@@ -126,6 +126,10 @@ export class Cluster extends pulumi.CustomResource {
     }
 
     /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    public readonly autoRenew!: pulumi.Output<number>;
+    /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
      * @deprecated It will be deprecated in later versions.
@@ -169,19 +173,25 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly placementInfo!: pulumi.Output<outputs.Emr.ClusterPlacementInfo>;
     /**
+     * Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+     */
+    public readonly preExecutedFileSettings!: pulumi.Output<outputs.Emr.ClusterPreExecutedFileSetting[] | undefined>;
+    /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
-     * - 20: indicates EMR-V2.5.0
+     * - 20: represents EMR-V2.5.0
      * - 25: represents EMR-V3.1.0
      * - 27: represents KAFKA-V1.0.0
-     * - 30: indicates EMR-V2.6.0
+     * - 30: represents EMR-V2.6.0
      * - 33: represents EMR-V3.2.1
-     * - 34: stands for EMR-V3.3.0
-     * - 36: represents STARROCKS-V1.0.0
-     * - 37: indicates EMR-V3.4.0
+     * - 34: represents EMR-V3.3.0
+     * - 37: represents EMR-V3.4.0
      * - 38: represents EMR-V2.7.0
-     * - 39: stands for STARROCKS-V1.1.0
-     * - 41: represents DRUID-V1.1.0.
+     * - 44: represents EMR-V3.5.0
+     * - 50: represents KAFKA-V2.0.0
+     * - 51: represents STARROCKS-V1.4.0
+     * - 53: represents EMR-V3.6.0
+     * - 54: represents STARROCKS-V2.0.0.
      */
     public readonly productId!: pulumi.Output<number>;
     /**
@@ -204,6 +214,10 @@ export class Cluster extends pulumi.CustomResource {
      * Tag description list.
      */
     public readonly tags!: pulumi.Output<{[key: string]: any}>;
+    /**
+     * Terminate nodes. Note: it only works when the number of nodes decreases.
+     */
+    public readonly terminateNodeInfos!: pulumi.Output<outputs.Emr.ClusterTerminateNodeInfo[] | undefined>;
     /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
@@ -231,6 +245,7 @@ export class Cluster extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClusterState | undefined;
+            resourceInputs["autoRenew"] = state ? state.autoRenew : undefined;
             resourceInputs["displayStrategy"] = state ? state.displayStrategy : undefined;
             resourceInputs["extendFsField"] = state ? state.extendFsField : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
@@ -240,12 +255,14 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["payMode"] = state ? state.payMode : undefined;
             resourceInputs["placement"] = state ? state.placement : undefined;
             resourceInputs["placementInfo"] = state ? state.placementInfo : undefined;
+            resourceInputs["preExecutedFileSettings"] = state ? state.preExecutedFileSettings : undefined;
             resourceInputs["productId"] = state ? state.productId : undefined;
             resourceInputs["resourceSpec"] = state ? state.resourceSpec : undefined;
             resourceInputs["sgId"] = state ? state.sgId : undefined;
             resourceInputs["softwares"] = state ? state.softwares : undefined;
             resourceInputs["supportHa"] = state ? state.supportHa : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["terminateNodeInfos"] = state ? state.terminateNodeInfos : undefined;
             resourceInputs["timeSpan"] = state ? state.timeSpan : undefined;
             resourceInputs["timeUnit"] = state ? state.timeUnit : undefined;
             resourceInputs["vpcSettings"] = state ? state.vpcSettings : undefined;
@@ -269,6 +286,7 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.vpcSettings === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcSettings'");
             }
+            resourceInputs["autoRenew"] = args ? args.autoRenew : undefined;
             resourceInputs["displayStrategy"] = args ? args.displayStrategy : undefined;
             resourceInputs["extendFsField"] = args ? args.extendFsField : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
@@ -277,12 +295,14 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["payMode"] = args ? args.payMode : undefined;
             resourceInputs["placement"] = args ? args.placement : undefined;
             resourceInputs["placementInfo"] = args ? args.placementInfo : undefined;
+            resourceInputs["preExecutedFileSettings"] = args ? args.preExecutedFileSettings : undefined;
             resourceInputs["productId"] = args ? args.productId : undefined;
             resourceInputs["resourceSpec"] = args ? args.resourceSpec : undefined;
             resourceInputs["sgId"] = args ? args.sgId : undefined;
             resourceInputs["softwares"] = args ? args.softwares : undefined;
             resourceInputs["supportHa"] = args ? args.supportHa : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["terminateNodeInfos"] = args ? args.terminateNodeInfos : undefined;
             resourceInputs["timeSpan"] = args ? args.timeSpan : undefined;
             resourceInputs["timeUnit"] = args ? args.timeUnit : undefined;
             resourceInputs["vpcSettings"] = args ? args.vpcSettings : undefined;
@@ -299,6 +319,10 @@ export class Cluster extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Cluster resources.
  */
 export interface ClusterState {
+    /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    autoRenew?: pulumi.Input<number>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
@@ -343,19 +367,25 @@ export interface ClusterState {
      */
     placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
     /**
+     * Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+     */
+    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[]>;
+    /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
-     * - 20: indicates EMR-V2.5.0
+     * - 20: represents EMR-V2.5.0
      * - 25: represents EMR-V3.1.0
      * - 27: represents KAFKA-V1.0.0
-     * - 30: indicates EMR-V2.6.0
+     * - 30: represents EMR-V2.6.0
      * - 33: represents EMR-V3.2.1
-     * - 34: stands for EMR-V3.3.0
-     * - 36: represents STARROCKS-V1.0.0
-     * - 37: indicates EMR-V3.4.0
+     * - 34: represents EMR-V3.3.0
+     * - 37: represents EMR-V3.4.0
      * - 38: represents EMR-V2.7.0
-     * - 39: stands for STARROCKS-V1.1.0
-     * - 41: represents DRUID-V1.1.0.
+     * - 44: represents EMR-V3.5.0
+     * - 50: represents KAFKA-V2.0.0
+     * - 51: represents STARROCKS-V1.4.0
+     * - 53: represents EMR-V3.6.0
+     * - 54: represents STARROCKS-V2.0.0.
      */
     productId?: pulumi.Input<number>;
     /**
@@ -379,6 +409,10 @@ export interface ClusterState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
+     * Terminate nodes. Note: it only works when the number of nodes decreases.
+     */
+    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[]>;
+    /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
@@ -397,6 +431,10 @@ export interface ClusterState {
  * The set of arguments for constructing a Cluster resource.
  */
 export interface ClusterArgs {
+    /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    autoRenew?: pulumi.Input<number>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
@@ -437,19 +475,25 @@ export interface ClusterArgs {
      */
     placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
     /**
+     * Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+     */
+    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[]>;
+    /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
-     * - 20: indicates EMR-V2.5.0
+     * - 20: represents EMR-V2.5.0
      * - 25: represents EMR-V3.1.0
      * - 27: represents KAFKA-V1.0.0
-     * - 30: indicates EMR-V2.6.0
+     * - 30: represents EMR-V2.6.0
      * - 33: represents EMR-V3.2.1
-     * - 34: stands for EMR-V3.3.0
-     * - 36: represents STARROCKS-V1.0.0
-     * - 37: indicates EMR-V3.4.0
+     * - 34: represents EMR-V3.3.0
+     * - 37: represents EMR-V3.4.0
      * - 38: represents EMR-V2.7.0
-     * - 39: stands for STARROCKS-V1.1.0
-     * - 41: represents DRUID-V1.1.0.
+     * - 44: represents EMR-V3.5.0
+     * - 50: represents KAFKA-V2.0.0
+     * - 51: represents STARROCKS-V1.4.0
+     * - 53: represents EMR-V3.6.0
+     * - 54: represents STARROCKS-V2.0.0.
      */
     productId: pulumi.Input<number>;
     /**
@@ -472,6 +516,10 @@ export interface ClusterArgs {
      * Tag description list.
      */
     tags?: pulumi.Input<{[key: string]: any}>;
+    /**
+     * Terminate nodes. Note: it only works when the number of nodes decreases.
+     */
+    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[]>;
     /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.

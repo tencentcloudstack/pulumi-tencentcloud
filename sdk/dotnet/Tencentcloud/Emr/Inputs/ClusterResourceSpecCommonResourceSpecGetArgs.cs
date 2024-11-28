@@ -13,24 +13,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
 
     public sealed class ClusterResourceSpecCommonResourceSpecGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Number of CPU cores.
+        /// </summary>
         [Input("cpu")]
         public Input<int>? Cpu { get; set; }
 
+        /// <summary>
+        /// Data disk capacity.
+        /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
 
+        /// <summary>
+        /// disk types. Value range:
+        /// - CLOUD_SSD: Represents cloud SSD;
+        /// - CLOUD_PREMIUM: Represents efficient cloud disk;
+        /// - CLOUD_BASIC: Represents Cloud Block Storage.
+        /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }
 
+        /// <summary>
+        /// Memory size in M.
+        /// </summary>
         [Input("memSize")]
         public Input<int>? MemSize { get; set; }
 
+        [Input("multiDisks")]
+        private InputList<Inputs.ClusterResourceSpecCommonResourceSpecMultiDiskGetArgs>? _multiDisks;
+
+        /// <summary>
+        /// Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        /// </summary>
+        public InputList<Inputs.ClusterResourceSpecCommonResourceSpecMultiDiskGetArgs> MultiDisks
+        {
+            get => _multiDisks ?? (_multiDisks = new InputList<Inputs.ClusterResourceSpecCommonResourceSpecMultiDiskGetArgs>());
+            set => _multiDisks = value;
+        }
+
+        /// <summary>
+        /// Root disk capacity.
+        /// </summary>
         [Input("rootSize")]
         public Input<int>? RootSize { get; set; }
 
+        /// <summary>
+        /// Node specification description, such as CVM.SA2.
+        /// </summary>
         [Input("spec")]
         public Input<string>? Spec { get; set; }
 
+        /// <summary>
+        /// Storage type. Value range:
+        /// - 4: Represents cloud SSD;
+        /// - 5: Represents efficient cloud disk;
+        /// - 6: Represents enhanced SSD Cloud Block Storage;
+        /// - 11: Represents throughput Cloud Block Storage;
+        /// - 12: Represents extremely fast SSD Cloud Block Storage.
+        /// </summary>
         [Input("storageType")]
         public Input<int>? StorageType { get; set; }
 

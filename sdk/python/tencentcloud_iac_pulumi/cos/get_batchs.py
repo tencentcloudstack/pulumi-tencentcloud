@@ -101,6 +101,8 @@ def get_batchs(appid: Optional[int] = None,
     """
     Use this data source to query the COS batch.
 
+    > **NOTE:** The current resource does not support `cos_domain`.
+
     ## Example Usage
 
     <!--Start PulumiCodeChooser -->
@@ -144,6 +146,8 @@ def get_batchs_output(appid: Optional[pulumi.Input[int]] = None,
                       opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetBatchsResult]:
     """
     Use this data source to query the COS batch.
+
+    > **NOTE:** The current resource does not support `cos_domain`.
 
     ## Example Usage
 

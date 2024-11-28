@@ -15,6 +15,8 @@ __all__ = [
     'ZoneVpcAttachmentAccountVpcSetArgs',
     'ZoneVpcAttachmentVpcSetArgs',
     'ZoneVpcSetArgs',
+    'GetEndPointsFilterArgs',
+    'GetForwardRulesFilterArgs',
     'GetPrivateZoneListFilterArgs',
     'GetRecordsFilterArgs',
 ]
@@ -247,6 +249,80 @@ class ZoneVpcSetArgs:
     @uniq_vpc_id.setter
     def uniq_vpc_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "uniq_vpc_id", value)
+
+
+@pulumi.input_type
+class GetEndPointsFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Array of parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Array of parameter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetForwardRulesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Array of parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Array of parameter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 
 @pulumi.input_type

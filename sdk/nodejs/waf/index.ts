@@ -120,20 +120,15 @@ export const getUserDomains: typeof import("./getUserDomains").getUserDomains = 
 export const getUserDomainsOutput: typeof import("./getUserDomains").getUserDomainsOutput = null as any;
 utilities.lazyLoad(exports, ["getUserDomains","getUserDomainsOutput"], () => require("./getUserDomains"));
 
-export { GetWafInfosArgs, GetWafInfosResult, GetWafInfosOutputArgs } from "./getWafInfos";
-export const getWafInfos: typeof import("./getWafInfos").getWafInfos = null as any;
-export const getWafInfosOutput: typeof import("./getWafInfos").getWafInfosOutput = null as any;
-utilities.lazyLoad(exports, ["getWafInfos","getWafInfosOutput"], () => require("./getWafInfos"));
-
 export { IpAccessControlArgs, IpAccessControlState } from "./ipAccessControl";
 export type IpAccessControl = import("./ipAccessControl").IpAccessControl;
 export const IpAccessControl: typeof import("./ipAccessControl").IpAccessControl = null as any;
 utilities.lazyLoad(exports, ["IpAccessControl"], () => require("./ipAccessControl"));
 
-export { ModifyAccessPeriodArgs, ModifyAccessPeriodState } from "./modifyAccessPeriod";
-export type ModifyAccessPeriod = import("./modifyAccessPeriod").ModifyAccessPeriod;
-export const ModifyAccessPeriod: typeof import("./modifyAccessPeriod").ModifyAccessPeriod = null as any;
-utilities.lazyLoad(exports, ["ModifyAccessPeriod"], () => require("./modifyAccessPeriod"));
+export { IpAccessControlV2Args, IpAccessControlV2State } from "./ipAccessControlV2";
+export type IpAccessControlV2 = import("./ipAccessControlV2").IpAccessControlV2;
+export const IpAccessControlV2: typeof import("./ipAccessControlV2").IpAccessControlV2 = null as any;
+utilities.lazyLoad(exports, ["IpAccessControlV2"], () => require("./ipAccessControlV2"));
 
 export { ModuleStatusArgs, ModuleStatusState } from "./moduleStatus";
 export type ModuleStatus = import("./moduleStatus").ModuleStatus;
@@ -187,8 +182,8 @@ const _module = {
                 return new CustomWhiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Waf/ipAccessControl:IpAccessControl":
                 return new IpAccessControl(name, <any>undefined, { urn })
-            case "tencentcloud:Waf/modifyAccessPeriod:ModifyAccessPeriod":
-                return new ModifyAccessPeriod(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/ipAccessControlV2:IpAccessControlV2":
+                return new IpAccessControlV2(name, <any>undefined, { urn })
             case "tencentcloud:Waf/moduleStatus:ModuleStatus":
                 return new ModuleStatus(name, <any>undefined, { urn })
             case "tencentcloud:Waf/protectionMode:ProtectionMode":
@@ -215,7 +210,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Waf/clbInstance", _module
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/customRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/customWhiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/ipAccessControl", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Waf/modifyAccessPeriod", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/ipAccessControlV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/moduleStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/protectionMode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/saasDomain", _module)

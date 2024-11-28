@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
 {
     /// <summary>
-    /// Provides a resource to create a cls data_transform
+    /// Provides a resource to create a CLS data transform
     /// 
     /// ## Example Usage
     /// 
@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         StorageType = "hot",
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "createdBy", "terraform" },
     ///         },
     ///     });
     /// 
@@ -68,11 +68,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         StorageType = "hot",
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "createdBy", "terraform" },
     ///         },
     ///     });
     /// 
-    ///     var dataTransform = new Tencentcloud.Cls.DataTransform("dataTransform", new()
+    ///     var example = new Tencentcloud.Cls.DataTransform("example", new()
     ///     {
     ///         FuncType = 1,
     ///         SrcTopicId = topicSrc.Id,
@@ -95,53 +95,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls data_transform can be imported using the id, e.g.
+    /// CLS data transform can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+    /// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform example 7b4bcb05-9154-4cdc-a479-f6b5743846e5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/dataTransform:DataTransform")]
     public partial class DataTransform : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// data transform des resources.
+        /// Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         /// </summary>
         [Output("dstResources")]
         public Output<ImmutableArray<Outputs.DataTransformDstResource>> DstResources { get; private set; } = null!;
 
         /// <summary>
-        /// task enable flag.
+        /// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         /// </summary>
         [Output("enableFlag")]
         public Output<int?> EnableFlag { get; private set; } = null!;
 
         /// <summary>
-        /// data transform content.
+        /// Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         /// </summary>
         [Output("etlContent")]
         public Output<string> EtlContent { get; private set; } = null!;
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
         /// </summary>
         [Output("funcType")]
         public Output<int> FuncType { get; private set; } = null!;
 
         /// <summary>
-        /// task name.
+        /// Task name.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// src topic id.
+        /// Source topic ID.
         /// </summary>
         [Output("srcTopicId")]
         public Output<string> SrcTopicId { get; private set; } = null!;
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         /// </summary>
         [Output("taskType")]
         public Output<int> TaskType { get; private set; } = null!;
@@ -197,7 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputList<Inputs.DataTransformDstResourceArgs>? _dstResources;
 
         /// <summary>
-        /// data transform des resources.
+        /// Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         /// </summary>
         public InputList<Inputs.DataTransformDstResourceArgs> DstResources
         {
@@ -206,37 +206,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
 
         /// <summary>
-        /// task enable flag.
+        /// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         /// </summary>
         [Input("enableFlag")]
         public Input<int>? EnableFlag { get; set; }
 
         /// <summary>
-        /// data transform content.
+        /// Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         /// </summary>
         [Input("etlContent", required: true)]
         public Input<string> EtlContent { get; set; } = null!;
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
         /// </summary>
         [Input("funcType", required: true)]
         public Input<int> FuncType { get; set; } = null!;
 
         /// <summary>
-        /// task name.
+        /// Task name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// src topic id.
+        /// Source topic ID.
         /// </summary>
         [Input("srcTopicId", required: true)]
         public Input<string> SrcTopicId { get; set; } = null!;
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         /// </summary>
         [Input("taskType", required: true)]
         public Input<int> TaskType { get; set; } = null!;
@@ -253,7 +253,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputList<Inputs.DataTransformDstResourceGetArgs>? _dstResources;
 
         /// <summary>
-        /// data transform des resources.
+        /// Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         /// </summary>
         public InputList<Inputs.DataTransformDstResourceGetArgs> DstResources
         {
@@ -262,37 +262,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
 
         /// <summary>
-        /// task enable flag.
+        /// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         /// </summary>
         [Input("enableFlag")]
         public Input<int>? EnableFlag { get; set; }
 
         /// <summary>
-        /// data transform content.
+        /// Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         /// </summary>
         [Input("etlContent")]
         public Input<string>? EtlContent { get; set; }
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
         /// </summary>
         [Input("funcType")]
         public Input<int>? FuncType { get; set; }
 
         /// <summary>
-        /// task name.
+        /// Task name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// src topic id.
+        /// Source topic ID.
         /// </summary>
         [Input("srcTopicId")]
         public Input<string>? SrcTopicId { get; set; }
 
         /// <summary>
-        /// task type.
+        /// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         /// </summary>
         [Input("taskType")]
         public Input<int>? TaskType { get; set; }

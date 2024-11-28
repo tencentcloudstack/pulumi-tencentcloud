@@ -67,6 +67,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PeerConnectManager{}
 	case "tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation":
 		r = &PeerConnectRejectOperation{}
+	case "tencentcloud:Vpc/privateNatGateway:PrivateNatGateway":
+		r = &PrivateNatGateway{}
 	case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
 		r = &ResumeSnapshotInstance{}
 	case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
@@ -203,6 +205,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vpc/peerConnectRejectOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/privateNatGateway",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

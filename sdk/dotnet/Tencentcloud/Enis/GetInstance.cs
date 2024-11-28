@@ -231,7 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis
     public sealed class GetInstanceResult
     {
         /// <summary>
-        /// Description of the IP.
+        /// Message description.
         /// </summary>
         public readonly string? Description;
         /// <summary>

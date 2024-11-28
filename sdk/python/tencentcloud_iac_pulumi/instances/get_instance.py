@@ -22,10 +22,13 @@ class GetInstanceResult:
     """
     A collection of values returned by getInstance.
     """
-    def __init__(__self__, availability_zone=None, id=None, instance_id=None, instance_lists=None, instance_name=None, instance_set_ids=None, project_id=None, result_output_file=None, subnet_id=None, tags=None, vpc_id=None):
+    def __init__(__self__, availability_zone=None, dedicated_cluster_id=None, id=None, instance_id=None, instance_lists=None, instance_name=None, instance_set_ids=None, project_id=None, result_output_file=None, subnet_id=None, tags=None, vpc_id=None):
         if availability_zone and not isinstance(availability_zone, str):
             raise TypeError("Expected argument 'availability_zone' to be a str")
         pulumi.set(__self__, "availability_zone", availability_zone)
+        if dedicated_cluster_id and not isinstance(dedicated_cluster_id, str):
+            raise TypeError("Expected argument 'dedicated_cluster_id' to be a str")
+        pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -64,6 +67,14 @@ class GetInstanceResult:
         The available zone that the CVM instance locates at.
         """
         return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[str]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter
@@ -147,6 +158,7 @@ class AwaitableGetInstanceResult(GetInstanceResult):
             yield self
         return GetInstanceResult(
             availability_zone=self.availability_zone,
+            dedicated_cluster_id=self.dedicated_cluster_id,
             id=self.id,
             instance_id=self.instance_id,
             instance_lists=self.instance_lists,
@@ -160,6 +172,7 @@ class AwaitableGetInstanceResult(GetInstanceResult):
 
 
 def get_instance(availability_zone: Optional[str] = None,
+                 dedicated_cluster_id: Optional[str] = None,
                  instance_id: Optional[str] = None,
                  instance_name: Optional[str] = None,
                  instance_set_ids: Optional[Sequence[str]] = None,
@@ -217,6 +230,7 @@ def get_instance(availability_zone: Optional[str] = None,
 
 
     :param str availability_zone: The available zone that the CVM instance locates at.
+    :param str dedicated_cluster_id: Exclusive cluster id.
     :param str instance_id: ID of the instances to be queried.
     :param str instance_name: Name of the instances to be queried.
     :param Sequence[str] instance_set_ids: Instance set ids, max length is 100, conflict with other field.
@@ -228,6 +242,7 @@ def get_instance(availability_zone: Optional[str] = None,
     """
     __args__ = dict()
     __args__['availabilityZone'] = availability_zone
+    __args__['dedicatedClusterId'] = dedicated_cluster_id
     __args__['instanceId'] = instance_id
     __args__['instanceName'] = instance_name
     __args__['instanceSetIds'] = instance_set_ids
@@ -241,6 +256,7 @@ def get_instance(availability_zone: Optional[str] = None,
 
     return AwaitableGetInstanceResult(
         availability_zone=pulumi.get(__ret__, 'availability_zone'),
+        dedicated_cluster_id=pulumi.get(__ret__, 'dedicated_cluster_id'),
         id=pulumi.get(__ret__, 'id'),
         instance_id=pulumi.get(__ret__, 'instance_id'),
         instance_lists=pulumi.get(__ret__, 'instance_lists'),
@@ -255,6 +271,7 @@ def get_instance(availability_zone: Optional[str] = None,
 
 @_utilities.lift_output_func(get_instance)
 def get_instance_output(availability_zone: Optional[pulumi.Input[Optional[str]]] = None,
+                        dedicated_cluster_id: Optional[pulumi.Input[Optional[str]]] = None,
                         instance_id: Optional[pulumi.Input[Optional[str]]] = None,
                         instance_name: Optional[pulumi.Input[Optional[str]]] = None,
                         instance_set_ids: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
@@ -312,6 +329,7 @@ def get_instance_output(availability_zone: Optional[pulumi.Input[Optional[str]]]
 
 
     :param str availability_zone: The available zone that the CVM instance locates at.
+    :param str dedicated_cluster_id: Exclusive cluster id.
     :param str instance_id: ID of the instances to be queried.
     :param str instance_name: Name of the instances to be queried.
     :param Sequence[str] instance_set_ids: Instance set ids, max length is 100, conflict with other field.

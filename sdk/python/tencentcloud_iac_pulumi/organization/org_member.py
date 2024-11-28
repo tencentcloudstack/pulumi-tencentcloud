@@ -22,7 +22,8 @@ class OrgMemberArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  pay_uin: Optional[pulumi.Input[str]] = None,
                  record_id: Optional[pulumi.Input[int]] = None,
-                 remark: Optional[pulumi.Input[str]] = None):
+                 remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a OrgMember resource.
         :param pulumi.Input[int] node_id: Organization node ID.
@@ -32,6 +33,7 @@ class OrgMemberArgs:
         :param pulumi.Input[str] pay_uin: The uin which is payment account on behalf.When `PermissionIds` contains 7, is required.
         :param pulumi.Input[int] record_id: Create member record ID.When create failed and needs to be recreated, is required.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "node_id", node_id)
         pulumi.set(__self__, "permission_ids", permission_ids)
@@ -44,6 +46,8 @@ class OrgMemberArgs:
             pulumi.set(__self__, "record_id", record_id)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="nodeId")
@@ -129,6 +133,18 @@ class OrgMemberArgs:
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _OrgMemberState:
@@ -147,6 +163,7 @@ class _OrgMemberState:
                  policy_type: Optional[pulumi.Input[str]] = None,
                  record_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering OrgMember resources.
@@ -164,6 +181,7 @@ class _OrgMemberState:
         :param pulumi.Input[str] policy_type: Organization policy type.- `Financial`: Financial management policy.
         :param pulumi.Input[int] record_id: Create member record ID.When create failed and needs to be recreated, is required.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] update_time: Member update time.
         """
         if create_time is not None:
@@ -194,6 +212,8 @@ class _OrgMemberState:
             pulumi.set(__self__, "record_id", record_id)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if update_time is not None:
             pulumi.set(__self__, "update_time", update_time)
 
@@ -366,6 +386,18 @@ class _OrgMemberState:
         pulumi.set(self, "remark", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> Optional[pulumi.Input[str]]:
         """
@@ -390,6 +422,7 @@ class OrgMember(pulumi.CustomResource):
                  policy_type: Optional[pulumi.Input[str]] = None,
                  record_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a resource to create a organization org_member
@@ -431,6 +464,7 @@ class OrgMember(pulumi.CustomResource):
         :param pulumi.Input[str] policy_type: Organization policy type.- `Financial`: Financial management policy.
         :param pulumi.Input[int] record_id: Create member record ID.When create failed and needs to be recreated, is required.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -491,6 +525,7 @@ class OrgMember(pulumi.CustomResource):
                  policy_type: Optional[pulumi.Input[str]] = None,
                  record_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -513,6 +548,7 @@ class OrgMember(pulumi.CustomResource):
             __props__.__dict__["policy_type"] = policy_type
             __props__.__dict__["record_id"] = record_id
             __props__.__dict__["remark"] = remark
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["is_allow_quit"] = None
             __props__.__dict__["member_type"] = None
@@ -545,6 +581,7 @@ class OrgMember(pulumi.CustomResource):
             policy_type: Optional[pulumi.Input[str]] = None,
             record_id: Optional[pulumi.Input[int]] = None,
             remark: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             update_time: Optional[pulumi.Input[str]] = None) -> 'OrgMember':
         """
         Get an existing OrgMember resource's state with the given name, id, and optional extra
@@ -567,6 +604,7 @@ class OrgMember(pulumi.CustomResource):
         :param pulumi.Input[str] policy_type: Organization policy type.- `Financial`: Financial management policy.
         :param pulumi.Input[int] record_id: Create member record ID.When create failed and needs to be recreated, is required.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] update_time: Member update time.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -587,6 +625,7 @@ class OrgMember(pulumi.CustomResource):
         __props__.__dict__["policy_type"] = policy_type
         __props__.__dict__["record_id"] = record_id
         __props__.__dict__["remark"] = remark
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["update_time"] = update_time
         return OrgMember(resource_name, opts=opts, __props__=__props__)
 
@@ -701,6 +740,14 @@ class OrgMember(pulumi.CustomResource):
         Notes.
         """
         return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="updateTime")

@@ -1616,7 +1616,7 @@ class Connection(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ikeLocalFqdnName")
-    def ike_local_fqdn_name(self) -> pulumi.Output[Optional[str]]:
+    def ike_local_fqdn_name(self) -> pulumi.Output[str]:
         """
         Local FQDN name of the IKE operation specification.
         """
@@ -1656,7 +1656,7 @@ class Connection(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="ikeRemoteFqdnName")
-    def ike_remote_fqdn_name(self) -> pulumi.Output[Optional[str]]:
+    def ike_remote_fqdn_name(self) -> pulumi.Output[str]:
         """
         Remote FQDN name of the IKE operation specification.
         """

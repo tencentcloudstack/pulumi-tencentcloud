@@ -39,6 +39,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             set => _assumeRole.Set(value);
         }
 
+        private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?> _assumeRoleWithSaml = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml>("assumeRoleWithSaml"));
+        public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml? AssumeRoleWithSaml
+        {
+            get => _assumeRoleWithSaml.Get();
+            set => _assumeRoleWithSaml.Set(value);
+        }
+
+        private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?> _assumeRoleWithWebIdentity = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity>("assumeRoleWithWebIdentity"));
+        public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity? AssumeRoleWithWebIdentity
+        {
+            get => _assumeRoleWithWebIdentity.Get();
+            set => _assumeRoleWithWebIdentity.Set(value);
+        }
+
+        private static readonly __Value<string?> _camRoleName = new __Value<string?>(() => __config.Get("camRoleName"));
+        /// <summary>
+        /// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        /// </summary>
+        public static string? CamRoleName
+        {
+            get => _camRoleName.Get();
+            set => _camRoleName.Set(value);
+        }
+
+        private static readonly __Value<string?> _cosDomain = new __Value<string?>(() => __config.Get("cosDomain"));
+        /// <summary>
+        /// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        /// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        /// </summary>
+        public static string? CosDomain
+        {
+            get => _cosDomain.Get();
+            set => _cosDomain.Set(value);
+        }
+
         private static readonly __Value<string?> _domain = new __Value<string?>(() => __config.Get("domain"));
         /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
@@ -47,6 +82,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         {
             get => _domain.Get();
             set => _domain.Set(value);
+        }
+
+        private static readonly __Value<bool?> _enablePodOidc = new __Value<bool?>(() => __config.GetBoolean("enablePodOidc"));
+        /// <summary>
+        /// Whether to enable pod oidc.
+        /// </summary>
+        public static bool? EnablePodOidc
+        {
+            get => _enablePodOidc.Get();
+            set => _enablePodOidc.Set(value);
         }
 
         private static readonly __Value<string?> _profile = new __Value<string?>(() => __config.Get("profile"));
@@ -72,8 +117,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 
         private static readonly __Value<string?> _region = new __Value<string?>(() => __config.Get("region") ?? Utilities.GetEnv("TENCENTCLOUD_REGION"));
         /// <summary>
-        /// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        /// environment variables. The default input value is ap-guangzhou.
+        /// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        /// default input value is ap-guangzhou.
         /// </summary>
         public static string? Region
         {
@@ -83,8 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 
         private static readonly __Value<string?> _secretId = new __Value<string?>(() => __config.Get("secretId") ?? Utilities.GetEnv("TENCENTCLOUD_SECRET_ID"));
         /// <summary>
-        /// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        /// environment variable.
+        /// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         /// </summary>
         public static string? SecretId
         {
@@ -94,8 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 
         private static readonly __Value<string?> _secretKey = new __Value<string?>(() => __config.Get("secretKey") ?? Utilities.GetEnv("TENCENTCLOUD_SECRET_KEY"));
         /// <summary>
-        /// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        /// environment variable.
+        /// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         /// </summary>
         public static string? SecretKey
         {
@@ -132,6 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
              public class AssumeRole
              {
             /// <summary>
+            /// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+            /// </summary>
+                public string? ExternalId { get; set; } = null!;
+            /// <summary>
             /// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
             /// </summary>
                 public string? Policy { get; set; } = null!;
@@ -147,6 +194,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
             /// </summary>
                 public string SessionName { get; set; }
+            }
+
+             public class AssumeRoleWithSaml
+             {
+            /// <summary>
+            /// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+            /// </summary>
+                public string PrincipalArn { get; set; }
+            /// <summary>
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// </summary>
+                public string RoleArn { get; set; }
+            /// <summary>
+            /// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+            /// </summary>
+                public string SamlAssertion { get; set; }
+            /// <summary>
+            /// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+            /// </summary>
+                public int SessionDuration { get; set; }
+            /// <summary>
+            /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+            /// </summary>
+                public string SessionName { get; set; }
+            }
+
+             public class AssumeRoleWithWebIdentity
+             {
+            /// <summary>
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// </summary>
+                public string RoleArn { get; set; }
+            /// <summary>
+            /// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+            /// </summary>
+                public int SessionDuration { get; set; }
+            /// <summary>
+            /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+            /// </summary>
+                public string SessionName { get; set; }
+            /// <summary>
+            /// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+            /// </summary>
+                public string WebIdentityToken { get; set; }
             }
         }
     }

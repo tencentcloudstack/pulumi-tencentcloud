@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         [Input("commonCount")]
         public Input<int>? CommonCount { get; set; }
 
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         [Input("commonResourceSpec")]
         public Input<Inputs.ClusterResourceSpecCommonResourceSpecGetArgs>? CommonResourceSpec { get; set; }
 
@@ -28,6 +31,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         [Input("coreCount")]
         public Input<int>? CoreCount { get; set; }
 
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         [Input("coreResourceSpec")]
         public Input<Inputs.ClusterResourceSpecCoreResourceSpecGetArgs>? CoreResourceSpec { get; set; }
 
@@ -37,6 +43,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         [Input("masterCount")]
         public Input<int>? MasterCount { get; set; }
 
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         [Input("masterResourceSpec")]
         public Input<Inputs.ClusterResourceSpecMasterResourceSpecGetArgs>? MasterResourceSpec { get; set; }
 
@@ -46,6 +55,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         [Input("taskCount")]
         public Input<int>? TaskCount { get; set; }
 
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         [Input("taskResourceSpec")]
         public Input<Inputs.ClusterResourceSpecTaskResourceSpecGetArgs>? TaskResourceSpec { get; set; }
 

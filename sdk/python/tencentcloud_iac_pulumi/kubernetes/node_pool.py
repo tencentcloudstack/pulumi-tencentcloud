@@ -21,6 +21,7 @@ class NodePoolArgs:
                  max_size: pulumi.Input[int],
                  min_size: pulumi.Input[int],
                  vpc_id: pulumi.Input[str],
+                 annotations: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  delete_keep_instance: Optional[pulumi.Input[bool]] = None,
                  deletion_protection: Optional[pulumi.Input[bool]] = None,
@@ -49,6 +50,7 @@ class NodePoolArgs:
         :param pulumi.Input[int] max_size: Maximum number of node.
         :param pulumi.Input[int] min_size: Minimum number of node.
         :param pulumi.Input[str] vpc_id: ID of VPC network.
+        :param pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]] annotations: Node Annotation List.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
         :param pulumi.Input[bool] delete_keep_instance: Indicate to keep the CVM instance when delete the node pool. Default is `true`.
         :param pulumi.Input[bool] deletion_protection: Indicates whether the node pool deletion protection is enabled.
@@ -76,6 +78,8 @@ class NodePoolArgs:
         pulumi.set(__self__, "max_size", max_size)
         pulumi.set(__self__, "min_size", min_size)
         pulumi.set(__self__, "vpc_id", vpc_id)
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
         if default_cooldown is not None:
             pulumi.set(__self__, "default_cooldown", default_cooldown)
         if delete_keep_instance is not None:
@@ -178,6 +182,18 @@ class NodePoolArgs:
     @vpc_id.setter
     def vpc_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "vpc_id", value)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]]:
+        """
+        Node Annotation List.
+        """
+        return pulumi.get(self, "annotations")
+
+    @annotations.setter
+    def annotations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]]):
+        pulumi.set(self, "annotations", value)
 
     @property
     @pulumi.getter(name="defaultCooldown")
@@ -435,6 +451,7 @@ class NodePoolArgs:
 @pulumi.input_type
 class _NodePoolState:
     def __init__(__self__, *,
+                 annotations: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]] = None,
                  auto_scaling_config: Optional[pulumi.Input['NodePoolAutoScalingConfigArgs']] = None,
                  auto_scaling_group_id: Optional[pulumi.Input[str]] = None,
                  autoscaling_added_total: Optional[pulumi.Input[int]] = None,
@@ -469,6 +486,7 @@ class _NodePoolState:
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering NodePool resources.
+        :param pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]] annotations: Node Annotation List.
         :param pulumi.Input['NodePoolAutoScalingConfigArgs'] auto_scaling_config: Auto scaling config parameters.
         :param pulumi.Input[str] auto_scaling_group_id: The auto scaling group ID.
         :param pulumi.Input[int] autoscaling_added_total: The total of autoscaling added node.
@@ -502,6 +520,8 @@ class _NodePoolState:
         :param pulumi.Input[str] vpc_id: ID of VPC network.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: List of auto scaling group available zones, for Basic network it is required.
         """
+        if annotations is not None:
+            pulumi.set(__self__, "annotations", annotations)
         if auto_scaling_config is not None:
             pulumi.set(__self__, "auto_scaling_config", auto_scaling_config)
         if auto_scaling_group_id is not None:
@@ -566,6 +586,18 @@ class _NodePoolState:
             pulumi.set(__self__, "vpc_id", vpc_id)
         if zones is not None:
             pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]]:
+        """
+        Node Annotation List.
+        """
+        return pulumi.get(self, "annotations")
+
+    @annotations.setter
+    def annotations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolAnnotationArgs']]]]):
+        pulumi.set(self, "annotations", value)
 
     @property
     @pulumi.getter(name="autoScalingConfig")
@@ -957,6 +989,7 @@ class NodePool(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 annotations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolAnnotationArgs']]]]] = None,
                  auto_scaling_config: Optional[pulumi.Input[pulumi.InputType['NodePoolAutoScalingConfigArgs']]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
@@ -1014,7 +1047,7 @@ class NodePool(pulumi.CustomResource):
         if default_instance_type is None:
             default_instance_type = "S1.SMALL1"
         #this is the cluster with empty worker config
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
             vpc_id=vpc.instance_lists[0].vpc_id,
             cluster_cidr=cluster_cidr,
             cluster_max_pod_num=32,
@@ -1024,8 +1057,8 @@ class NodePool(pulumi.CustomResource):
             cluster_version="1.18.4",
             cluster_deploy_type="MANAGED_CLUSTER")
         #this is one example of managing node using node pool
-        mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
-            cluster_id=managed_cluster.id,
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
             max_size=6,
             min_size=1,
             vpc_id=vpc.instance_lists[0].vpc_id,
@@ -1034,6 +1067,7 @@ class NodePool(pulumi.CustomResource):
             desired_capacity=4,
             enable_auto_scale=True,
             multi_zone_subnet_policy="EQUALITY",
+            node_os="img-9qrfy1xt",
             auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
                 instance_type=default_instance_type,
                 system_disk_type="CLOUD_PREMIUM",
@@ -1069,6 +1103,7 @@ class NodePool(pulumi.CustomResource):
                 ),
             ],
             node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                docker_graph_path="/var/lib/docker",
                 extra_args=["root-dir=/var/lib/kubelet"],
             ))
         ```
@@ -1081,7 +1116,7 @@ class NodePool(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
+        example = tencentcloud.kubernetes.NodePool("example",
             cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
             max_size=6,
             min_size=1,
@@ -1126,11 +1161,12 @@ class NodePool(pulumi.CustomResource):
         tke node pool can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+        $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolAnnotationArgs']]]] annotations: Node Annotation List.
         :param pulumi.Input[pulumi.InputType['NodePoolAutoScalingConfigArgs']] auto_scaling_config: Auto scaling config parameters.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[int] default_cooldown: Seconds of scaling group cool down. Default value is `300`.
@@ -1194,7 +1230,7 @@ class NodePool(pulumi.CustomResource):
         if default_instance_type is None:
             default_instance_type = "S1.SMALL1"
         #this is the cluster with empty worker config
-        managed_cluster = tencentcloud.kubernetes.Cluster("managedCluster",
+        example_cluster = tencentcloud.kubernetes.Cluster("exampleCluster",
             vpc_id=vpc.instance_lists[0].vpc_id,
             cluster_cidr=cluster_cidr,
             cluster_max_pod_num=32,
@@ -1204,8 +1240,8 @@ class NodePool(pulumi.CustomResource):
             cluster_version="1.18.4",
             cluster_deploy_type="MANAGED_CLUSTER")
         #this is one example of managing node using node pool
-        mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
-            cluster_id=managed_cluster.id,
+        example_node_pool = tencentcloud.kubernetes.NodePool("exampleNodePool",
+            cluster_id=example_cluster.id,
             max_size=6,
             min_size=1,
             vpc_id=vpc.instance_lists[0].vpc_id,
@@ -1214,6 +1250,7 @@ class NodePool(pulumi.CustomResource):
             desired_capacity=4,
             enable_auto_scale=True,
             multi_zone_subnet_policy="EQUALITY",
+            node_os="img-9qrfy1xt",
             auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
                 instance_type=default_instance_type,
                 system_disk_type="CLOUD_PREMIUM",
@@ -1249,6 +1286,7 @@ class NodePool(pulumi.CustomResource):
                 ),
             ],
             node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                docker_graph_path="/var/lib/docker",
                 extra_args=["root-dir=/var/lib/kubelet"],
             ))
         ```
@@ -1261,7 +1299,7 @@ class NodePool(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mynodepool = tencentcloud.kubernetes.NodePool("mynodepool",
+        example = tencentcloud.kubernetes.NodePool("example",
             cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
             max_size=6,
             min_size=1,
@@ -1306,7 +1344,7 @@ class NodePool(pulumi.CustomResource):
         tke node pool can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+        $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
         ```
 
         :param str resource_name: The name of the resource.
@@ -1324,6 +1362,7 @@ class NodePool(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 annotations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolAnnotationArgs']]]]] = None,
                  auto_scaling_config: Optional[pulumi.Input[pulumi.InputType['NodePoolAutoScalingConfigArgs']]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  default_cooldown: Optional[pulumi.Input[int]] = None,
@@ -1359,6 +1398,7 @@ class NodePool(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = NodePoolArgs.__new__(NodePoolArgs)
 
+            __props__.__dict__["annotations"] = annotations
             if auto_scaling_config is None and not opts.urn:
                 raise TypeError("Missing required property 'auto_scaling_config'")
             __props__.__dict__["auto_scaling_config"] = auto_scaling_config
@@ -1411,6 +1451,7 @@ class NodePool(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            annotations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolAnnotationArgs']]]]] = None,
             auto_scaling_config: Optional[pulumi.Input[pulumi.InputType['NodePoolAutoScalingConfigArgs']]] = None,
             auto_scaling_group_id: Optional[pulumi.Input[str]] = None,
             autoscaling_added_total: Optional[pulumi.Input[int]] = None,
@@ -1450,6 +1491,7 @@ class NodePool(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['NodePoolAnnotationArgs']]]] annotations: Node Annotation List.
         :param pulumi.Input[pulumi.InputType['NodePoolAutoScalingConfigArgs']] auto_scaling_config: Auto scaling config parameters.
         :param pulumi.Input[str] auto_scaling_group_id: The auto scaling group ID.
         :param pulumi.Input[int] autoscaling_added_total: The total of autoscaling added node.
@@ -1487,6 +1529,7 @@ class NodePool(pulumi.CustomResource):
 
         __props__ = _NodePoolState.__new__(_NodePoolState)
 
+        __props__.__dict__["annotations"] = annotations
         __props__.__dict__["auto_scaling_config"] = auto_scaling_config
         __props__.__dict__["auto_scaling_group_id"] = auto_scaling_group_id
         __props__.__dict__["autoscaling_added_total"] = autoscaling_added_total
@@ -1520,6 +1563,14 @@ class NodePool(pulumi.CustomResource):
         __props__.__dict__["vpc_id"] = vpc_id
         __props__.__dict__["zones"] = zones
         return NodePool(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> pulumi.Output[Sequence['outputs.NodePoolAnnotation']]:
+        """
+        Node Annotation List.
+        """
+        return pulumi.get(self, "annotations")
 
     @property
     @pulumi.getter(name="autoScalingConfig")
@@ -1731,7 +1782,7 @@ class NodePool(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+    def tags(self) -> pulumi.Output[Mapping[str, Any]]:
         """
         Node pool tag specifications, will passthroughs to the scaling instances.
         """

@@ -105,7 +105,7 @@ type Connection struct {
 	// Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
 	IkeLocalAddress pulumi.StringPtrOutput `pulumi:"ikeLocalAddress"`
 	// Local FQDN name of the IKE operation specification.
-	IkeLocalFqdnName pulumi.StringPtrOutput `pulumi:"ikeLocalFqdnName"`
+	IkeLocalFqdnName pulumi.StringOutput `pulumi:"ikeLocalFqdnName"`
 	// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeLocalIdentity pulumi.StringPtrOutput `pulumi:"ikeLocalIdentity"`
 	// Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
@@ -115,7 +115,7 @@ type Connection struct {
 	// Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
 	IkeRemoteAddress pulumi.StringPtrOutput `pulumi:"ikeRemoteAddress"`
 	// Remote FQDN name of the IKE operation specification.
-	IkeRemoteFqdnName pulumi.StringPtrOutput `pulumi:"ikeRemoteFqdnName"`
+	IkeRemoteFqdnName pulumi.StringOutput `pulumi:"ikeRemoteFqdnName"`
 	// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
 	IkeRemoteIdentity pulumi.StringPtrOutput `pulumi:"ikeRemoteIdentity"`
 	// SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
@@ -631,8 +631,8 @@ func (o ConnectionOutput) IkeLocalAddress() pulumi.StringPtrOutput {
 }
 
 // Local FQDN name of the IKE operation specification.
-func (o ConnectionOutput) IkeLocalFqdnName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeLocalFqdnName }).(pulumi.StringPtrOutput)
+func (o ConnectionOutput) IkeLocalFqdnName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.IkeLocalFqdnName }).(pulumi.StringOutput)
 }
 
 // Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
@@ -656,8 +656,8 @@ func (o ConnectionOutput) IkeRemoteAddress() pulumi.StringPtrOutput {
 }
 
 // Remote FQDN name of the IKE operation specification.
-func (o ConnectionOutput) IkeRemoteFqdnName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.IkeRemoteFqdnName }).(pulumi.StringPtrOutput)
+func (o ConnectionOutput) IkeRemoteFqdnName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.IkeRemoteFqdnName }).(pulumi.StringOutput)
 }
 
 // Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.

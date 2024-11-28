@@ -11,6 +11,7 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'LifecycleHookLifecycleCommand',
     'LoadBalancerForwardLoadBalancer',
     'LoadBalancerForwardLoadBalancerTargetAttribute',
     'ScalingConfigDataDisk',
@@ -18,6 +19,8 @@ __all__ = [
     'ScalingConfigInstanceNameSettings',
     'ScalingGroupForwardBalancerId',
     'ScalingGroupForwardBalancerIdTargetAttribute',
+    'StartInstanceRefreshRefreshSettings',
+    'StartInstanceRefreshRefreshSettingsRollingUpdateSettings',
     'GetAdvicesAutoScalingAdviceSetResult',
     'GetAdvicesAutoScalingAdviceSetAdviceResult',
     'GetInstancesFilterResult',
@@ -34,6 +37,53 @@ __all__ = [
     'GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeResult',
     'GetScalingPoliciesScalingPolicyListResult',
 ]
+
+@pulumi.output_type
+class LifecycleHookLifecycleCommand(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "commandId":
+            suggest = "command_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LifecycleHookLifecycleCommand. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LifecycleHookLifecycleCommand.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LifecycleHookLifecycleCommand.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 command_id: str,
+                 parameters: Optional[str] = None):
+        """
+        :param str command_id: Remote command ID. It is required to execute a command.
+        :param str parameters: Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
+        """
+        pulumi.set(__self__, "command_id", command_id)
+        if parameters is not None:
+            pulumi.set(__self__, "parameters", parameters)
+
+    @property
+    @pulumi.getter(name="commandId")
+    def command_id(self) -> str:
+        """
+        Remote command ID. It is required to execute a command.
+        """
+        return pulumi.get(self, "command_id")
+
+    @property
+    @pulumi.getter
+    def parameters(self) -> Optional[str]:
+        """
+        Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
+        """
+        return pulumi.get(self, "parameters")
+
 
 @pulumi.output_type
 class LoadBalancerForwardLoadBalancer(dict):
@@ -429,6 +479,118 @@ class ScalingGroupForwardBalancerIdTargetAttribute(dict):
         Weight.
         """
         return pulumi.get(self, "weight")
+
+
+@pulumi.output_type
+class StartInstanceRefreshRefreshSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "rollingUpdateSettings":
+            suggest = "rolling_update_settings"
+        elif key == "checkInstanceTargetHealth":
+            suggest = "check_instance_target_health"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StartInstanceRefreshRefreshSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StartInstanceRefreshRefreshSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StartInstanceRefreshRefreshSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 rolling_update_settings: 'outputs.StartInstanceRefreshRefreshSettingsRollingUpdateSettings',
+                 check_instance_target_health: Optional[bool] = None):
+        """
+        :param 'StartInstanceRefreshRefreshSettingsRollingUpdateSettingsArgs' rolling_update_settings: Rolling update settings parameters. RefreshMode is the rolling update. This parameter must be filled in.Note: This field may return null, indicating that no valid value can be obtained.
+        :param bool check_instance_target_health: Backend service health check status for instances, defaults to FALSE. This setting takes effect only for scaling groups bound with application load balancers. When enabled, if an instance fails the check after being refreshed, its load balancer port weight remains 0 and is marked as a refresh failure. Valid values: <br><li>TRUE: Enable the check.</li> <li>FALSE: Do not enable the check.
+        """
+        pulumi.set(__self__, "rolling_update_settings", rolling_update_settings)
+        if check_instance_target_health is not None:
+            pulumi.set(__self__, "check_instance_target_health", check_instance_target_health)
+
+    @property
+    @pulumi.getter(name="rollingUpdateSettings")
+    def rolling_update_settings(self) -> 'outputs.StartInstanceRefreshRefreshSettingsRollingUpdateSettings':
+        """
+        Rolling update settings parameters. RefreshMode is the rolling update. This parameter must be filled in.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "rolling_update_settings")
+
+    @property
+    @pulumi.getter(name="checkInstanceTargetHealth")
+    def check_instance_target_health(self) -> Optional[bool]:
+        """
+        Backend service health check status for instances, defaults to FALSE. This setting takes effect only for scaling groups bound with application load balancers. When enabled, if an instance fails the check after being refreshed, its load balancer port weight remains 0 and is marked as a refresh failure. Valid values: <br><li>TRUE: Enable the check.</li> <li>FALSE: Do not enable the check.
+        """
+        return pulumi.get(self, "check_instance_target_health")
+
+
+@pulumi.output_type
+class StartInstanceRefreshRefreshSettingsRollingUpdateSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "batchNumber":
+            suggest = "batch_number"
+        elif key == "batchPause":
+            suggest = "batch_pause"
+        elif key == "maxSurge":
+            suggest = "max_surge"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in StartInstanceRefreshRefreshSettingsRollingUpdateSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        StartInstanceRefreshRefreshSettingsRollingUpdateSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        StartInstanceRefreshRefreshSettingsRollingUpdateSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 batch_number: int,
+                 batch_pause: Optional[str] = None,
+                 max_surge: Optional[int] = None):
+        """
+        :param int batch_number: Batch quantity. The batch quantity should be a positive integer greater than 0, but cannot exceed the total number of instances pending refresh.
+        :param str batch_pause: Pause policy between batches. Default value: Automatic. Valid values: <br><li>FIRST_BATCH_PAUSE: Pause after the first batch update completes.</li> <li>BATCH_INTERVAL_PAUSE: Pause between each batch update.</li> <li>AUTOMATIC: No pauses.
+        :param int max_surge: Maximum Extra Quantity. After setting this parameter, a batch of pay-as-you-go extra instances will be created according to the launch configuration before the rolling update starts, and the extra instances will be destroyed after the rolling update is completed.
+        """
+        pulumi.set(__self__, "batch_number", batch_number)
+        if batch_pause is not None:
+            pulumi.set(__self__, "batch_pause", batch_pause)
+        if max_surge is not None:
+            pulumi.set(__self__, "max_surge", max_surge)
+
+    @property
+    @pulumi.getter(name="batchNumber")
+    def batch_number(self) -> int:
+        """
+        Batch quantity. The batch quantity should be a positive integer greater than 0, but cannot exceed the total number of instances pending refresh.
+        """
+        return pulumi.get(self, "batch_number")
+
+    @property
+    @pulumi.getter(name="batchPause")
+    def batch_pause(self) -> Optional[str]:
+        """
+        Pause policy between batches. Default value: Automatic. Valid values: <br><li>FIRST_BATCH_PAUSE: Pause after the first batch update completes.</li> <li>BATCH_INTERVAL_PAUSE: Pause between each batch update.</li> <li>AUTOMATIC: No pauses.
+        """
+        return pulumi.get(self, "batch_pause")
+
+    @property
+    @pulumi.getter(name="maxSurge")
+    def max_surge(self) -> Optional[int]:
+        """
+        Maximum Extra Quantity. After setting this parameter, a batch of pay-as-you-go extra instances will be created according to the launch configuration before the rolling update starts, and the extra instances will be destroyed after the rolling update is completed.
+        """
+        return pulumi.get(self, "max_surge")
 
 
 @pulumi.output_type
@@ -1154,7 +1316,8 @@ class GetScalingConfigsConfigurationListResult(dict):
                  status: str,
                  system_disk_size: int,
                  system_disk_type: str,
-                 user_data: str):
+                 user_data: str,
+                 version_number: int):
         """
         :param str configuration_id: Launch configuration ID.
         :param str configuration_name: Launch configuration name.
@@ -1176,6 +1339,7 @@ class GetScalingConfigsConfigurationListResult(dict):
         :param int system_disk_size: System disk size of the scaling configuration in GB.
         :param str system_disk_type: System disk category of the scaling configuration.
         :param str user_data: Base64-encoded User Data text.
+        :param int version_number: Version Number.
         """
         pulumi.set(__self__, "configuration_id", configuration_id)
         pulumi.set(__self__, "configuration_name", configuration_name)
@@ -1197,6 +1361,7 @@ class GetScalingConfigsConfigurationListResult(dict):
         pulumi.set(__self__, "system_disk_size", system_disk_size)
         pulumi.set(__self__, "system_disk_type", system_disk_type)
         pulumi.set(__self__, "user_data", user_data)
+        pulumi.set(__self__, "version_number", version_number)
 
     @property
     @pulumi.getter(name="configurationId")
@@ -1357,6 +1522,14 @@ class GetScalingConfigsConfigurationListResult(dict):
         Base64-encoded User Data text.
         """
         return pulumi.get(self, "user_data")
+
+    @property
+    @pulumi.getter(name="versionNumber")
+    def version_number(self) -> int:
+        """
+        Version Number.
+        """
+        return pulumi.get(self, "version_number")
 
 
 @pulumi.output_type

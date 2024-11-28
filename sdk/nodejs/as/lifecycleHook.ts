@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -57,6 +59,7 @@ import * as utilities from "../utilities";
  *     lifecycleTransition: "INSTANCE_LAUNCHING",
  *     defaultResult: "CONTINUE",
  *     heartbeatTimeout: 500,
+ *     lifecycleTransitionType: "NORMAL",
  *     notificationMetadata: "tf test",
  * });
  * ```
@@ -97,6 +100,34 @@ import * as utilities from "../utilities";
  * });
  * ```
  * <!--End PulumiCodeChooser -->
+ *
+ * ### Use TAT Command
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.as.LifecycleHook("example", {
+ *     defaultResult: "CONTINUE",
+ *     heartbeatTimeout: 300,
+ *     lifecycleHookName: "test",
+ *     lifecycleTransition: "INSTANCE_TERMINATING",
+ *     scalingGroupId: tencentcloud_as_scaling_group.example.id,
+ *     lifecycleCommand: {
+ *         commandId: "cmd-xxxx",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * lifecycle hook can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example lifecycle_hook_id
+ * ```
  */
 export class LifecycleHook extends pulumi.CustomResource {
     /**
@@ -135,6 +166,10 @@ export class LifecycleHook extends pulumi.CustomResource {
      */
     public readonly heartbeatTimeout!: pulumi.Output<number | undefined>;
     /**
+     * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+     */
+    public readonly lifecycleCommand!: pulumi.Output<outputs.As.LifecycleHookLifecycleCommand>;
+    /**
      * The name of the lifecycle hook.
      */
     public readonly lifecycleHookName!: pulumi.Output<string>;
@@ -142,6 +177,10 @@ export class LifecycleHook extends pulumi.CustomResource {
      * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     public readonly lifecycleTransition!: pulumi.Output<string>;
+    /**
+     * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+     */
+    public readonly lifecycleTransitionType!: pulumi.Output<string>;
     /**
      * Contains additional information that you want to include any time AS sends a message to the notification target.
      */
@@ -151,7 +190,7 @@ export class LifecycleHook extends pulumi.CustomResource {
      */
     public readonly notificationQueueName!: pulumi.Output<string | undefined>;
     /**
-     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
      */
     public readonly notificationTargetType!: pulumi.Output<string | undefined>;
     /**
@@ -178,8 +217,10 @@ export class LifecycleHook extends pulumi.CustomResource {
             const state = argsOrState as LifecycleHookState | undefined;
             resourceInputs["defaultResult"] = state ? state.defaultResult : undefined;
             resourceInputs["heartbeatTimeout"] = state ? state.heartbeatTimeout : undefined;
+            resourceInputs["lifecycleCommand"] = state ? state.lifecycleCommand : undefined;
             resourceInputs["lifecycleHookName"] = state ? state.lifecycleHookName : undefined;
             resourceInputs["lifecycleTransition"] = state ? state.lifecycleTransition : undefined;
+            resourceInputs["lifecycleTransitionType"] = state ? state.lifecycleTransitionType : undefined;
             resourceInputs["notificationMetadata"] = state ? state.notificationMetadata : undefined;
             resourceInputs["notificationQueueName"] = state ? state.notificationQueueName : undefined;
             resourceInputs["notificationTargetType"] = state ? state.notificationTargetType : undefined;
@@ -198,8 +239,10 @@ export class LifecycleHook extends pulumi.CustomResource {
             }
             resourceInputs["defaultResult"] = args ? args.defaultResult : undefined;
             resourceInputs["heartbeatTimeout"] = args ? args.heartbeatTimeout : undefined;
+            resourceInputs["lifecycleCommand"] = args ? args.lifecycleCommand : undefined;
             resourceInputs["lifecycleHookName"] = args ? args.lifecycleHookName : undefined;
             resourceInputs["lifecycleTransition"] = args ? args.lifecycleTransition : undefined;
+            resourceInputs["lifecycleTransitionType"] = args ? args.lifecycleTransitionType : undefined;
             resourceInputs["notificationMetadata"] = args ? args.notificationMetadata : undefined;
             resourceInputs["notificationQueueName"] = args ? args.notificationQueueName : undefined;
             resourceInputs["notificationTargetType"] = args ? args.notificationTargetType : undefined;
@@ -224,6 +267,10 @@ export interface LifecycleHookState {
      */
     heartbeatTimeout?: pulumi.Input<number>;
     /**
+     * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+     */
+    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand>;
+    /**
      * The name of the lifecycle hook.
      */
     lifecycleHookName?: pulumi.Input<string>;
@@ -231,6 +278,10 @@ export interface LifecycleHookState {
      * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     lifecycleTransition?: pulumi.Input<string>;
+    /**
+     * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+     */
+    lifecycleTransitionType?: pulumi.Input<string>;
     /**
      * Contains additional information that you want to include any time AS sends a message to the notification target.
      */
@@ -240,7 +291,7 @@ export interface LifecycleHookState {
      */
     notificationQueueName?: pulumi.Input<string>;
     /**
-     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
      */
     notificationTargetType?: pulumi.Input<string>;
     /**
@@ -266,6 +317,10 @@ export interface LifecycleHookArgs {
      */
     heartbeatTimeout?: pulumi.Input<number>;
     /**
+     * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+     */
+    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand>;
+    /**
      * The name of the lifecycle hook.
      */
     lifecycleHookName: pulumi.Input<string>;
@@ -273,6 +328,10 @@ export interface LifecycleHookArgs {
      * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
     lifecycleTransition: pulumi.Input<string>;
+    /**
+     * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+     */
+    lifecycleTransitionType?: pulumi.Input<string>;
     /**
      * Contains additional information that you want to include any time AS sends a message to the notification target.
      */
@@ -282,7 +341,7 @@ export interface LifecycleHookArgs {
      */
     notificationQueueName?: pulumi.Input<string>;
     /**
-     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+     * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
      */
     notificationTargetType?: pulumi.Input<string>;
     /**

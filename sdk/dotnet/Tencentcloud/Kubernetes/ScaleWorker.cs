@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// &gt; **NOTE:** Import Node: Currently, only one node can be imported at a time.
     /// 
+    /// &gt; **NOTE:** If you need to view error messages during instance creation, you can use parameter `create_result_output_file` to set the file save path
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -32,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
     ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
     ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
+    ///     var example = new Tencentcloud.Kubernetes.ScaleWorker("example", new()
     ///     {
     ///         ClusterId = "cls-godovr32",
     ///         DesiredPodNum = 16,
@@ -65,6 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///             UserData = "dGVzdA==",
     ///             Password = "AABBccdd1122",
     ///         },
+    ///         CreateResultOutputFile = "my_output_file_path",
     ///     });
     /// 
     /// });
@@ -86,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
     ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
     ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
+    ///     var example = new Tencentcloud.Kubernetes.ScaleWorker("example", new()
     ///     {
     ///         ClusterId = "cls-godovr32",
     ///         ExtraArgs = new[]
@@ -133,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// tke scale worker can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/scaleWorker:ScaleWorker")]
@@ -146,7 +149,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Used to save results of CVMs creation error messages.
+        /// </summary>
+        [Output("createResultOutputFile")]
+        public Output<string?> CreateResultOutputFile { get; private set; } = null!;
+
+        /// <summary>
+        /// Configurations of tke data disk.
         /// </summary>
         [Output("dataDisks")]
         public Output<ImmutableArray<Outputs.ScaleWorkerDataDisk>> DataDisks { get; private set; } = null!;
@@ -192,6 +201,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("preStartUserScript")]
         public Output<string?> PreStartUserScript { get; private set; } = null!;
+
+        /// <summary>
+        /// Node taint.
+        /// </summary>
+        [Output("taints")]
+        public Output<ImmutableArray<Outputs.ScaleWorkerTaint>> Taints { get; private set; } = null!;
 
         /// <summary>
         /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
@@ -270,11 +285,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// Used to save results of CVMs creation error messages.
+        /// </summary>
+        [Input("createResultOutputFile")]
+        public Input<string>? CreateResultOutputFile { get; set; }
+
         [Input("dataDisks")]
         private InputList<Inputs.ScaleWorkerDataDiskArgs>? _dataDisks;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of tke data disk.
         /// </summary>
         public InputList<Inputs.ScaleWorkerDataDiskArgs> DataDisks
         {
@@ -336,6 +357,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         [Input("preStartUserScript")]
         public Input<string>? PreStartUserScript { get; set; }
 
+        [Input("taints")]
+        private InputList<Inputs.ScaleWorkerTaintArgs>? _taints;
+
+        /// <summary>
+        /// Node taint.
+        /// </summary>
+        public InputList<Inputs.ScaleWorkerTaintArgs> Taints
+        {
+            get => _taints ?? (_taints = new InputList<Inputs.ScaleWorkerTaintArgs>());
+            set => _taints = value;
+        }
+
         /// <summary>
         /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         /// </summary>
@@ -368,11 +401,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// Used to save results of CVMs creation error messages.
+        /// </summary>
+        [Input("createResultOutputFile")]
+        public Input<string>? CreateResultOutputFile { get; set; }
+
         [Input("dataDisks")]
         private InputList<Inputs.ScaleWorkerDataDiskGetArgs>? _dataDisks;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of tke data disk.
         /// </summary>
         public InputList<Inputs.ScaleWorkerDataDiskGetArgs> DataDisks
         {
@@ -433,6 +472,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("preStartUserScript")]
         public Input<string>? PreStartUserScript { get; set; }
+
+        [Input("taints")]
+        private InputList<Inputs.ScaleWorkerTaintGetArgs>? _taints;
+
+        /// <summary>
+        /// Node taint.
+        /// </summary>
+        public InputList<Inputs.ScaleWorkerTaintGetArgs> Taints
+        {
+            get => _taints ?? (_taints = new InputList<Inputs.ScaleWorkerTaintGetArgs>());
+            set => _taints = value;
+        }
 
         /// <summary>
         /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.

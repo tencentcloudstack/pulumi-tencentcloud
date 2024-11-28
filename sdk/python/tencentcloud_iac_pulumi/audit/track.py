@@ -287,7 +287,7 @@ class Track(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        track = tencentcloud.audit.Track("track",
+        example = tencentcloud.audit.Track("example",
             action_type="Read",
             event_names=["*"],
             resource_type="*",
@@ -302,12 +302,36 @@ class Track(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Specify storage user
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.audit.Track("example",
+            action_type="Read",
+            event_names=["*"],
+            resource_type="*",
+            status=1,
+            storage=tencentcloud.audit.TrackStorageArgs(
+                storage_account_id="100037717137",
+                storage_app_id="1309116520",
+                storage_name="db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+                storage_prefix="cloudaudit",
+                storage_region="ap-guangzhou",
+                storage_type="cos",
+            ),
+            track_for_all_members=0)
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         audit track can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Audit/track:Track track track_id
+        $ pulumi import tencentcloud:Audit/track:Track example 24283
         ```
 
         :param str resource_name: The name of the resource.
@@ -336,7 +360,7 @@ class Track(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        track = tencentcloud.audit.Track("track",
+        example = tencentcloud.audit.Track("example",
             action_type="Read",
             event_names=["*"],
             resource_type="*",
@@ -351,12 +375,36 @@ class Track(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Specify storage user
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.audit.Track("example",
+            action_type="Read",
+            event_names=["*"],
+            resource_type="*",
+            status=1,
+            storage=tencentcloud.audit.TrackStorageArgs(
+                storage_account_id="100037717137",
+                storage_app_id="1309116520",
+                storage_name="db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+                storage_prefix="cloudaudit",
+                storage_region="ap-guangzhou",
+                storage_type="cos",
+            ),
+            track_for_all_members=0)
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         audit track can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Audit/track:Track track track_id
+        $ pulumi import tencentcloud:Audit/track:Track example 24283
         ```
 
         :param str resource_name: The name of the resource.

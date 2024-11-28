@@ -88,6 +88,10 @@ type HttpDomain struct {
 	GaapAuth pulumi.BoolPtrOutput `pulumi:"gaapAuth"`
 	// ID of the SSL certificate.
 	GaapAuthId pulumi.StringOutput `pulumi:"gaapAuthId"`
+	// Group Id.
+	GroupId pulumi.StringPtrOutput `pulumi:"groupId"`
+	// Whether to use as the default domain name, the default is false.
+	IsDefaultServer pulumi.BoolPtrOutput `pulumi:"isDefaultServer"`
 	// ID of the layer7 listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
 	// Indicates whether realserver authentication is enable, default value is `false`.
@@ -156,6 +160,10 @@ type httpDomainState struct {
 	GaapAuth *bool `pulumi:"gaapAuth"`
 	// ID of the SSL certificate.
 	GaapAuthId *string `pulumi:"gaapAuthId"`
+	// Group Id.
+	GroupId *string `pulumi:"groupId"`
+	// Whether to use as the default domain name, the default is false.
+	IsDefaultServer *bool `pulumi:"isDefaultServer"`
 	// ID of the layer7 listener.
 	ListenerId *string `pulumi:"listenerId"`
 	// Indicates whether realserver authentication is enable, default value is `false`.
@@ -189,6 +197,10 @@ type HttpDomainState struct {
 	GaapAuth pulumi.BoolPtrInput
 	// ID of the SSL certificate.
 	GaapAuthId pulumi.StringPtrInput
+	// Group Id.
+	GroupId pulumi.StringPtrInput
+	// Whether to use as the default domain name, the default is false.
+	IsDefaultServer pulumi.BoolPtrInput
 	// ID of the layer7 listener.
 	ListenerId pulumi.StringPtrInput
 	// Indicates whether realserver authentication is enable, default value is `false`.
@@ -226,6 +238,10 @@ type httpDomainArgs struct {
 	GaapAuth *bool `pulumi:"gaapAuth"`
 	// ID of the SSL certificate.
 	GaapAuthId *string `pulumi:"gaapAuthId"`
+	// Group Id.
+	GroupId *string `pulumi:"groupId"`
+	// Whether to use as the default domain name, the default is false.
+	IsDefaultServer *bool `pulumi:"isDefaultServer"`
 	// ID of the layer7 listener.
 	ListenerId string `pulumi:"listenerId"`
 	// Indicates whether realserver authentication is enable, default value is `false`.
@@ -260,6 +276,10 @@ type HttpDomainArgs struct {
 	GaapAuth pulumi.BoolPtrInput
 	// ID of the SSL certificate.
 	GaapAuthId pulumi.StringPtrInput
+	// Group Id.
+	GroupId pulumi.StringPtrInput
+	// Whether to use as the default domain name, the default is false.
+	IsDefaultServer pulumi.BoolPtrInput
 	// ID of the layer7 listener.
 	ListenerId pulumi.StringInput
 	// Indicates whether realserver authentication is enable, default value is `false`.
@@ -401,6 +421,16 @@ func (o HttpDomainOutput) GaapAuth() pulumi.BoolPtrOutput {
 // ID of the SSL certificate.
 func (o HttpDomainOutput) GaapAuthId() pulumi.StringOutput {
 	return o.ApplyT(func(v *HttpDomain) pulumi.StringOutput { return v.GaapAuthId }).(pulumi.StringOutput)
+}
+
+// Group Id.
+func (o HttpDomainOutput) GroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *HttpDomain) pulumi.StringPtrOutput { return v.GroupId }).(pulumi.StringPtrOutput)
+}
+
+// Whether to use as the default domain name, the default is false.
+func (o HttpDomainOutput) IsDefaultServer() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *HttpDomain) pulumi.BoolPtrOutput { return v.IsDefaultServer }).(pulumi.BoolPtrOutput)
 }
 
 // ID of the layer7 listener.

@@ -8,10 +8,299 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
+    'GetFromFamilyImageResult',
+    'GetFromFamilyImageSnapshotSetResult',
+    'GetFromFamilyImageTagResult',
     'GetInstanceFilterResult',
 ]
+
+@pulumi.output_type
+class GetFromFamilyImageResult(dict):
+    def __init__(__self__, *,
+                 architecture: str,
+                 created_time: str,
+                 image_creator: str,
+                 image_deprecated: bool,
+                 image_description: str,
+                 image_family: str,
+                 image_id: str,
+                 image_name: str,
+                 image_size: int,
+                 image_source: str,
+                 image_state: str,
+                 image_type: str,
+                 is_support_cloudinit: bool,
+                 license_type: str,
+                 os_name: str,
+                 platform: str,
+                 snapshot_sets: Sequence['outputs.GetFromFamilyImageSnapshotSetResult'],
+                 sync_percent: int,
+                 tags: Sequence['outputs.GetFromFamilyImageTagResult']):
+        """
+        :param str architecture: Image architecture.
+        :param str created_time: Creation time of the image.
+        :param str image_creator: Image creator.
+        :param bool image_deprecated: If Image Deprecated.
+        :param str image_description: Image description.
+        :param str image_family: Image family name.
+        :param str image_id: Image ID.
+        :param str image_name: Image name.
+        :param int image_size: Image size.
+        :param str image_source: Image source.
+        :param str image_state: Image state.
+        :param str image_type: Image type.
+        :param bool is_support_cloudinit: Whether the image supports cloud-init.
+        :param str license_type: Image license type.
+        :param str os_name: Operating system of the image.
+        :param str platform: Source platform of the image.
+        :param Sequence['GetFromFamilyImageSnapshotSetArgs'] snapshot_sets: Information on the snapshots associated with the image.
+        :param int sync_percent: Synchronization percentage.
+        :param Sequence['GetFromFamilyImageTagArgs'] tags: The list of tags bound to the image.
+        """
+        pulumi.set(__self__, "architecture", architecture)
+        pulumi.set(__self__, "created_time", created_time)
+        pulumi.set(__self__, "image_creator", image_creator)
+        pulumi.set(__self__, "image_deprecated", image_deprecated)
+        pulumi.set(__self__, "image_description", image_description)
+        pulumi.set(__self__, "image_family", image_family)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "image_name", image_name)
+        pulumi.set(__self__, "image_size", image_size)
+        pulumi.set(__self__, "image_source", image_source)
+        pulumi.set(__self__, "image_state", image_state)
+        pulumi.set(__self__, "image_type", image_type)
+        pulumi.set(__self__, "is_support_cloudinit", is_support_cloudinit)
+        pulumi.set(__self__, "license_type", license_type)
+        pulumi.set(__self__, "os_name", os_name)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "snapshot_sets", snapshot_sets)
+        pulumi.set(__self__, "sync_percent", sync_percent)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def architecture(self) -> str:
+        """
+        Image architecture.
+        """
+        return pulumi.get(self, "architecture")
+
+    @property
+    @pulumi.getter(name="createdTime")
+    def created_time(self) -> str:
+        """
+        Creation time of the image.
+        """
+        return pulumi.get(self, "created_time")
+
+    @property
+    @pulumi.getter(name="imageCreator")
+    def image_creator(self) -> str:
+        """
+        Image creator.
+        """
+        return pulumi.get(self, "image_creator")
+
+    @property
+    @pulumi.getter(name="imageDeprecated")
+    def image_deprecated(self) -> bool:
+        """
+        If Image Deprecated.
+        """
+        return pulumi.get(self, "image_deprecated")
+
+    @property
+    @pulumi.getter(name="imageDescription")
+    def image_description(self) -> str:
+        """
+        Image description.
+        """
+        return pulumi.get(self, "image_description")
+
+    @property
+    @pulumi.getter(name="imageFamily")
+    def image_family(self) -> str:
+        """
+        Image family name.
+        """
+        return pulumi.get(self, "image_family")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        """
+        Image ID.
+        """
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter(name="imageName")
+    def image_name(self) -> str:
+        """
+        Image name.
+        """
+        return pulumi.get(self, "image_name")
+
+    @property
+    @pulumi.getter(name="imageSize")
+    def image_size(self) -> int:
+        """
+        Image size.
+        """
+        return pulumi.get(self, "image_size")
+
+    @property
+    @pulumi.getter(name="imageSource")
+    def image_source(self) -> str:
+        """
+        Image source.
+        """
+        return pulumi.get(self, "image_source")
+
+    @property
+    @pulumi.getter(name="imageState")
+    def image_state(self) -> str:
+        """
+        Image state.
+        """
+        return pulumi.get(self, "image_state")
+
+    @property
+    @pulumi.getter(name="imageType")
+    def image_type(self) -> str:
+        """
+        Image type.
+        """
+        return pulumi.get(self, "image_type")
+
+    @property
+    @pulumi.getter(name="isSupportCloudinit")
+    def is_support_cloudinit(self) -> bool:
+        """
+        Whether the image supports cloud-init.
+        """
+        return pulumi.get(self, "is_support_cloudinit")
+
+    @property
+    @pulumi.getter(name="licenseType")
+    def license_type(self) -> str:
+        """
+        Image license type.
+        """
+        return pulumi.get(self, "license_type")
+
+    @property
+    @pulumi.getter(name="osName")
+    def os_name(self) -> str:
+        """
+        Operating system of the image.
+        """
+        return pulumi.get(self, "os_name")
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        Source platform of the image.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="snapshotSets")
+    def snapshot_sets(self) -> Sequence['outputs.GetFromFamilyImageSnapshotSetResult']:
+        """
+        Information on the snapshots associated with the image.
+        """
+        return pulumi.get(self, "snapshot_sets")
+
+    @property
+    @pulumi.getter(name="syncPercent")
+    def sync_percent(self) -> int:
+        """
+        Synchronization percentage.
+        """
+        return pulumi.get(self, "sync_percent")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetFromFamilyImageTagResult']:
+        """
+        The list of tags bound to the image.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetFromFamilyImageSnapshotSetResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_usage: str,
+                 snapshot_id: str):
+        """
+        :param int disk_size: Size of the cloud disk used to create the snapshot, unit(GB).
+        :param str disk_usage: Type of the cloud disk used to create the snapshot. Valid values: YSTEM_DISK: system disk, DATA_DISK: data disk.
+        :param str snapshot_id: Snapshot ID.
+        """
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_usage", disk_usage)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Size of the cloud disk used to create the snapshot, unit(GB).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskUsage")
+    def disk_usage(self) -> str:
+        """
+        Type of the cloud disk used to create the snapshot. Valid values: YSTEM_DISK: system disk, DATA_DISK: data disk.
+        """
+        return pulumi.get(self, "disk_usage")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        """
+        Snapshot ID.
+        """
+        return pulumi.get(self, "snapshot_id")
+
+
+@pulumi.output_type
+class GetFromFamilyImageTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key.
+        :param str value: Vaule.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Vaule.
+        """
+        return pulumi.get(self, "value")
+
 
 @pulumi.output_type
 class GetInstanceFilterResult(dict):

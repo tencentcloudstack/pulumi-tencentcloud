@@ -21,6 +21,7 @@ class ListenerArgs:
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  end_port: Optional[pulumi.Input[int]] = None,
+                 h2c_switch: Optional[pulumi.Input[bool]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -53,6 +54,7 @@ class ListenerArgs:
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        :param pulumi.Input[bool] h2c_switch: Enable H2C switch for intranet HTTP listener.
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -88,6 +90,8 @@ class ListenerArgs:
             pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
         if end_port is not None:
             pulumi.set(__self__, "end_port", end_port)
+        if h2c_switch is not None:
+            pulumi.set(__self__, "h2c_switch", h2c_switch)
         if health_check_context_type is not None:
             pulumi.set(__self__, "health_check_context_type", health_check_context_type)
         if health_check_health_num is not None:
@@ -218,6 +222,18 @@ class ListenerArgs:
     @end_port.setter
     def end_port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "end_port", value)
+
+    @property
+    @pulumi.getter(name="h2cSwitch")
+    def h2c_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable H2C switch for intranet HTTP listener.
+        """
+        return pulumi.get(self, "h2c_switch")
+
+    @h2c_switch.setter
+    def h2c_switch(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "h2c_switch", value)
 
     @property
     @pulumi.getter(name="healthCheckContextType")
@@ -504,6 +520,7 @@ class _ListenerState:
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  end_port: Optional[pulumi.Input[int]] = None,
+                 h2c_switch: Optional[pulumi.Input[bool]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -537,6 +554,7 @@ class _ListenerState:
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
         :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        :param pulumi.Input[bool] h2c_switch: Enable H2C switch for intranet HTTP listener.
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -574,6 +592,8 @@ class _ListenerState:
             pulumi.set(__self__, "clb_id", clb_id)
         if end_port is not None:
             pulumi.set(__self__, "end_port", end_port)
+        if h2c_switch is not None:
+            pulumi.set(__self__, "h2c_switch", h2c_switch)
         if health_check_context_type is not None:
             pulumi.set(__self__, "health_check_context_type", health_check_context_type)
         if health_check_health_num is not None:
@@ -686,6 +706,18 @@ class _ListenerState:
     @end_port.setter
     def end_port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "end_port", value)
+
+    @property
+    @pulumi.getter(name="h2cSwitch")
+    def h2c_switch(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable H2C switch for intranet HTTP listener.
+        """
+        return pulumi.get(self, "h2c_switch")
+
+    @h2c_switch.setter
+    def h2c_switch(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "h2c_switch", value)
 
     @property
     @pulumi.getter(name="healthCheckContextType")
@@ -1010,6 +1042,7 @@ class Listener(pulumi.CustomResource):
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  end_port: Optional[pulumi.Input[int]] = None,
+                 h2c_switch: Optional[pulumi.Input[bool]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1243,6 +1276,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
         :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        :param pulumi.Input[bool] h2c_switch: Enable H2C switch for intranet HTTP listener.
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -1495,6 +1529,7 @@ class Listener(pulumi.CustomResource):
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  end_port: Optional[pulumi.Input[int]] = None,
+                 h2c_switch: Optional[pulumi.Input[bool]] = None,
                  health_check_context_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1536,6 +1571,7 @@ class Listener(pulumi.CustomResource):
                 raise TypeError("Missing required property 'clb_id'")
             __props__.__dict__["clb_id"] = clb_id
             __props__.__dict__["end_port"] = end_port
+            __props__.__dict__["h2c_switch"] = h2c_switch
             __props__.__dict__["health_check_context_type"] = health_check_context_type
             __props__.__dict__["health_check_health_num"] = health_check_health_num
             __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1581,6 +1617,7 @@ class Listener(pulumi.CustomResource):
             certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
             clb_id: Optional[pulumi.Input[str]] = None,
             end_port: Optional[pulumi.Input[int]] = None,
+            h2c_switch: Optional[pulumi.Input[bool]] = None,
             health_check_context_type: Optional[pulumi.Input[str]] = None,
             health_check_health_num: Optional[pulumi.Input[int]] = None,
             health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1619,6 +1656,7 @@ class Listener(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of `HTTPS` and `TCP_SSL` protocol and must be set when it is available.
         :param pulumi.Input[str] clb_id: ID of the CLB.
         :param pulumi.Input[int] end_port: This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+        :param pulumi.Input[bool] h2c_switch: Enable H2C switch for intranet HTTP listener.
         :param pulumi.Input[str] health_check_context_type: Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
         :param pulumi.Input[int] health_check_http_code: HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `health_check_type` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
@@ -1655,6 +1693,7 @@ class Listener(pulumi.CustomResource):
         __props__.__dict__["certificate_ssl_mode"] = certificate_ssl_mode
         __props__.__dict__["clb_id"] = clb_id
         __props__.__dict__["end_port"] = end_port
+        __props__.__dict__["h2c_switch"] = h2c_switch
         __props__.__dict__["health_check_context_type"] = health_check_context_type
         __props__.__dict__["health_check_health_num"] = health_check_health_num
         __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1722,6 +1761,14 @@ class Listener(pulumi.CustomResource):
         This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         """
         return pulumi.get(self, "end_port")
+
+    @property
+    @pulumi.getter(name="h2cSwitch")
+    def h2c_switch(self) -> pulumi.Output[bool]:
+        """
+        Enable H2C switch for intranet HTTP listener.
+        """
+        return pulumi.get(self, "h2c_switch")
 
     @property
     @pulumi.getter(name="healthCheckContextType")

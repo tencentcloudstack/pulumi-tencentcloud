@@ -81,23 +81,34 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.scf.Function("foo", {
- *     enablePublicNet: true,
  *     handler: "first.do_it_first",
  *     runtime: "Python3.6",
+ *     enablePublicNet: true,
+ *     zipFile: "/scf/first.zip",
  *     triggers: [
  *         {
  *             name: "tf-test-fn-trigger",
- *             triggerDesc: "*&#47;5 * * * * * *",
  *             type: "timer",
+ *             triggerDesc: "*&#47;5 * * * * * *",
  *         },
  *         {
- *             cosRegion: "ap-guangzhou",
  *             name: "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
- *             triggerDesc: "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+ *             cosRegion: "ap-guangzhou",
  *             type: "cos",
+ *             triggerDesc: "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+ *         },
+ *         {
+ *             name: "tf-test-fn-trigger",
+ *             type: "http",
+ *             triggerDesc: JSON.stringify({
+ *                 AuthType: "NONE",
+ *                 NetConfig: {
+ *                     EnableIntranet: true,
+ *                     EnableExtranet: false,
+ *                 },
+ *             }),
  *         },
  *     ],
- *     zipFile: "/scf/first.zip",
  * });
  * ```
  * <!--End PulumiCodeChooser -->

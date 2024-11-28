@@ -48,11 +48,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         CidrBlock = "10.0.1.0/24",
     ///     });
     /// 
-    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     var example = new Tencentcloud.Redis.Instance("example", new()
     ///     {
     ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
     ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.TypeId),
-    ///         Password = "test12345789",
+    ///         Password = "Password@123",
     ///         MemSize = 8192,
     ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
     ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
@@ -65,12 +65,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Create a CDC scenario instance
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var cdcId = config.Get("cdcId") ?? "cluster-xxxx";
+    ///     var clusters = Tencentcloud.Redis.GetClusters.Invoke(new()
+    ///     {
+    ///         DedicatedClusterId = cdcId,
+    ///     });
+    /// 
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
+    ///     {
+    ///         TypeId = 7,
+    ///         Region = "ap-guangzhou",
+    ///     });
+    /// 
+    ///     var subnets = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    ///     {
+    ///         CdcId = cdcId,
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Redis.Instance("example", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.TypeId),
+    ///         Password = "Password@123",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = subnets.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
+    ///         SubnetId = subnets.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId),
+    ///         ProductVersion = "cdc",
+    ///         RedisClusterId = clusters.Apply(getClustersResult =&gt; getClustersResult.Resources[0]?.RedisClusterId),
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["name"] = clusters.Apply(getClustersResult =&gt; getClustersResult.Resources[0]?.RedisClusterId),
+    ///     };
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// Redis instance can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+    /// $ pulumi import tencentcloud:Redis/instance:Instance example crs-iu22tdrf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/instance:Instance")]
@@ -101,7 +154,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Dedicated Cluster ID.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string> DedicatedClusterId { get; private set; } = null!;
+
+        /// <summary>
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
@@ -167,6 +226,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
+        /// Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        /// </summary>
+        [Output("productVersion")]
+        public Output<string> ProductVersion { get; private set; } = null!;
+
+        /// <summary>
         /// Specifies which project the instance should belong to.
         /// </summary>
         [Output("projectId")]
@@ -177,6 +242,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Output("recycle")]
         public Output<int?> Recycle { get; private set; } = null!;
+
+        /// <summary>
+        /// Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
+        /// </summary>
+        [Output("redisClusterId")]
+        public Output<string> RedisClusterId { get; private set; } = null!;
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
@@ -320,7 +391,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -390,6 +461,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
+        /// Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        /// </summary>
+        [Input("productVersion")]
+        public Input<string>? ProductVersion { get; set; }
+
+        /// <summary>
         /// Specifies which project the instance should belong to.
         /// </summary>
         [Input("projectId")]
@@ -400,6 +477,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("recycle")]
         public Input<int>? Recycle { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
+        /// </summary>
+        [Input("redisClusterId")]
+        public Input<string>? RedisClusterId { get; set; }
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
@@ -518,7 +601,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
+        /// Dedicated Cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
+        /// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
@@ -600,6 +689,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<int>? PrepaidPeriod { get; set; }
 
         /// <summary>
+        /// Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+        /// </summary>
+        [Input("productVersion")]
+        public Input<string>? ProductVersion { get; set; }
+
+        /// <summary>
         /// Specifies which project the instance should belong to.
         /// </summary>
         [Input("projectId")]
@@ -610,6 +705,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("recycle")]
         public Input<int>? Recycle { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster ID. When the `product_version` is set to `cdc`, this parameter must be set.
+        /// </summary>
+        [Input("redisClusterId")]
+        public Input<string>? RedisClusterId { get; set; }
 
         /// <summary>
         /// The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replica_zone_ids`, Non-multi-AZ does not require `replica_zone_ids`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.

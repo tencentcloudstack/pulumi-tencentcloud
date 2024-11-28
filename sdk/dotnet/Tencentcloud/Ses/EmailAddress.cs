@@ -11,9 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
 {
     /// <summary>
-    /// Provides a resource to create a ses email_address
+    /// Provides a resource to create a ses email address
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Create ses email address
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -24,10 +26,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var emailAddress = new Tencentcloud.Ses.EmailAddress("emailAddress", new()
+    ///     var example = new Tencentcloud.Ses.EmailAddress("example", new()
     ///     {
-    ///         SesEmailAddress = "aaa@iac-tf.cloud",
-    ///         EmailSenderName = "aaa",
+    ///         SesEmailAddress = "demo@iac-terraform.cloud",
+    ///         EmailSenderName = "root",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Set smtp password
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Ses.EmailAddress("example", new()
+    ///     {
+    ///         SesEmailAddress = "demo@iac-terraform.cloud",
+    ///         EmailSenderName = "root",
+    ///         SmtpPassword = "Password@123",
     ///     });
     /// 
     /// });
@@ -39,14 +63,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// ses email_address can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
+    /// $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress example demo@iac-terraform.cloud
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/emailAddress:EmailAddress")]
     public partial class EmailAddress : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Your sender address. (You can create up to 10 sender addresses for each domain.).
+        /// Your sender address(You can create up to 10 sender addresses for each domain).
         /// </summary>
         [Output("emailAddress")]
         public Output<string> SesEmailAddress { get; private set; } = null!;
@@ -56,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// </summary>
         [Output("emailSenderName")]
         public Output<string?> EmailSenderName { get; private set; } = null!;
+
+        /// <summary>
+        /// Password for SMTP, Length limit 64.
+        /// </summary>
+        [Output("smtpPassword")]
+        public Output<string?> SmtpPassword { get; private set; } = null!;
 
 
         /// <summary>
@@ -81,6 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "smtpPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -105,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     public sealed class EmailAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Your sender address. (You can create up to 10 sender addresses for each domain.).
+        /// Your sender address(You can create up to 10 sender addresses for each domain).
         /// </summary>
         [Input("emailAddress", required: true)]
         public Input<string> SesEmailAddress { get; set; } = null!;
@@ -116,6 +150,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         [Input("emailSenderName")]
         public Input<string>? EmailSenderName { get; set; }
 
+        [Input("smtpPassword")]
+        private Input<string>? _smtpPassword;
+
+        /// <summary>
+        /// Password for SMTP, Length limit 64.
+        /// </summary>
+        public Input<string>? SmtpPassword
+        {
+            get => _smtpPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _smtpPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         public EmailAddressArgs()
         {
         }
@@ -125,7 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     public sealed class EmailAddressState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Your sender address. (You can create up to 10 sender addresses for each domain.).
+        /// Your sender address(You can create up to 10 sender addresses for each domain).
         /// </summary>
         [Input("emailAddress")]
         public Input<string>? SesEmailAddress { get; set; }
@@ -135,6 +185,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// </summary>
         [Input("emailSenderName")]
         public Input<string>? EmailSenderName { get; set; }
+
+        [Input("smtpPassword")]
+        private Input<string>? _smtpPassword;
+
+        /// <summary>
+        /// Password for SMTP, Length limit 64.
+        /// </summary>
+        public Input<string>? SmtpPassword
+        {
+            get => _smtpPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _smtpPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public EmailAddressState()
         {

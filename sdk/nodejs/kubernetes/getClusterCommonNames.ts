@@ -11,17 +11,33 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query common names by subaccount uins
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Kubernetes.getClusterCommonNames({
- *     clusterId: "cls-12345678",
+ * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ *     clusterId: "cls-fdy7hm1q",
  *     subaccountUins: [
- *         "1234567890",
- *         "0987654321",
+ *         "100037718139",
+ *         "100031340176",
  *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query common names by role ids
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ *     clusterId: "cls-fdy7hm1q",
+ *     roleIds: ["4611686018441060141"],
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -82,17 +98,33 @@ export interface GetClusterCommonNamesResult {
  *
  * ## Example Usage
  *
+ * ### Query common names by subaccount uins
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = tencentcloud.Kubernetes.getClusterCommonNames({
- *     clusterId: "cls-12345678",
+ * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ *     clusterId: "cls-fdy7hm1q",
  *     subaccountUins: [
- *         "1234567890",
- *         "0987654321",
+ *         "100037718139",
+ *         "100031340176",
  *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query common names by role ids
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ *     clusterId: "cls-fdy7hm1q",
+ *     roleIds: ["4611686018441060141"],
  * });
  * ```
  * <!--End PulumiCodeChooser -->

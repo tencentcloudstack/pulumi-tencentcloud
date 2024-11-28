@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// <summary>
     /// Provides a resource to create a cos bucket_referer
     /// 
+    /// &gt; **NOTE:** The current resource does not support cdc.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;

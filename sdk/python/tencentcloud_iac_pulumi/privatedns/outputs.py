@@ -16,6 +16,13 @@ __all__ = [
     'ZoneVpcAttachmentAccountVpcSet',
     'ZoneVpcAttachmentVpcSet',
     'ZoneVpcSet',
+    'GetEndPointsEndPointSetResult',
+    'GetEndPointsEndPointSetTagResult',
+    'GetEndPointsFilterResult',
+    'GetForwardRulesFilterResult',
+    'GetForwardRulesForwardRuleSetResult',
+    'GetForwardRulesForwardRuleSetTagResult',
+    'GetForwardRulesForwardRuleSetVpcSetResult',
     'GetPrivateZoneListFilterResult',
     'GetPrivateZoneListPrivateZoneSetResult',
     'GetPrivateZoneListPrivateZoneSetAccountVpcSetResult',
@@ -289,6 +296,371 @@ class ZoneVpcSet(dict):
     def uniq_vpc_id(self) -> str:
         """
         VPC ID.
+        """
+        return pulumi.get(self, "uniq_vpc_id")
+
+
+@pulumi.output_type
+class GetEndPointsEndPointSetResult(dict):
+    def __init__(__self__, *,
+                 end_point_id: str,
+                 end_point_name: str,
+                 end_point_service_id: str,
+                 end_point_vip_sets: Sequence[str],
+                 region_code: str,
+                 tags: Sequence['outputs.GetEndPointsEndPointSetTagResult']):
+        """
+        :param str end_point_id: Endpoint ID.
+        :param str end_point_name: Endpoint name.
+        :param str end_point_service_id: Endpoint service ID.
+        :param Sequence[str] end_point_vip_sets: VIP list of the endpoint.
+        :param str region_code: ap-guangzhou
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetEndPointsEndPointSetTagArgs'] tags: Tag key-value pair collection.
+               Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "end_point_id", end_point_id)
+        pulumi.set(__self__, "end_point_name", end_point_name)
+        pulumi.set(__self__, "end_point_service_id", end_point_service_id)
+        pulumi.set(__self__, "end_point_vip_sets", end_point_vip_sets)
+        pulumi.set(__self__, "region_code", region_code)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="endPointId")
+    def end_point_id(self) -> str:
+        """
+        Endpoint ID.
+        """
+        return pulumi.get(self, "end_point_id")
+
+    @property
+    @pulumi.getter(name="endPointName")
+    def end_point_name(self) -> str:
+        """
+        Endpoint name.
+        """
+        return pulumi.get(self, "end_point_name")
+
+    @property
+    @pulumi.getter(name="endPointServiceId")
+    def end_point_service_id(self) -> str:
+        """
+        Endpoint service ID.
+        """
+        return pulumi.get(self, "end_point_service_id")
+
+    @property
+    @pulumi.getter(name="endPointVipSets")
+    def end_point_vip_sets(self) -> Sequence[str]:
+        """
+        VIP list of the endpoint.
+        """
+        return pulumi.get(self, "end_point_vip_sets")
+
+    @property
+    @pulumi.getter(name="regionCode")
+    def region_code(self) -> str:
+        """
+        ap-guangzhou
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "region_code")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetEndPointsEndPointSetTagResult']:
+        """
+        Tag key-value pair collection.
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetEndPointsEndPointSetTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetEndPointsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Array of parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Array of parameter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetForwardRulesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Parameter name.
+        :param Sequence[str] values: Array of parameter values.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Parameter name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Array of parameter values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetForwardRulesForwardRuleSetResult(dict):
+    def __init__(__self__, *,
+                 created_at: str,
+                 domain: str,
+                 end_point_id: str,
+                 end_point_name: str,
+                 forward_addresses: Sequence[str],
+                 rule_id: str,
+                 rule_name: str,
+                 rule_type: str,
+                 tags: Sequence['outputs.GetForwardRulesForwardRuleSetTagResult'],
+                 updated_at: str,
+                 vpc_sets: Sequence['outputs.GetForwardRulesForwardRuleSetVpcSetResult'],
+                 zone_id: str):
+        """
+        :param str created_at: Creation time.
+        :param str domain: Private domain name.
+        :param str end_point_id: Endpoint ID.
+        :param str end_point_name: Endpoint name.
+        :param Sequence[str] forward_addresses: Forwarding address.
+        :param str rule_id: Rule ID.
+        :param str rule_name: Forwarding rule name.
+        :param str rule_type: Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
+        :param Sequence['GetForwardRulesForwardRuleSetTagArgs'] tags: Tag.
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param str updated_at: Update time.
+        :param Sequence['GetForwardRulesForwardRuleSetVpcSetArgs'] vpc_sets: List of VPCs bound to the private domain.
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param str zone_id: ID of the bound private domain.
+        """
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "end_point_id", end_point_id)
+        pulumi.set(__self__, "end_point_name", end_point_name)
+        pulumi.set(__self__, "forward_addresses", forward_addresses)
+        pulumi.set(__self__, "rule_id", rule_id)
+        pulumi.set(__self__, "rule_name", rule_name)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "updated_at", updated_at)
+        pulumi.set(__self__, "vpc_sets", vpc_sets)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter
+    def domain(self) -> str:
+        """
+        Private domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter(name="endPointId")
+    def end_point_id(self) -> str:
+        """
+        Endpoint ID.
+        """
+        return pulumi.get(self, "end_point_id")
+
+    @property
+    @pulumi.getter(name="endPointName")
+    def end_point_name(self) -> str:
+        """
+        Endpoint name.
+        """
+        return pulumi.get(self, "end_point_name")
+
+    @property
+    @pulumi.getter(name="forwardAddresses")
+    def forward_addresses(self) -> Sequence[str]:
+        """
+        Forwarding address.
+        """
+        return pulumi.get(self, "forward_addresses")
+
+    @property
+    @pulumi.getter(name="ruleId")
+    def rule_id(self) -> str:
+        """
+        Rule ID.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> str:
+        """
+        Forwarding rule name.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        """
+        Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
+        """
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetForwardRulesForwardRuleSetTagResult']:
+        """
+        Tag.
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> str:
+        """
+        Update time.
+        """
+        return pulumi.get(self, "updated_at")
+
+    @property
+    @pulumi.getter(name="vpcSets")
+    def vpc_sets(self) -> Sequence['outputs.GetForwardRulesForwardRuleSetVpcSetResult']:
+        """
+        List of VPCs bound to the private domain.
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "vpc_sets")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        """
+        ID of the bound private domain.
+        """
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetForwardRulesForwardRuleSetTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetForwardRulesForwardRuleSetVpcSetResult(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 uniq_vpc_id: str):
+        """
+        :param str region: VPC region: ap-guangzhou, ap-shanghai.
+        :param str uniq_vpc_id: VpcId: vpc-xadsafsdasd.
+        """
+        pulumi.set(__self__, "region", region)
+        pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        """
+        VPC region: ap-guangzhou, ap-shanghai.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="uniqVpcId")
+    def uniq_vpc_id(self) -> str:
+        """
+        VpcId: vpc-xadsafsdasd.
         """
         return pulumi.get(self, "uniq_vpc_id")
 

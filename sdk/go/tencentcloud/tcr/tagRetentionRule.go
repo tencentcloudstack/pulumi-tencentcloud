@@ -16,7 +16,7 @@ import (
 //
 // ## Example Usage
 //
-// ### Create a tcr tag retention rule instance
+// ### Create and enable a tcr tag retention rule instance
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -64,7 +64,6 @@ import (
 //					Value: pulumi.Int(2),
 //				},
 //				CronSetting: pulumi.String("daily"),
-//				Disabled:    pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err

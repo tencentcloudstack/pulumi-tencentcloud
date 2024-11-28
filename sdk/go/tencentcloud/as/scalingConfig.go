@@ -56,13 +56,14 @@ import (
 //						DiskSize: pulumi.Int(50),
 //					},
 //				},
-//				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-//				InternetMaxBandwidthOut: pulumi.Int(10),
-//				PublicIpAssigned:        pulumi.Bool(true),
-//				Password:                pulumi.String("Test@123#"),
-//				EnhancedSecurityService: pulumi.Bool(false),
-//				EnhancedMonitorService:  pulumi.Bool(false),
-//				UserData:                pulumi.String("dGVzdA=="),
+//				InternetChargeType:             pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut:        pulumi.Int(10),
+//				PublicIpAssigned:               pulumi.Bool(true),
+//				Password:                       pulumi.String("Test@123#"),
+//				EnhancedSecurityService:        pulumi.Bool(false),
+//				EnhancedMonitorService:         pulumi.Bool(false),
+//				EnhancedAutomationToolsService: pulumi.Bool(false),
+//				UserData:                       pulumi.String("dGVzdA=="),
 //				HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
 //					HostName:      pulumi.String("host-name-test"),
 //					HostNameStyle: pulumi.String("UNIQUE"),
@@ -126,6 +127,53 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Using image family
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewScalingConfig(ctx, "example", &As.ScalingConfigArgs{
+//				ConfigurationName:              pulumi.String("as-test-config"),
+//				DiskTypePolicy:                 pulumi.String("ORIGINAL"),
+//				EnhancedAutomationToolsService: pulumi.Bool(false),
+//				EnhancedMonitorService:         pulumi.Bool(false),
+//				EnhancedSecurityService:        pulumi.Bool(false),
+//				ImageFamily:                    pulumi.String("business-daily-update"),
+//				InstanceTags:                   nil,
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("S5.SMALL2"),
+//				},
+//				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut: pulumi.Int(0),
+//				KeyIds:                  pulumi.StringArray{},
+//				ProjectId:               pulumi.Int(0),
+//				PublicIpAssigned:        pulumi.Bool(false),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-5275dorp"),
+//				},
+//				SystemDiskSize: pulumi.Int(50),
+//				SystemDiskType: pulumi.String("CLOUD_BSSD"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // AutoScaling Configuration can be imported using the id, e.g.
@@ -146,14 +194,18 @@ type ScalingConfig struct {
 	DataDisks ScalingConfigDataDiskArrayOutput `pulumi:"dataDisks"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrOutput `pulumi:"diskTypePolicy"`
+	// To specify whether to enable cloud automation tools service.
+	EnhancedAutomationToolsService pulumi.BoolPtrOutput `pulumi:"enhancedAutomationToolsService"`
 	// To specify whether to enable cloud monitor service. Default is `TRUE`.
 	EnhancedMonitorService pulumi.BoolPtrOutput `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrOutput `pulumi:"enhancedSecurityService"`
 	// Related settings of the cloud server hostname (HostName).
 	HostNameSettings ScalingConfigHostNameSettingsPtrOutput `pulumi:"hostNameSettings"`
+	// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+	ImageFamily pulumi.StringPtrOutput `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
-	ImageId pulumi.StringOutput `pulumi:"imageId"`
+	ImageId pulumi.StringPtrOutput `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -206,9 +258,6 @@ func NewScalingConfig(ctx *pulumi.Context,
 	if args.ConfigurationName == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigurationName'")
 	}
-	if args.ImageId == nil {
-		return nil, errors.New("invalid value for required argument 'ImageId'")
-	}
 	if args.InstanceTypes == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceTypes'")
 	}
@@ -252,12 +301,16 @@ type scalingConfigState struct {
 	DataDisks []ScalingConfigDataDisk `pulumi:"dataDisks"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy *string `pulumi:"diskTypePolicy"`
+	// To specify whether to enable cloud automation tools service.
+	EnhancedAutomationToolsService *bool `pulumi:"enhancedAutomationToolsService"`
 	// To specify whether to enable cloud monitor service. Default is `TRUE`.
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// Related settings of the cloud server hostname (HostName).
 	HostNameSettings *ScalingConfigHostNameSettings `pulumi:"hostNameSettings"`
+	// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+	ImageFamily *string `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
 	ImageId *string `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -313,12 +366,16 @@ type ScalingConfigState struct {
 	DataDisks ScalingConfigDataDiskArrayInput
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrInput
+	// To specify whether to enable cloud automation tools service.
+	EnhancedAutomationToolsService pulumi.BoolPtrInput
 	// To specify whether to enable cloud monitor service. Default is `TRUE`.
 	EnhancedMonitorService pulumi.BoolPtrInput
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrInput
 	// Related settings of the cloud server hostname (HostName).
 	HostNameSettings ScalingConfigHostNameSettingsPtrInput
+	// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+	ImageFamily pulumi.StringPtrInput
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringPtrInput
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
@@ -376,14 +433,18 @@ type scalingConfigArgs struct {
 	DataDisks []ScalingConfigDataDisk `pulumi:"dataDisks"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy *string `pulumi:"diskTypePolicy"`
+	// To specify whether to enable cloud automation tools service.
+	EnhancedAutomationToolsService *bool `pulumi:"enhancedAutomationToolsService"`
 	// To specify whether to enable cloud monitor service. Default is `TRUE`.
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// Related settings of the cloud server hostname (HostName).
 	HostNameSettings *ScalingConfigHostNameSettings `pulumi:"hostNameSettings"`
+	// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+	ImageFamily *string `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
-	ImageId string `pulumi:"imageId"`
+	ImageId *string `pulumi:"imageId"`
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -434,14 +495,18 @@ type ScalingConfigArgs struct {
 	DataDisks ScalingConfigDataDiskArrayInput
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrInput
+	// To specify whether to enable cloud automation tools service.
+	EnhancedAutomationToolsService pulumi.BoolPtrInput
 	// To specify whether to enable cloud monitor service. Default is `TRUE`.
 	EnhancedMonitorService pulumi.BoolPtrInput
 	// To specify whether to enable cloud security service. Default is `TRUE`.
 	EnhancedSecurityService pulumi.BoolPtrInput
 	// Related settings of the cloud server hostname (HostName).
 	HostNameSettings ScalingConfigHostNameSettingsPtrInput
+	// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+	ImageFamily pulumi.StringPtrInput
 	// An available image ID for a cvm instance.
-	ImageId pulumi.StringInput
+	ImageId pulumi.StringPtrInput
 	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrInput
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -594,6 +659,11 @@ func (o ScalingConfigOutput) DiskTypePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.DiskTypePolicy }).(pulumi.StringPtrOutput)
 }
 
+// To specify whether to enable cloud automation tools service.
+func (o ScalingConfigOutput) EnhancedAutomationToolsService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ScalingConfig) pulumi.BoolPtrOutput { return v.EnhancedAutomationToolsService }).(pulumi.BoolPtrOutput)
+}
+
 // To specify whether to enable cloud monitor service. Default is `TRUE`.
 func (o ScalingConfigOutput) EnhancedMonitorService() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.BoolPtrOutput { return v.EnhancedMonitorService }).(pulumi.BoolPtrOutput)
@@ -609,9 +679,14 @@ func (o ScalingConfigOutput) HostNameSettings() ScalingConfigHostNameSettingsPtr
 	return o.ApplyT(func(v *ScalingConfig) ScalingConfigHostNameSettingsPtrOutput { return v.HostNameSettings }).(ScalingConfigHostNameSettingsPtrOutput)
 }
 
+// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+func (o ScalingConfigOutput) ImageFamily() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.ImageFamily }).(pulumi.StringPtrOutput)
+}
+
 // An available image ID for a cvm instance.
-func (o ScalingConfigOutput) ImageId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ScalingConfig) pulumi.StringOutput { return v.ImageId }).(pulumi.StringOutput)
+func (o ScalingConfigOutput) ImageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.ImageId }).(pulumi.StringPtrOutput)
 }
 
 // Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.

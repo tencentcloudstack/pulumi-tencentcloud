@@ -10,6 +10,7 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'CheckCertificateDomainVerificationOperationVerificationResultArgs',
     'FreeCertificateDvAuthArgs',
     'PayCertificateDvAuthArgs',
     'PayCertificateInformationArgs',
@@ -26,6 +27,141 @@ __all__ = [
     'GetDescribeHostVodInstanceListFilterArgs',
     'GetDescribeHostWafInstanceListFilterArgs',
 ]
+
+@pulumi.input_type
+class CheckCertificateDomainVerificationOperationVerificationResultArgs:
+    def __init__(__self__, *,
+                 ca_check: Optional[pulumi.Input[int]] = None,
+                 check_values: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 domain: Optional[pulumi.Input[str]] = None,
+                 frequently: Optional[pulumi.Input[bool]] = None,
+                 issued: Optional[pulumi.Input[bool]] = None,
+                 local_check: Optional[pulumi.Input[int]] = None,
+                 local_check_fail_reason: Optional[pulumi.Input[str]] = None,
+                 verify_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] ca_check: CA inspection results.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] check_values: Detected values.
+        :param pulumi.Input[str] domain: Domain name.
+        :param pulumi.Input[bool] frequently: Whether frequent requests.
+        :param pulumi.Input[bool] issued: Whether issued.
+        :param pulumi.Input[int] local_check: Local inspection results.
+        :param pulumi.Input[str] local_check_fail_reason: Check the reason for the failure.
+        :param pulumi.Input[str] verify_type: Domain Verify Type.
+        """
+        if ca_check is not None:
+            pulumi.set(__self__, "ca_check", ca_check)
+        if check_values is not None:
+            pulumi.set(__self__, "check_values", check_values)
+        if domain is not None:
+            pulumi.set(__self__, "domain", domain)
+        if frequently is not None:
+            pulumi.set(__self__, "frequently", frequently)
+        if issued is not None:
+            pulumi.set(__self__, "issued", issued)
+        if local_check is not None:
+            pulumi.set(__self__, "local_check", local_check)
+        if local_check_fail_reason is not None:
+            pulumi.set(__self__, "local_check_fail_reason", local_check_fail_reason)
+        if verify_type is not None:
+            pulumi.set(__self__, "verify_type", verify_type)
+
+    @property
+    @pulumi.getter(name="caCheck")
+    def ca_check(self) -> Optional[pulumi.Input[int]]:
+        """
+        CA inspection results.
+        """
+        return pulumi.get(self, "ca_check")
+
+    @ca_check.setter
+    def ca_check(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ca_check", value)
+
+    @property
+    @pulumi.getter(name="checkValues")
+    def check_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Detected values.
+        """
+        return pulumi.get(self, "check_values")
+
+    @check_values.setter
+    def check_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "check_values", value)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name.
+        """
+        return pulumi.get(self, "domain")
+
+    @domain.setter
+    def domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter
+    def frequently(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether frequent requests.
+        """
+        return pulumi.get(self, "frequently")
+
+    @frequently.setter
+    def frequently(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "frequently", value)
+
+    @property
+    @pulumi.getter
+    def issued(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether issued.
+        """
+        return pulumi.get(self, "issued")
+
+    @issued.setter
+    def issued(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "issued", value)
+
+    @property
+    @pulumi.getter(name="localCheck")
+    def local_check(self) -> Optional[pulumi.Input[int]]:
+        """
+        Local inspection results.
+        """
+        return pulumi.get(self, "local_check")
+
+    @local_check.setter
+    def local_check(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "local_check", value)
+
+    @property
+    @pulumi.getter(name="localCheckFailReason")
+    def local_check_fail_reason(self) -> Optional[pulumi.Input[str]]:
+        """
+        Check the reason for the failure.
+        """
+        return pulumi.get(self, "local_check_fail_reason")
+
+    @local_check_fail_reason.setter
+    def local_check_fail_reason(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "local_check_fail_reason", value)
+
+    @property
+    @pulumi.getter(name="verifyType")
+    def verify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain Verify Type.
+        """
+        return pulumi.get(self, "verify_type")
+
+    @verify_type.setter
+    def verify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "verify_type", value)
+
 
 @pulumi.input_type
 class FreeCertificateDvAuthArgs:

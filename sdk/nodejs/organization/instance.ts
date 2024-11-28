@@ -120,6 +120,10 @@ export class Instance extends pulumi.CustomResource {
      * Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
     public /*out*/ readonly rootNodeId!: pulumi.Output<number>;
+    /**
+     * Root node name.
+     */
+    public readonly rootNodeName!: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -150,8 +154,10 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["payName"] = state ? state.payName : undefined;
             resourceInputs["payUin"] = state ? state.payUin : undefined;
             resourceInputs["rootNodeId"] = state ? state.rootNodeId : undefined;
+            resourceInputs["rootNodeName"] = state ? state.rootNodeName : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
+            resourceInputs["rootNodeName"] = args ? args.rootNodeName : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["hostUin"] = undefined /*out*/;
             resourceInputs["isAllowQuit"] = undefined /*out*/;
@@ -242,10 +248,18 @@ export interface InstanceState {
      * Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
     rootNodeId?: pulumi.Input<number>;
+    /**
+     * Root node name.
+     */
+    rootNodeName?: pulumi.Input<string>;
 }
 
 /**
  * The set of arguments for constructing a Instance resource.
  */
 export interface InstanceArgs {
+    /**
+     * Root node name.
+     */
+    rootNodeName?: pulumi.Input<string>;
 }

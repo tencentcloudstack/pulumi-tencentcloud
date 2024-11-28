@@ -355,6 +355,8 @@ type Listener struct {
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort pulumi.IntOutput `pulumi:"endPort"`
+	// Enable H2C switch for intranet HTTP listener.
+	H2cSwitch pulumi.BoolOutput `pulumi:"h2cSwitch"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringOutput `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -458,6 +460,8 @@ type listenerState struct {
 	ClbId *string `pulumi:"clbId"`
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort *int `pulumi:"endPort"`
+	// Enable H2C switch for intranet HTTP listener.
+	H2cSwitch *bool `pulumi:"h2cSwitch"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -523,6 +527,8 @@ type ListenerState struct {
 	ClbId pulumi.StringPtrInput
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort pulumi.IntPtrInput
+	// Enable H2C switch for intranet HTTP listener.
+	H2cSwitch pulumi.BoolPtrInput
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -592,6 +598,8 @@ type listenerArgs struct {
 	ClbId string `pulumi:"clbId"`
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort *int `pulumi:"endPort"`
+	// Enable H2C switch for intranet HTTP listener.
+	H2cSwitch *bool `pulumi:"h2cSwitch"`
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType *string `pulumi:"healthCheckContextType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -656,6 +664,8 @@ type ListenerArgs struct {
 	ClbId pulumi.StringInput
 	// This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	EndPort pulumi.IntPtrInput
+	// Enable H2C switch for intranet HTTP listener.
+	H2cSwitch pulumi.BoolPtrInput
 	// Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
 	HealthCheckContextType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
@@ -818,6 +828,11 @@ func (o ListenerOutput) ClbId() pulumi.StringOutput {
 // This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 func (o ListenerOutput) EndPort() pulumi.IntOutput {
 	return o.ApplyT(func(v *Listener) pulumi.IntOutput { return v.EndPort }).(pulumi.IntOutput)
+}
+
+// Enable H2C switch for intranet HTTP listener.
+func (o ListenerOutput) H2cSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Listener) pulumi.BoolOutput { return v.H2cSwitch }).(pulumi.BoolOutput)
 }
 
 // Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.

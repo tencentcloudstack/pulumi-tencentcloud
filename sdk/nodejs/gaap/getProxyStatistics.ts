@@ -69,7 +69,7 @@ export interface GetProxyStatisticsArgs {
      */
     isp?: string;
     /**
-     * Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+     * Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
      */
     metricNames: string[];
     /**
@@ -159,7 +159,7 @@ export interface GetProxyStatisticsOutputArgs {
      */
     isp?: pulumi.Input<string>;
     /**
-     * Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+     * Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
      */
     metricNames: pulumi.Input<pulumi.Input<string>[]>;
     /**

@@ -1856,11 +1856,13 @@ class BucketWebsiteArgs:
     def __init__(__self__, *,
                  endpoint: Optional[pulumi.Input[str]] = None,
                  error_document: Optional[pulumi.Input[str]] = None,
-                 index_document: Optional[pulumi.Input[str]] = None):
+                 index_document: Optional[pulumi.Input[str]] = None,
+                 redirect_all_requests_to: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] endpoint: `Endpoint` of the static website.
         :param pulumi.Input[str] error_document: An absolute path to the document to return in case of a 4XX error.
         :param pulumi.Input[str] index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        :param pulumi.Input[str] redirect_all_requests_to: Redirects all request configurations. Valid values: http, https. Default is `http`.
         """
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
@@ -1868,6 +1870,8 @@ class BucketWebsiteArgs:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
             pulumi.set(__self__, "index_document", index_document)
+        if redirect_all_requests_to is not None:
+            pulumi.set(__self__, "redirect_all_requests_to", redirect_all_requests_to)
 
     @property
     @pulumi.getter
@@ -1904,5 +1908,17 @@ class BucketWebsiteArgs:
     @index_document.setter
     def index_document(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "index_document", value)
+
+    @property
+    @pulumi.getter(name="redirectAllRequestsTo")
+    def redirect_all_requests_to(self) -> Optional[pulumi.Input[str]]:
+        """
+        Redirects all request configurations. Valid values: http, https. Default is `http`.
+        """
+        return pulumi.get(self, "redirect_all_requests_to")
+
+    @redirect_all_requests_to.setter
+    def redirect_all_requests_to(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "redirect_all_requests_to", value)
 
 

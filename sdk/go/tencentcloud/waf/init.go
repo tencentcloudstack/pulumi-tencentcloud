@@ -43,8 +43,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CustomWhiteRule{}
 	case "tencentcloud:Waf/ipAccessControl:IpAccessControl":
 		r = &IpAccessControl{}
-	case "tencentcloud:Waf/modifyAccessPeriod:ModifyAccessPeriod":
-		r = &ModifyAccessPeriod{}
+	case "tencentcloud:Waf/ipAccessControlV2:IpAccessControlV2":
+		r = &IpAccessControlV2{}
 	case "tencentcloud:Waf/moduleStatus:ModuleStatus":
 		r = &ModuleStatus{}
 	case "tencentcloud:Waf/protectionMode:ProtectionMode":
@@ -125,7 +125,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Waf/modifyAccessPeriod",
+		"Waf/ipAccessControlV2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -62,6 +62,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
         /// Status of the layer7 listener.
         /// </summary>
         public readonly int Status;
+        /// <summary>
+        /// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        /// </summary>
+        public readonly string TlsCiphers;
+        /// <summary>
+        /// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+        /// </summary>
+        public readonly ImmutableArray<string> TlsSupportVersions;
 
         [OutputConstructor]
         private GetLayer7ListenersListenerResult(
@@ -87,7 +95,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
 
             string proxyId,
 
-            int status)
+            int status,
+
+            string tlsCiphers,
+
+            ImmutableArray<string> tlsSupportVersions)
         {
             AuthType = authType;
             CertificateId = certificateId;
@@ -101,6 +113,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
             Protocol = protocol;
             ProxyId = proxyId;
             Status = status;
+            TlsCiphers = tlsCiphers;
+            TlsSupportVersions = tlsSupportVersions;
         }
     }
 }

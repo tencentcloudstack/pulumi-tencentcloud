@@ -105,6 +105,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     public sealed class GetLayer7ListenersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
+        /// Group id.
+        /// </summary>
+        [Input("groupId")]
+        public string? GroupId { get; set; }
+
+        /// <summary>
         /// ID of the layer7 listener to be queried.
         /// </summary>
         [Input("listenerId")]
@@ -148,6 +154,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
 
     public sealed class GetLayer7ListenersInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Group id.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
+
         /// <summary>
         /// ID of the layer7 listener to be queried.
         /// </summary>
@@ -194,6 +206,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     [OutputType]
     public sealed class GetLayer7ListenersResult
     {
+        public readonly string? GroupId;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
@@ -220,6 +233,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
 
         [OutputConstructor]
         private GetLayer7ListenersResult(
+            string? groupId,
+
             string id,
 
             string? listenerId,
@@ -236,6 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
 
             string? resultOutputFile)
         {
+            GroupId = groupId;
             Id = id;
             ListenerId = listenerId;
             ListenerName = listenerName;

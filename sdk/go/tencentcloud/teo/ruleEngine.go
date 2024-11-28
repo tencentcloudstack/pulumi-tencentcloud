@@ -195,6 +195,8 @@ type RuleEngine struct {
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
 	// The rule name (1 to 255 characters).
 	RuleName pulumi.StringOutput `pulumi:"ruleName"`
+	// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+	RulePriority pulumi.IntOutput `pulumi:"rulePriority"`
 	// Rule items list.
 	Rules RuleEngineRuleArrayOutput `pulumi:"rules"`
 	// Rule status. Values:
@@ -251,6 +253,8 @@ type ruleEngineState struct {
 	RuleId *string `pulumi:"ruleId"`
 	// The rule name (1 to 255 characters).
 	RuleName *string `pulumi:"ruleName"`
+	// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+	RulePriority *int `pulumi:"rulePriority"`
 	// Rule items list.
 	Rules []RuleEngineRule `pulumi:"rules"`
 	// Rule status. Values:
@@ -266,6 +270,8 @@ type RuleEngineState struct {
 	RuleId pulumi.StringPtrInput
 	// The rule name (1 to 255 characters).
 	RuleName pulumi.StringPtrInput
+	// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+	RulePriority pulumi.IntPtrInput
 	// Rule items list.
 	Rules RuleEngineRuleArrayInput
 	// Rule status. Values:
@@ -402,6 +408,11 @@ func (o RuleEngineOutput) RuleId() pulumi.StringOutput {
 // The rule name (1 to 255 characters).
 func (o RuleEngineOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v *RuleEngine) pulumi.StringOutput { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+func (o RuleEngineOutput) RulePriority() pulumi.IntOutput {
+	return o.ApplyT(func(v *RuleEngine) pulumi.IntOutput { return v.RulePriority }).(pulumi.IntOutput)
 }
 
 // Rule items list.

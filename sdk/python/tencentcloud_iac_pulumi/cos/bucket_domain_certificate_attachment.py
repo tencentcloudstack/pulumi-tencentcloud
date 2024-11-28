@@ -102,6 +102,8 @@ class BucketDomainCertificateAttachment(pulumi.CustomResource):
         """
         Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket.
 
+        > **NOTE:** The current resource does not support cdc.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -137,6 +139,8 @@ class BucketDomainCertificateAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket.
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 

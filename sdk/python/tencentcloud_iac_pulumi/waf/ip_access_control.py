@@ -166,6 +166,8 @@ class IpAccessControl(pulumi.CustomResource):
         """
         Provides a resource to create a waf ip_access_control
 
+        > **NOTE:** This resource is no longer under maintenance, please use `Waf.IpAccessControlV2` instead
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -223,6 +225,8 @@ class IpAccessControl(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a waf ip_access_control
+
+        > **NOTE:** This resource is no longer under maintenance, please use `Waf.IpAccessControlV2` instead
 
         ## Example Usage
 

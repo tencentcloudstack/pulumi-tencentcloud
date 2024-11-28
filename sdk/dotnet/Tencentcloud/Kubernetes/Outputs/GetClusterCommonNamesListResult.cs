@@ -17,6 +17,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// <summary>
         /// The CommonName in the certificate of the client corresponding to the sub-account.
         /// </summary>
+        public readonly string CommonName;
+        /// <summary>
+        /// (**Deprecated**) It has been deprecated from version 1.81.140. Please use `common_name`. The CommonName in the certificate of the client corresponding to the sub-account.
+        /// </summary>
         public readonly string CommonNames;
         /// <summary>
         /// User UIN.
@@ -25,10 +29,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
         [OutputConstructor]
         private GetClusterCommonNamesListResult(
+            string commonName,
+
             string commonNames,
 
             string subaccountUin)
         {
+            CommonName = commonName;
             CommonNames = commonNames;
             SubaccountUin = subaccountUin;
         }

@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create a single domain listener rule
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -26,25 +28,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.ListenerRule("foo", new()
+    ///     var example = new Tencentcloud.Clb.ListenerRule("example", new()
     ///     {
     ///         CertificateCaId = "VfqO4zkB",
     ///         CertificateId = "VjANRdz8",
     ///         CertificateSslMode = "MUTUAL",
     ///         ClbId = "lb-k2zjp9lv",
-    ///         Domain = "foo.net",
+    ///         Domain = "example.com",
     ///         HealthCheckHealthNum = 3,
     ///         HealthCheckHttpCode = 2,
-    ///         HealthCheckHttpDomain = "Default Domain",
+    ///         HealthCheckHttpDomain = "check.com",
     ///         HealthCheckHttpMethod = "GET",
-    ///         HealthCheckHttpPath = "Default Path",
+    ///         HealthCheckHttpPath = "/",
     ///         HealthCheckIntervalTime = 5,
     ///         HealthCheckSwitch = true,
     ///         HealthCheckUnhealthNum = 3,
     ///         ListenerId = "lbl-hh141sn9",
     ///         Scheduler = "WRR",
     ///         SessionExpireTime = 30,
-    ///         Url = "/bar",
+    ///         Url = "/",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a listener rule for domain lists
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.ListenerRule("example", new()
+    ///     {
+    ///         ClbId = "lb-k2zjp9lv",
+    ///         Domains = new[]
+    ///         {
+    ///             "example1.com",
+    ///             "example2.com",
+    ///         },
+    ///         HealthCheckHealthNum = 3,
+    ///         HealthCheckHttpCode = 2,
+    ///         HealthCheckHttpDomain = "check.com",
+    ///         HealthCheckHttpMethod = "GET",
+    ///         HealthCheckHttpPath = "/",
+    ///         HealthCheckIntervalTime = 5,
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckUnhealthNum = 3,
+    ///         ListenerId = "lbl-hh141sn9",
+    ///         Scheduler = "WRR",
+    ///         Url = "/",
     ///     });
     /// 
     /// });
@@ -56,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// CLB listener rule can be imported using the id (version &gt;= 1.47.0), e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+    /// $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule example lb-k2zjp9lv#lbl-hh141sn9#loc-agg236ys
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/listenerRule:ListenerRule")]
@@ -87,13 +125,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> ClbId { get; private set; } = null!;
 
         /// <summary>
-        /// Domain name of the listener rule.
+        /// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         /// </summary>
         [Output("domain")]
         public Output<string> Domain { get; private set; } = null!;
 
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
+        /// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        /// </summary>
+        [Output("domains")]
+        public Output<ImmutableArray<string>> Domains { get; private set; } = null!;
+
+        /// <summary>
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `GRPC`, `GRPCS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Output("forwardType")]
         public Output<string> ForwardType { get; private set; } = null!;
@@ -147,7 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> HealthCheckTimeOut { get; private set; } = null!;
 
         /// <summary>
-        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// Type of health check. Valid value is `CUSTOM`, `PING`, `TCP`, `HTTP`, `HTTPS`, `GRPC`, `GRPCS`.
         /// </summary>
         [Output("healthCheckType")]
         public Output<string> HealthCheckType { get; private set; } = null!;
@@ -278,13 +322,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ClbId { get; set; } = null!;
 
         /// <summary>
-        /// Domain name of the listener rule.
+        /// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         /// </summary>
-        [Input("domain", required: true)]
-        public Input<string> Domain { get; set; } = null!;
+        [Input("domain")]
+        public Input<string>? Domain { get; set; }
+
+        [Input("domains")]
+        private InputList<string>? _domains;
 
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
+        /// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        /// </summary>
+        public InputList<string> Domains
+        {
+            get => _domains ?? (_domains = new InputList<string>());
+            set => _domains = value;
+        }
+
+        /// <summary>
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `GRPC`, `GRPCS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Input("forwardType")]
         public Input<string>? ForwardType { get; set; }
@@ -338,7 +394,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// Type of health check. Valid value is `CUSTOM`, `PING`, `TCP`, `HTTP`, `HTTPS`, `GRPC`, `GRPCS`.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }
@@ -424,13 +480,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? ClbId { get; set; }
 
         /// <summary>
-        /// Domain name of the listener rule.
+        /// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
 
+        [Input("domains")]
+        private InputList<string>? _domains;
+
         /// <summary>
-        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
+        /// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        /// </summary>
+        public InputList<string> Domains
+        {
+            get => _domains ?? (_domains = new InputList<string>());
+            set => _domains = value;
+        }
+
+        /// <summary>
+        /// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `GRPC`, `GRPCS`, `TRPC`. The default is `HTTP`.
         /// </summary>
         [Input("forwardType")]
         public Input<string>? ForwardType { get; set; }
@@ -484,7 +552,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Type of health check. Valid value is `CUSTOM`, `TCP`, `HTTP`.
+        /// Type of health check. Valid value is `CUSTOM`, `PING`, `TCP`, `HTTP`, `HTTPS`, `GRPC`, `GRPCS`.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }

@@ -17,14 +17,16 @@ __all__ = ['ScalingConfigArgs', 'ScalingConfig']
 class ScalingConfigArgs:
     def __init__(__self__, *,
                  configuration_name: pulumi.Input[str],
-                 image_id: pulumi.Input[str],
                  instance_types: pulumi.Input[Sequence[pulumi.Input[str]]],
                  cam_role_name: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ScalingConfigDataDiskArgs']]]] = None,
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
+                 enhanced_automation_tools_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
                  host_name_settings: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']] = None,
+                 image_family: Optional[pulumi.Input[str]] = None,
+                 image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
                  instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[str]] = None,
@@ -46,14 +48,16 @@ class ScalingConfigArgs:
         """
         The set of arguments for constructing a ScalingConfig resource.
         :param pulumi.Input[str] configuration_name: Name of a launch configuration.
-        :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_types: Specified types of CVM instances.
         :param pulumi.Input[str] cam_role_name: CAM role name authorized to access.
         :param pulumi.Input[Sequence[pulumi.Input['ScalingConfigDataDiskArgs']]] data_disks: Configurations of data disk.
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
+        :param pulumi.Input[bool] enhanced_automation_tools_service: To specify whether to enable cloud automation tools service.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input['ScalingConfigHostNameSettingsArgs'] host_name_settings: Related settings of the cloud server hostname (HostName).
+        :param pulumi.Input[str] image_family: Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
@@ -74,7 +78,6 @@ class ScalingConfigArgs:
         :param pulumi.Input[str] user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         pulumi.set(__self__, "configuration_name", configuration_name)
-        pulumi.set(__self__, "image_id", image_id)
         pulumi.set(__self__, "instance_types", instance_types)
         if cam_role_name is not None:
             pulumi.set(__self__, "cam_role_name", cam_role_name)
@@ -82,12 +85,18 @@ class ScalingConfigArgs:
             pulumi.set(__self__, "data_disks", data_disks)
         if disk_type_policy is not None:
             pulumi.set(__self__, "disk_type_policy", disk_type_policy)
+        if enhanced_automation_tools_service is not None:
+            pulumi.set(__self__, "enhanced_automation_tools_service", enhanced_automation_tools_service)
         if enhanced_monitor_service is not None:
             pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
         if enhanced_security_service is not None:
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
         if host_name_settings is not None:
             pulumi.set(__self__, "host_name_settings", host_name_settings)
+        if image_family is not None:
+            pulumi.set(__self__, "image_family", image_family)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if instance_charge_type_prepaid_period is not None:
@@ -138,18 +147,6 @@ class ScalingConfigArgs:
         pulumi.set(self, "configuration_name", value)
 
     @property
-    @pulumi.getter(name="imageId")
-    def image_id(self) -> pulumi.Input[str]:
-        """
-        An available image ID for a cvm instance.
-        """
-        return pulumi.get(self, "image_id")
-
-    @image_id.setter
-    def image_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "image_id", value)
-
-    @property
     @pulumi.getter(name="instanceTypes")
     def instance_types(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
         """
@@ -198,6 +195,18 @@ class ScalingConfigArgs:
         pulumi.set(self, "disk_type_policy", value)
 
     @property
+    @pulumi.getter(name="enhancedAutomationToolsService")
+    def enhanced_automation_tools_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        To specify whether to enable cloud automation tools service.
+        """
+        return pulumi.get(self, "enhanced_automation_tools_service")
+
+    @enhanced_automation_tools_service.setter
+    def enhanced_automation_tools_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enhanced_automation_tools_service", value)
+
+    @property
     @pulumi.getter(name="enhancedMonitorService")
     def enhanced_monitor_service(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -232,6 +241,30 @@ class ScalingConfigArgs:
     @host_name_settings.setter
     def host_name_settings(self, value: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]):
         pulumi.set(self, "host_name_settings", value)
+
+    @property
+    @pulumi.getter(name="imageFamily")
+    def image_family(self) -> Optional[pulumi.Input[str]]:
+        """
+        Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        """
+        return pulumi.get(self, "image_family")
+
+    @image_family.setter
+    def image_family(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_family", value)
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        An available image ID for a cvm instance.
+        """
+        return pulumi.get(self, "image_id")
+
+    @image_id.setter
+    def image_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_id", value)
 
     @property
     @pulumi.getter(name="instanceChargeType")
@@ -458,9 +491,11 @@ class _ScalingConfigState:
                  create_time: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ScalingConfigDataDiskArgs']]]] = None,
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
+                 enhanced_automation_tools_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
                  host_name_settings: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']] = None,
+                 image_family: Optional[pulumi.Input[str]] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -489,9 +524,11 @@ class _ScalingConfigState:
         :param pulumi.Input[str] create_time: The time when the launch configuration was created.
         :param pulumi.Input[Sequence[pulumi.Input['ScalingConfigDataDiskArgs']]] data_disks: Configurations of data disk.
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
+        :param pulumi.Input[bool] enhanced_automation_tools_service: To specify whether to enable cloud automation tools service.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input['ScalingConfigHostNameSettingsArgs'] host_name_settings: Related settings of the cloud server hostname (HostName).
+        :param pulumi.Input[str] image_family: Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -524,12 +561,16 @@ class _ScalingConfigState:
             pulumi.set(__self__, "data_disks", data_disks)
         if disk_type_policy is not None:
             pulumi.set(__self__, "disk_type_policy", disk_type_policy)
+        if enhanced_automation_tools_service is not None:
+            pulumi.set(__self__, "enhanced_automation_tools_service", enhanced_automation_tools_service)
         if enhanced_monitor_service is not None:
             pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
         if enhanced_security_service is not None:
             pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
         if host_name_settings is not None:
             pulumi.set(__self__, "host_name_settings", host_name_settings)
+        if image_family is not None:
+            pulumi.set(__self__, "image_family", image_family)
         if image_id is not None:
             pulumi.set(__self__, "image_id", image_id)
         if instance_charge_type is not None:
@@ -634,6 +675,18 @@ class _ScalingConfigState:
         pulumi.set(self, "disk_type_policy", value)
 
     @property
+    @pulumi.getter(name="enhancedAutomationToolsService")
+    def enhanced_automation_tools_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        To specify whether to enable cloud automation tools service.
+        """
+        return pulumi.get(self, "enhanced_automation_tools_service")
+
+    @enhanced_automation_tools_service.setter
+    def enhanced_automation_tools_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enhanced_automation_tools_service", value)
+
+    @property
     @pulumi.getter(name="enhancedMonitorService")
     def enhanced_monitor_service(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -668,6 +721,18 @@ class _ScalingConfigState:
     @host_name_settings.setter
     def host_name_settings(self, value: Optional[pulumi.Input['ScalingConfigHostNameSettingsArgs']]):
         pulumi.set(self, "host_name_settings", value)
+
+    @property
+    @pulumi.getter(name="imageFamily")
+    def image_family(self) -> Optional[pulumi.Input[str]]:
+        """
+        Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        """
+        return pulumi.get(self, "image_family")
+
+    @image_family.setter
+    def image_family(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_family", value)
 
     @property
     @pulumi.getter(name="imageId")
@@ -931,9 +996,11 @@ class ScalingConfig(pulumi.CustomResource):
                  configuration_name: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingConfigDataDiskArgs']]]]] = None,
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
+                 enhanced_automation_tools_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
                  host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
+                 image_family: Optional[pulumi.Input[str]] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -987,6 +1054,7 @@ class ScalingConfig(pulumi.CustomResource):
             password="Test@123#",
             enhanced_security_service=False,
             enhanced_monitor_service=False,
+            enhanced_automation_tools_service=False,
             user_data="dGVzdA==",
             host_name_settings=tencentcloud.as_.ScalingConfigHostNameSettingsArgs(
                 host_name="host-name-test",
@@ -1018,6 +1086,33 @@ class ScalingConfig(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Using image family
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.ScalingConfig("example",
+            configuration_name="as-test-config",
+            disk_type_policy="ORIGINAL",
+            enhanced_automation_tools_service=False,
+            enhanced_monitor_service=False,
+            enhanced_security_service=False,
+            image_family="business-daily-update",
+            instance_tags={},
+            instance_types=["S5.SMALL2"],
+            internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+            internet_max_bandwidth_out=0,
+            key_ids=[],
+            project_id=0,
+            public_ip_assigned=False,
+            security_group_ids=["sg-5275dorp"],
+            system_disk_size=50,
+            system_disk_type="CLOUD_BSSD")
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         AutoScaling Configuration can be imported using the id, e.g.
@@ -1032,9 +1127,11 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[str] configuration_name: Name of a launch configuration.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingConfigDataDiskArgs']]]] data_disks: Configurations of data disk.
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
+        :param pulumi.Input[bool] enhanced_automation_tools_service: To specify whether to enable cloud automation tools service.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']] host_name_settings: Related settings of the cloud server hostname (HostName).
+        :param pulumi.Input[str] image_family: Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -1094,6 +1191,7 @@ class ScalingConfig(pulumi.CustomResource):
             password="Test@123#",
             enhanced_security_service=False,
             enhanced_monitor_service=False,
+            enhanced_automation_tools_service=False,
             user_data="dGVzdA==",
             host_name_settings=tencentcloud.as_.ScalingConfigHostNameSettingsArgs(
                 host_name="host-name-test",
@@ -1125,6 +1223,33 @@ class ScalingConfig(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Using image family
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.ScalingConfig("example",
+            configuration_name="as-test-config",
+            disk_type_policy="ORIGINAL",
+            enhanced_automation_tools_service=False,
+            enhanced_monitor_service=False,
+            enhanced_security_service=False,
+            image_family="business-daily-update",
+            instance_tags={},
+            instance_types=["S5.SMALL2"],
+            internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+            internet_max_bandwidth_out=0,
+            key_ids=[],
+            project_id=0,
+            public_ip_assigned=False,
+            security_group_ids=["sg-5275dorp"],
+            system_disk_size=50,
+            system_disk_type="CLOUD_BSSD")
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         AutoScaling Configuration can be imported using the id, e.g.
@@ -1152,9 +1277,11 @@ class ScalingConfig(pulumi.CustomResource):
                  configuration_name: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingConfigDataDiskArgs']]]]] = None,
                  disk_type_policy: Optional[pulumi.Input[str]] = None,
+                 enhanced_automation_tools_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
                  enhanced_security_service: Optional[pulumi.Input[bool]] = None,
                  host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
+                 image_family: Optional[pulumi.Input[str]] = None,
                  image_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -1190,11 +1317,11 @@ class ScalingConfig(pulumi.CustomResource):
             __props__.__dict__["configuration_name"] = configuration_name
             __props__.__dict__["data_disks"] = data_disks
             __props__.__dict__["disk_type_policy"] = disk_type_policy
+            __props__.__dict__["enhanced_automation_tools_service"] = enhanced_automation_tools_service
             __props__.__dict__["enhanced_monitor_service"] = enhanced_monitor_service
             __props__.__dict__["enhanced_security_service"] = enhanced_security_service
             __props__.__dict__["host_name_settings"] = host_name_settings
-            if image_id is None and not opts.urn:
-                raise TypeError("Missing required property 'image_id'")
+            __props__.__dict__["image_family"] = image_family
             __props__.__dict__["image_id"] = image_id
             __props__.__dict__["instance_charge_type"] = instance_charge_type
             __props__.__dict__["instance_charge_type_prepaid_period"] = instance_charge_type_prepaid_period
@@ -1236,9 +1363,11 @@ class ScalingConfig(pulumi.CustomResource):
             create_time: Optional[pulumi.Input[str]] = None,
             data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingConfigDataDiskArgs']]]]] = None,
             disk_type_policy: Optional[pulumi.Input[str]] = None,
+            enhanced_automation_tools_service: Optional[pulumi.Input[bool]] = None,
             enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
             enhanced_security_service: Optional[pulumi.Input[bool]] = None,
             host_name_settings: Optional[pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']]] = None,
+            image_family: Optional[pulumi.Input[str]] = None,
             image_id: Optional[pulumi.Input[str]] = None,
             instance_charge_type: Optional[pulumi.Input[str]] = None,
             instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -1272,9 +1401,11 @@ class ScalingConfig(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: The time when the launch configuration was created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingConfigDataDiskArgs']]]] data_disks: Configurations of data disk.
         :param pulumi.Input[str] disk_type_policy: Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
+        :param pulumi.Input[bool] enhanced_automation_tools_service: To specify whether to enable cloud automation tools service.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is `TRUE`.
         :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is `TRUE`.
         :param pulumi.Input[pulumi.InputType['ScalingConfigHostNameSettingsArgs']] host_name_settings: Related settings of the cloud server hostname (HostName).
+        :param pulumi.Input[str] image_family: Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
         :param pulumi.Input[str] image_id: An available image ID for a cvm instance.
         :param pulumi.Input[str] instance_charge_type: Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
@@ -1306,9 +1437,11 @@ class ScalingConfig(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["data_disks"] = data_disks
         __props__.__dict__["disk_type_policy"] = disk_type_policy
+        __props__.__dict__["enhanced_automation_tools_service"] = enhanced_automation_tools_service
         __props__.__dict__["enhanced_monitor_service"] = enhanced_monitor_service
         __props__.__dict__["enhanced_security_service"] = enhanced_security_service
         __props__.__dict__["host_name_settings"] = host_name_settings
+        __props__.__dict__["image_family"] = image_family
         __props__.__dict__["image_id"] = image_id
         __props__.__dict__["instance_charge_type"] = instance_charge_type
         __props__.__dict__["instance_charge_type_prepaid_period"] = instance_charge_type_prepaid_period
@@ -1373,6 +1506,14 @@ class ScalingConfig(pulumi.CustomResource):
         return pulumi.get(self, "disk_type_policy")
 
     @property
+    @pulumi.getter(name="enhancedAutomationToolsService")
+    def enhanced_automation_tools_service(self) -> pulumi.Output[Optional[bool]]:
+        """
+        To specify whether to enable cloud automation tools service.
+        """
+        return pulumi.get(self, "enhanced_automation_tools_service")
+
+    @property
     @pulumi.getter(name="enhancedMonitorService")
     def enhanced_monitor_service(self) -> pulumi.Output[Optional[bool]]:
         """
@@ -1397,8 +1538,16 @@ class ScalingConfig(pulumi.CustomResource):
         return pulumi.get(self, "host_name_settings")
 
     @property
+    @pulumi.getter(name="imageFamily")
+    def image_family(self) -> pulumi.Output[Optional[str]]:
+        """
+        Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        """
+        return pulumi.get(self, "image_family")
+
+    @property
     @pulumi.getter(name="imageId")
-    def image_id(self) -> pulumi.Output[str]:
+    def image_id(self) -> pulumi.Output[Optional[str]]:
         """
         An available image ID for a cvm instance.
         """

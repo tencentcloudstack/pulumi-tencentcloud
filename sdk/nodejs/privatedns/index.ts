@@ -5,6 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { EndPointArgs, EndPointState } from "./endPoint";
+export type EndPoint = import("./endPoint").EndPoint;
+export const EndPoint: typeof import("./endPoint").EndPoint = null as any;
+utilities.lazyLoad(exports, ["EndPoint"], () => require("./endPoint"));
+
+export { ForwardRuleArgs, ForwardRuleState } from "./forwardRule";
+export type ForwardRule = import("./forwardRule").ForwardRule;
+export const ForwardRule: typeof import("./forwardRule").ForwardRule = null as any;
+utilities.lazyLoad(exports, ["ForwardRule"], () => require("./forwardRule"));
+
+export { GetEndPointsArgs, GetEndPointsResult, GetEndPointsOutputArgs } from "./getEndPoints";
+export const getEndPoints: typeof import("./getEndPoints").getEndPoints = null as any;
+export const getEndPointsOutput: typeof import("./getEndPoints").getEndPointsOutput = null as any;
+utilities.lazyLoad(exports, ["getEndPoints","getEndPointsOutput"], () => require("./getEndPoints"));
+
+export { GetForwardRulesArgs, GetForwardRulesResult, GetForwardRulesOutputArgs } from "./getForwardRules";
+export const getForwardRules: typeof import("./getForwardRules").getForwardRules = null as any;
+export const getForwardRulesOutput: typeof import("./getForwardRules").getForwardRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getForwardRules","getForwardRulesOutput"], () => require("./getForwardRules"));
+
 export { GetPrivateZoneListArgs, GetPrivateZoneListResult, GetPrivateZoneListOutputArgs } from "./getPrivateZoneList";
 export const getPrivateZoneList: typeof import("./getPrivateZoneList").getPrivateZoneList = null as any;
 export const getPrivateZoneListOutput: typeof import("./getPrivateZoneList").getPrivateZoneListOutput = null as any;
@@ -35,6 +55,10 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:PrivateDns/endPoint:EndPoint":
+                return new EndPoint(name, <any>undefined, { urn })
+            case "tencentcloud:PrivateDns/forwardRule:ForwardRule":
+                return new ForwardRule(name, <any>undefined, { urn })
             case "tencentcloud:PrivateDns/record:Record":
                 return new Record(name, <any>undefined, { urn })
             case "tencentcloud:PrivateDns/zone:Zone":
@@ -46,6 +70,8 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/endPoint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/forwardRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/record", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/zone", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/zoneVpcAttachment", _module)

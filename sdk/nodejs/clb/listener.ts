@@ -262,6 +262,10 @@ export class Listener extends pulumi.CustomResource {
      */
     public readonly endPort!: pulumi.Output<number>;
     /**
+     * Enable H2C switch for intranet HTTP listener.
+     */
+    public readonly h2cSwitch!: pulumi.Output<boolean>;
+    /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
     public readonly healthCheckContextType!: pulumi.Output<string>;
@@ -384,6 +388,7 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["certificateSslMode"] = state ? state.certificateSslMode : undefined;
             resourceInputs["clbId"] = state ? state.clbId : undefined;
             resourceInputs["endPort"] = state ? state.endPort : undefined;
+            resourceInputs["h2cSwitch"] = state ? state.h2cSwitch : undefined;
             resourceInputs["healthCheckContextType"] = state ? state.healthCheckContextType : undefined;
             resourceInputs["healthCheckHealthNum"] = state ? state.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = state ? state.healthCheckHttpCode : undefined;
@@ -426,6 +431,7 @@ export class Listener extends pulumi.CustomResource {
             resourceInputs["certificateSslMode"] = args ? args.certificateSslMode : undefined;
             resourceInputs["clbId"] = args ? args.clbId : undefined;
             resourceInputs["endPort"] = args ? args.endPort : undefined;
+            resourceInputs["h2cSwitch"] = args ? args.h2cSwitch : undefined;
             resourceInputs["healthCheckContextType"] = args ? args.healthCheckContextType : undefined;
             resourceInputs["healthCheckHealthNum"] = args ? args.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = args ? args.healthCheckHttpCode : undefined;
@@ -482,6 +488,10 @@ export interface ListenerState {
      * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
     endPort?: pulumi.Input<number>;
+    /**
+     * Enable H2C switch for intranet HTTP listener.
+     */
+    h2cSwitch?: pulumi.Input<boolean>;
     /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */
@@ -612,6 +622,10 @@ export interface ListenerArgs {
      * This parameter is used to specify the end port and is required when creating a port range listener. Only one member can be passed in when inputting the `Ports` parameter, which is used to specify the start port. If you want to try the port range feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
     endPort?: pulumi.Input<number>;
+    /**
+     * Enable H2C switch for intranet HTTP listener.
+     */
+    h2cSwitch?: pulumi.Input<boolean>;
     /**
      * Health check protocol. When the value of `healthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
      */

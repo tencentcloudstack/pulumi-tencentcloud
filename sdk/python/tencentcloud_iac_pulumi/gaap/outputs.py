@@ -1100,6 +1100,7 @@ class GetHttpDomainsDomainResult(dict):
                  domain: str,
                  gaap_auth: bool,
                  gaap_auth_id: str,
+                 is_default_server: bool,
                  realserver_auth: bool,
                  realserver_certificate_domain: str,
                  realserver_certificate_id: str,
@@ -1113,6 +1114,7 @@ class GetHttpDomainsDomainResult(dict):
         :param str domain: Forward domain of the layer7 listener to be queried.
         :param bool gaap_auth: Indicates whether SSL certificate authentication is enable.
         :param str gaap_auth_id: ID of the SSL certificate.
+        :param bool is_default_server: Whether to use as the default domain name.
         :param bool realserver_auth: Indicates whether realserver authentication is enable.
         :param str realserver_certificate_domain: CA certificate domain of the realserver.
         :param str realserver_certificate_id: (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead. CA certificate ID of the realserver.
@@ -1126,6 +1128,7 @@ class GetHttpDomainsDomainResult(dict):
         pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "gaap_auth", gaap_auth)
         pulumi.set(__self__, "gaap_auth_id", gaap_auth_id)
+        pulumi.set(__self__, "is_default_server", is_default_server)
         pulumi.set(__self__, "realserver_auth", realserver_auth)
         pulumi.set(__self__, "realserver_certificate_domain", realserver_certificate_domain)
         pulumi.set(__self__, "realserver_certificate_id", realserver_certificate_id)
@@ -1197,6 +1200,14 @@ class GetHttpDomainsDomainResult(dict):
         ID of the SSL certificate.
         """
         return pulumi.get(self, "gaap_auth_id")
+
+    @property
+    @pulumi.getter(name="isDefaultServer")
+    def is_default_server(self) -> bool:
+        """
+        Whether to use as the default domain name.
+        """
+        return pulumi.get(self, "is_default_server")
 
     @property
     @pulumi.getter(name="realserverAuth")
@@ -1643,7 +1654,9 @@ class GetLayer7ListenersListenerResult(dict):
                  port: int,
                  protocol: str,
                  proxy_id: str,
-                 status: int):
+                 status: int,
+                 tls_ciphers: str,
+                 tls_support_versions: Sequence[str]):
         """
         :param int auth_type: Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication.
         :param str certificate_id: Certificate ID of the layer7 listener.
@@ -1657,6 +1670,8 @@ class GetLayer7ListenersListenerResult(dict):
         :param str protocol: Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
         :param str proxy_id: ID of the GAAP proxy to be queried.
         :param int status: Status of the layer7 listener.
+        :param str tls_ciphers: Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        :param Sequence[str] tls_support_versions: TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
         """
         pulumi.set(__self__, "auth_type", auth_type)
         pulumi.set(__self__, "certificate_id", certificate_id)
@@ -1670,6 +1685,8 @@ class GetLayer7ListenersListenerResult(dict):
         pulumi.set(__self__, "protocol", protocol)
         pulumi.set(__self__, "proxy_id", proxy_id)
         pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tls_ciphers", tls_ciphers)
+        pulumi.set(__self__, "tls_support_versions", tls_support_versions)
 
     @property
     @pulumi.getter(name="authType")
@@ -1769,6 +1786,22 @@ class GetLayer7ListenersListenerResult(dict):
         Status of the layer7 listener.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="tlsCiphers")
+    def tls_ciphers(self) -> str:
+        """
+        Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        """
+        return pulumi.get(self, "tls_ciphers")
+
+    @property
+    @pulumi.getter(name="tlsSupportVersions")
+    def tls_support_versions(self) -> Sequence[str]:
+        """
+        TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+        """
+        return pulumi.get(self, "tls_support_versions")
 
 
 @pulumi.output_type
@@ -2330,6 +2363,7 @@ class GetProxyDetailProxyDetailResult(dict):
                  ip: str,
                  ip_address_version: str,
                  ip_lists: Sequence['outputs.GetProxyDetailProxyDetailIpListResult'],
+                 is_support_tls_choice: int,
                  modify_config_time: int,
                  network_type: str,
                  package_type: str,
@@ -2366,6 +2400,7 @@ class GetProxyDetailProxyDetailResult(dict):
         :param str ip: IP.
         :param str ip_address_version: IP version: IPv4, IPv6Note: This field may return null, indicating that a valid value cannot be obtained.
         :param Sequence['GetProxyDetailProxyDetailIpListArgs'] ip_lists: IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
+        :param int is_support_tls_choice: Whether to allow TLS configuration.0-no support, 1-expressed support.
         :param int modify_config_time: Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
         :param str network_type: A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
         :param str package_type: proxy package type: Thunder represents standard proxy, Accelerator represents silver acceleration proxy,CrossBorder represents a cross-border proxy.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -2402,6 +2437,7 @@ class GetProxyDetailProxyDetailResult(dict):
         pulumi.set(__self__, "ip", ip)
         pulumi.set(__self__, "ip_address_version", ip_address_version)
         pulumi.set(__self__, "ip_lists", ip_lists)
+        pulumi.set(__self__, "is_support_tls_choice", is_support_tls_choice)
         pulumi.set(__self__, "modify_config_time", modify_config_time)
         pulumi.set(__self__, "network_type", network_type)
         pulumi.set(__self__, "package_type", package_type)
@@ -2563,6 +2599,14 @@ class GetProxyDetailProxyDetailResult(dict):
         IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
         """
         return pulumi.get(self, "ip_lists")
+
+    @property
+    @pulumi.getter(name="isSupportTlsChoice")
+    def is_support_tls_choice(self) -> int:
+        """
+        Whether to allow TLS configuration.0-no support, 1-expressed support.
+        """
+        return pulumi.get(self, "is_support_tls_choice")
 
     @property
     @pulumi.getter(name="modifyConfigTime")

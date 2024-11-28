@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
     public sealed class InstanceDbNodeSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Dedicated cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
         /// </summary>
         [Input("role")]

@@ -658,7 +658,7 @@ class FunctionTrigger(dict):
         """
         :param str name: Name of the SCF function trigger, if `type` is `ckafka`, the format of name must be `<ckafkaInstanceId>-<topicId>`; if `type` is `cos`, the name is cos bucket id, other In any case, it can be combined arbitrarily. It can only contain English letters, numbers, connectors and underscores. The maximum length is 100.
         :param str trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
-        :param str type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        :param str type: Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         :param str cos_region: Region of cos bucket. if `type` is `cos`, `cos_region` is required.
         """
         pulumi.set(__self__, "name", name)
@@ -687,7 +687,7 @@ class FunctionTrigger(dict):
     @pulumi.getter
     def type(self) -> str:
         """
-        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         """
         return pulumi.get(self, "type")
 
@@ -740,7 +740,7 @@ class FunctionTriggerInfo(dict):
         :param str modify_time: Modify time of SCF function trigger.
         :param str name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param str trigger_desc: TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
-        :param str type: Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        :param str type: Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         """
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
@@ -809,7 +809,7 @@ class FunctionTriggerInfo(dict):
     @pulumi.getter
     def type(self) -> Optional[str]:
         """
-        Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         """
         return pulumi.get(self, "type")
 

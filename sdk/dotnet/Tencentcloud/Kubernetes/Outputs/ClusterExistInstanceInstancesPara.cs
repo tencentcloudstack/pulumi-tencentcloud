@@ -15,14 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class ClusterExistInstanceInstancesPara
     {
         /// <summary>
+        /// To specify whether to enable cloud monitor service. Default is TRUE.
+        /// </summary>
+        public readonly bool? EnhancedMonitorService;
+        /// <summary>
+        /// To specify whether to enable cloud security service. Default is TRUE.
+        /// </summary>
+        public readonly bool? EnhancedSecurityService;
+        /// <summary>
         /// Cluster IDs.
         /// </summary>
         public readonly ImmutableArray<string> InstanceIds;
+        /// <summary>
+        /// ID list of keys, should be set if `password` not set.
+        /// </summary>
+        public readonly ImmutableArray<string> KeyIds;
+        /// <summary>
+        /// Advanced Node Settings. commonly used to attach existing instances.
+        /// </summary>
+        public readonly Outputs.ClusterExistInstanceInstancesParaMasterConfig? MasterConfig;
+        /// <summary>
+        /// Password to access, should be set if `key_ids` not set.
+        /// </summary>
+        public readonly string? Password;
+        /// <summary>
+        /// Security groups to which a CVM instance belongs.
+        /// </summary>
+        public readonly ImmutableArray<string> SecurityGroupIds;
 
         [OutputConstructor]
-        private ClusterExistInstanceInstancesPara(ImmutableArray<string> instanceIds)
+        private ClusterExistInstanceInstancesPara(
+            bool? enhancedMonitorService,
+
+            bool? enhancedSecurityService,
+
+            ImmutableArray<string> instanceIds,
+
+            ImmutableArray<string> keyIds,
+
+            Outputs.ClusterExistInstanceInstancesParaMasterConfig? masterConfig,
+
+            string? password,
+
+            ImmutableArray<string> securityGroupIds)
         {
+            EnhancedMonitorService = enhancedMonitorService;
+            EnhancedSecurityService = enhancedSecurityService;
             InstanceIds = instanceIds;
+            KeyIds = keyIds;
+            MasterConfig = masterConfig;
+            Password = password;
+            SecurityGroupIds = securityGroupIds;
         }
     }
 }

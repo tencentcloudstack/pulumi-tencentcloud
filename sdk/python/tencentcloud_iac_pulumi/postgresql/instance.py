@@ -32,6 +32,7 @@ class InstanceArgs:
                  db_major_version: Optional[pulumi.Input[str]] = None,
                  db_major_vesion: Optional[pulumi.Input[str]] = None,
                  db_node_sets: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  kms_region: Optional[pulumi.Input[str]] = None,
@@ -64,6 +65,7 @@ class InstanceArgs:
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
+        :param pulumi.Input[bool] delete_protection: Whether to enable instance deletion protection. Default: false.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
@@ -108,6 +110,8 @@ class InstanceArgs:
             pulumi.set(__self__, "db_major_vesion", db_major_vesion)
         if db_node_sets is not None:
             pulumi.set(__self__, "db_node_sets", db_node_sets)
+        if delete_protection is not None:
+            pulumi.set(__self__, "delete_protection", delete_protection)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if kms_key_id is not None:
@@ -333,6 +337,18 @@ class InstanceArgs:
         pulumi.set(self, "db_node_sets", value)
 
     @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable instance deletion protection. Default: false.
+        """
+        return pulumi.get(self, "delete_protection")
+
+    @delete_protection.setter
+    def delete_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protection", value)
+
+    @property
     @pulumi.getter(name="engineVersion")
     def engine_version(self) -> Optional[pulumi.Input[str]]:
         """
@@ -516,6 +532,7 @@ class _InstanceState:
                  db_major_version: Optional[pulumi.Input[str]] = None,
                  db_major_vesion: Optional[pulumi.Input[str]] = None,
                  db_node_sets: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  kms_region: Optional[pulumi.Input[str]] = None,
@@ -554,6 +571,7 @@ class _InstanceState:
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]] db_node_sets: Specify instance node info for disaster migration.
+        :param pulumi.Input[bool] delete_protection: Whether to enable instance deletion protection. Default: false.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
@@ -606,6 +624,8 @@ class _InstanceState:
             pulumi.set(__self__, "db_major_vesion", db_major_vesion)
         if db_node_sets is not None:
             pulumi.set(__self__, "db_node_sets", db_node_sets)
+        if delete_protection is not None:
+            pulumi.set(__self__, "delete_protection", delete_protection)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if kms_key_id is not None:
@@ -801,6 +821,18 @@ class _InstanceState:
     @db_node_sets.setter
     def db_node_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDbNodeSetArgs']]]]):
         pulumi.set(self, "db_node_sets", value)
+
+    @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable instance deletion protection. Default: false.
+        """
+        return pulumi.get(self, "delete_protection")
+
+    @delete_protection.setter
+    def delete_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protection", value)
 
     @property
     @pulumi.getter(name="engineVersion")
@@ -1107,6 +1139,7 @@ class Instance(pulumi.CustomResource):
                  db_major_version: Optional[pulumi.Input[str]] = None,
                  db_major_vesion: Optional[pulumi.Input[str]] = None,
                  db_node_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  kms_region: Optional[pulumi.Input[str]] = None,
@@ -1131,9 +1164,12 @@ class Instance(pulumi.CustomResource):
         Use this resource to create postgresql instance.
 
         > **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
-        **Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
+
+        > **Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
 
         ## Example Usage
+
+        ### Create a postgresql instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1173,7 +1209,48 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### Create a multi available zone bucket
+        ### Create a postgresql instance with delete protection
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example = tencentcloud.postgresql.Instance("example",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            engine_version="10.23",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            cpu=1,
+            memory=2,
+            storage=10,
+            delete_protection=True,
+            tags={
+                "test": "tf",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a multi available zone postgresql instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1224,7 +1301,57 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### create pgsql with kms key
+        ### Create a multi available zone postgresql instance of CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example = tencentcloud.postgresql.Instance("example",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            cpu=1,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+            ],
+            tags={
+                "CreateBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create pgsql with kms key
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1266,7 +1393,7 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### upgrade kernel version
+        ### Upgrade kernel version
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1328,6 +1455,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
+        :param pulumi.Input[bool] delete_protection: Whether to enable instance deletion protection. Default: false.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
@@ -1358,9 +1486,12 @@ class Instance(pulumi.CustomResource):
         Use this resource to create postgresql instance.
 
         > **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
-        **Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
+
+        > **Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
 
         ## Example Usage
+
+        ### Create a postgresql instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1400,7 +1531,48 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### Create a multi available zone bucket
+        ### Create a postgresql instance with delete protection
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example = tencentcloud.postgresql.Instance("example",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            engine_version="10.23",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            cpu=1,
+            memory=2,
+            storage=10,
+            delete_protection=True,
+            tags={
+                "test": "tf",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a multi available zone postgresql instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1451,7 +1623,57 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### create pgsql with kms key
+        ### Create a multi available zone postgresql instance of CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example = tencentcloud.postgresql.Instance("example",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            cpu=1,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+            ],
+            tags={
+                "CreateBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create pgsql with kms key
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1493,7 +1715,7 @@ class Instance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ### upgrade kernel version
+        ### Upgrade kernel version
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -1568,6 +1790,7 @@ class Instance(pulumi.CustomResource):
                  db_major_version: Optional[pulumi.Input[str]] = None,
                  db_major_vesion: Optional[pulumi.Input[str]] = None,
                  db_node_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  kms_key_id: Optional[pulumi.Input[str]] = None,
                  kms_region: Optional[pulumi.Input[str]] = None,
@@ -1609,6 +1832,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["db_major_version"] = db_major_version
             __props__.__dict__["db_major_vesion"] = db_major_vesion
             __props__.__dict__["db_node_sets"] = db_node_sets
+            __props__.__dict__["delete_protection"] = delete_protection
             __props__.__dict__["engine_version"] = engine_version
             __props__.__dict__["kms_key_id"] = kms_key_id
             __props__.__dict__["kms_region"] = kms_region
@@ -1668,6 +1892,7 @@ class Instance(pulumi.CustomResource):
             db_major_version: Optional[pulumi.Input[str]] = None,
             db_major_vesion: Optional[pulumi.Input[str]] = None,
             db_node_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]]] = None,
+            delete_protection: Optional[pulumi.Input[bool]] = None,
             engine_version: Optional[pulumi.Input[str]] = None,
             kms_key_id: Optional[pulumi.Input[str]] = None,
             kms_region: Optional[pulumi.Input[str]] = None,
@@ -1711,6 +1936,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] db_major_version: PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[str] db_major_vesion: `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDbNodeSetArgs']]]] db_node_sets: Specify instance node info for disaster migration.
+        :param pulumi.Input[bool] delete_protection: Whether to enable instance deletion protection. Default: false.
         :param pulumi.Input[str] engine_version: Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         :param pulumi.Input[str] kms_key_id: KeyId of the custom key.
         :param pulumi.Input[str] kms_region: Region of the custom key.
@@ -1752,6 +1978,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["db_major_version"] = db_major_version
         __props__.__dict__["db_major_vesion"] = db_major_vesion
         __props__.__dict__["db_node_sets"] = db_node_sets
+        __props__.__dict__["delete_protection"] = delete_protection
         __props__.__dict__["engine_version"] = engine_version
         __props__.__dict__["kms_key_id"] = kms_key_id
         __props__.__dict__["kms_region"] = kms_region
@@ -1804,7 +2031,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="backupPlan")
-    def backup_plan(self) -> pulumi.Output[Optional['outputs.InstanceBackupPlan']]:
+    def backup_plan(self) -> pulumi.Output['outputs.InstanceBackupPlan']:
         """
         Specify DB backup plan.
         """
@@ -1876,6 +2103,14 @@ class Instance(pulumi.CustomResource):
         Specify instance node info for disaster migration.
         """
         return pulumi.get(self, "db_node_sets")
+
+    @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to enable instance deletion protection. Default: false.
+        """
+        return pulumi.get(self, "delete_protection")
 
     @property
     @pulumi.getter(name="engineVersion")

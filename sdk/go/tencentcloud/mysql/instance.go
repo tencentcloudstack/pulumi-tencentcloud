@@ -172,6 +172,8 @@ type Instance struct {
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+	EngineType pulumi.StringOutput `pulumi:"engineType"`
 	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -300,6 +302,8 @@ type instanceState struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
+	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+	EngineType *string `pulumi:"engineType"`
 	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -383,6 +387,8 @@ type InstanceState struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
+	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+	EngineType pulumi.StringPtrInput
 	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -470,6 +476,8 @@ type instanceArgs struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
+	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+	EngineType *string `pulumi:"engineType"`
 	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -540,6 +548,8 @@ type InstanceArgs struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
+	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+	EngineType pulumi.StringPtrInput
 	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -708,6 +718,11 @@ func (o InstanceOutput) Cpu() pulumi.IntOutput {
 // Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 func (o InstanceOutput) DeviceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
+}
+
+// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+func (o InstanceOutput) EngineType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EngineType }).(pulumi.StringOutput)
 }
 
 // The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.

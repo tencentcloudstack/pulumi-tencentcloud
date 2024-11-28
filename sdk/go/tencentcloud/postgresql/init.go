@@ -21,12 +21,20 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Postgresql/account:Account":
+		r = &Account{}
+	case "tencentcloud:Postgresql/accountPrivilegesOperation:AccountPrivilegesOperation":
+		r = &AccountPrivilegesOperation{}
+	case "tencentcloud:Postgresql/applyParameterTemplateOperation:ApplyParameterTemplateOperation":
+		r = &ApplyParameterTemplateOperation{}
 	case "tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig":
 		r = &BackupDownloadRestrictionConfig{}
 	case "tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig":
 		r = &BackupPlanConfig{}
 	case "tencentcloud:Postgresql/baseBackup:BaseBackup":
 		r = &BaseBackup{}
+	case "tencentcloud:Postgresql/cloneDbInstance:CloneDbInstance":
+		r = &CloneDbInstance{}
 	case "tencentcloud:Postgresql/deleteLogBackupOperation:DeleteLogBackupOperation":
 		r = &DeleteLogBackupOperation{}
 	case "tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation":
@@ -72,6 +80,21 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Postgresql/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/accountPrivilegesOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/applyParameterTemplateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Postgresql/backupDownloadRestrictionConfig",
 		&module{version},
 	)
@@ -83,6 +106,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/baseBackup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/cloneDbInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

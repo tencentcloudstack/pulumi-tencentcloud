@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
 {
     /// <summary>
-    /// Provides a resource to create a vpc ccn_routes
+    /// Provides a resource to create a vpc ccn_routes switch
     /// 
     /// ## Example Usage
     /// 
@@ -24,11 +24,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var ccnRoutes = new Tencentcloud.Ccn.Routes("ccnRoutes", new()
+    ///     var example = new Tencentcloud.Ccn.Routes("example", new()
     ///     {
-    ///         CcnId = "ccn-39lqkygf",
-    ///         RouteId = "ccnr-3o0dfyuw",
-    ///         Switch = "on",
+    ///         CcnId = "ccn-gr7nynbd",
+    ///         RouteId = "ccnr-5uhewx1s",
+    ///         Switch = "off",
     ///     });
     /// 
     /// });
@@ -40,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// vpc ccn_routes can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+    /// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/routes:Routes")]

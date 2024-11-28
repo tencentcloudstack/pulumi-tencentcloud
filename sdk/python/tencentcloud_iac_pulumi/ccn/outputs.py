@@ -14,6 +14,13 @@ __all__ = [
     'InstancesAcceptAttachInstance',
     'InstancesRejectAttachInstance',
     'InstancesResetAttachInstance',
+    'RouteTableAssociateInstanceConfigInstance',
+    'RouteTableBroadcastPoliciesPolicy',
+    'RouteTableBroadcastPoliciesPolicyBroadcastCondition',
+    'RouteTableBroadcastPoliciesPolicyRouteCondition',
+    'RouteTableInputPoliciesPolicy',
+    'RouteTableInputPoliciesPolicyRouteCondition',
+    'RouteTableSelectionPoliciesSelectionPolicy',
     'GetBandwidthLimitsLimitResult',
     'GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataResult',
     'GetCrossBorderRegionBandwidthLimitsCcnBandwidthSetResult',
@@ -21,6 +28,11 @@ __all__ = [
     'GetCrossBorderRegionBandwidthLimitsFilterResult',
     'GetInstancesInstanceListResult',
     'GetInstancesInstanceListAttachmentListResult',
+    'GetRouteTableInputPoliciesPolicySetResult',
+    'GetRouteTableInputPoliciesPolicySetPolicyResult',
+    'GetRouteTableInputPoliciesPolicySetPolicyRouteConditionResult',
+    'GetRoutesFilterResult',
+    'GetRoutesRouteListResult',
 ]
 
 @pulumi.output_type
@@ -285,6 +297,437 @@ class InstancesResetAttachInstance(dict):
         ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
         """
         return pulumi.get(self, "route_table_id")
+
+
+@pulumi.output_type
+class RouteTableAssociateInstanceConfigInstance(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceType":
+            suggest = "instance_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableAssociateInstanceConfigInstance. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableAssociateInstanceConfigInstance.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableAssociateInstanceConfigInstance.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_id: str,
+                 instance_type: str):
+        """
+        :param str instance_id: Instances ID.
+        :param str instance_type: Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instances ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+        """
+        return pulumi.get(self, "instance_type")
+
+
+@pulumi.output_type
+class RouteTableBroadcastPoliciesPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "broadcastConditions":
+            suggest = "broadcast_conditions"
+        elif key == "routeConditions":
+            suggest = "route_conditions"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableBroadcastPoliciesPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableBroadcastPoliciesPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableBroadcastPoliciesPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: str,
+                 broadcast_conditions: Sequence['outputs.RouteTableBroadcastPoliciesPolicyBroadcastCondition'],
+                 description: str,
+                 route_conditions: Sequence['outputs.RouteTableBroadcastPoliciesPolicyRouteCondition']):
+        """
+        :param str action: Routing behavior, `accept` allows, `drop` rejects.
+        :param Sequence['RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs'] broadcast_conditions: propagation conditions.
+        :param str description: Policy description.
+        :param Sequence['RouteTableBroadcastPoliciesPolicyRouteConditionArgs'] route_conditions: Routing conditions.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "broadcast_conditions", broadcast_conditions)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "route_conditions", route_conditions)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Routing behavior, `accept` allows, `drop` rejects.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter(name="broadcastConditions")
+    def broadcast_conditions(self) -> Sequence['outputs.RouteTableBroadcastPoliciesPolicyBroadcastCondition']:
+        """
+        propagation conditions.
+        """
+        return pulumi.get(self, "broadcast_conditions")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Policy description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="routeConditions")
+    def route_conditions(self) -> Sequence['outputs.RouteTableBroadcastPoliciesPolicyRouteCondition']:
+        """
+        Routing conditions.
+        """
+        return pulumi.get(self, "route_conditions")
+
+
+@pulumi.output_type
+class RouteTableBroadcastPoliciesPolicyBroadcastCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "matchPattern":
+            suggest = "match_pattern"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableBroadcastPoliciesPolicyBroadcastCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableBroadcastPoliciesPolicyBroadcastCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableBroadcastPoliciesPolicyBroadcastCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 match_pattern: int,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param int match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param str name: condition type.
+        :param Sequence[str] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> int:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class RouteTableBroadcastPoliciesPolicyRouteCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "matchPattern":
+            suggest = "match_pattern"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableBroadcastPoliciesPolicyRouteCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableBroadcastPoliciesPolicyRouteCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableBroadcastPoliciesPolicyRouteCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 match_pattern: int,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param int match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param str name: condition type.
+        :param Sequence[str] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> int:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class RouteTableInputPoliciesPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "routeConditions":
+            suggest = "route_conditions"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableInputPoliciesPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableInputPoliciesPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableInputPoliciesPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action: str,
+                 description: str,
+                 route_conditions: Sequence['outputs.RouteTableInputPoliciesPolicyRouteCondition']):
+        """
+        :param str action: Routing behavior, `accept` allows, `drop` rejects.
+        :param str description: Policy description.
+        :param Sequence['RouteTableInputPoliciesPolicyRouteConditionArgs'] route_conditions: Routing conditions.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "route_conditions", route_conditions)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Routing behavior, `accept` allows, `drop` rejects.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Policy description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="routeConditions")
+    def route_conditions(self) -> Sequence['outputs.RouteTableInputPoliciesPolicyRouteCondition']:
+        """
+        Routing conditions.
+        """
+        return pulumi.get(self, "route_conditions")
+
+
+@pulumi.output_type
+class RouteTableInputPoliciesPolicyRouteCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "matchPattern":
+            suggest = "match_pattern"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableInputPoliciesPolicyRouteCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableInputPoliciesPolicyRouteCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableInputPoliciesPolicyRouteCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 match_pattern: int,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param int match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param str name: condition type.
+        :param Sequence[str] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> int:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class RouteTableSelectionPoliciesSelectionPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceId":
+            suggest = "instance_id"
+        elif key == "instanceType":
+            suggest = "instance_type"
+        elif key == "routeTableId":
+            suggest = "route_table_id"
+        elif key == "sourceCidrBlock":
+            suggest = "source_cidr_block"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in RouteTableSelectionPoliciesSelectionPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        RouteTableSelectionPoliciesSelectionPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        RouteTableSelectionPoliciesSelectionPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 description: str,
+                 instance_id: str,
+                 instance_type: str,
+                 route_table_id: str,
+                 source_cidr_block: str):
+        """
+        :param str description: description.
+        :param str instance_id: Instance ID.
+        :param str instance_type: Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+        :param str route_table_id: route table ID.
+        :param str source_cidr_block: Source CIDR.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "route_table_id", route_table_id)
+        pulumi.set(__self__, "source_cidr_block", source_cidr_block)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        description.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> str:
+        """
+        route table ID.
+        """
+        return pulumi.get(self, "route_table_id")
+
+    @property
+    @pulumi.getter(name="sourceCidrBlock")
+    def source_cidr_block(self) -> str:
+        """
+        Source CIDR.
+        """
+        return pulumi.get(self, "source_cidr_block")
 
 
 @pulumi.output_type
@@ -763,5 +1206,331 @@ class GetInstancesInstanceListAttachmentListResult(dict):
         States of instance. The available value include 'ISOLATED'(arrears) and 'AVAILABLE'.
         """
         return pulumi.get(self, "state")
+
+
+@pulumi.output_type
+class GetRouteTableInputPoliciesPolicySetResult(dict):
+    def __init__(__self__, *,
+                 create_time: Optional[str] = None,
+                 policy_version: Optional[int] = None,
+                 policys: Optional[Sequence['outputs.GetRouteTableInputPoliciesPolicySetPolicyResult']] = None):
+        """
+        :param str create_time: Create time.
+        :param int policy_version: Policy version.
+        :param Sequence['GetRouteTableInputPoliciesPolicySetPolicyArgs'] policys: Policys.
+        """
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if policy_version is not None:
+            pulumi.set(__self__, "policy_version", policy_version)
+        if policys is not None:
+            pulumi.set(__self__, "policys", policys)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[str]:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="policyVersion")
+    def policy_version(self) -> Optional[int]:
+        """
+        Policy version.
+        """
+        return pulumi.get(self, "policy_version")
+
+    @property
+    @pulumi.getter
+    def policys(self) -> Optional[Sequence['outputs.GetRouteTableInputPoliciesPolicySetPolicyResult']]:
+        """
+        Policys.
+        """
+        return pulumi.get(self, "policys")
+
+
+@pulumi.output_type
+class GetRouteTableInputPoliciesPolicySetPolicyResult(dict):
+    def __init__(__self__, *,
+                 action: str,
+                 description: str,
+                 route_conditions: Sequence['outputs.GetRouteTableInputPoliciesPolicySetPolicyRouteConditionResult'],
+                 as_path_operate_mode: Optional[str] = None,
+                 operate_as_path: Optional[str] = None):
+        """
+        :param str action: Routing behavior, `accept` allows, `drop` rejects.
+        :param str description: Policy description
+        :param Sequence['GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs'] route_conditions: Routing conditions.
+        :param str as_path_operate_mode: as-path operate mode
+        :param str operate_as_path: as-path operate
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "route_conditions", route_conditions)
+        if as_path_operate_mode is not None:
+            pulumi.set(__self__, "as_path_operate_mode", as_path_operate_mode)
+        if operate_as_path is not None:
+            pulumi.set(__self__, "operate_as_path", operate_as_path)
+
+    @property
+    @pulumi.getter
+    def action(self) -> str:
+        """
+        Routing behavior, `accept` allows, `drop` rejects.
+        """
+        return pulumi.get(self, "action")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Policy description
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="routeConditions")
+    def route_conditions(self) -> Sequence['outputs.GetRouteTableInputPoliciesPolicySetPolicyRouteConditionResult']:
+        """
+        Routing conditions.
+        """
+        return pulumi.get(self, "route_conditions")
+
+    @property
+    @pulumi.getter(name="asPathOperateMode")
+    def as_path_operate_mode(self) -> Optional[str]:
+        """
+        as-path operate mode
+        """
+        return pulumi.get(self, "as_path_operate_mode")
+
+    @property
+    @pulumi.getter(name="operateAsPath")
+    def operate_as_path(self) -> Optional[str]:
+        """
+        as-path operate
+        """
+        return pulumi.get(self, "operate_as_path")
+
+
+@pulumi.output_type
+class GetRouteTableInputPoliciesPolicySetPolicyRouteConditionResult(dict):
+    def __init__(__self__, *,
+                 match_pattern: int,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param int match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param str name: condition type.
+        :param Sequence[str] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> int:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetRoutesFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+        :param Sequence[str] values: Filter value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of the field.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetRoutesRouteListResult(dict):
+    def __init__(__self__, *,
+                 destination_cidr_block: str,
+                 enabled: bool,
+                 extra_state: str,
+                 instance_extra_name: str,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_region: str,
+                 instance_type: str,
+                 instance_uin: str,
+                 is_bgp: bool,
+                 route_id: str,
+                 route_priority: int,
+                 update_time: str):
+        """
+        :param str destination_cidr_block: Destination.
+        :param bool enabled: Is routing enabled.
+        :param str extra_state: Extension status of routing.
+        :param str instance_extra_name: Next hop extension name (associated instance extension name).
+        :param str instance_id: Next jump (associated instance ID).
+        :param str instance_name: Next jump (associated instance name).
+        :param str instance_region: Next jump (associated instance region).
+        :param str instance_type: Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+        :param str instance_uin: The UIN (root account) to which the associated instance belongs.
+        :param bool is_bgp: Is it dynamic routing.
+        :param str route_id: route ID.
+        :param int route_priority: Routing priority.
+        :param str update_time: update time.
+        """
+        pulumi.set(__self__, "destination_cidr_block", destination_cidr_block)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "extra_state", extra_state)
+        pulumi.set(__self__, "instance_extra_name", instance_extra_name)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_region", instance_region)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "instance_uin", instance_uin)
+        pulumi.set(__self__, "is_bgp", is_bgp)
+        pulumi.set(__self__, "route_id", route_id)
+        pulumi.set(__self__, "route_priority", route_priority)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="destinationCidrBlock")
+    def destination_cidr_block(self) -> str:
+        """
+        Destination.
+        """
+        return pulumi.get(self, "destination_cidr_block")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Is routing enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="extraState")
+    def extra_state(self) -> str:
+        """
+        Extension status of routing.
+        """
+        return pulumi.get(self, "extra_state")
+
+    @property
+    @pulumi.getter(name="instanceExtraName")
+    def instance_extra_name(self) -> str:
+        """
+        Next hop extension name (associated instance extension name).
+        """
+        return pulumi.get(self, "instance_extra_name")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Next jump (associated instance ID).
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Next jump (associated instance name).
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceRegion")
+    def instance_region(self) -> str:
+        """
+        Next jump (associated instance region).
+        """
+        return pulumi.get(self, "instance_region")
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> str:
+        """
+        Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @property
+    @pulumi.getter(name="instanceUin")
+    def instance_uin(self) -> str:
+        """
+        The UIN (root account) to which the associated instance belongs.
+        """
+        return pulumi.get(self, "instance_uin")
+
+    @property
+    @pulumi.getter(name="isBgp")
+    def is_bgp(self) -> bool:
+        """
+        Is it dynamic routing.
+        """
+        return pulumi.get(self, "is_bgp")
+
+    @property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> str:
+        """
+        route ID.
+        """
+        return pulumi.get(self, "route_id")
+
+    @property
+    @pulumi.getter(name="routePriority")
+    def route_priority(self) -> int:
+        """
+        Routing priority.
+        """
+        return pulumi.get(self, "route_priority")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        update time.
+        """
+        return pulumi.get(self, "update_time")
 
 

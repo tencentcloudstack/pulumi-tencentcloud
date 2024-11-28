@@ -197,6 +197,8 @@ class BucketReferer(pulumi.CustomResource):
         """
         Provides a resource to create a cos bucket_referer
 
+        > **NOTE:** The current resource does not support cdc.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -240,6 +242,8 @@ class BucketReferer(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to create a cos bucket_referer
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 

@@ -66,6 +66,10 @@ export class EndPoint extends pulumi.CustomResource {
     }
 
     /**
+     * CDC instance ID.
+     */
+    public /*out*/ readonly cdcId!: pulumi.Output<string>;
+    /**
      * Create Time.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -115,6 +119,7 @@ export class EndPoint extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as EndPointState | undefined;
+            resourceInputs["cdcId"] = state ? state.cdcId : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["endPointName"] = state ? state.endPointName : undefined;
             resourceInputs["endPointOwner"] = state ? state.endPointOwner : undefined;
@@ -144,6 +149,7 @@ export class EndPoint extends pulumi.CustomResource {
             resourceInputs["securityGroupsIds"] = args ? args.securityGroupsIds : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["cdcId"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["endPointOwner"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
@@ -157,6 +163,10 @@ export class EndPoint extends pulumi.CustomResource {
  * Input properties used for looking up and filtering EndPoint resources.
  */
 export interface EndPointState {
+    /**
+     * CDC instance ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Create Time.
      */

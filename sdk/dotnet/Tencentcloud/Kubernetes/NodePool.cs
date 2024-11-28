@@ -42,7 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     ///     var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
     ///     //this is the cluster with empty worker config
-    ///     var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new()
+    ///     var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new()
     ///     {
     ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
     ///         ClusterCidr = clusterCidr,
@@ -55,9 +55,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     });
     /// 
     ///     //this is one example of managing node using node pool
-    ///     var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
+    ///     var exampleNodePool = new Tencentcloud.Kubernetes.NodePool("exampleNodePool", new()
     ///     {
-    ///         ClusterId = managedCluster.Id,
+    ///         ClusterId = exampleCluster.Id,
     ///         MaxSize = 6,
     ///         MinSize = 1,
     ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
@@ -69,6 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///         DesiredCapacity = 4,
     ///         EnableAutoScale = true,
     ///         MultiZoneSubnetPolicy = "EQUALITY",
+    ///         NodeOs = "img-9qrfy1xt",
     ///         AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
     ///         {
     ///             InstanceType = defaultInstanceType,
@@ -117,6 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///         },
     ///         NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
     ///         {
+    ///             DockerGraphPath = "/var/lib/docker",
     ///             ExtraArgs = new[]
     ///             {
     ///                 "root-dir=/var/lib/kubelet",
@@ -139,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
+    ///     var example = new Tencentcloud.Kubernetes.NodePool("example", new()
     ///     {
     ///         ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
     ///         MaxSize = 6,
@@ -198,12 +200,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// tke node pool can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/nodePool:NodePool")]
     public partial class NodePool : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Node Annotation List.
+        /// </summary>
+        [Output("annotations")]
+        public Output<ImmutableArray<Outputs.NodePoolAnnotation>> Annotations { get; private set; } = null!;
+
         /// <summary>
         /// Auto scaling config parameters.
         /// </summary>
@@ -364,7 +372,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Node pool tag specifications, will passthroughs to the scaling instances.
         /// </summary>
         [Output("tags")]
-        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, object>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Taints of kubernetes node pool created nodes.
@@ -443,6 +451,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 
     public sealed class NodePoolArgs : global::Pulumi.ResourceArgs
     {
+        [Input("annotations")]
+        private InputList<Inputs.NodePoolAnnotationArgs>? _annotations;
+
+        /// <summary>
+        /// Node Annotation List.
+        /// </summary>
+        public InputList<Inputs.NodePoolAnnotationArgs> Annotations
+        {
+            get => _annotations ?? (_annotations = new InputList<Inputs.NodePoolAnnotationArgs>());
+            set => _annotations = value;
+        }
+
         /// <summary>
         /// Auto scaling config parameters.
         /// </summary>
@@ -637,6 +657,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 
     public sealed class NodePoolState : global::Pulumi.ResourceArgs
     {
+        [Input("annotations")]
+        private InputList<Inputs.NodePoolAnnotationGetArgs>? _annotations;
+
+        /// <summary>
+        /// Node Annotation List.
+        /// </summary>
+        public InputList<Inputs.NodePoolAnnotationGetArgs> Annotations
+        {
+            get => _annotations ?? (_annotations = new InputList<Inputs.NodePoolAnnotationGetArgs>());
+            set => _annotations = value;
+        }
+
         /// <summary>
         /// Auto scaling config parameters.
         /// </summary>

@@ -76,7 +76,7 @@ type GetInstanceArgs struct {
 
 // A collection of values returned by getInstance.
 type GetInstanceResult struct {
-	// Description of the IP.
+	// Message description.
 	Description *string `pulumi:"description"`
 	// An information list of ENIs. Each element contains the following attributes:
 	Enis []GetInstanceEni `pulumi:"enis"`
@@ -154,7 +154,7 @@ func (o GetInstanceResultOutput) ToGetInstanceResultOutputWithContext(ctx contex
 	return o
 }
 
-// Description of the IP.
+// Message description.
 func (o GetInstanceResultOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetInstanceResult) *string { return v.Description }).(pulumi.StringPtrOutput)
 }

@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public Input<string> TriggerDesc { get; set; } = null!;
 
         /// <summary>
-        /// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        /// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;

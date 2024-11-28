@@ -10,6 +10,17 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
+    /// <summary>
+    /// Provides a resource to create a vpc notify_routes
+    /// 
+    /// ## Import
+    /// 
+    /// vpc notify_routes can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Vpc/notifyRoutes:NotifyRoutes notify_routes route_table_id#route_item_id
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/notifyRoutes:NotifyRoutes")]
     public partial class NotifyRoutes : global::Pulumi.CustomResource
     {
@@ -23,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// The unique ID of the routing policy.
         /// </summary>
         [Output("routeItemIds")]
-        public Output<ImmutableArray<string>> RouteItemIds { get; private set; } = null!;
+        public Output<string> RouteItemIds { get; private set; } = null!;
 
         /// <summary>
         /// The unique ID of the routing table.
@@ -78,17 +89,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 
     public sealed class NotifyRoutesArgs : global::Pulumi.ResourceArgs
     {
-        [Input("routeItemIds", required: true)]
-        private InputList<string>? _routeItemIds;
-
         /// <summary>
         /// The unique ID of the routing policy.
         /// </summary>
-        public InputList<string> RouteItemIds
-        {
-            get => _routeItemIds ?? (_routeItemIds = new InputList<string>());
-            set => _routeItemIds = value;
-        }
+        [Input("routeItemIds", required: true)]
+        public Input<string> RouteItemIds { get; set; } = null!;
 
         /// <summary>
         /// The unique ID of the routing table.
@@ -110,17 +115,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("publishedToVbc")]
         public Input<bool>? PublishedToVbc { get; set; }
 
-        [Input("routeItemIds")]
-        private InputList<string>? _routeItemIds;
-
         /// <summary>
         /// The unique ID of the routing policy.
         /// </summary>
-        public InputList<string> RouteItemIds
-        {
-            get => _routeItemIds ?? (_routeItemIds = new InputList<string>());
-            set => _routeItemIds = value;
-        }
+        [Input("routeItemIds")]
+        public Input<string>? RouteItemIds { get; set; }
 
         /// <summary>
         /// The unique ID of the routing table.

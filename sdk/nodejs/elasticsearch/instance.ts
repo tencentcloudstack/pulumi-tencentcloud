@@ -49,6 +49,10 @@ import * as utilities from "../utilities";
  *     esAcl: {
  *         whiteLists: ["127.0.0.1"],
  *     },
+ *     cosBackup: {
+ *         isAutoBackup: true,
+ *         backupTime: "22:00",
+ *     },
  *     tags: {
  *         test: "test",
  *     },
@@ -179,6 +183,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
     /**
+     * COS automatic backup information.
+     */
+    public readonly cosBackup!: pulumi.Output<outputs.Elasticsearch.InstanceCosBackup | undefined>;
+    /**
      * Instance creation time.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -272,6 +280,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["basicSecurityType"] = state ? state.basicSecurityType : undefined;
             resourceInputs["chargePeriod"] = state ? state.chargePeriod : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
+            resourceInputs["cosBackup"] = state ? state.cosBackup : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["deployMode"] = state ? state.deployMode : undefined;
             resourceInputs["elasticsearchDomain"] = state ? state.elasticsearchDomain : undefined;
@@ -309,6 +318,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["basicSecurityType"] = args ? args.basicSecurityType : undefined;
             resourceInputs["chargePeriod"] = args ? args.chargePeriod : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
+            resourceInputs["cosBackup"] = args ? args.cosBackup : undefined;
             resourceInputs["deployMode"] = args ? args.deployMode : undefined;
             resourceInputs["esAcl"] = args ? args.esAcl : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
@@ -356,6 +366,10 @@ export interface InstanceState {
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * COS automatic backup information.
+     */
+    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup>;
     /**
      * Instance creation time.
      */
@@ -454,6 +468,10 @@ export interface InstanceArgs {
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * COS automatic backup information.
+     */
+    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup>;
     /**
      * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */

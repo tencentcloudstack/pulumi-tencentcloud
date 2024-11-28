@@ -103,16 +103,30 @@ def get_cluster_common_names(cluster_id: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query common names by subaccount uins
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-12345678",
+    example = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
         subaccount_uins=[
-            "1234567890",
-            "0987654321",
+            "100037718139",
+            "100031340176",
         ])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query common names by role ids
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
+        role_ids=["4611686018441060141"])
     ```
     <!--End PulumiCodeChooser -->
 
@@ -150,16 +164,30 @@ def get_cluster_common_names_output(cluster_id: Optional[pulumi.Input[Optional[s
 
     ## Example Usage
 
+    ### Query common names by subaccount uins
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    foo = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-12345678",
+    example = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
         subaccount_uins=[
-            "1234567890",
-            "0987654321",
+            "100037718139",
+            "100031340176",
         ])
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query common names by role ids
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    example = tencentcloud.Kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
+        role_ids=["4611686018441060141"])
     ```
     <!--End PulumiCodeChooser -->
 

@@ -7,38 +7,48 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cos bucketInventory
+ * Provides a resource to create a cos bucket inventory
+ *
+ * > **NOTE:** The current resource does not support cdc.
  *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketInventory = new tencentcloud.cos.BucketInventory("bucketInventory", {
- *     bucket: "keep-test-xxxxxx",
- *     destination: {
- *         accountId: "",
- *         bucket: "qcs::cos:ap-guangzhou::keep-test-xxxxxx",
- *         format: "CSV",
- *         prefix: "cos_bucket_inventory",
- *     },
- *     filter: {
- *         period: {
- *             startTime: "1687276800",
- *         },
- *     },
- *     includedObjectVersions: "Current",
+ * const info = tencentcloud.User.getInfo({});
+ * const appId = info.then(info => info.appId);
+ * // create cos
+ * const exampleBucket = new tencentcloud.cos.Bucket("exampleBucket", {
+ *     bucket: appId.then(appId => `private-bucket-${appId}`),
+ *     acl: "private",
+ * });
+ * // create cos bucket inventory
+ * const exampleBucketInventory = new tencentcloud.cos.BucketInventory("exampleBucketInventory", {
+ *     bucket: exampleBucket.id,
  *     isEnabled: "true",
+ *     includedObjectVersions: "Current",
  *     optionalFields: {
  *         fields: [
  *             "Size",
  *             "ETag",
  *         ],
  *     },
+ *     filter: {
+ *         period: {
+ *             startTime: "1687276800",
+ *         },
+ *     },
  *     schedule: {
- *         frequency: "Weekly",
+ *         frequency: "Daily",
+ *     },
+ *     destination: {
+ *         bucket: "qcs::cos:ap-guangzhou::private-bucket-1309118522",
+ *         format: "CSV",
+ *         prefix: "frontends",
  *     },
  * });
  * ```
@@ -46,10 +56,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cos bucket_inventory can be imported using the id, e.g.
+ * cos bucket inventory can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+ * $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory example private-bucket-1309118522#tf-example
  * ```
  */
 export class BucketInventory extends pulumi.CustomResource {

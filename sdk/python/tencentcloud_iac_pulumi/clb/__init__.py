@@ -29,6 +29,7 @@ from .instance import *
 from .instance_mix_ip_target_config import *
 from .instance_sla_config import *
 from .listener import *
+from .listener_default_domain import *
 from .listener_rule import *
 from .log_set import *
 from .log_topic import *

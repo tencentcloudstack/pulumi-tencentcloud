@@ -5,6 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .action_timer import *
 from .chc_config import *
 from .export_images import *
 from .get_chc_denied_actions import *

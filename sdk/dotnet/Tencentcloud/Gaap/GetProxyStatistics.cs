@@ -124,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         private List<string>? _metricNames;
 
         /// <summary>
-        /// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+        /// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
         /// </summary>
         public List<string> MetricNames
         {
@@ -180,7 +180,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         private InputList<string>? _metricNames;
 
         /// <summary>
-        /// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+        /// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
         /// </summary>
         public InputList<string> MetricNames
         {

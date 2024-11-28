@@ -14,14 +14,24 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = new tencentcloud.rum.Project("project", {
- *     desc: "projectDesc-1",
- *     enableUrlGroup: 0,
- *     instanceId: "rum-pasZKEI3RLgakj",
+ * const exampleTawInstance = new tencentcloud.rum.TawInstance("exampleTawInstance", {
+ *     areaId: 1,
+ *     chargeType: 1,
+ *     dataRetentionDays: 30,
+ *     instanceName: "tf-example",
+ *     instanceDesc: "desc.",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleProject = new tencentcloud.rum.Project("exampleProject", {
+ *     instanceId: exampleTawInstance.id,
  *     rate: "100",
- *     repo: "",
+ *     enableUrlGroup: 0,
  *     type: "web",
+ *     repo: "https://github.com/xxx",
  *     url: "iac-tf.com",
+ *     desc: "desc.",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -31,7 +41,7 @@ import * as utilities from "../utilities";
  * rum project can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Rum/project:Project project project_id
+ * $ pulumi import tencentcloud:Rum/project:Project example 139422
  * ```
  */
 export class Project extends pulumi.CustomResource {
@@ -63,7 +73,7 @@ export class Project extends pulumi.CustomResource {
     }
 
     /**
-     * Creata Time.
+     * Create Time.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
@@ -191,7 +201,7 @@ export class Project extends pulumi.CustomResource {
  */
 export interface ProjectState {
     /**
-     * Creata Time.
+     * Create Time.
      */
     createTime?: pulumi.Input<string>;
     /**

@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// ## Example Usage
     /// 
-    /// ### Create a tcr tag retention rule instance
+    /// ### Create and enable a tcr tag retention rule instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -62,7 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///             Value = 2,
     ///         },
     ///         CronSetting = "daily",
-    ///         Disabled = true,
     ///     });
     /// 
     /// });

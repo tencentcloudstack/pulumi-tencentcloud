@@ -12,9 +12,29 @@ from . import outputs
 
 assumeRole: Optional[str]
 
+assumeRoleWithSaml: Optional[str]
+
+assumeRoleWithWebIdentity: Optional[str]
+
+camRoleName: Optional[str]
+"""
+The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+"""
+
+cosDomain: Optional[str]
+"""
+The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+`https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+"""
+
 domain: Optional[str]
 """
 The root domain of the API request, Default is `tencentcloudapi.com`.
+"""
+
+enablePodOidc: Optional[bool]
+"""
+Whether to enable pod oidc.
 """
 
 profile: Optional[str]
@@ -30,20 +50,18 @@ The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `H
 
 region: Optional[str]
 """
-This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-environment variables. The default input value is ap-guangzhou.
+This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+default input value is ap-guangzhou.
 """
 
 secretId: Optional[str]
 """
-This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-environment variable.
+This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 """
 
 secretKey: Optional[str]
 """
-This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-environment variable.
+This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 """
 
 securityToken: Optional[str]

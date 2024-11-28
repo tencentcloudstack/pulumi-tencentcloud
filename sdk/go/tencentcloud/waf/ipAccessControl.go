@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to create a waf ipAccessControl
 //
+// > **NOTE:** This resource is no longer under maintenance, please use `Waf.IpAccessControlV2` instead
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->

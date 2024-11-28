@@ -9,6 +9,10 @@ from .acceleration_domain import *
 from .application_proxy import *
 from .application_proxy_rule import *
 from .certificate_config import *
+from .function import *
+from .function_rule import *
+from .function_rule_priority import *
+from .function_runtime_environment import *
 from .get_rule_engine_settings import *
 from .get_zone_available_plans import *
 from .l4_proxy import *
@@ -16,6 +20,7 @@ from .origin_group import *
 from .ownership_verify import *
 from .realtime_log_delivery import *
 from .rule_engine import *
+from .security_ip_group import *
 from .zone import *
 from .zone_setting import *
 from ._inputs import *

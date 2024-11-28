@@ -313,6 +313,8 @@ class Zone(pulumi.CustomResource):
         """
         Provide a resource to create a Private Dns Zone.
 
+        > **NOTE:** If you want to unbind all VPCs bound to the current private dns zone, simply clearing the declaration will not take effect; you need to set the `region` and `uniq_vpc_id` in `vpc_set` to an empty string.
+
         ## Example Usage
 
         ### Create a basic Private Dns Zone
@@ -393,6 +395,8 @@ class Zone(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to create a Private Dns Zone.
+
+        > **NOTE:** If you want to unbind all VPCs bound to the current private dns zone, simply clearing the declaration will not take effect; you need to set the `region` and `uniq_vpc_id` in `vpc_set` to an empty string.
 
         ## Example Usage
 

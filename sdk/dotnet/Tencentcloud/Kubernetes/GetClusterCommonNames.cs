@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query common names by subaccount uins
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -26,13 +28,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+        ///     var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
         ///     {
-        ///         ClusterId = "cls-12345678",
+        ///         ClusterId = "cls-fdy7hm1q",
         ///         SubaccountUins = new[]
         ///         {
-        ///             "1234567890",
-        ///             "0987654321",
+        ///             "100037718139",
+        ///             "100031340176",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query common names by role ids
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-fdy7hm1q",
+        ///         RoleIds = new[]
+        ///         {
+        ///             "4611686018441060141",
         ///         },
         ///     });
         /// 
@@ -48,6 +74,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query common names by subaccount uins
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -57,13 +85,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+        ///     var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
         ///     {
-        ///         ClusterId = "cls-12345678",
+        ///         ClusterId = "cls-fdy7hm1q",
         ///         SubaccountUins = new[]
         ///         {
-        ///             "1234567890",
-        ///             "0987654321",
+        ///             "100037718139",
+        ///             "100031340176",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query common names by role ids
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Kubernetes.GetClusterCommonNames.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-fdy7hm1q",
+        ///         RoleIds = new[]
+        ///         {
+        ///             "4611686018441060141",
         ///         },
         ///     });
         /// 

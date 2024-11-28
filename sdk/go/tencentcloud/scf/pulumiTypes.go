@@ -1256,7 +1256,7 @@ type FunctionTrigger struct {
 	Name string `pulumi:"name"`
 	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 	TriggerDesc string `pulumi:"triggerDesc"`
-	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 	Type string `pulumi:"type"`
 }
 
@@ -1278,7 +1278,7 @@ type FunctionTriggerArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 	TriggerDesc pulumi.StringInput `pulumi:"triggerDesc"`
-	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 	Type pulumi.StringInput `pulumi:"type"`
 }
 
@@ -1348,7 +1348,7 @@ func (o FunctionTriggerOutput) TriggerDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionTrigger) string { return v.TriggerDesc }).(pulumi.StringOutput)
 }
 
-// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 func (o FunctionTriggerOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionTrigger) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -1386,7 +1386,7 @@ type FunctionTriggerInfo struct {
 	Name *string `pulumi:"name"`
 	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 	TriggerDesc *string `pulumi:"triggerDesc"`
-	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 	Type *string `pulumi:"type"`
 }
 
@@ -1414,7 +1414,7 @@ type FunctionTriggerInfoArgs struct {
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// TriggerDesc of the SCF function trigger, parameter format of `timer` is linux cron expression; parameter of `cos` type is json string `{"bucketUrl":"<name-appid>.cos.<region>.myqcloud.com","event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}}`, where `bucketUrl` is cos bucket (optional), `event` is the cos event trigger, `Prefix` is the corresponding file prefix filter condition, `Suffix` is the suffix filter condition, if not need filter condition can not pass; `cmq` type does not pass this parameter; `ckafka` type parameter format is json string `{"maxMsgNum":"1","offset":"latest"}`; `apigw` type parameter format is json string `{"api":{"authRequired":"FALSE","requestConfig":{"method":"ANY"},"isIntegratedResponse":"FALSE"},"service":{"serviceId":"service-dqzh68sg"},"release":{"environmentName":"test"}}`.
 	TriggerDesc pulumi.StringPtrInput `pulumi:"triggerDesc"`
-	// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+	// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
@@ -1499,7 +1499,7 @@ func (o FunctionTriggerInfoOutput) TriggerDesc() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.TriggerDesc }).(pulumi.StringPtrOutput)
 }
 
-// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
 func (o FunctionTriggerInfoOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v FunctionTriggerInfo) *string { return v.Type }).(pulumi.StringPtrOutput)
 }

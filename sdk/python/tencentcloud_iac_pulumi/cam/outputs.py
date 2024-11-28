@@ -27,10 +27,13 @@ __all__ = [
     'GetPolicyGrantingServiceAccessListActionResult',
     'GetPolicyGrantingServiceAccessListPolicyResult',
     'GetPolicyGrantingServiceAccessListServiceResult',
+    'GetRoleDetailRoleInfoResult',
+    'GetRoleDetailRoleInfoTagResult',
     'GetRolePolicyAttachmentsRolePolicyAttachmentListResult',
     'GetRolesRoleListResult',
     'GetSamlProvidersProviderListResult',
     'GetSecretLastUsedTimeSecretIdLastUsedRowResult',
+    'GetSubAccountsSubAccountResult',
     'GetUserPolicyAttachmentsUserPolicyAttachmentListResult',
     'GetUsersUserListResult',
 ]
@@ -886,6 +889,171 @@ class GetPolicyGrantingServiceAccessListServiceResult(dict):
 
 
 @pulumi.output_type
+class GetRoleDetailRoleInfoResult(dict):
+    def __init__(__self__, *,
+                 add_time: str,
+                 console_login: int,
+                 deletion_task_id: str,
+                 description: str,
+                 policy_document: str,
+                 role_id: str,
+                 role_name: str,
+                 role_type: str,
+                 session_duration: int,
+                 tags: Sequence['outputs.GetRoleDetailRoleInfoTagResult'],
+                 update_time: str):
+        """
+        :param str add_time: Time role created
+        :param int console_login: If login is allowed for the role
+        :param str deletion_task_id: Task identifier for deleting a service-linked role 
+               Note: this field may return null, indicating that no valid values can be obtained.
+        :param str description: Role description
+        :param str policy_document: Role policy document
+        :param str role_id: Role ID
+        :param str role_name: Role name
+        :param str role_type: User role. Valid values: `user`, `system`, `service_linked`
+               Note: this field may return null, indicating that no valid values can be obtained.
+        :param int session_duration: Valid period
+               Note: this field may return null, indicating that no valid values can be obtained.
+        :param Sequence['GetRoleDetailRoleInfoTagArgs'] tags: Tags.
+               Note: This field may return `null`, indicating that no valid values can be obtained.
+        :param str update_time: Time role last updated
+        """
+        pulumi.set(__self__, "add_time", add_time)
+        pulumi.set(__self__, "console_login", console_login)
+        pulumi.set(__self__, "deletion_task_id", deletion_task_id)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "policy_document", policy_document)
+        pulumi.set(__self__, "role_id", role_id)
+        pulumi.set(__self__, "role_name", role_name)
+        pulumi.set(__self__, "role_type", role_type)
+        pulumi.set(__self__, "session_duration", session_duration)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "update_time", update_time)
+
+    @property
+    @pulumi.getter(name="addTime")
+    def add_time(self) -> str:
+        """
+        Time role created
+        """
+        return pulumi.get(self, "add_time")
+
+    @property
+    @pulumi.getter(name="consoleLogin")
+    def console_login(self) -> int:
+        """
+        If login is allowed for the role
+        """
+        return pulumi.get(self, "console_login")
+
+    @property
+    @pulumi.getter(name="deletionTaskId")
+    def deletion_task_id(self) -> str:
+        """
+        Task identifier for deleting a service-linked role 
+        Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "deletion_task_id")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Role description
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="policyDocument")
+    def policy_document(self) -> str:
+        """
+        Role policy document
+        """
+        return pulumi.get(self, "policy_document")
+
+    @property
+    @pulumi.getter(name="roleId")
+    def role_id(self) -> str:
+        """
+        Role ID
+        """
+        return pulumi.get(self, "role_id")
+
+    @property
+    @pulumi.getter(name="roleName")
+    def role_name(self) -> str:
+        """
+        Role name
+        """
+        return pulumi.get(self, "role_name")
+
+    @property
+    @pulumi.getter(name="roleType")
+    def role_type(self) -> str:
+        """
+        User role. Valid values: `user`, `system`, `service_linked`
+        Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "role_type")
+
+    @property
+    @pulumi.getter(name="sessionDuration")
+    def session_duration(self) -> int:
+        """
+        Valid period
+        Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "session_duration")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetRoleDetailRoleInfoTagResult']:
+        """
+        Tags.
+        Note: This field may return `null`, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="updateTime")
+    def update_time(self) -> str:
+        """
+        Time role last updated
+        """
+        return pulumi.get(self, "update_time")
+
+
+@pulumi.output_type
+class GetRoleDetailRoleInfoTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Tag key.
+        :param str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
 class GetRolePolicyAttachmentsRolePolicyAttachmentListResult(dict):
     def __init__(__self__, *,
                  create_mode: int,
@@ -1131,6 +1299,95 @@ class GetSecretLastUsedTimeSecretIdLastUsedRowResult(dict):
         Secret Id.
         """
         return pulumi.get(self, "secret_id")
+
+
+@pulumi.output_type
+class GetSubAccountsSubAccountResult(dict):
+    def __init__(__self__, *,
+                 create_time: str,
+                 last_login_ip: str,
+                 last_login_time: str,
+                 name: str,
+                 remark: str,
+                 uid: int,
+                 uin: int,
+                 user_type: int):
+        """
+        :param str create_time: Creation time
+               Note: this field may return null, indicating that no valid values can be obtained.
+        :param str name: Sub-user name
+        :param str remark: Sub-user remarks
+        :param int uid: Sub-user UID. UID is the unique identifier of a user who is a message recipient, while UIN is a unique identifier of a user.
+        :param int uin: Sub-user ID
+        :param int user_type: User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
+        """
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "last_login_ip", last_login_ip)
+        pulumi.set(__self__, "last_login_time", last_login_time)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "remark", remark)
+        pulumi.set(__self__, "uid", uid)
+        pulumi.set(__self__, "uin", uin)
+        pulumi.set(__self__, "user_type", user_type)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Creation time
+        Note: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="lastLoginIp")
+    def last_login_ip(self) -> str:
+        return pulumi.get(self, "last_login_ip")
+
+    @property
+    @pulumi.getter(name="lastLoginTime")
+    def last_login_time(self) -> str:
+        return pulumi.get(self, "last_login_time")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Sub-user name
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def remark(self) -> str:
+        """
+        Sub-user remarks
+        """
+        return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def uid(self) -> int:
+        """
+        Sub-user UID. UID is the unique identifier of a user who is a message recipient, while UIN is a unique identifier of a user.
+        """
+        return pulumi.get(self, "uid")
+
+    @property
+    @pulumi.getter
+    def uin(self) -> int:
+        """
+        Sub-user ID
+        """
+        return pulumi.get(self, "uin")
+
+    @property
+    @pulumi.getter(name="userType")
+    def user_type(self) -> int:
+        """
+        User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
+        """
+        return pulumi.get(self, "user_type")
 
 
 @pulumi.output_type

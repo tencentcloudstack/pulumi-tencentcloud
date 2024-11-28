@@ -30,6 +30,7 @@ class ReadonlyInstanceArgs:
                  pay_type: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
+                 ro_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -55,6 +56,7 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[str] ro_group_id: Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
@@ -97,6 +99,8 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "period", period)
         if prepaid_period is not None:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
+        if ro_group_id is not None:
+            pulumi.set(__self__, "ro_group_id", ro_group_id)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
         if slave_deploy_mode is not None:
@@ -311,6 +315,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "prepaid_period", value)
 
     @property
+    @pulumi.getter(name="roGroupId")
+    def ro_group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        """
+        return pulumi.get(self, "ro_group_id")
+
+    @ro_group_id.setter
+    def ro_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ro_group_id", value)
+
+    @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -415,6 +431,7 @@ class _ReadonlyInstanceState:
                  pay_type: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
+                 ro_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  status: Optional[pulumi.Input[int]] = None,
@@ -444,6 +461,7 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[str] ro_group_id: Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[int] status: Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
@@ -495,6 +513,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "period", period)
         if prepaid_period is not None:
             pulumi.set(__self__, "prepaid_period", prepaid_period)
+        if ro_group_id is not None:
+            pulumi.set(__self__, "ro_group_id", ro_group_id)
         if security_groups is not None:
             pulumi.set(__self__, "security_groups", security_groups)
         if slave_deploy_mode is not None:
@@ -727,6 +747,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "prepaid_period", value)
 
     @property
+    @pulumi.getter(name="roGroupId")
+    def ro_group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        """
+        return pulumi.get(self, "ro_group_id")
+
+    @ro_group_id.setter
+    def ro_group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ro_group_id", value)
+
+    @property
     @pulumi.getter(name="securityGroups")
     def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -867,6 +899,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  pay_type: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
+                 ro_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -960,6 +993,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[str] ro_group_id: Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[str] subnet_id: Private network ID. If `vpc_id` is set, this value is required.
@@ -1072,6 +1106,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  pay_type: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
+                 ro_group_id: Optional[pulumi.Input[str]] = None,
                  security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  slave_deploy_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -1110,6 +1145,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             __props__.__dict__["pay_type"] = pay_type
             __props__.__dict__["period"] = period
             __props__.__dict__["prepaid_period"] = prepaid_period
+            __props__.__dict__["ro_group_id"] = ro_group_id
             __props__.__dict__["security_groups"] = security_groups
             __props__.__dict__["slave_deploy_mode"] = slave_deploy_mode
             __props__.__dict__["subnet_id"] = subnet_id
@@ -1151,6 +1187,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             pay_type: Optional[pulumi.Input[int]] = None,
             period: Optional[pulumi.Input[int]] = None,
             prepaid_period: Optional[pulumi.Input[int]] = None,
+            ro_group_id: Optional[pulumi.Input[str]] = None,
             security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             slave_deploy_mode: Optional[pulumi.Input[int]] = None,
             status: Optional[pulumi.Input[int]] = None,
@@ -1185,6 +1222,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] pay_type: It has been deprecated from version 1.36.0. Please use `charge_type` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
         :param pulumi.Input[int] period: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead. Period of instance. NOTES: Only supported prepaid instance.
         :param pulumi.Input[int] prepaid_period: Period of instance. NOTES: Only supported prepaid instance.
+        :param pulumi.Input[str] ro_group_id: Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: Security groups to use.
         :param pulumi.Input[int] slave_deploy_mode: Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
         :param pulumi.Input[int] status: Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
@@ -1217,6 +1255,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["pay_type"] = pay_type
         __props__.__dict__["period"] = period
         __props__.__dict__["prepaid_period"] = prepaid_period
+        __props__.__dict__["ro_group_id"] = ro_group_id
         __props__.__dict__["security_groups"] = security_groups
         __props__.__dict__["slave_deploy_mode"] = slave_deploy_mode
         __props__.__dict__["status"] = status
@@ -1370,6 +1409,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         Period of instance. NOTES: Only supported prepaid instance.
         """
         return pulumi.get(self, "prepaid_period")
+
+    @property
+    @pulumi.getter(name="roGroupId")
+    def ro_group_id(self) -> pulumi.Output[str]:
+        """
+        Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        """
+        return pulumi.get(self, "ro_group_id")
 
     @property
     @pulumi.getter(name="securityGroups")

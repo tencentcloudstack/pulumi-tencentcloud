@@ -10,9 +10,12 @@ import * as utilities from "../utilities";
  * Use this resource to create postgresql instance.
  *
  * > **Note:** To update the charge type, please update the `chargeType` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
- * **Note:** If no values are set for the two parameters: `dbMajorVersion` and `engineVersion`, then `engineVersion` is set to `10.4` by default. Suggest using parameter `dbMajorVersion` to create an instance
+ *
+ * > **Note:** If no values are set for the two parameters: `dbMajorVersion` and `engineVersion`, then `engineVersion` is set to `10.4` by default. Suggest using parameter `dbMajorVersion` to create an instance
  *
  * ## Example Usage
+ *
+ * ### Create a postgresql instance
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -52,7 +55,48 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### Create a multi available zone bucket
+ * ### Create a postgresql instance with delete protection
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create postgresql
+ * const example = new tencentcloud.postgresql.Instance("example", {
+ *     availabilityZone: availabilityZone,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dbMajorVersion: "10",
+ *     engineVersion: "10.23",
+ *     rootUser: "root123",
+ *     rootPassword: "Root123$",
+ *     charset: "UTF8",
+ *     projectId: 0,
+ *     cpu: 1,
+ *     memory: 2,
+ *     storage: 10,
+ *     deleteProtection: true,
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a multi available zone postgresql instance
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -101,7 +145,57 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### create pgsql with kms key
+ * ### Create a multi available zone postgresql instance of CDC
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create postgresql
+ * const example = new tencentcloud.postgresql.Instance("example", {
+ *     availabilityZone: availabilityZone,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dbMajorVersion: "10",
+ *     rootUser: "root123",
+ *     rootPassword: "Root123$",
+ *     charset: "UTF8",
+ *     projectId: 0,
+ *     memory: 2,
+ *     cpu: 1,
+ *     storage: 10,
+ *     dbNodeSets: [
+ *         {
+ *             role: "Primary",
+ *             zone: availabilityZone,
+ *             dedicatedClusterId: "cluster-262n63e8",
+ *         },
+ *         {
+ *             zone: availabilityZone,
+ *             dedicatedClusterId: "cluster-262n63e8",
+ *         },
+ *     ],
+ *     tags: {
+ *         CreateBy: "terraform",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create pgsql with kms key
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -142,7 +236,7 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### upgrade kernel version
+ * ### Upgrade kernel version
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -233,7 +327,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Specify DB backup plan.
      */
-    public readonly backupPlan!: pulumi.Output<outputs.Postgresql.InstanceBackupPlan | undefined>;
+    public readonly backupPlan!: pulumi.Output<outputs.Postgresql.InstanceBackupPlan>;
     /**
      * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
@@ -268,6 +362,10 @@ export class Instance extends pulumi.CustomResource {
      * Specify instance node info for disaster migration.
      */
     public readonly dbNodeSets!: pulumi.Output<outputs.Postgresql.InstanceDbNodeSet[] | undefined>;
+    /**
+     * Whether to enable instance deletion protection. Default: false.
+     */
+    public readonly deleteProtection!: pulumi.Output<boolean | undefined>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */
@@ -390,6 +488,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dbMajorVersion"] = state ? state.dbMajorVersion : undefined;
             resourceInputs["dbMajorVesion"] = state ? state.dbMajorVesion : undefined;
             resourceInputs["dbNodeSets"] = state ? state.dbNodeSets : undefined;
+            resourceInputs["deleteProtection"] = state ? state.deleteProtection : undefined;
             resourceInputs["engineVersion"] = state ? state.engineVersion : undefined;
             resourceInputs["kmsKeyId"] = state ? state.kmsKeyId : undefined;
             resourceInputs["kmsRegion"] = state ? state.kmsRegion : undefined;
@@ -445,6 +544,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dbMajorVersion"] = args ? args.dbMajorVersion : undefined;
             resourceInputs["dbMajorVesion"] = args ? args.dbMajorVesion : undefined;
             resourceInputs["dbNodeSets"] = args ? args.dbNodeSets : undefined;
+            resourceInputs["deleteProtection"] = args ? args.deleteProtection : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
             resourceInputs["kmsKeyId"] = args ? args.kmsKeyId : undefined;
             resourceInputs["kmsRegion"] = args ? args.kmsRegion : undefined;
@@ -532,6 +632,10 @@ export interface InstanceState {
      * Specify instance node info for disaster migration.
      */
     dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[]>;
+    /**
+     * Whether to enable instance deletion protection. Default: false.
+     */
+    deleteProtection?: pulumi.Input<boolean>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */
@@ -680,6 +784,10 @@ export interface InstanceArgs {
      * Specify instance node info for disaster migration.
      */
     dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[]>;
+    /**
+     * Whether to enable instance deletion protection. Default: false.
+     */
+    deleteProtection?: pulumi.Input<boolean>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */

@@ -58,7 +58,7 @@ import * as utilities from "../utilities";
  *     }],
  *     clusterDeployType: "MANAGED_CLUSTER",
  * });
- * const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
+ * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
  *     clusterId: managedCluster.id,
  *     jwksUri: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com/openid/v1/jwks`,
  *     issuer: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com`,
@@ -117,7 +117,7 @@ import * as utilities from "../utilities";
  *     clusterDeployType: "MANAGED_CLUSTER",
  * });
  * // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
- * const testUseTkeDefaultAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", {
+ * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
  *     clusterId: managedCluster.id,
  *     autoCreateDiscoveryAnonymousAuth: true,
  *     useTkeDefault: true,
@@ -133,7 +133,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const testAuthAttach = new tencentcloud.kubernetes.AuthAttachment("testAuthAttach", {
+ * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
  *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
  *     useTkeDefault: true,
  *     autoCreateDiscoveryAnonymousAuth: true,
@@ -153,7 +153,7 @@ import * as utilities from "../utilities";
  * tke cluster authentication can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+ * $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
  * ```
  */
 export class AuthAttachment extends pulumi.CustomResource {

@@ -22,7 +22,10 @@ class GetLayer7ListenersResult:
     """
     A collection of values returned by getLayer7Listeners.
     """
-    def __init__(__self__, id=None, listener_id=None, listener_name=None, listeners=None, port=None, protocol=None, proxy_id=None, result_output_file=None):
+    def __init__(__self__, group_id=None, id=None, listener_id=None, listener_name=None, listeners=None, port=None, protocol=None, proxy_id=None, result_output_file=None):
+        if group_id and not isinstance(group_id, str):
+            raise TypeError("Expected argument 'group_id' to be a str")
+        pulumi.set(__self__, "group_id", group_id)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -47,6 +50,11 @@ class GetLayer7ListenersResult:
         if result_output_file and not isinstance(result_output_file, str):
             raise TypeError("Expected argument 'result_output_file' to be a str")
         pulumi.set(__self__, "result_output_file", result_output_file)
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[str]:
+        return pulumi.get(self, "group_id")
 
     @property
     @pulumi.getter
@@ -110,6 +118,7 @@ class AwaitableGetLayer7ListenersResult(GetLayer7ListenersResult):
         if False:
             yield self
         return GetLayer7ListenersResult(
+            group_id=self.group_id,
             id=self.id,
             listener_id=self.listener_id,
             listener_name=self.listener_name,
@@ -120,7 +129,8 @@ class AwaitableGetLayer7ListenersResult(GetLayer7ListenersResult):
             result_output_file=self.result_output_file)
 
 
-def get_layer7_listeners(listener_id: Optional[str] = None,
+def get_layer7_listeners(group_id: Optional[str] = None,
+                         listener_id: Optional[str] = None,
                          listener_name: Optional[str] = None,
                          port: Optional[int] = None,
                          protocol: Optional[str] = None,
@@ -154,6 +164,7 @@ def get_layer7_listeners(listener_id: Optional[str] = None,
     <!--End PulumiCodeChooser -->
 
 
+    :param str group_id: Group id.
     :param str listener_id: ID of the layer7 listener to be queried.
     :param str listener_name: Name of the layer7 listener to be queried.
     :param int port: Port of the layer7 listener to be queried.
@@ -162,6 +173,7 @@ def get_layer7_listeners(listener_id: Optional[str] = None,
     :param str result_output_file: Used to save results.
     """
     __args__ = dict()
+    __args__['groupId'] = group_id
     __args__['listenerId'] = listener_id
     __args__['listenerName'] = listener_name
     __args__['port'] = port
@@ -172,6 +184,7 @@ def get_layer7_listeners(listener_id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners', __args__, opts=opts, typ=GetLayer7ListenersResult).value
 
     return AwaitableGetLayer7ListenersResult(
+        group_id=pulumi.get(__ret__, 'group_id'),
         id=pulumi.get(__ret__, 'id'),
         listener_id=pulumi.get(__ret__, 'listener_id'),
         listener_name=pulumi.get(__ret__, 'listener_name'),
@@ -183,7 +196,8 @@ def get_layer7_listeners(listener_id: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_layer7_listeners)
-def get_layer7_listeners_output(listener_id: Optional[pulumi.Input[Optional[str]]] = None,
+def get_layer7_listeners_output(group_id: Optional[pulumi.Input[Optional[str]]] = None,
+                                listener_id: Optional[pulumi.Input[Optional[str]]] = None,
                                 listener_name: Optional[pulumi.Input[Optional[str]]] = None,
                                 port: Optional[pulumi.Input[Optional[int]]] = None,
                                 protocol: Optional[pulumi.Input[str]] = None,
@@ -217,6 +231,7 @@ def get_layer7_listeners_output(listener_id: Optional[pulumi.Input[Optional[str]
     <!--End PulumiCodeChooser -->
 
 
+    :param str group_id: Group id.
     :param str listener_id: ID of the layer7 listener to be queried.
     :param str listener_name: Name of the layer7 listener to be queried.
     :param int port: Port of the layer7 listener to be queried.

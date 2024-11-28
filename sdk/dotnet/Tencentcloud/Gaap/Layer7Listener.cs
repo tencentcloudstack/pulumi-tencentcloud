@@ -91,6 +91,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<string?> ForwardProtocol { get; private set; } = null!;
 
         /// <summary>
+        /// Group ID.
+        /// </summary>
+        [Output("groupId")]
+        public Output<string?> GroupId { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the layer7 listener, the maximum length is 30.
         /// </summary>
         [Output("name")]
@@ -112,13 +118,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// ID of the GAAP proxy.
         /// </summary>
         [Output("proxyId")]
-        public Output<string> ProxyId { get; private set; } = null!;
+        public Output<string?> ProxyId { get; private set; } = null!;
 
         /// <summary>
         /// Status of the layer7 listener.
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        /// </summary>
+        [Output("tlsCiphers")]
+        public Output<string> TlsCiphers { get; private set; } = null!;
+
+        /// <summary>
+        /// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+        /// </summary>
+        [Output("tlsSupportVersions")]
+        public Output<ImmutableArray<string>> TlsSupportVersions { get; private set; } = null!;
 
 
         /// <summary>
@@ -204,6 +222,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? ForwardProtocol { get; set; }
 
         /// <summary>
+        /// Group ID.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
+
+        /// <summary>
         /// Name of the layer7 listener, the maximum length is 30.
         /// </summary>
         [Input("name")]
@@ -224,8 +248,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// ID of the GAAP proxy.
         /// </summary>
-        [Input("proxyId", required: true)]
-        public Input<string> ProxyId { get; set; } = null!;
+        [Input("proxyId")]
+        public Input<string>? ProxyId { get; set; }
+
+        /// <summary>
+        /// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        /// </summary>
+        [Input("tlsCiphers")]
+        public Input<string>? TlsCiphers { get; set; }
+
+        [Input("tlsSupportVersions")]
+        private InputList<string>? _tlsSupportVersions;
+
+        /// <summary>
+        /// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+        /// </summary>
+        public InputList<string> TlsSupportVersions
+        {
+            get => _tlsSupportVersions ?? (_tlsSupportVersions = new InputList<string>());
+            set => _tlsSupportVersions = value;
+        }
 
         public Layer7ListenerArgs()
         {
@@ -278,6 +320,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? ForwardProtocol { get; set; }
 
         /// <summary>
+        /// Group ID.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
+
+        /// <summary>
         /// Name of the layer7 listener, the maximum length is 30.
         /// </summary>
         [Input("name")]
@@ -306,6 +354,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }
+
+        /// <summary>
+        /// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+        /// </summary>
+        [Input("tlsCiphers")]
+        public Input<string>? TlsCiphers { get; set; }
+
+        [Input("tlsSupportVersions")]
+        private InputList<string>? _tlsSupportVersions;
+
+        /// <summary>
+        /// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+        /// </summary>
+        public InputList<string> TlsSupportVersions
+        {
+            get => _tlsSupportVersions ?? (_tlsSupportVersions = new InputList<string>());
+            set => _tlsSupportVersions = value;
+        }
 
         public Layer7ListenerState()
         {

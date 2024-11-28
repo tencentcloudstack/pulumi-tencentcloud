@@ -15,6 +15,11 @@ export type CheckCertificateChainOperation = import("./checkCertificateChainOper
 export const CheckCertificateChainOperation: typeof import("./checkCertificateChainOperation").CheckCertificateChainOperation = null as any;
 utilities.lazyLoad(exports, ["CheckCertificateChainOperation"], () => require("./checkCertificateChainOperation"));
 
+export { CheckCertificateDomainVerificationOperationArgs, CheckCertificateDomainVerificationOperationState } from "./checkCertificateDomainVerificationOperation";
+export type CheckCertificateDomainVerificationOperation = import("./checkCertificateDomainVerificationOperation").CheckCertificateDomainVerificationOperation;
+export const CheckCertificateDomainVerificationOperation: typeof import("./checkCertificateDomainVerificationOperation").CheckCertificateDomainVerificationOperation = null as any;
+utilities.lazyLoad(exports, ["CheckCertificateDomainVerificationOperation"], () => require("./checkCertificateDomainVerificationOperation"));
+
 export { CompleteCertificateOperationArgs, CompleteCertificateOperationState } from "./completeCertificateOperation";
 export type CompleteCertificateOperation = import("./completeCertificateOperation").CompleteCertificateOperation;
 export const CompleteCertificateOperation: typeof import("./completeCertificateOperation").CompleteCertificateOperation = null as any;
@@ -189,6 +194,8 @@ const _module = {
                 return new Certificate(name, <any>undefined, { urn })
             case "tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation":
                 return new CheckCertificateChainOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Ssl/checkCertificateDomainVerificationOperation:CheckCertificateDomainVerificationOperation":
+                return new CheckCertificateDomainVerificationOperation(name, <any>undefined, { urn })
             case "tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation":
                 return new CompleteCertificateOperation(name, <any>undefined, { urn })
             case "tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation":
@@ -222,6 +229,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/certificate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/checkCertificateChainOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/checkCertificateDomainVerificationOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/completeCertificateOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/deployCertificateInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssl/deployCertificateRecordRetryOperation", _module)

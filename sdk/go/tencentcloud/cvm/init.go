@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cvm/actionTimer:ActionTimer":
+		r = &ActionTimer{}
 	case "tencentcloud:Cvm/chcConfig:ChcConfig":
 		r = &ChcConfig{}
 	case "tencentcloud:Cvm/exportImages:ExportImages":
@@ -64,6 +66,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/actionTimer",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cvm/chcConfig",

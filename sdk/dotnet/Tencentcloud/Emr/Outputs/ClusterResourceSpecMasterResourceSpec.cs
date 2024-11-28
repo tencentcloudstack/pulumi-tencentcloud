@@ -14,12 +14,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Outputs
     [OutputType]
     public sealed class ClusterResourceSpecMasterResourceSpec
     {
+        /// <summary>
+        /// Number of CPU cores.
+        /// </summary>
         public readonly int? Cpu;
+        /// <summary>
+        /// Data disk capacity.
+        /// </summary>
         public readonly int? DiskSize;
+        /// <summary>
+        /// disk types. Value range:
+        /// - CLOUD_SSD: Represents cloud SSD;
+        /// - CLOUD_PREMIUM: Represents efficient cloud disk;
+        /// - CLOUD_BASIC: Represents Cloud Block Storage.
+        /// </summary>
         public readonly string? DiskType;
+        /// <summary>
+        /// Memory size in M.
+        /// </summary>
         public readonly int? MemSize;
+        /// <summary>
+        /// Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ClusterResourceSpecMasterResourceSpecMultiDisk> MultiDisks;
+        /// <summary>
+        /// Root disk capacity.
+        /// </summary>
         public readonly int? RootSize;
+        /// <summary>
+        /// Node specification description, such as CVM.SA2.
+        /// </summary>
         public readonly string? Spec;
+        /// <summary>
+        /// Storage type. Value range:
+        /// - 4: Represents cloud SSD;
+        /// - 5: Represents efficient cloud disk;
+        /// - 6: Represents enhanced SSD Cloud Block Storage;
+        /// - 11: Represents throughput Cloud Block Storage;
+        /// - 12: Represents extremely fast SSD Cloud Block Storage.
+        /// </summary>
         public readonly int? StorageType;
 
         [OutputConstructor]
@@ -32,6 +65,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Outputs
 
             int? memSize,
 
+            ImmutableArray<Outputs.ClusterResourceSpecMasterResourceSpecMultiDisk> multiDisks,
+
             int? rootSize,
 
             string? spec,
@@ -42,6 +77,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Outputs
             DiskSize = diskSize;
             DiskType = diskType;
             MemSize = memSize;
+            MultiDisks = multiDisks;
             RootSize = rootSize;
             Spec = spec;
             StorageType = storageType;

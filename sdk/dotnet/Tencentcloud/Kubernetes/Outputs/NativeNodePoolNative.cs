@@ -63,6 +63,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly Outputs.NativeNodePoolNativeLifecycle? Lifecycle;
         /// <summary>
+        /// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+        /// </summary>
+        public readonly string? MachineType;
+        /// <summary>
         /// Node pool management parameter settings.
         /// </summary>
         public readonly Outputs.NativeNodePoolNativeManagement? Management;
@@ -117,6 +121,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             Outputs.NativeNodePoolNativeLifecycle? lifecycle,
 
+            string? machineType,
+
             Outputs.NativeNodePoolNativeManagement? management,
 
             int? replicas,
@@ -143,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             KeyIds = keyIds;
             KubeletArgs = kubeletArgs;
             Lifecycle = lifecycle;
+            MachineType = machineType;
             Management = management;
             Replicas = replicas;
             RuntimeRootDir = runtimeRootDir;

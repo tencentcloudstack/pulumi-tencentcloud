@@ -102,6 +102,7 @@ class _RuleEngineState:
     def __init__(__self__, *,
                  rule_id: Optional[pulumi.Input[str]] = None,
                  rule_name: Optional[pulumi.Input[str]] = None,
+                 rule_priority: Optional[pulumi.Input[int]] = None,
                  rules: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleArgs']]]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -110,6 +111,7 @@ class _RuleEngineState:
         Input properties used for looking up and filtering RuleEngine resources.
         :param pulumi.Input[str] rule_id: Rule ID.
         :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
+        :param pulumi.Input[int] rule_priority: Rule priority, the larger the value, the higher the priority, the minimum is 1.
         :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleArgs']]] rules: Rule items list.
         :param pulumi.Input[str] status: Rule status. Values:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
@@ -119,6 +121,8 @@ class _RuleEngineState:
             pulumi.set(__self__, "rule_id", rule_id)
         if rule_name is not None:
             pulumi.set(__self__, "rule_name", rule_name)
+        if rule_priority is not None:
+            pulumi.set(__self__, "rule_priority", rule_priority)
         if rules is not None:
             pulumi.set(__self__, "rules", rules)
         if status is not None:
@@ -151,6 +155,18 @@ class _RuleEngineState:
     @rule_name.setter
     def rule_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "rule_name", value)
+
+    @property
+    @pulumi.getter(name="rulePriority")
+    def rule_priority(self) -> Optional[pulumi.Input[int]]:
+        """
+        Rule priority, the larger the value, the higher the priority, the minimum is 1.
+        """
+        return pulumi.get(self, "rule_priority")
+
+    @rule_priority.setter
+    def rule_priority(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "rule_priority", value)
 
     @property
     @pulumi.getter
@@ -513,6 +529,7 @@ class RuleEngine(pulumi.CustomResource):
                 raise TypeError("Missing required property 'zone_id'")
             __props__.__dict__["zone_id"] = zone_id
             __props__.__dict__["rule_id"] = None
+            __props__.__dict__["rule_priority"] = None
         super(RuleEngine, __self__).__init__(
             'tencentcloud:Teo/ruleEngine:RuleEngine',
             resource_name,
@@ -525,6 +542,7 @@ class RuleEngine(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             rule_id: Optional[pulumi.Input[str]] = None,
             rule_name: Optional[pulumi.Input[str]] = None,
+            rule_priority: Optional[pulumi.Input[int]] = None,
             rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RuleEngineRuleArgs']]]]] = None,
             status: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -538,6 +556,7 @@ class RuleEngine(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] rule_id: Rule ID.
         :param pulumi.Input[str] rule_name: The rule name (1 to 255 characters).
+        :param pulumi.Input[int] rule_priority: Rule priority, the larger the value, the higher the priority, the minimum is 1.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RuleEngineRuleArgs']]]] rules: Rule items list.
         :param pulumi.Input[str] status: Rule status. Values:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: rule tag list.
@@ -549,6 +568,7 @@ class RuleEngine(pulumi.CustomResource):
 
         __props__.__dict__["rule_id"] = rule_id
         __props__.__dict__["rule_name"] = rule_name
+        __props__.__dict__["rule_priority"] = rule_priority
         __props__.__dict__["rules"] = rules
         __props__.__dict__["status"] = status
         __props__.__dict__["tags"] = tags
@@ -570,6 +590,14 @@ class RuleEngine(pulumi.CustomResource):
         The rule name (1 to 255 characters).
         """
         return pulumi.get(self, "rule_name")
+
+    @property
+    @pulumi.getter(name="rulePriority")
+    def rule_priority(self) -> pulumi.Output[int]:
+        """
+        Rule priority, the larger the value, the higher the priority, the minimum is 1.
+        """
+        return pulumi.get(self, "rule_priority")
 
     @property
     @pulumi.getter

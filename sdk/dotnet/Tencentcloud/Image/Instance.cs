@@ -40,6 +40,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Use image family
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var imageFamily = new Tencentcloud.Image.Instance("imageFamily", new()
+    ///     {
+    ///         DataDiskIds = new[] {},
+    ///         ImageDescription = "create image with snapshot 12323",
+    ///         ImageFamily = "business-daily-update",
+    ///         ImageName = "image-family-test123",
+    ///         SnapshotIds = new[]
+    ///         {
+    ///             "snap-7uuvrcoj",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// image instance can be imported using the id, e.g.
@@ -68,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// </summary>
         [Output("imageDescription")]
         public Output<string?> ImageDescription { get; private set; } = null!;
+
+        /// <summary>
+        /// Set image family. Example value: `business-daily-update`.
+        /// </summary>
+        [Output("imageFamily")]
+        public Output<string?> ImageFamily { get; private set; } = null!;
 
         /// <summary>
         /// Image name.
@@ -171,6 +204,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         public Input<string>? ImageDescription { get; set; }
 
         /// <summary>
+        /// Set image family. Example value: `business-daily-update`.
+        /// </summary>
+        [Input("imageFamily")]
+        public Input<string>? ImageFamily { get; set; }
+
+        /// <summary>
         /// Image name.
         /// </summary>
         [Input("imageName", required: true)]
@@ -243,6 +282,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// </summary>
         [Input("imageDescription")]
         public Input<string>? ImageDescription { get; set; }
+
+        /// <summary>
+        /// Set image family. Example value: `business-daily-update`.
+        /// </summary>
+        [Input("imageFamily")]
+        public Input<string>? ImageFamily { get; set; }
 
         /// <summary>
         /// Image name.

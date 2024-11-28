@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         [Input("indexDocument")]
         public Input<string>? IndexDocument { get; set; }
 
+        /// <summary>
+        /// Redirects all request configurations. Valid values: http, https. Default is `http`.
+        /// </summary>
+        [Input("redirectAllRequestsTo")]
+        public Input<string>? RedirectAllRequestsTo { get; set; }
+
         public BucketWebsiteArgs()
         {
         }

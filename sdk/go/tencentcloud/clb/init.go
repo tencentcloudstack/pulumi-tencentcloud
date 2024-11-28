@@ -35,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InstanceSlaConfig{}
 	case "tencentcloud:Clb/listener:Listener":
 		r = &Listener{}
+	case "tencentcloud:Clb/listenerDefaultDomain:ListenerDefaultDomain":
+		r = &ListenerDefaultDomain{}
 	case "tencentcloud:Clb/listenerRule:ListenerRule":
 		r = &ListenerRule{}
 	case "tencentcloud:Clb/logSet:LogSet":
@@ -103,6 +105,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Clb/listener",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Clb/listenerDefaultDomain",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

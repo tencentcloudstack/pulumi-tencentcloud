@@ -11,7 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
 {
     /// <summary>
-    /// Provides a resource to create a cos bucket_inventory
+    /// Provides a resource to create a cos bucket inventory
+    /// 
+    /// &gt; **NOTE:** The current resource does not support cdc.
     /// 
     /// ## Example Usage
     /// 
@@ -20,29 +22,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var bucketInventory = new Tencentcloud.Cos.BucketInventory("bucketInventory", new()
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     // create cos
+    ///     var exampleBucket = new Tencentcloud.Cos.Bucket("exampleBucket", new()
     ///     {
-    ///         Bucket = "keep-test-xxxxxx",
-    ///         Destination = new Tencentcloud.Cos.Inputs.BucketInventoryDestinationArgs
-    ///         {
-    ///             AccountId = "",
-    ///             Bucket = "qcs::cos:ap-guangzhou::keep-test-xxxxxx",
-    ///             Format = "CSV",
-    ///             Prefix = "cos_bucket_inventory",
-    ///         },
-    ///         Filter = new Tencentcloud.Cos.Inputs.BucketInventoryFilterArgs
-    ///         {
-    ///             Period = new Tencentcloud.Cos.Inputs.BucketInventoryFilterPeriodArgs
-    ///             {
-    ///                 StartTime = "1687276800",
-    ///             },
-    ///         },
-    ///         IncludedObjectVersions = "Current",
+    ///         CosBucket = appId.Apply(appId =&gt; $"private-bucket-{appId}"),
+    ///         Acl = "private",
+    ///     });
+    /// 
+    ///     // create cos bucket inventory
+    ///     var exampleBucketInventory = new Tencentcloud.Cos.BucketInventory("exampleBucketInventory", new()
+    ///     {
+    ///         Bucket = exampleBucket.Id,
     ///         IsEnabled = "true",
+    ///         IncludedObjectVersions = "Current",
     ///         OptionalFields = new Tencentcloud.Cos.Inputs.BucketInventoryOptionalFieldsArgs
     ///         {
     ///             Fields = new[]
@@ -51,9 +52,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///                 "ETag",
     ///             },
     ///         },
+    ///         Filter = new Tencentcloud.Cos.Inputs.BucketInventoryFilterArgs
+    ///         {
+    ///             Period = new Tencentcloud.Cos.Inputs.BucketInventoryFilterPeriodArgs
+    ///             {
+    ///                 StartTime = "1687276800",
+    ///             },
+    ///         },
     ///         Schedule = new Tencentcloud.Cos.Inputs.BucketInventoryScheduleArgs
     ///         {
-    ///             Frequency = "Weekly",
+    ///             Frequency = "Daily",
+    ///         },
+    ///         Destination = new Tencentcloud.Cos.Inputs.BucketInventoryDestinationArgs
+    ///         {
+    ///             Bucket = "qcs::cos:ap-guangzhou::private-bucket-1309118522",
+    ///             Format = "CSV",
+    ///             Prefix = "frontends",
     ///         },
     ///     });
     /// 
@@ -63,10 +77,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Import
     /// 
-    /// cos bucket_inventory can be imported using the id, e.g.
+    /// cos bucket inventory can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+    /// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory example private-bucket-1309118522#tf-example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketInventory:BucketInventory")]

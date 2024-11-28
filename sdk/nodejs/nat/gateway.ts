@@ -7,6 +7,10 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a NAT gateway.
  *
+ * > **NOTE:** If `natProductVersion` is `1`, `maxConcurrent` valid values is `1000000`, `3000000`, `10000000`.
+ *
+ * > **NOTE:** If set `stockPublicIpAddressesBandwidthOut`, do not set the `internetMaxBandwidthOut` parameter of resource `tencentcloud.Eip.Instance` at the same time, otherwise conflicts may occur.
+ *
  * ## Example Usage
  *
  * ### Create a traditional NAT gateway.
@@ -21,6 +25,7 @@ import * as utilities from "../utilities";
  * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
  * const example = new tencentcloud.nat.Gateway("example", {
  *     vpcId: vpc.id,
+ *     natProductVersion: 1,
  *     bandwidth: 100,
  *     maxConcurrent: 1000000,
  *     assignedEipSets: [
@@ -28,7 +33,7 @@ import * as utilities from "../utilities";
  *         eipExample2.publicIp,
  *     ],
  *     tags: {
- *         tf_tag_key: "tf_tag_value",
+ *         createBy: "terraform",
  *     },
  * });
  * ```
@@ -46,13 +51,38 @@ import * as utilities from "../utilities";
  * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
  * const example = new tencentcloud.nat.Gateway("example", {
  *     vpcId: vpc.id,
+ *     natProductVersion: 2,
  *     assignedEipSets: [
  *         eipExample1.publicIp,
  *         eipExample2.publicIp,
  *     ],
- *     natProductVersion: 2,
  *     tags: {
- *         tf_tag_key: "tf_tag_value",
+ *         createBy: "terraform",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Or set stock public ip addresses bandwidth out
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const eipExample1 = new tencentcloud.eip.Instance("eipExample1", {});
+ * const eipExample2 = new tencentcloud.eip.Instance("eipExample2", {});
+ * const example = new tencentcloud.nat.Gateway("example", {
+ *     vpcId: vpc.id,
+ *     natProductVersion: 2,
+ *     stockPublicIpAddressesBandwidthOut: 100,
+ *     assignedEipSets: [
+ *         eipExample1.publicIp,
+ *         eipExample2.publicIp,
+ *     ],
+ *     tags: {
+ *         createBy: "terraform",
  *     },
  * });
  * ```
@@ -63,7 +93,7 @@ import * as utilities from "../utilities";
  * NAT gateway can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+ * $ pulumi import tencentcloud:Nat/gateway:Gateway example nat-1asg3t63
  * ```
  */
 export class Gateway extends pulumi.CustomResource {
@@ -99,17 +129,17 @@ export class Gateway extends pulumi.CustomResource {
      */
     public readonly assignedEipSets!: pulumi.Output<string[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
      */
-    public readonly bandwidth!: pulumi.Output<number | undefined>;
+    public readonly bandwidth!: pulumi.Output<number>;
     /**
      * Create time of the NAT gateway.
      */
     public /*out*/ readonly createdTime!: pulumi.Output<string>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
      */
-    public readonly maxConcurrent!: pulumi.Output<number | undefined>;
+    public readonly maxConcurrent!: pulumi.Output<number>;
     /**
      * Name of the NAT gateway.
      */
@@ -118,6 +148,10 @@ export class Gateway extends pulumi.CustomResource {
      * 1: traditional NAT, 2: standard NAT, default value is 1.
      */
     public readonly natProductVersion!: pulumi.Output<number>;
+    /**
+     * The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+     */
+    public readonly stockPublicIpAddressesBandwidthOut!: pulumi.Output<number>;
     /**
      * Subnet of NAT.
      */
@@ -154,6 +188,7 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["maxConcurrent"] = state ? state.maxConcurrent : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["natProductVersion"] = state ? state.natProductVersion : undefined;
+            resourceInputs["stockPublicIpAddressesBandwidthOut"] = state ? state.stockPublicIpAddressesBandwidthOut : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
@@ -171,6 +206,7 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["maxConcurrent"] = args ? args.maxConcurrent : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["natProductVersion"] = args ? args.natProductVersion : undefined;
+            resourceInputs["stockPublicIpAddressesBandwidthOut"] = args ? args.stockPublicIpAddressesBandwidthOut : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
@@ -191,7 +227,7 @@ export interface GatewayState {
      */
     assignedEipSets?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
      */
     bandwidth?: pulumi.Input<number>;
     /**
@@ -199,7 +235,7 @@ export interface GatewayState {
      */
     createdTime?: pulumi.Input<string>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
      */
     maxConcurrent?: pulumi.Input<number>;
     /**
@@ -210,6 +246,10 @@ export interface GatewayState {
      * 1: traditional NAT, 2: standard NAT, default value is 1.
      */
     natProductVersion?: pulumi.Input<number>;
+    /**
+     * The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+     */
+    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number>;
     /**
      * Subnet of NAT.
      */
@@ -237,11 +277,11 @@ export interface GatewayArgs {
      */
     assignedEipSets: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+     * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
      */
     bandwidth?: pulumi.Input<number>;
     /**
-     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+     * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
      */
     maxConcurrent?: pulumi.Input<number>;
     /**
@@ -252,6 +292,10 @@ export interface GatewayArgs {
      * 1: traditional NAT, 2: standard NAT, default value is 1.
      */
     natProductVersion?: pulumi.Input<number>;
+    /**
+     * The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+     */
+    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number>;
     /**
      * Subnet of NAT.
      */

@@ -64,7 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Output<string?> DepartmentId { get; private set; } = null!;
 
         /// <summary>
-        /// Email.
+        /// Email. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Output("email")]
         public Output<string?> Email { get; private set; } = null!;
@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Output<ImmutableArray<int>> GroupIdSets { get; private set; } = null!;
 
         /// <summary>
-        /// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        /// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Output("phone")]
         public Output<string?> Phone { get; private set; } = null!;
@@ -171,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string>? DepartmentId { get; set; }
 
         /// <summary>
-        /// Email.
+        /// Email. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Input("email")]
         public Input<string>? Email { get; set; }
@@ -189,7 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
 
         /// <summary>
-        /// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        /// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Input("phone")]
         public Input<string>? Phone { get; set; }
@@ -245,7 +245,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string>? DepartmentId { get; set; }
 
         /// <summary>
-        /// Email.
+        /// Email. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Input("email")]
         public Input<string>? Email { get; set; }
@@ -263,7 +263,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
 
         /// <summary>
-        /// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        /// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         /// </summary>
         [Input("phone")]
         public Input<string>? Phone { get; set; }

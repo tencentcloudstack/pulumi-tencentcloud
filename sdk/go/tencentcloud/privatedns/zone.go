@@ -14,6 +14,8 @@ import (
 
 // Provide a resource to create a Private Dns Zone.
 //
+// > **NOTE:** If you want to unbind all VPCs bound to the current private dns zone, simply clearing the declaration will not take effect; you need to set the `region` and `uniqVpcId` in `vpcSet` to an empty string.
+//
 // ## Example Usage
 //
 // ### Create a basic Private Dns Zone

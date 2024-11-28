@@ -16,21 +16,37 @@ __all__ = [
     'ClusterAttachmentWorkerConfigOverridesArgs',
     'ClusterAttachmentWorkerConfigOverridesDataDiskArgs',
     'ClusterAttachmentWorkerConfigOverridesGpuArgsArgs',
+    'ClusterAttachmentWorkerConfigTaintArgs',
     'ClusterAuthOptionsArgs',
     'ClusterClusterAuditArgs',
     'ClusterClusterExtraArgsArgs',
     'ClusterEventPersistenceArgs',
     'ClusterExistInstanceArgs',
     'ClusterExistInstanceInstancesParaArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigLabelArgs',
+    'ClusterExistInstanceInstancesParaMasterConfigTaintArgs',
     'ClusterExtensionAddonArgs',
     'ClusterLogAgentArgs',
+    'ClusterMasterAttachmentExtraArgsArgs',
+    'ClusterMasterAttachmentMasterConfigArgs',
+    'ClusterMasterAttachmentMasterConfigDataDiskArgs',
+    'ClusterMasterAttachmentMasterConfigExtraArgsArgs',
+    'ClusterMasterAttachmentMasterConfigGpuArgsArgs',
+    'ClusterMasterAttachmentMasterConfigLabelArgs',
+    'ClusterMasterAttachmentMasterConfigTaintArgs',
     'ClusterMasterConfigArgs',
     'ClusterMasterConfigDataDiskArgs',
     'ClusterNodePoolGlobalConfigArgs',
+    'ClusterResourceDeleteOptionArgs',
     'ClusterWorkerConfigArgs',
     'ClusterWorkerConfigDataDiskArgs',
     'ClusterWorkerInstancesListArgs',
     'EncryptionProtectionKmsConfigurationArgs',
+    'HealthCheckPolicyRuleArgs',
     'NativeNodePoolAnnotationArgs',
     'NativeNodePoolLabelArgs',
     'NativeNodePoolNativeArgs',
@@ -44,6 +60,7 @@ __all__ = [
     'NativeNodePoolTagArgs',
     'NativeNodePoolTagTagArgs',
     'NativeNodePoolTaintArgs',
+    'NodePoolAnnotationArgs',
     'NodePoolAutoScalingConfigArgs',
     'NodePoolAutoScalingConfigDataDiskArgs',
     'NodePoolNodeConfigArgs',
@@ -52,6 +69,7 @@ __all__ = [
     'NodePoolTaintArgs',
     'ScaleWorkerDataDiskArgs',
     'ScaleWorkerGpuArgsArgs',
+    'ScaleWorkerTaintArgs',
     'ScaleWorkerWorkerConfigArgs',
     'ScaleWorkerWorkerConfigDataDiskArgs',
     'ScaleWorkerWorkerInstancesListArgs',
@@ -73,6 +91,7 @@ class ClusterAttachmentWorkerConfigArgs:
                  is_schedule: Optional[pulumi.Input[bool]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  pre_start_user_script: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigTaintArgs']]]] = None,
                  user_data: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigDataDiskArgs']]] data_disks: Configurations of data disk.
@@ -80,9 +99,10 @@ class ClusterAttachmentWorkerConfigArgs:
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter.
         :param pulumi.Input['ClusterAttachmentWorkerConfigGpuArgsArgs'] gpu_args: GPU driver parameters.
-        :param pulumi.Input[bool] is_schedule: Indicate to schedule the adding node or not. Default is true.
+        :param pulumi.Input[bool] is_schedule: This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigTaintArgs']]] taints: Node taint.
         :param pulumi.Input[str] user_data: Base64-encoded User Data text, the length limit is 16KB.
         """
         if data_disks is not None:
@@ -96,11 +116,16 @@ class ClusterAttachmentWorkerConfigArgs:
         if gpu_args is not None:
             pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
+            warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+            pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+        if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
         if mount_target is not None:
             pulumi.set(__self__, "mount_target", mount_target)
         if pre_start_user_script is not None:
             pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        if taints is not None:
+            pulumi.set(__self__, "taints", taints)
         if user_data is not None:
             pulumi.set(__self__, "user_data", user_data)
 
@@ -168,8 +193,11 @@ class ClusterAttachmentWorkerConfigArgs:
     @pulumi.getter(name="isSchedule")
     def is_schedule(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate to schedule the adding node or not. Default is true.
+        This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         """
+        warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+
         return pulumi.get(self, "is_schedule")
 
     @is_schedule.setter
@@ -199,6 +227,18 @@ class ClusterAttachmentWorkerConfigArgs:
     @pre_start_user_script.setter
     def pre_start_user_script(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "pre_start_user_script", value)
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigTaintArgs']]]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @taints.setter
+    def taints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigTaintArgs']]]]):
+        pulumi.set(self, "taints", value)
 
     @property
     @pulumi.getter(name="userData")
@@ -418,30 +458,48 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
         """
         :param pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigOverridesDataDiskArgs']]] data_disks: Configurations of data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
-        :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param pulumi.Input[str] docker_graph_path: This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         :param pulumi.Input['ClusterAttachmentWorkerConfigOverridesGpuArgsArgs'] gpu_args: GPU driver parameters.
-        :param pulumi.Input[bool] is_schedule: Indicate to schedule the adding node or not. Default is true.
-        :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
-        :param pulumi.Input[str] user_data: Base64-encoded User Data text, the length limit is 16KB.
+        :param pulumi.Input[bool] is_schedule: This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+        :param pulumi.Input[str] mount_target: This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+        :param pulumi.Input[str] pre_start_user_script: This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[str] user_data: This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         """
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if desired_pod_num is not None:
             pulumi.set(__self__, "desired_pod_num", desired_pod_num)
         if docker_graph_path is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""docker_graph_path is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+        if docker_graph_path is not None:
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        if extra_args is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""extra_args is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
         if gpu_args is not None:
             pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
+            warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+            pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+        if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
+        if mount_target is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""mount_target is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if mount_target is not None:
             pulumi.set(__self__, "mount_target", mount_target)
         if pre_start_user_script is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""pre_start_user_script is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+        if pre_start_user_script is not None:
             pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        if user_data is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""user_data is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if user_data is not None:
             pulumi.set(__self__, "user_data", user_data)
 
@@ -473,8 +531,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="dockerGraphPath")
     def docker_graph_path(self) -> Optional[pulumi.Input[str]]:
         """
-        Docker graph path. Default is `/var/lib/docker`.
+        This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""docker_graph_path is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "docker_graph_path")
 
     @docker_graph_path.setter
@@ -485,8 +546,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="extraArgs")
     def extra_args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Custom parameter information related to the node. This is a white-list parameter.
+        This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""extra_args is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "extra_args")
 
     @extra_args.setter
@@ -509,8 +573,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="isSchedule")
     def is_schedule(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate to schedule the adding node or not. Default is true.
+        This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         """
+        warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+
         return pulumi.get(self, "is_schedule")
 
     @is_schedule.setter
@@ -521,8 +588,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="mountTarget")
     def mount_target(self) -> Optional[pulumi.Input[str]]:
         """
-        Mount target. Default is not mounting.
+        This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""mount_target is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "mount_target")
 
     @mount_target.setter
@@ -533,8 +603,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="preStartUserScript")
     def pre_start_user_script(self) -> Optional[pulumi.Input[str]]:
         """
-        Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""pre_start_user_script is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "pre_start_user_script")
 
     @pre_start_user_script.setter
@@ -545,8 +618,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="userData")
     def user_data(self) -> Optional[pulumi.Input[str]]:
         """
-        Base64-encoded User Data text, the length limit is 16KB.
+        This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""user_data is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "user_data")
 
     @user_data.setter
@@ -742,6 +818,61 @@ class ClusterAttachmentWorkerConfigOverridesGpuArgsArgs:
     @mig_enable.setter
     def mig_enable(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "mig_enable", value)
+
+
+@pulumi.input_type
+class ClusterAttachmentWorkerConfigTaintArgs:
+    def __init__(__self__, *,
+                 effect: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] effect: Effect of the taint.
+        :param pulumi.Input[str] key: Key of the taint.
+        :param pulumi.Input[str] value: Value of the taint.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @effect.setter
+    def effect(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "effect", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
 
 
 @pulumi.input_type
@@ -1068,11 +1199,35 @@ class ClusterExistInstanceArgs:
 @pulumi.input_type
 class ClusterExistInstanceInstancesParaArgs:
     def __init__(__self__, *,
-                 instance_ids: pulumi.Input[Sequence[pulumi.Input[str]]]):
+                 instance_ids: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 enhanced_monitor_service: Optional[pulumi.Input[bool]] = None,
+                 enhanced_security_service: Optional[pulumi.Input[bool]] = None,
+                 key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 master_config: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigArgs']] = None,
+                 password: Optional[pulumi.Input[str]] = None,
+                 security_group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input[str]]] instance_ids: Cluster IDs.
+        :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
+        :param pulumi.Input[bool] enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys, should be set if `password` not set.
+        :param pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigArgs'] master_config: Advanced Node Settings. commonly used to attach existing instances.
+        :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_group_ids: Security groups to which a CVM instance belongs.
         """
         pulumi.set(__self__, "instance_ids", instance_ids)
+        if enhanced_monitor_service is not None:
+            pulumi.set(__self__, "enhanced_monitor_service", enhanced_monitor_service)
+        if enhanced_security_service is not None:
+            pulumi.set(__self__, "enhanced_security_service", enhanced_security_service)
+        if key_ids is not None:
+            pulumi.set(__self__, "key_ids", key_ids)
+        if master_config is not None:
+            pulumi.set(__self__, "master_config", master_config)
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
 
     @property
     @pulumi.getter(name="instanceIds")
@@ -1085,6 +1240,550 @@ class ClusterExistInstanceInstancesParaArgs:
     @instance_ids.setter
     def instance_ids(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "instance_ids", value)
+
+    @property
+    @pulumi.getter(name="enhancedMonitorService")
+    def enhanced_monitor_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        To specify whether to enable cloud monitor service. Default is TRUE.
+        """
+        return pulumi.get(self, "enhanced_monitor_service")
+
+    @enhanced_monitor_service.setter
+    def enhanced_monitor_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enhanced_monitor_service", value)
+
+    @property
+    @pulumi.getter(name="enhancedSecurityService")
+    def enhanced_security_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        To specify whether to enable cloud security service. Default is TRUE.
+        """
+        return pulumi.get(self, "enhanced_security_service")
+
+    @enhanced_security_service.setter
+    def enhanced_security_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enhanced_security_service", value)
+
+    @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        ID list of keys, should be set if `password` not set.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @key_ids.setter
+    def key_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "key_ids", value)
+
+    @property
+    @pulumi.getter(name="masterConfig")
+    def master_config(self) -> Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigArgs']]:
+        """
+        Advanced Node Settings. commonly used to attach existing instances.
+        """
+        return pulumi.get(self, "master_config")
+
+    @master_config.setter
+    def master_config(self, value: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigArgs']]):
+        pulumi.set(self, "master_config", value)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[pulumi.Input[str]]:
+        """
+        Password to access, should be set if `key_ids` not set.
+        """
+        return pulumi.get(self, "password")
+
+    @password.setter
+    def password(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "password", value)
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Security groups to which a CVM instance belongs.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @security_group_ids.setter
+    def security_group_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "security_group_ids", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigArgs:
+    def __init__(__self__, *,
+                 data_disk: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs']] = None,
+                 desired_pod_number: Optional[pulumi.Input[int]] = None,
+                 docker_graph_path: Optional[pulumi.Input[str]] = None,
+                 extra_args: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs']] = None,
+                 gpu_args: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs']] = None,
+                 labels: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigLabelArgs']]]] = None,
+                 mount_target: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigTaintArgs']]]] = None,
+                 unschedulable: Optional[pulumi.Input[int]] = None,
+                 user_script: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs'] data_disk: Configurations of data disk.
+        :param pulumi.Input[int] desired_pod_number: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+        :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
+        :param pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs'] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs'] gpu_args: GPU driver parameters.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigLabelArgs']]] labels: Node label list.
+        :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigTaintArgs']]] taints: Node taint.
+        :param pulumi.Input[int] unschedulable: Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+        :param pulumi.Input[str] user_script: User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+        """
+        if data_disk is not None:
+            pulumi.set(__self__, "data_disk", data_disk)
+        if desired_pod_number is not None:
+            pulumi.set(__self__, "desired_pod_number", desired_pod_number)
+        if docker_graph_path is not None:
+            pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        if extra_args is not None:
+            pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if mount_target is not None:
+            pulumi.set(__self__, "mount_target", mount_target)
+        if taints is not None:
+            pulumi.set(__self__, "taints", taints)
+        if unschedulable is not None:
+            pulumi.set(__self__, "unschedulable", unschedulable)
+        if user_script is not None:
+            pulumi.set(__self__, "user_script", user_script)
+
+    @property
+    @pulumi.getter(name="dataDisk")
+    def data_disk(self) -> Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs']]:
+        """
+        Configurations of data disk.
+        """
+        return pulumi.get(self, "data_disk")
+
+    @data_disk.setter
+    def data_disk(self, value: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs']]):
+        pulumi.set(self, "data_disk", value)
+
+    @property
+    @pulumi.getter(name="desiredPodNumber")
+    def desired_pod_number(self) -> Optional[pulumi.Input[int]]:
+        """
+        Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+        """
+        return pulumi.get(self, "desired_pod_number")
+
+    @desired_pod_number.setter
+    def desired_pod_number(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "desired_pod_number", value)
+
+    @property
+    @pulumi.getter(name="dockerGraphPath")
+    def docker_graph_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Docker graph path. Default is `/var/lib/docker`.
+        """
+        return pulumi.get(self, "docker_graph_path")
+
+    @docker_graph_path.setter
+    def docker_graph_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_graph_path", value)
+
+    @property
+    @pulumi.getter(name="extraArgs")
+    def extra_args(self) -> Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs']]:
+        """
+        Custom parameter information related to the node. This is a white-list parameter.
+        """
+        return pulumi.get(self, "extra_args")
+
+    @extra_args.setter
+    def extra_args(self, value: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs']]):
+        pulumi.set(self, "extra_args", value)
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs']]:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @gpu_args.setter
+    def gpu_args(self, value: Optional[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs']]):
+        pulumi.set(self, "gpu_args", value)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigLabelArgs']]]]:
+        """
+        Node label list.
+        """
+        return pulumi.get(self, "labels")
+
+    @labels.setter
+    def labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigLabelArgs']]]]):
+        pulumi.set(self, "labels", value)
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mount target. Default is not mounting.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @mount_target.setter
+    def mount_target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mount_target", value)
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigTaintArgs']]]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @taints.setter
+    def taints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterExistInstanceInstancesParaMasterConfigTaintArgs']]]]):
+        pulumi.set(self, "taints", value)
+
+    @property
+    @pulumi.getter
+    def unschedulable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+        """
+        return pulumi.get(self, "unschedulable")
+
+    @unschedulable.setter
+    def unschedulable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unschedulable", value)
+
+    @property
+    @pulumi.getter(name="userScript")
+    def user_script(self) -> Optional[pulumi.Input[str]]:
+        """
+        User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+        """
+        return pulumi.get(self, "user_script")
+
+    @user_script.setter
+    def user_script(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_script", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs:
+    def __init__(__self__, *,
+                 auto_format_and_mount: Optional[pulumi.Input[bool]] = None,
+                 disk_partition: Optional[pulumi.Input[str]] = None,
+                 disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 file_system: Optional[pulumi.Input[str]] = None,
+                 mount_target: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
+        :param pulumi.Input[str] disk_partition: The name of the device or partition to mount.
+        :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
+        :param pulumi.Input[str] disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+        :param pulumi.Input[str] file_system: File system, e.g. `ext3/ext4/xfs`.
+        :param pulumi.Input[str] mount_target: Mount target.
+        """
+        if auto_format_and_mount is not None:
+            pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            pulumi.set(__self__, "disk_partition", disk_partition)
+        if disk_size is not None:
+            pulumi.set(__self__, "disk_size", disk_size)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if file_system is not None:
+            pulumi.set(__self__, "file_system", file_system)
+        if mount_target is not None:
+            pulumi.set(__self__, "mount_target", mount_target)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to auto format and mount or not. Default is `false`.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @auto_format_and_mount.setter
+    def auto_format_and_mount(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_format_and_mount", value)
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the device or partition to mount.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @disk_partition.setter
+    def disk_partition(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_partition", value)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Volume of disk in GB. Default is `0`.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @disk_size.setter
+    def disk_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_size", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> Optional[pulumi.Input[str]]:
+        """
+        File system, e.g. `ext3/ext4/xfs`.
+        """
+        return pulumi.get(self, "file_system")
+
+    @file_system.setter
+    def file_system(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "file_system", value)
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mount target.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @mount_target.setter
+    def mount_target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mount_target", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs:
+    def __init__(__self__, *,
+                 kubelets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] kubelets: Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+        """
+        if kubelets is not None:
+            pulumi.set(__self__, "kubelets", kubelets)
+
+    @property
+    @pulumi.getter
+    def kubelets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+        """
+        return pulumi.get(self, "kubelets")
+
+    @kubelets.setter
+    def kubelets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "kubelets", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs:
+    def __init__(__self__, *,
+                 cuda: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 cudnn: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 custom_driver: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 driver: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 mig_enable: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[Mapping[str, Any]] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param pulumi.Input[Mapping[str, Any]] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param pulumi.Input[Mapping[str, Any]] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param pulumi.Input[Mapping[str, Any]] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param pulumi.Input[bool] mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @cuda.setter
+    def cuda(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "cuda", value)
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @cudnn.setter
+    def cudnn(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "cudnn", value)
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @custom_driver.setter
+    def custom_driver(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "custom_driver", value)
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @driver.setter
+    def driver(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "driver", value)
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
+
+    @mig_enable.setter
+    def mig_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "mig_enable", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigLabelArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: Name of map.
+        :param pulumi.Input[str] value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class ClusterExistInstanceInstancesParaMasterConfigTaintArgs:
+    def __init__(__self__, *,
+                 effect: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] effect: Effect of the taint.
+        :param pulumi.Input[str] key: Key of the taint.
+        :param pulumi.Input[str] value: Value of the taint.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @effect.setter
+    def effect(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "effect", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
 
 
 @pulumi.input_type
@@ -1160,6 +1859,549 @@ class ClusterLogAgentArgs:
     @kubelet_root_dir.setter
     def kubelet_root_dir(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "kubelet_root_dir", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentExtraArgsArgs:
+    def __init__(__self__, *,
+                 etcds: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 kube_api_servers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 kube_controller_managers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 kube_schedulers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] etcds: etcd custom parameters. Only supports independent clusters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] kube_api_servers: Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] kube_controller_managers: Kube controller manager custom parameters.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] kube_schedulers: kube scheduler custom parameters.
+        """
+        if etcds is not None:
+            pulumi.set(__self__, "etcds", etcds)
+        if kube_api_servers is not None:
+            pulumi.set(__self__, "kube_api_servers", kube_api_servers)
+        if kube_controller_managers is not None:
+            pulumi.set(__self__, "kube_controller_managers", kube_controller_managers)
+        if kube_schedulers is not None:
+            pulumi.set(__self__, "kube_schedulers", kube_schedulers)
+
+    @property
+    @pulumi.getter
+    def etcds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        etcd custom parameters. Only supports independent clusters.
+        """
+        return pulumi.get(self, "etcds")
+
+    @etcds.setter
+    def etcds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "etcds", value)
+
+    @property
+    @pulumi.getter(name="kubeApiServers")
+    def kube_api_servers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+        """
+        return pulumi.get(self, "kube_api_servers")
+
+    @kube_api_servers.setter
+    def kube_api_servers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "kube_api_servers", value)
+
+    @property
+    @pulumi.getter(name="kubeControllerManagers")
+    def kube_controller_managers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kube controller manager custom parameters.
+        """
+        return pulumi.get(self, "kube_controller_managers")
+
+    @kube_controller_managers.setter
+    def kube_controller_managers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "kube_controller_managers", value)
+
+    @property
+    @pulumi.getter(name="kubeSchedulers")
+    def kube_schedulers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        kube scheduler custom parameters.
+        """
+        return pulumi.get(self, "kube_schedulers")
+
+    @kube_schedulers.setter
+    def kube_schedulers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "kube_schedulers", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigArgs:
+    def __init__(__self__, *,
+                 data_disk: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigDataDiskArgs']] = None,
+                 desired_pod_number: Optional[pulumi.Input[int]] = None,
+                 docker_graph_path: Optional[pulumi.Input[str]] = None,
+                 extra_args: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigExtraArgsArgs']] = None,
+                 gpu_args: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigGpuArgsArgs']] = None,
+                 labels: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigLabelArgs']]]] = None,
+                 mount_target: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigTaintArgs']]]] = None,
+                 unschedulable: Optional[pulumi.Input[int]] = None,
+                 user_script: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['ClusterMasterAttachmentMasterConfigDataDiskArgs'] data_disk: Configurations of data disk.
+        :param pulumi.Input[int] desired_pod_number: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+        :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
+        :param pulumi.Input['ClusterMasterAttachmentMasterConfigExtraArgsArgs'] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param pulumi.Input['ClusterMasterAttachmentMasterConfigGpuArgsArgs'] gpu_args: GPU driver parameters.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigLabelArgs']]] labels: Node label list.
+        :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigTaintArgs']]] taints: Node taint.
+        :param pulumi.Input[int] unschedulable: Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+        :param pulumi.Input[str] user_script: User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+        """
+        if data_disk is not None:
+            pulumi.set(__self__, "data_disk", data_disk)
+        if desired_pod_number is not None:
+            pulumi.set(__self__, "desired_pod_number", desired_pod_number)
+        if docker_graph_path is not None:
+            pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        if extra_args is not None:
+            pulumi.set(__self__, "extra_args", extra_args)
+        if gpu_args is not None:
+            pulumi.set(__self__, "gpu_args", gpu_args)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if mount_target is not None:
+            pulumi.set(__self__, "mount_target", mount_target)
+        if taints is not None:
+            pulumi.set(__self__, "taints", taints)
+        if unschedulable is not None:
+            pulumi.set(__self__, "unschedulable", unschedulable)
+        if user_script is not None:
+            pulumi.set(__self__, "user_script", user_script)
+
+    @property
+    @pulumi.getter(name="dataDisk")
+    def data_disk(self) -> Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigDataDiskArgs']]:
+        """
+        Configurations of data disk.
+        """
+        return pulumi.get(self, "data_disk")
+
+    @data_disk.setter
+    def data_disk(self, value: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigDataDiskArgs']]):
+        pulumi.set(self, "data_disk", value)
+
+    @property
+    @pulumi.getter(name="desiredPodNumber")
+    def desired_pod_number(self) -> Optional[pulumi.Input[int]]:
+        """
+        Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+        """
+        return pulumi.get(self, "desired_pod_number")
+
+    @desired_pod_number.setter
+    def desired_pod_number(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "desired_pod_number", value)
+
+    @property
+    @pulumi.getter(name="dockerGraphPath")
+    def docker_graph_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Docker graph path. Default is `/var/lib/docker`.
+        """
+        return pulumi.get(self, "docker_graph_path")
+
+    @docker_graph_path.setter
+    def docker_graph_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_graph_path", value)
+
+    @property
+    @pulumi.getter(name="extraArgs")
+    def extra_args(self) -> Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigExtraArgsArgs']]:
+        """
+        Custom parameter information related to the node. This is a white-list parameter.
+        """
+        return pulumi.get(self, "extra_args")
+
+    @extra_args.setter
+    def extra_args(self, value: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigExtraArgsArgs']]):
+        pulumi.set(self, "extra_args", value)
+
+    @property
+    @pulumi.getter(name="gpuArgs")
+    def gpu_args(self) -> Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigGpuArgsArgs']]:
+        """
+        GPU driver parameters.
+        """
+        return pulumi.get(self, "gpu_args")
+
+    @gpu_args.setter
+    def gpu_args(self, value: Optional[pulumi.Input['ClusterMasterAttachmentMasterConfigGpuArgsArgs']]):
+        pulumi.set(self, "gpu_args", value)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigLabelArgs']]]]:
+        """
+        Node label list.
+        """
+        return pulumi.get(self, "labels")
+
+    @labels.setter
+    def labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigLabelArgs']]]]):
+        pulumi.set(self, "labels", value)
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mount target. Default is not mounting.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @mount_target.setter
+    def mount_target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mount_target", value)
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigTaintArgs']]]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @taints.setter
+    def taints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterMasterAttachmentMasterConfigTaintArgs']]]]):
+        pulumi.set(self, "taints", value)
+
+    @property
+    @pulumi.getter
+    def unschedulable(self) -> Optional[pulumi.Input[int]]:
+        """
+        Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+        """
+        return pulumi.get(self, "unschedulable")
+
+    @unschedulable.setter
+    def unschedulable(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unschedulable", value)
+
+    @property
+    @pulumi.getter(name="userScript")
+    def user_script(self) -> Optional[pulumi.Input[str]]:
+        """
+        User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+        """
+        return pulumi.get(self, "user_script")
+
+    @user_script.setter
+    def user_script(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "user_script", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigDataDiskArgs:
+    def __init__(__self__, *,
+                 auto_format_and_mount: Optional[pulumi.Input[bool]] = None,
+                 disk_partition: Optional[pulumi.Input[str]] = None,
+                 disk_size: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 file_system: Optional[pulumi.Input[str]] = None,
+                 mount_target: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
+        :param pulumi.Input[str] disk_partition: The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+        :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
+        :param pulumi.Input[str] disk_type: Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+        :param pulumi.Input[str] file_system: File system, e.g. `ext3/ext4/xfs`.
+        :param pulumi.Input[str] mount_target: Mount target.
+        """
+        if auto_format_and_mount is not None:
+            pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            pulumi.set(__self__, "disk_partition", disk_partition)
+        if disk_size is not None:
+            pulumi.set(__self__, "disk_size", disk_size)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if file_system is not None:
+            pulumi.set(__self__, "file_system", file_system)
+        if mount_target is not None:
+            pulumi.set(__self__, "mount_target", mount_target)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicate whether to auto format and mount or not. Default is `false`.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @auto_format_and_mount.setter
+    def auto_format_and_mount(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "auto_format_and_mount", value)
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @disk_partition.setter
+    def disk_partition(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_partition", value)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Volume of disk in GB. Default is `0`.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @disk_size.setter
+    def disk_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "disk_size", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> Optional[pulumi.Input[str]]:
+        """
+        File system, e.g. `ext3/ext4/xfs`.
+        """
+        return pulumi.get(self, "file_system")
+
+    @file_system.setter
+    def file_system(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "file_system", value)
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> Optional[pulumi.Input[str]]:
+        """
+        Mount target.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @mount_target.setter
+    def mount_target(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "mount_target", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigExtraArgsArgs:
+    def __init__(__self__, *,
+                 kubelets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] kubelets: Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+        """
+        if kubelets is not None:
+            pulumi.set(__self__, "kubelets", kubelets)
+
+    @property
+    @pulumi.getter
+    def kubelets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+        """
+        return pulumi.get(self, "kubelets")
+
+    @kubelets.setter
+    def kubelets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "kubelets", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigGpuArgsArgs:
+    def __init__(__self__, *,
+                 cuda: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 cudnn: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 custom_driver: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 driver: Optional[pulumi.Input[Mapping[str, Any]]] = None,
+                 mig_enable: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[Mapping[str, Any]] cuda: CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param pulumi.Input[Mapping[str, Any]] cudnn: cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        :param pulumi.Input[Mapping[str, Any]] custom_driver: Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        :param pulumi.Input[Mapping[str, Any]] driver: GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        :param pulumi.Input[bool] mig_enable: Whether to enable MIG.
+        """
+        if cuda is not None:
+            pulumi.set(__self__, "cuda", cuda)
+        if cudnn is not None:
+            pulumi.set(__self__, "cudnn", cudnn)
+        if custom_driver is not None:
+            pulumi.set(__self__, "custom_driver", custom_driver)
+        if driver is not None:
+            pulumi.set(__self__, "driver", driver)
+        if mig_enable is not None:
+            pulumi.set(__self__, "mig_enable", mig_enable)
+
+    @property
+    @pulumi.getter
+    def cuda(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "cuda")
+
+    @cuda.setter
+    def cuda(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "cuda", value)
+
+    @property
+    @pulumi.getter
+    def cudnn(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `doc_name`: Doc name of cuDNN; `dev_name`: Dev name of cuDNN.
+        """
+        return pulumi.get(self, "cudnn")
+
+    @cudnn.setter
+    def cudnn(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "cudnn", value)
+
+    @property
+    @pulumi.getter(name="customDriver")
+    def custom_driver(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+        """
+        return pulumi.get(self, "custom_driver")
+
+    @custom_driver.setter
+    def custom_driver(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "custom_driver", value)
+
+    @property
+    @pulumi.getter
+    def driver(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+        """
+        return pulumi.get(self, "driver")
+
+    @driver.setter
+    def driver(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "driver", value)
+
+    @property
+    @pulumi.getter(name="migEnable")
+    def mig_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable MIG.
+        """
+        return pulumi.get(self, "mig_enable")
+
+    @mig_enable.setter
+    def mig_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "mig_enable", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigLabelArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: Name of map.
+        :param pulumi.Input[str] value: Value of map.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name of map.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value of map.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class ClusterMasterAttachmentMasterConfigTaintArgs:
+    def __init__(__self__, *,
+                 effect: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] effect: Effect of the taint.
+        :param pulumi.Input[str] key: Key of the taint.
+        :param pulumi.Input[str] value: Value of the taint.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @effect.setter
+    def effect(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "effect", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
 
 
 @pulumi.input_type
@@ -1902,6 +3144,59 @@ class ClusterNodePoolGlobalConfigArgs:
 
 
 @pulumi.input_type
+class ClusterResourceDeleteOptionArgs:
+    def __init__(__self__, *,
+                 delete_mode: pulumi.Input[str],
+                 resource_type: pulumi.Input[str],
+                 skip_deletion_protection: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] delete_mode: The deletion mode of CBS resources when the cluster is deleted, `terminate` (destroy), `retain` (retain). Other resources are deleted by default.
+        :param pulumi.Input[str] resource_type: Resource type, valid values are `CBS`, `CLB`, and `CVM`.
+        :param pulumi.Input[bool] skip_deletion_protection: Whether to skip resources with deletion protection enabled, the default is false.
+        """
+        pulumi.set(__self__, "delete_mode", delete_mode)
+        pulumi.set(__self__, "resource_type", resource_type)
+        if skip_deletion_protection is not None:
+            pulumi.set(__self__, "skip_deletion_protection", skip_deletion_protection)
+
+    @property
+    @pulumi.getter(name="deleteMode")
+    def delete_mode(self) -> pulumi.Input[str]:
+        """
+        The deletion mode of CBS resources when the cluster is deleted, `terminate` (destroy), `retain` (retain). Other resources are deleted by default.
+        """
+        return pulumi.get(self, "delete_mode")
+
+    @delete_mode.setter
+    def delete_mode(self, value: pulumi.Input[str]):
+        pulumi.set(self, "delete_mode", value)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> pulumi.Input[str]:
+        """
+        Resource type, valid values are `CBS`, `CLB`, and `CVM`.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @resource_type.setter
+    def resource_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource_type", value)
+
+    @property
+    @pulumi.getter(name="skipDeletionProtection")
+    def skip_deletion_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to skip resources with deletion protection enabled, the default is false.
+        """
+        return pulumi.get(self, "skip_deletion_protection")
+
+    @skip_deletion_protection.setter
+    def skip_deletion_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "skip_deletion_protection", value)
+
+
+@pulumi.input_type
 class ClusterWorkerConfigArgs:
     def __init__(__self__, *,
                  instance_type: pulumi.Input[str],
@@ -2616,6 +3911,58 @@ class EncryptionProtectionKmsConfigurationArgs:
 
 
 @pulumi.input_type
+class HealthCheckPolicyRuleArgs:
+    def __init__(__self__, *,
+                 auto_repair_enabled: pulumi.Input[bool],
+                 enabled: pulumi.Input[bool],
+                 name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] auto_repair_enabled: Enable repair or not.
+        :param pulumi.Input[bool] enabled: Enable detection of this project or not.
+        :param pulumi.Input[str] name: Health check rule details.
+        """
+        pulumi.set(__self__, "auto_repair_enabled", auto_repair_enabled)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="autoRepairEnabled")
+    def auto_repair_enabled(self) -> pulumi.Input[bool]:
+        """
+        Enable repair or not.
+        """
+        return pulumi.get(self, "auto_repair_enabled")
+
+    @auto_repair_enabled.setter
+    def auto_repair_enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "auto_repair_enabled", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Enable detection of this project or not.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Health check rule details.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
 class NativeNodePoolAnnotationArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
@@ -2707,6 +4054,7 @@ class NativeNodePoolNativeArgs:
                  key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  kubelet_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  lifecycle: Optional[pulumi.Input['NativeNodePoolNativeLifecycleArgs']] = None,
+                 machine_type: Optional[pulumi.Input[str]] = None,
                  management: Optional[pulumi.Input['NativeNodePoolNativeManagementArgs']] = None,
                  replicas: Optional[pulumi.Input[int]] = None,
                  runtime_root_dir: Optional[pulumi.Input[str]] = None,
@@ -2727,6 +4075,7 @@ class NativeNodePoolNativeArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: Node pool ssh public key id array.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] kubelet_args: Kubelet custom parameters.
         :param pulumi.Input['NativeNodePoolNativeLifecycleArgs'] lifecycle: Predefined scripts.
+        :param pulumi.Input[str] machine_type: Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
         :param pulumi.Input['NativeNodePoolNativeManagementArgs'] management: Node pool management parameter settings.
         :param pulumi.Input[int] replicas: Desired number of nodes.
         :param pulumi.Input[str] runtime_root_dir: Runtime root directory.
@@ -2757,6 +4106,8 @@ class NativeNodePoolNativeArgs:
             pulumi.set(__self__, "kubelet_args", kubelet_args)
         if lifecycle is not None:
             pulumi.set(__self__, "lifecycle", lifecycle)
+        if machine_type is not None:
+            pulumi.set(__self__, "machine_type", machine_type)
         if management is not None:
             pulumi.set(__self__, "management", management)
         if replicas is not None:
@@ -2945,6 +4296,18 @@ class NativeNodePoolNativeArgs:
     @lifecycle.setter
     def lifecycle(self, value: Optional[pulumi.Input['NativeNodePoolNativeLifecycleArgs']]):
         pulumi.set(self, "lifecycle", value)
+
+    @property
+    @pulumi.getter(name="machineType")
+    def machine_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+        """
+        return pulumi.get(self, "machine_type")
+
+    @machine_type.setter
+    def machine_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "machine_type", value)
 
     @property
     @pulumi.getter
@@ -3570,6 +4933,43 @@ class NativeNodePoolTaintArgs:
 
 
 @pulumi.input_type
+class NodePoolAnnotationArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: Name in the map table.
+        :param pulumi.Input[str] value: Value in the map table.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Name in the map table.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Value in the map table.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
 class NodePoolAutoScalingConfigArgs:
     def __init__(__self__, *,
                  instance_type: pulumi.Input[str],
@@ -3585,6 +4985,7 @@ class NodePoolAutoScalingConfigArgs:
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
                  instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 instance_name_style: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -3610,6 +5011,7 @@ class NodePoolAutoScalingConfigArgs:
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input[str] instance_name: Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        :param pulumi.Input[str] instance_name_style: Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
         :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -3647,6 +5049,8 @@ class NodePoolAutoScalingConfigArgs:
             pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if instance_name_style is not None:
+            pulumi.set(__self__, "instance_name_style", instance_name_style)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
         if internet_max_bandwidth_out is not None:
@@ -3828,6 +5232,18 @@ class NodePoolAutoScalingConfigArgs:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="instanceNameStyle")
+    def instance_name_style(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        """
+        return pulumi.get(self, "instance_name_style")
+
+    @instance_name_style.setter
+    def instance_name_style(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_name_style", value)
 
     @property
     @pulumi.getter(name="internetChargeType")
@@ -4465,12 +5881,14 @@ class NodePoolTaintArgs:
 class ScaleWorkerDataDiskArgs:
     def __init__(__self__, *,
                  auto_format_and_mount: Optional[pulumi.Input[bool]] = None,
+                 disk_partition: Optional[pulumi.Input[str]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  file_system: Optional[pulumi.Input[str]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[bool] auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
+        :param pulumi.Input[str] disk_partition: The name of the device or partition to mount.
         :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
         :param pulumi.Input[str] disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
         :param pulumi.Input[str] file_system: File system, e.g. `ext3/ext4/xfs`.
@@ -4478,6 +5896,8 @@ class ScaleWorkerDataDiskArgs:
         """
         if auto_format_and_mount is not None:
             pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            pulumi.set(__self__, "disk_partition", disk_partition)
         if disk_size is not None:
             pulumi.set(__self__, "disk_size", disk_size)
         if disk_type is not None:
@@ -4498,6 +5918,18 @@ class ScaleWorkerDataDiskArgs:
     @auto_format_and_mount.setter
     def auto_format_and_mount(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_format_and_mount", value)
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the device or partition to mount.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @disk_partition.setter
+    def disk_partition(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_partition", value)
 
     @property
     @pulumi.getter(name="diskSize")
@@ -4636,6 +6068,61 @@ class ScaleWorkerGpuArgsArgs:
 
 
 @pulumi.input_type
+class ScaleWorkerTaintArgs:
+    def __init__(__self__, *,
+                 effect: Optional[pulumi.Input[str]] = None,
+                 key: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] effect: Effect of the taint.
+        :param pulumi.Input[str] key: Key of the taint.
+        :param pulumi.Input[str] value: Value of the taint.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[pulumi.Input[str]]:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @effect.setter
+    def effect(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "effect", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
 class ScaleWorkerWorkerConfigArgs:
     def __init__(__self__, *,
                  instance_type: pulumi.Input[str],
@@ -4672,7 +6159,7 @@ class ScaleWorkerWorkerConfigArgs:
         :param pulumi.Input[str] bandwidth_package_id: bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.
         :param pulumi.Input[str] cam_role_name: CAM role name authorized to access.
         :param pulumi.Input[int] count: Number of cvm.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]] data_disks: Configurations of cvm data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desired_pod_num` or none.
         :param pulumi.Input[str] disaster_recover_group_ids: Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
@@ -4823,7 +6310,7 @@ class ScaleWorkerWorkerConfigArgs:
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of cvm data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -5096,7 +6583,13 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         :param pulumi.Input[str] snapshot_id: Data disk snapshot ID.
         """
         if auto_format_and_mount is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""auto_format_and_mount is deprecated: This argument was deprecated, use `data_disk` instead.""")
+        if auto_format_and_mount is not None:
             pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""disk_partition is deprecated: This argument was deprecated, use `data_disk` instead.""")
         if disk_partition is not None:
             pulumi.set(__self__, "disk_partition", disk_partition)
         if disk_size is not None:
@@ -5106,9 +6599,15 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         if encrypt is not None:
             pulumi.set(__self__, "encrypt", encrypt)
         if file_system is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""file_system is deprecated: This argument was deprecated, use `data_disk` instead.""")
+        if file_system is not None:
             pulumi.set(__self__, "file_system", file_system)
         if kms_key_id is not None:
             pulumi.set(__self__, "kms_key_id", kms_key_id)
+        if mount_target is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""mount_target is deprecated: This argument was deprecated, use `data_disk` instead.""")
         if mount_target is not None:
             pulumi.set(__self__, "mount_target", mount_target)
         if snapshot_id is not None:
@@ -5120,6 +6619,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         Indicate whether to auto format and mount or not. Default is `false`.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""auto_format_and_mount is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "auto_format_and_mount")
 
     @auto_format_and_mount.setter
@@ -5132,6 +6634,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         The name of the device or partition to mount.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""disk_partition is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "disk_partition")
 
     @disk_partition.setter
@@ -5180,6 +6685,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         File system, e.g. `ext3/ext4/xfs`.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""file_system is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "file_system")
 
     @file_system.setter
@@ -5204,6 +6712,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         Mount target.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""mount_target is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "mount_target")
 
     @mount_target.setter

@@ -91,7 +91,7 @@ export interface GetInstanceArgs {
  */
 export interface GetInstanceResult {
     /**
-     * Description of the IP.
+     * Message description.
      */
     readonly description?: string;
     /**

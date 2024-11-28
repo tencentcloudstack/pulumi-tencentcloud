@@ -130,6 +130,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Output<string> BandwidthPackageId { get; private set; } = null!;
 
         /// <summary>
+        /// CDC Unique ID.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string?> CdcId { get; private set; } = null!;
+
+        /// <summary>
         /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         /// </summary>
         [Output("egress")]
@@ -267,6 +273,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<string>? BandwidthPackageId { get; set; }
 
         /// <summary>
+        /// CDC Unique ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
+        /// <summary>
         /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
         /// </summary>
         [Input("egress")]
@@ -357,6 +369,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// </summary>
         [Input("bandwidthPackageId")]
         public Input<string>? BandwidthPackageId { get; set; }
+
+        /// <summary>
+        /// CDC Unique ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// Network egress. It defaults to `center_egress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).

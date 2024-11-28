@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// <summary>
     /// Provides a resource to create a waf ip_access_control
     /// 
+    /// &gt; **NOTE:** This resource is no longer under maintenance, please use `tencentcloud.Waf.IpAccessControlV2` instead
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;

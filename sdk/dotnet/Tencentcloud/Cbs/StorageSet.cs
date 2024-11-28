@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create 3 standard CBS storages
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -24,13 +26,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var storage = new Tencentcloud.Cbs.StorageSet("storage", new()
+    ///     var example = new Tencentcloud.Cbs.StorageSet("example", new()
     ///     {
     ///         AvailabilityZone = "ap-guangzhou-3",
-    ///         DiskCount = 10,
+    ///         DiskCount = 3,
     ///         Encrypt = false,
     ///         ProjectId = 0,
-    ///         StorageName = "mystorage",
+    ///         StorageName = "tf-example",
+    ///         StorageSize = 100,
+    ///         StorageType = "CLOUD_SSD",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create 3 dedicated cluster CBS storages
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cbs.StorageSet("example", new()
+    ///     {
+    ///         AvailabilityZone = "ap-guangzhou-4",
+    ///         ChargeType = "DEDICATED_CLUSTER_PAID",
+    ///         DedicatedClusterId = "cluster-262n63e8",
+    ///         DiskCount = 3,
+    ///         Encrypt = false,
+    ///         ProjectId = 0,
+    ///         StorageName = "tf-example",
     ///         StorageSize = 100,
     ///         StorageType = "CLOUD_SSD",
     ///     });
@@ -55,10 +85,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string?> DedicatedClusterId { get; private set; } = null!;
 
         /// <summary>
         /// The number of disks to be purchased. Default 1.
@@ -174,10 +210,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// The number of disks to be purchased. Default 1.
@@ -248,10 +290,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// The number of disks to be purchased. Default 1.

@@ -125,6 +125,11 @@ export type Listener = import("./listener").Listener;
 export const Listener: typeof import("./listener").Listener = null as any;
 utilities.lazyLoad(exports, ["Listener"], () => require("./listener"));
 
+export { ListenerDefaultDomainArgs, ListenerDefaultDomainState } from "./listenerDefaultDomain";
+export type ListenerDefaultDomain = import("./listenerDefaultDomain").ListenerDefaultDomain;
+export const ListenerDefaultDomain: typeof import("./listenerDefaultDomain").ListenerDefaultDomain = null as any;
+utilities.lazyLoad(exports, ["ListenerDefaultDomain"], () => require("./listenerDefaultDomain"));
+
 export { ListenerRuleArgs, ListenerRuleState } from "./listenerRule";
 export type ListenerRule = import("./listenerRule").ListenerRule;
 export const ListenerRule: typeof import("./listenerRule").ListenerRule = null as any;
@@ -199,6 +204,8 @@ const _module = {
                 return new InstanceSlaConfig(name, <any>undefined, { urn })
             case "tencentcloud:Clb/listener:Listener":
                 return new Listener(name, <any>undefined, { urn })
+            case "tencentcloud:Clb/listenerDefaultDomain:ListenerDefaultDomain":
+                return new ListenerDefaultDomain(name, <any>undefined, { urn })
             case "tencentcloud:Clb/listenerRule:ListenerRule":
                 return new ListenerRule(name, <any>undefined, { urn })
             case "tencentcloud:Clb/logSet:LogSet":
@@ -233,6 +240,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instanceMixIpTargetConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/instanceSlaConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listener", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listenerDefaultDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/listenerRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logSet", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Clb/logTopic", _module)

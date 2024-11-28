@@ -15,6 +15,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
     public sealed class TrackStorage
     {
         /// <summary>
+        /// Designated to store user ID.
+        /// </summary>
+        public readonly string? StorageAccountId;
+        /// <summary>
+        /// Designated to store user appid.
+        /// </summary>
+        public readonly string? StorageAppId;
+        /// <summary>
         /// Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
         /// </summary>
         public readonly string StorageName;
@@ -33,6 +41,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
 
         [OutputConstructor]
         private TrackStorage(
+            string? storageAccountId,
+
+            string? storageAppId,
+
             string storageName,
 
             string storagePrefix,
@@ -41,6 +53,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
 
             string storageType)
         {
+            StorageAccountId = storageAccountId;
+            StorageAppId = storageAppId;
             StorageName = storageName;
             StoragePrefix = storagePrefix;
             StorageRegion = storageRegion;

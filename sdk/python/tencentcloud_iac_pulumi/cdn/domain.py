@@ -40,6 +40,7 @@ class DomainArgs:
                  origin_pull_optimization: Optional[pulumi.Input['DomainOriginPullOptimizationArgs']] = None,
                  origin_pull_timeout: Optional[pulumi.Input['DomainOriginPullTimeoutArgs']] = None,
                  oss_private_access: Optional[pulumi.Input['DomainOssPrivateAccessArgs']] = None,
+                 others_private_access: Optional[pulumi.Input['DomainOthersPrivateAccessArgs']] = None,
                  post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input['DomainQnPrivateAccessArgs']] = None,
@@ -82,6 +83,7 @@ class DomainArgs:
         :param pulumi.Input['DomainOriginPullOptimizationArgs'] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input['DomainOriginPullTimeoutArgs'] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input['DomainOssPrivateAccessArgs'] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input['DomainOthersPrivateAccessArgs'] others_private_access: Object storage back-to-source authentication of other vendors.
         :param pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input['DomainQnPrivateAccessArgs'] qn_private_access: Access authentication for OBS origin.
@@ -147,6 +149,8 @@ class DomainArgs:
             pulumi.set(__self__, "origin_pull_timeout", origin_pull_timeout)
         if oss_private_access is not None:
             pulumi.set(__self__, "oss_private_access", oss_private_access)
+        if others_private_access is not None:
+            pulumi.set(__self__, "others_private_access", others_private_access)
         if post_max_sizes is not None:
             pulumi.set(__self__, "post_max_sizes", post_max_sizes)
         if project_id is not None:
@@ -472,6 +476,18 @@ class DomainArgs:
         pulumi.set(self, "oss_private_access", value)
 
     @property
+    @pulumi.getter(name="othersPrivateAccess")
+    def others_private_access(self) -> Optional[pulumi.Input['DomainOthersPrivateAccessArgs']]:
+        """
+        Object storage back-to-source authentication of other vendors.
+        """
+        return pulumi.get(self, "others_private_access")
+
+    @others_private_access.setter
+    def others_private_access(self, value: Optional[pulumi.Input['DomainOthersPrivateAccessArgs']]):
+        pulumi.set(self, "others_private_access", value)
+
+    @property
     @pulumi.getter(name="postMaxSizes")
     def post_max_sizes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]:
         """
@@ -694,6 +710,7 @@ class _DomainState:
                  origin_pull_optimization: Optional[pulumi.Input['DomainOriginPullOptimizationArgs']] = None,
                  origin_pull_timeout: Optional[pulumi.Input['DomainOriginPullTimeoutArgs']] = None,
                  oss_private_access: Optional[pulumi.Input['DomainOssPrivateAccessArgs']] = None,
+                 others_private_access: Optional[pulumi.Input['DomainOthersPrivateAccessArgs']] = None,
                  post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input['DomainQnPrivateAccessArgs']] = None,
@@ -741,6 +758,7 @@ class _DomainState:
         :param pulumi.Input['DomainOriginPullOptimizationArgs'] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input['DomainOriginPullTimeoutArgs'] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input['DomainOssPrivateAccessArgs'] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input['DomainOthersPrivateAccessArgs'] others_private_access: Object storage back-to-source authentication of other vendors.
         :param pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input['DomainQnPrivateAccessArgs'] qn_private_access: Access authentication for OBS origin.
@@ -817,6 +835,8 @@ class _DomainState:
             pulumi.set(__self__, "origin_pull_timeout", origin_pull_timeout)
         if oss_private_access is not None:
             pulumi.set(__self__, "oss_private_access", oss_private_access)
+        if others_private_access is not None:
+            pulumi.set(__self__, "others_private_access", others_private_access)
         if post_max_sizes is not None:
             pulumi.set(__self__, "post_max_sizes", post_max_sizes)
         if project_id is not None:
@@ -1182,6 +1202,18 @@ class _DomainState:
         pulumi.set(self, "oss_private_access", value)
 
     @property
+    @pulumi.getter(name="othersPrivateAccess")
+    def others_private_access(self) -> Optional[pulumi.Input['DomainOthersPrivateAccessArgs']]:
+        """
+        Object storage back-to-source authentication of other vendors.
+        """
+        return pulumi.get(self, "others_private_access")
+
+    @others_private_access.setter
+    def others_private_access(self, value: Optional[pulumi.Input['DomainOthersPrivateAccessArgs']]):
+        pulumi.set(self, "others_private_access", value)
+
+    @property
     @pulumi.getter(name="postMaxSizes")
     def post_max_sizes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainPostMaxSizeArgs']]]]:
         """
@@ -1426,6 +1458,7 @@ class Domain(pulumi.CustomResource):
                  origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
                  origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
                  oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+                 others_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOthersPrivateAccessArgs']]] = None,
                  post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
@@ -1605,6 +1638,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[pulumi.InputType['DomainOthersPrivateAccessArgs']] others_private_access: Object storage back-to-source authentication of other vendors.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']] qn_private_access: Access authentication for OBS origin.
@@ -1803,6 +1837,7 @@ class Domain(pulumi.CustomResource):
                  origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
                  origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
                  oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+                 others_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOthersPrivateAccessArgs']]] = None,
                  post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
                  qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
@@ -1856,6 +1891,7 @@ class Domain(pulumi.CustomResource):
             __props__.__dict__["origin_pull_optimization"] = origin_pull_optimization
             __props__.__dict__["origin_pull_timeout"] = origin_pull_timeout
             __props__.__dict__["oss_private_access"] = oss_private_access
+            __props__.__dict__["others_private_access"] = others_private_access
             __props__.__dict__["post_max_sizes"] = post_max_sizes
             __props__.__dict__["project_id"] = project_id
             __props__.__dict__["qn_private_access"] = qn_private_access
@@ -1917,6 +1953,7 @@ class Domain(pulumi.CustomResource):
             origin_pull_optimization: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']]] = None,
             origin_pull_timeout: Optional[pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']]] = None,
             oss_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']]] = None,
+            others_private_access: Optional[pulumi.Input[pulumi.InputType['DomainOthersPrivateAccessArgs']]] = None,
             post_max_sizes: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
             qn_private_access: Optional[pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']]] = None,
@@ -1969,6 +2006,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['DomainOriginPullOptimizationArgs']] origin_pull_optimization: Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         :param pulumi.Input[pulumi.InputType['DomainOriginPullTimeoutArgs']] origin_pull_timeout: Cross-border linkage optimization configuration.
         :param pulumi.Input[pulumi.InputType['DomainOssPrivateAccessArgs']] oss_private_access: Access authentication for OSS origin.
+        :param pulumi.Input[pulumi.InputType['DomainOthersPrivateAccessArgs']] others_private_access: Object storage back-to-source authentication of other vendors.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DomainPostMaxSizeArgs']]]] post_max_sizes: Maximum post size configuration.
         :param pulumi.Input[int] project_id: The project CDN belongs to, default to 0.
         :param pulumi.Input[pulumi.InputType['DomainQnPrivateAccessArgs']] qn_private_access: Access authentication for OBS origin.
@@ -2019,6 +2057,7 @@ class Domain(pulumi.CustomResource):
         __props__.__dict__["origin_pull_optimization"] = origin_pull_optimization
         __props__.__dict__["origin_pull_timeout"] = origin_pull_timeout
         __props__.__dict__["oss_private_access"] = oss_private_access
+        __props__.__dict__["others_private_access"] = others_private_access
         __props__.__dict__["post_max_sizes"] = post_max_sizes
         __props__.__dict__["project_id"] = project_id
         __props__.__dict__["qn_private_access"] = qn_private_access
@@ -2257,6 +2296,14 @@ class Domain(pulumi.CustomResource):
         Access authentication for OSS origin.
         """
         return pulumi.get(self, "oss_private_access")
+
+    @property
+    @pulumi.getter(name="othersPrivateAccess")
+    def others_private_access(self) -> pulumi.Output[Optional['outputs.DomainOthersPrivateAccess']]:
+        """
+        Object storage back-to-source authentication of other vendors.
+        """
+        return pulumi.get(self, "others_private_access")
 
     @property
     @pulumi.getter(name="postMaxSizes")

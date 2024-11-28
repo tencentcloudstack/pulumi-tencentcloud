@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a vpc ccnRoutes
+// Provides a resource to create a vpc ccnRoutes switch
 //
 // ## Example Usage
 //
@@ -29,10 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ccn.NewRoutes(ctx, "ccnRoutes", &Ccn.RoutesArgs{
-//				CcnId:   pulumi.String("ccn-39lqkygf"),
-//				RouteId: pulumi.String("ccnr-3o0dfyuw"),
-//				Switch:  pulumi.String("on"),
+//			_, err := Ccn.NewRoutes(ctx, "example", &Ccn.RoutesArgs{
+//				CcnId:   pulumi.String("ccn-gr7nynbd"),
+//				RouteId: pulumi.String("ccnr-5uhewx1s"),
+//				Switch:  pulumi.String("off"),
 //			})
 //			if err != nil {
 //				return err
@@ -49,7 +49,7 @@ import (
 // vpc ccn_routes can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+// $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
 // ```
 type Routes struct {
 	pulumi.CustomResourceState

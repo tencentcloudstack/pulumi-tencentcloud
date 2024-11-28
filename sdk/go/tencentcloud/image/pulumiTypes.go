@@ -13,6 +13,486 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type GetFromFamilyImage struct {
+	// Image architecture.
+	Architecture string `pulumi:"architecture"`
+	// Creation time of the image.
+	CreatedTime string `pulumi:"createdTime"`
+	// Image creator.
+	ImageCreator string `pulumi:"imageCreator"`
+	// If Image Deprecated.
+	ImageDeprecated bool `pulumi:"imageDeprecated"`
+	// Image description.
+	ImageDescription string `pulumi:"imageDescription"`
+	// Image family name.
+	ImageFamily string `pulumi:"imageFamily"`
+	// Image ID.
+	ImageId string `pulumi:"imageId"`
+	// Image name.
+	ImageName string `pulumi:"imageName"`
+	// Image size.
+	ImageSize int `pulumi:"imageSize"`
+	// Image source.
+	ImageSource string `pulumi:"imageSource"`
+	// Image state.
+	ImageState string `pulumi:"imageState"`
+	// Image type.
+	ImageType string `pulumi:"imageType"`
+	// Whether the image supports cloud-init.
+	IsSupportCloudinit bool `pulumi:"isSupportCloudinit"`
+	// Image license type.
+	LicenseType string `pulumi:"licenseType"`
+	// Operating system of the image.
+	OsName string `pulumi:"osName"`
+	// Source platform of the image.
+	Platform string `pulumi:"platform"`
+	// Information on the snapshots associated with the image.
+	SnapshotSets []GetFromFamilyImageSnapshotSet `pulumi:"snapshotSets"`
+	// Synchronization percentage.
+	SyncPercent int `pulumi:"syncPercent"`
+	// The list of tags bound to the image.
+	Tags []GetFromFamilyImageTag `pulumi:"tags"`
+}
+
+// GetFromFamilyImageInput is an input type that accepts GetFromFamilyImageArgs and GetFromFamilyImageOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageInput` via:
+//
+//	GetFromFamilyImageArgs{...}
+type GetFromFamilyImageInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageOutput() GetFromFamilyImageOutput
+	ToGetFromFamilyImageOutputWithContext(context.Context) GetFromFamilyImageOutput
+}
+
+type GetFromFamilyImageArgs struct {
+	// Image architecture.
+	Architecture pulumi.StringInput `pulumi:"architecture"`
+	// Creation time of the image.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Image creator.
+	ImageCreator pulumi.StringInput `pulumi:"imageCreator"`
+	// If Image Deprecated.
+	ImageDeprecated pulumi.BoolInput `pulumi:"imageDeprecated"`
+	// Image description.
+	ImageDescription pulumi.StringInput `pulumi:"imageDescription"`
+	// Image family name.
+	ImageFamily pulumi.StringInput `pulumi:"imageFamily"`
+	// Image ID.
+	ImageId pulumi.StringInput `pulumi:"imageId"`
+	// Image name.
+	ImageName pulumi.StringInput `pulumi:"imageName"`
+	// Image size.
+	ImageSize pulumi.IntInput `pulumi:"imageSize"`
+	// Image source.
+	ImageSource pulumi.StringInput `pulumi:"imageSource"`
+	// Image state.
+	ImageState pulumi.StringInput `pulumi:"imageState"`
+	// Image type.
+	ImageType pulumi.StringInput `pulumi:"imageType"`
+	// Whether the image supports cloud-init.
+	IsSupportCloudinit pulumi.BoolInput `pulumi:"isSupportCloudinit"`
+	// Image license type.
+	LicenseType pulumi.StringInput `pulumi:"licenseType"`
+	// Operating system of the image.
+	OsName pulumi.StringInput `pulumi:"osName"`
+	// Source platform of the image.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// Information on the snapshots associated with the image.
+	SnapshotSets GetFromFamilyImageSnapshotSetArrayInput `pulumi:"snapshotSets"`
+	// Synchronization percentage.
+	SyncPercent pulumi.IntInput `pulumi:"syncPercent"`
+	// The list of tags bound to the image.
+	Tags GetFromFamilyImageTagArrayInput `pulumi:"tags"`
+}
+
+func (GetFromFamilyImageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImage)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageArgs) ToGetFromFamilyImageOutput() GetFromFamilyImageOutput {
+	return i.ToGetFromFamilyImageOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageArgs) ToGetFromFamilyImageOutputWithContext(ctx context.Context) GetFromFamilyImageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageOutput)
+}
+
+// GetFromFamilyImageArrayInput is an input type that accepts GetFromFamilyImageArray and GetFromFamilyImageArrayOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageArrayInput` via:
+//
+//	GetFromFamilyImageArray{ GetFromFamilyImageArgs{...} }
+type GetFromFamilyImageArrayInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageArrayOutput() GetFromFamilyImageArrayOutput
+	ToGetFromFamilyImageArrayOutputWithContext(context.Context) GetFromFamilyImageArrayOutput
+}
+
+type GetFromFamilyImageArray []GetFromFamilyImageInput
+
+func (GetFromFamilyImageArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImage)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageArray) ToGetFromFamilyImageArrayOutput() GetFromFamilyImageArrayOutput {
+	return i.ToGetFromFamilyImageArrayOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageArray) ToGetFromFamilyImageArrayOutputWithContext(ctx context.Context) GetFromFamilyImageArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageArrayOutput)
+}
+
+type GetFromFamilyImageOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImage)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageOutput) ToGetFromFamilyImageOutput() GetFromFamilyImageOutput {
+	return o
+}
+
+func (o GetFromFamilyImageOutput) ToGetFromFamilyImageOutputWithContext(ctx context.Context) GetFromFamilyImageOutput {
+	return o
+}
+
+// Image architecture.
+func (o GetFromFamilyImageOutput) Architecture() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.Architecture }).(pulumi.StringOutput)
+}
+
+// Creation time of the image.
+func (o GetFromFamilyImageOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Image creator.
+func (o GetFromFamilyImageOutput) ImageCreator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageCreator }).(pulumi.StringOutput)
+}
+
+// If Image Deprecated.
+func (o GetFromFamilyImageOutput) ImageDeprecated() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) bool { return v.ImageDeprecated }).(pulumi.BoolOutput)
+}
+
+// Image description.
+func (o GetFromFamilyImageOutput) ImageDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageDescription }).(pulumi.StringOutput)
+}
+
+// Image family name.
+func (o GetFromFamilyImageOutput) ImageFamily() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageFamily }).(pulumi.StringOutput)
+}
+
+// Image ID.
+func (o GetFromFamilyImageOutput) ImageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageId }).(pulumi.StringOutput)
+}
+
+// Image name.
+func (o GetFromFamilyImageOutput) ImageName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageName }).(pulumi.StringOutput)
+}
+
+// Image size.
+func (o GetFromFamilyImageOutput) ImageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) int { return v.ImageSize }).(pulumi.IntOutput)
+}
+
+// Image source.
+func (o GetFromFamilyImageOutput) ImageSource() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageSource }).(pulumi.StringOutput)
+}
+
+// Image state.
+func (o GetFromFamilyImageOutput) ImageState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageState }).(pulumi.StringOutput)
+}
+
+// Image type.
+func (o GetFromFamilyImageOutput) ImageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.ImageType }).(pulumi.StringOutput)
+}
+
+// Whether the image supports cloud-init.
+func (o GetFromFamilyImageOutput) IsSupportCloudinit() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) bool { return v.IsSupportCloudinit }).(pulumi.BoolOutput)
+}
+
+// Image license type.
+func (o GetFromFamilyImageOutput) LicenseType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.LicenseType }).(pulumi.StringOutput)
+}
+
+// Operating system of the image.
+func (o GetFromFamilyImageOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.OsName }).(pulumi.StringOutput)
+}
+
+// Source platform of the image.
+func (o GetFromFamilyImageOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// Information on the snapshots associated with the image.
+func (o GetFromFamilyImageOutput) SnapshotSets() GetFromFamilyImageSnapshotSetArrayOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) []GetFromFamilyImageSnapshotSet { return v.SnapshotSets }).(GetFromFamilyImageSnapshotSetArrayOutput)
+}
+
+// Synchronization percentage.
+func (o GetFromFamilyImageOutput) SyncPercent() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) int { return v.SyncPercent }).(pulumi.IntOutput)
+}
+
+// The list of tags bound to the image.
+func (o GetFromFamilyImageOutput) Tags() GetFromFamilyImageTagArrayOutput {
+	return o.ApplyT(func(v GetFromFamilyImage) []GetFromFamilyImageTag { return v.Tags }).(GetFromFamilyImageTagArrayOutput)
+}
+
+type GetFromFamilyImageArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImage)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageArrayOutput) ToGetFromFamilyImageArrayOutput() GetFromFamilyImageArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageArrayOutput) ToGetFromFamilyImageArrayOutputWithContext(ctx context.Context) GetFromFamilyImageArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageArrayOutput) Index(i pulumi.IntInput) GetFromFamilyImageOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFromFamilyImage {
+		return vs[0].([]GetFromFamilyImage)[vs[1].(int)]
+	}).(GetFromFamilyImageOutput)
+}
+
+type GetFromFamilyImageSnapshotSet struct {
+	// Size of the cloud disk used to create the snapshot, unit(GB).
+	DiskSize int `pulumi:"diskSize"`
+	// Type of the cloud disk used to create the snapshot. Valid values: YSTEM_DISK: system disk, DATA_DISK: data disk.
+	DiskUsage string `pulumi:"diskUsage"`
+	// Snapshot ID.
+	SnapshotId string `pulumi:"snapshotId"`
+}
+
+// GetFromFamilyImageSnapshotSetInput is an input type that accepts GetFromFamilyImageSnapshotSetArgs and GetFromFamilyImageSnapshotSetOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageSnapshotSetInput` via:
+//
+//	GetFromFamilyImageSnapshotSetArgs{...}
+type GetFromFamilyImageSnapshotSetInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageSnapshotSetOutput() GetFromFamilyImageSnapshotSetOutput
+	ToGetFromFamilyImageSnapshotSetOutputWithContext(context.Context) GetFromFamilyImageSnapshotSetOutput
+}
+
+type GetFromFamilyImageSnapshotSetArgs struct {
+	// Size of the cloud disk used to create the snapshot, unit(GB).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Type of the cloud disk used to create the snapshot. Valid values: YSTEM_DISK: system disk, DATA_DISK: data disk.
+	DiskUsage pulumi.StringInput `pulumi:"diskUsage"`
+	// Snapshot ID.
+	SnapshotId pulumi.StringInput `pulumi:"snapshotId"`
+}
+
+func (GetFromFamilyImageSnapshotSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImageSnapshotSet)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageSnapshotSetArgs) ToGetFromFamilyImageSnapshotSetOutput() GetFromFamilyImageSnapshotSetOutput {
+	return i.ToGetFromFamilyImageSnapshotSetOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageSnapshotSetArgs) ToGetFromFamilyImageSnapshotSetOutputWithContext(ctx context.Context) GetFromFamilyImageSnapshotSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageSnapshotSetOutput)
+}
+
+// GetFromFamilyImageSnapshotSetArrayInput is an input type that accepts GetFromFamilyImageSnapshotSetArray and GetFromFamilyImageSnapshotSetArrayOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageSnapshotSetArrayInput` via:
+//
+//	GetFromFamilyImageSnapshotSetArray{ GetFromFamilyImageSnapshotSetArgs{...} }
+type GetFromFamilyImageSnapshotSetArrayInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageSnapshotSetArrayOutput() GetFromFamilyImageSnapshotSetArrayOutput
+	ToGetFromFamilyImageSnapshotSetArrayOutputWithContext(context.Context) GetFromFamilyImageSnapshotSetArrayOutput
+}
+
+type GetFromFamilyImageSnapshotSetArray []GetFromFamilyImageSnapshotSetInput
+
+func (GetFromFamilyImageSnapshotSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImageSnapshotSet)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageSnapshotSetArray) ToGetFromFamilyImageSnapshotSetArrayOutput() GetFromFamilyImageSnapshotSetArrayOutput {
+	return i.ToGetFromFamilyImageSnapshotSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageSnapshotSetArray) ToGetFromFamilyImageSnapshotSetArrayOutputWithContext(ctx context.Context) GetFromFamilyImageSnapshotSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageSnapshotSetArrayOutput)
+}
+
+type GetFromFamilyImageSnapshotSetOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageSnapshotSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImageSnapshotSet)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageSnapshotSetOutput) ToGetFromFamilyImageSnapshotSetOutput() GetFromFamilyImageSnapshotSetOutput {
+	return o
+}
+
+func (o GetFromFamilyImageSnapshotSetOutput) ToGetFromFamilyImageSnapshotSetOutputWithContext(ctx context.Context) GetFromFamilyImageSnapshotSetOutput {
+	return o
+}
+
+// Size of the cloud disk used to create the snapshot, unit(GB).
+func (o GetFromFamilyImageSnapshotSetOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetFromFamilyImageSnapshotSet) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Type of the cloud disk used to create the snapshot. Valid values: YSTEM_DISK: system disk, DATA_DISK: data disk.
+func (o GetFromFamilyImageSnapshotSetOutput) DiskUsage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImageSnapshotSet) string { return v.DiskUsage }).(pulumi.StringOutput)
+}
+
+// Snapshot ID.
+func (o GetFromFamilyImageSnapshotSetOutput) SnapshotId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImageSnapshotSet) string { return v.SnapshotId }).(pulumi.StringOutput)
+}
+
+type GetFromFamilyImageSnapshotSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageSnapshotSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImageSnapshotSet)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageSnapshotSetArrayOutput) ToGetFromFamilyImageSnapshotSetArrayOutput() GetFromFamilyImageSnapshotSetArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageSnapshotSetArrayOutput) ToGetFromFamilyImageSnapshotSetArrayOutputWithContext(ctx context.Context) GetFromFamilyImageSnapshotSetArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageSnapshotSetArrayOutput) Index(i pulumi.IntInput) GetFromFamilyImageSnapshotSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFromFamilyImageSnapshotSet {
+		return vs[0].([]GetFromFamilyImageSnapshotSet)[vs[1].(int)]
+	}).(GetFromFamilyImageSnapshotSetOutput)
+}
+
+type GetFromFamilyImageTag struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Vaule.
+	Value string `pulumi:"value"`
+}
+
+// GetFromFamilyImageTagInput is an input type that accepts GetFromFamilyImageTagArgs and GetFromFamilyImageTagOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageTagInput` via:
+//
+//	GetFromFamilyImageTagArgs{...}
+type GetFromFamilyImageTagInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageTagOutput() GetFromFamilyImageTagOutput
+	ToGetFromFamilyImageTagOutputWithContext(context.Context) GetFromFamilyImageTagOutput
+}
+
+type GetFromFamilyImageTagArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Vaule.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetFromFamilyImageTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImageTag)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageTagArgs) ToGetFromFamilyImageTagOutput() GetFromFamilyImageTagOutput {
+	return i.ToGetFromFamilyImageTagOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageTagArgs) ToGetFromFamilyImageTagOutputWithContext(ctx context.Context) GetFromFamilyImageTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageTagOutput)
+}
+
+// GetFromFamilyImageTagArrayInput is an input type that accepts GetFromFamilyImageTagArray and GetFromFamilyImageTagArrayOutput values.
+// You can construct a concrete instance of `GetFromFamilyImageTagArrayInput` via:
+//
+//	GetFromFamilyImageTagArray{ GetFromFamilyImageTagArgs{...} }
+type GetFromFamilyImageTagArrayInput interface {
+	pulumi.Input
+
+	ToGetFromFamilyImageTagArrayOutput() GetFromFamilyImageTagArrayOutput
+	ToGetFromFamilyImageTagArrayOutputWithContext(context.Context) GetFromFamilyImageTagArrayOutput
+}
+
+type GetFromFamilyImageTagArray []GetFromFamilyImageTagInput
+
+func (GetFromFamilyImageTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImageTag)(nil)).Elem()
+}
+
+func (i GetFromFamilyImageTagArray) ToGetFromFamilyImageTagArrayOutput() GetFromFamilyImageTagArrayOutput {
+	return i.ToGetFromFamilyImageTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetFromFamilyImageTagArray) ToGetFromFamilyImageTagArrayOutputWithContext(ctx context.Context) GetFromFamilyImageTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetFromFamilyImageTagArrayOutput)
+}
+
+type GetFromFamilyImageTagOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetFromFamilyImageTag)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageTagOutput) ToGetFromFamilyImageTagOutput() GetFromFamilyImageTagOutput {
+	return o
+}
+
+func (o GetFromFamilyImageTagOutput) ToGetFromFamilyImageTagOutputWithContext(ctx context.Context) GetFromFamilyImageTagOutput {
+	return o
+}
+
+// Key.
+func (o GetFromFamilyImageTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImageTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Vaule.
+func (o GetFromFamilyImageTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetFromFamilyImageTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetFromFamilyImageTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetFromFamilyImageTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetFromFamilyImageTag)(nil)).Elem()
+}
+
+func (o GetFromFamilyImageTagArrayOutput) ToGetFromFamilyImageTagArrayOutput() GetFromFamilyImageTagArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageTagArrayOutput) ToGetFromFamilyImageTagArrayOutputWithContext(ctx context.Context) GetFromFamilyImageTagArrayOutput {
+	return o
+}
+
+func (o GetFromFamilyImageTagArrayOutput) Index(i pulumi.IntInput) GetFromFamilyImageTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetFromFamilyImageTag {
+		return vs[0].([]GetFromFamilyImageTag)[vs[1].(int)]
+	}).(GetFromFamilyImageTagOutput)
+}
+
 type GetInstanceFilter struct {
 	// Key of the filter, valid keys: `image-id`, `image-type`, `image-name`.
 	Name string `pulumi:"name"`
@@ -120,8 +600,20 @@ func (o GetInstanceFilterArrayOutput) Index(i pulumi.IntInput) GetInstanceFilter
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageInput)(nil)).Elem(), GetFromFamilyImageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageArrayInput)(nil)).Elem(), GetFromFamilyImageArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageSnapshotSetInput)(nil)).Elem(), GetFromFamilyImageSnapshotSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageSnapshotSetArrayInput)(nil)).Elem(), GetFromFamilyImageSnapshotSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageTagInput)(nil)).Elem(), GetFromFamilyImageTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetFromFamilyImageTagArrayInput)(nil)).Elem(), GetFromFamilyImageTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceFilterInput)(nil)).Elem(), GetInstanceFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceFilterArrayInput)(nil)).Elem(), GetInstanceFilterArray{})
+	pulumi.RegisterOutputType(GetFromFamilyImageOutput{})
+	pulumi.RegisterOutputType(GetFromFamilyImageArrayOutput{})
+	pulumi.RegisterOutputType(GetFromFamilyImageSnapshotSetOutput{})
+	pulumi.RegisterOutputType(GetFromFamilyImageSnapshotSetArrayOutput{})
+	pulumi.RegisterOutputType(GetFromFamilyImageTagOutput{})
+	pulumi.RegisterOutputType(GetFromFamilyImageTagArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceFilterOutput{})
 	pulumi.RegisterOutputType(GetInstanceFilterArrayOutput{})
 }

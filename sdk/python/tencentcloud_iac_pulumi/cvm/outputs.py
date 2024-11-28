@@ -11,6 +11,7 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'ActionTimerActionTimer',
     'ChcConfigBmcVirtualPrivateCloud',
     'ChcConfigDeployVirtualPrivateCloud',
     'ImportImageTagSpecification',
@@ -68,6 +69,56 @@ __all__ = [
     'GetInstancesModificationInstanceTypeConfigStatusListResult',
     'GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigResult',
 ]
+
+@pulumi.output_type
+class ActionTimerActionTimer(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "actionTime":
+            suggest = "action_time"
+        elif key == "timerAction":
+            suggest = "timer_action"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ActionTimerActionTimer. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ActionTimerActionTimer.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ActionTimerActionTimer.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 action_time: Optional[str] = None,
+                 timer_action: Optional[str] = None):
+        """
+        :param str action_time: Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+        :param str timer_action: Timer action, currently only supports destroying one value: TerminateInstances.
+        """
+        if action_time is not None:
+            pulumi.set(__self__, "action_time", action_time)
+        if timer_action is not None:
+            pulumi.set(__self__, "timer_action", timer_action)
+
+    @property
+    @pulumi.getter(name="actionTime")
+    def action_time(self) -> Optional[str]:
+        """
+        Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+        """
+        return pulumi.get(self, "action_time")
+
+    @property
+    @pulumi.getter(name="timerAction")
+    def timer_action(self) -> Optional[str]:
+        """
+        Timer action, currently only supports destroying one value: TerminateInstances.
+        """
+        return pulumi.get(self, "timer_action")
+
 
 @pulumi.output_type
 class ChcConfigBmcVirtualPrivateCloud(dict):
@@ -1091,7 +1142,7 @@ class LaunchTemplatePlacement(dict):
         """
         :param str zone: The available zone ID of the instance.
         :param Sequence[str] host_ids: The CDH ID list of the instance(input).
-        :param Sequence[str] host_ips: Specify the host machine ip.
+        :param Sequence[str] host_ips: It has been deprecated from version 1.81.108. Specify the host machine ip.
         :param int project_id: The project ID of the instance.
         """
         pulumi.set(__self__, "zone", zone)
@@ -1122,8 +1173,11 @@ class LaunchTemplatePlacement(dict):
     @pulumi.getter(name="hostIps")
     def host_ips(self) -> Optional[Sequence[str]]:
         """
-        Specify the host machine ip.
+        It has been deprecated from version 1.81.108. Specify the host machine ip.
         """
+        warnings.warn("""It has been deprecated from version 1.81.108.""", DeprecationWarning)
+        pulumi.log.warn("""host_ips is deprecated: It has been deprecated from version 1.81.108.""")
+
         return pulumi.get(self, "host_ips")
 
     @property
@@ -3208,7 +3262,7 @@ class GetChcHostsChcHostSetPlacementResult(dict):
         """
         :param str host_id: The ID of the CDH to which the instance belongs, only used as an output parameter.
         :param Sequence[str] host_ids: ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
-        :param Sequence[str] host_ips: IPs of the hosts to create CVMs.
+        :param Sequence[str] host_ips: (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
         :param int project_id: ID of the project to which the instance belongs. This parameter can be obtained from the projectId returned by DescribeProject. If this is left empty, the default project is used.
         :param str zone: ID of the availability zone where the instance resides. You can call the [DescribeZones](https://www.tencentcloud.com/document/product/213/35071) API and obtain the ID in the returned Zone field.
         """
@@ -3238,8 +3292,11 @@ class GetChcHostsChcHostSetPlacementResult(dict):
     @pulumi.getter(name="hostIps")
     def host_ips(self) -> Sequence[str]:
         """
-        IPs of the hosts to create CVMs.
+        (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
         """
+        warnings.warn("""It has been deprecated from version 1.81.108.""", DeprecationWarning)
+        pulumi.log.warn("""host_ips is deprecated: It has been deprecated from version 1.81.108.""")
+
         return pulumi.get(self, "host_ips")
 
     @property

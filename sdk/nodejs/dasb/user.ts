@@ -72,7 +72,7 @@ export class User extends pulumi.CustomResource {
      */
     public readonly departmentId!: pulumi.Output<string | undefined>;
     /**
-     * Email.
+     * Email. Please provide at least one of `phone` or `email`.
      */
     public readonly email!: pulumi.Output<string | undefined>;
     /**
@@ -80,7 +80,7 @@ export class User extends pulumi.CustomResource {
      */
     public readonly groupIdSets!: pulumi.Output<number[]>;
     /**
-     * Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+     * Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
      */
     public readonly phone!: pulumi.Output<string | undefined>;
     /**
@@ -164,7 +164,7 @@ export interface UserState {
      */
     departmentId?: pulumi.Input<string>;
     /**
-     * Email.
+     * Email. Please provide at least one of `phone` or `email`.
      */
     email?: pulumi.Input<string>;
     /**
@@ -172,7 +172,7 @@ export interface UserState {
      */
     groupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+     * Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
      */
     phone?: pulumi.Input<string>;
     /**
@@ -210,7 +210,7 @@ export interface UserArgs {
      */
     departmentId?: pulumi.Input<string>;
     /**
-     * Email.
+     * Email. Please provide at least one of `phone` or `email`.
      */
     email?: pulumi.Input<string>;
     /**
@@ -218,7 +218,7 @@ export interface UserArgs {
      */
     groupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
     /**
-     * Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+     * Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
      */
     phone?: pulumi.Input<string>;
     /**

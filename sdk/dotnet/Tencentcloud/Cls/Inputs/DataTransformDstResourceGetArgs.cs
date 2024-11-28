@@ -14,13 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
     public sealed class DataTransformDstResourceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// alias.
+        /// Alias.
         /// </summary>
         [Input("alias", required: true)]
         public Input<string> Alias { get; set; } = null!;
 
         /// <summary>
-        /// dst topic id.
+        /// Dst topic ID.
         /// </summary>
         [Input("topicId", required: true)]
         public Input<string> TopicId { get; set; } = null!;

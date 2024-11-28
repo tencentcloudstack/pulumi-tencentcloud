@@ -5292,17 +5292,19 @@ func (o DomainMaxAgeMaxAgeRuleArrayOutput) Index(i pulumi.IntInput) DomainMaxAge
 type DomainOrigin struct {
 	// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
 	BackupOriginLists []string `pulumi:"backupOriginLists"`
-	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name.
 	BackupOriginType *string `pulumi:"backupOriginType"`
 	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	BackupServerName *string `pulumi:"backupServerName"`
 	// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
 	CosPrivateAccess *string `pulumi:"cosPrivateAccess"`
+	// Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `awsS3`: AWS S3; `aliOss`: Alibaba Cloud OSS; `hwObs`: Huawei OBS; `qiniuKodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hwObs`.
+	OriginCompany *string `pulumi:"originCompany"`
 	// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
 	OriginLists []string `pulumi:"originLists"`
 	// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
 	OriginPullProtocol *string `pulumi:"originPullProtocol"`
-	// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+	// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 	OriginType string `pulumi:"originType"`
 	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
 	ServerName *string `pulumi:"serverName"`
@@ -5322,17 +5324,19 @@ type DomainOriginInput interface {
 type DomainOriginArgs struct {
 	// Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backupOriginType`.
 	BackupOriginLists pulumi.StringArrayInput `pulumi:"backupOriginLists"`
-	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+	// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name.
 	BackupOriginType pulumi.StringPtrInput `pulumi:"backupOriginType"`
 	// Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
 	BackupServerName pulumi.StringPtrInput `pulumi:"backupServerName"`
 	// When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
 	CosPrivateAccess pulumi.StringPtrInput `pulumi:"cosPrivateAccess"`
+	// Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `awsS3`: AWS S3; `aliOss`: Alibaba Cloud OSS; `hwObs`: Huawei OBS; `qiniuKodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hwObs`.
+	OriginCompany pulumi.StringPtrInput `pulumi:"originCompany"`
 	// Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
 	OriginLists pulumi.StringArrayInput `pulumi:"originLists"`
 	// Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
 	OriginPullProtocol pulumi.StringPtrInput `pulumi:"originPullProtocol"`
-	// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+	// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 	OriginType pulumi.StringInput `pulumi:"originType"`
 	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
 	ServerName pulumi.StringPtrInput `pulumi:"serverName"`
@@ -5420,7 +5424,7 @@ func (o DomainOriginOutput) BackupOriginLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DomainOrigin) []string { return v.BackupOriginLists }).(pulumi.StringArrayOutput)
 }
 
-// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name.
 func (o DomainOriginOutput) BackupOriginType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainOrigin) *string { return v.BackupOriginType }).(pulumi.StringPtrOutput)
 }
@@ -5435,6 +5439,11 @@ func (o DomainOriginOutput) CosPrivateAccess() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainOrigin) *string { return v.CosPrivateAccess }).(pulumi.StringPtrOutput)
 }
 
+// Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `awsS3`: AWS S3; `aliOss`: Alibaba Cloud OSS; `hwObs`: Huawei OBS; `qiniuKodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hwObs`.
+func (o DomainOriginOutput) OriginCompany() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOrigin) *string { return v.OriginCompany }).(pulumi.StringPtrOutput)
+}
+
 // Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
 func (o DomainOriginOutput) OriginLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DomainOrigin) []string { return v.OriginLists }).(pulumi.StringArrayOutput)
@@ -5445,7 +5454,7 @@ func (o DomainOriginOutput) OriginPullProtocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainOrigin) *string { return v.OriginPullProtocol }).(pulumi.StringPtrOutput)
 }
 
-// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 func (o DomainOriginOutput) OriginType() pulumi.StringOutput {
 	return o.ApplyT(func(v DomainOrigin) string { return v.OriginType }).(pulumi.StringOutput)
 }
@@ -5489,7 +5498,7 @@ func (o DomainOriginPtrOutput) BackupOriginLists() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+// Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name.
 func (o DomainOriginPtrOutput) BackupOriginType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
@@ -5519,6 +5528,16 @@ func (o DomainOriginPtrOutput) CosPrivateAccess() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `awsS3`: AWS S3; `aliOss`: Alibaba Cloud OSS; `hwObs`: Huawei OBS; `qiniuKodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hwObs`.
+func (o DomainOriginPtrOutput) OriginCompany() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOrigin) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OriginCompany
+	}).(pulumi.StringPtrOutput)
+}
+
 // Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `originType`.
 func (o DomainOriginPtrOutput) OriginLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DomainOrigin) []string {
@@ -5539,7 +5558,7 @@ func (o DomainOriginPtrOutput) OriginPullProtocol() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 func (o DomainOriginPtrOutput) OriginType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
@@ -6077,6 +6096,219 @@ func (o DomainOssPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
 // Configuration switch, available values: `on`, `off` (default).
 func (o DomainOssPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainOssPrivateAccess) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainOthersPrivateAccess struct {
+	// Access ID.
+	AccessKey *string `pulumi:"accessKey"`
+	// Bucket.
+	Bucket *string `pulumi:"bucket"`
+	// Region.
+	Region *string `pulumi:"region"`
+	// Key.
+	SecretKey *string `pulumi:"secretKey"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch string `pulumi:"switch"`
+}
+
+// DomainOthersPrivateAccessInput is an input type that accepts DomainOthersPrivateAccessArgs and DomainOthersPrivateAccessOutput values.
+// You can construct a concrete instance of `DomainOthersPrivateAccessInput` via:
+//
+//	DomainOthersPrivateAccessArgs{...}
+type DomainOthersPrivateAccessInput interface {
+	pulumi.Input
+
+	ToDomainOthersPrivateAccessOutput() DomainOthersPrivateAccessOutput
+	ToDomainOthersPrivateAccessOutputWithContext(context.Context) DomainOthersPrivateAccessOutput
+}
+
+type DomainOthersPrivateAccessArgs struct {
+	// Access ID.
+	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
+	// Bucket.
+	Bucket pulumi.StringPtrInput `pulumi:"bucket"`
+	// Region.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Key.
+	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
+	// Configuration switch, available values: `on`, `off` (default).
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainOthersPrivateAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOthersPrivateAccess)(nil)).Elem()
+}
+
+func (i DomainOthersPrivateAccessArgs) ToDomainOthersPrivateAccessOutput() DomainOthersPrivateAccessOutput {
+	return i.ToDomainOthersPrivateAccessOutputWithContext(context.Background())
+}
+
+func (i DomainOthersPrivateAccessArgs) ToDomainOthersPrivateAccessOutputWithContext(ctx context.Context) DomainOthersPrivateAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOthersPrivateAccessOutput)
+}
+
+func (i DomainOthersPrivateAccessArgs) ToDomainOthersPrivateAccessPtrOutput() DomainOthersPrivateAccessPtrOutput {
+	return i.ToDomainOthersPrivateAccessPtrOutputWithContext(context.Background())
+}
+
+func (i DomainOthersPrivateAccessArgs) ToDomainOthersPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOthersPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOthersPrivateAccessOutput).ToDomainOthersPrivateAccessPtrOutputWithContext(ctx)
+}
+
+// DomainOthersPrivateAccessPtrInput is an input type that accepts DomainOthersPrivateAccessArgs, DomainOthersPrivateAccessPtr and DomainOthersPrivateAccessPtrOutput values.
+// You can construct a concrete instance of `DomainOthersPrivateAccessPtrInput` via:
+//
+//	        DomainOthersPrivateAccessArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainOthersPrivateAccessPtrInput interface {
+	pulumi.Input
+
+	ToDomainOthersPrivateAccessPtrOutput() DomainOthersPrivateAccessPtrOutput
+	ToDomainOthersPrivateAccessPtrOutputWithContext(context.Context) DomainOthersPrivateAccessPtrOutput
+}
+
+type domainOthersPrivateAccessPtrType DomainOthersPrivateAccessArgs
+
+func DomainOthersPrivateAccessPtr(v *DomainOthersPrivateAccessArgs) DomainOthersPrivateAccessPtrInput {
+	return (*domainOthersPrivateAccessPtrType)(v)
+}
+
+func (*domainOthersPrivateAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOthersPrivateAccess)(nil)).Elem()
+}
+
+func (i *domainOthersPrivateAccessPtrType) ToDomainOthersPrivateAccessPtrOutput() DomainOthersPrivateAccessPtrOutput {
+	return i.ToDomainOthersPrivateAccessPtrOutputWithContext(context.Background())
+}
+
+func (i *domainOthersPrivateAccessPtrType) ToDomainOthersPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOthersPrivateAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOthersPrivateAccessPtrOutput)
+}
+
+type DomainOthersPrivateAccessOutput struct{ *pulumi.OutputState }
+
+func (DomainOthersPrivateAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOthersPrivateAccess)(nil)).Elem()
+}
+
+func (o DomainOthersPrivateAccessOutput) ToDomainOthersPrivateAccessOutput() DomainOthersPrivateAccessOutput {
+	return o
+}
+
+func (o DomainOthersPrivateAccessOutput) ToDomainOthersPrivateAccessOutputWithContext(ctx context.Context) DomainOthersPrivateAccessOutput {
+	return o
+}
+
+func (o DomainOthersPrivateAccessOutput) ToDomainOthersPrivateAccessPtrOutput() DomainOthersPrivateAccessPtrOutput {
+	return o.ToDomainOthersPrivateAccessPtrOutputWithContext(context.Background())
+}
+
+func (o DomainOthersPrivateAccessOutput) ToDomainOthersPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOthersPrivateAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOthersPrivateAccess) *DomainOthersPrivateAccess {
+		return &v
+	}).(DomainOthersPrivateAccessPtrOutput)
+}
+
+// Access ID.
+func (o DomainOthersPrivateAccessOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOthersPrivateAccess) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+}
+
+// Bucket.
+func (o DomainOthersPrivateAccessOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOthersPrivateAccess) *string { return v.Bucket }).(pulumi.StringPtrOutput)
+}
+
+// Region.
+func (o DomainOthersPrivateAccessOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOthersPrivateAccess) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// Key.
+func (o DomainOthersPrivateAccessOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOthersPrivateAccess) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+}
+
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOthersPrivateAccessOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainOthersPrivateAccess) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainOthersPrivateAccessPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainOthersPrivateAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOthersPrivateAccess)(nil)).Elem()
+}
+
+func (o DomainOthersPrivateAccessPtrOutput) ToDomainOthersPrivateAccessPtrOutput() DomainOthersPrivateAccessPtrOutput {
+	return o
+}
+
+func (o DomainOthersPrivateAccessPtrOutput) ToDomainOthersPrivateAccessPtrOutputWithContext(ctx context.Context) DomainOthersPrivateAccessPtrOutput {
+	return o
+}
+
+func (o DomainOthersPrivateAccessPtrOutput) Elem() DomainOthersPrivateAccessOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) DomainOthersPrivateAccess {
+		if v != nil {
+			return *v
+		}
+		var ret DomainOthersPrivateAccess
+		return ret
+	}).(DomainOthersPrivateAccessOutput)
+}
+
+// Access ID.
+func (o DomainOthersPrivateAccessPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccessKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Bucket.
+func (o DomainOthersPrivateAccessPtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Bucket
+	}).(pulumi.StringPtrOutput)
+}
+
+// Region.
+func (o DomainOthersPrivateAccessPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Key.
+func (o DomainOthersPrivateAccessPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecretKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Configuration switch, available values: `on`, `off` (default).
+func (o DomainOthersPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOthersPrivateAccess) *string {
 		if v == nil {
 			return nil
 		}
@@ -8991,6 +9223,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullTimeoutPtrInput)(nil)).Elem(), DomainOriginPullTimeoutArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOssPrivateAccessInput)(nil)).Elem(), DomainOssPrivateAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOssPrivateAccessPtrInput)(nil)).Elem(), DomainOssPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOthersPrivateAccessInput)(nil)).Elem(), DomainOthersPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOthersPrivateAccessPtrInput)(nil)).Elem(), DomainOthersPrivateAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainPostMaxSizeInput)(nil)).Elem(), DomainPostMaxSizeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainPostMaxSizeArrayInput)(nil)).Elem(), DomainPostMaxSizeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainQnPrivateAccessInput)(nil)).Elem(), DomainQnPrivateAccessArgs{})
@@ -9092,6 +9326,8 @@ func init() {
 	pulumi.RegisterOutputType(DomainOriginPullTimeoutPtrOutput{})
 	pulumi.RegisterOutputType(DomainOssPrivateAccessOutput{})
 	pulumi.RegisterOutputType(DomainOssPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainOthersPrivateAccessOutput{})
+	pulumi.RegisterOutputType(DomainOthersPrivateAccessPtrOutput{})
 	pulumi.RegisterOutputType(DomainPostMaxSizeOutput{})
 	pulumi.RegisterOutputType(DomainPostMaxSizeArrayOutput{})
 	pulumi.RegisterOutputType(DomainQnPrivateAccessOutput{})

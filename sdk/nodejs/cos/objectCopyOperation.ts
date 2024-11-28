@@ -59,7 +59,7 @@ export class ObjectCopyOperation extends pulumi.CustomResource {
      */
     public readonly key!: pulumi.Output<string>;
     /**
-     * Object key.
+     * Source url. In the CDC scenario, the CDC source url is used.
      */
     public readonly sourceUrl!: pulumi.Output<string>;
 
@@ -112,7 +112,7 @@ export interface ObjectCopyOperationState {
      */
     key?: pulumi.Input<string>;
     /**
-     * Object key.
+     * Source url. In the CDC scenario, the CDC source url is used.
      */
     sourceUrl?: pulumi.Input<string>;
 }
@@ -130,7 +130,7 @@ export interface ObjectCopyOperationArgs {
      */
     key: pulumi.Input<string>;
     /**
-     * Object key.
+     * Source url. In the CDC scenario, the CDC source url is used.
      */
     sourceUrl: pulumi.Input<string>;
 }

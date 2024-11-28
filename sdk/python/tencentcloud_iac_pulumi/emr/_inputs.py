@@ -11,11 +11,17 @@ from .. import _utilities
 
 __all__ = [
     'ClusterPlacementInfoArgs',
+    'ClusterPreExecutedFileSettingArgs',
     'ClusterResourceSpecArgs',
     'ClusterResourceSpecCommonResourceSpecArgs',
+    'ClusterResourceSpecCommonResourceSpecMultiDiskArgs',
     'ClusterResourceSpecCoreResourceSpecArgs',
+    'ClusterResourceSpecCoreResourceSpecMultiDiskArgs',
     'ClusterResourceSpecMasterResourceSpecArgs',
+    'ClusterResourceSpecMasterResourceSpecMultiDiskArgs',
     'ClusterResourceSpecTaskResourceSpecArgs',
+    'ClusterResourceSpecTaskResourceSpecMultiDiskArgs',
+    'ClusterTerminateNodeInfoArgs',
     'GetAutoScaleRecordsFilterArgs',
 ]
 
@@ -58,6 +64,141 @@ class ClusterPlacementInfoArgs:
 
 
 @pulumi.input_type
+class ClusterPreExecutedFileSettingArgs:
+    def __init__(__self__, *,
+                 args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 cos_file_name: Optional[pulumi.Input[str]] = None,
+                 cos_file_uri: Optional[pulumi.Input[str]] = None,
+                 cos_secret_id: Optional[pulumi.Input[str]] = None,
+                 cos_secret_key: Optional[pulumi.Input[str]] = None,
+                 remark: Optional[pulumi.Input[str]] = None,
+                 run_order: Optional[pulumi.Input[int]] = None,
+                 when_run: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] args: Execution script parameters.
+        :param pulumi.Input[str] cos_file_name: Script file name.
+        :param pulumi.Input[str] cos_file_uri: The cos address of the script.
+        :param pulumi.Input[str] cos_secret_id: Cos secretId.
+        :param pulumi.Input[str] cos_secret_key: Cos secretKey.
+        :param pulumi.Input[str] remark: Remark.
+        :param pulumi.Input[int] run_order: Run order.
+        :param pulumi.Input[str] when_run: `resourceAfter` or `clusterAfter`.
+        """
+        if args is not None:
+            pulumi.set(__self__, "args", args)
+        if cos_file_name is not None:
+            pulumi.set(__self__, "cos_file_name", cos_file_name)
+        if cos_file_uri is not None:
+            pulumi.set(__self__, "cos_file_uri", cos_file_uri)
+        if cos_secret_id is not None:
+            pulumi.set(__self__, "cos_secret_id", cos_secret_id)
+        if cos_secret_key is not None:
+            pulumi.set(__self__, "cos_secret_key", cos_secret_key)
+        if remark is not None:
+            pulumi.set(__self__, "remark", remark)
+        if run_order is not None:
+            pulumi.set(__self__, "run_order", run_order)
+        if when_run is not None:
+            pulumi.set(__self__, "when_run", when_run)
+
+    @property
+    @pulumi.getter
+    def args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Execution script parameters.
+        """
+        return pulumi.get(self, "args")
+
+    @args.setter
+    def args(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "args", value)
+
+    @property
+    @pulumi.getter(name="cosFileName")
+    def cos_file_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Script file name.
+        """
+        return pulumi.get(self, "cos_file_name")
+
+    @cos_file_name.setter
+    def cos_file_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cos_file_name", value)
+
+    @property
+    @pulumi.getter(name="cosFileUri")
+    def cos_file_uri(self) -> Optional[pulumi.Input[str]]:
+        """
+        The cos address of the script.
+        """
+        return pulumi.get(self, "cos_file_uri")
+
+    @cos_file_uri.setter
+    def cos_file_uri(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cos_file_uri", value)
+
+    @property
+    @pulumi.getter(name="cosSecretId")
+    def cos_secret_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cos secretId.
+        """
+        return pulumi.get(self, "cos_secret_id")
+
+    @cos_secret_id.setter
+    def cos_secret_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cos_secret_id", value)
+
+    @property
+    @pulumi.getter(name="cosSecretKey")
+    def cos_secret_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cos secretKey.
+        """
+        return pulumi.get(self, "cos_secret_key")
+
+    @cos_secret_key.setter
+    def cos_secret_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cos_secret_key", value)
+
+    @property
+    @pulumi.getter
+    def remark(self) -> Optional[pulumi.Input[str]]:
+        """
+        Remark.
+        """
+        return pulumi.get(self, "remark")
+
+    @remark.setter
+    def remark(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "remark", value)
+
+    @property
+    @pulumi.getter(name="runOrder")
+    def run_order(self) -> Optional[pulumi.Input[int]]:
+        """
+        Run order.
+        """
+        return pulumi.get(self, "run_order")
+
+    @run_order.setter
+    def run_order(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "run_order", value)
+
+    @property
+    @pulumi.getter(name="whenRun")
+    def when_run(self) -> Optional[pulumi.Input[str]]:
+        """
+        `resourceAfter` or `clusterAfter`.
+        """
+        return pulumi.get(self, "when_run")
+
+    @when_run.setter
+    def when_run(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "when_run", value)
+
+
+@pulumi.input_type
 class ClusterResourceSpecArgs:
     def __init__(__self__, *,
                  common_count: Optional[pulumi.Input[int]] = None,
@@ -70,9 +211,13 @@ class ClusterResourceSpecArgs:
                  task_resource_spec: Optional[pulumi.Input['ClusterResourceSpecTaskResourceSpecArgs']] = None):
         """
         :param pulumi.Input[int] common_count: The number of common node.
+        :param pulumi.Input['ClusterResourceSpecCommonResourceSpecArgs'] common_resource_spec: Resource details.
         :param pulumi.Input[int] core_count: The number of core node.
+        :param pulumi.Input['ClusterResourceSpecCoreResourceSpecArgs'] core_resource_spec: Resource details.
         :param pulumi.Input[int] master_count: The number of master node.
+        :param pulumi.Input['ClusterResourceSpecMasterResourceSpecArgs'] master_resource_spec: Resource details.
         :param pulumi.Input[int] task_count: The number of core node.
+        :param pulumi.Input['ClusterResourceSpecTaskResourceSpecArgs'] task_resource_spec: Resource details.
         """
         if common_count is not None:
             pulumi.set(__self__, "common_count", common_count)
@@ -106,6 +251,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="commonResourceSpec")
     def common_resource_spec(self) -> Optional[pulumi.Input['ClusterResourceSpecCommonResourceSpecArgs']]:
+        """
+        Resource details.
+        """
         return pulumi.get(self, "common_resource_spec")
 
     @common_resource_spec.setter
@@ -127,6 +275,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="coreResourceSpec")
     def core_resource_spec(self) -> Optional[pulumi.Input['ClusterResourceSpecCoreResourceSpecArgs']]:
+        """
+        Resource details.
+        """
         return pulumi.get(self, "core_resource_spec")
 
     @core_resource_spec.setter
@@ -148,6 +299,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="masterResourceSpec")
     def master_resource_spec(self) -> Optional[pulumi.Input['ClusterResourceSpecMasterResourceSpecArgs']]:
+        """
+        Resource details.
+        """
         return pulumi.get(self, "master_resource_spec")
 
     @master_resource_spec.setter
@@ -169,6 +323,9 @@ class ClusterResourceSpecArgs:
     @property
     @pulumi.getter(name="taskResourceSpec")
     def task_resource_spec(self) -> Optional[pulumi.Input['ClusterResourceSpecTaskResourceSpecArgs']]:
+        """
+        Resource details.
+        """
         return pulumi.get(self, "task_resource_spec")
 
     @task_resource_spec.setter
@@ -183,9 +340,28 @@ class ClusterResourceSpecCommonResourceSpecArgs:
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
+                 multi_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCommonResourceSpecMultiDiskArgs']]]] = None,
                  root_size: Optional[pulumi.Input[int]] = None,
                  spec: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] cpu: Number of CPU cores.
+        :param pulumi.Input[int] disk_size: Data disk capacity.
+        :param pulumi.Input[str] disk_type: disk types. Value range:
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_BASIC: Represents Cloud Block Storage.
+        :param pulumi.Input[int] mem_size: Memory size in M.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCommonResourceSpecMultiDiskArgs']]] multi_disks: Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        :param pulumi.Input[int] root_size: Root disk capacity.
+        :param pulumi.Input[str] spec: Node specification description, such as CVM.SA2.
+        :param pulumi.Input[int] storage_type: Storage type. Value range:
+               - 4: Represents cloud SSD;
+               - 5: Represents efficient cloud disk;
+               - 6: Represents enhanced SSD Cloud Block Storage;
+               - 11: Represents throughput Cloud Block Storage;
+               - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
         if disk_size is not None:
@@ -194,6 +370,8 @@ class ClusterResourceSpecCommonResourceSpecArgs:
             pulumi.set(__self__, "disk_type", disk_type)
         if mem_size is not None:
             pulumi.set(__self__, "mem_size", mem_size)
+        if multi_disks is not None:
+            pulumi.set(__self__, "multi_disks", multi_disks)
         if root_size is not None:
             pulumi.set(__self__, "root_size", root_size)
         if spec is not None:
@@ -204,6 +382,9 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of CPU cores.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -213,6 +394,9 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Data disk capacity.
+        """
         return pulumi.get(self, "disk_size")
 
     @disk_size.setter
@@ -222,6 +406,12 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        disk types. Value range:
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_BASIC: Represents Cloud Block Storage.
+        """
         return pulumi.get(self, "disk_type")
 
     @disk_type.setter
@@ -231,6 +421,9 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory size in M.
+        """
         return pulumi.get(self, "mem_size")
 
     @mem_size.setter
@@ -238,8 +431,23 @@ class ClusterResourceSpecCommonResourceSpecArgs:
         pulumi.set(self, "mem_size", value)
 
     @property
+    @pulumi.getter(name="multiDisks")
+    def multi_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCommonResourceSpecMultiDiskArgs']]]]:
+        """
+        Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        """
+        return pulumi.get(self, "multi_disks")
+
+    @multi_disks.setter
+    def multi_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCommonResourceSpecMultiDiskArgs']]]]):
+        pulumi.set(self, "multi_disks", value)
+
+    @property
     @pulumi.getter(name="rootSize")
     def root_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Root disk capacity.
+        """
         return pulumi.get(self, "root_size")
 
     @root_size.setter
@@ -249,6 +457,9 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter
     def spec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Node specification description, such as CVM.SA2.
+        """
         return pulumi.get(self, "spec")
 
     @spec.setter
@@ -258,11 +469,80 @@ class ClusterResourceSpecCommonResourceSpecArgs:
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Storage type. Value range:
+        - 4: Represents cloud SSD;
+        - 5: Represents efficient cloud disk;
+        - 6: Represents enhanced SSD Cloud Block Storage;
+        - 11: Represents throughput Cloud Block Storage;
+        - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         return pulumi.get(self, "storage_type")
 
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class ClusterResourceSpecCommonResourceSpecMultiDiskArgs:
+    def __init__(__self__, *,
+                 count: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 volume: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] count: Number of cloud disks of this type.
+        :param pulumi.Input[str] disk_type: Cloud disk type
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        :param pulumi.Input[int] volume: Cloud disk size.
+        """
+        if count is not None:
+            pulumi.set(__self__, "count", count)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if volume is not None:
+            pulumi.set(__self__, "volume", volume)
+
+    @property
+    @pulumi.getter
+    def count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of cloud disks of this type.
+        """
+        return pulumi.get(self, "count")
+
+    @count.setter
+    def count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "count", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud disk type
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter
+    def volume(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cloud disk size.
+        """
+        return pulumi.get(self, "volume")
+
+    @volume.setter
+    def volume(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "volume", value)
 
 
 @pulumi.input_type
@@ -272,9 +552,28 @@ class ClusterResourceSpecCoreResourceSpecArgs:
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
+                 multi_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCoreResourceSpecMultiDiskArgs']]]] = None,
                  root_size: Optional[pulumi.Input[int]] = None,
                  spec: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] cpu: Number of CPU cores.
+        :param pulumi.Input[int] disk_size: Data disk capacity.
+        :param pulumi.Input[str] disk_type: disk types. Value range:
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_BASIC: Represents Cloud Block Storage.
+        :param pulumi.Input[int] mem_size: Memory size in M.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCoreResourceSpecMultiDiskArgs']]] multi_disks: Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        :param pulumi.Input[int] root_size: Root disk capacity.
+        :param pulumi.Input[str] spec: Node specification description, such as CVM.SA2.
+        :param pulumi.Input[int] storage_type: Storage type. Value range:
+               - 4: Represents cloud SSD;
+               - 5: Represents efficient cloud disk;
+               - 6: Represents enhanced SSD Cloud Block Storage;
+               - 11: Represents throughput Cloud Block Storage;
+               - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
         if disk_size is not None:
@@ -283,6 +582,8 @@ class ClusterResourceSpecCoreResourceSpecArgs:
             pulumi.set(__self__, "disk_type", disk_type)
         if mem_size is not None:
             pulumi.set(__self__, "mem_size", mem_size)
+        if multi_disks is not None:
+            pulumi.set(__self__, "multi_disks", multi_disks)
         if root_size is not None:
             pulumi.set(__self__, "root_size", root_size)
         if spec is not None:
@@ -293,6 +594,9 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of CPU cores.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -302,6 +606,9 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Data disk capacity.
+        """
         return pulumi.get(self, "disk_size")
 
     @disk_size.setter
@@ -311,6 +618,12 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        disk types. Value range:
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_BASIC: Represents Cloud Block Storage.
+        """
         return pulumi.get(self, "disk_type")
 
     @disk_type.setter
@@ -320,6 +633,9 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory size in M.
+        """
         return pulumi.get(self, "mem_size")
 
     @mem_size.setter
@@ -327,8 +643,23 @@ class ClusterResourceSpecCoreResourceSpecArgs:
         pulumi.set(self, "mem_size", value)
 
     @property
+    @pulumi.getter(name="multiDisks")
+    def multi_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCoreResourceSpecMultiDiskArgs']]]]:
+        """
+        Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        """
+        return pulumi.get(self, "multi_disks")
+
+    @multi_disks.setter
+    def multi_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecCoreResourceSpecMultiDiskArgs']]]]):
+        pulumi.set(self, "multi_disks", value)
+
+    @property
     @pulumi.getter(name="rootSize")
     def root_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Root disk capacity.
+        """
         return pulumi.get(self, "root_size")
 
     @root_size.setter
@@ -338,6 +669,9 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter
     def spec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Node specification description, such as CVM.SA2.
+        """
         return pulumi.get(self, "spec")
 
     @spec.setter
@@ -347,11 +681,80 @@ class ClusterResourceSpecCoreResourceSpecArgs:
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Storage type. Value range:
+        - 4: Represents cloud SSD;
+        - 5: Represents efficient cloud disk;
+        - 6: Represents enhanced SSD Cloud Block Storage;
+        - 11: Represents throughput Cloud Block Storage;
+        - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         return pulumi.get(self, "storage_type")
 
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class ClusterResourceSpecCoreResourceSpecMultiDiskArgs:
+    def __init__(__self__, *,
+                 count: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 volume: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] count: Number of cloud disks of this type.
+        :param pulumi.Input[str] disk_type: Cloud disk type
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        :param pulumi.Input[int] volume: Cloud disk size.
+        """
+        if count is not None:
+            pulumi.set(__self__, "count", count)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if volume is not None:
+            pulumi.set(__self__, "volume", volume)
+
+    @property
+    @pulumi.getter
+    def count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of cloud disks of this type.
+        """
+        return pulumi.get(self, "count")
+
+    @count.setter
+    def count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "count", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud disk type
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter
+    def volume(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cloud disk size.
+        """
+        return pulumi.get(self, "volume")
+
+    @volume.setter
+    def volume(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "volume", value)
 
 
 @pulumi.input_type
@@ -361,9 +764,28 @@ class ClusterResourceSpecMasterResourceSpecArgs:
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
+                 multi_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecMasterResourceSpecMultiDiskArgs']]]] = None,
                  root_size: Optional[pulumi.Input[int]] = None,
                  spec: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] cpu: Number of CPU cores.
+        :param pulumi.Input[int] disk_size: Data disk capacity.
+        :param pulumi.Input[str] disk_type: disk types. Value range:
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_BASIC: Represents Cloud Block Storage.
+        :param pulumi.Input[int] mem_size: Memory size in M.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecMasterResourceSpecMultiDiskArgs']]] multi_disks: Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        :param pulumi.Input[int] root_size: Root disk capacity.
+        :param pulumi.Input[str] spec: Node specification description, such as CVM.SA2.
+        :param pulumi.Input[int] storage_type: Storage type. Value range:
+               - 4: Represents cloud SSD;
+               - 5: Represents efficient cloud disk;
+               - 6: Represents enhanced SSD Cloud Block Storage;
+               - 11: Represents throughput Cloud Block Storage;
+               - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
         if disk_size is not None:
@@ -372,6 +794,8 @@ class ClusterResourceSpecMasterResourceSpecArgs:
             pulumi.set(__self__, "disk_type", disk_type)
         if mem_size is not None:
             pulumi.set(__self__, "mem_size", mem_size)
+        if multi_disks is not None:
+            pulumi.set(__self__, "multi_disks", multi_disks)
         if root_size is not None:
             pulumi.set(__self__, "root_size", root_size)
         if spec is not None:
@@ -382,6 +806,9 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of CPU cores.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -391,6 +818,9 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Data disk capacity.
+        """
         return pulumi.get(self, "disk_size")
 
     @disk_size.setter
@@ -400,6 +830,12 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        disk types. Value range:
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_BASIC: Represents Cloud Block Storage.
+        """
         return pulumi.get(self, "disk_type")
 
     @disk_type.setter
@@ -409,6 +845,9 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory size in M.
+        """
         return pulumi.get(self, "mem_size")
 
     @mem_size.setter
@@ -416,8 +855,23 @@ class ClusterResourceSpecMasterResourceSpecArgs:
         pulumi.set(self, "mem_size", value)
 
     @property
+    @pulumi.getter(name="multiDisks")
+    def multi_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecMasterResourceSpecMultiDiskArgs']]]]:
+        """
+        Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        """
+        return pulumi.get(self, "multi_disks")
+
+    @multi_disks.setter
+    def multi_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecMasterResourceSpecMultiDiskArgs']]]]):
+        pulumi.set(self, "multi_disks", value)
+
+    @property
     @pulumi.getter(name="rootSize")
     def root_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Root disk capacity.
+        """
         return pulumi.get(self, "root_size")
 
     @root_size.setter
@@ -427,6 +881,9 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter
     def spec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Node specification description, such as CVM.SA2.
+        """
         return pulumi.get(self, "spec")
 
     @spec.setter
@@ -436,11 +893,80 @@ class ClusterResourceSpecMasterResourceSpecArgs:
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Storage type. Value range:
+        - 4: Represents cloud SSD;
+        - 5: Represents efficient cloud disk;
+        - 6: Represents enhanced SSD Cloud Block Storage;
+        - 11: Represents throughput Cloud Block Storage;
+        - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         return pulumi.get(self, "storage_type")
 
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class ClusterResourceSpecMasterResourceSpecMultiDiskArgs:
+    def __init__(__self__, *,
+                 count: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 volume: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] count: Number of cloud disks of this type.
+        :param pulumi.Input[str] disk_type: Cloud disk type
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        :param pulumi.Input[int] volume: Cloud disk size.
+        """
+        if count is not None:
+            pulumi.set(__self__, "count", count)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if volume is not None:
+            pulumi.set(__self__, "volume", volume)
+
+    @property
+    @pulumi.getter
+    def count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of cloud disks of this type.
+        """
+        return pulumi.get(self, "count")
+
+    @count.setter
+    def count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "count", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud disk type
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter
+    def volume(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cloud disk size.
+        """
+        return pulumi.get(self, "volume")
+
+    @volume.setter
+    def volume(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "volume", value)
 
 
 @pulumi.input_type
@@ -450,9 +976,28 @@ class ClusterResourceSpecTaskResourceSpecArgs:
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  mem_size: Optional[pulumi.Input[int]] = None,
+                 multi_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecTaskResourceSpecMultiDiskArgs']]]] = None,
                  root_size: Optional[pulumi.Input[int]] = None,
                  spec: Optional[pulumi.Input[str]] = None,
                  storage_type: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] cpu: Number of CPU cores.
+        :param pulumi.Input[int] disk_size: Data disk capacity.
+        :param pulumi.Input[str] disk_type: disk types. Value range:
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_BASIC: Represents Cloud Block Storage.
+        :param pulumi.Input[int] mem_size: Memory size in M.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecTaskResourceSpecMultiDiskArgs']]] multi_disks: Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        :param pulumi.Input[int] root_size: Root disk capacity.
+        :param pulumi.Input[str] spec: Node specification description, such as CVM.SA2.
+        :param pulumi.Input[int] storage_type: Storage type. Value range:
+               - 4: Represents cloud SSD;
+               - 5: Represents efficient cloud disk;
+               - 6: Represents enhanced SSD Cloud Block Storage;
+               - 11: Represents throughput Cloud Block Storage;
+               - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
         if disk_size is not None:
@@ -461,6 +1006,8 @@ class ClusterResourceSpecTaskResourceSpecArgs:
             pulumi.set(__self__, "disk_type", disk_type)
         if mem_size is not None:
             pulumi.set(__self__, "mem_size", mem_size)
+        if multi_disks is not None:
+            pulumi.set(__self__, "multi_disks", multi_disks)
         if root_size is not None:
             pulumi.set(__self__, "root_size", root_size)
         if spec is not None:
@@ -471,6 +1018,9 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter
     def cpu(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of CPU cores.
+        """
         return pulumi.get(self, "cpu")
 
     @cpu.setter
@@ -480,6 +1030,9 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter(name="diskSize")
     def disk_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Data disk capacity.
+        """
         return pulumi.get(self, "disk_size")
 
     @disk_size.setter
@@ -489,6 +1042,12 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        disk types. Value range:
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_BASIC: Represents Cloud Block Storage.
+        """
         return pulumi.get(self, "disk_type")
 
     @disk_type.setter
@@ -498,6 +1057,9 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter(name="memSize")
     def mem_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Memory size in M.
+        """
         return pulumi.get(self, "mem_size")
 
     @mem_size.setter
@@ -505,8 +1067,23 @@ class ClusterResourceSpecTaskResourceSpecArgs:
         pulumi.set(self, "mem_size", value)
 
     @property
+    @pulumi.getter(name="multiDisks")
+    def multi_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecTaskResourceSpecMultiDiskArgs']]]]:
+        """
+        Cloud disk list. When the data disk is a cloud disk, use disk_type and disk_size parameters directly, and use multi_disks for excess parts.
+        """
+        return pulumi.get(self, "multi_disks")
+
+    @multi_disks.setter
+    def multi_disks(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceSpecTaskResourceSpecMultiDiskArgs']]]]):
+        pulumi.set(self, "multi_disks", value)
+
+    @property
     @pulumi.getter(name="rootSize")
     def root_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Root disk capacity.
+        """
         return pulumi.get(self, "root_size")
 
     @root_size.setter
@@ -516,6 +1093,9 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter
     def spec(self) -> Optional[pulumi.Input[str]]:
+        """
+        Node specification description, such as CVM.SA2.
+        """
         return pulumi.get(self, "spec")
 
     @spec.setter
@@ -525,11 +1105,119 @@ class ClusterResourceSpecTaskResourceSpecArgs:
     @property
     @pulumi.getter(name="storageType")
     def storage_type(self) -> Optional[pulumi.Input[int]]:
+        """
+        Storage type. Value range:
+        - 4: Represents cloud SSD;
+        - 5: Represents efficient cloud disk;
+        - 6: Represents enhanced SSD Cloud Block Storage;
+        - 11: Represents throughput Cloud Block Storage;
+        - 12: Represents extremely fast SSD Cloud Block Storage.
+        """
         return pulumi.get(self, "storage_type")
 
     @storage_type.setter
     def storage_type(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class ClusterResourceSpecTaskResourceSpecMultiDiskArgs:
+    def __init__(__self__, *,
+                 count: Optional[pulumi.Input[int]] = None,
+                 disk_type: Optional[pulumi.Input[str]] = None,
+                 volume: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] count: Number of cloud disks of this type.
+        :param pulumi.Input[str] disk_type: Cloud disk type
+               - CLOUD_SSD: Represents cloud SSD;
+               - CLOUD_PREMIUM: Represents efficient cloud disk;
+               - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        :param pulumi.Input[int] volume: Cloud disk size.
+        """
+        if count is not None:
+            pulumi.set(__self__, "count", count)
+        if disk_type is not None:
+            pulumi.set(__self__, "disk_type", disk_type)
+        if volume is not None:
+            pulumi.set(__self__, "volume", volume)
+
+    @property
+    @pulumi.getter
+    def count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of cloud disks of this type.
+        """
+        return pulumi.get(self, "count")
+
+    @count.setter
+    def count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "count", value)
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud disk type
+        - CLOUD_SSD: Represents cloud SSD;
+        - CLOUD_PREMIUM: Represents efficient cloud disk;
+        - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @disk_type.setter
+    def disk_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_type", value)
+
+    @property
+    @pulumi.getter
+    def volume(self) -> Optional[pulumi.Input[int]]:
+        """
+        Cloud disk size.
+        """
+        return pulumi.get(self, "volume")
+
+    @volume.setter
+    def volume(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "volume", value)
+
+
+@pulumi.input_type
+class ClusterTerminateNodeInfoArgs:
+    def __init__(__self__, *,
+                 cvm_instance_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 node_flag: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] cvm_instance_ids: Destroy resource list.
+        :param pulumi.Input[str] node_flag: Value range of destruction node type: `MASTER`, `TASK`, `CORE`, `ROUTER`.
+        """
+        if cvm_instance_ids is not None:
+            pulumi.set(__self__, "cvm_instance_ids", cvm_instance_ids)
+        if node_flag is not None:
+            pulumi.set(__self__, "node_flag", node_flag)
+
+    @property
+    @pulumi.getter(name="cvmInstanceIds")
+    def cvm_instance_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Destroy resource list.
+        """
+        return pulumi.get(self, "cvm_instance_ids")
+
+    @cvm_instance_ids.setter
+    def cvm_instance_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "cvm_instance_ids", value)
+
+    @property
+    @pulumi.getter(name="nodeFlag")
+    def node_flag(self) -> Optional[pulumi.Input[str]]:
+        """
+        Value range of destruction node type: `MASTER`, `TASK`, `CORE`, `ROUTER`.
+        """
+        return pulumi.get(self, "node_flag")
+
+    @node_flag.setter
+    def node_flag(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "node_flag", value)
 
 
 @pulumi.input_type

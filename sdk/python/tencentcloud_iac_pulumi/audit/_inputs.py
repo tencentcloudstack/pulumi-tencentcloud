@@ -11,6 +11,7 @@ from .. import _utilities
 
 __all__ = [
     'TrackStorageArgs',
+    'GetEventsLookupAttributeArgs',
 ]
 
 @pulumi.input_type
@@ -19,17 +20,25 @@ class TrackStorageArgs:
                  storage_name: pulumi.Input[str],
                  storage_prefix: pulumi.Input[str],
                  storage_region: pulumi.Input[str],
-                 storage_type: pulumi.Input[str]):
+                 storage_type: pulumi.Input[str],
+                 storage_account_id: Optional[pulumi.Input[str]] = None,
+                 storage_app_id: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] storage_name: Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
         :param pulumi.Input[str] storage_prefix: Storage path prefix.
         :param pulumi.Input[str] storage_region: Storage region.
         :param pulumi.Input[str] storage_type: Track Storage type, optional:- `cos`- `cls`.
+        :param pulumi.Input[str] storage_account_id: Designated to store user ID.
+        :param pulumi.Input[str] storage_app_id: Designated to store user appid.
         """
         pulumi.set(__self__, "storage_name", storage_name)
         pulumi.set(__self__, "storage_prefix", storage_prefix)
         pulumi.set(__self__, "storage_region", storage_region)
         pulumi.set(__self__, "storage_type", storage_type)
+        if storage_account_id is not None:
+            pulumi.set(__self__, "storage_account_id", storage_account_id)
+        if storage_app_id is not None:
+            pulumi.set(__self__, "storage_app_id", storage_app_id)
 
     @property
     @pulumi.getter(name="storageName")
@@ -78,5 +87,71 @@ class TrackStorageArgs:
     @storage_type.setter
     def storage_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "storage_type", value)
+
+    @property
+    @pulumi.getter(name="storageAccountId")
+    def storage_account_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Designated to store user ID.
+        """
+        return pulumi.get(self, "storage_account_id")
+
+    @storage_account_id.setter
+    def storage_account_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_account_id", value)
+
+    @property
+    @pulumi.getter(name="storageAppId")
+    def storage_app_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Designated to store user appid.
+        """
+        return pulumi.get(self, "storage_app_id")
+
+    @storage_app_id.setter
+    def storage_app_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "storage_app_id", value)
+
+
+@pulumi.input_type
+class GetEventsLookupAttributeArgs:
+    def __init__(__self__, *,
+                 attribute_key: str,
+                 attribute_value: Optional[str] = None):
+        """
+        :param str attribute_key: Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str attribute_value: Value of `AttributeValue`
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "attribute_key", attribute_key)
+        if attribute_value is not None:
+            pulumi.set(__self__, "attribute_value", attribute_value)
+
+    @property
+    @pulumi.getter(name="attributeKey")
+    def attribute_key(self) -> str:
+        """
+        Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_key")
+
+    @attribute_key.setter
+    def attribute_key(self, value: str):
+        pulumi.set(self, "attribute_key", value)
+
+    @property
+    @pulumi.getter(name="attributeValue")
+    def attribute_value(self) -> Optional[str]:
+        """
+        Value of `AttributeValue`
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_value")
+
+    @attribute_value.setter
+    def attribute_value(self, value: Optional[str]):
+        pulumi.set(self, "attribute_value", value)
 
 

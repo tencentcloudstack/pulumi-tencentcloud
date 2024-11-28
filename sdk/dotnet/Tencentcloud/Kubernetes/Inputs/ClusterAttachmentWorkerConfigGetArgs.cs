@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<Inputs.ClusterAttachmentWorkerConfigGpuArgsGetArgs>? GpuArgs { get; set; }
 
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         [Input("isSchedule")]
         public Input<bool>? IsSchedule { get; set; }
@@ -72,6 +72,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         /// </summary>
         [Input("preStartUserScript")]
         public Input<string>? PreStartUserScript { get; set; }
+
+        [Input("taints")]
+        private InputList<Inputs.ClusterAttachmentWorkerConfigTaintGetArgs>? _taints;
+
+        /// <summary>
+        /// Node taint.
+        /// </summary>
+        public InputList<Inputs.ClusterAttachmentWorkerConfigTaintGetArgs> Taints
+        {
+            get => _taints ?? (_taints = new InputList<Inputs.ClusterAttachmentWorkerConfigTaintGetArgs>());
+            set => _taints = value;
+        }
 
         /// <summary>
         /// Base64-encoded User Data text, the length limit is 16KB.

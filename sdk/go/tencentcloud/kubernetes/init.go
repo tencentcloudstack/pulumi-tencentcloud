@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Addon{}
 	case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
 		r = &AddonAttachment{}
+	case "tencentcloud:Kubernetes/addonConfig:AddonConfig":
+		r = &AddonConfig{}
 	case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
 		r = &AuthAttachment{}
 	case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
@@ -35,8 +37,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ClusterAttachment{}
 	case "tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint":
 		r = &ClusterEndpoint{}
+	case "tencentcloud:Kubernetes/clusterMasterAttachment:ClusterMasterAttachment":
+		r = &ClusterMasterAttachment{}
 	case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
 		r = &EncryptionProtection{}
+	case "tencentcloud:Kubernetes/healthCheckPolicy:HealthCheckPolicy":
+		r = &HealthCheckPolicy{}
+	case "tencentcloud:Kubernetes/logConfig:LogConfig":
+		r = &LogConfig{}
 	case "tencentcloud:Kubernetes/nativeNodePool:NativeNodePool":
 		r = &NativeNodePool{}
 	case "tencentcloud:Kubernetes/nodePool:NodePool":
@@ -70,6 +78,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/addonConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/authAttachment",
 		&module{version},
 	)
@@ -95,7 +108,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/clusterMasterAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/encryptionProtection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/healthCheckPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/logConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

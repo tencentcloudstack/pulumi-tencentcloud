@@ -13,6 +13,7 @@ from .clear_instance_operation import *
 from .connection_config import *
 from .get_backup import *
 from .get_backup_download_info import *
+from .get_clusters import *
 from .get_instance_node_info import *
 from .get_instance_shards import *
 from .get_instance_task_list import *
@@ -21,6 +22,7 @@ from .get_instances import *
 from .get_param_records import *
 from .get_zone_config import *
 from .instance import *
+from .log_delivery import *
 from .maintenance_window import *
 from .param import *
 from .param_template import *

@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create postgresql readonly instance
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -61,7 +63,7 @@ import (
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
 //				VpcId:            vpc.ID(),
 //				SubnetId:         subnet.ID(),
-//				EngineVersion:    pulumi.String("10.4"),
+//				DbMajorVersion:   pulumi.String("10"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
 //				Charset:          pulumi.String("UTF8"),
@@ -76,6 +78,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			// create postgresql readonly group
 //			exampleReadonlyGroup, err := Postgresql.NewReadonlyGroup(ctx, "exampleReadonlyGroup", &Postgresql.ReadonlyGroupArgs{
 //				MasterDbInstanceId:       exampleInstance.ID(),
 //				ProjectId:                pulumi.Int(0),
@@ -101,12 +104,13 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			// create postgresql readonly instance
 //			_, err = Postgresql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Postgresql.ReadonlyInstanceArgs{
 //				ReadOnlyGroupId:    exampleReadonlyGroup.ID(),
 //				MasterDbInstanceId: exampleInstance.ID(),
 //				Zone:               pulumi.String(availabilityZone),
 //				AutoRenewFlag:      pulumi.Int(0),
-//				DbVersion:          pulumi.String("10.4"),
+//				DbVersion:          pulumi.String("10.23"),
 //				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
 //				Memory:             pulumi.Int(4),
 //				Cpu:                pulumi.Int(2),
@@ -129,12 +133,141 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Create postgresql readonly instance of CDC
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create postgresql
+//			exampleInstance, err := Postgresql.NewInstance(ctx, "exampleInstance", &Postgresql.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				DbMajorVersion:   pulumi.String("10"),
+//				RootUser:         pulumi.String("root123"),
+//				RootPassword:     pulumi.String("Root123$"),
+//				Charset:          pulumi.String("UTF8"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(2),
+//				Cpu:              pulumi.Int(1),
+//				Storage:          pulumi.Int(10),
+//				DbNodeSets: postgresql.InstanceDbNodeSetArray{
+//					&postgresql.InstanceDbNodeSetArgs{
+//						Role:               pulumi.String("Primary"),
+//						Zone:               pulumi.String(availabilityZone),
+//						DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//					},
+//					&postgresql.InstanceDbNodeSetArgs{
+//						Zone:               pulumi.String(availabilityZone),
+//						DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"CreateBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create postgresql readonly group
+//			exampleReadonlyGroup, err := Postgresql.NewReadonlyGroup(ctx, "exampleReadonlyGroup", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       exampleInstance.ID(),
+//				ProjectId:                pulumi.Int(0),
+//				VpcId:                    vpc.ID(),
+//				SubnetId:                 subnet.ID(),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create security group
+//			exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
+//				Description: pulumi.String("sg desc."),
+//				ProjectId:   pulumi.Int(0),
+//				Tags: pulumi.Map{
+//					"CreateBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create postgresql readonly instance
+//			_, err = Postgresql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Postgresql.ReadonlyInstanceArgs{
+//				ReadOnlyGroupId:    exampleReadonlyGroup.ID(),
+//				MasterDbInstanceId: exampleInstance.ID(),
+//				Zone:               pulumi.String(availabilityZone),
+//				AutoRenewFlag:      pulumi.Int(0),
+//				DbVersion:          pulumi.String("10.23"),
+//				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+//				Memory:             pulumi.Int(4),
+//				Cpu:                pulumi.Int(2),
+//				Storage:            pulumi.Int(250),
+//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet.ID(),
+//				NeedSupportIpv6:    pulumi.Int(0),
+//				ProjectId:          pulumi.Int(0),
+//				DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//				SecurityGroupsIds: pulumi.StringArray{
+//					exampleGroup.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // postgresql readonly instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
+// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example pgro-gih5m0ke
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -149,6 +282,8 @@ type ReadonlyInstance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion pulumi.StringOutput `pulumi:"dbVersion"`
+	// Dedicated cluster ID.
+	DedicatedClusterId pulumi.StringPtrOutput `pulumi:"dedicatedClusterId"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
 	// The instance ID of this readonly resource.
@@ -252,6 +387,8 @@ type readonlyInstanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion *string `pulumi:"dbVersion"`
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The instance ID of this readonly resource.
@@ -299,6 +436,8 @@ type ReadonlyInstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion pulumi.StringPtrInput
+	// Dedicated cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType pulumi.StringPtrInput
 	// The instance ID of this readonly resource.
@@ -348,6 +487,8 @@ type readonlyInstanceArgs struct {
 	Cpu *int `pulumi:"cpu"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion string `pulumi:"dbVersion"`
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// ID of the primary instance to which the read-only replica belongs.
@@ -388,6 +529,8 @@ type ReadonlyInstanceArgs struct {
 	Cpu pulumi.IntPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion pulumi.StringInput
+	// Dedicated cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
 	InstanceChargeType pulumi.StringPtrInput
 	// ID of the primary instance to which the read-only replica belongs.
@@ -528,6 +671,11 @@ func (o ReadonlyInstanceOutput) CreateTime() pulumi.StringOutput {
 // PostgreSQL kernel version, which must be the same as that of the primary instance.
 func (o ReadonlyInstanceOutput) DbVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DbVersion }).(pulumi.StringOutput)
+}
+
+// Dedicated cluster ID.
+func (o ReadonlyInstanceOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringPtrOutput { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).

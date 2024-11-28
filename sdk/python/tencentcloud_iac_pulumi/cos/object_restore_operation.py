@@ -192,6 +192,8 @@ class ObjectRestoreOperation(pulumi.CustomResource):
         """
         Provides a resource to restore object
 
+        > **NOTE:** The current resource does not support cdc.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -229,6 +231,8 @@ class ObjectRestoreOperation(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to restore object
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 

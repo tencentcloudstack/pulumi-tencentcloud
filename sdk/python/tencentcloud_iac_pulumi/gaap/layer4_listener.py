@@ -20,45 +20,73 @@ class Layer4ListenerArgs:
                  protocol: pulumi.Input[str],
                  proxy_id: pulumi.Input[str],
                  realserver_type: pulumi.Input[str],
+                 check_port: Optional[pulumi.Input[int]] = None,
+                 check_type: Optional[pulumi.Input[str]] = None,
                  client_ip_method: Optional[pulumi.Input[int]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
+                 context_type: Optional[pulumi.Input[str]] = None,
                  health_check: Optional[pulumi.Input[bool]] = None,
+                 healthy_threshold: Optional[pulumi.Input[int]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  realserver_bind_sets: Optional[pulumi.Input[Sequence[pulumi.Input['Layer4ListenerRealserverBindSetArgs']]]] = None,
-                 scheduler: Optional[pulumi.Input[str]] = None):
+                 recv_context: Optional[pulumi.Input[str]] = None,
+                 scheduler: Optional[pulumi.Input[str]] = None,
+                 send_context: Optional[pulumi.Input[str]] = None,
+                 unhealthy_threshold: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Layer4Listener resource.
         :param pulumi.Input[int] port: Port of the layer4 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[int] check_port: UDP origin station health check probe port.
+        :param pulumi.Input[str] check_type: UDP origin server health type. PORT means check port, and PING means PING.
         :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
-        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
+        :param pulumi.Input[str] context_type: UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`.
+        :param pulumi.Input[int] healthy_threshold: Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
         :param pulumi.Input[Sequence[pulumi.Input['Layer4ListenerRealserverBindSetArgs']]] realserver_bind_sets: An information list of GAAP realserver.
+        :param pulumi.Input[str] recv_context: UDP source server health check port detects received messages. Only used when the health check type is PORT.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
+        :param pulumi.Input[str] send_context: UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        :param pulumi.Input[int] unhealthy_threshold: Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
         """
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "protocol", protocol)
         pulumi.set(__self__, "proxy_id", proxy_id)
         pulumi.set(__self__, "realserver_type", realserver_type)
+        if check_port is not None:
+            pulumi.set(__self__, "check_port", check_port)
+        if check_type is not None:
+            pulumi.set(__self__, "check_type", check_type)
         if client_ip_method is not None:
             pulumi.set(__self__, "client_ip_method", client_ip_method)
         if connect_timeout is not None:
             pulumi.set(__self__, "connect_timeout", connect_timeout)
+        if context_type is not None:
+            pulumi.set(__self__, "context_type", context_type)
         if health_check is not None:
             pulumi.set(__self__, "health_check", health_check)
+        if healthy_threshold is not None:
+            pulumi.set(__self__, "healthy_threshold", healthy_threshold)
         if interval is not None:
             pulumi.set(__self__, "interval", interval)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if realserver_bind_sets is not None:
             pulumi.set(__self__, "realserver_bind_sets", realserver_bind_sets)
+        if recv_context is not None:
+            pulumi.set(__self__, "recv_context", recv_context)
         if scheduler is not None:
             pulumi.set(__self__, "scheduler", scheduler)
+        if send_context is not None:
+            pulumi.set(__self__, "send_context", send_context)
+        if unhealthy_threshold is not None:
+            pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
 
     @property
     @pulumi.getter
@@ -109,6 +137,30 @@ class Layer4ListenerArgs:
         pulumi.set(self, "realserver_type", value)
 
     @property
+    @pulumi.getter(name="checkPort")
+    def check_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        UDP origin station health check probe port.
+        """
+        return pulumi.get(self, "check_port")
+
+    @check_port.setter
+    def check_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "check_port", value)
+
+    @property
+    @pulumi.getter(name="checkType")
+    def check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP origin server health type. PORT means check port, and PING means PING.
+        """
+        return pulumi.get(self, "check_type")
+
+    @check_type.setter
+    def check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "check_type", value)
+
+    @property
     @pulumi.getter(name="clientIpMethod")
     def client_ip_method(self) -> Optional[pulumi.Input[int]]:
         """
@@ -124,7 +176,7 @@ class Layer4ListenerArgs:
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
 
@@ -133,10 +185,22 @@ class Layer4ListenerArgs:
         pulumi.set(self, "connect_timeout", value)
 
     @property
+    @pulumi.getter(name="contextType")
+    def context_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "context_type")
+
+    @context_type.setter
+    def context_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "context_type", value)
+
+    @property
     @pulumi.getter(name="healthCheck")
     def health_check(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        Indicates whether health check is enable, default value is `false`.
         """
         return pulumi.get(self, "health_check")
 
@@ -145,10 +209,22 @@ class Layer4ListenerArgs:
         pulumi.set(self, "health_check", value)
 
     @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "healthy_threshold")
+
+    @healthy_threshold.setter
+    def healthy_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "healthy_threshold", value)
+
+    @property
     @pulumi.getter
     def interval(self) -> Optional[pulumi.Input[int]]:
         """
-        Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        Interval of the health check, default value is 5s.
         """
         return pulumi.get(self, "interval")
 
@@ -181,6 +257,18 @@ class Layer4ListenerArgs:
         pulumi.set(self, "realserver_bind_sets", value)
 
     @property
+    @pulumi.getter(name="recvContext")
+    def recv_context(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "recv_context")
+
+    @recv_context.setter
+    def recv_context(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "recv_context", value)
+
+    @property
     @pulumi.getter
     def scheduler(self) -> Optional[pulumi.Input[str]]:
         """
@@ -192,14 +280,42 @@ class Layer4ListenerArgs:
     def scheduler(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "scheduler", value)
 
+    @property
+    @pulumi.getter(name="sendContext")
+    def send_context(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        """
+        return pulumi.get(self, "send_context")
+
+    @send_context.setter
+    def send_context(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "send_context", value)
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "unhealthy_threshold")
+
+    @unhealthy_threshold.setter
+    def unhealthy_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unhealthy_threshold", value)
+
 
 @pulumi.input_type
 class _Layer4ListenerState:
     def __init__(__self__, *,
+                 check_port: Optional[pulumi.Input[int]] = None,
+                 check_type: Optional[pulumi.Input[str]] = None,
                  client_ip_method: Optional[pulumi.Input[int]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
+                 context_type: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  health_check: Optional[pulumi.Input[bool]] = None,
+                 healthy_threshold: Optional[pulumi.Input[int]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -207,32 +323,50 @@ class _Layer4ListenerState:
                  proxy_id: Optional[pulumi.Input[str]] = None,
                  realserver_bind_sets: Optional[pulumi.Input[Sequence[pulumi.Input['Layer4ListenerRealserverBindSetArgs']]]] = None,
                  realserver_type: Optional[pulumi.Input[str]] = None,
+                 recv_context: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[int]] = None):
+                 send_context: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[int]] = None,
+                 unhealthy_threshold: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Layer4Listener resources.
+        :param pulumi.Input[int] check_port: UDP origin station health check probe port.
+        :param pulumi.Input[str] check_type: UDP origin server health type. PORT means check port, and PING means PING.
         :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
+        :param pulumi.Input[str] context_type: UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
         :param pulumi.Input[str] create_time: Creation time of the layer4 listener.
-        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`.
+        :param pulumi.Input[int] healthy_threshold: Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
         :param pulumi.Input[int] port: Port of the layer4 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input['Layer4ListenerRealserverBindSetArgs']]] realserver_bind_sets: An information list of GAAP realserver.
         :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] recv_context: UDP source server health check port detects received messages. Only used when the health check type is PORT.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
+        :param pulumi.Input[str] send_context: UDP source server health check port detection sends messages. Only used when health check type is PORT.
         :param pulumi.Input[int] status: Status of the layer4 listener.
+        :param pulumi.Input[int] unhealthy_threshold: Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
         """
+        if check_port is not None:
+            pulumi.set(__self__, "check_port", check_port)
+        if check_type is not None:
+            pulumi.set(__self__, "check_type", check_type)
         if client_ip_method is not None:
             pulumi.set(__self__, "client_ip_method", client_ip_method)
         if connect_timeout is not None:
             pulumi.set(__self__, "connect_timeout", connect_timeout)
+        if context_type is not None:
+            pulumi.set(__self__, "context_type", context_type)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if health_check is not None:
             pulumi.set(__self__, "health_check", health_check)
+        if healthy_threshold is not None:
+            pulumi.set(__self__, "healthy_threshold", healthy_threshold)
         if interval is not None:
             pulumi.set(__self__, "interval", interval)
         if name is not None:
@@ -247,10 +381,40 @@ class _Layer4ListenerState:
             pulumi.set(__self__, "realserver_bind_sets", realserver_bind_sets)
         if realserver_type is not None:
             pulumi.set(__self__, "realserver_type", realserver_type)
+        if recv_context is not None:
+            pulumi.set(__self__, "recv_context", recv_context)
         if scheduler is not None:
             pulumi.set(__self__, "scheduler", scheduler)
+        if send_context is not None:
+            pulumi.set(__self__, "send_context", send_context)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if unhealthy_threshold is not None:
+            pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
+
+    @property
+    @pulumi.getter(name="checkPort")
+    def check_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        UDP origin station health check probe port.
+        """
+        return pulumi.get(self, "check_port")
+
+    @check_port.setter
+    def check_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "check_port", value)
+
+    @property
+    @pulumi.getter(name="checkType")
+    def check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP origin server health type. PORT means check port, and PING means PING.
+        """
+        return pulumi.get(self, "check_type")
+
+    @check_type.setter
+    def check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "check_type", value)
 
     @property
     @pulumi.getter(name="clientIpMethod")
@@ -268,13 +432,25 @@ class _Layer4ListenerState:
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
 
     @connect_timeout.setter
     def connect_timeout(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "connect_timeout", value)
+
+    @property
+    @pulumi.getter(name="contextType")
+    def context_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "context_type")
+
+    @context_type.setter
+    def context_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "context_type", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -292,7 +468,7 @@ class _Layer4ListenerState:
     @pulumi.getter(name="healthCheck")
     def health_check(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        Indicates whether health check is enable, default value is `false`.
         """
         return pulumi.get(self, "health_check")
 
@@ -301,10 +477,22 @@ class _Layer4ListenerState:
         pulumi.set(self, "health_check", value)
 
     @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "healthy_threshold")
+
+    @healthy_threshold.setter
+    def healthy_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "healthy_threshold", value)
+
+    @property
     @pulumi.getter
     def interval(self) -> Optional[pulumi.Input[int]]:
         """
-        Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        Interval of the health check, default value is 5s.
         """
         return pulumi.get(self, "interval")
 
@@ -385,6 +573,18 @@ class _Layer4ListenerState:
         pulumi.set(self, "realserver_type", value)
 
     @property
+    @pulumi.getter(name="recvContext")
+    def recv_context(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "recv_context")
+
+    @recv_context.setter
+    def recv_context(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "recv_context", value)
+
+    @property
     @pulumi.getter
     def scheduler(self) -> Optional[pulumi.Input[str]]:
         """
@@ -395,6 +595,18 @@ class _Layer4ListenerState:
     @scheduler.setter
     def scheduler(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "scheduler", value)
+
+    @property
+    @pulumi.getter(name="sendContext")
+    def send_context(self) -> Optional[pulumi.Input[str]]:
+        """
+        UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        """
+        return pulumi.get(self, "send_context")
+
+    @send_context.setter
+    def send_context(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "send_context", value)
 
     @property
     @pulumi.getter
@@ -408,15 +620,31 @@ class _Layer4ListenerState:
     def status(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "status", value)
 
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "unhealthy_threshold")
+
+    @unhealthy_threshold.setter
+    def unhealthy_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "unhealthy_threshold", value)
+
 
 class Layer4Listener(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 check_port: Optional[pulumi.Input[int]] = None,
+                 check_type: Optional[pulumi.Input[str]] = None,
                  client_ip_method: Optional[pulumi.Input[int]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
+                 context_type: Optional[pulumi.Input[str]] = None,
                  health_check: Optional[pulumi.Input[bool]] = None,
+                 healthy_threshold: Optional[pulumi.Input[int]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -424,7 +652,10 @@ class Layer4Listener(pulumi.CustomResource):
                  proxy_id: Optional[pulumi.Input[str]] = None,
                  realserver_bind_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]]] = None,
                  realserver_type: Optional[pulumi.Input[str]] = None,
+                 recv_context: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
+                 send_context: Optional[pulumi.Input[str]] = None,
+                 unhealthy_threshold: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Provides a resource to create a layer4 listener of GAAP.
@@ -474,17 +705,24 @@ class Layer4Listener(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] check_port: UDP origin station health check probe port.
+        :param pulumi.Input[str] check_type: UDP origin server health type. PORT means check port, and PING means PING.
         :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
-        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
+        :param pulumi.Input[str] context_type: UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`.
+        :param pulumi.Input[int] healthy_threshold: Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
         :param pulumi.Input[int] port: Port of the layer4 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]] realserver_bind_sets: An information list of GAAP realserver.
         :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] recv_context: UDP source server health check port detects received messages. Only used when the health check type is PORT.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
+        :param pulumi.Input[str] send_context: UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        :param pulumi.Input[int] unhealthy_threshold: Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
         """
         ...
     @overload
@@ -553,9 +791,13 @@ class Layer4Listener(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 check_port: Optional[pulumi.Input[int]] = None,
+                 check_type: Optional[pulumi.Input[str]] = None,
                  client_ip_method: Optional[pulumi.Input[int]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
+                 context_type: Optional[pulumi.Input[str]] = None,
                  health_check: Optional[pulumi.Input[bool]] = None,
+                 healthy_threshold: Optional[pulumi.Input[int]] = None,
                  interval: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
@@ -563,7 +805,10 @@ class Layer4Listener(pulumi.CustomResource):
                  proxy_id: Optional[pulumi.Input[str]] = None,
                  realserver_bind_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]]] = None,
                  realserver_type: Optional[pulumi.Input[str]] = None,
+                 recv_context: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
+                 send_context: Optional[pulumi.Input[str]] = None,
+                 unhealthy_threshold: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -573,9 +818,13 @@ class Layer4Listener(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = Layer4ListenerArgs.__new__(Layer4ListenerArgs)
 
+            __props__.__dict__["check_port"] = check_port
+            __props__.__dict__["check_type"] = check_type
             __props__.__dict__["client_ip_method"] = client_ip_method
             __props__.__dict__["connect_timeout"] = connect_timeout
+            __props__.__dict__["context_type"] = context_type
             __props__.__dict__["health_check"] = health_check
+            __props__.__dict__["healthy_threshold"] = healthy_threshold
             __props__.__dict__["interval"] = interval
             __props__.__dict__["name"] = name
             if port is None and not opts.urn:
@@ -591,7 +840,10 @@ class Layer4Listener(pulumi.CustomResource):
             if realserver_type is None and not opts.urn:
                 raise TypeError("Missing required property 'realserver_type'")
             __props__.__dict__["realserver_type"] = realserver_type
+            __props__.__dict__["recv_context"] = recv_context
             __props__.__dict__["scheduler"] = scheduler
+            __props__.__dict__["send_context"] = send_context
+            __props__.__dict__["unhealthy_threshold"] = unhealthy_threshold
             __props__.__dict__["create_time"] = None
             __props__.__dict__["status"] = None
         super(Layer4Listener, __self__).__init__(
@@ -604,10 +856,14 @@ class Layer4Listener(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            check_port: Optional[pulumi.Input[int]] = None,
+            check_type: Optional[pulumi.Input[str]] = None,
             client_ip_method: Optional[pulumi.Input[int]] = None,
             connect_timeout: Optional[pulumi.Input[int]] = None,
+            context_type: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             health_check: Optional[pulumi.Input[bool]] = None,
+            healthy_threshold: Optional[pulumi.Input[int]] = None,
             interval: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
@@ -615,8 +871,11 @@ class Layer4Listener(pulumi.CustomResource):
             proxy_id: Optional[pulumi.Input[str]] = None,
             realserver_bind_sets: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]]] = None,
             realserver_type: Optional[pulumi.Input[str]] = None,
+            recv_context: Optional[pulumi.Input[str]] = None,
             scheduler: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[int]] = None) -> 'Layer4Listener':
+            send_context: Optional[pulumi.Input[str]] = None,
+            status: Optional[pulumi.Input[int]] = None,
+            unhealthy_threshold: Optional[pulumi.Input[int]] = None) -> 'Layer4Listener':
         """
         Get an existing Layer4Listener resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -624,28 +883,39 @@ class Layer4Listener(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] check_port: UDP origin station health check probe port.
+        :param pulumi.Input[str] check_type: UDP origin server health type. PORT means check port, and PING means PING.
         :param pulumi.Input[int] client_ip_method: The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        :param pulumi.Input[int] connect_timeout: Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
+        :param pulumi.Input[str] context_type: UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
         :param pulumi.Input[str] create_time: Creation time of the layer4 listener.
-        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
-        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        :param pulumi.Input[bool] health_check: Indicates whether health check is enable, default value is `false`.
+        :param pulumi.Input[int] healthy_threshold: Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        :param pulumi.Input[int] interval: Interval of the health check, default value is 5s.
         :param pulumi.Input[str] name: Name of the layer4 listener, the maximum length is 30.
         :param pulumi.Input[int] port: Port of the layer4 listener.
         :param pulumi.Input[str] protocol: Protocol of the layer4 listener. Valid value: `TCP` and `UDP`.
         :param pulumi.Input[str] proxy_id: ID of the GAAP proxy.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['Layer4ListenerRealserverBindSetArgs']]]] realserver_bind_sets: An information list of GAAP realserver.
         :param pulumi.Input[str] realserver_type: Type of the realserver. Valid value: `IP` and `DOMAIN`. NOTES: when the `protocol` is specified as `TCP` and the `scheduler` is specified as `wrr`, the item can only be set to `IP`.
+        :param pulumi.Input[str] recv_context: UDP source server health check port detects received messages. Only used when the health check type is PORT.
         :param pulumi.Input[str] scheduler: Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
+        :param pulumi.Input[str] send_context: UDP source server health check port detection sends messages. Only used when health check type is PORT.
         :param pulumi.Input[int] status: Status of the layer4 listener.
+        :param pulumi.Input[int] unhealthy_threshold: Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _Layer4ListenerState.__new__(_Layer4ListenerState)
 
+        __props__.__dict__["check_port"] = check_port
+        __props__.__dict__["check_type"] = check_type
         __props__.__dict__["client_ip_method"] = client_ip_method
         __props__.__dict__["connect_timeout"] = connect_timeout
+        __props__.__dict__["context_type"] = context_type
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["health_check"] = health_check
+        __props__.__dict__["healthy_threshold"] = healthy_threshold
         __props__.__dict__["interval"] = interval
         __props__.__dict__["name"] = name
         __props__.__dict__["port"] = port
@@ -653,9 +923,28 @@ class Layer4Listener(pulumi.CustomResource):
         __props__.__dict__["proxy_id"] = proxy_id
         __props__.__dict__["realserver_bind_sets"] = realserver_bind_sets
         __props__.__dict__["realserver_type"] = realserver_type
+        __props__.__dict__["recv_context"] = recv_context
         __props__.__dict__["scheduler"] = scheduler
+        __props__.__dict__["send_context"] = send_context
         __props__.__dict__["status"] = status
+        __props__.__dict__["unhealthy_threshold"] = unhealthy_threshold
         return Layer4Listener(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="checkPort")
+    def check_port(self) -> pulumi.Output[int]:
+        """
+        UDP origin station health check probe port.
+        """
+        return pulumi.get(self, "check_port")
+
+    @property
+    @pulumi.getter(name="checkType")
+    def check_type(self) -> pulumi.Output[str]:
+        """
+        UDP origin server health type. PORT means check port, and PING means PING.
+        """
+        return pulumi.get(self, "check_type")
 
     @property
     @pulumi.getter(name="clientIpMethod")
@@ -669,9 +958,17 @@ class Layer4Listener(pulumi.CustomResource):
     @pulumi.getter(name="connectTimeout")
     def connect_timeout(self) -> pulumi.Output[Optional[int]]:
         """
-        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         """
         return pulumi.get(self, "connect_timeout")
+
+    @property
+    @pulumi.getter(name="contextType")
+    def context_type(self) -> pulumi.Output[str]:
+        """
+        UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "context_type")
 
     @property
     @pulumi.getter(name="createTime")
@@ -685,15 +982,23 @@ class Layer4Listener(pulumi.CustomResource):
     @pulumi.getter(name="healthCheck")
     def health_check(self) -> pulumi.Output[Optional[bool]]:
         """
-        Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        Indicates whether health check is enable, default value is `false`.
         """
         return pulumi.get(self, "health_check")
+
+    @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> pulumi.Output[Optional[int]]:
+        """
+        Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "healthy_threshold")
 
     @property
     @pulumi.getter
     def interval(self) -> pulumi.Output[Optional[int]]:
         """
-        Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        Interval of the health check, default value is 5s.
         """
         return pulumi.get(self, "interval")
 
@@ -746,6 +1051,14 @@ class Layer4Listener(pulumi.CustomResource):
         return pulumi.get(self, "realserver_type")
 
     @property
+    @pulumi.getter(name="recvContext")
+    def recv_context(self) -> pulumi.Output[str]:
+        """
+        UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        """
+        return pulumi.get(self, "recv_context")
+
+    @property
     @pulumi.getter
     def scheduler(self) -> pulumi.Output[Optional[str]]:
         """
@@ -754,10 +1067,26 @@ class Layer4Listener(pulumi.CustomResource):
         return pulumi.get(self, "scheduler")
 
     @property
+    @pulumi.getter(name="sendContext")
+    def send_context(self) -> pulumi.Output[str]:
+        """
+        UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        """
+        return pulumi.get(self, "send_context")
+
+    @property
     @pulumi.getter
     def status(self) -> pulumi.Output[int]:
         """
         Status of the layer4 listener.
         """
         return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> pulumi.Output[Optional[int]]:
+        """
+        Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        """
+        return pulumi.get(self, "unhealthy_threshold")
 

@@ -15,6 +15,9 @@ __all__ = [
     'AccelerationDomainOriginInfoPrivateParameter',
     'ApplicationProxyIpv6',
     'CertificateConfigServerCertInfo',
+    'FunctionRuleFunctionRuleCondition',
+    'FunctionRuleFunctionRuleConditionRuleCondition',
+    'FunctionRuntimeEnvironmentEnvironmentVariable',
     'L4ProxyDdosProtectionConfig',
     'OriginGroupRecord',
     'OriginGroupRecordPrivateParameter',
@@ -48,6 +51,7 @@ __all__ = [
     'RuleEngineRuleSubRuleRuleActionRewriteActionParameter',
     'RuleEngineRuleSubRuleRuleOr',
     'RuleEngineRuleSubRuleRuleOrAnd',
+    'SecurityIpGroupIpGroup',
     'ZoneOwnershipVerification',
     'ZoneOwnershipVerificationDnsVerification',
     'ZoneSettingCache',
@@ -327,6 +331,181 @@ class CertificateConfigServerCertInfo(dict):
         Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate. Note: This field may return `null`, indicating that no valid value can be obtained.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class FunctionRuleFunctionRuleCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ruleConditions":
+            suggest = "rule_conditions"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionRuleFunctionRuleCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionRuleFunctionRuleCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionRuleFunctionRuleCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 rule_conditions: Sequence['outputs.FunctionRuleFunctionRuleConditionRuleCondition']):
+        """
+        :param Sequence['FunctionRuleFunctionRuleConditionRuleConditionArgs'] rule_conditions: For edge function trigger rule conditions, if all items in the list are satisfied, then the condition is considered fulfilled.
+        """
+        pulumi.set(__self__, "rule_conditions", rule_conditions)
+
+    @property
+    @pulumi.getter(name="ruleConditions")
+    def rule_conditions(self) -> Sequence['outputs.FunctionRuleFunctionRuleConditionRuleCondition']:
+        """
+        For edge function trigger rule conditions, if all items in the list are satisfied, then the condition is considered fulfilled.
+        """
+        return pulumi.get(self, "rule_conditions")
+
+
+@pulumi.output_type
+class FunctionRuleFunctionRuleConditionRuleCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ignoreCase":
+            suggest = "ignore_case"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in FunctionRuleFunctionRuleConditionRuleCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        FunctionRuleFunctionRuleConditionRuleCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        FunctionRuleFunctionRuleConditionRuleCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 operator: str,
+                 target: str,
+                 ignore_case: Optional[bool] = None,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str operator: Operator. Valid values:
+        :param str target: The match type. Values:
+        :param bool ignore_case: Whether the parameter value is case insensitive. Default value: false.
+        :param str name: The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+        :param Sequence[str] values: The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+               - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+               - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+               - When `Target=all`, it indicates any site request.
+               - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+               - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+               - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+               - When `Target=client_country`, enter the ISO-3166 country/region code.
+               - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+               - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
+        """
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "target", target)
+        if ignore_case is not None:
+            pulumi.set(__self__, "ignore_case", ignore_case)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> str:
+        """
+        Operator. Valid values:
+        """
+        return pulumi.get(self, "operator")
+
+    @property
+    @pulumi.getter
+    def target(self) -> str:
+        """
+        The match type. Values:
+        """
+        return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter(name="ignoreCase")
+    def ignore_case(self) -> Optional[bool]:
+        """
+        Whether the parameter value is case insensitive. Default value: false.
+        """
+        return pulumi.get(self, "ignore_case")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+        - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+        - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+        - When `Target=all`, it indicates any site request.
+        - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+        - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+        - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+        - When `Target=client_country`, enter the ISO-3166 country/region code.
+        - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+        - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class FunctionRuntimeEnvironmentEnvironmentVariable(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 type: str,
+                 value: str):
+        """
+        :param str key: The name of the variable, which is limited to alphanumeric characters and the special characters `@`, `.`, `-`, and `_`. It can have a maximum of 64 bytes and should not be duplicated.
+        :param str type: The type of the variable can have the following values:  - `string`: Represents a string type.  - `json`: Represents a JSON object type.
+        :param str value: The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The name of the variable, which is limited to alphanumeric characters and the special characters `@`, `.`, `-`, and `_`. It can have a maximum of 64 bytes and should not be duplicated.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of the variable can have the following values:  - `string`: Represents a string type.  - `json`: Represents a JSON object type.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -2011,6 +2190,64 @@ class RuleEngineRuleSubRuleRuleOrAnd(dict):
         - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class SecurityIpGroupIpGroup(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "groupId":
+            suggest = "group_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SecurityIpGroupIpGroup. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SecurityIpGroupIpGroup.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SecurityIpGroupIpGroup.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 contents: Sequence[str],
+                 name: str,
+                 group_id: Optional[int] = None):
+        """
+        :param Sequence[str] contents: IP group content. Only supports IP and IP mask.
+        :param str name: Group name.
+        :param int group_id: Group ID.
+        """
+        pulumi.set(__self__, "contents", contents)
+        pulumi.set(__self__, "name", name)
+        if group_id is not None:
+            pulumi.set(__self__, "group_id", group_id)
+
+    @property
+    @pulumi.getter
+    def contents(self) -> Sequence[str]:
+        """
+        IP group content. Only supports IP and IP mask.
+        """
+        return pulumi.get(self, "contents")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Group name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[int]:
+        """
+        Group ID.
+        """
+        return pulumi.get(self, "group_id")
 
 
 @pulumi.output_type

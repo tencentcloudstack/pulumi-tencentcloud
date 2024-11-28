@@ -152,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// Local FQDN name of the IKE operation specification.
         /// </summary>
         [Output("ikeLocalFqdnName")]
-        public Output<string?> IkeLocalFqdnName { get; private set; } = null!;
+        public Output<string> IkeLocalFqdnName { get; private set; } = null!;
 
         /// <summary>
         /// Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
@@ -182,7 +182,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// Remote FQDN name of the IKE operation specification.
         /// </summary>
         [Output("ikeRemoteFqdnName")]
-        public Output<string?> IkeRemoteFqdnName { get; private set; } = null!;
+        public Output<string> IkeRemoteFqdnName { get; private set; } = null!;
 
         /// <summary>
         /// Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.

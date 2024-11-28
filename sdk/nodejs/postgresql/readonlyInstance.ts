@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Create postgresql readonly instance
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -31,7 +33,7 @@ import * as utilities from "../utilities";
  *     chargeType: "POSTPAID_BY_HOUR",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
- *     engineVersion: "10.4",
+ *     dbMajorVersion: "10",
  *     rootUser: "root123",
  *     rootPassword: "Root123$",
  *     charset: "UTF8",
@@ -43,6 +45,7 @@ import * as utilities from "../utilities";
  *         test: "tf",
  *     },
  * });
+ * // create postgresql readonly group
  * const exampleReadonlyGroup = new tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup", {
  *     masterDbInstanceId: exampleInstance.id,
  *     projectId: 0,
@@ -62,12 +65,13 @@ import * as utilities from "../utilities";
  *         example: "test",
  *     },
  * });
+ * // create postgresql readonly instance
  * const exampleReadonlyInstance = new tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance", {
  *     readOnlyGroupId: exampleReadonlyGroup.id,
  *     masterDbInstanceId: exampleInstance.id,
  *     zone: availabilityZone,
  *     autoRenewFlag: 0,
- *     dbVersion: "10.4",
+ *     dbVersion: "10.23",
  *     instanceChargeType: "POSTPAID_BY_HOUR",
  *     memory: 4,
  *     cpu: 2,
@@ -81,12 +85,100 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
+ * ### Create postgresql readonly instance of CDC
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create postgresql
+ * const exampleInstance = new tencentcloud.postgresql.Instance("exampleInstance", {
+ *     availabilityZone: availabilityZone,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dbMajorVersion: "10",
+ *     rootUser: "root123",
+ *     rootPassword: "Root123$",
+ *     charset: "UTF8",
+ *     projectId: 0,
+ *     memory: 2,
+ *     cpu: 1,
+ *     storage: 10,
+ *     dbNodeSets: [
+ *         {
+ *             role: "Primary",
+ *             zone: availabilityZone,
+ *             dedicatedClusterId: "cluster-262n63e8",
+ *         },
+ *         {
+ *             zone: availabilityZone,
+ *             dedicatedClusterId: "cluster-262n63e8",
+ *         },
+ *     ],
+ *     tags: {
+ *         CreateBy: "terraform",
+ *     },
+ * });
+ * // create postgresql readonly group
+ * const exampleReadonlyGroup = new tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup", {
+ *     masterDbInstanceId: exampleInstance.id,
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     replayLagEliminate: 1,
+ *     replayLatencyEliminate: 1,
+ *     maxReplayLag: 100,
+ *     maxReplayLatency: 512,
+ *     minDelayEliminateReserve: 1,
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         CreateBy: "terraform",
+ *     },
+ * });
+ * // create postgresql readonly instance
+ * const exampleReadonlyInstance = new tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance", {
+ *     readOnlyGroupId: exampleReadonlyGroup.id,
+ *     masterDbInstanceId: exampleInstance.id,
+ *     zone: availabilityZone,
+ *     autoRenewFlag: 0,
+ *     dbVersion: "10.23",
+ *     instanceChargeType: "POSTPAID_BY_HOUR",
+ *     memory: 4,
+ *     cpu: 2,
+ *     storage: 250,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     needSupportIpv6: 0,
+ *     projectId: 0,
+ *     dedicatedClusterId: "cluster-262n63e8",
+ *     securityGroupsIds: [exampleGroup.id],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * postgresql readonly instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
+ * $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example pgro-gih5m0ke
  * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
@@ -137,6 +229,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * PostgreSQL kernel version, which must be the same as that of the primary instance.
      */
     public readonly dbVersion!: pulumi.Output<string>;
+    /**
+     * Dedicated cluster ID.
+     */
+    public readonly dedicatedClusterId!: pulumi.Output<string | undefined>;
     /**
      * instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
      */
@@ -224,6 +320,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dbVersion"] = state ? state.dbVersion : undefined;
+            resourceInputs["dedicatedClusterId"] = state ? state.dedicatedClusterId : undefined;
             resourceInputs["instanceChargeType"] = state ? state.instanceChargeType : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["masterDbInstanceId"] = state ? state.masterDbInstanceId : undefined;
@@ -274,6 +371,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["autoVoucher"] = args ? args.autoVoucher : undefined;
             resourceInputs["cpu"] = args ? args.cpu : undefined;
             resourceInputs["dbVersion"] = args ? args.dbVersion : undefined;
+            resourceInputs["dedicatedClusterId"] = args ? args.dedicatedClusterId : undefined;
             resourceInputs["instanceChargeType"] = args ? args.instanceChargeType : undefined;
             resourceInputs["masterDbInstanceId"] = args ? args.masterDbInstanceId : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
@@ -322,6 +420,10 @@ export interface ReadonlyInstanceState {
      * PostgreSQL kernel version, which must be the same as that of the primary instance.
      */
     dbVersion?: pulumi.Input<string>;
+    /**
+     * Dedicated cluster ID.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
      */
@@ -412,6 +514,10 @@ export interface ReadonlyInstanceArgs {
      * PostgreSQL kernel version, which must be the same as that of the primary instance.
      */
     dbVersion: pulumi.Input<string>;
+    /**
+     * Dedicated cluster ID.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
      */

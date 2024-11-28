@@ -15,6 +15,34 @@ import (
 //
 // ## Example Usage
 //
+// ### Query all CBS storages
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.GetStorages(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query CBS by storage id
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -29,8 +57,36 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
-//				ResultOutputFile: pulumi.StringRef("mytestpath"),
-//				StorageId:        pulumi.StringRef("disk-kdt0sq6m"),
+//				ResultOutputFile: pulumi.StringRef("my-test-path"),
+//				StorageId:        pulumi.StringRef("disk-6goq404g"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query CBS by dedicated cluster id
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.GetStorages(ctx, &cbs.GetStoragesArgs{
+//				DedicatedClusterId: pulumi.StringRef("cluster-262n63e8"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -61,6 +117,8 @@ import (
 //				ChargeTypes: []string{
 //					"POSTPAID_BY_HOUR",
 //					"PREPAID",
+//					"CDCPAID",
+//					"DEDICATED_CLUSTER_PAID",
 //				},
 //				InstanceIps: []string{
 //					"10.0.0.2",
@@ -73,7 +131,7 @@ import (
 //					"ATTACHED",
 //				},
 //				TagKeys: []string{
-//					"foo",
+//					"example",
 //				},
 //				TagValues: []string{
 //					"bar",
@@ -103,8 +161,10 @@ func GetStorages(ctx *pulumi.Context, args *GetStoragesArgs, opts ...pulumi.Invo
 type GetStoragesArgs struct {
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeTypes []string `pulumi:"chargeTypes"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// List filter by attached instance public or private IPs.
 	InstanceIps []string `pulumi:"instanceIps"`
 	// List filter by attached instance name.
@@ -137,6 +197,8 @@ type GetStoragesResult struct {
 	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Pay type of the CBS instance.
 	ChargeTypes []string `pulumi:"chargeTypes"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// The provider-assigned unique ID for this managed resource.
 	Id            string   `pulumi:"id"`
 	InstanceIps   []string `pulumi:"instanceIps"`
@@ -177,8 +239,10 @@ func GetStoragesOutput(ctx *pulumi.Context, args GetStoragesOutputArgs, opts ...
 type GetStoragesOutputArgs struct {
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringPtrInput `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeTypes pulumi.StringArrayInput `pulumi:"chargeTypes"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput `pulumi:"dedicatedClusterId"`
 	// List filter by attached instance public or private IPs.
 	InstanceIps pulumi.StringArrayInput `pulumi:"instanceIps"`
 	// List filter by attached instance name.
@@ -232,6 +296,11 @@ func (o GetStoragesResultOutput) AvailabilityZone() pulumi.StringPtrOutput {
 // Pay type of the CBS instance.
 func (o GetStoragesResultOutput) ChargeTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetStoragesResult) []string { return v.ChargeTypes }).(pulumi.StringArrayOutput)
+}
+
+// Exclusive cluster id.
+func (o GetStoragesResultOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetStoragesResult) *string { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The provider-assigned unique ID for this managed resource.

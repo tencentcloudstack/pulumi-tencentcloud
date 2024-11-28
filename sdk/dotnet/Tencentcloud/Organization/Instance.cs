@@ -137,6 +137,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         [Output("rootNodeId")]
         public Output<int> RootNodeId { get; private set; } = null!;
 
+        /// <summary>
+        /// Root node name.
+        /// </summary>
+        [Output("rootNodeName")]
+        public Output<string> RootNodeName { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Instance resource with the given unique name, arguments, and options.
@@ -184,6 +190,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
 
     public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Root node name.
+        /// </summary>
+        [Input("rootNodeName")]
+        public Input<string>? RootNodeName { get; set; }
+
         public InstanceArgs()
         {
         }
@@ -293,6 +305,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// </summary>
         [Input("rootNodeId")]
         public Input<int>? RootNodeId { get; set; }
+
+        /// <summary>
+        /// Root node name.
+        /// </summary>
+        [Input("rootNodeName")]
+        public Input<string>? RootNodeName { get; set; }
 
         public InstanceState()
         {

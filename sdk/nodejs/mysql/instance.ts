@@ -149,6 +149,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly deviceType!: pulumi.Output<string>;
     /**
+     * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+     */
+    public readonly engineType!: pulumi.Output<string>;
+    /**
      * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
     public readonly engineVersion!: pulumi.Output<string | undefined>;
@@ -303,6 +307,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["deviceType"] = state ? state.deviceType : undefined;
+            resourceInputs["engineType"] = state ? state.engineType : undefined;
             resourceInputs["engineVersion"] = state ? state.engineVersion : undefined;
             resourceInputs["fastUpgrade"] = state ? state.fastUpgrade : undefined;
             resourceInputs["firstSlaveZone"] = state ? state.firstSlaveZone : undefined;
@@ -352,6 +357,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
             resourceInputs["cpu"] = args ? args.cpu : undefined;
             resourceInputs["deviceType"] = args ? args.deviceType : undefined;
+            resourceInputs["engineType"] = args ? args.engineType : undefined;
             resourceInputs["engineVersion"] = args ? args.engineVersion : undefined;
             resourceInputs["fastUpgrade"] = args ? args.fastUpgrade : undefined;
             resourceInputs["firstSlaveZone"] = args ? args.firstSlaveZone : undefined;
@@ -417,6 +423,10 @@ export interface InstanceState {
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
     deviceType?: pulumi.Input<string>;
+    /**
+     * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+     */
+    engineType?: pulumi.Input<string>;
     /**
      * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
@@ -579,6 +589,10 @@ export interface InstanceArgs {
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
     deviceType?: pulumi.Input<string>;
+    /**
+     * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+     */
+    engineType?: pulumi.Input<string>;
     /**
      * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */

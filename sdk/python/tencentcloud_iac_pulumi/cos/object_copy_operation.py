@@ -21,7 +21,7 @@ class ObjectCopyOperationArgs:
         The set of arguments for constructing a ObjectCopyOperation resource.
         :param pulumi.Input[str] bucket: Bucket.
         :param pulumi.Input[str] key: Object key.
-        :param pulumi.Input[str] source_url: Object key.
+        :param pulumi.Input[str] source_url: Source url. In the CDC scenario, the CDC source url is used.
         """
         pulumi.set(__self__, "bucket", bucket)
         pulumi.set(__self__, "key", key)
@@ -55,7 +55,7 @@ class ObjectCopyOperationArgs:
     @pulumi.getter(name="sourceUrl")
     def source_url(self) -> pulumi.Input[str]:
         """
-        Object key.
+        Source url. In the CDC scenario, the CDC source url is used.
         """
         return pulumi.get(self, "source_url")
 
@@ -74,7 +74,7 @@ class _ObjectCopyOperationState:
         Input properties used for looking up and filtering ObjectCopyOperation resources.
         :param pulumi.Input[str] bucket: Bucket.
         :param pulumi.Input[str] key: Object key.
-        :param pulumi.Input[str] source_url: Object key.
+        :param pulumi.Input[str] source_url: Source url. In the CDC scenario, the CDC source url is used.
         """
         if bucket is not None:
             pulumi.set(__self__, "bucket", bucket)
@@ -111,7 +111,7 @@ class _ObjectCopyOperationState:
     @pulumi.getter(name="sourceUrl")
     def source_url(self) -> Optional[pulumi.Input[str]]:
         """
-        Object key.
+        Source url. In the CDC scenario, the CDC source url is used.
         """
         return pulumi.get(self, "source_url")
 
@@ -150,7 +150,7 @@ class ObjectCopyOperation(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bucket: Bucket.
         :param pulumi.Input[str] key: Object key.
-        :param pulumi.Input[str] source_url: Object key.
+        :param pulumi.Input[str] source_url: Source url. In the CDC scenario, the CDC source url is used.
         """
         ...
     @overload
@@ -233,7 +233,7 @@ class ObjectCopyOperation(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] bucket: Bucket.
         :param pulumi.Input[str] key: Object key.
-        :param pulumi.Input[str] source_url: Object key.
+        :param pulumi.Input[str] source_url: Source url. In the CDC scenario, the CDC source url is used.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -264,7 +264,7 @@ class ObjectCopyOperation(pulumi.CustomResource):
     @pulumi.getter(name="sourceUrl")
     def source_url(self) -> pulumi.Output[str]:
         """
-        Object key.
+        Source url. In the CDC scenario, the CDC source url is used.
         """
         return pulumi.get(self, "source_url")
 

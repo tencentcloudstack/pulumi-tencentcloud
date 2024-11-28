@@ -101,7 +101,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
+//			_, err = Kubernetes.NewAuthAttachment(ctx, "example", &Kubernetes.AuthAttachmentArgs{
 //				ClusterId: managedCluster.ID(),
 //				JwksUri: managedCluster.ID().ApplyT(func(id string) (string, error) {
 //					return fmt.Sprintf("https://%v.ccs.tencent-cloud.com/openid/v1/jwks", id), nil
@@ -205,7 +205,7 @@ import (
 //				return err
 //			}
 //			// if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-//			_, err = Kubernetes.NewAuthAttachment(ctx, "testUseTkeDefaultAuthAttach", &Kubernetes.AuthAttachmentArgs{
+//			_, err = Kubernetes.NewAuthAttachment(ctx, "example", &Kubernetes.AuthAttachmentArgs{
 //				ClusterId:                        managedCluster.ID(),
 //				AutoCreateDiscoveryAnonymousAuth: pulumi.Bool(true),
 //				UseTkeDefault:                    pulumi.Bool(true),
@@ -236,7 +236,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kubernetes.NewAuthAttachment(ctx, "testAuthAttach", &Kubernetes.AuthAttachmentArgs{
+//			_, err := Kubernetes.NewAuthAttachment(ctx, "example", &Kubernetes.AuthAttachmentArgs{
 //				ClusterId:                          pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
 //				UseTkeDefault:                      pulumi.Bool(true),
 //				AutoCreateDiscoveryAnonymousAuth:   pulumi.Bool(true),
@@ -266,7 +266,7 @@ import (
 // tke cluster authentication can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
 // ```
 type AuthAttachment struct {
 	pulumi.CustomResourceState

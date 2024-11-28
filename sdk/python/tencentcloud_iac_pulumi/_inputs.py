@@ -11,6 +11,8 @@ from . import _utilities
 
 __all__ = [
     'ProviderAssumeRoleArgs',
+    'ProviderAssumeRoleWithSamlArgs',
+    'ProviderAssumeRoleWithWebIdentityArgs',
 ]
 
 @pulumi.input_type
@@ -19,16 +21,20 @@ class ProviderAssumeRoleArgs:
                  role_arn: pulumi.Input[str],
                  session_duration: pulumi.Input[int],
                  session_name: pulumi.Input[str],
+                 external_id: Optional[pulumi.Input[str]] = None,
                  policy: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] role_arn: The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
         :param pulumi.Input[int] session_duration: The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
         :param pulumi.Input[str] session_name: The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+        :param pulumi.Input[str] external_id: External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
         :param pulumi.Input[str] policy: A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
         """
         pulumi.set(__self__, "role_arn", role_arn)
         pulumi.set(__self__, "session_duration", session_duration)
         pulumi.set(__self__, "session_name", session_name)
+        if external_id is not None:
+            pulumi.set(__self__, "external_id", external_id)
         if policy is not None:
             pulumi.set(__self__, "policy", policy)
 
@@ -69,6 +75,18 @@ class ProviderAssumeRoleArgs:
         pulumi.set(self, "session_name", value)
 
     @property
+    @pulumi.getter(name="externalId")
+    def external_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+        """
+        return pulumi.get(self, "external_id")
+
+    @external_id.setter
+    def external_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "external_id", value)
+
+    @property
     @pulumi.getter
     def policy(self) -> Optional[pulumi.Input[str]]:
         """
@@ -79,5 +97,154 @@ class ProviderAssumeRoleArgs:
     @policy.setter
     def policy(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "policy", value)
+
+
+@pulumi.input_type
+class ProviderAssumeRoleWithSamlArgs:
+    def __init__(__self__, *,
+                 principal_arn: pulumi.Input[str],
+                 role_arn: pulumi.Input[str],
+                 saml_assertion: pulumi.Input[str],
+                 session_duration: pulumi.Input[int],
+                 session_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] principal_arn: Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+        :param pulumi.Input[str] role_arn: The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+        :param pulumi.Input[str] saml_assertion: SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+        :param pulumi.Input[int] session_duration: The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+        :param pulumi.Input[str] session_name: The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+        """
+        pulumi.set(__self__, "principal_arn", principal_arn)
+        pulumi.set(__self__, "role_arn", role_arn)
+        pulumi.set(__self__, "saml_assertion", saml_assertion)
+        pulumi.set(__self__, "session_duration", session_duration)
+        pulumi.set(__self__, "session_name", session_name)
+
+    @property
+    @pulumi.getter(name="principalArn")
+    def principal_arn(self) -> pulumi.Input[str]:
+        """
+        Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+        """
+        return pulumi.get(self, "principal_arn")
+
+    @principal_arn.setter
+    def principal_arn(self, value: pulumi.Input[str]):
+        pulumi.set(self, "principal_arn", value)
+
+    @property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> pulumi.Input[str]:
+        """
+        The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: pulumi.Input[str]):
+        pulumi.set(self, "role_arn", value)
+
+    @property
+    @pulumi.getter(name="samlAssertion")
+    def saml_assertion(self) -> pulumi.Input[str]:
+        """
+        SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+        """
+        return pulumi.get(self, "saml_assertion")
+
+    @saml_assertion.setter
+    def saml_assertion(self, value: pulumi.Input[str]):
+        pulumi.set(self, "saml_assertion", value)
+
+    @property
+    @pulumi.getter(name="sessionDuration")
+    def session_duration(self) -> pulumi.Input[int]:
+        """
+        The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+        """
+        return pulumi.get(self, "session_duration")
+
+    @session_duration.setter
+    def session_duration(self, value: pulumi.Input[int]):
+        pulumi.set(self, "session_duration", value)
+
+    @property
+    @pulumi.getter(name="sessionName")
+    def session_name(self) -> pulumi.Input[str]:
+        """
+        The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+        """
+        return pulumi.get(self, "session_name")
+
+    @session_name.setter
+    def session_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "session_name", value)
+
+
+@pulumi.input_type
+class ProviderAssumeRoleWithWebIdentityArgs:
+    def __init__(__self__, *,
+                 role_arn: pulumi.Input[str],
+                 session_duration: pulumi.Input[int],
+                 session_name: pulumi.Input[str],
+                 web_identity_token: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] role_arn: The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+        :param pulumi.Input[int] session_duration: The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+        :param pulumi.Input[str] session_name: The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+        :param pulumi.Input[str] web_identity_token: OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+        """
+        pulumi.set(__self__, "role_arn", role_arn)
+        pulumi.set(__self__, "session_duration", session_duration)
+        pulumi.set(__self__, "session_name", session_name)
+        pulumi.set(__self__, "web_identity_token", web_identity_token)
+
+    @property
+    @pulumi.getter(name="roleArn")
+    def role_arn(self) -> pulumi.Input[str]:
+        """
+        The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+        """
+        return pulumi.get(self, "role_arn")
+
+    @role_arn.setter
+    def role_arn(self, value: pulumi.Input[str]):
+        pulumi.set(self, "role_arn", value)
+
+    @property
+    @pulumi.getter(name="sessionDuration")
+    def session_duration(self) -> pulumi.Input[int]:
+        """
+        The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+        """
+        return pulumi.get(self, "session_duration")
+
+    @session_duration.setter
+    def session_duration(self, value: pulumi.Input[int]):
+        pulumi.set(self, "session_duration", value)
+
+    @property
+    @pulumi.getter(name="sessionName")
+    def session_name(self) -> pulumi.Input[str]:
+        """
+        The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+        """
+        return pulumi.get(self, "session_name")
+
+    @session_name.setter
+    def session_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "session_name", value)
+
+    @property
+    @pulumi.getter(name="webIdentityToken")
+    def web_identity_token(self) -> pulumi.Input[str]:
+        """
+        OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+        """
+        return pulumi.get(self, "web_identity_token")
+
+    @web_identity_token.setter
+    def web_identity_token(self, value: pulumi.Input[str]):
+        pulumi.set(self, "web_identity_token", value)
 
 
