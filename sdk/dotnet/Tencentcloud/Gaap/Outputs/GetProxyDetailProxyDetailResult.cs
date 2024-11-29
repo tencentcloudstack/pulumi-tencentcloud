@@ -87,6 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetProxyDetailProxyDetailIpListResult> IpLists;
         /// <summary>
+        /// Whether to allow TLS configuration.0-no support, 1-expressed support.
+        /// </summary>
+        public readonly int IsSupportTlsChoice;
+        /// <summary>
         /// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
         /// </summary>
         public readonly int ModifyConfigTime;
@@ -193,6 +197,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
 
             ImmutableArray<Outputs.GetProxyDetailProxyDetailIpListResult> ipLists,
 
+            int isSupportTlsChoice,
+
             int modifyConfigTime,
 
             string networkType,
@@ -245,6 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
             Ip = ip;
             IpAddressVersion = ipAddressVersion;
             IpLists = ipLists;
+            IsSupportTlsChoice = isSupportTlsChoice;
             ModifyConfigTime = modifyConfigTime;
             NetworkType = networkType;
             PackageType = packageType;

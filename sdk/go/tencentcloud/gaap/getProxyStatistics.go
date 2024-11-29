@@ -74,7 +74,7 @@ type GetProxyStatisticsArgs struct {
 	Granularity int `pulumi:"granularity"`
 	// Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.
 	Isp *string `pulumi:"isp"`
-	// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+	// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
 	MetricNames []string `pulumi:"metricNames"`
 	// Proxy Id.
 	ProxyId string `pulumi:"proxyId"`
@@ -120,7 +120,7 @@ type GetProxyStatisticsOutputArgs struct {
 	Granularity pulumi.IntInput `pulumi:"granularity"`
 	// Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.
 	Isp pulumi.StringPtrInput `pulumi:"isp"`
-	// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+	// Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
 	MetricNames pulumi.StringArrayInput `pulumi:"metricNames"`
 	// Proxy Id.
 	ProxyId pulumi.StringInput `pulumi:"proxyId"`

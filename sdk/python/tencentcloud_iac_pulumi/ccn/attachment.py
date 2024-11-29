@@ -19,7 +19,8 @@ class AttachmentArgs:
                  instance_region: pulumi.Input[str],
                  instance_type: pulumi.Input[str],
                  ccn_uin: Optional[pulumi.Input[str]] = None,
-                 description: Optional[pulumi.Input[str]] = None):
+                 description: Optional[pulumi.Input[str]] = None,
+                 route_table_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Attachment resource.
         :param pulumi.Input[str] ccn_id: ID of the CCN.
@@ -28,6 +29,7 @@ class AttachmentArgs:
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         :param pulumi.Input[str] ccn_uin: Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
         :param pulumi.Input[str] description: Remark of attachment.
+        :param pulumi.Input[str] route_table_id: Ccn instance route table ID.
         """
         pulumi.set(__self__, "ccn_id", ccn_id)
         pulumi.set(__self__, "instance_id", instance_id)
@@ -37,6 +39,8 @@ class AttachmentArgs:
             pulumi.set(__self__, "ccn_uin", ccn_uin)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if route_table_id is not None:
+            pulumi.set(__self__, "route_table_id", route_table_id)
 
     @property
     @pulumi.getter(name="ccnId")
@@ -110,6 +114,18 @@ class AttachmentArgs:
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
 
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ccn instance route table ID.
+        """
+        return pulumi.get(self, "route_table_id")
+
+    @route_table_id.setter
+    def route_table_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "route_table_id", value)
+
 
 @pulumi.input_type
 class _AttachmentState:
@@ -123,6 +139,7 @@ class _AttachmentState:
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
                  route_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 route_table_id: Optional[pulumi.Input[str]] = None,
                  state: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Attachment resources.
@@ -135,6 +152,7 @@ class _AttachmentState:
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_ids: Route id list.
+        :param pulumi.Input[str] route_table_id: Ccn instance route table ID.
         :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         if attached_time is not None:
@@ -155,6 +173,8 @@ class _AttachmentState:
             pulumi.set(__self__, "instance_type", instance_type)
         if route_ids is not None:
             pulumi.set(__self__, "route_ids", route_ids)
+        if route_table_id is not None:
+            pulumi.set(__self__, "route_table_id", route_table_id)
         if state is not None:
             pulumi.set(__self__, "state", state)
 
@@ -267,6 +287,18 @@ class _AttachmentState:
         pulumi.set(self, "route_ids", value)
 
     @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Ccn instance route table ID.
+        """
+        return pulumi.get(self, "route_table_id")
+
+    @route_table_id.setter
+    def route_table_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "route_table_id", value)
+
+    @property
     @pulumi.getter
     def state(self) -> Optional[pulumi.Input[str]]:
         """
@@ -290,11 +322,14 @@ class Attachment(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
+                 route_table_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Provides a CCN attaching resource.
 
         ## Example Usage
+
+        ### Only Attachment instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -305,33 +340,90 @@ class Attachment(pulumi.CustomResource):
         region = config.get("region")
         if region is None:
             region = "ap-guangzhou"
-        otheruin = config.get("otheruin")
-        if otheruin is None:
-            otheruin = "123353"
-        otherccn = config.get("otherccn")
-        if otherccn is None:
-            otherccn = "ccn-151ssaga"
-        vpc = tencentcloud.vpc.Instance("vpc",
-            cidr_block="10.0.0.0/16",
-            dns_servers=[
-                "119.29.29.29",
-                "8.8.8.8",
-            ],
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        other_uin = config.get("otherUin")
+        if other_uin is None:
+            other_uin = "100031344528"
+        other_ccn = config.get("otherCcn")
+        if other_ccn is None:
+            other_ccn = "ccn-qhgojahx"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="172.16.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="172.16.0.0/24",
             is_multicast=False)
-        main = tencentcloud.ccn.Instance("main",
-            description="ci-temp-test-ccn-des",
-            qos="AG")
+        # create ccn
+        example = tencentcloud.ccn.Instance("example",
+            description="desc.",
+            qos="AG",
+            charge_type="PREPAID",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            tags={
+                "createBy": "terraform",
+            })
+        # attachment instance
         attachment = tencentcloud.ccn.Attachment("attachment",
-            ccn_id=main.id,
-            instance_type="VPC",
+            ccn_id=example.id,
             instance_id=vpc.id,
+            instance_type="VPC",
             instance_region=region)
+        # attachment other instance
         other_account = tencentcloud.ccn.Attachment("otherAccount",
-            ccn_id=otherccn,
-            instance_type="VPC",
+            ccn_id=other_ccn,
             instance_id=vpc.id,
+            instance_type="VPC",
             instance_region=region,
-            ccn_uin=otheruin)
+            ccn_uin=other_uin)
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Attachment instance & route table
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        region = config.get("region")
+        if region is None:
+            region = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="172.16.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="172.16.0.0/24",
+            is_multicast=False)
+        # create ccn
+        example_instance = tencentcloud.ccn.Instance("exampleInstance",
+            description="desc.",
+            qos="AG",
+            charge_type="PREPAID",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            tags={
+                "createBy": "terraform",
+            })
+        # create ccn route table
+        example_route_table = tencentcloud.ccn.RouteTable("exampleRouteTable",
+            ccn_id=example_instance.id,
+            description="desc.")
+        # attachment instance & route table
+        attachment = tencentcloud.ccn.Attachment("attachment",
+            ccn_id=example_instance.id,
+            instance_id=vpc.id,
+            instance_type="VPC",
+            instance_region=region,
+            route_table_id=example_route_table.id)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -343,6 +435,7 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.Input[str] instance_id: ID of instance is attached.
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
+        :param pulumi.Input[str] route_table_id: Ccn instance route table ID.
         """
         ...
     @overload
@@ -355,6 +448,8 @@ class Attachment(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Only Attachment instance
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
@@ -364,33 +459,90 @@ class Attachment(pulumi.CustomResource):
         region = config.get("region")
         if region is None:
             region = "ap-guangzhou"
-        otheruin = config.get("otheruin")
-        if otheruin is None:
-            otheruin = "123353"
-        otherccn = config.get("otherccn")
-        if otherccn is None:
-            otherccn = "ccn-151ssaga"
-        vpc = tencentcloud.vpc.Instance("vpc",
-            cidr_block="10.0.0.0/16",
-            dns_servers=[
-                "119.29.29.29",
-                "8.8.8.8",
-            ],
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        other_uin = config.get("otherUin")
+        if other_uin is None:
+            other_uin = "100031344528"
+        other_ccn = config.get("otherCcn")
+        if other_ccn is None:
+            other_ccn = "ccn-qhgojahx"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="172.16.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="172.16.0.0/24",
             is_multicast=False)
-        main = tencentcloud.ccn.Instance("main",
-            description="ci-temp-test-ccn-des",
-            qos="AG")
+        # create ccn
+        example = tencentcloud.ccn.Instance("example",
+            description="desc.",
+            qos="AG",
+            charge_type="PREPAID",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            tags={
+                "createBy": "terraform",
+            })
+        # attachment instance
         attachment = tencentcloud.ccn.Attachment("attachment",
-            ccn_id=main.id,
-            instance_type="VPC",
+            ccn_id=example.id,
             instance_id=vpc.id,
+            instance_type="VPC",
             instance_region=region)
+        # attachment other instance
         other_account = tencentcloud.ccn.Attachment("otherAccount",
-            ccn_id=otherccn,
-            instance_type="VPC",
+            ccn_id=other_ccn,
             instance_id=vpc.id,
+            instance_type="VPC",
             instance_region=region,
-            ccn_uin=otheruin)
+            ccn_uin=other_uin)
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Attachment instance & route table
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        region = config.get("region")
+        if region is None:
+            region = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="172.16.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="172.16.0.0/24",
+            is_multicast=False)
+        # create ccn
+        example_instance = tencentcloud.ccn.Instance("exampleInstance",
+            description="desc.",
+            qos="AG",
+            charge_type="PREPAID",
+            bandwidth_limit_type="INTER_REGION_LIMIT",
+            tags={
+                "createBy": "terraform",
+            })
+        # create ccn route table
+        example_route_table = tencentcloud.ccn.RouteTable("exampleRouteTable",
+            ccn_id=example_instance.id,
+            description="desc.")
+        # attachment instance & route table
+        attachment = tencentcloud.ccn.Attachment("attachment",
+            ccn_id=example_instance.id,
+            instance_id=vpc.id,
+            instance_type="VPC",
+            instance_region=region,
+            route_table_id=example_route_table.id)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -415,6 +567,7 @@ class Attachment(pulumi.CustomResource):
                  instance_id: Optional[pulumi.Input[str]] = None,
                  instance_region: Optional[pulumi.Input[str]] = None,
                  instance_type: Optional[pulumi.Input[str]] = None,
+                 route_table_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -438,6 +591,7 @@ class Attachment(pulumi.CustomResource):
             if instance_type is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_type'")
             __props__.__dict__["instance_type"] = instance_type
+            __props__.__dict__["route_table_id"] = route_table_id
             __props__.__dict__["attached_time"] = None
             __props__.__dict__["cidr_blocks"] = None
             __props__.__dict__["route_ids"] = None
@@ -461,6 +615,7 @@ class Attachment(pulumi.CustomResource):
             instance_region: Optional[pulumi.Input[str]] = None,
             instance_type: Optional[pulumi.Input[str]] = None,
             route_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            route_table_id: Optional[pulumi.Input[str]] = None,
             state: Optional[pulumi.Input[str]] = None) -> 'Attachment':
         """
         Get an existing Attachment resource's state with the given name, id, and optional extra
@@ -478,6 +633,7 @@ class Attachment(pulumi.CustomResource):
         :param pulumi.Input[str] instance_region: The region that the instance locates at.
         :param pulumi.Input[str] instance_type: Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] route_ids: Route id list.
+        :param pulumi.Input[str] route_table_id: Ccn instance route table ID.
         :param pulumi.Input[str] state: States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -493,6 +649,7 @@ class Attachment(pulumi.CustomResource):
         __props__.__dict__["instance_region"] = instance_region
         __props__.__dict__["instance_type"] = instance_type
         __props__.__dict__["route_ids"] = route_ids
+        __props__.__dict__["route_table_id"] = route_table_id
         __props__.__dict__["state"] = state
         return Attachment(resource_name, opts=opts, __props__=__props__)
 
@@ -567,6 +724,14 @@ class Attachment(pulumi.CustomResource):
         Route id list.
         """
         return pulumi.get(self, "route_ids")
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> pulumi.Output[str]:
+        """
+        Ccn instance route table ID.
+        """
+        return pulumi.get(self, "route_table_id")
 
     @property
     @pulumi.getter

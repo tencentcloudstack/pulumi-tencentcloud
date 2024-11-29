@@ -109,6 +109,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<string> GaapAuthId { get; private set; } = null!;
 
         /// <summary>
+        /// Group Id.
+        /// </summary>
+        [Output("groupId")]
+        public Output<string?> GroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to use as the default domain name, the default is false.
+        /// </summary>
+        [Output("isDefaultServer")]
+        public Output<bool?> IsDefaultServer { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the layer7 listener.
         /// </summary>
         [Output("listenerId")]
@@ -240,6 +252,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? GaapAuthId { get; set; }
 
         /// <summary>
+        /// Group Id.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
+
+        /// <summary>
+        /// Whether to use as the default domain name, the default is false.
+        /// </summary>
+        [Input("isDefaultServer")]
+        public Input<bool>? IsDefaultServer { get; set; }
+
+        /// <summary>
         /// ID of the layer7 listener.
         /// </summary>
         [Input("listenerId", required: true)]
@@ -336,6 +360,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// </summary>
         [Input("gaapAuthId")]
         public Input<string>? GaapAuthId { get; set; }
+
+        /// <summary>
+        /// Group Id.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
+
+        /// <summary>
+        /// Whether to use as the default domain name, the default is false.
+        /// </summary>
+        [Input("isDefaultServer")]
+        public Input<bool>? IsDefaultServer { get; set; }
 
         /// <summary>
         /// ID of the layer7 listener.

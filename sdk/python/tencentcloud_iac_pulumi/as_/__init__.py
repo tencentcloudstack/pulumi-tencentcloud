@@ -27,6 +27,7 @@ from .scaling_group import *
 from .scaling_group_status import *
 from .scaling_policy import *
 from .schedule import *
+from .start_instance_refresh import *
 from .start_instances import *
 from .stop_instances import *
 from ._inputs import *

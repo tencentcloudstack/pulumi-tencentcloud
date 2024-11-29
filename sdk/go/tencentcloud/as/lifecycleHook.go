@@ -94,12 +94,13 @@ import (
 //				return err
 //			}
 //			_, err = As.NewLifecycleHook(ctx, "exampleLifecycleHook", &As.LifecycleHookArgs{
-//				ScalingGroupId:       exampleScalingGroup.ID(),
-//				LifecycleHookName:    pulumi.String("tf-as-lifecycle-hook"),
-//				LifecycleTransition:  pulumi.String("INSTANCE_LAUNCHING"),
-//				DefaultResult:        pulumi.String("CONTINUE"),
-//				HeartbeatTimeout:     pulumi.Int(500),
-//				NotificationMetadata: pulumi.String("tf test"),
+//				ScalingGroupId:          exampleScalingGroup.ID(),
+//				LifecycleHookName:       pulumi.String("tf-as-lifecycle-hook"),
+//				LifecycleTransition:     pulumi.String("INSTANCE_LAUNCHING"),
+//				DefaultResult:           pulumi.String("CONTINUE"),
+//				HeartbeatTimeout:        pulumi.Int(500),
+//				LifecycleTransitionType: pulumi.String("NORMAL"),
+//				NotificationMetadata:    pulumi.String("tf test"),
 //			})
 //			if err != nil {
 //				return err
@@ -176,6 +177,49 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
+//
+// ### Use TAT Command
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.NewLifecycleHook(ctx, "example", &As.LifecycleHookArgs{
+//				DefaultResult:       pulumi.String("CONTINUE"),
+//				HeartbeatTimeout:    pulumi.Int(300),
+//				LifecycleHookName:   pulumi.String("test"),
+//				LifecycleTransition: pulumi.String("INSTANCE_TERMINATING"),
+//				ScalingGroupId:      pulumi.Any(tencentcloud_as_scaling_group.Example.Id),
+//				LifecycleCommand: &as.LifecycleHookLifecycleCommandArgs{
+//					CommandId: pulumi.String("cmd-xxxx"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// lifecycle hook can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example lifecycle_hook_id
+// ```
 type LifecycleHook struct {
 	pulumi.CustomResourceState
 
@@ -183,15 +227,19 @@ type LifecycleHook struct {
 	DefaultResult pulumi.StringPtrOutput `pulumi:"defaultResult"`
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrOutput `pulumi:"heartbeatTimeout"`
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand LifecycleHookLifecycleCommandOutput `pulumi:"lifecycleCommand"`
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringOutput `pulumi:"lifecycleHookName"`
 	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringOutput `pulumi:"lifecycleTransition"`
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType pulumi.StringOutput `pulumi:"lifecycleTransitionType"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrOutput `pulumi:"notificationMetadata"`
 	// For CMQ_QUEUE type, a name of queue must be set.
 	NotificationQueueName pulumi.StringPtrOutput `pulumi:"notificationQueueName"`
-	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 	NotificationTargetType pulumi.StringPtrOutput `pulumi:"notificationTargetType"`
 	// For CMQ_TOPIC type, a name of topic must be set.
 	NotificationTopicName pulumi.StringPtrOutput `pulumi:"notificationTopicName"`
@@ -242,15 +290,19 @@ type lifecycleHookState struct {
 	DefaultResult *string `pulumi:"defaultResult"`
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout *int `pulumi:"heartbeatTimeout"`
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleHookLifecycleCommand `pulumi:"lifecycleCommand"`
 	// The name of the lifecycle hook.
 	LifecycleHookName *string `pulumi:"lifecycleHookName"`
 	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition *string `pulumi:"lifecycleTransition"`
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType *string `pulumi:"lifecycleTransitionType"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata *string `pulumi:"notificationMetadata"`
 	// For CMQ_QUEUE type, a name of queue must be set.
 	NotificationQueueName *string `pulumi:"notificationQueueName"`
-	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 	NotificationTargetType *string `pulumi:"notificationTargetType"`
 	// For CMQ_TOPIC type, a name of topic must be set.
 	NotificationTopicName *string `pulumi:"notificationTopicName"`
@@ -263,15 +315,19 @@ type LifecycleHookState struct {
 	DefaultResult pulumi.StringPtrInput
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrInput
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand LifecycleHookLifecycleCommandPtrInput
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringPtrInput
 	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringPtrInput
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType pulumi.StringPtrInput
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrInput
 	// For CMQ_QUEUE type, a name of queue must be set.
 	NotificationQueueName pulumi.StringPtrInput
-	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 	NotificationTargetType pulumi.StringPtrInput
 	// For CMQ_TOPIC type, a name of topic must be set.
 	NotificationTopicName pulumi.StringPtrInput
@@ -288,15 +344,19 @@ type lifecycleHookArgs struct {
 	DefaultResult *string `pulumi:"defaultResult"`
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout *int `pulumi:"heartbeatTimeout"`
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleHookLifecycleCommand `pulumi:"lifecycleCommand"`
 	// The name of the lifecycle hook.
 	LifecycleHookName string `pulumi:"lifecycleHookName"`
 	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition string `pulumi:"lifecycleTransition"`
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType *string `pulumi:"lifecycleTransitionType"`
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata *string `pulumi:"notificationMetadata"`
 	// For CMQ_QUEUE type, a name of queue must be set.
 	NotificationQueueName *string `pulumi:"notificationQueueName"`
-	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 	NotificationTargetType *string `pulumi:"notificationTargetType"`
 	// For CMQ_TOPIC type, a name of topic must be set.
 	NotificationTopicName *string `pulumi:"notificationTopicName"`
@@ -310,15 +370,19 @@ type LifecycleHookArgs struct {
 	DefaultResult pulumi.StringPtrInput
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
 	HeartbeatTimeout pulumi.IntPtrInput
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand LifecycleHookLifecycleCommandPtrInput
 	// The name of the lifecycle hook.
 	LifecycleHookName pulumi.StringInput
 	// The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 	LifecycleTransition pulumi.StringInput
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType pulumi.StringPtrInput
 	// Contains additional information that you want to include any time AS sends a message to the notification target.
 	NotificationMetadata pulumi.StringPtrInput
 	// For CMQ_QUEUE type, a name of queue must be set.
 	NotificationQueueName pulumi.StringPtrInput
-	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 	NotificationTargetType pulumi.StringPtrInput
 	// For CMQ_TOPIC type, a name of topic must be set.
 	NotificationTopicName pulumi.StringPtrInput
@@ -423,6 +487,11 @@ func (o LifecycleHookOutput) HeartbeatTimeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.IntPtrOutput { return v.HeartbeatTimeout }).(pulumi.IntPtrOutput)
 }
 
+// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+func (o LifecycleHookOutput) LifecycleCommand() LifecycleHookLifecycleCommandOutput {
+	return o.ApplyT(func(v *LifecycleHook) LifecycleHookLifecycleCommandOutput { return v.LifecycleCommand }).(LifecycleHookLifecycleCommandOutput)
+}
+
 // The name of the lifecycle hook.
 func (o LifecycleHookOutput) LifecycleHookName() pulumi.StringOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringOutput { return v.LifecycleHookName }).(pulumi.StringOutput)
@@ -431,6 +500,11 @@ func (o LifecycleHookOutput) LifecycleHookName() pulumi.StringOutput {
 // The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
 func (o LifecycleHookOutput) LifecycleTransition() pulumi.StringOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringOutput { return v.LifecycleTransition }).(pulumi.StringOutput)
+}
+
+// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+func (o LifecycleHookOutput) LifecycleTransitionType() pulumi.StringOutput {
+	return o.ApplyT(func(v *LifecycleHook) pulumi.StringOutput { return v.LifecycleTransitionType }).(pulumi.StringOutput)
 }
 
 // Contains additional information that you want to include any time AS sends a message to the notification target.
@@ -443,7 +517,7 @@ func (o LifecycleHookOutput) NotificationQueueName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringPtrOutput { return v.NotificationQueueName }).(pulumi.StringPtrOutput)
 }
 
-// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
 func (o LifecycleHookOutput) NotificationTargetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LifecycleHook) pulumi.StringPtrOutput { return v.NotificationTargetType }).(pulumi.StringPtrOutput)
 }

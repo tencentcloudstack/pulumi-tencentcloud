@@ -14,6 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ProviderAssumeRole struct {
+	// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+	ExternalId *string `pulumi:"externalId"`
 	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 	Policy *string `pulumi:"policy"`
 	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
@@ -36,6 +38,8 @@ type ProviderAssumeRoleInput interface {
 }
 
 type ProviderAssumeRoleArgs struct {
+	// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
 	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 	Policy pulumi.StringPtrInput `pulumi:"policy"`
 	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
@@ -123,6 +127,11 @@ func (o ProviderAssumeRoleOutput) ToProviderAssumeRolePtrOutputWithContext(ctx c
 	}).(ProviderAssumeRolePtrOutput)
 }
 
+// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+func (o ProviderAssumeRoleOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderAssumeRole) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
+}
+
 // A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 func (o ProviderAssumeRoleOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProviderAssumeRole) *string { return v.Policy }).(pulumi.StringPtrOutput)
@@ -167,6 +176,16 @@ func (o ProviderAssumeRolePtrOutput) Elem() ProviderAssumeRoleOutput {
 	}).(ProviderAssumeRoleOutput)
 }
 
+// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+func (o ProviderAssumeRolePtrOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRole) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalId
+	}).(pulumi.StringPtrOutput)
+}
+
 // A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 func (o ProviderAssumeRolePtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRole) *string {
@@ -207,9 +226,424 @@ func (o ProviderAssumeRolePtrOutput) SessionName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ProviderAssumeRoleWithSaml struct {
+	// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+	PrincipalArn string `pulumi:"principalArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn string `pulumi:"roleArn"`
+	// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+	SamlAssertion string `pulumi:"samlAssertion"`
+	// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration int `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName string `pulumi:"sessionName"`
+}
+
+// ProviderAssumeRoleWithSamlInput is an input type that accepts ProviderAssumeRoleWithSamlArgs and ProviderAssumeRoleWithSamlOutput values.
+// You can construct a concrete instance of `ProviderAssumeRoleWithSamlInput` via:
+//
+//	ProviderAssumeRoleWithSamlArgs{...}
+type ProviderAssumeRoleWithSamlInput interface {
+	pulumi.Input
+
+	ToProviderAssumeRoleWithSamlOutput() ProviderAssumeRoleWithSamlOutput
+	ToProviderAssumeRoleWithSamlOutputWithContext(context.Context) ProviderAssumeRoleWithSamlOutput
+}
+
+type ProviderAssumeRoleWithSamlArgs struct {
+	// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+	PrincipalArn pulumi.StringInput `pulumi:"principalArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+	SamlAssertion pulumi.StringInput `pulumi:"samlAssertion"`
+	// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName pulumi.StringInput `pulumi:"sessionName"`
+}
+
+func (ProviderAssumeRoleWithSamlArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderAssumeRoleWithSaml)(nil)).Elem()
+}
+
+func (i ProviderAssumeRoleWithSamlArgs) ToProviderAssumeRoleWithSamlOutput() ProviderAssumeRoleWithSamlOutput {
+	return i.ToProviderAssumeRoleWithSamlOutputWithContext(context.Background())
+}
+
+func (i ProviderAssumeRoleWithSamlArgs) ToProviderAssumeRoleWithSamlOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithSamlOutput)
+}
+
+func (i ProviderAssumeRoleWithSamlArgs) ToProviderAssumeRoleWithSamlPtrOutput() ProviderAssumeRoleWithSamlPtrOutput {
+	return i.ToProviderAssumeRoleWithSamlPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderAssumeRoleWithSamlArgs) ToProviderAssumeRoleWithSamlPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithSamlOutput).ToProviderAssumeRoleWithSamlPtrOutputWithContext(ctx)
+}
+
+// ProviderAssumeRoleWithSamlPtrInput is an input type that accepts ProviderAssumeRoleWithSamlArgs, ProviderAssumeRoleWithSamlPtr and ProviderAssumeRoleWithSamlPtrOutput values.
+// You can construct a concrete instance of `ProviderAssumeRoleWithSamlPtrInput` via:
+//
+//	        ProviderAssumeRoleWithSamlArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderAssumeRoleWithSamlPtrInput interface {
+	pulumi.Input
+
+	ToProviderAssumeRoleWithSamlPtrOutput() ProviderAssumeRoleWithSamlPtrOutput
+	ToProviderAssumeRoleWithSamlPtrOutputWithContext(context.Context) ProviderAssumeRoleWithSamlPtrOutput
+}
+
+type providerAssumeRoleWithSamlPtrType ProviderAssumeRoleWithSamlArgs
+
+func ProviderAssumeRoleWithSamlPtr(v *ProviderAssumeRoleWithSamlArgs) ProviderAssumeRoleWithSamlPtrInput {
+	return (*providerAssumeRoleWithSamlPtrType)(v)
+}
+
+func (*providerAssumeRoleWithSamlPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderAssumeRoleWithSaml)(nil)).Elem()
+}
+
+func (i *providerAssumeRoleWithSamlPtrType) ToProviderAssumeRoleWithSamlPtrOutput() ProviderAssumeRoleWithSamlPtrOutput {
+	return i.ToProviderAssumeRoleWithSamlPtrOutputWithContext(context.Background())
+}
+
+func (i *providerAssumeRoleWithSamlPtrType) ToProviderAssumeRoleWithSamlPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithSamlPtrOutput)
+}
+
+type ProviderAssumeRoleWithSamlOutput struct{ *pulumi.OutputState }
+
+func (ProviderAssumeRoleWithSamlOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderAssumeRoleWithSaml)(nil)).Elem()
+}
+
+func (o ProviderAssumeRoleWithSamlOutput) ToProviderAssumeRoleWithSamlOutput() ProviderAssumeRoleWithSamlOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithSamlOutput) ToProviderAssumeRoleWithSamlOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithSamlOutput) ToProviderAssumeRoleWithSamlPtrOutput() ProviderAssumeRoleWithSamlPtrOutput {
+	return o.ToProviderAssumeRoleWithSamlPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderAssumeRoleWithSamlOutput) ToProviderAssumeRoleWithSamlPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderAssumeRoleWithSaml) *ProviderAssumeRoleWithSaml {
+		return &v
+	}).(ProviderAssumeRoleWithSamlPtrOutput)
+}
+
+// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+func (o ProviderAssumeRoleWithSamlOutput) PrincipalArn() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithSaml) string { return v.PrincipalArn }).(pulumi.StringOutput)
+}
+
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+func (o ProviderAssumeRoleWithSamlOutput) RoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithSaml) string { return v.RoleArn }).(pulumi.StringOutput)
+}
+
+// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+func (o ProviderAssumeRoleWithSamlOutput) SamlAssertion() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithSaml) string { return v.SamlAssertion }).(pulumi.StringOutput)
+}
+
+// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+func (o ProviderAssumeRoleWithSamlOutput) SessionDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithSaml) int { return v.SessionDuration }).(pulumi.IntOutput)
+}
+
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+func (o ProviderAssumeRoleWithSamlOutput) SessionName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithSaml) string { return v.SessionName }).(pulumi.StringOutput)
+}
+
+type ProviderAssumeRoleWithSamlPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderAssumeRoleWithSamlPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderAssumeRoleWithSaml)(nil)).Elem()
+}
+
+func (o ProviderAssumeRoleWithSamlPtrOutput) ToProviderAssumeRoleWithSamlPtrOutput() ProviderAssumeRoleWithSamlPtrOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithSamlPtrOutput) ToProviderAssumeRoleWithSamlPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithSamlPtrOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithSamlPtrOutput) Elem() ProviderAssumeRoleWithSamlOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) ProviderAssumeRoleWithSaml {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderAssumeRoleWithSaml
+		return ret
+	}).(ProviderAssumeRoleWithSamlOutput)
+}
+
+// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+func (o ProviderAssumeRoleWithSamlPtrOutput) PrincipalArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrincipalArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+func (o ProviderAssumeRoleWithSamlPtrOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RoleArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+func (o ProviderAssumeRoleWithSamlPtrOutput) SamlAssertion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SamlAssertion
+	}).(pulumi.StringPtrOutput)
+}
+
+// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+func (o ProviderAssumeRoleWithSamlPtrOutput) SessionDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.SessionDuration
+	}).(pulumi.IntPtrOutput)
+}
+
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+func (o ProviderAssumeRoleWithSamlPtrOutput) SessionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithSaml) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SessionName
+	}).(pulumi.StringPtrOutput)
+}
+
+type ProviderAssumeRoleWithWebIdentity struct {
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn string `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration int `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName string `pulumi:"sessionName"`
+	// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+	WebIdentityToken string `pulumi:"webIdentityToken"`
+}
+
+// ProviderAssumeRoleWithWebIdentityInput is an input type that accepts ProviderAssumeRoleWithWebIdentityArgs and ProviderAssumeRoleWithWebIdentityOutput values.
+// You can construct a concrete instance of `ProviderAssumeRoleWithWebIdentityInput` via:
+//
+//	ProviderAssumeRoleWithWebIdentityArgs{...}
+type ProviderAssumeRoleWithWebIdentityInput interface {
+	pulumi.Input
+
+	ToProviderAssumeRoleWithWebIdentityOutput() ProviderAssumeRoleWithWebIdentityOutput
+	ToProviderAssumeRoleWithWebIdentityOutputWithContext(context.Context) ProviderAssumeRoleWithWebIdentityOutput
+}
+
+type ProviderAssumeRoleWithWebIdentityArgs struct {
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName pulumi.StringInput `pulumi:"sessionName"`
+	// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+	WebIdentityToken pulumi.StringInput `pulumi:"webIdentityToken"`
+}
+
+func (ProviderAssumeRoleWithWebIdentityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderAssumeRoleWithWebIdentity)(nil)).Elem()
+}
+
+func (i ProviderAssumeRoleWithWebIdentityArgs) ToProviderAssumeRoleWithWebIdentityOutput() ProviderAssumeRoleWithWebIdentityOutput {
+	return i.ToProviderAssumeRoleWithWebIdentityOutputWithContext(context.Background())
+}
+
+func (i ProviderAssumeRoleWithWebIdentityArgs) ToProviderAssumeRoleWithWebIdentityOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithWebIdentityOutput)
+}
+
+func (i ProviderAssumeRoleWithWebIdentityArgs) ToProviderAssumeRoleWithWebIdentityPtrOutput() ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return i.ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(context.Background())
+}
+
+func (i ProviderAssumeRoleWithWebIdentityArgs) ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithWebIdentityOutput).ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(ctx)
+}
+
+// ProviderAssumeRoleWithWebIdentityPtrInput is an input type that accepts ProviderAssumeRoleWithWebIdentityArgs, ProviderAssumeRoleWithWebIdentityPtr and ProviderAssumeRoleWithWebIdentityPtrOutput values.
+// You can construct a concrete instance of `ProviderAssumeRoleWithWebIdentityPtrInput` via:
+//
+//	        ProviderAssumeRoleWithWebIdentityArgs{...}
+//
+//	or:
+//
+//	        nil
+type ProviderAssumeRoleWithWebIdentityPtrInput interface {
+	pulumi.Input
+
+	ToProviderAssumeRoleWithWebIdentityPtrOutput() ProviderAssumeRoleWithWebIdentityPtrOutput
+	ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(context.Context) ProviderAssumeRoleWithWebIdentityPtrOutput
+}
+
+type providerAssumeRoleWithWebIdentityPtrType ProviderAssumeRoleWithWebIdentityArgs
+
+func ProviderAssumeRoleWithWebIdentityPtr(v *ProviderAssumeRoleWithWebIdentityArgs) ProviderAssumeRoleWithWebIdentityPtrInput {
+	return (*providerAssumeRoleWithWebIdentityPtrType)(v)
+}
+
+func (*providerAssumeRoleWithWebIdentityPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderAssumeRoleWithWebIdentity)(nil)).Elem()
+}
+
+func (i *providerAssumeRoleWithWebIdentityPtrType) ToProviderAssumeRoleWithWebIdentityPtrOutput() ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return i.ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(context.Background())
+}
+
+func (i *providerAssumeRoleWithWebIdentityPtrType) ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderAssumeRoleWithWebIdentityPtrOutput)
+}
+
+type ProviderAssumeRoleWithWebIdentityOutput struct{ *pulumi.OutputState }
+
+func (ProviderAssumeRoleWithWebIdentityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProviderAssumeRoleWithWebIdentity)(nil)).Elem()
+}
+
+func (o ProviderAssumeRoleWithWebIdentityOutput) ToProviderAssumeRoleWithWebIdentityOutput() ProviderAssumeRoleWithWebIdentityOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithWebIdentityOutput) ToProviderAssumeRoleWithWebIdentityOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithWebIdentityOutput) ToProviderAssumeRoleWithWebIdentityPtrOutput() ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return o.ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(context.Background())
+}
+
+func (o ProviderAssumeRoleWithWebIdentityOutput) ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ProviderAssumeRoleWithWebIdentity) *ProviderAssumeRoleWithWebIdentity {
+		return &v
+	}).(ProviderAssumeRoleWithWebIdentityPtrOutput)
+}
+
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+func (o ProviderAssumeRoleWithWebIdentityOutput) RoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.RoleArn }).(pulumi.StringOutput)
+}
+
+// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+func (o ProviderAssumeRoleWithWebIdentityOutput) SessionDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) int { return v.SessionDuration }).(pulumi.IntOutput)
+}
+
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+func (o ProviderAssumeRoleWithWebIdentityOutput) SessionName() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.SessionName }).(pulumi.StringOutput)
+}
+
+// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+func (o ProviderAssumeRoleWithWebIdentityOutput) WebIdentityToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.WebIdentityToken }).(pulumi.StringOutput)
+}
+
+type ProviderAssumeRoleWithWebIdentityPtrOutput struct{ *pulumi.OutputState }
+
+func (ProviderAssumeRoleWithWebIdentityPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ProviderAssumeRoleWithWebIdentity)(nil)).Elem()
+}
+
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) ToProviderAssumeRoleWithWebIdentityPtrOutput() ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) ToProviderAssumeRoleWithWebIdentityPtrOutputWithContext(ctx context.Context) ProviderAssumeRoleWithWebIdentityPtrOutput {
+	return o
+}
+
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) Elem() ProviderAssumeRoleWithWebIdentityOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) ProviderAssumeRoleWithWebIdentity {
+		if v != nil {
+			return *v
+		}
+		var ret ProviderAssumeRoleWithWebIdentity
+		return ret
+	}).(ProviderAssumeRoleWithWebIdentityOutput)
+}
+
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RoleArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) SessionDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.SessionDuration
+	}).(pulumi.IntPtrOutput)
+}
+
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) SessionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SessionName
+	}).(pulumi.StringPtrOutput)
+}
+
+// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) WebIdentityToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.WebIdentityToken
+	}).(pulumi.StringPtrOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRoleInput)(nil)).Elem(), ProviderAssumeRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRolePtrInput)(nil)).Elem(), ProviderAssumeRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRoleWithSamlInput)(nil)).Elem(), ProviderAssumeRoleWithSamlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRoleWithSamlPtrInput)(nil)).Elem(), ProviderAssumeRoleWithSamlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRoleWithWebIdentityInput)(nil)).Elem(), ProviderAssumeRoleWithWebIdentityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProviderAssumeRoleWithWebIdentityPtrInput)(nil)).Elem(), ProviderAssumeRoleWithWebIdentityArgs{})
 	pulumi.RegisterOutputType(ProviderAssumeRoleOutput{})
 	pulumi.RegisterOutputType(ProviderAssumeRolePtrOutput{})
+	pulumi.RegisterOutputType(ProviderAssumeRoleWithSamlOutput{})
+	pulumi.RegisterOutputType(ProviderAssumeRoleWithSamlPtrOutput{})
+	pulumi.RegisterOutputType(ProviderAssumeRoleWithWebIdentityOutput{})
+	pulumi.RegisterOutputType(ProviderAssumeRoleWithWebIdentityPtrOutput{})
 }

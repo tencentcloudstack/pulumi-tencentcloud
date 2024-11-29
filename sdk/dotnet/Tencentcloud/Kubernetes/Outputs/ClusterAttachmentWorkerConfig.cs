@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly Outputs.ClusterAttachmentWorkerConfigGpuArgs? GpuArgs;
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         public readonly bool? IsSchedule;
         /// <summary>
@@ -46,6 +46,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         /// </summary>
         public readonly string? PreStartUserScript;
+        /// <summary>
+        /// Node taint.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ClusterAttachmentWorkerConfigTaint> Taints;
         /// <summary>
         /// Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
@@ -69,6 +73,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? preStartUserScript,
 
+            ImmutableArray<Outputs.ClusterAttachmentWorkerConfigTaint> taints,
+
             string? userData)
         {
             DataDisks = dataDisks;
@@ -79,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             IsSchedule = isSchedule;
             MountTarget = mountTarget;
             PreStartUserScript = preStartUserScript;
+            Taints = taints;
             UserData = userData;
         }
     }

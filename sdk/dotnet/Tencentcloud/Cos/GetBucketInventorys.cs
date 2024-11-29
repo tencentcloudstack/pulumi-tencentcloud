@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// <summary>
         /// Use this data source to query the COS bucket inventorys.
         /// 
+        /// &gt; **NOTE:** The current resource does not support cdc.
+        /// 
         /// ## Example Usage
         /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -40,6 +42,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
 
         /// <summary>
         /// Use this data source to query the COS bucket inventorys.
+        /// 
+        /// &gt; **NOTE:** The current resource does not support cdc.
         /// 
         /// ## Example Usage
         /// 

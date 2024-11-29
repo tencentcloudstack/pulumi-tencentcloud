@@ -39,6 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInstanceInstanceListDataDiskResult> DataDisks;
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        public readonly string DedicatedClusterId;
+        /// <summary>
         /// Expired time of the instance.
         /// </summary>
         public readonly string ExpiredTime;
@@ -123,6 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// </summary>
         public readonly ImmutableDictionary<string, object> Tags;
         /// <summary>
+        /// Globally unique ID of the instance.
+        /// </summary>
+        public readonly string Uuid;
+        /// <summary>
         /// ID of the vpc to be queried.
         /// </summary>
         public readonly string VpcId;
@@ -140,6 +148,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             string createTime,
 
             ImmutableArray<Outputs.GetInstanceInstanceListDataDiskResult> dataDisks,
+
+            string dedicatedClusterId,
 
             string expiredTime,
 
@@ -183,6 +193,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
 
             ImmutableDictionary<string, object> tags,
 
+            string uuid,
+
             string vpcId)
         {
             AllocatePublicIp = allocatePublicIp;
@@ -191,6 +203,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             Cpu = cpu;
             CreateTime = createTime;
             DataDisks = dataDisks;
+            DedicatedClusterId = dedicatedClusterId;
             ExpiredTime = expiredTime;
             ImageId = imageId;
             InstanceChargeType = instanceChargeType;
@@ -212,6 +225,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             SystemDiskSize = systemDiskSize;
             SystemDiskType = systemDiskType;
             Tags = tags;
+            Uuid = uuid;
             VpcId = vpcId;
         }
     }

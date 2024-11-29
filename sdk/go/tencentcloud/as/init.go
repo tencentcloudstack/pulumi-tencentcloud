@@ -51,6 +51,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ScalingPolicy{}
 	case "tencentcloud:As/schedule:Schedule":
 		r = &Schedule{}
+	case "tencentcloud:As/startInstanceRefresh:StartInstanceRefresh":
+		r = &StartInstanceRefresh{}
 	case "tencentcloud:As/startInstances:StartInstances":
 		r = &StartInstances{}
 	case "tencentcloud:As/stopInstances:StopInstances":
@@ -141,6 +143,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"As/schedule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"As/startInstanceRefresh",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

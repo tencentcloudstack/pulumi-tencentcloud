@@ -11,13 +11,6 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 {
     /// <summary>
-    /// Provide a resource to create a kubernetes cluster.
-    /// 
-    /// &gt; **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
-    /// 
-    /// &gt; **NOTE:** We recommend this usage that uses the `tencentcloud.Kubernetes.Cluster` resource to create a cluster without any `worker_config`, then adds nodes by the `tencentcloud.Kubernetes.NodePool` resource.
-    /// It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
-    /// 
     /// ## Example Usage
     /// 
     /// ### Use node pool global config
@@ -203,12 +196,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Use delete options to delete CBS when deleting the Cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Kubernetes.Cluster("example", new()
+    ///     {
+    ///         VpcId = local.First_vpc_id,
+    ///         ClusterCidr = @var.Example_cluster_cidr,
+    ///         ClusterMaxPodNum = 32,
+    ///         ClusterName = "example",
+    ///         ClusterDesc = "example for tke cluster",
+    ///         ClusterMaxServiceNum = 32,
+    ///         ClusterLevel = "L50",
+    ///         AutoUpgradeClusterLevel = true,
+    ///         ClusterInternet = false,
+    ///         ClusterVersion = "1.30.0",
+    ///         ClusterOs = "tlinux2.2(tkernel3)x86_64",
+    ///         ClusterDeployType = "MANAGED_CLUSTER",
+    ///         ContainerRuntime = "containerd",
+    ///         DockerGraphPath = "/var/lib/containerd",
+    ///         Tags = 
+    ///         {
+    ///             { "demo", "test" },
+    ///         },
+    ///         WorkerConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
+    ///             {
+    ///                 Count = 1,
+    ///                 AvailabilityZone = @var.Availability_zone_first,
+    ///                 InstanceType = "SA2.MEDIUM2",
+    ///                 SystemDiskType = "CLOUD_SSD",
+    ///                 SystemDiskSize = 60,
+    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///                 InternetMaxBandwidthOut = 100,
+    ///                 PublicIpAssigned = true,
+    ///                 SubnetId = local.First_subnet_id,
+    ///                 DataDisks = new[]
+    ///                 {
+    ///                     new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
+    ///                     {
+    ///                         DiskType = "CLOUD_PREMIUM",
+    ///                         DiskSize = 50,
+    ///                     },
+    ///                 },
+    ///                 EnhancedSecurityService = false,
+    ///                 EnhancedMonitorService = false,
+    ///                 UserData = "dGVzdA==",
+    ///                 DisasterRecoverGroupIds = new() { },
+    ///                 SecurityGroupIds = new() { },
+    ///                 KeyIds = new() { },
+    ///                 CamRoleName = "CVM_QcsRole",
+    ///                 Password = "ZZXXccvv1212",
+    ///             },
+    ///         },
+    ///         ResourceDeleteOptions = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.ClusterResourceDeleteOptionArgs
+    ///             {
+    ///                 ResourceType = "CBS",
+    ///                 DeleteMode = "terminate",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// tke cluster can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster example cls-n2h4jbtk
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/cluster:Cluster")]
@@ -237,6 +306,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("basePodNum")]
         public Output<int?> BasePodNum { get; private set; } = null!;
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string?> CdcId { get; private set; } = null!;
 
         /// <summary>
         /// The certificate used for access.
@@ -461,6 +536,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<bool?> IgnoreClusterCidrConflict { get; private set; } = null!;
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Output("ignoreServiceCidrConflict")]
+        public Output<bool> IgnoreServiceCidrConflict { get; private set; } = null!;
+
+        /// <summary>
+        /// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        /// </summary>
+        [Output("instanceDeleteMode")]
+        public Output<string?> InstanceDeleteMode { get; private set; } = null!;
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Output("isNonStaticIpMode")]
@@ -545,10 +632,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> PgwEndpoint { get; private set; } = null!;
 
         /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Output("preStartUserScript")]
+        public Output<string?> PreStartUserScript { get; private set; } = null!;
+
+        /// <summary>
         /// Project ID, default value is 0.
         /// </summary>
         [Output("projectId")]
         public Output<int?> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        /// </summary>
+        [Output("resourceDeleteOptions")]
+        public Output<ImmutableArray<Outputs.ClusterResourceDeleteOption>> ResourceDeleteOptions { get; private set; } = null!;
 
         /// <summary>
         /// Container Runtime version.
@@ -686,6 +785,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("basePodNum")]
         public Input<int>? BasePodNum { get; set; }
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
@@ -904,6 +1009,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? IgnoreClusterCidrConflict { get; set; }
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Input("ignoreServiceCidrConflict")]
+        public Input<bool>? IgnoreServiceCidrConflict { get; set; }
+
+        /// <summary>
+        /// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        /// </summary>
+        [Input("instanceDeleteMode")]
+        public Input<string>? InstanceDeleteMode { get; set; }
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Input("isNonStaticIpMode")]
@@ -989,10 +1106,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
 
         /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
+
+        /// <summary>
         /// Project ID, default value is 0.
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("resourceDeleteOptions")]
+        private InputList<Inputs.ClusterResourceDeleteOptionArgs>? _resourceDeleteOptions;
+
+        /// <summary>
+        /// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        /// </summary>
+        public InputList<Inputs.ClusterResourceDeleteOptionArgs> ResourceDeleteOptions
+        {
+            get => _resourceDeleteOptions ?? (_resourceDeleteOptions = new InputList<Inputs.ClusterResourceDeleteOptionArgs>());
+            set => _resourceDeleteOptions = value;
+        }
 
         /// <summary>
         /// Container Runtime version.
@@ -1085,6 +1220,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("basePodNum")]
         public Input<int>? BasePodNum { get; set; }
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// The certificate used for access.
@@ -1333,6 +1474,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? IgnoreClusterCidrConflict { get; set; }
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Input("ignoreServiceCidrConflict")]
+        public Input<bool>? IgnoreServiceCidrConflict { get; set; }
+
+        /// <summary>
+        /// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        /// </summary>
+        [Input("instanceDeleteMode")]
+        public Input<string>? InstanceDeleteMode { get; set; }
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Input("isNonStaticIpMode")]
@@ -1442,10 +1595,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? PgwEndpoint { get; set; }
 
         /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
+
+        /// <summary>
         /// Project ID, default value is 0.
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("resourceDeleteOptions")]
+        private InputList<Inputs.ClusterResourceDeleteOptionGetArgs>? _resourceDeleteOptions;
+
+        /// <summary>
+        /// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        /// </summary>
+        public InputList<Inputs.ClusterResourceDeleteOptionGetArgs> ResourceDeleteOptions
+        {
+            get => _resourceDeleteOptions ?? (_resourceDeleteOptions = new InputList<Inputs.ClusterResourceDeleteOptionGetArgs>());
+            set => _resourceDeleteOptions = value;
+        }
 
         /// <summary>
         /// Container Runtime version.

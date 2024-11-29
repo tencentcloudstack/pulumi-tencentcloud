@@ -22,10 +22,13 @@ class GetSubnetsResult:
     """
     A collection of values returned by getSubnets.
     """
-    def __init__(__self__, availability_zone=None, cidr_block=None, id=None, instance_lists=None, is_default=None, is_remote_vpc_snat=None, name=None, result_output_file=None, subnet_id=None, tag_key=None, tags=None, vpc_id=None):
+    def __init__(__self__, availability_zone=None, cdc_id=None, cidr_block=None, id=None, instance_lists=None, is_default=None, is_remote_vpc_snat=None, name=None, result_output_file=None, subnet_id=None, tag_key=None, tags=None, vpc_id=None):
         if availability_zone and not isinstance(availability_zone, str):
             raise TypeError("Expected argument 'availability_zone' to be a str")
         pulumi.set(__self__, "availability_zone", availability_zone)
+        if cdc_id and not isinstance(cdc_id, str):
+            raise TypeError("Expected argument 'cdc_id' to be a str")
+        pulumi.set(__self__, "cdc_id", cdc_id)
         if cidr_block and not isinstance(cidr_block, str):
             raise TypeError("Expected argument 'cidr_block' to be a str")
         pulumi.set(__self__, "cidr_block", cidr_block)
@@ -67,6 +70,14 @@ class GetSubnetsResult:
         The availability zone of the subnet.
         """
         return pulumi.get(self, "availability_zone")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[str]:
+        """
+        ID of CDC instance.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="cidrBlock")
@@ -155,6 +166,7 @@ class AwaitableGetSubnetsResult(GetSubnetsResult):
             yield self
         return GetSubnetsResult(
             availability_zone=self.availability_zone,
+            cdc_id=self.cdc_id,
             cidr_block=self.cidr_block,
             id=self.id,
             instance_lists=self.instance_lists,
@@ -169,6 +181,7 @@ class AwaitableGetSubnetsResult(GetSubnetsResult):
 
 
 def get_subnets(availability_zone: Optional[str] = None,
+                cdc_id: Optional[str] = None,
                 cidr_block: Optional[str] = None,
                 is_default: Optional[bool] = None,
                 is_remote_vpc_snat: Optional[bool] = None,
@@ -184,33 +197,49 @@ def get_subnets(availability_zone: Optional[str] = None,
 
     ## Example Usage
 
+    ### Create subnet resource
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
-    import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
     config = pulumi.Config()
     availability_zone = config.get("availabilityZone")
     if availability_zone is None:
         availability_zone = "ap-guangzhou-3"
-    foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
     subnet = tencentcloud.subnet.Instance("subnet",
         availability_zone=availability_zone,
-        vpc_id=foo.id,
+        vpc_id=vpc.id,
         cidr_block="10.0.20.0/28",
         is_multicast=False,
         tags={
             "test": "test",
         })
-    id_instances = tencentcloud.Vpc.get_subnets_output(subnet_id=subnet.id)
-    name_instances = tencentcloud.Vpc.get_subnets_output(name=subnet.name)
-    tags_instances = subnet.tags.apply(lambda tags: tencentcloud.Vpc.get_subnets_output(tags=tags))
+    subnet_cdc = tencentcloud.subnet.Instance("subnetCDC",
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        cdc_id="cluster-lchwgxhs",
+        availability_zone=data["tencentcloud_availability_zones"]["zones"]["zones"][0]["name"],
+        is_multicast=False)
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query all subnets
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    subnets = tencentcloud.Vpc.get_subnets()
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param str availability_zone: Zone of the subnet to be queried.
+    :param str cdc_id: ID of CDC instance.
     :param str cidr_block: Filter subnet with this CIDR.
     :param bool is_default: Filter default or no default subnets.
     :param bool is_remote_vpc_snat: Filter the VPC SNAT address pool subnet.
@@ -223,6 +252,7 @@ def get_subnets(availability_zone: Optional[str] = None,
     """
     __args__ = dict()
     __args__['availabilityZone'] = availability_zone
+    __args__['cdcId'] = cdc_id
     __args__['cidrBlock'] = cidr_block
     __args__['isDefault'] = is_default
     __args__['isRemoteVpcSnat'] = is_remote_vpc_snat
@@ -237,6 +267,7 @@ def get_subnets(availability_zone: Optional[str] = None,
 
     return AwaitableGetSubnetsResult(
         availability_zone=pulumi.get(__ret__, 'availability_zone'),
+        cdc_id=pulumi.get(__ret__, 'cdc_id'),
         cidr_block=pulumi.get(__ret__, 'cidr_block'),
         id=pulumi.get(__ret__, 'id'),
         instance_lists=pulumi.get(__ret__, 'instance_lists'),
@@ -252,6 +283,7 @@ def get_subnets(availability_zone: Optional[str] = None,
 
 @_utilities.lift_output_func(get_subnets)
 def get_subnets_output(availability_zone: Optional[pulumi.Input[Optional[str]]] = None,
+                       cdc_id: Optional[pulumi.Input[Optional[str]]] = None,
                        cidr_block: Optional[pulumi.Input[Optional[str]]] = None,
                        is_default: Optional[pulumi.Input[Optional[bool]]] = None,
                        is_remote_vpc_snat: Optional[pulumi.Input[Optional[bool]]] = None,
@@ -267,33 +299,49 @@ def get_subnets_output(availability_zone: Optional[pulumi.Input[Optional[str]]] 
 
     ## Example Usage
 
+    ### Create subnet resource
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
-    import pulumi_tencentcloud as tencentcloud
     import tencentcloud_iac_pulumi as tencentcloud
 
     config = pulumi.Config()
     availability_zone = config.get("availabilityZone")
     if availability_zone is None:
         availability_zone = "ap-guangzhou-3"
-    foo = tencentcloud.vpc.Instance("foo", cidr_block="10.0.0.0/16")
+    vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
     subnet = tencentcloud.subnet.Instance("subnet",
         availability_zone=availability_zone,
-        vpc_id=foo.id,
+        vpc_id=vpc.id,
         cidr_block="10.0.20.0/28",
         is_multicast=False,
         tags={
             "test": "test",
         })
-    id_instances = tencentcloud.Vpc.get_subnets_output(subnet_id=subnet.id)
-    name_instances = tencentcloud.Vpc.get_subnets_output(name=subnet.name)
-    tags_instances = subnet.tags.apply(lambda tags: tencentcloud.Vpc.get_subnets_output(tags=tags))
+    subnet_cdc = tencentcloud.subnet.Instance("subnetCDC",
+        vpc_id=vpc.id,
+        cidr_block="10.0.0.0/16",
+        cdc_id="cluster-lchwgxhs",
+        availability_zone=data["tencentcloud_availability_zones"]["zones"]["zones"][0]["name"],
+        is_multicast=False)
+    ```
+    <!--End PulumiCodeChooser -->
+
+    ### Query all subnets
+
+    <!--Start PulumiCodeChooser -->
+    ```python
+    import pulumi
+    import pulumi_tencentcloud as tencentcloud
+
+    subnets = tencentcloud.Vpc.get_subnets()
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param str availability_zone: Zone of the subnet to be queried.
+    :param str cdc_id: ID of CDC instance.
     :param str cidr_block: Filter subnet with this CIDR.
     :param bool is_default: Filter default or no default subnets.
     :param bool is_remote_vpc_snat: Filter the VPC SNAT address pool subnet.

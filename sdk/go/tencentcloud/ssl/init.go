@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Certificate{}
 	case "tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation":
 		r = &CheckCertificateChainOperation{}
+	case "tencentcloud:Ssl/checkCertificateDomainVerificationOperation:CheckCertificateDomainVerificationOperation":
+		r = &CheckCertificateDomainVerificationOperation{}
 	case "tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation":
 		r = &CompleteCertificateOperation{}
 	case "tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation":
@@ -72,6 +74,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ssl/checkCertificateChainOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ssl/checkCertificateDomainVerificationOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

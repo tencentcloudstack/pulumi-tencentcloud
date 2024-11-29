@@ -680,6 +680,886 @@ func (o ZoneVpcSetArrayOutput) Index(i pulumi.IntInput) ZoneVpcSetOutput {
 	}).(ZoneVpcSetOutput)
 }
 
+type GetEndPointsEndPointSet struct {
+	// Endpoint ID.
+	EndPointId string `pulumi:"endPointId"`
+	// Endpoint name.
+	EndPointName string `pulumi:"endPointName"`
+	// Endpoint service ID.
+	EndPointServiceId string `pulumi:"endPointServiceId"`
+	// VIP list of the endpoint.
+	EndPointVipSets []string `pulumi:"endPointVipSets"`
+	// ap-guangzhou
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionCode string `pulumi:"regionCode"`
+	// Tag key-value pair collection.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []GetEndPointsEndPointSetTag `pulumi:"tags"`
+}
+
+// GetEndPointsEndPointSetInput is an input type that accepts GetEndPointsEndPointSetArgs and GetEndPointsEndPointSetOutput values.
+// You can construct a concrete instance of `GetEndPointsEndPointSetInput` via:
+//
+//	GetEndPointsEndPointSetArgs{...}
+type GetEndPointsEndPointSetInput interface {
+	pulumi.Input
+
+	ToGetEndPointsEndPointSetOutput() GetEndPointsEndPointSetOutput
+	ToGetEndPointsEndPointSetOutputWithContext(context.Context) GetEndPointsEndPointSetOutput
+}
+
+type GetEndPointsEndPointSetArgs struct {
+	// Endpoint ID.
+	EndPointId pulumi.StringInput `pulumi:"endPointId"`
+	// Endpoint name.
+	EndPointName pulumi.StringInput `pulumi:"endPointName"`
+	// Endpoint service ID.
+	EndPointServiceId pulumi.StringInput `pulumi:"endPointServiceId"`
+	// VIP list of the endpoint.
+	EndPointVipSets pulumi.StringArrayInput `pulumi:"endPointVipSets"`
+	// ap-guangzhou
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionCode pulumi.StringInput `pulumi:"regionCode"`
+	// Tag key-value pair collection.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags GetEndPointsEndPointSetTagArrayInput `pulumi:"tags"`
+}
+
+func (GetEndPointsEndPointSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsEndPointSet)(nil)).Elem()
+}
+
+func (i GetEndPointsEndPointSetArgs) ToGetEndPointsEndPointSetOutput() GetEndPointsEndPointSetOutput {
+	return i.ToGetEndPointsEndPointSetOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsEndPointSetArgs) ToGetEndPointsEndPointSetOutputWithContext(ctx context.Context) GetEndPointsEndPointSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsEndPointSetOutput)
+}
+
+// GetEndPointsEndPointSetArrayInput is an input type that accepts GetEndPointsEndPointSetArray and GetEndPointsEndPointSetArrayOutput values.
+// You can construct a concrete instance of `GetEndPointsEndPointSetArrayInput` via:
+//
+//	GetEndPointsEndPointSetArray{ GetEndPointsEndPointSetArgs{...} }
+type GetEndPointsEndPointSetArrayInput interface {
+	pulumi.Input
+
+	ToGetEndPointsEndPointSetArrayOutput() GetEndPointsEndPointSetArrayOutput
+	ToGetEndPointsEndPointSetArrayOutputWithContext(context.Context) GetEndPointsEndPointSetArrayOutput
+}
+
+type GetEndPointsEndPointSetArray []GetEndPointsEndPointSetInput
+
+func (GetEndPointsEndPointSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsEndPointSet)(nil)).Elem()
+}
+
+func (i GetEndPointsEndPointSetArray) ToGetEndPointsEndPointSetArrayOutput() GetEndPointsEndPointSetArrayOutput {
+	return i.ToGetEndPointsEndPointSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsEndPointSetArray) ToGetEndPointsEndPointSetArrayOutputWithContext(ctx context.Context) GetEndPointsEndPointSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsEndPointSetArrayOutput)
+}
+
+type GetEndPointsEndPointSetOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsEndPointSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsEndPointSet)(nil)).Elem()
+}
+
+func (o GetEndPointsEndPointSetOutput) ToGetEndPointsEndPointSetOutput() GetEndPointsEndPointSetOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetOutput) ToGetEndPointsEndPointSetOutputWithContext(ctx context.Context) GetEndPointsEndPointSetOutput {
+	return o
+}
+
+// Endpoint ID.
+func (o GetEndPointsEndPointSetOutput) EndPointId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) string { return v.EndPointId }).(pulumi.StringOutput)
+}
+
+// Endpoint name.
+func (o GetEndPointsEndPointSetOutput) EndPointName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) string { return v.EndPointName }).(pulumi.StringOutput)
+}
+
+// Endpoint service ID.
+func (o GetEndPointsEndPointSetOutput) EndPointServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) string { return v.EndPointServiceId }).(pulumi.StringOutput)
+}
+
+// VIP list of the endpoint.
+func (o GetEndPointsEndPointSetOutput) EndPointVipSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) []string { return v.EndPointVipSets }).(pulumi.StringArrayOutput)
+}
+
+// ap-guangzhou
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetEndPointsEndPointSetOutput) RegionCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) string { return v.RegionCode }).(pulumi.StringOutput)
+}
+
+// Tag key-value pair collection.
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetEndPointsEndPointSetOutput) Tags() GetEndPointsEndPointSetTagArrayOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSet) []GetEndPointsEndPointSetTag { return v.Tags }).(GetEndPointsEndPointSetTagArrayOutput)
+}
+
+type GetEndPointsEndPointSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsEndPointSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsEndPointSet)(nil)).Elem()
+}
+
+func (o GetEndPointsEndPointSetArrayOutput) ToGetEndPointsEndPointSetArrayOutput() GetEndPointsEndPointSetArrayOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetArrayOutput) ToGetEndPointsEndPointSetArrayOutputWithContext(ctx context.Context) GetEndPointsEndPointSetArrayOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetArrayOutput) Index(i pulumi.IntInput) GetEndPointsEndPointSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEndPointsEndPointSet {
+		return vs[0].([]GetEndPointsEndPointSet)[vs[1].(int)]
+	}).(GetEndPointsEndPointSetOutput)
+}
+
+type GetEndPointsEndPointSetTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetEndPointsEndPointSetTagInput is an input type that accepts GetEndPointsEndPointSetTagArgs and GetEndPointsEndPointSetTagOutput values.
+// You can construct a concrete instance of `GetEndPointsEndPointSetTagInput` via:
+//
+//	GetEndPointsEndPointSetTagArgs{...}
+type GetEndPointsEndPointSetTagInput interface {
+	pulumi.Input
+
+	ToGetEndPointsEndPointSetTagOutput() GetEndPointsEndPointSetTagOutput
+	ToGetEndPointsEndPointSetTagOutputWithContext(context.Context) GetEndPointsEndPointSetTagOutput
+}
+
+type GetEndPointsEndPointSetTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetEndPointsEndPointSetTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsEndPointSetTag)(nil)).Elem()
+}
+
+func (i GetEndPointsEndPointSetTagArgs) ToGetEndPointsEndPointSetTagOutput() GetEndPointsEndPointSetTagOutput {
+	return i.ToGetEndPointsEndPointSetTagOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsEndPointSetTagArgs) ToGetEndPointsEndPointSetTagOutputWithContext(ctx context.Context) GetEndPointsEndPointSetTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsEndPointSetTagOutput)
+}
+
+// GetEndPointsEndPointSetTagArrayInput is an input type that accepts GetEndPointsEndPointSetTagArray and GetEndPointsEndPointSetTagArrayOutput values.
+// You can construct a concrete instance of `GetEndPointsEndPointSetTagArrayInput` via:
+//
+//	GetEndPointsEndPointSetTagArray{ GetEndPointsEndPointSetTagArgs{...} }
+type GetEndPointsEndPointSetTagArrayInput interface {
+	pulumi.Input
+
+	ToGetEndPointsEndPointSetTagArrayOutput() GetEndPointsEndPointSetTagArrayOutput
+	ToGetEndPointsEndPointSetTagArrayOutputWithContext(context.Context) GetEndPointsEndPointSetTagArrayOutput
+}
+
+type GetEndPointsEndPointSetTagArray []GetEndPointsEndPointSetTagInput
+
+func (GetEndPointsEndPointSetTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsEndPointSetTag)(nil)).Elem()
+}
+
+func (i GetEndPointsEndPointSetTagArray) ToGetEndPointsEndPointSetTagArrayOutput() GetEndPointsEndPointSetTagArrayOutput {
+	return i.ToGetEndPointsEndPointSetTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsEndPointSetTagArray) ToGetEndPointsEndPointSetTagArrayOutputWithContext(ctx context.Context) GetEndPointsEndPointSetTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsEndPointSetTagArrayOutput)
+}
+
+type GetEndPointsEndPointSetTagOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsEndPointSetTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsEndPointSetTag)(nil)).Elem()
+}
+
+func (o GetEndPointsEndPointSetTagOutput) ToGetEndPointsEndPointSetTagOutput() GetEndPointsEndPointSetTagOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetTagOutput) ToGetEndPointsEndPointSetTagOutputWithContext(ctx context.Context) GetEndPointsEndPointSetTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetEndPointsEndPointSetTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSetTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetEndPointsEndPointSetTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsEndPointSetTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetEndPointsEndPointSetTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsEndPointSetTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsEndPointSetTag)(nil)).Elem()
+}
+
+func (o GetEndPointsEndPointSetTagArrayOutput) ToGetEndPointsEndPointSetTagArrayOutput() GetEndPointsEndPointSetTagArrayOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetTagArrayOutput) ToGetEndPointsEndPointSetTagArrayOutputWithContext(ctx context.Context) GetEndPointsEndPointSetTagArrayOutput {
+	return o
+}
+
+func (o GetEndPointsEndPointSetTagArrayOutput) Index(i pulumi.IntInput) GetEndPointsEndPointSetTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEndPointsEndPointSetTag {
+		return vs[0].([]GetEndPointsEndPointSetTag)[vs[1].(int)]
+	}).(GetEndPointsEndPointSetTagOutput)
+}
+
+type GetEndPointsFilter struct {
+	// Parameter name.
+	Name string `pulumi:"name"`
+	// Array of parameter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetEndPointsFilterInput is an input type that accepts GetEndPointsFilterArgs and GetEndPointsFilterOutput values.
+// You can construct a concrete instance of `GetEndPointsFilterInput` via:
+//
+//	GetEndPointsFilterArgs{...}
+type GetEndPointsFilterInput interface {
+	pulumi.Input
+
+	ToGetEndPointsFilterOutput() GetEndPointsFilterOutput
+	ToGetEndPointsFilterOutputWithContext(context.Context) GetEndPointsFilterOutput
+}
+
+type GetEndPointsFilterArgs struct {
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Array of parameter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetEndPointsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsFilter)(nil)).Elem()
+}
+
+func (i GetEndPointsFilterArgs) ToGetEndPointsFilterOutput() GetEndPointsFilterOutput {
+	return i.ToGetEndPointsFilterOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsFilterArgs) ToGetEndPointsFilterOutputWithContext(ctx context.Context) GetEndPointsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsFilterOutput)
+}
+
+// GetEndPointsFilterArrayInput is an input type that accepts GetEndPointsFilterArray and GetEndPointsFilterArrayOutput values.
+// You can construct a concrete instance of `GetEndPointsFilterArrayInput` via:
+//
+//	GetEndPointsFilterArray{ GetEndPointsFilterArgs{...} }
+type GetEndPointsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetEndPointsFilterArrayOutput() GetEndPointsFilterArrayOutput
+	ToGetEndPointsFilterArrayOutputWithContext(context.Context) GetEndPointsFilterArrayOutput
+}
+
+type GetEndPointsFilterArray []GetEndPointsFilterInput
+
+func (GetEndPointsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsFilter)(nil)).Elem()
+}
+
+func (i GetEndPointsFilterArray) ToGetEndPointsFilterArrayOutput() GetEndPointsFilterArrayOutput {
+	return i.ToGetEndPointsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetEndPointsFilterArray) ToGetEndPointsFilterArrayOutputWithContext(ctx context.Context) GetEndPointsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetEndPointsFilterArrayOutput)
+}
+
+type GetEndPointsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetEndPointsFilter)(nil)).Elem()
+}
+
+func (o GetEndPointsFilterOutput) ToGetEndPointsFilterOutput() GetEndPointsFilterOutput {
+	return o
+}
+
+func (o GetEndPointsFilterOutput) ToGetEndPointsFilterOutputWithContext(ctx context.Context) GetEndPointsFilterOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetEndPointsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEndPointsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Array of parameter values.
+func (o GetEndPointsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetEndPointsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetEndPointsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetEndPointsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetEndPointsFilter)(nil)).Elem()
+}
+
+func (o GetEndPointsFilterArrayOutput) ToGetEndPointsFilterArrayOutput() GetEndPointsFilterArrayOutput {
+	return o
+}
+
+func (o GetEndPointsFilterArrayOutput) ToGetEndPointsFilterArrayOutputWithContext(ctx context.Context) GetEndPointsFilterArrayOutput {
+	return o
+}
+
+func (o GetEndPointsFilterArrayOutput) Index(i pulumi.IntInput) GetEndPointsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEndPointsFilter {
+		return vs[0].([]GetEndPointsFilter)[vs[1].(int)]
+	}).(GetEndPointsFilterOutput)
+}
+
+type GetForwardRulesFilter struct {
+	// Parameter name.
+	Name string `pulumi:"name"`
+	// Array of parameter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetForwardRulesFilterInput is an input type that accepts GetForwardRulesFilterArgs and GetForwardRulesFilterOutput values.
+// You can construct a concrete instance of `GetForwardRulesFilterInput` via:
+//
+//	GetForwardRulesFilterArgs{...}
+type GetForwardRulesFilterInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesFilterOutput() GetForwardRulesFilterOutput
+	ToGetForwardRulesFilterOutputWithContext(context.Context) GetForwardRulesFilterOutput
+}
+
+type GetForwardRulesFilterArgs struct {
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Array of parameter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetForwardRulesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesFilter)(nil)).Elem()
+}
+
+func (i GetForwardRulesFilterArgs) ToGetForwardRulesFilterOutput() GetForwardRulesFilterOutput {
+	return i.ToGetForwardRulesFilterOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesFilterArgs) ToGetForwardRulesFilterOutputWithContext(ctx context.Context) GetForwardRulesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesFilterOutput)
+}
+
+// GetForwardRulesFilterArrayInput is an input type that accepts GetForwardRulesFilterArray and GetForwardRulesFilterArrayOutput values.
+// You can construct a concrete instance of `GetForwardRulesFilterArrayInput` via:
+//
+//	GetForwardRulesFilterArray{ GetForwardRulesFilterArgs{...} }
+type GetForwardRulesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesFilterArrayOutput() GetForwardRulesFilterArrayOutput
+	ToGetForwardRulesFilterArrayOutputWithContext(context.Context) GetForwardRulesFilterArrayOutput
+}
+
+type GetForwardRulesFilterArray []GetForwardRulesFilterInput
+
+func (GetForwardRulesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesFilter)(nil)).Elem()
+}
+
+func (i GetForwardRulesFilterArray) ToGetForwardRulesFilterArrayOutput() GetForwardRulesFilterArrayOutput {
+	return i.ToGetForwardRulesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesFilterArray) ToGetForwardRulesFilterArrayOutputWithContext(ctx context.Context) GetForwardRulesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesFilterArrayOutput)
+}
+
+type GetForwardRulesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesFilter)(nil)).Elem()
+}
+
+func (o GetForwardRulesFilterOutput) ToGetForwardRulesFilterOutput() GetForwardRulesFilterOutput {
+	return o
+}
+
+func (o GetForwardRulesFilterOutput) ToGetForwardRulesFilterOutputWithContext(ctx context.Context) GetForwardRulesFilterOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetForwardRulesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Array of parameter values.
+func (o GetForwardRulesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetForwardRulesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetForwardRulesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesFilter)(nil)).Elem()
+}
+
+func (o GetForwardRulesFilterArrayOutput) ToGetForwardRulesFilterArrayOutput() GetForwardRulesFilterArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesFilterArrayOutput) ToGetForwardRulesFilterArrayOutputWithContext(ctx context.Context) GetForwardRulesFilterArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesFilterArrayOutput) Index(i pulumi.IntInput) GetForwardRulesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetForwardRulesFilter {
+		return vs[0].([]GetForwardRulesFilter)[vs[1].(int)]
+	}).(GetForwardRulesFilterOutput)
+}
+
+type GetForwardRulesForwardRuleSet struct {
+	// Creation time.
+	CreatedAt string `pulumi:"createdAt"`
+	// Private domain name.
+	Domain string `pulumi:"domain"`
+	// Endpoint ID.
+	EndPointId string `pulumi:"endPointId"`
+	// Endpoint name.
+	EndPointName string `pulumi:"endPointName"`
+	// Forwarding address.
+	ForwardAddresses []string `pulumi:"forwardAddresses"`
+	// Rule ID.
+	RuleId string `pulumi:"ruleId"`
+	// Forwarding rule name.
+	RuleName string `pulumi:"ruleName"`
+	// Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
+	RuleType string `pulumi:"ruleType"`
+	// Tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []GetForwardRulesForwardRuleSetTag `pulumi:"tags"`
+	// Update time.
+	UpdatedAt string `pulumi:"updatedAt"`
+	// List of VPCs bound to the private domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcSets []GetForwardRulesForwardRuleSetVpcSet `pulumi:"vpcSets"`
+	// ID of the bound private domain.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetForwardRulesForwardRuleSetInput is an input type that accepts GetForwardRulesForwardRuleSetArgs and GetForwardRulesForwardRuleSetOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetInput` via:
+//
+//	GetForwardRulesForwardRuleSetArgs{...}
+type GetForwardRulesForwardRuleSetInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetOutput() GetForwardRulesForwardRuleSetOutput
+	ToGetForwardRulesForwardRuleSetOutputWithContext(context.Context) GetForwardRulesForwardRuleSetOutput
+}
+
+type GetForwardRulesForwardRuleSetArgs struct {
+	// Creation time.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Private domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Endpoint ID.
+	EndPointId pulumi.StringInput `pulumi:"endPointId"`
+	// Endpoint name.
+	EndPointName pulumi.StringInput `pulumi:"endPointName"`
+	// Forwarding address.
+	ForwardAddresses pulumi.StringArrayInput `pulumi:"forwardAddresses"`
+	// Rule ID.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Forwarding rule name.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
+	// Tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags GetForwardRulesForwardRuleSetTagArrayInput `pulumi:"tags"`
+	// Update time.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+	// List of VPCs bound to the private domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcSets GetForwardRulesForwardRuleSetVpcSetArrayInput `pulumi:"vpcSets"`
+	// ID of the bound private domain.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetForwardRulesForwardRuleSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSet)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetArgs) ToGetForwardRulesForwardRuleSetOutput() GetForwardRulesForwardRuleSetOutput {
+	return i.ToGetForwardRulesForwardRuleSetOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetArgs) ToGetForwardRulesForwardRuleSetOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetOutput)
+}
+
+// GetForwardRulesForwardRuleSetArrayInput is an input type that accepts GetForwardRulesForwardRuleSetArray and GetForwardRulesForwardRuleSetArrayOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetArrayInput` via:
+//
+//	GetForwardRulesForwardRuleSetArray{ GetForwardRulesForwardRuleSetArgs{...} }
+type GetForwardRulesForwardRuleSetArrayInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetArrayOutput() GetForwardRulesForwardRuleSetArrayOutput
+	ToGetForwardRulesForwardRuleSetArrayOutputWithContext(context.Context) GetForwardRulesForwardRuleSetArrayOutput
+}
+
+type GetForwardRulesForwardRuleSetArray []GetForwardRulesForwardRuleSetInput
+
+func (GetForwardRulesForwardRuleSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSet)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetArray) ToGetForwardRulesForwardRuleSetArrayOutput() GetForwardRulesForwardRuleSetArrayOutput {
+	return i.ToGetForwardRulesForwardRuleSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetArray) ToGetForwardRulesForwardRuleSetArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetArrayOutput)
+}
+
+type GetForwardRulesForwardRuleSetOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSet)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetOutput) ToGetForwardRulesForwardRuleSetOutput() GetForwardRulesForwardRuleSetOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetOutput) ToGetForwardRulesForwardRuleSetOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetOutput {
+	return o
+}
+
+// Creation time.
+func (o GetForwardRulesForwardRuleSetOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Private domain name.
+func (o GetForwardRulesForwardRuleSetOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Endpoint ID.
+func (o GetForwardRulesForwardRuleSetOutput) EndPointId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.EndPointId }).(pulumi.StringOutput)
+}
+
+// Endpoint name.
+func (o GetForwardRulesForwardRuleSetOutput) EndPointName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.EndPointName }).(pulumi.StringOutput)
+}
+
+// Forwarding address.
+func (o GetForwardRulesForwardRuleSetOutput) ForwardAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) []string { return v.ForwardAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Rule ID.
+func (o GetForwardRulesForwardRuleSetOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Forwarding rule name.
+func (o GetForwardRulesForwardRuleSetOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
+func (o GetForwardRulesForwardRuleSetOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.RuleType }).(pulumi.StringOutput)
+}
+
+// Tag.
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetForwardRulesForwardRuleSetOutput) Tags() GetForwardRulesForwardRuleSetTagArrayOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) []GetForwardRulesForwardRuleSetTag { return v.Tags }).(GetForwardRulesForwardRuleSetTagArrayOutput)
+}
+
+// Update time.
+func (o GetForwardRulesForwardRuleSetOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+// List of VPCs bound to the private domain.
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetForwardRulesForwardRuleSetOutput) VpcSets() GetForwardRulesForwardRuleSetVpcSetArrayOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) []GetForwardRulesForwardRuleSetVpcSet { return v.VpcSets }).(GetForwardRulesForwardRuleSetVpcSetArrayOutput)
+}
+
+// ID of the bound private domain.
+func (o GetForwardRulesForwardRuleSetOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSet) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetForwardRulesForwardRuleSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSet)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetArrayOutput) ToGetForwardRulesForwardRuleSetArrayOutput() GetForwardRulesForwardRuleSetArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetArrayOutput) ToGetForwardRulesForwardRuleSetArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetArrayOutput) Index(i pulumi.IntInput) GetForwardRulesForwardRuleSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetForwardRulesForwardRuleSet {
+		return vs[0].([]GetForwardRulesForwardRuleSet)[vs[1].(int)]
+	}).(GetForwardRulesForwardRuleSetOutput)
+}
+
+type GetForwardRulesForwardRuleSetTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetForwardRulesForwardRuleSetTagInput is an input type that accepts GetForwardRulesForwardRuleSetTagArgs and GetForwardRulesForwardRuleSetTagOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetTagInput` via:
+//
+//	GetForwardRulesForwardRuleSetTagArgs{...}
+type GetForwardRulesForwardRuleSetTagInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetTagOutput() GetForwardRulesForwardRuleSetTagOutput
+	ToGetForwardRulesForwardRuleSetTagOutputWithContext(context.Context) GetForwardRulesForwardRuleSetTagOutput
+}
+
+type GetForwardRulesForwardRuleSetTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetForwardRulesForwardRuleSetTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSetTag)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetTagArgs) ToGetForwardRulesForwardRuleSetTagOutput() GetForwardRulesForwardRuleSetTagOutput {
+	return i.ToGetForwardRulesForwardRuleSetTagOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetTagArgs) ToGetForwardRulesForwardRuleSetTagOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetTagOutput)
+}
+
+// GetForwardRulesForwardRuleSetTagArrayInput is an input type that accepts GetForwardRulesForwardRuleSetTagArray and GetForwardRulesForwardRuleSetTagArrayOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetTagArrayInput` via:
+//
+//	GetForwardRulesForwardRuleSetTagArray{ GetForwardRulesForwardRuleSetTagArgs{...} }
+type GetForwardRulesForwardRuleSetTagArrayInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetTagArrayOutput() GetForwardRulesForwardRuleSetTagArrayOutput
+	ToGetForwardRulesForwardRuleSetTagArrayOutputWithContext(context.Context) GetForwardRulesForwardRuleSetTagArrayOutput
+}
+
+type GetForwardRulesForwardRuleSetTagArray []GetForwardRulesForwardRuleSetTagInput
+
+func (GetForwardRulesForwardRuleSetTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSetTag)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetTagArray) ToGetForwardRulesForwardRuleSetTagArrayOutput() GetForwardRulesForwardRuleSetTagArrayOutput {
+	return i.ToGetForwardRulesForwardRuleSetTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetTagArray) ToGetForwardRulesForwardRuleSetTagArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetTagArrayOutput)
+}
+
+type GetForwardRulesForwardRuleSetTagOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSetTag)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetTagOutput) ToGetForwardRulesForwardRuleSetTagOutput() GetForwardRulesForwardRuleSetTagOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetTagOutput) ToGetForwardRulesForwardRuleSetTagOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetForwardRulesForwardRuleSetTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSetTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetForwardRulesForwardRuleSetTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSetTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetForwardRulesForwardRuleSetTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSetTag)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetTagArrayOutput) ToGetForwardRulesForwardRuleSetTagArrayOutput() GetForwardRulesForwardRuleSetTagArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetTagArrayOutput) ToGetForwardRulesForwardRuleSetTagArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetTagArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetTagArrayOutput) Index(i pulumi.IntInput) GetForwardRulesForwardRuleSetTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetForwardRulesForwardRuleSetTag {
+		return vs[0].([]GetForwardRulesForwardRuleSetTag)[vs[1].(int)]
+	}).(GetForwardRulesForwardRuleSetTagOutput)
+}
+
+type GetForwardRulesForwardRuleSetVpcSet struct {
+	// VPC region: ap-guangzhou, ap-shanghai.
+	Region string `pulumi:"region"`
+	// VpcId: vpc-xadsafsdasd.
+	UniqVpcId string `pulumi:"uniqVpcId"`
+}
+
+// GetForwardRulesForwardRuleSetVpcSetInput is an input type that accepts GetForwardRulesForwardRuleSetVpcSetArgs and GetForwardRulesForwardRuleSetVpcSetOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetVpcSetInput` via:
+//
+//	GetForwardRulesForwardRuleSetVpcSetArgs{...}
+type GetForwardRulesForwardRuleSetVpcSetInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetVpcSetOutput() GetForwardRulesForwardRuleSetVpcSetOutput
+	ToGetForwardRulesForwardRuleSetVpcSetOutputWithContext(context.Context) GetForwardRulesForwardRuleSetVpcSetOutput
+}
+
+type GetForwardRulesForwardRuleSetVpcSetArgs struct {
+	// VPC region: ap-guangzhou, ap-shanghai.
+	Region pulumi.StringInput `pulumi:"region"`
+	// VpcId: vpc-xadsafsdasd.
+	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
+}
+
+func (GetForwardRulesForwardRuleSetVpcSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSetVpcSet)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetVpcSetArgs) ToGetForwardRulesForwardRuleSetVpcSetOutput() GetForwardRulesForwardRuleSetVpcSetOutput {
+	return i.ToGetForwardRulesForwardRuleSetVpcSetOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetVpcSetArgs) ToGetForwardRulesForwardRuleSetVpcSetOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetVpcSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetVpcSetOutput)
+}
+
+// GetForwardRulesForwardRuleSetVpcSetArrayInput is an input type that accepts GetForwardRulesForwardRuleSetVpcSetArray and GetForwardRulesForwardRuleSetVpcSetArrayOutput values.
+// You can construct a concrete instance of `GetForwardRulesForwardRuleSetVpcSetArrayInput` via:
+//
+//	GetForwardRulesForwardRuleSetVpcSetArray{ GetForwardRulesForwardRuleSetVpcSetArgs{...} }
+type GetForwardRulesForwardRuleSetVpcSetArrayInput interface {
+	pulumi.Input
+
+	ToGetForwardRulesForwardRuleSetVpcSetArrayOutput() GetForwardRulesForwardRuleSetVpcSetArrayOutput
+	ToGetForwardRulesForwardRuleSetVpcSetArrayOutputWithContext(context.Context) GetForwardRulesForwardRuleSetVpcSetArrayOutput
+}
+
+type GetForwardRulesForwardRuleSetVpcSetArray []GetForwardRulesForwardRuleSetVpcSetInput
+
+func (GetForwardRulesForwardRuleSetVpcSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSetVpcSet)(nil)).Elem()
+}
+
+func (i GetForwardRulesForwardRuleSetVpcSetArray) ToGetForwardRulesForwardRuleSetVpcSetArrayOutput() GetForwardRulesForwardRuleSetVpcSetArrayOutput {
+	return i.ToGetForwardRulesForwardRuleSetVpcSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetForwardRulesForwardRuleSetVpcSetArray) ToGetForwardRulesForwardRuleSetVpcSetArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetVpcSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetForwardRulesForwardRuleSetVpcSetArrayOutput)
+}
+
+type GetForwardRulesForwardRuleSetVpcSetOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetVpcSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetForwardRulesForwardRuleSetVpcSet)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetVpcSetOutput) ToGetForwardRulesForwardRuleSetVpcSetOutput() GetForwardRulesForwardRuleSetVpcSetOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetVpcSetOutput) ToGetForwardRulesForwardRuleSetVpcSetOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetVpcSetOutput {
+	return o
+}
+
+// VPC region: ap-guangzhou, ap-shanghai.
+func (o GetForwardRulesForwardRuleSetVpcSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSetVpcSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// VpcId: vpc-xadsafsdasd.
+func (o GetForwardRulesForwardRuleSetVpcSetOutput) UniqVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetForwardRulesForwardRuleSetVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
+}
+
+type GetForwardRulesForwardRuleSetVpcSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetForwardRulesForwardRuleSetVpcSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetForwardRulesForwardRuleSetVpcSet)(nil)).Elem()
+}
+
+func (o GetForwardRulesForwardRuleSetVpcSetArrayOutput) ToGetForwardRulesForwardRuleSetVpcSetArrayOutput() GetForwardRulesForwardRuleSetVpcSetArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetVpcSetArrayOutput) ToGetForwardRulesForwardRuleSetVpcSetArrayOutputWithContext(ctx context.Context) GetForwardRulesForwardRuleSetVpcSetArrayOutput {
+	return o
+}
+
+func (o GetForwardRulesForwardRuleSetVpcSetArrayOutput) Index(i pulumi.IntInput) GetForwardRulesForwardRuleSetVpcSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetForwardRulesForwardRuleSetVpcSet {
+		return vs[0].([]GetForwardRulesForwardRuleSetVpcSet)[vs[1].(int)]
+	}).(GetForwardRulesForwardRuleSetVpcSetOutput)
+}
+
 type GetPrivateZoneListFilter struct {
 	// name.
 	Name string `pulumi:"name"`
@@ -1804,6 +2684,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcAttachmentVpcSetPtrInput)(nil)).Elem(), ZoneVpcAttachmentVpcSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcSetInput)(nil)).Elem(), ZoneVpcSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneVpcSetArrayInput)(nil)).Elem(), ZoneVpcSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsEndPointSetInput)(nil)).Elem(), GetEndPointsEndPointSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsEndPointSetArrayInput)(nil)).Elem(), GetEndPointsEndPointSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsEndPointSetTagInput)(nil)).Elem(), GetEndPointsEndPointSetTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsEndPointSetTagArrayInput)(nil)).Elem(), GetEndPointsEndPointSetTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsFilterInput)(nil)).Elem(), GetEndPointsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetEndPointsFilterArrayInput)(nil)).Elem(), GetEndPointsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesFilterInput)(nil)).Elem(), GetForwardRulesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesFilterArrayInput)(nil)).Elem(), GetForwardRulesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetInput)(nil)).Elem(), GetForwardRulesForwardRuleSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetArrayInput)(nil)).Elem(), GetForwardRulesForwardRuleSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetTagInput)(nil)).Elem(), GetForwardRulesForwardRuleSetTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetTagArrayInput)(nil)).Elem(), GetForwardRulesForwardRuleSetTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetVpcSetInput)(nil)).Elem(), GetForwardRulesForwardRuleSetVpcSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetForwardRulesForwardRuleSetVpcSetArrayInput)(nil)).Elem(), GetForwardRulesForwardRuleSetVpcSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateZoneListFilterInput)(nil)).Elem(), GetPrivateZoneListFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateZoneListFilterArrayInput)(nil)).Elem(), GetPrivateZoneListFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPrivateZoneListPrivateZoneSetInput)(nil)).Elem(), GetPrivateZoneListPrivateZoneSetArgs{})
@@ -1830,6 +2724,20 @@ func init() {
 	pulumi.RegisterOutputType(ZoneVpcAttachmentVpcSetPtrOutput{})
 	pulumi.RegisterOutputType(ZoneVpcSetOutput{})
 	pulumi.RegisterOutputType(ZoneVpcSetArrayOutput{})
+	pulumi.RegisterOutputType(GetEndPointsEndPointSetOutput{})
+	pulumi.RegisterOutputType(GetEndPointsEndPointSetArrayOutput{})
+	pulumi.RegisterOutputType(GetEndPointsEndPointSetTagOutput{})
+	pulumi.RegisterOutputType(GetEndPointsEndPointSetTagArrayOutput{})
+	pulumi.RegisterOutputType(GetEndPointsFilterOutput{})
+	pulumi.RegisterOutputType(GetEndPointsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesFilterOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetArrayOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetTagOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetTagArrayOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetVpcSetOutput{})
+	pulumi.RegisterOutputType(GetForwardRulesForwardRuleSetVpcSetArrayOutput{})
 	pulumi.RegisterOutputType(GetPrivateZoneListFilterOutput{})
 	pulumi.RegisterOutputType(GetPrivateZoneListFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetPrivateZoneListPrivateZoneSetOutput{})

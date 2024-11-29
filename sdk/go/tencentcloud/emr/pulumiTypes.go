@@ -169,18 +169,182 @@ func (o ClusterPlacementInfoPtrOutput) Zone() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ClusterPreExecutedFileSetting struct {
+	// Execution script parameters.
+	Args []string `pulumi:"args"`
+	// Script file name.
+	CosFileName *string `pulumi:"cosFileName"`
+	// The cos address of the script.
+	CosFileUri *string `pulumi:"cosFileUri"`
+	// Cos secretId.
+	CosSecretId *string `pulumi:"cosSecretId"`
+	// Cos secretKey.
+	CosSecretKey *string `pulumi:"cosSecretKey"`
+	// Remark.
+	Remark *string `pulumi:"remark"`
+	// Run order.
+	RunOrder *int `pulumi:"runOrder"`
+	// `resourceAfter` or `clusterAfter`.
+	WhenRun *string `pulumi:"whenRun"`
+}
+
+// ClusterPreExecutedFileSettingInput is an input type that accepts ClusterPreExecutedFileSettingArgs and ClusterPreExecutedFileSettingOutput values.
+// You can construct a concrete instance of `ClusterPreExecutedFileSettingInput` via:
+//
+//	ClusterPreExecutedFileSettingArgs{...}
+type ClusterPreExecutedFileSettingInput interface {
+	pulumi.Input
+
+	ToClusterPreExecutedFileSettingOutput() ClusterPreExecutedFileSettingOutput
+	ToClusterPreExecutedFileSettingOutputWithContext(context.Context) ClusterPreExecutedFileSettingOutput
+}
+
+type ClusterPreExecutedFileSettingArgs struct {
+	// Execution script parameters.
+	Args pulumi.StringArrayInput `pulumi:"args"`
+	// Script file name.
+	CosFileName pulumi.StringPtrInput `pulumi:"cosFileName"`
+	// The cos address of the script.
+	CosFileUri pulumi.StringPtrInput `pulumi:"cosFileUri"`
+	// Cos secretId.
+	CosSecretId pulumi.StringPtrInput `pulumi:"cosSecretId"`
+	// Cos secretKey.
+	CosSecretKey pulumi.StringPtrInput `pulumi:"cosSecretKey"`
+	// Remark.
+	Remark pulumi.StringPtrInput `pulumi:"remark"`
+	// Run order.
+	RunOrder pulumi.IntPtrInput `pulumi:"runOrder"`
+	// `resourceAfter` or `clusterAfter`.
+	WhenRun pulumi.StringPtrInput `pulumi:"whenRun"`
+}
+
+func (ClusterPreExecutedFileSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (i ClusterPreExecutedFileSettingArgs) ToClusterPreExecutedFileSettingOutput() ClusterPreExecutedFileSettingOutput {
+	return i.ToClusterPreExecutedFileSettingOutputWithContext(context.Background())
+}
+
+func (i ClusterPreExecutedFileSettingArgs) ToClusterPreExecutedFileSettingOutputWithContext(ctx context.Context) ClusterPreExecutedFileSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPreExecutedFileSettingOutput)
+}
+
+// ClusterPreExecutedFileSettingArrayInput is an input type that accepts ClusterPreExecutedFileSettingArray and ClusterPreExecutedFileSettingArrayOutput values.
+// You can construct a concrete instance of `ClusterPreExecutedFileSettingArrayInput` via:
+//
+//	ClusterPreExecutedFileSettingArray{ ClusterPreExecutedFileSettingArgs{...} }
+type ClusterPreExecutedFileSettingArrayInput interface {
+	pulumi.Input
+
+	ToClusterPreExecutedFileSettingArrayOutput() ClusterPreExecutedFileSettingArrayOutput
+	ToClusterPreExecutedFileSettingArrayOutputWithContext(context.Context) ClusterPreExecutedFileSettingArrayOutput
+}
+
+type ClusterPreExecutedFileSettingArray []ClusterPreExecutedFileSettingInput
+
+func (ClusterPreExecutedFileSettingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (i ClusterPreExecutedFileSettingArray) ToClusterPreExecutedFileSettingArrayOutput() ClusterPreExecutedFileSettingArrayOutput {
+	return i.ToClusterPreExecutedFileSettingArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterPreExecutedFileSettingArray) ToClusterPreExecutedFileSettingArrayOutputWithContext(ctx context.Context) ClusterPreExecutedFileSettingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterPreExecutedFileSettingArrayOutput)
+}
+
+type ClusterPreExecutedFileSettingOutput struct{ *pulumi.OutputState }
+
+func (ClusterPreExecutedFileSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (o ClusterPreExecutedFileSettingOutput) ToClusterPreExecutedFileSettingOutput() ClusterPreExecutedFileSettingOutput {
+	return o
+}
+
+func (o ClusterPreExecutedFileSettingOutput) ToClusterPreExecutedFileSettingOutputWithContext(ctx context.Context) ClusterPreExecutedFileSettingOutput {
+	return o
+}
+
+// Execution script parameters.
+func (o ClusterPreExecutedFileSettingOutput) Args() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) []string { return v.Args }).(pulumi.StringArrayOutput)
+}
+
+// Script file name.
+func (o ClusterPreExecutedFileSettingOutput) CosFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.CosFileName }).(pulumi.StringPtrOutput)
+}
+
+// The cos address of the script.
+func (o ClusterPreExecutedFileSettingOutput) CosFileUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.CosFileUri }).(pulumi.StringPtrOutput)
+}
+
+// Cos secretId.
+func (o ClusterPreExecutedFileSettingOutput) CosSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.CosSecretId }).(pulumi.StringPtrOutput)
+}
+
+// Cos secretKey.
+func (o ClusterPreExecutedFileSettingOutput) CosSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.CosSecretKey }).(pulumi.StringPtrOutput)
+}
+
+// Remark.
+func (o ClusterPreExecutedFileSettingOutput) Remark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Run order.
+func (o ClusterPreExecutedFileSettingOutput) RunOrder() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *int { return v.RunOrder }).(pulumi.IntPtrOutput)
+}
+
+// `resourceAfter` or `clusterAfter`.
+func (o ClusterPreExecutedFileSettingOutput) WhenRun() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterPreExecutedFileSetting) *string { return v.WhenRun }).(pulumi.StringPtrOutput)
+}
+
+type ClusterPreExecutedFileSettingArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterPreExecutedFileSettingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (o ClusterPreExecutedFileSettingArrayOutput) ToClusterPreExecutedFileSettingArrayOutput() ClusterPreExecutedFileSettingArrayOutput {
+	return o
+}
+
+func (o ClusterPreExecutedFileSettingArrayOutput) ToClusterPreExecutedFileSettingArrayOutputWithContext(ctx context.Context) ClusterPreExecutedFileSettingArrayOutput {
+	return o
+}
+
+func (o ClusterPreExecutedFileSettingArrayOutput) Index(i pulumi.IntInput) ClusterPreExecutedFileSettingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterPreExecutedFileSetting {
+		return vs[0].([]ClusterPreExecutedFileSetting)[vs[1].(int)]
+	}).(ClusterPreExecutedFileSettingOutput)
+}
+
 type ClusterResourceSpec struct {
 	// The number of common node.
-	CommonCount        *int                                   `pulumi:"commonCount"`
+	CommonCount *int `pulumi:"commonCount"`
+	// Resource details.
 	CommonResourceSpec *ClusterResourceSpecCommonResourceSpec `pulumi:"commonResourceSpec"`
 	// The number of core node.
-	CoreCount        *int                                 `pulumi:"coreCount"`
+	CoreCount *int `pulumi:"coreCount"`
+	// Resource details.
 	CoreResourceSpec *ClusterResourceSpecCoreResourceSpec `pulumi:"coreResourceSpec"`
 	// The number of master node.
-	MasterCount        *int                                   `pulumi:"masterCount"`
+	MasterCount *int `pulumi:"masterCount"`
+	// Resource details.
 	MasterResourceSpec *ClusterResourceSpecMasterResourceSpec `pulumi:"masterResourceSpec"`
 	// The number of core node.
-	TaskCount        *int                                 `pulumi:"taskCount"`
+	TaskCount *int `pulumi:"taskCount"`
+	// Resource details.
 	TaskResourceSpec *ClusterResourceSpecTaskResourceSpec `pulumi:"taskResourceSpec"`
 }
 
@@ -197,16 +361,20 @@ type ClusterResourceSpecInput interface {
 
 type ClusterResourceSpecArgs struct {
 	// The number of common node.
-	CommonCount        pulumi.IntPtrInput                            `pulumi:"commonCount"`
+	CommonCount pulumi.IntPtrInput `pulumi:"commonCount"`
+	// Resource details.
 	CommonResourceSpec ClusterResourceSpecCommonResourceSpecPtrInput `pulumi:"commonResourceSpec"`
 	// The number of core node.
-	CoreCount        pulumi.IntPtrInput                          `pulumi:"coreCount"`
+	CoreCount pulumi.IntPtrInput `pulumi:"coreCount"`
+	// Resource details.
 	CoreResourceSpec ClusterResourceSpecCoreResourceSpecPtrInput `pulumi:"coreResourceSpec"`
 	// The number of master node.
-	MasterCount        pulumi.IntPtrInput                            `pulumi:"masterCount"`
+	MasterCount pulumi.IntPtrInput `pulumi:"masterCount"`
+	// Resource details.
 	MasterResourceSpec ClusterResourceSpecMasterResourceSpecPtrInput `pulumi:"masterResourceSpec"`
 	// The number of core node.
-	TaskCount        pulumi.IntPtrInput                          `pulumi:"taskCount"`
+	TaskCount pulumi.IntPtrInput `pulumi:"taskCount"`
+	// Resource details.
 	TaskResourceSpec ClusterResourceSpecTaskResourceSpecPtrInput `pulumi:"taskResourceSpec"`
 }
 
@@ -292,6 +460,7 @@ func (o ClusterResourceSpecOutput) CommonCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.CommonCount }).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecOutput) CommonResourceSpec() ClusterResourceSpecCommonResourceSpecPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecCommonResourceSpec { return v.CommonResourceSpec }).(ClusterResourceSpecCommonResourceSpecPtrOutput)
 }
@@ -301,6 +470,7 @@ func (o ClusterResourceSpecOutput) CoreCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.CoreCount }).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecOutput) CoreResourceSpec() ClusterResourceSpecCoreResourceSpecPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecCoreResourceSpec { return v.CoreResourceSpec }).(ClusterResourceSpecCoreResourceSpecPtrOutput)
 }
@@ -310,6 +480,7 @@ func (o ClusterResourceSpecOutput) MasterCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.MasterCount }).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecOutput) MasterResourceSpec() ClusterResourceSpecMasterResourceSpecPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecMasterResourceSpec { return v.MasterResourceSpec }).(ClusterResourceSpecMasterResourceSpecPtrOutput)
 }
@@ -319,6 +490,7 @@ func (o ClusterResourceSpecOutput) TaskCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *int { return v.TaskCount }).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecOutput) TaskResourceSpec() ClusterResourceSpecTaskResourceSpecPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpec) *ClusterResourceSpecTaskResourceSpec { return v.TaskResourceSpec }).(ClusterResourceSpecTaskResourceSpecPtrOutput)
 }
@@ -357,6 +529,7 @@ func (o ClusterResourceSpecPtrOutput) CommonCount() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecPtrOutput) CommonResourceSpec() ClusterResourceSpecCommonResourceSpecPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *ClusterResourceSpecCommonResourceSpec {
 		if v == nil {
@@ -376,6 +549,7 @@ func (o ClusterResourceSpecPtrOutput) CoreCount() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecPtrOutput) CoreResourceSpec() ClusterResourceSpecCoreResourceSpecPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *ClusterResourceSpecCoreResourceSpec {
 		if v == nil {
@@ -395,6 +569,7 @@ func (o ClusterResourceSpecPtrOutput) MasterCount() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecPtrOutput) MasterResourceSpec() ClusterResourceSpecMasterResourceSpecPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *ClusterResourceSpecMasterResourceSpec {
 		if v == nil {
@@ -414,6 +589,7 @@ func (o ClusterResourceSpecPtrOutput) TaskCount() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Resource details.
 func (o ClusterResourceSpecPtrOutput) TaskResourceSpec() ClusterResourceSpecTaskResourceSpecPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpec) *ClusterResourceSpecTaskResourceSpec {
 		if v == nil {
@@ -424,13 +600,30 @@ func (o ClusterResourceSpecPtrOutput) TaskResourceSpec() ClusterResourceSpecTask
 }
 
 type ClusterResourceSpecCommonResourceSpec struct {
-	Cpu         *int    `pulumi:"cpu"`
-	DiskSize    *int    `pulumi:"diskSize"`
-	DiskType    *string `pulumi:"diskType"`
-	MemSize     *int    `pulumi:"memSize"`
-	RootSize    *int    `pulumi:"rootSize"`
-	Spec        *string `pulumi:"spec"`
-	StorageType *int    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu *int `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize *int `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize *int `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks []ClusterResourceSpecCommonResourceSpecMultiDisk `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize *int `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec *string `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType *int `pulumi:"storageType"`
 }
 
 // ClusterResourceSpecCommonResourceSpecInput is an input type that accepts ClusterResourceSpecCommonResourceSpecArgs and ClusterResourceSpecCommonResourceSpecOutput values.
@@ -445,13 +638,30 @@ type ClusterResourceSpecCommonResourceSpecInput interface {
 }
 
 type ClusterResourceSpecCommonResourceSpecArgs struct {
-	Cpu         pulumi.IntPtrInput    `pulumi:"cpu"`
-	DiskSize    pulumi.IntPtrInput    `pulumi:"diskSize"`
-	DiskType    pulumi.StringPtrInput `pulumi:"diskType"`
-	MemSize     pulumi.IntPtrInput    `pulumi:"memSize"`
-	RootSize    pulumi.IntPtrInput    `pulumi:"rootSize"`
-	Spec        pulumi.StringPtrInput `pulumi:"spec"`
-	StorageType pulumi.IntPtrInput    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntPtrInput `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize pulumi.IntPtrInput `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks ClusterResourceSpecCommonResourceSpecMultiDiskArrayInput `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize pulumi.IntPtrInput `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec pulumi.StringPtrInput `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType pulumi.IntPtrInput `pulumi:"storageType"`
 }
 
 func (ClusterResourceSpecCommonResourceSpecArgs) ElementType() reflect.Type {
@@ -531,30 +741,52 @@ func (o ClusterResourceSpecCommonResourceSpecOutput) ToClusterResourceSpecCommon
 	}).(ClusterResourceSpecCommonResourceSpecPtrOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecCommonResourceSpecOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *int { return v.Cpu }).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecCommonResourceSpecOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecCommonResourceSpecOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecCommonResourceSpecOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *int { return v.MemSize }).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecCommonResourceSpecOutput) MultiDisks() ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) []ClusterResourceSpecCommonResourceSpecMultiDisk {
+		return v.MultiDisks
+	}).(ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecCommonResourceSpecOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *int { return v.RootSize }).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecCommonResourceSpecOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *string { return v.Spec }).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecCommonResourceSpecOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpec) *int { return v.StorageType }).(pulumi.IntPtrOutput)
 }
@@ -583,6 +815,7 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) Elem() ClusterResourceSp
 	}).(ClusterResourceSpecCommonResourceSpecOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *int {
 		if v == nil {
@@ -592,6 +825,7 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *int {
 		if v == nil {
@@ -601,6 +835,10 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) DiskSize() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *string {
 		if v == nil {
@@ -610,6 +848,7 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) DiskType() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *int {
 		if v == nil {
@@ -619,6 +858,17 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) MemSize() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecCommonResourceSpecPtrOutput) MultiDisks() ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) []ClusterResourceSpecCommonResourceSpecMultiDisk {
+		if v == nil {
+			return nil
+		}
+		return v.MultiDisks
+	}).(ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *int {
 		if v == nil {
@@ -628,6 +878,7 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) RootSize() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *string {
 		if v == nil {
@@ -637,6 +888,12 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) Spec() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecCommonResourceSpecPtrOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCommonResourceSpec) *int {
 		if v == nil {
@@ -646,14 +903,155 @@ func (o ClusterResourceSpecCommonResourceSpecPtrOutput) StorageType() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
+type ClusterResourceSpecCommonResourceSpecMultiDisk struct {
+	// Number of cloud disks of this type.
+	Count *int `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume *int `pulumi:"volume"`
+}
+
+// ClusterResourceSpecCommonResourceSpecMultiDiskInput is an input type that accepts ClusterResourceSpecCommonResourceSpecMultiDiskArgs and ClusterResourceSpecCommonResourceSpecMultiDiskOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecMultiDiskInput` via:
+//
+//	ClusterResourceSpecCommonResourceSpecMultiDiskArgs{...}
+type ClusterResourceSpecCommonResourceSpecMultiDiskInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecCommonResourceSpecMultiDiskOutput() ClusterResourceSpecCommonResourceSpecMultiDiskOutput
+	ToClusterResourceSpecCommonResourceSpecMultiDiskOutputWithContext(context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskOutput
+}
+
+type ClusterResourceSpecCommonResourceSpecMultiDiskArgs struct {
+	// Number of cloud disks of this type.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume pulumi.IntPtrInput `pulumi:"volume"`
+}
+
+func (ClusterResourceSpecCommonResourceSpecMultiDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecCommonResourceSpecMultiDiskArgs) ToClusterResourceSpecCommonResourceSpecMultiDiskOutput() ClusterResourceSpecCommonResourceSpecMultiDiskOutput {
+	return i.ToClusterResourceSpecCommonResourceSpecMultiDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecCommonResourceSpecMultiDiskArgs) ToClusterResourceSpecCommonResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecCommonResourceSpecMultiDiskOutput)
+}
+
+// ClusterResourceSpecCommonResourceSpecMultiDiskArrayInput is an input type that accepts ClusterResourceSpecCommonResourceSpecMultiDiskArray and ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecCommonResourceSpecMultiDiskArrayInput` via:
+//
+//	ClusterResourceSpecCommonResourceSpecMultiDiskArray{ ClusterResourceSpecCommonResourceSpecMultiDiskArgs{...} }
+type ClusterResourceSpecCommonResourceSpecMultiDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput
+	ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutputWithContext(context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput
+}
+
+type ClusterResourceSpecCommonResourceSpecMultiDiskArray []ClusterResourceSpecCommonResourceSpecMultiDiskInput
+
+func (ClusterResourceSpecCommonResourceSpecMultiDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecCommonResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecCommonResourceSpecMultiDiskArray) ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return i.ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecCommonResourceSpecMultiDiskArray) ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput)
+}
+
+type ClusterResourceSpecCommonResourceSpecMultiDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecCommonResourceSpecMultiDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskOutput) ToClusterResourceSpecCommonResourceSpecMultiDiskOutput() ClusterResourceSpecCommonResourceSpecMultiDiskOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskOutput) ToClusterResourceSpecCommonResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskOutput {
+	return o
+}
+
+// Number of cloud disks of this type.
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpecMultiDisk) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// Cloud disk type
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpecMultiDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk size.
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskOutput) Volume() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCommonResourceSpecMultiDisk) *int { return v.Volume }).(pulumi.IntPtrOutput)
+}
+
+type ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecCommonResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecCommonResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput) Index(i pulumi.IntInput) ClusterResourceSpecCommonResourceSpecMultiDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceSpecCommonResourceSpecMultiDisk {
+		return vs[0].([]ClusterResourceSpecCommonResourceSpecMultiDisk)[vs[1].(int)]
+	}).(ClusterResourceSpecCommonResourceSpecMultiDiskOutput)
+}
+
 type ClusterResourceSpecCoreResourceSpec struct {
-	Cpu         *int    `pulumi:"cpu"`
-	DiskSize    *int    `pulumi:"diskSize"`
-	DiskType    *string `pulumi:"diskType"`
-	MemSize     *int    `pulumi:"memSize"`
-	RootSize    *int    `pulumi:"rootSize"`
-	Spec        *string `pulumi:"spec"`
-	StorageType *int    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu *int `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize *int `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize *int `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks []ClusterResourceSpecCoreResourceSpecMultiDisk `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize *int `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec *string `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType *int `pulumi:"storageType"`
 }
 
 // ClusterResourceSpecCoreResourceSpecInput is an input type that accepts ClusterResourceSpecCoreResourceSpecArgs and ClusterResourceSpecCoreResourceSpecOutput values.
@@ -668,13 +1066,30 @@ type ClusterResourceSpecCoreResourceSpecInput interface {
 }
 
 type ClusterResourceSpecCoreResourceSpecArgs struct {
-	Cpu         pulumi.IntPtrInput    `pulumi:"cpu"`
-	DiskSize    pulumi.IntPtrInput    `pulumi:"diskSize"`
-	DiskType    pulumi.StringPtrInput `pulumi:"diskType"`
-	MemSize     pulumi.IntPtrInput    `pulumi:"memSize"`
-	RootSize    pulumi.IntPtrInput    `pulumi:"rootSize"`
-	Spec        pulumi.StringPtrInput `pulumi:"spec"`
-	StorageType pulumi.IntPtrInput    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntPtrInput `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize pulumi.IntPtrInput `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks ClusterResourceSpecCoreResourceSpecMultiDiskArrayInput `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize pulumi.IntPtrInput `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec pulumi.StringPtrInput `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType pulumi.IntPtrInput `pulumi:"storageType"`
 }
 
 func (ClusterResourceSpecCoreResourceSpecArgs) ElementType() reflect.Type {
@@ -754,30 +1169,52 @@ func (o ClusterResourceSpecCoreResourceSpecOutput) ToClusterResourceSpecCoreReso
 	}).(ClusterResourceSpecCoreResourceSpecPtrOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecCoreResourceSpecOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *int { return v.Cpu }).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecCoreResourceSpecOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecCoreResourceSpecOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecCoreResourceSpecOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *int { return v.MemSize }).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecCoreResourceSpecOutput) MultiDisks() ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) []ClusterResourceSpecCoreResourceSpecMultiDisk {
+		return v.MultiDisks
+	}).(ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecCoreResourceSpecOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *int { return v.RootSize }).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecCoreResourceSpecOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *string { return v.Spec }).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecCoreResourceSpecOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpec) *int { return v.StorageType }).(pulumi.IntPtrOutput)
 }
@@ -806,6 +1243,7 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) Elem() ClusterResourceSpec
 	}).(ClusterResourceSpecCoreResourceSpecOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *int {
 		if v == nil {
@@ -815,6 +1253,7 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *int {
 		if v == nil {
@@ -824,6 +1263,10 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *string {
 		if v == nil {
@@ -833,6 +1276,7 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) DiskType() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *int {
 		if v == nil {
@@ -842,6 +1286,17 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) MemSize() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecCoreResourceSpecPtrOutput) MultiDisks() ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) []ClusterResourceSpecCoreResourceSpecMultiDisk {
+		if v == nil {
+			return nil
+		}
+		return v.MultiDisks
+	}).(ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *int {
 		if v == nil {
@@ -851,6 +1306,7 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) RootSize() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *string {
 		if v == nil {
@@ -860,6 +1316,12 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) Spec() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecCoreResourceSpecPtrOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecCoreResourceSpec) *int {
 		if v == nil {
@@ -869,14 +1331,155 @@ func (o ClusterResourceSpecCoreResourceSpecPtrOutput) StorageType() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
+type ClusterResourceSpecCoreResourceSpecMultiDisk struct {
+	// Number of cloud disks of this type.
+	Count *int `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume *int `pulumi:"volume"`
+}
+
+// ClusterResourceSpecCoreResourceSpecMultiDiskInput is an input type that accepts ClusterResourceSpecCoreResourceSpecMultiDiskArgs and ClusterResourceSpecCoreResourceSpecMultiDiskOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecMultiDiskInput` via:
+//
+//	ClusterResourceSpecCoreResourceSpecMultiDiskArgs{...}
+type ClusterResourceSpecCoreResourceSpecMultiDiskInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecCoreResourceSpecMultiDiskOutput() ClusterResourceSpecCoreResourceSpecMultiDiskOutput
+	ToClusterResourceSpecCoreResourceSpecMultiDiskOutputWithContext(context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskOutput
+}
+
+type ClusterResourceSpecCoreResourceSpecMultiDiskArgs struct {
+	// Number of cloud disks of this type.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume pulumi.IntPtrInput `pulumi:"volume"`
+}
+
+func (ClusterResourceSpecCoreResourceSpecMultiDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecCoreResourceSpecMultiDiskArgs) ToClusterResourceSpecCoreResourceSpecMultiDiskOutput() ClusterResourceSpecCoreResourceSpecMultiDiskOutput {
+	return i.ToClusterResourceSpecCoreResourceSpecMultiDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecCoreResourceSpecMultiDiskArgs) ToClusterResourceSpecCoreResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecCoreResourceSpecMultiDiskOutput)
+}
+
+// ClusterResourceSpecCoreResourceSpecMultiDiskArrayInput is an input type that accepts ClusterResourceSpecCoreResourceSpecMultiDiskArray and ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecCoreResourceSpecMultiDiskArrayInput` via:
+//
+//	ClusterResourceSpecCoreResourceSpecMultiDiskArray{ ClusterResourceSpecCoreResourceSpecMultiDiskArgs{...} }
+type ClusterResourceSpecCoreResourceSpecMultiDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput
+	ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutputWithContext(context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput
+}
+
+type ClusterResourceSpecCoreResourceSpecMultiDiskArray []ClusterResourceSpecCoreResourceSpecMultiDiskInput
+
+func (ClusterResourceSpecCoreResourceSpecMultiDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecCoreResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecCoreResourceSpecMultiDiskArray) ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return i.ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecCoreResourceSpecMultiDiskArray) ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput)
+}
+
+type ClusterResourceSpecCoreResourceSpecMultiDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecCoreResourceSpecMultiDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskOutput) ToClusterResourceSpecCoreResourceSpecMultiDiskOutput() ClusterResourceSpecCoreResourceSpecMultiDiskOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskOutput) ToClusterResourceSpecCoreResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskOutput {
+	return o
+}
+
+// Number of cloud disks of this type.
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpecMultiDisk) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// Cloud disk type
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpecMultiDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk size.
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskOutput) Volume() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecCoreResourceSpecMultiDisk) *int { return v.Volume }).(pulumi.IntPtrOutput)
+}
+
+type ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecCoreResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput() ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecCoreResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput) Index(i pulumi.IntInput) ClusterResourceSpecCoreResourceSpecMultiDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceSpecCoreResourceSpecMultiDisk {
+		return vs[0].([]ClusterResourceSpecCoreResourceSpecMultiDisk)[vs[1].(int)]
+	}).(ClusterResourceSpecCoreResourceSpecMultiDiskOutput)
+}
+
 type ClusterResourceSpecMasterResourceSpec struct {
-	Cpu         *int    `pulumi:"cpu"`
-	DiskSize    *int    `pulumi:"diskSize"`
-	DiskType    *string `pulumi:"diskType"`
-	MemSize     *int    `pulumi:"memSize"`
-	RootSize    *int    `pulumi:"rootSize"`
-	Spec        *string `pulumi:"spec"`
-	StorageType *int    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu *int `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize *int `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize *int `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks []ClusterResourceSpecMasterResourceSpecMultiDisk `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize *int `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec *string `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType *int `pulumi:"storageType"`
 }
 
 // ClusterResourceSpecMasterResourceSpecInput is an input type that accepts ClusterResourceSpecMasterResourceSpecArgs and ClusterResourceSpecMasterResourceSpecOutput values.
@@ -891,13 +1494,30 @@ type ClusterResourceSpecMasterResourceSpecInput interface {
 }
 
 type ClusterResourceSpecMasterResourceSpecArgs struct {
-	Cpu         pulumi.IntPtrInput    `pulumi:"cpu"`
-	DiskSize    pulumi.IntPtrInput    `pulumi:"diskSize"`
-	DiskType    pulumi.StringPtrInput `pulumi:"diskType"`
-	MemSize     pulumi.IntPtrInput    `pulumi:"memSize"`
-	RootSize    pulumi.IntPtrInput    `pulumi:"rootSize"`
-	Spec        pulumi.StringPtrInput `pulumi:"spec"`
-	StorageType pulumi.IntPtrInput    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntPtrInput `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize pulumi.IntPtrInput `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks ClusterResourceSpecMasterResourceSpecMultiDiskArrayInput `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize pulumi.IntPtrInput `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec pulumi.StringPtrInput `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType pulumi.IntPtrInput `pulumi:"storageType"`
 }
 
 func (ClusterResourceSpecMasterResourceSpecArgs) ElementType() reflect.Type {
@@ -977,30 +1597,52 @@ func (o ClusterResourceSpecMasterResourceSpecOutput) ToClusterResourceSpecMaster
 	}).(ClusterResourceSpecMasterResourceSpecPtrOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecMasterResourceSpecOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *int { return v.Cpu }).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecMasterResourceSpecOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecMasterResourceSpecOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecMasterResourceSpecOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *int { return v.MemSize }).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecMasterResourceSpecOutput) MultiDisks() ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) []ClusterResourceSpecMasterResourceSpecMultiDisk {
+		return v.MultiDisks
+	}).(ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecMasterResourceSpecOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *int { return v.RootSize }).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecMasterResourceSpecOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *string { return v.Spec }).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecMasterResourceSpecOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpec) *int { return v.StorageType }).(pulumi.IntPtrOutput)
 }
@@ -1029,6 +1671,7 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) Elem() ClusterResourceSp
 	}).(ClusterResourceSpecMasterResourceSpecOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *int {
 		if v == nil {
@@ -1038,6 +1681,7 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *int {
 		if v == nil {
@@ -1047,6 +1691,10 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) DiskSize() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *string {
 		if v == nil {
@@ -1056,6 +1704,7 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) DiskType() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *int {
 		if v == nil {
@@ -1065,6 +1714,17 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) MemSize() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecMasterResourceSpecPtrOutput) MultiDisks() ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) []ClusterResourceSpecMasterResourceSpecMultiDisk {
+		if v == nil {
+			return nil
+		}
+		return v.MultiDisks
+	}).(ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *int {
 		if v == nil {
@@ -1074,6 +1734,7 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) RootSize() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *string {
 		if v == nil {
@@ -1083,6 +1744,12 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) Spec() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecMasterResourceSpecPtrOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecMasterResourceSpec) *int {
 		if v == nil {
@@ -1092,14 +1759,155 @@ func (o ClusterResourceSpecMasterResourceSpecPtrOutput) StorageType() pulumi.Int
 	}).(pulumi.IntPtrOutput)
 }
 
+type ClusterResourceSpecMasterResourceSpecMultiDisk struct {
+	// Number of cloud disks of this type.
+	Count *int `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume *int `pulumi:"volume"`
+}
+
+// ClusterResourceSpecMasterResourceSpecMultiDiskInput is an input type that accepts ClusterResourceSpecMasterResourceSpecMultiDiskArgs and ClusterResourceSpecMasterResourceSpecMultiDiskOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecMultiDiskInput` via:
+//
+//	ClusterResourceSpecMasterResourceSpecMultiDiskArgs{...}
+type ClusterResourceSpecMasterResourceSpecMultiDiskInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecMasterResourceSpecMultiDiskOutput() ClusterResourceSpecMasterResourceSpecMultiDiskOutput
+	ToClusterResourceSpecMasterResourceSpecMultiDiskOutputWithContext(context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskOutput
+}
+
+type ClusterResourceSpecMasterResourceSpecMultiDiskArgs struct {
+	// Number of cloud disks of this type.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume pulumi.IntPtrInput `pulumi:"volume"`
+}
+
+func (ClusterResourceSpecMasterResourceSpecMultiDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecMasterResourceSpecMultiDiskArgs) ToClusterResourceSpecMasterResourceSpecMultiDiskOutput() ClusterResourceSpecMasterResourceSpecMultiDiskOutput {
+	return i.ToClusterResourceSpecMasterResourceSpecMultiDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecMasterResourceSpecMultiDiskArgs) ToClusterResourceSpecMasterResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecMasterResourceSpecMultiDiskOutput)
+}
+
+// ClusterResourceSpecMasterResourceSpecMultiDiskArrayInput is an input type that accepts ClusterResourceSpecMasterResourceSpecMultiDiskArray and ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecMasterResourceSpecMultiDiskArrayInput` via:
+//
+//	ClusterResourceSpecMasterResourceSpecMultiDiskArray{ ClusterResourceSpecMasterResourceSpecMultiDiskArgs{...} }
+type ClusterResourceSpecMasterResourceSpecMultiDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput() ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput
+	ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutputWithContext(context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput
+}
+
+type ClusterResourceSpecMasterResourceSpecMultiDiskArray []ClusterResourceSpecMasterResourceSpecMultiDiskInput
+
+func (ClusterResourceSpecMasterResourceSpecMultiDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecMasterResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecMasterResourceSpecMultiDiskArray) ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput() ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return i.ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecMasterResourceSpecMultiDiskArray) ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput)
+}
+
+type ClusterResourceSpecMasterResourceSpecMultiDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecMasterResourceSpecMultiDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskOutput) ToClusterResourceSpecMasterResourceSpecMultiDiskOutput() ClusterResourceSpecMasterResourceSpecMultiDiskOutput {
+	return o
+}
+
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskOutput) ToClusterResourceSpecMasterResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskOutput {
+	return o
+}
+
+// Number of cloud disks of this type.
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpecMultiDisk) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// Cloud disk type
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpecMultiDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk size.
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskOutput) Volume() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecMasterResourceSpecMultiDisk) *int { return v.Volume }).(pulumi.IntPtrOutput)
+}
+
+type ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecMasterResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput() ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecMasterResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput) Index(i pulumi.IntInput) ClusterResourceSpecMasterResourceSpecMultiDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceSpecMasterResourceSpecMultiDisk {
+		return vs[0].([]ClusterResourceSpecMasterResourceSpecMultiDisk)[vs[1].(int)]
+	}).(ClusterResourceSpecMasterResourceSpecMultiDiskOutput)
+}
+
 type ClusterResourceSpecTaskResourceSpec struct {
-	Cpu         *int    `pulumi:"cpu"`
-	DiskSize    *int    `pulumi:"diskSize"`
-	DiskType    *string `pulumi:"diskType"`
-	MemSize     *int    `pulumi:"memSize"`
-	RootSize    *int    `pulumi:"rootSize"`
-	Spec        *string `pulumi:"spec"`
-	StorageType *int    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu *int `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize *int `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize *int `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks []ClusterResourceSpecTaskResourceSpecMultiDisk `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize *int `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec *string `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType *int `pulumi:"storageType"`
 }
 
 // ClusterResourceSpecTaskResourceSpecInput is an input type that accepts ClusterResourceSpecTaskResourceSpecArgs and ClusterResourceSpecTaskResourceSpecOutput values.
@@ -1114,13 +1922,30 @@ type ClusterResourceSpecTaskResourceSpecInput interface {
 }
 
 type ClusterResourceSpecTaskResourceSpecArgs struct {
-	Cpu         pulumi.IntPtrInput    `pulumi:"cpu"`
-	DiskSize    pulumi.IntPtrInput    `pulumi:"diskSize"`
-	DiskType    pulumi.StringPtrInput `pulumi:"diskType"`
-	MemSize     pulumi.IntPtrInput    `pulumi:"memSize"`
-	RootSize    pulumi.IntPtrInput    `pulumi:"rootSize"`
-	Spec        pulumi.StringPtrInput `pulumi:"spec"`
-	StorageType pulumi.IntPtrInput    `pulumi:"storageType"`
+	// Number of CPU cores.
+	Cpu pulumi.IntPtrInput `pulumi:"cpu"`
+	// Data disk capacity.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// disk types. Value range:
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_BASIC: Represents Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Memory size in M.
+	MemSize pulumi.IntPtrInput `pulumi:"memSize"`
+	// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+	MultiDisks ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput `pulumi:"multiDisks"`
+	// Root disk capacity.
+	RootSize pulumi.IntPtrInput `pulumi:"rootSize"`
+	// Node specification description, such as CVM.SA2.
+	Spec pulumi.StringPtrInput `pulumi:"spec"`
+	// Storage type. Value range:
+	// - 4: Represents cloud SSD;
+	// - 5: Represents efficient cloud disk;
+	// - 6: Represents enhanced SSD Cloud Block Storage;
+	// - 11: Represents throughput Cloud Block Storage;
+	// - 12: Represents extremely fast SSD Cloud Block Storage.
+	StorageType pulumi.IntPtrInput `pulumi:"storageType"`
 }
 
 func (ClusterResourceSpecTaskResourceSpecArgs) ElementType() reflect.Type {
@@ -1200,30 +2025,52 @@ func (o ClusterResourceSpecTaskResourceSpecOutput) ToClusterResourceSpecTaskReso
 	}).(ClusterResourceSpecTaskResourceSpecPtrOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecTaskResourceSpecOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *int { return v.Cpu }).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecTaskResourceSpecOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecTaskResourceSpecOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecTaskResourceSpecOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *int { return v.MemSize }).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecTaskResourceSpecOutput) MultiDisks() ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) []ClusterResourceSpecTaskResourceSpecMultiDisk {
+		return v.MultiDisks
+	}).(ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecTaskResourceSpecOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *int { return v.RootSize }).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecTaskResourceSpecOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *string { return v.Spec }).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecTaskResourceSpecOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpec) *int { return v.StorageType }).(pulumi.IntPtrOutput)
 }
@@ -1252,6 +2099,7 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) Elem() ClusterResourceSpec
 	}).(ClusterResourceSpecTaskResourceSpecOutput)
 }
 
+// Number of CPU cores.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *int {
 		if v == nil {
@@ -1261,6 +2109,7 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) Cpu() pulumi.IntPtrOutput 
 	}).(pulumi.IntPtrOutput)
 }
 
+// Data disk capacity.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *int {
 		if v == nil {
@@ -1270,6 +2119,10 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) DiskSize() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// disk types. Value range:
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_BASIC: Represents Cloud Block Storage.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *string {
 		if v == nil {
@@ -1279,6 +2132,7 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) DiskType() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+// Memory size in M.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) MemSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *int {
 		if v == nil {
@@ -1288,6 +2142,17 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) MemSize() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
+// Cloud disk list. When the data disk is a cloud disk, use diskType and diskSize parameters directly, and use multiDisks for excess parts.
+func (o ClusterResourceSpecTaskResourceSpecPtrOutput) MultiDisks() ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) []ClusterResourceSpecTaskResourceSpecMultiDisk {
+		if v == nil {
+			return nil
+		}
+		return v.MultiDisks
+	}).(ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput)
+}
+
+// Root disk capacity.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) RootSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *int {
 		if v == nil {
@@ -1297,6 +2162,7 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) RootSize() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+// Node specification description, such as CVM.SA2.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) Spec() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *string {
 		if v == nil {
@@ -1306,6 +2172,12 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) Spec() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
+// Storage type. Value range:
+// - 4: Represents cloud SSD;
+// - 5: Represents efficient cloud disk;
+// - 6: Represents enhanced SSD Cloud Block Storage;
+// - 11: Represents throughput Cloud Block Storage;
+// - 12: Represents extremely fast SSD Cloud Block Storage.
 func (o ClusterResourceSpecTaskResourceSpecPtrOutput) StorageType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterResourceSpecTaskResourceSpec) *int {
 		if v == nil {
@@ -1313,6 +2185,236 @@ func (o ClusterResourceSpecTaskResourceSpecPtrOutput) StorageType() pulumi.IntPt
 		}
 		return v.StorageType
 	}).(pulumi.IntPtrOutput)
+}
+
+type ClusterResourceSpecTaskResourceSpecMultiDisk struct {
+	// Number of cloud disks of this type.
+	Count *int `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType *string `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume *int `pulumi:"volume"`
+}
+
+// ClusterResourceSpecTaskResourceSpecMultiDiskInput is an input type that accepts ClusterResourceSpecTaskResourceSpecMultiDiskArgs and ClusterResourceSpecTaskResourceSpecMultiDiskOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecMultiDiskInput` via:
+//
+//	ClusterResourceSpecTaskResourceSpecMultiDiskArgs{...}
+type ClusterResourceSpecTaskResourceSpecMultiDiskInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecTaskResourceSpecMultiDiskOutput() ClusterResourceSpecTaskResourceSpecMultiDiskOutput
+	ToClusterResourceSpecTaskResourceSpecMultiDiskOutputWithContext(context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskOutput
+}
+
+type ClusterResourceSpecTaskResourceSpecMultiDiskArgs struct {
+	// Number of cloud disks of this type.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// Cloud disk type
+	// - CLOUD_SSD: Represents cloud SSD;
+	// - CLOUD_PREMIUM: Represents efficient cloud disk;
+	// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// Cloud disk size.
+	Volume pulumi.IntPtrInput `pulumi:"volume"`
+}
+
+func (ClusterResourceSpecTaskResourceSpecMultiDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecTaskResourceSpecMultiDiskArgs) ToClusterResourceSpecTaskResourceSpecMultiDiskOutput() ClusterResourceSpecTaskResourceSpecMultiDiskOutput {
+	return i.ToClusterResourceSpecTaskResourceSpecMultiDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecTaskResourceSpecMultiDiskArgs) ToClusterResourceSpecTaskResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecTaskResourceSpecMultiDiskOutput)
+}
+
+// ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput is an input type that accepts ClusterResourceSpecTaskResourceSpecMultiDiskArray and ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput` via:
+//
+//	ClusterResourceSpecTaskResourceSpecMultiDiskArray{ ClusterResourceSpecTaskResourceSpecMultiDiskArgs{...} }
+type ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput() ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput
+	ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutputWithContext(context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput
+}
+
+type ClusterResourceSpecTaskResourceSpecMultiDiskArray []ClusterResourceSpecTaskResourceSpecMultiDiskInput
+
+func (ClusterResourceSpecTaskResourceSpecMultiDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecTaskResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (i ClusterResourceSpecTaskResourceSpecMultiDiskArray) ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput() ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return i.ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceSpecTaskResourceSpecMultiDiskArray) ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput)
+}
+
+type ClusterResourceSpecTaskResourceSpecMultiDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecTaskResourceSpecMultiDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskOutput) ToClusterResourceSpecTaskResourceSpecMultiDiskOutput() ClusterResourceSpecTaskResourceSpecMultiDiskOutput {
+	return o
+}
+
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskOutput) ToClusterResourceSpecTaskResourceSpecMultiDiskOutputWithContext(ctx context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskOutput {
+	return o
+}
+
+// Number of cloud disks of this type.
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpecMultiDisk) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// Cloud disk type
+// - CLOUD_SSD: Represents cloud SSD;
+// - CLOUD_PREMIUM: Represents efficient cloud disk;
+// - CLOUD_HSSD: Represents enhanced SSD Cloud Block Storage.
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpecMultiDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk size.
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskOutput) Volume() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterResourceSpecTaskResourceSpecMultiDisk) *int { return v.Volume }).(pulumi.IntPtrOutput)
+}
+
+type ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceSpecTaskResourceSpecMultiDisk)(nil)).Elem()
+}
+
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput() ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput) ToClusterResourceSpecTaskResourceSpecMultiDiskArrayOutputWithContext(ctx context.Context) ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput {
+	return o
+}
+
+func (o ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput) Index(i pulumi.IntInput) ClusterResourceSpecTaskResourceSpecMultiDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceSpecTaskResourceSpecMultiDisk {
+		return vs[0].([]ClusterResourceSpecTaskResourceSpecMultiDisk)[vs[1].(int)]
+	}).(ClusterResourceSpecTaskResourceSpecMultiDiskOutput)
+}
+
+type ClusterTerminateNodeInfo struct {
+	// Destroy resource list.
+	CvmInstanceIds []string `pulumi:"cvmInstanceIds"`
+	// Value range of destruction node type: `MASTER`, `TASK`, `CORE`, `ROUTER`.
+	NodeFlag *string `pulumi:"nodeFlag"`
+}
+
+// ClusterTerminateNodeInfoInput is an input type that accepts ClusterTerminateNodeInfoArgs and ClusterTerminateNodeInfoOutput values.
+// You can construct a concrete instance of `ClusterTerminateNodeInfoInput` via:
+//
+//	ClusterTerminateNodeInfoArgs{...}
+type ClusterTerminateNodeInfoInput interface {
+	pulumi.Input
+
+	ToClusterTerminateNodeInfoOutput() ClusterTerminateNodeInfoOutput
+	ToClusterTerminateNodeInfoOutputWithContext(context.Context) ClusterTerminateNodeInfoOutput
+}
+
+type ClusterTerminateNodeInfoArgs struct {
+	// Destroy resource list.
+	CvmInstanceIds pulumi.StringArrayInput `pulumi:"cvmInstanceIds"`
+	// Value range of destruction node type: `MASTER`, `TASK`, `CORE`, `ROUTER`.
+	NodeFlag pulumi.StringPtrInput `pulumi:"nodeFlag"`
+}
+
+func (ClusterTerminateNodeInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterTerminateNodeInfo)(nil)).Elem()
+}
+
+func (i ClusterTerminateNodeInfoArgs) ToClusterTerminateNodeInfoOutput() ClusterTerminateNodeInfoOutput {
+	return i.ToClusterTerminateNodeInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterTerminateNodeInfoArgs) ToClusterTerminateNodeInfoOutputWithContext(ctx context.Context) ClusterTerminateNodeInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterTerminateNodeInfoOutput)
+}
+
+// ClusterTerminateNodeInfoArrayInput is an input type that accepts ClusterTerminateNodeInfoArray and ClusterTerminateNodeInfoArrayOutput values.
+// You can construct a concrete instance of `ClusterTerminateNodeInfoArrayInput` via:
+//
+//	ClusterTerminateNodeInfoArray{ ClusterTerminateNodeInfoArgs{...} }
+type ClusterTerminateNodeInfoArrayInput interface {
+	pulumi.Input
+
+	ToClusterTerminateNodeInfoArrayOutput() ClusterTerminateNodeInfoArrayOutput
+	ToClusterTerminateNodeInfoArrayOutputWithContext(context.Context) ClusterTerminateNodeInfoArrayOutput
+}
+
+type ClusterTerminateNodeInfoArray []ClusterTerminateNodeInfoInput
+
+func (ClusterTerminateNodeInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterTerminateNodeInfo)(nil)).Elem()
+}
+
+func (i ClusterTerminateNodeInfoArray) ToClusterTerminateNodeInfoArrayOutput() ClusterTerminateNodeInfoArrayOutput {
+	return i.ToClusterTerminateNodeInfoArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterTerminateNodeInfoArray) ToClusterTerminateNodeInfoArrayOutputWithContext(ctx context.Context) ClusterTerminateNodeInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterTerminateNodeInfoArrayOutput)
+}
+
+type ClusterTerminateNodeInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterTerminateNodeInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterTerminateNodeInfo)(nil)).Elem()
+}
+
+func (o ClusterTerminateNodeInfoOutput) ToClusterTerminateNodeInfoOutput() ClusterTerminateNodeInfoOutput {
+	return o
+}
+
+func (o ClusterTerminateNodeInfoOutput) ToClusterTerminateNodeInfoOutputWithContext(ctx context.Context) ClusterTerminateNodeInfoOutput {
+	return o
+}
+
+// Destroy resource list.
+func (o ClusterTerminateNodeInfoOutput) CvmInstanceIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterTerminateNodeInfo) []string { return v.CvmInstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// Value range of destruction node type: `MASTER`, `TASK`, `CORE`, `ROUTER`.
+func (o ClusterTerminateNodeInfoOutput) NodeFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterTerminateNodeInfo) *string { return v.NodeFlag }).(pulumi.StringPtrOutput)
+}
+
+type ClusterTerminateNodeInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterTerminateNodeInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterTerminateNodeInfo)(nil)).Elem()
+}
+
+func (o ClusterTerminateNodeInfoArrayOutput) ToClusterTerminateNodeInfoArrayOutput() ClusterTerminateNodeInfoArrayOutput {
+	return o
+}
+
+func (o ClusterTerminateNodeInfoArrayOutput) ToClusterTerminateNodeInfoArrayOutputWithContext(ctx context.Context) ClusterTerminateNodeInfoArrayOutput {
+	return o
+}
+
+func (o ClusterTerminateNodeInfoArrayOutput) Index(i pulumi.IntInput) ClusterTerminateNodeInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterTerminateNodeInfo {
+		return vs[0].([]ClusterTerminateNodeInfo)[vs[1].(int)]
+	}).(ClusterTerminateNodeInfoOutput)
 }
 
 type GetAutoScaleRecordsFilter struct {
@@ -3071,16 +4173,28 @@ func (o GetNodesNodeTagArrayOutput) Index(i pulumi.IntInput) GetNodesNodeTagOutp
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPlacementInfoInput)(nil)).Elem(), ClusterPlacementInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPlacementInfoPtrInput)(nil)).Elem(), ClusterPlacementInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPreExecutedFileSettingInput)(nil)).Elem(), ClusterPreExecutedFileSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterPreExecutedFileSettingArrayInput)(nil)).Elem(), ClusterPreExecutedFileSettingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecInput)(nil)).Elem(), ClusterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecInput)(nil)).Elem(), ClusterResourceSpecCommonResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecCommonResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecMultiDiskInput)(nil)).Elem(), ClusterResourceSpecCommonResourceSpecMultiDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCommonResourceSpecMultiDiskArrayInput)(nil)).Elem(), ClusterResourceSpecCommonResourceSpecMultiDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecInput)(nil)).Elem(), ClusterResourceSpecCoreResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecCoreResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecMultiDiskInput)(nil)).Elem(), ClusterResourceSpecCoreResourceSpecMultiDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecCoreResourceSpecMultiDiskArrayInput)(nil)).Elem(), ClusterResourceSpecCoreResourceSpecMultiDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecMultiDiskInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecMultiDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecMasterResourceSpecMultiDiskArrayInput)(nil)).Elem(), ClusterResourceSpecMasterResourceSpecMultiDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecPtrInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecMultiDiskInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecMultiDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecMultiDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterTerminateNodeInfoInput)(nil)).Elem(), ClusterTerminateNodeInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterTerminateNodeInfoArrayInput)(nil)).Elem(), ClusterTerminateNodeInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsFilterInput)(nil)).Elem(), GetAutoScaleRecordsFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsFilterArrayInput)(nil)).Elem(), GetAutoScaleRecordsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAutoScaleRecordsRecordListInput)(nil)).Elem(), GetAutoScaleRecordsRecordListArgs{})
@@ -3103,16 +4217,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesNodeTagArrayInput)(nil)).Elem(), GetNodesNodeTagArray{})
 	pulumi.RegisterOutputType(ClusterPlacementInfoOutput{})
 	pulumi.RegisterOutputType(ClusterPlacementInfoPtrOutput{})
+	pulumi.RegisterOutputType(ClusterPreExecutedFileSettingOutput{})
+	pulumi.RegisterOutputType(ClusterPreExecutedFileSettingArrayOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecMultiDiskOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecCommonResourceSpecMultiDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCoreResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecCoreResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecCoreResourceSpecMultiDiskOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecCoreResourceSpecMultiDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecMultiDiskOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecMasterResourceSpecMultiDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecOutput{})
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecMultiDiskOutput{})
+	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterTerminateNodeInfoOutput{})
+	pulumi.RegisterOutputType(ClusterTerminateNodeInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetAutoScaleRecordsFilterOutput{})
 	pulumi.RegisterOutputType(GetAutoScaleRecordsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetAutoScaleRecordsRecordListOutput{})

@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a waf ipAccessControl
  *
+ * > **NOTE:** This resource is no longer under maintenance, please use `tencentcloud.Waf.IpAccessControlV2` instead
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->

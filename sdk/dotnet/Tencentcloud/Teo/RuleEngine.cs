@@ -245,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> RuleName { get; private set; } = null!;
 
         /// <summary>
+        /// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+        /// </summary>
+        [Output("rulePriority")]
+        public Output<int> RulePriority { get; private set; } = null!;
+
+        /// <summary>
         /// Rule items list.
         /// </summary>
         [Output("rules")]
@@ -376,6 +382,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("ruleName")]
         public Input<string>? RuleName { get; set; }
+
+        /// <summary>
+        /// Rule priority, the larger the value, the higher the priority, the minimum is 1.
+        /// </summary>
+        [Input("rulePriority")]
+        public Input<int>? RulePriority { get; set; }
 
         [Input("rules")]
         private InputList<Inputs.RuleEngineRuleGetArgs>? _rules;

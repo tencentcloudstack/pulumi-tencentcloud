@@ -138,6 +138,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Output("autoRenew")]
+        public Output<int> AutoRenew { get; private set; } = null!;
+
+        /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Output("displayStrategy")]
@@ -195,19 +201,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public Output<Outputs.ClusterPlacementInfo> PlacementInfo { get; private set; } = null!;
 
         /// <summary>
+        /// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+        /// </summary>
+        [Output("preExecutedFileSettings")]
+        public Output<ImmutableArray<Outputs.ClusterPreExecutedFileSetting>> PreExecutedFileSettings { get; private set; } = null!;
+
+        /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:
         /// - 16: represents EMR-V2.3.0
-        /// - 20: indicates EMR-V2.5.0
+        /// - 20: represents EMR-V2.5.0
         /// - 25: represents EMR-V3.1.0
         /// - 27: represents KAFKA-V1.0.0
-        /// - 30: indicates EMR-V2.6.0
+        /// - 30: represents EMR-V2.6.0
         /// - 33: represents EMR-V3.2.1
-        /// - 34: stands for EMR-V3.3.0
-        /// - 36: represents STARROCKS-V1.0.0
-        /// - 37: indicates EMR-V3.4.0
+        /// - 34: represents EMR-V3.3.0
+        /// - 37: represents EMR-V3.4.0
         /// - 38: represents EMR-V2.7.0
-        /// - 39: stands for STARROCKS-V1.1.0
-        /// - 41: represents DRUID-V1.1.0.
+        /// - 44: represents EMR-V3.5.0
+        /// - 50: represents KAFKA-V2.0.0
+        /// - 51: represents STARROCKS-V1.4.0
+        /// - 53: represents EMR-V3.6.0
+        /// - 54: represents STARROCKS-V2.0.0.
         /// </summary>
         [Output("productId")]
         public Output<int> ProductId { get; private set; } = null!;
@@ -241,6 +255,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, object>> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// Terminate nodes. Note: it only works when the number of nodes decreases.
+        /// </summary>
+        [Output("terminateNodeInfos")]
+        public Output<ImmutableArray<Outputs.ClusterTerminateNodeInfo>> TerminateNodeInfos { get; private set; } = null!;
 
         /// <summary>
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
@@ -313,6 +333,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Input("autoRenew")]
+        public Input<int>? AutoRenew { get; set; }
+
+        /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Input("displayStrategy")]
@@ -380,20 +406,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("placementInfo")]
         public Input<Inputs.ClusterPlacementInfoArgs>? PlacementInfo { get; set; }
 
+        [Input("preExecutedFileSettings")]
+        private InputList<Inputs.ClusterPreExecutedFileSettingArgs>? _preExecutedFileSettings;
+
+        /// <summary>
+        /// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+        /// </summary>
+        public InputList<Inputs.ClusterPreExecutedFileSettingArgs> PreExecutedFileSettings
+        {
+            get => _preExecutedFileSettings ?? (_preExecutedFileSettings = new InputList<Inputs.ClusterPreExecutedFileSettingArgs>());
+            set => _preExecutedFileSettings = value;
+        }
+
         /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:
         /// - 16: represents EMR-V2.3.0
-        /// - 20: indicates EMR-V2.5.0
+        /// - 20: represents EMR-V2.5.0
         /// - 25: represents EMR-V3.1.0
         /// - 27: represents KAFKA-V1.0.0
-        /// - 30: indicates EMR-V2.6.0
+        /// - 30: represents EMR-V2.6.0
         /// - 33: represents EMR-V3.2.1
-        /// - 34: stands for EMR-V3.3.0
-        /// - 36: represents STARROCKS-V1.0.0
-        /// - 37: indicates EMR-V3.4.0
+        /// - 34: represents EMR-V3.3.0
+        /// - 37: represents EMR-V3.4.0
         /// - 38: represents EMR-V2.7.0
-        /// - 39: stands for STARROCKS-V1.1.0
-        /// - 41: represents DRUID-V1.1.0.
+        /// - 44: represents EMR-V3.5.0
+        /// - 50: represents KAFKA-V2.0.0
+        /// - 51: represents STARROCKS-V1.4.0
+        /// - 53: represents EMR-V3.6.0
+        /// - 54: represents STARROCKS-V2.0.0.
         /// </summary>
         [Input("productId", required: true)]
         public Input<int> ProductId { get; set; } = null!;
@@ -440,6 +480,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
             set => _tags = value;
         }
 
+        [Input("terminateNodeInfos")]
+        private InputList<Inputs.ClusterTerminateNodeInfoArgs>? _terminateNodeInfos;
+
+        /// <summary>
+        /// Terminate nodes. Note: it only works when the number of nodes decreases.
+        /// </summary>
+        public InputList<Inputs.ClusterTerminateNodeInfoArgs> TerminateNodeInfos
+        {
+            get => _terminateNodeInfos ?? (_terminateNodeInfos = new InputList<Inputs.ClusterTerminateNodeInfoArgs>());
+            set => _terminateNodeInfos = value;
+        }
+
         /// <summary>
         /// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
         /// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
@@ -473,6 +525,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
 
     public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Input("autoRenew")]
+        public Input<int>? AutoRenew { get; set; }
+
         /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
@@ -547,20 +605,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("placementInfo")]
         public Input<Inputs.ClusterPlacementInfoGetArgs>? PlacementInfo { get; set; }
 
+        [Input("preExecutedFileSettings")]
+        private InputList<Inputs.ClusterPreExecutedFileSettingGetArgs>? _preExecutedFileSettings;
+
+        /// <summary>
+        /// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+        /// </summary>
+        public InputList<Inputs.ClusterPreExecutedFileSettingGetArgs> PreExecutedFileSettings
+        {
+            get => _preExecutedFileSettings ?? (_preExecutedFileSettings = new InputList<Inputs.ClusterPreExecutedFileSettingGetArgs>());
+            set => _preExecutedFileSettings = value;
+        }
+
         /// <summary>
         /// Product ID. Different products ID represents different EMR product versions. Value range:
         /// - 16: represents EMR-V2.3.0
-        /// - 20: indicates EMR-V2.5.0
+        /// - 20: represents EMR-V2.5.0
         /// - 25: represents EMR-V3.1.0
         /// - 27: represents KAFKA-V1.0.0
-        /// - 30: indicates EMR-V2.6.0
+        /// - 30: represents EMR-V2.6.0
         /// - 33: represents EMR-V3.2.1
-        /// - 34: stands for EMR-V3.3.0
-        /// - 36: represents STARROCKS-V1.0.0
-        /// - 37: indicates EMR-V3.4.0
+        /// - 34: represents EMR-V3.3.0
+        /// - 37: represents EMR-V3.4.0
         /// - 38: represents EMR-V2.7.0
-        /// - 39: stands for STARROCKS-V1.1.0
-        /// - 41: represents DRUID-V1.1.0.
+        /// - 44: represents EMR-V3.5.0
+        /// - 50: represents KAFKA-V2.0.0
+        /// - 51: represents STARROCKS-V1.4.0
+        /// - 53: represents EMR-V3.6.0
+        /// - 54: represents STARROCKS-V2.0.0.
         /// </summary>
         [Input("productId")]
         public Input<int>? ProductId { get; set; }
@@ -605,6 +677,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         {
             get => _tags ?? (_tags = new InputMap<object>());
             set => _tags = value;
+        }
+
+        [Input("terminateNodeInfos")]
+        private InputList<Inputs.ClusterTerminateNodeInfoGetArgs>? _terminateNodeInfos;
+
+        /// <summary>
+        /// Terminate nodes. Note: it only works when the number of nodes decreases.
+        /// </summary>
+        public InputList<Inputs.ClusterTerminateNodeInfoGetArgs> TerminateNodeInfos
+        {
+            get => _terminateNodeInfos ?? (_terminateNodeInfos = new InputList<Inputs.ClusterTerminateNodeInfoGetArgs>());
+            set => _terminateNodeInfos = value;
         }
 
         /// <summary>

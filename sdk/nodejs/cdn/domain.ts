@@ -285,6 +285,10 @@ export class Domain extends pulumi.CustomResource {
      */
     public readonly ossPrivateAccess!: pulumi.Output<outputs.Cdn.DomainOssPrivateAccess | undefined>;
     /**
+     * Object storage back-to-source authentication of other vendors.
+     */
+    public readonly othersPrivateAccess!: pulumi.Output<outputs.Cdn.DomainOthersPrivateAccess | undefined>;
+    /**
      * Maximum post size configuration.
      */
     public readonly postMaxSizes!: pulumi.Output<outputs.Cdn.DomainPostMaxSize[] | undefined>;
@@ -397,6 +401,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["originPullOptimization"] = state ? state.originPullOptimization : undefined;
             resourceInputs["originPullTimeout"] = state ? state.originPullTimeout : undefined;
             resourceInputs["ossPrivateAccess"] = state ? state.ossPrivateAccess : undefined;
+            resourceInputs["othersPrivateAccess"] = state ? state.othersPrivateAccess : undefined;
             resourceInputs["postMaxSizes"] = state ? state.postMaxSizes : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["qnPrivateAccess"] = state ? state.qnPrivateAccess : undefined;
@@ -449,6 +454,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["originPullOptimization"] = args ? args.originPullOptimization : undefined;
             resourceInputs["originPullTimeout"] = args ? args.originPullTimeout : undefined;
             resourceInputs["ossPrivateAccess"] = args ? args.ossPrivateAccess : undefined;
+            resourceInputs["othersPrivateAccess"] = args ? args.othersPrivateAccess : undefined;
             resourceInputs["postMaxSizes"] = args ? args.postMaxSizes : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["qnPrivateAccess"] = args ? args.qnPrivateAccess : undefined;
@@ -591,6 +597,10 @@ export interface DomainState {
      * Access authentication for OSS origin.
      */
     ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
+    /**
+     * Object storage back-to-source authentication of other vendors.
+     */
+    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess>;
     /**
      * Maximum post size configuration.
      */
@@ -763,6 +773,10 @@ export interface DomainArgs {
      * Access authentication for OSS origin.
      */
     ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
+    /**
+     * Object storage back-to-source authentication of other vendors.
+     */
+    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess>;
     /**
      * Maximum post size configuration.
      */

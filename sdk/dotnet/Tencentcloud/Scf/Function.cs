@@ -110,6 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
+    /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
@@ -117,26 +118,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// {
     ///     var foo = new Tencentcloud.Scf.Function("foo", new()
     ///     {
-    ///         EnablePublicNet = true,
     ///         Handler = "first.do_it_first",
     ///         Runtime = "Python3.6",
+    ///         EnablePublicNet = true,
+    ///         ZipFile = "/scf/first.zip",
     ///         Triggers = new[]
     ///         {
     ///             new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
     ///             {
     ///                 Name = "tf-test-fn-trigger",
-    ///                 TriggerDesc = "*/5 * * * * * *",
     ///                 Type = "timer",
+    ///                 TriggerDesc = "*/5 * * * * * *",
     ///             },
     ///             new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
     ///             {
-    ///                 CosRegion = "ap-guangzhou",
     ///                 Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
-    ///                 TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+    ///                 CosRegion = "ap-guangzhou",
     ///                 Type = "cos",
+    ///                 TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+    ///             },
+    ///             new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+    ///             {
+    ///                 Name = "tf-test-fn-trigger",
+    ///                 Type = "http",
+    ///                 TriggerDesc = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["AuthType"] = "NONE",
+    ///                     ["NetConfig"] = new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["EnableIntranet"] = true,
+    ///                         ["EnableExtranet"] = false,
+    ///                     },
+    ///                 }),
     ///             },
     ///         },
-    ///         ZipFile = "/scf/first.zip",
     ///     });
     /// 
     /// });

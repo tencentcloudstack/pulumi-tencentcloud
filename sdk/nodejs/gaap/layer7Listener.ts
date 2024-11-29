@@ -91,6 +91,10 @@ export class Layer7Listener extends pulumi.CustomResource {
      */
     public readonly forwardProtocol!: pulumi.Output<string | undefined>;
     /**
+     * Group ID.
+     */
+    public readonly groupId!: pulumi.Output<string | undefined>;
+    /**
      * Name of the layer7 listener, the maximum length is 30.
      */
     public readonly name!: pulumi.Output<string>;
@@ -105,11 +109,19 @@ export class Layer7Listener extends pulumi.CustomResource {
     /**
      * ID of the GAAP proxy.
      */
-    public readonly proxyId!: pulumi.Output<string>;
+    public readonly proxyId!: pulumi.Output<string | undefined>;
     /**
      * Status of the layer7 listener.
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
+    /**
+     * Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+     */
+    public readonly tlsCiphers!: pulumi.Output<string>;
+    /**
+     * TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+     */
+    public readonly tlsSupportVersions!: pulumi.Output<string[]>;
 
     /**
      * Create a Layer7Listener resource with the given unique name, arguments, and options.
@@ -130,11 +142,14 @@ export class Layer7Listener extends pulumi.CustomResource {
             resourceInputs["clientCertificateIds"] = state ? state.clientCertificateIds : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["forwardProtocol"] = state ? state.forwardProtocol : undefined;
+            resourceInputs["groupId"] = state ? state.groupId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
             resourceInputs["proxyId"] = state ? state.proxyId : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["tlsCiphers"] = state ? state.tlsCiphers : undefined;
+            resourceInputs["tlsSupportVersions"] = state ? state.tlsSupportVersions : undefined;
         } else {
             const args = argsOrState as Layer7ListenerArgs | undefined;
             if ((!args || args.port === undefined) && !opts.urn) {
@@ -143,18 +158,18 @@ export class Layer7Listener extends pulumi.CustomResource {
             if ((!args || args.protocol === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'protocol'");
             }
-            if ((!args || args.proxyId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'proxyId'");
-            }
             resourceInputs["authType"] = args ? args.authType : undefined;
             resourceInputs["certificateId"] = args ? args.certificateId : undefined;
             resourceInputs["clientCertificateId"] = args ? args.clientCertificateId : undefined;
             resourceInputs["clientCertificateIds"] = args ? args.clientCertificateIds : undefined;
             resourceInputs["forwardProtocol"] = args ? args.forwardProtocol : undefined;
+            resourceInputs["groupId"] = args ? args.groupId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["proxyId"] = args ? args.proxyId : undefined;
+            resourceInputs["tlsCiphers"] = args ? args.tlsCiphers : undefined;
+            resourceInputs["tlsSupportVersions"] = args ? args.tlsSupportVersions : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -194,6 +209,10 @@ export interface Layer7ListenerState {
      */
     forwardProtocol?: pulumi.Input<string>;
     /**
+     * Group ID.
+     */
+    groupId?: pulumi.Input<string>;
+    /**
      * Name of the layer7 listener, the maximum length is 30.
      */
     name?: pulumi.Input<string>;
@@ -213,6 +232,14 @@ export interface Layer7ListenerState {
      * Status of the layer7 listener.
      */
     status?: pulumi.Input<number>;
+    /**
+     * Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+     */
+    tlsCiphers?: pulumi.Input<string>;
+    /**
+     * TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+     */
+    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -242,6 +269,10 @@ export interface Layer7ListenerArgs {
      */
     forwardProtocol?: pulumi.Input<string>;
     /**
+     * Group ID.
+     */
+    groupId?: pulumi.Input<string>;
+    /**
      * Name of the layer7 listener, the maximum length is 30.
      */
     name?: pulumi.Input<string>;
@@ -256,5 +287,13 @@ export interface Layer7ListenerArgs {
     /**
      * ID of the GAAP proxy.
      */
-    proxyId: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string>;
+    /**
+     * Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+     */
+    tlsCiphers?: pulumi.Input<string>;
+    /**
+     * TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+     */
+    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[]>;
 }

@@ -899,6 +899,369 @@ func (o GetMembersItemOrgPermissionArrayOutput) Index(i pulumi.IntInput) GetMemb
 	}).(GetMembersItemOrgPermissionOutput)
 }
 
+type GetNodesItem struct {
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Name.
+	Name string `pulumi:"name"`
+	// Organization node ID.
+	NodeId int `pulumi:"nodeId"`
+	// Parent node ID.
+	ParentNodeId int `pulumi:"parentNodeId"`
+	// Remarks.
+	Remark string `pulumi:"remark"`
+	// Department tag search list, with a maximum of 10.
+	Tags []GetNodesItemTag `pulumi:"tags"`
+	// Update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetNodesItemInput is an input type that accepts GetNodesItemArgs and GetNodesItemOutput values.
+// You can construct a concrete instance of `GetNodesItemInput` via:
+//
+//	GetNodesItemArgs{...}
+type GetNodesItemInput interface {
+	pulumi.Input
+
+	ToGetNodesItemOutput() GetNodesItemOutput
+	ToGetNodesItemOutputWithContext(context.Context) GetNodesItemOutput
+}
+
+type GetNodesItemArgs struct {
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Organization node ID.
+	NodeId pulumi.IntInput `pulumi:"nodeId"`
+	// Parent node ID.
+	ParentNodeId pulumi.IntInput `pulumi:"parentNodeId"`
+	// Remarks.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Department tag search list, with a maximum of 10.
+	Tags GetNodesItemTagArrayInput `pulumi:"tags"`
+	// Update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetNodesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesItem)(nil)).Elem()
+}
+
+func (i GetNodesItemArgs) ToGetNodesItemOutput() GetNodesItemOutput {
+	return i.ToGetNodesItemOutputWithContext(context.Background())
+}
+
+func (i GetNodesItemArgs) ToGetNodesItemOutputWithContext(ctx context.Context) GetNodesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesItemOutput)
+}
+
+// GetNodesItemArrayInput is an input type that accepts GetNodesItemArray and GetNodesItemArrayOutput values.
+// You can construct a concrete instance of `GetNodesItemArrayInput` via:
+//
+//	GetNodesItemArray{ GetNodesItemArgs{...} }
+type GetNodesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetNodesItemArrayOutput() GetNodesItemArrayOutput
+	ToGetNodesItemArrayOutputWithContext(context.Context) GetNodesItemArrayOutput
+}
+
+type GetNodesItemArray []GetNodesItemInput
+
+func (GetNodesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesItem)(nil)).Elem()
+}
+
+func (i GetNodesItemArray) ToGetNodesItemArrayOutput() GetNodesItemArrayOutput {
+	return i.ToGetNodesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodesItemArray) ToGetNodesItemArrayOutputWithContext(ctx context.Context) GetNodesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesItemArrayOutput)
+}
+
+type GetNodesItemOutput struct{ *pulumi.OutputState }
+
+func (GetNodesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesItem)(nil)).Elem()
+}
+
+func (o GetNodesItemOutput) ToGetNodesItemOutput() GetNodesItemOutput {
+	return o
+}
+
+func (o GetNodesItemOutput) ToGetNodesItemOutputWithContext(ctx context.Context) GetNodesItemOutput {
+	return o
+}
+
+// Creation time.
+func (o GetNodesItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Name.
+func (o GetNodesItemOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Organization node ID.
+func (o GetNodesItemOutput) NodeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesItem) int { return v.NodeId }).(pulumi.IntOutput)
+}
+
+// Parent node ID.
+func (o GetNodesItemOutput) ParentNodeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNodesItem) int { return v.ParentNodeId }).(pulumi.IntOutput)
+}
+
+// Remarks.
+func (o GetNodesItemOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItem) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Department tag search list, with a maximum of 10.
+func (o GetNodesItemOutput) Tags() GetNodesItemTagArrayOutput {
+	return o.ApplyT(func(v GetNodesItem) []GetNodesItemTag { return v.Tags }).(GetNodesItemTagArrayOutput)
+}
+
+// Update time.
+func (o GetNodesItemOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItem) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetNodesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesItem)(nil)).Elem()
+}
+
+func (o GetNodesItemArrayOutput) ToGetNodesItemArrayOutput() GetNodesItemArrayOutput {
+	return o
+}
+
+func (o GetNodesItemArrayOutput) ToGetNodesItemArrayOutputWithContext(ctx context.Context) GetNodesItemArrayOutput {
+	return o
+}
+
+func (o GetNodesItemArrayOutput) Index(i pulumi.IntInput) GetNodesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesItem {
+		return vs[0].([]GetNodesItem)[vs[1].(int)]
+	}).(GetNodesItemOutput)
+}
+
+type GetNodesItemTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetNodesItemTagInput is an input type that accepts GetNodesItemTagArgs and GetNodesItemTagOutput values.
+// You can construct a concrete instance of `GetNodesItemTagInput` via:
+//
+//	GetNodesItemTagArgs{...}
+type GetNodesItemTagInput interface {
+	pulumi.Input
+
+	ToGetNodesItemTagOutput() GetNodesItemTagOutput
+	ToGetNodesItemTagOutputWithContext(context.Context) GetNodesItemTagOutput
+}
+
+type GetNodesItemTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetNodesItemTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesItemTag)(nil)).Elem()
+}
+
+func (i GetNodesItemTagArgs) ToGetNodesItemTagOutput() GetNodesItemTagOutput {
+	return i.ToGetNodesItemTagOutputWithContext(context.Background())
+}
+
+func (i GetNodesItemTagArgs) ToGetNodesItemTagOutputWithContext(ctx context.Context) GetNodesItemTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesItemTagOutput)
+}
+
+// GetNodesItemTagArrayInput is an input type that accepts GetNodesItemTagArray and GetNodesItemTagArrayOutput values.
+// You can construct a concrete instance of `GetNodesItemTagArrayInput` via:
+//
+//	GetNodesItemTagArray{ GetNodesItemTagArgs{...} }
+type GetNodesItemTagArrayInput interface {
+	pulumi.Input
+
+	ToGetNodesItemTagArrayOutput() GetNodesItemTagArrayOutput
+	ToGetNodesItemTagArrayOutputWithContext(context.Context) GetNodesItemTagArrayOutput
+}
+
+type GetNodesItemTagArray []GetNodesItemTagInput
+
+func (GetNodesItemTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesItemTag)(nil)).Elem()
+}
+
+func (i GetNodesItemTagArray) ToGetNodesItemTagArrayOutput() GetNodesItemTagArrayOutput {
+	return i.ToGetNodesItemTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodesItemTagArray) ToGetNodesItemTagArrayOutputWithContext(ctx context.Context) GetNodesItemTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesItemTagArrayOutput)
+}
+
+type GetNodesItemTagOutput struct{ *pulumi.OutputState }
+
+func (GetNodesItemTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesItemTag)(nil)).Elem()
+}
+
+func (o GetNodesItemTagOutput) ToGetNodesItemTagOutput() GetNodesItemTagOutput {
+	return o
+}
+
+func (o GetNodesItemTagOutput) ToGetNodesItemTagOutputWithContext(ctx context.Context) GetNodesItemTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetNodesItemTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItemTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetNodesItemTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesItemTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetNodesItemTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodesItemTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesItemTag)(nil)).Elem()
+}
+
+func (o GetNodesItemTagArrayOutput) ToGetNodesItemTagArrayOutput() GetNodesItemTagArrayOutput {
+	return o
+}
+
+func (o GetNodesItemTagArrayOutput) ToGetNodesItemTagArrayOutputWithContext(ctx context.Context) GetNodesItemTagArrayOutput {
+	return o
+}
+
+func (o GetNodesItemTagArrayOutput) Index(i pulumi.IntInput) GetNodesItemTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesItemTag {
+		return vs[0].([]GetNodesItemTag)[vs[1].(int)]
+	}).(GetNodesItemTagOutput)
+}
+
+type GetNodesTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetNodesTagInput is an input type that accepts GetNodesTagArgs and GetNodesTagOutput values.
+// You can construct a concrete instance of `GetNodesTagInput` via:
+//
+//	GetNodesTagArgs{...}
+type GetNodesTagInput interface {
+	pulumi.Input
+
+	ToGetNodesTagOutput() GetNodesTagOutput
+	ToGetNodesTagOutputWithContext(context.Context) GetNodesTagOutput
+}
+
+type GetNodesTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetNodesTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesTag)(nil)).Elem()
+}
+
+func (i GetNodesTagArgs) ToGetNodesTagOutput() GetNodesTagOutput {
+	return i.ToGetNodesTagOutputWithContext(context.Background())
+}
+
+func (i GetNodesTagArgs) ToGetNodesTagOutputWithContext(ctx context.Context) GetNodesTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesTagOutput)
+}
+
+// GetNodesTagArrayInput is an input type that accepts GetNodesTagArray and GetNodesTagArrayOutput values.
+// You can construct a concrete instance of `GetNodesTagArrayInput` via:
+//
+//	GetNodesTagArray{ GetNodesTagArgs{...} }
+type GetNodesTagArrayInput interface {
+	pulumi.Input
+
+	ToGetNodesTagArrayOutput() GetNodesTagArrayOutput
+	ToGetNodesTagArrayOutputWithContext(context.Context) GetNodesTagArrayOutput
+}
+
+type GetNodesTagArray []GetNodesTagInput
+
+func (GetNodesTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesTag)(nil)).Elem()
+}
+
+func (i GetNodesTagArray) ToGetNodesTagArrayOutput() GetNodesTagArrayOutput {
+	return i.ToGetNodesTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetNodesTagArray) ToGetNodesTagArrayOutputWithContext(ctx context.Context) GetNodesTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNodesTagArrayOutput)
+}
+
+type GetNodesTagOutput struct{ *pulumi.OutputState }
+
+func (GetNodesTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNodesTag)(nil)).Elem()
+}
+
+func (o GetNodesTagOutput) ToGetNodesTagOutput() GetNodesTagOutput {
+	return o
+}
+
+func (o GetNodesTagOutput) ToGetNodesTagOutputWithContext(ctx context.Context) GetNodesTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetNodesTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetNodesTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNodesTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetNodesTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNodesTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNodesTag)(nil)).Elem()
+}
+
+func (o GetNodesTagArrayOutput) ToGetNodesTagArrayOutput() GetNodesTagArrayOutput {
+	return o
+}
+
+func (o GetNodesTagArrayOutput) ToGetNodesTagArrayOutputWithContext(ctx context.Context) GetNodesTagArrayOutput {
+	return o
+}
+
+func (o GetNodesTagArrayOutput) Index(i pulumi.IntInput) GetNodesTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNodesTag {
+		return vs[0].([]GetNodesTag)[vs[1].(int)]
+	}).(GetNodesTagOutput)
+}
+
 type GetOrgAuthNodeItem struct {
 	// Verified company name.
 	AuthName string `pulumi:"authName"`
@@ -1607,6 +1970,214 @@ func (o GetOrgShareAreaItemArrayOutput) Index(i pulumi.IntInput) GetOrgShareArea
 	}).(GetOrgShareAreaItemOutput)
 }
 
+type GetServicesItem struct {
+	// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	CanAssignCount int `pulumi:"canAssignCount"`
+	// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+	ConsoleUrl string `pulumi:"consoleUrl"`
+	// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+	Document string `pulumi:"document"`
+	// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+	GrantStatus string `pulumi:"grantStatus"`
+	// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsAssign int `pulumi:"isAssign"`
+	// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSetManagementScope int `pulumi:"isSetManagementScope"`
+	// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsUsageStatus int `pulumi:"isUsageStatus"`
+	// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	MemberNum string `pulumi:"memberNum"`
+	// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+	Product string `pulumi:"product"`
+	// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName string `pulumi:"productName"`
+	// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceGrant int `pulumi:"serviceGrant"`
+	// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceId int `pulumi:"serviceId"`
+}
+
+// GetServicesItemInput is an input type that accepts GetServicesItemArgs and GetServicesItemOutput values.
+// You can construct a concrete instance of `GetServicesItemInput` via:
+//
+//	GetServicesItemArgs{...}
+type GetServicesItemInput interface {
+	pulumi.Input
+
+	ToGetServicesItemOutput() GetServicesItemOutput
+	ToGetServicesItemOutputWithContext(context.Context) GetServicesItemOutput
+}
+
+type GetServicesItemArgs struct {
+	// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	CanAssignCount pulumi.IntInput `pulumi:"canAssignCount"`
+	// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+	ConsoleUrl pulumi.StringInput `pulumi:"consoleUrl"`
+	// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+	Document pulumi.StringInput `pulumi:"document"`
+	// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+	GrantStatus pulumi.StringInput `pulumi:"grantStatus"`
+	// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsAssign pulumi.IntInput `pulumi:"isAssign"`
+	// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSetManagementScope pulumi.IntInput `pulumi:"isSetManagementScope"`
+	// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsUsageStatus pulumi.IntInput `pulumi:"isUsageStatus"`
+	// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	MemberNum pulumi.StringInput `pulumi:"memberNum"`
+	// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+	Product pulumi.StringInput `pulumi:"product"`
+	// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceGrant pulumi.IntInput `pulumi:"serviceGrant"`
+	// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceId pulumi.IntInput `pulumi:"serviceId"`
+}
+
+func (GetServicesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesItem)(nil)).Elem()
+}
+
+func (i GetServicesItemArgs) ToGetServicesItemOutput() GetServicesItemOutput {
+	return i.ToGetServicesItemOutputWithContext(context.Background())
+}
+
+func (i GetServicesItemArgs) ToGetServicesItemOutputWithContext(ctx context.Context) GetServicesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesItemOutput)
+}
+
+// GetServicesItemArrayInput is an input type that accepts GetServicesItemArray and GetServicesItemArrayOutput values.
+// You can construct a concrete instance of `GetServicesItemArrayInput` via:
+//
+//	GetServicesItemArray{ GetServicesItemArgs{...} }
+type GetServicesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetServicesItemArrayOutput() GetServicesItemArrayOutput
+	ToGetServicesItemArrayOutputWithContext(context.Context) GetServicesItemArrayOutput
+}
+
+type GetServicesItemArray []GetServicesItemInput
+
+func (GetServicesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesItem)(nil)).Elem()
+}
+
+func (i GetServicesItemArray) ToGetServicesItemArrayOutput() GetServicesItemArrayOutput {
+	return i.ToGetServicesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetServicesItemArray) ToGetServicesItemArrayOutputWithContext(ctx context.Context) GetServicesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesItemArrayOutput)
+}
+
+type GetServicesItemOutput struct{ *pulumi.OutputState }
+
+func (GetServicesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesItem)(nil)).Elem()
+}
+
+func (o GetServicesItemOutput) ToGetServicesItemOutput() GetServicesItemOutput {
+	return o
+}
+
+func (o GetServicesItemOutput) ToGetServicesItemOutputWithContext(ctx context.Context) GetServicesItemOutput {
+	return o
+}
+
+// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) CanAssignCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.CanAssignCount }).(pulumi.IntOutput)
+}
+
+// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ConsoleUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.ConsoleUrl }).(pulumi.StringOutput)
+}
+
+// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Document() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Document }).(pulumi.StringOutput)
+}
+
+// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) GrantStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.GrantStatus }).(pulumi.StringOutput)
+}
+
+// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsAssign() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsAssign }).(pulumi.IntOutput)
+}
+
+// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsSetManagementScope() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsSetManagementScope }).(pulumi.IntOutput)
+}
+
+// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsUsageStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsUsageStatus }).(pulumi.IntOutput)
+}
+
+// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) MemberNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.MemberNum }).(pulumi.StringOutput)
+}
+
+// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Product() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Product }).(pulumi.StringOutput)
+}
+
+// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ServiceGrant() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.ServiceGrant }).(pulumi.IntOutput)
+}
+
+// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ServiceId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.ServiceId }).(pulumi.IntOutput)
+}
+
+type GetServicesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetServicesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesItem)(nil)).Elem()
+}
+
+func (o GetServicesItemArrayOutput) ToGetServicesItemArrayOutput() GetServicesItemArrayOutput {
+	return o
+}
+
+func (o GetServicesItemArrayOutput) ToGetServicesItemArrayOutputWithContext(ctx context.Context) GetServicesItemArrayOutput {
+	return o
+}
+
+func (o GetServicesItemArrayOutput) Index(i pulumi.IntInput) GetServicesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServicesItem {
+		return vs[0].([]GetServicesItem)[vs[1].(int)]
+	}).(GetServicesItemOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionInput)(nil)).Elem(), InstanceOrgPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionArrayInput)(nil)).Elem(), InstanceOrgPermissionArray{})
@@ -1622,6 +2193,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgIdentityArrayInput)(nil)).Elem(), GetMembersItemOrgIdentityArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgPermissionInput)(nil)).Elem(), GetMembersItemOrgPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMembersItemOrgPermissionArrayInput)(nil)).Elem(), GetMembersItemOrgPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesItemInput)(nil)).Elem(), GetNodesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesItemArrayInput)(nil)).Elem(), GetNodesItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesItemTagInput)(nil)).Elem(), GetNodesItemTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesItemTagArrayInput)(nil)).Elem(), GetNodesItemTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesTagInput)(nil)).Elem(), GetNodesTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNodesTagArrayInput)(nil)).Elem(), GetNodesTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemInput)(nil)).Elem(), GetOrgAuthNodeItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemArrayInput)(nil)).Elem(), GetOrgAuthNodeItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgAuthNodeItemManagerInput)(nil)).Elem(), GetOrgAuthNodeItemManagerArgs{})
@@ -1634,6 +2211,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByProductItemArrayInput)(nil)).Elem(), GetOrgFinancialByProductItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareAreaItemInput)(nil)).Elem(), GetOrgShareAreaItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareAreaItemArrayInput)(nil)).Elem(), GetOrgShareAreaItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesItemInput)(nil)).Elem(), GetServicesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesItemArrayInput)(nil)).Elem(), GetServicesItemArray{})
 	pulumi.RegisterOutputType(InstanceOrgPermissionOutput{})
 	pulumi.RegisterOutputType(InstanceOrgPermissionArrayOutput{})
 	pulumi.RegisterOutputType(OrgIdentityIdentityPolicyOutput{})
@@ -1648,6 +2227,12 @@ func init() {
 	pulumi.RegisterOutputType(GetMembersItemOrgIdentityArrayOutput{})
 	pulumi.RegisterOutputType(GetMembersItemOrgPermissionOutput{})
 	pulumi.RegisterOutputType(GetMembersItemOrgPermissionArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesItemOutput{})
+	pulumi.RegisterOutputType(GetNodesItemArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesItemTagOutput{})
+	pulumi.RegisterOutputType(GetNodesItemTagArrayOutput{})
+	pulumi.RegisterOutputType(GetNodesTagOutput{})
+	pulumi.RegisterOutputType(GetNodesTagArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgAuthNodeItemOutput{})
 	pulumi.RegisterOutputType(GetOrgAuthNodeItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgAuthNodeItemManagerOutput{})
@@ -1660,4 +2245,6 @@ func init() {
 	pulumi.RegisterOutputType(GetOrgFinancialByProductItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgShareAreaItemOutput{})
 	pulumi.RegisterOutputType(GetOrgShareAreaItemArrayOutput{})
+	pulumi.RegisterOutputType(GetServicesItemOutput{})
+	pulumi.RegisterOutputType(GetServicesItemArrayOutput{})
 }

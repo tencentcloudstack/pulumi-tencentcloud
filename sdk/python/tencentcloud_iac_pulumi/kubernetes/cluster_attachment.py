@@ -19,9 +19,11 @@ class ClusterAttachmentArgs:
                  cluster_id: pulumi.Input[str],
                  instance_id: pulumi.Input[str],
                  hostname: Optional[pulumi.Input[str]] = None,
+                 image_id: Optional[pulumi.Input[str]] = None,
                  key_ids: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  worker_config: Optional[pulumi.Input['ClusterAttachmentWorkerConfigArgs']] = None,
                  worker_config_overrides: Optional[pulumi.Input['ClusterAttachmentWorkerConfigOverridesArgs']] = None):
@@ -30,10 +32,12 @@ class ClusterAttachmentArgs:
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[str] instance_id: ID of the CVM instance, this cvm will reinstall the system.
         :param pulumi.Input[str] hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param pulumi.Input[str] image_id: ID of Node image.
         :param pulumi.Input[str] key_ids: The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
-        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input['ClusterAttachmentWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input['ClusterAttachmentWorkerConfigOverridesArgs'] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
         """
@@ -41,12 +45,16 @@ class ClusterAttachmentArgs:
         pulumi.set(__self__, "instance_id", instance_id)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
         if key_ids is not None:
             pulumi.set(__self__, "key_ids", key_ids)
         if labels is not None:
             pulumi.set(__self__, "labels", labels)
         if password is not None:
             pulumi.set(__self__, "password", password)
+        if security_groups is not None:
+            pulumi.set(__self__, "security_groups", security_groups)
         if unschedulable is not None:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if worker_config is not None:
@@ -91,6 +99,18 @@ class ClusterAttachmentArgs:
         pulumi.set(self, "hostname", value)
 
     @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of Node image.
+        """
+        return pulumi.get(self, "image_id")
+
+    @image_id.setter
+    def image_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_id", value)
+
+    @property
     @pulumi.getter(name="keyIds")
     def key_ids(self) -> Optional[pulumi.Input[str]]:
         """
@@ -127,10 +147,22 @@ class ClusterAttachmentArgs:
         pulumi.set(self, "password", value)
 
     @property
+    @pulumi.getter(name="securityGroups")
+    def security_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of security group IDs after attach to cluster.
+        """
+        return pulumi.get(self, "security_groups")
+
+    @security_groups.setter
+    def security_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "security_groups", value)
+
+    @property
     @pulumi.getter
     def unschedulable(self) -> Optional[pulumi.Input[int]]:
         """
-        Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         """
         return pulumi.get(self, "unschedulable")
 
@@ -168,6 +200,7 @@ class _ClusterAttachmentState:
     def __init__(__self__, *,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  hostname: Optional[pulumi.Input[str]] = None,
+                 image_id: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  key_ids: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -181,13 +214,14 @@ class _ClusterAttachmentState:
         Input properties used for looking up and filtering ClusterAttachment resources.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[str] hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param pulumi.Input[str] image_id: ID of Node image.
         :param pulumi.Input[str] instance_id: ID of the CVM instance, this cvm will reinstall the system.
         :param pulumi.Input[str] key_ids: The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs after attach to cluster.
         :param pulumi.Input[str] state: State of the node.
-        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input['ClusterAttachmentWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input['ClusterAttachmentWorkerConfigOverridesArgs'] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
         """
@@ -195,6 +229,8 @@ class _ClusterAttachmentState:
             pulumi.set(__self__, "cluster_id", cluster_id)
         if hostname is not None:
             pulumi.set(__self__, "hostname", hostname)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
         if instance_id is not None:
             pulumi.set(__self__, "instance_id", instance_id)
         if key_ids is not None:
@@ -237,6 +273,18 @@ class _ClusterAttachmentState:
     @hostname.setter
     def hostname(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "hostname", value)
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of Node image.
+        """
+        return pulumi.get(self, "image_id")
+
+    @image_id.setter
+    def image_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_id", value)
 
     @property
     @pulumi.getter(name="instanceId")
@@ -314,7 +362,7 @@ class _ClusterAttachmentState:
     @pulumi.getter
     def unschedulable(self) -> Optional[pulumi.Input[int]]:
         """
-        Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         """
         return pulumi.get(self, "unschedulable")
 
@@ -354,16 +402,20 @@ class ClusterAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  hostname: Optional[pulumi.Input[str]] = None,
+                 image_id: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  key_ids: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  worker_config: Optional[pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigArgs']]] = None,
                  worker_config_overrides: Optional[pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigOverridesArgs']]] = None,
                  __props__=None):
         """
         Provide a resource to attach an existing  cvm to kubernetes cluster.
+
+        > **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `is_schedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
 
         ## Example Usage
 
@@ -445,11 +497,13 @@ class ClusterAttachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[str] hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param pulumi.Input[str] image_id: ID of Node image.
         :param pulumi.Input[str] instance_id: ID of the CVM instance, this cvm will reinstall the system.
         :param pulumi.Input[str] key_ids: The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
-        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs after attach to cluster.
+        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigArgs']] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigOverridesArgs']] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
         """
@@ -461,6 +515,8 @@ class ClusterAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provide a resource to attach an existing  cvm to kubernetes cluster.
+
+        > **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `is_schedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
 
         ## Example Usage
 
@@ -555,10 +611,12 @@ class ClusterAttachment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  hostname: Optional[pulumi.Input[str]] = None,
+                 image_id: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  key_ids: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
+                 security_groups: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  worker_config: Optional[pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigArgs']]] = None,
                  worker_config_overrides: Optional[pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigOverridesArgs']]] = None,
@@ -575,16 +633,17 @@ class ClusterAttachment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["hostname"] = hostname
+            __props__.__dict__["image_id"] = image_id
             if instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_id'")
             __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["key_ids"] = key_ids
             __props__.__dict__["labels"] = labels
             __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
+            __props__.__dict__["security_groups"] = security_groups
             __props__.__dict__["unschedulable"] = unschedulable
             __props__.__dict__["worker_config"] = worker_config
             __props__.__dict__["worker_config_overrides"] = worker_config_overrides
-            __props__.__dict__["security_groups"] = None
             __props__.__dict__["state"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
@@ -600,6 +659,7 @@ class ClusterAttachment(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
             hostname: Optional[pulumi.Input[str]] = None,
+            image_id: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             key_ids: Optional[pulumi.Input[str]] = None,
             labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -618,13 +678,14 @@ class ClusterAttachment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input[str] hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
+        :param pulumi.Input[str] image_id: ID of Node image.
         :param pulumi.Input[str] instance_id: ID of the CVM instance, this cvm will reinstall the system.
         :param pulumi.Input[str] key_ids: The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke attachment exits CVM.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_groups: A list of security group IDs after attach to cluster.
         :param pulumi.Input[str] state: State of the node.
-        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         :param pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigArgs']] worker_config: Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
         :param pulumi.Input[pulumi.InputType['ClusterAttachmentWorkerConfigOverridesArgs']] worker_config_overrides: Override variable worker_config, commonly used to attach existing instances.
         """
@@ -634,6 +695,7 @@ class ClusterAttachment(pulumi.CustomResource):
 
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["hostname"] = hostname
+        __props__.__dict__["image_id"] = image_id
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["key_ids"] = key_ids
         __props__.__dict__["labels"] = labels
@@ -660,6 +722,14 @@ class ClusterAttachment(pulumi.CustomResource):
         The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         """
         return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> pulumi.Output[str]:
+        """
+        ID of Node image.
+        """
+        return pulumi.get(self, "image_id")
 
     @property
     @pulumi.getter(name="instanceId")
@@ -713,7 +783,7 @@ class ClusterAttachment(pulumi.CustomResource):
     @pulumi.getter
     def unschedulable(self) -> pulumi.Output[Optional[int]]:
         """
-        Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         """
         return pulumi.get(self, "unschedulable")
 

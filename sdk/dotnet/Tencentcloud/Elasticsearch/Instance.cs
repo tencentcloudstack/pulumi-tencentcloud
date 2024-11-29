@@ -78,6 +78,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     ///                 "127.0.0.1",
     ///             },
     ///         },
+    ///         CosBackup = new Tencentcloud.Elasticsearch.Inputs.InstanceCosBackupArgs
+    ///         {
+    ///             IsAutoBackup = true,
+    ///             BackupTime = "22:00",
+    ///         },
     ///         Tags = 
     ///         {
     ///             { "test", "test" },
@@ -224,6 +229,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// COS automatic backup information.
+        /// </summary>
+        [Output("cosBackup")]
+        public Output<Outputs.InstanceCosBackup?> CosBackup { get; private set; } = null!;
 
         /// <summary>
         /// Instance creation time.
@@ -415,6 +426,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// COS automatic backup information.
+        /// </summary>
+        [Input("cosBackup")]
+        public Input<Inputs.InstanceCosBackupArgs>? CosBackup { get; set; }
+
+        /// <summary>
         /// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         /// </summary>
         [Input("deployMode")]
@@ -563,6 +580,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// COS automatic backup information.
+        /// </summary>
+        [Input("cosBackup")]
+        public Input<Inputs.InstanceCosBackupGetArgs>? CosBackup { get; set; }
 
         /// <summary>
         /// Instance creation time.

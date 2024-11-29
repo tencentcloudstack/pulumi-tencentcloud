@@ -412,6 +412,835 @@ func (o InstancesResetAttachInstanceArrayOutput) Index(i pulumi.IntInput) Instan
 	}).(InstancesResetAttachInstanceOutput)
 }
 
+type RouteTableAssociateInstanceConfigInstance struct {
+	// Instances ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// RouteTableAssociateInstanceConfigInstanceInput is an input type that accepts RouteTableAssociateInstanceConfigInstanceArgs and RouteTableAssociateInstanceConfigInstanceOutput values.
+// You can construct a concrete instance of `RouteTableAssociateInstanceConfigInstanceInput` via:
+//
+//	RouteTableAssociateInstanceConfigInstanceArgs{...}
+type RouteTableAssociateInstanceConfigInstanceInput interface {
+	pulumi.Input
+
+	ToRouteTableAssociateInstanceConfigInstanceOutput() RouteTableAssociateInstanceConfigInstanceOutput
+	ToRouteTableAssociateInstanceConfigInstanceOutputWithContext(context.Context) RouteTableAssociateInstanceConfigInstanceOutput
+}
+
+type RouteTableAssociateInstanceConfigInstanceArgs struct {
+	// Instances ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (RouteTableAssociateInstanceConfigInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableAssociateInstanceConfigInstance)(nil)).Elem()
+}
+
+func (i RouteTableAssociateInstanceConfigInstanceArgs) ToRouteTableAssociateInstanceConfigInstanceOutput() RouteTableAssociateInstanceConfigInstanceOutput {
+	return i.ToRouteTableAssociateInstanceConfigInstanceOutputWithContext(context.Background())
+}
+
+func (i RouteTableAssociateInstanceConfigInstanceArgs) ToRouteTableAssociateInstanceConfigInstanceOutputWithContext(ctx context.Context) RouteTableAssociateInstanceConfigInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableAssociateInstanceConfigInstanceOutput)
+}
+
+// RouteTableAssociateInstanceConfigInstanceArrayInput is an input type that accepts RouteTableAssociateInstanceConfigInstanceArray and RouteTableAssociateInstanceConfigInstanceArrayOutput values.
+// You can construct a concrete instance of `RouteTableAssociateInstanceConfigInstanceArrayInput` via:
+//
+//	RouteTableAssociateInstanceConfigInstanceArray{ RouteTableAssociateInstanceConfigInstanceArgs{...} }
+type RouteTableAssociateInstanceConfigInstanceArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableAssociateInstanceConfigInstanceArrayOutput() RouteTableAssociateInstanceConfigInstanceArrayOutput
+	ToRouteTableAssociateInstanceConfigInstanceArrayOutputWithContext(context.Context) RouteTableAssociateInstanceConfigInstanceArrayOutput
+}
+
+type RouteTableAssociateInstanceConfigInstanceArray []RouteTableAssociateInstanceConfigInstanceInput
+
+func (RouteTableAssociateInstanceConfigInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableAssociateInstanceConfigInstance)(nil)).Elem()
+}
+
+func (i RouteTableAssociateInstanceConfigInstanceArray) ToRouteTableAssociateInstanceConfigInstanceArrayOutput() RouteTableAssociateInstanceConfigInstanceArrayOutput {
+	return i.ToRouteTableAssociateInstanceConfigInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableAssociateInstanceConfigInstanceArray) ToRouteTableAssociateInstanceConfigInstanceArrayOutputWithContext(ctx context.Context) RouteTableAssociateInstanceConfigInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableAssociateInstanceConfigInstanceArrayOutput)
+}
+
+type RouteTableAssociateInstanceConfigInstanceOutput struct{ *pulumi.OutputState }
+
+func (RouteTableAssociateInstanceConfigInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableAssociateInstanceConfigInstance)(nil)).Elem()
+}
+
+func (o RouteTableAssociateInstanceConfigInstanceOutput) ToRouteTableAssociateInstanceConfigInstanceOutput() RouteTableAssociateInstanceConfigInstanceOutput {
+	return o
+}
+
+func (o RouteTableAssociateInstanceConfigInstanceOutput) ToRouteTableAssociateInstanceConfigInstanceOutputWithContext(ctx context.Context) RouteTableAssociateInstanceConfigInstanceOutput {
+	return o
+}
+
+// Instances ID.
+func (o RouteTableAssociateInstanceConfigInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableAssociateInstanceConfigInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+func (o RouteTableAssociateInstanceConfigInstanceOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableAssociateInstanceConfigInstance) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type RouteTableAssociateInstanceConfigInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableAssociateInstanceConfigInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableAssociateInstanceConfigInstance)(nil)).Elem()
+}
+
+func (o RouteTableAssociateInstanceConfigInstanceArrayOutput) ToRouteTableAssociateInstanceConfigInstanceArrayOutput() RouteTableAssociateInstanceConfigInstanceArrayOutput {
+	return o
+}
+
+func (o RouteTableAssociateInstanceConfigInstanceArrayOutput) ToRouteTableAssociateInstanceConfigInstanceArrayOutputWithContext(ctx context.Context) RouteTableAssociateInstanceConfigInstanceArrayOutput {
+	return o
+}
+
+func (o RouteTableAssociateInstanceConfigInstanceArrayOutput) Index(i pulumi.IntInput) RouteTableAssociateInstanceConfigInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableAssociateInstanceConfigInstance {
+		return vs[0].([]RouteTableAssociateInstanceConfigInstance)[vs[1].(int)]
+	}).(RouteTableAssociateInstanceConfigInstanceOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicy struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action string `pulumi:"action"`
+	// propagation conditions.
+	BroadcastConditions []RouteTableBroadcastPoliciesPolicyBroadcastCondition `pulumi:"broadcastConditions"`
+	// Policy description.
+	Description string `pulumi:"description"`
+	// Routing conditions.
+	RouteConditions []RouteTableBroadcastPoliciesPolicyRouteCondition `pulumi:"routeConditions"`
+}
+
+// RouteTableBroadcastPoliciesPolicyInput is an input type that accepts RouteTableBroadcastPoliciesPolicyArgs and RouteTableBroadcastPoliciesPolicyOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyArgs{...}
+type RouteTableBroadcastPoliciesPolicyInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyOutput() RouteTableBroadcastPoliciesPolicyOutput
+	ToRouteTableBroadcastPoliciesPolicyOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyArgs struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action pulumi.StringInput `pulumi:"action"`
+	// propagation conditions.
+	BroadcastConditions RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayInput `pulumi:"broadcastConditions"`
+	// Policy description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Routing conditions.
+	RouteConditions RouteTableBroadcastPoliciesPolicyRouteConditionArrayInput `pulumi:"routeConditions"`
+}
+
+func (RouteTableBroadcastPoliciesPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicy)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyArgs) ToRouteTableBroadcastPoliciesPolicyOutput() RouteTableBroadcastPoliciesPolicyOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyArgs) ToRouteTableBroadcastPoliciesPolicyOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyOutput)
+}
+
+// RouteTableBroadcastPoliciesPolicyArrayInput is an input type that accepts RouteTableBroadcastPoliciesPolicyArray and RouteTableBroadcastPoliciesPolicyArrayOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyArrayInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyArray{ RouteTableBroadcastPoliciesPolicyArgs{...} }
+type RouteTableBroadcastPoliciesPolicyArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyArrayOutput() RouteTableBroadcastPoliciesPolicyArrayOutput
+	ToRouteTableBroadcastPoliciesPolicyArrayOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyArrayOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyArray []RouteTableBroadcastPoliciesPolicyInput
+
+func (RouteTableBroadcastPoliciesPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicy)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyArray) ToRouteTableBroadcastPoliciesPolicyArrayOutput() RouteTableBroadcastPoliciesPolicyArrayOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyArray) ToRouteTableBroadcastPoliciesPolicyArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicy)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyOutput) ToRouteTableBroadcastPoliciesPolicyOutput() RouteTableBroadcastPoliciesPolicyOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyOutput) ToRouteTableBroadcastPoliciesPolicyOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyOutput {
+	return o
+}
+
+// Routing behavior, `accept` allows, `drop` rejects.
+func (o RouteTableBroadcastPoliciesPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicy) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// propagation conditions.
+func (o RouteTableBroadcastPoliciesPolicyOutput) BroadcastConditions() RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicy) []RouteTableBroadcastPoliciesPolicyBroadcastCondition {
+		return v.BroadcastConditions
+	}).(RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput)
+}
+
+// Policy description.
+func (o RouteTableBroadcastPoliciesPolicyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicy) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Routing conditions.
+func (o RouteTableBroadcastPoliciesPolicyOutput) RouteConditions() RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicy) []RouteTableBroadcastPoliciesPolicyRouteCondition {
+		return v.RouteConditions
+	}).(RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicy)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyArrayOutput) ToRouteTableBroadcastPoliciesPolicyArrayOutput() RouteTableBroadcastPoliciesPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyArrayOutput) ToRouteTableBroadcastPoliciesPolicyArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyArrayOutput) Index(i pulumi.IntInput) RouteTableBroadcastPoliciesPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableBroadcastPoliciesPolicy {
+		return vs[0].([]RouteTableBroadcastPoliciesPolicy)[vs[1].(int)]
+	}).(RouteTableBroadcastPoliciesPolicyOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyBroadcastCondition struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern int `pulumi:"matchPattern"`
+	// condition type.
+	Name string `pulumi:"name"`
+	// List of conditional values.
+	Values []string `pulumi:"values"`
+}
+
+// RouteTableBroadcastPoliciesPolicyBroadcastConditionInput is an input type that accepts RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs and RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyBroadcastConditionInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs{...}
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput
+	ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern pulumi.IntInput `pulumi:"matchPattern"`
+	// condition type.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of conditional values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyBroadcastCondition)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput)
+}
+
+// RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayInput is an input type that accepts RouteTableBroadcastPoliciesPolicyBroadcastConditionArray and RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyBroadcastConditionArray{ RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs{...} }
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput
+	ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionArray []RouteTableBroadcastPoliciesPolicyBroadcastConditionInput
+
+func (RouteTableBroadcastPoliciesPolicyBroadcastConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicyBroadcastCondition)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyBroadcastConditionArray) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyBroadcastConditionArray) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyBroadcastCondition)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput {
+	return o
+}
+
+// Matching mode, `1` precise matching, `0` fuzzy matching.
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) MatchPattern() pulumi.IntOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyBroadcastCondition) int { return v.MatchPattern }).(pulumi.IntOutput)
+}
+
+// condition type.
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyBroadcastCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of conditional values.
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyBroadcastCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicyBroadcastCondition)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput() RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput) ToRouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput) Index(i pulumi.IntInput) RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableBroadcastPoliciesPolicyBroadcastCondition {
+		return vs[0].([]RouteTableBroadcastPoliciesPolicyBroadcastCondition)[vs[1].(int)]
+	}).(RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyRouteCondition struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern int `pulumi:"matchPattern"`
+	// condition type.
+	Name string `pulumi:"name"`
+	// List of conditional values.
+	Values []string `pulumi:"values"`
+}
+
+// RouteTableBroadcastPoliciesPolicyRouteConditionInput is an input type that accepts RouteTableBroadcastPoliciesPolicyRouteConditionArgs and RouteTableBroadcastPoliciesPolicyRouteConditionOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyRouteConditionInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyRouteConditionArgs{...}
+type RouteTableBroadcastPoliciesPolicyRouteConditionInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyRouteConditionOutput() RouteTableBroadcastPoliciesPolicyRouteConditionOutput
+	ToRouteTableBroadcastPoliciesPolicyRouteConditionOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyRouteConditionArgs struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern pulumi.IntInput `pulumi:"matchPattern"`
+	// condition type.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of conditional values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RouteTableBroadcastPoliciesPolicyRouteConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyRouteConditionArgs) ToRouteTableBroadcastPoliciesPolicyRouteConditionOutput() RouteTableBroadcastPoliciesPolicyRouteConditionOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyRouteConditionOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyRouteConditionArgs) ToRouteTableBroadcastPoliciesPolicyRouteConditionOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyRouteConditionOutput)
+}
+
+// RouteTableBroadcastPoliciesPolicyRouteConditionArrayInput is an input type that accepts RouteTableBroadcastPoliciesPolicyRouteConditionArray and RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput values.
+// You can construct a concrete instance of `RouteTableBroadcastPoliciesPolicyRouteConditionArrayInput` via:
+//
+//	RouteTableBroadcastPoliciesPolicyRouteConditionArray{ RouteTableBroadcastPoliciesPolicyRouteConditionArgs{...} }
+type RouteTableBroadcastPoliciesPolicyRouteConditionArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput() RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput
+	ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutputWithContext(context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput
+}
+
+type RouteTableBroadcastPoliciesPolicyRouteConditionArray []RouteTableBroadcastPoliciesPolicyRouteConditionInput
+
+func (RouteTableBroadcastPoliciesPolicyRouteConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i RouteTableBroadcastPoliciesPolicyRouteConditionArray) ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput() RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput {
+	return i.ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableBroadcastPoliciesPolicyRouteConditionArray) ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyRouteConditionOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyRouteConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionOutput) ToRouteTableBroadcastPoliciesPolicyRouteConditionOutput() RouteTableBroadcastPoliciesPolicyRouteConditionOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionOutput) ToRouteTableBroadcastPoliciesPolicyRouteConditionOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionOutput {
+	return o
+}
+
+// Matching mode, `1` precise matching, `0` fuzzy matching.
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionOutput) MatchPattern() pulumi.IntOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyRouteCondition) int { return v.MatchPattern }).(pulumi.IntOutput)
+}
+
+// condition type.
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyRouteCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of conditional values.
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RouteTableBroadcastPoliciesPolicyRouteCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableBroadcastPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput) ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput() RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput) ToRouteTableBroadcastPoliciesPolicyRouteConditionArrayOutputWithContext(ctx context.Context) RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput) Index(i pulumi.IntInput) RouteTableBroadcastPoliciesPolicyRouteConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableBroadcastPoliciesPolicyRouteCondition {
+		return vs[0].([]RouteTableBroadcastPoliciesPolicyRouteCondition)[vs[1].(int)]
+	}).(RouteTableBroadcastPoliciesPolicyRouteConditionOutput)
+}
+
+type RouteTableInputPoliciesPolicy struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action string `pulumi:"action"`
+	// Policy description.
+	Description string `pulumi:"description"`
+	// Routing conditions.
+	RouteConditions []RouteTableInputPoliciesPolicyRouteCondition `pulumi:"routeConditions"`
+}
+
+// RouteTableInputPoliciesPolicyInput is an input type that accepts RouteTableInputPoliciesPolicyArgs and RouteTableInputPoliciesPolicyOutput values.
+// You can construct a concrete instance of `RouteTableInputPoliciesPolicyInput` via:
+//
+//	RouteTableInputPoliciesPolicyArgs{...}
+type RouteTableInputPoliciesPolicyInput interface {
+	pulumi.Input
+
+	ToRouteTableInputPoliciesPolicyOutput() RouteTableInputPoliciesPolicyOutput
+	ToRouteTableInputPoliciesPolicyOutputWithContext(context.Context) RouteTableInputPoliciesPolicyOutput
+}
+
+type RouteTableInputPoliciesPolicyArgs struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Policy description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Routing conditions.
+	RouteConditions RouteTableInputPoliciesPolicyRouteConditionArrayInput `pulumi:"routeConditions"`
+}
+
+func (RouteTableInputPoliciesPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableInputPoliciesPolicy)(nil)).Elem()
+}
+
+func (i RouteTableInputPoliciesPolicyArgs) ToRouteTableInputPoliciesPolicyOutput() RouteTableInputPoliciesPolicyOutput {
+	return i.ToRouteTableInputPoliciesPolicyOutputWithContext(context.Background())
+}
+
+func (i RouteTableInputPoliciesPolicyArgs) ToRouteTableInputPoliciesPolicyOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableInputPoliciesPolicyOutput)
+}
+
+// RouteTableInputPoliciesPolicyArrayInput is an input type that accepts RouteTableInputPoliciesPolicyArray and RouteTableInputPoliciesPolicyArrayOutput values.
+// You can construct a concrete instance of `RouteTableInputPoliciesPolicyArrayInput` via:
+//
+//	RouteTableInputPoliciesPolicyArray{ RouteTableInputPoliciesPolicyArgs{...} }
+type RouteTableInputPoliciesPolicyArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableInputPoliciesPolicyArrayOutput() RouteTableInputPoliciesPolicyArrayOutput
+	ToRouteTableInputPoliciesPolicyArrayOutputWithContext(context.Context) RouteTableInputPoliciesPolicyArrayOutput
+}
+
+type RouteTableInputPoliciesPolicyArray []RouteTableInputPoliciesPolicyInput
+
+func (RouteTableInputPoliciesPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableInputPoliciesPolicy)(nil)).Elem()
+}
+
+func (i RouteTableInputPoliciesPolicyArray) ToRouteTableInputPoliciesPolicyArrayOutput() RouteTableInputPoliciesPolicyArrayOutput {
+	return i.ToRouteTableInputPoliciesPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableInputPoliciesPolicyArray) ToRouteTableInputPoliciesPolicyArrayOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableInputPoliciesPolicyArrayOutput)
+}
+
+type RouteTableInputPoliciesPolicyOutput struct{ *pulumi.OutputState }
+
+func (RouteTableInputPoliciesPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableInputPoliciesPolicy)(nil)).Elem()
+}
+
+func (o RouteTableInputPoliciesPolicyOutput) ToRouteTableInputPoliciesPolicyOutput() RouteTableInputPoliciesPolicyOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyOutput) ToRouteTableInputPoliciesPolicyOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyOutput {
+	return o
+}
+
+// Routing behavior, `accept` allows, `drop` rejects.
+func (o RouteTableInputPoliciesPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicy) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Policy description.
+func (o RouteTableInputPoliciesPolicyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicy) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Routing conditions.
+func (o RouteTableInputPoliciesPolicyOutput) RouteConditions() RouteTableInputPoliciesPolicyRouteConditionArrayOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicy) []RouteTableInputPoliciesPolicyRouteCondition {
+		return v.RouteConditions
+	}).(RouteTableInputPoliciesPolicyRouteConditionArrayOutput)
+}
+
+type RouteTableInputPoliciesPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableInputPoliciesPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableInputPoliciesPolicy)(nil)).Elem()
+}
+
+func (o RouteTableInputPoliciesPolicyArrayOutput) ToRouteTableInputPoliciesPolicyArrayOutput() RouteTableInputPoliciesPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyArrayOutput) ToRouteTableInputPoliciesPolicyArrayOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyArrayOutput) Index(i pulumi.IntInput) RouteTableInputPoliciesPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableInputPoliciesPolicy {
+		return vs[0].([]RouteTableInputPoliciesPolicy)[vs[1].(int)]
+	}).(RouteTableInputPoliciesPolicyOutput)
+}
+
+type RouteTableInputPoliciesPolicyRouteCondition struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern int `pulumi:"matchPattern"`
+	// condition type.
+	Name string `pulumi:"name"`
+	// List of conditional values.
+	Values []string `pulumi:"values"`
+}
+
+// RouteTableInputPoliciesPolicyRouteConditionInput is an input type that accepts RouteTableInputPoliciesPolicyRouteConditionArgs and RouteTableInputPoliciesPolicyRouteConditionOutput values.
+// You can construct a concrete instance of `RouteTableInputPoliciesPolicyRouteConditionInput` via:
+//
+//	RouteTableInputPoliciesPolicyRouteConditionArgs{...}
+type RouteTableInputPoliciesPolicyRouteConditionInput interface {
+	pulumi.Input
+
+	ToRouteTableInputPoliciesPolicyRouteConditionOutput() RouteTableInputPoliciesPolicyRouteConditionOutput
+	ToRouteTableInputPoliciesPolicyRouteConditionOutputWithContext(context.Context) RouteTableInputPoliciesPolicyRouteConditionOutput
+}
+
+type RouteTableInputPoliciesPolicyRouteConditionArgs struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern pulumi.IntInput `pulumi:"matchPattern"`
+	// condition type.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of conditional values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RouteTableInputPoliciesPolicyRouteConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableInputPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i RouteTableInputPoliciesPolicyRouteConditionArgs) ToRouteTableInputPoliciesPolicyRouteConditionOutput() RouteTableInputPoliciesPolicyRouteConditionOutput {
+	return i.ToRouteTableInputPoliciesPolicyRouteConditionOutputWithContext(context.Background())
+}
+
+func (i RouteTableInputPoliciesPolicyRouteConditionArgs) ToRouteTableInputPoliciesPolicyRouteConditionOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyRouteConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableInputPoliciesPolicyRouteConditionOutput)
+}
+
+// RouteTableInputPoliciesPolicyRouteConditionArrayInput is an input type that accepts RouteTableInputPoliciesPolicyRouteConditionArray and RouteTableInputPoliciesPolicyRouteConditionArrayOutput values.
+// You can construct a concrete instance of `RouteTableInputPoliciesPolicyRouteConditionArrayInput` via:
+//
+//	RouteTableInputPoliciesPolicyRouteConditionArray{ RouteTableInputPoliciesPolicyRouteConditionArgs{...} }
+type RouteTableInputPoliciesPolicyRouteConditionArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableInputPoliciesPolicyRouteConditionArrayOutput() RouteTableInputPoliciesPolicyRouteConditionArrayOutput
+	ToRouteTableInputPoliciesPolicyRouteConditionArrayOutputWithContext(context.Context) RouteTableInputPoliciesPolicyRouteConditionArrayOutput
+}
+
+type RouteTableInputPoliciesPolicyRouteConditionArray []RouteTableInputPoliciesPolicyRouteConditionInput
+
+func (RouteTableInputPoliciesPolicyRouteConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableInputPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i RouteTableInputPoliciesPolicyRouteConditionArray) ToRouteTableInputPoliciesPolicyRouteConditionArrayOutput() RouteTableInputPoliciesPolicyRouteConditionArrayOutput {
+	return i.ToRouteTableInputPoliciesPolicyRouteConditionArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableInputPoliciesPolicyRouteConditionArray) ToRouteTableInputPoliciesPolicyRouteConditionArrayOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyRouteConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableInputPoliciesPolicyRouteConditionArrayOutput)
+}
+
+type RouteTableInputPoliciesPolicyRouteConditionOutput struct{ *pulumi.OutputState }
+
+func (RouteTableInputPoliciesPolicyRouteConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableInputPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o RouteTableInputPoliciesPolicyRouteConditionOutput) ToRouteTableInputPoliciesPolicyRouteConditionOutput() RouteTableInputPoliciesPolicyRouteConditionOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyRouteConditionOutput) ToRouteTableInputPoliciesPolicyRouteConditionOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyRouteConditionOutput {
+	return o
+}
+
+// Matching mode, `1` precise matching, `0` fuzzy matching.
+func (o RouteTableInputPoliciesPolicyRouteConditionOutput) MatchPattern() pulumi.IntOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicyRouteCondition) int { return v.MatchPattern }).(pulumi.IntOutput)
+}
+
+// condition type.
+func (o RouteTableInputPoliciesPolicyRouteConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicyRouteCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of conditional values.
+func (o RouteTableInputPoliciesPolicyRouteConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RouteTableInputPoliciesPolicyRouteCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RouteTableInputPoliciesPolicyRouteConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableInputPoliciesPolicyRouteConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableInputPoliciesPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o RouteTableInputPoliciesPolicyRouteConditionArrayOutput) ToRouteTableInputPoliciesPolicyRouteConditionArrayOutput() RouteTableInputPoliciesPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyRouteConditionArrayOutput) ToRouteTableInputPoliciesPolicyRouteConditionArrayOutputWithContext(ctx context.Context) RouteTableInputPoliciesPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o RouteTableInputPoliciesPolicyRouteConditionArrayOutput) Index(i pulumi.IntInput) RouteTableInputPoliciesPolicyRouteConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableInputPoliciesPolicyRouteCondition {
+		return vs[0].([]RouteTableInputPoliciesPolicyRouteCondition)[vs[1].(int)]
+	}).(RouteTableInputPoliciesPolicyRouteConditionOutput)
+}
+
+type RouteTableSelectionPoliciesSelectionPolicy struct {
+	// description.
+	Description string `pulumi:"description"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+	InstanceType string `pulumi:"instanceType"`
+	// route table ID.
+	RouteTableId string `pulumi:"routeTableId"`
+	// Source CIDR.
+	SourceCidrBlock string `pulumi:"sourceCidrBlock"`
+}
+
+// RouteTableSelectionPoliciesSelectionPolicyInput is an input type that accepts RouteTableSelectionPoliciesSelectionPolicyArgs and RouteTableSelectionPoliciesSelectionPolicyOutput values.
+// You can construct a concrete instance of `RouteTableSelectionPoliciesSelectionPolicyInput` via:
+//
+//	RouteTableSelectionPoliciesSelectionPolicyArgs{...}
+type RouteTableSelectionPoliciesSelectionPolicyInput interface {
+	pulumi.Input
+
+	ToRouteTableSelectionPoliciesSelectionPolicyOutput() RouteTableSelectionPoliciesSelectionPolicyOutput
+	ToRouteTableSelectionPoliciesSelectionPolicyOutputWithContext(context.Context) RouteTableSelectionPoliciesSelectionPolicyOutput
+}
+
+type RouteTableSelectionPoliciesSelectionPolicyArgs struct {
+	// description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// route table ID.
+	RouteTableId pulumi.StringInput `pulumi:"routeTableId"`
+	// Source CIDR.
+	SourceCidrBlock pulumi.StringInput `pulumi:"sourceCidrBlock"`
+}
+
+func (RouteTableSelectionPoliciesSelectionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableSelectionPoliciesSelectionPolicy)(nil)).Elem()
+}
+
+func (i RouteTableSelectionPoliciesSelectionPolicyArgs) ToRouteTableSelectionPoliciesSelectionPolicyOutput() RouteTableSelectionPoliciesSelectionPolicyOutput {
+	return i.ToRouteTableSelectionPoliciesSelectionPolicyOutputWithContext(context.Background())
+}
+
+func (i RouteTableSelectionPoliciesSelectionPolicyArgs) ToRouteTableSelectionPoliciesSelectionPolicyOutputWithContext(ctx context.Context) RouteTableSelectionPoliciesSelectionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableSelectionPoliciesSelectionPolicyOutput)
+}
+
+// RouteTableSelectionPoliciesSelectionPolicyArrayInput is an input type that accepts RouteTableSelectionPoliciesSelectionPolicyArray and RouteTableSelectionPoliciesSelectionPolicyArrayOutput values.
+// You can construct a concrete instance of `RouteTableSelectionPoliciesSelectionPolicyArrayInput` via:
+//
+//	RouteTableSelectionPoliciesSelectionPolicyArray{ RouteTableSelectionPoliciesSelectionPolicyArgs{...} }
+type RouteTableSelectionPoliciesSelectionPolicyArrayInput interface {
+	pulumi.Input
+
+	ToRouteTableSelectionPoliciesSelectionPolicyArrayOutput() RouteTableSelectionPoliciesSelectionPolicyArrayOutput
+	ToRouteTableSelectionPoliciesSelectionPolicyArrayOutputWithContext(context.Context) RouteTableSelectionPoliciesSelectionPolicyArrayOutput
+}
+
+type RouteTableSelectionPoliciesSelectionPolicyArray []RouteTableSelectionPoliciesSelectionPolicyInput
+
+func (RouteTableSelectionPoliciesSelectionPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableSelectionPoliciesSelectionPolicy)(nil)).Elem()
+}
+
+func (i RouteTableSelectionPoliciesSelectionPolicyArray) ToRouteTableSelectionPoliciesSelectionPolicyArrayOutput() RouteTableSelectionPoliciesSelectionPolicyArrayOutput {
+	return i.ToRouteTableSelectionPoliciesSelectionPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i RouteTableSelectionPoliciesSelectionPolicyArray) ToRouteTableSelectionPoliciesSelectionPolicyArrayOutputWithContext(ctx context.Context) RouteTableSelectionPoliciesSelectionPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RouteTableSelectionPoliciesSelectionPolicyArrayOutput)
+}
+
+type RouteTableSelectionPoliciesSelectionPolicyOutput struct{ *pulumi.OutputState }
+
+func (RouteTableSelectionPoliciesSelectionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RouteTableSelectionPoliciesSelectionPolicy)(nil)).Elem()
+}
+
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) ToRouteTableSelectionPoliciesSelectionPolicyOutput() RouteTableSelectionPoliciesSelectionPolicyOutput {
+	return o
+}
+
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) ToRouteTableSelectionPoliciesSelectionPolicyOutputWithContext(ctx context.Context) RouteTableSelectionPoliciesSelectionPolicyOutput {
+	return o
+}
+
+// description.
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableSelectionPoliciesSelectionPolicy) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableSelectionPoliciesSelectionPolicy) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableSelectionPoliciesSelectionPolicy) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// route table ID.
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) RouteTableId() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableSelectionPoliciesSelectionPolicy) string { return v.RouteTableId }).(pulumi.StringOutput)
+}
+
+// Source CIDR.
+func (o RouteTableSelectionPoliciesSelectionPolicyOutput) SourceCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v RouteTableSelectionPoliciesSelectionPolicy) string { return v.SourceCidrBlock }).(pulumi.StringOutput)
+}
+
+type RouteTableSelectionPoliciesSelectionPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (RouteTableSelectionPoliciesSelectionPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RouteTableSelectionPoliciesSelectionPolicy)(nil)).Elem()
+}
+
+func (o RouteTableSelectionPoliciesSelectionPolicyArrayOutput) ToRouteTableSelectionPoliciesSelectionPolicyArrayOutput() RouteTableSelectionPoliciesSelectionPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableSelectionPoliciesSelectionPolicyArrayOutput) ToRouteTableSelectionPoliciesSelectionPolicyArrayOutputWithContext(ctx context.Context) RouteTableSelectionPoliciesSelectionPolicyArrayOutput {
+	return o
+}
+
+func (o RouteTableSelectionPoliciesSelectionPolicyArrayOutput) Index(i pulumi.IntInput) RouteTableSelectionPoliciesSelectionPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RouteTableSelectionPoliciesSelectionPolicy {
+		return vs[0].([]RouteTableSelectionPoliciesSelectionPolicy)[vs[1].(int)]
+	}).(RouteTableSelectionPoliciesSelectionPolicyOutput)
+}
+
 type GetBandwidthLimitsLimit struct {
 	// Limitation of bandwidth.
 	BandwidthLimit int `pulumi:"bandwidthLimit"`
@@ -1387,6 +2216,684 @@ func (o GetInstancesInstanceListAttachmentListArrayOutput) Index(i pulumi.IntInp
 	}).(GetInstancesInstanceListAttachmentListOutput)
 }
 
+type GetRouteTableInputPoliciesPolicySet struct {
+	// Create time.
+	CreateTime *string `pulumi:"createTime"`
+	// Policy version.
+	PolicyVersion *int `pulumi:"policyVersion"`
+	// Policys.
+	Policys []GetRouteTableInputPoliciesPolicySetPolicy `pulumi:"policys"`
+}
+
+// GetRouteTableInputPoliciesPolicySetInput is an input type that accepts GetRouteTableInputPoliciesPolicySetArgs and GetRouteTableInputPoliciesPolicySetOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetArgs{...}
+type GetRouteTableInputPoliciesPolicySetInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetOutput() GetRouteTableInputPoliciesPolicySetOutput
+	ToGetRouteTableInputPoliciesPolicySetOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetArgs struct {
+	// Create time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Policy version.
+	PolicyVersion pulumi.IntPtrInput `pulumi:"policyVersion"`
+	// Policys.
+	Policys GetRouteTableInputPoliciesPolicySetPolicyArrayInput `pulumi:"policys"`
+}
+
+func (GetRouteTableInputPoliciesPolicySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySet)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetArgs) ToGetRouteTableInputPoliciesPolicySetOutput() GetRouteTableInputPoliciesPolicySetOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetArgs) ToGetRouteTableInputPoliciesPolicySetOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetOutput)
+}
+
+// GetRouteTableInputPoliciesPolicySetArrayInput is an input type that accepts GetRouteTableInputPoliciesPolicySetArray and GetRouteTableInputPoliciesPolicySetArrayOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetArrayInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetArray{ GetRouteTableInputPoliciesPolicySetArgs{...} }
+type GetRouteTableInputPoliciesPolicySetArrayInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetArrayOutput() GetRouteTableInputPoliciesPolicySetArrayOutput
+	ToGetRouteTableInputPoliciesPolicySetArrayOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetArrayOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetArray []GetRouteTableInputPoliciesPolicySetInput
+
+func (GetRouteTableInputPoliciesPolicySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySet)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetArray) ToGetRouteTableInputPoliciesPolicySetArrayOutput() GetRouteTableInputPoliciesPolicySetArrayOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetArrayOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetArray) ToGetRouteTableInputPoliciesPolicySetArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySet)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetOutput) ToGetRouteTableInputPoliciesPolicySetOutput() GetRouteTableInputPoliciesPolicySetOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetOutput) ToGetRouteTableInputPoliciesPolicySetOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetOutput {
+	return o
+}
+
+// Create time.
+func (o GetRouteTableInputPoliciesPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Policy version.
+func (o GetRouteTableInputPoliciesPolicySetOutput) PolicyVersion() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySet) *int { return v.PolicyVersion }).(pulumi.IntPtrOutput)
+}
+
+// Policys.
+func (o GetRouteTableInputPoliciesPolicySetOutput) Policys() GetRouteTableInputPoliciesPolicySetPolicyArrayOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySet) []GetRouteTableInputPoliciesPolicySetPolicy {
+		return v.Policys
+	}).(GetRouteTableInputPoliciesPolicySetPolicyArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySet)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetArrayOutput) ToGetRouteTableInputPoliciesPolicySetArrayOutput() GetRouteTableInputPoliciesPolicySetArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetArrayOutput) ToGetRouteTableInputPoliciesPolicySetArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetArrayOutput) Index(i pulumi.IntInput) GetRouteTableInputPoliciesPolicySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRouteTableInputPoliciesPolicySet {
+		return vs[0].([]GetRouteTableInputPoliciesPolicySet)[vs[1].(int)]
+	}).(GetRouteTableInputPoliciesPolicySetOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicy struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action string `pulumi:"action"`
+	// as-path operate mode
+	AsPathOperateMode *string `pulumi:"asPathOperateMode"`
+	// Policy description
+	Description string `pulumi:"description"`
+	// as-path operate
+	OperateAsPath *string `pulumi:"operateAsPath"`
+	// Routing conditions.
+	RouteConditions []GetRouteTableInputPoliciesPolicySetPolicyRouteCondition `pulumi:"routeConditions"`
+}
+
+// GetRouteTableInputPoliciesPolicySetPolicyInput is an input type that accepts GetRouteTableInputPoliciesPolicySetPolicyArgs and GetRouteTableInputPoliciesPolicySetPolicyOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetPolicyInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetPolicyArgs{...}
+type GetRouteTableInputPoliciesPolicySetPolicyInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetPolicyOutput() GetRouteTableInputPoliciesPolicySetPolicyOutput
+	ToGetRouteTableInputPoliciesPolicySetPolicyOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetPolicyOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyArgs struct {
+	// Routing behavior, `accept` allows, `drop` rejects.
+	Action pulumi.StringInput `pulumi:"action"`
+	// as-path operate mode
+	AsPathOperateMode pulumi.StringPtrInput `pulumi:"asPathOperateMode"`
+	// Policy description
+	Description pulumi.StringInput `pulumi:"description"`
+	// as-path operate
+	OperateAsPath pulumi.StringPtrInput `pulumi:"operateAsPath"`
+	// Routing conditions.
+	RouteConditions GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayInput `pulumi:"routeConditions"`
+}
+
+func (GetRouteTableInputPoliciesPolicySetPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicy)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyArgs) ToGetRouteTableInputPoliciesPolicySetPolicyOutput() GetRouteTableInputPoliciesPolicySetPolicyOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetPolicyOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyArgs) ToGetRouteTableInputPoliciesPolicySetPolicyOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetPolicyOutput)
+}
+
+// GetRouteTableInputPoliciesPolicySetPolicyArrayInput is an input type that accepts GetRouteTableInputPoliciesPolicySetPolicyArray and GetRouteTableInputPoliciesPolicySetPolicyArrayOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetPolicyArrayInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetPolicyArray{ GetRouteTableInputPoliciesPolicySetPolicyArgs{...} }
+type GetRouteTableInputPoliciesPolicySetPolicyArrayInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyArrayOutput
+	ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetPolicyArrayOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyArray []GetRouteTableInputPoliciesPolicySetPolicyInput
+
+func (GetRouteTableInputPoliciesPolicySetPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySetPolicy)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyArray) ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyArrayOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyArray) ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetPolicyArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicy)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) ToGetRouteTableInputPoliciesPolicySetPolicyOutput() GetRouteTableInputPoliciesPolicySetPolicyOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) ToGetRouteTableInputPoliciesPolicySetPolicyOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyOutput {
+	return o
+}
+
+// Routing behavior, `accept` allows, `drop` rejects.
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicy) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// as-path operate mode
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) AsPathOperateMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicy) *string { return v.AsPathOperateMode }).(pulumi.StringPtrOutput)
+}
+
+// Policy description
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicy) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// as-path operate
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) OperateAsPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicy) *string { return v.OperateAsPath }).(pulumi.StringPtrOutput)
+}
+
+// Routing conditions.
+func (o GetRouteTableInputPoliciesPolicySetPolicyOutput) RouteConditions() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicy) []GetRouteTableInputPoliciesPolicySetPolicyRouteCondition {
+		return v.RouteConditions
+	}).(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySetPolicy)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyArrayOutput) ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyArrayOutput) ToGetRouteTableInputPoliciesPolicySetPolicyArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyArrayOutput) Index(i pulumi.IntInput) GetRouteTableInputPoliciesPolicySetPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRouteTableInputPoliciesPolicySetPolicy {
+		return vs[0].([]GetRouteTableInputPoliciesPolicySetPolicy)[vs[1].(int)]
+	}).(GetRouteTableInputPoliciesPolicySetPolicyOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyRouteCondition struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern int `pulumi:"matchPattern"`
+	// condition type.
+	Name string `pulumi:"name"`
+	// List of conditional values.
+	Values []string `pulumi:"values"`
+}
+
+// GetRouteTableInputPoliciesPolicySetPolicyRouteConditionInput is an input type that accepts GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs and GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetPolicyRouteConditionInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs{...}
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput
+	ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs struct {
+	// Matching mode, `1` precise matching, `0` fuzzy matching.
+	MatchPattern pulumi.IntInput `pulumi:"matchPattern"`
+	// condition type.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of conditional values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput)
+}
+
+// GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayInput is an input type that accepts GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray and GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput values.
+// You can construct a concrete instance of `GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayInput` via:
+//
+//	GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray{ GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs{...} }
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayInput interface {
+	pulumi.Input
+
+	ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput
+	ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutputWithContext(context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray []GetRouteTableInputPoliciesPolicySetPolicyRouteConditionInput
+
+func (GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySetPolicyRouteCondition)(nil)).Elem()
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput {
+	return i.ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutputWithContext(context.Background())
+}
+
+func (i GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput {
+	return o
+}
+
+// Matching mode, `1` precise matching, `0` fuzzy matching.
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) MatchPattern() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicyRouteCondition) int { return v.MatchPattern }).(pulumi.IntOutput)
+}
+
+// condition type.
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicyRouteCondition) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// List of conditional values.
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRouteTableInputPoliciesPolicySetPolicyRouteCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRouteTableInputPoliciesPolicySetPolicyRouteCondition)(nil)).Elem()
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput() GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput) ToGetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutputWithContext(ctx context.Context) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput {
+	return o
+}
+
+func (o GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput) Index(i pulumi.IntInput) GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRouteTableInputPoliciesPolicySetPolicyRouteCondition {
+		return vs[0].([]GetRouteTableInputPoliciesPolicySetPolicyRouteCondition)[vs[1].(int)]
+	}).(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput)
+}
+
+type GetRoutesFilter struct {
+	// Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+	Name string `pulumi:"name"`
+	// Filter value of the field.
+	Values []string `pulumi:"values"`
+}
+
+// GetRoutesFilterInput is an input type that accepts GetRoutesFilterArgs and GetRoutesFilterOutput values.
+// You can construct a concrete instance of `GetRoutesFilterInput` via:
+//
+//	GetRoutesFilterArgs{...}
+type GetRoutesFilterInput interface {
+	pulumi.Input
+
+	ToGetRoutesFilterOutput() GetRoutesFilterOutput
+	ToGetRoutesFilterOutputWithContext(context.Context) GetRoutesFilterOutput
+}
+
+type GetRoutesFilterArgs struct {
+	// Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of the field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetRoutesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesFilter)(nil)).Elem()
+}
+
+func (i GetRoutesFilterArgs) ToGetRoutesFilterOutput() GetRoutesFilterOutput {
+	return i.ToGetRoutesFilterOutputWithContext(context.Background())
+}
+
+func (i GetRoutesFilterArgs) ToGetRoutesFilterOutputWithContext(ctx context.Context) GetRoutesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesFilterOutput)
+}
+
+// GetRoutesFilterArrayInput is an input type that accepts GetRoutesFilterArray and GetRoutesFilterArrayOutput values.
+// You can construct a concrete instance of `GetRoutesFilterArrayInput` via:
+//
+//	GetRoutesFilterArray{ GetRoutesFilterArgs{...} }
+type GetRoutesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetRoutesFilterArrayOutput() GetRoutesFilterArrayOutput
+	ToGetRoutesFilterArrayOutputWithContext(context.Context) GetRoutesFilterArrayOutput
+}
+
+type GetRoutesFilterArray []GetRoutesFilterInput
+
+func (GetRoutesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesFilter)(nil)).Elem()
+}
+
+func (i GetRoutesFilterArray) ToGetRoutesFilterArrayOutput() GetRoutesFilterArrayOutput {
+	return i.ToGetRoutesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetRoutesFilterArray) ToGetRoutesFilterArrayOutputWithContext(ctx context.Context) GetRoutesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesFilterArrayOutput)
+}
+
+type GetRoutesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesFilter)(nil)).Elem()
+}
+
+func (o GetRoutesFilterOutput) ToGetRoutesFilterOutput() GetRoutesFilterOutput {
+	return o
+}
+
+func (o GetRoutesFilterOutput) ToGetRoutesFilterOutputWithContext(ctx context.Context) GetRoutesFilterOutput {
+	return o
+}
+
+// Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+func (o GetRoutesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of the field.
+func (o GetRoutesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRoutesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetRoutesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesFilter)(nil)).Elem()
+}
+
+func (o GetRoutesFilterArrayOutput) ToGetRoutesFilterArrayOutput() GetRoutesFilterArrayOutput {
+	return o
+}
+
+func (o GetRoutesFilterArrayOutput) ToGetRoutesFilterArrayOutputWithContext(ctx context.Context) GetRoutesFilterArrayOutput {
+	return o
+}
+
+func (o GetRoutesFilterArrayOutput) Index(i pulumi.IntInput) GetRoutesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRoutesFilter {
+		return vs[0].([]GetRoutesFilter)[vs[1].(int)]
+	}).(GetRoutesFilterOutput)
+}
+
+type GetRoutesRouteList struct {
+	// Destination.
+	DestinationCidrBlock string `pulumi:"destinationCidrBlock"`
+	// Is routing enabled.
+	Enabled bool `pulumi:"enabled"`
+	// Extension status of routing.
+	ExtraState string `pulumi:"extraState"`
+	// Next hop extension name (associated instance extension name).
+	InstanceExtraName string `pulumi:"instanceExtraName"`
+	// Next jump (associated instance ID).
+	InstanceId string `pulumi:"instanceId"`
+	// Next jump (associated instance name).
+	InstanceName string `pulumi:"instanceName"`
+	// Next jump (associated instance region).
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+	// The UIN (root account) to which the associated instance belongs.
+	InstanceUin string `pulumi:"instanceUin"`
+	// Is it dynamic routing.
+	IsBgp bool `pulumi:"isBgp"`
+	// route ID.
+	RouteId string `pulumi:"routeId"`
+	// Routing priority.
+	RoutePriority int `pulumi:"routePriority"`
+	// update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetRoutesRouteListInput is an input type that accepts GetRoutesRouteListArgs and GetRoutesRouteListOutput values.
+// You can construct a concrete instance of `GetRoutesRouteListInput` via:
+//
+//	GetRoutesRouteListArgs{...}
+type GetRoutesRouteListInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouteListOutput() GetRoutesRouteListOutput
+	ToGetRoutesRouteListOutputWithContext(context.Context) GetRoutesRouteListOutput
+}
+
+type GetRoutesRouteListArgs struct {
+	// Destination.
+	DestinationCidrBlock pulumi.StringInput `pulumi:"destinationCidrBlock"`
+	// Is routing enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Extension status of routing.
+	ExtraState pulumi.StringInput `pulumi:"extraState"`
+	// Next hop extension name (associated instance extension name).
+	InstanceExtraName pulumi.StringInput `pulumi:"instanceExtraName"`
+	// Next jump (associated instance ID).
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Next jump (associated instance name).
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Next jump (associated instance region).
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// The UIN (root account) to which the associated instance belongs.
+	InstanceUin pulumi.StringInput `pulumi:"instanceUin"`
+	// Is it dynamic routing.
+	IsBgp pulumi.BoolInput `pulumi:"isBgp"`
+	// route ID.
+	RouteId pulumi.StringInput `pulumi:"routeId"`
+	// Routing priority.
+	RoutePriority pulumi.IntInput `pulumi:"routePriority"`
+	// update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetRoutesRouteListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouteList)(nil)).Elem()
+}
+
+func (i GetRoutesRouteListArgs) ToGetRoutesRouteListOutput() GetRoutesRouteListOutput {
+	return i.ToGetRoutesRouteListOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouteListArgs) ToGetRoutesRouteListOutputWithContext(ctx context.Context) GetRoutesRouteListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouteListOutput)
+}
+
+// GetRoutesRouteListArrayInput is an input type that accepts GetRoutesRouteListArray and GetRoutesRouteListArrayOutput values.
+// You can construct a concrete instance of `GetRoutesRouteListArrayInput` via:
+//
+//	GetRoutesRouteListArray{ GetRoutesRouteListArgs{...} }
+type GetRoutesRouteListArrayInput interface {
+	pulumi.Input
+
+	ToGetRoutesRouteListArrayOutput() GetRoutesRouteListArrayOutput
+	ToGetRoutesRouteListArrayOutputWithContext(context.Context) GetRoutesRouteListArrayOutput
+}
+
+type GetRoutesRouteListArray []GetRoutesRouteListInput
+
+func (GetRoutesRouteListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouteList)(nil)).Elem()
+}
+
+func (i GetRoutesRouteListArray) ToGetRoutesRouteListArrayOutput() GetRoutesRouteListArrayOutput {
+	return i.ToGetRoutesRouteListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRoutesRouteListArray) ToGetRoutesRouteListArrayOutputWithContext(ctx context.Context) GetRoutesRouteListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRoutesRouteListArrayOutput)
+}
+
+type GetRoutesRouteListOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouteListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRoutesRouteList)(nil)).Elem()
+}
+
+func (o GetRoutesRouteListOutput) ToGetRoutesRouteListOutput() GetRoutesRouteListOutput {
+	return o
+}
+
+func (o GetRoutesRouteListOutput) ToGetRoutesRouteListOutputWithContext(ctx context.Context) GetRoutesRouteListOutput {
+	return o
+}
+
+// Destination.
+func (o GetRoutesRouteListOutput) DestinationCidrBlock() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.DestinationCidrBlock }).(pulumi.StringOutput)
+}
+
+// Is routing enabled.
+func (o GetRoutesRouteListOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Extension status of routing.
+func (o GetRoutesRouteListOutput) ExtraState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.ExtraState }).(pulumi.StringOutput)
+}
+
+// Next hop extension name (associated instance extension name).
+func (o GetRoutesRouteListOutput) InstanceExtraName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceExtraName }).(pulumi.StringOutput)
+}
+
+// Next jump (associated instance ID).
+func (o GetRoutesRouteListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Next jump (associated instance name).
+func (o GetRoutesRouteListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Next jump (associated instance region).
+func (o GetRoutesRouteListOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+func (o GetRoutesRouteListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// The UIN (root account) to which the associated instance belongs.
+func (o GetRoutesRouteListOutput) InstanceUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.InstanceUin }).(pulumi.StringOutput)
+}
+
+// Is it dynamic routing.
+func (o GetRoutesRouteListOutput) IsBgp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) bool { return v.IsBgp }).(pulumi.BoolOutput)
+}
+
+// route ID.
+func (o GetRoutesRouteListOutput) RouteId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.RouteId }).(pulumi.StringOutput)
+}
+
+// Routing priority.
+func (o GetRoutesRouteListOutput) RoutePriority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) int { return v.RoutePriority }).(pulumi.IntOutput)
+}
+
+// update time.
+func (o GetRoutesRouteListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRoutesRouteList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetRoutesRouteListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRoutesRouteListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRoutesRouteList)(nil)).Elem()
+}
+
+func (o GetRoutesRouteListArrayOutput) ToGetRoutesRouteListArrayOutput() GetRoutesRouteListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouteListArrayOutput) ToGetRoutesRouteListArrayOutputWithContext(ctx context.Context) GetRoutesRouteListArrayOutput {
+	return o
+}
+
+func (o GetRoutesRouteListArrayOutput) Index(i pulumi.IntInput) GetRoutesRouteListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRoutesRouteList {
+		return vs[0].([]GetRoutesRouteList)[vs[1].(int)]
+	}).(GetRoutesRouteListOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceInput)(nil)).Elem(), InstancesAcceptAttachInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesAcceptAttachInstanceArrayInput)(nil)).Elem(), InstancesAcceptAttachInstanceArray{})
@@ -1394,6 +2901,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesRejectAttachInstanceArrayInput)(nil)).Elem(), InstancesRejectAttachInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceInput)(nil)).Elem(), InstancesResetAttachInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancesResetAttachInstanceArrayInput)(nil)).Elem(), InstancesResetAttachInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableAssociateInstanceConfigInstanceInput)(nil)).Elem(), RouteTableAssociateInstanceConfigInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableAssociateInstanceConfigInstanceArrayInput)(nil)).Elem(), RouteTableAssociateInstanceConfigInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyArrayInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyBroadcastConditionInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyBroadcastConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyRouteConditionInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyRouteConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableBroadcastPoliciesPolicyRouteConditionArrayInput)(nil)).Elem(), RouteTableBroadcastPoliciesPolicyRouteConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableInputPoliciesPolicyInput)(nil)).Elem(), RouteTableInputPoliciesPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableInputPoliciesPolicyArrayInput)(nil)).Elem(), RouteTableInputPoliciesPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableInputPoliciesPolicyRouteConditionInput)(nil)).Elem(), RouteTableInputPoliciesPolicyRouteConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableInputPoliciesPolicyRouteConditionArrayInput)(nil)).Elem(), RouteTableInputPoliciesPolicyRouteConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableSelectionPoliciesSelectionPolicyInput)(nil)).Elem(), RouteTableSelectionPoliciesSelectionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RouteTableSelectionPoliciesSelectionPolicyArrayInput)(nil)).Elem(), RouteTableSelectionPoliciesSelectionPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitInput)(nil)).Elem(), GetBandwidthLimitsLimitArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBandwidthLimitsLimitArrayInput)(nil)).Elem(), GetBandwidthLimitsLimitArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataInput)(nil)).Elem(), GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataArgs{})
@@ -1408,12 +2929,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListAttachmentListArrayInput)(nil)).Elem(), GetInstancesInstanceListAttachmentListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetArrayInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyArrayInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyRouteConditionInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayInput)(nil)).Elem(), GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesFilterInput)(nil)).Elem(), GetRoutesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesFilterArrayInput)(nil)).Elem(), GetRoutesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouteListInput)(nil)).Elem(), GetRoutesRouteListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRoutesRouteListArrayInput)(nil)).Elem(), GetRoutesRouteListArray{})
 	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceOutput{})
 	pulumi.RegisterOutputType(InstancesAcceptAttachInstanceArrayOutput{})
 	pulumi.RegisterOutputType(InstancesRejectAttachInstanceOutput{})
 	pulumi.RegisterOutputType(InstancesRejectAttachInstanceArrayOutput{})
 	pulumi.RegisterOutputType(InstancesResetAttachInstanceOutput{})
 	pulumi.RegisterOutputType(InstancesResetAttachInstanceArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableAssociateInstanceConfigInstanceOutput{})
+	pulumi.RegisterOutputType(RouteTableAssociateInstanceConfigInstanceArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyBroadcastConditionOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyBroadcastConditionArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyRouteConditionOutput{})
+	pulumi.RegisterOutputType(RouteTableBroadcastPoliciesPolicyRouteConditionArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableInputPoliciesPolicyOutput{})
+	pulumi.RegisterOutputType(RouteTableInputPoliciesPolicyArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableInputPoliciesPolicyRouteConditionOutput{})
+	pulumi.RegisterOutputType(RouteTableInputPoliciesPolicyRouteConditionArrayOutput{})
+	pulumi.RegisterOutputType(RouteTableSelectionPoliciesSelectionPolicyOutput{})
+	pulumi.RegisterOutputType(RouteTableSelectionPoliciesSelectionPolicyArrayOutput{})
 	pulumi.RegisterOutputType(GetBandwidthLimitsLimitOutput{})
 	pulumi.RegisterOutputType(GetBandwidthLimitsLimitArrayOutput{})
 	pulumi.RegisterOutputType(GetCrossBorderFlowMonitorCrossBorderFlowMonitorDataOutput{})
@@ -1428,4 +2973,14 @@ func init() {
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListAttachmentListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListAttachmentListArrayOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetArrayOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetPolicyOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetPolicyArrayOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionOutput{})
+	pulumi.RegisterOutputType(GetRouteTableInputPoliciesPolicySetPolicyRouteConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetRoutesFilterOutput{})
+	pulumi.RegisterOutputType(GetRoutesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouteListOutput{})
+	pulumi.RegisterOutputType(GetRoutesRouteListArrayOutput{})
 }

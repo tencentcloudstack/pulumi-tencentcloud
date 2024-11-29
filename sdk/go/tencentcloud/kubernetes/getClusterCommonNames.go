@@ -15,6 +15,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Query common names by subaccount uins
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -29,10 +31,41 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
-//				ClusterId: pulumi.StringRef("cls-12345678"),
+//				ClusterId: pulumi.StringRef("cls-fdy7hm1q"),
 //				SubaccountUins: []string{
-//					"1234567890",
-//					"0987654321",
+//					"100037718139",
+//					"100031340176",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query common names by role ids
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
+//				ClusterId: pulumi.StringRef("cls-fdy7hm1q"),
+//				RoleIds: []string{
+//					"4611686018441060141",
 //				},
 //			}, nil)
 //			if err != nil {

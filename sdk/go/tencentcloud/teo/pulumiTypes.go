@@ -622,6 +622,380 @@ func (o CertificateConfigServerCertInfoArrayOutput) Index(i pulumi.IntInput) Cer
 	}).(CertificateConfigServerCertInfoOutput)
 }
 
+type FunctionRuleFunctionRuleCondition struct {
+	// For edge function trigger rule conditions, if all items in the list are satisfied, then the condition is considered fulfilled.
+	RuleConditions []FunctionRuleFunctionRuleConditionRuleCondition `pulumi:"ruleConditions"`
+}
+
+// FunctionRuleFunctionRuleConditionInput is an input type that accepts FunctionRuleFunctionRuleConditionArgs and FunctionRuleFunctionRuleConditionOutput values.
+// You can construct a concrete instance of `FunctionRuleFunctionRuleConditionInput` via:
+//
+//	FunctionRuleFunctionRuleConditionArgs{...}
+type FunctionRuleFunctionRuleConditionInput interface {
+	pulumi.Input
+
+	ToFunctionRuleFunctionRuleConditionOutput() FunctionRuleFunctionRuleConditionOutput
+	ToFunctionRuleFunctionRuleConditionOutputWithContext(context.Context) FunctionRuleFunctionRuleConditionOutput
+}
+
+type FunctionRuleFunctionRuleConditionArgs struct {
+	// For edge function trigger rule conditions, if all items in the list are satisfied, then the condition is considered fulfilled.
+	RuleConditions FunctionRuleFunctionRuleConditionRuleConditionArrayInput `pulumi:"ruleConditions"`
+}
+
+func (FunctionRuleFunctionRuleConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuleFunctionRuleCondition)(nil)).Elem()
+}
+
+func (i FunctionRuleFunctionRuleConditionArgs) ToFunctionRuleFunctionRuleConditionOutput() FunctionRuleFunctionRuleConditionOutput {
+	return i.ToFunctionRuleFunctionRuleConditionOutputWithContext(context.Background())
+}
+
+func (i FunctionRuleFunctionRuleConditionArgs) ToFunctionRuleFunctionRuleConditionOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuleFunctionRuleConditionOutput)
+}
+
+// FunctionRuleFunctionRuleConditionArrayInput is an input type that accepts FunctionRuleFunctionRuleConditionArray and FunctionRuleFunctionRuleConditionArrayOutput values.
+// You can construct a concrete instance of `FunctionRuleFunctionRuleConditionArrayInput` via:
+//
+//	FunctionRuleFunctionRuleConditionArray{ FunctionRuleFunctionRuleConditionArgs{...} }
+type FunctionRuleFunctionRuleConditionArrayInput interface {
+	pulumi.Input
+
+	ToFunctionRuleFunctionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionArrayOutput
+	ToFunctionRuleFunctionRuleConditionArrayOutputWithContext(context.Context) FunctionRuleFunctionRuleConditionArrayOutput
+}
+
+type FunctionRuleFunctionRuleConditionArray []FunctionRuleFunctionRuleConditionInput
+
+func (FunctionRuleFunctionRuleConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuleFunctionRuleCondition)(nil)).Elem()
+}
+
+func (i FunctionRuleFunctionRuleConditionArray) ToFunctionRuleFunctionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionArrayOutput {
+	return i.ToFunctionRuleFunctionRuleConditionArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionRuleFunctionRuleConditionArray) ToFunctionRuleFunctionRuleConditionArrayOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuleFunctionRuleConditionArrayOutput)
+}
+
+type FunctionRuleFunctionRuleConditionOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuleFunctionRuleConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuleFunctionRuleCondition)(nil)).Elem()
+}
+
+func (o FunctionRuleFunctionRuleConditionOutput) ToFunctionRuleFunctionRuleConditionOutput() FunctionRuleFunctionRuleConditionOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionOutput) ToFunctionRuleFunctionRuleConditionOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionOutput {
+	return o
+}
+
+// For edge function trigger rule conditions, if all items in the list are satisfied, then the condition is considered fulfilled.
+func (o FunctionRuleFunctionRuleConditionOutput) RuleConditions() FunctionRuleFunctionRuleConditionRuleConditionArrayOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleCondition) []FunctionRuleFunctionRuleConditionRuleCondition {
+		return v.RuleConditions
+	}).(FunctionRuleFunctionRuleConditionRuleConditionArrayOutput)
+}
+
+type FunctionRuleFunctionRuleConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuleFunctionRuleConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuleFunctionRuleCondition)(nil)).Elem()
+}
+
+func (o FunctionRuleFunctionRuleConditionArrayOutput) ToFunctionRuleFunctionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionArrayOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionArrayOutput) ToFunctionRuleFunctionRuleConditionArrayOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionArrayOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionArrayOutput) Index(i pulumi.IntInput) FunctionRuleFunctionRuleConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionRuleFunctionRuleCondition {
+		return vs[0].([]FunctionRuleFunctionRuleCondition)[vs[1].(int)]
+	}).(FunctionRuleFunctionRuleConditionOutput)
+}
+
+type FunctionRuleFunctionRuleConditionRuleCondition struct {
+	// Whether the parameter value is case insensitive. Default value: false.
+	IgnoreCase *bool `pulumi:"ignoreCase"`
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+	Name *string `pulumi:"name"`
+	// Operator. Valid values:
+	Operator string `pulumi:"operator"`
+	// The match type. Values:
+	Target string `pulumi:"target"`
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
+	Values []string `pulumi:"values"`
+}
+
+// FunctionRuleFunctionRuleConditionRuleConditionInput is an input type that accepts FunctionRuleFunctionRuleConditionRuleConditionArgs and FunctionRuleFunctionRuleConditionRuleConditionOutput values.
+// You can construct a concrete instance of `FunctionRuleFunctionRuleConditionRuleConditionInput` via:
+//
+//	FunctionRuleFunctionRuleConditionRuleConditionArgs{...}
+type FunctionRuleFunctionRuleConditionRuleConditionInput interface {
+	pulumi.Input
+
+	ToFunctionRuleFunctionRuleConditionRuleConditionOutput() FunctionRuleFunctionRuleConditionRuleConditionOutput
+	ToFunctionRuleFunctionRuleConditionRuleConditionOutputWithContext(context.Context) FunctionRuleFunctionRuleConditionRuleConditionOutput
+}
+
+type FunctionRuleFunctionRuleConditionRuleConditionArgs struct {
+	// Whether the parameter value is case insensitive. Default value: false.
+	IgnoreCase pulumi.BoolPtrInput `pulumi:"ignoreCase"`
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Operator. Valid values:
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The match type. Values:
+	Target pulumi.StringInput `pulumi:"target"`
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+	// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+	// - When `Target=all`, it indicates any site request.
+	// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+	// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+	// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+	// - When `Target=client_country`, enter the ISO-3166 country/region code.
+	// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+	// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (FunctionRuleFunctionRuleConditionRuleConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuleFunctionRuleConditionRuleCondition)(nil)).Elem()
+}
+
+func (i FunctionRuleFunctionRuleConditionRuleConditionArgs) ToFunctionRuleFunctionRuleConditionRuleConditionOutput() FunctionRuleFunctionRuleConditionRuleConditionOutput {
+	return i.ToFunctionRuleFunctionRuleConditionRuleConditionOutputWithContext(context.Background())
+}
+
+func (i FunctionRuleFunctionRuleConditionRuleConditionArgs) ToFunctionRuleFunctionRuleConditionRuleConditionOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionRuleConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuleFunctionRuleConditionRuleConditionOutput)
+}
+
+// FunctionRuleFunctionRuleConditionRuleConditionArrayInput is an input type that accepts FunctionRuleFunctionRuleConditionRuleConditionArray and FunctionRuleFunctionRuleConditionRuleConditionArrayOutput values.
+// You can construct a concrete instance of `FunctionRuleFunctionRuleConditionRuleConditionArrayInput` via:
+//
+//	FunctionRuleFunctionRuleConditionRuleConditionArray{ FunctionRuleFunctionRuleConditionRuleConditionArgs{...} }
+type FunctionRuleFunctionRuleConditionRuleConditionArrayInput interface {
+	pulumi.Input
+
+	ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionRuleConditionArrayOutput
+	ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutputWithContext(context.Context) FunctionRuleFunctionRuleConditionRuleConditionArrayOutput
+}
+
+type FunctionRuleFunctionRuleConditionRuleConditionArray []FunctionRuleFunctionRuleConditionRuleConditionInput
+
+func (FunctionRuleFunctionRuleConditionRuleConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuleFunctionRuleConditionRuleCondition)(nil)).Elem()
+}
+
+func (i FunctionRuleFunctionRuleConditionRuleConditionArray) ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionRuleConditionArrayOutput {
+	return i.ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionRuleFunctionRuleConditionRuleConditionArray) ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionRuleConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuleFunctionRuleConditionRuleConditionArrayOutput)
+}
+
+type FunctionRuleFunctionRuleConditionRuleConditionOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuleFunctionRuleConditionRuleConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuleFunctionRuleConditionRuleCondition)(nil)).Elem()
+}
+
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) ToFunctionRuleFunctionRuleConditionRuleConditionOutput() FunctionRuleFunctionRuleConditionRuleConditionOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) ToFunctionRuleFunctionRuleConditionRuleConditionOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionRuleConditionOutput {
+	return o
+}
+
+// Whether the parameter value is case insensitive. Default value: false.
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) IgnoreCase() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleConditionRuleCondition) *bool { return v.IgnoreCase }).(pulumi.BoolPtrOutput)
+}
+
+// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleConditionRuleCondition) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Operator. Valid values:
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleConditionRuleCondition) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The match type. Values:
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) Target() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleConditionRuleCondition) string { return v.Target }).(pulumi.StringOutput)
+}
+
+// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+// - When `Target=all`, it indicates any site request.
+// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+// - When `Target=client_country`, enter the ISO-3166 country/region code.
+// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
+func (o FunctionRuleFunctionRuleConditionRuleConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v FunctionRuleFunctionRuleConditionRuleCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type FunctionRuleFunctionRuleConditionRuleConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuleFunctionRuleConditionRuleConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuleFunctionRuleConditionRuleCondition)(nil)).Elem()
+}
+
+func (o FunctionRuleFunctionRuleConditionRuleConditionArrayOutput) ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutput() FunctionRuleFunctionRuleConditionRuleConditionArrayOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionRuleConditionArrayOutput) ToFunctionRuleFunctionRuleConditionRuleConditionArrayOutputWithContext(ctx context.Context) FunctionRuleFunctionRuleConditionRuleConditionArrayOutput {
+	return o
+}
+
+func (o FunctionRuleFunctionRuleConditionRuleConditionArrayOutput) Index(i pulumi.IntInput) FunctionRuleFunctionRuleConditionRuleConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionRuleFunctionRuleConditionRuleCondition {
+		return vs[0].([]FunctionRuleFunctionRuleConditionRuleCondition)[vs[1].(int)]
+	}).(FunctionRuleFunctionRuleConditionRuleConditionOutput)
+}
+
+type FunctionRuntimeEnvironmentEnvironmentVariable struct {
+	// The name of the variable, which is limited to alphanumeric characters and the special characters `@`, `.`, `-`, and `_`. It can have a maximum of 64 bytes and should not be duplicated.
+	Key string `pulumi:"key"`
+	// The type of the variable can have the following values:  - `string`: Represents a string type.  - `json`: Represents a JSON object type.
+	Type string `pulumi:"type"`
+	// The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+	Value string `pulumi:"value"`
+}
+
+// FunctionRuntimeEnvironmentEnvironmentVariableInput is an input type that accepts FunctionRuntimeEnvironmentEnvironmentVariableArgs and FunctionRuntimeEnvironmentEnvironmentVariableOutput values.
+// You can construct a concrete instance of `FunctionRuntimeEnvironmentEnvironmentVariableInput` via:
+//
+//	FunctionRuntimeEnvironmentEnvironmentVariableArgs{...}
+type FunctionRuntimeEnvironmentEnvironmentVariableInput interface {
+	pulumi.Input
+
+	ToFunctionRuntimeEnvironmentEnvironmentVariableOutput() FunctionRuntimeEnvironmentEnvironmentVariableOutput
+	ToFunctionRuntimeEnvironmentEnvironmentVariableOutputWithContext(context.Context) FunctionRuntimeEnvironmentEnvironmentVariableOutput
+}
+
+type FunctionRuntimeEnvironmentEnvironmentVariableArgs struct {
+	// The name of the variable, which is limited to alphanumeric characters and the special characters `@`, `.`, `-`, and `_`. It can have a maximum of 64 bytes and should not be duplicated.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the variable can have the following values:  - `string`: Represents a string type.  - `json`: Represents a JSON object type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (FunctionRuntimeEnvironmentEnvironmentVariableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuntimeEnvironmentEnvironmentVariable)(nil)).Elem()
+}
+
+func (i FunctionRuntimeEnvironmentEnvironmentVariableArgs) ToFunctionRuntimeEnvironmentEnvironmentVariableOutput() FunctionRuntimeEnvironmentEnvironmentVariableOutput {
+	return i.ToFunctionRuntimeEnvironmentEnvironmentVariableOutputWithContext(context.Background())
+}
+
+func (i FunctionRuntimeEnvironmentEnvironmentVariableArgs) ToFunctionRuntimeEnvironmentEnvironmentVariableOutputWithContext(ctx context.Context) FunctionRuntimeEnvironmentEnvironmentVariableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuntimeEnvironmentEnvironmentVariableOutput)
+}
+
+// FunctionRuntimeEnvironmentEnvironmentVariableArrayInput is an input type that accepts FunctionRuntimeEnvironmentEnvironmentVariableArray and FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput values.
+// You can construct a concrete instance of `FunctionRuntimeEnvironmentEnvironmentVariableArrayInput` via:
+//
+//	FunctionRuntimeEnvironmentEnvironmentVariableArray{ FunctionRuntimeEnvironmentEnvironmentVariableArgs{...} }
+type FunctionRuntimeEnvironmentEnvironmentVariableArrayInput interface {
+	pulumi.Input
+
+	ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutput() FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput
+	ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutputWithContext(context.Context) FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput
+}
+
+type FunctionRuntimeEnvironmentEnvironmentVariableArray []FunctionRuntimeEnvironmentEnvironmentVariableInput
+
+func (FunctionRuntimeEnvironmentEnvironmentVariableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuntimeEnvironmentEnvironmentVariable)(nil)).Elem()
+}
+
+func (i FunctionRuntimeEnvironmentEnvironmentVariableArray) ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutput() FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput {
+	return i.ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionRuntimeEnvironmentEnvironmentVariableArray) ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutputWithContext(ctx context.Context) FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput)
+}
+
+type FunctionRuntimeEnvironmentEnvironmentVariableOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuntimeEnvironmentEnvironmentVariableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionRuntimeEnvironmentEnvironmentVariable)(nil)).Elem()
+}
+
+func (o FunctionRuntimeEnvironmentEnvironmentVariableOutput) ToFunctionRuntimeEnvironmentEnvironmentVariableOutput() FunctionRuntimeEnvironmentEnvironmentVariableOutput {
+	return o
+}
+
+func (o FunctionRuntimeEnvironmentEnvironmentVariableOutput) ToFunctionRuntimeEnvironmentEnvironmentVariableOutputWithContext(ctx context.Context) FunctionRuntimeEnvironmentEnvironmentVariableOutput {
+	return o
+}
+
+// The name of the variable, which is limited to alphanumeric characters and the special characters `@`, `.`, `-`, and `_`. It can have a maximum of 64 bytes and should not be duplicated.
+func (o FunctionRuntimeEnvironmentEnvironmentVariableOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionRuntimeEnvironmentEnvironmentVariable) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the variable can have the following values:  - `string`: Represents a string type.  - `json`: Represents a JSON object type.
+func (o FunctionRuntimeEnvironmentEnvironmentVariableOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionRuntimeEnvironmentEnvironmentVariable) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the variable, which is limited to a maximum of 5000 bytes. The default value is empty.
+func (o FunctionRuntimeEnvironmentEnvironmentVariableOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v FunctionRuntimeEnvironmentEnvironmentVariable) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionRuntimeEnvironmentEnvironmentVariable)(nil)).Elem()
+}
+
+func (o FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput) ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutput() FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput {
+	return o
+}
+
+func (o FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput) ToFunctionRuntimeEnvironmentEnvironmentVariableArrayOutputWithContext(ctx context.Context) FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput {
+	return o
+}
+
+func (o FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput) Index(i pulumi.IntInput) FunctionRuntimeEnvironmentEnvironmentVariableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionRuntimeEnvironmentEnvironmentVariable {
+		return vs[0].([]FunctionRuntimeEnvironmentEnvironmentVariable)[vs[1].(int)]
+	}).(FunctionRuntimeEnvironmentEnvironmentVariableOutput)
+}
+
 type L4ProxyDdosProtectionConfig struct {
 	// Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
 	LevelMainland *string `pulumi:"levelMainland"`
@@ -5206,6 +5580,181 @@ func (o RuleEngineRuleSubRuleRuleOrAndArrayOutput) Index(i pulumi.IntInput) Rule
 	}).(RuleEngineRuleSubRuleRuleOrAndOutput)
 }
 
+type SecurityIpGroupIpGroup struct {
+	// IP group content. Only supports IP and IP mask.
+	Contents []string `pulumi:"contents"`
+	// Group ID.
+	GroupId *int `pulumi:"groupId"`
+	// Group name.
+	Name string `pulumi:"name"`
+}
+
+// SecurityIpGroupIpGroupInput is an input type that accepts SecurityIpGroupIpGroupArgs and SecurityIpGroupIpGroupOutput values.
+// You can construct a concrete instance of `SecurityIpGroupIpGroupInput` via:
+//
+//	SecurityIpGroupIpGroupArgs{...}
+type SecurityIpGroupIpGroupInput interface {
+	pulumi.Input
+
+	ToSecurityIpGroupIpGroupOutput() SecurityIpGroupIpGroupOutput
+	ToSecurityIpGroupIpGroupOutputWithContext(context.Context) SecurityIpGroupIpGroupOutput
+}
+
+type SecurityIpGroupIpGroupArgs struct {
+	// IP group content. Only supports IP and IP mask.
+	Contents pulumi.StringArrayInput `pulumi:"contents"`
+	// Group ID.
+	GroupId pulumi.IntPtrInput `pulumi:"groupId"`
+	// Group name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (SecurityIpGroupIpGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityIpGroupIpGroup)(nil)).Elem()
+}
+
+func (i SecurityIpGroupIpGroupArgs) ToSecurityIpGroupIpGroupOutput() SecurityIpGroupIpGroupOutput {
+	return i.ToSecurityIpGroupIpGroupOutputWithContext(context.Background())
+}
+
+func (i SecurityIpGroupIpGroupArgs) ToSecurityIpGroupIpGroupOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityIpGroupIpGroupOutput)
+}
+
+func (i SecurityIpGroupIpGroupArgs) ToSecurityIpGroupIpGroupPtrOutput() SecurityIpGroupIpGroupPtrOutput {
+	return i.ToSecurityIpGroupIpGroupPtrOutputWithContext(context.Background())
+}
+
+func (i SecurityIpGroupIpGroupArgs) ToSecurityIpGroupIpGroupPtrOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityIpGroupIpGroupOutput).ToSecurityIpGroupIpGroupPtrOutputWithContext(ctx)
+}
+
+// SecurityIpGroupIpGroupPtrInput is an input type that accepts SecurityIpGroupIpGroupArgs, SecurityIpGroupIpGroupPtr and SecurityIpGroupIpGroupPtrOutput values.
+// You can construct a concrete instance of `SecurityIpGroupIpGroupPtrInput` via:
+//
+//	        SecurityIpGroupIpGroupArgs{...}
+//
+//	or:
+//
+//	        nil
+type SecurityIpGroupIpGroupPtrInput interface {
+	pulumi.Input
+
+	ToSecurityIpGroupIpGroupPtrOutput() SecurityIpGroupIpGroupPtrOutput
+	ToSecurityIpGroupIpGroupPtrOutputWithContext(context.Context) SecurityIpGroupIpGroupPtrOutput
+}
+
+type securityIpGroupIpGroupPtrType SecurityIpGroupIpGroupArgs
+
+func SecurityIpGroupIpGroupPtr(v *SecurityIpGroupIpGroupArgs) SecurityIpGroupIpGroupPtrInput {
+	return (*securityIpGroupIpGroupPtrType)(v)
+}
+
+func (*securityIpGroupIpGroupPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityIpGroupIpGroup)(nil)).Elem()
+}
+
+func (i *securityIpGroupIpGroupPtrType) ToSecurityIpGroupIpGroupPtrOutput() SecurityIpGroupIpGroupPtrOutput {
+	return i.ToSecurityIpGroupIpGroupPtrOutputWithContext(context.Background())
+}
+
+func (i *securityIpGroupIpGroupPtrType) ToSecurityIpGroupIpGroupPtrOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SecurityIpGroupIpGroupPtrOutput)
+}
+
+type SecurityIpGroupIpGroupOutput struct{ *pulumi.OutputState }
+
+func (SecurityIpGroupIpGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SecurityIpGroupIpGroup)(nil)).Elem()
+}
+
+func (o SecurityIpGroupIpGroupOutput) ToSecurityIpGroupIpGroupOutput() SecurityIpGroupIpGroupOutput {
+	return o
+}
+
+func (o SecurityIpGroupIpGroupOutput) ToSecurityIpGroupIpGroupOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupOutput {
+	return o
+}
+
+func (o SecurityIpGroupIpGroupOutput) ToSecurityIpGroupIpGroupPtrOutput() SecurityIpGroupIpGroupPtrOutput {
+	return o.ToSecurityIpGroupIpGroupPtrOutputWithContext(context.Background())
+}
+
+func (o SecurityIpGroupIpGroupOutput) ToSecurityIpGroupIpGroupPtrOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SecurityIpGroupIpGroup) *SecurityIpGroupIpGroup {
+		return &v
+	}).(SecurityIpGroupIpGroupPtrOutput)
+}
+
+// IP group content. Only supports IP and IP mask.
+func (o SecurityIpGroupIpGroupOutput) Contents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SecurityIpGroupIpGroup) []string { return v.Contents }).(pulumi.StringArrayOutput)
+}
+
+// Group ID.
+func (o SecurityIpGroupIpGroupOutput) GroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SecurityIpGroupIpGroup) *int { return v.GroupId }).(pulumi.IntPtrOutput)
+}
+
+// Group name.
+func (o SecurityIpGroupIpGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v SecurityIpGroupIpGroup) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type SecurityIpGroupIpGroupPtrOutput struct{ *pulumi.OutputState }
+
+func (SecurityIpGroupIpGroupPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SecurityIpGroupIpGroup)(nil)).Elem()
+}
+
+func (o SecurityIpGroupIpGroupPtrOutput) ToSecurityIpGroupIpGroupPtrOutput() SecurityIpGroupIpGroupPtrOutput {
+	return o
+}
+
+func (o SecurityIpGroupIpGroupPtrOutput) ToSecurityIpGroupIpGroupPtrOutputWithContext(ctx context.Context) SecurityIpGroupIpGroupPtrOutput {
+	return o
+}
+
+func (o SecurityIpGroupIpGroupPtrOutput) Elem() SecurityIpGroupIpGroupOutput {
+	return o.ApplyT(func(v *SecurityIpGroupIpGroup) SecurityIpGroupIpGroup {
+		if v != nil {
+			return *v
+		}
+		var ret SecurityIpGroupIpGroup
+		return ret
+	}).(SecurityIpGroupIpGroupOutput)
+}
+
+// IP group content. Only supports IP and IP mask.
+func (o SecurityIpGroupIpGroupPtrOutput) Contents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SecurityIpGroupIpGroup) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Contents
+	}).(pulumi.StringArrayOutput)
+}
+
+// Group ID.
+func (o SecurityIpGroupIpGroupPtrOutput) GroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SecurityIpGroupIpGroup) *int {
+		if v == nil {
+			return nil
+		}
+		return v.GroupId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Group name.
+func (o SecurityIpGroupIpGroupPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SecurityIpGroupIpGroup) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
 type ZoneOwnershipVerification struct {
 	// CNAME access, using DNS to resolve the information required for authentication. For details, please refer to [Site/Domain Name Ownership Verification ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, indicating that no valid value can be obtained.
 	DnsVerifications []ZoneOwnershipVerificationDnsVerification `pulumi:"dnsVerifications"`
@@ -9579,6 +10128,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationProxyIpv6PtrInput)(nil)).Elem(), ApplicationProxyIpv6Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoInput)(nil)).Elem(), CertificateConfigServerCertInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CertificateConfigServerCertInfoArrayInput)(nil)).Elem(), CertificateConfigServerCertInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuleFunctionRuleConditionInput)(nil)).Elem(), FunctionRuleFunctionRuleConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuleFunctionRuleConditionArrayInput)(nil)).Elem(), FunctionRuleFunctionRuleConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuleFunctionRuleConditionRuleConditionInput)(nil)).Elem(), FunctionRuleFunctionRuleConditionRuleConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuleFunctionRuleConditionRuleConditionArrayInput)(nil)).Elem(), FunctionRuleFunctionRuleConditionRuleConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuntimeEnvironmentEnvironmentVariableInput)(nil)).Elem(), FunctionRuntimeEnvironmentEnvironmentVariableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionRuntimeEnvironmentEnvironmentVariableArrayInput)(nil)).Elem(), FunctionRuntimeEnvironmentEnvironmentVariableArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L4ProxyDdosProtectionConfigInput)(nil)).Elem(), L4ProxyDdosProtectionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*L4ProxyDdosProtectionConfigPtrInput)(nil)).Elem(), L4ProxyDdosProtectionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordInput)(nil)).Elem(), OriginGroupRecordArgs{})
@@ -9645,6 +10200,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrArrayInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrAndInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrAndArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleSubRuleRuleOrAndArrayInput)(nil)).Elem(), RuleEngineRuleSubRuleRuleOrAndArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityIpGroupIpGroupInput)(nil)).Elem(), SecurityIpGroupIpGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SecurityIpGroupIpGroupPtrInput)(nil)).Elem(), SecurityIpGroupIpGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationInput)(nil)).Elem(), ZoneOwnershipVerificationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationArrayInput)(nil)).Elem(), ZoneOwnershipVerificationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationDnsVerificationInput)(nil)).Elem(), ZoneOwnershipVerificationDnsVerificationArgs{})
@@ -9711,6 +10268,12 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationProxyIpv6PtrOutput{})
 	pulumi.RegisterOutputType(CertificateConfigServerCertInfoOutput{})
 	pulumi.RegisterOutputType(CertificateConfigServerCertInfoArrayOutput{})
+	pulumi.RegisterOutputType(FunctionRuleFunctionRuleConditionOutput{})
+	pulumi.RegisterOutputType(FunctionRuleFunctionRuleConditionArrayOutput{})
+	pulumi.RegisterOutputType(FunctionRuleFunctionRuleConditionRuleConditionOutput{})
+	pulumi.RegisterOutputType(FunctionRuleFunctionRuleConditionRuleConditionArrayOutput{})
+	pulumi.RegisterOutputType(FunctionRuntimeEnvironmentEnvironmentVariableOutput{})
+	pulumi.RegisterOutputType(FunctionRuntimeEnvironmentEnvironmentVariableArrayOutput{})
 	pulumi.RegisterOutputType(L4ProxyDdosProtectionConfigOutput{})
 	pulumi.RegisterOutputType(L4ProxyDdosProtectionConfigPtrOutput{})
 	pulumi.RegisterOutputType(OriginGroupRecordOutput{})
@@ -9777,6 +10340,8 @@ func init() {
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrAndOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleSubRuleRuleOrAndArrayOutput{})
+	pulumi.RegisterOutputType(SecurityIpGroupIpGroupOutput{})
+	pulumi.RegisterOutputType(SecurityIpGroupIpGroupPtrOutput{})
 	pulumi.RegisterOutputType(ZoneOwnershipVerificationOutput{})
 	pulumi.RegisterOutputType(ZoneOwnershipVerificationArrayOutput{})
 	pulumi.RegisterOutputType(ZoneOwnershipVerificationDnsVerificationOutput{})

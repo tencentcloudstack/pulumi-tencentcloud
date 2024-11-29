@@ -217,7 +217,7 @@ class TagRetentionRule(pulumi.CustomResource):
 
         ## Example Usage
 
-        ### Create a tcr tag retention rule instance
+        ### Create and enable a tcr tag retention rule instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -246,8 +246,7 @@ class TagRetentionRule(pulumi.CustomResource):
                 key="nDaysSinceLastPush",
                 value=2,
             ),
-            cron_setting="daily",
-            disabled=True)
+            cron_setting="daily")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -270,7 +269,7 @@ class TagRetentionRule(pulumi.CustomResource):
 
         ## Example Usage
 
-        ### Create a tcr tag retention rule instance
+        ### Create and enable a tcr tag retention rule instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -299,8 +298,7 @@ class TagRetentionRule(pulumi.CustomResource):
                 key="nDaysSinceLastPush",
                 value=2,
             ),
-            cron_setting="daily",
-            disabled=True)
+            cron_setting="daily")
         ```
         <!--End PulumiCodeChooser -->
 

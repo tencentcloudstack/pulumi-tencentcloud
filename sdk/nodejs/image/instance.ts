@@ -26,6 +26,23 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
+ * ### Use image family
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const imageFamily = new tencentcloud.image.Instance("imageFamily", {
+ *     dataDiskIds: [],
+ *     imageDescription: "create image with snapshot 12323",
+ *     imageFamily: "business-daily-update",
+ *     imageName: "image-family-test123",
+ *     snapshotIds: ["snap-7uuvrcoj"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * image instance can be imported using the id, e.g.
@@ -75,6 +92,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly imageDescription!: pulumi.Output<string | undefined>;
     /**
+     * Set image family. Example value: `business-daily-update`.
+     */
+    public readonly imageFamily!: pulumi.Output<string | undefined>;
+    /**
      * Image name.
      */
     public readonly imageName!: pulumi.Output<string>;
@@ -111,6 +132,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dataDiskIds"] = state ? state.dataDiskIds : undefined;
             resourceInputs["forcePoweroff"] = state ? state.forcePoweroff : undefined;
             resourceInputs["imageDescription"] = state ? state.imageDescription : undefined;
+            resourceInputs["imageFamily"] = state ? state.imageFamily : undefined;
             resourceInputs["imageName"] = state ? state.imageName : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["snapshotIds"] = state ? state.snapshotIds : undefined;
@@ -124,6 +146,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dataDiskIds"] = args ? args.dataDiskIds : undefined;
             resourceInputs["forcePoweroff"] = args ? args.forcePoweroff : undefined;
             resourceInputs["imageDescription"] = args ? args.imageDescription : undefined;
+            resourceInputs["imageFamily"] = args ? args.imageFamily : undefined;
             resourceInputs["imageName"] = args ? args.imageName : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["snapshotIds"] = args ? args.snapshotIds : undefined;
@@ -151,6 +174,10 @@ export interface InstanceState {
      * Image Description.
      */
     imageDescription?: pulumi.Input<string>;
+    /**
+     * Set image family. Example value: `business-daily-update`.
+     */
+    imageFamily?: pulumi.Input<string>;
     /**
      * Image name.
      */
@@ -189,6 +216,10 @@ export interface InstanceArgs {
      * Image Description.
      */
     imageDescription?: pulumi.Input<string>;
+    /**
+     * Set image family. Example value: `business-daily-update`.
+     */
+    imageFamily?: pulumi.Input<string>;
     /**
      * Image name.
      */

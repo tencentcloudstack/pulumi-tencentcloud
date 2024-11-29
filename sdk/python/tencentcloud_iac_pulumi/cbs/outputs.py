@@ -235,6 +235,7 @@ class GetStoragesSetStorageListResult(dict):
                  availability_zone: str,
                  charge_type: str,
                  create_time: str,
+                 dedicated_cluster_id: str,
                  encrypt: bool,
                  instance_id: str,
                  prepaid_renew_flag: str,
@@ -250,8 +251,9 @@ class GetStoragesSetStorageListResult(dict):
         """
         :param bool attached: Indicates whether the CBS is mounted the CVM.
         :param str availability_zone: The available zone that the CBS instance locates at.
-        :param str charge_type: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        :param str charge_type: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         :param str create_time: Creation time of CBS.
+        :param str dedicated_cluster_id: Exclusive cluster id.
         :param bool encrypt: Indicates whether CBS is encrypted.
         :param str instance_id: ID of the CVM instance that be mounted by this CBS.
         :param str prepaid_renew_flag: The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.
@@ -269,6 +271,7 @@ class GetStoragesSetStorageListResult(dict):
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         pulumi.set(__self__, "encrypt", encrypt)
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "prepaid_renew_flag", prepaid_renew_flag)
@@ -302,7 +305,7 @@ class GetStoragesSetStorageListResult(dict):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
         """
-        List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         """
         return pulumi.get(self, "charge_type")
 
@@ -313,6 +316,14 @@ class GetStoragesSetStorageListResult(dict):
         Creation time of CBS.
         """
         return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> str:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter
@@ -418,6 +429,7 @@ class GetStoragesStorageListResult(dict):
                  availability_zone: str,
                  charge_type: str,
                  create_time: str,
+                 dedicated_cluster_id: str,
                  encrypt: bool,
                  instance_id: str,
                  prepaid_renew_flag: str,
@@ -433,8 +445,9 @@ class GetStoragesStorageListResult(dict):
         """
         :param bool attached: Indicates whether the CBS is mounted the CVM.
         :param str availability_zone: The available zone that the CBS instance locates at.
-        :param str charge_type: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        :param str charge_type: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         :param str create_time: Creation time of CBS.
+        :param str dedicated_cluster_id: Exclusive cluster id.
         :param bool encrypt: Indicates whether CBS is encrypted.
         :param str instance_id: ID of the CVM instance that be mounted by this CBS.
         :param str prepaid_renew_flag: The way that CBS instance will be renew automatically or not when it reach the end of the prepaid tenancy.
@@ -452,6 +465,7 @@ class GetStoragesStorageListResult(dict):
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "charge_type", charge_type)
         pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         pulumi.set(__self__, "encrypt", encrypt)
         pulumi.set(__self__, "instance_id", instance_id)
         pulumi.set(__self__, "prepaid_renew_flag", prepaid_renew_flag)
@@ -485,7 +499,7 @@ class GetStoragesStorageListResult(dict):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> str:
         """
-        List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         """
         return pulumi.get(self, "charge_type")
 
@@ -496,6 +510,14 @@ class GetStoragesStorageListResult(dict):
         Creation time of CBS.
         """
         return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> str:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter

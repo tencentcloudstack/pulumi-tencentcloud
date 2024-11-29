@@ -110,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<Inputs.NativeNodePoolNativeLifecycleArgs>? Lifecycle { get; set; }
 
         /// <summary>
+        /// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+        /// </summary>
+        [Input("machineType")]
+        public Input<string>? MachineType { get; set; }
+
+        /// <summary>
         /// Node pool management parameter settings.
         /// </summary>
         [Input("management")]

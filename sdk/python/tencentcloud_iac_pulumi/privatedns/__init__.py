@@ -5,6 +5,10 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .end_point import *
+from .forward_rule import *
+from .get_end_points import *
+from .get_forward_rules import *
 from .get_private_zone_list import *
 from .get_records import *
 from .record import *

@@ -35,6 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Outputs
         /// </summary>
         public readonly bool? DeleteWithInstance;
         /// <summary>
+        /// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+        /// </summary>
+        public readonly bool? DeleteWithInstancePrepaid;
+        /// <summary>
         /// Decides whether the disk is encrypted. Default is `false`.
         /// </summary>
         public readonly bool? Encrypt;
@@ -55,6 +59,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Outputs
 
             bool? deleteWithInstance,
 
+            bool? deleteWithInstancePrepaid,
+
             bool? encrypt,
 
             int? throughputPerformance)
@@ -64,6 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Outputs
             DataDiskSnapshotId = dataDiskSnapshotId;
             DataDiskType = dataDiskType;
             DeleteWithInstance = deleteWithInstance;
+            DeleteWithInstancePrepaid = deleteWithInstancePrepaid;
             Encrypt = encrypt;
             ThroughputPerformance = throughputPerformance;
         }

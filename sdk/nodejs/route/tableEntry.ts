@@ -15,22 +15,27 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "na-siliconvalley-1";
- * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
- * const fooTable = new tencentcloud.route.Table("fooTable", {vpcId: fooInstance.id});
- * const fooSubnet_instanceInstance = new tencentcloud.subnet.Instance("fooSubnet/instanceInstance", {
- *     vpcId: fooInstance.id,
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create route table
+ * const exampleTable = new tencentcloud.route.Table("exampleTable", {vpcId: vpc.id});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
  *     cidrBlock: "10.0.12.0/24",
  *     availabilityZone: availabilityZone,
- *     routeTableId: fooTable.id,
+ *     routeTableId: exampleTable.id,
  * });
- * const instance = new tencentcloud.route.TableEntry("instance", {
- *     routeTableId: fooTable.id,
+ * // create route table entry
+ * const exampleTableEntry = new tencentcloud.route.TableEntry("exampleTableEntry", {
+ *     routeTableId: exampleTable.id,
  *     destinationCidrBlock: "10.4.4.0/24",
  *     nextType: "EIP",
  *     nextHub: "0",
- *     description: "ci-test-route-table-entry",
+ *     description: "describe",
  * });
+ * export const itemId = exampleTableEntry.routeItemId;
  * ```
  * <!--End PulumiCodeChooser -->
  *
@@ -39,7 +44,7 @@ import * as utilities from "../utilities";
  * Route table entry can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
+ * $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
  * ```
  */
 export class TableEntry extends pulumi.CustomResource {
@@ -91,6 +96,10 @@ export class TableEntry extends pulumi.CustomResource {
      */
     public readonly nextType!: pulumi.Output<string>;
     /**
+     * ID of route table entry.
+     */
+    public /*out*/ readonly routeItemId!: pulumi.Output<string>;
+    /**
      * ID of routing table to which this entry belongs.
      */
     public readonly routeTableId!: pulumi.Output<string>;
@@ -113,6 +122,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["disabled"] = state ? state.disabled : undefined;
             resourceInputs["nextHub"] = state ? state.nextHub : undefined;
             resourceInputs["nextType"] = state ? state.nextType : undefined;
+            resourceInputs["routeItemId"] = state ? state.routeItemId : undefined;
             resourceInputs["routeTableId"] = state ? state.routeTableId : undefined;
         } else {
             const args = argsOrState as TableEntryArgs | undefined;
@@ -134,6 +144,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["nextHub"] = args ? args.nextHub : undefined;
             resourceInputs["nextType"] = args ? args.nextType : undefined;
             resourceInputs["routeTableId"] = args ? args.routeTableId : undefined;
+            resourceInputs["routeItemId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TableEntry.__pulumiType, name, resourceInputs, opts);
@@ -164,6 +175,10 @@ export interface TableEntryState {
      * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
      */
     nextType?: pulumi.Input<string>;
+    /**
+     * ID of route table entry.
+     */
+    routeItemId?: pulumi.Input<string>;
     /**
      * ID of routing table to which this entry belongs.
      */

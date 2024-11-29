@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
     public sealed class InstanceDbNodeSet
     {
         /// <summary>
+        /// Dedicated cluster ID.
+        /// </summary>
+        public readonly string? DedicatedClusterId;
+        /// <summary>
         /// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
         /// </summary>
         public readonly string? Role;
@@ -25,10 +29,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
 
         [OutputConstructor]
         private InstanceDbNodeSet(
+            string? dedicatedClusterId,
+
             string? role,
 
             string zone)
         {
+            DedicatedClusterId = dedicatedClusterId;
             Role = role;
             Zone = zone;
         }

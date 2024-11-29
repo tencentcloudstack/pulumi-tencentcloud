@@ -81,6 +81,8 @@ type Instance struct {
 	PayUin pulumi.StringOutput `pulumi:"payUin"`
 	// Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
 	RootNodeId pulumi.IntOutput `pulumi:"rootNodeId"`
+	// Root node name.
+	RootNodeName pulumi.StringOutput `pulumi:"rootNodeName"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -145,6 +147,8 @@ type instanceState struct {
 	PayUin *string `pulumi:"payUin"`
 	// Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
 	RootNodeId *int `pulumi:"rootNodeId"`
+	// Root node name.
+	RootNodeName *string `pulumi:"rootNodeName"`
 }
 
 type InstanceState struct {
@@ -180,6 +184,8 @@ type InstanceState struct {
 	PayUin pulumi.StringPtrInput
 	// Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
 	RootNodeId pulumi.IntPtrInput
+	// Root node name.
+	RootNodeName pulumi.StringPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -187,10 +193,14 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
+	// Root node name.
+	RootNodeName *string `pulumi:"rootNodeName"`
 }
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
+	// Root node name.
+	RootNodeName pulumi.StringPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -358,6 +368,11 @@ func (o InstanceOutput) PayUin() pulumi.StringOutput {
 // Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
 func (o InstanceOutput) RootNodeId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.RootNodeId }).(pulumi.IntOutput)
+}
+
+// Root node name.
+func (o InstanceOutput) RootNodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.RootNodeName }).(pulumi.StringOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

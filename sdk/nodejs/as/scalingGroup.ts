@@ -52,6 +52,9 @@ import * as utilities from "../utilities";
  *     minSize: 0,
  *     vpcId: vpc.id,
  *     subnetIds: [subnet.id],
+ *     healthCheckType: "CLB",
+ *     replaceLoadBalancerUnhealthy: true,
+ *     lbHealthCheckGracePeriod: 30,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -113,9 +116,17 @@ export class ScalingGroup extends pulumi.CustomResource {
      */
     public readonly forwardBalancerIds!: pulumi.Output<outputs.As.ScalingGroupForwardBalancerId[] | undefined>;
     /**
+     * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+     */
+    public readonly healthCheckType!: pulumi.Output<string>;
+    /**
      * Instance number of a scaling group.
      */
     public /*out*/ readonly instanceCount!: pulumi.Output<number>;
+    /**
+     * Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+     */
+    public readonly lbHealthCheckGracePeriod!: pulumi.Output<number>;
     /**
      * ID list of traditional load balancers.
      */
@@ -199,7 +210,9 @@ export class ScalingGroup extends pulumi.CustomResource {
             resourceInputs["defaultCooldown"] = state ? state.defaultCooldown : undefined;
             resourceInputs["desiredCapacity"] = state ? state.desiredCapacity : undefined;
             resourceInputs["forwardBalancerIds"] = state ? state.forwardBalancerIds : undefined;
+            resourceInputs["healthCheckType"] = state ? state.healthCheckType : undefined;
             resourceInputs["instanceCount"] = state ? state.instanceCount : undefined;
+            resourceInputs["lbHealthCheckGracePeriod"] = state ? state.lbHealthCheckGracePeriod : undefined;
             resourceInputs["loadBalancerIds"] = state ? state.loadBalancerIds : undefined;
             resourceInputs["maxSize"] = state ? state.maxSize : undefined;
             resourceInputs["minSize"] = state ? state.minSize : undefined;
@@ -237,6 +250,8 @@ export class ScalingGroup extends pulumi.CustomResource {
             resourceInputs["defaultCooldown"] = args ? args.defaultCooldown : undefined;
             resourceInputs["desiredCapacity"] = args ? args.desiredCapacity : undefined;
             resourceInputs["forwardBalancerIds"] = args ? args.forwardBalancerIds : undefined;
+            resourceInputs["healthCheckType"] = args ? args.healthCheckType : undefined;
+            resourceInputs["lbHealthCheckGracePeriod"] = args ? args.lbHealthCheckGracePeriod : undefined;
             resourceInputs["loadBalancerIds"] = args ? args.loadBalancerIds : undefined;
             resourceInputs["maxSize"] = args ? args.maxSize : undefined;
             resourceInputs["minSize"] = args ? args.minSize : undefined;
@@ -286,9 +301,17 @@ export interface ScalingGroupState {
      */
     forwardBalancerIds?: pulumi.Input<pulumi.Input<inputs.As.ScalingGroupForwardBalancerId>[]>;
     /**
+     * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+     */
+    healthCheckType?: pulumi.Input<string>;
+    /**
      * Instance number of a scaling group.
      */
     instanceCount?: pulumi.Input<number>;
+    /**
+     * Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+     */
+    lbHealthCheckGracePeriod?: pulumi.Input<number>;
     /**
      * ID list of traditional load balancers.
      */
@@ -375,6 +398,14 @@ export interface ScalingGroupArgs {
      * List of application load balancers, which can't be specified with `loadBalancerIds` together.
      */
     forwardBalancerIds?: pulumi.Input<pulumi.Input<inputs.As.ScalingGroupForwardBalancerId>[]>;
+    /**
+     * Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+     */
+    healthCheckType?: pulumi.Input<string>;
+    /**
+     * Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+     */
+    lbHealthCheckGracePeriod?: pulumi.Input<number>;
     /**
      * ID list of traditional load balancers.
      */

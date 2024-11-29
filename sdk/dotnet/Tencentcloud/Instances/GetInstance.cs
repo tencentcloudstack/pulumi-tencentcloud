@@ -177,6 +177,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         public string? AvailabilityZone { get; set; }
 
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public string? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// ID of the instances to be queried.
         /// </summary>
         [Input("instanceId")]
@@ -249,6 +255,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// </summary>
         [Input("availabilityZone")]
         public Input<string>? AvailabilityZone { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// ID of the instances to be queried.
@@ -325,6 +337,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// </summary>
         public readonly string? AvailabilityZone;
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        public readonly string? DedicatedClusterId;
+        /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
@@ -363,6 +379,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         private GetInstanceResult(
             string? availabilityZone,
 
+            string? dedicatedClusterId,
+
             string id,
 
             string? instanceId,
@@ -384,6 +402,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
             string? vpcId)
         {
             AvailabilityZone = availabilityZone;
+            DedicatedClusterId = dedicatedClusterId;
             Id = id;
             InstanceId = instanceId;
             InstanceLists = instanceLists;

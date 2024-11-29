@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * });
  * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
  * //this is the cluster with empty worker config
- * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
+ * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
  *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: clusterCidr,
  *     clusterMaxPodNum: 32,
@@ -43,8 +43,8 @@ import * as utilities from "../utilities";
  *     clusterDeployType: "MANAGED_CLUSTER",
  * });
  * //this is one example of managing node using node pool
- * const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
- *     clusterId: managedCluster.id,
+ * const exampleNodePool = new tencentcloud.kubernetes.NodePool("exampleNodePool", {
+ *     clusterId: exampleCluster.id,
  *     maxSize: 6,
  *     minSize: 1,
  *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
@@ -53,6 +53,7 @@ import * as utilities from "../utilities";
  *     desiredCapacity: 4,
  *     enableAutoScale: true,
  *     multiZoneSubnetPolicy: "EQUALITY",
+ *     nodeOs: "img-9qrfy1xt",
  *     autoScalingConfig: {
  *         instanceType: defaultInstanceType,
  *         systemDiskType: "CLOUD_PREMIUM",
@@ -88,6 +89,7 @@ import * as utilities from "../utilities";
  *         },
  *     ],
  *     nodeConfig: {
+ *         dockerGraphPath: "/var/lib/docker",
  *         extraArgs: ["root-dir=/var/lib/kubelet"],
  *     },
  * });
@@ -101,7 +103,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
+ * const example = new tencentcloud.kubernetes.NodePool("example", {
  *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
  *     maxSize: 6,
  *     minSize: 1,
@@ -147,7 +149,7 @@ import * as utilities from "../utilities";
  * tke node pool can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+ * $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
  * ```
  */
 export class NodePool extends pulumi.CustomResource {
@@ -178,6 +180,10 @@ export class NodePool extends pulumi.CustomResource {
         return obj['__pulumiType'] === NodePool.__pulumiType;
     }
 
+    /**
+     * Node Annotation List.
+     */
+    public readonly annotations!: pulumi.Output<outputs.Kubernetes.NodePoolAnnotation[]>;
     /**
      * Auto scaling config parameters.
      */
@@ -285,7 +291,7 @@ export class NodePool extends pulumi.CustomResource {
     /**
      * Node pool tag specifications, will passthroughs to the scaling instances.
      */
-    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly tags!: pulumi.Output<{[key: string]: any}>;
     /**
      * Taints of kubernetes node pool created nodes.
      */
@@ -320,6 +326,7 @@ export class NodePool extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as NodePoolState | undefined;
+            resourceInputs["annotations"] = state ? state.annotations : undefined;
             resourceInputs["autoScalingConfig"] = state ? state.autoScalingConfig : undefined;
             resourceInputs["autoScalingGroupId"] = state ? state.autoScalingGroupId : undefined;
             resourceInputs["autoscalingAddedTotal"] = state ? state.autoscalingAddedTotal : undefined;
@@ -369,6 +376,7 @@ export class NodePool extends pulumi.CustomResource {
             if ((!args || args.vpcId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcId'");
             }
+            resourceInputs["annotations"] = args ? args.annotations : undefined;
             resourceInputs["autoScalingConfig"] = args ? args.autoScalingConfig : undefined;
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["defaultCooldown"] = args ? args.defaultCooldown : undefined;
@@ -411,6 +419,10 @@ export class NodePool extends pulumi.CustomResource {
  * Input properties used for looking up and filtering NodePool resources.
  */
 export interface NodePoolState {
+    /**
+     * Node Annotation List.
+     */
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[]>;
     /**
      * Auto scaling config parameters.
      */
@@ -545,6 +557,10 @@ export interface NodePoolState {
  * The set of arguments for constructing a NodePool resource.
  */
 export interface NodePoolArgs {
+    /**
+     * Node Annotation List.
+     */
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[]>;
     /**
      * Auto scaling config parameters.
      */

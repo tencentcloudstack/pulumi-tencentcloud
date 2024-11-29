@@ -115,6 +115,11 @@ export type Schedule = import("./schedule").Schedule;
 export const Schedule: typeof import("./schedule").Schedule = null as any;
 utilities.lazyLoad(exports, ["Schedule"], () => require("./schedule"));
 
+export { StartInstanceRefreshArgs, StartInstanceRefreshState } from "./startInstanceRefresh";
+export type StartInstanceRefresh = import("./startInstanceRefresh").StartInstanceRefresh;
+export const StartInstanceRefresh: typeof import("./startInstanceRefresh").StartInstanceRefresh = null as any;
+utilities.lazyLoad(exports, ["StartInstanceRefresh"], () => require("./startInstanceRefresh"));
+
 export { StartInstancesArgs, StartInstancesState } from "./startInstances";
 export type StartInstances = import("./startInstances").StartInstances;
 export const StartInstances: typeof import("./startInstances").StartInstances = null as any;
@@ -160,6 +165,8 @@ const _module = {
                 return new ScalingPolicy(name, <any>undefined, { urn })
             case "tencentcloud:As/schedule:Schedule":
                 return new Schedule(name, <any>undefined, { urn })
+            case "tencentcloud:As/startInstanceRefresh:StartInstanceRefresh":
+                return new StartInstanceRefresh(name, <any>undefined, { urn })
             case "tencentcloud:As/startInstances:StartInstances":
                 return new StartInstances(name, <any>undefined, { urn })
             case "tencentcloud:As/stopInstances:StopInstances":
@@ -184,5 +191,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingGroup", _module
 pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingGroupStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/scalingPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/schedule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "As/startInstanceRefresh", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/startInstances", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "As/stopInstances", _module)

@@ -28,9 +28,8 @@ from .get_ports import *
 from .get_tls_versions import *
 from .get_user_clb_regions import *
 from .get_user_domains import *
-from .get_waf_infos import *
 from .ip_access_control import *
-from .modify_access_period import *
+from .ip_access_control_v2 import *
 from .module_status import *
 from .protection_mode import *
 from .saas_domain import *

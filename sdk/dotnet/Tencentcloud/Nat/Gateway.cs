@@ -13,6 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// <summary>
     /// Provides a resource to create a NAT gateway.
     /// 
+    /// &gt; **NOTE:** If `nat_product_version` is `1`, `max_concurrent` valid values is `1000000`, `3000000`, `10000000`.
+    /// 
+    /// &gt; **NOTE:** If set `stock_public_ip_addresses_bandwidth_out`, do not set the `internet_max_bandwidth_out` parameter of resource `tencentcloud.Eip.Instance` at the same time, otherwise conflicts may occur.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a traditional NAT gateway.
@@ -38,6 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     ///     var example = new Tencentcloud.Nat.Gateway("example", new()
     ///     {
     ///         VpcId = vpc.Id,
+    ///         NatProductVersion = 1,
     ///         Bandwidth = 100,
     ///         MaxConcurrent = 1000000,
     ///         AssignedEipSets = new[]
@@ -47,7 +52,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "tf_tag_key", "tf_tag_value" },
+    ///             { "createBy", "terraform" },
     ///         },
     ///     });
     /// 
@@ -78,15 +83,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     ///     var example = new Tencentcloud.Nat.Gateway("example", new()
     ///     {
     ///         VpcId = vpc.Id,
+    ///         NatProductVersion = 2,
     ///         AssignedEipSets = new[]
     ///         {
     ///             eipExample1.PublicIp,
     ///             eipExample2.PublicIp,
     ///         },
-    ///         NatProductVersion = 2,
     ///         Tags = 
     ///         {
-    ///             { "tf_tag_key", "tf_tag_value" },
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Or set stock public ip addresses bandwidth out
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    /// 
+    ///     var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    /// 
+    ///     var example = new Tencentcloud.Nat.Gateway("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         NatProductVersion = 2,
+    ///         StockPublicIpAddressesBandwidthOut = 100,
+    ///         AssignedEipSets = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///             eipExample2.PublicIp,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
     ///         },
     ///     });
     /// 
@@ -99,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// NAT gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+    /// $ pulumi import tencentcloud:Nat/gateway:Gateway example nat-1asg3t63
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/gateway:Gateway")]
@@ -112,10 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Output<ImmutableArray<string>> AssignedEipSets { get; private set; } = null!;
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
         /// </summary>
         [Output("bandwidth")]
-        public Output<int?> Bandwidth { get; private set; } = null!;
+        public Output<int> Bandwidth { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the NAT gateway.
@@ -124,10 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Output<string> CreatedTime { get; private set; } = null!;
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
         /// </summary>
         [Output("maxConcurrent")]
-        public Output<int?> MaxConcurrent { get; private set; } = null!;
+        public Output<int> MaxConcurrent { get; private set; } = null!;
 
         /// <summary>
         /// Name of the NAT gateway.
@@ -140,6 +185,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Output("natProductVersion")]
         public Output<int> NatProductVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+        /// </summary>
+        [Output("stockPublicIpAddressesBandwidthOut")]
+        public Output<int> StockPublicIpAddressesBandwidthOut { get; private set; } = null!;
 
         /// <summary>
         /// Subnet of NAT.
@@ -225,13 +276,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
         /// </summary>
         [Input("maxConcurrent")]
         public Input<int>? MaxConcurrent { get; set; }
@@ -247,6 +298,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Input("natProductVersion")]
         public Input<int>? NatProductVersion { get; set; }
+
+        /// <summary>
+        /// The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+        /// </summary>
+        [Input("stockPublicIpAddressesBandwidthOut")]
+        public Input<int>? StockPublicIpAddressesBandwidthOut { get; set; }
 
         /// <summary>
         /// Subnet of NAT.
@@ -299,7 +356,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
 
         /// <summary>
-        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is 100.
+        /// The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
@@ -311,7 +368,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public Input<string>? CreatedTime { get; set; }
 
         /// <summary>
-        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`.
+        /// The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `nat_product_version` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
         /// </summary>
         [Input("maxConcurrent")]
         public Input<int>? MaxConcurrent { get; set; }
@@ -327,6 +384,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// </summary>
         [Input("natProductVersion")]
         public Input<int>? NatProductVersion { get; set; }
+
+        /// <summary>
+        /// The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
+        /// </summary>
+        [Input("stockPublicIpAddressesBandwidthOut")]
+        public Input<int>? StockPublicIpAddressesBandwidthOut { get; set; }
 
         /// <summary>
         /// Subnet of NAT.

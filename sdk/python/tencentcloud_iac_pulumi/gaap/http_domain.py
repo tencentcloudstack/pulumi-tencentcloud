@@ -23,6 +23,8 @@ class HttpDomainArgs:
                  client_certificate_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  gaap_auth: Optional[pulumi.Input[bool]] = None,
                  gaap_auth_id: Optional[pulumi.Input[str]] = None,
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 is_default_server: Optional[pulumi.Input[bool]] = None,
                  realserver_auth: Optional[pulumi.Input[bool]] = None,
                  realserver_certificate_domain: Optional[pulumi.Input[str]] = None,
                  realserver_certificate_id: Optional[pulumi.Input[str]] = None,
@@ -38,6 +40,8 @@ class HttpDomainArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] client_certificate_ids: ID list of the poly client certificate.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
         :param pulumi.Input[str] gaap_auth_id: ID of the SSL certificate.
+        :param pulumi.Input[str] group_id: Group Id.
+        :param pulumi.Input[bool] is_default_server: Whether to use as the default domain name, the default is false.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
         :param pulumi.Input[str] realserver_certificate_id: It has been deprecated from version 1.28.0. Set `realserver_certificate_ids` instead. CA certificate ID of the realserver.
@@ -62,6 +66,10 @@ class HttpDomainArgs:
             pulumi.set(__self__, "gaap_auth", gaap_auth)
         if gaap_auth_id is not None:
             pulumi.set(__self__, "gaap_auth_id", gaap_auth_id)
+        if group_id is not None:
+            pulumi.set(__self__, "group_id", group_id)
+        if is_default_server is not None:
+            pulumi.set(__self__, "is_default_server", is_default_server)
         if realserver_auth is not None:
             pulumi.set(__self__, "realserver_auth", realserver_auth)
         if realserver_certificate_domain is not None:
@@ -186,6 +194,30 @@ class HttpDomainArgs:
         pulumi.set(self, "gaap_auth_id", value)
 
     @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @group_id.setter
+    def group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_id", value)
+
+    @property
+    @pulumi.getter(name="isDefaultServer")
+    def is_default_server(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to use as the default domain name, the default is false.
+        """
+        return pulumi.get(self, "is_default_server")
+
+    @is_default_server.setter
+    def is_default_server(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_default_server", value)
+
+    @property
     @pulumi.getter(name="realserverAuth")
     def realserver_auth(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -248,6 +280,8 @@ class _HttpDomainState:
                  domain: Optional[pulumi.Input[str]] = None,
                  gaap_auth: Optional[pulumi.Input[bool]] = None,
                  gaap_auth_id: Optional[pulumi.Input[str]] = None,
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 is_default_server: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
                  realserver_auth: Optional[pulumi.Input[bool]] = None,
                  realserver_certificate_domain: Optional[pulumi.Input[str]] = None,
@@ -263,6 +297,8 @@ class _HttpDomainState:
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
         :param pulumi.Input[str] gaap_auth_id: ID of the SSL certificate.
+        :param pulumi.Input[str] group_id: Group Id.
+        :param pulumi.Input[bool] is_default_server: Whether to use as the default domain name, the default is false.
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
@@ -288,6 +324,10 @@ class _HttpDomainState:
             pulumi.set(__self__, "gaap_auth", gaap_auth)
         if gaap_auth_id is not None:
             pulumi.set(__self__, "gaap_auth_id", gaap_auth_id)
+        if group_id is not None:
+            pulumi.set(__self__, "group_id", group_id)
+        if is_default_server is not None:
+            pulumi.set(__self__, "is_default_server", is_default_server)
         if listener_id is not None:
             pulumi.set(__self__, "listener_id", listener_id)
         if realserver_auth is not None:
@@ -402,6 +442,30 @@ class _HttpDomainState:
         pulumi.set(self, "gaap_auth_id", value)
 
     @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @group_id.setter
+    def group_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "group_id", value)
+
+    @property
+    @pulumi.getter(name="isDefaultServer")
+    def is_default_server(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to use as the default domain name, the default is false.
+        """
+        return pulumi.get(self, "is_default_server")
+
+    @is_default_server.setter
+    def is_default_server(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_default_server", value)
+
+    @property
     @pulumi.getter(name="listenerId")
     def listener_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -478,6 +542,8 @@ class HttpDomain(pulumi.CustomResource):
                  domain: Optional[pulumi.Input[str]] = None,
                  gaap_auth: Optional[pulumi.Input[bool]] = None,
                  gaap_auth_id: Optional[pulumi.Input[str]] = None,
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 is_default_server: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
                  realserver_auth: Optional[pulumi.Input[bool]] = None,
                  realserver_certificate_domain: Optional[pulumi.Input[str]] = None,
@@ -527,6 +593,8 @@ class HttpDomain(pulumi.CustomResource):
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
         :param pulumi.Input[str] gaap_auth_id: ID of the SSL certificate.
+        :param pulumi.Input[str] group_id: Group Id.
+        :param pulumi.Input[bool] is_default_server: Whether to use as the default domain name, the default is false.
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
@@ -595,6 +663,8 @@ class HttpDomain(pulumi.CustomResource):
                  domain: Optional[pulumi.Input[str]] = None,
                  gaap_auth: Optional[pulumi.Input[bool]] = None,
                  gaap_auth_id: Optional[pulumi.Input[str]] = None,
+                 group_id: Optional[pulumi.Input[str]] = None,
+                 is_default_server: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
                  realserver_auth: Optional[pulumi.Input[bool]] = None,
                  realserver_certificate_domain: Optional[pulumi.Input[str]] = None,
@@ -619,6 +689,8 @@ class HttpDomain(pulumi.CustomResource):
             __props__.__dict__["domain"] = domain
             __props__.__dict__["gaap_auth"] = gaap_auth
             __props__.__dict__["gaap_auth_id"] = gaap_auth_id
+            __props__.__dict__["group_id"] = group_id
+            __props__.__dict__["is_default_server"] = is_default_server
             if listener_id is None and not opts.urn:
                 raise TypeError("Missing required property 'listener_id'")
             __props__.__dict__["listener_id"] = listener_id
@@ -644,6 +716,8 @@ class HttpDomain(pulumi.CustomResource):
             domain: Optional[pulumi.Input[str]] = None,
             gaap_auth: Optional[pulumi.Input[bool]] = None,
             gaap_auth_id: Optional[pulumi.Input[str]] = None,
+            group_id: Optional[pulumi.Input[str]] = None,
+            is_default_server: Optional[pulumi.Input[bool]] = None,
             listener_id: Optional[pulumi.Input[str]] = None,
             realserver_auth: Optional[pulumi.Input[bool]] = None,
             realserver_certificate_domain: Optional[pulumi.Input[str]] = None,
@@ -664,6 +738,8 @@ class HttpDomain(pulumi.CustomResource):
         :param pulumi.Input[str] domain: Forward domain of the layer7 listener.
         :param pulumi.Input[bool] gaap_auth: Indicates whether SSL certificate authentication is enable, default value is `false`.
         :param pulumi.Input[str] gaap_auth_id: ID of the SSL certificate.
+        :param pulumi.Input[str] group_id: Group Id.
+        :param pulumi.Input[bool] is_default_server: Whether to use as the default domain name, the default is false.
         :param pulumi.Input[str] listener_id: ID of the layer7 listener.
         :param pulumi.Input[bool] realserver_auth: Indicates whether realserver authentication is enable, default value is `false`.
         :param pulumi.Input[str] realserver_certificate_domain: CA certificate domain of the realserver. It has been deprecated.
@@ -682,6 +758,8 @@ class HttpDomain(pulumi.CustomResource):
         __props__.__dict__["domain"] = domain
         __props__.__dict__["gaap_auth"] = gaap_auth
         __props__.__dict__["gaap_auth_id"] = gaap_auth_id
+        __props__.__dict__["group_id"] = group_id
+        __props__.__dict__["is_default_server"] = is_default_server
         __props__.__dict__["listener_id"] = listener_id
         __props__.__dict__["realserver_auth"] = realserver_auth
         __props__.__dict__["realserver_certificate_domain"] = realserver_certificate_domain
@@ -755,6 +833,22 @@ class HttpDomain(pulumi.CustomResource):
         ID of the SSL certificate.
         """
         return pulumi.get(self, "gaap_auth_id")
+
+    @property
+    @pulumi.getter(name="groupId")
+    def group_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Group Id.
+        """
+        return pulumi.get(self, "group_id")
+
+    @property
+    @pulumi.getter(name="isDefaultServer")
+    def is_default_server(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to use as the default domain name, the default is false.
+        """
+        return pulumi.get(self, "is_default_server")
 
     @property
     @pulumi.getter(name="listenerId")

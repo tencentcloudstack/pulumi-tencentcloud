@@ -16,27 +16,27 @@ var _ = internal.GetEnvOrDefault
 type GroupRuleSetEgress struct {
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Action string `pulumi:"action"`
-	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateGroup *string `pulumi:"addressTemplateGroup"`
-	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateId *string `pulumi:"addressTemplateId"`
-	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Description of the security group rule.
 	Description *string `pulumi:"description"`
-	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
 	// The security group rule index number, whose value dynamically changes with changes in security group rules.
 	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port *string `pulumi:"port"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 	Protocol *string `pulumi:"protocol"`
 	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateGroup *string `pulumi:"serviceTemplateGroup"`
 	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateId *string `pulumi:"serviceTemplateId"`
-	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	SourceSecurityId *string `pulumi:"sourceSecurityId"`
 }
 
@@ -54,27 +54,27 @@ type GroupRuleSetEgressInput interface {
 type GroupRuleSetEgressArgs struct {
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateGroup pulumi.StringPtrInput `pulumi:"addressTemplateGroup"`
-	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateId pulumi.StringPtrInput `pulumi:"addressTemplateId"`
-	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
 	// Description of the security group rule.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
 	// The security group rule index number, whose value dynamically changes with changes in security group rules.
 	PolicyIndex pulumi.IntPtrInput `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port pulumi.StringPtrInput `pulumi:"port"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
 	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateGroup pulumi.StringPtrInput `pulumi:"serviceTemplateGroup"`
 	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateId pulumi.StringPtrInput `pulumi:"serviceTemplateId"`
-	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	SourceSecurityId pulumi.StringPtrInput `pulumi:"sourceSecurityId"`
 }
 
@@ -134,17 +134,17 @@ func (o GroupRuleSetEgressOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetEgressOutput) AddressTemplateGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.AddressTemplateGroup }).(pulumi.StringPtrOutput)
 }
 
-// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetEgressOutput) AddressTemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.AddressTemplateId }).(pulumi.StringPtrOutput)
 }
 
-// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetEgressOutput) CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
 }
@@ -154,7 +154,7 @@ func (o GroupRuleSetEgressOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetEgressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
 }
@@ -169,7 +169,7 @@ func (o GroupRuleSetEgressOutput) Port() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Port }).(pulumi.StringPtrOutput)
 }
 
-// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 func (o GroupRuleSetEgressOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
@@ -184,7 +184,7 @@ func (o GroupRuleSetEgressOutput) ServiceTemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.ServiceTemplateId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetEgressOutput) SourceSecurityId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetEgress) *string { return v.SourceSecurityId }).(pulumi.StringPtrOutput)
 }
@@ -212,27 +212,27 @@ func (o GroupRuleSetEgressArrayOutput) Index(i pulumi.IntInput) GroupRuleSetEgre
 type GroupRuleSetIngress struct {
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Action string `pulumi:"action"`
-	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateGroup *string `pulumi:"addressTemplateGroup"`
-	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateId *string `pulumi:"addressTemplateId"`
-	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Description of the security group rule.
 	Description *string `pulumi:"description"`
-	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	Ipv6CidrBlock *string `pulumi:"ipv6CidrBlock"`
 	// The security group rule index number, whose value dynamically changes with changes in security group rules.
 	PolicyIndex *int `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port *string `pulumi:"port"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 	Protocol *string `pulumi:"protocol"`
 	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateGroup *string `pulumi:"serviceTemplateGroup"`
 	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateId *string `pulumi:"serviceTemplateId"`
-	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	SourceSecurityId *string `pulumi:"sourceSecurityId"`
 }
 
@@ -250,27 +250,27 @@ type GroupRuleSetIngressInput interface {
 type GroupRuleSetIngressArgs struct {
 	// Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
 	Action pulumi.StringInput `pulumi:"action"`
-	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateGroup pulumi.StringPtrInput `pulumi:"addressTemplateGroup"`
-	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+	// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	AddressTemplateId pulumi.StringPtrInput `pulumi:"addressTemplateId"`
-	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+	// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
 	// Description of the security group rule.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+	// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	Ipv6CidrBlock pulumi.StringPtrInput `pulumi:"ipv6CidrBlock"`
 	// The security group rule index number, whose value dynamically changes with changes in security group rules.
 	PolicyIndex pulumi.IntPtrInput `pulumi:"policyIndex"`
 	// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
 	Port pulumi.StringPtrInput `pulumi:"port"`
-	// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+	// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
 	// Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateGroup pulumi.StringPtrInput `pulumi:"serviceTemplateGroup"`
 	// Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidrBlock` and `port`.
 	ServiceTemplateId pulumi.StringPtrInput `pulumi:"serviceTemplateId"`
-	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+	// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 	SourceSecurityId pulumi.StringPtrInput `pulumi:"sourceSecurityId"`
 }
 
@@ -330,17 +330,17 @@ func (o GroupRuleSetIngressOutput) Action() pulumi.StringOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetIngressOutput) AddressTemplateGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.AddressTemplateGroup }).(pulumi.StringPtrOutput)
 }
 
-// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`.
+// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `sourceSecurityId` and `cidrBlock`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetIngressOutput) AddressTemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.AddressTemplateId }).(pulumi.StringPtrOutput)
 }
 
-// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time.
+// An IP address network or CIDR segment. NOTE: `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetIngressOutput) CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
 }
@@ -350,7 +350,7 @@ func (o GroupRuleSetIngressOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
+// An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetIngressOutput) Ipv6CidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Ipv6CidrBlock }).(pulumi.StringPtrOutput)
 }
@@ -365,7 +365,7 @@ func (o GroupRuleSetIngressOutput) Port() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Port }).(pulumi.StringPtrOutput)
 }
 
-// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
 func (o GroupRuleSetIngressOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
@@ -380,7 +380,7 @@ func (o GroupRuleSetIngressOutput) ServiceTemplateId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.ServiceTemplateId }).(pulumi.StringPtrOutput)
 }
 
-// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`.
+// ID of the nested security group, and conflicts with `cidrBlock` and `address_template_*`. NOTE: One of `cidrBlock`, `ipv6CidrBlock`, `sourceSecurityId` and `address_template_*` must be set.
 func (o GroupRuleSetIngressOutput) SourceSecurityId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GroupRuleSetIngress) *string { return v.SourceSecurityId }).(pulumi.StringPtrOutput)
 }

@@ -24,6 +24,8 @@ class ScalingGroupArgs:
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  forward_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdArgs']]]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
+                 lb_health_check_grace_period: Optional[pulumi.Input[int]] = None,
                  load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  multi_zone_subnet_policy: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -45,6 +47,8 @@ class ScalingGroupArgs:
         :param pulumi.Input[int] default_cooldown: Default cooldown time in second, and default value is `300`.
         :param pulumi.Input[int] desired_capacity: Desired volume of CVM instances, which is between `max_size` and `min_size`.
         :param pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdArgs']]] forward_balancer_ids: List of application load balancers, which can't be specified with `load_balancer_ids` together.
+        :param pulumi.Input[str] health_check_type: Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        :param pulumi.Input[int] lb_health_check_grace_period: Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_ids: ID list of traditional load balancers.
         :param pulumi.Input[str] multi_zone_subnet_policy: Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
         :param pulumi.Input[int] project_id: Specifies to which project the scaling group belongs.
@@ -68,6 +72,10 @@ class ScalingGroupArgs:
             pulumi.set(__self__, "desired_capacity", desired_capacity)
         if forward_balancer_ids is not None:
             pulumi.set(__self__, "forward_balancer_ids", forward_balancer_ids)
+        if health_check_type is not None:
+            pulumi.set(__self__, "health_check_type", health_check_type)
+        if lb_health_check_grace_period is not None:
+            pulumi.set(__self__, "lb_health_check_grace_period", lb_health_check_grace_period)
         if load_balancer_ids is not None:
             pulumi.set(__self__, "load_balancer_ids", load_balancer_ids)
         if multi_zone_subnet_policy is not None:
@@ -186,6 +194,30 @@ class ScalingGroupArgs:
     @forward_balancer_ids.setter
     def forward_balancer_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdArgs']]]]):
         pulumi.set(self, "forward_balancer_ids", value)
+
+    @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        """
+        return pulumi.get(self, "health_check_type")
+
+    @health_check_type.setter
+    def health_check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "health_check_type", value)
+
+    @property
+    @pulumi.getter(name="lbHealthCheckGracePeriod")
+    def lb_health_check_grace_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+        """
+        return pulumi.get(self, "lb_health_check_grace_period")
+
+    @lb_health_check_grace_period.setter
+    def lb_health_check_grace_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "lb_health_check_grace_period", value)
 
     @property
     @pulumi.getter(name="loadBalancerIds")
@@ -328,7 +360,9 @@ class _ScalingGroupState:
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  forward_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdArgs']]]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
                  instance_count: Optional[pulumi.Input[int]] = None,
+                 lb_health_check_grace_period: Optional[pulumi.Input[int]] = None,
                  load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  max_size: Optional[pulumi.Input[int]] = None,
                  min_size: Optional[pulumi.Input[int]] = None,
@@ -352,7 +386,9 @@ class _ScalingGroupState:
         :param pulumi.Input[int] default_cooldown: Default cooldown time in second, and default value is `300`.
         :param pulumi.Input[int] desired_capacity: Desired volume of CVM instances, which is between `max_size` and `min_size`.
         :param pulumi.Input[Sequence[pulumi.Input['ScalingGroupForwardBalancerIdArgs']]] forward_balancer_ids: List of application load balancers, which can't be specified with `load_balancer_ids` together.
+        :param pulumi.Input[str] health_check_type: Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
         :param pulumi.Input[int] instance_count: Instance number of a scaling group.
+        :param pulumi.Input[int] lb_health_check_grace_period: Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_ids: ID list of traditional load balancers.
         :param pulumi.Input[int] max_size: Maximum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
@@ -380,8 +416,12 @@ class _ScalingGroupState:
             pulumi.set(__self__, "desired_capacity", desired_capacity)
         if forward_balancer_ids is not None:
             pulumi.set(__self__, "forward_balancer_ids", forward_balancer_ids)
+        if health_check_type is not None:
+            pulumi.set(__self__, "health_check_type", health_check_type)
         if instance_count is not None:
             pulumi.set(__self__, "instance_count", instance_count)
+        if lb_health_check_grace_period is not None:
+            pulumi.set(__self__, "lb_health_check_grace_period", lb_health_check_grace_period)
         if load_balancer_ids is not None:
             pulumi.set(__self__, "load_balancer_ids", load_balancer_ids)
         if max_size is not None:
@@ -476,6 +516,18 @@ class _ScalingGroupState:
         pulumi.set(self, "forward_balancer_ids", value)
 
     @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        """
+        return pulumi.get(self, "health_check_type")
+
+    @health_check_type.setter
+    def health_check_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "health_check_type", value)
+
+    @property
     @pulumi.getter(name="instanceCount")
     def instance_count(self) -> Optional[pulumi.Input[int]]:
         """
@@ -486,6 +538,18 @@ class _ScalingGroupState:
     @instance_count.setter
     def instance_count(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "instance_count", value)
+
+    @property
+    @pulumi.getter(name="lbHealthCheckGracePeriod")
+    def lb_health_check_grace_period(self) -> Optional[pulumi.Input[int]]:
+        """
+        Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+        """
+        return pulumi.get(self, "lb_health_check_grace_period")
+
+    @lb_health_check_grace_period.setter
+    def lb_health_check_grace_period(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "lb_health_check_grace_period", value)
 
     @property
     @pulumi.getter(name="loadBalancerIds")
@@ -689,6 +753,8 @@ class ScalingGroup(pulumi.CustomResource):
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  forward_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingGroupForwardBalancerIdArgs']]]]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
+                 lb_health_check_grace_period: Optional[pulumi.Input[int]] = None,
                  load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  max_size: Optional[pulumi.Input[int]] = None,
                  min_size: Optional[pulumi.Input[int]] = None,
@@ -744,7 +810,10 @@ class ScalingGroup(pulumi.CustomResource):
             max_size=1,
             min_size=0,
             vpc_id=vpc.id,
-            subnet_ids=[subnet.id])
+            subnet_ids=[subnet.id],
+            health_check_type="CLB",
+            replace_load_balancer_unhealthy=True,
+            lb_health_check_grace_period=30)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -762,6 +831,8 @@ class ScalingGroup(pulumi.CustomResource):
         :param pulumi.Input[int] default_cooldown: Default cooldown time in second, and default value is `300`.
         :param pulumi.Input[int] desired_capacity: Desired volume of CVM instances, which is between `max_size` and `min_size`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingGroupForwardBalancerIdArgs']]]] forward_balancer_ids: List of application load balancers, which can't be specified with `load_balancer_ids` together.
+        :param pulumi.Input[str] health_check_type: Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        :param pulumi.Input[int] lb_health_check_grace_period: Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_ids: ID list of traditional load balancers.
         :param pulumi.Input[int] max_size: Maximum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
@@ -823,7 +894,10 @@ class ScalingGroup(pulumi.CustomResource):
             max_size=1,
             min_size=0,
             vpc_id=vpc.id,
-            subnet_ids=[subnet.id])
+            subnet_ids=[subnet.id],
+            health_check_type="CLB",
+            replace_load_balancer_unhealthy=True,
+            lb_health_check_grace_period=30)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -854,6 +928,8 @@ class ScalingGroup(pulumi.CustomResource):
                  default_cooldown: Optional[pulumi.Input[int]] = None,
                  desired_capacity: Optional[pulumi.Input[int]] = None,
                  forward_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingGroupForwardBalancerIdArgs']]]]] = None,
+                 health_check_type: Optional[pulumi.Input[str]] = None,
+                 lb_health_check_grace_period: Optional[pulumi.Input[int]] = None,
                  load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  max_size: Optional[pulumi.Input[int]] = None,
                  min_size: Optional[pulumi.Input[int]] = None,
@@ -884,6 +960,8 @@ class ScalingGroup(pulumi.CustomResource):
             __props__.__dict__["default_cooldown"] = default_cooldown
             __props__.__dict__["desired_capacity"] = desired_capacity
             __props__.__dict__["forward_balancer_ids"] = forward_balancer_ids
+            __props__.__dict__["health_check_type"] = health_check_type
+            __props__.__dict__["lb_health_check_grace_period"] = lb_health_check_grace_period
             __props__.__dict__["load_balancer_ids"] = load_balancer_ids
             if max_size is None and not opts.urn:
                 raise TypeError("Missing required property 'max_size'")
@@ -925,7 +1003,9 @@ class ScalingGroup(pulumi.CustomResource):
             default_cooldown: Optional[pulumi.Input[int]] = None,
             desired_capacity: Optional[pulumi.Input[int]] = None,
             forward_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingGroupForwardBalancerIdArgs']]]]] = None,
+            health_check_type: Optional[pulumi.Input[str]] = None,
             instance_count: Optional[pulumi.Input[int]] = None,
+            lb_health_check_grace_period: Optional[pulumi.Input[int]] = None,
             load_balancer_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             max_size: Optional[pulumi.Input[int]] = None,
             min_size: Optional[pulumi.Input[int]] = None,
@@ -954,7 +1034,9 @@ class ScalingGroup(pulumi.CustomResource):
         :param pulumi.Input[int] default_cooldown: Default cooldown time in second, and default value is `300`.
         :param pulumi.Input[int] desired_capacity: Desired volume of CVM instances, which is between `max_size` and `min_size`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScalingGroupForwardBalancerIdArgs']]]] forward_balancer_ids: List of application load balancers, which can't be specified with `load_balancer_ids` together.
+        :param pulumi.Input[str] health_check_type: Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
         :param pulumi.Input[int] instance_count: Instance number of a scaling group.
+        :param pulumi.Input[int] lb_health_check_grace_period: Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] load_balancer_ids: ID list of traditional load balancers.
         :param pulumi.Input[int] max_size: Maximum number of CVM instances. Valid value ranges: (0~2000).
         :param pulumi.Input[int] min_size: Minimum number of CVM instances. Valid value ranges: (0~2000).
@@ -981,7 +1063,9 @@ class ScalingGroup(pulumi.CustomResource):
         __props__.__dict__["default_cooldown"] = default_cooldown
         __props__.__dict__["desired_capacity"] = desired_capacity
         __props__.__dict__["forward_balancer_ids"] = forward_balancer_ids
+        __props__.__dict__["health_check_type"] = health_check_type
         __props__.__dict__["instance_count"] = instance_count
+        __props__.__dict__["lb_health_check_grace_period"] = lb_health_check_grace_period
         __props__.__dict__["load_balancer_ids"] = load_balancer_ids
         __props__.__dict__["max_size"] = max_size
         __props__.__dict__["min_size"] = min_size
@@ -1041,12 +1125,28 @@ class ScalingGroup(pulumi.CustomResource):
         return pulumi.get(self, "forward_balancer_ids")
 
     @property
+    @pulumi.getter(name="healthCheckType")
+    def health_check_type(self) -> pulumi.Output[str]:
+        """
+        Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        """
+        return pulumi.get(self, "health_check_type")
+
+    @property
     @pulumi.getter(name="instanceCount")
     def instance_count(self) -> pulumi.Output[int]:
         """
         Instance number of a scaling group.
         """
         return pulumi.get(self, "instance_count")
+
+    @property
+    @pulumi.getter(name="lbHealthCheckGracePeriod")
+    def lb_health_check_grace_period(self) -> pulumi.Output[int]:
+        """
+        Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
+        """
+        return pulumi.get(self, "lb_health_check_grace_period")
 
     @property
     @pulumi.getter(name="loadBalancerIds")

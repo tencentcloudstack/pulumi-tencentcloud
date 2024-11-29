@@ -21,6 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:PrivateDns/endPoint:EndPoint":
+		r = &EndPoint{}
+	case "tencentcloud:PrivateDns/forwardRule:ForwardRule":
+		r = &ForwardRule{}
 	case "tencentcloud:PrivateDns/record:Record":
 		r = &Record{}
 	case "tencentcloud:PrivateDns/zone:Zone":
@@ -40,6 +44,16 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"PrivateDns/endPoint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"PrivateDns/forwardRule",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"PrivateDns/record",

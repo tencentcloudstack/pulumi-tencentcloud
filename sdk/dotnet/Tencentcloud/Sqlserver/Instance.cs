@@ -106,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Output<string?> EngineVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        /// It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         /// </summary>
         [Output("haType")]
         public Output<string?> HaType { get; private set; } = null!;
@@ -139,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// Indicate whether to deploy across availability zones.
         /// </summary>
         [Output("multiZones")]
-        public Output<bool?> MultiZones { get; private set; } = null!;
+        public Output<bool> MultiZones { get; private set; } = null!;
 
         /// <summary>
         /// Name of the SQL Server instance.
@@ -303,7 +303,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
-        /// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        /// It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         /// </summary>
         [Input("haType")]
         public Input<string>? HaType { get; set; }
@@ -467,7 +467,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? EngineVersion { get; set; }
 
         /// <summary>
-        /// Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        /// It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         /// </summary>
         [Input("haType")]
         public Input<string>? HaType { get; set; }

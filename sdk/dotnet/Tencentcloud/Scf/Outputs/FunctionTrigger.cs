@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// </summary>
         public readonly string TriggerDesc;
         /// <summary>
-        /// Type of the SCF function trigger, support `cos`, `cmq`, `timer`, `ckafka`, `apigw`.
+        /// Type of the SCF function trigger, support `cos`, `cls`, `timer`, `ckafka`, `http`, `apigw`, `cmq`.
         /// </summary>
         public readonly string Type;
 

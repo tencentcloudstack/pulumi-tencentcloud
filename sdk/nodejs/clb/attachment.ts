@@ -13,14 +13,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ### Bind a Cvm instance
- *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.Attachment("foo", {
+ * const example = new tencentcloud.clb.Attachment("example", {
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-hh141sn9",
  *     ruleId: "loc-4xxr2cy7",
@@ -33,14 +31,31 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### Bind multiple Cvm instances
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.clb.Attachment("example", {
+ *     clbId: "lb-k2zjp9lv",
+ *     domain: "test.com",
+ *     listenerId: "lbl-hh141sn9",
+ *     targets: [{
+ *         instanceId: "ins-1flbqyp8",
+ *         port: 80,
+ *         weight: 10,
+ *     }],
+ *     url: "/",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.Attachment("foo", {
+ * const example = new tencentcloud.clb.Attachment("example", {
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-hh141sn9",
  *     ruleId: "loc-4xxr2cy7",
@@ -60,22 +75,65 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### Bind backend target is ENI
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.clb.Attachment("example", {
+ *     clbId: "lb-k2zjp9lv",
+ *     domain: "test.com",
+ *     listenerId: "lbl-hh141sn9",
+ *     targets: [
+ *         {
+ *             instanceId: "ins-1flbqyp8",
+ *             port: 80,
+ *             weight: 10,
+ *         },
+ *         {
+ *             instanceId: "ins-ekloqpa1",
+ *             port: 81,
+ *             weight: 10,
+ *         },
+ *     ],
+ *     url: "/",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.Attachment("foo", {
+ * const example = new tencentcloud.clb.Attachment("example", {
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-hh141sn9",
  *     ruleId: "loc-4xxr2cy7",
  *     targets: [{
- *         eniIp: "example-ip",
- *         port: 23,
+ *         eniIp: "172.16.16.52",
+ *         port: 8090,
  *         weight: 50,
  *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.clb.Attachment("example", {
+ *     clbId: "lb-k2zjp9lv",
+ *     domain: "test.com",
+ *     listenerId: "lbl-hh141sn9",
+ *     targets: [{
+ *         eniIp: "172.16.16.52",
+ *         port: 8090,
+ *         weight: 50,
+ *     }],
+ *     url: "/",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -85,7 +143,13 @@ import * as utilities from "../utilities";
  * CLB attachment can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+ * $ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+ * ```
+ *
+ * Or
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/#lbl-hh141sn9#lb-7a0t6zqb
  * ```
  */
 export class Attachment extends pulumi.CustomResource {
@@ -121,6 +185,10 @@ export class Attachment extends pulumi.CustomResource {
      */
     public readonly clbId!: pulumi.Output<string>;
     /**
+     * Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    public readonly domain!: pulumi.Output<string | undefined>;
+    /**
      * ID of the CLB listener.
      */
     public readonly listenerId!: pulumi.Output<string>;
@@ -136,6 +204,10 @@ export class Attachment extends pulumi.CustomResource {
      * Information of the backends to be attached.
      */
     public readonly targets!: pulumi.Output<outputs.Clb.AttachmentTarget[]>;
+    /**
+     * URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    public readonly url!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Attachment resource with the given unique name, arguments, and options.
@@ -151,10 +223,12 @@ export class Attachment extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as AttachmentState | undefined;
             resourceInputs["clbId"] = state ? state.clbId : undefined;
+            resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["listenerId"] = state ? state.listenerId : undefined;
             resourceInputs["protocolType"] = state ? state.protocolType : undefined;
             resourceInputs["ruleId"] = state ? state.ruleId : undefined;
             resourceInputs["targets"] = state ? state.targets : undefined;
+            resourceInputs["url"] = state ? state.url : undefined;
         } else {
             const args = argsOrState as AttachmentArgs | undefined;
             if ((!args || args.clbId === undefined) && !opts.urn) {
@@ -167,9 +241,11 @@ export class Attachment extends pulumi.CustomResource {
                 throw new Error("Missing required property 'targets'");
             }
             resourceInputs["clbId"] = args ? args.clbId : undefined;
+            resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["listenerId"] = args ? args.listenerId : undefined;
             resourceInputs["ruleId"] = args ? args.ruleId : undefined;
             resourceInputs["targets"] = args ? args.targets : undefined;
+            resourceInputs["url"] = args ? args.url : undefined;
             resourceInputs["protocolType"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -186,6 +262,10 @@ export interface AttachmentState {
      */
     clbId?: pulumi.Input<string>;
     /**
+     * Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    domain?: pulumi.Input<string>;
+    /**
      * ID of the CLB listener.
      */
     listenerId?: pulumi.Input<string>;
@@ -201,6 +281,10 @@ export interface AttachmentState {
      * Information of the backends to be attached.
      */
     targets?: pulumi.Input<pulumi.Input<inputs.Clb.AttachmentTarget>[]>;
+    /**
+     * URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    url?: pulumi.Input<string>;
 }
 
 /**
@@ -211,6 +295,10 @@ export interface AttachmentArgs {
      * ID of the CLB.
      */
     clbId: pulumi.Input<string>;
+    /**
+     * Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    domain?: pulumi.Input<string>;
     /**
      * ID of the CLB listener.
      */
@@ -223,4 +311,8 @@ export interface AttachmentArgs {
      * Information of the backends to be attached.
      */
     targets: pulumi.Input<pulumi.Input<inputs.Clb.AttachmentTarget>[]>;
+    /**
+     * URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+     */
+    url?: pulumi.Input<string>;
 }

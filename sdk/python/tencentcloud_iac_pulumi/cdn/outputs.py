@@ -43,6 +43,7 @@ __all__ = [
     'DomainOriginPullOptimization',
     'DomainOriginPullTimeout',
     'DomainOssPrivateAccess',
+    'DomainOthersPrivateAccess',
     'DomainPostMaxSize',
     'DomainQnPrivateAccess',
     'DomainReferer',
@@ -2401,6 +2402,8 @@ class DomainOrigin(dict):
             suggest = "backup_server_name"
         elif key == "cosPrivateAccess":
             suggest = "cos_private_access"
+        elif key == "originCompany":
+            suggest = "origin_company"
         elif key == "originPullProtocol":
             suggest = "origin_pull_protocol"
         elif key == "serverName":
@@ -2424,15 +2427,17 @@ class DomainOrigin(dict):
                  backup_origin_type: Optional[str] = None,
                  backup_server_name: Optional[str] = None,
                  cos_private_access: Optional[str] = None,
+                 origin_company: Optional[str] = None,
                  origin_pull_protocol: Optional[str] = None,
                  server_name: Optional[str] = None):
         """
         :param Sequence[str] origin_lists: Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `origin_type`.
-        :param str origin_type: Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ip_ipv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+        :param str origin_type: Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `third_party`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address, `ip_domain`: IP addresses and domain names (only available to beta users), `ip_domainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6_domain`: Multiple IPv6 addresses and one domain name, `ipv6_domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domain_domainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ip_ipv6_domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ip_domain_domainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6_domain_domainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ip_ipv6_domain_domainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
         :param Sequence[str] backup_origin_lists: Backup origin server list. Valid values can be ip or domain name. When modifying the backup origin server, you need to enter the corresponding `backup_origin_type`.
-        :param str backup_origin_type: Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+        :param str backup_origin_type: Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6_domain`: Multiple IPv6 addresses and one domain name, `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address, `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name.
         :param str backup_server_name: Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
         :param str cos_private_access: When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
+        :param str origin_company: Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `aws_s3`: AWS S3; `ali_oss`: Alibaba Cloud OSS; `hw_obs`: Huawei OBS; `qiniu_kodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hw_obs`.
         :param str origin_pull_protocol: Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
         :param str server_name: Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
         """
@@ -2446,6 +2451,8 @@ class DomainOrigin(dict):
             pulumi.set(__self__, "backup_server_name", backup_server_name)
         if cos_private_access is not None:
             pulumi.set(__self__, "cos_private_access", cos_private_access)
+        if origin_company is not None:
+            pulumi.set(__self__, "origin_company", origin_company)
         if origin_pull_protocol is not None:
             pulumi.set(__self__, "origin_pull_protocol", origin_pull_protocol)
         if server_name is not None:
@@ -2463,7 +2470,7 @@ class DomainOrigin(dict):
     @pulumi.getter(name="originType")
     def origin_type(self) -> str:
         """
-        Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ip_ipv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+        Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `third_party`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address, `ip_domain`: IP addresses and domain names (only available to beta users), `ip_domainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6_domain`: Multiple IPv6 addresses and one domain name, `ipv6_domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domain_domainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ip_ipv6_domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ip_domain_domainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6_domain_domainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ip_ipv6_domain_domainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
         """
         return pulumi.get(self, "origin_type")
 
@@ -2479,7 +2486,7 @@ class DomainOrigin(dict):
     @pulumi.getter(name="backupOriginType")
     def backup_origin_type(self) -> Optional[str]:
         """
-        Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+        Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6_domain`: Multiple IPv6 addresses and one domain name, `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address, `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name.
         """
         return pulumi.get(self, "backup_origin_type")
 
@@ -2498,6 +2505,14 @@ class DomainOrigin(dict):
         When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
         """
         return pulumi.get(self, "cos_private_access")
+
+    @property
+    @pulumi.getter(name="originCompany")
+    def origin_company(self) -> Optional[str]:
+        """
+        Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `aws_s3`: AWS S3; `ali_oss`: Alibaba Cloud OSS; `hw_obs`: Huawei OBS; `qiniu_kodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hw_obs`.
+        """
+        return pulumi.get(self, "origin_company")
 
     @property
     @pulumi.getter(name="originPullProtocol")
@@ -2630,6 +2645,91 @@ class DomainOssPrivateAccess(dict):
 
     def get(self, key: str, default = None) -> Any:
         DomainOssPrivateAccess.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 switch: str,
+                 access_key: Optional[str] = None,
+                 bucket: Optional[str] = None,
+                 region: Optional[str] = None,
+                 secret_key: Optional[str] = None):
+        """
+        :param str switch: Configuration switch, available values: `on`, `off` (default).
+        :param str access_key: Access ID.
+        :param str bucket: Bucket.
+        :param str region: Region.
+        :param str secret_key: Key.
+        """
+        pulumi.set(__self__, "switch", switch)
+        if access_key is not None:
+            pulumi.set(__self__, "access_key", access_key)
+        if bucket is not None:
+            pulumi.set(__self__, "bucket", bucket)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+        if secret_key is not None:
+            pulumi.set(__self__, "secret_key", secret_key)
+
+    @property
+    @pulumi.getter
+    def switch(self) -> str:
+        """
+        Configuration switch, available values: `on`, `off` (default).
+        """
+        return pulumi.get(self, "switch")
+
+    @property
+    @pulumi.getter(name="accessKey")
+    def access_key(self) -> Optional[str]:
+        """
+        Access ID.
+        """
+        return pulumi.get(self, "access_key")
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> Optional[str]:
+        """
+        Bucket.
+        """
+        return pulumi.get(self, "bucket")
+
+    @property
+    @pulumi.getter
+    def region(self) -> Optional[str]:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter(name="secretKey")
+    def secret_key(self) -> Optional[str]:
+        """
+        Key.
+        """
+        return pulumi.get(self, "secret_key")
+
+
+@pulumi.output_type
+class DomainOthersPrivateAccess(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "accessKey":
+            suggest = "access_key"
+        elif key == "secretKey":
+            suggest = "secret_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DomainOthersPrivateAccess. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DomainOthersPrivateAccess.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DomainOthersPrivateAccess.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,

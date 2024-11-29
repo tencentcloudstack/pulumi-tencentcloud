@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
     public sealed class GetInstanceEniResult
     {
         /// <summary>
+        /// CDC instance ID.
+        /// </summary>
+        public readonly string CdcId;
+        /// <summary>
         /// Creation time of the ENI.
         /// </summary>
         public readonly string CreateTime;
@@ -34,6 +38,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
         /// A set of intranet IPv4s.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInstanceEniIpv4Result> Ipv4s;
+        /// <summary>
+        /// A set of intranet IPv6s.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInstanceEniIpv6Result> Ipv6s;
         /// <summary>
         /// MAC address.
         /// </summary>
@@ -69,6 +77,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
 
         [OutputConstructor]
         private GetInstanceEniResult(
+            string cdcId,
+
             string createTime,
 
             string description,
@@ -78,6 +88,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
             string instanceId,
 
             ImmutableArray<Outputs.GetInstanceEniIpv4Result> ipv4s,
+
+            ImmutableArray<Outputs.GetInstanceEniIpv6Result> ipv6s,
 
             string mac,
 
@@ -95,11 +107,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
 
             string vpcId)
         {
+            CdcId = cdcId;
             CreateTime = createTime;
             Description = description;
             Id = id;
             InstanceId = instanceId;
             Ipv4s = ipv4s;
+            Ipv6s = ipv6s;
             Mac = mac;
             Name = name;
             Primary = primary;

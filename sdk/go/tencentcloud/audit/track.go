@@ -29,7 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Audit.NewTrack(ctx, "track", &Audit.TrackArgs{
+//			_, err := Audit.NewTrack(ctx, "example", &Audit.TrackArgs{
 //				ActionType: pulumi.String("Read"),
 //				EventNames: pulumi.StringArray{
 //					pulumi.String("*"),
@@ -54,12 +54,54 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Specify storage user
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Audit"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Audit.NewTrack(ctx, "example", &Audit.TrackArgs{
+//				ActionType: pulumi.String("Read"),
+//				EventNames: pulumi.StringArray{
+//					pulumi.String("*"),
+//				},
+//				ResourceType: pulumi.String("*"),
+//				Status:       pulumi.Int(1),
+//				Storage: &audit.TrackStorageArgs{
+//					StorageAccountId: pulumi.String("100037717137"),
+//					StorageAppId:     pulumi.String("1309116520"),
+//					StorageName:      pulumi.String("db90b92c-91d2-46b0-94ac-debbbb21dc4e"),
+//					StoragePrefix:    pulumi.String("cloudaudit"),
+//					StorageRegion:    pulumi.String("ap-guangzhou"),
+//					StorageType:      pulumi.String("cos"),
+//				},
+//				TrackForAllMembers: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // audit track can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Audit/track:Track track track_id
+// $ pulumi import tencentcloud:Audit/track:Track example 24283
 // ```
 type Track struct {
 	pulumi.CustomResourceState

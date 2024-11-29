@@ -25,13 +25,13 @@ class DataTransformArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a DataTransform resource.
-        :param pulumi.Input[str] etl_content: data transform content.
-        :param pulumi.Input[int] func_type: task type.
-        :param pulumi.Input[str] src_topic_id: src topic id.
-        :param pulumi.Input[int] task_type: task type.
-        :param pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]] dst_resources: data transform des resources.
-        :param pulumi.Input[int] enable_flag: task enable flag.
-        :param pulumi.Input[str] name: task name.
+        :param pulumi.Input[str] etl_content: Data transform content. If `func_type` is `2`, must use `log_auto_output`.
+        :param pulumi.Input[int] func_type: Task type. `1`: Specify the theme; `2`: Dynamic creation.
+        :param pulumi.Input[str] src_topic_id: Source topic ID.
+        :param pulumi.Input[int] task_type: Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
+        :param pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]] dst_resources: Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
+        :param pulumi.Input[int] enable_flag: Task enable flag. `1`: enable, `2`: disable, Default is `1`.
+        :param pulumi.Input[str] name: Task name.
         """
         pulumi.set(__self__, "etl_content", etl_content)
         pulumi.set(__self__, "func_type", func_type)
@@ -48,7 +48,7 @@ class DataTransformArgs:
     @pulumi.getter(name="etlContent")
     def etl_content(self) -> pulumi.Input[str]:
         """
-        data transform content.
+        Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         """
         return pulumi.get(self, "etl_content")
 
@@ -60,7 +60,7 @@ class DataTransformArgs:
     @pulumi.getter(name="funcType")
     def func_type(self) -> pulumi.Input[int]:
         """
-        task type.
+        Task type. `1`: Specify the theme; `2`: Dynamic creation.
         """
         return pulumi.get(self, "func_type")
 
@@ -72,7 +72,7 @@ class DataTransformArgs:
     @pulumi.getter(name="srcTopicId")
     def src_topic_id(self) -> pulumi.Input[str]:
         """
-        src topic id.
+        Source topic ID.
         """
         return pulumi.get(self, "src_topic_id")
 
@@ -84,7 +84,7 @@ class DataTransformArgs:
     @pulumi.getter(name="taskType")
     def task_type(self) -> pulumi.Input[int]:
         """
-        task type.
+        Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         return pulumi.get(self, "task_type")
 
@@ -96,7 +96,7 @@ class DataTransformArgs:
     @pulumi.getter(name="dstResources")
     def dst_resources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]]]:
         """
-        data transform des resources.
+        Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         """
         return pulumi.get(self, "dst_resources")
 
@@ -108,7 +108,7 @@ class DataTransformArgs:
     @pulumi.getter(name="enableFlag")
     def enable_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        task enable flag.
+        Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         """
         return pulumi.get(self, "enable_flag")
 
@@ -120,7 +120,7 @@ class DataTransformArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        task name.
+        Task name.
         """
         return pulumi.get(self, "name")
 
@@ -141,13 +141,13 @@ class _DataTransformState:
                  task_type: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering DataTransform resources.
-        :param pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]] dst_resources: data transform des resources.
-        :param pulumi.Input[int] enable_flag: task enable flag.
-        :param pulumi.Input[str] etl_content: data transform content.
-        :param pulumi.Input[int] func_type: task type.
-        :param pulumi.Input[str] name: task name.
-        :param pulumi.Input[str] src_topic_id: src topic id.
-        :param pulumi.Input[int] task_type: task type.
+        :param pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]] dst_resources: Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
+        :param pulumi.Input[int] enable_flag: Task enable flag. `1`: enable, `2`: disable, Default is `1`.
+        :param pulumi.Input[str] etl_content: Data transform content. If `func_type` is `2`, must use `log_auto_output`.
+        :param pulumi.Input[int] func_type: Task type. `1`: Specify the theme; `2`: Dynamic creation.
+        :param pulumi.Input[str] name: Task name.
+        :param pulumi.Input[str] src_topic_id: Source topic ID.
+        :param pulumi.Input[int] task_type: Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         if dst_resources is not None:
             pulumi.set(__self__, "dst_resources", dst_resources)
@@ -168,7 +168,7 @@ class _DataTransformState:
     @pulumi.getter(name="dstResources")
     def dst_resources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DataTransformDstResourceArgs']]]]:
         """
-        data transform des resources.
+        Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         """
         return pulumi.get(self, "dst_resources")
 
@@ -180,7 +180,7 @@ class _DataTransformState:
     @pulumi.getter(name="enableFlag")
     def enable_flag(self) -> Optional[pulumi.Input[int]]:
         """
-        task enable flag.
+        Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         """
         return pulumi.get(self, "enable_flag")
 
@@ -192,7 +192,7 @@ class _DataTransformState:
     @pulumi.getter(name="etlContent")
     def etl_content(self) -> Optional[pulumi.Input[str]]:
         """
-        data transform content.
+        Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         """
         return pulumi.get(self, "etl_content")
 
@@ -204,7 +204,7 @@ class _DataTransformState:
     @pulumi.getter(name="funcType")
     def func_type(self) -> Optional[pulumi.Input[int]]:
         """
-        task type.
+        Task type. `1`: Specify the theme; `2`: Dynamic creation.
         """
         return pulumi.get(self, "func_type")
 
@@ -216,7 +216,7 @@ class _DataTransformState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        task name.
+        Task name.
         """
         return pulumi.get(self, "name")
 
@@ -228,7 +228,7 @@ class _DataTransformState:
     @pulumi.getter(name="srcTopicId")
     def src_topic_id(self) -> Optional[pulumi.Input[str]]:
         """
-        src topic id.
+        Source topic ID.
         """
         return pulumi.get(self, "src_topic_id")
 
@@ -240,7 +240,7 @@ class _DataTransformState:
     @pulumi.getter(name="taskType")
     def task_type(self) -> Optional[pulumi.Input[int]]:
         """
-        task type.
+        Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         return pulumi.get(self, "task_type")
 
@@ -263,7 +263,7 @@ class DataTransform(pulumi.CustomResource):
                  task_type: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Provides a resource to create a cls data_transform
+        Provides a resource to create a CLS data transform
 
         ## Example Usage
 
@@ -286,7 +286,7 @@ class DataTransform(pulumi.CustomResource):
             period=10,
             storage_type="hot",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
         logset_dst = tencentcloud.cls.Logset("logsetDst",
             logset_name="tf-example-dst",
@@ -302,9 +302,9 @@ class DataTransform(pulumi.CustomResource):
             period=10,
             storage_type="hot",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
-        data_transform = tencentcloud.cls.DataTransform("dataTransform",
+        example = tencentcloud.cls.DataTransform("example",
             func_type=1,
             src_topic_id=topic_src.id,
             etl_content="ext_sep(\\"content\\", \\"f1, f2, f3\\", sep=\\",\\", quote=\\"\\", restrict=False, mode=\\"overwrite\\")fields_drop(\\"content\\")",
@@ -319,21 +319,21 @@ class DataTransform(pulumi.CustomResource):
 
         ## Import
 
-        cls data_transform can be imported using the id, e.g.
+        CLS data transform can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+        $ pulumi import tencentcloud:Cls/dataTransform:DataTransform example 7b4bcb05-9154-4cdc-a479-f6b5743846e5
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DataTransformDstResourceArgs']]]] dst_resources: data transform des resources.
-        :param pulumi.Input[int] enable_flag: task enable flag.
-        :param pulumi.Input[str] etl_content: data transform content.
-        :param pulumi.Input[int] func_type: task type.
-        :param pulumi.Input[str] name: task name.
-        :param pulumi.Input[str] src_topic_id: src topic id.
-        :param pulumi.Input[int] task_type: task type.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DataTransformDstResourceArgs']]]] dst_resources: Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
+        :param pulumi.Input[int] enable_flag: Task enable flag. `1`: enable, `2`: disable, Default is `1`.
+        :param pulumi.Input[str] etl_content: Data transform content. If `func_type` is `2`, must use `log_auto_output`.
+        :param pulumi.Input[int] func_type: Task type. `1`: Specify the theme; `2`: Dynamic creation.
+        :param pulumi.Input[str] name: Task name.
+        :param pulumi.Input[str] src_topic_id: Source topic ID.
+        :param pulumi.Input[int] task_type: Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         ...
     @overload
@@ -342,7 +342,7 @@ class DataTransform(pulumi.CustomResource):
                  args: DataTransformArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a cls data_transform
+        Provides a resource to create a CLS data transform
 
         ## Example Usage
 
@@ -365,7 +365,7 @@ class DataTransform(pulumi.CustomResource):
             period=10,
             storage_type="hot",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
         logset_dst = tencentcloud.cls.Logset("logsetDst",
             logset_name="tf-example-dst",
@@ -381,9 +381,9 @@ class DataTransform(pulumi.CustomResource):
             period=10,
             storage_type="hot",
             tags={
-                "test": "test",
+                "createdBy": "terraform",
             })
-        data_transform = tencentcloud.cls.DataTransform("dataTransform",
+        example = tencentcloud.cls.DataTransform("example",
             func_type=1,
             src_topic_id=topic_src.id,
             etl_content="ext_sep(\\"content\\", \\"f1, f2, f3\\", sep=\\",\\", quote=\\"\\", restrict=False, mode=\\"overwrite\\")fields_drop(\\"content\\")",
@@ -398,10 +398,10 @@ class DataTransform(pulumi.CustomResource):
 
         ## Import
 
-        cls data_transform can be imported using the id, e.g.
+        CLS data transform can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+        $ pulumi import tencentcloud:Cls/dataTransform:DataTransform example 7b4bcb05-9154-4cdc-a479-f6b5743846e5
         ```
 
         :param str resource_name: The name of the resource.
@@ -474,13 +474,13 @@ class DataTransform(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DataTransformDstResourceArgs']]]] dst_resources: data transform des resources.
-        :param pulumi.Input[int] enable_flag: task enable flag.
-        :param pulumi.Input[str] etl_content: data transform content.
-        :param pulumi.Input[int] func_type: task type.
-        :param pulumi.Input[str] name: task name.
-        :param pulumi.Input[str] src_topic_id: src topic id.
-        :param pulumi.Input[int] task_type: task type.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DataTransformDstResourceArgs']]]] dst_resources: Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
+        :param pulumi.Input[int] enable_flag: Task enable flag. `1`: enable, `2`: disable, Default is `1`.
+        :param pulumi.Input[str] etl_content: Data transform content. If `func_type` is `2`, must use `log_auto_output`.
+        :param pulumi.Input[int] func_type: Task type. `1`: Specify the theme; `2`: Dynamic creation.
+        :param pulumi.Input[str] name: Task name.
+        :param pulumi.Input[str] src_topic_id: Source topic ID.
+        :param pulumi.Input[int] task_type: Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -499,7 +499,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="dstResources")
     def dst_resources(self) -> pulumi.Output[Optional[Sequence['outputs.DataTransformDstResource']]]:
         """
-        data transform des resources.
+        Data transform des resources. If `func_type` is `1`, this parameter is required. If `func_type` is `2`, this parameter does not need to be filled in.
         """
         return pulumi.get(self, "dst_resources")
 
@@ -507,7 +507,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="enableFlag")
     def enable_flag(self) -> pulumi.Output[Optional[int]]:
         """
-        task enable flag.
+        Task enable flag. `1`: enable, `2`: disable, Default is `1`.
         """
         return pulumi.get(self, "enable_flag")
 
@@ -515,7 +515,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="etlContent")
     def etl_content(self) -> pulumi.Output[str]:
         """
-        data transform content.
+        Data transform content. If `func_type` is `2`, must use `log_auto_output`.
         """
         return pulumi.get(self, "etl_content")
 
@@ -523,7 +523,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="funcType")
     def func_type(self) -> pulumi.Output[int]:
         """
-        task type.
+        Task type. `1`: Specify the theme; `2`: Dynamic creation.
         """
         return pulumi.get(self, "func_type")
 
@@ -531,7 +531,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        task name.
+        Task name.
         """
         return pulumi.get(self, "name")
 
@@ -539,7 +539,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="srcTopicId")
     def src_topic_id(self) -> pulumi.Output[str]:
         """
-        src topic id.
+        Source topic ID.
         """
         return pulumi.get(self, "src_topic_id")
 
@@ -547,7 +547,7 @@ class DataTransform(pulumi.CustomResource):
     @pulumi.getter(name="taskType")
     def task_type(self) -> pulumi.Output[int]:
         """
-        task type.
+        Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
         """
         return pulumi.get(self, "task_type")
 

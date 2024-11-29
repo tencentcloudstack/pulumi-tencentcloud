@@ -162,7 +162,7 @@ def get_proxy_statistics(end_time: Optional[str] = None,
     :param str end_time: End Time(2019-03-25 12:00:00).
     :param int granularity: Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.
     :param str isp: Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.
-    :param Sequence[str] metric_names: Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+    :param Sequence[str] metric_names: Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
     :param str proxy_id: Proxy Id.
     :param str result_output_file: Used to save results.
     :param str start_time: Start Time(2019-03-25 12:00:00).
@@ -233,7 +233,7 @@ def get_proxy_statistics_output(end_time: Optional[pulumi.Input[str]] = None,
     :param str end_time: End Time(2019-03-25 12:00:00).
     :param int granularity: Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 3 days, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 300 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 3600 seconds.
     :param str isp: Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.
-    :param Sequence[str] metric_names: Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS.
+    :param Sequence[str] metric_names: Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
     :param str proxy_id: Proxy Id.
     :param str result_output_file: Used to save results.
     :param str start_time: Start Time(2019-03-25 12:00:00).

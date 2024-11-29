@@ -64,7 +64,7 @@ class GetInstanceResult:
     @pulumi.getter
     def description(self) -> Optional[str]:
         """
-        Description of the IP.
+        Message description.
         """
         return pulumi.get(self, "description")
 

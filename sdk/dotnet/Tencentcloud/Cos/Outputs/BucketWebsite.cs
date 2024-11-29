@@ -26,6 +26,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// COS returns this index document when requests are made to the root domain or any of the subfolders.
         /// </summary>
         public readonly string? IndexDocument;
+        /// <summary>
+        /// Redirects all request configurations. Valid values: http, https. Default is `http`.
+        /// </summary>
+        public readonly string? RedirectAllRequestsTo;
 
         [OutputConstructor]
         private BucketWebsite(
@@ -33,11 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
 
             string? errorDocument,
 
-            string? indexDocument)
+            string? indexDocument,
+
+            string? redirectAllRequestsTo)
         {
             Endpoint = endpoint;
             ErrorDocument = errorDocument;
             IndexDocument = indexDocument;
+            RedirectAllRequestsTo = redirectAllRequestsTo;
         }
     }
 }

@@ -130,7 +130,7 @@ class Routes(pulumi.CustomResource):
                  switch: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a vpc ccn_routes
+        Provides a resource to create a vpc ccn_routes switch
 
         ## Example Usage
 
@@ -139,10 +139,10 @@ class Routes(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ccn_routes = tencentcloud.ccn.Routes("ccnRoutes",
-            ccn_id="ccn-39lqkygf",
-            route_id="ccnr-3o0dfyuw",
-            switch="on")
+        example = tencentcloud.ccn.Routes("example",
+            ccn_id="ccn-gr7nynbd",
+            route_id="ccnr-5uhewx1s",
+            switch="off")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -151,7 +151,7 @@ class Routes(pulumi.CustomResource):
         vpc ccn_routes can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+        $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
         ```
 
         :param str resource_name: The name of the resource.
@@ -167,7 +167,7 @@ class Routes(pulumi.CustomResource):
                  args: RoutesArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a vpc ccn_routes
+        Provides a resource to create a vpc ccn_routes switch
 
         ## Example Usage
 
@@ -176,10 +176,10 @@ class Routes(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        ccn_routes = tencentcloud.ccn.Routes("ccnRoutes",
-            ccn_id="ccn-39lqkygf",
-            route_id="ccnr-3o0dfyuw",
-            switch="on")
+        example = tencentcloud.ccn.Routes("example",
+            ccn_id="ccn-gr7nynbd",
+            route_id="ccnr-5uhewx1s",
+            switch="off")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -188,7 +188,7 @@ class Routes(pulumi.CustomResource):
         vpc ccn_routes can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+        $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
         ```
 
         :param str resource_name: The name of the resource.

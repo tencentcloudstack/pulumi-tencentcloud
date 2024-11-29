@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create a standard cls topic
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -29,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         LogsetName = "tf_example",
     ///         Tags = 
     ///         {
-    ///             { "demo", "test" },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -46,7 +48,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         HotPeriod = 10,
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a cls topic with web tracking
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleLogset = new Tencentcloud.Cls.Logset("exampleLogset", new()
+    ///     {
+    ///         LogsetName = "tf_example",
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Cls.Topic("exampleTopic", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         LogsetId = exampleLogset.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 30,
+    ///         StorageType = "hot",
+    ///         Describes = "Test Demo.",
+    ///         HotPeriod = 10,
+    ///         IsWebTracking = true,
+    ///         Extends = new Tencentcloud.Cls.Inputs.TopicExtendsArgs
+    ///         {
+    ///             AnonymousAccess = new Tencentcloud.Cls.Inputs.TopicExtendsAnonymousAccessArgs
+    ///             {
+    ///                 Operations = new[]
+    ///                 {
+    ///                     "trackLog",
+    ///                     "realtimeProducer",
+    ///                 },
+    ///                 Conditions = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.TopicExtendsAnonymousAccessConditionArgs
+    ///                     {
+    ///                         Attributes = "VpcID",
+    ///                         Rule = 1,
+    ///                         ConditionValue = "vpc-ahr3xajx",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -78,10 +142,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<string?> Describes { get; private set; } = null!;
 
         /// <summary>
+        /// Log Subject Extension Information.
+        /// </summary>
+        [Output("extends")]
+        public Output<Outputs.TopicExtends?> Extends { get; private set; } = null!;
+
+        /// <summary>
         /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
         /// </summary>
         [Output("hotPeriod")]
         public Output<int> HotPeriod { get; private set; } = null!;
+
+        /// <summary>
+        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// </summary>
+        [Output("isWebTracking")]
+        public Output<bool> IsWebTracking { get; private set; } = null!;
 
         /// <summary>
         /// Logset ID.
@@ -185,10 +261,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? Describes { get; set; }
 
         /// <summary>
+        /// Log Subject Extension Information.
+        /// </summary>
+        [Input("extends")]
+        public Input<Inputs.TopicExtendsArgs>? Extends { get; set; }
+
+        /// <summary>
         /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
         /// </summary>
         [Input("hotPeriod")]
         public Input<int>? HotPeriod { get; set; }
+
+        /// <summary>
+        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// </summary>
+        [Input("isWebTracking")]
+        public Input<bool>? IsWebTracking { get; set; }
 
         /// <summary>
         /// Logset ID.
@@ -259,10 +347,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? Describes { get; set; }
 
         /// <summary>
+        /// Log Subject Extension Information.
+        /// </summary>
+        [Input("extends")]
+        public Input<Inputs.TopicExtendsGetArgs>? Extends { get; set; }
+
+        /// <summary>
         /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
         /// </summary>
         [Input("hotPeriod")]
         public Input<int>? HotPeriod { get; set; }
+
+        /// <summary>
+        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// </summary>
+        [Input("isWebTracking")]
+        public Input<bool>? IsWebTracking { get; set; }
 
         /// <summary>
         /// Logset ID.

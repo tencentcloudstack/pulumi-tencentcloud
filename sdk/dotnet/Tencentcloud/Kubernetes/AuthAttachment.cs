@@ -85,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///         ClusterDeployType = "MANAGED_CLUSTER",
     ///     });
     /// 
-    ///     var testAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testAuthAttach", new()
+    ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
     ///         ClusterId = managedCluster.Id,
     ///         JwksUri = managedCluster.Id.Apply(id =&gt; $"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
@@ -168,7 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     });
     /// 
     ///     // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-    ///     var testUseTkeDefaultAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach", new()
+    ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
     ///         ClusterId = managedCluster.Id,
     ///         AutoCreateDiscoveryAnonymousAuth = true,
@@ -191,7 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var testAuthAttach = new Tencentcloud.Kubernetes.AuthAttachment("testAuthAttach", new()
+    ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
     ///         ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
     ///         UseTkeDefault = true,
@@ -219,7 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// tke cluster authentication can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/authAttachment:AuthAttachment")]

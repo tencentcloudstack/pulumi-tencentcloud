@@ -13,6 +13,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 
     public sealed class ClusterExistInstanceInstancesParaArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// To specify whether to enable cloud monitor service. Default is TRUE.
+        /// </summary>
+        [Input("enhancedMonitorService")]
+        public Input<bool>? EnhancedMonitorService { get; set; }
+
+        /// <summary>
+        /// To specify whether to enable cloud security service. Default is TRUE.
+        /// </summary>
+        [Input("enhancedSecurityService")]
+        public Input<bool>? EnhancedSecurityService { get; set; }
+
         [Input("instanceIds", required: true)]
         private InputList<string>? _instanceIds;
 
@@ -23,6 +35,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         {
             get => _instanceIds ?? (_instanceIds = new InputList<string>());
             set => _instanceIds = value;
+        }
+
+        [Input("keyIds")]
+        private InputList<string>? _keyIds;
+
+        /// <summary>
+        /// ID list of keys, should be set if `password` not set.
+        /// </summary>
+        public InputList<string> KeyIds
+        {
+            get => _keyIds ?? (_keyIds = new InputList<string>());
+            set => _keyIds = value;
+        }
+
+        /// <summary>
+        /// Advanced Node Settings. commonly used to attach existing instances.
+        /// </summary>
+        [Input("masterConfig")]
+        public Input<Inputs.ClusterExistInstanceInstancesParaMasterConfigArgs>? MasterConfig { get; set; }
+
+        [Input("password")]
+        private Input<string>? _password;
+
+        /// <summary>
+        /// Password to access, should be set if `key_ids` not set.
+        /// </summary>
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("securityGroupIds")]
+        private InputList<string>? _securityGroupIds;
+
+        /// <summary>
+        /// Security groups to which a CVM instance belongs.
+        /// </summary>
+        public InputList<string> SecurityGroupIds
+        {
+            get => _securityGroupIds ?? (_securityGroupIds = new InputList<string>());
+            set => _securityGroupIds = value;
         }
 
         public ClusterExistInstanceInstancesParaArgs()

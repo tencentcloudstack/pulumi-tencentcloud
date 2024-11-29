@@ -17,12 +17,198 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// 
     /// &gt; **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ### Create a general POSTPAID_BY_HOUR CVM instance
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var images = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "OpenCloudOS Server",
+    ///     });
+    /// 
+    ///     var types = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S1",
+    ///                     "S2",
+    ///                     "S3",
+    ///                     "S4",
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     // create CVM instance
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         AvailabilityZone = availabilityZone,
+    ///         ImageId = images.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = types.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_PREMIUM",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a dedicated cluster CVM instance
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var images = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "OpenCloudOS Server",
+    ///     });
+    /// 
+    ///     var types = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S1",
+    ///                     "S2",
+    ///                     "S3",
+    ///                     "S4",
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         CdcId = "cluster-262n63e8",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create CVM instance
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         AvailabilityZone = availabilityZone,
+    ///         ImageId = images.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = types.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         DedicatedClusterId = "cluster-262n63e8",
+    ///         InstanceChargeType = "CDCPAID",
+    ///         SystemDiskType = "CLOUD_SSD",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_SSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// CVM instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+    /// $ pulumi import tencentcloud:Instance/instance:Instance example ins-2qol3a80
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Instance/instance:Instance")]
@@ -83,10 +269,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<ImmutableArray<Outputs.InstanceDataDisk>> DataDisks { get; private set; } = null!;
 
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string?> DedicatedClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         /// </summary>
         [Output("disableApiTermination")]
         public Output<bool?> DisableApiTermination { get; private set; } = null!;
+
+        /// <summary>
+        /// Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        /// </summary>
+        [Output("disableAutomationService")]
+        public Output<bool?> DisableAutomationService { get; private set; } = null!;
 
         /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -287,6 +485,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> SystemDiskId { get; private set; } = null!;
 
         /// <summary>
+        /// Resize online.
+        /// </summary>
+        [Output("systemDiskResizeOnline")]
+        public Output<bool?> SystemDiskResizeOnline { get; private set; } = null!;
+
+        /// <summary>
         /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         /// </summary>
         [Output("systemDiskSize")]
@@ -428,10 +632,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         /// </summary>
         [Input("disableApiTermination")]
         public Input<bool>? DisableApiTermination { get; set; }
+
+        /// <summary>
+        /// Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        /// </summary>
+        [Input("disableAutomationService")]
+        public Input<bool>? DisableAutomationService { get; set; }
 
         /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -631,6 +847,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? SystemDiskId { get; set; }
 
         /// <summary>
+        /// Resize online.
+        /// </summary>
+        [Input("systemDiskResizeOnline")]
+        public Input<bool>? SystemDiskResizeOnline { get; set; }
+
+        /// <summary>
         /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         /// </summary>
         [Input("systemDiskSize")]
@@ -741,10 +963,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         /// </summary>
         [Input("disableApiTermination")]
         public Input<bool>? DisableApiTermination { get; set; }
+
+        /// <summary>
+        /// Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        /// </summary>
+        [Input("disableAutomationService")]
+        public Input<bool>? DisableAutomationService { get; set; }
 
         /// <summary>
         /// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -972,6 +1206,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Input("systemDiskId")]
         public Input<string>? SystemDiskId { get; set; }
+
+        /// <summary>
+        /// Resize online.
+        /// </summary>
+        [Input("systemDiskResizeOnline")]
+        public Input<bool>? SystemDiskResizeOnline { get; set; }
 
         /// <summary>
         /// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.

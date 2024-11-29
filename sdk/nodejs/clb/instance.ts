@@ -11,97 +11,184 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ### INTERNAL CLB
+ * ### Create INTERNAL CLB
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internalClb = new tencentcloud.clb.Instance("internalClb", {
- *     clbName: "myclb",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ *     isMulticast: false,
+ * });
+ * // create clb
+ * const example = new tencentcloud.clb.Instance("example", {
  *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     subnetId: "subnet-12rastkr",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
  *     tags: {
- *         test: "tf",
+ *         tagKey: "tagValue",
  *     },
- *     vpcId: "vpc-7007ll7q",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### LCU-supported CLB
+ * ### Create dedicated cluster clb
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internalClb = new tencentcloud.clb.Instance("internalClb", {
- *     clbName: "myclb",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ *     cdcId: "cluster-lchwgxhs",
+ *     isMulticast: false,
+ * });
+ * // create clb
+ * const example = new tencentcloud.clb.Instance("example", {
  *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     clusterId: "cluster-lchwgxhs",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create LCU-supported CLB
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ *     isMulticast: false,
+ * });
+ * // create clb
+ * const example = new tencentcloud.clb.Instance("example", {
+ *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
  *     projectId: 0,
  *     slaType: "clb.c3.medium",
- *     subnetId: "subnet-o3a5nt20",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
  *     tags: {
- *         test: "tf",
+ *         tagKey: "tagValue",
  *     },
- *     vpcId: "vpc-2hfyray3",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### OPEN CLB
+ * ### Create OPEN CLB
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const openClb = new tencentcloud.clb.Instance("openClb", {
- *     clbName: "myclb",
- *     networkType: "OPEN",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
  *     projectId: 0,
- *     securityGroups: ["sg-o0ek7r93"],
  *     tags: {
- *         test: "tf",
+ *         example: "test",
  *     },
- *     vpcId: "vpc-da7ffa61",
  * });
- * ```
- * <!--End PulumiCodeChooser -->
- *
- * ### SUPPORT CORS
- *
- * <!--Start PulumiCodeChooser -->
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const openClb = new tencentcloud.clb.Instance("openClb", {
- *     clbName: "myclb",
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
  *     networkType: "OPEN",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     securityGroups: ["sg-o0ek7r93"],
+ *     vpcId: vpc.id,
+ *     securityGroups: [exampleGroup.id],
  *     tags: {
- *         test: "tf",
+ *         tagKey: "tagValue",
  *     },
- *     targetRegionInfoRegion: "ap-guangzhou",
- *     targetRegionInfoVpcId: "vpc-da7ffa61",
- *     vpcId: "vpc-da7ffa61",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### OPNE CLB with VipIsp
+ * ### Support CORS
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.vpc.BandwidthPackage("example", {
+ * const config = new pulumi.Config();
+ * const zone = config.get("zone") || "ap-guangzhou";
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     securityGroups: [exampleGroup.id],
+ *     targetRegionInfoRegion: zone,
+ *     targetRegionInfoVpcId: vpc.id,
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Open CLB with VipIsp
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc bandwidth package
+ * const exampleBandwidthPackage = new tencentcloud.vpc.BandwidthPackage("exampleBandwidthPackage", {
  *     networkType: "SINGLEISP_CMCC",
  *     chargeType: "ENHANCED95_POSTPAID_BY_MONTH",
  *     bandwidthPackageName: "tf-example",
@@ -111,16 +198,17 @@ import * as utilities from "../utilities";
  *         createdBy: "terraform",
  *     },
  * });
- * const openClb = new tencentcloud.clb.Instance("openClb", {
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
  *     networkType: "OPEN",
- *     clbName: "my-open-clb",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     vpcId: "vpc-4owdpnwr",
  *     vipIsp: "CMCC",
  *     internetChargeType: "BANDWIDTH_PACKAGE",
- *     bandwidthPackageId: example.id,
+ *     bandwidthPackageId: exampleBandwidthPackage.id,
+ *     vpcId: vpc.id,
  *     tags: {
- *         test: "open",
+ *         tagKey: "tagValue",
  *     },
  * });
  * ```
@@ -133,46 +221,76 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
- * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
- * const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
- *     networkType: "OPEN",
- *     clbName: "clb-instance-open",
+ * const config = new pulumi.Config();
+ * const zone = config.get("zone") || "ap-guangzhou";
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ *     isMulticast: false,
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
  *     projectId: 0,
- *     vpcId: fooInstance.id,
- *     targetRegionInfoRegion: "ap-guangzhou",
- *     targetRegionInfoVpcId: fooInstance.id,
- *     securityGroups: [fooGroup.id],
- *     dynamicVip: true,
  *     tags: {
- *         test: "tf",
+ *         example: "test",
  *     },
  * });
- * export const domain = clbOpen.domain;
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     targetRegionInfoRegion: zone,
+ *     targetRegionInfoVpcId: vpc.id,
+ *     securityGroups: [exampleGroup.id],
+ *     dynamicVip: true,
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * export const domain = exampleInstance.domain;
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### Specified  Vip Instance
+ * ### Specified Vip Instance
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
- * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
- * const clbOpen = new tencentcloud.clb.Instance("clbOpen", {
- *     networkType: "OPEN",
- *     clbName: "clb-instance-open",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
  *     projectId: 0,
- *     vpcId: fooInstance.id,
- *     securityGroups: [fooGroup.id],
- *     vip: "111.230.4.204",
  *     tags: {
- *         test: "tf",
+ *         example: "test",
  *     },
  * });
- * export const domain = tencentcloud_clb_instance.vip;
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     securityGroups: [exampleGroup.id],
+ *     vip: "111.230.4.204",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * export const domain = exampleInstance.domain;
  * ```
  * <!--End PulumiCodeChooser -->
  *
@@ -183,85 +301,106 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.vpc.Instance("foo", {
- *     cidrBlock: "10.0.0.0/16",
- *     tags: {
- *         test: "mytest",
- *     },
- * });
+ * const config = new pulumi.Config();
+ * const zone = config.get("zone") || "ap-guangzhou";
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: "ap-guangzhou-1",
- *     vpcId: foo.id,
- *     cidrBlock: "10.0.20.0/28",
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
  *     isMulticast: false,
  * });
- * const sglab = new tencentcloud.security.Group("sglab", {
- *     description: "favourite sg",
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
  *     projectId: 0,
- * });
- * const openClb = new tencentcloud.clb.Instance("openClb", {
- *     networkType: "OPEN",
- *     clbName: "my-open-clb",
- *     projectId: 0,
- *     vpcId: foo.id,
- *     loadBalancerPassToTarget: true,
- *     securityGroups: [sglab.id],
- *     targetRegionInfoRegion: "ap-guangzhou",
- *     targetRegionInfoVpcId: foo.id,
  *     tags: {
- *         test: "open",
+ *         example: "test",
+ *     },
+ * });
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     loadBalancerPassToTarget: true,
+ *     vpcId: vpc.id,
+ *     securityGroups: [exampleGroup.id],
+ *     targetRegionInfoVpcId: vpc.id,
+ *     targetRegionInfoRegion: zone,
+ *     tags: {
+ *         tagKey: "tagValue",
  *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### CREATE multiple instance
+ * ### Create multiple instance
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const openClb1 = new tencentcloud.clb.Instance("openClb1", {
- *     clbName: "hello",
- *     masterZoneId: "ap-guangzhou-3",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const example = new tencentcloud.clb.Instance("example", {
  *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     masterZoneId: availabilityZone,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
- * ### CREATE instance with log
+ * ### Create instance with log
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpcTest = new tencentcloud.vpc.Instance("vpcTest", {cidrBlock: "10.0.0.0/16"});
- * const rtbTest = new tencentcloud.route.Table("rtbTest", {vpcId: vpcTest.id});
- * const subnetTest = new tencentcloud.subnet.Instance("subnetTest", {
- *     availabilityZone: "ap-guangzhou-3",
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: _var.availability_zone,
  *     cidrBlock: "10.0.1.0/24",
- *     routeTableId: rtbTest.id,
- *     vpcId: vpcTest.id,
+ *     isMulticast: false,
  * });
- * const set = new tencentcloud.clb.LogSet("set", {period: 7});
+ * // create route table
+ * const route = new tencentcloud.route.Table("route", {vpcId: vpc.id});
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const log = new tencentcloud.clb.LogSet("log", {period: 7});
+ * // create topic
  * const topic = new tencentcloud.clb.LogTopic("topic", {
- *     logSetId: set.id,
+ *     logSetId: log.id,
  *     topicName: "clb-topic",
  * });
- * const internalClb = new tencentcloud.clb.Instance("internalClb", {
- *     clbName: "myclb",
- *     loadBalancerPassToTarget: true,
- *     logSetId: set.id,
- *     logTopicId: topic.id,
+ * // create clb
+ * const exampleInstance = new tencentcloud.clb.Instance("exampleInstance", {
  *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     subnetId: subnetTest.id,
+ *     loadBalancerPassToTarget: true,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     securityGroups: [exampleGroup.id],
+ *     logSetId: log.id,
+ *     logTopicId: topic.id,
  *     tags: {
- *         test: "tf",
+ *         tagKey: "tagValue",
  *     },
- *     vpcId: vpcTest.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -271,7 +410,7 @@ import * as utilities from "../utilities";
  * CLB instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+ * $ pulumi import tencentcloud:Clb/instance:Instance example lb-7a0t6zqb
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -303,7 +442,7 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
-     * IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+     * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
      */
     public readonly addressIpVersion!: pulumi.Output<string>;
     /**
@@ -322,6 +461,10 @@ export class Instance extends pulumi.CustomResource {
      * The virtual service address table of the CLB.
      */
     public /*out*/ readonly clbVips!: pulumi.Output<string[]>;
+    /**
+     * Cluster ID.
+     */
+    public readonly clusterId!: pulumi.Output<string | undefined>;
     /**
      * Whether to enable delete protection.
      */
@@ -361,7 +504,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
      */
-    public readonly masterZoneId!: pulumi.Output<string | undefined>;
+    public readonly masterZoneId!: pulumi.Output<string>;
     /**
      * Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
      */
@@ -381,7 +524,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
      */
-    public readonly slaveZoneId!: pulumi.Output<string | undefined>;
+    public readonly slaveZoneId!: pulumi.Output<string>;
     /**
      * Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
      */
@@ -421,7 +564,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Available zone id, only applicable to open CLB.
      */
-    public readonly zoneId!: pulumi.Output<string | undefined>;
+    public readonly zoneId!: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -441,6 +584,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = state ? state.clbName : undefined;
             resourceInputs["clbVips"] = state ? state.clbVips : undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["deleteProtect"] = state ? state.deleteProtect : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
             resourceInputs["dynamicVip"] = state ? state.dynamicVip : undefined;
@@ -477,6 +621,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["addressIpVersion"] = args ? args.addressIpVersion : undefined;
             resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = args ? args.clbName : undefined;
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["deleteProtect"] = args ? args.deleteProtect : undefined;
             resourceInputs["dynamicVip"] = args ? args.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = args ? args.internetBandwidthMaxOut : undefined;
@@ -515,7 +660,7 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
-     * IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+     * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
      */
     addressIpVersion?: pulumi.Input<string>;
     /**
@@ -534,6 +679,10 @@ export interface InstanceState {
      * The virtual service address table of the CLB.
      */
     clbVips?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Cluster ID.
+     */
+    clusterId?: pulumi.Input<string>;
     /**
      * Whether to enable delete protection.
      */
@@ -641,7 +790,7 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
-     * IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+     * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
      */
     addressIpVersion?: pulumi.Input<string>;
     /**
@@ -652,6 +801,10 @@ export interface InstanceArgs {
      * Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
     clbName: pulumi.Input<string>;
+    /**
+     * Cluster ID.
+     */
+    clusterId?: pulumi.Input<string>;
     /**
      * Whether to enable delete protection.
      */

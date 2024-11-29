@@ -61,6 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         Password = "Test@123#",
     ///         EnhancedSecurityService = false,
     ///         EnhancedMonitorService = false,
+    ///         EnhancedAutomationToolsService = false,
     ///         UserData = "dGVzdA==",
     ///         HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
     ///         {
@@ -115,6 +116,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Using image family
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.As.ScalingConfig("example", new()
+    ///     {
+    ///         ConfigurationName = "as-test-config",
+    ///         DiskTypePolicy = "ORIGINAL",
+    ///         EnhancedAutomationToolsService = false,
+    ///         EnhancedMonitorService = false,
+    ///         EnhancedSecurityService = false,
+    ///         ImageFamily = "business-daily-update",
+    ///         InstanceTags = null,
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "S5.SMALL2",
+    ///         },
+    ///         InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///         InternetMaxBandwidthOut = 0,
+    ///         KeyIds = new[] {},
+    ///         ProjectId = 0,
+    ///         PublicIpAssigned = false,
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-5275dorp",
+    ///         },
+    ///         SystemDiskSize = 50,
+    ///         SystemDiskType = "CLOUD_BSSD",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// AutoScaling Configuration can be imported using the id, e.g.
@@ -157,6 +199,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<string?> DiskTypePolicy { get; private set; } = null!;
 
         /// <summary>
+        /// To specify whether to enable cloud automation tools service.
+        /// </summary>
+        [Output("enhancedAutomationToolsService")]
+        public Output<bool?> EnhancedAutomationToolsService { get; private set; } = null!;
+
+        /// <summary>
         /// To specify whether to enable cloud monitor service. Default is `TRUE`.
         /// </summary>
         [Output("enhancedMonitorService")]
@@ -175,10 +223,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<Outputs.ScalingConfigHostNameSettings?> HostNameSettings { get; private set; } = null!;
 
         /// <summary>
+        /// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        /// </summary>
+        [Output("imageFamily")]
+        public Output<string?> ImageFamily { get; private set; } = null!;
+
+        /// <summary>
         /// An available image ID for a cvm instance.
         /// </summary>
         [Output("imageId")]
-        public Output<string> ImageId { get; private set; } = null!;
+        public Output<string?> ImageId { get; private set; } = null!;
 
         /// <summary>
         /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
@@ -382,6 +436,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? DiskTypePolicy { get; set; }
 
         /// <summary>
+        /// To specify whether to enable cloud automation tools service.
+        /// </summary>
+        [Input("enhancedAutomationToolsService")]
+        public Input<bool>? EnhancedAutomationToolsService { get; set; }
+
+        /// <summary>
         /// To specify whether to enable cloud monitor service. Default is `TRUE`.
         /// </summary>
         [Input("enhancedMonitorService")]
@@ -400,10 +460,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<Inputs.ScalingConfigHostNameSettingsArgs>? HostNameSettings { get; set; }
 
         /// <summary>
+        /// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        /// </summary>
+        [Input("imageFamily")]
+        public Input<string>? ImageFamily { get; set; }
+
+        /// <summary>
         /// An available image ID for a cvm instance.
         /// </summary>
-        [Input("imageId", required: true)]
-        public Input<string> ImageId { get; set; } = null!;
+        [Input("imageId")]
+        public Input<string>? ImageId { get; set; }
 
         /// <summary>
         /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
@@ -598,6 +664,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? DiskTypePolicy { get; set; }
 
         /// <summary>
+        /// To specify whether to enable cloud automation tools service.
+        /// </summary>
+        [Input("enhancedAutomationToolsService")]
+        public Input<bool>? EnhancedAutomationToolsService { get; set; }
+
+        /// <summary>
         /// To specify whether to enable cloud monitor service. Default is `TRUE`.
         /// </summary>
         [Input("enhancedMonitorService")]
@@ -614,6 +686,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Input("hostNameSettings")]
         public Input<Inputs.ScalingConfigHostNameSettingsGetArgs>? HostNameSettings { get; set; }
+
+        /// <summary>
+        /// Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
+        /// </summary>
+        [Input("imageFamily")]
+        public Input<string>? ImageFamily { get; set; }
 
         /// <summary>
         /// An available image ID for a cvm instance.

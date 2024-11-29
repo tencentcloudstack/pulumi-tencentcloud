@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         private InputList<Inputs.ScaleWorkerWorkerConfigDataDiskArgs>? _dataDisks;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of cvm data disk.
         /// </summary>
         public InputList<Inputs.ScaleWorkerWorkerConfigDataDiskArgs> DataDisks
         {

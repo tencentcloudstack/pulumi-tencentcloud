@@ -383,7 +383,7 @@ class AuthAttachment(pulumi.CustomResource):
                 password="ZZXXccvv1212",
             )],
             cluster_deploy_type="MANAGED_CLUSTER")
-        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=managed_cluster.id,
             jwks_uri=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
             issuer=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com"),
@@ -442,7 +442,7 @@ class AuthAttachment(pulumi.CustomResource):
             )],
             cluster_deploy_type="MANAGED_CLUSTER")
         # if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-        test_use_tke_default_auth_attach = tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=managed_cluster.id,
             auto_create_discovery_anonymous_auth=True,
             use_tke_default=True)
@@ -457,7 +457,7 @@ class AuthAttachment(pulumi.CustomResource):
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
             use_tke_default=True,
             auto_create_discovery_anonymous_auth=True,
@@ -474,7 +474,7 @@ class AuthAttachment(pulumi.CustomResource):
         tke cluster authentication can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
         ```
 
         :param str resource_name: The name of the resource.
@@ -549,7 +549,7 @@ class AuthAttachment(pulumi.CustomResource):
                 password="ZZXXccvv1212",
             )],
             cluster_deploy_type="MANAGED_CLUSTER")
-        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=managed_cluster.id,
             jwks_uri=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
             issuer=managed_cluster.id.apply(lambda id: f"https://{id}.ccs.tencent-cloud.com"),
@@ -608,7 +608,7 @@ class AuthAttachment(pulumi.CustomResource):
             )],
             cluster_deploy_type="MANAGED_CLUSTER")
         # if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
-        test_use_tke_default_auth_attach = tencentcloud.kubernetes.AuthAttachment("testUseTkeDefaultAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=managed_cluster.id,
             auto_create_discovery_anonymous_auth=True,
             use_tke_default=True)
@@ -623,7 +623,7 @@ class AuthAttachment(pulumi.CustomResource):
         import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        test_auth_attach = tencentcloud.kubernetes.AuthAttachment("testAuthAttach",
+        example = tencentcloud.kubernetes.AuthAttachment("example",
             cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
             use_tke_default=True,
             auto_create_discovery_anonymous_auth=True,
@@ -640,7 +640,7 @@ class AuthAttachment(pulumi.CustomResource):
         tke cluster authentication can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
         ```
 
         :param str resource_name: The name of the resource.

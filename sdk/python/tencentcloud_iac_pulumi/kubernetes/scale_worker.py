@@ -18,6 +18,7 @@ class ScaleWorkerArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
                  worker_config: pulumi.Input['ScaleWorkerWorkerConfigArgs'],
+                 create_result_output_file: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]] = None,
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
@@ -26,13 +27,15 @@ class ScaleWorkerArgs:
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  pre_start_user_script: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  user_script: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ScaleWorker resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input['ScaleWorkerWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[str] create_result_output_file: Used to save results of CVMs creation error messages.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -40,11 +43,14 @@ class ScaleWorkerArgs:
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]] taints: Node taint.
         :param pulumi.Input[int] unschedulable: Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         :param pulumi.Input[str] user_script: Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "worker_config", worker_config)
+        if create_result_output_file is not None:
+            pulumi.set(__self__, "create_result_output_file", create_result_output_file)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if desired_pod_num is not None:
@@ -61,6 +67,8 @@ class ScaleWorkerArgs:
             pulumi.set(__self__, "mount_target", mount_target)
         if pre_start_user_script is not None:
             pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        if taints is not None:
+            pulumi.set(__self__, "taints", taints)
         if unschedulable is not None:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if user_script is not None:
@@ -91,10 +99,22 @@ class ScaleWorkerArgs:
         pulumi.set(self, "worker_config", value)
 
     @property
+    @pulumi.getter(name="createResultOutputFile")
+    def create_result_output_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used to save results of CVMs creation error messages.
+        """
+        return pulumi.get(self, "create_result_output_file")
+
+    @create_result_output_file.setter
+    def create_result_output_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "create_result_output_file", value)
+
+    @property
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -185,6 +205,18 @@ class ScaleWorkerArgs:
     @pre_start_user_script.setter
     def pre_start_user_script(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "pre_start_user_script", value)
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @taints.setter
+    def taints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]]):
+        pulumi.set(self, "taints", value)
 
     @property
     @pulumi.getter
@@ -215,6 +247,7 @@ class ScaleWorkerArgs:
 class _ScaleWorkerState:
     def __init__(__self__, *,
                  cluster_id: Optional[pulumi.Input[str]] = None,
+                 create_result_output_file: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]] = None,
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
@@ -223,6 +256,7 @@ class _ScaleWorkerState:
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  pre_start_user_script: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  user_script: Optional[pulumi.Input[str]] = None,
                  worker_config: Optional[pulumi.Input['ScaleWorkerWorkerConfigArgs']] = None,
@@ -230,7 +264,8 @@ class _ScaleWorkerState:
         """
         Input properties used for looking up and filtering ScaleWorker resources.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[str] create_result_output_file: Used to save results of CVMs creation error messages.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -238,6 +273,7 @@ class _ScaleWorkerState:
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]] taints: Node taint.
         :param pulumi.Input[int] unschedulable: Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         :param pulumi.Input[str] user_script: Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
         :param pulumi.Input['ScaleWorkerWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
@@ -245,6 +281,8 @@ class _ScaleWorkerState:
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
+        if create_result_output_file is not None:
+            pulumi.set(__self__, "create_result_output_file", create_result_output_file)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if desired_pod_num is not None:
@@ -261,6 +299,8 @@ class _ScaleWorkerState:
             pulumi.set(__self__, "mount_target", mount_target)
         if pre_start_user_script is not None:
             pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        if taints is not None:
+            pulumi.set(__self__, "taints", taints)
         if unschedulable is not None:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if user_script is not None:
@@ -283,10 +323,22 @@ class _ScaleWorkerState:
         pulumi.set(self, "cluster_id", value)
 
     @property
+    @pulumi.getter(name="createResultOutputFile")
+    def create_result_output_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        Used to save results of CVMs creation error messages.
+        """
+        return pulumi.get(self, "create_result_output_file")
+
+    @create_result_output_file.setter
+    def create_result_output_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "create_result_output_file", value)
+
+    @property
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -377,6 +429,18 @@ class _ScaleWorkerState:
     @pre_start_user_script.setter
     def pre_start_user_script(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "pre_start_user_script", value)
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @taints.setter
+    def taints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerTaintArgs']]]]):
+        pulumi.set(self, "taints", value)
 
     @property
     @pulumi.getter
@@ -433,6 +497,7 @@ class ScaleWorker(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
+                 create_result_output_file: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]]] = None,
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
@@ -441,6 +506,7 @@ class ScaleWorker(pulumi.CustomResource):
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  pre_start_user_script: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerTaintArgs']]]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  user_script: Optional[pulumi.Input[str]] = None,
                  worker_config: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerWorkerConfigArgs']]] = None,
@@ -451,6 +517,8 @@ class ScaleWorker(pulumi.CustomResource):
         > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
 
         > **NOTE:** Import Node: Currently, only one node can be imported at a time.
+
+        > **NOTE:** If you need to view error messages during instance creation, you can use parameter `create_result_output_file` to set the file save path
 
         ## Example Usage
 
@@ -469,7 +537,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             desired_pod_num=16,
             labels={
@@ -494,7 +562,8 @@ class ScaleWorker(pulumi.CustomResource):
                 enhanced_monitor_service=False,
                 user_data="dGVzdA==",
                 password="AABBccdd1122",
-            ))
+            ),
+            create_result_output_file="my_output_file_path")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -515,7 +584,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             extra_args=["root-dir=/var/lib/kubelet"],
             labels={
@@ -549,13 +618,14 @@ class ScaleWorker(pulumi.CustomResource):
         tke scale worker can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of data disk.
+        :param pulumi.Input[str] create_result_output_file: Used to save results of CVMs creation error messages.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -563,6 +633,7 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerTaintArgs']]]] taints: Node taint.
         :param pulumi.Input[int] unschedulable: Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         :param pulumi.Input[str] user_script: Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
         :param pulumi.Input[pulumi.InputType['ScaleWorkerWorkerConfigArgs']] worker_config: Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
@@ -580,6 +651,8 @@ class ScaleWorker(pulumi.CustomResource):
 
         > **NOTE:** Import Node: Currently, only one node can be imported at a time.
 
+        > **NOTE:** If you need to view error messages during instance creation, you can use parameter `create_result_output_file` to set the file save path
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -597,7 +670,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             desired_pod_num=16,
             labels={
@@ -622,7 +695,8 @@ class ScaleWorker(pulumi.CustomResource):
                 enhanced_monitor_service=False,
                 user_data="dGVzdA==",
                 password="AABBccdd1122",
-            ))
+            ),
+            create_result_output_file="my_output_file_path")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -643,7 +717,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             extra_args=["root-dir=/var/lib/kubelet"],
             labels={
@@ -677,7 +751,7 @@ class ScaleWorker(pulumi.CustomResource):
         tke scale worker can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi
         ```
 
         :param str resource_name: The name of the resource.
@@ -696,6 +770,7 @@ class ScaleWorker(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
+                 create_result_output_file: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]]] = None,
                  desired_pod_num: Optional[pulumi.Input[int]] = None,
                  docker_graph_path: Optional[pulumi.Input[str]] = None,
@@ -704,6 +779,7 @@ class ScaleWorker(pulumi.CustomResource):
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None,
                  pre_start_user_script: Optional[pulumi.Input[str]] = None,
+                 taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerTaintArgs']]]]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  user_script: Optional[pulumi.Input[str]] = None,
                  worker_config: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerWorkerConfigArgs']]] = None,
@@ -719,6 +795,7 @@ class ScaleWorker(pulumi.CustomResource):
             if cluster_id is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
+            __props__.__dict__["create_result_output_file"] = create_result_output_file
             __props__.__dict__["data_disks"] = data_disks
             __props__.__dict__["desired_pod_num"] = desired_pod_num
             __props__.__dict__["docker_graph_path"] = docker_graph_path
@@ -727,6 +804,7 @@ class ScaleWorker(pulumi.CustomResource):
             __props__.__dict__["labels"] = labels
             __props__.__dict__["mount_target"] = mount_target
             __props__.__dict__["pre_start_user_script"] = pre_start_user_script
+            __props__.__dict__["taints"] = taints
             __props__.__dict__["unschedulable"] = unschedulable
             __props__.__dict__["user_script"] = user_script
             if worker_config is None and not opts.urn:
@@ -744,6 +822,7 @@ class ScaleWorker(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
+            create_result_output_file: Optional[pulumi.Input[str]] = None,
             data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]]] = None,
             desired_pod_num: Optional[pulumi.Input[int]] = None,
             docker_graph_path: Optional[pulumi.Input[str]] = None,
@@ -752,6 +831,7 @@ class ScaleWorker(pulumi.CustomResource):
             labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             mount_target: Optional[pulumi.Input[str]] = None,
             pre_start_user_script: Optional[pulumi.Input[str]] = None,
+            taints: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerTaintArgs']]]]] = None,
             unschedulable: Optional[pulumi.Input[int]] = None,
             user_script: Optional[pulumi.Input[str]] = None,
             worker_config: Optional[pulumi.Input[pulumi.InputType['ScaleWorkerWorkerConfigArgs']]] = None,
@@ -764,7 +844,8 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of data disk.
+        :param pulumi.Input[str] create_result_output_file: Used to save results of CVMs creation error messages.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -772,6 +853,7 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of kubernetes scale worker created nodes.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerTaintArgs']]]] taints: Node taint.
         :param pulumi.Input[int] unschedulable: Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         :param pulumi.Input[str] user_script: Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
         :param pulumi.Input[pulumi.InputType['ScaleWorkerWorkerConfigArgs']] worker_config: Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
@@ -782,6 +864,7 @@ class ScaleWorker(pulumi.CustomResource):
         __props__ = _ScaleWorkerState.__new__(_ScaleWorkerState)
 
         __props__.__dict__["cluster_id"] = cluster_id
+        __props__.__dict__["create_result_output_file"] = create_result_output_file
         __props__.__dict__["data_disks"] = data_disks
         __props__.__dict__["desired_pod_num"] = desired_pod_num
         __props__.__dict__["docker_graph_path"] = docker_graph_path
@@ -790,6 +873,7 @@ class ScaleWorker(pulumi.CustomResource):
         __props__.__dict__["labels"] = labels
         __props__.__dict__["mount_target"] = mount_target
         __props__.__dict__["pre_start_user_script"] = pre_start_user_script
+        __props__.__dict__["taints"] = taints
         __props__.__dict__["unschedulable"] = unschedulable
         __props__.__dict__["user_script"] = user_script
         __props__.__dict__["worker_config"] = worker_config
@@ -805,10 +889,18 @@ class ScaleWorker(pulumi.CustomResource):
         return pulumi.get(self, "cluster_id")
 
     @property
+    @pulumi.getter(name="createResultOutputFile")
+    def create_result_output_file(self) -> pulumi.Output[Optional[str]]:
+        """
+        Used to save results of CVMs creation error messages.
+        """
+        return pulumi.get(self, "create_result_output_file")
+
+    @property
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> pulumi.Output[Optional[Sequence['outputs.ScaleWorkerDataDisk']]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -867,6 +959,14 @@ class ScaleWorker(pulumi.CustomResource):
         Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         """
         return pulumi.get(self, "pre_start_user_script")
+
+    @property
+    @pulumi.getter
+    def taints(self) -> pulumi.Output[Optional[Sequence['outputs.ScaleWorkerTaint']]]:
+        """
+        Node taint.
+        """
+        return pulumi.get(self, "taints")
 
     @property
     @pulumi.getter

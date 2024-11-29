@@ -90,6 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         LifecycleTransition = "INSTANCE_LAUNCHING",
     ///         DefaultResult = "CONTINUE",
     ///         HeartbeatTimeout = 500,
+    ///         LifecycleTransitionType = "NORMAL",
     ///         NotificationMetadata = "tf test",
     ///     });
     /// 
@@ -146,6 +147,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Use TAT Command
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.As.LifecycleHook("example", new()
+    ///     {
+    ///         DefaultResult = "CONTINUE",
+    ///         HeartbeatTimeout = 300,
+    ///         LifecycleHookName = "test",
+    ///         LifecycleTransition = "INSTANCE_TERMINATING",
+    ///         ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
+    ///         LifecycleCommand = new Tencentcloud.As.Inputs.LifecycleHookLifecycleCommandArgs
+    ///         {
+    ///             CommandId = "cmd-xxxx",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// lifecycle hook can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example lifecycle_hook_id
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/lifecycleHook:LifecycleHook")]
     public partial class LifecycleHook : global::Pulumi.CustomResource
@@ -163,6 +200,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<int?> HeartbeatTimeout { get; private set; } = null!;
 
         /// <summary>
+        /// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        /// </summary>
+        [Output("lifecycleCommand")]
+        public Output<Outputs.LifecycleHookLifecycleCommand> LifecycleCommand { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the lifecycle hook.
         /// </summary>
         [Output("lifecycleHookName")]
@@ -173,6 +216,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Output("lifecycleTransition")]
         public Output<string> LifecycleTransition { get; private set; } = null!;
+
+        /// <summary>
+        /// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        /// </summary>
+        [Output("lifecycleTransitionType")]
+        public Output<string> LifecycleTransitionType { get; private set; } = null!;
 
         /// <summary>
         /// Contains additional information that you want to include any time AS sends a message to the notification target.
@@ -187,7 +236,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<string?> NotificationQueueName { get; private set; } = null!;
 
         /// <summary>
-        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         /// </summary>
         [Output("notificationTargetType")]
         public Output<string?> NotificationTargetType { get; private set; } = null!;
@@ -264,6 +313,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<int>? HeartbeatTimeout { get; set; }
 
         /// <summary>
+        /// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        /// </summary>
+        [Input("lifecycleCommand")]
+        public Input<Inputs.LifecycleHookLifecycleCommandArgs>? LifecycleCommand { get; set; }
+
+        /// <summary>
         /// The name of the lifecycle hook.
         /// </summary>
         [Input("lifecycleHookName", required: true)]
@@ -274,6 +329,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Input("lifecycleTransition", required: true)]
         public Input<string> LifecycleTransition { get; set; } = null!;
+
+        /// <summary>
+        /// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        /// </summary>
+        [Input("lifecycleTransitionType")]
+        public Input<string>? LifecycleTransitionType { get; set; }
 
         /// <summary>
         /// Contains additional information that you want to include any time AS sends a message to the notification target.
@@ -288,7 +349,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? NotificationQueueName { get; set; }
 
         /// <summary>
-        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         /// </summary>
         [Input("notificationTargetType")]
         public Input<string>? NotificationTargetType { get; set; }
@@ -326,6 +387,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<int>? HeartbeatTimeout { get; set; }
 
         /// <summary>
+        /// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        /// </summary>
+        [Input("lifecycleCommand")]
+        public Input<Inputs.LifecycleHookLifecycleCommandGetArgs>? LifecycleCommand { get; set; }
+
+        /// <summary>
         /// The name of the lifecycle hook.
         /// </summary>
         [Input("lifecycleHookName")]
@@ -336,6 +403,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Input("lifecycleTransition")]
         public Input<string>? LifecycleTransition { get; set; }
+
+        /// <summary>
+        /// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        /// </summary>
+        [Input("lifecycleTransitionType")]
+        public Input<string>? LifecycleTransitionType { get; set; }
 
         /// <summary>
         /// Contains additional information that you want to include any time AS sends a message to the notification target.
@@ -350,7 +423,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? NotificationQueueName { get; set; }
 
         /// <summary>
-        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        /// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         /// </summary>
         [Input("notificationTargetType")]
         public Input<string>? NotificationTargetType { get; set; }

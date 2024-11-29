@@ -15,8 +15,10 @@ __all__ = [
     'CustomRuleStrategyArgs',
     'CustomWhiteRuleStrategyArgs',
     'IpAccessControlItemArgs',
+    'IpAccessControlV2JobDateTimeArgs',
+    'IpAccessControlV2JobDateTimeCronArgs',
+    'IpAccessControlV2JobDateTimeTimedArgs',
     'SaasDomainPortArgs',
-    'GetWafInfosParamArgs',
 ]
 
 @pulumi.input_type
@@ -480,6 +482,193 @@ class IpAccessControlItemArgs:
 
 
 @pulumi.input_type
+class IpAccessControlV2JobDateTimeArgs:
+    def __init__(__self__, *,
+                 crons: Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeCronArgs']]]] = None,
+                 time_t_zone: Optional[pulumi.Input[str]] = None,
+                 timeds: Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeTimedArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeCronArgs']]] crons: Time parameters for periodic execution
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] time_t_zone: Time zone
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeTimedArgs']]] timeds: Time parameters for scheduled execution
+               Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if crons is not None:
+            pulumi.set(__self__, "crons", crons)
+        if time_t_zone is not None:
+            pulumi.set(__self__, "time_t_zone", time_t_zone)
+        if timeds is not None:
+            pulumi.set(__self__, "timeds", timeds)
+
+    @property
+    @pulumi.getter
+    def crons(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeCronArgs']]]]:
+        """
+        Time parameters for periodic execution
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "crons")
+
+    @crons.setter
+    def crons(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeCronArgs']]]]):
+        pulumi.set(self, "crons", value)
+
+    @property
+    @pulumi.getter(name="timeTZone")
+    def time_t_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        Time zone
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "time_t_zone")
+
+    @time_t_zone.setter
+    def time_t_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_t_zone", value)
+
+    @property
+    @pulumi.getter
+    def timeds(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeTimedArgs']]]]:
+        """
+        Time parameters for scheduled execution
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "timeds")
+
+    @timeds.setter
+    def timeds(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['IpAccessControlV2JobDateTimeTimedArgs']]]]):
+        pulumi.set(self, "timeds", value)
+
+
+@pulumi.input_type
+class IpAccessControlV2JobDateTimeCronArgs:
+    def __init__(__self__, *,
+                 days: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None,
+                 end_time: Optional[pulumi.Input[str]] = None,
+                 start_time: Optional[pulumi.Input[str]] = None,
+                 w_days: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] days: Days in each month for execution
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] end_time: End time
+               
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[str] start_time: Start time
+               
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] w_days: Days of each week for execution
+               Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if days is not None:
+            pulumi.set(__self__, "days", days)
+        if end_time is not None:
+            pulumi.set(__self__, "end_time", end_time)
+        if start_time is not None:
+            pulumi.set(__self__, "start_time", start_time)
+        if w_days is not None:
+            pulumi.set(__self__, "w_days", w_days)
+
+    @property
+    @pulumi.getter
+    def days(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Days in each month for execution
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "days")
+
+    @days.setter
+    def days(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "days", value)
+
+    @property
+    @pulumi.getter(name="endTime")
+    def end_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        End time
+
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "end_time")
+
+    @end_time.setter
+    def end_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "end_time", value)
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Start time
+
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "start_time")
+
+    @start_time.setter
+    def start_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "start_time", value)
+
+    @property
+    @pulumi.getter(name="wDays")
+    def w_days(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        Days of each week for execution
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "w_days")
+
+    @w_days.setter
+    def w_days(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "w_days", value)
+
+
+@pulumi.input_type
+class IpAccessControlV2JobDateTimeTimedArgs:
+    def __init__(__self__, *,
+                 end_date_time: Optional[pulumi.Input[int]] = None,
+                 start_date_time: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] end_date_time: End timestamp, in seconds
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param pulumi.Input[int] start_date_time: Start timestamp, in seconds
+               Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        if end_date_time is not None:
+            pulumi.set(__self__, "end_date_time", end_date_time)
+        if start_date_time is not None:
+            pulumi.set(__self__, "start_date_time", start_date_time)
+
+    @property
+    @pulumi.getter(name="endDateTime")
+    def end_date_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        End timestamp, in seconds
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "end_date_time")
+
+    @end_date_time.setter
+    def end_date_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "end_date_time", value)
+
+    @property
+    @pulumi.getter(name="startDateTime")
+    def start_date_time(self) -> Optional[pulumi.Input[int]]:
+        """
+        Start timestamp, in seconds
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "start_date_time")
+
+    @start_date_time.setter
+    def start_date_time(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "start_date_time", value)
+
+
+@pulumi.input_type
 class SaasDomainPortArgs:
     def __init__(__self__, *,
                  port: pulumi.Input[str],
@@ -560,59 +749,5 @@ class SaasDomainPortArgs:
     @nginx_server_id.setter
     def nginx_server_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "nginx_server_id", value)
-
-
-@pulumi.input_type
-class GetWafInfosParamArgs:
-    def __init__(__self__, *,
-                 load_balancer_id: str,
-                 domain_id: Optional[str] = None,
-                 listener_id: Optional[str] = None):
-        """
-        :param str load_balancer_id: Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
-        :param str domain_id: Domain unique ID.
-        :param str listener_id: Listener ID of LoadBalancer.
-        """
-        pulumi.set(__self__, "load_balancer_id", load_balancer_id)
-        if domain_id is not None:
-            pulumi.set(__self__, "domain_id", domain_id)
-        if listener_id is not None:
-            pulumi.set(__self__, "listener_id", listener_id)
-
-    @property
-    @pulumi.getter(name="loadBalancerId")
-    def load_balancer_id(self) -> str:
-        """
-        Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
-        """
-        return pulumi.get(self, "load_balancer_id")
-
-    @load_balancer_id.setter
-    def load_balancer_id(self, value: str):
-        pulumi.set(self, "load_balancer_id", value)
-
-    @property
-    @pulumi.getter(name="domainId")
-    def domain_id(self) -> Optional[str]:
-        """
-        Domain unique ID.
-        """
-        return pulumi.get(self, "domain_id")
-
-    @domain_id.setter
-    def domain_id(self, value: Optional[str]):
-        pulumi.set(self, "domain_id", value)
-
-    @property
-    @pulumi.getter(name="listenerId")
-    def listener_id(self) -> Optional[str]:
-        """
-        Listener ID of LoadBalancer.
-        """
-        return pulumi.get(self, "listener_id")
-
-    @listener_id.setter
-    def listener_id(self, value: Optional[str]):
-        pulumi.set(self, "listener_id", value)
 
 

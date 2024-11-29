@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Outputs
         /// </summary>
         public readonly int? DiskSize;
         /// <summary>
-        /// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+        /// Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
         /// </summary>
         public readonly string? DiskType;
         /// <summary>

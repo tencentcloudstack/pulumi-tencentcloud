@@ -20,6 +20,7 @@ class InstanceArgs:
                  network_type: pulumi.Input[str],
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
@@ -46,8 +47,9 @@ class InstanceArgs:
         The set of arguments for constructing a Instance resource.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[str] network_type: Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
-        :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ip_version: It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -77,6 +79,8 @@ class InstanceArgs:
             pulumi.set(__self__, "address_ip_version", address_ip_version)
         if bandwidth_package_id is not None:
             pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if delete_protect is not None:
             pulumi.set(__self__, "delete_protect", delete_protect)
         if dynamic_vip is not None:
@@ -150,7 +154,7 @@ class InstanceArgs:
     @pulumi.getter(name="addressIpVersion")
     def address_ip_version(self) -> Optional[pulumi.Input[str]]:
         """
-        IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         """
         return pulumi.get(self, "address_ip_version")
 
@@ -169,6 +173,18 @@ class InstanceArgs:
     @bandwidth_package_id.setter
     def bandwidth_package_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "bandwidth_package_id", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="deleteProtect")
@@ -443,6 +459,7 @@ class _InstanceState:
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
                  clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  delete_protect: Optional[pulumi.Input[bool]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
@@ -470,11 +487,12 @@ class _InstanceState:
                  zone_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Instance resources.
-        :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ip_version: It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         :param pulumi.Input[str] address_ipv6: The IPv6 address of the load balancing instance.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[str] domain: Domain name of the CLB instance.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
@@ -511,6 +529,8 @@ class _InstanceState:
             pulumi.set(__self__, "clb_name", clb_name)
         if clb_vips is not None:
             pulumi.set(__self__, "clb_vips", clb_vips)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if delete_protect is not None:
             pulumi.set(__self__, "delete_protect", delete_protect)
         if domain is not None:
@@ -566,7 +586,7 @@ class _InstanceState:
     @pulumi.getter(name="addressIpVersion")
     def address_ip_version(self) -> Optional[pulumi.Input[str]]:
         """
-        IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         """
         return pulumi.get(self, "address_ip_version")
 
@@ -621,6 +641,18 @@ class _InstanceState:
     @clb_vips.setter
     def clb_vips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "clb_vips", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="deleteProtect")
@@ -931,6 +963,7 @@ class Instance(pulumi.CustomResource):
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
@@ -960,93 +993,186 @@ class Instance(pulumi.CustomResource):
 
         ## Example Usage
 
-        ### INTERNAL CLB
+        ### Create INTERNAL CLB
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
             network_type="INTERNAL",
+            clb_name="tf-example",
             project_id=0,
-            subnet_id="subnet-12rastkr",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-7007ll7q")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### LCU-supported CLB
+        ### Create dedicated cluster clb
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            cdc_id="cluster-lchwgxhs",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
             network_type="INTERNAL",
+            clb_name="tf-example",
+            project_id=0,
+            cluster_id="cluster-lchwgxhs",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create LCU-supported CLB
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
+            network_type="INTERNAL",
+            clb_name="tf-example",
             project_id=0,
             sla_type="clb.c3.medium",
-            subnet_id="subnet-o3a5nt20",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-2hfyray3")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### OPEN CLB
+        ### Create OPEN CLB
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        open_clb = tencentcloud.clb.Instance("openClb",
-            clb_name="myclb",
-            network_type="OPEN",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            security_groups=["sg-o0ek7r93"],
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-da7ffa61")
-        ```
-        <!--End PulumiCodeChooser -->
-
-        ### SUPPORT CORS
-
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        open_clb = tencentcloud.clb.Instance("openClb",
-            clb_name="myclb",
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
             network_type="OPEN",
+            clb_name="tf-example",
             project_id=0,
-            security_groups=["sg-o0ek7r93"],
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
             tags={
-                "test": "tf",
-            },
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id="vpc-da7ffa61",
-            vpc_id="vpc-da7ffa61")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### OPNE CLB with VipIsp
+        ### Support CORS
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.vpc.BandwidthPackage("example",
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
+            target_region_info_region=zone,
+            target_region_info_vpc_id=vpc.id,
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Open CLB with VipIsp
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc bandwidth package
+        example_bandwidth_package = tencentcloud.vpc.BandwidthPackage("exampleBandwidthPackage",
             network_type="SINGLEISP_CMCC",
             charge_type="ENHANCED95_POSTPAID_BY_MONTH",
             bandwidth_package_name="tf-example",
@@ -1055,16 +1181,17 @@ class Instance(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             })
-        open_clb = tencentcloud.clb.Instance("openClb",
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
             network_type="OPEN",
-            clb_name="my-open-clb",
+            clb_name="tf-example",
             project_id=0,
-            vpc_id="vpc-4owdpnwr",
             vip_isp="CMCC",
             internet_charge_type="BANDWIDTH_PACKAGE",
-            bandwidth_package_id=example.id,
+            bandwidth_package_id=example_bandwidth_package.id,
+            vpc_id=vpc.id,
             tags={
-                "test": "open",
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
@@ -1076,44 +1203,77 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_group = tencentcloud.security.Group("fooGroup")
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        clb_open = tencentcloud.clb.Instance("clbOpen",
-            network_type="OPEN",
-            clb_name="clb-instance-open",
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo_instance.id,
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id=foo_instance.id,
-            security_groups=[foo_group.id],
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            target_region_info_region=zone,
+            target_region_info_vpc_id=vpc.id,
+            security_groups=[example_group.id],
             dynamic_vip=True,
             tags={
-                "test": "tf",
+                "tagKey": "tagValue",
             })
-        pulumi.export("domain", clb_open.domain)
+        pulumi.export("domain", example_instance.domain)
         ```
         <!--End PulumiCodeChooser -->
 
-        ### Specified  Vip Instance
+        ### Specified Vip Instance
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_group = tencentcloud.security.Group("fooGroup")
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        clb_open = tencentcloud.clb.Instance("clbOpen",
-            network_type="OPEN",
-            clb_name="clb-instance-open",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo_instance.id,
-            security_groups=[foo_group.id],
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
             vip="111.230.4.204",
             tags={
-                "test": "tf",
+                "tagKey": "tagValue",
             })
-        pulumi.export("domain", tencentcloud_clb_instance["vip"])
+        pulumi.export("domain", example_instance.domain)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1124,78 +1284,105 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
-            cidr_block="10.0.0.0/16",
-            tags={
-                "test": "mytest",
-            })
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
         subnet = tencentcloud.subnet.Instance("subnet",
-            availability_zone="ap-guangzhou-1",
-            vpc_id=foo.id,
-            cidr_block="10.0.20.0/28",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
             is_multicast=False)
-        sglab = tencentcloud.security.Group("sglab",
-            description="favourite sg",
-            project_id=0)
-        open_clb = tencentcloud.clb.Instance("openClb",
-            network_type="OPEN",
-            clb_name="my-open-clb",
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo.id,
-            load_balancer_pass_to_target=True,
-            security_groups=[sglab.id],
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id=foo.id,
             tags={
-                "test": "open",
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            load_balancer_pass_to_target=True,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
+            target_region_info_vpc_id=vpc.id,
+            target_region_info_region=zone,
+            tags={
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### CREATE multiple instance
+        ### Create multiple instance
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        open_clb1 = tencentcloud.clb.Instance("openClb1",
-            clb_name="hello",
-            master_zone_id="ap-guangzhou-3",
-            network_type="OPEN")
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        example = tencentcloud.clb.Instance("example",
+            network_type="OPEN",
+            clb_name="tf-example",
+            master_zone_id=availability_zone)
         ```
         <!--End PulumiCodeChooser -->
 
-        ### CREATE instance with log
+        ### Create instance with log
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        vpc_test = tencentcloud.vpc.Instance("vpcTest", cidr_block="10.0.0.0/16")
-        rtb_test = tencentcloud.route.Table("rtbTest", vpc_id=vpc_test.id)
-        subnet_test = tencentcloud.subnet.Instance("subnetTest",
-            availability_zone="ap-guangzhou-3",
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=var["availability_zone"],
             cidr_block="10.0.1.0/24",
-            route_table_id=rtb_test.id,
-            vpc_id=vpc_test.id)
-        set = tencentcloud.clb.LogSet("set", period=7)
-        topic = tencentcloud.clb.LogTopic("topic",
-            log_set_id=set.id,
-            topic_name="clb-topic")
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
-            load_balancer_pass_to_target=True,
-            log_set_id=set.id,
-            log_topic_id=topic.id,
-            network_type="INTERNAL",
+            is_multicast=False)
+        # create route table
+        route = tencentcloud.route.Table("route", vpc_id=vpc.id)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            subnet_id=subnet_test.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id=vpc_test.id)
+                "example": "test",
+            })
+        log = tencentcloud.clb.LogSet("log", period=7)
+        # create topic
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=log.id,
+            topic_name="clb-topic")
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="INTERNAL",
+            clb_name="tf-example",
+            project_id=0,
+            load_balancer_pass_to_target=True,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[example_group.id],
+            log_set_id=log.id,
+            log_topic_id=topic.id,
+            tags={
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1204,14 +1391,15 @@ class Instance(pulumi.CustomResource):
         CLB instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+        $ pulumi import tencentcloud:Clb/instance:Instance example lb-7a0t6zqb
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ip_version: It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -1247,93 +1435,186 @@ class Instance(pulumi.CustomResource):
 
         ## Example Usage
 
-        ### INTERNAL CLB
+        ### Create INTERNAL CLB
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
             network_type="INTERNAL",
+            clb_name="tf-example",
             project_id=0,
-            subnet_id="subnet-12rastkr",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-7007ll7q")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### LCU-supported CLB
+        ### Create dedicated cluster clb
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            cdc_id="cluster-lchwgxhs",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
             network_type="INTERNAL",
+            clb_name="tf-example",
+            project_id=0,
+            cluster_id="cluster-lchwgxhs",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create LCU-supported CLB
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create clb
+        example = tencentcloud.clb.Instance("example",
+            network_type="INTERNAL",
+            clb_name="tf-example",
             project_id=0,
             sla_type="clb.c3.medium",
-            subnet_id="subnet-o3a5nt20",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-2hfyray3")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### OPEN CLB
+        ### Create OPEN CLB
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        open_clb = tencentcloud.clb.Instance("openClb",
-            clb_name="myclb",
-            network_type="OPEN",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            security_groups=["sg-o0ek7r93"],
             tags={
-                "test": "tf",
-            },
-            vpc_id="vpc-da7ffa61")
-        ```
-        <!--End PulumiCodeChooser -->
-
-        ### SUPPORT CORS
-
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
-
-        open_clb = tencentcloud.clb.Instance("openClb",
-            clb_name="myclb",
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
             network_type="OPEN",
+            clb_name="tf-example",
             project_id=0,
-            security_groups=["sg-o0ek7r93"],
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
             tags={
-                "test": "tf",
-            },
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id="vpc-da7ffa61",
-            vpc_id="vpc-da7ffa61")
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### OPNE CLB with VipIsp
+        ### Support CORS
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        example = tencentcloud.vpc.BandwidthPackage("example",
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
+            target_region_info_region=zone,
+            target_region_info_vpc_id=vpc.id,
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Open CLB with VipIsp
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc bandwidth package
+        example_bandwidth_package = tencentcloud.vpc.BandwidthPackage("exampleBandwidthPackage",
             network_type="SINGLEISP_CMCC",
             charge_type="ENHANCED95_POSTPAID_BY_MONTH",
             bandwidth_package_name="tf-example",
@@ -1342,16 +1623,17 @@ class Instance(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             })
-        open_clb = tencentcloud.clb.Instance("openClb",
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
             network_type="OPEN",
-            clb_name="my-open-clb",
+            clb_name="tf-example",
             project_id=0,
-            vpc_id="vpc-4owdpnwr",
             vip_isp="CMCC",
             internet_charge_type="BANDWIDTH_PACKAGE",
-            bandwidth_package_id=example.id,
+            bandwidth_package_id=example_bandwidth_package.id,
+            vpc_id=vpc.id,
             tags={
-                "test": "open",
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
@@ -1363,44 +1645,77 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_group = tencentcloud.security.Group("fooGroup")
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        clb_open = tencentcloud.clb.Instance("clbOpen",
-            network_type="OPEN",
-            clb_name="clb-instance-open",
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo_instance.id,
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id=foo_instance.id,
-            security_groups=[foo_group.id],
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            target_region_info_region=zone,
+            target_region_info_vpc_id=vpc.id,
+            security_groups=[example_group.id],
             dynamic_vip=True,
             tags={
-                "test": "tf",
+                "tagKey": "tagValue",
             })
-        pulumi.export("domain", clb_open.domain)
+        pulumi.export("domain", example_instance.domain)
         ```
         <!--End PulumiCodeChooser -->
 
-        ### Specified  Vip Instance
+        ### Specified Vip Instance
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo_group = tencentcloud.security.Group("fooGroup")
-        foo_instance = tencentcloud.vpc.Instance("fooInstance", cidr_block="10.0.0.0/16")
-        clb_open = tencentcloud.clb.Instance("clbOpen",
-            network_type="OPEN",
-            clb_name="clb-instance-open",
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo_instance.id,
-            security_groups=[foo_group.id],
+            tags={
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
             vip="111.230.4.204",
             tags={
-                "test": "tf",
+                "tagKey": "tagValue",
             })
-        pulumi.export("domain", tencentcloud_clb_instance["vip"])
+        pulumi.export("domain", example_instance.domain)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1411,78 +1726,105 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpc.Instance("foo",
-            cidr_block="10.0.0.0/16",
-            tags={
-                "test": "mytest",
-            })
+        config = pulumi.Config()
+        zone = config.get("zone")
+        if zone is None:
+            zone = "ap-guangzhou"
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
         subnet = tencentcloud.subnet.Instance("subnet",
-            availability_zone="ap-guangzhou-1",
-            vpc_id=foo.id,
-            cidr_block="10.0.20.0/28",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
             is_multicast=False)
-        sglab = tencentcloud.security.Group("sglab",
-            description="favourite sg",
-            project_id=0)
-        open_clb = tencentcloud.clb.Instance("openClb",
-            network_type="OPEN",
-            clb_name="my-open-clb",
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            vpc_id=foo.id,
-            load_balancer_pass_to_target=True,
-            security_groups=[sglab.id],
-            target_region_info_region="ap-guangzhou",
-            target_region_info_vpc_id=foo.id,
             tags={
-                "test": "open",
+                "example": "test",
+            })
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="OPEN",
+            clb_name="tf-example",
+            project_id=0,
+            load_balancer_pass_to_target=True,
+            vpc_id=vpc.id,
+            security_groups=[example_group.id],
+            target_region_info_vpc_id=vpc.id,
+            target_region_info_region=zone,
+            tags={
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
 
-        ### CREATE multiple instance
+        ### Create multiple instance
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        open_clb1 = tencentcloud.clb.Instance("openClb1",
-            clb_name="hello",
-            master_zone_id="ap-guangzhou-3",
-            network_type="OPEN")
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        example = tencentcloud.clb.Instance("example",
+            network_type="OPEN",
+            clb_name="tf-example",
+            master_zone_id=availability_zone)
         ```
         <!--End PulumiCodeChooser -->
 
-        ### CREATE instance with log
+        ### Create instance with log
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        vpc_test = tencentcloud.vpc.Instance("vpcTest", cidr_block="10.0.0.0/16")
-        rtb_test = tencentcloud.route.Table("rtbTest", vpc_id=vpc_test.id)
-        subnet_test = tencentcloud.subnet.Instance("subnetTest",
-            availability_zone="ap-guangzhou-3",
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=var["availability_zone"],
             cidr_block="10.0.1.0/24",
-            route_table_id=rtb_test.id,
-            vpc_id=vpc_test.id)
-        set = tencentcloud.clb.LogSet("set", period=7)
-        topic = tencentcloud.clb.LogTopic("topic",
-            log_set_id=set.id,
-            topic_name="clb-topic")
-        internal_clb = tencentcloud.clb.Instance("internalClb",
-            clb_name="myclb",
-            load_balancer_pass_to_target=True,
-            log_set_id=set.id,
-            log_topic_id=topic.id,
-            network_type="INTERNAL",
+            is_multicast=False)
+        # create route table
+        route = tencentcloud.route.Table("route", vpc_id=vpc.id)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
             project_id=0,
-            subnet_id=subnet_test.id,
             tags={
-                "test": "tf",
-            },
-            vpc_id=vpc_test.id)
+                "example": "test",
+            })
+        log = tencentcloud.clb.LogSet("log", period=7)
+        # create topic
+        topic = tencentcloud.clb.LogTopic("topic",
+            log_set_id=log.id,
+            topic_name="clb-topic")
+        # create clb
+        example_instance = tencentcloud.clb.Instance("exampleInstance",
+            network_type="INTERNAL",
+            clb_name="tf-example",
+            project_id=0,
+            load_balancer_pass_to_target=True,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups=[example_group.id],
+            log_set_id=log.id,
+            log_topic_id=topic.id,
+            tags={
+                "tagKey": "tagValue",
+            })
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1491,7 +1833,7 @@ class Instance(pulumi.CustomResource):
         CLB instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+        $ pulumi import tencentcloud:Clb/instance:Instance example lb-7a0t6zqb
         ```
 
         :param str resource_name: The name of the resource.
@@ -1512,6 +1854,7 @@ class Instance(pulumi.CustomResource):
                  address_ip_version: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  delete_protect: Optional[pulumi.Input[bool]] = None,
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
@@ -1549,6 +1892,7 @@ class Instance(pulumi.CustomResource):
             if clb_name is None and not opts.urn:
                 raise TypeError("Missing required property 'clb_name'")
             __props__.__dict__["clb_name"] = clb_name
+            __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["delete_protect"] = delete_protect
             __props__.__dict__["dynamic_vip"] = dynamic_vip
             __props__.__dict__["internet_bandwidth_max_out"] = internet_bandwidth_max_out
@@ -1593,6 +1937,7 @@ class Instance(pulumi.CustomResource):
             bandwidth_package_id: Optional[pulumi.Input[str]] = None,
             clb_name: Optional[pulumi.Input[str]] = None,
             clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             delete_protect: Optional[pulumi.Input[bool]] = None,
             domain: Optional[pulumi.Input[str]] = None,
             dynamic_vip: Optional[pulumi.Input[bool]] = None,
@@ -1625,11 +1970,12 @@ class Instance(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ip_version: It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         :param pulumi.Input[str] address_ipv6: The IPv6 address of the load balancing instance.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[bool] delete_protect: Whether to enable delete protection.
         :param pulumi.Input[str] domain: Domain name of the CLB instance.
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
@@ -1665,6 +2011,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["bandwidth_package_id"] = bandwidth_package_id
         __props__.__dict__["clb_name"] = clb_name
         __props__.__dict__["clb_vips"] = clb_vips
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["delete_protect"] = delete_protect
         __props__.__dict__["domain"] = domain
         __props__.__dict__["dynamic_vip"] = dynamic_vip
@@ -1696,7 +2043,7 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="addressIpVersion")
     def address_ip_version(self) -> pulumi.Output[str]:
         """
-        IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
         """
         return pulumi.get(self, "address_ip_version")
 
@@ -1731,6 +2078,14 @@ class Instance(pulumi.CustomResource):
         The virtual service address table of the CLB.
         """
         return pulumi.get(self, "clb_vips")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="deleteProtect")
@@ -1806,7 +2161,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="masterZoneId")
-    def master_zone_id(self) -> pulumi.Output[Optional[str]]:
+    def master_zone_id(self) -> pulumi.Output[str]:
         """
         Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         """
@@ -1846,7 +2201,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="slaveZoneId")
-    def slave_zone_id(self) -> pulumi.Output[Optional[str]]:
+    def slave_zone_id(self) -> pulumi.Output[str]:
         """
         Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         """
@@ -1926,7 +2281,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="zoneId")
-    def zone_id(self) -> pulumi.Output[Optional[str]]:
+    def zone_id(self) -> pulumi.Output[str]:
         """
         Available zone id, only applicable to open CLB.
         """

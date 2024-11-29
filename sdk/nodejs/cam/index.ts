@@ -60,6 +60,11 @@ export const getPolicyGrantingServiceAccess: typeof import("./getPolicyGrantingS
 export const getPolicyGrantingServiceAccessOutput: typeof import("./getPolicyGrantingServiceAccess").getPolicyGrantingServiceAccessOutput = null as any;
 utilities.lazyLoad(exports, ["getPolicyGrantingServiceAccess","getPolicyGrantingServiceAccessOutput"], () => require("./getPolicyGrantingServiceAccess"));
 
+export { GetRoleDetailArgs, GetRoleDetailResult, GetRoleDetailOutputArgs } from "./getRoleDetail";
+export const getRoleDetail: typeof import("./getRoleDetail").getRoleDetail = null as any;
+export const getRoleDetailOutput: typeof import("./getRoleDetail").getRoleDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getRoleDetail","getRoleDetailOutput"], () => require("./getRoleDetail"));
+
 export { GetRolePolicyAttachmentsArgs, GetRolePolicyAttachmentsResult, GetRolePolicyAttachmentsOutputArgs } from "./getRolePolicyAttachments";
 export const getRolePolicyAttachments: typeof import("./getRolePolicyAttachments").getRolePolicyAttachments = null as any;
 export const getRolePolicyAttachmentsOutput: typeof import("./getRolePolicyAttachments").getRolePolicyAttachmentsOutput = null as any;
@@ -79,6 +84,11 @@ export { GetSecretLastUsedTimeArgs, GetSecretLastUsedTimeResult, GetSecretLastUs
 export const getSecretLastUsedTime: typeof import("./getSecretLastUsedTime").getSecretLastUsedTime = null as any;
 export const getSecretLastUsedTimeOutput: typeof import("./getSecretLastUsedTime").getSecretLastUsedTimeOutput = null as any;
 utilities.lazyLoad(exports, ["getSecretLastUsedTime","getSecretLastUsedTimeOutput"], () => require("./getSecretLastUsedTime"));
+
+export { GetSubAccountsArgs, GetSubAccountsResult, GetSubAccountsOutputArgs } from "./getSubAccounts";
+export const getSubAccounts: typeof import("./getSubAccounts").getSubAccounts = null as any;
+export const getSubAccountsOutput: typeof import("./getSubAccounts").getSubAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getSubAccounts","getSubAccountsOutput"], () => require("./getSubAccounts"));
 
 export { GetUserPolicyAttachmentsArgs, GetUserPolicyAttachmentsResult, GetUserPolicyAttachmentsOutputArgs } from "./getUserPolicyAttachments";
 export const getUserPolicyAttachments: typeof import("./getUserPolicyAttachments").getUserPolicyAttachments = null as any;

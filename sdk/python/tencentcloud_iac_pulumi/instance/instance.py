@@ -24,7 +24,9 @@ class InstanceArgs:
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disable_api_termination: Optional[pulumi.Input[bool]] = None,
+                 disable_automation_service: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -52,6 +54,7 @@ class InstanceArgs:
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  system_disk_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_resize_online: Optional[pulumi.Input[bool]] = None,
                  system_disk_size: Optional[pulumi.Input[int]] = None,
                  system_disk_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -68,7 +71,9 @@ class InstanceArgs:
         :param pulumi.Input[str] cdh_host_id: Id of cdh instance. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]] data_disks: Settings for data disks.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        :param pulumi.Input[bool] disable_automation_service: Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
@@ -96,6 +101,7 @@ class InstanceArgs:
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+        :param pulumi.Input[bool] system_disk_resize_online: Resize online.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -117,8 +123,12 @@ class InstanceArgs:
             pulumi.set(__self__, "cdh_instance_type", cdh_instance_type)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if disable_api_termination is not None:
             pulumi.set(__self__, "disable_api_termination", disable_api_termination)
+        if disable_automation_service is not None:
+            pulumi.set(__self__, "disable_automation_service", disable_automation_service)
         if disable_monitor_service is not None:
             pulumi.set(__self__, "disable_monitor_service", disable_monitor_service)
         if disable_security_service is not None:
@@ -182,6 +192,8 @@ class InstanceArgs:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if system_disk_id is not None:
             pulumi.set(__self__, "system_disk_id", system_disk_id)
+        if system_disk_resize_online is not None:
+            pulumi.set(__self__, "system_disk_resize_online", system_disk_resize_online)
         if system_disk_size is not None:
             pulumi.set(__self__, "system_disk_size", system_disk_size)
         if system_disk_type is not None:
@@ -292,6 +304,18 @@ class InstanceArgs:
         pulumi.set(self, "data_disks", value)
 
     @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
+
+    @property
     @pulumi.getter(name="disableApiTermination")
     def disable_api_termination(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -302,6 +326,18 @@ class InstanceArgs:
     @disable_api_termination.setter
     def disable_api_termination(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "disable_api_termination", value)
+
+    @property
+    @pulumi.getter(name="disableAutomationService")
+    def disable_automation_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        """
+        return pulumi.get(self, "disable_automation_service")
+
+    @disable_automation_service.setter
+    def disable_automation_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_automation_service", value)
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -637,6 +673,18 @@ class InstanceArgs:
         pulumi.set(self, "system_disk_id", value)
 
     @property
+    @pulumi.getter(name="systemDiskResizeOnline")
+    def system_disk_resize_online(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Resize online.
+        """
+        return pulumi.get(self, "system_disk_resize_online")
+
+    @system_disk_resize_online.setter
+    def system_disk_resize_online(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_disk_resize_online", value)
+
+    @property
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> Optional[pulumi.Input[int]]:
         """
@@ -721,7 +769,9 @@ class _InstanceState:
                  cpu: Optional[pulumi.Input[int]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disable_api_termination: Optional[pulumi.Input[bool]] = None,
+                 disable_automation_service: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  expired_time: Optional[pulumi.Input[str]] = None,
@@ -755,6 +805,7 @@ class _InstanceState:
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  system_disk_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_resize_online: Optional[pulumi.Input[bool]] = None,
                  system_disk_size: Optional[pulumi.Input[int]] = None,
                  system_disk_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -773,7 +824,9 @@ class _InstanceState:
         :param pulumi.Input[int] cpu: The number of CPU cores of the instance.
         :param pulumi.Input[str] create_time: Create time of the instance.
         :param pulumi.Input[Sequence[pulumi.Input['InstanceDataDiskArgs']]] data_disks: Settings for data disks.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        :param pulumi.Input[bool] disable_automation_service: Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[str] expired_time: Expired time of the instance.
@@ -807,6 +860,7 @@ class _InstanceState:
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+        :param pulumi.Input[bool] system_disk_resize_online: Resize online.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -833,8 +887,12 @@ class _InstanceState:
             pulumi.set(__self__, "create_time", create_time)
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if disable_api_termination is not None:
             pulumi.set(__self__, "disable_api_termination", disable_api_termination)
+        if disable_automation_service is not None:
+            pulumi.set(__self__, "disable_automation_service", disable_automation_service)
         if disable_monitor_service is not None:
             pulumi.set(__self__, "disable_monitor_service", disable_monitor_service)
         if disable_security_service is not None:
@@ -910,6 +968,8 @@ class _InstanceState:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if system_disk_id is not None:
             pulumi.set(__self__, "system_disk_id", system_disk_id)
+        if system_disk_resize_online is not None:
+            pulumi.set(__self__, "system_disk_resize_online", system_disk_resize_online)
         if system_disk_size is not None:
             pulumi.set(__self__, "system_disk_size", system_disk_size)
         if system_disk_type is not None:
@@ -1034,6 +1094,18 @@ class _InstanceState:
         pulumi.set(self, "data_disks", value)
 
     @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
+
+    @property
     @pulumi.getter(name="disableApiTermination")
     def disable_api_termination(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -1044,6 +1116,18 @@ class _InstanceState:
     @disable_api_termination.setter
     def disable_api_termination(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "disable_api_termination", value)
+
+    @property
+    @pulumi.getter(name="disableAutomationService")
+    def disable_automation_service(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        """
+        return pulumi.get(self, "disable_automation_service")
+
+    @disable_automation_service.setter
+    def disable_automation_service(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_automation_service", value)
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -1451,6 +1535,18 @@ class _InstanceState:
         pulumi.set(self, "system_disk_id", value)
 
     @property
+    @pulumi.getter(name="systemDiskResizeOnline")
+    def system_disk_resize_online(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Resize online.
+        """
+        return pulumi.get(self, "system_disk_resize_online")
+
+    @system_disk_resize_online.setter
+    def system_disk_resize_online(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "system_disk_resize_online", value)
+
+    @property
     @pulumi.getter(name="systemDiskSize")
     def system_disk_size(self) -> Optional[pulumi.Input[int]]:
         """
@@ -1547,7 +1643,9 @@ class Instance(pulumi.CustomResource):
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disable_api_termination: Optional[pulumi.Input[bool]] = None,
+                 disable_automation_service: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1576,6 +1674,7 @@ class Instance(pulumi.CustomResource):
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  system_disk_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_resize_online: Optional[pulumi.Input[bool]] = None,
                  system_disk_size: Optional[pulumi.Input[int]] = None,
                  system_disk_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1590,12 +1689,130 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 
+        ## Example Usage
+
+        ### Create a general POSTPAID_BY_HOUR CVM instance
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        images = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="OpenCloudOS Server")
+        types = tencentcloud.Instance.get_types(filters=[tencentcloud.instance.GetTypesFilterArgs(
+                name="instance-family",
+                values=[
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4",
+                    "S5",
+                ],
+            )],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        # create CVM instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone=availability_zone,
+            image_id=images.images[0].image_id,
+            instance_type=types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_PREMIUM",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a dedicated cluster CVM instance
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        images = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="OpenCloudOS Server")
+        types = tencentcloud.Instance.get_types(filters=[tencentcloud.instance.GetTypesFilterArgs(
+                name="instance-family",
+                values=[
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4",
+                    "S5",
+                ],
+            )],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            cdc_id="cluster-262n63e8",
+            is_multicast=False)
+        # create CVM instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone=availability_zone,
+            image_id=images.images[0].image_id,
+            instance_type=types.instance_types[0].instance_type,
+            dedicated_cluster_id="cluster-262n63e8",
+            instance_charge_type="CDCPAID",
+            system_disk_type="CLOUD_SSD",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_SSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         CVM instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+        $ pulumi import tencentcloud:Instance/instance:Instance example ins-2qol3a80
         ```
 
         :param str resource_name: The name of the resource.
@@ -1607,7 +1824,9 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] cdh_host_id: Id of cdh instance. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[str] cdh_instance_type: Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instance_charge_type is set to `CDHPAID`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]] data_disks: Settings for data disks.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        :param pulumi.Input[bool] disable_automation_service: Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
@@ -1636,6 +1855,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+        :param pulumi.Input[bool] system_disk_resize_online: Resize online.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -1656,12 +1876,130 @@ class Instance(pulumi.CustomResource):
 
         > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 
+        ## Example Usage
+
+        ### Create a general POSTPAID_BY_HOUR CVM instance
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        images = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="OpenCloudOS Server")
+        types = tencentcloud.Instance.get_types(filters=[tencentcloud.instance.GetTypesFilterArgs(
+                name="instance-family",
+                values=[
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4",
+                    "S5",
+                ],
+            )],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        # create CVM instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone=availability_zone,
+            image_id=images.images[0].image_id,
+            instance_type=types.instance_types[0].instance_type,
+            system_disk_type="CLOUD_PREMIUM",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_PREMIUM",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a dedicated cluster CVM instance
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        images = tencentcloud.Images.get_instance(image_types=["PUBLIC_IMAGE"],
+            image_name_regex="OpenCloudOS Server")
+        types = tencentcloud.Instance.get_types(filters=[tencentcloud.instance.GetTypesFilterArgs(
+                name="instance-family",
+                values=[
+                    "S1",
+                    "S2",
+                    "S3",
+                    "S4",
+                    "S5",
+                ],
+            )],
+            cpu_core_count=2,
+            exclude_sold_out=True)
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24",
+            cdc_id="cluster-262n63e8",
+            is_multicast=False)
+        # create CVM instance
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone=availability_zone,
+            image_id=images.images[0].image_id,
+            instance_type=types.instance_types[0].instance_type,
+            dedicated_cluster_id="cluster-262n63e8",
+            instance_charge_type="CDCPAID",
+            system_disk_type="CLOUD_SSD",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_disks=[tencentcloud.instance.InstanceDataDiskArgs(
+                data_disk_type="CLOUD_SSD",
+                data_disk_size=50,
+                encrypt=False,
+            )],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         CVM instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+        $ pulumi import tencentcloud:Instance/instance:Instance example ins-2qol3a80
         ```
 
         :param str resource_name: The name of the resource.
@@ -1686,7 +2024,9 @@ class Instance(pulumi.CustomResource):
                  cdh_host_id: Optional[pulumi.Input[str]] = None,
                  cdh_instance_type: Optional[pulumi.Input[str]] = None,
                  data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disable_api_termination: Optional[pulumi.Input[bool]] = None,
+                 disable_automation_service: Optional[pulumi.Input[bool]] = None,
                  disable_monitor_service: Optional[pulumi.Input[bool]] = None,
                  disable_security_service: Optional[pulumi.Input[bool]] = None,
                  force_delete: Optional[pulumi.Input[bool]] = None,
@@ -1715,6 +2055,7 @@ class Instance(pulumi.CustomResource):
                  stopped_mode: Optional[pulumi.Input[str]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
                  system_disk_id: Optional[pulumi.Input[str]] = None,
+                 system_disk_resize_online: Optional[pulumi.Input[bool]] = None,
                  system_disk_size: Optional[pulumi.Input[int]] = None,
                  system_disk_type: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1739,7 +2080,9 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["cdh_host_id"] = cdh_host_id
             __props__.__dict__["cdh_instance_type"] = cdh_instance_type
             __props__.__dict__["data_disks"] = data_disks
+            __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
             __props__.__dict__["disable_api_termination"] = disable_api_termination
+            __props__.__dict__["disable_automation_service"] = disable_automation_service
             __props__.__dict__["disable_monitor_service"] = disable_monitor_service
             __props__.__dict__["disable_security_service"] = disable_security_service
             __props__.__dict__["force_delete"] = force_delete
@@ -1770,6 +2113,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["stopped_mode"] = stopped_mode
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["system_disk_id"] = system_disk_id
+            __props__.__dict__["system_disk_resize_online"] = system_disk_resize_online
             __props__.__dict__["system_disk_size"] = system_disk_size
             __props__.__dict__["system_disk_type"] = system_disk_type
             __props__.__dict__["tags"] = tags
@@ -1805,7 +2149,9 @@ class Instance(pulumi.CustomResource):
             cpu: Optional[pulumi.Input[int]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             data_disks: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]]] = None,
+            dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
             disable_api_termination: Optional[pulumi.Input[bool]] = None,
+            disable_automation_service: Optional[pulumi.Input[bool]] = None,
             disable_monitor_service: Optional[pulumi.Input[bool]] = None,
             disable_security_service: Optional[pulumi.Input[bool]] = None,
             expired_time: Optional[pulumi.Input[str]] = None,
@@ -1839,6 +2185,7 @@ class Instance(pulumi.CustomResource):
             stopped_mode: Optional[pulumi.Input[str]] = None,
             subnet_id: Optional[pulumi.Input[str]] = None,
             system_disk_id: Optional[pulumi.Input[str]] = None,
+            system_disk_resize_online: Optional[pulumi.Input[bool]] = None,
             system_disk_size: Optional[pulumi.Input[int]] = None,
             system_disk_type: Optional[pulumi.Input[str]] = None,
             tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -1862,7 +2209,9 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] cpu: The number of CPU cores of the instance.
         :param pulumi.Input[str] create_time: Create time of the instance.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['InstanceDataDiskArgs']]]] data_disks: Settings for data disks.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[bool] disable_api_termination: Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
+        :param pulumi.Input[bool] disable_automation_service: Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifying will cause the instance reset.
         :param pulumi.Input[str] expired_time: Expired time of the instance.
@@ -1896,6 +2245,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] stopped_mode: Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
         :param pulumi.Input[str] subnet_id: The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
         :param pulumi.Input[str] system_disk_id: System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+        :param pulumi.Input[bool] system_disk_resize_online: Resize online.
         :param pulumi.Input[int] system_disk_size: Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
         :param pulumi.Input[str] system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
         :param pulumi.Input[Mapping[str, Any]] tags: A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -1917,7 +2267,9 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["cpu"] = cpu
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["data_disks"] = data_disks
+        __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
         __props__.__dict__["disable_api_termination"] = disable_api_termination
+        __props__.__dict__["disable_automation_service"] = disable_automation_service
         __props__.__dict__["disable_monitor_service"] = disable_monitor_service
         __props__.__dict__["disable_security_service"] = disable_security_service
         __props__.__dict__["expired_time"] = expired_time
@@ -1951,6 +2303,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["stopped_mode"] = stopped_mode
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["system_disk_id"] = system_disk_id
+        __props__.__dict__["system_disk_resize_online"] = system_disk_resize_online
         __props__.__dict__["system_disk_size"] = system_disk_size
         __props__.__dict__["system_disk_type"] = system_disk_type
         __props__.__dict__["tags"] = tags
@@ -2033,12 +2386,28 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "data_disks")
 
     @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @property
     @pulumi.getter(name="disableApiTermination")
     def disable_api_termination(self) -> pulumi.Output[Optional[bool]]:
         """
         Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
         """
         return pulumi.get(self, "disable_api_termination")
+
+    @property
+    @pulumi.getter(name="disableAutomationService")
+    def disable_automation_service(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
+        """
+        return pulumi.get(self, "disable_automation_service")
 
     @property
     @pulumi.getter(name="disableMonitorService")
@@ -2312,6 +2681,14 @@ class Instance(pulumi.CustomResource):
         System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         """
         return pulumi.get(self, "system_disk_id")
+
+    @property
+    @pulumi.getter(name="systemDiskResizeOnline")
+    def system_disk_resize_online(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Resize online.
+        """
+        return pulumi.get(self, "system_disk_resize_online")
 
     @property
     @pulumi.getter(name="systemDiskSize")

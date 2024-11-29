@@ -311,6 +311,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> EndPort { get; private set; } = null!;
 
         /// <summary>
+        /// Enable H2C switch for intranet HTTP listener.
+        /// </summary>
+        [Output("h2cSwitch")]
+        public Output<bool> H2cSwitch { get; private set; } = null!;
+
+        /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         /// </summary>
         [Output("healthCheckContextType")]
@@ -544,6 +550,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? EndPort { get; set; }
 
         /// <summary>
+        /// Enable H2C switch for intranet HTTP listener.
+        /// </summary>
+        [Input("h2cSwitch")]
+        public Input<bool>? H2cSwitch { get; set; }
+
+        /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
         /// </summary>
         [Input("healthCheckContextType")]
@@ -730,6 +742,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("endPort")]
         public Input<int>? EndPort { get; set; }
+
+        /// <summary>
+        /// Enable H2C switch for intranet HTTP listener.
+        /// </summary>
+        [Input("h2cSwitch")]
+        public Input<bool>? H2cSwitch { get; set; }
 
         /// <summary>
         /// Health check protocol. When the value of `health_check_type` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.

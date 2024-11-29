@@ -29,6 +29,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationProxyRule{}
 	case "tencentcloud:Teo/certificateConfig:CertificateConfig":
 		r = &CertificateConfig{}
+	case "tencentcloud:Teo/function:Function":
+		r = &Function{}
+	case "tencentcloud:Teo/functionRule:FunctionRule":
+		r = &FunctionRule{}
+	case "tencentcloud:Teo/functionRulePriority:FunctionRulePriority":
+		r = &FunctionRulePriority{}
+	case "tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment":
+		r = &FunctionRuntimeEnvironment{}
 	case "tencentcloud:Teo/l4Proxy:L4Proxy":
 		r = &L4Proxy{}
 	case "tencentcloud:Teo/originGroup:OriginGroup":
@@ -39,6 +47,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RealtimeLogDelivery{}
 	case "tencentcloud:Teo/ruleEngine:RuleEngine":
 		r = &RuleEngine{}
+	case "tencentcloud:Teo/securityIpGroup:SecurityIpGroup":
+		r = &SecurityIpGroup{}
 	case "tencentcloud:Teo/zone:Zone":
 		r = &Zone{}
 	case "tencentcloud:Teo/zoneSetting:ZoneSetting":
@@ -78,6 +88,26 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/function",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/functionRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/functionRulePriority",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/functionRuntimeEnvironment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/l4Proxy",
 		&module{version},
 	)
@@ -99,6 +129,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/ruleEngine",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/securityIpGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

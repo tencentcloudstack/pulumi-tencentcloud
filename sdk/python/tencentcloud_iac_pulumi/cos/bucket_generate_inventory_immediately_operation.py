@@ -100,6 +100,8 @@ class BucketGenerateInventoryImmediatelyOperation(pulumi.CustomResource):
         """
         Provides a resource to generate a cos bucket inventory immediately
 
+        > **NOTE:** The current resource does not support cdc.
+
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
@@ -126,6 +128,8 @@ class BucketGenerateInventoryImmediatelyOperation(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Provides a resource to generate a cos bucket inventory immediately
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 

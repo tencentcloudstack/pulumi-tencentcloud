@@ -10,6 +10,7 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ActionTimerActionTimerArgs',
     'ChcConfigBmcVirtualPrivateCloudArgs',
     'ChcConfigDeployVirtualPrivateCloudArgs',
     'ImportImageTagSpecificationArgs',
@@ -57,6 +58,45 @@ __all__ = [
     'GetChcHostsFilterArgs',
     'GetInstancesModificationFilterArgs',
 ]
+
+@pulumi.input_type
+class ActionTimerActionTimerArgs:
+    def __init__(__self__, *,
+                 action_time: Optional[pulumi.Input[str]] = None,
+                 timer_action: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] action_time: Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+        :param pulumi.Input[str] timer_action: Timer action, currently only supports destroying one value: TerminateInstances.
+        """
+        if action_time is not None:
+            pulumi.set(__self__, "action_time", action_time)
+        if timer_action is not None:
+            pulumi.set(__self__, "timer_action", timer_action)
+
+    @property
+    @pulumi.getter(name="actionTime")
+    def action_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+        """
+        return pulumi.get(self, "action_time")
+
+    @action_time.setter
+    def action_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "action_time", value)
+
+    @property
+    @pulumi.getter(name="timerAction")
+    def timer_action(self) -> Optional[pulumi.Input[str]]:
+        """
+        Timer action, currently only supports destroying one value: TerminateInstances.
+        """
+        return pulumi.get(self, "timer_action")
+
+    @timer_action.setter
+    def timer_action(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "timer_action", value)
+
 
 @pulumi.input_type
 class ChcConfigBmcVirtualPrivateCloudArgs:
@@ -988,12 +1028,15 @@ class LaunchTemplatePlacementArgs:
         """
         :param pulumi.Input[str] zone: The available zone ID of the instance.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] host_ids: The CDH ID list of the instance(input).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] host_ips: Specify the host machine ip.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] host_ips: It has been deprecated from version 1.81.108. Specify the host machine ip.
         :param pulumi.Input[int] project_id: The project ID of the instance.
         """
         pulumi.set(__self__, "zone", zone)
         if host_ids is not None:
             pulumi.set(__self__, "host_ids", host_ids)
+        if host_ips is not None:
+            warnings.warn("""It has been deprecated from version 1.81.108.""", DeprecationWarning)
+            pulumi.log.warn("""host_ips is deprecated: It has been deprecated from version 1.81.108.""")
         if host_ips is not None:
             pulumi.set(__self__, "host_ips", host_ips)
         if project_id is not None:
@@ -1027,8 +1070,11 @@ class LaunchTemplatePlacementArgs:
     @pulumi.getter(name="hostIps")
     def host_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Specify the host machine ip.
+        It has been deprecated from version 1.81.108. Specify the host machine ip.
         """
+        warnings.warn("""It has been deprecated from version 1.81.108.""", DeprecationWarning)
+        pulumi.log.warn("""host_ips is deprecated: It has been deprecated from version 1.81.108.""")
+
         return pulumi.get(self, "host_ips")
 
     @host_ips.setter

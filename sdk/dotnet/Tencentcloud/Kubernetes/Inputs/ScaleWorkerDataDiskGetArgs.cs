@@ -20,6 +20,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<bool>? AutoFormatAndMount { get; set; }
 
         /// <summary>
+        /// The name of the device or partition to mount.
+        /// </summary>
+        [Input("diskPartition")]
+        public Input<string>? DiskPartition { get; set; }
+
+        /// <summary>
         /// Volume of disk in GB. Default is `0`.
         /// </summary>
         [Input("diskSize")]

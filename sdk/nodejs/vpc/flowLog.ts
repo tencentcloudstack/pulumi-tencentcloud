@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  * vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+ * $ pulumi import tencentcloud:Vpc/flowLog:FlowLog example fl-7k59x22l#vpc-n6qjlen5
  * ```
  */
 export class FlowLog extends pulumi.CustomResource {

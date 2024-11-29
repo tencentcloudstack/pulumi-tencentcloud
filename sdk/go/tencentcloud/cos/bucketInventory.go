@@ -12,7 +12,9 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cos bucketInventory
+// Provides a resource to create a cos bucket inventory
+//
+// > **NOTE:** The current resource does not support cdc.
 //
 // ## Example Usage
 //
@@ -22,36 +24,52 @@ import (
 //
 // import (
 //
+//	"fmt"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cos.NewBucketInventory(ctx, "bucketInventory", &Cos.BucketInventoryArgs{
-//				Bucket: pulumi.String("keep-test-xxxxxx"),
-//				Destination: &cos.BucketInventoryDestinationArgs{
-//					AccountId: pulumi.String(""),
-//					Bucket:    pulumi.String("qcs::cos:ap-guangzhou::keep-test-xxxxxx"),
-//					Format:    pulumi.String("CSV"),
-//					Prefix:    pulumi.String("cos_bucket_inventory"),
-//				},
-//				Filter: &cos.BucketInventoryFilterArgs{
-//					Period: &cos.BucketInventoryFilterPeriodArgs{
-//						StartTime: pulumi.String("1687276800"),
-//					},
-//				},
-//				IncludedObjectVersions: pulumi.String("Current"),
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			// create cos
+//			exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("private-bucket-%v", appId)),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create cos bucket inventory
+//			_, err = Cos.NewBucketInventory(ctx, "exampleBucketInventory", &Cos.BucketInventoryArgs{
+//				Bucket:                 exampleBucket.ID(),
 //				IsEnabled:              pulumi.String("true"),
+//				IncludedObjectVersions: pulumi.String("Current"),
 //				OptionalFields: &cos.BucketInventoryOptionalFieldsArgs{
 //					Fields: pulumi.StringArray{
 //						pulumi.String("Size"),
 //						pulumi.String("ETag"),
 //					},
 //				},
+//				Filter: &cos.BucketInventoryFilterArgs{
+//					Period: &cos.BucketInventoryFilterPeriodArgs{
+//						StartTime: pulumi.String("1687276800"),
+//					},
+//				},
 //				Schedule: &cos.BucketInventoryScheduleArgs{
-//					Frequency: pulumi.String("Weekly"),
+//					Frequency: pulumi.String("Daily"),
+//				},
+//				Destination: &cos.BucketInventoryDestinationArgs{
+//					Bucket: pulumi.String("qcs::cos:ap-guangzhou::private-bucket-1309118522"),
+//					Format: pulumi.String("CSV"),
+//					Prefix: pulumi.String("frontends"),
 //				},
 //			})
 //			if err != nil {
@@ -66,10 +84,10 @@ import (
 //
 // ## Import
 //
-// cos bucket_inventory can be imported using the id, e.g.
+// cos bucket inventory can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory example private-bucket-1309118522#tf-example
 // ```
 type BucketInventory struct {
 	pulumi.CustomResourceState

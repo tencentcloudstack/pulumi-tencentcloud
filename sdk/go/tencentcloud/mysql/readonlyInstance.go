@@ -164,6 +164,8 @@ type ReadonlyInstance struct {
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
+	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+	RoGroupId pulumi.StringOutput `pulumi:"roGroupId"`
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -266,6 +268,8 @@ type readonlyInstanceState struct {
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
+	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+	RoGroupId *string `pulumi:"roGroupId"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -327,6 +331,8 @@ type ReadonlyInstanceState struct {
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
+	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+	RoGroupId pulumi.StringPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -388,6 +394,8 @@ type readonlyInstanceArgs struct {
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
+	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+	RoGroupId *string `pulumi:"roGroupId"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -442,6 +450,8 @@ type ReadonlyInstanceArgs struct {
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
+	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+	RoGroupId pulumi.StringPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -634,6 +644,11 @@ func (o ReadonlyInstanceOutput) Period() pulumi.IntPtrOutput {
 // Period of instance. NOTES: Only supported prepaid instance.
 func (o ReadonlyInstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.PrepaidPeriod }).(pulumi.IntPtrOutput)
+}
+
+// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+func (o ReadonlyInstanceOutput) RoGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.RoGroupId }).(pulumi.StringOutput)
 }
 
 // Security groups to use.

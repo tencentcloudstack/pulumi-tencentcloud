@@ -8,6 +8,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['LifecycleHookArgs', 'LifecycleHook']
 
@@ -19,6 +21,8 @@ class LifecycleHookArgs:
                  scaling_group_id: pulumi.Input[str],
                  default_result: Optional[pulumi.Input[str]] = None,
                  heartbeat_timeout: Optional[pulumi.Input[int]] = None,
+                 lifecycle_command: Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']] = None,
+                 lifecycle_transition_type: Optional[pulumi.Input[str]] = None,
                  notification_metadata: Optional[pulumi.Input[str]] = None,
                  notification_queue_name: Optional[pulumi.Input[str]] = None,
                  notification_target_type: Optional[pulumi.Input[str]] = None,
@@ -30,9 +34,11 @@ class LifecycleHookArgs:
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
+        :param pulumi.Input['LifecycleHookLifecycleCommandArgs'] lifecycle_command: Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        :param pulumi.Input[str] lifecycle_transition_type: The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
-        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         :param pulumi.Input[str] notification_topic_name: For CMQ_TOPIC type, a name of topic must be set.
         """
         pulumi.set(__self__, "lifecycle_hook_name", lifecycle_hook_name)
@@ -42,6 +48,10 @@ class LifecycleHookArgs:
             pulumi.set(__self__, "default_result", default_result)
         if heartbeat_timeout is not None:
             pulumi.set(__self__, "heartbeat_timeout", heartbeat_timeout)
+        if lifecycle_command is not None:
+            pulumi.set(__self__, "lifecycle_command", lifecycle_command)
+        if lifecycle_transition_type is not None:
+            pulumi.set(__self__, "lifecycle_transition_type", lifecycle_transition_type)
         if notification_metadata is not None:
             pulumi.set(__self__, "notification_metadata", notification_metadata)
         if notification_queue_name is not None:
@@ -112,6 +122,30 @@ class LifecycleHookArgs:
         pulumi.set(self, "heartbeat_timeout", value)
 
     @property
+    @pulumi.getter(name="lifecycleCommand")
+    def lifecycle_command(self) -> Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']]:
+        """
+        Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        """
+        return pulumi.get(self, "lifecycle_command")
+
+    @lifecycle_command.setter
+    def lifecycle_command(self, value: Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']]):
+        pulumi.set(self, "lifecycle_command", value)
+
+    @property
+    @pulumi.getter(name="lifecycleTransitionType")
+    def lifecycle_transition_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        """
+        return pulumi.get(self, "lifecycle_transition_type")
+
+    @lifecycle_transition_type.setter
+    def lifecycle_transition_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "lifecycle_transition_type", value)
+
+    @property
     @pulumi.getter(name="notificationMetadata")
     def notification_metadata(self) -> Optional[pulumi.Input[str]]:
         """
@@ -139,7 +173,7 @@ class LifecycleHookArgs:
     @pulumi.getter(name="notificationTargetType")
     def notification_target_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         """
         return pulumi.get(self, "notification_target_type")
 
@@ -165,8 +199,10 @@ class _LifecycleHookState:
     def __init__(__self__, *,
                  default_result: Optional[pulumi.Input[str]] = None,
                  heartbeat_timeout: Optional[pulumi.Input[int]] = None,
+                 lifecycle_command: Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']] = None,
                  lifecycle_hook_name: Optional[pulumi.Input[str]] = None,
                  lifecycle_transition: Optional[pulumi.Input[str]] = None,
+                 lifecycle_transition_type: Optional[pulumi.Input[str]] = None,
                  notification_metadata: Optional[pulumi.Input[str]] = None,
                  notification_queue_name: Optional[pulumi.Input[str]] = None,
                  notification_target_type: Optional[pulumi.Input[str]] = None,
@@ -176,11 +212,13 @@ class _LifecycleHookState:
         Input properties used for looking up and filtering LifecycleHook resources.
         :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
+        :param pulumi.Input['LifecycleHookLifecycleCommandArgs'] lifecycle_command: Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
         :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition_type: The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
-        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         :param pulumi.Input[str] notification_topic_name: For CMQ_TOPIC type, a name of topic must be set.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -188,10 +226,14 @@ class _LifecycleHookState:
             pulumi.set(__self__, "default_result", default_result)
         if heartbeat_timeout is not None:
             pulumi.set(__self__, "heartbeat_timeout", heartbeat_timeout)
+        if lifecycle_command is not None:
+            pulumi.set(__self__, "lifecycle_command", lifecycle_command)
         if lifecycle_hook_name is not None:
             pulumi.set(__self__, "lifecycle_hook_name", lifecycle_hook_name)
         if lifecycle_transition is not None:
             pulumi.set(__self__, "lifecycle_transition", lifecycle_transition)
+        if lifecycle_transition_type is not None:
+            pulumi.set(__self__, "lifecycle_transition_type", lifecycle_transition_type)
         if notification_metadata is not None:
             pulumi.set(__self__, "notification_metadata", notification_metadata)
         if notification_queue_name is not None:
@@ -228,6 +270,18 @@ class _LifecycleHookState:
         pulumi.set(self, "heartbeat_timeout", value)
 
     @property
+    @pulumi.getter(name="lifecycleCommand")
+    def lifecycle_command(self) -> Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']]:
+        """
+        Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        """
+        return pulumi.get(self, "lifecycle_command")
+
+    @lifecycle_command.setter
+    def lifecycle_command(self, value: Optional[pulumi.Input['LifecycleHookLifecycleCommandArgs']]):
+        pulumi.set(self, "lifecycle_command", value)
+
+    @property
     @pulumi.getter(name="lifecycleHookName")
     def lifecycle_hook_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -250,6 +304,18 @@ class _LifecycleHookState:
     @lifecycle_transition.setter
     def lifecycle_transition(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "lifecycle_transition", value)
+
+    @property
+    @pulumi.getter(name="lifecycleTransitionType")
+    def lifecycle_transition_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        """
+        return pulumi.get(self, "lifecycle_transition_type")
+
+    @lifecycle_transition_type.setter
+    def lifecycle_transition_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "lifecycle_transition_type", value)
 
     @property
     @pulumi.getter(name="notificationMetadata")
@@ -279,7 +345,7 @@ class _LifecycleHookState:
     @pulumi.getter(name="notificationTargetType")
     def notification_target_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         """
         return pulumi.get(self, "notification_target_type")
 
@@ -319,8 +385,10 @@ class LifecycleHook(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  default_result: Optional[pulumi.Input[str]] = None,
                  heartbeat_timeout: Optional[pulumi.Input[int]] = None,
+                 lifecycle_command: Optional[pulumi.Input[pulumi.InputType['LifecycleHookLifecycleCommandArgs']]] = None,
                  lifecycle_hook_name: Optional[pulumi.Input[str]] = None,
                  lifecycle_transition: Optional[pulumi.Input[str]] = None,
+                 lifecycle_transition_type: Optional[pulumi.Input[str]] = None,
                  notification_metadata: Optional[pulumi.Input[str]] = None,
                  notification_queue_name: Optional[pulumi.Input[str]] = None,
                  notification_target_type: Optional[pulumi.Input[str]] = None,
@@ -373,6 +441,7 @@ class LifecycleHook(pulumi.CustomResource):
             lifecycle_transition="INSTANCE_LAUNCHING",
             default_result="CONTINUE",
             heartbeat_timeout=500,
+            lifecycle_transition_type="NORMAL",
             notification_metadata="tf test")
         ```
         <!--End PulumiCodeChooser -->
@@ -411,15 +480,44 @@ class LifecycleHook(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Use TAT Command
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.LifecycleHook("example",
+            default_result="CONTINUE",
+            heartbeat_timeout=300,
+            lifecycle_hook_name="test",
+            lifecycle_transition="INSTANCE_TERMINATING",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            lifecycle_command=tencentcloud.as_.LifecycleHookLifecycleCommandArgs(
+                command_id="cmd-xxxx",
+            ))
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        lifecycle hook can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example lifecycle_hook_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
+        :param pulumi.Input[pulumi.InputType['LifecycleHookLifecycleCommandArgs']] lifecycle_command: Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
         :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition_type: The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
-        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         :param pulumi.Input[str] notification_topic_name: For CMQ_TOPIC type, a name of topic must be set.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -475,6 +573,7 @@ class LifecycleHook(pulumi.CustomResource):
             lifecycle_transition="INSTANCE_LAUNCHING",
             default_result="CONTINUE",
             heartbeat_timeout=500,
+            lifecycle_transition_type="NORMAL",
             notification_metadata="tf test")
         ```
         <!--End PulumiCodeChooser -->
@@ -513,6 +612,33 @@ class LifecycleHook(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Use TAT Command
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.as_.LifecycleHook("example",
+            default_result="CONTINUE",
+            heartbeat_timeout=300,
+            lifecycle_hook_name="test",
+            lifecycle_transition="INSTANCE_TERMINATING",
+            scaling_group_id=tencentcloud_as_scaling_group["example"]["id"],
+            lifecycle_command=tencentcloud.as_.LifecycleHookLifecycleCommandArgs(
+                command_id="cmd-xxxx",
+            ))
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        lifecycle hook can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:As/lifecycleHook:LifecycleHook example lifecycle_hook_id
+        ```
+
         :param str resource_name: The name of the resource.
         :param LifecycleHookArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -530,8 +656,10 @@ class LifecycleHook(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  default_result: Optional[pulumi.Input[str]] = None,
                  heartbeat_timeout: Optional[pulumi.Input[int]] = None,
+                 lifecycle_command: Optional[pulumi.Input[pulumi.InputType['LifecycleHookLifecycleCommandArgs']]] = None,
                  lifecycle_hook_name: Optional[pulumi.Input[str]] = None,
                  lifecycle_transition: Optional[pulumi.Input[str]] = None,
+                 lifecycle_transition_type: Optional[pulumi.Input[str]] = None,
                  notification_metadata: Optional[pulumi.Input[str]] = None,
                  notification_queue_name: Optional[pulumi.Input[str]] = None,
                  notification_target_type: Optional[pulumi.Input[str]] = None,
@@ -548,12 +676,14 @@ class LifecycleHook(pulumi.CustomResource):
 
             __props__.__dict__["default_result"] = default_result
             __props__.__dict__["heartbeat_timeout"] = heartbeat_timeout
+            __props__.__dict__["lifecycle_command"] = lifecycle_command
             if lifecycle_hook_name is None and not opts.urn:
                 raise TypeError("Missing required property 'lifecycle_hook_name'")
             __props__.__dict__["lifecycle_hook_name"] = lifecycle_hook_name
             if lifecycle_transition is None and not opts.urn:
                 raise TypeError("Missing required property 'lifecycle_transition'")
             __props__.__dict__["lifecycle_transition"] = lifecycle_transition
+            __props__.__dict__["lifecycle_transition_type"] = lifecycle_transition_type
             __props__.__dict__["notification_metadata"] = notification_metadata
             __props__.__dict__["notification_queue_name"] = notification_queue_name
             __props__.__dict__["notification_target_type"] = notification_target_type
@@ -573,8 +703,10 @@ class LifecycleHook(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             default_result: Optional[pulumi.Input[str]] = None,
             heartbeat_timeout: Optional[pulumi.Input[int]] = None,
+            lifecycle_command: Optional[pulumi.Input[pulumi.InputType['LifecycleHookLifecycleCommandArgs']]] = None,
             lifecycle_hook_name: Optional[pulumi.Input[str]] = None,
             lifecycle_transition: Optional[pulumi.Input[str]] = None,
+            lifecycle_transition_type: Optional[pulumi.Input[str]] = None,
             notification_metadata: Optional[pulumi.Input[str]] = None,
             notification_queue_name: Optional[pulumi.Input[str]] = None,
             notification_target_type: Optional[pulumi.Input[str]] = None,
@@ -589,11 +721,13 @@ class LifecycleHook(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] default_result: Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
         :param pulumi.Input[int] heartbeat_timeout: Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
+        :param pulumi.Input[pulumi.InputType['LifecycleHookLifecycleCommandArgs']] lifecycle_command: Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
         :param pulumi.Input[str] lifecycle_hook_name: The name of the lifecycle hook.
         :param pulumi.Input[str] lifecycle_transition: The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
+        :param pulumi.Input[str] lifecycle_transition_type: The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
         :param pulumi.Input[str] notification_metadata: Contains additional information that you want to include any time AS sends a message to the notification target.
         :param pulumi.Input[str] notification_queue_name: For CMQ_QUEUE type, a name of queue must be set.
-        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        :param pulumi.Input[str] notification_target_type: Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         :param pulumi.Input[str] notification_topic_name: For CMQ_TOPIC type, a name of topic must be set.
         :param pulumi.Input[str] scaling_group_id: ID of a scaling group.
         """
@@ -603,8 +737,10 @@ class LifecycleHook(pulumi.CustomResource):
 
         __props__.__dict__["default_result"] = default_result
         __props__.__dict__["heartbeat_timeout"] = heartbeat_timeout
+        __props__.__dict__["lifecycle_command"] = lifecycle_command
         __props__.__dict__["lifecycle_hook_name"] = lifecycle_hook_name
         __props__.__dict__["lifecycle_transition"] = lifecycle_transition
+        __props__.__dict__["lifecycle_transition_type"] = lifecycle_transition_type
         __props__.__dict__["notification_metadata"] = notification_metadata
         __props__.__dict__["notification_queue_name"] = notification_queue_name
         __props__.__dict__["notification_target_type"] = notification_target_type
@@ -629,6 +765,14 @@ class LifecycleHook(pulumi.CustomResource):
         return pulumi.get(self, "heartbeat_timeout")
 
     @property
+    @pulumi.getter(name="lifecycleCommand")
+    def lifecycle_command(self) -> pulumi.Output['outputs.LifecycleHookLifecycleCommand']:
+        """
+        Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+        """
+        return pulumi.get(self, "lifecycle_command")
+
+    @property
     @pulumi.getter(name="lifecycleHookName")
     def lifecycle_hook_name(self) -> pulumi.Output[str]:
         """
@@ -643,6 +787,14 @@ class LifecycleHook(pulumi.CustomResource):
         The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
         """
         return pulumi.get(self, "lifecycle_transition")
+
+    @property
+    @pulumi.getter(name="lifecycleTransitionType")
+    def lifecycle_transition_type(self) -> pulumi.Output[str]:
+        """
+        The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
+        """
+        return pulumi.get(self, "lifecycle_transition_type")
 
     @property
     @pulumi.getter(name="notificationMetadata")
@@ -664,7 +816,7 @@ class LifecycleHook(pulumi.CustomResource):
     @pulumi.getter(name="notificationTargetType")
     def notification_target_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`.
+        Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
         """
         return pulumi.get(self, "notification_target_type")
 

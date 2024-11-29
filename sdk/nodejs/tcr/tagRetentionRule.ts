@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ### Create a tcr tag retention rule instance
+ * ### Create and enable a tcr tag retention rule instance
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -43,7 +43,6 @@ import * as utilities from "../utilities";
  *         value: 2,
  *     },
  *     cronSetting: "daily",
- *     disabled: true,
  * });
  * ```
  * <!--End PulumiCodeChooser -->

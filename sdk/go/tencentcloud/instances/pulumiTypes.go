@@ -26,6 +26,8 @@ type GetInstanceInstanceList struct {
 	CreateTime string `pulumi:"createTime"`
 	// An information list of data disk. Each element contains the following attributes:
 	DataDisks []GetInstanceInstanceListDataDisk `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId string `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime string `pulumi:"expiredTime"`
 	// ID of the image.
@@ -68,6 +70,8 @@ type GetInstanceInstanceList struct {
 	SystemDiskType string `pulumi:"systemDiskType"`
 	// Tags of the instance.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Globally unique ID of the instance.
+	Uuid string `pulumi:"uuid"`
 	// ID of the vpc to be queried.
 	VpcId string `pulumi:"vpcId"`
 }
@@ -96,6 +100,8 @@ type GetInstanceInstanceListArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// An information list of data disk. Each element contains the following attributes:
 	DataDisks GetInstanceInstanceListDataDiskArrayInput `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringInput `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
 	// ID of the image.
@@ -138,6 +144,8 @@ type GetInstanceInstanceListArgs struct {
 	SystemDiskType pulumi.StringInput `pulumi:"systemDiskType"`
 	// Tags of the instance.
 	Tags pulumi.MapInput `pulumi:"tags"`
+	// Globally unique ID of the instance.
+	Uuid pulumi.StringInput `pulumi:"uuid"`
 	// ID of the vpc to be queried.
 	VpcId pulumi.StringInput `pulumi:"vpcId"`
 }
@@ -221,6 +229,11 @@ func (o GetInstanceInstanceListOutput) CreateTime() pulumi.StringOutput {
 // An information list of data disk. Each element contains the following attributes:
 func (o GetInstanceInstanceListOutput) DataDisks() GetInstanceInstanceListDataDiskArrayOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) []GetInstanceInstanceListDataDisk { return v.DataDisks }).(GetInstanceInstanceListDataDiskArrayOutput)
+}
+
+// Exclusive cluster id.
+func (o GetInstanceInstanceListOutput) DedicatedClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.DedicatedClusterId }).(pulumi.StringOutput)
 }
 
 // Expired time of the instance.
@@ -326,6 +339,11 @@ func (o GetInstanceInstanceListOutput) SystemDiskType() pulumi.StringOutput {
 // Tags of the instance.
 func (o GetInstanceInstanceListOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) map[string]interface{} { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Globally unique ID of the instance.
+func (o GetInstanceInstanceListOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.Uuid }).(pulumi.StringOutput)
 }
 
 // ID of the vpc to be queried.

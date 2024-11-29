@@ -53,6 +53,10 @@ __all__ = [
     'KafkaRechargeProtocolArgs',
     'MachineGroupMachineGroupTypeArgs',
     'ScheduledSqlDstResourceArgs',
+    'TopicExtendsArgs',
+    'TopicExtendsAnonymousAccessArgs',
+    'TopicExtendsAnonymousAccessConditionArgs',
+    'GetLogsetsFilterArgs',
 ]
 
 @pulumi.input_type
@@ -2422,8 +2426,8 @@ class DataTransformDstResourceArgs:
                  alias: pulumi.Input[str],
                  topic_id: pulumi.Input[str]):
         """
-        :param pulumi.Input[str] alias: alias.
-        :param pulumi.Input[str] topic_id: dst topic id.
+        :param pulumi.Input[str] alias: Alias.
+        :param pulumi.Input[str] topic_id: Dst topic ID.
         """
         pulumi.set(__self__, "alias", alias)
         pulumi.set(__self__, "topic_id", topic_id)
@@ -2432,7 +2436,7 @@ class DataTransformDstResourceArgs:
     @pulumi.getter
     def alias(self) -> pulumi.Input[str]:
         """
-        alias.
+        Alias.
         """
         return pulumi.get(self, "alias")
 
@@ -2444,7 +2448,7 @@ class DataTransformDstResourceArgs:
     @pulumi.getter(name="topicId")
     def topic_id(self) -> pulumi.Input[str]:
         """
-        dst topic id.
+        Dst topic ID.
         """
         return pulumi.get(self, "topic_id")
 
@@ -3294,5 +3298,159 @@ class ScheduledSqlDstResourceArgs:
     @region.setter
     def region(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "region", value)
+
+
+@pulumi.input_type
+class TopicExtendsArgs:
+    def __init__(__self__, *,
+                 anonymous_access: Optional[pulumi.Input['TopicExtendsAnonymousAccessArgs']] = None):
+        """
+        :param pulumi.Input['TopicExtendsAnonymousAccessArgs'] anonymous_access: Log topic authentication free configuration information.
+        """
+        if anonymous_access is not None:
+            pulumi.set(__self__, "anonymous_access", anonymous_access)
+
+    @property
+    @pulumi.getter(name="anonymousAccess")
+    def anonymous_access(self) -> Optional[pulumi.Input['TopicExtendsAnonymousAccessArgs']]:
+        """
+        Log topic authentication free configuration information.
+        """
+        return pulumi.get(self, "anonymous_access")
+
+    @anonymous_access.setter
+    def anonymous_access(self, value: Optional[pulumi.Input['TopicExtendsAnonymousAccessArgs']]):
+        pulumi.set(self, "anonymous_access", value)
+
+
+@pulumi.input_type
+class TopicExtendsAnonymousAccessArgs:
+    def __init__(__self__, *,
+                 conditions: Optional[pulumi.Input[Sequence[pulumi.Input['TopicExtendsAnonymousAccessConditionArgs']]]] = None,
+                 operations: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['TopicExtendsAnonymousAccessConditionArgs']]] conditions: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] operations: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if operations is not None:
+            pulumi.set(__self__, "operations", operations)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['TopicExtendsAnonymousAccessConditionArgs']]]]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "conditions")
+
+    @conditions.setter
+    def conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['TopicExtendsAnonymousAccessConditionArgs']]]]):
+        pulumi.set(self, "conditions", value)
+
+    @property
+    @pulumi.getter
+    def operations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "operations")
+
+    @operations.setter
+    def operations(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "operations", value)
+
+
+@pulumi.input_type
+class TopicExtendsAnonymousAccessConditionArgs:
+    def __init__(__self__, *,
+                 attributes: Optional[pulumi.Input[str]] = None,
+                 condition_value: Optional[pulumi.Input[str]] = None,
+                 rule: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[str] attributes: Condition attribute, currently only VpcID is supported.
+        :param pulumi.Input[str] condition_value: The value of the corresponding conditional attribute.
+        :param pulumi.Input[int] rule: Conditional rule, 1: equal, 2: not equal.
+        """
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
+        if condition_value is not None:
+            pulumi.set(__self__, "condition_value", condition_value)
+        if rule is not None:
+            pulumi.set(__self__, "rule", rule)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[pulumi.Input[str]]:
+        """
+        Condition attribute, currently only VpcID is supported.
+        """
+        return pulumi.get(self, "attributes")
+
+    @attributes.setter
+    def attributes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "attributes", value)
+
+    @property
+    @pulumi.getter(name="conditionValue")
+    def condition_value(self) -> Optional[pulumi.Input[str]]:
+        """
+        The value of the corresponding conditional attribute.
+        """
+        return pulumi.get(self, "condition_value")
+
+    @condition_value.setter
+    def condition_value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "condition_value", value)
+
+    @property
+    @pulumi.getter
+    def rule(self) -> Optional[pulumi.Input[int]]:
+        """
+        Conditional rule, 1: equal, 2: not equal.
+        """
+        return pulumi.get(self, "rule")
+
+    @rule.setter
+    def rule(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "rule", value)
+
+
+@pulumi.input_type
+class GetLogsetsFilterArgs:
+    def __init__(__self__, *,
+                 key: str,
+                 values: Sequence[str]):
+        """
+        :param str key: Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        :param Sequence[str] values: The values that need to be filtered.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The values that need to be filtered.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
 
 

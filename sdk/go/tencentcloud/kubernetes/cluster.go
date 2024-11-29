@@ -12,13 +12,6 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provide a resource to create a kubernetes cluster.
-//
-// > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extraArgs`), you need to submit a ticket for application.
-//
-// > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `workerConfig`, then adds nodes by the `Kubernetes.NodePool` resource.
-// It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
-//
 // ## Example Usage
 //
 // ### Use node pool global config
@@ -235,12 +228,89 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Use delete options to delete CBS when deleting the Cluster
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewCluster(ctx, "example", &Kubernetes.ClusterArgs{
+//				VpcId:                   pulumi.Any(local.First_vpc_id),
+//				ClusterCidr:             pulumi.Any(_var.Example_cluster_cidr),
+//				ClusterMaxPodNum:        pulumi.Int(32),
+//				ClusterName:             pulumi.String("example"),
+//				ClusterDesc:             pulumi.String("example for tke cluster"),
+//				ClusterMaxServiceNum:    pulumi.Int(32),
+//				ClusterLevel:            pulumi.String("L50"),
+//				AutoUpgradeClusterLevel: pulumi.Bool(true),
+//				ClusterInternet:         pulumi.Bool(false),
+//				ClusterVersion:          pulumi.String("1.30.0"),
+//				ClusterOs:               pulumi.String("tlinux2.2(tkernel3)x86_64"),
+//				ClusterDeployType:       pulumi.String("MANAGED_CLUSTER"),
+//				ContainerRuntime:        pulumi.String("containerd"),
+//				DockerGraphPath:         pulumi.String("/var/lib/containerd"),
+//				Tags: pulumi.Map{
+//					"demo": pulumi.Any("test"),
+//				},
+//				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+//					&kubernetes.ClusterWorkerConfigArgs{
+//						Count:                   pulumi.Int(1),
+//						AvailabilityZone:        pulumi.Any(_var.Availability_zone_first),
+//						InstanceType:            pulumi.String("SA2.MEDIUM2"),
+//						SystemDiskType:          pulumi.String("CLOUD_SSD"),
+//						SystemDiskSize:          pulumi.Int(60),
+//						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//						InternetMaxBandwidthOut: pulumi.Int(100),
+//						PublicIpAssigned:        pulumi.Bool(true),
+//						SubnetId:                pulumi.Any(local.First_subnet_id),
+//						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+//							&kubernetes.ClusterWorkerConfigDataDiskArgs{
+//								DiskType: pulumi.String("CLOUD_PREMIUM"),
+//								DiskSize: pulumi.Int(50),
+//							},
+//						},
+//						EnhancedSecurityService: pulumi.Bool(false),
+//						EnhancedMonitorService:  pulumi.Bool(false),
+//						UserData:                pulumi.String("dGVzdA=="),
+//						DisasterRecoverGroupIds: pulumi.String{},
+//						SecurityGroupIds:        pulumi.StringArray{},
+//						KeyIds:                  pulumi.String{},
+//						CamRoleName:             pulumi.String("CVM_QcsRole"),
+//						Password:                pulumi.String("ZZXXccvv1212"),
+//					},
+//				},
+//				ResourceDeleteOptions: kubernetes.ClusterResourceDeleteOptionArray{
+//					&kubernetes.ClusterResourceDeleteOptionArgs{
+//						ResourceType: pulumi.String("CBS"),
+//						DeleteMode:   pulumi.String("terminate"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // tke cluster can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster example cls-n2h4jbtk
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
@@ -253,6 +323,8 @@ type Cluster struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrOutput `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrOutput `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId pulumi.StringPtrOutput `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringOutput `pulumi:"certificationAuthority"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -329,6 +401,10 @@ type Cluster struct {
 	GlobeDesiredPodNum pulumi.IntPtrOutput `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrOutput `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolOutput `pulumi:"ignoreServiceCidrConflict"`
+	// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+	InstanceDeleteMode pulumi.StringPtrOutput `pulumi:"instanceDeleteMode"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrOutput `pulumi:"isNonStaticIpMode"`
 	// Kubernetes config.
@@ -359,8 +435,12 @@ type Cluster struct {
 	Password pulumi.StringOutput `pulumi:"password"`
 	// The Intranet address used for access.
 	PgwEndpoint pulumi.StringOutput `pulumi:"pgwEndpoint"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrOutput `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
+	// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+	ResourceDeleteOptions ClusterResourceDeleteOptionArrayOutput `pulumi:"resourceDeleteOptions"`
 	// Container Runtime version.
 	RuntimeVersion pulumi.StringPtrOutput `pulumi:"runtimeVersion"`
 	// Access policy.
@@ -426,6 +506,8 @@ type clusterState struct {
 	AutoUpgradeClusterLevel *bool `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum *int `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId *string `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority *string `pulumi:"certificationAuthority"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -502,6 +584,10 @@ type clusterState struct {
 	GlobeDesiredPodNum *int `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict *bool `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict *bool `pulumi:"ignoreServiceCidrConflict"`
+	// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+	InstanceDeleteMode *string `pulumi:"instanceDeleteMode"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode *bool `pulumi:"isNonStaticIpMode"`
 	// Kubernetes config.
@@ -532,8 +618,12 @@ type clusterState struct {
 	Password *string `pulumi:"password"`
 	// The Intranet address used for access.
 	PgwEndpoint *string `pulumi:"pgwEndpoint"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
+	// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+	ResourceDeleteOptions []ClusterResourceDeleteOption `pulumi:"resourceDeleteOptions"`
 	// Container Runtime version.
 	RuntimeVersion *string `pulumi:"runtimeVersion"`
 	// Access policy.
@@ -567,6 +657,8 @@ type ClusterState struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrInput
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrInput
+	// CDC ID.
+	CdcId pulumi.StringPtrInput
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringPtrInput
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -643,6 +735,10 @@ type ClusterState struct {
 	GlobeDesiredPodNum pulumi.IntPtrInput
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrInput
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolPtrInput
+	// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+	InstanceDeleteMode pulumi.StringPtrInput
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrInput
 	// Kubernetes config.
@@ -673,8 +769,12 @@ type ClusterState struct {
 	Password pulumi.StringPtrInput
 	// The Intranet address used for access.
 	PgwEndpoint pulumi.StringPtrInput
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
+	// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+	ResourceDeleteOptions ClusterResourceDeleteOptionArrayInput
 	// Container Runtime version.
 	RuntimeVersion pulumi.StringPtrInput
 	// Access policy.
@@ -712,6 +812,8 @@ type clusterArgs struct {
 	AutoUpgradeClusterLevel *bool `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum *int `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId *string `pulumi:"cdcId"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
 	ClaimExpiredSeconds *int `pulumi:"claimExpiredSeconds"`
 	// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
@@ -776,6 +878,10 @@ type clusterArgs struct {
 	GlobeDesiredPodNum *int `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict *bool `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict *bool `pulumi:"ignoreServiceCidrConflict"`
+	// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+	InstanceDeleteMode *string `pulumi:"instanceDeleteMode"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode *bool `pulumi:"isNonStaticIpMode"`
 	// Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
@@ -798,8 +904,12 @@ type clusterArgs struct {
 	NodeNameType *string `pulumi:"nodeNameType"`
 	// Global config effective for all node pools.
 	NodePoolGlobalConfigs []ClusterNodePoolGlobalConfig `pulumi:"nodePoolGlobalConfigs"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
+	// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+	ResourceDeleteOptions []ClusterResourceDeleteOption `pulumi:"resourceDeleteOptions"`
 	// Container Runtime version.
 	RuntimeVersion *string `pulumi:"runtimeVersion"`
 	// A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -828,6 +938,8 @@ type ClusterArgs struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrInput
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrInput
+	// CDC ID.
+	CdcId pulumi.StringPtrInput
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
 	ClaimExpiredSeconds pulumi.IntPtrInput
 	// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
@@ -892,6 +1004,10 @@ type ClusterArgs struct {
 	GlobeDesiredPodNum pulumi.IntPtrInput
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrInput
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolPtrInput
+	// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+	InstanceDeleteMode pulumi.StringPtrInput
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrInput
 	// Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
@@ -914,8 +1030,12 @@ type ClusterArgs struct {
 	NodeNameType pulumi.StringPtrInput
 	// Global config effective for all node pools.
 	NodePoolGlobalConfigs ClusterNodePoolGlobalConfigArrayInput
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
+	// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+	ResourceDeleteOptions ClusterResourceDeleteOptionArrayInput
 	// Container Runtime version.
 	RuntimeVersion pulumi.StringPtrInput
 	// A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -1039,6 +1159,11 @@ func (o ClusterOutput) AutoUpgradeClusterLevel() pulumi.BoolPtrOutput {
 // The number of basic pods. valid when enable_customized_pod_cidr=true.
 func (o ClusterOutput) BasePodNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.BasePodNum }).(pulumi.IntPtrOutput)
+}
+
+// CDC ID.
+func (o ClusterOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
 // The certificate used for access.
@@ -1228,6 +1353,16 @@ func (o ClusterOutput) IgnoreClusterCidrConflict() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.IgnoreClusterCidrConflict }).(pulumi.BoolPtrOutput)
 }
 
+// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+func (o ClusterOutput) IgnoreServiceCidrConflict() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.IgnoreServiceCidrConflict }).(pulumi.BoolOutput)
+}
+
+// The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+func (o ClusterOutput) InstanceDeleteMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.InstanceDeleteMode }).(pulumi.StringPtrOutput)
+}
+
 // Indicates whether non-static ip mode is enabled. Default is false.
 func (o ClusterOutput) IsNonStaticIpMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.IsNonStaticIpMode }).(pulumi.BoolPtrOutput)
@@ -1300,9 +1435,19 @@ func (o ClusterOutput) PgwEndpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.PgwEndpoint }).(pulumi.StringOutput)
 }
 
+// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+func (o ClusterOutput) PreStartUserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
+}
+
 // Project ID, default value is 0.
 func (o ClusterOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+func (o ClusterOutput) ResourceDeleteOptions() ClusterResourceDeleteOptionArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterResourceDeleteOptionArrayOutput { return v.ResourceDeleteOptions }).(ClusterResourceDeleteOptionArrayOutput)
 }
 
 // Container Runtime version.

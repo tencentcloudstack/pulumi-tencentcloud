@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Inputs
     public sealed class ProviderAssumeRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
+        /// </summary>
+        [Input("externalId")]
+        public Input<string>? ExternalId { get; set; }
+
+        /// <summary>
         /// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
         /// </summary>
         [Input("policy")]

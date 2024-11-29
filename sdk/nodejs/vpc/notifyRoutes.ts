@@ -4,6 +4,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a vpc notifyRoutes
+ *
+ * ## Import
+ *
+ * vpc notify_routes can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Vpc/notifyRoutes:NotifyRoutes notify_routes route_table_id#route_item_id
+ * ```
+ */
 export class NotifyRoutes extends pulumi.CustomResource {
     /**
      * Get an existing NotifyRoutes resource's state with the given name, ID, and optional extra
@@ -39,7 +50,7 @@ export class NotifyRoutes extends pulumi.CustomResource {
     /**
      * The unique ID of the routing policy.
      */
-    public readonly routeItemIds!: pulumi.Output<string[]>;
+    public readonly routeItemIds!: pulumi.Output<string>;
     /**
      * The unique ID of the routing table.
      */
@@ -89,7 +100,7 @@ export interface NotifyRoutesState {
     /**
      * The unique ID of the routing policy.
      */
-    routeItemIds?: pulumi.Input<pulumi.Input<string>[]>;
+    routeItemIds?: pulumi.Input<string>;
     /**
      * The unique ID of the routing table.
      */
@@ -103,7 +114,7 @@ export interface NotifyRoutesArgs {
     /**
      * The unique ID of the routing policy.
      */
-    routeItemIds: pulumi.Input<pulumi.Input<string>[]>;
+    routeItemIds: pulumi.Input<string>;
     /**
      * The unique ID of the routing table.
      */

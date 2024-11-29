@@ -40,6 +40,16 @@ export const getInstances: typeof import("./getInstances").getInstances = null a
 export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
 utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
 
+export { GetRouteTableInputPoliciesArgs, GetRouteTableInputPoliciesResult, GetRouteTableInputPoliciesOutputArgs } from "./getRouteTableInputPolicies";
+export const getRouteTableInputPolicies: typeof import("./getRouteTableInputPolicies").getRouteTableInputPolicies = null as any;
+export const getRouteTableInputPoliciesOutput: typeof import("./getRouteTableInputPolicies").getRouteTableInputPoliciesOutput = null as any;
+utilities.lazyLoad(exports, ["getRouteTableInputPolicies","getRouteTableInputPoliciesOutput"], () => require("./getRouteTableInputPolicies"));
+
+export { GetRoutesArgs, GetRoutesResult, GetRoutesOutputArgs } from "./getRoutes";
+export const getRoutes: typeof import("./getRoutes").getRoutes = null as any;
+export const getRoutesOutput: typeof import("./getRoutes").getRoutesOutput = null as any;
+utilities.lazyLoad(exports, ["getRoutes","getRoutesOutput"], () => require("./getRoutes"));
+
 export { GetTenantInstancesArgs, GetTenantInstancesResult, GetTenantInstancesOutputArgs } from "./getTenantInstances";
 export const getTenantInstances: typeof import("./getTenantInstances").getTenantInstances = null as any;
 export const getTenantInstancesOutput: typeof import("./getTenantInstances").getTenantInstancesOutput = null as any;
@@ -65,6 +75,31 @@ export type InstancesResetAttach = import("./instancesResetAttach").InstancesRes
 export const InstancesResetAttach: typeof import("./instancesResetAttach").InstancesResetAttach = null as any;
 utilities.lazyLoad(exports, ["InstancesResetAttach"], () => require("./instancesResetAttach"));
 
+export { RouteTableArgs, RouteTableState } from "./routeTable";
+export type RouteTable = import("./routeTable").RouteTable;
+export const RouteTable: typeof import("./routeTable").RouteTable = null as any;
+utilities.lazyLoad(exports, ["RouteTable"], () => require("./routeTable"));
+
+export { RouteTableAssociateInstanceConfigArgs, RouteTableAssociateInstanceConfigState } from "./routeTableAssociateInstanceConfig";
+export type RouteTableAssociateInstanceConfig = import("./routeTableAssociateInstanceConfig").RouteTableAssociateInstanceConfig;
+export const RouteTableAssociateInstanceConfig: typeof import("./routeTableAssociateInstanceConfig").RouteTableAssociateInstanceConfig = null as any;
+utilities.lazyLoad(exports, ["RouteTableAssociateInstanceConfig"], () => require("./routeTableAssociateInstanceConfig"));
+
+export { RouteTableBroadcastPoliciesArgs, RouteTableBroadcastPoliciesState } from "./routeTableBroadcastPolicies";
+export type RouteTableBroadcastPolicies = import("./routeTableBroadcastPolicies").RouteTableBroadcastPolicies;
+export const RouteTableBroadcastPolicies: typeof import("./routeTableBroadcastPolicies").RouteTableBroadcastPolicies = null as any;
+utilities.lazyLoad(exports, ["RouteTableBroadcastPolicies"], () => require("./routeTableBroadcastPolicies"));
+
+export { RouteTableInputPoliciesArgs, RouteTableInputPoliciesState } from "./routeTableInputPolicies";
+export type RouteTableInputPolicies = import("./routeTableInputPolicies").RouteTableInputPolicies;
+export const RouteTableInputPolicies: typeof import("./routeTableInputPolicies").RouteTableInputPolicies = null as any;
+utilities.lazyLoad(exports, ["RouteTableInputPolicies"], () => require("./routeTableInputPolicies"));
+
+export { RouteTableSelectionPoliciesArgs, RouteTableSelectionPoliciesState } from "./routeTableSelectionPolicies";
+export type RouteTableSelectionPolicies = import("./routeTableSelectionPolicies").RouteTableSelectionPolicies;
+export const RouteTableSelectionPolicies: typeof import("./routeTableSelectionPolicies").RouteTableSelectionPolicies = null as any;
+utilities.lazyLoad(exports, ["RouteTableSelectionPolicies"], () => require("./routeTableSelectionPolicies"));
+
 export { RoutesArgs, RoutesState } from "./routes";
 export type Routes = import("./routes").Routes;
 export const Routes: typeof import("./routes").Routes = null as any;
@@ -87,6 +122,16 @@ const _module = {
                 return new InstancesRejectAttach(name, <any>undefined, { urn })
             case "tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach":
                 return new InstancesResetAttach(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routeTable:RouteTable":
+                return new RouteTable(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routeTableAssociateInstanceConfig:RouteTableAssociateInstanceConfig":
+                return new RouteTableAssociateInstanceConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routeTableBroadcastPolicies:RouteTableBroadcastPolicies":
+                return new RouteTableBroadcastPolicies(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routeTableInputPolicies:RouteTableInputPolicies":
+                return new RouteTableInputPolicies(name, <any>undefined, { urn })
+            case "tencentcloud:Ccn/routeTableSelectionPolicies:RouteTableSelectionPolicies":
+                return new RouteTableSelectionPolicies(name, <any>undefined, { urn })
             case "tencentcloud:Ccn/routes:Routes":
                 return new Routes(name, <any>undefined, { urn })
             default:
@@ -100,4 +145,9 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instancesAcceptAttach", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instancesRejectAttach", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/instancesResetAttach", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routeTable", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routeTableAssociateInstanceConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routeTableBroadcastPolicies", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routeTableInputPolicies", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routeTableSelectionPolicies", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ccn/routes", _module)

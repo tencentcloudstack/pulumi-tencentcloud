@@ -133,6 +133,8 @@ type Instance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringOutput `pulumi:"bandwidthPackageId"`
+	// CDC Unique ID.
+	CdcId pulumi.StringPtrOutput `pulumi:"cdcId"`
 	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	Egress pulumi.StringOutput `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -197,6 +199,8 @@ type instanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// CDC Unique ID.
+	CdcId *string `pulumi:"cdcId"`
 	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	Egress *string `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -232,6 +236,8 @@ type InstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
+	// CDC Unique ID.
+	CdcId pulumi.StringPtrInput
 	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	Egress pulumi.StringPtrInput
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -271,6 +277,8 @@ type instanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// CDC Unique ID.
+	CdcId *string `pulumi:"cdcId"`
 	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	Egress *string `pulumi:"egress"`
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -303,6 +311,8 @@ type InstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
+	// CDC Unique ID.
+	CdcId pulumi.StringPtrInput
 	// Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	Egress pulumi.StringPtrInput
 	// The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
@@ -433,6 +443,11 @@ func (o InstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 // ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
 func (o InstanceOutput) BandwidthPackageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.BandwidthPackageId }).(pulumi.StringOutput)
+}
+
+// CDC Unique ID.
+func (o InstanceOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
 // Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).

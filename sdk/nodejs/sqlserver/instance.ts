@@ -98,7 +98,9 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly engineVersion!: pulumi.Output<string | undefined>;
     /**
-     * Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     * It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     *
+     * @deprecated It has been deprecated from version 1.81.136.
      */
     public readonly haType!: pulumi.Output<string | undefined>;
     /**
@@ -120,7 +122,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Indicate whether to deploy across availability zones.
      */
-    public readonly multiZones!: pulumi.Output<boolean | undefined>;
+    public readonly multiZones!: pulumi.Output<boolean>;
     /**
      * Name of the SQL Server instance.
      */
@@ -288,7 +290,9 @@ export interface InstanceState {
      */
     engineVersion?: pulumi.Input<string>;
     /**
-     * Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     * It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     *
+     * @deprecated It has been deprecated from version 1.81.136.
      */
     haType?: pulumi.Input<string>;
     /**
@@ -396,7 +400,9 @@ export interface InstanceArgs {
      */
     engineVersion?: pulumi.Input<string>;
     /**
-     * Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     * It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+     *
+     * @deprecated It has been deprecated from version 1.81.136.
      */
     haType?: pulumi.Input<string>;
     /**

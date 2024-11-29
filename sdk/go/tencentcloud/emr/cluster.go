@@ -146,6 +146,8 @@ import (
 type Cluster struct {
 	pulumi.CustomResourceState
 
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntOutput `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -171,19 +173,23 @@ type Cluster struct {
 	Placement pulumi.MapOutput `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoOutput `pulumi:"placementInfo"`
+	// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+	PreExecutedFileSettings ClusterPreExecutedFileSettingArrayOutput `pulumi:"preExecutedFileSettings"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
-	// - 20: indicates EMR-V2.5.0
+	// - 20: represents EMR-V2.5.0
 	// - 25: represents EMR-V3.1.0
 	// - 27: represents KAFKA-V1.0.0
-	// - 30: indicates EMR-V2.6.0
+	// - 30: represents EMR-V2.6.0
 	// - 33: represents EMR-V3.2.1
-	// - 34: stands for EMR-V3.3.0
-	// - 36: represents STARROCKS-V1.0.0
-	// - 37: indicates EMR-V3.4.0
+	// - 34: represents EMR-V3.3.0
+	// - 37: represents EMR-V3.4.0
 	// - 38: represents EMR-V2.7.0
-	// - 39: stands for STARROCKS-V1.1.0
-	// - 41: represents DRUID-V1.1.0.
+	// - 44: represents EMR-V3.5.0
+	// - 50: represents KAFKA-V2.0.0
+	// - 51: represents STARROCKS-V1.4.0
+	// - 53: represents EMR-V3.6.0
+	// - 54: represents STARROCKS-V2.0.0.
 	ProductId pulumi.IntOutput `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrOutput `pulumi:"resourceSpec"`
@@ -195,6 +201,8 @@ type Cluster struct {
 	SupportHa pulumi.IntOutput `pulumi:"supportHa"`
 	// Tag description list.
 	Tags pulumi.MapOutput `pulumi:"tags"`
+	// Terminate nodes. Note: it only works when the number of nodes decreases.
+	TerminateNodeInfos ClusterTerminateNodeInfoArrayOutput `pulumi:"terminateNodeInfos"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
@@ -259,6 +267,8 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew *int `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -284,19 +294,23 @@ type clusterState struct {
 	Placement map[string]interface{} `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
+	// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+	PreExecutedFileSettings []ClusterPreExecutedFileSetting `pulumi:"preExecutedFileSettings"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
-	// - 20: indicates EMR-V2.5.0
+	// - 20: represents EMR-V2.5.0
 	// - 25: represents EMR-V3.1.0
 	// - 27: represents KAFKA-V1.0.0
-	// - 30: indicates EMR-V2.6.0
+	// - 30: represents EMR-V2.6.0
 	// - 33: represents EMR-V3.2.1
-	// - 34: stands for EMR-V3.3.0
-	// - 36: represents STARROCKS-V1.0.0
-	// - 37: indicates EMR-V3.4.0
+	// - 34: represents EMR-V3.3.0
+	// - 37: represents EMR-V3.4.0
 	// - 38: represents EMR-V2.7.0
-	// - 39: stands for STARROCKS-V1.1.0
-	// - 41: represents DRUID-V1.1.0.
+	// - 44: represents EMR-V3.5.0
+	// - 50: represents KAFKA-V2.0.0
+	// - 51: represents STARROCKS-V1.4.0
+	// - 53: represents EMR-V3.6.0
+	// - 54: represents STARROCKS-V2.0.0.
 	ProductId *int `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec *ClusterResourceSpec `pulumi:"resourceSpec"`
@@ -308,6 +322,8 @@ type clusterState struct {
 	SupportHa *int `pulumi:"supportHa"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Terminate nodes. Note: it only works when the number of nodes decreases.
+	TerminateNodeInfos []ClusterTerminateNodeInfo `pulumi:"terminateNodeInfos"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan *int `pulumi:"timeSpan"`
@@ -318,6 +334,8 @@ type clusterState struct {
 }
 
 type ClusterState struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntPtrInput
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -343,19 +361,23 @@ type ClusterState struct {
 	Placement pulumi.MapInput
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoPtrInput
+	// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+	PreExecutedFileSettings ClusterPreExecutedFileSettingArrayInput
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
-	// - 20: indicates EMR-V2.5.0
+	// - 20: represents EMR-V2.5.0
 	// - 25: represents EMR-V3.1.0
 	// - 27: represents KAFKA-V1.0.0
-	// - 30: indicates EMR-V2.6.0
+	// - 30: represents EMR-V2.6.0
 	// - 33: represents EMR-V3.2.1
-	// - 34: stands for EMR-V3.3.0
-	// - 36: represents STARROCKS-V1.0.0
-	// - 37: indicates EMR-V3.4.0
+	// - 34: represents EMR-V3.3.0
+	// - 37: represents EMR-V3.4.0
 	// - 38: represents EMR-V2.7.0
-	// - 39: stands for STARROCKS-V1.1.0
-	// - 41: represents DRUID-V1.1.0.
+	// - 44: represents EMR-V3.5.0
+	// - 50: represents KAFKA-V2.0.0
+	// - 51: represents STARROCKS-V1.4.0
+	// - 53: represents EMR-V3.6.0
+	// - 54: represents STARROCKS-V2.0.0.
 	ProductId pulumi.IntPtrInput
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrInput
@@ -367,6 +389,8 @@ type ClusterState struct {
 	SupportHa pulumi.IntPtrInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// Terminate nodes. Note: it only works when the number of nodes decreases.
+	TerminateNodeInfos ClusterTerminateNodeInfoArrayInput
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntPtrInput
@@ -381,6 +405,8 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew *int `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -404,19 +430,23 @@ type clusterArgs struct {
 	Placement map[string]interface{} `pulumi:"placement"`
 	// The location of the instance.
 	PlacementInfo *ClusterPlacementInfo `pulumi:"placementInfo"`
+	// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+	PreExecutedFileSettings []ClusterPreExecutedFileSetting `pulumi:"preExecutedFileSettings"`
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
-	// - 20: indicates EMR-V2.5.0
+	// - 20: represents EMR-V2.5.0
 	// - 25: represents EMR-V3.1.0
 	// - 27: represents KAFKA-V1.0.0
-	// - 30: indicates EMR-V2.6.0
+	// - 30: represents EMR-V2.6.0
 	// - 33: represents EMR-V3.2.1
-	// - 34: stands for EMR-V3.3.0
-	// - 36: represents STARROCKS-V1.0.0
-	// - 37: indicates EMR-V3.4.0
+	// - 34: represents EMR-V3.3.0
+	// - 37: represents EMR-V3.4.0
 	// - 38: represents EMR-V2.7.0
-	// - 39: stands for STARROCKS-V1.1.0
-	// - 41: represents DRUID-V1.1.0.
+	// - 44: represents EMR-V3.5.0
+	// - 50: represents KAFKA-V2.0.0
+	// - 51: represents STARROCKS-V1.4.0
+	// - 53: represents EMR-V3.6.0
+	// - 54: represents STARROCKS-V2.0.0.
 	ProductId int `pulumi:"productId"`
 	// Resource specification of EMR instance.
 	ResourceSpec *ClusterResourceSpec `pulumi:"resourceSpec"`
@@ -428,6 +458,8 @@ type clusterArgs struct {
 	SupportHa int `pulumi:"supportHa"`
 	// Tag description list.
 	Tags map[string]interface{} `pulumi:"tags"`
+	// Terminate nodes. Note: it only works when the number of nodes decreases.
+	TerminateNodeInfos []ClusterTerminateNodeInfo `pulumi:"terminateNodeInfos"`
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan *int `pulumi:"timeSpan"`
@@ -439,6 +471,8 @@ type clusterArgs struct {
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntPtrInput
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -462,19 +496,23 @@ type ClusterArgs struct {
 	Placement pulumi.MapInput
 	// The location of the instance.
 	PlacementInfo ClusterPlacementInfoPtrInput
+	// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+	PreExecutedFileSettings ClusterPreExecutedFileSettingArrayInput
 	// Product ID. Different products ID represents different EMR product versions. Value range:
 	// - 16: represents EMR-V2.3.0
-	// - 20: indicates EMR-V2.5.0
+	// - 20: represents EMR-V2.5.0
 	// - 25: represents EMR-V3.1.0
 	// - 27: represents KAFKA-V1.0.0
-	// - 30: indicates EMR-V2.6.0
+	// - 30: represents EMR-V2.6.0
 	// - 33: represents EMR-V3.2.1
-	// - 34: stands for EMR-V3.3.0
-	// - 36: represents STARROCKS-V1.0.0
-	// - 37: indicates EMR-V3.4.0
+	// - 34: represents EMR-V3.3.0
+	// - 37: represents EMR-V3.4.0
 	// - 38: represents EMR-V2.7.0
-	// - 39: stands for STARROCKS-V1.1.0
-	// - 41: represents DRUID-V1.1.0.
+	// - 44: represents EMR-V3.5.0
+	// - 50: represents KAFKA-V2.0.0
+	// - 51: represents STARROCKS-V1.4.0
+	// - 53: represents EMR-V3.6.0
+	// - 54: represents STARROCKS-V2.0.0.
 	ProductId pulumi.IntInput
 	// Resource specification of EMR instance.
 	ResourceSpec ClusterResourceSpecPtrInput
@@ -486,6 +524,8 @@ type ClusterArgs struct {
 	SupportHa pulumi.IntInput
 	// Tag description list.
 	Tags pulumi.MapInput
+	// Terminate nodes. Note: it only works when the number of nodes decreases.
+	TerminateNodeInfos ClusterTerminateNodeInfoArrayInput
 	// The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
 	// When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
 	TimeSpan pulumi.IntPtrInput
@@ -582,6 +622,11 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
+// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+func (o ClusterOutput) AutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.AutoRenew }).(pulumi.IntOutput)
+}
+
 // It will be deprecated in later versions. Display strategy of EMR instance.
 //
 // Deprecated: It will be deprecated in later versions.
@@ -634,19 +679,26 @@ func (o ClusterOutput) PlacementInfo() ClusterPlacementInfoOutput {
 	return o.ApplyT(func(v *Cluster) ClusterPlacementInfoOutput { return v.PlacementInfo }).(ClusterPlacementInfoOutput)
 }
 
+// Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
+func (o ClusterOutput) PreExecutedFileSettings() ClusterPreExecutedFileSettingArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterPreExecutedFileSettingArrayOutput { return v.PreExecutedFileSettings }).(ClusterPreExecutedFileSettingArrayOutput)
+}
+
 // Product ID. Different products ID represents different EMR product versions. Value range:
 // - 16: represents EMR-V2.3.0
-// - 20: indicates EMR-V2.5.0
+// - 20: represents EMR-V2.5.0
 // - 25: represents EMR-V3.1.0
 // - 27: represents KAFKA-V1.0.0
-// - 30: indicates EMR-V2.6.0
+// - 30: represents EMR-V2.6.0
 // - 33: represents EMR-V3.2.1
-// - 34: stands for EMR-V3.3.0
-// - 36: represents STARROCKS-V1.0.0
-// - 37: indicates EMR-V3.4.0
+// - 34: represents EMR-V3.3.0
+// - 37: represents EMR-V3.4.0
 // - 38: represents EMR-V2.7.0
-// - 39: stands for STARROCKS-V1.1.0
-// - 41: represents DRUID-V1.1.0.
+// - 44: represents EMR-V3.5.0
+// - 50: represents KAFKA-V2.0.0
+// - 51: represents STARROCKS-V1.4.0
+// - 53: represents EMR-V3.6.0
+// - 54: represents STARROCKS-V2.0.0.
 func (o ClusterOutput) ProductId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.ProductId }).(pulumi.IntOutput)
 }
@@ -674,6 +726,11 @@ func (o ClusterOutput) SupportHa() pulumi.IntOutput {
 // Tag description list.
 func (o ClusterOutput) Tags() pulumi.MapOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
+}
+
+// Terminate nodes. Note: it only works when the number of nodes decreases.
+func (o ClusterOutput) TerminateNodeInfos() ClusterTerminateNodeInfoArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterTerminateNodeInfoArrayOutput { return v.TerminateNodeInfos }).(ClusterTerminateNodeInfoArrayOutput)
 }
 
 // The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.

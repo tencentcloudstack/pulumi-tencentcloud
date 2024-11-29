@@ -21,6 +21,7 @@ class ClusterArgs:
                  auth_options: Optional[pulumi.Input['ClusterAuthOptionsArgs']] = None,
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
                  cluster_audit: Optional[pulumi.Input['ClusterClusterAuditArgs']] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
@@ -53,6 +54,8 @@ class ClusterArgs:
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  globe_desired_pod_num: Optional[pulumi.Input[int]] = None,
                  ignore_cluster_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 ignore_service_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 instance_delete_mode: Optional[pulumi.Input[str]] = None,
                  is_non_static_ip_mode: Optional[pulumi.Input[bool]] = None,
                  kube_proxy_mode: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -63,7 +66,9 @@ class ClusterArgs:
                  network_type: Optional[pulumi.Input[str]] = None,
                  node_name_type: Optional[pulumi.Input[str]] = None,
                  node_pool_global_configs: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]]] = None,
+                 pre_start_user_script: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 resource_delete_options: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]] = None,
                  runtime_version: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -78,6 +83,7 @@ class ClusterArgs:
         :param pulumi.Input['ClusterAuthOptionsArgs'] auth_options: Specify cluster authentication configuration. Only available for managed cluster and `cluster_version` >= 1.20.
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
+        :param pulumi.Input[str] cdc_id: CDC ID.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         :param pulumi.Input['ClusterClusterAuditArgs'] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -110,6 +116,8 @@ class ClusterArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
         :param pulumi.Input[int] globe_desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
         :param pulumi.Input[bool] ignore_cluster_cidr_conflict: Indicates whether to ignore the cluster cidr conflict error. Default is false.
+        :param pulumi.Input[bool] ignore_service_cidr_conflict: Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        :param pulumi.Input[str] instance_delete_mode: The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
         :param pulumi.Input[bool] is_non_static_ip_mode: Indicates whether non-static ip mode is enabled. Default is false.
         :param pulumi.Input[str] kube_proxy_mode: Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke cluster nodes.
@@ -120,7 +128,9 @@ class ClusterArgs:
         :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]] node_pool_global_configs: Global config effective for all node pools.
+        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]] resource_delete_options: The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
         :param pulumi.Input[str] runtime_version: Container Runtime version.
         :param pulumi.Input[str] service_cidr: A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the cluster.
@@ -138,6 +148,8 @@ class ClusterArgs:
             pulumi.set(__self__, "auto_upgrade_cluster_level", auto_upgrade_cluster_level)
         if base_pod_num is not None:
             pulumi.set(__self__, "base_pod_num", base_pod_num)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if claim_expired_seconds is not None:
             pulumi.set(__self__, "claim_expired_seconds", claim_expired_seconds)
         if cluster_audit is not None:
@@ -202,6 +214,10 @@ class ClusterArgs:
             pulumi.set(__self__, "globe_desired_pod_num", globe_desired_pod_num)
         if ignore_cluster_cidr_conflict is not None:
             pulumi.set(__self__, "ignore_cluster_cidr_conflict", ignore_cluster_cidr_conflict)
+        if ignore_service_cidr_conflict is not None:
+            pulumi.set(__self__, "ignore_service_cidr_conflict", ignore_service_cidr_conflict)
+        if instance_delete_mode is not None:
+            pulumi.set(__self__, "instance_delete_mode", instance_delete_mode)
         if is_non_static_ip_mode is not None:
             pulumi.set(__self__, "is_non_static_ip_mode", is_non_static_ip_mode)
         if kube_proxy_mode is not None:
@@ -225,8 +241,12 @@ class ClusterArgs:
             pulumi.set(__self__, "node_name_type", node_name_type)
         if node_pool_global_configs is not None:
             pulumi.set(__self__, "node_pool_global_configs", node_pool_global_configs)
+        if pre_start_user_script is not None:
+            pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if resource_delete_options is not None:
+            pulumi.set(__self__, "resource_delete_options", resource_delete_options)
         if runtime_version is not None:
             pulumi.set(__self__, "runtime_version", runtime_version)
         if service_cidr is not None:
@@ -301,6 +321,18 @@ class ClusterArgs:
     @base_pod_num.setter
     def base_pod_num(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "base_pod_num", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CDC ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
 
     @property
     @pulumi.getter(name="claimExpiredSeconds")
@@ -687,6 +719,30 @@ class ClusterArgs:
         pulumi.set(self, "ignore_cluster_cidr_conflict", value)
 
     @property
+    @pulumi.getter(name="ignoreServiceCidrConflict")
+    def ignore_service_cidr_conflict(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        """
+        return pulumi.get(self, "ignore_service_cidr_conflict")
+
+    @ignore_service_cidr_conflict.setter
+    def ignore_service_cidr_conflict(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "ignore_service_cidr_conflict", value)
+
+    @property
+    @pulumi.getter(name="instanceDeleteMode")
+    def instance_delete_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        """
+        return pulumi.get(self, "instance_delete_mode")
+
+    @instance_delete_mode.setter
+    def instance_delete_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_delete_mode", value)
+
+    @property
     @pulumi.getter(name="isNonStaticIpMode")
     def is_non_static_ip_mode(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -810,6 +866,18 @@ class ClusterArgs:
         pulumi.set(self, "node_pool_global_configs", value)
 
     @property
+    @pulumi.getter(name="preStartUserScript")
+    def pre_start_user_script(self) -> Optional[pulumi.Input[str]]:
+        """
+        Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        """
+        return pulumi.get(self, "pre_start_user_script")
+
+    @pre_start_user_script.setter
+    def pre_start_user_script(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pre_start_user_script", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -820,6 +888,18 @@ class ClusterArgs:
     @project_id.setter
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter(name="resourceDeleteOptions")
+    def resource_delete_options(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]]:
+        """
+        The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        """
+        return pulumi.get(self, "resource_delete_options")
+
+    @resource_delete_options.setter
+    def resource_delete_options(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]]):
+        pulumi.set(self, "resource_delete_options", value)
 
     @property
     @pulumi.getter(name="runtimeVersion")
@@ -913,6 +993,7 @@ class _ClusterState:
                  auth_options: Optional[pulumi.Input['ClusterAuthOptionsArgs']] = None,
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  certification_authority: Optional[pulumi.Input[str]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
                  cluster_as_enabled: Optional[pulumi.Input[bool]] = None,
@@ -950,6 +1031,8 @@ class _ClusterState:
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  globe_desired_pod_num: Optional[pulumi.Input[int]] = None,
                  ignore_cluster_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 ignore_service_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 instance_delete_mode: Optional[pulumi.Input[str]] = None,
                  is_non_static_ip_mode: Optional[pulumi.Input[bool]] = None,
                  kube_config: Optional[pulumi.Input[str]] = None,
                  kube_config_intranet: Optional[pulumi.Input[str]] = None,
@@ -964,7 +1047,9 @@ class _ClusterState:
                  node_pool_global_configs: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  pgw_endpoint: Optional[pulumi.Input[str]] = None,
+                 pre_start_user_script: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 resource_delete_options: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]] = None,
                  runtime_version: Optional[pulumi.Input[str]] = None,
                  security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
@@ -982,6 +1067,7 @@ class _ClusterState:
         :param pulumi.Input['ClusterAuthOptionsArgs'] auth_options: Specify cluster authentication configuration. Only available for managed cluster and `cluster_version` >= 1.20.
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
+        :param pulumi.Input[str] cdc_id: CDC ID.
         :param pulumi.Input[str] certification_authority: The certificate used for access.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         :param pulumi.Input[bool] cluster_as_enabled: (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
@@ -1019,6 +1105,8 @@ class _ClusterState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
         :param pulumi.Input[int] globe_desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
         :param pulumi.Input[bool] ignore_cluster_cidr_conflict: Indicates whether to ignore the cluster cidr conflict error. Default is false.
+        :param pulumi.Input[bool] ignore_service_cidr_conflict: Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        :param pulumi.Input[str] instance_delete_mode: The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
         :param pulumi.Input[bool] is_non_static_ip_mode: Indicates whether non-static ip mode is enabled. Default is false.
         :param pulumi.Input[str] kube_config: Kubernetes config.
         :param pulumi.Input[str] kube_config_intranet: Kubernetes config of private network.
@@ -1033,7 +1121,9 @@ class _ClusterState:
         :param pulumi.Input[Sequence[pulumi.Input['ClusterNodePoolGlobalConfigArgs']]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[str] pgw_endpoint: The Intranet address used for access.
+        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]] resource_delete_options: The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
         :param pulumi.Input[str] runtime_version: Container Runtime version.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_policies: Access policy.
         :param pulumi.Input[str] service_cidr: A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -1054,6 +1144,8 @@ class _ClusterState:
             pulumi.set(__self__, "auto_upgrade_cluster_level", auto_upgrade_cluster_level)
         if base_pod_num is not None:
             pulumi.set(__self__, "base_pod_num", base_pod_num)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if certification_authority is not None:
             pulumi.set(__self__, "certification_authority", certification_authority)
         if claim_expired_seconds is not None:
@@ -1131,6 +1223,10 @@ class _ClusterState:
             pulumi.set(__self__, "globe_desired_pod_num", globe_desired_pod_num)
         if ignore_cluster_cidr_conflict is not None:
             pulumi.set(__self__, "ignore_cluster_cidr_conflict", ignore_cluster_cidr_conflict)
+        if ignore_service_cidr_conflict is not None:
+            pulumi.set(__self__, "ignore_service_cidr_conflict", ignore_service_cidr_conflict)
+        if instance_delete_mode is not None:
+            pulumi.set(__self__, "instance_delete_mode", instance_delete_mode)
         if is_non_static_ip_mode is not None:
             pulumi.set(__self__, "is_non_static_ip_mode", is_non_static_ip_mode)
         if kube_config is not None:
@@ -1162,8 +1258,12 @@ class _ClusterState:
             pulumi.set(__self__, "password", password)
         if pgw_endpoint is not None:
             pulumi.set(__self__, "pgw_endpoint", pgw_endpoint)
+        if pre_start_user_script is not None:
+            pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
         if project_id is not None:
             pulumi.set(__self__, "project_id", project_id)
+        if resource_delete_options is not None:
+            pulumi.set(__self__, "resource_delete_options", resource_delete_options)
         if runtime_version is not None:
             pulumi.set(__self__, "runtime_version", runtime_version)
         if security_policies is not None:
@@ -1234,6 +1334,18 @@ class _ClusterState:
     @base_pod_num.setter
     def base_pod_num(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "base_pod_num", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CDC ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
 
     @property
     @pulumi.getter(name="certificationAuthority")
@@ -1683,6 +1795,30 @@ class _ClusterState:
         pulumi.set(self, "ignore_cluster_cidr_conflict", value)
 
     @property
+    @pulumi.getter(name="ignoreServiceCidrConflict")
+    def ignore_service_cidr_conflict(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        """
+        return pulumi.get(self, "ignore_service_cidr_conflict")
+
+    @ignore_service_cidr_conflict.setter
+    def ignore_service_cidr_conflict(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "ignore_service_cidr_conflict", value)
+
+    @property
+    @pulumi.getter(name="instanceDeleteMode")
+    def instance_delete_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        """
+        return pulumi.get(self, "instance_delete_mode")
+
+    @instance_delete_mode.setter
+    def instance_delete_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_delete_mode", value)
+
+    @property
     @pulumi.getter(name="isNonStaticIpMode")
     def is_non_static_ip_mode(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -1854,6 +1990,18 @@ class _ClusterState:
         pulumi.set(self, "pgw_endpoint", value)
 
     @property
+    @pulumi.getter(name="preStartUserScript")
+    def pre_start_user_script(self) -> Optional[pulumi.Input[str]]:
+        """
+        Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        """
+        return pulumi.get(self, "pre_start_user_script")
+
+    @pre_start_user_script.setter
+    def pre_start_user_script(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "pre_start_user_script", value)
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> Optional[pulumi.Input[int]]:
         """
@@ -1864,6 +2012,18 @@ class _ClusterState:
     @project_id.setter
     def project_id(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "project_id", value)
+
+    @property
+    @pulumi.getter(name="resourceDeleteOptions")
+    def resource_delete_options(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]]:
+        """
+        The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        """
+        return pulumi.get(self, "resource_delete_options")
+
+    @resource_delete_options.setter
+    def resource_delete_options(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterResourceDeleteOptionArgs']]]]):
+        pulumi.set(self, "resource_delete_options", value)
 
     @property
     @pulumi.getter(name="runtimeVersion")
@@ -2007,6 +2167,7 @@ class Cluster(pulumi.CustomResource):
                  auth_options: Optional[pulumi.Input[pulumi.InputType['ClusterAuthOptionsArgs']]] = None,
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
                  cluster_audit: Optional[pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']]] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
@@ -2039,6 +2200,8 @@ class Cluster(pulumi.CustomResource):
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  globe_desired_pod_num: Optional[pulumi.Input[int]] = None,
                  ignore_cluster_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 ignore_service_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 instance_delete_mode: Optional[pulumi.Input[str]] = None,
                  is_non_static_ip_mode: Optional[pulumi.Input[bool]] = None,
                  kube_proxy_mode: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -2049,7 +2212,9 @@ class Cluster(pulumi.CustomResource):
                  network_type: Optional[pulumi.Input[str]] = None,
                  node_name_type: Optional[pulumi.Input[str]] = None,
                  node_pool_global_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]]] = None,
+                 pre_start_user_script: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 resource_delete_options: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterResourceDeleteOptionArgs']]]]] = None,
                  runtime_version: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -2060,13 +2225,6 @@ class Cluster(pulumi.CustomResource):
                  worker_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]]] = None,
                  __props__=None):
         """
-        Provide a resource to create a kubernetes cluster.
-
-        > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
-
-        > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `worker_config`, then adds nodes by the `Kubernetes.NodePool` resource.
-        It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
-
         ## Example Usage
 
         ### Use node pool global config
@@ -2214,12 +2372,67 @@ class Cluster(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Use delete options to delete CBS when deleting the Cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kubernetes.Cluster("example",
+            vpc_id=local["first_vpc_id"],
+            cluster_cidr=var["example_cluster_cidr"],
+            cluster_max_pod_num=32,
+            cluster_name="example",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_level="L50",
+            auto_upgrade_cluster_level=True,
+            cluster_internet=False,
+            cluster_version="1.30.0",
+            cluster_os="tlinux2.2(tkernel3)x86_64",
+            cluster_deploy_type="MANAGED_CLUSTER",
+            container_runtime="containerd",
+            docker_graph_path="/var/lib/containerd",
+            tags={
+                "demo": "test",
+            },
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=var["availability_zone_first"],
+                instance_type="SA2.MEDIUM2",
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=local["first_subnet_id"],
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                disaster_recover_group_ids=[],
+                security_group_ids=[],
+                key_ids=[],
+                cam_role_name="CVM_QcsRole",
+                password="ZZXXccvv1212",
+            )],
+            resource_delete_options=[tencentcloud.kubernetes.ClusterResourceDeleteOptionArgs(
+                resource_type="CBS",
+                delete_mode="terminate",
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         tke cluster can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster example cls-n2h4jbtk
         ```
 
         :param str resource_name: The name of the resource.
@@ -2228,6 +2441,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ClusterAuthOptionsArgs']] auth_options: Specify cluster authentication configuration. Only available for managed cluster and `cluster_version` >= 1.20.
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
+        :param pulumi.Input[str] cdc_id: CDC ID.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         :param pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']] cluster_audit: Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
         :param pulumi.Input[str] cluster_cidr: A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -2260,6 +2474,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
         :param pulumi.Input[int] globe_desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
         :param pulumi.Input[bool] ignore_cluster_cidr_conflict: Indicates whether to ignore the cluster cidr conflict error. Default is false.
+        :param pulumi.Input[bool] ignore_service_cidr_conflict: Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        :param pulumi.Input[str] instance_delete_mode: The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
         :param pulumi.Input[bool] is_non_static_ip_mode: Indicates whether non-static ip mode is enabled. Default is false.
         :param pulumi.Input[str] kube_proxy_mode: Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
         :param pulumi.Input[Mapping[str, Any]] labels: Labels of tke cluster nodes.
@@ -2270,7 +2486,9 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] network_type: Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
         :param pulumi.Input[str] node_name_type: Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]] node_pool_global_configs: Global config effective for all node pools.
+        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterResourceDeleteOptionArgs']]]] resource_delete_options: The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
         :param pulumi.Input[str] runtime_version: Container Runtime version.
         :param pulumi.Input[str] service_cidr: A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the cluster.
@@ -2287,13 +2505,6 @@ class Cluster(pulumi.CustomResource):
                  args: ClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provide a resource to create a kubernetes cluster.
-
-        > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extra_args`), you need to submit a ticket for application.
-
-        > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `worker_config`, then adds nodes by the `Kubernetes.NodePool` resource.
-        It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloud_kubernetes_attachment`. The reason is that `worker_config` is unchangeable and may cause the whole cluster resource to `ForceNew`.
-
         ## Example Usage
 
         ### Use node pool global config
@@ -2441,12 +2652,67 @@ class Cluster(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Use delete options to delete CBS when deleting the Cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kubernetes.Cluster("example",
+            vpc_id=local["first_vpc_id"],
+            cluster_cidr=var["example_cluster_cidr"],
+            cluster_max_pod_num=32,
+            cluster_name="example",
+            cluster_desc="example for tke cluster",
+            cluster_max_service_num=32,
+            cluster_level="L50",
+            auto_upgrade_cluster_level=True,
+            cluster_internet=False,
+            cluster_version="1.30.0",
+            cluster_os="tlinux2.2(tkernel3)x86_64",
+            cluster_deploy_type="MANAGED_CLUSTER",
+            container_runtime="containerd",
+            docker_graph_path="/var/lib/containerd",
+            tags={
+                "demo": "test",
+            },
+            worker_configs=[tencentcloud.kubernetes.ClusterWorkerConfigArgs(
+                count=1,
+                availability_zone=var["availability_zone_first"],
+                instance_type="SA2.MEDIUM2",
+                system_disk_type="CLOUD_SSD",
+                system_disk_size=60,
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=100,
+                public_ip_assigned=True,
+                subnet_id=local["first_subnet_id"],
+                data_disks=[tencentcloud.kubernetes.ClusterWorkerConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                )],
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                user_data="dGVzdA==",
+                disaster_recover_group_ids=[],
+                security_group_ids=[],
+                key_ids=[],
+                cam_role_name="CVM_QcsRole",
+                password="ZZXXccvv1212",
+            )],
+            resource_delete_options=[tencentcloud.kubernetes.ClusterResourceDeleteOptionArgs(
+                resource_type="CBS",
+                delete_mode="terminate",
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         tke cluster can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster example cls-n2h4jbtk
         ```
 
         :param str resource_name: The name of the resource.
@@ -2468,6 +2734,7 @@ class Cluster(pulumi.CustomResource):
                  auth_options: Optional[pulumi.Input[pulumi.InputType['ClusterAuthOptionsArgs']]] = None,
                  auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
                  base_pod_num: Optional[pulumi.Input[int]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  claim_expired_seconds: Optional[pulumi.Input[int]] = None,
                  cluster_audit: Optional[pulumi.Input[pulumi.InputType['ClusterClusterAuditArgs']]] = None,
                  cluster_cidr: Optional[pulumi.Input[str]] = None,
@@ -2500,6 +2767,8 @@ class Cluster(pulumi.CustomResource):
                  extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  globe_desired_pod_num: Optional[pulumi.Input[int]] = None,
                  ignore_cluster_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 ignore_service_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+                 instance_delete_mode: Optional[pulumi.Input[str]] = None,
                  is_non_static_ip_mode: Optional[pulumi.Input[bool]] = None,
                  kube_proxy_mode: Optional[pulumi.Input[str]] = None,
                  labels: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -2510,7 +2779,9 @@ class Cluster(pulumi.CustomResource):
                  network_type: Optional[pulumi.Input[str]] = None,
                  node_name_type: Optional[pulumi.Input[str]] = None,
                  node_pool_global_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]]] = None,
+                 pre_start_user_script: Optional[pulumi.Input[str]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
+                 resource_delete_options: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterResourceDeleteOptionArgs']]]]] = None,
                  runtime_version: Optional[pulumi.Input[str]] = None,
                  service_cidr: Optional[pulumi.Input[str]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -2532,6 +2803,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["auth_options"] = auth_options
             __props__.__dict__["auto_upgrade_cluster_level"] = auto_upgrade_cluster_level
             __props__.__dict__["base_pod_num"] = base_pod_num
+            __props__.__dict__["cdc_id"] = cdc_id
             __props__.__dict__["claim_expired_seconds"] = claim_expired_seconds
             __props__.__dict__["cluster_audit"] = cluster_audit
             __props__.__dict__["cluster_cidr"] = cluster_cidr
@@ -2564,6 +2836,8 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["extra_args"] = extra_args
             __props__.__dict__["globe_desired_pod_num"] = globe_desired_pod_num
             __props__.__dict__["ignore_cluster_cidr_conflict"] = ignore_cluster_cidr_conflict
+            __props__.__dict__["ignore_service_cidr_conflict"] = ignore_service_cidr_conflict
+            __props__.__dict__["instance_delete_mode"] = instance_delete_mode
             __props__.__dict__["is_non_static_ip_mode"] = is_non_static_ip_mode
             __props__.__dict__["kube_proxy_mode"] = kube_proxy_mode
             __props__.__dict__["labels"] = labels
@@ -2574,7 +2848,9 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["network_type"] = network_type
             __props__.__dict__["node_name_type"] = node_name_type
             __props__.__dict__["node_pool_global_configs"] = node_pool_global_configs
+            __props__.__dict__["pre_start_user_script"] = pre_start_user_script
             __props__.__dict__["project_id"] = project_id
+            __props__.__dict__["resource_delete_options"] = resource_delete_options
             __props__.__dict__["runtime_version"] = runtime_version
             __props__.__dict__["service_cidr"] = service_cidr
             __props__.__dict__["tags"] = tags
@@ -2611,6 +2887,7 @@ class Cluster(pulumi.CustomResource):
             auth_options: Optional[pulumi.Input[pulumi.InputType['ClusterAuthOptionsArgs']]] = None,
             auto_upgrade_cluster_level: Optional[pulumi.Input[bool]] = None,
             base_pod_num: Optional[pulumi.Input[int]] = None,
+            cdc_id: Optional[pulumi.Input[str]] = None,
             certification_authority: Optional[pulumi.Input[str]] = None,
             claim_expired_seconds: Optional[pulumi.Input[int]] = None,
             cluster_as_enabled: Optional[pulumi.Input[bool]] = None,
@@ -2648,6 +2925,8 @@ class Cluster(pulumi.CustomResource):
             extra_args: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             globe_desired_pod_num: Optional[pulumi.Input[int]] = None,
             ignore_cluster_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+            ignore_service_cidr_conflict: Optional[pulumi.Input[bool]] = None,
+            instance_delete_mode: Optional[pulumi.Input[str]] = None,
             is_non_static_ip_mode: Optional[pulumi.Input[bool]] = None,
             kube_config: Optional[pulumi.Input[str]] = None,
             kube_config_intranet: Optional[pulumi.Input[str]] = None,
@@ -2662,7 +2941,9 @@ class Cluster(pulumi.CustomResource):
             node_pool_global_configs: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]]] = None,
             password: Optional[pulumi.Input[str]] = None,
             pgw_endpoint: Optional[pulumi.Input[str]] = None,
+            pre_start_user_script: Optional[pulumi.Input[str]] = None,
             project_id: Optional[pulumi.Input[int]] = None,
+            resource_delete_options: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterResourceDeleteOptionArgs']]]]] = None,
             runtime_version: Optional[pulumi.Input[str]] = None,
             security_policies: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             service_cidr: Optional[pulumi.Input[str]] = None,
@@ -2685,6 +2966,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['ClusterAuthOptionsArgs']] auth_options: Specify cluster authentication configuration. Only available for managed cluster and `cluster_version` >= 1.20.
         :param pulumi.Input[bool] auto_upgrade_cluster_level: Whether the cluster level auto upgraded, valid for managed cluster.
         :param pulumi.Input[int] base_pod_num: The number of basic pods. valid when enable_customized_pod_cidr=true.
+        :param pulumi.Input[str] cdc_id: CDC ID.
         :param pulumi.Input[str] certification_authority: The certificate used for access.
         :param pulumi.Input[int] claim_expired_seconds: Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
         :param pulumi.Input[bool] cluster_as_enabled: (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
@@ -2722,6 +3004,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
         :param pulumi.Input[int] globe_desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
         :param pulumi.Input[bool] ignore_cluster_cidr_conflict: Indicates whether to ignore the cluster cidr conflict error. Default is false.
+        :param pulumi.Input[bool] ignore_service_cidr_conflict: Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        :param pulumi.Input[str] instance_delete_mode: The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
         :param pulumi.Input[bool] is_non_static_ip_mode: Indicates whether non-static ip mode is enabled. Default is false.
         :param pulumi.Input[str] kube_config: Kubernetes config.
         :param pulumi.Input[str] kube_config_intranet: Kubernetes config of private network.
@@ -2736,7 +3020,9 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterNodePoolGlobalConfigArgs']]]] node_pool_global_configs: Global config effective for all node pools.
         :param pulumi.Input[str] password: Password to access, should be set if `key_ids` not set.
         :param pulumi.Input[str] pgw_endpoint: The Intranet address used for access.
+        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         :param pulumi.Input[int] project_id: Project ID, default value is 0.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterResourceDeleteOptionArgs']]]] resource_delete_options: The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
         :param pulumi.Input[str] runtime_version: Container Runtime version.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] security_policies: Access policy.
         :param pulumi.Input[str] service_cidr: A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
@@ -2757,6 +3043,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["auth_options"] = auth_options
         __props__.__dict__["auto_upgrade_cluster_level"] = auto_upgrade_cluster_level
         __props__.__dict__["base_pod_num"] = base_pod_num
+        __props__.__dict__["cdc_id"] = cdc_id
         __props__.__dict__["certification_authority"] = certification_authority
         __props__.__dict__["claim_expired_seconds"] = claim_expired_seconds
         __props__.__dict__["cluster_as_enabled"] = cluster_as_enabled
@@ -2794,6 +3081,8 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["extra_args"] = extra_args
         __props__.__dict__["globe_desired_pod_num"] = globe_desired_pod_num
         __props__.__dict__["ignore_cluster_cidr_conflict"] = ignore_cluster_cidr_conflict
+        __props__.__dict__["ignore_service_cidr_conflict"] = ignore_service_cidr_conflict
+        __props__.__dict__["instance_delete_mode"] = instance_delete_mode
         __props__.__dict__["is_non_static_ip_mode"] = is_non_static_ip_mode
         __props__.__dict__["kube_config"] = kube_config
         __props__.__dict__["kube_config_intranet"] = kube_config_intranet
@@ -2808,7 +3097,9 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["node_pool_global_configs"] = node_pool_global_configs
         __props__.__dict__["password"] = password
         __props__.__dict__["pgw_endpoint"] = pgw_endpoint
+        __props__.__dict__["pre_start_user_script"] = pre_start_user_script
         __props__.__dict__["project_id"] = project_id
+        __props__.__dict__["resource_delete_options"] = resource_delete_options
         __props__.__dict__["runtime_version"] = runtime_version
         __props__.__dict__["security_policies"] = security_policies
         __props__.__dict__["service_cidr"] = service_cidr
@@ -2853,6 +3144,14 @@ class Cluster(pulumi.CustomResource):
         The number of basic pods. valid when enable_customized_pod_cidr=true.
         """
         return pulumi.get(self, "base_pod_num")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        CDC ID.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="certificationAuthority")
@@ -3154,6 +3453,22 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "ignore_cluster_cidr_conflict")
 
     @property
+    @pulumi.getter(name="ignoreServiceCidrConflict")
+    def ignore_service_cidr_conflict(self) -> pulumi.Output[bool]:
+        """
+        Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        """
+        return pulumi.get(self, "ignore_service_cidr_conflict")
+
+    @property
+    @pulumi.getter(name="instanceDeleteMode")
+    def instance_delete_mode(self) -> pulumi.Output[Optional[str]]:
+        """
+        The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
+        """
+        return pulumi.get(self, "instance_delete_mode")
+
+    @property
     @pulumi.getter(name="isNonStaticIpMode")
     def is_non_static_ip_mode(self) -> pulumi.Output[Optional[bool]]:
         """
@@ -3269,12 +3584,28 @@ class Cluster(pulumi.CustomResource):
         return pulumi.get(self, "pgw_endpoint")
 
     @property
+    @pulumi.getter(name="preStartUserScript")
+    def pre_start_user_script(self) -> pulumi.Output[Optional[str]]:
+        """
+        Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        """
+        return pulumi.get(self, "pre_start_user_script")
+
+    @property
     @pulumi.getter(name="projectId")
     def project_id(self) -> pulumi.Output[Optional[int]]:
         """
         Project ID, default value is 0.
         """
         return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter(name="resourceDeleteOptions")
+    def resource_delete_options(self) -> pulumi.Output[Optional[Sequence['outputs.ClusterResourceDeleteOption']]]:
+        """
+        The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
+        """
+        return pulumi.get(self, "resource_delete_options")
 
     @property
     @pulumi.getter(name="runtimeVersion")

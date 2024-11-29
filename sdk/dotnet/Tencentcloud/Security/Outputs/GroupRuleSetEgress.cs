@@ -19,15 +19,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// </summary>
         public readonly string Action;
         /// <summary>
-        /// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        /// Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         /// </summary>
         public readonly string? AddressTemplateGroup;
         /// <summary>
-        /// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        /// Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         /// </summary>
         public readonly string? AddressTemplateId;
         /// <summary>
-        /// An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        /// An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         /// </summary>
         public readonly string? CidrBlock;
         /// <summary>
@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// </summary>
         public readonly string? Description;
         /// <summary>
-        /// An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        /// An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         /// </summary>
         public readonly string? Ipv6CidrBlock;
         /// <summary>
@@ -47,7 +47,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// </summary>
         public readonly string? Port;
         /// <summary>
-        /// Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        /// Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
         /// </summary>
         public readonly string? Protocol;
         /// <summary>
@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// </summary>
         public readonly string? ServiceTemplateId;
         /// <summary>
-        /// ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        /// ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         /// </summary>
         public readonly string? SourceSecurityId;
 

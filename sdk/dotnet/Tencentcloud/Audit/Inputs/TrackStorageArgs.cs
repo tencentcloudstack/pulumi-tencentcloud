@@ -14,6 +14,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Inputs
     public sealed class TrackStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Designated to store user ID.
+        /// </summary>
+        [Input("storageAccountId")]
+        public Input<string>? StorageAccountId { get; set; }
+
+        /// <summary>
+        /// Designated to store user appid.
+        /// </summary>
+        [Input("storageAppId")]
+        public Input<string>? StorageAppId { get; set; }
+
+        /// <summary>
         /// Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
         /// </summary>
         [Input("storageName", required: true)]

@@ -5,15 +5,21 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .account import *
+from .account_privileges_operation import *
+from .apply_parameter_template_operation import *
 from .backup_download_restriction_config import *
 from .backup_plan_config import *
 from .base_backup import *
+from .clone_db_instance import *
 from .delete_log_backup_operation import *
 from .disisolate_db_instance_operation import *
+from .get_account_privileges import *
 from .get_backup_download_urls import *
 from .get_base_backups import *
 from .get_db_instance_classes import *
 from .get_db_instance_versions import *
+from .get_dedicated_clusters import *
 from .get_default_parameters import *
 from .get_instances import *
 from .get_log_backups import *

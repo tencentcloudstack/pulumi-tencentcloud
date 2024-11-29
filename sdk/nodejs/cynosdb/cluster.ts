@@ -9,12 +9,160 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a CynosDB cluster.
  *
+ * ## Example Usage
+ *
+ * ### Create a single availability zone NORMAL CynosDB cluster
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * // create cynosdb cluster
+ * const exampleCluster = new tencentcloud.cynosdb.Cluster("exampleCluster", {
+ *     availableZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dbMode: "NORMAL",
+ *     dbType: "MYSQL",
+ *     dbVersion: "5.7",
+ *     port: 3306,
+ *     storageLimit: 1000,
+ *     clusterName: "tf-example",
+ *     password: "cynosDB@123",
+ *     instanceMaintainDuration: 7200,
+ *     instanceMaintainStartTime: 10800,
+ *     instanceCpuCore: 2,
+ *     instanceMemorySize: 4,
+ *     forceDelete: false,
+ *     instanceMaintainWeekdays: [
+ *         "Fri",
+ *         "Mon",
+ *         "Sat",
+ *         "Sun",
+ *         "Thu",
+ *         "Wed",
+ *         "Tue",
+ *     ],
+ *     paramItems: [
+ *         {
+ *             name: "character_set_server",
+ *             currentValue: "utf8mb4",
+ *         },
+ *         {
+ *             name: "lower_case_table_names",
+ *             currentValue: "0",
+ *         },
+ *     ],
+ *     rwGroupSgs: [exampleGroup.id],
+ *     roGroupSgs: [exampleGroup.id],
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a multiple availability zone SERVERLESS CynosDB cluster
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const slaveZone = config.get("slaveZone") || "ap-guangzhou-6";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * // create param template
+ * const exampleParamTemplate = new tencentcloud.cynosdb.ParamTemplate("exampleParamTemplate", {
+ *     dbMode: "SERVERLESS",
+ *     engineVersion: "8.0",
+ *     templateName: "tf-example",
+ *     templateDescription: "terraform-template",
+ *     paramLists: [{
+ *         currentValue: "-1",
+ *         paramName: "optimizer_trace_offset",
+ *     }],
+ * });
+ * // create cynosdb cluster
+ * const exampleCluster = new tencentcloud.cynosdb.Cluster("exampleCluster", {
+ *     availableZone: availabilityZone,
+ *     slaveZone: slaveZone,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dbMode: "SERVERLESS",
+ *     dbType: "MYSQL",
+ *     dbVersion: "8.0",
+ *     port: 3306,
+ *     storageLimit: 1000,
+ *     clusterName: "tf-example",
+ *     password: "cynosDB@123",
+ *     instanceMaintainDuration: 7200,
+ *     instanceMaintainStartTime: 10800,
+ *     minCpu: 2,
+ *     maxCpu: 4,
+ *     paramTemplateId: exampleParamTemplate.templateId,
+ *     forceDelete: false,
+ *     instanceMaintainWeekdays: [
+ *         "Fri",
+ *         "Mon",
+ *         "Sat",
+ *         "Sun",
+ *         "Thu",
+ *         "Wed",
+ *         "Tue",
+ *     ],
+ *     rwGroupSgs: [exampleGroup.id],
+ *     roGroupSgs: [exampleGroup.id],
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * CynosDB cluster can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+ * $ pulumi import tencentcloud:Cynosdb/cluster:Cluster example cynosdbmysql-dzj5l8gz
  * ```
  */
 export class Cluster extends pulumi.CustomResource {
@@ -90,7 +238,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly dbType!: pulumi.Output<string>;
     /**
-     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`, `8.0`.
      */
     public readonly dbVersion!: pulumi.Output<string>;
     /**
@@ -146,9 +294,13 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly oldIpReserveHours!: pulumi.Output<number | undefined>;
     /**
-     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Specify parameter list of database. It is valid when `paramTemplateId` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     public readonly paramItems!: pulumi.Output<outputs.Cynosdb.ClusterParamItem[] | undefined>;
+    /**
+     * The ID of the parameter template.
+     */
+    public readonly paramTemplateId!: pulumi.Output<number>;
     /**
      * Password of `root` account.
      */
@@ -158,7 +310,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly port!: pulumi.Output<number | undefined>;
     /**
-     * The ID of the parameter template.
+     * It will be deprecated. Use `paramTemplateId` instead. The ID of the parameter template.
+     *
+     * @deprecated It will be deprecated. Use `paramTemplateId` instead.
      */
     public readonly prarmTemplateId!: pulumi.Output<number>;
     /**
@@ -209,6 +363,10 @@ export class Cluster extends pulumi.CustomResource {
      * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
      */
     public readonly serverlessStatusFlag!: pulumi.Output<string | undefined>;
+    /**
+     * Multi zone Addresses of the CynosDB Cluster.
+     */
+    public readonly slaveZone!: pulumi.Output<string | undefined>;
     /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
@@ -273,6 +431,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["minCpu"] = state ? state.minCpu : undefined;
             resourceInputs["oldIpReserveHours"] = state ? state.oldIpReserveHours : undefined;
             resourceInputs["paramItems"] = state ? state.paramItems : undefined;
+            resourceInputs["paramTemplateId"] = state ? state.paramTemplateId : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["prarmTemplateId"] = state ? state.prarmTemplateId : undefined;
@@ -288,6 +447,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["rwGroupSgs"] = state ? state.rwGroupSgs : undefined;
             resourceInputs["serverlessStatus"] = state ? state.serverlessStatus : undefined;
             resourceInputs["serverlessStatusFlag"] = state ? state.serverlessStatusFlag : undefined;
+            resourceInputs["slaveZone"] = state ? state.slaveZone : undefined;
             resourceInputs["storageLimit"] = state ? state.storageLimit : undefined;
             resourceInputs["storagePayMode"] = state ? state.storagePayMode : undefined;
             resourceInputs["storageUsed"] = state ? state.storageUsed : undefined;
@@ -336,6 +496,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["minCpu"] = args ? args.minCpu : undefined;
             resourceInputs["oldIpReserveHours"] = args ? args.oldIpReserveHours : undefined;
             resourceInputs["paramItems"] = args ? args.paramItems : undefined;
+            resourceInputs["paramTemplateId"] = args ? args.paramTemplateId : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prarmTemplateId"] = args ? args.prarmTemplateId : undefined;
@@ -344,6 +505,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["roGroupSgs"] = args ? args.roGroupSgs : undefined;
             resourceInputs["rwGroupSgs"] = args ? args.rwGroupSgs : undefined;
             resourceInputs["serverlessStatusFlag"] = args ? args.serverlessStatusFlag : undefined;
+            resourceInputs["slaveZone"] = args ? args.slaveZone : undefined;
             resourceInputs["storageLimit"] = args ? args.storageLimit : undefined;
             resourceInputs["storagePayMode"] = args ? args.storagePayMode : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
@@ -421,7 +583,7 @@ export interface ClusterState {
      */
     dbType?: pulumi.Input<string>;
     /**
-     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`, `8.0`.
      */
     dbVersion?: pulumi.Input<string>;
     /**
@@ -477,9 +639,13 @@ export interface ClusterState {
      */
     oldIpReserveHours?: pulumi.Input<number>;
     /**
-     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Specify parameter list of database. It is valid when `paramTemplateId` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     paramItems?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterParamItem>[]>;
+    /**
+     * The ID of the parameter template.
+     */
+    paramTemplateId?: pulumi.Input<number>;
     /**
      * Password of `root` account.
      */
@@ -489,7 +655,9 @@ export interface ClusterState {
      */
     port?: pulumi.Input<number>;
     /**
-     * The ID of the parameter template.
+     * It will be deprecated. Use `paramTemplateId` instead. The ID of the parameter template.
+     *
+     * @deprecated It will be deprecated. Use `paramTemplateId` instead.
      */
     prarmTemplateId?: pulumi.Input<number>;
     /**
@@ -540,6 +708,10 @@ export interface ClusterState {
      * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
      */
     serverlessStatusFlag?: pulumi.Input<string>;
+    /**
+     * Multi zone Addresses of the CynosDB Cluster.
+     */
+    slaveZone?: pulumi.Input<string>;
     /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */
@@ -603,7 +775,7 @@ export interface ClusterArgs {
      */
     dbType: pulumi.Input<string>;
     /**
-     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`.
+     * Version of CynosDB, which is related to `dbType`. For `MYSQL`, available value is `5.7`, `8.0`.
      */
     dbVersion: pulumi.Input<string>;
     /**
@@ -643,9 +815,13 @@ export interface ClusterArgs {
      */
     oldIpReserveHours?: pulumi.Input<number>;
     /**
-     * Specify parameter list of database. It is valid when prarmTemplateId is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+     * Specify parameter list of database. It is valid when `paramTemplateId` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
      */
     paramItems?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterParamItem>[]>;
+    /**
+     * The ID of the parameter template.
+     */
+    paramTemplateId?: pulumi.Input<number>;
     /**
      * Password of `root` account.
      */
@@ -655,7 +831,9 @@ export interface ClusterArgs {
      */
     port?: pulumi.Input<number>;
     /**
-     * The ID of the parameter template.
+     * It will be deprecated. Use `paramTemplateId` instead. The ID of the parameter template.
+     *
+     * @deprecated It will be deprecated. Use `paramTemplateId` instead.
      */
     prarmTemplateId?: pulumi.Input<number>;
     /**
@@ -678,6 +856,10 @@ export interface ClusterArgs {
      * Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
      */
     serverlessStatusFlag?: pulumi.Input<string>;
+    /**
+     * Multi zone Addresses of the CynosDB Cluster.
+     */
+    slaveZone?: pulumi.Input<string>;
     /**
      * Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
      */

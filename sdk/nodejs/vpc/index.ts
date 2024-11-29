@@ -250,6 +250,11 @@ export type PeerConnectRejectOperation = import("./peerConnectRejectOperation").
 export const PeerConnectRejectOperation: typeof import("./peerConnectRejectOperation").PeerConnectRejectOperation = null as any;
 utilities.lazyLoad(exports, ["PeerConnectRejectOperation"], () => require("./peerConnectRejectOperation"));
 
+export { PrivateNatGatewayArgs, PrivateNatGatewayState } from "./privateNatGateway";
+export type PrivateNatGateway = import("./privateNatGateway").PrivateNatGateway;
+export const PrivateNatGateway: typeof import("./privateNatGateway").PrivateNatGateway = null as any;
+utilities.lazyLoad(exports, ["PrivateNatGateway"], () => require("./privateNatGateway"));
+
 export { ResumeSnapshotInstanceArgs, ResumeSnapshotInstanceState } from "./resumeSnapshotInstance";
 export type ResumeSnapshotInstance = import("./resumeSnapshotInstance").ResumeSnapshotInstance;
 export const ResumeSnapshotInstance: typeof import("./resumeSnapshotInstance").ResumeSnapshotInstance = null as any;
@@ -326,6 +331,8 @@ const _module = {
                 return new PeerConnectManager(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/peerConnectRejectOperation:PeerConnectRejectOperation":
                 return new PeerConnectRejectOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/privateNatGateway:PrivateNatGateway":
+                return new PrivateNatGateway(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
                 return new ResumeSnapshotInstance(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
@@ -364,6 +371,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/notifyRoutes", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectAcceptOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectManager", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectRejectOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/privateNatGateway", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/resumeSnapshotInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyAttachment", _module)

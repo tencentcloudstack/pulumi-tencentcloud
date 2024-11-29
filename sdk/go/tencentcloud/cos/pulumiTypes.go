@@ -4876,6 +4876,8 @@ type BucketWebsite struct {
 	ErrorDocument *string `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
 	IndexDocument *string `pulumi:"indexDocument"`
+	// Redirects all request configurations. Valid values: http, https. Default is `http`.
+	RedirectAllRequestsTo *string `pulumi:"redirectAllRequestsTo"`
 }
 
 // BucketWebsiteInput is an input type that accepts BucketWebsiteArgs and BucketWebsiteOutput values.
@@ -4896,6 +4898,8 @@ type BucketWebsiteArgs struct {
 	ErrorDocument pulumi.StringPtrInput `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
 	IndexDocument pulumi.StringPtrInput `pulumi:"indexDocument"`
+	// Redirects all request configurations. Valid values: http, https. Default is `http`.
+	RedirectAllRequestsTo pulumi.StringPtrInput `pulumi:"redirectAllRequestsTo"`
 }
 
 func (BucketWebsiteArgs) ElementType() reflect.Type {
@@ -4990,6 +4994,11 @@ func (o BucketWebsiteOutput) IndexDocument() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketWebsite) *string { return v.IndexDocument }).(pulumi.StringPtrOutput)
 }
 
+// Redirects all request configurations. Valid values: http, https. Default is `http`.
+func (o BucketWebsiteOutput) RedirectAllRequestsTo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.RedirectAllRequestsTo }).(pulumi.StringPtrOutput)
+}
+
 type BucketWebsitePtrOutput struct{ *pulumi.OutputState }
 
 func (BucketWebsitePtrOutput) ElementType() reflect.Type {
@@ -5041,6 +5050,16 @@ func (o BucketWebsitePtrOutput) IndexDocument() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.IndexDocument
+	}).(pulumi.StringPtrOutput)
+}
+
+// Redirects all request configurations. Valid values: http, https. Default is `http`.
+func (o BucketWebsitePtrOutput) RedirectAllRequestsTo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectAllRequestsTo
 	}).(pulumi.StringPtrOutput)
 }
 

@@ -83,23 +83,39 @@ export class Layer4Listener extends pulumi.CustomResource {
     }
 
     /**
+     * UDP origin station health check probe port.
+     */
+    public readonly checkPort!: pulumi.Output<number>;
+    /**
+     * UDP origin server health type. PORT means check port, and PING means PING.
+     */
+    public readonly checkType!: pulumi.Output<string>;
+    /**
      * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     public readonly clientIpMethod!: pulumi.Output<number | undefined>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
      */
     public readonly connectTimeout!: pulumi.Output<number | undefined>;
+    /**
+     * UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+     */
+    public readonly contextType!: pulumi.Output<string>;
     /**
      * Creation time of the layer4 listener.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
-     * Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+     * Indicates whether health check is enable, default value is `false`.
      */
     public readonly healthCheck!: pulumi.Output<boolean | undefined>;
     /**
-     * Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+     * Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+     */
+    public readonly healthyThreshold!: pulumi.Output<number | undefined>;
+    /**
+     * Interval of the health check, default value is 5s.
      */
     public readonly interval!: pulumi.Output<number | undefined>;
     /**
@@ -127,13 +143,25 @@ export class Layer4Listener extends pulumi.CustomResource {
      */
     public readonly realserverType!: pulumi.Output<string>;
     /**
+     * UDP source server health check port detects received messages. Only used when the health check type is PORT.
+     */
+    public readonly recvContext!: pulumi.Output<string>;
+    /**
      * Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
      */
     public readonly scheduler!: pulumi.Output<string | undefined>;
     /**
+     * UDP source server health check port detection sends messages. Only used when health check type is PORT.
+     */
+    public readonly sendContext!: pulumi.Output<string>;
+    /**
      * Status of the layer4 listener.
      */
     public /*out*/ readonly status!: pulumi.Output<number>;
+    /**
+     * Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+     */
+    public readonly unhealthyThreshold!: pulumi.Output<number | undefined>;
 
     /**
      * Create a Layer4Listener resource with the given unique name, arguments, and options.
@@ -148,10 +176,14 @@ export class Layer4Listener extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as Layer4ListenerState | undefined;
+            resourceInputs["checkPort"] = state ? state.checkPort : undefined;
+            resourceInputs["checkType"] = state ? state.checkType : undefined;
             resourceInputs["clientIpMethod"] = state ? state.clientIpMethod : undefined;
             resourceInputs["connectTimeout"] = state ? state.connectTimeout : undefined;
+            resourceInputs["contextType"] = state ? state.contextType : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["healthCheck"] = state ? state.healthCheck : undefined;
+            resourceInputs["healthyThreshold"] = state ? state.healthyThreshold : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
@@ -159,8 +191,11 @@ export class Layer4Listener extends pulumi.CustomResource {
             resourceInputs["proxyId"] = state ? state.proxyId : undefined;
             resourceInputs["realserverBindSets"] = state ? state.realserverBindSets : undefined;
             resourceInputs["realserverType"] = state ? state.realserverType : undefined;
+            resourceInputs["recvContext"] = state ? state.recvContext : undefined;
             resourceInputs["scheduler"] = state ? state.scheduler : undefined;
+            resourceInputs["sendContext"] = state ? state.sendContext : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
+            resourceInputs["unhealthyThreshold"] = state ? state.unhealthyThreshold : undefined;
         } else {
             const args = argsOrState as Layer4ListenerArgs | undefined;
             if ((!args || args.port === undefined) && !opts.urn) {
@@ -175,9 +210,13 @@ export class Layer4Listener extends pulumi.CustomResource {
             if ((!args || args.realserverType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'realserverType'");
             }
+            resourceInputs["checkPort"] = args ? args.checkPort : undefined;
+            resourceInputs["checkType"] = args ? args.checkType : undefined;
             resourceInputs["clientIpMethod"] = args ? args.clientIpMethod : undefined;
             resourceInputs["connectTimeout"] = args ? args.connectTimeout : undefined;
+            resourceInputs["contextType"] = args ? args.contextType : undefined;
             resourceInputs["healthCheck"] = args ? args.healthCheck : undefined;
+            resourceInputs["healthyThreshold"] = args ? args.healthyThreshold : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
@@ -185,7 +224,10 @@ export class Layer4Listener extends pulumi.CustomResource {
             resourceInputs["proxyId"] = args ? args.proxyId : undefined;
             resourceInputs["realserverBindSets"] = args ? args.realserverBindSets : undefined;
             resourceInputs["realserverType"] = args ? args.realserverType : undefined;
+            resourceInputs["recvContext"] = args ? args.recvContext : undefined;
             resourceInputs["scheduler"] = args ? args.scheduler : undefined;
+            resourceInputs["sendContext"] = args ? args.sendContext : undefined;
+            resourceInputs["unhealthyThreshold"] = args ? args.unhealthyThreshold : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -199,23 +241,39 @@ export class Layer4Listener extends pulumi.CustomResource {
  */
 export interface Layer4ListenerState {
     /**
+     * UDP origin station health check probe port.
+     */
+    checkPort?: pulumi.Input<number>;
+    /**
+     * UDP origin server health type. PORT means check port, and PING means PING.
+     */
+    checkType?: pulumi.Input<string>;
+    /**
      * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     clientIpMethod?: pulumi.Input<number>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
      */
     connectTimeout?: pulumi.Input<number>;
+    /**
+     * UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+     */
+    contextType?: pulumi.Input<string>;
     /**
      * Creation time of the layer4 listener.
      */
     createTime?: pulumi.Input<string>;
     /**
-     * Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+     * Indicates whether health check is enable, default value is `false`.
      */
     healthCheck?: pulumi.Input<boolean>;
     /**
-     * Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+     * Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * Interval of the health check, default value is 5s.
      */
     interval?: pulumi.Input<number>;
     /**
@@ -243,13 +301,25 @@ export interface Layer4ListenerState {
      */
     realserverType?: pulumi.Input<string>;
     /**
+     * UDP source server health check port detects received messages. Only used when the health check type is PORT.
+     */
+    recvContext?: pulumi.Input<string>;
+    /**
      * Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
      */
     scheduler?: pulumi.Input<string>;
     /**
+     * UDP source server health check port detection sends messages. Only used when health check type is PORT.
+     */
+    sendContext?: pulumi.Input<string>;
+    /**
      * Status of the layer4 listener.
      */
     status?: pulumi.Input<number>;
+    /**
+     * Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
 }
 
 /**
@@ -257,19 +327,35 @@ export interface Layer4ListenerState {
  */
 export interface Layer4ListenerArgs {
     /**
+     * UDP origin station health check probe port.
+     */
+    checkPort?: pulumi.Input<number>;
+    /**
+     * UDP origin server health type. PORT means check port, and PING means PING.
+     */
+    checkType?: pulumi.Input<string>;
+    /**
      * The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
      */
     clientIpMethod?: pulumi.Input<number>;
     /**
-     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+     * Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
      */
     connectTimeout?: pulumi.Input<number>;
     /**
-     * Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+     * UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+     */
+    contextType?: pulumi.Input<string>;
+    /**
+     * Indicates whether health check is enable, default value is `false`.
      */
     healthCheck?: pulumi.Input<boolean>;
     /**
-     * Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+     * Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+     */
+    healthyThreshold?: pulumi.Input<number>;
+    /**
+     * Interval of the health check, default value is 5s.
      */
     interval?: pulumi.Input<number>;
     /**
@@ -297,7 +383,19 @@ export interface Layer4ListenerArgs {
      */
     realserverType: pulumi.Input<string>;
     /**
+     * UDP source server health check port detects received messages. Only used when the health check type is PORT.
+     */
+    recvContext?: pulumi.Input<string>;
+    /**
      * Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
      */
     scheduler?: pulumi.Input<string>;
+    /**
+     * UDP source server health check port detection sends messages. Only used when health check type is PORT.
+     */
+    sendContext?: pulumi.Input<string>;
+    /**
+     * Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+     */
+    unhealthyThreshold?: pulumi.Input<number>;
 }

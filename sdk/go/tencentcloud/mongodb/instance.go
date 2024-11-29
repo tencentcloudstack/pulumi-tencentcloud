@@ -85,6 +85,12 @@ type Instance struct {
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringOutput `pulumi:"machineType"`
+	// Maintenance window end time.
+	// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+	// - The end time must be based on the start time backwards.
+	MaintenanceEnd pulumi.StringOutput `pulumi:"maintenanceEnd"`
+	// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+	MaintenanceStart pulumi.StringOutput `pulumi:"maintenanceStart"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntOutput `pulumi:"memory"`
 	// The number of nodes in each replica set. Default value: 3.
@@ -196,6 +202,12 @@ type instanceState struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType *string `pulumi:"machineType"`
+	// Maintenance window end time.
+	// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+	// - The end time must be based on the start time backwards.
+	MaintenanceEnd *string `pulumi:"maintenanceEnd"`
+	// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+	MaintenanceStart *string `pulumi:"maintenanceStart"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory *int `pulumi:"memory"`
 	// The number of nodes in each replica set. Default value: 3.
@@ -253,6 +265,12 @@ type InstanceState struct {
 	InstanceName pulumi.StringPtrInput
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringPtrInput
+	// Maintenance window end time.
+	// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+	// - The end time must be based on the start time backwards.
+	MaintenanceEnd pulumi.StringPtrInput
+	// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+	MaintenanceStart pulumi.StringPtrInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntPtrInput
 	// The number of nodes in each replica set. Default value: 3.
@@ -312,6 +330,12 @@ type instanceArgs struct {
 	InstanceName string `pulumi:"instanceName"`
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType string `pulumi:"machineType"`
+	// Maintenance window end time.
+	// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+	// - The end time must be based on the start time backwards.
+	MaintenanceEnd *string `pulumi:"maintenanceEnd"`
+	// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+	MaintenanceStart *string `pulumi:"maintenanceStart"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory int `pulumi:"memory"`
 	// The number of nodes in each replica set. Default value: 3.
@@ -360,6 +384,12 @@ type InstanceArgs struct {
 	InstanceName pulumi.StringInput
 	// Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 	MachineType pulumi.StringInput
+	// Maintenance window end time.
+	// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+	// - The end time must be based on the start time backwards.
+	MaintenanceEnd pulumi.StringPtrInput
+	// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+	MaintenanceStart pulumi.StringPtrInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntInput
 	// The number of nodes in each replica set. Default value: 3.
@@ -523,6 +553,18 @@ func (o InstanceOutput) InstanceName() pulumi.StringOutput {
 // Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
 func (o InstanceOutput) MachineType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.MachineType }).(pulumi.StringOutput)
+}
+
+// Maintenance window end time.
+// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+// - The end time must be based on the start time backwards.
+func (o InstanceOutput) MaintenanceEnd() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.MaintenanceEnd }).(pulumi.StringOutput)
+}
+
+// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+func (o InstanceOutput) MaintenanceStart() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.MaintenanceStart }).(pulumi.StringOutput)
 }
 
 // Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.

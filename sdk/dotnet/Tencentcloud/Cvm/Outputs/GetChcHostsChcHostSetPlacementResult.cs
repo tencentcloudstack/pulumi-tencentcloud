@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
         /// </summary>
         public readonly ImmutableArray<string> HostIds;
         /// <summary>
-        /// IPs of the hosts to create CVMs.
+        /// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
         /// </summary>
         public readonly ImmutableArray<string> HostIps;
         /// <summary>

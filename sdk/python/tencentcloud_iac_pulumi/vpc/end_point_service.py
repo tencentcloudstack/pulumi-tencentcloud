@@ -99,6 +99,7 @@ class EndPointServiceArgs:
 class _EndPointServiceState:
     def __init__(__self__, *,
                  auto_accept_flag: Optional[pulumi.Input[bool]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  end_point_count: Optional[pulumi.Input[int]] = None,
                  end_point_service_name: Optional[pulumi.Input[str]] = None,
@@ -110,6 +111,7 @@ class _EndPointServiceState:
         """
         Input properties used for looking up and filtering EndPointService resources.
         :param pulumi.Input[bool] auto_accept_flag: Whether to automatically accept.
+        :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] create_time: Create Time.
         :param pulumi.Input[int] end_point_count: Count of end point.
         :param pulumi.Input[str] end_point_service_name: Name of end point service.
@@ -121,6 +123,8 @@ class _EndPointServiceState:
         """
         if auto_accept_flag is not None:
             pulumi.set(__self__, "auto_accept_flag", auto_accept_flag)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if end_point_count is not None:
@@ -149,6 +153,18 @@ class _EndPointServiceState:
     @auto_accept_flag.setter
     def auto_accept_flag(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_accept_flag", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CDC instance ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -368,6 +384,7 @@ class EndPointService(pulumi.CustomResource):
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
+            __props__.__dict__["cdc_id"] = None
             __props__.__dict__["create_time"] = None
             __props__.__dict__["end_point_count"] = None
             __props__.__dict__["service_owner"] = None
@@ -383,6 +400,7 @@ class EndPointService(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             auto_accept_flag: Optional[pulumi.Input[bool]] = None,
+            cdc_id: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             end_point_count: Optional[pulumi.Input[int]] = None,
             end_point_service_name: Optional[pulumi.Input[str]] = None,
@@ -399,6 +417,7 @@ class EndPointService(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_accept_flag: Whether to automatically accept.
+        :param pulumi.Input[str] cdc_id: CDC instance ID.
         :param pulumi.Input[str] create_time: Create Time.
         :param pulumi.Input[int] end_point_count: Count of end point.
         :param pulumi.Input[str] end_point_service_name: Name of end point service.
@@ -413,6 +432,7 @@ class EndPointService(pulumi.CustomResource):
         __props__ = _EndPointServiceState.__new__(_EndPointServiceState)
 
         __props__.__dict__["auto_accept_flag"] = auto_accept_flag
+        __props__.__dict__["cdc_id"] = cdc_id
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["end_point_count"] = end_point_count
         __props__.__dict__["end_point_service_name"] = end_point_service_name
@@ -430,6 +450,14 @@ class EndPointService(pulumi.CustomResource):
         Whether to automatically accept.
         """
         return pulumi.get(self, "auto_accept_flag")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> pulumi.Output[str]:
+        """
+        CDC instance ID.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="createTime")

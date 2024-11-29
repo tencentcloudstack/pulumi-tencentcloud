@@ -10,6 +10,11 @@ export const getCosRegions: typeof import("./getCosRegions").getCosRegions = nul
 export const getCosRegionsOutput: typeof import("./getCosRegions").getCosRegionsOutput = null as any;
 utilities.lazyLoad(exports, ["getCosRegions","getCosRegionsOutput"], () => require("./getCosRegions"));
 
+export { GetEventsArgs, GetEventsResult, GetEventsOutputArgs } from "./getEvents";
+export const getEvents: typeof import("./getEvents").getEvents = null as any;
+export const getEventsOutput: typeof import("./getEvents").getEventsOutput = null as any;
+utilities.lazyLoad(exports, ["getEvents","getEventsOutput"], () => require("./getEvents"));
+
 export { GetKeyAliasArgs, GetKeyAliasResult, GetKeyAliasOutputArgs } from "./getKeyAlias";
 export const getKeyAlias: typeof import("./getKeyAlias").getKeyAlias = null as any;
 export const getKeyAliasOutput: typeof import("./getKeyAlias").getKeyAliasOutput = null as any;

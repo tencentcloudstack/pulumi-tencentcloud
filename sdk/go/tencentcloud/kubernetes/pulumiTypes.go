@@ -24,12 +24,16 @@ type ClusterAttachmentWorkerConfig struct {
 	ExtraArgs []string `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs *ClusterAttachmentWorkerConfigGpuArgs `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule *bool `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
 	MountTarget *string `pulumi:"mountTarget"`
 	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
 	PreStartUserScript *string `pulumi:"preStartUserScript"`
+	// Node taint.
+	Taints []ClusterAttachmentWorkerConfigTaint `pulumi:"taints"`
 	// Base64-encoded User Data text, the length limit is 16KB.
 	UserData *string `pulumi:"userData"`
 }
@@ -56,12 +60,16 @@ type ClusterAttachmentWorkerConfigArgs struct {
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs ClusterAttachmentWorkerConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
 	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
 	PreStartUserScript pulumi.StringPtrInput `pulumi:"preStartUserScript"`
+	// Node taint.
+	Taints ClusterAttachmentWorkerConfigTaintArrayInput `pulumi:"taints"`
 	// Base64-encoded User Data text, the length limit is 16KB.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
 }
@@ -168,7 +176,9 @@ func (o ClusterAttachmentWorkerConfigOutput) GpuArgs() ClusterAttachmentWorkerCo
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *ClusterAttachmentWorkerConfigGpuArgs { return v.GpuArgs }).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *bool { return v.IsSchedule }).(pulumi.BoolPtrOutput)
 }
@@ -181,6 +191,11 @@ func (o ClusterAttachmentWorkerConfigOutput) MountTarget() pulumi.StringPtrOutpu
 // Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
 func (o ClusterAttachmentWorkerConfigOutput) PreStartUserScript() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *string { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterAttachmentWorkerConfigOutput) Taints() ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) []ClusterAttachmentWorkerConfigTaint { return v.Taints }).(ClusterAttachmentWorkerConfigTaintArrayOutput)
 }
 
 // Base64-encoded User Data text, the length limit is 16KB.
@@ -262,7 +277,9 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) GpuArgs() ClusterAttachmentWorke
 	}).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *bool {
 		if v == nil {
@@ -290,6 +307,16 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) PreStartUserScript() pulumi.Stri
 		}
 		return v.PreStartUserScript
 	}).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterAttachmentWorkerConfigPtrOutput) Taints() ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) []ClusterAttachmentWorkerConfigTaint {
+		if v == nil {
+			return nil
+		}
+		return v.Taints
+	}).(ClusterAttachmentWorkerConfigTaintArrayOutput)
 }
 
 // Base64-encoded User Data text, the length limit is 16KB.
@@ -662,19 +689,31 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 	DataDisks []ClusterAttachmentWorkerConfigOverridesDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	ExtraArgs []string `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs *ClusterAttachmentWorkerConfigOverridesGpuArgs `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule *bool `pulumi:"isSchedule"`
-	// Mount target. Default is not mounting.
+	// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	MountTarget *string `pulumi:"mountTarget"`
-	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	PreStartUserScript *string `pulumi:"preStartUserScript"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	UserData *string `pulumi:"userData"`
 }
 
@@ -694,19 +733,31 @@ type ClusterAttachmentWorkerConfigOverridesArgs struct {
 	DataDisks ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
-	// Mount target. Default is not mounting.
+	// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
-	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	PreStartUserScript pulumi.StringPtrInput `pulumi:"preStartUserScript"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
 }
 
@@ -799,12 +850,16 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) DesiredPodNum() pulumi.Int
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *int { return v.DesiredPodNum }).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
 }
@@ -816,22 +871,30 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) GpuArgs() ClusterAttachmen
 	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *bool { return v.IsSchedule }).(pulumi.BoolPtrOutput)
 }
 
-// Mount target. Default is not mounting.
+// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) PreStartUserScript() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.UserData }).(pulumi.StringPtrOutput)
 }
@@ -880,7 +943,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DesiredPodNum() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -890,7 +955,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DockerGraphPath() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) []string {
 		if v == nil {
@@ -910,7 +977,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) GpuArgs() ClusterAttach
 	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *bool {
 		if v == nil {
@@ -920,7 +989,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) IsSchedule() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Mount target. Default is not mounting.
+// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -930,7 +1001,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) MountTarget() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) PreStartUserScript() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -940,7 +1013,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) PreStartUserScript() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -1303,6 +1378,121 @@ func (o ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput) MigEnable() pulu
 		}
 		return v.MigEnable
 	}).(pulumi.BoolPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigTaint struct {
+	// Effect of the taint.
+	Effect *string `pulumi:"effect"`
+	// Key of the taint.
+	Key *string `pulumi:"key"`
+	// Value of the taint.
+	Value *string `pulumi:"value"`
+}
+
+// ClusterAttachmentWorkerConfigTaintInput is an input type that accepts ClusterAttachmentWorkerConfigTaintArgs and ClusterAttachmentWorkerConfigTaintOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigTaintInput` via:
+//
+//	ClusterAttachmentWorkerConfigTaintArgs{...}
+type ClusterAttachmentWorkerConfigTaintInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigTaintOutput() ClusterAttachmentWorkerConfigTaintOutput
+	ToClusterAttachmentWorkerConfigTaintOutputWithContext(context.Context) ClusterAttachmentWorkerConfigTaintOutput
+}
+
+type ClusterAttachmentWorkerConfigTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ClusterAttachmentWorkerConfigTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterAttachmentWorkerConfigTaintArgs) ToClusterAttachmentWorkerConfigTaintOutput() ClusterAttachmentWorkerConfigTaintOutput {
+	return i.ToClusterAttachmentWorkerConfigTaintOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigTaintArgs) ToClusterAttachmentWorkerConfigTaintOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigTaintOutput)
+}
+
+// ClusterAttachmentWorkerConfigTaintArrayInput is an input type that accepts ClusterAttachmentWorkerConfigTaintArray and ClusterAttachmentWorkerConfigTaintArrayOutput values.
+// You can construct a concrete instance of `ClusterAttachmentWorkerConfigTaintArrayInput` via:
+//
+//	ClusterAttachmentWorkerConfigTaintArray{ ClusterAttachmentWorkerConfigTaintArgs{...} }
+type ClusterAttachmentWorkerConfigTaintArrayInput interface {
+	pulumi.Input
+
+	ToClusterAttachmentWorkerConfigTaintArrayOutput() ClusterAttachmentWorkerConfigTaintArrayOutput
+	ToClusterAttachmentWorkerConfigTaintArrayOutputWithContext(context.Context) ClusterAttachmentWorkerConfigTaintArrayOutput
+}
+
+type ClusterAttachmentWorkerConfigTaintArray []ClusterAttachmentWorkerConfigTaintInput
+
+func (ClusterAttachmentWorkerConfigTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterAttachmentWorkerConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterAttachmentWorkerConfigTaintArray) ToClusterAttachmentWorkerConfigTaintArrayOutput() ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return i.ToClusterAttachmentWorkerConfigTaintArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterAttachmentWorkerConfigTaintArray) ToClusterAttachmentWorkerConfigTaintArrayOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterAttachmentWorkerConfigTaintArrayOutput)
+}
+
+type ClusterAttachmentWorkerConfigTaintOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterAttachmentWorkerConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigTaintOutput) ToClusterAttachmentWorkerConfigTaintOutput() ClusterAttachmentWorkerConfigTaintOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigTaintOutput) ToClusterAttachmentWorkerConfigTaintOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o ClusterAttachmentWorkerConfigTaintOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigTaint) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// Key of the taint.
+func (o ClusterAttachmentWorkerConfigTaintOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigTaint) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Value of the taint.
+func (o ClusterAttachmentWorkerConfigTaintOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfigTaint) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ClusterAttachmentWorkerConfigTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterAttachmentWorkerConfigTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterAttachmentWorkerConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterAttachmentWorkerConfigTaintArrayOutput) ToClusterAttachmentWorkerConfigTaintArrayOutput() ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigTaintArrayOutput) ToClusterAttachmentWorkerConfigTaintArrayOutputWithContext(ctx context.Context) ClusterAttachmentWorkerConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterAttachmentWorkerConfigTaintArrayOutput) Index(i pulumi.IntInput) ClusterAttachmentWorkerConfigTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterAttachmentWorkerConfigTaint {
+		return vs[0].([]ClusterAttachmentWorkerConfigTaint)[vs[1].(int)]
+	}).(ClusterAttachmentWorkerConfigTaintOutput)
 }
 
 type ClusterAuthOptions struct {
@@ -2178,8 +2368,20 @@ func (o ClusterExistInstanceArrayOutput) Index(i pulumi.IntInput) ClusterExistIn
 }
 
 type ClusterExistInstanceInstancesPara struct {
+	// To specify whether to enable cloud monitor service. Default is TRUE.
+	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
+	// To specify whether to enable cloud security service. Default is TRUE.
+	EnhancedSecurityService *bool `pulumi:"enhancedSecurityService"`
 	// Cluster IDs.
 	InstanceIds []string `pulumi:"instanceIds"`
+	// ID list of keys, should be set if `password` not set.
+	KeyIds []string `pulumi:"keyIds"`
+	// Advanced Node Settings. commonly used to attach existing instances.
+	MasterConfig *ClusterExistInstanceInstancesParaMasterConfig `pulumi:"masterConfig"`
+	// Password to access, should be set if `keyIds` not set.
+	Password *string `pulumi:"password"`
+	// Security groups to which a CVM instance belongs.
+	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 }
 
 // ClusterExistInstanceInstancesParaInput is an input type that accepts ClusterExistInstanceInstancesParaArgs and ClusterExistInstanceInstancesParaOutput values.
@@ -2194,8 +2396,20 @@ type ClusterExistInstanceInstancesParaInput interface {
 }
 
 type ClusterExistInstanceInstancesParaArgs struct {
+	// To specify whether to enable cloud monitor service. Default is TRUE.
+	EnhancedMonitorService pulumi.BoolPtrInput `pulumi:"enhancedMonitorService"`
+	// To specify whether to enable cloud security service. Default is TRUE.
+	EnhancedSecurityService pulumi.BoolPtrInput `pulumi:"enhancedSecurityService"`
 	// Cluster IDs.
 	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+	// ID list of keys, should be set if `password` not set.
+	KeyIds pulumi.StringArrayInput `pulumi:"keyIds"`
+	// Advanced Node Settings. commonly used to attach existing instances.
+	MasterConfig ClusterExistInstanceInstancesParaMasterConfigPtrInput `pulumi:"masterConfig"`
+	// Password to access, should be set if `keyIds` not set.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Security groups to which a CVM instance belongs.
+	SecurityGroupIds pulumi.StringArrayInput `pulumi:"securityGroupIds"`
 }
 
 func (ClusterExistInstanceInstancesParaArgs) ElementType() reflect.Type {
@@ -2275,9 +2489,41 @@ func (o ClusterExistInstanceInstancesParaOutput) ToClusterExistInstanceInstances
 	}).(ClusterExistInstanceInstancesParaPtrOutput)
 }
 
+// To specify whether to enable cloud monitor service. Default is TRUE.
+func (o ClusterExistInstanceInstancesParaOutput) EnhancedMonitorService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) *bool { return v.EnhancedMonitorService }).(pulumi.BoolPtrOutput)
+}
+
+// To specify whether to enable cloud security service. Default is TRUE.
+func (o ClusterExistInstanceInstancesParaOutput) EnhancedSecurityService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) *bool { return v.EnhancedSecurityService }).(pulumi.BoolPtrOutput)
+}
+
 // Cluster IDs.
 func (o ClusterExistInstanceInstancesParaOutput) InstanceIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
+}
+
+// ID list of keys, should be set if `password` not set.
+func (o ClusterExistInstanceInstancesParaOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) []string { return v.KeyIds }).(pulumi.StringArrayOutput)
+}
+
+// Advanced Node Settings. commonly used to attach existing instances.
+func (o ClusterExistInstanceInstancesParaOutput) MasterConfig() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) *ClusterExistInstanceInstancesParaMasterConfig {
+		return v.MasterConfig
+	}).(ClusterExistInstanceInstancesParaMasterConfigPtrOutput)
+}
+
+// Password to access, should be set if `keyIds` not set.
+func (o ClusterExistInstanceInstancesParaOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Security groups to which a CVM instance belongs.
+func (o ClusterExistInstanceInstancesParaOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesPara) []string { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
 }
 
 type ClusterExistInstanceInstancesParaPtrOutput struct{ *pulumi.OutputState }
@@ -2304,6 +2550,26 @@ func (o ClusterExistInstanceInstancesParaPtrOutput) Elem() ClusterExistInstanceI
 	}).(ClusterExistInstanceInstancesParaOutput)
 }
 
+// To specify whether to enable cloud monitor service. Default is TRUE.
+func (o ClusterExistInstanceInstancesParaPtrOutput) EnhancedMonitorService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnhancedMonitorService
+	}).(pulumi.BoolPtrOutput)
+}
+
+// To specify whether to enable cloud security service. Default is TRUE.
+func (o ClusterExistInstanceInstancesParaPtrOutput) EnhancedSecurityService() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnhancedSecurityService
+	}).(pulumi.BoolPtrOutput)
+}
+
 // Cluster IDs.
 func (o ClusterExistInstanceInstancesParaPtrOutput) InstanceIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) []string {
@@ -2312,6 +2578,1169 @@ func (o ClusterExistInstanceInstancesParaPtrOutput) InstanceIds() pulumi.StringA
 		}
 		return v.InstanceIds
 	}).(pulumi.StringArrayOutput)
+}
+
+// ID list of keys, should be set if `password` not set.
+func (o ClusterExistInstanceInstancesParaPtrOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KeyIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Advanced Node Settings. commonly used to attach existing instances.
+func (o ClusterExistInstanceInstancesParaPtrOutput) MasterConfig() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) *ClusterExistInstanceInstancesParaMasterConfig {
+		if v == nil {
+			return nil
+		}
+		return v.MasterConfig
+	}).(ClusterExistInstanceInstancesParaMasterConfigPtrOutput)
+}
+
+// Password to access, should be set if `keyIds` not set.
+func (o ClusterExistInstanceInstancesParaPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Security groups to which a CVM instance belongs.
+func (o ClusterExistInstanceInstancesParaPtrOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesPara) []string {
+		if v == nil {
+			return nil
+		}
+		return v.SecurityGroupIds
+	}).(pulumi.StringArrayOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfig struct {
+	// Configurations of data disk.
+	DataDisk *ClusterExistInstanceInstancesParaMasterConfigDataDisk `pulumi:"dataDisk"`
+	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+	DesiredPodNumber *int `pulumi:"desiredPodNumber"`
+	// Docker graph path. Default is `/var/lib/docker`.
+	DockerGraphPath *string `pulumi:"dockerGraphPath"`
+	// Custom parameter information related to the node. This is a white-list parameter.
+	ExtraArgs *ClusterExistInstanceInstancesParaMasterConfigExtraArgs `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ClusterExistInstanceInstancesParaMasterConfigGpuArgs `pulumi:"gpuArgs"`
+	// Node label list.
+	Labels []ClusterExistInstanceInstancesParaMasterConfigLabel `pulumi:"labels"`
+	// Mount target. Default is not mounting.
+	MountTarget *string `pulumi:"mountTarget"`
+	// Node taint.
+	Taints []ClusterExistInstanceInstancesParaMasterConfigTaint `pulumi:"taints"`
+	// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+	Unschedulable *int `pulumi:"unschedulable"`
+	// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+	UserScript *string `pulumi:"userScript"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigArgs and ClusterExistInstanceInstancesParaMasterConfigOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigOutput() ClusterExistInstanceInstancesParaMasterConfigOutput
+	ToClusterExistInstanceInstancesParaMasterConfigOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigArgs struct {
+	// Configurations of data disk.
+	DataDisk ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput `pulumi:"dataDisk"`
+	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+	DesiredPodNumber pulumi.IntPtrInput `pulumi:"desiredPodNumber"`
+	// Docker graph path. Default is `/var/lib/docker`.
+	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
+	// Custom parameter information related to the node. This is a white-list parameter.
+	ExtraArgs ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
+	// Node label list.
+	Labels ClusterExistInstanceInstancesParaMasterConfigLabelArrayInput `pulumi:"labels"`
+	// Mount target. Default is not mounting.
+	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
+	// Node taint.
+	Taints ClusterExistInstanceInstancesParaMasterConfigTaintArrayInput `pulumi:"taints"`
+	// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+	Unschedulable pulumi.IntPtrInput `pulumi:"unschedulable"`
+	// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+	UserScript pulumi.StringPtrInput `pulumi:"userScript"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfig)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigArgs) ToClusterExistInstanceInstancesParaMasterConfigOutput() ClusterExistInstanceInstancesParaMasterConfigOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigArgs) ToClusterExistInstanceInstancesParaMasterConfigOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigOutput)
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigArgs) ToClusterExistInstanceInstancesParaMasterConfigPtrOutput() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigArgs) ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigOutput).ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(ctx)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigPtrInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigArgs, ClusterExistInstanceInstancesParaMasterConfigPtr and ClusterExistInstanceInstancesParaMasterConfigPtrOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigPtrInput` via:
+//
+//	        ClusterExistInstanceInstancesParaMasterConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterExistInstanceInstancesParaMasterConfigPtrInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigPtrOutput() ClusterExistInstanceInstancesParaMasterConfigPtrOutput
+	ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigPtrOutput
+}
+
+type clusterExistInstanceInstancesParaMasterConfigPtrType ClusterExistInstanceInstancesParaMasterConfigArgs
+
+func ClusterExistInstanceInstancesParaMasterConfigPtr(v *ClusterExistInstanceInstancesParaMasterConfigArgs) ClusterExistInstanceInstancesParaMasterConfigPtrInput {
+	return (*clusterExistInstanceInstancesParaMasterConfigPtrType)(v)
+}
+
+func (*clusterExistInstanceInstancesParaMasterConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfig)(nil)).Elem()
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigPtrType) ToClusterExistInstanceInstancesParaMasterConfigPtrOutput() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigPtrType) ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfig)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) ToClusterExistInstanceInstancesParaMasterConfigOutput() ClusterExistInstanceInstancesParaMasterConfigOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) ToClusterExistInstanceInstancesParaMasterConfigOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) ToClusterExistInstanceInstancesParaMasterConfigPtrOutput() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o.ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfig {
+		return &v
+	}).(ClusterExistInstanceInstancesParaMasterConfigPtrOutput)
+}
+
+// Configurations of data disk.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) DataDisk() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigDataDisk {
+		return v.DataDisk
+	}).(ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) DesiredPodNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *int { return v.DesiredPodNumber }).(pulumi.IntPtrOutput)
+}
+
+// Docker graph path. Default is `/var/lib/docker`.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) DockerGraphPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
+}
+
+// Custom parameter information related to the node. This is a white-list parameter.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) ExtraArgs() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigExtraArgs {
+		return v.ExtraArgs
+	}).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) GpuArgs() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigGpuArgs {
+		return v.GpuArgs
+	}).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput)
+}
+
+// Node label list.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) Labels() ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) []ClusterExistInstanceInstancesParaMasterConfigLabel {
+		return v.Labels
+	}).(ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput)
+}
+
+// Mount target. Default is not mounting.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) Taints() ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) []ClusterExistInstanceInstancesParaMasterConfigTaint {
+		return v.Taints
+	}).(ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput)
+}
+
+// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) Unschedulable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *int { return v.Unschedulable }).(pulumi.IntPtrOutput)
+}
+
+// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+func (o ClusterExistInstanceInstancesParaMasterConfigOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfig) *string { return v.UserScript }).(pulumi.StringPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfig)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigPtrOutput() ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) Elem() ClusterExistInstanceInstancesParaMasterConfigOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) ClusterExistInstanceInstancesParaMasterConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterExistInstanceInstancesParaMasterConfig
+		return ret
+	}).(ClusterExistInstanceInstancesParaMasterConfigOutput)
+}
+
+// Configurations of data disk.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) DataDisk() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigDataDisk {
+		if v == nil {
+			return nil
+		}
+		return v.DataDisk
+	}).(ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) DesiredPodNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DesiredPodNumber
+	}).(pulumi.IntPtrOutput)
+}
+
+// Docker graph path. Default is `/var/lib/docker`.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DockerGraphPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom parameter information related to the node. This is a white-list parameter.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) ExtraArgs() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigExtraArgs {
+		if v == nil {
+			return nil
+		}
+		return v.ExtraArgs
+	}).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) GpuArgs() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *ClusterExistInstanceInstancesParaMasterConfigGpuArgs {
+		if v == nil {
+			return nil
+		}
+		return v.GpuArgs
+	}).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput)
+}
+
+// Node label list.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) Labels() ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) []ClusterExistInstanceInstancesParaMasterConfigLabel {
+		if v == nil {
+			return nil
+		}
+		return v.Labels
+	}).(ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput)
+}
+
+// Mount target. Default is not mounting.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MountTarget
+	}).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) Taints() ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) []ClusterExistInstanceInstancesParaMasterConfigTaint {
+		if v == nil {
+			return nil
+		}
+		return v.Taints
+	}).(ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput)
+}
+
+// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) Unschedulable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Unschedulable
+	}).(pulumi.IntPtrOutput)
+}
+
+// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+func (o ClusterExistInstanceInstancesParaMasterConfigPtrOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserScript
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigDataDisk struct {
+	// Indicate whether to auto format and mount or not. Default is `false`.
+	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition *string `pulumi:"diskPartition"`
+	// Volume of disk in GB. Default is `0`.
+	DiskSize *int `pulumi:"diskSize"`
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+	DiskType *string `pulumi:"diskType"`
+	// File system, e.g. `ext3/ext4/xfs`.
+	FileSystem *string `pulumi:"fileSystem"`
+	// Mount target.
+	MountTarget *string `pulumi:"mountTarget"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigDataDiskInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs and ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigDataDiskInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput
+	ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs struct {
+	// Indicate whether to auto format and mount or not. Default is `false`.
+	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
+	// Volume of disk in GB. Default is `0`.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// File system, e.g. `ext3/ext4/xfs`.
+	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
+	// Mount target.
+	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput)
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput).ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs, ClusterExistInstanceInstancesParaMasterConfigDataDiskPtr and ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput` via:
+//
+//	        ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput
+	ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput
+}
+
+type clusterExistInstanceInstancesParaMasterConfigDataDiskPtrType ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs
+
+func ClusterExistInstanceInstancesParaMasterConfigDataDiskPtr(v *ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput {
+	return (*clusterExistInstanceInstancesParaMasterConfigDataDiskPtrType)(v)
+}
+
+func (*clusterExistInstanceInstancesParaMasterConfigDataDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigDataDiskPtrType) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigDataDiskPtrType) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o.ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *ClusterExistInstanceInstancesParaMasterConfigDataDisk {
+		return &v
+	}).(ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate whether to auto format and mount or not. Default is `false`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
+}
+
+// Volume of disk in GB. Default is `0`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
+}
+
+// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// File system, e.g. `ext3/ext4/xfs`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) FileSystem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string { return v.FileSystem }).(pulumi.StringPtrOutput)
+}
+
+// Mount target.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput() ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) Elem() ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) ClusterExistInstanceInstancesParaMasterConfigDataDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterExistInstanceInstancesParaMasterConfigDataDisk
+		return ret
+	}).(ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput)
+}
+
+// Indicate whether to auto format and mount or not. Default is `false`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AutoFormatAndMount
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskPartition
+	}).(pulumi.StringPtrOutput)
+}
+
+// Volume of disk in GB. Default is `0`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+// File system, e.g. `ext3/ext4/xfs`.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) FileSystem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FileSystem
+	}).(pulumi.StringPtrOutput)
+}
+
+// Mount target.
+func (o ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MountTarget
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgs struct {
+	// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+	Kubelets []string `pulumi:"kubelets"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigExtraArgsInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs and ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigExtraArgsInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgsInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput
+	ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs struct {
+	// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+	Kubelets pulumi.StringArrayInput `pulumi:"kubelets"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput)
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput).ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs, ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtr and ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput` via:
+//
+//	        ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput
+	ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput
+}
+
+type clusterExistInstanceInstancesParaMasterConfigExtraArgsPtrType ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs
+
+func ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtr(v *ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput {
+	return (*clusterExistInstanceInstancesParaMasterConfigExtraArgsPtrType)(v)
+}
+
+func (*clusterExistInstanceInstancesParaMasterConfigExtraArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigExtraArgsPtrType) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigExtraArgsPtrType) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o.ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterExistInstanceInstancesParaMasterConfigExtraArgs) *ClusterExistInstanceInstancesParaMasterConfigExtraArgs {
+		return &v
+	}).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput)
+}
+
+// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigExtraArgs) []string { return v.Kubelets }).(pulumi.StringArrayOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput) Elem() ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigExtraArgs) ClusterExistInstanceInstancesParaMasterConfigExtraArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterExistInstanceInstancesParaMasterConfigExtraArgs
+		return ret
+	}).(ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput)
+}
+
+// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Kubelets
+	}).(pulumi.StringArrayOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigGpuArgsInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs and ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigGpuArgsInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgsInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput
+	ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput)
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput).ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs, ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtr and ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput` via:
+//
+//	        ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput
+	ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput
+}
+
+type clusterExistInstanceInstancesParaMasterConfigGpuArgsPtrType ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs
+
+func ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtr(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput {
+	return (*clusterExistInstanceInstancesParaMasterConfigGpuArgsPtrType)(v)
+}
+
+func (*clusterExistInstanceInstancesParaMasterConfigGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigGpuArgsPtrType) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterExistInstanceInstancesParaMasterConfigGpuArgsPtrType) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o.ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) *ClusterExistInstanceInstancesParaMasterConfigGpuArgs {
+		return &v
+	}).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} {
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterExistInstanceInstancesParaMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput() ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) ToClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) Elem() ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) ClusterExistInstanceInstancesParaMasterConfigGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterExistInstanceInstancesParaMasterConfigGpuArgs
+		return ret
+	}).(ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterExistInstanceInstancesParaMasterConfigGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigLabel struct {
+	// Name of map.
+	Name string `pulumi:"name"`
+	// Value of map.
+	Value string `pulumi:"value"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigLabelInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigLabelArgs and ClusterExistInstanceInstancesParaMasterConfigLabelOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigLabelInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigLabelArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigLabelInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigLabelOutput() ClusterExistInstanceInstancesParaMasterConfigLabelOutput
+	ToClusterExistInstanceInstancesParaMasterConfigLabelOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigLabelArgs struct {
+	// Name of map.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of map.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigLabel)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigLabelArgs) ToClusterExistInstanceInstancesParaMasterConfigLabelOutput() ClusterExistInstanceInstancesParaMasterConfigLabelOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigLabelOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigLabelArgs) ToClusterExistInstanceInstancesParaMasterConfigLabelOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigLabelOutput)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigLabelArrayInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigLabelArray and ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigLabelArrayInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigLabelArray{ ClusterExistInstanceInstancesParaMasterConfigLabelArgs{...} }
+type ClusterExistInstanceInstancesParaMasterConfigLabelArrayInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput() ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput
+	ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigLabelArray []ClusterExistInstanceInstancesParaMasterConfigLabelInput
+
+func (ClusterExistInstanceInstancesParaMasterConfigLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterExistInstanceInstancesParaMasterConfigLabel)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigLabelArray) ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput() ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigLabelArray) ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigLabelOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigLabel)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelOutput) ToClusterExistInstanceInstancesParaMasterConfigLabelOutput() ClusterExistInstanceInstancesParaMasterConfigLabelOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelOutput) ToClusterExistInstanceInstancesParaMasterConfigLabelOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelOutput {
+	return o
+}
+
+// Name of map.
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of map.
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterExistInstanceInstancesParaMasterConfigLabel)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput) ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput() ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput) ToClusterExistInstanceInstancesParaMasterConfigLabelArrayOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput) Index(i pulumi.IntInput) ClusterExistInstanceInstancesParaMasterConfigLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterExistInstanceInstancesParaMasterConfigLabel {
+		return vs[0].([]ClusterExistInstanceInstancesParaMasterConfigLabel)[vs[1].(int)]
+	}).(ClusterExistInstanceInstancesParaMasterConfigLabelOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigTaint struct {
+	// Effect of the taint.
+	Effect *string `pulumi:"effect"`
+	// Key of the taint.
+	Key *string `pulumi:"key"`
+	// Value of the taint.
+	Value *string `pulumi:"value"`
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigTaintInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigTaintArgs and ClusterExistInstanceInstancesParaMasterConfigTaintOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigTaintInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigTaintArgs{...}
+type ClusterExistInstanceInstancesParaMasterConfigTaintInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigTaintOutput() ClusterExistInstanceInstancesParaMasterConfigTaintOutput
+	ToClusterExistInstanceInstancesParaMasterConfigTaintOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ClusterExistInstanceInstancesParaMasterConfigTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigTaintArgs) ToClusterExistInstanceInstancesParaMasterConfigTaintOutput() ClusterExistInstanceInstancesParaMasterConfigTaintOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigTaintOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigTaintArgs) ToClusterExistInstanceInstancesParaMasterConfigTaintOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigTaintOutput)
+}
+
+// ClusterExistInstanceInstancesParaMasterConfigTaintArrayInput is an input type that accepts ClusterExistInstanceInstancesParaMasterConfigTaintArray and ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput values.
+// You can construct a concrete instance of `ClusterExistInstanceInstancesParaMasterConfigTaintArrayInput` via:
+//
+//	ClusterExistInstanceInstancesParaMasterConfigTaintArray{ ClusterExistInstanceInstancesParaMasterConfigTaintArgs{...} }
+type ClusterExistInstanceInstancesParaMasterConfigTaintArrayInput interface {
+	pulumi.Input
+
+	ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput() ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput
+	ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutputWithContext(context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigTaintArray []ClusterExistInstanceInstancesParaMasterConfigTaintInput
+
+func (ClusterExistInstanceInstancesParaMasterConfigTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterExistInstanceInstancesParaMasterConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigTaintArray) ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput() ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return i.ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterExistInstanceInstancesParaMasterConfigTaintArray) ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigTaintOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintOutput) ToClusterExistInstanceInstancesParaMasterConfigTaintOutput() ClusterExistInstanceInstancesParaMasterConfigTaintOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintOutput) ToClusterExistInstanceInstancesParaMasterConfigTaintOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigTaint) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// Key of the taint.
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigTaint) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Value of the taint.
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterExistInstanceInstancesParaMasterConfigTaint) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterExistInstanceInstancesParaMasterConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput) ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput() ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput) ToClusterExistInstanceInstancesParaMasterConfigTaintArrayOutputWithContext(ctx context.Context) ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput) Index(i pulumi.IntInput) ClusterExistInstanceInstancesParaMasterConfigTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterExistInstanceInstancesParaMasterConfigTaint {
+		return vs[0].([]ClusterExistInstanceInstancesParaMasterConfigTaint)[vs[1].(int)]
+	}).(ClusterExistInstanceInstancesParaMasterConfigTaintOutput)
 }
 
 type ClusterExtensionAddon struct {
@@ -2574,6 +4003,1321 @@ func (o ClusterLogAgentPtrOutput) KubeletRootDir() pulumi.StringPtrOutput {
 		}
 		return v.KubeletRootDir
 	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentExtraArgs struct {
+	// etcd custom parameters. Only supports independent clusters.
+	Etcds []string `pulumi:"etcds"`
+	// Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+	KubeApiServers []string `pulumi:"kubeApiServers"`
+	// Kube controller manager custom parameters.
+	KubeControllerManagers []string `pulumi:"kubeControllerManagers"`
+	// kube scheduler custom parameters.
+	KubeSchedulers []string `pulumi:"kubeSchedulers"`
+}
+
+// ClusterMasterAttachmentExtraArgsInput is an input type that accepts ClusterMasterAttachmentExtraArgsArgs and ClusterMasterAttachmentExtraArgsOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentExtraArgsInput` via:
+//
+//	ClusterMasterAttachmentExtraArgsArgs{...}
+type ClusterMasterAttachmentExtraArgsInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentExtraArgsOutput() ClusterMasterAttachmentExtraArgsOutput
+	ToClusterMasterAttachmentExtraArgsOutputWithContext(context.Context) ClusterMasterAttachmentExtraArgsOutput
+}
+
+type ClusterMasterAttachmentExtraArgsArgs struct {
+	// etcd custom parameters. Only supports independent clusters.
+	Etcds pulumi.StringArrayInput `pulumi:"etcds"`
+	// Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+	KubeApiServers pulumi.StringArrayInput `pulumi:"kubeApiServers"`
+	// Kube controller manager custom parameters.
+	KubeControllerManagers pulumi.StringArrayInput `pulumi:"kubeControllerManagers"`
+	// kube scheduler custom parameters.
+	KubeSchedulers pulumi.StringArrayInput `pulumi:"kubeSchedulers"`
+}
+
+func (ClusterMasterAttachmentExtraArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentExtraArgs)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentExtraArgsArgs) ToClusterMasterAttachmentExtraArgsOutput() ClusterMasterAttachmentExtraArgsOutput {
+	return i.ToClusterMasterAttachmentExtraArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentExtraArgsArgs) ToClusterMasterAttachmentExtraArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentExtraArgsOutput)
+}
+
+func (i ClusterMasterAttachmentExtraArgsArgs) ToClusterMasterAttachmentExtraArgsPtrOutput() ClusterMasterAttachmentExtraArgsPtrOutput {
+	return i.ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentExtraArgsArgs) ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentExtraArgsOutput).ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterMasterAttachmentExtraArgsPtrInput is an input type that accepts ClusterMasterAttachmentExtraArgsArgs, ClusterMasterAttachmentExtraArgsPtr and ClusterMasterAttachmentExtraArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentExtraArgsPtrInput` via:
+//
+//	        ClusterMasterAttachmentExtraArgsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterMasterAttachmentExtraArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentExtraArgsPtrOutput() ClusterMasterAttachmentExtraArgsPtrOutput
+	ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(context.Context) ClusterMasterAttachmentExtraArgsPtrOutput
+}
+
+type clusterMasterAttachmentExtraArgsPtrType ClusterMasterAttachmentExtraArgsArgs
+
+func ClusterMasterAttachmentExtraArgsPtr(v *ClusterMasterAttachmentExtraArgsArgs) ClusterMasterAttachmentExtraArgsPtrInput {
+	return (*clusterMasterAttachmentExtraArgsPtrType)(v)
+}
+
+func (*clusterMasterAttachmentExtraArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentExtraArgs)(nil)).Elem()
+}
+
+func (i *clusterMasterAttachmentExtraArgsPtrType) ToClusterMasterAttachmentExtraArgsPtrOutput() ClusterMasterAttachmentExtraArgsPtrOutput {
+	return i.ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterMasterAttachmentExtraArgsPtrType) ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentExtraArgsPtrOutput)
+}
+
+type ClusterMasterAttachmentExtraArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentExtraArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentExtraArgsOutput) ToClusterMasterAttachmentExtraArgsOutput() ClusterMasterAttachmentExtraArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentExtraArgsOutput) ToClusterMasterAttachmentExtraArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentExtraArgsOutput) ToClusterMasterAttachmentExtraArgsPtrOutput() ClusterMasterAttachmentExtraArgsPtrOutput {
+	return o.ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterMasterAttachmentExtraArgsOutput) ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterMasterAttachmentExtraArgs) *ClusterMasterAttachmentExtraArgs {
+		return &v
+	}).(ClusterMasterAttachmentExtraArgsPtrOutput)
+}
+
+// etcd custom parameters. Only supports independent clusters.
+func (o ClusterMasterAttachmentExtraArgsOutput) Etcds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentExtraArgs) []string { return v.Etcds }).(pulumi.StringArrayOutput)
+}
+
+// Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterMasterAttachmentExtraArgsOutput) KubeApiServers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentExtraArgs) []string { return v.KubeApiServers }).(pulumi.StringArrayOutput)
+}
+
+// Kube controller manager custom parameters.
+func (o ClusterMasterAttachmentExtraArgsOutput) KubeControllerManagers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentExtraArgs) []string { return v.KubeControllerManagers }).(pulumi.StringArrayOutput)
+}
+
+// kube scheduler custom parameters.
+func (o ClusterMasterAttachmentExtraArgsOutput) KubeSchedulers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentExtraArgs) []string { return v.KubeSchedulers }).(pulumi.StringArrayOutput)
+}
+
+type ClusterMasterAttachmentExtraArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentExtraArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) ToClusterMasterAttachmentExtraArgsPtrOutput() ClusterMasterAttachmentExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) ToClusterMasterAttachmentExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) Elem() ClusterMasterAttachmentExtraArgsOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentExtraArgs) ClusterMasterAttachmentExtraArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterMasterAttachmentExtraArgs
+		return ret
+	}).(ClusterMasterAttachmentExtraArgsOutput)
+}
+
+// etcd custom parameters. Only supports independent clusters.
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) Etcds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Etcds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Kube apiserver custom parameters. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) KubeApiServers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KubeApiServers
+	}).(pulumi.StringArrayOutput)
+}
+
+// Kube controller manager custom parameters.
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) KubeControllerManagers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KubeControllerManagers
+	}).(pulumi.StringArrayOutput)
+}
+
+// kube scheduler custom parameters.
+func (o ClusterMasterAttachmentExtraArgsPtrOutput) KubeSchedulers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KubeSchedulers
+	}).(pulumi.StringArrayOutput)
+}
+
+type ClusterMasterAttachmentMasterConfig struct {
+	// Configurations of data disk.
+	DataDisk *ClusterMasterAttachmentMasterConfigDataDisk `pulumi:"dataDisk"`
+	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+	DesiredPodNumber *int `pulumi:"desiredPodNumber"`
+	// Docker graph path. Default is `/var/lib/docker`.
+	DockerGraphPath *string `pulumi:"dockerGraphPath"`
+	// Custom parameter information related to the node. This is a white-list parameter.
+	ExtraArgs *ClusterMasterAttachmentMasterConfigExtraArgs `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs *ClusterMasterAttachmentMasterConfigGpuArgs `pulumi:"gpuArgs"`
+	// Node label list.
+	Labels []ClusterMasterAttachmentMasterConfigLabel `pulumi:"labels"`
+	// Mount target. Default is not mounting.
+	MountTarget *string `pulumi:"mountTarget"`
+	// Node taint.
+	Taints []ClusterMasterAttachmentMasterConfigTaint `pulumi:"taints"`
+	// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+	Unschedulable *int `pulumi:"unschedulable"`
+	// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+	UserScript *string `pulumi:"userScript"`
+}
+
+// ClusterMasterAttachmentMasterConfigInput is an input type that accepts ClusterMasterAttachmentMasterConfigArgs and ClusterMasterAttachmentMasterConfigOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigArgs{...}
+type ClusterMasterAttachmentMasterConfigInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigOutput() ClusterMasterAttachmentMasterConfigOutput
+	ToClusterMasterAttachmentMasterConfigOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigOutput
+}
+
+type ClusterMasterAttachmentMasterConfigArgs struct {
+	// Configurations of data disk.
+	DataDisk ClusterMasterAttachmentMasterConfigDataDiskPtrInput `pulumi:"dataDisk"`
+	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+	DesiredPodNumber pulumi.IntPtrInput `pulumi:"desiredPodNumber"`
+	// Docker graph path. Default is `/var/lib/docker`.
+	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
+	// Custom parameter information related to the node. This is a white-list parameter.
+	ExtraArgs ClusterMasterAttachmentMasterConfigExtraArgsPtrInput `pulumi:"extraArgs"`
+	// GPU driver parameters.
+	GpuArgs ClusterMasterAttachmentMasterConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
+	// Node label list.
+	Labels ClusterMasterAttachmentMasterConfigLabelArrayInput `pulumi:"labels"`
+	// Mount target. Default is not mounting.
+	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
+	// Node taint.
+	Taints ClusterMasterAttachmentMasterConfigTaintArrayInput `pulumi:"taints"`
+	// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+	Unschedulable pulumi.IntPtrInput `pulumi:"unschedulable"`
+	// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+	UserScript pulumi.StringPtrInput `pulumi:"userScript"`
+}
+
+func (ClusterMasterAttachmentMasterConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfig)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigArgs) ToClusterMasterAttachmentMasterConfigOutput() ClusterMasterAttachmentMasterConfigOutput {
+	return i.ToClusterMasterAttachmentMasterConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigArgs) ToClusterMasterAttachmentMasterConfigOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigOutput)
+}
+
+func (i ClusterMasterAttachmentMasterConfigArgs) ToClusterMasterAttachmentMasterConfigPtrOutput() ClusterMasterAttachmentMasterConfigPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigArgs) ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigOutput).ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(ctx)
+}
+
+// ClusterMasterAttachmentMasterConfigPtrInput is an input type that accepts ClusterMasterAttachmentMasterConfigArgs, ClusterMasterAttachmentMasterConfigPtr and ClusterMasterAttachmentMasterConfigPtrOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigPtrInput` via:
+//
+//	        ClusterMasterAttachmentMasterConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterMasterAttachmentMasterConfigPtrInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigPtrOutput() ClusterMasterAttachmentMasterConfigPtrOutput
+	ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigPtrOutput
+}
+
+type clusterMasterAttachmentMasterConfigPtrType ClusterMasterAttachmentMasterConfigArgs
+
+func ClusterMasterAttachmentMasterConfigPtr(v *ClusterMasterAttachmentMasterConfigArgs) ClusterMasterAttachmentMasterConfigPtrInput {
+	return (*clusterMasterAttachmentMasterConfigPtrType)(v)
+}
+
+func (*clusterMasterAttachmentMasterConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfig)(nil)).Elem()
+}
+
+func (i *clusterMasterAttachmentMasterConfigPtrType) ToClusterMasterAttachmentMasterConfigPtrOutput() ClusterMasterAttachmentMasterConfigPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterMasterAttachmentMasterConfigPtrType) ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfig)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigOutput) ToClusterMasterAttachmentMasterConfigOutput() ClusterMasterAttachmentMasterConfigOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigOutput) ToClusterMasterAttachmentMasterConfigOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigOutput) ToClusterMasterAttachmentMasterConfigPtrOutput() ClusterMasterAttachmentMasterConfigPtrOutput {
+	return o.ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterMasterAttachmentMasterConfigOutput) ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfig {
+		return &v
+	}).(ClusterMasterAttachmentMasterConfigPtrOutput)
+}
+
+// Configurations of data disk.
+func (o ClusterMasterAttachmentMasterConfigOutput) DataDisk() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigDataDisk {
+		return v.DataDisk
+	}).(ClusterMasterAttachmentMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+func (o ClusterMasterAttachmentMasterConfigOutput) DesiredPodNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *int { return v.DesiredPodNumber }).(pulumi.IntPtrOutput)
+}
+
+// Docker graph path. Default is `/var/lib/docker`.
+func (o ClusterMasterAttachmentMasterConfigOutput) DockerGraphPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
+}
+
+// Custom parameter information related to the node. This is a white-list parameter.
+func (o ClusterMasterAttachmentMasterConfigOutput) ExtraArgs() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigExtraArgs {
+		return v.ExtraArgs
+	}).(ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterMasterAttachmentMasterConfigOutput) GpuArgs() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigGpuArgs {
+		return v.GpuArgs
+	}).(ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput)
+}
+
+// Node label list.
+func (o ClusterMasterAttachmentMasterConfigOutput) Labels() ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) []ClusterMasterAttachmentMasterConfigLabel {
+		return v.Labels
+	}).(ClusterMasterAttachmentMasterConfigLabelArrayOutput)
+}
+
+// Mount target. Default is not mounting.
+func (o ClusterMasterAttachmentMasterConfigOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterMasterAttachmentMasterConfigOutput) Taints() ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) []ClusterMasterAttachmentMasterConfigTaint {
+		return v.Taints
+	}).(ClusterMasterAttachmentMasterConfigTaintArrayOutput)
+}
+
+// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+func (o ClusterMasterAttachmentMasterConfigOutput) Unschedulable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *int { return v.Unschedulable }).(pulumi.IntPtrOutput)
+}
+
+// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+func (o ClusterMasterAttachmentMasterConfigOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfig) *string { return v.UserScript }).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfig)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) ToClusterMasterAttachmentMasterConfigPtrOutput() ClusterMasterAttachmentMasterConfigPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) ToClusterMasterAttachmentMasterConfigPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) Elem() ClusterMasterAttachmentMasterConfigOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) ClusterMasterAttachmentMasterConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterMasterAttachmentMasterConfig
+		return ret
+	}).(ClusterMasterAttachmentMasterConfigOutput)
+}
+
+// Configurations of data disk.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) DataDisk() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigDataDisk {
+		if v == nil {
+			return nil
+		}
+		return v.DataDisk
+	}).(ClusterMasterAttachmentMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) DesiredPodNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DesiredPodNumber
+	}).(pulumi.IntPtrOutput)
+}
+
+// Docker graph path. Default is `/var/lib/docker`.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DockerGraphPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom parameter information related to the node. This is a white-list parameter.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) ExtraArgs() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigExtraArgs {
+		if v == nil {
+			return nil
+		}
+		return v.ExtraArgs
+	}).(ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput)
+}
+
+// GPU driver parameters.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) GpuArgs() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *ClusterMasterAttachmentMasterConfigGpuArgs {
+		if v == nil {
+			return nil
+		}
+		return v.GpuArgs
+	}).(ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput)
+}
+
+// Node label list.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) Labels() ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) []ClusterMasterAttachmentMasterConfigLabel {
+		if v == nil {
+			return nil
+		}
+		return v.Labels
+	}).(ClusterMasterAttachmentMasterConfigLabelArrayOutput)
+}
+
+// Mount target. Default is not mounting.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MountTarget
+	}).(pulumi.StringPtrOutput)
+}
+
+// Node taint.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) Taints() ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) []ClusterMasterAttachmentMasterConfigTaint {
+		if v == nil {
+			return nil
+		}
+		return v.Taints
+	}).(ClusterMasterAttachmentMasterConfigTaintArrayOutput)
+}
+
+// Set whether the joined nodes participate in scheduling, with a default value of 0, indicating participation in scheduling; Non 0 means not participating in scheduling.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) Unschedulable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Unschedulable
+	}).(pulumi.IntPtrOutput)
+}
+
+// User script encoded in base64, which will be executed after the k8s component runs. The user needs to ensure the script's reentrant and retry logic. The script and its generated log files can be viewed in the node path /data/ccs_userscript/. If the node needs to be initialized before joining the schedule, it can be used in conjunction with the `unschedulable` parameter. After the final initialization of the userScript is completed, add the command "kubectl uncordon nodename --kubeconfig=/root/.kube/config" to add the node to the schedule.
+func (o ClusterMasterAttachmentMasterConfigPtrOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserScript
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigDataDisk struct {
+	// Indicate whether to auto format and mount or not. Default is `false`.
+	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+	DiskPartition *string `pulumi:"diskPartition"`
+	// Volume of disk in GB. Default is `0`.
+	DiskSize *int `pulumi:"diskSize"`
+	// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+	DiskType *string `pulumi:"diskType"`
+	// File system, e.g. `ext3/ext4/xfs`.
+	FileSystem *string `pulumi:"fileSystem"`
+	// Mount target.
+	MountTarget *string `pulumi:"mountTarget"`
+}
+
+// ClusterMasterAttachmentMasterConfigDataDiskInput is an input type that accepts ClusterMasterAttachmentMasterConfigDataDiskArgs and ClusterMasterAttachmentMasterConfigDataDiskOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigDataDiskInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigDataDiskArgs{...}
+type ClusterMasterAttachmentMasterConfigDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigDataDiskOutput() ClusterMasterAttachmentMasterConfigDataDiskOutput
+	ToClusterMasterAttachmentMasterConfigDataDiskOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigDataDiskOutput
+}
+
+type ClusterMasterAttachmentMasterConfigDataDiskArgs struct {
+	// Indicate whether to auto format and mount or not. Default is `false`.
+	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
+	// Volume of disk in GB. Default is `0`.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+	// File system, e.g. `ext3/ext4/xfs`.
+	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
+	// Mount target.
+	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
+}
+
+func (ClusterMasterAttachmentMasterConfigDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigDataDiskArgs) ToClusterMasterAttachmentMasterConfigDataDiskOutput() ClusterMasterAttachmentMasterConfigDataDiskOutput {
+	return i.ToClusterMasterAttachmentMasterConfigDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigDataDiskArgs) ToClusterMasterAttachmentMasterConfigDataDiskOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigDataDiskOutput)
+}
+
+func (i ClusterMasterAttachmentMasterConfigDataDiskArgs) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutput() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigDataDiskArgs) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigDataDiskOutput).ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterMasterAttachmentMasterConfigDataDiskPtrInput is an input type that accepts ClusterMasterAttachmentMasterConfigDataDiskArgs, ClusterMasterAttachmentMasterConfigDataDiskPtr and ClusterMasterAttachmentMasterConfigDataDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigDataDiskPtrInput` via:
+//
+//	        ClusterMasterAttachmentMasterConfigDataDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterMasterAttachmentMasterConfigDataDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigDataDiskPtrOutput() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput
+	ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigDataDiskPtrOutput
+}
+
+type clusterMasterAttachmentMasterConfigDataDiskPtrType ClusterMasterAttachmentMasterConfigDataDiskArgs
+
+func ClusterMasterAttachmentMasterConfigDataDiskPtr(v *ClusterMasterAttachmentMasterConfigDataDiskArgs) ClusterMasterAttachmentMasterConfigDataDiskPtrInput {
+	return (*clusterMasterAttachmentMasterConfigDataDiskPtrType)(v)
+}
+
+func (*clusterMasterAttachmentMasterConfigDataDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (i *clusterMasterAttachmentMasterConfigDataDiskPtrType) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutput() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterMasterAttachmentMasterConfigDataDiskPtrType) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigDataDiskPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) ToClusterMasterAttachmentMasterConfigDataDiskOutput() ClusterMasterAttachmentMasterConfigDataDiskOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) ToClusterMasterAttachmentMasterConfigDataDiskOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutput() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o.ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterMasterAttachmentMasterConfigDataDisk) *ClusterMasterAttachmentMasterConfigDataDisk {
+		return &v
+	}).(ClusterMasterAttachmentMasterConfigDataDiskPtrOutput)
+}
+
+// Indicate whether to auto format and mount or not. Default is `false`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
+}
+
+// Volume of disk in GB. Default is `0`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
+}
+
+// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *string { return v.DiskType }).(pulumi.StringPtrOutput)
+}
+
+// File system, e.g. `ext3/ext4/xfs`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) FileSystem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *string { return v.FileSystem }).(pulumi.StringPtrOutput)
+}
+
+// Mount target.
+func (o ClusterMasterAttachmentMasterConfigDataDiskOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigDataDisk) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigDataDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigDataDisk)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutput() ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) ToClusterMasterAttachmentMasterConfigDataDiskPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigDataDiskPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) Elem() ClusterMasterAttachmentMasterConfigDataDiskOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) ClusterMasterAttachmentMasterConfigDataDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterMasterAttachmentMasterConfigDataDisk
+		return ret
+	}).(ClusterMasterAttachmentMasterConfigDataDiskOutput)
+}
+
+// Indicate whether to auto format and mount or not. Default is `false`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AutoFormatAndMount
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount. NOTE: this argument doesn't support setting in node pool, or will leads to mount error.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskPartition
+	}).(pulumi.StringPtrOutput)
+}
+
+// Volume of disk in GB. Default is `0`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+// File system, e.g. `ext3/ext4/xfs`.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) FileSystem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FileSystem
+	}).(pulumi.StringPtrOutput)
+}
+
+// Mount target.
+func (o ClusterMasterAttachmentMasterConfigDataDiskPtrOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigDataDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MountTarget
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigExtraArgs struct {
+	// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+	Kubelets []string `pulumi:"kubelets"`
+}
+
+// ClusterMasterAttachmentMasterConfigExtraArgsInput is an input type that accepts ClusterMasterAttachmentMasterConfigExtraArgsArgs and ClusterMasterAttachmentMasterConfigExtraArgsOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigExtraArgsInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigExtraArgsArgs{...}
+type ClusterMasterAttachmentMasterConfigExtraArgsInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigExtraArgsOutput() ClusterMasterAttachmentMasterConfigExtraArgsOutput
+	ToClusterMasterAttachmentMasterConfigExtraArgsOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigExtraArgsOutput
+}
+
+type ClusterMasterAttachmentMasterConfigExtraArgsArgs struct {
+	// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+	Kubelets pulumi.StringArrayInput `pulumi:"kubelets"`
+}
+
+func (ClusterMasterAttachmentMasterConfigExtraArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigExtraArgsArgs) ToClusterMasterAttachmentMasterConfigExtraArgsOutput() ClusterMasterAttachmentMasterConfigExtraArgsOutput {
+	return i.ToClusterMasterAttachmentMasterConfigExtraArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigExtraArgsArgs) ToClusterMasterAttachmentMasterConfigExtraArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigExtraArgsOutput)
+}
+
+func (i ClusterMasterAttachmentMasterConfigExtraArgsArgs) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutput() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigExtraArgsArgs) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigExtraArgsOutput).ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterMasterAttachmentMasterConfigExtraArgsPtrInput is an input type that accepts ClusterMasterAttachmentMasterConfigExtraArgsArgs, ClusterMasterAttachmentMasterConfigExtraArgsPtr and ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigExtraArgsPtrInput` via:
+//
+//	        ClusterMasterAttachmentMasterConfigExtraArgsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterMasterAttachmentMasterConfigExtraArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutput() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput
+	ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput
+}
+
+type clusterMasterAttachmentMasterConfigExtraArgsPtrType ClusterMasterAttachmentMasterConfigExtraArgsArgs
+
+func ClusterMasterAttachmentMasterConfigExtraArgsPtr(v *ClusterMasterAttachmentMasterConfigExtraArgsArgs) ClusterMasterAttachmentMasterConfigExtraArgsPtrInput {
+	return (*clusterMasterAttachmentMasterConfigExtraArgsPtrType)(v)
+}
+
+func (*clusterMasterAttachmentMasterConfigExtraArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (i *clusterMasterAttachmentMasterConfigExtraArgsPtrType) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutput() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterMasterAttachmentMasterConfigExtraArgsPtrType) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigExtraArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigExtraArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsOutput) ToClusterMasterAttachmentMasterConfigExtraArgsOutput() ClusterMasterAttachmentMasterConfigExtraArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsOutput) ToClusterMasterAttachmentMasterConfigExtraArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsOutput) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutput() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o.ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsOutput) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterMasterAttachmentMasterConfigExtraArgs) *ClusterMasterAttachmentMasterConfigExtraArgs {
+		return &v
+	}).(ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput)
+}
+
+// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterMasterAttachmentMasterConfigExtraArgsOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigExtraArgs) []string { return v.Kubelets }).(pulumi.StringArrayOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigExtraArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutput() ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput) ToClusterMasterAttachmentMasterConfigExtraArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput) Elem() ClusterMasterAttachmentMasterConfigExtraArgsOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigExtraArgs) ClusterMasterAttachmentMasterConfigExtraArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterMasterAttachmentMasterConfigExtraArgs
+		return ret
+	}).(ClusterMasterAttachmentMasterConfigExtraArgsOutput)
+}
+
+// Kubelet custom parameter. The parameter format is ["k1=v1", "k1=v2"].
+func (o ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput) Kubelets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigExtraArgs) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Kubelets
+	}).(pulumi.StringArrayOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigGpuArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda map[string]interface{} `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn map[string]interface{} `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver map[string]interface{} `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver map[string]interface{} `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable *bool `pulumi:"migEnable"`
+}
+
+// ClusterMasterAttachmentMasterConfigGpuArgsInput is an input type that accepts ClusterMasterAttachmentMasterConfigGpuArgsArgs and ClusterMasterAttachmentMasterConfigGpuArgsOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigGpuArgsInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigGpuArgsArgs{...}
+type ClusterMasterAttachmentMasterConfigGpuArgsInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigGpuArgsOutput() ClusterMasterAttachmentMasterConfigGpuArgsOutput
+	ToClusterMasterAttachmentMasterConfigGpuArgsOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigGpuArgsOutput
+}
+
+type ClusterMasterAttachmentMasterConfigGpuArgsArgs struct {
+	// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Cuda pulumi.MapInput `pulumi:"cuda"`
+	// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+	Cudnn pulumi.MapInput `pulumi:"cudnn"`
+	// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+	CustomDriver pulumi.MapInput `pulumi:"customDriver"`
+	// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+	Driver pulumi.MapInput `pulumi:"driver"`
+	// Whether to enable MIG.
+	MigEnable pulumi.BoolPtrInput `pulumi:"migEnable"`
+}
+
+func (ClusterMasterAttachmentMasterConfigGpuArgsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigGpuArgsArgs) ToClusterMasterAttachmentMasterConfigGpuArgsOutput() ClusterMasterAttachmentMasterConfigGpuArgsOutput {
+	return i.ToClusterMasterAttachmentMasterConfigGpuArgsOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigGpuArgsArgs) ToClusterMasterAttachmentMasterConfigGpuArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigGpuArgsOutput)
+}
+
+func (i ClusterMasterAttachmentMasterConfigGpuArgsArgs) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutput() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigGpuArgsArgs) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigGpuArgsOutput).ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(ctx)
+}
+
+// ClusterMasterAttachmentMasterConfigGpuArgsPtrInput is an input type that accepts ClusterMasterAttachmentMasterConfigGpuArgsArgs, ClusterMasterAttachmentMasterConfigGpuArgsPtr and ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigGpuArgsPtrInput` via:
+//
+//	        ClusterMasterAttachmentMasterConfigGpuArgsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterMasterAttachmentMasterConfigGpuArgsPtrInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutput() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput
+	ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput
+}
+
+type clusterMasterAttachmentMasterConfigGpuArgsPtrType ClusterMasterAttachmentMasterConfigGpuArgsArgs
+
+func ClusterMasterAttachmentMasterConfigGpuArgsPtr(v *ClusterMasterAttachmentMasterConfigGpuArgsArgs) ClusterMasterAttachmentMasterConfigGpuArgsPtrInput {
+	return (*clusterMasterAttachmentMasterConfigGpuArgsPtrType)(v)
+}
+
+func (*clusterMasterAttachmentMasterConfigGpuArgsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (i *clusterMasterAttachmentMasterConfigGpuArgsPtrType) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutput() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return i.ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterMasterAttachmentMasterConfigGpuArgsPtrType) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigGpuArgsOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigGpuArgsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) ToClusterMasterAttachmentMasterConfigGpuArgsOutput() ClusterMasterAttachmentMasterConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) ToClusterMasterAttachmentMasterConfigGpuArgsOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutput() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o.ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterMasterAttachmentMasterConfigGpuArgs) *ClusterMasterAttachmentMasterConfigGpuArgs {
+		return &v
+	}).(ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} { return v.Cuda }).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} { return v.Cudnn }).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} { return v.CustomDriver }).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} { return v.Driver }).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigGpuArgs) *bool { return v.MigEnable }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterMasterAttachmentMasterConfigGpuArgs)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutput() ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) ToClusterMasterAttachmentMasterConfigGpuArgsPtrOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) Elem() ClusterMasterAttachmentMasterConfigGpuArgsOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) ClusterMasterAttachmentMasterConfigGpuArgs {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterMasterAttachmentMasterConfigGpuArgs
+		return ret
+	}).(ClusterMasterAttachmentMasterConfigGpuArgsOutput)
+}
+
+// CUDA  version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) Cuda() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cuda
+	}).(pulumi.MapOutput)
+}
+
+// cuDNN version. Format like: `{ version: String, name: String, doc_name: String, dev_name: String }`. `version`: cuDNN version; `name`: cuDNN name; `docName`: Doc name of cuDNN; `devName`: Dev name of cuDNN.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) Cudnn() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Cudnn
+	}).(pulumi.MapOutput)
+}
+
+// Custom GPU driver. Format like: `{address: String}`. `address`: URL of custom GPU driver address.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) CustomDriver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.CustomDriver
+	}).(pulumi.MapOutput)
+}
+
+// GPU driver version. Format like: `{ version: String, name: String }`. `version`: Version of GPU driver or CUDA; `name`: Name of GPU driver or CUDA.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) Driver() pulumi.MapOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) map[string]interface{} {
+		if v == nil {
+			return nil
+		}
+		return v.Driver
+	}).(pulumi.MapOutput)
+}
+
+// Whether to enable MIG.
+func (o ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterMasterAttachmentMasterConfigGpuArgs) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.MigEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigLabel struct {
+	// Name of map.
+	Name string `pulumi:"name"`
+	// Value of map.
+	Value string `pulumi:"value"`
+}
+
+// ClusterMasterAttachmentMasterConfigLabelInput is an input type that accepts ClusterMasterAttachmentMasterConfigLabelArgs and ClusterMasterAttachmentMasterConfigLabelOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigLabelInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigLabelArgs{...}
+type ClusterMasterAttachmentMasterConfigLabelInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigLabelOutput() ClusterMasterAttachmentMasterConfigLabelOutput
+	ToClusterMasterAttachmentMasterConfigLabelOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigLabelOutput
+}
+
+type ClusterMasterAttachmentMasterConfigLabelArgs struct {
+	// Name of map.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of map.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ClusterMasterAttachmentMasterConfigLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigLabel)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigLabelArgs) ToClusterMasterAttachmentMasterConfigLabelOutput() ClusterMasterAttachmentMasterConfigLabelOutput {
+	return i.ToClusterMasterAttachmentMasterConfigLabelOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigLabelArgs) ToClusterMasterAttachmentMasterConfigLabelOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigLabelOutput)
+}
+
+// ClusterMasterAttachmentMasterConfigLabelArrayInput is an input type that accepts ClusterMasterAttachmentMasterConfigLabelArray and ClusterMasterAttachmentMasterConfigLabelArrayOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigLabelArrayInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigLabelArray{ ClusterMasterAttachmentMasterConfigLabelArgs{...} }
+type ClusterMasterAttachmentMasterConfigLabelArrayInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigLabelArrayOutput() ClusterMasterAttachmentMasterConfigLabelArrayOutput
+	ToClusterMasterAttachmentMasterConfigLabelArrayOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigLabelArrayOutput
+}
+
+type ClusterMasterAttachmentMasterConfigLabelArray []ClusterMasterAttachmentMasterConfigLabelInput
+
+func (ClusterMasterAttachmentMasterConfigLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMasterAttachmentMasterConfigLabel)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigLabelArray) ToClusterMasterAttachmentMasterConfigLabelArrayOutput() ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return i.ToClusterMasterAttachmentMasterConfigLabelArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigLabelArray) ToClusterMasterAttachmentMasterConfigLabelArrayOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigLabelArrayOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigLabelOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigLabel)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigLabelOutput) ToClusterMasterAttachmentMasterConfigLabelOutput() ClusterMasterAttachmentMasterConfigLabelOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigLabelOutput) ToClusterMasterAttachmentMasterConfigLabelOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigLabelOutput {
+	return o
+}
+
+// Name of map.
+func (o ClusterMasterAttachmentMasterConfigLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of map.
+func (o ClusterMasterAttachmentMasterConfigLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMasterAttachmentMasterConfigLabel)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigLabelArrayOutput) ToClusterMasterAttachmentMasterConfigLabelArrayOutput() ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigLabelArrayOutput) ToClusterMasterAttachmentMasterConfigLabelArrayOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigLabelArrayOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigLabelArrayOutput) Index(i pulumi.IntInput) ClusterMasterAttachmentMasterConfigLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterMasterAttachmentMasterConfigLabel {
+		return vs[0].([]ClusterMasterAttachmentMasterConfigLabel)[vs[1].(int)]
+	}).(ClusterMasterAttachmentMasterConfigLabelOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigTaint struct {
+	// Effect of the taint.
+	Effect *string `pulumi:"effect"`
+	// Key of the taint.
+	Key *string `pulumi:"key"`
+	// Value of the taint.
+	Value *string `pulumi:"value"`
+}
+
+// ClusterMasterAttachmentMasterConfigTaintInput is an input type that accepts ClusterMasterAttachmentMasterConfigTaintArgs and ClusterMasterAttachmentMasterConfigTaintOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigTaintInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigTaintArgs{...}
+type ClusterMasterAttachmentMasterConfigTaintInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigTaintOutput() ClusterMasterAttachmentMasterConfigTaintOutput
+	ToClusterMasterAttachmentMasterConfigTaintOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigTaintOutput
+}
+
+type ClusterMasterAttachmentMasterConfigTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ClusterMasterAttachmentMasterConfigTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigTaintArgs) ToClusterMasterAttachmentMasterConfigTaintOutput() ClusterMasterAttachmentMasterConfigTaintOutput {
+	return i.ToClusterMasterAttachmentMasterConfigTaintOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigTaintArgs) ToClusterMasterAttachmentMasterConfigTaintOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigTaintOutput)
+}
+
+// ClusterMasterAttachmentMasterConfigTaintArrayInput is an input type that accepts ClusterMasterAttachmentMasterConfigTaintArray and ClusterMasterAttachmentMasterConfigTaintArrayOutput values.
+// You can construct a concrete instance of `ClusterMasterAttachmentMasterConfigTaintArrayInput` via:
+//
+//	ClusterMasterAttachmentMasterConfigTaintArray{ ClusterMasterAttachmentMasterConfigTaintArgs{...} }
+type ClusterMasterAttachmentMasterConfigTaintArrayInput interface {
+	pulumi.Input
+
+	ToClusterMasterAttachmentMasterConfigTaintArrayOutput() ClusterMasterAttachmentMasterConfigTaintArrayOutput
+	ToClusterMasterAttachmentMasterConfigTaintArrayOutputWithContext(context.Context) ClusterMasterAttachmentMasterConfigTaintArrayOutput
+}
+
+type ClusterMasterAttachmentMasterConfigTaintArray []ClusterMasterAttachmentMasterConfigTaintInput
+
+func (ClusterMasterAttachmentMasterConfigTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMasterAttachmentMasterConfigTaint)(nil)).Elem()
+}
+
+func (i ClusterMasterAttachmentMasterConfigTaintArray) ToClusterMasterAttachmentMasterConfigTaintArrayOutput() ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return i.ToClusterMasterAttachmentMasterConfigTaintArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterMasterAttachmentMasterConfigTaintArray) ToClusterMasterAttachmentMasterConfigTaintArrayOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMasterAttachmentMasterConfigTaintArrayOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigTaintOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMasterAttachmentMasterConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigTaintOutput) ToClusterMasterAttachmentMasterConfigTaintOutput() ClusterMasterAttachmentMasterConfigTaintOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigTaintOutput) ToClusterMasterAttachmentMasterConfigTaintOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o ClusterMasterAttachmentMasterConfigTaintOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigTaint) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// Key of the taint.
+func (o ClusterMasterAttachmentMasterConfigTaintOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigTaint) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Value of the taint.
+func (o ClusterMasterAttachmentMasterConfigTaintOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterMasterAttachmentMasterConfigTaint) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ClusterMasterAttachmentMasterConfigTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterMasterAttachmentMasterConfigTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMasterAttachmentMasterConfigTaint)(nil)).Elem()
+}
+
+func (o ClusterMasterAttachmentMasterConfigTaintArrayOutput) ToClusterMasterAttachmentMasterConfigTaintArrayOutput() ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigTaintArrayOutput) ToClusterMasterAttachmentMasterConfigTaintArrayOutputWithContext(ctx context.Context) ClusterMasterAttachmentMasterConfigTaintArrayOutput {
+	return o
+}
+
+func (o ClusterMasterAttachmentMasterConfigTaintArrayOutput) Index(i pulumi.IntInput) ClusterMasterAttachmentMasterConfigTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterMasterAttachmentMasterConfigTaint {
+		return vs[0].([]ClusterMasterAttachmentMasterConfigTaint)[vs[1].(int)]
+	}).(ClusterMasterAttachmentMasterConfigTaintOutput)
 }
 
 type ClusterMasterConfig struct {
@@ -3243,6 +5987,121 @@ func (o ClusterNodePoolGlobalConfigArrayOutput) Index(i pulumi.IntInput) Cluster
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterNodePoolGlobalConfig {
 		return vs[0].([]ClusterNodePoolGlobalConfig)[vs[1].(int)]
 	}).(ClusterNodePoolGlobalConfigOutput)
+}
+
+type ClusterResourceDeleteOption struct {
+	// The deletion mode of CBS resources when the cluster is deleted, `terminate` (destroy), `retain` (retain). Other resources are deleted by default.
+	DeleteMode string `pulumi:"deleteMode"`
+	// Resource type, valid values are `CBS`, `CLB`, and `CVM`.
+	ResourceType string `pulumi:"resourceType"`
+	// Whether to skip resources with deletion protection enabled, the default is false.
+	SkipDeletionProtection *bool `pulumi:"skipDeletionProtection"`
+}
+
+// ClusterResourceDeleteOptionInput is an input type that accepts ClusterResourceDeleteOptionArgs and ClusterResourceDeleteOptionOutput values.
+// You can construct a concrete instance of `ClusterResourceDeleteOptionInput` via:
+//
+//	ClusterResourceDeleteOptionArgs{...}
+type ClusterResourceDeleteOptionInput interface {
+	pulumi.Input
+
+	ToClusterResourceDeleteOptionOutput() ClusterResourceDeleteOptionOutput
+	ToClusterResourceDeleteOptionOutputWithContext(context.Context) ClusterResourceDeleteOptionOutput
+}
+
+type ClusterResourceDeleteOptionArgs struct {
+	// The deletion mode of CBS resources when the cluster is deleted, `terminate` (destroy), `retain` (retain). Other resources are deleted by default.
+	DeleteMode pulumi.StringInput `pulumi:"deleteMode"`
+	// Resource type, valid values are `CBS`, `CLB`, and `CVM`.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Whether to skip resources with deletion protection enabled, the default is false.
+	SkipDeletionProtection pulumi.BoolPtrInput `pulumi:"skipDeletionProtection"`
+}
+
+func (ClusterResourceDeleteOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceDeleteOption)(nil)).Elem()
+}
+
+func (i ClusterResourceDeleteOptionArgs) ToClusterResourceDeleteOptionOutput() ClusterResourceDeleteOptionOutput {
+	return i.ToClusterResourceDeleteOptionOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceDeleteOptionArgs) ToClusterResourceDeleteOptionOutputWithContext(ctx context.Context) ClusterResourceDeleteOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceDeleteOptionOutput)
+}
+
+// ClusterResourceDeleteOptionArrayInput is an input type that accepts ClusterResourceDeleteOptionArray and ClusterResourceDeleteOptionArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceDeleteOptionArrayInput` via:
+//
+//	ClusterResourceDeleteOptionArray{ ClusterResourceDeleteOptionArgs{...} }
+type ClusterResourceDeleteOptionArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceDeleteOptionArrayOutput() ClusterResourceDeleteOptionArrayOutput
+	ToClusterResourceDeleteOptionArrayOutputWithContext(context.Context) ClusterResourceDeleteOptionArrayOutput
+}
+
+type ClusterResourceDeleteOptionArray []ClusterResourceDeleteOptionInput
+
+func (ClusterResourceDeleteOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceDeleteOption)(nil)).Elem()
+}
+
+func (i ClusterResourceDeleteOptionArray) ToClusterResourceDeleteOptionArrayOutput() ClusterResourceDeleteOptionArrayOutput {
+	return i.ToClusterResourceDeleteOptionArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceDeleteOptionArray) ToClusterResourceDeleteOptionArrayOutputWithContext(ctx context.Context) ClusterResourceDeleteOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceDeleteOptionArrayOutput)
+}
+
+type ClusterResourceDeleteOptionOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceDeleteOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceDeleteOption)(nil)).Elem()
+}
+
+func (o ClusterResourceDeleteOptionOutput) ToClusterResourceDeleteOptionOutput() ClusterResourceDeleteOptionOutput {
+	return o
+}
+
+func (o ClusterResourceDeleteOptionOutput) ToClusterResourceDeleteOptionOutputWithContext(ctx context.Context) ClusterResourceDeleteOptionOutput {
+	return o
+}
+
+// The deletion mode of CBS resources when the cluster is deleted, `terminate` (destroy), `retain` (retain). Other resources are deleted by default.
+func (o ClusterResourceDeleteOptionOutput) DeleteMode() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterResourceDeleteOption) string { return v.DeleteMode }).(pulumi.StringOutput)
+}
+
+// Resource type, valid values are `CBS`, `CLB`, and `CVM`.
+func (o ClusterResourceDeleteOptionOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterResourceDeleteOption) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Whether to skip resources with deletion protection enabled, the default is false.
+func (o ClusterResourceDeleteOptionOutput) SkipDeletionProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterResourceDeleteOption) *bool { return v.SkipDeletionProtection }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterResourceDeleteOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceDeleteOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceDeleteOption)(nil)).Elem()
+}
+
+func (o ClusterResourceDeleteOptionArrayOutput) ToClusterResourceDeleteOptionArrayOutput() ClusterResourceDeleteOptionArrayOutput {
+	return o
+}
+
+func (o ClusterResourceDeleteOptionArrayOutput) ToClusterResourceDeleteOptionArrayOutputWithContext(ctx context.Context) ClusterResourceDeleteOptionArrayOutput {
+	return o
+}
+
+func (o ClusterResourceDeleteOptionArrayOutput) Index(i pulumi.IntInput) ClusterResourceDeleteOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceDeleteOption {
+		return vs[0].([]ClusterResourceDeleteOption)[vs[1].(int)]
+	}).(ClusterResourceDeleteOptionOutput)
 }
 
 type ClusterWorkerConfig struct {
@@ -4034,6 +6893,121 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+type HealthCheckPolicyRule struct {
+	// Enable repair or not.
+	AutoRepairEnabled bool `pulumi:"autoRepairEnabled"`
+	// Enable detection of this project or not.
+	Enabled bool `pulumi:"enabled"`
+	// Health check rule details.
+	Name string `pulumi:"name"`
+}
+
+// HealthCheckPolicyRuleInput is an input type that accepts HealthCheckPolicyRuleArgs and HealthCheckPolicyRuleOutput values.
+// You can construct a concrete instance of `HealthCheckPolicyRuleInput` via:
+//
+//	HealthCheckPolicyRuleArgs{...}
+type HealthCheckPolicyRuleInput interface {
+	pulumi.Input
+
+	ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput
+	ToHealthCheckPolicyRuleOutputWithContext(context.Context) HealthCheckPolicyRuleOutput
+}
+
+type HealthCheckPolicyRuleArgs struct {
+	// Enable repair or not.
+	AutoRepairEnabled pulumi.BoolInput `pulumi:"autoRepairEnabled"`
+	// Enable detection of this project or not.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Health check rule details.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (HealthCheckPolicyRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (i HealthCheckPolicyRuleArgs) ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput {
+	return i.ToHealthCheckPolicyRuleOutputWithContext(context.Background())
+}
+
+func (i HealthCheckPolicyRuleArgs) ToHealthCheckPolicyRuleOutputWithContext(ctx context.Context) HealthCheckPolicyRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HealthCheckPolicyRuleOutput)
+}
+
+// HealthCheckPolicyRuleArrayInput is an input type that accepts HealthCheckPolicyRuleArray and HealthCheckPolicyRuleArrayOutput values.
+// You can construct a concrete instance of `HealthCheckPolicyRuleArrayInput` via:
+//
+//	HealthCheckPolicyRuleArray{ HealthCheckPolicyRuleArgs{...} }
+type HealthCheckPolicyRuleArrayInput interface {
+	pulumi.Input
+
+	ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput
+	ToHealthCheckPolicyRuleArrayOutputWithContext(context.Context) HealthCheckPolicyRuleArrayOutput
+}
+
+type HealthCheckPolicyRuleArray []HealthCheckPolicyRuleInput
+
+func (HealthCheckPolicyRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (i HealthCheckPolicyRuleArray) ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput {
+	return i.ToHealthCheckPolicyRuleArrayOutputWithContext(context.Background())
+}
+
+func (i HealthCheckPolicyRuleArray) ToHealthCheckPolicyRuleArrayOutputWithContext(ctx context.Context) HealthCheckPolicyRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HealthCheckPolicyRuleArrayOutput)
+}
+
+type HealthCheckPolicyRuleOutput struct{ *pulumi.OutputState }
+
+func (HealthCheckPolicyRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (o HealthCheckPolicyRuleOutput) ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleOutput) ToHealthCheckPolicyRuleOutputWithContext(ctx context.Context) HealthCheckPolicyRuleOutput {
+	return o
+}
+
+// Enable repair or not.
+func (o HealthCheckPolicyRuleOutput) AutoRepairEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) bool { return v.AutoRepairEnabled }).(pulumi.BoolOutput)
+}
+
+// Enable detection of this project or not.
+func (o HealthCheckPolicyRuleOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Health check rule details.
+func (o HealthCheckPolicyRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type HealthCheckPolicyRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (HealthCheckPolicyRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) ToHealthCheckPolicyRuleArrayOutputWithContext(ctx context.Context) HealthCheckPolicyRuleArrayOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) Index(i pulumi.IntInput) HealthCheckPolicyRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HealthCheckPolicyRule {
+		return vs[0].([]HealthCheckPolicyRule)[vs[1].(int)]
+	}).(HealthCheckPolicyRuleOutput)
+}
+
 type NativeNodePoolAnnotation struct {
 	// Name in the map table.
 	Name string `pulumi:"name"`
@@ -4271,6 +7245,8 @@ type NativeNodePoolNative struct {
 	KubeletArgs []string `pulumi:"kubeletArgs"`
 	// Predefined scripts.
 	Lifecycle *NativeNodePoolNativeLifecycle `pulumi:"lifecycle"`
+	// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+	MachineType *string `pulumi:"machineType"`
 	// Node pool management parameter settings.
 	Management *NativeNodePoolNativeManagement `pulumi:"management"`
 	// Desired number of nodes.
@@ -4323,6 +7299,8 @@ type NativeNodePoolNativeArgs struct {
 	KubeletArgs pulumi.StringArrayInput `pulumi:"kubeletArgs"`
 	// Predefined scripts.
 	Lifecycle NativeNodePoolNativeLifecyclePtrInput `pulumi:"lifecycle"`
+	// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+	MachineType pulumi.StringPtrInput `pulumi:"machineType"`
 	// Node pool management parameter settings.
 	Management NativeNodePoolNativeManagementPtrInput `pulumi:"management"`
 	// Desired number of nodes.
@@ -4476,6 +7454,11 @@ func (o NativeNodePoolNativeOutput) KubeletArgs() pulumi.StringArrayOutput {
 // Predefined scripts.
 func (o NativeNodePoolNativeOutput) Lifecycle() NativeNodePoolNativeLifecyclePtrOutput {
 	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeLifecycle { return v.Lifecycle }).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+func (o NativeNodePoolNativeOutput) MachineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *string { return v.MachineType }).(pulumi.StringPtrOutput)
 }
 
 // Node pool management parameter settings.
@@ -4655,6 +7638,16 @@ func (o NativeNodePoolNativePtrOutput) Lifecycle() NativeNodePoolNativeLifecycle
 		}
 		return v.Lifecycle
 	}).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+// Node pool type. Example value: `NativeCVM` or `Native`. Default is `Native`.
+func (o NativeNodePoolNativePtrOutput) MachineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MachineType
+	}).(pulumi.StringPtrOutput)
 }
 
 // Node pool management parameter settings.
@@ -6225,6 +9218,112 @@ func (o NativeNodePoolTaintArrayOutput) Index(i pulumi.IntInput) NativeNodePoolT
 	}).(NativeNodePoolTaintOutput)
 }
 
+type NodePoolAnnotation struct {
+	// Name in the map table.
+	Name string `pulumi:"name"`
+	// Value in the map table.
+	Value string `pulumi:"value"`
+}
+
+// NodePoolAnnotationInput is an input type that accepts NodePoolAnnotationArgs and NodePoolAnnotationOutput values.
+// You can construct a concrete instance of `NodePoolAnnotationInput` via:
+//
+//	NodePoolAnnotationArgs{...}
+type NodePoolAnnotationInput interface {
+	pulumi.Input
+
+	ToNodePoolAnnotationOutput() NodePoolAnnotationOutput
+	ToNodePoolAnnotationOutputWithContext(context.Context) NodePoolAnnotationOutput
+}
+
+type NodePoolAnnotationArgs struct {
+	// Name in the map table.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value in the map table.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (NodePoolAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NodePoolAnnotation)(nil)).Elem()
+}
+
+func (i NodePoolAnnotationArgs) ToNodePoolAnnotationOutput() NodePoolAnnotationOutput {
+	return i.ToNodePoolAnnotationOutputWithContext(context.Background())
+}
+
+func (i NodePoolAnnotationArgs) ToNodePoolAnnotationOutputWithContext(ctx context.Context) NodePoolAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NodePoolAnnotationOutput)
+}
+
+// NodePoolAnnotationArrayInput is an input type that accepts NodePoolAnnotationArray and NodePoolAnnotationArrayOutput values.
+// You can construct a concrete instance of `NodePoolAnnotationArrayInput` via:
+//
+//	NodePoolAnnotationArray{ NodePoolAnnotationArgs{...} }
+type NodePoolAnnotationArrayInput interface {
+	pulumi.Input
+
+	ToNodePoolAnnotationArrayOutput() NodePoolAnnotationArrayOutput
+	ToNodePoolAnnotationArrayOutputWithContext(context.Context) NodePoolAnnotationArrayOutput
+}
+
+type NodePoolAnnotationArray []NodePoolAnnotationInput
+
+func (NodePoolAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NodePoolAnnotation)(nil)).Elem()
+}
+
+func (i NodePoolAnnotationArray) ToNodePoolAnnotationArrayOutput() NodePoolAnnotationArrayOutput {
+	return i.ToNodePoolAnnotationArrayOutputWithContext(context.Background())
+}
+
+func (i NodePoolAnnotationArray) ToNodePoolAnnotationArrayOutputWithContext(ctx context.Context) NodePoolAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NodePoolAnnotationArrayOutput)
+}
+
+type NodePoolAnnotationOutput struct{ *pulumi.OutputState }
+
+func (NodePoolAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NodePoolAnnotation)(nil)).Elem()
+}
+
+func (o NodePoolAnnotationOutput) ToNodePoolAnnotationOutput() NodePoolAnnotationOutput {
+	return o
+}
+
+func (o NodePoolAnnotationOutput) ToNodePoolAnnotationOutputWithContext(ctx context.Context) NodePoolAnnotationOutput {
+	return o
+}
+
+// Name in the map table.
+func (o NodePoolAnnotationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NodePoolAnnotation) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value in the map table.
+func (o NodePoolAnnotationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v NodePoolAnnotation) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type NodePoolAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (NodePoolAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NodePoolAnnotation)(nil)).Elem()
+}
+
+func (o NodePoolAnnotationArrayOutput) ToNodePoolAnnotationArrayOutput() NodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o NodePoolAnnotationArrayOutput) ToNodePoolAnnotationArrayOutputWithContext(ctx context.Context) NodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o NodePoolAnnotationArrayOutput) Index(i pulumi.IntInput) NodePoolAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NodePoolAnnotation {
+		return vs[0].([]NodePoolAnnotation)[vs[1].(int)]
+	}).(NodePoolAnnotationOutput)
+}
+
 type NodePoolAutoScalingConfig struct {
 	// Backup CVM instance types if specified instance type sold out or mismatch.
 	BackupInstanceTypes []string `pulumi:"backupInstanceTypes"`
@@ -6250,6 +9349,8 @@ type NodePoolAutoScalingConfig struct {
 	InstanceChargeTypePrepaidRenewFlag *string `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 	InstanceName *string `pulumi:"instanceName"`
+	// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceNameStyle *string `pulumi:"instanceNameStyle"`
 	// Specified types of CVM instance.
 	InstanceType string `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -6314,6 +9415,8 @@ type NodePoolAutoScalingConfigArgs struct {
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringPtrInput `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+	// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceNameStyle pulumi.StringPtrInput `pulumi:"instanceNameStyle"`
 	// Specified types of CVM instance.
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -6477,6 +9580,11 @@ func (o NodePoolAutoScalingConfigOutput) InstanceChargeTypePrepaidRenewFlag() pu
 // Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 func (o NodePoolAutoScalingConfigOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigOutput) InstanceNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceNameStyle }).(pulumi.StringPtrOutput)
 }
 
 // Specified types of CVM instance.
@@ -6682,6 +9790,16 @@ func (o NodePoolAutoScalingConfigPtrOutput) InstanceName() pulumi.StringPtrOutpu
 			return nil
 		}
 		return v.InstanceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigPtrOutput) InstanceNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceNameStyle
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -7711,6 +10829,8 @@ func (o NodePoolTaintArrayOutput) Index(i pulumi.IntInput) NodePoolTaintOutput {
 type ScaleWorkerDataDisk struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
 	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition *string `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
 	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
@@ -7735,6 +10855,8 @@ type ScaleWorkerDataDiskInput interface {
 type ScaleWorkerDataDiskArgs struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
 	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
 	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
@@ -7799,6 +10921,11 @@ func (o ScaleWorkerDataDiskOutput) ToScaleWorkerDataDiskOutputWithContext(ctx co
 // Indicate whether to auto format and mount or not. Default is `false`.
 func (o ScaleWorkerDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount.
+func (o ScaleWorkerDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
 }
 
 // Volume of disk in GB. Default is `0`.
@@ -8054,6 +11181,121 @@ func (o ScaleWorkerGpuArgsPtrOutput) MigEnable() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+type ScaleWorkerTaint struct {
+	// Effect of the taint.
+	Effect *string `pulumi:"effect"`
+	// Key of the taint.
+	Key *string `pulumi:"key"`
+	// Value of the taint.
+	Value *string `pulumi:"value"`
+}
+
+// ScaleWorkerTaintInput is an input type that accepts ScaleWorkerTaintArgs and ScaleWorkerTaintOutput values.
+// You can construct a concrete instance of `ScaleWorkerTaintInput` via:
+//
+//	ScaleWorkerTaintArgs{...}
+type ScaleWorkerTaintInput interface {
+	pulumi.Input
+
+	ToScaleWorkerTaintOutput() ScaleWorkerTaintOutput
+	ToScaleWorkerTaintOutputWithContext(context.Context) ScaleWorkerTaintOutput
+}
+
+type ScaleWorkerTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ScaleWorkerTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScaleWorkerTaint)(nil)).Elem()
+}
+
+func (i ScaleWorkerTaintArgs) ToScaleWorkerTaintOutput() ScaleWorkerTaintOutput {
+	return i.ToScaleWorkerTaintOutputWithContext(context.Background())
+}
+
+func (i ScaleWorkerTaintArgs) ToScaleWorkerTaintOutputWithContext(ctx context.Context) ScaleWorkerTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScaleWorkerTaintOutput)
+}
+
+// ScaleWorkerTaintArrayInput is an input type that accepts ScaleWorkerTaintArray and ScaleWorkerTaintArrayOutput values.
+// You can construct a concrete instance of `ScaleWorkerTaintArrayInput` via:
+//
+//	ScaleWorkerTaintArray{ ScaleWorkerTaintArgs{...} }
+type ScaleWorkerTaintArrayInput interface {
+	pulumi.Input
+
+	ToScaleWorkerTaintArrayOutput() ScaleWorkerTaintArrayOutput
+	ToScaleWorkerTaintArrayOutputWithContext(context.Context) ScaleWorkerTaintArrayOutput
+}
+
+type ScaleWorkerTaintArray []ScaleWorkerTaintInput
+
+func (ScaleWorkerTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ScaleWorkerTaint)(nil)).Elem()
+}
+
+func (i ScaleWorkerTaintArray) ToScaleWorkerTaintArrayOutput() ScaleWorkerTaintArrayOutput {
+	return i.ToScaleWorkerTaintArrayOutputWithContext(context.Background())
+}
+
+func (i ScaleWorkerTaintArray) ToScaleWorkerTaintArrayOutputWithContext(ctx context.Context) ScaleWorkerTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScaleWorkerTaintArrayOutput)
+}
+
+type ScaleWorkerTaintOutput struct{ *pulumi.OutputState }
+
+func (ScaleWorkerTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScaleWorkerTaint)(nil)).Elem()
+}
+
+func (o ScaleWorkerTaintOutput) ToScaleWorkerTaintOutput() ScaleWorkerTaintOutput {
+	return o
+}
+
+func (o ScaleWorkerTaintOutput) ToScaleWorkerTaintOutputWithContext(ctx context.Context) ScaleWorkerTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o ScaleWorkerTaintOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerTaint) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// Key of the taint.
+func (o ScaleWorkerTaintOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerTaint) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Value of the taint.
+func (o ScaleWorkerTaintOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerTaint) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ScaleWorkerTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (ScaleWorkerTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ScaleWorkerTaint)(nil)).Elem()
+}
+
+func (o ScaleWorkerTaintArrayOutput) ToScaleWorkerTaintArrayOutput() ScaleWorkerTaintArrayOutput {
+	return o
+}
+
+func (o ScaleWorkerTaintArrayOutput) ToScaleWorkerTaintArrayOutputWithContext(ctx context.Context) ScaleWorkerTaintArrayOutput {
+	return o
+}
+
+func (o ScaleWorkerTaintArrayOutput) Index(i pulumi.IntInput) ScaleWorkerTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ScaleWorkerTaint {
+		return vs[0].([]ScaleWorkerTaint)[vs[1].(int)]
+	}).(ScaleWorkerTaintOutput)
+}
+
 type ScaleWorkerWorkerConfig struct {
 	// Indicates which availability zone will be used.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
@@ -8063,7 +11305,7 @@ type ScaleWorkerWorkerConfig struct {
 	CamRoleName *string `pulumi:"camRoleName"`
 	// Number of cvm.
 	Count *int `pulumi:"count"`
-	// Configurations of data disk.
+	// Configurations of cvm data disk.
 	DataDisks []ScaleWorkerWorkerConfigDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
@@ -8131,7 +11373,7 @@ type ScaleWorkerWorkerConfigArgs struct {
 	CamRoleName pulumi.StringPtrInput `pulumi:"camRoleName"`
 	// Number of cvm.
 	Count pulumi.IntPtrInput `pulumi:"count"`
-	// Configurations of data disk.
+	// Configurations of cvm data disk.
 	DataDisks ScaleWorkerWorkerConfigDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
@@ -8276,7 +11518,7 @@ func (o ScaleWorkerWorkerConfigOutput) Count() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfig) *int { return v.Count }).(pulumi.IntPtrOutput)
 }
 
-// Configurations of data disk.
+// Configurations of cvm data disk.
 func (o ScaleWorkerWorkerConfigOutput) DataDisks() ScaleWorkerWorkerConfigDataDiskArrayOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfig) []ScaleWorkerWorkerConfigDataDisk { return v.DataDisks }).(ScaleWorkerWorkerConfigDataDiskArrayOutput)
 }
@@ -8455,7 +11697,7 @@ func (o ScaleWorkerWorkerConfigPtrOutput) Count() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Configurations of data disk.
+// Configurations of cvm data disk.
 func (o ScaleWorkerWorkerConfigPtrOutput) DataDisks() ScaleWorkerWorkerConfigDataDiskArrayOutput {
 	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) []ScaleWorkerWorkerConfigDataDisk {
 		if v == nil {
@@ -8687,8 +11929,12 @@ func (o ScaleWorkerWorkerConfigPtrOutput) UserData() pulumi.StringPtrOutput {
 
 type ScaleWorkerWorkerConfigDataDisk struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
 	// The name of the device or partition to mount.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	DiskPartition *string `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
@@ -8697,10 +11943,14 @@ type ScaleWorkerWorkerConfigDataDisk struct {
 	// Indicates whether to encrypt data disk, default `false`.
 	Encrypt *bool `pulumi:"encrypt"`
 	// File system, e.g. `ext3/ext4/xfs`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	FileSystem *string `pulumi:"fileSystem"`
 	// ID of the custom CMK in the format of UUID or `kms-abcd1234`. This parameter is used to encrypt cloud disks.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// Mount target.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	MountTarget *string `pulumi:"mountTarget"`
 	// Data disk snapshot ID.
 	SnapshotId *string `pulumi:"snapshotId"`
@@ -8719,8 +11969,12 @@ type ScaleWorkerWorkerConfigDataDiskInput interface {
 
 type ScaleWorkerWorkerConfigDataDiskArgs struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
 	// The name of the device or partition to mount.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -8729,10 +11983,14 @@ type ScaleWorkerWorkerConfigDataDiskArgs struct {
 	// Indicates whether to encrypt data disk, default `false`.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// File system, e.g. `ext3/ext4/xfs`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
 	// ID of the custom CMK in the format of UUID or `kms-abcd1234`. This parameter is used to encrypt cloud disks.
 	KmsKeyId pulumi.StringPtrInput `pulumi:"kmsKeyId"`
 	// Mount target.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
 	// Data disk snapshot ID.
 	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
@@ -8790,11 +12048,15 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) ToScaleWorkerWorkerConfigDataDisk
 }
 
 // Indicate whether to auto format and mount or not. Default is `false`.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
 }
 
 // The name of the device or partition to mount.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
 }
@@ -8815,6 +12077,8 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) Encrypt() pulumi.BoolPtrOutput {
 }
 
 // File system, e.g. `ext3/ext4/xfs`.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) FileSystem() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.FileSystem }).(pulumi.StringPtrOutput)
 }
@@ -8825,6 +12089,8 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) KmsKeyId() pulumi.StringPtrOutput
 }
 
 // Mount target.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
 }
@@ -9670,6 +12936,10 @@ func (o GetClusterAuthenticationOptionsServiceAccountArrayOutput) Index(i pulumi
 
 type GetClusterCommonNamesList struct {
 	// The CommonName in the certificate of the client corresponding to the sub-account.
+	CommonName string `pulumi:"commonName"`
+	// (**Deprecated**) It has been deprecated from version 1.81.140. Please use `commonName`. The CommonName in the certificate of the client corresponding to the sub-account.
+	//
+	// Deprecated: It has been deprecated from version 1.81.140. Please use `commonName`.
 	CommonNames string `pulumi:"commonNames"`
 	// User UIN.
 	SubaccountUin string `pulumi:"subaccountUin"`
@@ -9688,6 +12958,10 @@ type GetClusterCommonNamesListInput interface {
 
 type GetClusterCommonNamesListArgs struct {
 	// The CommonName in the certificate of the client corresponding to the sub-account.
+	CommonName pulumi.StringInput `pulumi:"commonName"`
+	// (**Deprecated**) It has been deprecated from version 1.81.140. Please use `commonName`. The CommonName in the certificate of the client corresponding to the sub-account.
+	//
+	// Deprecated: It has been deprecated from version 1.81.140. Please use `commonName`.
 	CommonNames pulumi.StringInput `pulumi:"commonNames"`
 	// User UIN.
 	SubaccountUin pulumi.StringInput `pulumi:"subaccountUin"`
@@ -9745,6 +13019,13 @@ func (o GetClusterCommonNamesListOutput) ToGetClusterCommonNamesListOutputWithCo
 }
 
 // The CommonName in the certificate of the client corresponding to the sub-account.
+func (o GetClusterCommonNamesListOutput) CommonName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterCommonNamesList) string { return v.CommonName }).(pulumi.StringOutput)
+}
+
+// (**Deprecated**) It has been deprecated from version 1.81.140. Please use `commonName`. The CommonName in the certificate of the client corresponding to the sub-account.
+//
+// Deprecated: It has been deprecated from version 1.81.140. Please use `commonName`.
 func (o GetClusterCommonNamesListOutput) CommonNames() pulumi.StringOutput {
 	return o.ApplyT(func(v GetClusterCommonNamesList) string { return v.CommonNames }).(pulumi.StringOutput)
 }
@@ -15350,6 +18631,8 @@ func (o GetClusterNodePoolsNodePoolSetTaintArrayOutput) Index(i pulumi.IntInput)
 }
 
 type GetClustersList struct {
+	// CDC ID.
+	CdcId string `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority string `pulumi:"certificationAuthority"`
 	// The expired seconds to recycle ENI.
@@ -15440,6 +18723,8 @@ type GetClustersListInput interface {
 }
 
 type GetClustersListArgs struct {
+	// CDC ID.
+	CdcId pulumi.StringInput `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringInput `pulumi:"certificationAuthority"`
 	// The expired seconds to recycle ENI.
@@ -15567,6 +18852,11 @@ func (o GetClustersListOutput) ToGetClustersListOutput() GetClustersListOutput {
 
 func (o GetClustersListOutput) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
 	return o
+}
+
+// CDC ID.
+func (o GetClustersListOutput) CdcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.CdcId }).(pulumi.StringOutput)
 }
 
 // The certificate used for access.
@@ -16037,6 +19327,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgsInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigOverridesGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigTaintInput)(nil)).Elem(), ClusterAttachmentWorkerConfigTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigTaintArrayInput)(nil)).Elem(), ClusterAttachmentWorkerConfigTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAuthOptionsInput)(nil)).Elem(), ClusterAuthOptionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAuthOptionsPtrInput)(nil)).Elem(), ClusterAuthOptionsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterClusterAuditInput)(nil)).Elem(), ClusterClusterAuditArgs{})
@@ -16049,16 +19341,44 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceArrayInput)(nil)).Elem(), ClusterExistInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaInput)(nil)).Elem(), ClusterExistInstanceInstancesParaArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaPtrInput)(nil)).Elem(), ClusterExistInstanceInstancesParaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigPtrInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigDataDiskInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigExtraArgsInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigGpuArgsInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigLabelInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigLabelArrayInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigTaintInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExistInstanceInstancesParaMasterConfigTaintArrayInput)(nil)).Elem(), ClusterExistInstanceInstancesParaMasterConfigTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExtensionAddonInput)(nil)).Elem(), ClusterExtensionAddonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExtensionAddonArrayInput)(nil)).Elem(), ClusterExtensionAddonArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterLogAgentInput)(nil)).Elem(), ClusterLogAgentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterLogAgentPtrInput)(nil)).Elem(), ClusterLogAgentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentExtraArgsInput)(nil)).Elem(), ClusterMasterAttachmentExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentExtraArgsPtrInput)(nil)).Elem(), ClusterMasterAttachmentExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigPtrInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigDataDiskInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigDataDiskPtrInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigExtraArgsInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigExtraArgsPtrInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigExtraArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigGpuArgsInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigGpuArgsPtrInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigLabelInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigLabelArrayInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigTaintInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigTaintArrayInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterConfigInput)(nil)).Elem(), ClusterMasterConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterConfigArrayInput)(nil)).Elem(), ClusterMasterConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterConfigDataDiskInput)(nil)).Elem(), ClusterMasterConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterConfigDataDiskArrayInput)(nil)).Elem(), ClusterMasterConfigDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNodePoolGlobalConfigInput)(nil)).Elem(), ClusterNodePoolGlobalConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNodePoolGlobalConfigArrayInput)(nil)).Elem(), ClusterNodePoolGlobalConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceDeleteOptionInput)(nil)).Elem(), ClusterResourceDeleteOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceDeleteOptionArrayInput)(nil)).Elem(), ClusterResourceDeleteOptionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigInput)(nil)).Elem(), ClusterWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigArrayInput)(nil)).Elem(), ClusterWorkerConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigDataDiskInput)(nil)).Elem(), ClusterWorkerConfigDataDiskArgs{})
@@ -16067,6 +19387,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListArrayInput)(nil)).Elem(), ClusterWorkerInstancesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationPtrInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleInput)(nil)).Elem(), HealthCheckPolicyRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleArrayInput)(nil)).Elem(), HealthCheckPolicyRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationInput)(nil)).Elem(), NativeNodePoolAnnotationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationArrayInput)(nil)).Elem(), NativeNodePoolAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolLabelInput)(nil)).Elem(), NativeNodePoolLabelArgs{})
@@ -16093,6 +19415,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTagTagArrayInput)(nil)).Elem(), NativeNodePoolTagTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTaintInput)(nil)).Elem(), NativeNodePoolTaintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTaintArrayInput)(nil)).Elem(), NativeNodePoolTaintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAnnotationInput)(nil)).Elem(), NodePoolAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAnnotationArrayInput)(nil)).Elem(), NodePoolAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigPtrInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigDataDiskInput)(nil)).Elem(), NodePoolAutoScalingConfigDataDiskArgs{})
@@ -16109,6 +19433,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerDataDiskArrayInput)(nil)).Elem(), ScaleWorkerDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerGpuArgsInput)(nil)).Elem(), ScaleWorkerGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerGpuArgsPtrInput)(nil)).Elem(), ScaleWorkerGpuArgsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerTaintInput)(nil)).Elem(), ScaleWorkerTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerTaintArrayInput)(nil)).Elem(), ScaleWorkerTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigInput)(nil)).Elem(), ScaleWorkerWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigPtrInput)(nil)).Elem(), ScaleWorkerWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerWorkerConfigDataDiskInput)(nil)).Elem(), ScaleWorkerWorkerConfigDataDiskArgs{})
@@ -16233,6 +19559,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesGpuArgsOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigTaintOutput{})
+	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigTaintArrayOutput{})
 	pulumi.RegisterOutputType(ClusterAuthOptionsOutput{})
 	pulumi.RegisterOutputType(ClusterAuthOptionsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterClusterAuditOutput{})
@@ -16245,16 +19573,44 @@ func init() {
 	pulumi.RegisterOutputType(ClusterExistInstanceArrayOutput{})
 	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaOutput{})
 	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaPtrOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigPtrOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigDataDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigExtraArgsOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigExtraArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigGpuArgsOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigGpuArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigLabelOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigLabelArrayOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigTaintOutput{})
+	pulumi.RegisterOutputType(ClusterExistInstanceInstancesParaMasterConfigTaintArrayOutput{})
 	pulumi.RegisterOutputType(ClusterExtensionAddonOutput{})
 	pulumi.RegisterOutputType(ClusterExtensionAddonArrayOutput{})
 	pulumi.RegisterOutputType(ClusterLogAgentOutput{})
 	pulumi.RegisterOutputType(ClusterLogAgentPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentExtraArgsOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentExtraArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigDataDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigExtraArgsOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigExtraArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigGpuArgsOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigGpuArgsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigLabelOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigLabelArrayOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigTaintOutput{})
+	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigTaintArrayOutput{})
 	pulumi.RegisterOutputType(ClusterMasterConfigOutput{})
 	pulumi.RegisterOutputType(ClusterMasterConfigArrayOutput{})
 	pulumi.RegisterOutputType(ClusterMasterConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ClusterMasterConfigDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterNodePoolGlobalConfigOutput{})
 	pulumi.RegisterOutputType(ClusterNodePoolGlobalConfigArrayOutput{})
+	pulumi.RegisterOutputType(ClusterResourceDeleteOptionOutput{})
+	pulumi.RegisterOutputType(ClusterResourceDeleteOptionArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigDataDiskOutput{})
@@ -16263,6 +19619,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListArrayOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(HealthCheckPolicyRuleOutput{})
+	pulumi.RegisterOutputType(HealthCheckPolicyRuleArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolAnnotationOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolLabelOutput{})
@@ -16289,6 +19647,8 @@ func init() {
 	pulumi.RegisterOutputType(NativeNodePoolTagTagArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolTaintOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolTaintArrayOutput{})
+	pulumi.RegisterOutputType(NodePoolAnnotationOutput{})
+	pulumi.RegisterOutputType(NodePoolAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigDataDiskOutput{})
@@ -16305,6 +19665,8 @@ func init() {
 	pulumi.RegisterOutputType(ScaleWorkerDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerGpuArgsOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerGpuArgsPtrOutput{})
+	pulumi.RegisterOutputType(ScaleWorkerTaintOutput{})
+	pulumi.RegisterOutputType(ScaleWorkerTaintArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigPtrOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerWorkerConfigDataDiskOutput{})

@@ -18,21 +18,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Outputs
         /// The number of common node.
         /// </summary>
         public readonly int? CommonCount;
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         public readonly Outputs.ClusterResourceSpecCommonResourceSpec? CommonResourceSpec;
         /// <summary>
         /// The number of core node.
         /// </summary>
         public readonly int? CoreCount;
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         public readonly Outputs.ClusterResourceSpecCoreResourceSpec? CoreResourceSpec;
         /// <summary>
         /// The number of master node.
         /// </summary>
         public readonly int? MasterCount;
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         public readonly Outputs.ClusterResourceSpecMasterResourceSpec? MasterResourceSpec;
         /// <summary>
         /// The number of core node.
         /// </summary>
         public readonly int? TaskCount;
+        /// <summary>
+        /// Resource details.
+        /// </summary>
         public readonly Outputs.ClusterResourceSpecTaskResourceSpec? TaskResourceSpec;
 
         [OutputConstructor]

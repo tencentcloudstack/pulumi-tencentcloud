@@ -13,6 +13,8 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** Import Node: Currently, only one node can be imported at a time.
  *
+ * > **NOTE:** If you need to view error messages during instance creation, you can use parameter `createResultOutputFile` to set the file save path
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -24,7 +26,7 @@ import * as utilities from "../utilities";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const subnet = config.get("subnet") || "subnet-pqfek0t8";
  * const scaleInstanceType = config.get("scaleInstanceType") || "S2.LARGE16";
- * const testScale = new tencentcloud.kubernetes.ScaleWorker("testScale", {
+ * const example = new tencentcloud.kubernetes.ScaleWorker("example", {
  *     clusterId: "cls-godovr32",
  *     desiredPodNum: 16,
  *     labels: {
@@ -50,6 +52,7 @@ import * as utilities from "../utilities";
  *         userData: "dGVzdA==",
  *         password: "AABBccdd1122",
  *     },
+ *     createResultOutputFile: "my_output_file_path",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -65,7 +68,7 @@ import * as utilities from "../utilities";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const subnet = config.get("subnet") || "subnet-pqfek0t8";
  * const scaleInstanceType = config.get("scaleInstanceType") || "S2.LARGE16";
- * const testScale = new tencentcloud.kubernetes.ScaleWorker("testScale", {
+ * const example = new tencentcloud.kubernetes.ScaleWorker("example", {
  *     clusterId: "cls-godovr32",
  *     extraArgs: ["root-dir=/var/lib/kubelet"],
  *     labels: {
@@ -100,7 +103,7 @@ import * as utilities from "../utilities";
  * tke scale worker can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+ * $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi
  * ```
  */
 export class ScaleWorker extends pulumi.CustomResource {
@@ -136,7 +139,11 @@ export class ScaleWorker extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Configurations of data disk.
+     * Used to save results of CVMs creation error messages.
+     */
+    public readonly createResultOutputFile!: pulumi.Output<string | undefined>;
+    /**
+     * Configurations of tke data disk.
      */
     public readonly dataDisks!: pulumi.Output<outputs.Kubernetes.ScaleWorkerDataDisk[] | undefined>;
     /**
@@ -168,6 +175,10 @@ export class ScaleWorker extends pulumi.CustomResource {
      */
     public readonly preStartUserScript!: pulumi.Output<string | undefined>;
     /**
+     * Node taint.
+     */
+    public readonly taints!: pulumi.Output<outputs.Kubernetes.ScaleWorkerTaint[] | undefined>;
+    /**
      * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
     public readonly unschedulable!: pulumi.Output<number | undefined>;
@@ -198,6 +209,7 @@ export class ScaleWorker extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ScaleWorkerState | undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
+            resourceInputs["createResultOutputFile"] = state ? state.createResultOutputFile : undefined;
             resourceInputs["dataDisks"] = state ? state.dataDisks : undefined;
             resourceInputs["desiredPodNum"] = state ? state.desiredPodNum : undefined;
             resourceInputs["dockerGraphPath"] = state ? state.dockerGraphPath : undefined;
@@ -206,6 +218,7 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["labels"] = state ? state.labels : undefined;
             resourceInputs["mountTarget"] = state ? state.mountTarget : undefined;
             resourceInputs["preStartUserScript"] = state ? state.preStartUserScript : undefined;
+            resourceInputs["taints"] = state ? state.taints : undefined;
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
             resourceInputs["userScript"] = state ? state.userScript : undefined;
             resourceInputs["workerConfig"] = state ? state.workerConfig : undefined;
@@ -219,6 +232,7 @@ export class ScaleWorker extends pulumi.CustomResource {
                 throw new Error("Missing required property 'workerConfig'");
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
+            resourceInputs["createResultOutputFile"] = args ? args.createResultOutputFile : undefined;
             resourceInputs["dataDisks"] = args ? args.dataDisks : undefined;
             resourceInputs["desiredPodNum"] = args ? args.desiredPodNum : undefined;
             resourceInputs["dockerGraphPath"] = args ? args.dockerGraphPath : undefined;
@@ -227,6 +241,7 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["labels"] = args ? args.labels : undefined;
             resourceInputs["mountTarget"] = args ? args.mountTarget : undefined;
             resourceInputs["preStartUserScript"] = args ? args.preStartUserScript : undefined;
+            resourceInputs["taints"] = args ? args.taints : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
             resourceInputs["userScript"] = args ? args.userScript : undefined;
             resourceInputs["workerConfig"] = args ? args.workerConfig : undefined;
@@ -246,7 +261,11 @@ export interface ScaleWorkerState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Configurations of data disk.
+     * Used to save results of CVMs creation error messages.
+     */
+    createResultOutputFile?: pulumi.Input<string>;
+    /**
+     * Configurations of tke data disk.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
     /**
@@ -277,6 +296,10 @@ export interface ScaleWorkerState {
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
     preStartUserScript?: pulumi.Input<string>;
+    /**
+     * Node taint.
+     */
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[]>;
     /**
      * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
@@ -304,7 +327,11 @@ export interface ScaleWorkerArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Configurations of data disk.
+     * Used to save results of CVMs creation error messages.
+     */
+    createResultOutputFile?: pulumi.Input<string>;
+    /**
+     * Configurations of tke data disk.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
     /**
@@ -335,6 +362,10 @@ export interface ScaleWorkerArgs {
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
     preStartUserScript?: pulumi.Input<string>;
+    /**
+     * Node taint.
+     */
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[]>;
     /**
      * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */

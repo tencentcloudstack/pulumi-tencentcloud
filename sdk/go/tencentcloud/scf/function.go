@@ -132,6 +132,8 @@ import (
 //
 // import (
 //
+//	"encoding/json"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
 //
@@ -139,24 +141,40 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
-//				EnablePublicNet: pulumi.Bool(true),
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"AuthType": "NONE",
+//				"NetConfig": map[string]interface{}{
+//					"EnableIntranet": true,
+//					"EnableExtranet": false,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Scf.NewFunction(ctx, "foo", &Scf.FunctionArgs{
 //				Handler:         pulumi.String("first.do_it_first"),
 //				Runtime:         pulumi.String("Python3.6"),
+//				EnablePublicNet: pulumi.Bool(true),
+//				ZipFile:         pulumi.String("/scf/first.zip"),
 //				Triggers: scf.FunctionTriggerArray{
 //					&scf.FunctionTriggerArgs{
 //						Name:        pulumi.String("tf-test-fn-trigger"),
-//						TriggerDesc: pulumi.String("*/5 * * * * * *"),
 //						Type:        pulumi.String("timer"),
+//						TriggerDesc: pulumi.String("*/5 * * * * * *"),
 //					},
 //					&scf.FunctionTriggerArgs{
-//						CosRegion:   pulumi.String("ap-guangzhou"),
 //						Name:        pulumi.String("scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com"),
-//						TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+//						CosRegion:   pulumi.String("ap-guangzhou"),
 //						Type:        pulumi.String("cos"),
+//						TriggerDesc: pulumi.String("{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}"),
+//					},
+//					&scf.FunctionTriggerArgs{
+//						Name:        pulumi.String("tf-test-fn-trigger"),
+//						Type:        pulumi.String("http"),
+//						TriggerDesc: pulumi.String(json0),
 //					},
 //				},
-//				ZipFile: pulumi.String("/scf/first.zip"),
 //			})
 //			if err != nil {
 //				return err

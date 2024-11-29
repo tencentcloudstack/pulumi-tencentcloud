@@ -35,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectionConfig{}
 	case "tencentcloud:Redis/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Redis/logDelivery:LogDelivery":
+		r = &LogDelivery{}
 	case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
 		r = &MaintenanceWindow{}
 	case "tencentcloud:Redis/param:Param":
@@ -109,6 +111,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Redis/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/logDelivery",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -13,6 +13,162 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ActionTimerActionTimer struct {
+	// Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+	ActionTime *string `pulumi:"actionTime"`
+	// Timer action, currently only supports destroying one value: TerminateInstances.
+	TimerAction *string `pulumi:"timerAction"`
+}
+
+// ActionTimerActionTimerInput is an input type that accepts ActionTimerActionTimerArgs and ActionTimerActionTimerOutput values.
+// You can construct a concrete instance of `ActionTimerActionTimerInput` via:
+//
+//	ActionTimerActionTimerArgs{...}
+type ActionTimerActionTimerInput interface {
+	pulumi.Input
+
+	ToActionTimerActionTimerOutput() ActionTimerActionTimerOutput
+	ToActionTimerActionTimerOutputWithContext(context.Context) ActionTimerActionTimerOutput
+}
+
+type ActionTimerActionTimerArgs struct {
+	// Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+	ActionTime pulumi.StringPtrInput `pulumi:"actionTime"`
+	// Timer action, currently only supports destroying one value: TerminateInstances.
+	TimerAction pulumi.StringPtrInput `pulumi:"timerAction"`
+}
+
+func (ActionTimerActionTimerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ActionTimerActionTimer)(nil)).Elem()
+}
+
+func (i ActionTimerActionTimerArgs) ToActionTimerActionTimerOutput() ActionTimerActionTimerOutput {
+	return i.ToActionTimerActionTimerOutputWithContext(context.Background())
+}
+
+func (i ActionTimerActionTimerArgs) ToActionTimerActionTimerOutputWithContext(ctx context.Context) ActionTimerActionTimerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ActionTimerActionTimerOutput)
+}
+
+func (i ActionTimerActionTimerArgs) ToActionTimerActionTimerPtrOutput() ActionTimerActionTimerPtrOutput {
+	return i.ToActionTimerActionTimerPtrOutputWithContext(context.Background())
+}
+
+func (i ActionTimerActionTimerArgs) ToActionTimerActionTimerPtrOutputWithContext(ctx context.Context) ActionTimerActionTimerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ActionTimerActionTimerOutput).ToActionTimerActionTimerPtrOutputWithContext(ctx)
+}
+
+// ActionTimerActionTimerPtrInput is an input type that accepts ActionTimerActionTimerArgs, ActionTimerActionTimerPtr and ActionTimerActionTimerPtrOutput values.
+// You can construct a concrete instance of `ActionTimerActionTimerPtrInput` via:
+//
+//	        ActionTimerActionTimerArgs{...}
+//
+//	or:
+//
+//	        nil
+type ActionTimerActionTimerPtrInput interface {
+	pulumi.Input
+
+	ToActionTimerActionTimerPtrOutput() ActionTimerActionTimerPtrOutput
+	ToActionTimerActionTimerPtrOutputWithContext(context.Context) ActionTimerActionTimerPtrOutput
+}
+
+type actionTimerActionTimerPtrType ActionTimerActionTimerArgs
+
+func ActionTimerActionTimerPtr(v *ActionTimerActionTimerArgs) ActionTimerActionTimerPtrInput {
+	return (*actionTimerActionTimerPtrType)(v)
+}
+
+func (*actionTimerActionTimerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ActionTimerActionTimer)(nil)).Elem()
+}
+
+func (i *actionTimerActionTimerPtrType) ToActionTimerActionTimerPtrOutput() ActionTimerActionTimerPtrOutput {
+	return i.ToActionTimerActionTimerPtrOutputWithContext(context.Background())
+}
+
+func (i *actionTimerActionTimerPtrType) ToActionTimerActionTimerPtrOutputWithContext(ctx context.Context) ActionTimerActionTimerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ActionTimerActionTimerPtrOutput)
+}
+
+type ActionTimerActionTimerOutput struct{ *pulumi.OutputState }
+
+func (ActionTimerActionTimerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ActionTimerActionTimer)(nil)).Elem()
+}
+
+func (o ActionTimerActionTimerOutput) ToActionTimerActionTimerOutput() ActionTimerActionTimerOutput {
+	return o
+}
+
+func (o ActionTimerActionTimerOutput) ToActionTimerActionTimerOutputWithContext(ctx context.Context) ActionTimerActionTimerOutput {
+	return o
+}
+
+func (o ActionTimerActionTimerOutput) ToActionTimerActionTimerPtrOutput() ActionTimerActionTimerPtrOutput {
+	return o.ToActionTimerActionTimerPtrOutputWithContext(context.Background())
+}
+
+func (o ActionTimerActionTimerOutput) ToActionTimerActionTimerPtrOutputWithContext(ctx context.Context) ActionTimerActionTimerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ActionTimerActionTimer) *ActionTimerActionTimer {
+		return &v
+	}).(ActionTimerActionTimerPtrOutput)
+}
+
+// Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+func (o ActionTimerActionTimerOutput) ActionTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ActionTimerActionTimer) *string { return v.ActionTime }).(pulumi.StringPtrOutput)
+}
+
+// Timer action, currently only supports destroying one value: TerminateInstances.
+func (o ActionTimerActionTimerOutput) TimerAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ActionTimerActionTimer) *string { return v.TimerAction }).(pulumi.StringPtrOutput)
+}
+
+type ActionTimerActionTimerPtrOutput struct{ *pulumi.OutputState }
+
+func (ActionTimerActionTimerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ActionTimerActionTimer)(nil)).Elem()
+}
+
+func (o ActionTimerActionTimerPtrOutput) ToActionTimerActionTimerPtrOutput() ActionTimerActionTimerPtrOutput {
+	return o
+}
+
+func (o ActionTimerActionTimerPtrOutput) ToActionTimerActionTimerPtrOutputWithContext(ctx context.Context) ActionTimerActionTimerPtrOutput {
+	return o
+}
+
+func (o ActionTimerActionTimerPtrOutput) Elem() ActionTimerActionTimerOutput {
+	return o.ApplyT(func(v *ActionTimerActionTimer) ActionTimerActionTimer {
+		if v != nil {
+			return *v
+		}
+		var ret ActionTimerActionTimer
+		return ret
+	}).(ActionTimerActionTimerOutput)
+}
+
+// Execution time, expressed according to ISO8601 standard and using UTC time. The format is YYYY-MM-DDThh:mm:ssZ. For example, 2018-05-29T11:26:40Z, the execution time must be 5 minutes longer than the current time.
+func (o ActionTimerActionTimerPtrOutput) ActionTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ActionTimerActionTimer) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ActionTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Timer action, currently only supports destroying one value: TerminateInstances.
+func (o ActionTimerActionTimerPtrOutput) TimerAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ActionTimerActionTimer) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimerAction
+	}).(pulumi.StringPtrOutput)
+}
+
 type ChcConfigBmcVirtualPrivateCloud struct {
 	// Whether to use a CVM instance as a public gateway. The public gateway is only available when the instance has a public IP and resides in a VPC. Valid values:&lt;br&gt;&lt;li&gt;TRUE: yes;&lt;br&gt;&lt;li&gt;FALSE: no&lt;br&gt;&lt;br&gt;Default: FALSE.
 	AsVpcGateway *bool `pulumi:"asVpcGateway"`
@@ -2781,7 +2937,9 @@ func (o LaunchTemplateLoginSettingsPtrOutput) Password() pulumi.StringPtrOutput 
 type LaunchTemplatePlacement struct {
 	// The CDH ID list of the instance(input).
 	HostIds []string `pulumi:"hostIds"`
-	// Specify the host machine ip.
+	// It has been deprecated from version 1.81.108. Specify the host machine ip.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps []string `pulumi:"hostIps"`
 	// The project ID of the instance.
 	ProjectId *int `pulumi:"projectId"`
@@ -2803,7 +2961,9 @@ type LaunchTemplatePlacementInput interface {
 type LaunchTemplatePlacementArgs struct {
 	// The CDH ID list of the instance(input).
 	HostIds pulumi.StringArrayInput `pulumi:"hostIds"`
-	// Specify the host machine ip.
+	// It has been deprecated from version 1.81.108. Specify the host machine ip.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps pulumi.StringArrayInput `pulumi:"hostIps"`
 	// The project ID of the instance.
 	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
@@ -2893,7 +3053,9 @@ func (o LaunchTemplatePlacementOutput) HostIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LaunchTemplatePlacement) []string { return v.HostIds }).(pulumi.StringArrayOutput)
 }
 
-// Specify the host machine ip.
+// It has been deprecated from version 1.81.108. Specify the host machine ip.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o LaunchTemplatePlacementOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LaunchTemplatePlacement) []string { return v.HostIps }).(pulumi.StringArrayOutput)
 }
@@ -2942,7 +3104,9 @@ func (o LaunchTemplatePlacementPtrOutput) HostIds() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// Specify the host machine ip.
+// It has been deprecated from version 1.81.108. Specify the host machine ip.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o LaunchTemplatePlacementPtrOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *LaunchTemplatePlacement) []string {
 		if v == nil {
@@ -7952,7 +8116,9 @@ type GetChcHostsChcHostSetPlacement struct {
 	HostId string `pulumi:"hostId"`
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
 	HostIds []string `pulumi:"hostIds"`
-	// IPs of the hosts to create CVMs.
+	// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps []string `pulumi:"hostIps"`
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId returned by DescribeProject. If this is left empty, the default project is used.
 	ProjectId int `pulumi:"projectId"`
@@ -7976,7 +8142,9 @@ type GetChcHostsChcHostSetPlacementArgs struct {
 	HostId pulumi.StringInput `pulumi:"hostId"`
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
 	HostIds pulumi.StringArrayInput `pulumi:"hostIds"`
-	// IPs of the hosts to create CVMs.
+	// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps pulumi.StringArrayInput `pulumi:"hostIps"`
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId returned by DescribeProject. If this is left empty, the default project is used.
 	ProjectId pulumi.IntInput `pulumi:"projectId"`
@@ -8045,7 +8213,9 @@ func (o GetChcHostsChcHostSetPlacementOutput) HostIds() pulumi.StringArrayOutput
 	return o.ApplyT(func(v GetChcHostsChcHostSetPlacement) []string { return v.HostIds }).(pulumi.StringArrayOutput)
 }
 
-// IPs of the hosts to create CVMs.
+// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o GetChcHostsChcHostSetPlacementOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetChcHostsChcHostSetPlacement) []string { return v.HostIps }).(pulumi.StringArrayOutput)
 }
@@ -8892,6 +9062,8 @@ func (o GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigAr
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ActionTimerActionTimerInput)(nil)).Elem(), ActionTimerActionTimerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ActionTimerActionTimerPtrInput)(nil)).Elem(), ActionTimerActionTimerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigBmcVirtualPrivateCloudInput)(nil)).Elem(), ChcConfigBmcVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigBmcVirtualPrivateCloudPtrInput)(nil)).Elem(), ChcConfigBmcVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ChcConfigDeployVirtualPrivateCloudInput)(nil)).Elem(), ChcConfigDeployVirtualPrivateCloudArgs{})
@@ -9004,6 +9176,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListArrayInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArray{})
+	pulumi.RegisterOutputType(ActionTimerActionTimerOutput{})
+	pulumi.RegisterOutputType(ActionTimerActionTimerPtrOutput{})
 	pulumi.RegisterOutputType(ChcConfigBmcVirtualPrivateCloudOutput{})
 	pulumi.RegisterOutputType(ChcConfigBmcVirtualPrivateCloudPtrOutput{})
 	pulumi.RegisterOutputType(ChcConfigDeployVirtualPrivateCloudOutput{})

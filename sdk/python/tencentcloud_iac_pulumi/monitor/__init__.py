@@ -27,6 +27,7 @@ from .get_policy_groups import *
 from .get_product_event import *
 from .get_product_namespace import *
 from .get_statistic_data import *
+from .get_tmp_instances import *
 from .get_tmp_regions import *
 from .grafana_dns_config import *
 from .grafana_env_config import *

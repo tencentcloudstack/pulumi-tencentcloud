@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string> Key { get; private set; } = null!;
 
         /// <summary>
-        /// Object key.
+        /// Source url. In the CDC scenario, the CDC source url is used.
         /// </summary>
         [Output("sourceUrl")]
         public Output<string> SourceUrl { get; private set; } = null!;
@@ -116,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string> Key { get; set; } = null!;
 
         /// <summary>
-        /// Object key.
+        /// Source url. In the CDC scenario, the CDC source url is used.
         /// </summary>
         [Input("sourceUrl", required: true)]
         public Input<string> SourceUrl { get; set; } = null!;
@@ -142,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// Object key.
+        /// Source url. In the CDC scenario, the CDC source url is used.
         /// </summary>
         [Input("sourceUrl")]
         public Input<string>? SourceUrl { get; set; }

@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
         public Input<bool>? DeleteWithInstance { get; set; }
 
         /// <summary>
+        /// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+        /// </summary>
+        [Input("deleteWithInstancePrepaid")]
+        public Input<bool>? DeleteWithInstancePrepaid { get; set; }
+
+        /// <summary>
         /// Decides whether the disk is encrypted. Default is `false`.
         /// </summary>
         [Input("encrypt")]

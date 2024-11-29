@@ -20,12 +20,14 @@ class BucketArgs:
                  acceleration_enable: Optional[pulumi.Input[bool]] = None,
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
                  enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
                  intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
                  intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
+                 kms_id: Optional[pulumi.Input[str]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -44,12 +46,14 @@ class BucketArgs:
         :param pulumi.Input[bool] acceleration_enable: Enable bucket acceleration.
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
+        :param pulumi.Input[str] cdc_id: CDC cluster ID.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
-        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
         :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        :param pulumi.Input[str] kms_id: The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -70,6 +74,8 @@ class BucketArgs:
             pulumi.set(__self__, "acl", acl)
         if acl_body is not None:
             pulumi.set(__self__, "acl_body", acl_body)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if cors_rules is not None:
             pulumi.set(__self__, "cors_rules", cors_rules)
         if enable_intelligent_tiering is not None:
@@ -82,6 +88,8 @@ class BucketArgs:
             pulumi.set(__self__, "intelligent_tiering_days", intelligent_tiering_days)
         if intelligent_tiering_request_frequent is not None:
             pulumi.set(__self__, "intelligent_tiering_request_frequent", intelligent_tiering_request_frequent)
+        if kms_id is not None:
+            pulumi.set(__self__, "kms_id", kms_id)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -156,6 +164,18 @@ class BucketArgs:
         pulumi.set(self, "acl_body", value)
 
     @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CDC cluster ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
+
+    @property
     @pulumi.getter(name="corsRules")
     def cors_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]]:
         """
@@ -183,7 +203,7 @@ class BucketArgs:
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The server-side encryption algorithm to use. Valid value is `AES256`.
+        The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         """
         return pulumi.get(self, "encryption_algorithm")
 
@@ -226,6 +246,18 @@ class BucketArgs:
     @intelligent_tiering_request_frequent.setter
     def intelligent_tiering_request_frequent(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "intelligent_tiering_request_frequent", value)
+
+    @property
+    @pulumi.getter(name="kmsId")
+    def kms_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        """
+        return pulumi.get(self, "kms_id")
+
+    @kms_id.setter
+    def kms_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "kms_id", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -379,6 +411,7 @@ class _BucketState:
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]] = None,
                  cos_bucket_url: Optional[pulumi.Input[str]] = None,
                  enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
@@ -386,6 +419,7 @@ class _BucketState:
                  force_clean: Optional[pulumi.Input[bool]] = None,
                  intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
                  intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
+                 kms_id: Optional[pulumi.Input[str]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -404,13 +438,15 @@ class _BucketState:
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
+        :param pulumi.Input[str] cdc_id: CDC cluster ID.
         :param pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
         :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
-        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
         :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        :param pulumi.Input[str] kms_id: The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
         :param pulumi.Input[Sequence[pulumi.Input['BucketLifecycleRuleArgs']]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -432,6 +468,8 @@ class _BucketState:
             pulumi.set(__self__, "acl_body", acl_body)
         if bucket is not None:
             pulumi.set(__self__, "bucket", bucket)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if cors_rules is not None:
             pulumi.set(__self__, "cors_rules", cors_rules)
         if cos_bucket_url is not None:
@@ -446,6 +484,8 @@ class _BucketState:
             pulumi.set(__self__, "intelligent_tiering_days", intelligent_tiering_days)
         if intelligent_tiering_request_frequent is not None:
             pulumi.set(__self__, "intelligent_tiering_request_frequent", intelligent_tiering_request_frequent)
+        if kms_id is not None:
+            pulumi.set(__self__, "kms_id", kms_id)
         if lifecycle_rules is not None:
             pulumi.set(__self__, "lifecycle_rules", lifecycle_rules)
         if log_enable is not None:
@@ -520,6 +560,18 @@ class _BucketState:
         pulumi.set(self, "bucket", value)
 
     @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        CDC cluster ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
+
+    @property
     @pulumi.getter(name="corsRules")
     def cors_rules(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['BucketCorsRuleArgs']]]]:
         """
@@ -559,7 +611,7 @@ class _BucketState:
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> Optional[pulumi.Input[str]]:
         """
-        The server-side encryption algorithm to use. Valid value is `AES256`.
+        The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         """
         return pulumi.get(self, "encryption_algorithm")
 
@@ -602,6 +654,18 @@ class _BucketState:
     @intelligent_tiering_request_frequent.setter
     def intelligent_tiering_request_frequent(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "intelligent_tiering_request_frequent", value)
+
+    @property
+    @pulumi.getter(name="kmsId")
+    def kms_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        """
+        return pulumi.get(self, "kms_id")
+
+    @kms_id.setter
+    def kms_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "kms_id", value)
 
     @property
     @pulumi.getter(name="lifecycleRules")
@@ -757,12 +821,14 @@ class Bucket(pulumi.CustomResource):
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
                  enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
                  intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
                  intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
+                 kms_id: Optional[pulumi.Input[str]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -779,6 +845,8 @@ class Bucket(pulumi.CustomResource):
         """
         Provides a COS resource to create a COS bucket and set its attributes.
 
+        > **NOTE:** The following capabilities do not support cdc scenarios: `multi_az`, `website`, and bucket replication `replica_role`.
+
         ## Example Usage
 
         ### Private Bucket
@@ -791,9 +859,58 @@ class Bucket(pulumi.CustomResource):
 
         info = tencentcloud.User.get_info()
         app_id = info.app_id
-        private_sbucket = tencentcloud.cos.Bucket("privateSbucket",
+        private_bucket = tencentcloud.cos.Bucket("privateBucket",
             bucket=f"private-bucket-{app_id}",
             acl="private")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Private Bucket with CDC cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        private_bucket = tencentcloud.cos.Bucket("privateBucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private",
+            versioning_enable=True,
+            force_clean=True)
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Enable SSE-KMS encryption
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        bucket_basic = tencentcloud.cos.Bucket("bucketBasic",
+            bucket=f"tf-bucket-cdc-{app_id}",
+            acl="private",
+            encryption_algorithm="KMS",
+            kms_id=example.id,
+            versioning_enable=True,
+            acceleration_enable=False,
+            force_clean=True)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -892,6 +1009,47 @@ class Bucket(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Using verbose acl with CDC cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_acl = tencentcloud.cos.Bucket("bucketWithAcl",
+            bucket=f"private-bucket-{app_id}",
+            acl="private",
+            acl_body=\"\"\"<AccessControlPolicy>
+            <Owner>
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Owner>
+            <AccessControlList>
+                <Grant>
+                    <Grantee type="CanonicalUser">
+                        <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                        <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+                    </Grantee>
+                    <Permission>WRITE</Permission>
+                </Grant>
+                <Grant>
+                    <Grantee type="CanonicalUser">
+                        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+                    </Grantee>
+                    <Permission>FULL_CONTROL</Permission>
+                </Grant>
+            </AccessControlList>
+        </AccessControlPolicy>
+        \"\"\")
+        ```
+        <!--End PulumiCodeChooser -->
+
         ### Static Website
 
         <!--Start PulumiCodeChooser -->
@@ -907,6 +1065,7 @@ class Bucket(pulumi.CustomResource):
             website=tencentcloud.cos.BucketWebsiteArgs(
                 index_document="index.html",
                 error_document="error.html",
+                redirect_all_requests_to="https",
             ))
         pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
         ```
@@ -925,6 +1084,33 @@ class Bucket(pulumi.CustomResource):
         bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
             bucket=f"bucket-with-cors-{app_id}",
             acl="public-read-write",
+            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
+                allowed_origins=["http://*.abc.com"],
+                allowed_methods=[
+                    "PUT",
+                    "POST",
+                ],
+                allowed_headers=["*"],
+                max_age_seconds=300,
+                expose_headers=["Etag"],
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Using CORS with CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
+            bucket=f"bucket-with-cors-{app_id}",
             cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
                 allowed_origins=["http://*.abc.com"],
                 allowed_methods=[
@@ -957,6 +1143,30 @@ class Bucket(pulumi.CustomResource):
                     days=30,
                     storage_class="STANDARD_IA",
                 )],
+                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
+                    days=90,
+                ),
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Using object lifecycle with CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_lifecycle = tencentcloud.cos.Bucket("bucketWithLifecycle",
+            bucket=f"bucket-with-lifecycle-{app_id}",
+            acl="private",
+            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
+                filter_prefix="path1/",
                 expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
                     days=90,
                 ),
@@ -1009,12 +1219,14 @@ class Bucket(pulumi.CustomResource):
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
+        :param pulumi.Input[str] cdc_id: CDC cluster ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
-        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
         :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        :param pulumi.Input[str] kms_id: The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -1037,6 +1249,8 @@ class Bucket(pulumi.CustomResource):
         """
         Provides a COS resource to create a COS bucket and set its attributes.
 
+        > **NOTE:** The following capabilities do not support cdc scenarios: `multi_az`, `website`, and bucket replication `replica_role`.
+
         ## Example Usage
 
         ### Private Bucket
@@ -1049,9 +1263,58 @@ class Bucket(pulumi.CustomResource):
 
         info = tencentcloud.User.get_info()
         app_id = info.app_id
-        private_sbucket = tencentcloud.cos.Bucket("privateSbucket",
+        private_bucket = tencentcloud.cos.Bucket("privateBucket",
             bucket=f"private-bucket-{app_id}",
             acl="private")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Private Bucket with CDC cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        private_bucket = tencentcloud.cos.Bucket("privateBucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private",
+            versioning_enable=True,
+            force_clean=True)
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Enable SSE-KMS encryption
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        example = tencentcloud.kms.Key("example",
+            alias="tf-example-kms-key",
+            description="example of kms key",
+            key_rotation_enabled=False,
+            is_enabled=True,
+            tags={
+                "createdBy": "terraform",
+            })
+        bucket_basic = tencentcloud.cos.Bucket("bucketBasic",
+            bucket=f"tf-bucket-cdc-{app_id}",
+            acl="private",
+            encryption_algorithm="KMS",
+            kms_id=example.id,
+            versioning_enable=True,
+            acceleration_enable=False,
+            force_clean=True)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1150,6 +1413,47 @@ class Bucket(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Using verbose acl with CDC cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_acl = tencentcloud.cos.Bucket("bucketWithAcl",
+            bucket=f"private-bucket-{app_id}",
+            acl="private",
+            acl_body=\"\"\"<AccessControlPolicy>
+            <Owner>
+                <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+            </Owner>
+            <AccessControlList>
+                <Grant>
+                    <Grantee type="CanonicalUser">
+                        <ID>qcs::cam::uin/100015006748:uin/100015006748</ID>
+                        <DisplayName>qcs::cam::uin/100015006748:uin/100015006748</DisplayName>
+                    </Grantee>
+                    <Permission>WRITE</Permission>
+                </Grant>
+                <Grant>
+                    <Grantee type="CanonicalUser">
+                        <ID>qcs::cam::uin/100023201586:uin/100023201586</ID>
+                        <DisplayName>qcs::cam::uin/100023201586:uin/100023201586</DisplayName>
+                    </Grantee>
+                    <Permission>FULL_CONTROL</Permission>
+                </Grant>
+            </AccessControlList>
+        </AccessControlPolicy>
+        \"\"\")
+        ```
+        <!--End PulumiCodeChooser -->
+
         ### Static Website
 
         <!--Start PulumiCodeChooser -->
@@ -1165,6 +1469,7 @@ class Bucket(pulumi.CustomResource):
             website=tencentcloud.cos.BucketWebsiteArgs(
                 index_document="index.html",
                 error_document="error.html",
+                redirect_all_requests_to="https",
             ))
         pulumi.export("endpointTest", bucket_with_static_website.website.endpoint)
         ```
@@ -1183,6 +1488,33 @@ class Bucket(pulumi.CustomResource):
         bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
             bucket=f"bucket-with-cors-{app_id}",
             acl="public-read-write",
+            cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
+                allowed_origins=["http://*.abc.com"],
+                allowed_methods=[
+                    "PUT",
+                    "POST",
+                ],
+                allowed_headers=["*"],
+                max_age_seconds=300,
+                expose_headers=["Etag"],
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Using CORS with CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_cors = tencentcloud.cos.Bucket("bucketWithCors",
+            bucket=f"bucket-with-cors-{app_id}",
             cors_rules=[tencentcloud.cos.BucketCorsRuleArgs(
                 allowed_origins=["http://*.abc.com"],
                 allowed_methods=[
@@ -1215,6 +1547,30 @@ class Bucket(pulumi.CustomResource):
                     days=30,
                     storage_class="STANDARD_IA",
                 )],
+                expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
+                    days=90,
+                ),
+            )])
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Using object lifecycle with CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        region = "ap-guangzhou"
+        cdc_id = "cluster-262n63e8"
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        bucket_with_lifecycle = tencentcloud.cos.Bucket("bucketWithLifecycle",
+            bucket=f"bucket-with-lifecycle-{app_id}",
+            acl="private",
+            lifecycle_rules=[tencentcloud.cos.BucketLifecycleRuleArgs(
+                filter_prefix="path1/",
                 expiration=tencentcloud.cos.BucketLifecycleRuleExpirationArgs(
                     days=90,
                 ),
@@ -1280,12 +1636,14 @@ class Bucket(pulumi.CustomResource):
                  acl: Optional[pulumi.Input[str]] = None,
                  acl_body: Optional[pulumi.Input[str]] = None,
                  bucket: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
                  enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
                  encryption_algorithm: Optional[pulumi.Input[str]] = None,
                  force_clean: Optional[pulumi.Input[bool]] = None,
                  intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
                  intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
+                 kms_id: Optional[pulumi.Input[str]] = None,
                  lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
                  log_enable: Optional[pulumi.Input[bool]] = None,
                  log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1313,12 +1671,14 @@ class Bucket(pulumi.CustomResource):
             if bucket is None and not opts.urn:
                 raise TypeError("Missing required property 'bucket'")
             __props__.__dict__["bucket"] = bucket
+            __props__.__dict__["cdc_id"] = cdc_id
             __props__.__dict__["cors_rules"] = cors_rules
             __props__.__dict__["enable_intelligent_tiering"] = enable_intelligent_tiering
             __props__.__dict__["encryption_algorithm"] = encryption_algorithm
             __props__.__dict__["force_clean"] = force_clean
             __props__.__dict__["intelligent_tiering_days"] = intelligent_tiering_days
             __props__.__dict__["intelligent_tiering_request_frequent"] = intelligent_tiering_request_frequent
+            __props__.__dict__["kms_id"] = kms_id
             __props__.__dict__["lifecycle_rules"] = lifecycle_rules
             __props__.__dict__["log_enable"] = log_enable
             __props__.__dict__["log_prefix"] = log_prefix
@@ -1346,6 +1706,7 @@ class Bucket(pulumi.CustomResource):
             acl: Optional[pulumi.Input[str]] = None,
             acl_body: Optional[pulumi.Input[str]] = None,
             bucket: Optional[pulumi.Input[str]] = None,
+            cdc_id: Optional[pulumi.Input[str]] = None,
             cors_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]]] = None,
             cos_bucket_url: Optional[pulumi.Input[str]] = None,
             enable_intelligent_tiering: Optional[pulumi.Input[bool]] = None,
@@ -1353,6 +1714,7 @@ class Bucket(pulumi.CustomResource):
             force_clean: Optional[pulumi.Input[bool]] = None,
             intelligent_tiering_days: Optional[pulumi.Input[int]] = None,
             intelligent_tiering_request_frequent: Optional[pulumi.Input[int]] = None,
+            kms_id: Optional[pulumi.Input[str]] = None,
             lifecycle_rules: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]]] = None,
             log_enable: Optional[pulumi.Input[bool]] = None,
             log_prefix: Optional[pulumi.Input[str]] = None,
@@ -1376,13 +1738,15 @@ class Bucket(pulumi.CustomResource):
         :param pulumi.Input[str] acl: The canned ACL to apply. Valid values: private, public-read, and public-read-write. Defaults to private.
         :param pulumi.Input[str] acl_body: ACL XML body for multiple grant info. NOTE: this argument will overwrite `acl`. Check https://intl.cloud.tencent.com/document/product/436/7737 for more detail.
         :param pulumi.Input[str] bucket: The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
+        :param pulumi.Input[str] cdc_id: CDC cluster ID.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketCorsRuleArgs']]]] cors_rules: A rule of Cross-Origin Resource Sharing (documented below).
         :param pulumi.Input[str] cos_bucket_url: The URL of this cos bucket.
         :param pulumi.Input[bool] enable_intelligent_tiering: Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
-        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid value is `AES256`.
+        :param pulumi.Input[str] encryption_algorithm: The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         :param pulumi.Input[bool] force_clean: Force cleanup all objects before delete bucket.
         :param pulumi.Input[int] intelligent_tiering_days: Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
         :param pulumi.Input[int] intelligent_tiering_request_frequent: Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
+        :param pulumi.Input[str] kms_id: The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['BucketLifecycleRuleArgs']]]] lifecycle_rules: A configuration of object lifecycle management (documented below).
         :param pulumi.Input[bool] log_enable: Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `log_target_bucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
         :param pulumi.Input[str] log_prefix: The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `log_target_bucket`/`log_prefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `log_enable` is `true`.
@@ -1404,6 +1768,7 @@ class Bucket(pulumi.CustomResource):
         __props__.__dict__["acl"] = acl
         __props__.__dict__["acl_body"] = acl_body
         __props__.__dict__["bucket"] = bucket
+        __props__.__dict__["cdc_id"] = cdc_id
         __props__.__dict__["cors_rules"] = cors_rules
         __props__.__dict__["cos_bucket_url"] = cos_bucket_url
         __props__.__dict__["enable_intelligent_tiering"] = enable_intelligent_tiering
@@ -1411,6 +1776,7 @@ class Bucket(pulumi.CustomResource):
         __props__.__dict__["force_clean"] = force_clean
         __props__.__dict__["intelligent_tiering_days"] = intelligent_tiering_days
         __props__.__dict__["intelligent_tiering_request_frequent"] = intelligent_tiering_request_frequent
+        __props__.__dict__["kms_id"] = kms_id
         __props__.__dict__["lifecycle_rules"] = lifecycle_rules
         __props__.__dict__["log_enable"] = log_enable
         __props__.__dict__["log_prefix"] = log_prefix
@@ -1458,6 +1824,14 @@ class Bucket(pulumi.CustomResource):
         return pulumi.get(self, "bucket")
 
     @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        CDC cluster ID.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @property
     @pulumi.getter(name="corsRules")
     def cors_rules(self) -> pulumi.Output[Optional[Sequence['outputs.BucketCorsRule']]]:
         """
@@ -1485,7 +1859,7 @@ class Bucket(pulumi.CustomResource):
     @pulumi.getter(name="encryptionAlgorithm")
     def encryption_algorithm(self) -> pulumi.Output[Optional[str]]:
         """
-        The server-side encryption algorithm to use. Valid value is `AES256`.
+        The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         """
         return pulumi.get(self, "encryption_algorithm")
 
@@ -1512,6 +1886,14 @@ class Bucket(pulumi.CustomResource):
         Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
         """
         return pulumi.get(self, "intelligent_tiering_request_frequent")
+
+    @property
+    @pulumi.getter(name="kmsId")
+    def kms_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        """
+        return pulumi.get(self, "kms_id")
 
     @property
     @pulumi.getter(name="lifecycleRules")

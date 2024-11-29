@@ -16,10 +16,12 @@ from .get_list_entities_for_policy import *
 from .get_oidc_config import *
 from .get_policies import *
 from .get_policy_granting_service_access import *
+from .get_role_detail import *
 from .get_role_policy_attachments import *
 from .get_roles import *
 from .get_saml_providers import *
 from .get_secret_last_used_time import *
+from .get_sub_accounts import *
 from .get_user_policy_attachments import *
 from .get_users import *
 from .group import *

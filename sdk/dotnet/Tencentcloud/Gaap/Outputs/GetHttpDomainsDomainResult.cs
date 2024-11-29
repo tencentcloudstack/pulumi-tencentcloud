@@ -47,6 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
         /// </summary>
         public readonly string GaapAuthId;
         /// <summary>
+        /// Whether to use as the default domain name.
+        /// </summary>
+        public readonly bool IsDefaultServer;
+        /// <summary>
         /// Indicates whether realserver authentication is enable.
         /// </summary>
         public readonly bool RealserverAuth;
@@ -81,6 +85,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
 
             string gaapAuthId,
 
+            bool isDefaultServer,
+
             bool realserverAuth,
 
             string realserverCertificateDomain,
@@ -97,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Outputs
             Domain = domain;
             GaapAuth = gaapAuth;
             GaapAuthId = gaapAuthId;
+            IsDefaultServer = isDefaultServer;
             RealserverAuth = realserverAuth;
             RealserverCertificateDomain = realserverCertificateDomain;
             RealserverCertificateId = realserverCertificateId;

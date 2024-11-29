@@ -12,6 +12,7 @@ from . import outputs
 
 __all__ = [
     'DiagnoseDiagnoseJobMeta',
+    'InstanceCosBackup',
     'InstanceEsAcl',
     'InstanceMultiZoneInfo',
     'InstanceNodeInfoList',
@@ -118,6 +119,54 @@ class DiagnoseDiagnoseJobMeta(dict):
         Chinese name of intelligent operation and maintenance diagnosis item.
         """
         return pulumi.get(self, "job_zh_name")
+
+
+@pulumi.output_type
+class InstanceCosBackup(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "backupTime":
+            suggest = "backup_time"
+        elif key == "isAutoBackup":
+            suggest = "is_auto_backup"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in InstanceCosBackup. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        InstanceCosBackup.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        InstanceCosBackup.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 backup_time: str,
+                 is_auto_backup: bool):
+        """
+        :param str backup_time: Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+        :param bool is_auto_backup: Whether to enable automatic backup of cos.
+        """
+        pulumi.set(__self__, "backup_time", backup_time)
+        pulumi.set(__self__, "is_auto_backup", is_auto_backup)
+
+    @property
+    @pulumi.getter(name="backupTime")
+    def backup_time(self) -> str:
+        """
+        Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+        """
+        return pulumi.get(self, "backup_time")
+
+    @property
+    @pulumi.getter(name="isAutoBackup")
+    def is_auto_backup(self) -> bool:
+        """
+        Whether to enable automatic backup of cos.
+        """
+        return pulumi.get(self, "is_auto_backup")
 
 
 @pulumi.output_type
@@ -254,7 +303,7 @@ class InstanceNodeInfoList(dict):
         :param int node_num: Number of nodes.
         :param str node_type: Node specification, and valid values refer to [document of tencentcloud](https://intl.cloud.tencent.com/document/product/845/18376).
         :param int disk_size: Node disk size. Unit is GB, and default value is `100`.
-        :param str disk_type: Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+        :param str disk_type: Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
         :param bool encrypt: Decides to encrypt this disk or not.
         :param str type: Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
         """
@@ -297,7 +346,7 @@ class InstanceNodeInfoList(dict):
     @pulumi.getter(name="diskType")
     def disk_type(self) -> Optional[str]:
         """
-        Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+        Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
         """
         return pulumi.get(self, "disk_type")
 

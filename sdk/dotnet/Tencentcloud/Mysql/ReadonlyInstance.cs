@@ -218,6 +218,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<int?> PrepaidPeriod { get; private set; } = null!;
 
         /// <summary>
+        /// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        /// </summary>
+        [Output("roGroupId")]
+        public Output<string> RoGroupId { get; private set; } = null!;
+
+        /// <summary>
         /// Security groups to use.
         /// </summary>
         [Output("securityGroups")]
@@ -414,6 +420,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
 
+        /// <summary>
+        /// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        /// </summary>
+        [Input("roGroupId")]
+        public Input<string>? RoGroupId { get; set; }
+
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;
 
@@ -583,6 +595,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("prepaidPeriod")]
         public Input<int>? PrepaidPeriod { get; set; }
+
+        /// <summary>
+        /// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
+        /// </summary>
+        [Input("roGroupId")]
+        public Input<string>? RoGroupId { get; set; }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;

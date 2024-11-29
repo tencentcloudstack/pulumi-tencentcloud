@@ -31,17 +31,17 @@ class GroupRuleSetEgressArgs:
                  source_security_id: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] action: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
-        :param pulumi.Input[str] address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
-        :param pulumi.Input[str] address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
-        :param pulumi.Input[str] cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        :param pulumi.Input[str] address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
+        :param pulumi.Input[str] address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
+        :param pulumi.Input[str] cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        :param pulumi.Input[str] ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         :param pulumi.Input[int] policy_index: The security group rule index number, whose value dynamically changes with changes in security group rules.
         :param pulumi.Input[str] port: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
-        :param pulumi.Input[str] protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        :param pulumi.Input[str] protocol: Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
         :param pulumi.Input[str] service_template_group: Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
         :param pulumi.Input[str] service_template_id: Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
-        :param pulumi.Input[str] source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        :param pulumi.Input[str] source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         pulumi.set(__self__, "action", action)
         if address_template_group is not None:
@@ -83,7 +83,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter(name="addressTemplateGroup")
     def address_template_group(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "address_template_group")
 
@@ -95,7 +95,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter(name="addressTemplateId")
     def address_template_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "address_template_id")
 
@@ -107,7 +107,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
-        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "cidr_block")
 
@@ -131,7 +131,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter(name="ipv6CidrBlock")
     def ipv6_cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
-        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "ipv6_cidr_block")
 
@@ -167,7 +167,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
         """
         return pulumi.get(self, "protocol")
 
@@ -203,7 +203,7 @@ class GroupRuleSetEgressArgs:
     @pulumi.getter(name="sourceSecurityId")
     def source_security_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "source_security_id")
 
@@ -229,17 +229,17 @@ class GroupRuleSetIngressArgs:
                  source_security_id: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] action: Rule policy of security group. Valid values: `ACCEPT` and `DROP`.
-        :param pulumi.Input[str] address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
-        :param pulumi.Input[str] address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
-        :param pulumi.Input[str] cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        :param pulumi.Input[str] address_template_group: Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
+        :param pulumi.Input[str] address_template_id: Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
+        :param pulumi.Input[str] cidr_block: An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         :param pulumi.Input[str] description: Description of the security group rule.
-        :param pulumi.Input[str] ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        :param pulumi.Input[str] ipv6_cidr_block: An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         :param pulumi.Input[int] policy_index: The security group rule index number, whose value dynamically changes with changes in security group rules.
         :param pulumi.Input[str] port: Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
-        :param pulumi.Input[str] protocol: Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        :param pulumi.Input[str] protocol: Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
         :param pulumi.Input[str] service_template_group: Specify Group ID of Protocol template ID like `ppmg-xxxxxxxx`, conflict with `cidr_block` and `port`.
         :param pulumi.Input[str] service_template_id: Specify Protocol template ID like `ppm-xxxxxxxx`, conflict with `cidr_block` and `port`.
-        :param pulumi.Input[str] source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        :param pulumi.Input[str] source_security_id: ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         pulumi.set(__self__, "action", action)
         if address_template_group is not None:
@@ -281,7 +281,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter(name="addressTemplateGroup")
     def address_template_group(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        Specify Group ID of Address template like `ipmg-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "address_template_group")
 
@@ -293,7 +293,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter(name="addressTemplateId")
     def address_template_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`.
+        Specify Address template ID like `ipm-xxxxxxxx`, conflict with `source_security_id` and `cidr_block`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "address_template_id")
 
@@ -305,7 +305,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter(name="cidrBlock")
     def cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
-        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time.
+        An IP address network or CIDR segment. NOTE: `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` are exclusive and cannot be set in the same time; One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "cidr_block")
 
@@ -329,7 +329,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter(name="ipv6CidrBlock")
     def ipv6_cidr_block(self) -> Optional[pulumi.Input[str]]:
         """
-        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
+        An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "ipv6_cidr_block")
 
@@ -365,7 +365,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter
     def protocol(self) -> Optional[pulumi.Input[str]]:
         """
-        Type of IP protocol. Valid values: `TCP`, `UDP` and `ICMP`. Default to all types protocol, and conflicts with `service_template_*`.
+        Type of IP protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPv6` and `ALL`. Default to all types protocol, and conflicts with `service_template_*`.
         """
         return pulumi.get(self, "protocol")
 
@@ -401,7 +401,7 @@ class GroupRuleSetIngressArgs:
     @pulumi.getter(name="sourceSecurityId")
     def source_security_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`.
+        ID of the nested security group, and conflicts with `cidr_block` and `address_template_*`. NOTE: One of `cidr_block`, `ipv6_cidr_block`, `source_security_id` and `address_template_*` must be set.
         """
         return pulumi.get(self, "source_security_id")
 

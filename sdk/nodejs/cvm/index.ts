@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { ActionTimerArgs, ActionTimerState } from "./actionTimer";
+export type ActionTimer = import("./actionTimer").ActionTimer;
+export const ActionTimer: typeof import("./actionTimer").ActionTimer = null as any;
+utilities.lazyLoad(exports, ["ActionTimer"], () => require("./actionTimer"));
+
 export { ChcConfigArgs, ChcConfigState } from "./chcConfig";
 export type ChcConfig = import("./chcConfig").ChcConfig;
 export const ChcConfig: typeof import("./chcConfig").ChcConfig = null as any;
@@ -125,6 +130,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cvm/actionTimer:ActionTimer":
+                return new ActionTimer(name, <any>undefined, { urn })
             case "tencentcloud:Cvm/chcConfig:ChcConfig":
                 return new ChcConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cvm/exportImages:ExportImages":
@@ -160,6 +167,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/actionTimer", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/chcConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/exportImages", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/hpcCluster", _module)

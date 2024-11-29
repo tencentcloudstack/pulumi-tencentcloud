@@ -128,6 +128,162 @@ func (o DiagnoseDiagnoseJobMetaArrayOutput) Index(i pulumi.IntInput) DiagnoseDia
 	}).(DiagnoseDiagnoseJobMetaOutput)
 }
 
+type InstanceCosBackup struct {
+	// Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+	BackupTime string `pulumi:"backupTime"`
+	// Whether to enable automatic backup of cos.
+	IsAutoBackup bool `pulumi:"isAutoBackup"`
+}
+
+// InstanceCosBackupInput is an input type that accepts InstanceCosBackupArgs and InstanceCosBackupOutput values.
+// You can construct a concrete instance of `InstanceCosBackupInput` via:
+//
+//	InstanceCosBackupArgs{...}
+type InstanceCosBackupInput interface {
+	pulumi.Input
+
+	ToInstanceCosBackupOutput() InstanceCosBackupOutput
+	ToInstanceCosBackupOutputWithContext(context.Context) InstanceCosBackupOutput
+}
+
+type InstanceCosBackupArgs struct {
+	// Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+	BackupTime pulumi.StringInput `pulumi:"backupTime"`
+	// Whether to enable automatic backup of cos.
+	IsAutoBackup pulumi.BoolInput `pulumi:"isAutoBackup"`
+}
+
+func (InstanceCosBackupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceCosBackup)(nil)).Elem()
+}
+
+func (i InstanceCosBackupArgs) ToInstanceCosBackupOutput() InstanceCosBackupOutput {
+	return i.ToInstanceCosBackupOutputWithContext(context.Background())
+}
+
+func (i InstanceCosBackupArgs) ToInstanceCosBackupOutputWithContext(ctx context.Context) InstanceCosBackupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCosBackupOutput)
+}
+
+func (i InstanceCosBackupArgs) ToInstanceCosBackupPtrOutput() InstanceCosBackupPtrOutput {
+	return i.ToInstanceCosBackupPtrOutputWithContext(context.Background())
+}
+
+func (i InstanceCosBackupArgs) ToInstanceCosBackupPtrOutputWithContext(ctx context.Context) InstanceCosBackupPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCosBackupOutput).ToInstanceCosBackupPtrOutputWithContext(ctx)
+}
+
+// InstanceCosBackupPtrInput is an input type that accepts InstanceCosBackupArgs, InstanceCosBackupPtr and InstanceCosBackupPtrOutput values.
+// You can construct a concrete instance of `InstanceCosBackupPtrInput` via:
+//
+//	        InstanceCosBackupArgs{...}
+//
+//	or:
+//
+//	        nil
+type InstanceCosBackupPtrInput interface {
+	pulumi.Input
+
+	ToInstanceCosBackupPtrOutput() InstanceCosBackupPtrOutput
+	ToInstanceCosBackupPtrOutputWithContext(context.Context) InstanceCosBackupPtrOutput
+}
+
+type instanceCosBackupPtrType InstanceCosBackupArgs
+
+func InstanceCosBackupPtr(v *InstanceCosBackupArgs) InstanceCosBackupPtrInput {
+	return (*instanceCosBackupPtrType)(v)
+}
+
+func (*instanceCosBackupPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceCosBackup)(nil)).Elem()
+}
+
+func (i *instanceCosBackupPtrType) ToInstanceCosBackupPtrOutput() InstanceCosBackupPtrOutput {
+	return i.ToInstanceCosBackupPtrOutputWithContext(context.Background())
+}
+
+func (i *instanceCosBackupPtrType) ToInstanceCosBackupPtrOutputWithContext(ctx context.Context) InstanceCosBackupPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCosBackupPtrOutput)
+}
+
+type InstanceCosBackupOutput struct{ *pulumi.OutputState }
+
+func (InstanceCosBackupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceCosBackup)(nil)).Elem()
+}
+
+func (o InstanceCosBackupOutput) ToInstanceCosBackupOutput() InstanceCosBackupOutput {
+	return o
+}
+
+func (o InstanceCosBackupOutput) ToInstanceCosBackupOutputWithContext(ctx context.Context) InstanceCosBackupOutput {
+	return o
+}
+
+func (o InstanceCosBackupOutput) ToInstanceCosBackupPtrOutput() InstanceCosBackupPtrOutput {
+	return o.ToInstanceCosBackupPtrOutputWithContext(context.Background())
+}
+
+func (o InstanceCosBackupOutput) ToInstanceCosBackupPtrOutputWithContext(ctx context.Context) InstanceCosBackupPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceCosBackup) *InstanceCosBackup {
+		return &v
+	}).(InstanceCosBackupPtrOutput)
+}
+
+// Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+func (o InstanceCosBackupOutput) BackupTime() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceCosBackup) string { return v.BackupTime }).(pulumi.StringOutput)
+}
+
+// Whether to enable automatic backup of cos.
+func (o InstanceCosBackupOutput) IsAutoBackup() pulumi.BoolOutput {
+	return o.ApplyT(func(v InstanceCosBackup) bool { return v.IsAutoBackup }).(pulumi.BoolOutput)
+}
+
+type InstanceCosBackupPtrOutput struct{ *pulumi.OutputState }
+
+func (InstanceCosBackupPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceCosBackup)(nil)).Elem()
+}
+
+func (o InstanceCosBackupPtrOutput) ToInstanceCosBackupPtrOutput() InstanceCosBackupPtrOutput {
+	return o
+}
+
+func (o InstanceCosBackupPtrOutput) ToInstanceCosBackupPtrOutputWithContext(ctx context.Context) InstanceCosBackupPtrOutput {
+	return o
+}
+
+func (o InstanceCosBackupPtrOutput) Elem() InstanceCosBackupOutput {
+	return o.ApplyT(func(v *InstanceCosBackup) InstanceCosBackup {
+		if v != nil {
+			return *v
+		}
+		var ret InstanceCosBackup
+		return ret
+	}).(InstanceCosBackupOutput)
+}
+
+// Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+func (o InstanceCosBackupPtrOutput) BackupTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceCosBackup) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.BackupTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable automatic backup of cos.
+func (o InstanceCosBackupPtrOutput) IsAutoBackup() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *InstanceCosBackup) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.IsAutoBackup
+	}).(pulumi.BoolPtrOutput)
+}
+
 type InstanceEsAcl struct {
 	// Blacklist of kibana access.
 	BlackLists []string `pulumi:"blackLists"`
@@ -393,7 +549,7 @@ func (o InstanceMultiZoneInfoArrayOutput) Index(i pulumi.IntInput) InstanceMulti
 type InstanceNodeInfoList struct {
 	// Node disk size. Unit is GB, and default value is `100`.
 	DiskSize *int `pulumi:"diskSize"`
-	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+	// Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
 	DiskType *string `pulumi:"diskType"`
 	// Decides to encrypt this disk or not.
 	Encrypt *bool `pulumi:"encrypt"`
@@ -419,7 +575,7 @@ type InstanceNodeInfoListInput interface {
 type InstanceNodeInfoListArgs struct {
 	// Node disk size. Unit is GB, and default value is `100`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
-	// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+	// Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
 	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
 	// Decides to encrypt this disk or not.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
@@ -487,7 +643,7 @@ func (o InstanceNodeInfoListOutput) DiskSize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *int { return v.DiskSize }).(pulumi.IntPtrOutput)
 }
 
-// Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+// Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
 func (o InstanceNodeInfoListOutput) DiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceNodeInfoList) *string { return v.DiskType }).(pulumi.StringPtrOutput)
 }
@@ -6361,6 +6517,8 @@ func (o GetViewsNodesViewArrayOutput) Index(i pulumi.IntInput) GetViewsNodesView
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DiagnoseDiagnoseJobMetaInput)(nil)).Elem(), DiagnoseDiagnoseJobMetaArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DiagnoseDiagnoseJobMetaArrayInput)(nil)).Elem(), DiagnoseDiagnoseJobMetaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCosBackupInput)(nil)).Elem(), InstanceCosBackupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCosBackupPtrInput)(nil)).Elem(), InstanceCosBackupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclInput)(nil)).Elem(), InstanceEsAclArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceEsAclPtrInput)(nil)).Elem(), InstanceEsAclArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceMultiZoneInfoInput)(nil)).Elem(), InstanceMultiZoneInfoArgs{})
@@ -6447,6 +6605,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetViewsNodesViewArrayInput)(nil)).Elem(), GetViewsNodesViewArray{})
 	pulumi.RegisterOutputType(DiagnoseDiagnoseJobMetaOutput{})
 	pulumi.RegisterOutputType(DiagnoseDiagnoseJobMetaArrayOutput{})
+	pulumi.RegisterOutputType(InstanceCosBackupOutput{})
+	pulumi.RegisterOutputType(InstanceCosBackupPtrOutput{})
 	pulumi.RegisterOutputType(InstanceEsAclOutput{})
 	pulumi.RegisterOutputType(InstanceEsAclPtrOutput{})
 	pulumi.RegisterOutputType(InstanceMultiZoneInfoOutput{})

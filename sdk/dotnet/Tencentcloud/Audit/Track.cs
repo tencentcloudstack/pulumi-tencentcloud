@@ -24,7 +24,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var track = new Tencentcloud.Audit.Track("track", new()
+    ///     var example = new Tencentcloud.Audit.Track("example", new()
     ///     {
     ///         ActionType = "Read",
     ///         EventNames = new[]
@@ -47,12 +47,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Specify storage user
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Audit.Track("example", new()
+    ///     {
+    ///         ActionType = "Read",
+    ///         EventNames = new[]
+    ///         {
+    ///             "*",
+    ///         },
+    ///         ResourceType = "*",
+    ///         Status = 1,
+    ///         Storage = new Tencentcloud.Audit.Inputs.TrackStorageArgs
+    ///         {
+    ///             StorageAccountId = "100037717137",
+    ///             StorageAppId = "1309116520",
+    ///             StorageName = "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+    ///             StoragePrefix = "cloudaudit",
+    ///             StorageRegion = "ap-guangzhou",
+    ///             StorageType = "cos",
+    ///         },
+    ///         TrackForAllMembers = 0,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// audit track can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Audit/track:Track track track_id
+    /// $ pulumi import tencentcloud:Audit/track:Track example 24283
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Audit/track:Track")]

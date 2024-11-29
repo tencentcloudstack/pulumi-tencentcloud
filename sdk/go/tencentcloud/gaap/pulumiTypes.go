@@ -2258,6 +2258,8 @@ type GetHttpDomainsDomain struct {
 	GaapAuth bool `pulumi:"gaapAuth"`
 	// ID of the SSL certificate.
 	GaapAuthId string `pulumi:"gaapAuthId"`
+	// Whether to use as the default domain name.
+	IsDefaultServer bool `pulumi:"isDefaultServer"`
 	// Indicates whether realserver authentication is enable.
 	RealserverAuth bool `pulumi:"realserverAuth"`
 	// CA certificate domain of the realserver.
@@ -2300,6 +2302,8 @@ type GetHttpDomainsDomainArgs struct {
 	GaapAuth pulumi.BoolInput `pulumi:"gaapAuth"`
 	// ID of the SSL certificate.
 	GaapAuthId pulumi.StringInput `pulumi:"gaapAuthId"`
+	// Whether to use as the default domain name.
+	IsDefaultServer pulumi.BoolInput `pulumi:"isDefaultServer"`
 	// Indicates whether realserver authentication is enable.
 	RealserverAuth pulumi.BoolInput `pulumi:"realserverAuth"`
 	// CA certificate domain of the realserver.
@@ -2403,6 +2407,11 @@ func (o GetHttpDomainsDomainOutput) GaapAuth() pulumi.BoolOutput {
 // ID of the SSL certificate.
 func (o GetHttpDomainsDomainOutput) GaapAuthId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetHttpDomainsDomain) string { return v.GaapAuthId }).(pulumi.StringOutput)
+}
+
+// Whether to use as the default domain name.
+func (o GetHttpDomainsDomainOutput) IsDefaultServer() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetHttpDomainsDomain) bool { return v.IsDefaultServer }).(pulumi.BoolOutput)
 }
 
 // Indicates whether realserver authentication is enable.
@@ -3044,6 +3053,10 @@ type GetLayer7ListenersListener struct {
 	ProxyId string `pulumi:"proxyId"`
 	// Status of the layer7 listener.
 	Status int `pulumi:"status"`
+	// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+	TlsCiphers string `pulumi:"tlsCiphers"`
+	// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+	TlsSupportVersions []string `pulumi:"tlsSupportVersions"`
 }
 
 // GetLayer7ListenersListenerInput is an input type that accepts GetLayer7ListenersListenerArgs and GetLayer7ListenersListenerOutput values.
@@ -3084,6 +3097,10 @@ type GetLayer7ListenersListenerArgs struct {
 	ProxyId pulumi.StringInput `pulumi:"proxyId"`
 	// Status of the layer7 listener.
 	Status pulumi.IntInput `pulumi:"status"`
+	// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+	TlsCiphers pulumi.StringInput `pulumi:"tlsCiphers"`
+	// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+	TlsSupportVersions pulumi.StringArrayInput `pulumi:"tlsSupportVersions"`
 }
 
 func (GetLayer7ListenersListenerArgs) ElementType() reflect.Type {
@@ -3197,6 +3214,16 @@ func (o GetLayer7ListenersListenerOutput) ProxyId() pulumi.StringOutput {
 // Status of the layer7 listener.
 func (o GetLayer7ListenersListenerOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetLayer7ListenersListener) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
+func (o GetLayer7ListenersListenerOutput) TlsCiphers() pulumi.StringOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) string { return v.TlsCiphers }).(pulumi.StringOutput)
+}
+
+// TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
+func (o GetLayer7ListenersListenerOutput) TlsSupportVersions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetLayer7ListenersListener) []string { return v.TlsSupportVersions }).(pulumi.StringArrayOutput)
 }
 
 type GetLayer7ListenersListenerArrayOutput struct{ *pulumi.OutputState }
@@ -4372,6 +4399,8 @@ type GetProxyDetailProxyDetail struct {
 	IpAddressVersion string `pulumi:"ipAddressVersion"`
 	// IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
 	IpLists []GetProxyDetailProxyDetailIpList `pulumi:"ipLists"`
+	// Whether to allow TLS configuration.0-no support, 1-expressed support.
+	IsSupportTlsChoice int `pulumi:"isSupportTlsChoice"`
 	// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
 	ModifyConfigTime int `pulumi:"modifyConfigTime"`
 	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
@@ -4456,6 +4485,8 @@ type GetProxyDetailProxyDetailArgs struct {
 	IpAddressVersion pulumi.StringInput `pulumi:"ipAddressVersion"`
 	// IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
 	IpLists GetProxyDetailProxyDetailIpListArrayInput `pulumi:"ipLists"`
+	// Whether to allow TLS configuration.0-no support, 1-expressed support.
+	IsSupportTlsChoice pulumi.IntInput `pulumi:"isSupportTlsChoice"`
 	// Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.
 	ModifyConfigTime pulumi.IntInput `pulumi:"modifyConfigTime"`
 	// A list of network types supported by the access area, with normal indicating support for regular BGP, cn2 indicating premium BGP, triple indicating three networks, and secure_EIP represents a custom secure EIP.
@@ -4633,6 +4664,11 @@ func (o GetProxyDetailProxyDetailOutput) IpAddressVersion() pulumi.StringOutput 
 // IP ListNote: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetProxyDetailProxyDetailOutput) IpLists() GetProxyDetailProxyDetailIpListArrayOutput {
 	return o.ApplyT(func(v GetProxyDetailProxyDetail) []GetProxyDetailProxyDetailIpList { return v.IpLists }).(GetProxyDetailProxyDetailIpListArrayOutput)
+}
+
+// Whether to allow TLS configuration.0-no support, 1-expressed support.
+func (o GetProxyDetailProxyDetailOutput) IsSupportTlsChoice() pulumi.IntOutput {
+	return o.ApplyT(func(v GetProxyDetailProxyDetail) int { return v.IsSupportTlsChoice }).(pulumi.IntOutput)
 }
 
 // Configuration change timeNote: This field may return null, indicating that a valid value cannot be obtained.

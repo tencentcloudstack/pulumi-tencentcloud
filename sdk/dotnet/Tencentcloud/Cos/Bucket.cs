@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// <summary>
     /// Provides a COS resource to create a COS bucket and set its attributes.
     /// 
+    /// &gt; **NOTE:** The following capabilities do not support cdc scenarios: `multi_az`, `website`, and bucket replication `replica_role`.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Private Bucket
@@ -31,10 +33,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
     /// 
-    ///     var privateSbucket = new Tencentcloud.Cos.Bucket("privateSbucket", new()
+    ///     var privateBucket = new Tencentcloud.Cos.Bucket("privateBucket", new()
     ///     {
     ///         CosBucket = appId.Apply(appId =&gt; $"private-bucket-{appId}"),
     ///         Acl = "private",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Private Bucket with CDC cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var region = "ap-guangzhou";
+    /// 
+    ///     var cdcId = "cluster-262n63e8";
+    /// 
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var privateBucket = new Tencentcloud.Cos.Bucket("privateBucket", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"private-bucket-{appId}"),
+    ///         Acl = "private",
+    ///         VersioningEnable = true,
+    ///         ForceClean = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Enable SSE-KMS encryption
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var example = new Tencentcloud.Kms.Key("example", new()
+    ///     {
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         KeyRotationEnabled = false,
+    ///         IsEnabled = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var bucketBasic = new Tencentcloud.Cos.Bucket("bucketBasic", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"tf-bucket-cdc-{appId}"),
+    ///         Acl = "private",
+    ///         EncryptionAlgorithm = "KMS",
+    ///         KmsId = example.Id,
+    ///         VersioningEnable = true,
+    ///         AccelerationEnable = false,
+    ///         ForceClean = true,
     ///     });
     /// 
     /// });
@@ -156,6 +233,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Using verbose acl with CDC cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var region = "ap-guangzhou";
+    /// 
+    ///     var cdcId = "cluster-262n63e8";
+    /// 
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var bucketWithAcl = new Tencentcloud.Cos.Bucket("bucketWithAcl", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"private-bucket-{appId}"),
+    ///         Acl = "private",
+    ///         AclBody = @"&lt;AccessControlPolicy&gt;
+    ///     &lt;Owner&gt;
+    ///         &lt;ID&gt;qcs::cam::uin/100023201586:uin/100023201586&lt;/ID&gt;
+    ///         &lt;DisplayName&gt;qcs::cam::uin/100023201586:uin/100023201586&lt;/DisplayName&gt;
+    ///     &lt;/Owner&gt;
+    ///     &lt;AccessControlList&gt;
+    ///         &lt;Grant&gt;
+    ///             &lt;Grantee type=""CanonicalUser""&gt;
+    ///                 &lt;ID&gt;qcs::cam::uin/100015006748:uin/100015006748&lt;/ID&gt;
+    ///                 &lt;DisplayName&gt;qcs::cam::uin/100015006748:uin/100015006748&lt;/DisplayName&gt;
+    ///             &lt;/Grantee&gt;
+    ///             &lt;Permission&gt;WRITE&lt;/Permission&gt;
+    ///         &lt;/Grant&gt;
+    ///         &lt;Grant&gt;
+    ///             &lt;Grantee type=""CanonicalUser""&gt;
+    ///                 &lt;ID&gt;qcs::cam::uin/100023201586:uin/100023201586&lt;/ID&gt;
+    ///                 &lt;DisplayName&gt;qcs::cam::uin/100023201586:uin/100023201586&lt;/DisplayName&gt;
+    ///             &lt;/Grantee&gt;
+    ///             &lt;Permission&gt;FULL_CONTROL&lt;/Permission&gt;
+    ///         &lt;/Grant&gt;
+    ///     &lt;/AccessControlList&gt;
+    /// &lt;/AccessControlPolicy&gt;
+    /// ",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Static Website
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -179,6 +309,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///         {
     ///             IndexDocument = "index.html",
     ///             ErrorDocument = "error.html",
+    ///             RedirectAllRequestsTo = "https",
     ///         },
     ///     });
     /// 
@@ -210,6 +341,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///     {
     ///         CosBucket = appId.Apply(appId =&gt; $"bucket-with-cors-{appId}"),
     ///         Acl = "public-read-write",
+    ///         CorsRules = new[]
+    ///         {
+    ///             new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
+    ///             {
+    ///                 AllowedOrigins = new[]
+    ///                 {
+    ///                     "http://*.abc.com",
+    ///                 },
+    ///                 AllowedMethods = new[]
+    ///                 {
+    ///                     "PUT",
+    ///                     "POST",
+    ///                 },
+    ///                 AllowedHeaders = new[]
+    ///                 {
+    ///                     "*",
+    ///                 },
+    ///                 MaxAgeSeconds = 300,
+    ///                 ExposeHeaders = new[]
+    ///                 {
+    ///                     "Etag",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Using CORS with CDC
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var region = "ap-guangzhou";
+    /// 
+    ///     var cdcId = "cluster-262n63e8";
+    /// 
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var bucketWithCors = new Tencentcloud.Cos.Bucket("bucketWithCors", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"bucket-with-cors-{appId}"),
     ///         CorsRules = new[]
     ///         {
     ///             new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
@@ -273,6 +457,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///                         StorageClass = "STANDARD_IA",
     ///                     },
     ///                 },
+    ///                 Expiration = new Tencentcloud.Cos.Inputs.BucketLifecycleRuleExpirationArgs
+    ///                 {
+    ///                     Days = 90,
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Using object lifecycle with CDC
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var region = "ap-guangzhou";
+    /// 
+    ///     var cdcId = "cluster-262n63e8";
+    /// 
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var bucketWithLifecycle = new Tencentcloud.Cos.Bucket("bucketWithLifecycle", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"bucket-with-lifecycle-{appId}"),
+    ///         Acl = "private",
+    ///         LifecycleRules = new[]
+    ///         {
+    ///             new Tencentcloud.Cos.Inputs.BucketLifecycleRuleArgs
+    ///             {
+    ///                 FilterPrefix = "path1/",
     ///                 Expiration = new Tencentcloud.Cos.Inputs.BucketLifecycleRuleExpirationArgs
     ///                 {
     ///                     Days = 90,
@@ -377,6 +602,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string> CosBucket { get; private set; } = null!;
 
         /// <summary>
+        /// CDC cluster ID.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string?> CdcId { get; private set; } = null!;
+
+        /// <summary>
         /// A rule of Cross-Origin Resource Sharing (documented below).
         /// </summary>
         [Output("corsRules")]
@@ -395,7 +626,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<bool> EnableIntelligentTiering { get; private set; } = null!;
 
         /// <summary>
-        /// The server-side encryption algorithm to use. Valid value is `AES256`.
+        /// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         /// </summary>
         [Output("encryptionAlgorithm")]
         public Output<string?> EncryptionAlgorithm { get; private set; } = null!;
@@ -417,6 +648,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Output("intelligentTieringRequestFrequent")]
         public Output<int> IntelligentTieringRequestFrequent { get; private set; } = null!;
+
+        /// <summary>
+        /// The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        /// </summary>
+        [Output("kmsId")]
+        public Output<string?> KmsId { get; private set; } = null!;
 
         /// <summary>
         /// A configuration of object lifecycle management (documented below).
@@ -561,6 +798,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         [Input("bucket", required: true)]
         public Input<string> CosBucket { get; set; } = null!;
 
+        /// <summary>
+        /// CDC cluster ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
         [Input("corsRules")]
         private InputList<Inputs.BucketCorsRuleArgs>? _corsRules;
 
@@ -580,7 +823,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<bool>? EnableIntelligentTiering { get; set; }
 
         /// <summary>
-        /// The server-side encryption algorithm to use. Valid value is `AES256`.
+        /// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         /// </summary>
         [Input("encryptionAlgorithm")]
         public Input<string>? EncryptionAlgorithm { get; set; }
@@ -602,6 +845,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("intelligentTieringRequestFrequent")]
         public Input<int>? IntelligentTieringRequestFrequent { get; set; }
+
+        /// <summary>
+        /// The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        /// </summary>
+        [Input("kmsId")]
+        public Input<string>? KmsId { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleArgs>? _lifecycleRules;
@@ -737,6 +986,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         [Input("bucket")]
         public Input<string>? CosBucket { get; set; }
 
+        /// <summary>
+        /// CDC cluster ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
         [Input("corsRules")]
         private InputList<Inputs.BucketCorsRuleGetArgs>? _corsRules;
 
@@ -762,7 +1017,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<bool>? EnableIntelligentTiering { get; set; }
 
         /// <summary>
-        /// The server-side encryption algorithm to use. Valid value is `AES256`.
+        /// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
         /// </summary>
         [Input("encryptionAlgorithm")]
         public Input<string>? EncryptionAlgorithm { get; set; }
@@ -784,6 +1039,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("intelligentTieringRequestFrequent")]
         public Input<int>? IntelligentTieringRequestFrequent { get; set; }
+
+        /// <summary>
+        /// The KMS Master Key ID. This value is valid only when `encryption_algorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+        /// </summary>
+        [Input("kmsId")]
+        public Input<string>? KmsId { get; set; }
 
         [Input("lifecycleRules")]
         private InputList<Inputs.BucketLifecycleRuleGetArgs>? _lifecycleRules;

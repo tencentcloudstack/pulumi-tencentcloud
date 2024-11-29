@@ -25,6 +25,26 @@ export type CertificateConfig = import("./certificateConfig").CertificateConfig;
 export const CertificateConfig: typeof import("./certificateConfig").CertificateConfig = null as any;
 utilities.lazyLoad(exports, ["CertificateConfig"], () => require("./certificateConfig"));
 
+export { FunctionArgs, FunctionState } from "./function";
+export type Function = import("./function").Function;
+export const Function: typeof import("./function").Function = null as any;
+utilities.lazyLoad(exports, ["Function"], () => require("./function"));
+
+export { FunctionRuleArgs, FunctionRuleState } from "./functionRule";
+export type FunctionRule = import("./functionRule").FunctionRule;
+export const FunctionRule: typeof import("./functionRule").FunctionRule = null as any;
+utilities.lazyLoad(exports, ["FunctionRule"], () => require("./functionRule"));
+
+export { FunctionRulePriorityArgs, FunctionRulePriorityState } from "./functionRulePriority";
+export type FunctionRulePriority = import("./functionRulePriority").FunctionRulePriority;
+export const FunctionRulePriority: typeof import("./functionRulePriority").FunctionRulePriority = null as any;
+utilities.lazyLoad(exports, ["FunctionRulePriority"], () => require("./functionRulePriority"));
+
+export { FunctionRuntimeEnvironmentArgs, FunctionRuntimeEnvironmentState } from "./functionRuntimeEnvironment";
+export type FunctionRuntimeEnvironment = import("./functionRuntimeEnvironment").FunctionRuntimeEnvironment;
+export const FunctionRuntimeEnvironment: typeof import("./functionRuntimeEnvironment").FunctionRuntimeEnvironment = null as any;
+utilities.lazyLoad(exports, ["FunctionRuntimeEnvironment"], () => require("./functionRuntimeEnvironment"));
+
 export { GetRuleEngineSettingsArgs, GetRuleEngineSettingsResult, GetRuleEngineSettingsOutputArgs } from "./getRuleEngineSettings";
 export const getRuleEngineSettings: typeof import("./getRuleEngineSettings").getRuleEngineSettings = null as any;
 export const getRuleEngineSettingsOutput: typeof import("./getRuleEngineSettings").getRuleEngineSettingsOutput = null as any;
@@ -60,6 +80,11 @@ export type RuleEngine = import("./ruleEngine").RuleEngine;
 export const RuleEngine: typeof import("./ruleEngine").RuleEngine = null as any;
 utilities.lazyLoad(exports, ["RuleEngine"], () => require("./ruleEngine"));
 
+export { SecurityIpGroupArgs, SecurityIpGroupState } from "./securityIpGroup";
+export type SecurityIpGroup = import("./securityIpGroup").SecurityIpGroup;
+export const SecurityIpGroup: typeof import("./securityIpGroup").SecurityIpGroup = null as any;
+utilities.lazyLoad(exports, ["SecurityIpGroup"], () => require("./securityIpGroup"));
+
 export { ZoneArgs, ZoneState } from "./zone";
 export type Zone = import("./zone").Zone;
 export const Zone: typeof import("./zone").Zone = null as any;
@@ -83,6 +108,14 @@ const _module = {
                 return new ApplicationProxyRule(name, <any>undefined, { urn })
             case "tencentcloud:Teo/certificateConfig:CertificateConfig":
                 return new CertificateConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/function:Function":
+                return new Function(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/functionRule:FunctionRule":
+                return new FunctionRule(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/functionRulePriority:FunctionRulePriority":
+                return new FunctionRulePriority(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment":
+                return new FunctionRuntimeEnvironment(name, <any>undefined, { urn })
             case "tencentcloud:Teo/l4Proxy:L4Proxy":
                 return new L4Proxy(name, <any>undefined, { urn })
             case "tencentcloud:Teo/originGroup:OriginGroup":
@@ -93,6 +126,8 @@ const _module = {
                 return new RealtimeLogDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ruleEngine:RuleEngine":
                 return new RuleEngine(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/securityIpGroup:SecurityIpGroup":
+                return new SecurityIpGroup(name, <any>undefined, { urn })
             case "tencentcloud:Teo/zone:Zone":
                 return new Zone(name, <any>undefined, { urn })
             case "tencentcloud:Teo/zoneSetting:ZoneSetting":
@@ -106,10 +141,15 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Teo/accelerationDomain", 
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxyRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/certificateConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/function", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRulePriority", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRuntimeEnvironment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l4Proxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/originGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ownershipVerify", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/realtimeLogDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ruleEngine", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityIpGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/zone", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/zoneSetting", _module)

@@ -44,7 +44,7 @@ class InstanceArgs:
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        :param pulumi.Input[str] ha_type: It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
@@ -71,6 +71,9 @@ class InstanceArgs:
             pulumi.set(__self__, "charge_type", charge_type)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
+        if ha_type is not None:
+            warnings.warn("""It has been deprecated from version 1.81.136.""", DeprecationWarning)
+            pulumi.log.warn("""ha_type is deprecated: It has been deprecated from version 1.81.136.""")
         if ha_type is not None:
             pulumi.set(__self__, "ha_type", ha_type)
         if maintenance_start_time is not None:
@@ -191,8 +194,11 @@ class InstanceArgs:
     @pulumi.getter(name="haType")
     def ha_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         """
+        warnings.warn("""It has been deprecated from version 1.81.136.""", DeprecationWarning)
+        pulumi.log.warn("""ha_type is deprecated: It has been deprecated from version 1.81.136.""")
+
         return pulumi.get(self, "ha_type")
 
     @ha_type.setter
@@ -396,7 +402,7 @@ class _InstanceState:
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        :param pulumi.Input[str] ha_type: It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
@@ -429,6 +435,9 @@ class _InstanceState:
             pulumi.set(__self__, "create_time", create_time)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
+        if ha_type is not None:
+            warnings.warn("""It has been deprecated from version 1.81.136.""", DeprecationWarning)
+            pulumi.log.warn("""ha_type is deprecated: It has been deprecated from version 1.81.136.""")
         if ha_type is not None:
             pulumi.set(__self__, "ha_type", ha_type)
         if maintenance_start_time is not None:
@@ -549,8 +558,11 @@ class _InstanceState:
     @pulumi.getter(name="haType")
     def ha_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         """
+        warnings.warn("""It has been deprecated from version 1.81.136.""", DeprecationWarning)
+        pulumi.log.warn("""ha_type is deprecated: It has been deprecated from version 1.81.136.""")
+
         return pulumi.get(self, "ha_type")
 
     @ha_type.setter
@@ -860,7 +872,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] availability_zone: Availability zone.
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        :param pulumi.Input[str] ha_type: It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
@@ -1044,7 +1056,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
         :param pulumi.Input[str] create_time: Create time of the SQL Server instance.
         :param pulumi.Input[str] engine_version: Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
-        :param pulumi.Input[str] ha_type: Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        :param pulumi.Input[str] ha_type: It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         :param pulumi.Input[str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] maintenance_week_sets: A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
@@ -1149,8 +1161,11 @@ class Instance(pulumi.CustomResource):
     @pulumi.getter(name="haType")
     def ha_type(self) -> pulumi.Output[Optional[str]]:
         """
-        Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
+        It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
         """
+        warnings.warn("""It has been deprecated from version 1.81.136.""", DeprecationWarning)
+        pulumi.log.warn("""ha_type is deprecated: It has been deprecated from version 1.81.136.""")
+
         return pulumi.get(self, "ha_type")
 
     @property
@@ -1187,7 +1202,7 @@ class Instance(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="multiZones")
-    def multi_zones(self) -> pulumi.Output[Optional[bool]]:
+    def multi_zones(self) -> pulumi.Output[bool]:
         """
         Indicate whether to deploy across availability zones.
         """

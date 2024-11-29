@@ -7,6 +7,7 @@ import typing
 # Export this package's modules as members:
 from .certificate import *
 from .check_certificate_chain_operation import *
+from .check_certificate_domain_verification_operation import *
 from .complete_certificate_operation import *
 from .deploy_certificate_instance_operation import *
 from .deploy_certificate_record_retry_operation import *

@@ -58,7 +58,7 @@ import (
 //				defaultInstanceType = param
 //			}
 //			// this is the cluster with empty worker config
-//			managedCluster, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+//			exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
 //				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
 //				ClusterCidr:          pulumi.String(clusterCidr),
 //				ClusterMaxPodNum:     pulumi.Int(32),
@@ -72,8 +72,8 @@ import (
 //				return err
 //			}
 //			// this is one example of managing node using node pool
-//			_, err = Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
-//				ClusterId: managedCluster.ID(),
+//			_, err = Kubernetes.NewNodePool(ctx, "exampleNodePool", &Kubernetes.NodePoolArgs{
+//				ClusterId: exampleCluster.ID(),
 //				MaxSize:   pulumi.Int(6),
 //				MinSize:   pulumi.Int(1),
 //				VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
@@ -84,6 +84,7 @@ import (
 //				DesiredCapacity:       pulumi.Int(4),
 //				EnableAutoScale:       pulumi.Bool(true),
 //				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+//				NodeOs:                pulumi.String("img-9qrfy1xt"),
 //				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
 //					InstanceType:   pulumi.String(defaultInstanceType),
 //					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
@@ -123,6 +124,7 @@ import (
 //					},
 //				},
 //				NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+//					DockerGraphPath: pulumi.String("/var/lib/docker"),
 //					ExtraArgs: pulumi.StringArray{
 //						pulumi.String("root-dir=/var/lib/kubelet"),
 //					},
@@ -153,7 +155,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Kubernetes.NewNodePool(ctx, "mynodepool", &Kubernetes.NodePoolArgs{
+//			_, err := Kubernetes.NewNodePool(ctx, "example", &Kubernetes.NodePoolArgs{
 //				ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
 //				MaxSize:   pulumi.Int(6),
 //				MinSize:   pulumi.Int(1),
@@ -210,11 +212,13 @@ import (
 // tke node pool can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
+// $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool example cls-d2xdg3io#np-380ay1o8
 // ```
 type NodePool struct {
 	pulumi.CustomResourceState
 
+	// Node Annotation List.
+	Annotations NodePoolAnnotationArrayOutput `pulumi:"annotations"`
 	// Auto scaling config parameters.
 	AutoScalingConfig NodePoolAutoScalingConfigOutput `pulumi:"autoScalingConfig"`
 	// The auto scaling group ID.
@@ -326,6 +330,8 @@ func GetNodePool(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering NodePool resources.
 type nodePoolState struct {
+	// Node Annotation List.
+	Annotations []NodePoolAnnotation `pulumi:"annotations"`
 	// Auto scaling config parameters.
 	AutoScalingConfig *NodePoolAutoScalingConfig `pulumi:"autoScalingConfig"`
 	// The auto scaling group ID.
@@ -393,6 +399,8 @@ type nodePoolState struct {
 }
 
 type NodePoolState struct {
+	// Node Annotation List.
+	Annotations NodePoolAnnotationArrayInput
 	// Auto scaling config parameters.
 	AutoScalingConfig NodePoolAutoScalingConfigPtrInput
 	// The auto scaling group ID.
@@ -464,6 +472,8 @@ func (NodePoolState) ElementType() reflect.Type {
 }
 
 type nodePoolArgs struct {
+	// Node Annotation List.
+	Annotations []NodePoolAnnotation `pulumi:"annotations"`
 	// Auto scaling config parameters.
 	AutoScalingConfig NodePoolAutoScalingConfig `pulumi:"autoScalingConfig"`
 	// ID of the cluster.
@@ -520,6 +530,8 @@ type nodePoolArgs struct {
 
 // The set of arguments for constructing a NodePool resource.
 type NodePoolArgs struct {
+	// Node Annotation List.
+	Annotations NodePoolAnnotationArrayInput
 	// Auto scaling config parameters.
 	AutoScalingConfig NodePoolAutoScalingConfigInput
 	// ID of the cluster.
@@ -659,6 +671,11 @@ func (o NodePoolOutput) ToNodePoolOutput() NodePoolOutput {
 
 func (o NodePoolOutput) ToNodePoolOutputWithContext(ctx context.Context) NodePoolOutput {
 	return o
+}
+
+// Node Annotation List.
+func (o NodePoolOutput) Annotations() NodePoolAnnotationArrayOutput {
+	return o.ApplyT(func(v *NodePool) NodePoolAnnotationArrayOutput { return v.Annotations }).(NodePoolAnnotationArrayOutput)
 }
 
 // Auto scaling config parameters.

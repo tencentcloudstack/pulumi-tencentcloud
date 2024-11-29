@@ -73,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<string> Bucket { get; private set; } = null!;
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023), The six-segment resource scenario example in the document is as follows: Example of specifying a bucket: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/*`; Example of specifying a folder: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/*`; Specified object example: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/exampleobject`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/exampleobject`.
         /// </summary>
         [Output("policy")]
         public Output<string> Policy { get; private set; } = null!;
@@ -132,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string> Bucket { get; set; } = null!;
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023), The six-segment resource scenario example in the document is as follows: Example of specifying a bucket: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/*`; Example of specifying a folder: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/*`; Specified object example: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/exampleobject`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/exampleobject`.
         /// </summary>
         [Input("policy", required: true)]
         public Input<string> Policy { get; set; } = null!;
@@ -152,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Input<string>? Bucket { get; set; }
 
         /// <summary>
-        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023).
+        /// The text of the policy. For more info please refer to [Tencent official doc](https://intl.cloud.tencent.com/document/product/436/18023), The six-segment resource scenario example in the document is as follows: Example of specifying a bucket: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/*`; Example of specifying a folder: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/*`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/*`; Specified object example: `qcs::cos:ap-guangzhou:uid/1250000000:examplebucket-1250000000/folder/exampleobject`, In the cdc scenario: `qcs::cos:ap-guangzhou:uid/1250000000:cdc_cluster-123456_examplebucket-1250000000/folder/exampleobject`.
         /// </summary>
         [Input("policy")]
         public Input<string>? Policy { get; set; }

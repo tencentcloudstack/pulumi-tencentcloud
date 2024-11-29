@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// teo acceleration_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+    /// $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain zone_id#domain_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/accelerationDomain:AccelerationDomain")]

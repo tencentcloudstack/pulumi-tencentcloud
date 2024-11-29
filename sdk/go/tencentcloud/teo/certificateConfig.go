@@ -84,7 +84,7 @@ import (
 // teo certificate can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
+// $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host
 // ```
 type CertificateConfig struct {
 	pulumi.CustomResourceState

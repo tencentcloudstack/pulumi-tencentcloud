@@ -40,6 +40,7 @@ export function getLayer7Listeners(args: GetLayer7ListenersArgs, opts?: pulumi.I
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", {
+        "groupId": args.groupId,
         "listenerId": args.listenerId,
         "listenerName": args.listenerName,
         "port": args.port,
@@ -53,6 +54,10 @@ export function getLayer7Listeners(args: GetLayer7ListenersArgs, opts?: pulumi.I
  * A collection of arguments for invoking getLayer7Listeners.
  */
 export interface GetLayer7ListenersArgs {
+    /**
+     * Group id.
+     */
+    groupId?: string;
     /**
      * ID of the layer7 listener to be queried.
      */
@@ -83,6 +88,7 @@ export interface GetLayer7ListenersArgs {
  * A collection of values returned by getLayer7Listeners.
  */
 export interface GetLayer7ListenersResult {
+    readonly groupId?: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
@@ -145,6 +151,10 @@ export function getLayer7ListenersOutput(args: GetLayer7ListenersOutputArgs, opt
  * A collection of arguments for invoking getLayer7Listeners.
  */
 export interface GetLayer7ListenersOutputArgs {
+    /**
+     * Group id.
+     */
+    groupId?: pulumi.Input<string>;
     /**
      * ID of the layer7 listener to be queried.
      */

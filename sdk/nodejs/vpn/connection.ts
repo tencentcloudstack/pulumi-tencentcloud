@@ -133,7 +133,7 @@ export class Connection extends pulumi.CustomResource {
     /**
      * Local FQDN name of the IKE operation specification.
      */
-    public readonly ikeLocalFqdnName!: pulumi.Output<string | undefined>;
+    public readonly ikeLocalFqdnName!: pulumi.Output<string>;
     /**
      * Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */
@@ -153,7 +153,7 @@ export class Connection extends pulumi.CustomResource {
     /**
      * Remote FQDN name of the IKE operation specification.
      */
-    public readonly ikeRemoteFqdnName!: pulumi.Output<string | undefined>;
+    public readonly ikeRemoteFqdnName!: pulumi.Output<string>;
     /**
      * Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */

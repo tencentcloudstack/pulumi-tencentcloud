@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const track = new tencentcloud.audit.Track("track", {
+ * const example = new tencentcloud.audit.Track("example", {
  *     actionType: "Read",
  *     eventNames: ["*"],
  *     resourceType: "*",
@@ -32,12 +32,37 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
+ * ### Specify storage user
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.audit.Track("example", {
+ *     actionType: "Read",
+ *     eventNames: ["*"],
+ *     resourceType: "*",
+ *     status: 1,
+ *     storage: {
+ *         storageAccountId: "100037717137",
+ *         storageAppId: "1309116520",
+ *         storageName: "db90b92c-91d2-46b0-94ac-debbbb21dc4e",
+ *         storagePrefix: "cloudaudit",
+ *         storageRegion: "ap-guangzhou",
+ *         storageType: "cos",
+ *     },
+ *     trackForAllMembers: 0,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * audit track can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Audit/track:Track track track_id
+ * $ pulumi import tencentcloud:Audit/track:Track example 24283
  * ```
  */
 export class Track extends pulumi.CustomResource {

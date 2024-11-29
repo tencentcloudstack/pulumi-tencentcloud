@@ -119,6 +119,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly bandwidthPackageId!: pulumi.Output<string>;
     /**
+     * CDC Unique ID.
+     */
+    public readonly cdcId!: pulumi.Output<string | undefined>;
+    /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
     public readonly egress!: pulumi.Output<string>;
@@ -177,6 +181,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["applicableForClb"] = state ? state.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
+            resourceInputs["cdcId"] = state ? state.cdcId : undefined;
             resourceInputs["egress"] = state ? state.egress : undefined;
             resourceInputs["internetChargeType"] = state ? state.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = state ? state.internetMaxBandwidthOut : undefined;
@@ -194,6 +199,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["applicableForClb"] = args ? args.applicableForClb : undefined;
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
             resourceInputs["bandwidthPackageId"] = args ? args.bandwidthPackageId : undefined;
+            resourceInputs["cdcId"] = args ? args.cdcId : undefined;
             resourceInputs["egress"] = args ? args.egress : undefined;
             resourceInputs["internetChargeType"] = args ? args.internetChargeType : undefined;
             resourceInputs["internetMaxBandwidthOut"] = args ? args.internetMaxBandwidthOut : undefined;
@@ -236,6 +242,10 @@ export interface InstanceState {
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
     bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * CDC Unique ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
@@ -304,6 +314,10 @@ export interface InstanceArgs {
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
     bandwidthPackageId?: pulumi.Input<string>;
+    /**
+     * CDC Unique ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */

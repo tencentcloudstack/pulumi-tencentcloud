@@ -14,6 +14,7 @@ __all__ = [
     'OrgIdentityIdentityPolicyArgs',
     'OrgMemberOrgPermissionArgs',
     'OrgShareUnitMemberMemberArgs',
+    'GetNodesTagArgs',
 ]
 
 @pulumi.input_type
@@ -185,5 +186,42 @@ class OrgShareUnitMemberMemberArgs:
     @share_member_uin.setter
     def share_member_uin(self, value: pulumi.Input[int]):
         pulumi.set(self, "share_member_uin", value)
+
+
+@pulumi.input_type
+class GetNodesTagArgs:
+    def __init__(__self__, *,
+                 tag_key: str,
+                 tag_value: str):
+        """
+        :param str tag_key: Tag key.
+        :param str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @tag_key.setter
+    def tag_key(self, value: str):
+        pulumi.set(self, "tag_key", value)
+
+    @property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
+
+    @tag_value.setter
+    def tag_value(self, value: str):
+        pulumi.set(self, "tag_value", value)
 
 

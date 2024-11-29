@@ -49,6 +49,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PolicySubAccountAttachment{}
 	case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
 		r = &QuitOrganizationOperation{}
+	case "tencentcloud:Organization/serviceAssign:ServiceAssign":
+		r = &ServiceAssign{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -130,6 +132,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/quitOrganizationOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/serviceAssign",
 		&module{version},
 	)
 }

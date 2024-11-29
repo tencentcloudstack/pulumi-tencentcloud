@@ -11,9 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
 {
     /// <summary>
-    /// Provides a resource to create a CBS.
+    /// Provides a resource to create a CBS storage.
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Create a standard CBS storage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -24,17 +26,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var storage = new Tencentcloud.Cbs.Storage("storage", new()
+    ///     var example = new Tencentcloud.Cbs.Storage("example", new()
     ///     {
     ///         AvailabilityZone = "ap-guangzhou-3",
     ///         Encrypt = false,
     ///         ProjectId = 0,
-    ///         StorageName = "mystorage",
+    ///         StorageName = "tf-example",
     ///         StorageSize = 100,
     ///         StorageType = "CLOUD_SSD",
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a dedicated cluster CBS storage
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cbs.Storage("example", new()
+    ///     {
+    ///         AvailabilityZone = "ap-guangzhou-4",
+    ///         ChargeType = "DEDICATED_CLUSTER_PAID",
+    ///         DedicatedClusterId = "cluster-262n63e8",
+    ///         Encrypt = false,
+    ///         ProjectId = 0,
+    ///         StorageName = "tf-example",
+    ///         StorageSize = 100,
+    ///         StorageType = "CLOUD_SSD",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
     ///         },
     ///     });
     /// 
@@ -47,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// CBS storage can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+    /// $ pulumi import tencentcloud:Cbs/storage:Storage example disk-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storage:Storage")]
@@ -66,10 +99,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `CDCPAID` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string?> DedicatedClusterId { get; private set; } = null!;
 
         /// <summary>
         /// The quota of backup points of cloud disk.
@@ -209,10 +248,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `CDCPAID` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// The quota of backup points of cloud disk.
@@ -319,10 +364,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// The charge type of CBS instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
+        /// The charge type of CBS instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `CDCPAID` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// The quota of backup points of cloud disk.
