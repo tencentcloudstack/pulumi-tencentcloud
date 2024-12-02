@@ -10,6 +10,44 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserve
 {
+    /// <summary>
+    /// Provides a resource to create a vpc reserve ip addresses
+    /// 
+    /// ## Example Usage
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var reserveIp = new Tencentcloud.Reserve.IpAddress("reserveIp", new()
+    ///     {
+    ///         Description = "description",
+    ///         ReserveIpAddress = "10.0.0.13",
+    ///         SubnetId = "xxxxxx",
+    ///         Tags = 
+    ///         {
+    ///             { "test1", "test1" },
+    ///         },
+    ///         VpcId = "xxxxxx",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// vpc reserve_ip_addresses can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Reserve/ipAddress:IpAddress")]
     public partial class IpAddress : global::Pulumi.CustomResource
     {

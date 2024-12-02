@@ -24,24 +24,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Vpn.Connection("foo", new()
+    ///     var example = new Tencentcloud.Vpn.Connection("example", new()
     ///     {
-    ///         CustomerGatewayId = "cgw-xfqag",
+    ///         CustomerGatewayId = "cgw-e503id2z",
+    ///         EnableHealthCheck = true,
+    ///         HealthCheckConfig = new Tencentcloud.Vpn.Inputs.ConnectionHealthCheckConfigArgs
+    ///         {
+    ///             ProbeInterval = 5000,
+    ///             ProbeThreshold = 3,
+    ///             ProbeTimeout = 150,
+    ///             ProbeType = "NQA",
+    ///         },
+    ///         HealthCheckLocalIp = "169.254.227.187",
+    ///         HealthCheckRemoteIp = "169.254.164.37",
     ///         IkeDhGroupName = "GROUP2",
     ///         IkeExchangeMode = "AGGRESSIVE",
-    ///         IkeLocalAddress = "1.1.1.1",
+    ///         IkeLocalAddress = "159.75.204.38",
     ///         IkeLocalIdentity = "ADDRESS",
     ///         IkeProtoAuthenAlgorithm = "SHA",
     ///         IkeProtoEncryAlgorithm = "3DES-CBC",
-    ///         IkeRemoteAddress = "2.2.2.2",
+    ///         IkeRemoteAddress = "109.244.60.154",
     ///         IkeRemoteIdentity = "ADDRESS",
-    ///         IkeSaLifetimeSeconds = 86401,
+    ///         IkeSaLifetimeSeconds = 86400,
     ///         IpsecEncryptAlgorithm = "3DES-CBC",
     ///         IpsecIntegrityAlgorithm = "SHA1",
     ///         IpsecPfsDhGroup = "NULL",
-    ///         IpsecSaLifetimeSeconds = 7200,
-    ///         IpsecSaLifetimeTraffic = 2570,
-    ///         PreShareKey = "testt",
+    ///         IpsecSaLifetimeSeconds = 14400,
+    ///         IpsecSaLifetimeTraffic = 4096000000,
+    ///         NegotiationType = "flowTrigger",
+    ///         PreShareKey = "your_pre_share_key",
+    ///         RouteType = "StaticRoute",
     ///         SecurityGroupPolicies = new[]
     ///         {
     ///             new Tencentcloud.Vpn.Inputs.ConnectionSecurityGroupPolicyArgs
@@ -55,10 +67,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "test", "testt" },
+    ///             { "createBy", "Terraform" },
     ///         },
-    ///         VpcId = "vpc-dk8zmwuf",
-    ///         VpnGatewayId = "vpngw-8ccsnclt",
+    ///         VpcId = "vpc-6ccw0s5l",
+    ///         VpnGatewayId = "vpngw-33p5vnwd",
     ///     });
     /// 
     /// });
@@ -76,6 +88,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     [TencentcloudResourceType("tencentcloud:Vpn/connection:Connection")]
     public partial class Connection : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// BGP config.
+        /// </summary>
+        [Output("bgpConfig")]
+        public Output<Outputs.ConnectionBgpConfig> BgpConfig { get; private set; } = null!;
+
         /// <summary>
         /// Create time of the VPN connection.
         /// </summary>
@@ -117,6 +135,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Output("encryptProto")]
         public Output<string> EncryptProto { get; private set; } = null!;
+
+        /// <summary>
+        /// VPN channel health check configuration.
+        /// </summary>
+        [Output("healthCheckConfig")]
+        public Output<Outputs.ConnectionHealthCheckConfig> HealthCheckConfig { get; private set; } = null!;
 
         /// <summary>
         /// Health check the address of this terminal.
@@ -245,6 +269,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        /// </summary>
+        [Output("negotiationType")]
+        public Output<string> NegotiationType { get; private set; } = null!;
+
+        /// <summary>
         /// Net status of the VPN connection. Valid value: `AVAILABLE`.
         /// </summary>
         [Output("netStatus")]
@@ -257,7 +287,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string> PreShareKey { get; private set; } = null!;
 
         /// <summary>
-        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         /// </summary>
         [Output("routeType")]
         public Output<string> RouteType { get; private set; } = null!;
@@ -346,6 +376,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     public sealed class ConnectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// BGP config.
+        /// </summary>
+        [Input("bgpConfig")]
+        public Input<Inputs.ConnectionBgpConfigArgs>? BgpConfig { get; set; }
+
+        /// <summary>
         /// ID of the customer gateway.
         /// </summary>
         [Input("customerGatewayId", required: true)]
@@ -374,6 +410,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Input("enableHealthCheck")]
         public Input<bool>? EnableHealthCheck { get; set; }
+
+        /// <summary>
+        /// VPN channel health check configuration.
+        /// </summary>
+        [Input("healthCheckConfig")]
+        public Input<Inputs.ConnectionHealthCheckConfigArgs>? HealthCheckConfig { get; set; }
 
         /// <summary>
         /// Health check the address of this terminal.
@@ -496,13 +538,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        /// </summary>
+        [Input("negotiationType")]
+        public Input<string>? NegotiationType { get; set; }
+
+        /// <summary>
         /// Pre-shared key of the VPN connection.
         /// </summary>
         [Input("preShareKey", required: true)]
         public Input<string> PreShareKey { get; set; } = null!;
 
         /// <summary>
-        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         /// </summary>
         [Input("routeType")]
         public Input<string>? RouteType { get; set; }
@@ -552,6 +600,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     public sealed class ConnectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// BGP config.
+        /// </summary>
+        [Input("bgpConfig")]
+        public Input<Inputs.ConnectionBgpConfigGetArgs>? BgpConfig { get; set; }
+
+        /// <summary>
         /// Create time of the VPN connection.
         /// </summary>
         [Input("createTime")]
@@ -592,6 +646,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Input("encryptProto")]
         public Input<string>? EncryptProto { get; set; }
+
+        /// <summary>
+        /// VPN channel health check configuration.
+        /// </summary>
+        [Input("healthCheckConfig")]
+        public Input<Inputs.ConnectionHealthCheckConfigGetArgs>? HealthCheckConfig { get; set; }
 
         /// <summary>
         /// Health check the address of this terminal.
@@ -720,6 +780,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        /// </summary>
+        [Input("negotiationType")]
+        public Input<string>? NegotiationType { get; set; }
+
+        /// <summary>
         /// Net status of the VPN connection. Valid value: `AVAILABLE`.
         /// </summary>
         [Input("netStatus")]
@@ -732,7 +798,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? PreShareKey { get; set; }
 
         /// <summary>
-        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        /// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         /// </summary>
         [Input("routeType")]
         public Input<string>? RouteType { get; set; }

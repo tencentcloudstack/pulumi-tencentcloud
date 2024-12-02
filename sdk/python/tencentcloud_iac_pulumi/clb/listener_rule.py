@@ -8,6 +8,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['ListenerRuleArgs', 'ListenerRule']
 
@@ -34,6 +36,7 @@ class ListenerRuleArgs:
                  health_check_type: Optional[pulumi.Input[str]] = None,
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
+                 oauth: Optional[pulumi.Input['ListenerRuleOauthArgs']] = None,
                  quic: Optional[pulumi.Input[bool]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
@@ -60,6 +63,7 @@ class ListenerRuleArgs:
         :param pulumi.Input[str] health_check_type: Type of health check. Valid value is `CUSTOM`, `PING`, `TCP`, `HTTP`, `HTTPS`, `GRPC`, `GRPCS`.
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
+        :param pulumi.Input['ListenerRuleOauthArgs'] oauth: OAuth configuration information.
         :param pulumi.Input[bool] quic: Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -102,6 +106,8 @@ class ListenerRuleArgs:
             pulumi.set(__self__, "health_check_unhealth_num", health_check_unhealth_num)
         if http2_switch is not None:
             pulumi.set(__self__, "http2_switch", http2_switch)
+        if oauth is not None:
+            pulumi.set(__self__, "oauth", oauth)
         if quic is not None:
             pulumi.set(__self__, "quic", quic)
         if scheduler is not None:
@@ -353,6 +359,18 @@ class ListenerRuleArgs:
 
     @property
     @pulumi.getter
+    def oauth(self) -> Optional[pulumi.Input['ListenerRuleOauthArgs']]:
+        """
+        OAuth configuration information.
+        """
+        return pulumi.get(self, "oauth")
+
+    @oauth.setter
+    def oauth(self, value: Optional[pulumi.Input['ListenerRuleOauthArgs']]):
+        pulumi.set(self, "oauth", value)
+
+    @property
+    @pulumi.getter
     def quic(self) -> Optional[pulumi.Input[bool]]:
         """
         Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
@@ -422,6 +440,7 @@ class _ListenerRuleState:
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
+                 oauth: Optional[pulumi.Input['ListenerRuleOauthArgs']] = None,
                  quic: Optional[pulumi.Input[bool]] = None,
                  rule_id: Optional[pulumi.Input[str]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
@@ -449,6 +468,7 @@ class _ListenerRuleState:
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
+        :param pulumi.Input['ListenerRuleOauthArgs'] oauth: OAuth configuration information.
         :param pulumi.Input[bool] quic: Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         :param pulumi.Input[str] rule_id: ID of this CLB listener rule.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -494,6 +514,8 @@ class _ListenerRuleState:
             pulumi.set(__self__, "http2_switch", http2_switch)
         if listener_id is not None:
             pulumi.set(__self__, "listener_id", listener_id)
+        if oauth is not None:
+            pulumi.set(__self__, "oauth", oauth)
         if quic is not None:
             pulumi.set(__self__, "quic", quic)
         if rule_id is not None:
@@ -737,6 +759,18 @@ class _ListenerRuleState:
 
     @property
     @pulumi.getter
+    def oauth(self) -> Optional[pulumi.Input['ListenerRuleOauthArgs']]:
+        """
+        OAuth configuration information.
+        """
+        return pulumi.get(self, "oauth")
+
+    @oauth.setter
+    def oauth(self, value: Optional[pulumi.Input['ListenerRuleOauthArgs']]):
+        pulumi.set(self, "oauth", value)
+
+    @property
+    @pulumi.getter
     def quic(self) -> Optional[pulumi.Input[bool]]:
         """
         Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
@@ -832,6 +866,7 @@ class ListenerRule(pulumi.CustomResource):
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
+                 oauth: Optional[pulumi.Input[pulumi.InputType['ListenerRuleOauthArgs']]] = None,
                  quic: Optional[pulumi.Input[bool]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
@@ -929,6 +964,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
+        :param pulumi.Input[pulumi.InputType['ListenerRuleOauthArgs']] oauth: OAuth configuration information.
         :param pulumi.Input[bool] quic: Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] session_expire_time: Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -1045,6 +1081,7 @@ class ListenerRule(pulumi.CustomResource):
                  health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
                  http2_switch: Optional[pulumi.Input[bool]] = None,
                  listener_id: Optional[pulumi.Input[str]] = None,
+                 oauth: Optional[pulumi.Input[pulumi.InputType['ListenerRuleOauthArgs']]] = None,
                  quic: Optional[pulumi.Input[bool]] = None,
                  scheduler: Optional[pulumi.Input[str]] = None,
                  session_expire_time: Optional[pulumi.Input[int]] = None,
@@ -1082,6 +1119,7 @@ class ListenerRule(pulumi.CustomResource):
             if listener_id is None and not opts.urn:
                 raise TypeError("Missing required property 'listener_id'")
             __props__.__dict__["listener_id"] = listener_id
+            __props__.__dict__["oauth"] = oauth
             __props__.__dict__["quic"] = quic
             __props__.__dict__["scheduler"] = scheduler
             __props__.__dict__["session_expire_time"] = session_expire_time
@@ -1119,6 +1157,7 @@ class ListenerRule(pulumi.CustomResource):
             health_check_unhealth_num: Optional[pulumi.Input[int]] = None,
             http2_switch: Optional[pulumi.Input[bool]] = None,
             listener_id: Optional[pulumi.Input[str]] = None,
+            oauth: Optional[pulumi.Input[pulumi.InputType['ListenerRuleOauthArgs']]] = None,
             quic: Optional[pulumi.Input[bool]] = None,
             rule_id: Optional[pulumi.Input[str]] = None,
             scheduler: Optional[pulumi.Input[str]] = None,
@@ -1151,6 +1190,7 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[int] health_check_unhealth_num: Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[bool] http2_switch: Indicate to apply HTTP2.0 protocol or not.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
+        :param pulumi.Input[pulumi.InputType['ListenerRuleOauthArgs']] oauth: OAuth configuration information.
         :param pulumi.Input[bool] quic: Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         :param pulumi.Input[str] rule_id: ID of this CLB listener rule.
         :param pulumi.Input[str] scheduler: Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -1181,6 +1221,7 @@ class ListenerRule(pulumi.CustomResource):
         __props__.__dict__["health_check_unhealth_num"] = health_check_unhealth_num
         __props__.__dict__["http2_switch"] = http2_switch
         __props__.__dict__["listener_id"] = listener_id
+        __props__.__dict__["oauth"] = oauth
         __props__.__dict__["quic"] = quic
         __props__.__dict__["rule_id"] = rule_id
         __props__.__dict__["scheduler"] = scheduler
@@ -1340,6 +1381,14 @@ class ListenerRule(pulumi.CustomResource):
         ID of CLB listener.
         """
         return pulumi.get(self, "listener_id")
+
+    @property
+    @pulumi.getter
+    def oauth(self) -> pulumi.Output['outputs.ListenerRuleOauth']:
+        """
+        OAuth configuration information.
+        """
+        return pulumi.get(self, "oauth")
 
     @property
     @pulumi.getter

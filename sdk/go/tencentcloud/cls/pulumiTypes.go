@@ -7441,6 +7441,535 @@ func (o MachineGroupMachineGroupTypePtrOutput) Values() pulumi.StringArrayOutput
 	}).(pulumi.StringArrayOutput)
 }
 
+type NoticeContentNoticeContents struct {
+	// Template for Alarm Recovery Notification Content.
+	RecoveryContent *NoticeContentNoticeContentsRecoveryContent `pulumi:"recoveryContent"`
+	// Alarm triggered notification content template.
+	TriggerContent *NoticeContentNoticeContentsTriggerContent `pulumi:"triggerContent"`
+	// Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+	Type string `pulumi:"type"`
+}
+
+// NoticeContentNoticeContentsInput is an input type that accepts NoticeContentNoticeContentsArgs and NoticeContentNoticeContentsOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsInput` via:
+//
+//	NoticeContentNoticeContentsArgs{...}
+type NoticeContentNoticeContentsInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsOutput() NoticeContentNoticeContentsOutput
+	ToNoticeContentNoticeContentsOutputWithContext(context.Context) NoticeContentNoticeContentsOutput
+}
+
+type NoticeContentNoticeContentsArgs struct {
+	// Template for Alarm Recovery Notification Content.
+	RecoveryContent NoticeContentNoticeContentsRecoveryContentPtrInput `pulumi:"recoveryContent"`
+	// Alarm triggered notification content template.
+	TriggerContent NoticeContentNoticeContentsTriggerContentPtrInput `pulumi:"triggerContent"`
+	// Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (NoticeContentNoticeContentsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContents)(nil)).Elem()
+}
+
+func (i NoticeContentNoticeContentsArgs) ToNoticeContentNoticeContentsOutput() NoticeContentNoticeContentsOutput {
+	return i.ToNoticeContentNoticeContentsOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsArgs) ToNoticeContentNoticeContentsOutputWithContext(ctx context.Context) NoticeContentNoticeContentsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsOutput)
+}
+
+func (i NoticeContentNoticeContentsArgs) ToNoticeContentNoticeContentsPtrOutput() NoticeContentNoticeContentsPtrOutput {
+	return i.ToNoticeContentNoticeContentsPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsArgs) ToNoticeContentNoticeContentsPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsOutput).ToNoticeContentNoticeContentsPtrOutputWithContext(ctx)
+}
+
+// NoticeContentNoticeContentsPtrInput is an input type that accepts NoticeContentNoticeContentsArgs, NoticeContentNoticeContentsPtr and NoticeContentNoticeContentsPtrOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsPtrInput` via:
+//
+//	        NoticeContentNoticeContentsArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentNoticeContentsPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsPtrOutput() NoticeContentNoticeContentsPtrOutput
+	ToNoticeContentNoticeContentsPtrOutputWithContext(context.Context) NoticeContentNoticeContentsPtrOutput
+}
+
+type noticeContentNoticeContentsPtrType NoticeContentNoticeContentsArgs
+
+func NoticeContentNoticeContentsPtr(v *NoticeContentNoticeContentsArgs) NoticeContentNoticeContentsPtrInput {
+	return (*noticeContentNoticeContentsPtrType)(v)
+}
+
+func (*noticeContentNoticeContentsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContents)(nil)).Elem()
+}
+
+func (i *noticeContentNoticeContentsPtrType) ToNoticeContentNoticeContentsPtrOutput() NoticeContentNoticeContentsPtrOutput {
+	return i.ToNoticeContentNoticeContentsPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentNoticeContentsPtrType) ToNoticeContentNoticeContentsPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsPtrOutput)
+}
+
+type NoticeContentNoticeContentsOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContents)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsOutput) ToNoticeContentNoticeContentsOutput() NoticeContentNoticeContentsOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsOutput) ToNoticeContentNoticeContentsOutputWithContext(ctx context.Context) NoticeContentNoticeContentsOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsOutput) ToNoticeContentNoticeContentsPtrOutput() NoticeContentNoticeContentsPtrOutput {
+	return o.ToNoticeContentNoticeContentsPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentNoticeContentsOutput) ToNoticeContentNoticeContentsPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentNoticeContents) *NoticeContentNoticeContents {
+		return &v
+	}).(NoticeContentNoticeContentsPtrOutput)
+}
+
+// Template for Alarm Recovery Notification Content.
+func (o NoticeContentNoticeContentsOutput) RecoveryContent() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContents) *NoticeContentNoticeContentsRecoveryContent {
+		return v.RecoveryContent
+	}).(NoticeContentNoticeContentsRecoveryContentPtrOutput)
+}
+
+// Alarm triggered notification content template.
+func (o NoticeContentNoticeContentsOutput) TriggerContent() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContents) *NoticeContentNoticeContentsTriggerContent {
+		return v.TriggerContent
+	}).(NoticeContentNoticeContentsTriggerContentPtrOutput)
+}
+
+// Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+func (o NoticeContentNoticeContentsOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContents) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type NoticeContentNoticeContentsPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContents)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsPtrOutput) ToNoticeContentNoticeContentsPtrOutput() NoticeContentNoticeContentsPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsPtrOutput) ToNoticeContentNoticeContentsPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsPtrOutput) Elem() NoticeContentNoticeContentsOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContents) NoticeContentNoticeContents {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentNoticeContents
+		return ret
+	}).(NoticeContentNoticeContentsOutput)
+}
+
+// Template for Alarm Recovery Notification Content.
+func (o NoticeContentNoticeContentsPtrOutput) RecoveryContent() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContents) *NoticeContentNoticeContentsRecoveryContent {
+		if v == nil {
+			return nil
+		}
+		return v.RecoveryContent
+	}).(NoticeContentNoticeContentsRecoveryContentPtrOutput)
+}
+
+// Alarm triggered notification content template.
+func (o NoticeContentNoticeContentsPtrOutput) TriggerContent() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContents) *NoticeContentNoticeContentsTriggerContent {
+		if v == nil {
+			return nil
+		}
+		return v.TriggerContent
+	}).(NoticeContentNoticeContentsTriggerContentPtrOutput)
+}
+
+// Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+func (o NoticeContentNoticeContentsPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContents) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentNoticeContentsRecoveryContent struct {
+	// Notification content template body information.
+	Content *string `pulumi:"content"`
+	// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+	Headers []string `pulumi:"headers"`
+	// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+	Title *string `pulumi:"title"`
+}
+
+// NoticeContentNoticeContentsRecoveryContentInput is an input type that accepts NoticeContentNoticeContentsRecoveryContentArgs and NoticeContentNoticeContentsRecoveryContentOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsRecoveryContentInput` via:
+//
+//	NoticeContentNoticeContentsRecoveryContentArgs{...}
+type NoticeContentNoticeContentsRecoveryContentInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsRecoveryContentOutput() NoticeContentNoticeContentsRecoveryContentOutput
+	ToNoticeContentNoticeContentsRecoveryContentOutputWithContext(context.Context) NoticeContentNoticeContentsRecoveryContentOutput
+}
+
+type NoticeContentNoticeContentsRecoveryContentArgs struct {
+	// Notification content template body information.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+	Title pulumi.StringPtrInput `pulumi:"title"`
+}
+
+func (NoticeContentNoticeContentsRecoveryContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContent)(nil)).Elem()
+}
+
+func (i NoticeContentNoticeContentsRecoveryContentArgs) ToNoticeContentNoticeContentsRecoveryContentOutput() NoticeContentNoticeContentsRecoveryContentOutput {
+	return i.ToNoticeContentNoticeContentsRecoveryContentOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsRecoveryContentArgs) ToNoticeContentNoticeContentsRecoveryContentOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsRecoveryContentOutput)
+}
+
+func (i NoticeContentNoticeContentsRecoveryContentArgs) ToNoticeContentNoticeContentsRecoveryContentPtrOutput() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return i.ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsRecoveryContentArgs) ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsRecoveryContentOutput).ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(ctx)
+}
+
+// NoticeContentNoticeContentsRecoveryContentPtrInput is an input type that accepts NoticeContentNoticeContentsRecoveryContentArgs, NoticeContentNoticeContentsRecoveryContentPtr and NoticeContentNoticeContentsRecoveryContentPtrOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsRecoveryContentPtrInput` via:
+//
+//	        NoticeContentNoticeContentsRecoveryContentArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentNoticeContentsRecoveryContentPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsRecoveryContentPtrOutput() NoticeContentNoticeContentsRecoveryContentPtrOutput
+	ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(context.Context) NoticeContentNoticeContentsRecoveryContentPtrOutput
+}
+
+type noticeContentNoticeContentsRecoveryContentPtrType NoticeContentNoticeContentsRecoveryContentArgs
+
+func NoticeContentNoticeContentsRecoveryContentPtr(v *NoticeContentNoticeContentsRecoveryContentArgs) NoticeContentNoticeContentsRecoveryContentPtrInput {
+	return (*noticeContentNoticeContentsRecoveryContentPtrType)(v)
+}
+
+func (*noticeContentNoticeContentsRecoveryContentPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContentsRecoveryContent)(nil)).Elem()
+}
+
+func (i *noticeContentNoticeContentsRecoveryContentPtrType) ToNoticeContentNoticeContentsRecoveryContentPtrOutput() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return i.ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentNoticeContentsRecoveryContentPtrType) ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsRecoveryContentPtrOutput)
+}
+
+type NoticeContentNoticeContentsRecoveryContentOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsRecoveryContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContent)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentOutput) ToNoticeContentNoticeContentsRecoveryContentOutput() NoticeContentNoticeContentsRecoveryContentOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentOutput) ToNoticeContentNoticeContentsRecoveryContentOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentOutput) ToNoticeContentNoticeContentsRecoveryContentPtrOutput() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o.ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentOutput) ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentNoticeContentsRecoveryContent) *NoticeContentNoticeContentsRecoveryContent {
+		return &v
+	}).(NoticeContentNoticeContentsRecoveryContentPtrOutput)
+}
+
+// Notification content template body information.
+func (o NoticeContentNoticeContentsRecoveryContentOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsRecoveryContent) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+func (o NoticeContentNoticeContentsRecoveryContentOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsRecoveryContent) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+func (o NoticeContentNoticeContentsRecoveryContentOutput) Title() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsRecoveryContent) *string { return v.Title }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentNoticeContentsRecoveryContentPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsRecoveryContentPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContentsRecoveryContent)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) ToNoticeContentNoticeContentsRecoveryContentPtrOutput() NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) ToNoticeContentNoticeContentsRecoveryContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsRecoveryContentPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) Elem() NoticeContentNoticeContentsRecoveryContentOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsRecoveryContent) NoticeContentNoticeContentsRecoveryContent {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentNoticeContentsRecoveryContent
+		return ret
+	}).(NoticeContentNoticeContentsRecoveryContentOutput)
+}
+
+// Notification content template body information.
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsRecoveryContent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsRecoveryContent) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+func (o NoticeContentNoticeContentsRecoveryContentPtrOutput) Title() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsRecoveryContent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Title
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentNoticeContentsTriggerContent struct {
+	// Notification content template body information.
+	Content *string `pulumi:"content"`
+	// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+	Headers []string `pulumi:"headers"`
+	// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+	Title *string `pulumi:"title"`
+}
+
+// NoticeContentNoticeContentsTriggerContentInput is an input type that accepts NoticeContentNoticeContentsTriggerContentArgs and NoticeContentNoticeContentsTriggerContentOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsTriggerContentInput` via:
+//
+//	NoticeContentNoticeContentsTriggerContentArgs{...}
+type NoticeContentNoticeContentsTriggerContentInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsTriggerContentOutput() NoticeContentNoticeContentsTriggerContentOutput
+	ToNoticeContentNoticeContentsTriggerContentOutputWithContext(context.Context) NoticeContentNoticeContentsTriggerContentOutput
+}
+
+type NoticeContentNoticeContentsTriggerContentArgs struct {
+	// Notification content template body information.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+	Title pulumi.StringPtrInput `pulumi:"title"`
+}
+
+func (NoticeContentNoticeContentsTriggerContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContentsTriggerContent)(nil)).Elem()
+}
+
+func (i NoticeContentNoticeContentsTriggerContentArgs) ToNoticeContentNoticeContentsTriggerContentOutput() NoticeContentNoticeContentsTriggerContentOutput {
+	return i.ToNoticeContentNoticeContentsTriggerContentOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsTriggerContentArgs) ToNoticeContentNoticeContentsTriggerContentOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsTriggerContentOutput)
+}
+
+func (i NoticeContentNoticeContentsTriggerContentArgs) ToNoticeContentNoticeContentsTriggerContentPtrOutput() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return i.ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentNoticeContentsTriggerContentArgs) ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsTriggerContentOutput).ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(ctx)
+}
+
+// NoticeContentNoticeContentsTriggerContentPtrInput is an input type that accepts NoticeContentNoticeContentsTriggerContentArgs, NoticeContentNoticeContentsTriggerContentPtr and NoticeContentNoticeContentsTriggerContentPtrOutput values.
+// You can construct a concrete instance of `NoticeContentNoticeContentsTriggerContentPtrInput` via:
+//
+//	        NoticeContentNoticeContentsTriggerContentArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentNoticeContentsTriggerContentPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentNoticeContentsTriggerContentPtrOutput() NoticeContentNoticeContentsTriggerContentPtrOutput
+	ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(context.Context) NoticeContentNoticeContentsTriggerContentPtrOutput
+}
+
+type noticeContentNoticeContentsTriggerContentPtrType NoticeContentNoticeContentsTriggerContentArgs
+
+func NoticeContentNoticeContentsTriggerContentPtr(v *NoticeContentNoticeContentsTriggerContentArgs) NoticeContentNoticeContentsTriggerContentPtrInput {
+	return (*noticeContentNoticeContentsTriggerContentPtrType)(v)
+}
+
+func (*noticeContentNoticeContentsTriggerContentPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContentsTriggerContent)(nil)).Elem()
+}
+
+func (i *noticeContentNoticeContentsTriggerContentPtrType) ToNoticeContentNoticeContentsTriggerContentPtrOutput() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return i.ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentNoticeContentsTriggerContentPtrType) ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentNoticeContentsTriggerContentPtrOutput)
+}
+
+type NoticeContentNoticeContentsTriggerContentOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsTriggerContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentNoticeContentsTriggerContent)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsTriggerContentOutput) ToNoticeContentNoticeContentsTriggerContentOutput() NoticeContentNoticeContentsTriggerContentOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsTriggerContentOutput) ToNoticeContentNoticeContentsTriggerContentOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsTriggerContentOutput) ToNoticeContentNoticeContentsTriggerContentPtrOutput() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o.ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentNoticeContentsTriggerContentOutput) ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentNoticeContentsTriggerContent) *NoticeContentNoticeContentsTriggerContent {
+		return &v
+	}).(NoticeContentNoticeContentsTriggerContentPtrOutput)
+}
+
+// Notification content template body information.
+func (o NoticeContentNoticeContentsTriggerContentOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsTriggerContent) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+func (o NoticeContentNoticeContentsTriggerContentOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsTriggerContent) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+func (o NoticeContentNoticeContentsTriggerContentOutput) Title() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentNoticeContentsTriggerContent) *string { return v.Title }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentNoticeContentsTriggerContentPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentNoticeContentsTriggerContentPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentNoticeContentsTriggerContent)(nil)).Elem()
+}
+
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) ToNoticeContentNoticeContentsTriggerContentPtrOutput() NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) ToNoticeContentNoticeContentsTriggerContentPtrOutputWithContext(ctx context.Context) NoticeContentNoticeContentsTriggerContentPtrOutput {
+	return o
+}
+
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) Elem() NoticeContentNoticeContentsTriggerContentOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsTriggerContent) NoticeContentNoticeContentsTriggerContent {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentNoticeContentsTriggerContent
+		return ret
+	}).(NoticeContentNoticeContentsTriggerContentOutput)
+}
+
+// Notification content template body information.
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsTriggerContent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsTriggerContent) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+func (o NoticeContentNoticeContentsTriggerContentPtrOutput) Title() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentNoticeContentsTriggerContent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Title
+	}).(pulumi.StringPtrOutput)
+}
+
 type ScheduledSqlDstResource struct {
 	// topic type.
 	BizType *int `pulumi:"bizType"`
@@ -9579,6 +10108,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolPtrInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsInput)(nil)).Elem(), NoticeContentNoticeContentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsPtrInput)(nil)).Elem(), NoticeContentNoticeContentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContentInput)(nil)).Elem(), NoticeContentNoticeContentsRecoveryContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContentPtrInput)(nil)).Elem(), NoticeContentNoticeContentsRecoveryContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsTriggerContentInput)(nil)).Elem(), NoticeContentNoticeContentsTriggerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsTriggerContentPtrInput)(nil)).Elem(), NoticeContentNoticeContentsTriggerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourcePtrInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsInput)(nil)).Elem(), TopicExtendsArgs{})
@@ -9691,6 +10226,12 @@ func init() {
 	pulumi.RegisterOutputType(KafkaRechargeProtocolPtrOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsRecoveryContentOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsRecoveryContentPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsTriggerContentOutput{})
+	pulumi.RegisterOutputType(NoticeContentNoticeContentsTriggerContentPtrOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourceOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourcePtrOutput{})
 	pulumi.RegisterOutputType(TopicExtendsOutput{})

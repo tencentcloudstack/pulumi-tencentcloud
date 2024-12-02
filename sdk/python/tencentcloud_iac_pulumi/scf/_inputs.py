@@ -10,6 +10,10 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'CustomDomainCertConfigArgs',
+    'CustomDomainEndpointsConfigArgs',
+    'CustomDomainEndpointsConfigPathRewriteArgs',
+    'CustomDomainWafConfigArgs',
     'FunctionAliasRoutingConfigArgs',
     'FunctionAliasRoutingConfigAdditionalVersionMatchArgs',
     'FunctionAliasRoutingConfigAdditionalVersionWeightArgs',
@@ -25,6 +29,203 @@ __all__ = [
     'ProvisionedConcurrencyConfigTriggerActionArgs',
     'GetTriggersFilterArgs',
 ]
+
+@pulumi.input_type
+class CustomDomainCertConfigArgs:
+    def __init__(__self__, *,
+                 certificate_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] certificate_id: SSL Certificates ID.
+        """
+        if certificate_id is not None:
+            pulumi.set(__self__, "certificate_id", certificate_id)
+
+    @property
+    @pulumi.getter(name="certificateId")
+    def certificate_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        SSL Certificates ID.
+        """
+        return pulumi.get(self, "certificate_id")
+
+    @certificate_id.setter
+    def certificate_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "certificate_id", value)
+
+
+@pulumi.input_type
+class CustomDomainEndpointsConfigArgs:
+    def __init__(__self__, *,
+                 function_name: pulumi.Input[str],
+                 namespace: pulumi.Input[str],
+                 path_match: pulumi.Input[str],
+                 qualifier: pulumi.Input[str],
+                 path_rewrites: Optional[pulumi.Input[Sequence[pulumi.Input['CustomDomainEndpointsConfigPathRewriteArgs']]]] = None):
+        """
+        :param pulumi.Input[str] function_name: Function name.
+        :param pulumi.Input[str] namespace: Function namespace.
+        :param pulumi.Input[str] path_match: Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        :param pulumi.Input[str] qualifier: Function alias or version.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomDomainEndpointsConfigPathRewriteArgs']]] path_rewrites: Path rewriting policy.
+        """
+        pulumi.set(__self__, "function_name", function_name)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "path_match", path_match)
+        pulumi.set(__self__, "qualifier", qualifier)
+        if path_rewrites is not None:
+            pulumi.set(__self__, "path_rewrites", path_rewrites)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> pulumi.Input[str]:
+        """
+        Function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @function_name.setter
+    def function_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "function_name", value)
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> pulumi.Input[str]:
+        """
+        Function namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @namespace.setter
+    def namespace(self, value: pulumi.Input[str]):
+        pulumi.set(self, "namespace", value)
+
+    @property
+    @pulumi.getter(name="pathMatch")
+    def path_match(self) -> pulumi.Input[str]:
+        """
+        Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        """
+        return pulumi.get(self, "path_match")
+
+    @path_match.setter
+    def path_match(self, value: pulumi.Input[str]):
+        pulumi.set(self, "path_match", value)
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> pulumi.Input[str]:
+        """
+        Function alias or version.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @qualifier.setter
+    def qualifier(self, value: pulumi.Input[str]):
+        pulumi.set(self, "qualifier", value)
+
+    @property
+    @pulumi.getter(name="pathRewrites")
+    def path_rewrites(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomDomainEndpointsConfigPathRewriteArgs']]]]:
+        """
+        Path rewriting policy.
+        """
+        return pulumi.get(self, "path_rewrites")
+
+    @path_rewrites.setter
+    def path_rewrites(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomDomainEndpointsConfigPathRewriteArgs']]]]):
+        pulumi.set(self, "path_rewrites", value)
+
+
+@pulumi.input_type
+class CustomDomainEndpointsConfigPathRewriteArgs:
+    def __init__(__self__, *,
+                 path: pulumi.Input[str],
+                 rewrite: pulumi.Input[str],
+                 type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] path: Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        :param pulumi.Input[str] rewrite: Replacement values: such as/, /$.
+        :param pulumi.Input[str] type: Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+        """
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "rewrite", rewrite)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def path(self) -> pulumi.Input[str]:
+        """
+        Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: pulumi.Input[str]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def rewrite(self) -> pulumi.Input[str]:
+        """
+        Replacement values: such as/, /$.
+        """
+        return pulumi.get(self, "rewrite")
+
+    @rewrite.setter
+    def rewrite(self, value: pulumi.Input[str]):
+        pulumi.set(self, "rewrite", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+
+@pulumi.input_type
+class CustomDomainWafConfigArgs:
+    def __init__(__self__, *,
+                 waf_instance_id: Optional[pulumi.Input[str]] = None,
+                 waf_open: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] waf_instance_id: Web Application Firewall Instance ID.
+        :param pulumi.Input[str] waf_open: Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+        """
+        if waf_instance_id is not None:
+            pulumi.set(__self__, "waf_instance_id", waf_instance_id)
+        if waf_open is not None:
+            pulumi.set(__self__, "waf_open", waf_open)
+
+    @property
+    @pulumi.getter(name="wafInstanceId")
+    def waf_instance_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Web Application Firewall Instance ID.
+        """
+        return pulumi.get(self, "waf_instance_id")
+
+    @waf_instance_id.setter
+    def waf_instance_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "waf_instance_id", value)
+
+    @property
+    @pulumi.getter(name="wafOpen")
+    def waf_open(self) -> Optional[pulumi.Input[str]]:
+        """
+        Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+        """
+        return pulumi.get(self, "waf_open")
+
+    @waf_open.setter
+    def waf_open(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "waf_open", value)
+
 
 @pulumi.input_type
 class FunctionAliasRoutingConfigArgs:

@@ -34,6 +34,7 @@ class NodePoolArgs:
                  node_os: Optional[pulumi.Input[str]] = None,
                  node_os_type: Optional[pulumi.Input[str]] = None,
                  retry_policy: Optional[pulumi.Input[str]] = None,
+                 scale_tolerance: Optional[pulumi.Input[int]] = None,
                  scaling_group_name: Optional[pulumi.Input[str]] = None,
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
@@ -42,6 +43,7 @@ class NodePoolArgs:
                  taints: Optional[pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]]] = None,
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
+                 wait_node_ready: Optional[pulumi.Input[bool]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a NodePool resource.
@@ -63,6 +65,7 @@ class NodePoolArgs:
         :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
+        :param pulumi.Input[int] scale_tolerance: Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
@@ -71,6 +74,7 @@ class NodePoolArgs:
         :param pulumi.Input[Sequence[pulumi.Input['NodePoolTaintArgs']]] taints: Taints of kubernetes node pool created nodes.
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        :param pulumi.Input[bool] wait_node_ready: Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: List of auto scaling group available zones, for Basic network it is required.
         """
         pulumi.set(__self__, "auto_scaling_config", auto_scaling_config)
@@ -104,6 +108,8 @@ class NodePoolArgs:
             pulumi.set(__self__, "node_os_type", node_os_type)
         if retry_policy is not None:
             pulumi.set(__self__, "retry_policy", retry_policy)
+        if scale_tolerance is not None:
+            pulumi.set(__self__, "scale_tolerance", scale_tolerance)
         if scaling_group_name is not None:
             pulumi.set(__self__, "scaling_group_name", scaling_group_name)
         if scaling_group_project_id is not None:
@@ -120,6 +126,8 @@ class NodePoolArgs:
             pulumi.set(__self__, "termination_policies", termination_policies)
         if unschedulable is not None:
             pulumi.set(__self__, "unschedulable", unschedulable)
+        if wait_node_ready is not None:
+            pulumi.set(__self__, "wait_node_ready", wait_node_ready)
         if zones is not None:
             pulumi.set(__self__, "zones", zones)
 
@@ -340,6 +348,18 @@ class NodePoolArgs:
         pulumi.set(self, "retry_policy", value)
 
     @property
+    @pulumi.getter(name="scaleTolerance")
+    def scale_tolerance(self) -> Optional[pulumi.Input[int]]:
+        """
+        Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        """
+        return pulumi.get(self, "scale_tolerance")
+
+    @scale_tolerance.setter
+    def scale_tolerance(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "scale_tolerance", value)
+
+    @property
     @pulumi.getter(name="scalingGroupName")
     def scaling_group_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -436,6 +456,18 @@ class NodePoolArgs:
         pulumi.set(self, "unschedulable", value)
 
     @property
+    @pulumi.getter(name="waitNodeReady")
+    def wait_node_ready(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        """
+        return pulumi.get(self, "wait_node_ready")
+
+    @wait_node_ready.setter
+    def wait_node_ready(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "wait_node_ready", value)
+
+    @property
     @pulumi.getter
     def zones(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -473,6 +505,7 @@ class _NodePoolState:
                  node_os: Optional[pulumi.Input[str]] = None,
                  node_os_type: Optional[pulumi.Input[str]] = None,
                  retry_policy: Optional[pulumi.Input[str]] = None,
+                 scale_tolerance: Optional[pulumi.Input[int]] = None,
                  scaling_group_name: Optional[pulumi.Input[str]] = None,
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
@@ -483,6 +516,7 @@ class _NodePoolState:
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_node_ready: Optional[pulumi.Input[bool]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering NodePool resources.
@@ -508,6 +542,7 @@ class _NodePoolState:
         :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
+        :param pulumi.Input[int] scale_tolerance: Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
@@ -518,6 +553,7 @@ class _NodePoolState:
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[str] vpc_id: ID of VPC network.
+        :param pulumi.Input[bool] wait_node_ready: Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: List of auto scaling group available zones, for Basic network it is required.
         """
         if annotations is not None:
@@ -564,6 +600,8 @@ class _NodePoolState:
             pulumi.set(__self__, "node_os_type", node_os_type)
         if retry_policy is not None:
             pulumi.set(__self__, "retry_policy", retry_policy)
+        if scale_tolerance is not None:
+            pulumi.set(__self__, "scale_tolerance", scale_tolerance)
         if scaling_group_name is not None:
             pulumi.set(__self__, "scaling_group_name", scaling_group_name)
         if scaling_group_project_id is not None:
@@ -584,6 +622,8 @@ class _NodePoolState:
             pulumi.set(__self__, "unschedulable", unschedulable)
         if vpc_id is not None:
             pulumi.set(__self__, "vpc_id", vpc_id)
+        if wait_node_ready is not None:
+            pulumi.set(__self__, "wait_node_ready", wait_node_ready)
         if zones is not None:
             pulumi.set(__self__, "zones", zones)
 
@@ -852,6 +892,18 @@ class _NodePoolState:
         pulumi.set(self, "retry_policy", value)
 
     @property
+    @pulumi.getter(name="scaleTolerance")
+    def scale_tolerance(self) -> Optional[pulumi.Input[int]]:
+        """
+        Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        """
+        return pulumi.get(self, "scale_tolerance")
+
+    @scale_tolerance.setter
+    def scale_tolerance(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "scale_tolerance", value)
+
+    @property
     @pulumi.getter(name="scalingGroupName")
     def scaling_group_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -972,6 +1024,18 @@ class _NodePoolState:
         pulumi.set(self, "vpc_id", value)
 
     @property
+    @pulumi.getter(name="waitNodeReady")
+    def wait_node_ready(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        """
+        return pulumi.get(self, "wait_node_ready")
+
+    @wait_node_ready.setter
+    def wait_node_ready(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "wait_node_ready", value)
+
+    @property
     @pulumi.getter
     def zones(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -1006,6 +1070,7 @@ class NodePool(pulumi.CustomResource):
                  node_os: Optional[pulumi.Input[str]] = None,
                  node_os_type: Optional[pulumi.Input[str]] = None,
                  retry_policy: Optional[pulumi.Input[str]] = None,
+                 scale_tolerance: Optional[pulumi.Input[int]] = None,
                  scaling_group_name: Optional[pulumi.Input[str]] = None,
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
@@ -1015,6 +1080,7 @@ class NodePool(pulumi.CustomResource):
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_node_ready: Optional[pulumi.Input[bool]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
@@ -1025,6 +1091,8 @@ class NodePool(pulumi.CustomResource):
         > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
 
         > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
+
+        > **NOTE:**  There are two parameters `wait_node_ready` and `scale_tolerance` to ensure better management of node pool scaling operations. If this parameter is set, when creating resources, if the set criteria are not met, the resources will be marked as `tainted`.
 
         ## Example Usage
 
@@ -1153,6 +1221,67 @@ class NodePool(pulumi.CustomResource):
                 "test1": "test1",
                 "test2": "test2",
             })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kubernetes.NodePool("example",
+            cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
+            max_size=100,
+            min_size=1,
+            vpc_id=data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["vpc_id"],
+            subnet_ids=[data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["subnet_id"]],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=50,
+            enable_auto_scale=False,
+            wait_node_ready=True,
+            scale_tolerance=90,
+            multi_zone_subnet_policy="EQUALITY",
+            node_os="img-6n21msk1",
+            delete_keep_instance=False,
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=var["default_instance_type"],
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=["sg-bw28gmso"],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                    delete_with_instance=True,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                docker_graph_path="/var/lib/docker",
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1183,6 +1312,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
+        :param pulumi.Input[int] scale_tolerance: Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
@@ -1192,6 +1322,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[str] vpc_id: ID of VPC network.
+        :param pulumi.Input[bool] wait_node_ready: Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: List of auto scaling group available zones, for Basic network it is required.
         """
         ...
@@ -1208,6 +1339,8 @@ class NodePool(pulumi.CustomResource):
         > **NOTE:**  In order to ensure the integrity of customer data, if you destroy nodepool instance, it will keep the cvm instance associate with nodepool by default. If you want to destroy together, please set `delete_keep_instance` to `false`.
 
         > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
+
+        > **NOTE:**  There are two parameters `wait_node_ready` and `scale_tolerance` to ensure better management of node pool scaling operations. If this parameter is set, when creating resources, if the set criteria are not met, the resources will be marked as `tainted`.
 
         ## Example Usage
 
@@ -1336,6 +1469,67 @@ class NodePool(pulumi.CustomResource):
                 "test1": "test1",
                 "test2": "test2",
             })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.kubernetes.NodePool("example",
+            cluster_id=tencentcloud_kubernetes_cluster["managed_cluster"]["id"],
+            max_size=100,
+            min_size=1,
+            vpc_id=data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["vpc_id"],
+            subnet_ids=[data["tencentcloud_vpc_subnets"]["vpc"]["instance_list"][0]["subnet_id"]],
+            retry_policy="INCREMENTAL_INTERVALS",
+            desired_capacity=50,
+            enable_auto_scale=False,
+            wait_node_ready=True,
+            scale_tolerance=90,
+            multi_zone_subnet_policy="EQUALITY",
+            node_os="img-6n21msk1",
+            delete_keep_instance=False,
+            auto_scaling_config=tencentcloud.kubernetes.NodePoolAutoScalingConfigArgs(
+                instance_type=var["default_instance_type"],
+                system_disk_type="CLOUD_PREMIUM",
+                system_disk_size=50,
+                orderly_security_group_ids=["sg-bw28gmso"],
+                data_disks=[tencentcloud.kubernetes.NodePoolAutoScalingConfigDataDiskArgs(
+                    disk_type="CLOUD_PREMIUM",
+                    disk_size=50,
+                    delete_with_instance=True,
+                )],
+                internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR",
+                internet_max_bandwidth_out=10,
+                public_ip_assigned=True,
+                password="test123#",
+                enhanced_security_service=False,
+                enhanced_monitor_service=False,
+                host_name="12.123.0.0",
+                host_name_style="ORIGINAL",
+            ),
+            labels={
+                "test1": "test1",
+                "test2": "test2",
+            },
+            taints=[
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint",
+                    value="taint_value",
+                    effect="PreferNoSchedule",
+                ),
+                tencentcloud.kubernetes.NodePoolTaintArgs(
+                    key="test_taint2",
+                    value="taint_value2",
+                    effect="PreferNoSchedule",
+                ),
+            ],
+            node_config=tencentcloud.kubernetes.NodePoolNodeConfigArgs(
+                docker_graph_path="/var/lib/docker",
+                extra_args=["root-dir=/var/lib/kubelet"],
+            ))
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1379,6 +1573,7 @@ class NodePool(pulumi.CustomResource):
                  node_os: Optional[pulumi.Input[str]] = None,
                  node_os_type: Optional[pulumi.Input[str]] = None,
                  retry_policy: Optional[pulumi.Input[str]] = None,
+                 scale_tolerance: Optional[pulumi.Input[int]] = None,
                  scaling_group_name: Optional[pulumi.Input[str]] = None,
                  scaling_group_project_id: Optional[pulumi.Input[int]] = None,
                  scaling_mode: Optional[pulumi.Input[str]] = None,
@@ -1388,6 +1583,7 @@ class NodePool(pulumi.CustomResource):
                  termination_policies: Optional[pulumi.Input[str]] = None,
                  unschedulable: Optional[pulumi.Input[int]] = None,
                  vpc_id: Optional[pulumi.Input[str]] = None,
+                 wait_node_ready: Optional[pulumi.Input[bool]] = None,
                  zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -1423,6 +1619,7 @@ class NodePool(pulumi.CustomResource):
             __props__.__dict__["node_os"] = node_os
             __props__.__dict__["node_os_type"] = node_os_type
             __props__.__dict__["retry_policy"] = retry_policy
+            __props__.__dict__["scale_tolerance"] = scale_tolerance
             __props__.__dict__["scaling_group_name"] = scaling_group_name
             __props__.__dict__["scaling_group_project_id"] = scaling_group_project_id
             __props__.__dict__["scaling_mode"] = scaling_mode
@@ -1434,6 +1631,7 @@ class NodePool(pulumi.CustomResource):
             if vpc_id is None and not opts.urn:
                 raise TypeError("Missing required property 'vpc_id'")
             __props__.__dict__["vpc_id"] = vpc_id
+            __props__.__dict__["wait_node_ready"] = wait_node_ready
             __props__.__dict__["zones"] = zones
             __props__.__dict__["auto_scaling_group_id"] = None
             __props__.__dict__["autoscaling_added_total"] = None
@@ -1473,6 +1671,7 @@ class NodePool(pulumi.CustomResource):
             node_os: Optional[pulumi.Input[str]] = None,
             node_os_type: Optional[pulumi.Input[str]] = None,
             retry_policy: Optional[pulumi.Input[str]] = None,
+            scale_tolerance: Optional[pulumi.Input[int]] = None,
             scaling_group_name: Optional[pulumi.Input[str]] = None,
             scaling_group_project_id: Optional[pulumi.Input[int]] = None,
             scaling_mode: Optional[pulumi.Input[str]] = None,
@@ -1483,6 +1682,7 @@ class NodePool(pulumi.CustomResource):
             termination_policies: Optional[pulumi.Input[str]] = None,
             unschedulable: Optional[pulumi.Input[int]] = None,
             vpc_id: Optional[pulumi.Input[str]] = None,
+            wait_node_ready: Optional[pulumi.Input[bool]] = None,
             zones: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'NodePool':
         """
         Get an existing NodePool resource's state with the given name, id, and optional extra
@@ -1513,6 +1713,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] node_os: Operating system of the cluster. Please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] node_os_type: The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
         :param pulumi.Input[str] retry_policy: Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
+        :param pulumi.Input[int] scale_tolerance: Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
         :param pulumi.Input[str] scaling_group_name: Name of relative scaling group.
         :param pulumi.Input[int] scaling_group_project_id: Project ID the scaling group belongs to.
         :param pulumi.Input[str] scaling_mode: Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
@@ -1523,6 +1724,7 @@ class NodePool(pulumi.CustomResource):
         :param pulumi.Input[str] termination_policies: Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[str] vpc_id: ID of VPC network.
+        :param pulumi.Input[bool] wait_node_ready: Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] zones: List of auto scaling group available zones, for Basic network it is required.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1551,6 +1753,7 @@ class NodePool(pulumi.CustomResource):
         __props__.__dict__["node_os"] = node_os
         __props__.__dict__["node_os_type"] = node_os_type
         __props__.__dict__["retry_policy"] = retry_policy
+        __props__.__dict__["scale_tolerance"] = scale_tolerance
         __props__.__dict__["scaling_group_name"] = scaling_group_name
         __props__.__dict__["scaling_group_project_id"] = scaling_group_project_id
         __props__.__dict__["scaling_mode"] = scaling_mode
@@ -1561,6 +1764,7 @@ class NodePool(pulumi.CustomResource):
         __props__.__dict__["termination_policies"] = termination_policies
         __props__.__dict__["unschedulable"] = unschedulable
         __props__.__dict__["vpc_id"] = vpc_id
+        __props__.__dict__["wait_node_ready"] = wait_node_ready
         __props__.__dict__["zones"] = zones
         return NodePool(resource_name, opts=opts, __props__=__props__)
 
@@ -1741,6 +1945,14 @@ class NodePool(pulumi.CustomResource):
         return pulumi.get(self, "retry_policy")
 
     @property
+    @pulumi.getter(name="scaleTolerance")
+    def scale_tolerance(self) -> pulumi.Output[Optional[int]]:
+        """
+        Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        """
+        return pulumi.get(self, "scale_tolerance")
+
+    @property
     @pulumi.getter(name="scalingGroupName")
     def scaling_group_name(self) -> pulumi.Output[str]:
         """
@@ -1819,6 +2031,14 @@ class NodePool(pulumi.CustomResource):
         ID of VPC network.
         """
         return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter(name="waitNodeReady")
+    def wait_node_ready(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        """
+        return pulumi.get(self, "wait_node_ready")
 
     @property
     @pulumi.getter

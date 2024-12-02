@@ -153,6 +153,8 @@ type ListenerRule struct {
 	Http2Switch pulumi.BoolOutput `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
+	// OAuth configuration information.
+	Oauth ListenerRuleOauthOutput `pulumi:"oauth"`
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic pulumi.BoolOutput `pulumi:"quic"`
 	// ID of this CLB listener rule.
@@ -244,6 +246,8 @@ type listenerRuleState struct {
 	Http2Switch *bool `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId *string `pulumi:"listenerId"`
+	// OAuth configuration information.
+	Oauth *ListenerRuleOauth `pulumi:"oauth"`
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic *bool `pulumi:"quic"`
 	// ID of this CLB listener rule.
@@ -297,6 +301,8 @@ type ListenerRuleState struct {
 	Http2Switch pulumi.BoolPtrInput
 	// ID of CLB listener.
 	ListenerId pulumi.StringPtrInput
+	// OAuth configuration information.
+	Oauth ListenerRuleOauthPtrInput
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic pulumi.BoolPtrInput
 	// ID of this CLB listener rule.
@@ -354,6 +360,8 @@ type listenerRuleArgs struct {
 	Http2Switch *bool `pulumi:"http2Switch"`
 	// ID of CLB listener.
 	ListenerId string `pulumi:"listenerId"`
+	// OAuth configuration information.
+	Oauth *ListenerRuleOauth `pulumi:"oauth"`
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic *bool `pulumi:"quic"`
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -406,6 +414,8 @@ type ListenerRuleArgs struct {
 	Http2Switch pulumi.BoolPtrInput
 	// ID of CLB listener.
 	ListenerId pulumi.StringInput
+	// OAuth configuration information.
+	Oauth ListenerRuleOauthPtrInput
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic pulumi.BoolPtrInput
 	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -598,6 +608,11 @@ func (o ListenerRuleOutput) Http2Switch() pulumi.BoolOutput {
 // ID of CLB listener.
 func (o ListenerRuleOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// OAuth configuration information.
+func (o ListenerRuleOutput) Oauth() ListenerRuleOauthOutput {
+	return o.ApplyT(func(v *ListenerRule) ListenerRuleOauthOutput { return v.Oauth }).(ListenerRuleOauthOutput)
 }
 
 // Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.

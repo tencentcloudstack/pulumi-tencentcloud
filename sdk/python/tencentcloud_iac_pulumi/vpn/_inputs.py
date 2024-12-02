@@ -10,9 +10,134 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'ConnectionBgpConfigArgs',
+    'ConnectionHealthCheckConfigArgs',
     'ConnectionSecurityGroupPolicyArgs',
     'CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs',
 ]
+
+@pulumi.input_type
+class ConnectionBgpConfigArgs:
+    def __init__(__self__, *,
+                 local_bgp_ip: pulumi.Input[str],
+                 remote_bgp_ip: pulumi.Input[str],
+                 tunnel_cidr: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] local_bgp_ip: Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+        :param pulumi.Input[str] remote_bgp_ip: User side BGP address. It must be allocated from within the BGP tunnel network segment.
+        :param pulumi.Input[str] tunnel_cidr: BGP tunnel segment.
+        """
+        pulumi.set(__self__, "local_bgp_ip", local_bgp_ip)
+        pulumi.set(__self__, "remote_bgp_ip", remote_bgp_ip)
+        pulumi.set(__self__, "tunnel_cidr", tunnel_cidr)
+
+    @property
+    @pulumi.getter(name="localBgpIp")
+    def local_bgp_ip(self) -> pulumi.Input[str]:
+        """
+        Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+        """
+        return pulumi.get(self, "local_bgp_ip")
+
+    @local_bgp_ip.setter
+    def local_bgp_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "local_bgp_ip", value)
+
+    @property
+    @pulumi.getter(name="remoteBgpIp")
+    def remote_bgp_ip(self) -> pulumi.Input[str]:
+        """
+        User side BGP address. It must be allocated from within the BGP tunnel network segment.
+        """
+        return pulumi.get(self, "remote_bgp_ip")
+
+    @remote_bgp_ip.setter
+    def remote_bgp_ip(self, value: pulumi.Input[str]):
+        pulumi.set(self, "remote_bgp_ip", value)
+
+    @property
+    @pulumi.getter(name="tunnelCidr")
+    def tunnel_cidr(self) -> pulumi.Input[str]:
+        """
+        BGP tunnel segment.
+        """
+        return pulumi.get(self, "tunnel_cidr")
+
+    @tunnel_cidr.setter
+    def tunnel_cidr(self, value: pulumi.Input[str]):
+        pulumi.set(self, "tunnel_cidr", value)
+
+
+@pulumi.input_type
+class ConnectionHealthCheckConfigArgs:
+    def __init__(__self__, *,
+                 probe_interval: Optional[pulumi.Input[int]] = None,
+                 probe_threshold: Optional[pulumi.Input[int]] = None,
+                 probe_timeout: Optional[pulumi.Input[int]] = None,
+                 probe_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] probe_interval: Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+        :param pulumi.Input[int] probe_threshold: Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+        :param pulumi.Input[int] probe_timeout: Detection timeout, range [10-5000], Unit: ms.
+        :param pulumi.Input[str] probe_type: Detection mode, default is `NQA`, cannot be modified.
+        """
+        if probe_interval is not None:
+            pulumi.set(__self__, "probe_interval", probe_interval)
+        if probe_threshold is not None:
+            pulumi.set(__self__, "probe_threshold", probe_threshold)
+        if probe_timeout is not None:
+            pulumi.set(__self__, "probe_timeout", probe_timeout)
+        if probe_type is not None:
+            pulumi.set(__self__, "probe_type", probe_type)
+
+    @property
+    @pulumi.getter(name="probeInterval")
+    def probe_interval(self) -> Optional[pulumi.Input[int]]:
+        """
+        Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+        """
+        return pulumi.get(self, "probe_interval")
+
+    @probe_interval.setter
+    def probe_interval(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "probe_interval", value)
+
+    @property
+    @pulumi.getter(name="probeThreshold")
+    def probe_threshold(self) -> Optional[pulumi.Input[int]]:
+        """
+        Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+        """
+        return pulumi.get(self, "probe_threshold")
+
+    @probe_threshold.setter
+    def probe_threshold(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "probe_threshold", value)
+
+    @property
+    @pulumi.getter(name="probeTimeout")
+    def probe_timeout(self) -> Optional[pulumi.Input[int]]:
+        """
+        Detection timeout, range [10-5000], Unit: ms.
+        """
+        return pulumi.get(self, "probe_timeout")
+
+    @probe_timeout.setter
+    def probe_timeout(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "probe_timeout", value)
+
+    @property
+    @pulumi.getter(name="probeType")
+    def probe_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Detection mode, default is `NQA`, cannot be modified.
+        """
+        return pulumi.get(self, "probe_type")
+
+    @probe_type.setter
+    def probe_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "probe_type", value)
+
 
 @pulumi.input_type
 class ConnectionSecurityGroupPolicyArgs:

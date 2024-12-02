@@ -595,6 +595,162 @@ func (o InstanceSnatIpArrayOutput) Index(i pulumi.IntInput) InstanceSnatIpOutput
 	}).(InstanceSnatIpOutput)
 }
 
+type ListenerRuleOauth struct {
+	// Enable or disable authentication. True: Enabled; False: Disabled.
+	OauthEnable *bool `pulumi:"oauthEnable"`
+	// After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+	OauthFailureStatus *string `pulumi:"oauthFailureStatus"`
+}
+
+// ListenerRuleOauthInput is an input type that accepts ListenerRuleOauthArgs and ListenerRuleOauthOutput values.
+// You can construct a concrete instance of `ListenerRuleOauthInput` via:
+//
+//	ListenerRuleOauthArgs{...}
+type ListenerRuleOauthInput interface {
+	pulumi.Input
+
+	ToListenerRuleOauthOutput() ListenerRuleOauthOutput
+	ToListenerRuleOauthOutputWithContext(context.Context) ListenerRuleOauthOutput
+}
+
+type ListenerRuleOauthArgs struct {
+	// Enable or disable authentication. True: Enabled; False: Disabled.
+	OauthEnable pulumi.BoolPtrInput `pulumi:"oauthEnable"`
+	// After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+	OauthFailureStatus pulumi.StringPtrInput `pulumi:"oauthFailureStatus"`
+}
+
+func (ListenerRuleOauthArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ListenerRuleOauth)(nil)).Elem()
+}
+
+func (i ListenerRuleOauthArgs) ToListenerRuleOauthOutput() ListenerRuleOauthOutput {
+	return i.ToListenerRuleOauthOutputWithContext(context.Background())
+}
+
+func (i ListenerRuleOauthArgs) ToListenerRuleOauthOutputWithContext(ctx context.Context) ListenerRuleOauthOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ListenerRuleOauthOutput)
+}
+
+func (i ListenerRuleOauthArgs) ToListenerRuleOauthPtrOutput() ListenerRuleOauthPtrOutput {
+	return i.ToListenerRuleOauthPtrOutputWithContext(context.Background())
+}
+
+func (i ListenerRuleOauthArgs) ToListenerRuleOauthPtrOutputWithContext(ctx context.Context) ListenerRuleOauthPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ListenerRuleOauthOutput).ToListenerRuleOauthPtrOutputWithContext(ctx)
+}
+
+// ListenerRuleOauthPtrInput is an input type that accepts ListenerRuleOauthArgs, ListenerRuleOauthPtr and ListenerRuleOauthPtrOutput values.
+// You can construct a concrete instance of `ListenerRuleOauthPtrInput` via:
+//
+//	        ListenerRuleOauthArgs{...}
+//
+//	or:
+//
+//	        nil
+type ListenerRuleOauthPtrInput interface {
+	pulumi.Input
+
+	ToListenerRuleOauthPtrOutput() ListenerRuleOauthPtrOutput
+	ToListenerRuleOauthPtrOutputWithContext(context.Context) ListenerRuleOauthPtrOutput
+}
+
+type listenerRuleOauthPtrType ListenerRuleOauthArgs
+
+func ListenerRuleOauthPtr(v *ListenerRuleOauthArgs) ListenerRuleOauthPtrInput {
+	return (*listenerRuleOauthPtrType)(v)
+}
+
+func (*listenerRuleOauthPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ListenerRuleOauth)(nil)).Elem()
+}
+
+func (i *listenerRuleOauthPtrType) ToListenerRuleOauthPtrOutput() ListenerRuleOauthPtrOutput {
+	return i.ToListenerRuleOauthPtrOutputWithContext(context.Background())
+}
+
+func (i *listenerRuleOauthPtrType) ToListenerRuleOauthPtrOutputWithContext(ctx context.Context) ListenerRuleOauthPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ListenerRuleOauthPtrOutput)
+}
+
+type ListenerRuleOauthOutput struct{ *pulumi.OutputState }
+
+func (ListenerRuleOauthOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ListenerRuleOauth)(nil)).Elem()
+}
+
+func (o ListenerRuleOauthOutput) ToListenerRuleOauthOutput() ListenerRuleOauthOutput {
+	return o
+}
+
+func (o ListenerRuleOauthOutput) ToListenerRuleOauthOutputWithContext(ctx context.Context) ListenerRuleOauthOutput {
+	return o
+}
+
+func (o ListenerRuleOauthOutput) ToListenerRuleOauthPtrOutput() ListenerRuleOauthPtrOutput {
+	return o.ToListenerRuleOauthPtrOutputWithContext(context.Background())
+}
+
+func (o ListenerRuleOauthOutput) ToListenerRuleOauthPtrOutputWithContext(ctx context.Context) ListenerRuleOauthPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ListenerRuleOauth) *ListenerRuleOauth {
+		return &v
+	}).(ListenerRuleOauthPtrOutput)
+}
+
+// Enable or disable authentication. True: Enabled; False: Disabled.
+func (o ListenerRuleOauthOutput) OauthEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ListenerRuleOauth) *bool { return v.OauthEnable }).(pulumi.BoolPtrOutput)
+}
+
+// After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+func (o ListenerRuleOauthOutput) OauthFailureStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ListenerRuleOauth) *string { return v.OauthFailureStatus }).(pulumi.StringPtrOutput)
+}
+
+type ListenerRuleOauthPtrOutput struct{ *pulumi.OutputState }
+
+func (ListenerRuleOauthPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ListenerRuleOauth)(nil)).Elem()
+}
+
+func (o ListenerRuleOauthPtrOutput) ToListenerRuleOauthPtrOutput() ListenerRuleOauthPtrOutput {
+	return o
+}
+
+func (o ListenerRuleOauthPtrOutput) ToListenerRuleOauthPtrOutputWithContext(ctx context.Context) ListenerRuleOauthPtrOutput {
+	return o
+}
+
+func (o ListenerRuleOauthPtrOutput) Elem() ListenerRuleOauthOutput {
+	return o.ApplyT(func(v *ListenerRuleOauth) ListenerRuleOauth {
+		if v != nil {
+			return *v
+		}
+		var ret ListenerRuleOauth
+		return ret
+	}).(ListenerRuleOauthOutput)
+}
+
+// Enable or disable authentication. True: Enabled; False: Disabled.
+func (o ListenerRuleOauthPtrOutput) OauthEnable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ListenerRuleOauth) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OauthEnable
+	}).(pulumi.BoolPtrOutput)
+}
+
+// After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+func (o ListenerRuleOauthPtrOutput) OauthFailureStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ListenerRuleOauth) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OauthFailureStatus
+	}).(pulumi.StringPtrOutput)
+}
+
 type ReplaceCertForLbsCertificate struct {
 	// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
 	CertCaContent *string `pulumi:"certCaContent"`
@@ -9713,6 +9869,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpInput)(nil)).Elem(), InstanceSnatIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpArrayInput)(nil)).Elem(), InstanceSnatIpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ListenerRuleOauthInput)(nil)).Elem(), ListenerRuleOauthArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ListenerRuleOauthPtrInput)(nil)).Elem(), ListenerRuleOauthArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceCertForLbsCertificateInput)(nil)).Elem(), ReplaceCertForLbsCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceCertForLbsCertificatePtrInput)(nil)).Elem(), ReplaceCertForLbsCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpInput)(nil)).Elem(), SnatIpIpArgs{})
@@ -9841,6 +9999,8 @@ func init() {
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpArrayOutput{})
+	pulumi.RegisterOutputType(ListenerRuleOauthOutput{})
+	pulumi.RegisterOutputType(ListenerRuleOauthPtrOutput{})
 	pulumi.RegisterOutputType(ReplaceCertForLbsCertificateOutput{})
 	pulumi.RegisterOutputType(ReplaceCertForLbsCertificatePtrOutput{})
 	pulumi.RegisterOutputType(SnatIpIpOutput{})

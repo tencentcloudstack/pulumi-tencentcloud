@@ -18,6 +18,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create a normal configuration
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -36,16 +38,16 @@ import (
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
-//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//				OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-//				ConfigurationName: pulumi.String("example-launch-configuration"),
+//				ConfigurationName: pulumi.String("tf-example"),
 //				ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
 //				InstanceTypes: pulumi.StringArray{
-//					pulumi.String("SA1.SMALL1"),
+//					pulumi.String("SA5.MEDIUM4"),
 //				},
 //				ProjectId:      pulumi.Int(0),
 //				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
@@ -65,7 +67,7 @@ import (
 //				EnhancedAutomationToolsService: pulumi.Bool(false),
 //				UserData:                       pulumi.String("dGVzdA=="),
 //				HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
-//					HostName:      pulumi.String("host-name-test"),
+//					HostName:      pulumi.String("host-name"),
 //					HostNameStyle: pulumi.String("UNIQUE"),
 //				},
 //				InstanceTags: pulumi.Map{
@@ -102,16 +104,16 @@ import (
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
-//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//				OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
-//				ConfigurationName: pulumi.String("launch-configuration"),
+//				ConfigurationName: pulumi.String("tf-example"),
 //				ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
 //				InstanceTypes: pulumi.StringArray{
-//					pulumi.String("SA1.SMALL1"),
+//					pulumi.String("SA5.MEDIUM4"),
 //				},
 //				InstanceChargeType: pulumi.String("SPOTPAID"),
 //				SpotInstanceType:   pulumi.String("one-time"),
@@ -174,6 +176,74 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Create a CDC configuration
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("TencentOS Server 4 for x86_64"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = As.NewScalingConfig(ctx, "exampleScalingConfig", &As.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("tf-example"),
+//				ImageId:           pulumi.String(exampleInstance.Images[0].ImageId),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA5.MEDIUM4"),
+//				},
+//				ProjectId:          pulumi.Int(0),
+//				SystemDiskType:     pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:     pulumi.Int(50),
+//				InstanceChargeType: pulumi.String("CDCPAID"),
+//				DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//				DataDisks: as.ScalingConfigDataDiskArray{
+//					&as.ScalingConfigDataDiskArgs{
+//						DiskType: pulumi.String("CLOUD_PREMIUM"),
+//						DiskSize: pulumi.Int(50),
+//					},
+//				},
+//				InternetChargeType:             pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//				InternetMaxBandwidthOut:        pulumi.Int(10),
+//				PublicIpAssigned:               pulumi.Bool(true),
+//				Password:                       pulumi.String("Test@123#"),
+//				EnhancedSecurityService:        pulumi.Bool(false),
+//				EnhancedMonitorService:         pulumi.Bool(false),
+//				EnhancedAutomationToolsService: pulumi.Bool(false),
+//				UserData:                       pulumi.String("dGVzdA=="),
+//				HostNameSettings: &as.ScalingConfigHostNameSettingsArgs{
+//					HostName:      pulumi.String("host-name"),
+//					HostNameStyle: pulumi.String("UNIQUE"),
+//				},
+//				InstanceTags: pulumi.Map{
+//					"tag": pulumi.Any("example"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // AutoScaling Configuration can be imported using the id, e.g.
@@ -192,6 +262,8 @@ type ScalingConfig struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Configurations of data disk.
 	DataDisks ScalingConfigDataDiskArrayOutput `pulumi:"dataDisks"`
+	// Dedicated Cluster ID.
+	DedicatedClusterId pulumi.StringPtrOutput `pulumi:"dedicatedClusterId"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrOutput `pulumi:"diskTypePolicy"`
 	// To specify whether to enable cloud automation tools service.
@@ -206,7 +278,7 @@ type ScalingConfig struct {
 	ImageFamily pulumi.StringPtrOutput `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringPtrOutput `pulumi:"imageId"`
-	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrOutput `pulumi:"instanceChargeTypePrepaidPeriod"`
@@ -299,6 +371,8 @@ type scalingConfigState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Configurations of data disk.
 	DataDisks []ScalingConfigDataDisk `pulumi:"dataDisks"`
+	// Dedicated Cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy *string `pulumi:"diskTypePolicy"`
 	// To specify whether to enable cloud automation tools service.
@@ -313,7 +387,7 @@ type scalingConfigState struct {
 	ImageFamily *string `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
 	ImageId *string `pulumi:"imageId"`
-	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
@@ -364,6 +438,8 @@ type ScalingConfigState struct {
 	CreateTime pulumi.StringPtrInput
 	// Configurations of data disk.
 	DataDisks ScalingConfigDataDiskArrayInput
+	// Dedicated Cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrInput
 	// To specify whether to enable cloud automation tools service.
@@ -378,7 +454,7 @@ type ScalingConfigState struct {
 	ImageFamily pulumi.StringPtrInput
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringPtrInput
-	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrInput
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
@@ -431,6 +507,8 @@ type scalingConfigArgs struct {
 	ConfigurationName string `pulumi:"configurationName"`
 	// Configurations of data disk.
 	DataDisks []ScalingConfigDataDisk `pulumi:"dataDisks"`
+	// Dedicated Cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy *string `pulumi:"diskTypePolicy"`
 	// To specify whether to enable cloud automation tools service.
@@ -445,7 +523,7 @@ type scalingConfigArgs struct {
 	ImageFamily *string `pulumi:"imageFamily"`
 	// An available image ID for a cvm instance.
 	ImageId *string `pulumi:"imageId"`
-	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
@@ -493,6 +571,8 @@ type ScalingConfigArgs struct {
 	ConfigurationName pulumi.StringInput
 	// Configurations of data disk.
 	DataDisks ScalingConfigDataDiskArrayInput
+	// Dedicated Cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput
 	// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 	DiskTypePolicy pulumi.StringPtrInput
 	// To specify whether to enable cloud automation tools service.
@@ -507,7 +587,7 @@ type ScalingConfigArgs struct {
 	ImageFamily pulumi.StringPtrInput
 	// An available image ID for a cvm instance.
 	ImageId pulumi.StringPtrInput
-	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+	// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 	InstanceChargeType pulumi.StringPtrInput
 	// The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
@@ -654,6 +734,11 @@ func (o ScalingConfigOutput) DataDisks() ScalingConfigDataDiskArrayOutput {
 	return o.ApplyT(func(v *ScalingConfig) ScalingConfigDataDiskArrayOutput { return v.DataDisks }).(ScalingConfigDataDiskArrayOutput)
 }
 
+// Dedicated Cluster ID.
+func (o ScalingConfigOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
+}
+
 // Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
 func (o ScalingConfigOutput) DiskTypePolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.DiskTypePolicy }).(pulumi.StringPtrOutput)
@@ -689,7 +774,7 @@ func (o ScalingConfigOutput) ImageId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.ImageId }).(pulumi.StringPtrOutput)
 }
 
-// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
 func (o ScalingConfigOutput) InstanceChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScalingConfig) pulumi.StringPtrOutput { return v.InstanceChargeType }).(pulumi.StringPtrOutput)
 }

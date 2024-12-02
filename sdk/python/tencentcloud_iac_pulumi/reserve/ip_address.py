@@ -311,7 +311,34 @@ class IpAddress(pulumi.CustomResource):
                  vpc_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a IpAddress resource with the given unique name, props, and options.
+        Provides a resource to create a vpc reserve ip addresses
+
+        ## Example Usage
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        reserve_ip = tencentcloud.reserve.IpAddress("reserveIp",
+            description="description",
+            ip_address="10.0.0.13",
+            subnet_id="xxxxxx",
+            tags={
+                "test1": "test1",
+            },
+            vpc_id="xxxxxx")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        vpc reserve_ip_addresses can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The IP description is retained on the intranet.
@@ -328,7 +355,34 @@ class IpAddress(pulumi.CustomResource):
                  args: IpAddressArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a IpAddress resource with the given unique name, props, and options.
+        Provides a resource to create a vpc reserve ip addresses
+
+        ## Example Usage
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        reserve_ip = tencentcloud.reserve.IpAddress("reserveIp",
+            description="description",
+            ip_address="10.0.0.13",
+            subnet_id="xxxxxx",
+            tags={
+                "test1": "test1",
+            },
+            vpc_id="xxxxxx")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        vpc reserve_ip_addresses can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+        ```
+
         :param str resource_name: The name of the resource.
         :param IpAddressArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

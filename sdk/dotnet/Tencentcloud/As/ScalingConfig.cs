@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create a normal configuration
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -33,16 +35,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         {
     ///             "PUBLIC_IMAGE",
     ///         },
-    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///         OsName = "TencentOS Server 4 for x86_64",
     ///     });
     /// 
     ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
     ///     {
-    ///         ConfigurationName = "example-launch-configuration",
+    ///         ConfigurationName = "tf-example",
     ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
     ///         InstanceTypes = new[]
     ///         {
-    ///             "SA1.SMALL1",
+    ///             "SA5.MEDIUM4",
     ///         },
     ///         ProjectId = 0,
     ///         SystemDiskType = "CLOUD_PREMIUM",
@@ -65,7 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         UserData = "dGVzdA==",
     ///         HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
     ///         {
-    ///             HostName = "host-name-test",
+    ///             HostName = "host-name",
     ///             HostNameStyle = "UNIQUE",
     ///         },
     ///         InstanceTags = 
@@ -96,16 +98,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         {
     ///             "PUBLIC_IMAGE",
     ///         },
-    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///         OsName = "TencentOS Server 4 for x86_64",
     ///     });
     /// 
     ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
     ///     {
-    ///         ConfigurationName = "launch-configuration",
+    ///         ConfigurationName = "tf-example",
     ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
     ///         InstanceTypes = new[]
     ///         {
-    ///             "SA1.SMALL1",
+    ///             "SA5.MEDIUM4",
     ///         },
     ///         InstanceChargeType = "SPOTPAID",
     ///         SpotInstanceType = "one-time",
@@ -157,6 +159,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Create a CDC configuration
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = Pulumi.Tencentcloud;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleInstance = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 4 for x86_64",
+    ///     });
+    /// 
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "tf-example",
+    ///         ImageId = exampleInstance.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA5.MEDIUM4",
+    ///         },
+    ///         ProjectId = 0,
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         InstanceChargeType = "CDCPAID",
+    ///         DedicatedClusterId = "cluster-262n63e8",
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.As.Inputs.ScalingConfigDataDiskArgs
+    ///             {
+    ///                 DiskType = "CLOUD_PREMIUM",
+    ///                 DiskSize = 50,
+    ///             },
+    ///         },
+    ///         InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///         InternetMaxBandwidthOut = 10,
+    ///         PublicIpAssigned = true,
+    ///         Password = "Test@123#",
+    ///         EnhancedSecurityService = false,
+    ///         EnhancedMonitorService = false,
+    ///         EnhancedAutomationToolsService = false,
+    ///         UserData = "dGVzdA==",
+    ///         HostNameSettings = new Tencentcloud.As.Inputs.ScalingConfigHostNameSettingsArgs
+    ///         {
+    ///             HostName = "host-name",
+    ///             HostNameStyle = "UNIQUE",
+    ///         },
+    ///         InstanceTags = 
+    ///         {
+    ///             { "tag", "example" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// AutoScaling Configuration can be imported using the id, e.g.
@@ -191,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Output("dataDisks")]
         public Output<ImmutableArray<Outputs.ScalingConfigDataDisk>> DataDisks { get; private set; } = null!;
+
+        /// <summary>
+        /// Dedicated Cluster ID.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string?> DedicatedClusterId { get; private set; } = null!;
 
         /// <summary>
         /// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
@@ -235,7 +308,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<string?> ImageId { get; private set; } = null!;
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Output("instanceChargeType")]
         public Output<string?> InstanceChargeType { get; private set; } = null!;
@@ -430,6 +503,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
 
         /// <summary>
+        /// Dedicated Cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         /// </summary>
         [Input("diskTypePolicy")]
@@ -472,7 +551,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? ImageId { get; set; }
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }
@@ -658,6 +737,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
 
         /// <summary>
+        /// Dedicated Cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
         /// </summary>
         [Input("diskTypePolicy")]
@@ -700,7 +785,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? ImageId { get; set; }
 
         /// <summary>
-        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
+        /// Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }

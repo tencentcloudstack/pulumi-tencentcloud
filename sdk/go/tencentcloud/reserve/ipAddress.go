@@ -12,6 +12,49 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a vpc reserve ip addresses
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Reserve"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Reserve.NewIpAddress(ctx, "reserveIp", &Reserve.IpAddressArgs{
+//				Description: pulumi.String("description"),
+//				IpAddress:   pulumi.String("10.0.0.13"),
+//				SubnetId:    pulumi.String("xxxxxx"),
+//				Tags: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//				},
+//				VpcId: pulumi.String("xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// vpc reserve_ip_addresses can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+// ```
 type IpAddress struct {
 	pulumi.CustomResourceState
 

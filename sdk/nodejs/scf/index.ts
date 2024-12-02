@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { CustomDomainArgs, CustomDomainState } from "./customDomain";
+export type CustomDomain = import("./customDomain").CustomDomain;
+export const CustomDomain: typeof import("./customDomain").CustomDomain = null as any;
+utilities.lazyLoad(exports, ["CustomDomain"], () => require("./customDomain"));
+
 export { FunctionArgs, FunctionState } from "./function";
 export type Function = import("./function").Function;
 export const Function: typeof import("./function").Function = null as any;
@@ -135,6 +140,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Scf/customDomain:CustomDomain":
+                return new CustomDomain(name, <any>undefined, { urn })
             case "tencentcloud:Scf/function:Function":
                 return new Function(name, <any>undefined, { urn })
             case "tencentcloud:Scf/functionAlias:FunctionAlias":
@@ -164,6 +171,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/customDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/function", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionAlias", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/functionEventInvokeConfig", _module)

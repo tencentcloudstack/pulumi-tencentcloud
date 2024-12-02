@@ -13,6 +13,375 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ConnectionBgpConfig struct {
+	// Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+	LocalBgpIp string `pulumi:"localBgpIp"`
+	// User side BGP address. It must be allocated from within the BGP tunnel network segment.
+	RemoteBgpIp string `pulumi:"remoteBgpIp"`
+	// BGP tunnel segment.
+	TunnelCidr string `pulumi:"tunnelCidr"`
+}
+
+// ConnectionBgpConfigInput is an input type that accepts ConnectionBgpConfigArgs and ConnectionBgpConfigOutput values.
+// You can construct a concrete instance of `ConnectionBgpConfigInput` via:
+//
+//	ConnectionBgpConfigArgs{...}
+type ConnectionBgpConfigInput interface {
+	pulumi.Input
+
+	ToConnectionBgpConfigOutput() ConnectionBgpConfigOutput
+	ToConnectionBgpConfigOutputWithContext(context.Context) ConnectionBgpConfigOutput
+}
+
+type ConnectionBgpConfigArgs struct {
+	// Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+	LocalBgpIp pulumi.StringInput `pulumi:"localBgpIp"`
+	// User side BGP address. It must be allocated from within the BGP tunnel network segment.
+	RemoteBgpIp pulumi.StringInput `pulumi:"remoteBgpIp"`
+	// BGP tunnel segment.
+	TunnelCidr pulumi.StringInput `pulumi:"tunnelCidr"`
+}
+
+func (ConnectionBgpConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectionBgpConfig)(nil)).Elem()
+}
+
+func (i ConnectionBgpConfigArgs) ToConnectionBgpConfigOutput() ConnectionBgpConfigOutput {
+	return i.ToConnectionBgpConfigOutputWithContext(context.Background())
+}
+
+func (i ConnectionBgpConfigArgs) ToConnectionBgpConfigOutputWithContext(ctx context.Context) ConnectionBgpConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionBgpConfigOutput)
+}
+
+func (i ConnectionBgpConfigArgs) ToConnectionBgpConfigPtrOutput() ConnectionBgpConfigPtrOutput {
+	return i.ToConnectionBgpConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectionBgpConfigArgs) ToConnectionBgpConfigPtrOutputWithContext(ctx context.Context) ConnectionBgpConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionBgpConfigOutput).ToConnectionBgpConfigPtrOutputWithContext(ctx)
+}
+
+// ConnectionBgpConfigPtrInput is an input type that accepts ConnectionBgpConfigArgs, ConnectionBgpConfigPtr and ConnectionBgpConfigPtrOutput values.
+// You can construct a concrete instance of `ConnectionBgpConfigPtrInput` via:
+//
+//	        ConnectionBgpConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectionBgpConfigPtrInput interface {
+	pulumi.Input
+
+	ToConnectionBgpConfigPtrOutput() ConnectionBgpConfigPtrOutput
+	ToConnectionBgpConfigPtrOutputWithContext(context.Context) ConnectionBgpConfigPtrOutput
+}
+
+type connectionBgpConfigPtrType ConnectionBgpConfigArgs
+
+func ConnectionBgpConfigPtr(v *ConnectionBgpConfigArgs) ConnectionBgpConfigPtrInput {
+	return (*connectionBgpConfigPtrType)(v)
+}
+
+func (*connectionBgpConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectionBgpConfig)(nil)).Elem()
+}
+
+func (i *connectionBgpConfigPtrType) ToConnectionBgpConfigPtrOutput() ConnectionBgpConfigPtrOutput {
+	return i.ToConnectionBgpConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *connectionBgpConfigPtrType) ToConnectionBgpConfigPtrOutputWithContext(ctx context.Context) ConnectionBgpConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionBgpConfigPtrOutput)
+}
+
+type ConnectionBgpConfigOutput struct{ *pulumi.OutputState }
+
+func (ConnectionBgpConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectionBgpConfig)(nil)).Elem()
+}
+
+func (o ConnectionBgpConfigOutput) ToConnectionBgpConfigOutput() ConnectionBgpConfigOutput {
+	return o
+}
+
+func (o ConnectionBgpConfigOutput) ToConnectionBgpConfigOutputWithContext(ctx context.Context) ConnectionBgpConfigOutput {
+	return o
+}
+
+func (o ConnectionBgpConfigOutput) ToConnectionBgpConfigPtrOutput() ConnectionBgpConfigPtrOutput {
+	return o.ToConnectionBgpConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectionBgpConfigOutput) ToConnectionBgpConfigPtrOutputWithContext(ctx context.Context) ConnectionBgpConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectionBgpConfig) *ConnectionBgpConfig {
+		return &v
+	}).(ConnectionBgpConfigPtrOutput)
+}
+
+// Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+func (o ConnectionBgpConfigOutput) LocalBgpIp() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectionBgpConfig) string { return v.LocalBgpIp }).(pulumi.StringOutput)
+}
+
+// User side BGP address. It must be allocated from within the BGP tunnel network segment.
+func (o ConnectionBgpConfigOutput) RemoteBgpIp() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectionBgpConfig) string { return v.RemoteBgpIp }).(pulumi.StringOutput)
+}
+
+// BGP tunnel segment.
+func (o ConnectionBgpConfigOutput) TunnelCidr() pulumi.StringOutput {
+	return o.ApplyT(func(v ConnectionBgpConfig) string { return v.TunnelCidr }).(pulumi.StringOutput)
+}
+
+type ConnectionBgpConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectionBgpConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectionBgpConfig)(nil)).Elem()
+}
+
+func (o ConnectionBgpConfigPtrOutput) ToConnectionBgpConfigPtrOutput() ConnectionBgpConfigPtrOutput {
+	return o
+}
+
+func (o ConnectionBgpConfigPtrOutput) ToConnectionBgpConfigPtrOutputWithContext(ctx context.Context) ConnectionBgpConfigPtrOutput {
+	return o
+}
+
+func (o ConnectionBgpConfigPtrOutput) Elem() ConnectionBgpConfigOutput {
+	return o.ApplyT(func(v *ConnectionBgpConfig) ConnectionBgpConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectionBgpConfig
+		return ret
+	}).(ConnectionBgpConfigOutput)
+}
+
+// Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+func (o ConnectionBgpConfigPtrOutput) LocalBgpIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectionBgpConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LocalBgpIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// User side BGP address. It must be allocated from within the BGP tunnel network segment.
+func (o ConnectionBgpConfigPtrOutput) RemoteBgpIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectionBgpConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RemoteBgpIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// BGP tunnel segment.
+func (o ConnectionBgpConfigPtrOutput) TunnelCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectionBgpConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TunnelCidr
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConnectionHealthCheckConfig struct {
+	// Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+	ProbeInterval *int `pulumi:"probeInterval"`
+	// Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+	ProbeThreshold *int `pulumi:"probeThreshold"`
+	// Detection timeout, range [10-5000], Unit: ms.
+	ProbeTimeout *int `pulumi:"probeTimeout"`
+	// Detection mode, default is `NQA`, cannot be modified.
+	ProbeType *string `pulumi:"probeType"`
+}
+
+// ConnectionHealthCheckConfigInput is an input type that accepts ConnectionHealthCheckConfigArgs and ConnectionHealthCheckConfigOutput values.
+// You can construct a concrete instance of `ConnectionHealthCheckConfigInput` via:
+//
+//	ConnectionHealthCheckConfigArgs{...}
+type ConnectionHealthCheckConfigInput interface {
+	pulumi.Input
+
+	ToConnectionHealthCheckConfigOutput() ConnectionHealthCheckConfigOutput
+	ToConnectionHealthCheckConfigOutputWithContext(context.Context) ConnectionHealthCheckConfigOutput
+}
+
+type ConnectionHealthCheckConfigArgs struct {
+	// Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+	ProbeInterval pulumi.IntPtrInput `pulumi:"probeInterval"`
+	// Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+	ProbeThreshold pulumi.IntPtrInput `pulumi:"probeThreshold"`
+	// Detection timeout, range [10-5000], Unit: ms.
+	ProbeTimeout pulumi.IntPtrInput `pulumi:"probeTimeout"`
+	// Detection mode, default is `NQA`, cannot be modified.
+	ProbeType pulumi.StringPtrInput `pulumi:"probeType"`
+}
+
+func (ConnectionHealthCheckConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectionHealthCheckConfig)(nil)).Elem()
+}
+
+func (i ConnectionHealthCheckConfigArgs) ToConnectionHealthCheckConfigOutput() ConnectionHealthCheckConfigOutput {
+	return i.ToConnectionHealthCheckConfigOutputWithContext(context.Background())
+}
+
+func (i ConnectionHealthCheckConfigArgs) ToConnectionHealthCheckConfigOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionHealthCheckConfigOutput)
+}
+
+func (i ConnectionHealthCheckConfigArgs) ToConnectionHealthCheckConfigPtrOutput() ConnectionHealthCheckConfigPtrOutput {
+	return i.ToConnectionHealthCheckConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ConnectionHealthCheckConfigArgs) ToConnectionHealthCheckConfigPtrOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionHealthCheckConfigOutput).ToConnectionHealthCheckConfigPtrOutputWithContext(ctx)
+}
+
+// ConnectionHealthCheckConfigPtrInput is an input type that accepts ConnectionHealthCheckConfigArgs, ConnectionHealthCheckConfigPtr and ConnectionHealthCheckConfigPtrOutput values.
+// You can construct a concrete instance of `ConnectionHealthCheckConfigPtrInput` via:
+//
+//	        ConnectionHealthCheckConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConnectionHealthCheckConfigPtrInput interface {
+	pulumi.Input
+
+	ToConnectionHealthCheckConfigPtrOutput() ConnectionHealthCheckConfigPtrOutput
+	ToConnectionHealthCheckConfigPtrOutputWithContext(context.Context) ConnectionHealthCheckConfigPtrOutput
+}
+
+type connectionHealthCheckConfigPtrType ConnectionHealthCheckConfigArgs
+
+func ConnectionHealthCheckConfigPtr(v *ConnectionHealthCheckConfigArgs) ConnectionHealthCheckConfigPtrInput {
+	return (*connectionHealthCheckConfigPtrType)(v)
+}
+
+func (*connectionHealthCheckConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectionHealthCheckConfig)(nil)).Elem()
+}
+
+func (i *connectionHealthCheckConfigPtrType) ToConnectionHealthCheckConfigPtrOutput() ConnectionHealthCheckConfigPtrOutput {
+	return i.ToConnectionHealthCheckConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *connectionHealthCheckConfigPtrType) ToConnectionHealthCheckConfigPtrOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConnectionHealthCheckConfigPtrOutput)
+}
+
+type ConnectionHealthCheckConfigOutput struct{ *pulumi.OutputState }
+
+func (ConnectionHealthCheckConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConnectionHealthCheckConfig)(nil)).Elem()
+}
+
+func (o ConnectionHealthCheckConfigOutput) ToConnectionHealthCheckConfigOutput() ConnectionHealthCheckConfigOutput {
+	return o
+}
+
+func (o ConnectionHealthCheckConfigOutput) ToConnectionHealthCheckConfigOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigOutput {
+	return o
+}
+
+func (o ConnectionHealthCheckConfigOutput) ToConnectionHealthCheckConfigPtrOutput() ConnectionHealthCheckConfigPtrOutput {
+	return o.ToConnectionHealthCheckConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ConnectionHealthCheckConfigOutput) ToConnectionHealthCheckConfigPtrOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConnectionHealthCheckConfig) *ConnectionHealthCheckConfig {
+		return &v
+	}).(ConnectionHealthCheckConfigPtrOutput)
+}
+
+// Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+func (o ConnectionHealthCheckConfigOutput) ProbeInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConnectionHealthCheckConfig) *int { return v.ProbeInterval }).(pulumi.IntPtrOutput)
+}
+
+// Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+func (o ConnectionHealthCheckConfigOutput) ProbeThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConnectionHealthCheckConfig) *int { return v.ProbeThreshold }).(pulumi.IntPtrOutput)
+}
+
+// Detection timeout, range [10-5000], Unit: ms.
+func (o ConnectionHealthCheckConfigOutput) ProbeTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ConnectionHealthCheckConfig) *int { return v.ProbeTimeout }).(pulumi.IntPtrOutput)
+}
+
+// Detection mode, default is `NQA`, cannot be modified.
+func (o ConnectionHealthCheckConfigOutput) ProbeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConnectionHealthCheckConfig) *string { return v.ProbeType }).(pulumi.StringPtrOutput)
+}
+
+type ConnectionHealthCheckConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ConnectionHealthCheckConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConnectionHealthCheckConfig)(nil)).Elem()
+}
+
+func (o ConnectionHealthCheckConfigPtrOutput) ToConnectionHealthCheckConfigPtrOutput() ConnectionHealthCheckConfigPtrOutput {
+	return o
+}
+
+func (o ConnectionHealthCheckConfigPtrOutput) ToConnectionHealthCheckConfigPtrOutputWithContext(ctx context.Context) ConnectionHealthCheckConfigPtrOutput {
+	return o
+}
+
+func (o ConnectionHealthCheckConfigPtrOutput) Elem() ConnectionHealthCheckConfigOutput {
+	return o.ApplyT(func(v *ConnectionHealthCheckConfig) ConnectionHealthCheckConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ConnectionHealthCheckConfig
+		return ret
+	}).(ConnectionHealthCheckConfigOutput)
+}
+
+// Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+func (o ConnectionHealthCheckConfigPtrOutput) ProbeInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectionHealthCheckConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProbeInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+func (o ConnectionHealthCheckConfigPtrOutput) ProbeThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectionHealthCheckConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProbeThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Detection timeout, range [10-5000], Unit: ms.
+func (o ConnectionHealthCheckConfigPtrOutput) ProbeTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ConnectionHealthCheckConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProbeTimeout
+	}).(pulumi.IntPtrOutput)
+}
+
+// Detection mode, default is `NQA`, cannot be modified.
+func (o ConnectionHealthCheckConfigPtrOutput) ProbeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConnectionHealthCheckConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ProbeType
+	}).(pulumi.StringPtrOutput)
+}
+
 type ConnectionSecurityGroupPolicy struct {
 	// Local cidr block.
 	LocalCidrBlock string `pulumi:"localCidrBlock"`
@@ -1428,6 +1797,10 @@ func (o GetGatewaysGatewayListArrayOutput) Index(i pulumi.IntInput) GetGatewaysG
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionBgpConfigInput)(nil)).Elem(), ConnectionBgpConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionBgpConfigPtrInput)(nil)).Elem(), ConnectionBgpConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionHealthCheckConfigInput)(nil)).Elem(), ConnectionHealthCheckConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionHealthCheckConfigPtrInput)(nil)).Elem(), ConnectionHealthCheckConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyArrayInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput)(nil)).Elem(), CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{})
@@ -1444,6 +1817,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewayRoutesVpnGatewayRouteListArrayInput)(nil)).Elem(), GetGatewayRoutesVpnGatewayRouteListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysGatewayListInput)(nil)).Elem(), GetGatewaysGatewayListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGatewaysGatewayListArrayInput)(nil)).Elem(), GetGatewaysGatewayListArray{})
+	pulumi.RegisterOutputType(ConnectionBgpConfigOutput{})
+	pulumi.RegisterOutputType(ConnectionBgpConfigPtrOutput{})
+	pulumi.RegisterOutputType(ConnectionHealthCheckConfigOutput{})
+	pulumi.RegisterOutputType(ConnectionHealthCheckConfigPtrOutput{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyOutput{})
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyArrayOutput{})
 	pulumi.RegisterOutputType(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput{})
