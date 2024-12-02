@@ -72,7 +72,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-		_, err = cos.NewBucket(ctx, "myBucket", &Cos.BucketArgs{
+		_, err = cos.NewBucket(ctx, "myBucket", &cos.BucketArgs{
 			Acl:    pulumi.String("private"),
 			Bucket: pulumi.String(fmt.Sprintf("%v%v", "pulumi-created-", info.AppId)),
 		})
