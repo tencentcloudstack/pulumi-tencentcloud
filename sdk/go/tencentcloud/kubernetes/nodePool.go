@@ -20,6 +20,8 @@ import (
 //
 // > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
 //
+// > **NOTE:**  There are two parameters `waitNodeReady` and `scaleTolerance` to ensure better management of node pool scaling operations. If this parameter is set, when creating resources, if the set criteria are not met, the resources will be marked as `tainted`.
+//
 // ## Example Usage
 //
 // <!--Start PulumiCodeChooser -->
@@ -207,6 +209,91 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewNodePool(ctx, "example", &Kubernetes.NodePoolArgs{
+//				ClusterId: pulumi.Any(tencentcloud_kubernetes_cluster.Managed_cluster.Id),
+//				MaxSize:   pulumi.Int(100),
+//				MinSize:   pulumi.Int(1),
+//				VpcId:     pulumi.Any(data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id),
+//				SubnetIds: pulumi.StringArray{
+//					data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
+//				},
+//				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
+//				DesiredCapacity:       pulumi.Int(50),
+//				EnableAutoScale:       pulumi.Bool(false),
+//				WaitNodeReady:         pulumi.Bool(true),
+//				ScaleTolerance:        pulumi.Int(90),
+//				MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
+//				NodeOs:                pulumi.String("img-6n21msk1"),
+//				DeleteKeepInstance:    pulumi.Bool(false),
+//				AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
+//					InstanceType:   pulumi.Any(_var.Default_instance_type),
+//					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
+//					SystemDiskSize: pulumi.Int(50),
+//					OrderlySecurityGroupIds: pulumi.StringArray{
+//						pulumi.String("sg-bw28gmso"),
+//					},
+//					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
+//						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
+//							DiskType:           pulumi.String("CLOUD_PREMIUM"),
+//							DiskSize:           pulumi.Int(50),
+//							DeleteWithInstance: pulumi.Bool(true),
+//						},
+//					},
+//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					InternetMaxBandwidthOut: pulumi.Int(10),
+//					PublicIpAssigned:        pulumi.Bool(true),
+//					Password:                pulumi.String("test123#"),
+//					EnhancedSecurityService: pulumi.Bool(false),
+//					EnhancedMonitorService:  pulumi.Bool(false),
+//					HostName:                pulumi.String("12.123.0.0"),
+//					HostNameStyle:           pulumi.String("ORIGINAL"),
+//				},
+//				Labels: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//				Taints: kubernetes.NodePoolTaintArray{
+//					&kubernetes.NodePoolTaintArgs{
+//						Key:    pulumi.String("test_taint"),
+//						Value:  pulumi.String("taint_value"),
+//						Effect: pulumi.String("PreferNoSchedule"),
+//					},
+//					&kubernetes.NodePoolTaintArgs{
+//						Key:    pulumi.String("test_taint2"),
+//						Value:  pulumi.String("taint_value2"),
+//						Effect: pulumi.String("PreferNoSchedule"),
+//					},
+//				},
+//				NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
+//					DockerGraphPath: pulumi.String("/var/lib/docker"),
+//					ExtraArgs: pulumi.StringArray{
+//						pulumi.String("root-dir=/var/lib/kubelet"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // tke node pool can be imported, e.g.
@@ -261,6 +348,8 @@ type NodePool struct {
 	NodeOsType pulumi.StringPtrOutput `pulumi:"nodeOsType"`
 	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
 	RetryPolicy pulumi.StringPtrOutput `pulumi:"retryPolicy"`
+	// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+	ScaleTolerance pulumi.IntPtrOutput `pulumi:"scaleTolerance"`
 	// Name of relative scaling group.
 	ScalingGroupName pulumi.StringOutput `pulumi:"scalingGroupName"`
 	// Project ID the scaling group belongs to.
@@ -281,6 +370,8 @@ type NodePool struct {
 	Unschedulable pulumi.IntPtrOutput `pulumi:"unschedulable"`
 	// ID of VPC network.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+	WaitNodeReady pulumi.BoolPtrOutput `pulumi:"waitNodeReady"`
 	// List of auto scaling group available zones, for Basic network it is required.
 	Zones pulumi.StringArrayOutput `pulumi:"zones"`
 }
@@ -374,6 +465,8 @@ type nodePoolState struct {
 	NodeOsType *string `pulumi:"nodeOsType"`
 	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
 	RetryPolicy *string `pulumi:"retryPolicy"`
+	// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+	ScaleTolerance *int `pulumi:"scaleTolerance"`
 	// Name of relative scaling group.
 	ScalingGroupName *string `pulumi:"scalingGroupName"`
 	// Project ID the scaling group belongs to.
@@ -394,6 +487,8 @@ type nodePoolState struct {
 	Unschedulable *int `pulumi:"unschedulable"`
 	// ID of VPC network.
 	VpcId *string `pulumi:"vpcId"`
+	// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+	WaitNodeReady *bool `pulumi:"waitNodeReady"`
 	// List of auto scaling group available zones, for Basic network it is required.
 	Zones []string `pulumi:"zones"`
 }
@@ -443,6 +538,8 @@ type NodePoolState struct {
 	NodeOsType pulumi.StringPtrInput
 	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
 	RetryPolicy pulumi.StringPtrInput
+	// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+	ScaleTolerance pulumi.IntPtrInput
 	// Name of relative scaling group.
 	ScalingGroupName pulumi.StringPtrInput
 	// Project ID the scaling group belongs to.
@@ -463,6 +560,8 @@ type NodePoolState struct {
 	Unschedulable pulumi.IntPtrInput
 	// ID of VPC network.
 	VpcId pulumi.StringPtrInput
+	// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+	WaitNodeReady pulumi.BoolPtrInput
 	// List of auto scaling group available zones, for Basic network it is required.
 	Zones pulumi.StringArrayInput
 }
@@ -506,6 +605,8 @@ type nodePoolArgs struct {
 	NodeOsType *string `pulumi:"nodeOsType"`
 	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
 	RetryPolicy *string `pulumi:"retryPolicy"`
+	// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+	ScaleTolerance *int `pulumi:"scaleTolerance"`
 	// Name of relative scaling group.
 	ScalingGroupName *string `pulumi:"scalingGroupName"`
 	// Project ID the scaling group belongs to.
@@ -524,6 +625,8 @@ type nodePoolArgs struct {
 	Unschedulable *int `pulumi:"unschedulable"`
 	// ID of VPC network.
 	VpcId string `pulumi:"vpcId"`
+	// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+	WaitNodeReady *bool `pulumi:"waitNodeReady"`
 	// List of auto scaling group available zones, for Basic network it is required.
 	Zones []string `pulumi:"zones"`
 }
@@ -564,6 +667,8 @@ type NodePoolArgs struct {
 	NodeOsType pulumi.StringPtrInput
 	// Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
 	RetryPolicy pulumi.StringPtrInput
+	// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+	ScaleTolerance pulumi.IntPtrInput
 	// Name of relative scaling group.
 	ScalingGroupName pulumi.StringPtrInput
 	// Project ID the scaling group belongs to.
@@ -582,6 +687,8 @@ type NodePoolArgs struct {
 	Unschedulable pulumi.IntPtrInput
 	// ID of VPC network.
 	VpcId pulumi.StringInput
+	// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+	WaitNodeReady pulumi.BoolPtrInput
 	// List of auto scaling group available zones, for Basic network it is required.
 	Zones pulumi.StringArrayInput
 }
@@ -783,6 +890,11 @@ func (o NodePoolOutput) RetryPolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.StringPtrOutput { return v.RetryPolicy }).(pulumi.StringPtrOutput)
 }
 
+// Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+func (o NodePoolOutput) ScaleTolerance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.IntPtrOutput { return v.ScaleTolerance }).(pulumi.IntPtrOutput)
+}
+
 // Name of relative scaling group.
 func (o NodePoolOutput) ScalingGroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.StringOutput { return v.ScalingGroupName }).(pulumi.StringOutput)
@@ -831,6 +943,11 @@ func (o NodePoolOutput) Unschedulable() pulumi.IntPtrOutput {
 // ID of VPC network.
 func (o NodePoolOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *NodePool) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+func (o NodePoolOutput) WaitNodeReady() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *NodePool) pulumi.BoolPtrOutput { return v.WaitNodeReady }).(pulumi.BoolPtrOutput)
 }
 
 // List of auto scaling group available zones, for Basic network it is required.

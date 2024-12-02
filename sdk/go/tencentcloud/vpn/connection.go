@@ -29,23 +29,34 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Vpn.NewConnection(ctx, "foo", &Vpn.ConnectionArgs{
-//				CustomerGatewayId:       pulumi.String("cgw-xfqag"),
+//			_, err := Vpn.NewConnection(ctx, "example", &Vpn.ConnectionArgs{
+//				CustomerGatewayId: pulumi.String("cgw-e503id2z"),
+//				EnableHealthCheck: pulumi.Bool(true),
+//				HealthCheckConfig: &vpn.ConnectionHealthCheckConfigArgs{
+//					ProbeInterval:  pulumi.Int(5000),
+//					ProbeThreshold: pulumi.Int(3),
+//					ProbeTimeout:   pulumi.Int(150),
+//					ProbeType:      pulumi.String("NQA"),
+//				},
+//				HealthCheckLocalIp:      pulumi.String("169.254.227.187"),
+//				HealthCheckRemoteIp:     pulumi.String("169.254.164.37"),
 //				IkeDhGroupName:          pulumi.String("GROUP2"),
 //				IkeExchangeMode:         pulumi.String("AGGRESSIVE"),
-//				IkeLocalAddress:         pulumi.String("1.1.1.1"),
+//				IkeLocalAddress:         pulumi.String("159.75.204.38"),
 //				IkeLocalIdentity:        pulumi.String("ADDRESS"),
 //				IkeProtoAuthenAlgorithm: pulumi.String("SHA"),
 //				IkeProtoEncryAlgorithm:  pulumi.String("3DES-CBC"),
-//				IkeRemoteAddress:        pulumi.String("2.2.2.2"),
+//				IkeRemoteAddress:        pulumi.String("109.244.60.154"),
 //				IkeRemoteIdentity:       pulumi.String("ADDRESS"),
-//				IkeSaLifetimeSeconds:    pulumi.Int(86401),
+//				IkeSaLifetimeSeconds:    pulumi.Int(86400),
 //				IpsecEncryptAlgorithm:   pulumi.String("3DES-CBC"),
 //				IpsecIntegrityAlgorithm: pulumi.String("SHA1"),
 //				IpsecPfsDhGroup:         pulumi.String("NULL"),
-//				IpsecSaLifetimeSeconds:  pulumi.Int(7200),
-//				IpsecSaLifetimeTraffic:  pulumi.Int(2570),
-//				PreShareKey:             pulumi.String("testt"),
+//				IpsecSaLifetimeSeconds:  pulumi.Int(14400),
+//				IpsecSaLifetimeTraffic:  pulumi.Int(4096000000),
+//				NegotiationType:         pulumi.String("flowTrigger"),
+//				PreShareKey:             pulumi.String("your_pre_share_key"),
+//				RouteType:               pulumi.String("StaticRoute"),
 //				SecurityGroupPolicies: vpn.ConnectionSecurityGroupPolicyArray{
 //					&vpn.ConnectionSecurityGroupPolicyArgs{
 //						LocalCidrBlock: pulumi.String("172.16.0.0/16"),
@@ -55,10 +66,10 @@ import (
 //					},
 //				},
 //				Tags: pulumi.Map{
-//					"test": pulumi.Any("testt"),
+//					"createBy": pulumi.Any("Terraform"),
 //				},
-//				VpcId:        pulumi.String("vpc-dk8zmwuf"),
-//				VpnGatewayId: pulumi.String("vpngw-8ccsnclt"),
+//				VpcId:        pulumi.String("vpc-6ccw0s5l"),
+//				VpnGatewayId: pulumi.String("vpngw-33p5vnwd"),
 //			})
 //			if err != nil {
 //				return err
@@ -80,6 +91,8 @@ import (
 type Connection struct {
 	pulumi.CustomResourceState
 
+	// BGP config.
+	BgpConfig ConnectionBgpConfigOutput `pulumi:"bgpConfig"`
 	// Create time of the VPN connection.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// ID of the customer gateway.
@@ -94,6 +107,8 @@ type Connection struct {
 	EnableHealthCheck pulumi.BoolOutput `pulumi:"enableHealthCheck"`
 	// Encrypt proto of the VPN connection.
 	EncryptProto pulumi.StringOutput `pulumi:"encryptProto"`
+	// VPN channel health check configuration.
+	HealthCheckConfig ConnectionHealthCheckConfigOutput `pulumi:"healthCheckConfig"`
 	// Health check the address of this terminal.
 	HealthCheckLocalIp pulumi.StringOutput `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
@@ -136,11 +151,13 @@ type Connection struct {
 	IsCcnType pulumi.BoolOutput `pulumi:"isCcnType"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+	NegotiationType pulumi.StringOutput `pulumi:"negotiationType"`
 	// Net status of the VPN connection. Valid value: `AVAILABLE`.
 	NetStatus pulumi.StringOutput `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringOutput `pulumi:"preShareKey"`
-	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 	RouteType pulumi.StringOutput `pulumi:"routeType"`
 	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayOutput `pulumi:"securityGroupPolicies"`
@@ -195,6 +212,8 @@ func GetConnection(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Connection resources.
 type connectionState struct {
+	// BGP config.
+	BgpConfig *ConnectionBgpConfig `pulumi:"bgpConfig"`
 	// Create time of the VPN connection.
 	CreateTime *string `pulumi:"createTime"`
 	// ID of the customer gateway.
@@ -209,6 +228,8 @@ type connectionState struct {
 	EnableHealthCheck *bool `pulumi:"enableHealthCheck"`
 	// Encrypt proto of the VPN connection.
 	EncryptProto *string `pulumi:"encryptProto"`
+	// VPN channel health check configuration.
+	HealthCheckConfig *ConnectionHealthCheckConfig `pulumi:"healthCheckConfig"`
 	// Health check the address of this terminal.
 	HealthCheckLocalIp *string `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
@@ -251,11 +272,13 @@ type connectionState struct {
 	IsCcnType *bool `pulumi:"isCcnType"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
+	// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+	NegotiationType *string `pulumi:"negotiationType"`
 	// Net status of the VPN connection. Valid value: `AVAILABLE`.
 	NetStatus *string `pulumi:"netStatus"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey *string `pulumi:"preShareKey"`
-	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 	RouteType *string `pulumi:"routeType"`
 	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
@@ -272,6 +295,8 @@ type connectionState struct {
 }
 
 type ConnectionState struct {
+	// BGP config.
+	BgpConfig ConnectionBgpConfigPtrInput
 	// Create time of the VPN connection.
 	CreateTime pulumi.StringPtrInput
 	// ID of the customer gateway.
@@ -286,6 +311,8 @@ type ConnectionState struct {
 	EnableHealthCheck pulumi.BoolPtrInput
 	// Encrypt proto of the VPN connection.
 	EncryptProto pulumi.StringPtrInput
+	// VPN channel health check configuration.
+	HealthCheckConfig ConnectionHealthCheckConfigPtrInput
 	// Health check the address of this terminal.
 	HealthCheckLocalIp pulumi.StringPtrInput
 	// Health check peer address.
@@ -328,11 +355,13 @@ type ConnectionState struct {
 	IsCcnType pulumi.BoolPtrInput
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
+	// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+	NegotiationType pulumi.StringPtrInput
 	// Net status of the VPN connection. Valid value: `AVAILABLE`.
 	NetStatus pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringPtrInput
-	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 	RouteType pulumi.StringPtrInput
 	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
@@ -353,6 +382,8 @@ func (ConnectionState) ElementType() reflect.Type {
 }
 
 type connectionArgs struct {
+	// BGP config.
+	BgpConfig *ConnectionBgpConfig `pulumi:"bgpConfig"`
 	// ID of the customer gateway.
 	CustomerGatewayId string `pulumi:"customerGatewayId"`
 	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
@@ -363,6 +394,8 @@ type connectionArgs struct {
 	DpdTimeout *int `pulumi:"dpdTimeout"`
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck *bool `pulumi:"enableHealthCheck"`
+	// VPN channel health check configuration.
+	HealthCheckConfig *ConnectionHealthCheckConfig `pulumi:"healthCheckConfig"`
 	// Health check the address of this terminal.
 	HealthCheckLocalIp *string `pulumi:"healthCheckLocalIp"`
 	// Health check peer address.
@@ -403,9 +436,11 @@ type connectionArgs struct {
 	IpsecSaLifetimeTraffic *int `pulumi:"ipsecSaLifetimeTraffic"`
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name *string `pulumi:"name"`
+	// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+	NegotiationType *string `pulumi:"negotiationType"`
 	// Pre-shared key of the VPN connection.
 	PreShareKey string `pulumi:"preShareKey"`
-	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 	RouteType *string `pulumi:"routeType"`
 	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies []ConnectionSecurityGroupPolicy `pulumi:"securityGroupPolicies"`
@@ -419,6 +454,8 @@ type connectionArgs struct {
 
 // The set of arguments for constructing a Connection resource.
 type ConnectionArgs struct {
+	// BGP config.
+	BgpConfig ConnectionBgpConfigPtrInput
 	// ID of the customer gateway.
 	CustomerGatewayId pulumi.StringInput
 	// The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
@@ -429,6 +466,8 @@ type ConnectionArgs struct {
 	DpdTimeout pulumi.IntPtrInput
 	// Whether intra-tunnel health checks are supported.
 	EnableHealthCheck pulumi.BoolPtrInput
+	// VPN channel health check configuration.
+	HealthCheckConfig ConnectionHealthCheckConfigPtrInput
 	// Health check the address of this terminal.
 	HealthCheckLocalIp pulumi.StringPtrInput
 	// Health check peer address.
@@ -469,9 +508,11 @@ type ConnectionArgs struct {
 	IpsecSaLifetimeTraffic pulumi.IntPtrInput
 	// Name of the VPN connection. The length of character is limited to 1-60.
 	Name pulumi.StringPtrInput
+	// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+	NegotiationType pulumi.StringPtrInput
 	// Pre-shared key of the VPN connection.
 	PreShareKey pulumi.StringInput
-	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+	// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 	RouteType pulumi.StringPtrInput
 	// SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
 	SecurityGroupPolicies ConnectionSecurityGroupPolicyArrayInput
@@ -570,6 +611,11 @@ func (o ConnectionOutput) ToConnectionOutputWithContext(ctx context.Context) Con
 	return o
 }
 
+// BGP config.
+func (o ConnectionOutput) BgpConfig() ConnectionBgpConfigOutput {
+	return o.ApplyT(func(v *Connection) ConnectionBgpConfigOutput { return v.BgpConfig }).(ConnectionBgpConfigOutput)
+}
+
 // Create time of the VPN connection.
 func (o ConnectionOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
@@ -603,6 +649,11 @@ func (o ConnectionOutput) EnableHealthCheck() pulumi.BoolOutput {
 // Encrypt proto of the VPN connection.
 func (o ConnectionOutput) EncryptProto() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.EncryptProto }).(pulumi.StringOutput)
+}
+
+// VPN channel health check configuration.
+func (o ConnectionOutput) HealthCheckConfig() ConnectionHealthCheckConfigOutput {
+	return o.ApplyT(func(v *Connection) ConnectionHealthCheckConfigOutput { return v.HealthCheckConfig }).(ConnectionHealthCheckConfigOutput)
 }
 
 // Health check the address of this terminal.
@@ -710,6 +761,11 @@ func (o ConnectionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+func (o ConnectionOutput) NegotiationType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.NegotiationType }).(pulumi.StringOutput)
+}
+
 // Net status of the VPN connection. Valid value: `AVAILABLE`.
 func (o ConnectionOutput) NetStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.NetStatus }).(pulumi.StringOutput)
@@ -720,7 +776,7 @@ func (o ConnectionOutput) PreShareKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.PreShareKey }).(pulumi.StringOutput)
 }
 
-// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+// Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
 func (o ConnectionOutput) RouteType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.RouteType }).(pulumi.StringOutput)
 }

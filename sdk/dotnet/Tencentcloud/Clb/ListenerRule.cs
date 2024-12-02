@@ -215,6 +215,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> ListenerId { get; private set; } = null!;
 
         /// <summary>
+        /// OAuth configuration information.
+        /// </summary>
+        [Output("oauth")]
+        public Output<Outputs.ListenerRuleOauth> Oauth { get; private set; } = null!;
+
+        /// <summary>
         /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         /// </summary>
         [Output("quic")]
@@ -418,6 +424,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ListenerId { get; set; } = null!;
 
         /// <summary>
+        /// OAuth configuration information.
+        /// </summary>
+        [Input("oauth")]
+        public Input<Inputs.ListenerRuleOauthArgs>? Oauth { get; set; }
+
+        /// <summary>
         /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
         /// </summary>
         [Input("quic")]
@@ -574,6 +586,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("listenerId")]
         public Input<string>? ListenerId { get; set; }
+
+        /// <summary>
+        /// OAuth configuration information.
+        /// </summary>
+        [Input("oauth")]
+        public Input<Inputs.ListenerRuleOauthGetArgs>? Oauth { get; set; }
 
         /// <summary>
         /// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.

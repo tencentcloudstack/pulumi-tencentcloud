@@ -5,6 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .custom_domain import *
 from .function import *
 from .function_alias import *
 from .function_event_invoke_config import *

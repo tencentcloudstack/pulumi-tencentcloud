@@ -19,10 +19,12 @@ class ConnectionArgs:
                  customer_gateway_id: pulumi.Input[str],
                  pre_share_key: pulumi.Input[str],
                  vpn_gateway_id: pulumi.Input[str],
+                 bgp_config: Optional[pulumi.Input['ConnectionBgpConfigArgs']] = None,
                  dpd_action: Optional[pulumi.Input[str]] = None,
                  dpd_enable: Optional[pulumi.Input[int]] = None,
                  dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
+                 health_check_config: Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
                  ike_dh_group_name: Optional[pulumi.Input[str]] = None,
@@ -43,6 +45,7 @@ class ConnectionArgs:
                  ipsec_sa_lifetime_seconds: Optional[pulumi.Input[int]] = None,
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 negotiation_type: Optional[pulumi.Input[str]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
                  security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -52,10 +55,12 @@ class ConnectionArgs:
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
         :param pulumi.Input[str] vpn_gateway_id: ID of the VPN gateway.
+        :param pulumi.Input['ConnectionBgpConfigArgs'] bgp_config: BGP config.
         :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
         :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
         :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
+        :param pulumi.Input['ConnectionHealthCheckConfigArgs'] health_check_config: VPN channel health check configuration.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
         :param pulumi.Input[str] ike_dh_group_name: DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
@@ -76,7 +81,8 @@ class ConnectionArgs:
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[str] negotiation_type: The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -84,6 +90,8 @@ class ConnectionArgs:
         pulumi.set(__self__, "customer_gateway_id", customer_gateway_id)
         pulumi.set(__self__, "pre_share_key", pre_share_key)
         pulumi.set(__self__, "vpn_gateway_id", vpn_gateway_id)
+        if bgp_config is not None:
+            pulumi.set(__self__, "bgp_config", bgp_config)
         if dpd_action is not None:
             pulumi.set(__self__, "dpd_action", dpd_action)
         if dpd_enable is not None:
@@ -92,6 +100,8 @@ class ConnectionArgs:
             pulumi.set(__self__, "dpd_timeout", dpd_timeout)
         if enable_health_check is not None:
             pulumi.set(__self__, "enable_health_check", enable_health_check)
+        if health_check_config is not None:
+            pulumi.set(__self__, "health_check_config", health_check_config)
         if health_check_local_ip is not None:
             pulumi.set(__self__, "health_check_local_ip", health_check_local_ip)
         if health_check_remote_ip is not None:
@@ -132,6 +142,8 @@ class ConnectionArgs:
             pulumi.set(__self__, "ipsec_sa_lifetime_traffic", ipsec_sa_lifetime_traffic)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if negotiation_type is not None:
+            pulumi.set(__self__, "negotiation_type", negotiation_type)
         if route_type is not None:
             pulumi.set(__self__, "route_type", route_type)
         if security_group_policies is not None:
@@ -176,6 +188,18 @@ class ConnectionArgs:
     @vpn_gateway_id.setter
     def vpn_gateway_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "vpn_gateway_id", value)
+
+    @property
+    @pulumi.getter(name="bgpConfig")
+    def bgp_config(self) -> Optional[pulumi.Input['ConnectionBgpConfigArgs']]:
+        """
+        BGP config.
+        """
+        return pulumi.get(self, "bgp_config")
+
+    @bgp_config.setter
+    def bgp_config(self, value: Optional[pulumi.Input['ConnectionBgpConfigArgs']]):
+        pulumi.set(self, "bgp_config", value)
 
     @property
     @pulumi.getter(name="dpdAction")
@@ -224,6 +248,18 @@ class ConnectionArgs:
     @enable_health_check.setter
     def enable_health_check(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_health_check", value)
+
+    @property
+    @pulumi.getter(name="healthCheckConfig")
+    def health_check_config(self) -> Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']]:
+        """
+        VPN channel health check configuration.
+        """
+        return pulumi.get(self, "health_check_config")
+
+    @health_check_config.setter
+    def health_check_config(self, value: Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']]):
+        pulumi.set(self, "health_check_config", value)
 
     @property
     @pulumi.getter(name="healthCheckLocalIp")
@@ -466,10 +502,22 @@ class ConnectionArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="negotiationType")
+    def negotiation_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        """
+        return pulumi.get(self, "negotiation_type")
+
+    @negotiation_type.setter
+    def negotiation_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "negotiation_type", value)
+
+    @property
     @pulumi.getter(name="routeType")
     def route_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         """
         return pulumi.get(self, "route_type")
 
@@ -517,6 +565,7 @@ class ConnectionArgs:
 @pulumi.input_type
 class _ConnectionState:
     def __init__(__self__, *,
+                 bgp_config: Optional[pulumi.Input['ConnectionBgpConfigArgs']] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
                  dpd_action: Optional[pulumi.Input[str]] = None,
@@ -524,6 +573,7 @@ class _ConnectionState:
                  dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
                  encrypt_proto: Optional[pulumi.Input[str]] = None,
+                 health_check_config: Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
                  ike_dh_group_name: Optional[pulumi.Input[str]] = None,
@@ -545,6 +595,7 @@ class _ConnectionState:
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  is_ccn_type: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 negotiation_type: Optional[pulumi.Input[str]] = None,
                  net_status: Optional[pulumi.Input[str]] = None,
                  pre_share_key: Optional[pulumi.Input[str]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
@@ -556,6 +607,7 @@ class _ConnectionState:
                  vpn_proto: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Connection resources.
+        :param pulumi.Input['ConnectionBgpConfigArgs'] bgp_config: BGP config.
         :param pulumi.Input[str] create_time: Create time of the VPN connection.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
         :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
@@ -563,6 +615,7 @@ class _ConnectionState:
         :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] encrypt_proto: Encrypt proto of the VPN connection.
+        :param pulumi.Input['ConnectionHealthCheckConfigArgs'] health_check_config: VPN channel health check configuration.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
         :param pulumi.Input[str] ike_dh_group_name: DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
@@ -584,9 +637,10 @@ class _ConnectionState:
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[bool] is_ccn_type: Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
+        :param pulumi.Input[str] negotiation_type: The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
         :param pulumi.Input[str] net_status: Net status of the VPN connection. Valid value: `AVAILABLE`.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         :param pulumi.Input[Sequence[pulumi.Input['ConnectionSecurityGroupPolicyArgs']]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[str] state: State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
@@ -594,6 +648,8 @@ class _ConnectionState:
         :param pulumi.Input[str] vpn_gateway_id: ID of the VPN gateway.
         :param pulumi.Input[str] vpn_proto: Vpn proto of the VPN connection.
         """
+        if bgp_config is not None:
+            pulumi.set(__self__, "bgp_config", bgp_config)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if customer_gateway_id is not None:
@@ -608,6 +664,8 @@ class _ConnectionState:
             pulumi.set(__self__, "enable_health_check", enable_health_check)
         if encrypt_proto is not None:
             pulumi.set(__self__, "encrypt_proto", encrypt_proto)
+        if health_check_config is not None:
+            pulumi.set(__self__, "health_check_config", health_check_config)
         if health_check_local_ip is not None:
             pulumi.set(__self__, "health_check_local_ip", health_check_local_ip)
         if health_check_remote_ip is not None:
@@ -650,6 +708,8 @@ class _ConnectionState:
             pulumi.set(__self__, "is_ccn_type", is_ccn_type)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if negotiation_type is not None:
+            pulumi.set(__self__, "negotiation_type", negotiation_type)
         if net_status is not None:
             pulumi.set(__self__, "net_status", net_status)
         if pre_share_key is not None:
@@ -668,6 +728,18 @@ class _ConnectionState:
             pulumi.set(__self__, "vpn_gateway_id", vpn_gateway_id)
         if vpn_proto is not None:
             pulumi.set(__self__, "vpn_proto", vpn_proto)
+
+    @property
+    @pulumi.getter(name="bgpConfig")
+    def bgp_config(self) -> Optional[pulumi.Input['ConnectionBgpConfigArgs']]:
+        """
+        BGP config.
+        """
+        return pulumi.get(self, "bgp_config")
+
+    @bgp_config.setter
+    def bgp_config(self, value: Optional[pulumi.Input['ConnectionBgpConfigArgs']]):
+        pulumi.set(self, "bgp_config", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -752,6 +824,18 @@ class _ConnectionState:
     @encrypt_proto.setter
     def encrypt_proto(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "encrypt_proto", value)
+
+    @property
+    @pulumi.getter(name="healthCheckConfig")
+    def health_check_config(self) -> Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']]:
+        """
+        VPN channel health check configuration.
+        """
+        return pulumi.get(self, "health_check_config")
+
+    @health_check_config.setter
+    def health_check_config(self, value: Optional[pulumi.Input['ConnectionHealthCheckConfigArgs']]):
+        pulumi.set(self, "health_check_config", value)
 
     @property
     @pulumi.getter(name="healthCheckLocalIp")
@@ -1006,6 +1090,18 @@ class _ConnectionState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="negotiationType")
+    def negotiation_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        """
+        return pulumi.get(self, "negotiation_type")
+
+    @negotiation_type.setter
+    def negotiation_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "negotiation_type", value)
+
+    @property
     @pulumi.getter(name="netStatus")
     def net_status(self) -> Optional[pulumi.Input[str]]:
         """
@@ -1033,7 +1129,7 @@ class _ConnectionState:
     @pulumi.getter(name="routeType")
     def route_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         """
         return pulumi.get(self, "route_type")
 
@@ -1119,11 +1215,13 @@ class Connection(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 bgp_config: Optional[pulumi.Input[pulumi.InputType['ConnectionBgpConfigArgs']]] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
                  dpd_action: Optional[pulumi.Input[str]] = None,
                  dpd_enable: Optional[pulumi.Input[int]] = None,
                  dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
+                 health_check_config: Optional[pulumi.Input[pulumi.InputType['ConnectionHealthCheckConfigArgs']]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
                  ike_dh_group_name: Optional[pulumi.Input[str]] = None,
@@ -1144,6 +1242,7 @@ class Connection(pulumi.CustomResource):
                  ipsec_sa_lifetime_seconds: Optional[pulumi.Input[int]] = None,
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 negotiation_type: Optional[pulumi.Input[str]] = None,
                  pre_share_key: Optional[pulumi.Input[str]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
                  security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]]] = None,
@@ -1161,32 +1260,43 @@ class Connection(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpn.Connection("foo",
-            customer_gateway_id="cgw-xfqag",
+        example = tencentcloud.vpn.Connection("example",
+            customer_gateway_id="cgw-e503id2z",
+            enable_health_check=True,
+            health_check_config=tencentcloud.vpn.ConnectionHealthCheckConfigArgs(
+                probe_interval=5000,
+                probe_threshold=3,
+                probe_timeout=150,
+                probe_type="NQA",
+            ),
+            health_check_local_ip="169.254.227.187",
+            health_check_remote_ip="169.254.164.37",
             ike_dh_group_name="GROUP2",
             ike_exchange_mode="AGGRESSIVE",
-            ike_local_address="1.1.1.1",
+            ike_local_address="159.75.204.38",
             ike_local_identity="ADDRESS",
             ike_proto_authen_algorithm="SHA",
             ike_proto_encry_algorithm="3DES-CBC",
-            ike_remote_address="2.2.2.2",
+            ike_remote_address="109.244.60.154",
             ike_remote_identity="ADDRESS",
-            ike_sa_lifetime_seconds=86401,
+            ike_sa_lifetime_seconds=86400,
             ipsec_encrypt_algorithm="3DES-CBC",
             ipsec_integrity_algorithm="SHA1",
             ipsec_pfs_dh_group="NULL",
-            ipsec_sa_lifetime_seconds=7200,
-            ipsec_sa_lifetime_traffic=2570,
-            pre_share_key="testt",
+            ipsec_sa_lifetime_seconds=14400,
+            ipsec_sa_lifetime_traffic=4096000000,
+            negotiation_type="flowTrigger",
+            pre_share_key="your_pre_share_key",
+            route_type="StaticRoute",
             security_group_policies=[tencentcloud.vpn.ConnectionSecurityGroupPolicyArgs(
                 local_cidr_block="172.16.0.0/16",
                 remote_cidr_blocks=["2.2.2.0/26"],
             )],
             tags={
-                "test": "testt",
+                "createBy": "Terraform",
             },
-            vpc_id="vpc-dk8zmwuf",
-            vpn_gateway_id="vpngw-8ccsnclt")
+            vpc_id="vpc-6ccw0s5l",
+            vpn_gateway_id="vpngw-33p5vnwd")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1200,11 +1310,13 @@ class Connection(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[pulumi.InputType['ConnectionBgpConfigArgs']] bgp_config: BGP config.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
         :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
         :param pulumi.Input[int] dpd_enable: Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
         :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
+        :param pulumi.Input[pulumi.InputType['ConnectionHealthCheckConfigArgs']] health_check_config: VPN channel health check configuration.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
         :param pulumi.Input[str] ike_dh_group_name: DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
@@ -1225,8 +1337,9 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[int] ipsec_sa_lifetime_seconds: SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
+        :param pulumi.Input[str] negotiation_type: The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
         :param pulumi.Input[str] vpc_id: ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
@@ -1248,32 +1361,43 @@ class Connection(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.vpn.Connection("foo",
-            customer_gateway_id="cgw-xfqag",
+        example = tencentcloud.vpn.Connection("example",
+            customer_gateway_id="cgw-e503id2z",
+            enable_health_check=True,
+            health_check_config=tencentcloud.vpn.ConnectionHealthCheckConfigArgs(
+                probe_interval=5000,
+                probe_threshold=3,
+                probe_timeout=150,
+                probe_type="NQA",
+            ),
+            health_check_local_ip="169.254.227.187",
+            health_check_remote_ip="169.254.164.37",
             ike_dh_group_name="GROUP2",
             ike_exchange_mode="AGGRESSIVE",
-            ike_local_address="1.1.1.1",
+            ike_local_address="159.75.204.38",
             ike_local_identity="ADDRESS",
             ike_proto_authen_algorithm="SHA",
             ike_proto_encry_algorithm="3DES-CBC",
-            ike_remote_address="2.2.2.2",
+            ike_remote_address="109.244.60.154",
             ike_remote_identity="ADDRESS",
-            ike_sa_lifetime_seconds=86401,
+            ike_sa_lifetime_seconds=86400,
             ipsec_encrypt_algorithm="3DES-CBC",
             ipsec_integrity_algorithm="SHA1",
             ipsec_pfs_dh_group="NULL",
-            ipsec_sa_lifetime_seconds=7200,
-            ipsec_sa_lifetime_traffic=2570,
-            pre_share_key="testt",
+            ipsec_sa_lifetime_seconds=14400,
+            ipsec_sa_lifetime_traffic=4096000000,
+            negotiation_type="flowTrigger",
+            pre_share_key="your_pre_share_key",
+            route_type="StaticRoute",
             security_group_policies=[tencentcloud.vpn.ConnectionSecurityGroupPolicyArgs(
                 local_cidr_block="172.16.0.0/16",
                 remote_cidr_blocks=["2.2.2.0/26"],
             )],
             tags={
-                "test": "testt",
+                "createBy": "Terraform",
             },
-            vpc_id="vpc-dk8zmwuf",
-            vpn_gateway_id="vpngw-8ccsnclt")
+            vpc_id="vpc-6ccw0s5l",
+            vpn_gateway_id="vpngw-33p5vnwd")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -1300,11 +1424,13 @@ class Connection(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 bgp_config: Optional[pulumi.Input[pulumi.InputType['ConnectionBgpConfigArgs']]] = None,
                  customer_gateway_id: Optional[pulumi.Input[str]] = None,
                  dpd_action: Optional[pulumi.Input[str]] = None,
                  dpd_enable: Optional[pulumi.Input[int]] = None,
                  dpd_timeout: Optional[pulumi.Input[int]] = None,
                  enable_health_check: Optional[pulumi.Input[bool]] = None,
+                 health_check_config: Optional[pulumi.Input[pulumi.InputType['ConnectionHealthCheckConfigArgs']]] = None,
                  health_check_local_ip: Optional[pulumi.Input[str]] = None,
                  health_check_remote_ip: Optional[pulumi.Input[str]] = None,
                  ike_dh_group_name: Optional[pulumi.Input[str]] = None,
@@ -1325,6 +1451,7 @@ class Connection(pulumi.CustomResource):
                  ipsec_sa_lifetime_seconds: Optional[pulumi.Input[int]] = None,
                  ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 negotiation_type: Optional[pulumi.Input[str]] = None,
                  pre_share_key: Optional[pulumi.Input[str]] = None,
                  route_type: Optional[pulumi.Input[str]] = None,
                  security_group_policies: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]]] = None,
@@ -1340,6 +1467,7 @@ class Connection(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ConnectionArgs.__new__(ConnectionArgs)
 
+            __props__.__dict__["bgp_config"] = bgp_config
             if customer_gateway_id is None and not opts.urn:
                 raise TypeError("Missing required property 'customer_gateway_id'")
             __props__.__dict__["customer_gateway_id"] = customer_gateway_id
@@ -1347,6 +1475,7 @@ class Connection(pulumi.CustomResource):
             __props__.__dict__["dpd_enable"] = dpd_enable
             __props__.__dict__["dpd_timeout"] = dpd_timeout
             __props__.__dict__["enable_health_check"] = enable_health_check
+            __props__.__dict__["health_check_config"] = health_check_config
             __props__.__dict__["health_check_local_ip"] = health_check_local_ip
             __props__.__dict__["health_check_remote_ip"] = health_check_remote_ip
             __props__.__dict__["ike_dh_group_name"] = ike_dh_group_name
@@ -1367,6 +1496,7 @@ class Connection(pulumi.CustomResource):
             __props__.__dict__["ipsec_sa_lifetime_seconds"] = ipsec_sa_lifetime_seconds
             __props__.__dict__["ipsec_sa_lifetime_traffic"] = ipsec_sa_lifetime_traffic
             __props__.__dict__["name"] = name
+            __props__.__dict__["negotiation_type"] = negotiation_type
             if pre_share_key is None and not opts.urn:
                 raise TypeError("Missing required property 'pre_share_key'")
             __props__.__dict__["pre_share_key"] = pre_share_key
@@ -1393,6 +1523,7 @@ class Connection(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            bgp_config: Optional[pulumi.Input[pulumi.InputType['ConnectionBgpConfigArgs']]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             customer_gateway_id: Optional[pulumi.Input[str]] = None,
             dpd_action: Optional[pulumi.Input[str]] = None,
@@ -1400,6 +1531,7 @@ class Connection(pulumi.CustomResource):
             dpd_timeout: Optional[pulumi.Input[int]] = None,
             enable_health_check: Optional[pulumi.Input[bool]] = None,
             encrypt_proto: Optional[pulumi.Input[str]] = None,
+            health_check_config: Optional[pulumi.Input[pulumi.InputType['ConnectionHealthCheckConfigArgs']]] = None,
             health_check_local_ip: Optional[pulumi.Input[str]] = None,
             health_check_remote_ip: Optional[pulumi.Input[str]] = None,
             ike_dh_group_name: Optional[pulumi.Input[str]] = None,
@@ -1421,6 +1553,7 @@ class Connection(pulumi.CustomResource):
             ipsec_sa_lifetime_traffic: Optional[pulumi.Input[int]] = None,
             is_ccn_type: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            negotiation_type: Optional[pulumi.Input[str]] = None,
             net_status: Optional[pulumi.Input[str]] = None,
             pre_share_key: Optional[pulumi.Input[str]] = None,
             route_type: Optional[pulumi.Input[str]] = None,
@@ -1437,6 +1570,7 @@ class Connection(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[pulumi.InputType['ConnectionBgpConfigArgs']] bgp_config: BGP config.
         :param pulumi.Input[str] create_time: Create time of the VPN connection.
         :param pulumi.Input[str] customer_gateway_id: ID of the customer gateway.
         :param pulumi.Input[str] dpd_action: The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
@@ -1444,6 +1578,7 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[int] dpd_timeout: DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
         :param pulumi.Input[bool] enable_health_check: Whether intra-tunnel health checks are supported.
         :param pulumi.Input[str] encrypt_proto: Encrypt proto of the VPN connection.
+        :param pulumi.Input[pulumi.InputType['ConnectionHealthCheckConfigArgs']] health_check_config: VPN channel health check configuration.
         :param pulumi.Input[str] health_check_local_ip: Health check the address of this terminal.
         :param pulumi.Input[str] health_check_remote_ip: Health check peer address.
         :param pulumi.Input[str] ike_dh_group_name: DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
@@ -1465,9 +1600,10 @@ class Connection(pulumi.CustomResource):
         :param pulumi.Input[int] ipsec_sa_lifetime_traffic: SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
         :param pulumi.Input[bool] is_ccn_type: Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpc_id`. If `is_ccn_type` is true, modification of `vpc_id` will be ignored.
         :param pulumi.Input[str] name: Name of the VPN connection. The length of character is limited to 1-60.
+        :param pulumi.Input[str] negotiation_type: The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
         :param pulumi.Input[str] net_status: Net status of the VPN connection. Valid value: `AVAILABLE`.
         :param pulumi.Input[str] pre_share_key: Pre-shared key of the VPN connection.
-        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        :param pulumi.Input[str] route_type: Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ConnectionSecurityGroupPolicyArgs']]]] security_group_policies: SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
         :param pulumi.Input[str] state: State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
         :param pulumi.Input[Mapping[str, Any]] tags: A list of tags used to associate different resources.
@@ -1479,6 +1615,7 @@ class Connection(pulumi.CustomResource):
 
         __props__ = _ConnectionState.__new__(_ConnectionState)
 
+        __props__.__dict__["bgp_config"] = bgp_config
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["customer_gateway_id"] = customer_gateway_id
         __props__.__dict__["dpd_action"] = dpd_action
@@ -1486,6 +1623,7 @@ class Connection(pulumi.CustomResource):
         __props__.__dict__["dpd_timeout"] = dpd_timeout
         __props__.__dict__["enable_health_check"] = enable_health_check
         __props__.__dict__["encrypt_proto"] = encrypt_proto
+        __props__.__dict__["health_check_config"] = health_check_config
         __props__.__dict__["health_check_local_ip"] = health_check_local_ip
         __props__.__dict__["health_check_remote_ip"] = health_check_remote_ip
         __props__.__dict__["ike_dh_group_name"] = ike_dh_group_name
@@ -1507,6 +1645,7 @@ class Connection(pulumi.CustomResource):
         __props__.__dict__["ipsec_sa_lifetime_traffic"] = ipsec_sa_lifetime_traffic
         __props__.__dict__["is_ccn_type"] = is_ccn_type
         __props__.__dict__["name"] = name
+        __props__.__dict__["negotiation_type"] = negotiation_type
         __props__.__dict__["net_status"] = net_status
         __props__.__dict__["pre_share_key"] = pre_share_key
         __props__.__dict__["route_type"] = route_type
@@ -1517,6 +1656,14 @@ class Connection(pulumi.CustomResource):
         __props__.__dict__["vpn_gateway_id"] = vpn_gateway_id
         __props__.__dict__["vpn_proto"] = vpn_proto
         return Connection(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="bgpConfig")
+    def bgp_config(self) -> pulumi.Output['outputs.ConnectionBgpConfig']:
+        """
+        BGP config.
+        """
+        return pulumi.get(self, "bgp_config")
 
     @property
     @pulumi.getter(name="createTime")
@@ -1573,6 +1720,14 @@ class Connection(pulumi.CustomResource):
         Encrypt proto of the VPN connection.
         """
         return pulumi.get(self, "encrypt_proto")
+
+    @property
+    @pulumi.getter(name="healthCheckConfig")
+    def health_check_config(self) -> pulumi.Output['outputs.ConnectionHealthCheckConfig']:
+        """
+        VPN channel health check configuration.
+        """
+        return pulumi.get(self, "health_check_config")
 
     @property
     @pulumi.getter(name="healthCheckLocalIp")
@@ -1743,6 +1898,14 @@ class Connection(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="negotiationType")
+    def negotiation_type(self) -> pulumi.Output[str]:
+        """
+        The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+        """
+        return pulumi.get(self, "negotiation_type")
+
+    @property
     @pulumi.getter(name="netStatus")
     def net_status(self) -> pulumi.Output[str]:
         """
@@ -1762,7 +1925,7 @@ class Connection(pulumi.CustomResource):
     @pulumi.getter(name="routeType")
     def route_type(self) -> pulumi.Output[str]:
         """
-        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+        Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
         """
         return pulumi.get(self, "route_type")
 

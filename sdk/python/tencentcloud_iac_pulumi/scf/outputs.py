@@ -11,6 +11,10 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'CustomDomainCertConfig',
+    'CustomDomainEndpointsConfig',
+    'CustomDomainEndpointsConfigPathRewrite',
+    'CustomDomainWafConfig',
     'FunctionAliasRoutingConfig',
     'FunctionAliasRoutingConfigAdditionalVersionMatch',
     'FunctionAliasRoutingConfigAdditionalVersionWeight',
@@ -48,6 +52,216 @@ __all__ = [
     'GetTriggersFilterResult',
     'GetTriggersTriggerResult',
 ]
+
+@pulumi.output_type
+class CustomDomainCertConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "certificateId":
+            suggest = "certificate_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomDomainCertConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomDomainCertConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomDomainCertConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 certificate_id: Optional[str] = None):
+        """
+        :param str certificate_id: SSL Certificates ID.
+        """
+        if certificate_id is not None:
+            pulumi.set(__self__, "certificate_id", certificate_id)
+
+    @property
+    @pulumi.getter(name="certificateId")
+    def certificate_id(self) -> Optional[str]:
+        """
+        SSL Certificates ID.
+        """
+        return pulumi.get(self, "certificate_id")
+
+
+@pulumi.output_type
+class CustomDomainEndpointsConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "functionName":
+            suggest = "function_name"
+        elif key == "pathMatch":
+            suggest = "path_match"
+        elif key == "pathRewrites":
+            suggest = "path_rewrites"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomDomainEndpointsConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomDomainEndpointsConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomDomainEndpointsConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 function_name: str,
+                 namespace: str,
+                 path_match: str,
+                 qualifier: str,
+                 path_rewrites: Optional[Sequence['outputs.CustomDomainEndpointsConfigPathRewrite']] = None):
+        """
+        :param str function_name: Function name.
+        :param str namespace: Function namespace.
+        :param str path_match: Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        :param str qualifier: Function alias or version.
+        :param Sequence['CustomDomainEndpointsConfigPathRewriteArgs'] path_rewrites: Path rewriting policy.
+        """
+        pulumi.set(__self__, "function_name", function_name)
+        pulumi.set(__self__, "namespace", namespace)
+        pulumi.set(__self__, "path_match", path_match)
+        pulumi.set(__self__, "qualifier", qualifier)
+        if path_rewrites is not None:
+            pulumi.set(__self__, "path_rewrites", path_rewrites)
+
+    @property
+    @pulumi.getter(name="functionName")
+    def function_name(self) -> str:
+        """
+        Function name.
+        """
+        return pulumi.get(self, "function_name")
+
+    @property
+    @pulumi.getter
+    def namespace(self) -> str:
+        """
+        Function namespace.
+        """
+        return pulumi.get(self, "namespace")
+
+    @property
+    @pulumi.getter(name="pathMatch")
+    def path_match(self) -> str:
+        """
+        Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        """
+        return pulumi.get(self, "path_match")
+
+    @property
+    @pulumi.getter
+    def qualifier(self) -> str:
+        """
+        Function alias or version.
+        """
+        return pulumi.get(self, "qualifier")
+
+    @property
+    @pulumi.getter(name="pathRewrites")
+    def path_rewrites(self) -> Optional[Sequence['outputs.CustomDomainEndpointsConfigPathRewrite']]:
+        """
+        Path rewriting policy.
+        """
+        return pulumi.get(self, "path_rewrites")
+
+
+@pulumi.output_type
+class CustomDomainEndpointsConfigPathRewrite(dict):
+    def __init__(__self__, *,
+                 path: str,
+                 rewrite: str,
+                 type: str):
+        """
+        :param str path: Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        :param str rewrite: Replacement values: such as/, /$.
+        :param str type: Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+        """
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "rewrite", rewrite)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        """
+        Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def rewrite(self) -> str:
+        """
+        Replacement values: such as/, /$.
+        """
+        return pulumi.get(self, "rewrite")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class CustomDomainWafConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "wafInstanceId":
+            suggest = "waf_instance_id"
+        elif key == "wafOpen":
+            suggest = "waf_open"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomDomainWafConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomDomainWafConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomDomainWafConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 waf_instance_id: Optional[str] = None,
+                 waf_open: Optional[str] = None):
+        """
+        :param str waf_instance_id: Web Application Firewall Instance ID.
+        :param str waf_open: Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+        """
+        if waf_instance_id is not None:
+            pulumi.set(__self__, "waf_instance_id", waf_instance_id)
+        if waf_open is not None:
+            pulumi.set(__self__, "waf_open", waf_open)
+
+    @property
+    @pulumi.getter(name="wafInstanceId")
+    def waf_instance_id(self) -> Optional[str]:
+        """
+        Web Application Firewall Instance ID.
+        """
+        return pulumi.get(self, "waf_instance_id")
+
+    @property
+    @pulumi.getter(name="wafOpen")
+    def waf_open(self) -> Optional[str]:
+        """
+        Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+        """
+        return pulumi.get(self, "waf_open")
+
 
 @pulumi.output_type
 class FunctionAliasRoutingConfig(dict):

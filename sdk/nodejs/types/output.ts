@@ -17640,6 +17640,17 @@ export namespace Clb {
         subnetId: string;
     }
 
+    export interface ListenerRuleOauth {
+        /**
+         * Enable or disable authentication. True: Enabled; False: Disabled.
+         */
+        oauthEnable: boolean;
+        /**
+         * After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+         */
+        oauthFailureStatus: string;
+    }
+
     export interface ReplaceCertForLbsCertificate {
         /**
          * Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
@@ -19380,6 +19391,51 @@ export namespace Cls {
          * Machine description list.
          */
         values: string[];
+    }
+
+    export interface NoticeContentNoticeContents {
+        /**
+         * Template for Alarm Recovery Notification Content.
+         */
+        recoveryContent?: outputs.Cls.NoticeContentNoticeContentsRecoveryContent;
+        /**
+         * Alarm triggered notification content template.
+         */
+        triggerContent?: outputs.Cls.NoticeContentNoticeContentsTriggerContent;
+        /**
+         * Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+         */
+        type: string;
+    }
+
+    export interface NoticeContentNoticeContentsRecoveryContent {
+        /**
+         * Notification content template body information.
+         */
+        content?: string;
+        /**
+         * Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+         */
+        headers?: string[];
+        /**
+         * Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+         */
+        title?: string;
+    }
+
+    export interface NoticeContentNoticeContentsTriggerContent {
+        /**
+         * Notification content template body information.
+         */
+        content?: string;
+        /**
+         * Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+         */
+        headers?: string[];
+        /**
+         * Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+         */
+        title?: string;
     }
 
     export interface ScheduledSqlDstResource {
@@ -62593,6 +62649,62 @@ export namespace Rum {
 }
 
 export namespace Scf {
+    export interface CustomDomainCertConfig {
+        /**
+         * SSL Certificates ID.
+         */
+        certificateId?: string;
+    }
+
+    export interface CustomDomainEndpointsConfig {
+        /**
+         * Function name.
+         */
+        functionName: string;
+        /**
+         * Function namespace.
+         */
+        namespace: string;
+        /**
+         * Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+         */
+        pathMatch: string;
+        /**
+         * Path rewriting policy.
+         */
+        pathRewrites?: outputs.Scf.CustomDomainEndpointsConfigPathRewrite[];
+        /**
+         * Function alias or version.
+         */
+        qualifier: string;
+    }
+
+    export interface CustomDomainEndpointsConfigPathRewrite {
+        /**
+         * Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+         */
+        path: string;
+        /**
+         * Replacement values: such as/, /$.
+         */
+        rewrite: string;
+        /**
+         * Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+         */
+        type: string;
+    }
+
+    export interface CustomDomainWafConfig {
+        /**
+         * Web Application Firewall Instance ID.
+         */
+        wafInstanceId?: string;
+        /**
+         * Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+         */
+        wafOpen?: string;
+    }
+
     export interface FunctionAliasRoutingConfig {
         /**
          * Additional version with rule-based routing.
@@ -78304,6 +78416,40 @@ export namespace Vpc {
 }
 
 export namespace Vpn {
+    export interface ConnectionBgpConfig {
+        /**
+         * Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+         */
+        localBgpIp: string;
+        /**
+         * User side BGP address. It must be allocated from within the BGP tunnel network segment.
+         */
+        remoteBgpIp: string;
+        /**
+         * BGP tunnel segment.
+         */
+        tunnelCidr: string;
+    }
+
+    export interface ConnectionHealthCheckConfig {
+        /**
+         * Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+         */
+        probeInterval?: number;
+        /**
+         * Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+         */
+        probeThreshold?: number;
+        /**
+         * Detection timeout, range [10-5000], Unit: ms.
+         */
+        probeTimeout?: number;
+        /**
+         * Detection mode, default is `NQA`, cannot be modified.
+         */
+        probeType?: string;
+    }
+
     export interface ConnectionSecurityGroupPolicy {
         /**
          * Local cidr block.

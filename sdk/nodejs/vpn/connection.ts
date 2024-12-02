@@ -16,32 +16,43 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.vpn.Connection("foo", {
- *     customerGatewayId: "cgw-xfqag",
+ * const example = new tencentcloud.vpn.Connection("example", {
+ *     customerGatewayId: "cgw-e503id2z",
+ *     enableHealthCheck: true,
+ *     healthCheckConfig: {
+ *         probeInterval: 5000,
+ *         probeThreshold: 3,
+ *         probeTimeout: 150,
+ *         probeType: "NQA",
+ *     },
+ *     healthCheckLocalIp: "169.254.227.187",
+ *     healthCheckRemoteIp: "169.254.164.37",
  *     ikeDhGroupName: "GROUP2",
  *     ikeExchangeMode: "AGGRESSIVE",
- *     ikeLocalAddress: "1.1.1.1",
+ *     ikeLocalAddress: "159.75.204.38",
  *     ikeLocalIdentity: "ADDRESS",
  *     ikeProtoAuthenAlgorithm: "SHA",
  *     ikeProtoEncryAlgorithm: "3DES-CBC",
- *     ikeRemoteAddress: "2.2.2.2",
+ *     ikeRemoteAddress: "109.244.60.154",
  *     ikeRemoteIdentity: "ADDRESS",
- *     ikeSaLifetimeSeconds: 86401,
+ *     ikeSaLifetimeSeconds: 86400,
  *     ipsecEncryptAlgorithm: "3DES-CBC",
  *     ipsecIntegrityAlgorithm: "SHA1",
  *     ipsecPfsDhGroup: "NULL",
- *     ipsecSaLifetimeSeconds: 7200,
- *     ipsecSaLifetimeTraffic: 2570,
- *     preShareKey: "testt",
+ *     ipsecSaLifetimeSeconds: 14400,
+ *     ipsecSaLifetimeTraffic: 4096000000,
+ *     negotiationType: "flowTrigger",
+ *     preShareKey: "your_pre_share_key",
+ *     routeType: "StaticRoute",
  *     securityGroupPolicies: [{
  *         localCidrBlock: "172.16.0.0/16",
  *         remoteCidrBlocks: ["2.2.2.0/26"],
  *     }],
  *     tags: {
- *         test: "testt",
+ *         createBy: "Terraform",
  *     },
- *     vpcId: "vpc-dk8zmwuf",
- *     vpnGatewayId: "vpngw-8ccsnclt",
+ *     vpcId: "vpc-6ccw0s5l",
+ *     vpnGatewayId: "vpngw-33p5vnwd",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -83,6 +94,10 @@ export class Connection extends pulumi.CustomResource {
     }
 
     /**
+     * BGP config.
+     */
+    public readonly bgpConfig!: pulumi.Output<outputs.Vpn.ConnectionBgpConfig>;
+    /**
      * Create time of the VPN connection.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -110,6 +125,10 @@ export class Connection extends pulumi.CustomResource {
      * Encrypt proto of the VPN connection.
      */
     public /*out*/ readonly encryptProto!: pulumi.Output<string>;
+    /**
+     * VPN channel health check configuration.
+     */
+    public readonly healthCheckConfig!: pulumi.Output<outputs.Vpn.ConnectionHealthCheckConfig>;
     /**
      * Health check the address of this terminal.
      */
@@ -195,6 +214,10 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+     */
+    public readonly negotiationType!: pulumi.Output<string>;
+    /**
      * Net status of the VPN connection. Valid value: `AVAILABLE`.
      */
     public /*out*/ readonly netStatus!: pulumi.Output<string>;
@@ -203,7 +226,7 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly preShareKey!: pulumi.Output<string>;
     /**
-     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
      */
     public readonly routeType!: pulumi.Output<string>;
     /**
@@ -244,6 +267,7 @@ export class Connection extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConnectionState | undefined;
+            resourceInputs["bgpConfig"] = state ? state.bgpConfig : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["customerGatewayId"] = state ? state.customerGatewayId : undefined;
             resourceInputs["dpdAction"] = state ? state.dpdAction : undefined;
@@ -251,6 +275,7 @@ export class Connection extends pulumi.CustomResource {
             resourceInputs["dpdTimeout"] = state ? state.dpdTimeout : undefined;
             resourceInputs["enableHealthCheck"] = state ? state.enableHealthCheck : undefined;
             resourceInputs["encryptProto"] = state ? state.encryptProto : undefined;
+            resourceInputs["healthCheckConfig"] = state ? state.healthCheckConfig : undefined;
             resourceInputs["healthCheckLocalIp"] = state ? state.healthCheckLocalIp : undefined;
             resourceInputs["healthCheckRemoteIp"] = state ? state.healthCheckRemoteIp : undefined;
             resourceInputs["ikeDhGroupName"] = state ? state.ikeDhGroupName : undefined;
@@ -272,6 +297,7 @@ export class Connection extends pulumi.CustomResource {
             resourceInputs["ipsecSaLifetimeTraffic"] = state ? state.ipsecSaLifetimeTraffic : undefined;
             resourceInputs["isCcnType"] = state ? state.isCcnType : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["negotiationType"] = state ? state.negotiationType : undefined;
             resourceInputs["netStatus"] = state ? state.netStatus : undefined;
             resourceInputs["preShareKey"] = state ? state.preShareKey : undefined;
             resourceInputs["routeType"] = state ? state.routeType : undefined;
@@ -292,11 +318,13 @@ export class Connection extends pulumi.CustomResource {
             if ((!args || args.vpnGatewayId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpnGatewayId'");
             }
+            resourceInputs["bgpConfig"] = args ? args.bgpConfig : undefined;
             resourceInputs["customerGatewayId"] = args ? args.customerGatewayId : undefined;
             resourceInputs["dpdAction"] = args ? args.dpdAction : undefined;
             resourceInputs["dpdEnable"] = args ? args.dpdEnable : undefined;
             resourceInputs["dpdTimeout"] = args ? args.dpdTimeout : undefined;
             resourceInputs["enableHealthCheck"] = args ? args.enableHealthCheck : undefined;
+            resourceInputs["healthCheckConfig"] = args ? args.healthCheckConfig : undefined;
             resourceInputs["healthCheckLocalIp"] = args ? args.healthCheckLocalIp : undefined;
             resourceInputs["healthCheckRemoteIp"] = args ? args.healthCheckRemoteIp : undefined;
             resourceInputs["ikeDhGroupName"] = args ? args.ikeDhGroupName : undefined;
@@ -317,6 +345,7 @@ export class Connection extends pulumi.CustomResource {
             resourceInputs["ipsecSaLifetimeSeconds"] = args ? args.ipsecSaLifetimeSeconds : undefined;
             resourceInputs["ipsecSaLifetimeTraffic"] = args ? args.ipsecSaLifetimeTraffic : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["negotiationType"] = args ? args.negotiationType : undefined;
             resourceInputs["preShareKey"] = args ? args.preShareKey : undefined;
             resourceInputs["routeType"] = args ? args.routeType : undefined;
             resourceInputs["securityGroupPolicies"] = args ? args.securityGroupPolicies : undefined;
@@ -339,6 +368,10 @@ export class Connection extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Connection resources.
  */
 export interface ConnectionState {
+    /**
+     * BGP config.
+     */
+    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig>;
     /**
      * Create time of the VPN connection.
      */
@@ -367,6 +400,10 @@ export interface ConnectionState {
      * Encrypt proto of the VPN connection.
      */
     encryptProto?: pulumi.Input<string>;
+    /**
+     * VPN channel health check configuration.
+     */
+    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig>;
     /**
      * Health check the address of this terminal.
      */
@@ -452,6 +489,10 @@ export interface ConnectionState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+     */
+    negotiationType?: pulumi.Input<string>;
+    /**
      * Net status of the VPN connection. Valid value: `AVAILABLE`.
      */
     netStatus?: pulumi.Input<string>;
@@ -460,7 +501,7 @@ export interface ConnectionState {
      */
     preShareKey?: pulumi.Input<string>;
     /**
-     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
      */
     routeType?: pulumi.Input<string>;
     /**
@@ -494,6 +535,10 @@ export interface ConnectionState {
  */
 export interface ConnectionArgs {
     /**
+     * BGP config.
+     */
+    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig>;
+    /**
      * ID of the customer gateway.
      */
     customerGatewayId: pulumi.Input<string>;
@@ -513,6 +558,10 @@ export interface ConnectionArgs {
      * Whether intra-tunnel health checks are supported.
      */
     enableHealthCheck?: pulumi.Input<boolean>;
+    /**
+     * VPN channel health check configuration.
+     */
+    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig>;
     /**
      * Health check the address of this terminal.
      */
@@ -594,11 +643,15 @@ export interface ConnectionArgs {
      */
     name?: pulumi.Input<string>;
     /**
+     * The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
+     */
+    negotiationType?: pulumi.Input<string>;
+    /**
      * Pre-shared key of the VPN connection.
      */
     preShareKey: pulumi.Input<string>;
     /**
-     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`.
+     * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
      */
     routeType?: pulumi.Input<string>;
     /**

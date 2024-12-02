@@ -7658,6 +7658,17 @@ export namespace Clb {
         subnetId: pulumi.Input<string>;
     }
 
+    export interface ListenerRuleOauth {
+        /**
+         * Enable or disable authentication. True: Enabled; False: Disabled.
+         */
+        oauthEnable?: pulumi.Input<boolean>;
+        /**
+         * After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+         */
+        oauthFailureStatus?: pulumi.Input<string>;
+    }
+
     export interface ReplaceCertForLbsCertificate {
         /**
          * Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
@@ -8776,6 +8787,51 @@ export namespace Cls {
          * Machine description list.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface NoticeContentNoticeContents {
+        /**
+         * Template for Alarm Recovery Notification Content.
+         */
+        recoveryContent?: pulumi.Input<inputs.Cls.NoticeContentNoticeContentsRecoveryContent>;
+        /**
+         * Alarm triggered notification content template.
+         */
+        triggerContent?: pulumi.Input<inputs.Cls.NoticeContentNoticeContentsTriggerContent>;
+        /**
+         * Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface NoticeContentNoticeContentsRecoveryContent {
+        /**
+         * Notification content template body information.
+         */
+        content?: pulumi.Input<string>;
+        /**
+         * Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+         */
+        headers?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+         */
+        title?: pulumi.Input<string>;
+    }
+
+    export interface NoticeContentNoticeContentsTriggerContent {
+        /**
+         * Notification content template body information.
+         */
+        content?: pulumi.Input<string>;
+        /**
+         * Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+         */
+        headers?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+         */
+        title?: pulumi.Input<string>;
     }
 
     export interface ScheduledSqlDstResource {
@@ -27346,6 +27402,62 @@ export namespace Rum {
 }
 
 export namespace Scf {
+    export interface CustomDomainCertConfig {
+        /**
+         * SSL Certificates ID.
+         */
+        certificateId?: pulumi.Input<string>;
+    }
+
+    export interface CustomDomainEndpointsConfig {
+        /**
+         * Function name.
+         */
+        functionName: pulumi.Input<string>;
+        /**
+         * Function namespace.
+         */
+        namespace: pulumi.Input<string>;
+        /**
+         * Path, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+         */
+        pathMatch: pulumi.Input<string>;
+        /**
+         * Path rewriting policy.
+         */
+        pathRewrites?: pulumi.Input<pulumi.Input<inputs.Scf.CustomDomainEndpointsConfigPathRewrite>[]>;
+        /**
+         * Function alias or version.
+         */
+        qualifier: pulumi.Input<string>;
+    }
+
+    export interface CustomDomainEndpointsConfigPathRewrite {
+        /**
+         * Path that needs to be rerouted, value specification: /,/*,/xxx,/xxx/a,/xxx/*.
+         */
+        path: pulumi.Input<string>;
+        /**
+         * Replacement values: such as/, /$.
+         */
+        rewrite: pulumi.Input<string>;
+        /**
+         * Matching rules, value range: WildcardRules wildcard matching, ExactRules exact matching.
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface CustomDomainWafConfig {
+        /**
+         * Web Application Firewall Instance ID.
+         */
+        wafInstanceId?: pulumi.Input<string>;
+        /**
+         * Whether the Web Application Firewall is turned on, value range:OPEN, CLOSE.
+         */
+        wafOpen?: pulumi.Input<string>;
+    }
+
     export interface FunctionAliasRoutingConfig {
         /**
          * Additional version with rule-based routing.
@@ -33398,6 +33510,40 @@ export namespace Vpc {
 }
 
 export namespace Vpn {
+    export interface ConnectionBgpConfig {
+        /**
+         * Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+         */
+        localBgpIp: pulumi.Input<string>;
+        /**
+         * User side BGP address. It must be allocated from within the BGP tunnel network segment.
+         */
+        remoteBgpIp: pulumi.Input<string>;
+        /**
+         * BGP tunnel segment.
+         */
+        tunnelCidr: pulumi.Input<string>;
+    }
+
+    export interface ConnectionHealthCheckConfig {
+        /**
+         * Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+         */
+        probeInterval?: pulumi.Input<number>;
+        /**
+         * Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+         */
+        probeThreshold?: pulumi.Input<number>;
+        /**
+         * Detection timeout, range [10-5000], Unit: ms.
+         */
+        probeTimeout?: pulumi.Input<number>;
+        /**
+         * Detection mode, default is `NQA`, cannot be modified.
+         */
+        probeType?: pulumi.Input<string>;
+    }
+
     export interface ConnectionSecurityGroupPolicy {
         /**
          * Local cidr block.

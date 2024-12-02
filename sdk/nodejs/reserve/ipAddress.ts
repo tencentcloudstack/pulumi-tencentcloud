@@ -4,6 +4,36 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a vpc reserve ip addresses
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const reserveIp = new tencentcloud.reserve.IpAddress("reserveIp", {
+ *     description: "description",
+ *     ipAddress: "10.0.0.13",
+ *     subnetId: "xxxxxx",
+ *     tags: {
+ *         test1: "test1",
+ *     },
+ *     vpcId: "xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * vpc reserve_ip_addresses can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+ * ```
+ */
 export class IpAddress extends pulumi.CustomResource {
     /**
      * Get an existing IpAddress resource's state with the given name, ID, and optional extra

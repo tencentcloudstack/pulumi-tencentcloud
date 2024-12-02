@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -181,6 +183,10 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly listenerId!: pulumi.Output<string>;
     /**
+     * OAuth configuration information.
+     */
+    public readonly oauth!: pulumi.Output<outputs.Clb.ListenerRuleOauth>;
+    /**
      * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
      */
     public readonly quic!: pulumi.Output<boolean>;
@@ -237,6 +243,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckUnhealthNum"] = state ? state.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = state ? state.http2Switch : undefined;
             resourceInputs["listenerId"] = state ? state.listenerId : undefined;
+            resourceInputs["oauth"] = state ? state.oauth : undefined;
             resourceInputs["quic"] = state ? state.quic : undefined;
             resourceInputs["ruleId"] = state ? state.ruleId : undefined;
             resourceInputs["scheduler"] = state ? state.scheduler : undefined;
@@ -273,6 +280,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["healthCheckUnhealthNum"] = args ? args.healthCheckUnhealthNum : undefined;
             resourceInputs["http2Switch"] = args ? args.http2Switch : undefined;
             resourceInputs["listenerId"] = args ? args.listenerId : undefined;
+            resourceInputs["oauth"] = args ? args.oauth : undefined;
             resourceInputs["quic"] = args ? args.quic : undefined;
             resourceInputs["scheduler"] = args ? args.scheduler : undefined;
             resourceInputs["sessionExpireTime"] = args ? args.sessionExpireTime : undefined;
@@ -365,6 +373,10 @@ export interface ListenerRuleState {
      * ID of CLB listener.
      */
     listenerId?: pulumi.Input<string>;
+    /**
+     * OAuth configuration information.
+     */
+    oauth?: pulumi.Input<inputs.Clb.ListenerRuleOauth>;
     /**
      * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
      */
@@ -471,6 +483,10 @@ export interface ListenerRuleArgs {
      * ID of CLB listener.
      */
     listenerId: pulumi.Input<string>;
+    /**
+     * OAuth configuration information.
+     */
+    oauth?: pulumi.Input<inputs.Clb.ListenerRuleOauth>;
     /**
      * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
      */

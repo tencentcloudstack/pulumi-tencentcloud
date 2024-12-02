@@ -2018,6 +2018,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Cls/cloudProductLogTask",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/cloudProductLogTask:CloudProductLogTask": "CloudProductLogTask"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Cls/config",
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
@@ -2102,6 +2110,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.cls",
   "classes": {
    "tencentcloud:Cls/machineGroup:MachineGroup": "MachineGroup"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cls/noticeContent",
+  "fqn": "tencentcloud_iac_pulumi.cls",
+  "classes": {
+   "tencentcloud:Cls/noticeContent:NoticeContent": "NoticeContent"
   }
  },
  {
@@ -6310,6 +6326,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.rum",
   "classes": {
    "tencentcloud:Rum/whitelist:Whitelist": "Whitelist"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Scf/customDomain",
+  "fqn": "tencentcloud_iac_pulumi.scf",
+  "classes": {
+   "tencentcloud:Scf/customDomain:CustomDomain": "CustomDomain"
   }
  },
  {

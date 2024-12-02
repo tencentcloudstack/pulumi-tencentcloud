@@ -15,6 +15,8 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `deleteWithInstance` to `true`.
  *
+ * > **NOTE:**  There are two parameters `waitNodeReady` and `scaleTolerance` to ensure better management of node pool scaling operations. If this parameter is set, when creating resources, if the set criteria are not met, the resources will be marked as `tainted`.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -139,6 +141,68 @@ import * as utilities from "../utilities";
  *     labels: {
  *         test1: "test1",
  *         test2: "test2",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.kubernetes.NodePool("example", {
+ *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
+ *     maxSize: 100,
+ *     minSize: 1,
+ *     vpcId: data.tencentcloud_vpc_subnets.vpc.instance_list[0].vpc_id,
+ *     subnetIds: [data.tencentcloud_vpc_subnets.vpc.instance_list[0].subnet_id],
+ *     retryPolicy: "INCREMENTAL_INTERVALS",
+ *     desiredCapacity: 50,
+ *     enableAutoScale: false,
+ *     waitNodeReady: true,
+ *     scaleTolerance: 90,
+ *     multiZoneSubnetPolicy: "EQUALITY",
+ *     nodeOs: "img-6n21msk1",
+ *     deleteKeepInstance: false,
+ *     autoScalingConfig: {
+ *         instanceType: _var.default_instance_type,
+ *         systemDiskType: "CLOUD_PREMIUM",
+ *         systemDiskSize: 50,
+ *         orderlySecurityGroupIds: ["sg-bw28gmso"],
+ *         dataDisks: [{
+ *             diskType: "CLOUD_PREMIUM",
+ *             diskSize: 50,
+ *             deleteWithInstance: true,
+ *         }],
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         internetMaxBandwidthOut: 10,
+ *         publicIpAssigned: true,
+ *         password: "test123#",
+ *         enhancedSecurityService: false,
+ *         enhancedMonitorService: false,
+ *         hostName: "12.123.0.0",
+ *         hostNameStyle: "ORIGINAL",
+ *     },
+ *     labels: {
+ *         test1: "test1",
+ *         test2: "test2",
+ *     },
+ *     taints: [
+ *         {
+ *             key: "test_taint",
+ *             value: "taint_value",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *         {
+ *             key: "test_taint2",
+ *             value: "taint_value2",
+ *             effect: "PreferNoSchedule",
+ *         },
+ *     ],
+ *     nodeConfig: {
+ *         dockerGraphPath: "/var/lib/docker",
+ *         extraArgs: ["root-dir=/var/lib/kubelet"],
  *     },
  * });
  * ```
@@ -269,6 +333,10 @@ export class NodePool extends pulumi.CustomResource {
      */
     public readonly retryPolicy!: pulumi.Output<string | undefined>;
     /**
+     * Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+     */
+    public readonly scaleTolerance!: pulumi.Output<number | undefined>;
+    /**
      * Name of relative scaling group.
      */
     public readonly scalingGroupName!: pulumi.Output<string>;
@@ -309,6 +377,10 @@ export class NodePool extends pulumi.CustomResource {
      */
     public readonly vpcId!: pulumi.Output<string>;
     /**
+     * Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+     */
+    public readonly waitNodeReady!: pulumi.Output<boolean | undefined>;
+    /**
      * List of auto scaling group available zones, for Basic network it is required.
      */
     public readonly zones!: pulumi.Output<string[] | undefined>;
@@ -348,6 +420,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["nodeOs"] = state ? state.nodeOs : undefined;
             resourceInputs["nodeOsType"] = state ? state.nodeOsType : undefined;
             resourceInputs["retryPolicy"] = state ? state.retryPolicy : undefined;
+            resourceInputs["scaleTolerance"] = state ? state.scaleTolerance : undefined;
             resourceInputs["scalingGroupName"] = state ? state.scalingGroupName : undefined;
             resourceInputs["scalingGroupProjectId"] = state ? state.scalingGroupProjectId : undefined;
             resourceInputs["scalingMode"] = state ? state.scalingMode : undefined;
@@ -358,6 +431,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["terminationPolicies"] = state ? state.terminationPolicies : undefined;
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
+            resourceInputs["waitNodeReady"] = state ? state.waitNodeReady : undefined;
             resourceInputs["zones"] = state ? state.zones : undefined;
         } else {
             const args = argsOrState as NodePoolArgs | undefined;
@@ -393,6 +467,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["nodeOs"] = args ? args.nodeOs : undefined;
             resourceInputs["nodeOsType"] = args ? args.nodeOsType : undefined;
             resourceInputs["retryPolicy"] = args ? args.retryPolicy : undefined;
+            resourceInputs["scaleTolerance"] = args ? args.scaleTolerance : undefined;
             resourceInputs["scalingGroupName"] = args ? args.scalingGroupName : undefined;
             resourceInputs["scalingGroupProjectId"] = args ? args.scalingGroupProjectId : undefined;
             resourceInputs["scalingMode"] = args ? args.scalingMode : undefined;
@@ -402,6 +477,7 @@ export class NodePool extends pulumi.CustomResource {
             resourceInputs["terminationPolicies"] = args ? args.terminationPolicies : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["waitNodeReady"] = args ? args.waitNodeReady : undefined;
             resourceInputs["zones"] = args ? args.zones : undefined;
             resourceInputs["autoScalingGroupId"] = undefined /*out*/;
             resourceInputs["autoscalingAddedTotal"] = undefined /*out*/;
@@ -508,6 +584,10 @@ export interface NodePoolState {
      */
     retryPolicy?: pulumi.Input<string>;
     /**
+     * Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+     */
+    scaleTolerance?: pulumi.Input<number>;
+    /**
      * Name of relative scaling group.
      */
     scalingGroupName?: pulumi.Input<string>;
@@ -547,6 +627,10 @@ export interface NodePoolState {
      * ID of VPC network.
      */
     vpcId?: pulumi.Input<string>;
+    /**
+     * Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+     */
+    waitNodeReady?: pulumi.Input<boolean>;
     /**
      * List of auto scaling group available zones, for Basic network it is required.
      */
@@ -626,6 +710,10 @@ export interface NodePoolArgs {
      */
     retryPolicy?: pulumi.Input<string>;
     /**
+     * Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
+     */
+    scaleTolerance?: pulumi.Input<number>;
+    /**
      * Name of relative scaling group.
      */
     scalingGroupName?: pulumi.Input<string>;
@@ -661,6 +749,10 @@ export interface NodePoolArgs {
      * ID of VPC network.
      */
     vpcId: pulumi.Input<string>;
+    /**
+     * Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
+     */
+    waitNodeReady?: pulumi.Input<boolean>;
     /**
      * List of auto scaling group available zones, for Basic network it is required.
      */

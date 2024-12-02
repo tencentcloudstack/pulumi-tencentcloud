@@ -15,6 +15,7 @@ __all__ = [
     'FunctionTargetsAttachmentFunctionTargets',
     'FunctionTargetsAttachmentFunctionTargetsFunction',
     'InstanceSnatIp',
+    'ListenerRuleOauth',
     'ReplaceCertForLbsCertificate',
     'SnatIpIp',
     'TargetGroupAttachmentsAssociation',
@@ -300,6 +301,56 @@ class InstanceSnatIp(dict):
         Snat IP address, If set to empty will auto allocated.
         """
         return pulumi.get(self, "ip")
+
+
+@pulumi.output_type
+class ListenerRuleOauth(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "oauthEnable":
+            suggest = "oauth_enable"
+        elif key == "oauthFailureStatus":
+            suggest = "oauth_failure_status"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ListenerRuleOauth. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ListenerRuleOauth.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ListenerRuleOauth.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 oauth_enable: Optional[bool] = None,
+                 oauth_failure_status: Optional[str] = None):
+        """
+        :param bool oauth_enable: Enable or disable authentication. True: Enabled; False: Disabled.
+        :param str oauth_failure_status: After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+        """
+        if oauth_enable is not None:
+            pulumi.set(__self__, "oauth_enable", oauth_enable)
+        if oauth_failure_status is not None:
+            pulumi.set(__self__, "oauth_failure_status", oauth_failure_status)
+
+    @property
+    @pulumi.getter(name="oauthEnable")
+    def oauth_enable(self) -> Optional[bool]:
+        """
+        Enable or disable authentication. True: Enabled; False: Disabled.
+        """
+        return pulumi.get(self, "oauth_enable")
+
+    @property
+    @pulumi.getter(name="oauthFailureStatus")
+    def oauth_failure_status(self) -> Optional[str]:
+        """
+        After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+        """
+        return pulumi.get(self, "oauth_failure_status")
 
 
 @pulumi.output_type

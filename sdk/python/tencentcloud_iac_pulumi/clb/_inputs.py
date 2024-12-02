@@ -14,6 +14,7 @@ __all__ = [
     'FunctionTargetsAttachmentFunctionTargetsArgs',
     'FunctionTargetsAttachmentFunctionTargetsFunctionArgs',
     'InstanceSnatIpArgs',
+    'ListenerRuleOauthArgs',
     'ReplaceCertForLbsCertificateArgs',
     'SnatIpIpArgs',
     'TargetGroupAttachmentsAssociationArgs',
@@ -239,6 +240,45 @@ class InstanceSnatIpArgs:
     @ip.setter
     def ip(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "ip", value)
+
+
+@pulumi.input_type
+class ListenerRuleOauthArgs:
+    def __init__(__self__, *,
+                 oauth_enable: Optional[pulumi.Input[bool]] = None,
+                 oauth_failure_status: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] oauth_enable: Enable or disable authentication. True: Enabled; False: Disabled.
+        :param pulumi.Input[str] oauth_failure_status: After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+        """
+        if oauth_enable is not None:
+            pulumi.set(__self__, "oauth_enable", oauth_enable)
+        if oauth_failure_status is not None:
+            pulumi.set(__self__, "oauth_failure_status", oauth_failure_status)
+
+    @property
+    @pulumi.getter(name="oauthEnable")
+    def oauth_enable(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable or disable authentication. True: Enabled; False: Disabled.
+        """
+        return pulumi.get(self, "oauth_enable")
+
+    @oauth_enable.setter
+    def oauth_enable(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "oauth_enable", value)
+
+    @property
+    @pulumi.getter(name="oauthFailureStatus")
+    def oauth_failure_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        After all IAPs fail, the request is rejected or released. BYPASS: PASS; REJECT: Reject.
+        """
+        return pulumi.get(self, "oauth_failure_status")
+
+    @oauth_failure_status.setter
+    def oauth_failure_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "oauth_failure_status", value)
 
 
 @pulumi.input_type

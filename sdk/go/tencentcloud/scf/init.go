@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Scf/customDomain:CustomDomain":
+		r = &CustomDomain{}
 	case "tencentcloud:Scf/function:Function":
 		r = &Function{}
 	case "tencentcloud:Scf/functionAlias:FunctionAlias":
@@ -58,6 +60,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Scf/customDomain",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Scf/function",

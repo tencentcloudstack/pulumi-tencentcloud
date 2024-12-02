@@ -8,6 +8,7 @@ import typing
 from .alarm import *
 from .alarm_notice import *
 from .ckafka_consumer import *
+from .cloud_product_log_task import *
 from .config import *
 from .config_attachment import *
 from .config_extra import *
@@ -23,6 +24,7 @@ from .index import *
 from .kafka_recharge import *
 from .logset import *
 from .machine_group import *
+from .notice_content import *
 from .scheduled_sql import *
 from .topic import *
 from ._inputs import *

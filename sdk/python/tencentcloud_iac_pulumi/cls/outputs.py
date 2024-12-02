@@ -53,6 +53,9 @@ __all__ = [
     'KafkaRechargeLogRechargeRule',
     'KafkaRechargeProtocol',
     'MachineGroupMachineGroupType',
+    'NoticeContentNoticeContents',
+    'NoticeContentNoticeContentsRecoveryContent',
+    'NoticeContentNoticeContentsTriggerContent',
     'ScheduledSqlDstResource',
     'TopicExtends',
     'TopicExtendsAnonymousAccess',
@@ -3041,6 +3044,153 @@ class MachineGroupMachineGroupType(dict):
         Machine description list.
         """
         return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class NoticeContentNoticeContents(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "recoveryContent":
+            suggest = "recovery_content"
+        elif key == "triggerContent":
+            suggest = "trigger_content"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NoticeContentNoticeContents. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NoticeContentNoticeContents.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NoticeContentNoticeContents.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 type: str,
+                 recovery_content: Optional['outputs.NoticeContentNoticeContentsRecoveryContent'] = None,
+                 trigger_content: Optional['outputs.NoticeContentNoticeContentsTriggerContent'] = None):
+        """
+        :param str type: Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+        :param 'NoticeContentNoticeContentsRecoveryContentArgs' recovery_content: Template for Alarm Recovery Notification Content.
+        :param 'NoticeContentNoticeContentsTriggerContentArgs' trigger_content: Alarm triggered notification content template.
+        """
+        pulumi.set(__self__, "type", type)
+        if recovery_content is not None:
+            pulumi.set(__self__, "recovery_content", recovery_content)
+        if trigger_content is not None:
+            pulumi.set(__self__, "trigger_content", trigger_content)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Channel type. Email: Email; Sms: SMS; WeChat: WeChat; Phone: Telephone; WeCom: Enterprise WeChat; DingTalk: DingTalk; Lark: Feishu; HTTP: Custom callback.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="recoveryContent")
+    def recovery_content(self) -> Optional['outputs.NoticeContentNoticeContentsRecoveryContent']:
+        """
+        Template for Alarm Recovery Notification Content.
+        """
+        return pulumi.get(self, "recovery_content")
+
+    @property
+    @pulumi.getter(name="triggerContent")
+    def trigger_content(self) -> Optional['outputs.NoticeContentNoticeContentsTriggerContent']:
+        """
+        Alarm triggered notification content template.
+        """
+        return pulumi.get(self, "trigger_content")
+
+
+@pulumi.output_type
+class NoticeContentNoticeContentsRecoveryContent(dict):
+    def __init__(__self__, *,
+                 content: Optional[str] = None,
+                 headers: Optional[Sequence[str]] = None,
+                 title: Optional[str] = None):
+        """
+        :param str content: Notification content template body information.
+        :param Sequence[str] headers: Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+        :param str title: Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if title is not None:
+            pulumi.set(__self__, "title", title)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[str]:
+        """
+        Notification content template body information.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Sequence[str]]:
+        """
+        Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+        """
+        return pulumi.get(self, "headers")
+
+    @property
+    @pulumi.getter
+    def title(self) -> Optional[str]:
+        """
+        Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+        """
+        return pulumi.get(self, "title")
+
+
+@pulumi.output_type
+class NoticeContentNoticeContentsTriggerContent(dict):
+    def __init__(__self__, *,
+                 content: Optional[str] = None,
+                 headers: Optional[Sequence[str]] = None,
+                 title: Optional[str] = None):
+        """
+        :param str content: Notification content template body information.
+        :param Sequence[str] headers: Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+        :param str title: Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+        """
+        if content is not None:
+            pulumi.set(__self__, "content", content)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if title is not None:
+            pulumi.set(__self__, "title", title)
+
+    @property
+    @pulumi.getter
+    def content(self) -> Optional[str]:
+        """
+        Notification content template body information.
+        """
+        return pulumi.get(self, "content")
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[Sequence[str]]:
+        """
+        Request headers: In HTTP requests, request headers contain additional information sent by the client to the server, such as user agent, authorization credentials, expected response format, etc. Only `custom callback` supports this configuration.
+        """
+        return pulumi.get(self, "headers")
+
+    @property
+    @pulumi.getter
+    def title(self) -> Optional[str]:
+        """
+        Notification content template title information. Some notification channel types do not support 'title', please refer to the Tencent Cloud Console page.
+        """
+        return pulumi.get(self, "title")
 
 
 @pulumi.output_type

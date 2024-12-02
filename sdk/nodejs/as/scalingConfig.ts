@@ -13,6 +13,8 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Create a normal configuration
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -21,12 +23,12 @@ import * as utilities from "../utilities";
  *
  * const exampleInstance = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "TencentOS Server 3.2 (Final)",
+ *     osName: "TencentOS Server 4 for x86_64",
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
- *     configurationName: "example-launch-configuration",
+ *     configurationName: "tf-example",
  *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
- *     instanceTypes: ["SA1.SMALL1"],
+ *     instanceTypes: ["SA5.MEDIUM4"],
  *     projectId: 0,
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
@@ -43,7 +45,7 @@ import * as utilities from "../utilities";
  *     enhancedAutomationToolsService: false,
  *     userData: "dGVzdA==",
  *     hostNameSettings: {
- *         hostName: "host-name-test",
+ *         hostName: "host-name",
  *         hostNameStyle: "UNIQUE",
  *     },
  *     instanceTags: {
@@ -63,12 +65,12 @@ import * as utilities from "../utilities";
  *
  * const exampleInstance = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "TencentOS Server 3.2 (Final)",
+ *     osName: "TencentOS Server 4 for x86_64",
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
- *     configurationName: "launch-configuration",
+ *     configurationName: "tf-example",
  *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
- *     instanceTypes: ["SA1.SMALL1"],
+ *     instanceTypes: ["SA5.MEDIUM4"],
  *     instanceChargeType: "SPOTPAID",
  *     spotInstanceType: "one-time",
  *     spotMaxPrice: "1000",
@@ -100,6 +102,50 @@ import * as utilities from "../utilities";
  *     securityGroupIds: ["sg-5275dorp"],
  *     systemDiskSize: 50,
  *     systemDiskType: "CLOUD_BSSD",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a CDC configuration
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleInstance = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     osName: "TencentOS Server 4 for x86_64",
+ * });
+ * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
+ *     configurationName: "tf-example",
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
+ *     instanceTypes: ["SA5.MEDIUM4"],
+ *     projectId: 0,
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     systemDiskSize: 50,
+ *     instanceChargeType: "CDCPAID",
+ *     dedicatedClusterId: "cluster-262n63e8",
+ *     dataDisks: [{
+ *         diskType: "CLOUD_PREMIUM",
+ *         diskSize: 50,
+ *     }],
+ *     internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *     internetMaxBandwidthOut: 10,
+ *     publicIpAssigned: true,
+ *     password: "Test@123#",
+ *     enhancedSecurityService: false,
+ *     enhancedMonitorService: false,
+ *     enhancedAutomationToolsService: false,
+ *     userData: "dGVzdA==",
+ *     hostNameSettings: {
+ *         hostName: "host-name",
+ *         hostNameStyle: "UNIQUE",
+ *     },
+ *     instanceTags: {
+ *         tag: "example",
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -157,6 +203,10 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly dataDisks!: pulumi.Output<outputs.As.ScalingConfigDataDisk[] | undefined>;
     /**
+     * Dedicated Cluster ID.
+     */
+    public readonly dedicatedClusterId!: pulumi.Output<string | undefined>;
+    /**
      * Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
      */
     public readonly diskTypePolicy!: pulumi.Output<string | undefined>;
@@ -185,7 +235,7 @@ export class ScalingConfig extends pulumi.CustomResource {
      */
     public readonly imageId!: pulumi.Output<string | undefined>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     public readonly instanceChargeType!: pulumi.Output<string | undefined>;
     /**
@@ -282,6 +332,7 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["configurationName"] = state ? state.configurationName : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dataDisks"] = state ? state.dataDisks : undefined;
+            resourceInputs["dedicatedClusterId"] = state ? state.dedicatedClusterId : undefined;
             resourceInputs["diskTypePolicy"] = state ? state.diskTypePolicy : undefined;
             resourceInputs["enhancedAutomationToolsService"] = state ? state.enhancedAutomationToolsService : undefined;
             resourceInputs["enhancedMonitorService"] = state ? state.enhancedMonitorService : undefined;
@@ -320,6 +371,7 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["camRoleName"] = args ? args.camRoleName : undefined;
             resourceInputs["configurationName"] = args ? args.configurationName : undefined;
             resourceInputs["dataDisks"] = args ? args.dataDisks : undefined;
+            resourceInputs["dedicatedClusterId"] = args ? args.dedicatedClusterId : undefined;
             resourceInputs["diskTypePolicy"] = args ? args.diskTypePolicy : undefined;
             resourceInputs["enhancedAutomationToolsService"] = args ? args.enhancedAutomationToolsService : undefined;
             resourceInputs["enhancedMonitorService"] = args ? args.enhancedMonitorService : undefined;
@@ -377,6 +429,10 @@ export interface ScalingConfigState {
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[]>;
     /**
+     * Dedicated Cluster ID.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
+    /**
      * Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
      */
     diskTypePolicy?: pulumi.Input<string>;
@@ -405,7 +461,7 @@ export interface ScalingConfigState {
      */
     imageId?: pulumi.Input<string>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
@@ -503,6 +559,10 @@ export interface ScalingConfigArgs {
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[]>;
     /**
+     * Dedicated Cluster ID.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
+    /**
      * Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
      */
     diskTypePolicy?: pulumi.Input<string>;
@@ -531,7 +591,7 @@ export interface ScalingConfigArgs {
      */
     imageId?: pulumi.Input<string>;
     /**
-     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
+     * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**

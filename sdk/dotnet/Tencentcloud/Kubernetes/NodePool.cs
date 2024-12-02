@@ -19,6 +19,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// &gt; **NOTE:**  In order to ensure the integrity of customer data, if the cvm instance was destroyed due to shrinking, it will keep the cbs associate with cvm by default. If you want to destroy together, please set `delete_with_instance` to `true`.
     /// 
+    /// &gt; **NOTE:**  There are two parameters `wait_node_ready` and `scale_tolerance` to ensure better management of node pool scaling operations. If this parameter is set, when creating resources, if the set criteria are not met, the resources will be marked as `tainted`.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -195,6 +197,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Kubernetes.NodePool("example", new()
+    ///     {
+    ///         ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
+    ///         MaxSize = 100,
+    ///         MinSize = 1,
+    ///         VpcId = data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
+    ///         },
+    ///         RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///         DesiredCapacity = 50,
+    ///         EnableAutoScale = false,
+    ///         WaitNodeReady = true,
+    ///         ScaleTolerance = 90,
+    ///         MultiZoneSubnetPolicy = "EQUALITY",
+    ///         NodeOs = "img-6n21msk1",
+    ///         DeleteKeepInstance = false,
+    ///         AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///         {
+    ///             InstanceType = @var.Default_instance_type,
+    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             SystemDiskSize = 50,
+    ///             OrderlySecurityGroupIds = new[]
+    ///             {
+    ///                 "sg-bw28gmso",
+    ///             },
+    ///             DataDisks = new[]
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+    ///                 {
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
+    ///                     DeleteWithInstance = true,
+    ///                 },
+    ///             },
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 10,
+    ///             PublicIpAssigned = true,
+    ///             Password = "test123#",
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
+    ///             HostName = "12.123.0.0",
+    ///             HostNameStyle = "ORIGINAL",
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "test1", "test1" },
+    ///             { "test2", "test2" },
+    ///         },
+    ///         Taints = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///             {
+    ///                 Key = "test_taint",
+    ///                 Value = "taint_value",
+    ///                 Effect = "PreferNoSchedule",
+    ///             },
+    ///             new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///             {
+    ///                 Key = "test_taint2",
+    ///                 Value = "taint_value2",
+    ///                 Effect = "PreferNoSchedule",
+    ///             },
+    ///         },
+    ///         NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+    ///         {
+    ///             DockerGraphPath = "/var/lib/docker",
+    ///             ExtraArgs = new[]
+    ///             {
+    ///                 "root-dir=/var/lib/kubelet",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// tke node pool can be imported, e.g.
@@ -339,6 +429,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> RetryPolicy { get; private set; } = null!;
 
         /// <summary>
+        /// Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        /// </summary>
+        [Output("scaleTolerance")]
+        public Output<int?> ScaleTolerance { get; private set; } = null!;
+
+        /// <summary>
         /// Name of relative scaling group.
         /// </summary>
         [Output("scalingGroupName")]
@@ -397,6 +493,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        /// </summary>
+        [Output("waitNodeReady")]
+        public Output<bool?> WaitNodeReady { get; private set; } = null!;
 
         /// <summary>
         /// List of auto scaling group available zones, for Basic network it is required.
@@ -566,6 +668,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? RetryPolicy { get; set; }
 
         /// <summary>
+        /// Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        /// </summary>
+        [Input("scaleTolerance")]
+        public Input<int>? ScaleTolerance { get; set; }
+
+        /// <summary>
         /// Name of relative scaling group.
         /// </summary>
         [Input("scalingGroupName")]
@@ -636,6 +744,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
+
+        /// <summary>
+        /// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        /// </summary>
+        [Input("waitNodeReady")]
+        public Input<bool>? WaitNodeReady { get; set; }
 
         [Input("zones")]
         private InputList<string>? _zones;
@@ -802,6 +916,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? RetryPolicy { get; set; }
 
         /// <summary>
+        /// Control how many expectations(`desired_capacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `wait_node_ready` is `true`.
+        /// </summary>
+        [Input("scaleTolerance")]
+        public Input<int>? ScaleTolerance { get; set; }
+
+        /// <summary>
         /// Name of relative scaling group.
         /// </summary>
         [Input("scalingGroupName")]
@@ -878,6 +998,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Whether to wait for all expansion resources to be ready. Default is false. Only can be set if `enable_auto_scale` is `false`.
+        /// </summary>
+        [Input("waitNodeReady")]
+        public Input<bool>? WaitNodeReady { get; set; }
 
         [Input("zones")]
         private InputList<string>? _zones;

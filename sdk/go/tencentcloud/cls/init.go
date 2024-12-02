@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AlarmNotice{}
 	case "tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer":
 		r = &CkafkaConsumer{}
+	case "tencentcloud:Cls/cloudProductLogTask:CloudProductLogTask":
+		r = &CloudProductLogTask{}
 	case "tencentcloud:Cls/config:Config":
 		r = &Config{}
 	case "tencentcloud:Cls/configAttachment:ConfigAttachment":
@@ -49,6 +51,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Logset{}
 	case "tencentcloud:Cls/machineGroup:MachineGroup":
 		r = &MachineGroup{}
+	case "tencentcloud:Cls/noticeContent:NoticeContent":
+		r = &NoticeContent{}
 	case "tencentcloud:Cls/scheduledSql:ScheduledSql":
 		r = &ScheduledSql{}
 	case "tencentcloud:Cls/topic:Topic":
@@ -79,6 +83,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/ckafkaConsumer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/cloudProductLogTask",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -134,6 +143,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/machineGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/noticeContent",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

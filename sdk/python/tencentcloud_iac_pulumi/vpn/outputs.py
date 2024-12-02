@@ -11,6 +11,8 @@ from .. import _utilities
 from . import outputs
 
 __all__ = [
+    'ConnectionBgpConfig',
+    'ConnectionHealthCheckConfig',
     'ConnectionSecurityGroupPolicy',
     'CustomerGatewayConfigurationDownloadCustomerGatewayVendor',
     'GetConnectionsConnectionListResult',
@@ -20,6 +22,145 @@ __all__ = [
     'GetGatewayRoutesVpnGatewayRouteListResult',
     'GetGatewaysGatewayListResult',
 ]
+
+@pulumi.output_type
+class ConnectionBgpConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "localBgpIp":
+            suggest = "local_bgp_ip"
+        elif key == "remoteBgpIp":
+            suggest = "remote_bgp_ip"
+        elif key == "tunnelCidr":
+            suggest = "tunnel_cidr"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectionBgpConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectionBgpConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectionBgpConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 local_bgp_ip: str,
+                 remote_bgp_ip: str,
+                 tunnel_cidr: str):
+        """
+        :param str local_bgp_ip: Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+        :param str remote_bgp_ip: User side BGP address. It must be allocated from within the BGP tunnel network segment.
+        :param str tunnel_cidr: BGP tunnel segment.
+        """
+        pulumi.set(__self__, "local_bgp_ip", local_bgp_ip)
+        pulumi.set(__self__, "remote_bgp_ip", remote_bgp_ip)
+        pulumi.set(__self__, "tunnel_cidr", tunnel_cidr)
+
+    @property
+    @pulumi.getter(name="localBgpIp")
+    def local_bgp_ip(self) -> str:
+        """
+        Cloud BGP address. It must be allocated from within the BGP tunnel network segment.
+        """
+        return pulumi.get(self, "local_bgp_ip")
+
+    @property
+    @pulumi.getter(name="remoteBgpIp")
+    def remote_bgp_ip(self) -> str:
+        """
+        User side BGP address. It must be allocated from within the BGP tunnel network segment.
+        """
+        return pulumi.get(self, "remote_bgp_ip")
+
+    @property
+    @pulumi.getter(name="tunnelCidr")
+    def tunnel_cidr(self) -> str:
+        """
+        BGP tunnel segment.
+        """
+        return pulumi.get(self, "tunnel_cidr")
+
+
+@pulumi.output_type
+class ConnectionHealthCheckConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "probeInterval":
+            suggest = "probe_interval"
+        elif key == "probeThreshold":
+            suggest = "probe_threshold"
+        elif key == "probeTimeout":
+            suggest = "probe_timeout"
+        elif key == "probeType":
+            suggest = "probe_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ConnectionHealthCheckConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ConnectionHealthCheckConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ConnectionHealthCheckConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 probe_interval: Optional[int] = None,
+                 probe_threshold: Optional[int] = None,
+                 probe_timeout: Optional[int] = None,
+                 probe_type: Optional[str] = None):
+        """
+        :param int probe_interval: Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+        :param int probe_threshold: Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+        :param int probe_timeout: Detection timeout, range [10-5000], Unit: ms.
+        :param str probe_type: Detection mode, default is `NQA`, cannot be modified.
+        """
+        if probe_interval is not None:
+            pulumi.set(__self__, "probe_interval", probe_interval)
+        if probe_threshold is not None:
+            pulumi.set(__self__, "probe_threshold", probe_threshold)
+        if probe_timeout is not None:
+            pulumi.set(__self__, "probe_timeout", probe_timeout)
+        if probe_type is not None:
+            pulumi.set(__self__, "probe_type", probe_type)
+
+    @property
+    @pulumi.getter(name="probeInterval")
+    def probe_interval(self) -> Optional[int]:
+        """
+        Detection interval, Tencent Cloud's interval between two health checks, range [1000-5000], Unit: ms.
+        """
+        return pulumi.get(self, "probe_interval")
+
+    @property
+    @pulumi.getter(name="probeThreshold")
+    def probe_threshold(self) -> Optional[int]:
+        """
+        Detection times, perform route switching after N consecutive health check failures, range [3-8], Unit: times.
+        """
+        return pulumi.get(self, "probe_threshold")
+
+    @property
+    @pulumi.getter(name="probeTimeout")
+    def probe_timeout(self) -> Optional[int]:
+        """
+        Detection timeout, range [10-5000], Unit: ms.
+        """
+        return pulumi.get(self, "probe_timeout")
+
+    @property
+    @pulumi.getter(name="probeType")
+    def probe_type(self) -> Optional[str]:
+        """
+        Detection mode, default is `NQA`, cannot be modified.
+        """
+        return pulumi.get(self, "probe_type")
+
 
 @pulumi.output_type
 class ConnectionSecurityGroupPolicy(dict):
