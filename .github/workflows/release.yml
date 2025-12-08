@@ -48,7 +48,7 @@ jobs:
       fail-fast: true
       matrix:
         goversion:
-        - 1.21.x
+        - 1.24.x
   publish_sdk:
     name: Publish SDKs
     runs-on: ubuntu-20.04
@@ -70,7 +70,7 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2.0.0
         with:
-          pulumi-version: 3.117.0
+          pulumi-version: 3.210.0
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -119,7 +119,7 @@ jobs:
         dotnetversion:
           - 6.0.408
         goversion:
-          - 1.21.x
+          - 1.24.x
         language:
           - nodejs
           - python
@@ -128,4 +128,4 @@ jobs:
         nodeversion:
           - 18.x
         pythonversion:
-          - "3.9"
+          - "3.13"
