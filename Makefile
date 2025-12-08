@@ -82,13 +82,16 @@ build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
 build_python:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
-	cd sdk/python/ && \
-        cp ../../README.md . && \
-        python3 setup.py clean --all 2>/dev/null && \
-        rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-        sed -i.bak -e 's/^VERSION = .*/VERSION = "$(PYPI_VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
-        rm ./bin/setup.py.bak && \
-        cd ./bin && python3 setup.py build sdist
+    cd sdk/python/ && \
+    cp ../../README.md . && \
+    python3 -m venv .venv && \
+    . .venv/bin/activate && \
+    pip install --upgrade pip setuptools wheel && \
+    python3 setup.py clean --all 2>/dev/null && \
+    rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
+    sed -i.bak -e 's/^VERSION = .*/VERSION = "$(PYPI_VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
+    rm ./bin/setup.py.bak && \
+    cd ./bin && python3 setup.py build sdist
 
 build_dotnet:: DOTNET_VERSION := $(shell pulumictl get version --language dotnet)
 build_dotnet:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
