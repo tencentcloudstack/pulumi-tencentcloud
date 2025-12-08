@@ -101,7 +101,7 @@ build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
 	cd sdk/dotnet/ && \
 		echo "${DOTNET_VERSION}" >version.txt && \
-        dotnet build /p:Version=${DOTNET_VERSION}
+		dotnet build /p:Version=${DOTNET_VERSION}
 
 build_go:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_go:: install_plugins tfgen # build the go sdk
