@@ -78,9 +78,20 @@ func GetResourceInfo(mainPkg string) map[string]*tfbridge.ResourceInfo {
 	outputs := GetResourceOutput()
 	for i := range outputs {
 		item := outputs[i]
-		info[item.Key] = &tfbridge.ResourceInfo{
-			Tok: tfbridge.MakeResource(mainPkg, item.Module, item.Resource),
+		if item.Key == "tencentcloud_wedata_resource_group" {
+			continue
 		}
+
+		if item.Key == "tencentcloud_wedata_data_source" {
+			info[item.Key] = &tfbridge.ResourceInfo{
+				Tok: tfbridge.MakeResource(mainPkg, item.Module, "WeDataDataSource"),
+			}
+		} else {
+			info[item.Key] = &tfbridge.ResourceInfo{
+				Tok: tfbridge.MakeResource(mainPkg, item.Module, item.Resource),
+			}
+		}
+
 		if item.CsharpAlters != nil {
 			fields := map[string]*tfbridge.SchemaInfo{}
 			for k, v := range item.CsharpAlters {
@@ -99,9 +110,20 @@ func GetDataSourceInfo(mainPkg string) map[string]*tfbridge.DataSourceInfo {
 	outputs := GetDataSourceOutput()
 	for i := range outputs {
 		item := outputs[i]
-		info[item.Key] = &tfbridge.DataSourceInfo{
-			Tok: tfbridge.MakeDataSource(mainPkg, item.Module, item.DataSource),
+		if item.Key == "tencentcloud_wedata_data_sources" {
+			info[item.Key] = &tfbridge.DataSourceInfo{
+				Tok: tfbridge.MakeDataSource(mainPkg, item.Module, "WeDataDataSources"),
+			}
+		} else if item.Key == "tencentcloud_wedata_data_source_list" {
+			info[item.Key] = &tfbridge.DataSourceInfo{
+				Tok: tfbridge.MakeDataSource(mainPkg, item.Module, "WeDataDataSourceList"),
+			}
+		} else {
+			info[item.Key] = &tfbridge.DataSourceInfo{
+				Tok: tfbridge.MakeDataSource(mainPkg, item.Module, item.DataSource),
+			}
 		}
+
 		if item.CsharpAlters != nil {
 			fields := map[string]*tfbridge.SchemaInfo{}
 			for k, v := range item.CsharpAlters {
