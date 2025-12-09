@@ -1,3 +1,5 @@
+version: 2
+
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
@@ -21,10 +23,6 @@ builds:
       - -X github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version.Version={{.Tag }}
       - -X github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud/connectivity.ReqClient=Pulumi-{{.Tag }}
     main: ./cmd/pulumi-resource-tencentcloud/
-changelog:
-  skip: true
 release:
   disable: false
   prerelease: auto
-snapshot:
-  name_template: '{{ .Tag }}-SNAPSHOT'
