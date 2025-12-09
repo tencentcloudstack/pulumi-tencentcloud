@@ -2,6 +2,7 @@ version: 2
 
 archives:
   - id: archive
+    format: tar.gz
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
 before:
   hooks:
