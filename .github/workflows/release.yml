@@ -51,7 +51,7 @@ jobs:
         - 1.24.11
   publish_sdk:
     name: Publish SDKs
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: publish_binary
     steps:
       - name: Checkout Repo
