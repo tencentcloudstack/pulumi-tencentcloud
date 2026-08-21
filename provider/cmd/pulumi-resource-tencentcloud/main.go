@@ -15,17 +15,16 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	pftfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
 )
 
 //go:embed schema.json
 var pulumiSchema []byte
 
 func main() {
-	// Modify the path to point to the new provider
-	tfbridge.Main("tencentcloud", version.Version, tencentcloud.Provider(), pulumiSchema)
+	pftfbridge.MainWithMuxer(context.Background(), "tencentcloud", tencentcloud.Provider(), pulumiSchema)
 }

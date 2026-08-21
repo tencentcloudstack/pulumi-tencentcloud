@@ -15,6 +15,7 @@
 package tencentcloud
 
 import (
+	"context"
 	"fmt"
 	"path/filepath"
 
@@ -23,11 +24,13 @@ import (
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
+	pftfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 
 	// Replace this provider with the provider you are bridging.
 	"github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud"
+	"github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud/framework"
 
 	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
 )
@@ -42,8 +45,15 @@ var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider.
 func Provider() tfbridge.ProviderInfo {
-	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(tencentcloud.Provider())
+	// Instantiate the Terraform providers:
+	// - sdkProvider is the SDKv2 implementation hosting the majority of resources.
+	// - pfProvider is the Plugin Framework implementation for migrated resources;
+	//   it takes the SDKv2 provider as input to share configuration and meta,
+	//   mirroring the upstream muxed main.go.
+	ctx := context.Background()
+	sdkProvider := tencentcloud.Provider()
+	pfProvider := framework.NewProvider(sdkProvider)
+	p := pftfbridge.MuxShimWithPF(ctx, shimv2.NewProvider(sdkProvider), pfProvider)
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
