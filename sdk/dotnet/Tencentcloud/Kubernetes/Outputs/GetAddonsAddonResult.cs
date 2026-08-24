@@ -23,6 +23,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string AddonVersion;
         /// <summary>
+        /// Decoded add-on parameters (base64 decoded from raw_values).
+        /// Note: This field may return empty string if RawValues is null or invalid base64.
+        /// </summary>
+        public readonly string DecodeValues;
+        /// <summary>
         /// Add-on status
         /// Note: This field may return `Null`, indicating that no valid values can be obtained.
         /// </summary>
@@ -44,6 +49,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string addonVersion,
 
+            string decodeValues,
+
             string phase,
 
             string rawValues,
@@ -52,6 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         {
             AddonName = addonName;
             AddonVersion = addonVersion;
+            DecodeValues = decodeValues;
             Phase = phase;
             RawValues = rawValues;
             Reason = reason;

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterRoleConfigurations = tencentcloud.Identity.getCenterRoleConfigurations({
+ * const identityCenterRoleConfigurations = tencentcloud.identity.getCenterRoleConfigurations({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetCenterRoleConfigurationsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterRoleConfigurations = tencentcloud.Identity.getCenterRoleConfigurations({
+ * const identityCenterRoleConfigurations = tencentcloud.identity.getCenterRoleConfigurations({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -107,19 +107,19 @@ export interface GetCenterRoleConfigurationsOutputArgs {
     /**
      * Filter criteria, which are case insensitive. Currently, only RoleConfigurationName is supported and only eq (Equals) and sw (Start With) are supported. Example: Filter = "RoleConfigurationName, only sw test" means querying all permission configurations starting with test. Filter = "RoleConfigurationName, only eq TestRoleConfiguration" means querying the permission configuration named TestRoleConfiguration.
      */
-    filter?: pulumi.Input<string>;
+    filter?: pulumi.Input<string | undefined>;
     /**
      * Check whether the member account has been configured with permissions. If configured, return IsSelected: true; otherwise, return false.
      */
-    filterTargets?: pulumi.Input<pulumi.Input<number>[]>;
+    filterTargets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * UserId of the authorized user or GroupId of the authorized user group, which must be set together with the input parameter FilterTargets.
      */
-    principalId?: pulumi.Input<string>;
+    principalId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

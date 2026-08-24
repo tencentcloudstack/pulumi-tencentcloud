@@ -20,6 +20,11 @@ export type AuditService = import("./auditService").AuditService;
 export const AuditService: typeof import("./auditService").AuditService = null as any;
 utilities.lazyLoad(exports, ["AuditService"], () => require("./auditService"));
 
+export { BackupArgs, BackupState } from "./backup";
+export type Backup = import("./backup").Backup;
+export const Backup: typeof import("./backup").Backup = null as any;
+utilities.lazyLoad(exports, ["Backup"], () => require("./backup"));
+
 export { BackupDownloadRestrictionArgs, BackupDownloadRestrictionState } from "./backupDownloadRestriction";
 export type BackupDownloadRestriction = import("./backupDownloadRestriction").BackupDownloadRestriction;
 export const BackupDownloadRestriction: typeof import("./backupDownloadRestriction").BackupDownloadRestriction = null as any;
@@ -245,6 +250,11 @@ export type Proxy = import("./proxy").Proxy;
 export const Proxy: typeof import("./proxy").Proxy = null as any;
 utilities.lazyLoad(exports, ["Proxy"], () => require("./proxy"));
 
+export { ProxyAddressConfigArgs, ProxyAddressConfigState } from "./proxyAddressConfig";
+export type ProxyAddressConfig = import("./proxyAddressConfig").ProxyAddressConfig;
+export const ProxyAddressConfig: typeof import("./proxyAddressConfig").ProxyAddressConfig = null as any;
+utilities.lazyLoad(exports, ["ProxyAddressConfig"], () => require("./proxyAddressConfig"));
+
 export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
 export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
 export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
@@ -356,6 +366,8 @@ const _module = {
                 return new AuditLogFile(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/auditService:AuditService":
                 return new AuditService(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/backup:Backup":
+                return new Backup(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction":
                 return new BackupDownloadRestriction(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus":
@@ -390,6 +402,8 @@ const _module = {
                 return new Privilege(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/proxy:Proxy":
                 return new Proxy(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/proxyAddressConfig:ProxyAddressConfig":
+                return new ProxyAddressConfig(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/readonlyInstance:ReadonlyInstance":
                 return new ReadonlyInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/reloadBalanceProxyNode:ReloadBalanceProxyNode":
@@ -438,6 +452,7 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/auditLogFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/auditService", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupDownloadRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupEncryptionStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
@@ -455,6 +470,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/paramTemplate", _mo
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/passwordComplexity", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/privilege", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/proxy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/proxyAddressConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/readonlyInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/reloadBalanceProxyNode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/remoteBackupConfig", _module)

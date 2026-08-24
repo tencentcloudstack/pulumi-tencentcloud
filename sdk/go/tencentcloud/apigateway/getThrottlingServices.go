@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			_ = apigateway.GetThrottlingServicesOutput(ctx, apigateway.GetThrottlingServicesOutputArgs{
-//				ServiceId: service.ID(),
+//				ServiceId: service.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -81,12 +81,8 @@ type GetThrottlingServicesResult struct {
 }
 
 func GetThrottlingServicesOutput(ctx *pulumi.Context, args GetThrottlingServicesOutputArgs, opts ...pulumi.InvokeOption) GetThrottlingServicesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetThrottlingServicesResultOutput, error) {
-			args := v.(GetThrottlingServicesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args, GetThrottlingServicesResultOutput{}, options).(GetThrottlingServicesResultOutput), nil
-		}).(GetThrottlingServicesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args, GetThrottlingServicesResultOutput{}, options).(GetThrottlingServicesResultOutput)
 }
 
 // A collection of arguments for invoking getThrottlingServices.

@@ -43,7 +43,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -54,7 +54,7 @@ import (
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -77,8 +77,8 @@ import (
 //			}
 //			// attachment instance
 //			_, err = ccn.NewAttachmentV2(ctx, "example", &ccn.AttachmentV2Args{
-//				CcnId:          example.ID(),
-//				InstanceId:     vpc.ID(),
+//				CcnId:          example.ID().ToIDOutput().ToStringOutput(),
+//				InstanceId:     vpc2.ID().ToIDOutput().ToStringOutput(),
 //				InstanceType:   pulumi.String("VPC"),
 //				InstanceRegion: pulumi.String(region),
 //				Description:    pulumi.String("attachment descripiton."),
@@ -119,7 +119,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -130,7 +130,7 @@ import (
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -153,7 +153,7 @@ import (
 //			}
 //			// create ccn route table
 //			exampleRouteTable, err := ccn.NewRouteTable(ctx, "example", &ccn.RouteTableArgs{
-//				CcnId:       example.ID(),
+//				CcnId:       example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("tf-example"),
 //				Description: pulumi.String("desc."),
 //			})
@@ -162,11 +162,11 @@ import (
 //			}
 //			// attachment instance & route table
 //			_, err = ccn.NewAttachmentV2(ctx, "example", &ccn.AttachmentV2Args{
-//				CcnId:          example.ID(),
-//				InstanceId:     vpc.ID(),
+//				CcnId:          example.ID().ToIDOutput().ToStringOutput(),
+//				InstanceId:     vpc2.ID().ToIDOutput().ToStringOutput(),
 //				InstanceType:   pulumi.String("VPC"),
 //				InstanceRegion: pulumi.String(region),
-//				RouteTableId:   exampleRouteTable.ID(),
+//				RouteTableId:   exampleRouteTable.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

@@ -40,7 +40,7 @@ import (
 //			exampleNamespace, err := tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 //				EnvironName: pulumi.String("tf_example"),
 //				MsgTtl:      pulumi.Int(300),
-//				ClusterId:   exampleInstance.ID(),
+//				ClusterId:   exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				Remark:      pulumi.String("remark."),
 //			})
 //			if err != nil {
@@ -48,7 +48,7 @@ import (
 //			}
 //			_ = tdmq.GetEnvironmentAttributesOutput(ctx, tdmq.GetEnvironmentAttributesOutputArgs{
 //				EnvironmentId: exampleNamespace.EnvironName,
-//				ClusterId:     exampleInstance.ID(),
+//				ClusterId:     exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -99,12 +99,8 @@ type GetEnvironmentAttributesResult struct {
 }
 
 func GetEnvironmentAttributesOutput(ctx *pulumi.Context, args GetEnvironmentAttributesOutputArgs, opts ...pulumi.InvokeOption) GetEnvironmentAttributesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEnvironmentAttributesResultOutput, error) {
-			args := v.(GetEnvironmentAttributesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args, GetEnvironmentAttributesResultOutput{}, options).(GetEnvironmentAttributesResultOutput), nil
-		}).(GetEnvironmentAttributesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args, GetEnvironmentAttributesResultOutput{}, options).(GetEnvironmentAttributesResultOutput)
 }
 
 // A collection of arguments for invoking getEnvironmentAttributes.

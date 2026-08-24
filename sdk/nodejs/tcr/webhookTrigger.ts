@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  *         cveId: "cve-xxxxx",
  *     }],
  * });
- * const example = tencentcloud.Tcr.getNamespacesOutput({
+ * const example = tencentcloud.tcr.getNamespacesOutput({
  *     instanceId: exampleNamespace.instanceId,
  * });
  * const nsId = example.apply(example => example.namespaceLists?.[0]?.id);
@@ -66,7 +66,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tcr webhook_trigger can be imported using the id, e.g.
+ * tcr webhookTrigger can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
@@ -162,19 +162,19 @@ export interface WebhookTriggerState {
     /**
      * namespace name.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * instance Id.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trigger parameters.
      */
-    trigger?: pulumi.Input<inputs.Tcr.WebhookTriggerTrigger>;
+    trigger?: pulumi.Input<inputs.Tcr.WebhookTriggerTrigger | undefined>;
 }
 
 /**
@@ -192,7 +192,7 @@ export interface WebhookTriggerArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trigger parameters.
      */

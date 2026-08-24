@@ -74,12 +74,8 @@ type LookupInvokerResult struct {
 }
 
 func LookupInvokerOutput(ctx *pulumi.Context, args LookupInvokerOutputArgs, opts ...pulumi.InvokeOption) LookupInvokerResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupInvokerResultOutput, error) {
-			args := v.(LookupInvokerArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tat/getInvoker:getInvoker", args, LookupInvokerResultOutput{}, options).(LookupInvokerResultOutput), nil
-		}).(LookupInvokerResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tat/getInvoker:getInvoker", args, LookupInvokerResultOutput{}, options).(LookupInvokerResultOutput)
 }
 
 // A collection of arguments for invoking getInvoker.

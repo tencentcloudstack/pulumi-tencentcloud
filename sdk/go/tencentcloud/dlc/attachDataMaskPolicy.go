@@ -50,7 +50,7 @@ import (
 //						Table:    pulumi.String("tf-example"),
 //						Column:   pulumi.String("id"),
 //					},
-//					DataMaskStrategyId: example.ID(),
+//					DataMaskStrategyId: example.ID().ToIDOutput().ToStringOutput(),
 //					ColumnType:         pulumi.String("string"),
 //				},
 //			})

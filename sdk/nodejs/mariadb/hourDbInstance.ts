@@ -2,42 +2,79 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a mariadb hourDbInstance
+ * Provides a resource to create a MariaDB hour db instance
  *
  * ## Example Usage
+ *
+ * ### Create with default init params
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const basic = new tencentcloud.mariadb.HourDbInstance("basic", {
- *     dbVersionId: "10.0",
- *     instanceName: "db-test-del",
- *     memory: 2,
+ * const example = new tencentcloud.mariadb.HourDbInstance("example", {
+ *     instanceName: "tf-example",
+ *     memory: 4,
  *     nodeCount: 2,
- *     storage: 10,
- *     subnetId: "subnet-jdi5xn22",
- *     vpcId: "vpc-k1t8ickr",
- *     vip: "10.0.0.197",
+ *     storage: 100,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-d4umunpy",
+ *     vip: "10.0.0.8",
  *     zones: [
  *         "ap-guangzhou-6",
  *         "ap-guangzhou-7",
  *     ],
  *     tags: {
- *         createdBy: "terraform",
+ *         createdBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create with custom init params
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mariadb.HourDbInstance("example", {
+ *     dbVersionId: "5.7",
+ *     instanceName: "tf-example",
+ *     memory: 2,
+ *     nodeCount: 2,
+ *     storage: 100,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-d4umunpy",
+ *     vip: "10.0.0.8",
+ *     zones: [
+ *         "ap-guangzhou-6",
+ *         "ap-guangzhou-7",
+ *     ],
+ *     initParams: [
+ *         {
+ *             param: "character_set_server",
+ *             value: "utf8",
+ *         },
+ *         {
+ *             param: "lower_case_table_names",
+ *             value: "1",
+ *         },
+ *     ],
+ *     tags: {
+ *         createdBy: "Terraform",
  *     },
  * });
  * ```
  *
  * ## Import
  *
- * mariadb hour_db_instance can be imported using the id, e.g.
- *
+ * MariaDB hour db instance can be imported using the id, e.g.
  * ```sh
- * $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+ * $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance example tdsql-kjqih9nn
  * ```
  */
 export class HourDbInstance extends pulumi.CustomResource {
@@ -72,6 +109,10 @@ export class HourDbInstance extends pulumi.CustomResource {
      * db engine version, default to 10.1.9.
      */
     declare public readonly dbVersionId: pulumi.Output<string>;
+    /**
+     * parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+     */
+    declare public readonly initParams: pulumi.Output<outputs.Mariadb.HourDbInstanceInitParam[]>;
     /**
      * name of this instance.
      */
@@ -127,6 +168,7 @@ export class HourDbInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as HourDbInstanceState | undefined;
             resourceInputs["dbVersionId"] = state?.dbVersionId;
+            resourceInputs["initParams"] = state?.initParams;
             resourceInputs["instanceName"] = state?.instanceName;
             resourceInputs["memory"] = state?.memory;
             resourceInputs["nodeCount"] = state?.nodeCount;
@@ -152,6 +194,7 @@ export class HourDbInstance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'zones'");
             }
             resourceInputs["dbVersionId"] = args?.dbVersionId;
+            resourceInputs["initParams"] = args?.initParams;
             resourceInputs["instanceName"] = args?.instanceName;
             resourceInputs["memory"] = args?.memory;
             resourceInputs["nodeCount"] = args?.nodeCount;
@@ -175,47 +218,51 @@ export interface HourDbInstanceState {
     /**
      * db engine version, default to 10.1.9.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
+    /**
+     * parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+     */
+    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.HourDbInstanceInitParam>[] | undefined>;
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance memory.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * number of node for instance.
      */
-    nodeCount?: pulumi.Input<number>;
+    nodeCount?: pulumi.Input<number | undefined>;
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * instance disk storage.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * subnet id, it&amp;#39;s required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * available zone of instance.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -225,11 +272,15 @@ export interface HourDbInstanceArgs {
     /**
      * db engine version, default to 10.1.9.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
+    /**
+     * parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+     */
+    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.HourDbInstanceInitParam>[] | undefined>;
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance memory.
      */
@@ -241,7 +292,7 @@ export interface HourDbInstanceArgs {
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * instance disk storage.
      */
@@ -249,19 +300,19 @@ export interface HourDbInstanceArgs {
     /**
      * subnet id, it&amp;#39;s required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * available zone of instance.
      */

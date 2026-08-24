@@ -207,49 +207,49 @@ export interface BatchState {
     /**
      * Appid.
      */
-    appid?: pulumi.Input<number>;
+    appid?: pulumi.Input<number | undefined>;
     /**
      * Whether to confirm before performing the task. The default is false.
      */
-    confirmationRequired?: pulumi.Input<boolean>;
+    confirmationRequired?: pulumi.Input<boolean | undefined>;
     /**
      * Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * List of objects to be processed.
      */
-    manifest?: pulumi.Input<inputs.Cos.BatchManifest>;
+    manifest?: pulumi.Input<inputs.Cos.BatchManifest | undefined>;
     /**
      * Select the action to be performed on the objects in the manifest file.
      */
-    operation?: pulumi.Input<inputs.Cos.BatchOperation>;
+    operation?: pulumi.Input<inputs.Cos.BatchOperation | undefined>;
     /**
      * Mission priority. The higher the value, the higher the priority of the task. Priority values range from 0 to 2147483647.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Task completion report.
      */
-    report?: pulumi.Input<inputs.Cos.BatchReport>;
+    report?: pulumi.Input<inputs.Cos.BatchReport | undefined>;
     /**
      * COS resource identifier, which is used to identify the role you created. You need this resource identifier to verify your identity.
      */
-    roleArn?: pulumi.Input<string>;
+    roleArn?: pulumi.Input<string | undefined>;
     /**
      * Current status of the task.
      * Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
      * For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Uin.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -263,11 +263,11 @@ export interface BatchArgs {
     /**
      * Whether to confirm before performing the task. The default is false.
      */
-    confirmationRequired?: pulumi.Input<boolean>;
+    confirmationRequired?: pulumi.Input<boolean | undefined>;
     /**
      * Mission description. If you configured this information when you created the task, the content is returned. The description length ranges from 0 to 256 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * List of objects to be processed.
      */
@@ -293,7 +293,7 @@ export interface BatchArgs {
      * Legal parameter values include Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
      * For Update status, when you move a task to the Ready state, COS will assume that you have confirmed the task and will perform it. When you move a task to the Cancelled state, COS cancels the task. Optional parameters include: Ready, Cancelled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Uin.
      */

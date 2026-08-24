@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// ci bucket_pic_style can be imported using the bucket#styleName, e.g.
+// ci bucketPicStyle can be imported using the bucket#styleName, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.As.getLastActivity({
+ * const example = tencentcloud.as.getLastActivity({
  *     autoScalingGroupIds: ["asg-3st9wq9m"],
  *     excludeCancelledActivity: true,
  * });
@@ -73,7 +73,7 @@ export interface GetLastActivityResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.As.getLastActivity({
+ * const example = tencentcloud.as.getLastActivity({
  *     autoScalingGroupIds: ["asg-3st9wq9m"],
  *     excludeCancelledActivity: true,
  * });
@@ -99,9 +99,9 @@ export interface GetLastActivityOutputArgs {
     /**
      * Exclude cancellation type activities when querying. The default value is false, indicating that cancellation type activities are not excluded.
      */
-    excludeCancelledActivity?: pulumi.Input<boolean>;
+    excludeCancelledActivity?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -33,7 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc traffic_package can be imported using the id, e.g.
+    /// vpc TrafficPackage can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id

@@ -27,7 +27,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdmqRocketmq role can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
  * ```
@@ -131,27 +130,27 @@ export interface RocketmqRoleState {
     /**
      * Cluster ID (required).
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
     /**
      * Value of the role token.
      */
-    token?: pulumi.Input<string>;
+    token?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -165,7 +164,7 @@ export interface RocketmqRoleArgs {
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
      */

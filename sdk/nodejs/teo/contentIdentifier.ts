@@ -82,6 +82,10 @@ export class ContentIdentifier extends pulumi.CustomResource {
      */
     declare public readonly planId: pulumi.Output<string>;
     /**
+     * Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+     */
+    declare public /*out*/ readonly status: pulumi.Output<string>;
+    /**
      * Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
      */
     declare public readonly tags: pulumi.Output<outputs.Teo.ContentIdentifierTag[] | undefined>;
@@ -104,6 +108,7 @@ export class ContentIdentifier extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["modifiedOn"] = state?.modifiedOn;
             resourceInputs["planId"] = state?.planId;
+            resourceInputs["status"] = state?.status;
             resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as ContentIdentifierArgs | undefined;
@@ -119,6 +124,7 @@ export class ContentIdentifier extends pulumi.CustomResource {
             resourceInputs["contentId"] = undefined /*out*/;
             resourceInputs["createdOn"] = undefined /*out*/;
             resourceInputs["modifiedOn"] = undefined /*out*/;
+            resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ContentIdentifier.__pulumiType, name, resourceInputs, opts);
@@ -132,27 +138,31 @@ export interface ContentIdentifierState {
     /**
      * Content identifier ID.
      */
-    contentId?: pulumi.Input<string>;
+    contentId?: pulumi.Input<string | undefined>;
     /**
      * Creation time, which is in Coordinated Universal Time (UTC) and follows the ISO 8601 date and time format..
      */
-    createdOn?: pulumi.Input<string>;
+    createdOn?: pulumi.Input<string | undefined>;
     /**
      * Description of the content identifier, length limit of up to 20 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The time of the latest update, in Coordinated Universal Time (UTC), following the ISO 8601 date and time format..
      */
-    modifiedOn?: pulumi.Input<string>;
+    modifiedOn?: pulumi.Input<string | undefined>;
     /**
      * Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
      */
-    planId?: pulumi.Input<string>;
+    planId?: pulumi.Input<string | undefined>;
+    /**
+     * Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+     */
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Teo.ContentIdentifierTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Teo.ContentIdentifierTag>[] | undefined>;
 }
 
 /**
@@ -170,5 +180,5 @@ export interface ContentIdentifierArgs {
     /**
      * Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Teo.ContentIdentifierTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Teo.ContentIdentifierTag>[] | undefined>;
 }

@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this resource to create postgresql parameter.
+ * Use this resource to create PostgreSQL parameters.
  *
  * ## Example Usage
  *
@@ -15,47 +15,47 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new pulumi.Config();
- * const defaultAz = config.get("defaultAz") || "ap-guangzhou-3";
- * const gz3 = tencentcloud.Vpc.getSubnets({
- *     availabilityZone: defaultAz,
- *     isDefault: true,
- * });
- * const vpcId = gz3.then(gz3 => gz3.instanceLists?.[0]?.vpcId);
- * const subnetId = gz3.then(gz3 => gz3.instanceLists?.[0]?.subnetId);
- * const zone = tencentcloud.Availability.getZonesByProduct({
- *     product: "postgres",
- * });
- * const test = new tencentcloud.postgresql.Instance("test", {
- *     name: "tf_postsql_postpaid",
- *     availabilityZone: defaultAz,
+ * const example = new tencentcloud.postgresql.Instance("example", {
+ *     name: "tf-example",
+ *     availabilityZone: "ap-guangzhou-6",
  *     chargeType: "POSTPAID_BY_HOUR",
- *     period: 1,
- *     vpcId: vpcId,
- *     subnetId: subnetId,
- *     engineVersion: "13.3",
- *     rootPassword: "t1qaA2k1wgvfa3?ZZZ",
- *     securityGroups: ["sg-5275dorp"],
- *     charset: "LATIN1",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     dbMajorVersion: "17",
+ *     engineVersion: "17.4",
+ *     dbKernelVersion: "v17.4_r1.4",
+ *     rootUser: "root123",
+ *     rootPassword: "Root123$",
+ *     charset: "UTF8",
  *     projectId: 0,
- *     memory: 2,
- *     storage: 20,
+ *     memory: 4,
+ *     cpu: 2,
+ *     storage: 50,
+ *     tags: {
+ *         CreateBy: "Terraform",
+ *     },
  * });
- * const postgresqlParameters = new tencentcloud.postgresql.Parameters("postgresql_parameters", {
- *     dbInstanceId: test.id,
- *     paramLists: [{
- *         expectedValue: "off",
- *         name: "check_function_bodies",
- *     }],
+ * const exampleParameters = new tencentcloud.postgresql.Parameters("example", {
+ *     dbInstanceId: example.id,
+ *     paramLists: [
+ *         {
+ *             name: "check_function_bodies",
+ *             expectedValue: "off",
+ *         },
+ *         {
+ *             name: "max_standby_archive_delay",
+ *             expectedValue: "35000",
+ *         },
+ *     ],
  * });
  * ```
  *
  * ## Import
  *
- * postgresql parameters can be imported, e.g.
+ * PostgreSQL parameters can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Postgresql/parameters:Parameters example pgrogrp-lckioi2a
+ * $ pulumi import tencentcloud:Postgresql/parameters:Parameters example postgres-ckwcgdf1
  * ```
  */
 export class Parameters extends pulumi.CustomResource {
@@ -133,11 +133,11 @@ export interface ParametersState {
     /**
      * Instance ID.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Parameters to be modified and expected values.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParametersParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParametersParamList>[] | undefined>;
 }
 
 /**

@@ -30,8 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css pull_stream_task can be imported using the id, e.g.
- *
+ * css pullStreamTask can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
  * ```
@@ -276,111 +275,111 @@ export interface PullStreamTaskState {
     /**
      * push app name.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * backup pull source type.
      */
-    backupSourceType?: pulumi.Input<string>;
+    backupSourceType?: pulumi.Input<string | undefined>;
     /**
      * backup pull source.
      */
-    backupSourceUrl?: pulumi.Input<string>;
+    backupSourceUrl?: pulumi.Input<string | undefined>;
     /**
      * defind the callback event you need, null for all. TaskStart, TaskExit, VodSourceFileStart, VodSourceFileFinish, ResetTaskConfig, PullFileUnstable, PushStreamUnstable, PullFileFailed, PushStreamFailed, FileEndEarly.
      */
-    callbackEvents?: pulumi.Input<pulumi.Input<string>[]>;
+    callbackEvents?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * task event callback url.
      */
-    callbackUrl?: pulumi.Input<string>;
+    callbackUrl?: pulumi.Input<string | undefined>;
     /**
      * desc for pull task.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * desc who create the task.
      */
-    createBy?: pulumi.Input<string>;
+    createBy?: pulumi.Input<string | undefined>;
     /**
      * create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * push domain name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * task end time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * ignore_region for ignore the input region and reblance inside the server.
      */
-    extraCmd?: pulumi.Input<string>;
+    extraCmd?: pulumi.Input<string | undefined>;
     /**
      * task enable or disable.
      */
-    fileIndex?: pulumi.Input<number>;
+    fileIndex?: pulumi.Input<number | undefined>;
     /**
      * task enable or disable.
      */
-    offsetTime?: pulumi.Input<number>;
+    offsetTime?: pulumi.Input<number | undefined>;
     /**
      * desc operator user name.
      */
-    operator?: pulumi.Input<string>;
+    operator?: pulumi.Input<string | undefined>;
     /**
      * other pushing args.
      */
-    pushArgs?: pulumi.Input<string>;
+    pushArgs?: pulumi.Input<string | undefined>;
     /**
      * task run region.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
      */
-    sourceType?: pulumi.Input<string>;
+    sourceType?: pulumi.Input<string | undefined>;
     /**
      * Pull Source media, SourceType=PullLivePushLive only 1 value, SourceType=PullLivePushLive can input multi values.
      */
-    sourceUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    sourceUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * task begin time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * task enable or disable.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * push stream name.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * full target push url, DomainName, AppName, StreamName field must be empty.
      */
-    toUrl?: pulumi.Input<string>;
+    toUrl?: pulumi.Input<string | undefined>;
     /**
      * desc who update the task.
      */
-    updateBy?: pulumi.Input<string>;
+    updateBy?: pulumi.Input<string | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * loop time for vod.
      */
-    vodLoopTimes?: pulumi.Input<number>;
+    vodLoopTimes?: pulumi.Input<number | undefined>;
     /**
      * vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
      */
-    vodRefreshType?: pulumi.Input<string>;
+    vodRefreshType?: pulumi.Input<string | undefined>;
     /**
      * watermark list, max 4 setting.
      */
-    watermarkLists?: pulumi.Input<pulumi.Input<inputs.Css.PullStreamTaskWatermarkList>[]>;
+    watermarkLists?: pulumi.Input<pulumi.Input<inputs.Css.PullStreamTaskWatermarkList>[] | undefined>;
 }
 
 /**
@@ -394,23 +393,23 @@ export interface PullStreamTaskArgs {
     /**
      * backup pull source type.
      */
-    backupSourceType?: pulumi.Input<string>;
+    backupSourceType?: pulumi.Input<string | undefined>;
     /**
      * backup pull source.
      */
-    backupSourceUrl?: pulumi.Input<string>;
+    backupSourceUrl?: pulumi.Input<string | undefined>;
     /**
      * defind the callback event you need, null for all. TaskStart, TaskExit, VodSourceFileStart, VodSourceFileFinish, ResetTaskConfig, PullFileUnstable, PushStreamUnstable, PullFileFailed, PushStreamFailed, FileEndEarly.
      */
-    callbackEvents?: pulumi.Input<pulumi.Input<string>[]>;
+    callbackEvents?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * task event callback url.
      */
-    callbackUrl?: pulumi.Input<string>;
+    callbackUrl?: pulumi.Input<string | undefined>;
     /**
      * desc for pull task.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * push domain name.
      */
@@ -422,23 +421,23 @@ export interface PullStreamTaskArgs {
     /**
      * ignore_region for ignore the input region and reblance inside the server.
      */
-    extraCmd?: pulumi.Input<string>;
+    extraCmd?: pulumi.Input<string | undefined>;
     /**
      * task enable or disable.
      */
-    fileIndex?: pulumi.Input<number>;
+    fileIndex?: pulumi.Input<number | undefined>;
     /**
      * task enable or disable.
      */
-    offsetTime?: pulumi.Input<number>;
+    offsetTime?: pulumi.Input<number | undefined>;
     /**
      * desc operator user name.
      */
-    operator?: pulumi.Input<string>;
+    operator?: pulumi.Input<string | undefined>;
     /**
      * other pushing args.
      */
-    pushArgs?: pulumi.Input<string>;
+    pushArgs?: pulumi.Input<string | undefined>;
     /**
      * `PullLivePushLive`: SourceUrls live type, `PullVodPushLive`: SourceUrls vod type.
      */
@@ -454,7 +453,7 @@ export interface PullStreamTaskArgs {
     /**
      * task enable or disable.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * push stream name.
      */
@@ -462,17 +461,17 @@ export interface PullStreamTaskArgs {
     /**
      * full target push url, DomainName, AppName, StreamName field must be empty.
      */
-    toUrl?: pulumi.Input<string>;
+    toUrl?: pulumi.Input<string | undefined>;
     /**
      * loop time for vod.
      */
-    vodLoopTimes?: pulumi.Input<number>;
+    vodLoopTimes?: pulumi.Input<number | undefined>;
     /**
      * vod refresh method. `ImmediateNewSource`: switch to new source at once, `ContinueBreakPoint`: switch to new source while old source finish.
      */
-    vodRefreshType?: pulumi.Input<string>;
+    vodRefreshType?: pulumi.Input<string | undefined>;
     /**
      * watermark list, max 4 setting.
      */
-    watermarkLists?: pulumi.Input<pulumi.Input<inputs.Css.PullStreamTaskWatermarkList>[]>;
+    watermarkLists?: pulumi.Input<pulumi.Input<inputs.Css.PullStreamTaskWatermarkList>[] | undefined>;
 }

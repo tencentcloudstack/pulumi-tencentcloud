@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataResourceFiles = tencentcloud.Wedata.getResourceFiles({
+ * const wedataResourceFiles = tencentcloud.wedata.getResourceFiles({
  *     projectId: "2905622749543821312",
  *     resourceName: "tftest.txt",
  * });
@@ -109,7 +109,7 @@ export interface GetResourceFilesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataResourceFiles = tencentcloud.Wedata.getResourceFiles({
+ * const wedataResourceFiles = tencentcloud.wedata.getResourceFiles({
  *     projectId: "2905622749543821312",
  *     resourceName: "tftest.txt",
  * });
@@ -137,27 +137,27 @@ export interface GetResourceFilesOutputArgs {
     /**
      * Create time range. specifies the termination time in yyyy-MM-dd HH:MM:ss format.
      */
-    createTimeEnd?: pulumi.Input<string>;
+    createTimeEnd?: pulumi.Input<string | undefined>;
     /**
      * Create time range. specifies the start time in yyyy-MM-dd HH:MM:ss format.
      */
-    createTimeStart?: pulumi.Input<string>;
+    createTimeStart?: pulumi.Input<string | undefined>;
     /**
      * Creator ID. obtain through the DescribeCurrentUserInfo API.
      */
-    createUserUin?: pulumi.Input<string>;
+    createUserUin?: pulumi.Input<string | undefined>;
     /**
      * Update time range. specifies the end time in yyyy-MM-dd HH:MM:ss format.
      */
-    modifyTimeEnd?: pulumi.Input<string>;
+    modifyTimeEnd?: pulumi.Input<string | undefined>;
     /**
      * Update time range. specifies the start time in yyyy-MM-dd HH:MM:ss format.
      */
-    modifyTimeStart?: pulumi.Input<string>;
+    modifyTimeStart?: pulumi.Input<string | undefined>;
     /**
      * Specifies the path of the file's parent folder (for example /a/b/c, querying resource files under the folder c).
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -165,9 +165,9 @@ export interface GetResourceFilesOutputArgs {
     /**
      * Resource file name (fuzzy search keyword).
      */
-    resourceName?: pulumi.Input<string>;
+    resourceName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

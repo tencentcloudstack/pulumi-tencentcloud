@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const application = tencentcloud.Tsf.getApplication({
+ * const application = tencentcloud.tsf.getApplication({
  *     applicationType: "V",
  *     microserviceType: "N",
  *     applicationIdLists: ["application-a24x29xv"],
@@ -93,7 +93,7 @@ export interface GetApplicationResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const application = tencentcloud.Tsf.getApplication({
+ * const application = tencentcloud.tsf.getApplication({
  *     applicationType: "V",
  *     microserviceType: "N",
  *     applicationIdLists: ["application-a24x29xv"],
@@ -119,21 +119,21 @@ export interface GetApplicationOutputArgs {
     /**
      * Id list.
      */
-    applicationIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    applicationIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * An array of application resource types.
      */
-    applicationResourceTypeLists?: pulumi.Input<pulumi.Input<string>[]>;
+    applicationResourceTypeLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The application type. V OR C, V means VM, C means container.
      */
-    applicationType?: pulumi.Input<string>;
+    applicationType?: pulumi.Input<string | undefined>;
     /**
      * The microservice type of the application.
      */
-    microserviceType?: pulumi.Input<string>;
+    microserviceType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

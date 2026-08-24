@@ -22,8 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_node can be imported using the id, e.g.
- *
+ * organization orgNode can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
  * ```
@@ -124,27 +123,27 @@ export interface OrgNodeState {
     /**
      * Node creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Node name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Parent node ID.
      */
-    parentNodeId?: pulumi.Input<number>;
+    parentNodeId?: pulumi.Input<number | undefined>;
     /**
      * Notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Node update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -154,7 +153,7 @@ export interface OrgNodeArgs {
     /**
      * Node name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Parent node ID.
      */
@@ -162,9 +161,9 @@ export interface OrgNodeArgs {
     /**
      * Notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

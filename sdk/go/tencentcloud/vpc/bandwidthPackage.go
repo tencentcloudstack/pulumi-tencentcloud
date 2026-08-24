@@ -31,7 +31,7 @@ import (
 //				NetworkType:          pulumi.String("BGP"),
 //				ChargeType:           pulumi.String("TOP5_POSTPAID_BY_MONTH"),
 //				BandwidthPackageName: pulumi.String("tf-example"),
-//				Tags: pulumi.StringMap{
+//				Tag: pulumi.StringMap{
 //					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
@@ -64,7 +64,7 @@ import (
 //				BandwidthPackageName: pulumi.String("tf-example"),
 //				TimeSpan:             pulumi.Int(3),
 //				InternetMaxBandwidth: pulumi.Int(100),
-//				Tags: pulumi.StringMap{
+//				Tag: pulumi.StringMap{
 //					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
@@ -97,7 +97,7 @@ import (
 //				BandwidthPackageName: pulumi.String("tf-example"),
 //				InternetMaxBandwidth: pulumi.Int(400),
 //				Egress:               pulumi.String("center_egress2"),
-//				Tags: pulumi.StringMap{
+//				Tag: pulumi.StringMap{
 //					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
@@ -112,8 +112,7 @@ import (
 //
 // ## Import
 //
-// vpc bandwidth_package can be imported using the id, e.g.
-//
+// vpc bandwidthPackage can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage example bwp-hq8h7qpy
 // ```
@@ -131,6 +130,10 @@ type BandwidthPackage struct {
 	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrOutput `pulumi:"networkType"`
 	// Tag description list.
+	Tag pulumi.StringMapOutput `pulumi:"tag"`
+	// Use `tag` instead. Tag description list.
+	//
+	// Deprecated: Use `tag` instead.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
 	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
@@ -177,6 +180,10 @@ type bandwidthPackageState struct {
 	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
+	Tag map[string]string `pulumi:"tag"`
+	// Use `tag` instead. Tag description list.
+	//
+	// Deprecated: Use `tag` instead.
 	Tags map[string]string `pulumi:"tags"`
 	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
 	TimeSpan *int `pulumi:"timeSpan"`
@@ -194,6 +201,10 @@ type BandwidthPackageState struct {
 	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
+	Tag pulumi.StringMapInput
+	// Use `tag` instead. Tag description list.
+	//
+	// Deprecated: Use `tag` instead.
 	Tags pulumi.StringMapInput
 	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
 	TimeSpan pulumi.IntPtrInput
@@ -215,6 +226,10 @@ type bandwidthPackageArgs struct {
 	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType *string `pulumi:"networkType"`
 	// Tag description list.
+	Tag map[string]string `pulumi:"tag"`
+	// Use `tag` instead. Tag description list.
+	//
+	// Deprecated: Use `tag` instead.
 	Tags map[string]string `pulumi:"tags"`
 	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
 	TimeSpan *int `pulumi:"timeSpan"`
@@ -233,6 +248,10 @@ type BandwidthPackageArgs struct {
 	// Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
 	NetworkType pulumi.StringPtrInput
 	// Tag description list.
+	Tag pulumi.StringMapInput
+	// Use `tag` instead. Tag description list.
+	//
+	// Deprecated: Use `tag` instead.
 	Tags pulumi.StringMapInput
 	// The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
 	TimeSpan pulumi.IntPtrInput
@@ -351,6 +370,13 @@ func (o BandwidthPackageOutput) NetworkType() pulumi.StringPtrOutput {
 }
 
 // Tag description list.
+func (o BandwidthPackageOutput) Tag() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringMapOutput { return v.Tag }).(pulumi.StringMapOutput)
+}
+
+// Use `tag` instead. Tag description list.
+//
+// Deprecated: Use `tag` instead.
 func (o BandwidthPackageOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *BandwidthPackage) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }

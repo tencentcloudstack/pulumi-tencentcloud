@@ -139,23 +139,23 @@ export interface AuditServiceState {
     /**
      * Audit type. Valid values: true: Record all; false: Record by rules (default value).
      */
-    auditAll?: pulumi.Input<boolean>;
+    auditAll?: pulumi.Input<boolean | undefined>;
     /**
      * Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
      */
-    highLogExpireDay?: pulumi.Input<number>;
+    highLogExpireDay?: pulumi.Input<number | undefined>;
     /**
      * TencentDB for MySQL instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Retention period of the audit log. Valid values:  `7` (one week), `30` (one month), `90` (three months), `180` (six months), `365` (one year), `1095` (three years), `1825` (five years).
      */
-    logExpireDay?: pulumi.Input<number>;
+    logExpireDay?: pulumi.Input<number | undefined>;
     /**
      * Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
      */
-    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -165,11 +165,11 @@ export interface AuditServiceArgs {
     /**
      * Audit type. Valid values: true: Record all; false: Record by rules (default value).
      */
-    auditAll?: pulumi.Input<boolean>;
+    auditAll?: pulumi.Input<boolean | undefined>;
     /**
      * Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
      */
-    highLogExpireDay?: pulumi.Input<number>;
+    highLogExpireDay?: pulumi.Input<number | undefined>;
     /**
      * TencentDB for MySQL instance ID.
      */
@@ -181,5 +181,5 @@ export interface AuditServiceArgs {
     /**
      * Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
      */
-    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

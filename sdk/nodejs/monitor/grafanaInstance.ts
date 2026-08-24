@@ -41,7 +41,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor grafanaInstance can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
  * ```
@@ -192,61 +191,61 @@ export interface GrafanaInstanceState {
     /**
      * Whether to automatically use vouchers.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Control whether grafana could be accessed by internet.
      */
-    enableInternet?: pulumi.Input<boolean>;
+    enableInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Grafana server admin password.
      */
-    grafanaInitPassword?: pulumi.Input<string>;
+    grafanaInitPassword?: pulumi.Input<string | undefined>;
     /**
      * Grafana instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Grafana instance status, 1: Creating, 2: Running, 6: Stopped.
      */
-    instanceStatus?: pulumi.Input<number>;
+    instanceStatus?: pulumi.Input<number | undefined>;
     /**
      * Grafana public address.
      */
-    internalUrl?: pulumi.Input<string>;
+    internalUrl?: pulumi.Input<string | undefined>;
     /**
      * Grafana intranet address.
      */
-    internetUrl?: pulumi.Input<string>;
+    internetUrl?: pulumi.Input<string | undefined>;
     /**
      * Whether to clean up completely, the default is false.
      */
-    isDestroy?: pulumi.Input<boolean>;
+    isDestroy?: pulumi.Input<boolean | undefined>;
     /**
      * It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
      *
      * @deprecated It has been deprecated from version 1.81.16.
      */
-    isDistroy?: pulumi.Input<boolean>;
+    isDistroy?: pulumi.Input<boolean | undefined>;
     /**
      * Grafana external url which could be accessed by user.
      */
-    rootUrl?: pulumi.Input<string>;
+    rootUrl?: pulumi.Input<string | undefined>;
     /**
      * Subnet Id array.
      */
-    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Vpc Id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -256,15 +255,15 @@ export interface GrafanaInstanceArgs {
     /**
      * Whether to automatically use vouchers.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Control whether grafana could be accessed by internet.
      */
-    enableInternet?: pulumi.Input<boolean>;
+    enableInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Grafana server admin password.
      */
-    grafanaInitPassword?: pulumi.Input<string>;
+    grafanaInitPassword?: pulumi.Input<string | undefined>;
     /**
      * Instance name.
      */
@@ -272,23 +271,23 @@ export interface GrafanaInstanceArgs {
     /**
      * Whether to clean up completely, the default is false.
      */
-    isDestroy?: pulumi.Input<boolean>;
+    isDestroy?: pulumi.Input<boolean | undefined>;
     /**
      * It has been deprecated from version 1.81.16. Whether to clean up completely, the default is false.
      *
      * @deprecated It has been deprecated from version 1.81.16.
      */
-    isDistroy?: pulumi.Input<boolean>;
+    isDistroy?: pulumi.Input<boolean | undefined>;
     /**
      * Subnet Id array.
      */
-    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Vpc Id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

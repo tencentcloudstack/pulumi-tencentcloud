@@ -133,12 +133,8 @@ type GetWebVitalsPageResult struct {
 }
 
 func GetWebVitalsPageOutput(ctx *pulumi.Context, args GetWebVitalsPageOutputArgs, opts ...pulumi.InvokeOption) GetWebVitalsPageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWebVitalsPageResultOutput, error) {
-			args := v.(GetWebVitalsPageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args, GetWebVitalsPageResultOutput{}, options).(GetWebVitalsPageResultOutput), nil
-		}).(GetWebVitalsPageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", args, GetWebVitalsPageResultOutput{}, options).(GetWebVitalsPageResultOutput)
 }
 
 // A collection of arguments for invoking getWebVitalsPage.

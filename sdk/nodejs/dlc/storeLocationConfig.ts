@@ -108,11 +108,11 @@ export interface StoreLocationConfigState {
     /**
      * Whether to enable advanced settings. 0 means no while 1 means yes.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * The calculation results are stored in the cos path, such as: cosn://bucketname/.
      */
-    storeLocation?: pulumi.Input<string>;
+    storeLocation?: pulumi.Input<string | undefined>;
 }
 
 /**

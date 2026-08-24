@@ -37,7 +37,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// ## Import
     /// 
     /// pts job can be imported using the projectId#scenarioId#jobId, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
     /// ```

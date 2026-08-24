@@ -7,15 +7,28 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of postgresql dbInstanceVersions
+ * Use this data source to query detailed information of PostgreSQL db instance versions
  *
  * ## Example Usage
+ *
+ * ### Query all versions
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstanceVersions = tencentcloud.Postgresql.getDbInstanceVersions({});
+ * const example = tencentcloud.postgresql.getDbInstanceVersions({});
+ * ```
+ *
+ * ### Query versions by storage type
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.postgresql.getDbInstanceVersions({
+ *     storageType: "CLOUD_HSSD",
+ * });
  * ```
  */
 export function getDbInstanceVersions(args?: GetDbInstanceVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceVersionsResult> {
@@ -23,6 +36,7 @@ export function getDbInstanceVersions(args?: GetDbInstanceVersionsArgs, opts?: p
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", {
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
     }, opts);
 }
 
@@ -34,6 +48,10 @@ export interface GetDbInstanceVersionsArgs {
      * Used to save results.
      */
     resultOutputFile?: string;
+    /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: string;
 }
 
 /**
@@ -45,21 +63,35 @@ export interface GetDbInstanceVersionsResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
+    readonly storageType?: string;
     /**
      * List of database versions.
      */
     readonly versionSets: outputs.Postgresql.GetDbInstanceVersionsVersionSet[];
 }
 /**
- * Use this data source to query detailed information of postgresql dbInstanceVersions
+ * Use this data source to query detailed information of PostgreSQL db instance versions
  *
  * ## Example Usage
+ *
+ * ### Query all versions
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstanceVersions = tencentcloud.Postgresql.getDbInstanceVersions({});
+ * const example = tencentcloud.postgresql.getDbInstanceVersions({});
+ * ```
+ *
+ * ### Query versions by storage type
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.postgresql.getDbInstanceVersions({
+ *     storageType: "CLOUD_HSSD",
+ * });
  * ```
  */
 export function getDbInstanceVersionsOutput(args?: GetDbInstanceVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstanceVersionsResult> {
@@ -67,6 +99,7 @@ export function getDbInstanceVersionsOutput(args?: GetDbInstanceVersionsOutputAr
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", {
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
     }, opts);
 }
 
@@ -77,5 +110,9 @@ export interface GetDbInstanceVersionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: pulumi.Input<string | undefined>;
 }

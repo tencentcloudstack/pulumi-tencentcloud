@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  * GAAP layer7 listener can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener  tencentcloud_gaap_layer7_listener.foo listener-11112222
+ *   $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener foo listener-11112222
  * ```
  */
 export class Layer7Listener extends pulumi.CustomResource {
@@ -185,61 +185,61 @@ export interface Layer7ListenerState {
     /**
      * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    authType?: pulumi.Input<number>;
+    authType?: pulumi.Input<number | undefined>;
     /**
      * Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Creation time of the layer7 listener.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    forwardProtocol?: pulumi.Input<string>;
+    forwardProtocol?: pulumi.Input<string | undefined>;
     /**
      * Group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Name of the layer7 listener, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Port of the layer7 listener.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Protocol of the layer7 listener. Valid value: `HTTP` and `HTTPS`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ID of the GAAP proxy.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Status of the layer7 listener.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
      */
-    tlsCiphers?: pulumi.Input<string>;
+    tlsCiphers?: pulumi.Input<string | undefined>;
     /**
      * TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
      */
-    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[]>;
+    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -249,33 +249,33 @@ export interface Layer7ListenerArgs {
     /**
      * Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    authType?: pulumi.Input<number>;
+    authType?: pulumi.Input<number | undefined>;
     /**
      * Certificate ID of the layer7 listener. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Protocol type of the forwarding. Valid value: `HTTP` and `HTTPS`. NOTES: Only supports listeners of `HTTPS` protocol.
      */
-    forwardProtocol?: pulumi.Input<string>;
+    forwardProtocol?: pulumi.Input<string | undefined>;
     /**
      * Group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Name of the layer7 listener, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Port of the layer7 listener.
      */
@@ -287,13 +287,13 @@ export interface Layer7ListenerArgs {
     /**
      * ID of the GAAP proxy.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Password Suite, optional GAAP_TLS_CIPHERS_STRICT, GAAP_TLS_CIPHERS_GENERAL, GAAP_TLS_CIPHERS_WIDE(default).
      */
-    tlsCiphers?: pulumi.Input<string>;
+    tlsCiphers?: pulumi.Input<string | undefined>;
     /**
      * TLS version, optional TLSv1, TLSv1.1, TLSv1.2, TLSv1.3.
      */
-    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[]>;
+    tlsSupportVersions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

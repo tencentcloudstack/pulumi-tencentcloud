@@ -130,12 +130,8 @@ type GetPvUrlInfoResult struct {
 }
 
 func GetPvUrlInfoOutput(ctx *pulumi.Context, args GetPvUrlInfoOutputArgs, opts ...pulumi.InvokeOption) GetPvUrlInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPvUrlInfoResultOutput, error) {
-			args := v.(GetPvUrlInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args, GetPvUrlInfoResultOutput{}, options).(GetPvUrlInfoResultOutput), nil
-		}).(GetPvUrlInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getPvUrlInfo:getPvUrlInfo", args, GetPvUrlInfoResultOutput{}, options).(GetPvUrlInfoResultOutput)
 }
 
 // A collection of arguments for invoking getPvUrlInfo.

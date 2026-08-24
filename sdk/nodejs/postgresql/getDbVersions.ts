@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDbVersions({});
+ * const example = tencentcloud.postgresql.getDbVersions({});
  * ```
  *
  * ### Query DB versions by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDbVersions({
+ * const example = tencentcloud.postgresql.getDbVersions({
  *     dbVersion: "16.0",
  *     dbMajorVersion: "16",
  *     dbKernelVersion: "v16.0_r1.0",
@@ -103,7 +103,7 @@ export interface GetDbVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDbVersions({});
+ * const example = tencentcloud.postgresql.getDbVersions({});
  * ```
  *
  * ### Query DB versions by filters
@@ -112,7 +112,7 @@ export interface GetDbVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDbVersions({
+ * const example = tencentcloud.postgresql.getDbVersions({
  *     dbVersion: "16.0",
  *     dbMajorVersion: "16",
  *     dbKernelVersion: "v16.0_r1.0",
@@ -137,17 +137,17 @@ export interface GetDbVersionsOutputArgs {
     /**
      * PostgreSQL kernel version number.
      */
-    dbKernelVersion?: pulumi.Input<string>;
+    dbKernelVersion?: pulumi.Input<string | undefined>;
     /**
      * PostgreSQL major version number.
      */
-    dbMajorVersion?: pulumi.Input<string>;
+    dbMajorVersion?: pulumi.Input<string | undefined>;
     /**
      * Version of the postgresql database engine.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

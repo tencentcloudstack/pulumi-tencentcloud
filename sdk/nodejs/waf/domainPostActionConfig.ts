@@ -112,15 +112,15 @@ export interface DomainPostActionConfigState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * 0- Disable shipping, 1- Enable shipping.
      */
-    postCkafkaAction?: pulumi.Input<number>;
+    postCkafkaAction?: pulumi.Input<number | undefined>;
     /**
      * 0- Disable shipping, 1- Enable shipping.
      */
-    postClsAction?: pulumi.Input<number>;
+    postClsAction?: pulumi.Input<number | undefined>;
 }
 
 /**

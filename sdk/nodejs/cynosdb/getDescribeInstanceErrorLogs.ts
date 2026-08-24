@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeInstanceErrorLogs = tencentcloud.Cynosdb.getDescribeInstanceErrorLogs({
+ * const describeInstanceErrorLogs = tencentcloud.cynosdb.getDescribeInstanceErrorLogs({
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2023-06-01 15:04:05",
  *     endTime: "2023-06-19 15:04:05",
@@ -111,7 +111,7 @@ export interface GetDescribeInstanceErrorLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeInstanceErrorLogs = tencentcloud.Cynosdb.getDescribeInstanceErrorLogs({
+ * const describeInstanceErrorLogs = tencentcloud.cynosdb.getDescribeInstanceErrorLogs({
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2023-06-01 15:04:05",
  *     endTime: "2023-06-19 15:04:05",
@@ -146,7 +146,7 @@ export interface GetDescribeInstanceErrorLogsOutputArgs {
     /**
      * End time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Instance Id.
      */
@@ -154,25 +154,25 @@ export interface GetDescribeInstanceErrorLogsOutputArgs {
     /**
      * Keywords, supports fuzzy search.
      */
-    keyWords?: pulumi.Input<pulumi.Input<string>[]>;
+    keyWords?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Log levels, including error, warning, and note, support simultaneous search of multiple levels.
      */
-    logLevels?: pulumi.Input<pulumi.Input<string>[]>;
+    logLevels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sort fields with Timestamp enumeration values.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sort type, with ASC and DESC enumeration values.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

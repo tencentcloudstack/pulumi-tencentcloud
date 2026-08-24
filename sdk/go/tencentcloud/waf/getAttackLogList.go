@@ -125,12 +125,8 @@ type GetAttackLogListResult struct {
 }
 
 func GetAttackLogListOutput(ctx *pulumi.Context, args GetAttackLogListOutputArgs, opts ...pulumi.InvokeOption) GetAttackLogListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAttackLogListResultOutput, error) {
-			args := v.(GetAttackLogListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getAttackLogList:getAttackLogList", args, GetAttackLogListResultOutput{}, options).(GetAttackLogListResultOutput), nil
-		}).(GetAttackLogListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getAttackLogList:getAttackLogList", args, GetAttackLogListResultOutput{}, options).(GetAttackLogListResultOutput)
 }
 
 // A collection of arguments for invoking getAttackLogList.

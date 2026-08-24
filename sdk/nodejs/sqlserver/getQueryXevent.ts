@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getQueryXevent({
+ * const example = tencentcloud.sqlserver.getQueryXevent({
  *     instanceId: "mssql-gyg9xycl",
  *     eventType: "blocked",
  *     startTime: "2023-08-01 00:00:00",
@@ -96,7 +96,7 @@ export interface GetQueryXeventResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getQueryXevent({
+ * const example = tencentcloud.sqlserver.getQueryXevent({
  *     instanceId: "mssql-gyg9xycl",
  *     eventType: "blocked",
  *     startTime: "2023-08-01 00:00:00",
@@ -134,7 +134,7 @@ export interface GetQueryXeventOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Generation start time of an extended file.
      */

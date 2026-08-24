@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *     height: 128,
  *     resolutionAdaptive: false,
  * });
- * const foo = tencentcloud.Vod.getImageSpriteTemplatesOutput({
+ * const foo = tencentcloud.vod.getImageSpriteTemplatesOutput({
  *     type: "Custom",
  *     definition: fooImageSpriteTemplate.id,
  * });
@@ -110,7 +110,7 @@ export interface GetImageSpriteTemplatesResult {
  *     height: 128,
  *     resolutionAdaptive: false,
  * });
- * const foo = tencentcloud.Vod.getImageSpriteTemplatesOutput({
+ * const foo = tencentcloud.vod.getImageSpriteTemplatesOutput({
  *     type: "Custom",
  *     definition: fooImageSpriteTemplate.id,
  * });
@@ -134,17 +134,17 @@ export interface GetImageSpriteTemplatesOutputArgs {
     /**
      * Unique ID filter of image sprite template.
      */
-    definition?: pulumi.Input<string>;
+    definition?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Template type filter. Valid values: `Preset`, `Custom`. `Preset`: preset template; `Custom`: custom template.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logstashInstanceLogs = tencentcloud.Elasticsearch.getLogstashInstanceLogs({
+ * const logstashInstanceLogs = tencentcloud.elasticsearch.getLogstashInstanceLogs({
  *     instanceId: "ls-xxxxxx",
  *     logType: 1,
  *     startTime: "2023-10-31 10:30:00",
@@ -102,7 +102,7 @@ export interface GetLogstashInstanceLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logstashInstanceLogs = tencentcloud.Elasticsearch.getLogstashInstanceLogs({
+ * const logstashInstanceLogs = tencentcloud.elasticsearch.getLogstashInstanceLogs({
  *     instanceId: "ls-xxxxxx",
  *     logType: 1,
  *     startTime: "2023-10-31 10:30:00",
@@ -130,7 +130,7 @@ export interface GetLogstashInstanceLogsOutputArgs {
     /**
      * Log end time, in YYYY-MM-DD HH:MM:SS format, such as 2019-01-22 20:15:53.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
@@ -145,17 +145,17 @@ export interface GetLogstashInstanceLogsOutputArgs {
     /**
      * Time sort method. Default is 0. 0: descending; 1: ascending order.
      */
-    orderByType?: pulumi.Input<number>;
+    orderByType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search terms, support LUCENE syntax, such as level:WARN, ip:1.1.1.1, message:test-index, etc.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Log start time, in YYYY-MM-DD HH:MM:SS format, such as 2019-01-22 20:15:53.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

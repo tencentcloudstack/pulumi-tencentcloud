@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this resource to create postgresql parameter.
+// Use this resource to create PostgreSQL parameters.
 //
 // ## Example Usage
 //
@@ -22,61 +22,45 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			defaultAz := "ap-guangzhou-3"
-//			if param := cfg.Get("defaultAz"); param != "" {
-//				defaultAz = param
-//			}
-//			gz3, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				AvailabilityZone: pulumi.StringRef(defaultAz),
-//				IsDefault:        pulumi.BoolRef(true),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			vpcId := gz3.InstanceLists[0].VpcId
-//			subnetId := gz3.InstanceLists[0].SubnetId
-//			_, err = availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-//				Product: "postgres",
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			test, err := postgresql.NewInstance(ctx, "test", &postgresql.InstanceArgs{
-//				Name:             pulumi.String("tf_postsql_postpaid"),
-//				AvailabilityZone: pulumi.String(defaultAz),
+//			example, err := postgresql.NewInstance(ctx, "example", &postgresql.InstanceArgs{
+//				Name:             pulumi.String("tf-example"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				Period:           pulumi.Int(1),
-//				VpcId:            pulumi.String(vpcId),
-//				SubnetId:         pulumi.String(subnetId),
-//				EngineVersion:    pulumi.String("13.3"),
-//				RootPassword:     pulumi.String("t1qaA2k1wgvfa3?ZZZ"),
-//				SecurityGroups: pulumi.StringArray{
-//					pulumi.String("sg-5275dorp"),
+//				VpcId:            pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:         pulumi.String("subnet-hhi88a58"),
+//				DbMajorVersion:   pulumi.String("17"),
+//				EngineVersion:    pulumi.String("17.4"),
+//				DbKernelVersion:  pulumi.String("v17.4_r1.4"),
+//				RootUser:         pulumi.String("root123"),
+//				RootPassword:     pulumi.String("Root123$"),
+//				Charset:          pulumi.String("UTF8"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Cpu:              pulumi.Int(2),
+//				Storage:          pulumi.Int(50),
+//				Tags: pulumi.StringMap{
+//					"CreateBy": pulumi.String("Terraform"),
 //				},
-//				Charset:   pulumi.String("LATIN1"),
-//				ProjectId: pulumi.Int(0),
-//				Memory:    pulumi.Int(2),
-//				Storage:   pulumi.Int(20),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = postgresql.NewParameters(ctx, "postgresql_parameters", &postgresql.ParametersArgs{
-//				DbInstanceId: test.ID(),
+//			_, err = postgresql.NewParameters(ctx, "example", &postgresql.ParametersArgs{
+//				DbInstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				ParamLists: postgresql.ParametersParamListArray{
 //					&postgresql.ParametersParamListArgs{
-//						ExpectedValue: pulumi.String("off"),
 //						Name:          pulumi.String("check_function_bodies"),
+//						ExpectedValue: pulumi.String("off"),
+//					},
+//					&postgresql.ParametersParamListArgs{
+//						Name:          pulumi.String("max_standby_archive_delay"),
+//						ExpectedValue: pulumi.String("35000"),
 //					},
 //				},
 //			})
@@ -91,10 +75,10 @@ import (
 //
 // ## Import
 //
-// postgresql parameters can be imported, e.g.
+// PostgreSQL parameters can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Postgresql/parameters:Parameters example pgrogrp-lckioi2a
+// $ pulumi import tencentcloud:Postgresql/parameters:Parameters example postgres-ckwcgdf1
 // ```
 type Parameters struct {
 	pulumi.CustomResourceState

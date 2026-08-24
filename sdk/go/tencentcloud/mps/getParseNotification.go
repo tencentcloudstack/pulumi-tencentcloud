@@ -65,12 +65,8 @@ type GetParseNotificationResult struct {
 }
 
 func GetParseNotificationOutput(ctx *pulumi.Context, args GetParseNotificationOutputArgs, opts ...pulumi.InvokeOption) GetParseNotificationResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParseNotificationResultOutput, error) {
-			args := v.(GetParseNotificationArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mps/getParseNotification:getParseNotification", args, GetParseNotificationResultOutput{}, options).(GetParseNotificationResultOutput), nil
-		}).(GetParseNotificationResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mps/getParseNotification:getParseNotification", args, GetParseNotificationResultOutput{}, options).(GetParseNotificationResultOutput)
 }
 
 // A collection of arguments for invoking getParseNotification.

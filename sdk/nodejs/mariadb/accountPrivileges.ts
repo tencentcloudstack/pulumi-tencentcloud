@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb account_privileges can be imported using the id, e.g.
+ * mariadb accountPrivileges can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
@@ -157,39 +157,39 @@ export interface AccountPrivilegesState {
     /**
      * account information.
      */
-    accounts?: pulumi.Input<inputs.Mariadb.AccountPrivilegesAccounts>;
+    accounts?: pulumi.Input<inputs.Mariadb.AccountPrivilegesAccounts | undefined>;
     /**
      * Column permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `REFERENCES`.Note: if the parameter is left empty, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
      */
-    columnPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesColumnPrivilege>[]>;
+    columnPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesColumnPrivilege>[] | undefined>;
     /**
      * Database permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`.Note: if the parameter is left empty, no change will be made to the granted database permissions. To clear the granted database permissions, set `Privileges` to an empty array.
      */
-    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesDatabasePrivilege>[]>;
+    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesDatabasePrivilege>[] | undefined>;
     /**
      * Database function permissions. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.Note: if the parameter is not passed in, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
      */
-    functionPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesFunctionPrivilege>[]>;
+    functionPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesFunctionPrivilege>[] | undefined>;
     /**
      * Global permission. Valid values of `GlobalPrivileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `PROCESS`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `SHOW DATABASES`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`.Note: if the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Database stored procedure permission. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.Note: if the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
      */
-    procedurePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesProcedurePrivilege>[]>;
+    procedurePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesProcedurePrivilege>[] | undefined>;
     /**
      * `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.Note: if the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
      */
-    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesTablePrivilege>[]>;
+    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesTablePrivilege>[] | undefined>;
     /**
      * Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.Note: if the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
      */
-    viewPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesViewPrivilege>[]>;
+    viewPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesViewPrivilege>[] | undefined>;
 }
 
 /**
@@ -203,19 +203,19 @@ export interface AccountPrivilegesArgs {
     /**
      * Column permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `REFERENCES`.Note: if the parameter is left empty, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
      */
-    columnPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesColumnPrivilege>[]>;
+    columnPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesColumnPrivilege>[] | undefined>;
     /**
      * Database permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`.Note: if the parameter is left empty, no change will be made to the granted database permissions. To clear the granted database permissions, set `Privileges` to an empty array.
      */
-    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesDatabasePrivilege>[]>;
+    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesDatabasePrivilege>[] | undefined>;
     /**
      * Database function permissions. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.Note: if the parameter is not passed in, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
      */
-    functionPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesFunctionPrivilege>[]>;
+    functionPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesFunctionPrivilege>[] | undefined>;
     /**
      * Global permission. Valid values of `GlobalPrivileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `PROCESS`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `SHOW DATABASES`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`.Note: if the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * instance id.
      */
@@ -223,13 +223,13 @@ export interface AccountPrivilegesArgs {
     /**
      * Database stored procedure permission. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.Note: if the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
      */
-    procedurePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesProcedurePrivilege>[]>;
+    procedurePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesProcedurePrivilege>[] | undefined>;
     /**
      * `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.Note: if the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
      */
-    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesTablePrivilege>[]>;
+    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesTablePrivilege>[] | undefined>;
     /**
      * Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.Note: if the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
      */
-    viewPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesViewPrivilege>[]>;
+    viewPrivileges?: pulumi.Input<pulumi.Input<inputs.Mariadb.AccountPrivilegesViewPrivilege>[] | undefined>;
 }

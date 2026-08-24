@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sgSnapshotFileContent = tencentcloud.Vpc.getSgSnapshotFileContent({
+ * const sgSnapshotFileContent = tencentcloud.vpc.getSgSnapshotFileContent({
  *     snapshotPolicyId: "sspolicy-ebjofe71",
  *     snapshotFileId: "ssfile-017gepjxpr",
  *     securityGroupId: "sg-ntrgm89v",
@@ -99,7 +99,7 @@ export interface GetSgSnapshotFileContentResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sgSnapshotFileContent = tencentcloud.Vpc.getSgSnapshotFileContent({
+ * const sgSnapshotFileContent = tencentcloud.vpc.getSgSnapshotFileContent({
  *     snapshotPolicyId: "sspolicy-ebjofe71",
  *     snapshotFileId: "ssfile-017gepjxpr",
  *     securityGroupId: "sg-ntrgm89v",
@@ -123,7 +123,7 @@ export interface GetSgSnapshotFileContentOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Security group ID.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenerRealServers = tencentcloud.Gaap.getListenerRealServers({
+ * const listenerRealServers = tencentcloud.gaap.getListenerRealServers({
  *     listenerId: "listener-xxxxxx",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetListenerRealServersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenerRealServers = tencentcloud.Gaap.getListenerRealServers({
+ * const listenerRealServers = tencentcloud.gaap.getListenerRealServers({
  *     listenerId: "listener-xxxxxx",
  * });
  * ```
@@ -94,5 +94,5 @@ export interface GetListenerRealServersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -25,9 +25,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Outputs
         /// <summary>
         /// Forwarding target IP address.
         /// </summary>
-        public readonly string Host;
+        public readonly string? Host;
         /// <summary>
-        /// Specifies the forwarding IP port number.
+        /// Forwarding target IPs address.
+        /// </summary>
+        public readonly ImmutableArray<string> Hosts;
+        /// <summary>
+        /// Specifies the forwarding IP port number. This only applies when configuring `Host`; if using `Hosts`, you can choose any port value from `Hosts`.
         /// </summary>
         public readonly int Port;
         /// <summary>
@@ -61,7 +65,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Outputs
 
             string accessType,
 
-            string host,
+            string? host,
+
+            ImmutableArray<string> hosts,
 
             int port,
 
@@ -80,6 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Outputs
             AccessGatewayId = accessGatewayId;
             AccessType = accessType;
             Host = host;
+            Hosts = hosts;
             Port = port;
             Proto = proto;
             SnatVipCidr = snatVipCidr;

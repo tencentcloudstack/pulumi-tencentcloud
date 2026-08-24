@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const monitorPolicyConditions = tencentcloud.Monitor.getPolicyConditions({
+ * const monitorPolicyConditions = tencentcloud.monitor.getPolicyConditions({
  *     name: "Cloud Virtual Machine",
  *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
  * });
@@ -71,7 +71,7 @@ export interface GetPolicyConditionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const monitorPolicyConditions = tencentcloud.Monitor.getPolicyConditions({
+ * const monitorPolicyConditions = tencentcloud.monitor.getPolicyConditions({
  *     name: "Cloud Virtual Machine",
  *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
  * });
@@ -93,9 +93,9 @@ export interface GetPolicyConditionsOutputArgs {
     /**
      * Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

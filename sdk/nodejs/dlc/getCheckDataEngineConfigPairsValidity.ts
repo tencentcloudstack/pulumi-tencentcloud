@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getCheckDataEngineConfigPairsValidity({
+ * const example = tencentcloud.dlc.getCheckDataEngineConfigPairsValidity({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
@@ -83,7 +83,7 @@ export interface GetCheckDataEngineConfigPairsValidityResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getCheckDataEngineConfigPairsValidity({
+ * const example = tencentcloud.dlc.getCheckDataEngineConfigPairsValidity({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
@@ -106,17 +106,17 @@ export interface GetCheckDataEngineConfigPairsValidityOutputArgs {
     /**
      * ID of the minor version of the engine.
      */
-    childImageVersionId?: pulumi.Input<string>;
+    childImageVersionId?: pulumi.Input<string | undefined>;
     /**
      * User-defined parameters.
      */
-    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs>[]>;
+    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs>[] | undefined>;
     /**
      * ID of the major version of the engine. If there is the ID of the minor version, only the ID of the minor version needs to be input. If not, the latest ID of the minor version under the major version will be acquired.
      */
-    imageVersionId?: pulumi.Input<string>;
+    imageVersionId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

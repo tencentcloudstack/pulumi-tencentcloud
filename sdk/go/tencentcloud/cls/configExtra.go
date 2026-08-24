@@ -39,7 +39,7 @@ import (
 //			}
 //			topic, err := cls.NewTopic(ctx, "topic", &cls.TopicArgs{
 //				AutoSplit:          pulumi.Bool(true),
-//				LogsetId:           logset.ID(),
+//				LogsetId:           logset.ID().ToIDOutput().ToStringOutput(),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
 //				Period:             pulumi.Int(10),
@@ -71,11 +71,11 @@ import (
 //			}
 //			_, err = cls.NewConfigExtra(ctx, "extra", &cls.ConfigExtraArgs{
 //				Name:       pulumi.String("helloworld-test"),
-//				TopicId:    topic.ID(),
+//				TopicId:    topic.ID().ToIDOutput().ToStringOutput(),
 //				Type:       pulumi.String("container_file"),
 //				LogType:    pulumi.String("json_log"),
 //				ConfigFlag: pulumi.String("label_k8s"),
-//				LogsetId:   logset.ID(),
+//				LogsetId:   logset.ID().ToIDOutput().ToStringOutput(),
 //				LogsetName: logset.LogsetName,
 //				TopicName:  topic.TopicName,
 //				ContainerFile: &cls.ConfigExtraContainerFileArgs{
@@ -90,7 +90,7 @@ import (
 //						Namespace: pulumi.String("default"),
 //					},
 //				},
-//				GroupId: group.ID(),
+//				GroupId: group.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -103,7 +103,7 @@ import (
 //
 // ## Import
 //
-// cls config_extra can be imported using the id, e.g.
+// cls configExtra can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id

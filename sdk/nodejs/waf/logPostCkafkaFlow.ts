@@ -64,13 +64,13 @@ import * as utilities from "../utilities";
  *
  * WAF log post ckafka flow can be imported using the id, e.g.
  *
- * If log_type is 1
+ * If logType is 1
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/logPostCkafkaFlow:LogPostCkafkaFlow example 100536#1
  * ```
  *
- * If log_type is 2
+ * If logType is 2
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/logPostCkafkaFlow:LogPostCkafkaFlow example 100541#2
@@ -243,59 +243,59 @@ export interface LogPostCkafkaFlowState {
     /**
      * The supporting environment is IP:PORT, The external network environment is domain:PORT.
      */
-    brokers?: pulumi.Input<string>;
+    brokers?: pulumi.Input<string | undefined>;
     /**
      * CKafka ID.
      */
-    ckafkaId?: pulumi.Input<string>;
+    ckafkaId?: pulumi.Input<string | undefined>;
     /**
      * The region where CKafka is located for delivery.
      */
-    ckafkaRegion?: pulumi.Input<string>;
+    ckafkaRegion?: pulumi.Input<string | undefined>;
     /**
      * Default to none, supports snappy, gzip, and lz4 compression, recommended snappy.
      */
-    compression?: pulumi.Input<string>;
+    compression?: pulumi.Input<string | undefined>;
     /**
      * Unique ID for post cls flow.
      */
-    flowId?: pulumi.Input<number>;
+    flowId?: pulumi.Input<number | undefined>;
     /**
      * Version number of Kafka cluster.
      */
-    kafkaVersion?: pulumi.Input<string>;
+    kafkaVersion?: pulumi.Input<string | undefined>;
     /**
      * 1- Access log, 2- Attack log, the default is access log.
      */
-    logType?: pulumi.Input<number>;
+    logType?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable SASL verification, default not enabled, 0-off, 1-on.
      */
-    saslEnable?: pulumi.Input<number>;
+    saslEnable?: pulumi.Input<number | undefined>;
     /**
      * SASL password.
      */
-    saslPassword?: pulumi.Input<string>;
+    saslPassword?: pulumi.Input<string | undefined>;
     /**
      * SASL username.
      */
-    saslUser?: pulumi.Input<string>;
+    saslUser?: pulumi.Input<string | undefined>;
     /**
      * Status 0- Off 1- On.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Theme name, default not to pass or pass empty string, default value is waf_post_access_log.
      */
-    topic?: pulumi.Input<string>;
+    topic?: pulumi.Input<string | undefined>;
     /**
      * 1. External network TGW, 2. Supporting environment, default is supporting environment.
      */
-    vipType?: pulumi.Input<number>;
+    vipType?: pulumi.Input<number | undefined>;
     /**
      * Enable access to certain fields of the log and check if they have been delivered.
      */
-    writeConfig?: pulumi.Input<inputs.Waf.LogPostCkafkaFlowWriteConfig>;
+    writeConfig?: pulumi.Input<inputs.Waf.LogPostCkafkaFlowWriteConfig | undefined>;
 }
 
 /**
@@ -329,15 +329,15 @@ export interface LogPostCkafkaFlowArgs {
     /**
      * Whether to enable SASL verification, default not enabled, 0-off, 1-on.
      */
-    saslEnable?: pulumi.Input<number>;
+    saslEnable?: pulumi.Input<number | undefined>;
     /**
      * SASL password.
      */
-    saslPassword?: pulumi.Input<string>;
+    saslPassword?: pulumi.Input<string | undefined>;
     /**
      * SASL username.
      */
-    saslUser?: pulumi.Input<string>;
+    saslUser?: pulumi.Input<string | undefined>;
     /**
      * Theme name, default not to pass or pass empty string, default value is waf_post_access_log.
      */
@@ -349,5 +349,5 @@ export interface LogPostCkafkaFlowArgs {
     /**
      * Enable access to certain fields of the log and check if they have been delivered.
      */
-    writeConfig?: pulumi.Input<inputs.Waf.LogPostCkafkaFlowWriteConfig>;
+    writeConfig?: pulumi.Input<inputs.Waf.LogPostCkafkaFlowWriteConfig | undefined>;
 }

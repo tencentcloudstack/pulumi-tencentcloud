@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ckafka connect_resource can be imported using the id, e.g.
+ * ckafka connectResource can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id
@@ -180,55 +180,55 @@ export interface ConnectResourceState {
     /**
      * ClickHouse configuration, required when Type is CLICKHOUSE.
      */
-    clickhouseConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceClickhouseConnectParam>;
+    clickhouseConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceClickhouseConnectParam | undefined>;
     /**
      * Connection source description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Doris configuration, required when Type is DORIS.
      */
-    dorisConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDorisConnectParam>;
+    dorisConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDorisConnectParam | undefined>;
     /**
      * Dts configuration, required when Type is DTS.
      */
-    dtsConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDtsConnectParam>;
+    dtsConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDtsConnectParam | undefined>;
     /**
      * Es configuration, required when Type is ES.
      */
-    esConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceEsConnectParam>;
+    esConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceEsConnectParam | undefined>;
     /**
      * Kafka configuration, required when Type is KAFKA.
      */
-    kafkaConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceKafkaConnectParam>;
+    kafkaConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceKafkaConnectParam | undefined>;
     /**
      * Maria DB configuration, required when Type is MARIADB.
      */
-    mariadbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMariadbConnectParam>;
+    mariadbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMariadbConnectParam | undefined>;
     /**
      * Mongo DB configuration, required when Type is MONGODB.
      */
-    mongodbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMongodbConnectParam>;
+    mongodbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMongodbConnectParam | undefined>;
     /**
      * MySQL configuration, required when Type is MYSQL or TDSQL C_MYSQL.
      */
-    mysqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMysqlConnectParam>;
+    mysqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMysqlConnectParam | undefined>;
     /**
      * Postgresql configuration, required when Type is POSTGRESQL or TDSQL C POSTGRESQL.
      */
-    postgresqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourcePostgresqlConnectParam>;
+    postgresqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourcePostgresqlConnectParam | undefined>;
     /**
      * connection source name.
      */
-    resourceName?: pulumi.Input<string>;
+    resourceName?: pulumi.Input<string | undefined>;
     /**
      * SQLServer configuration, required when Type is SQLSERVER.
      */
-    sqlserverConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceSqlserverConnectParam>;
+    sqlserverConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceSqlserverConnectParam | undefined>;
     /**
      * connection source type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -238,43 +238,43 @@ export interface ConnectResourceArgs {
     /**
      * ClickHouse configuration, required when Type is CLICKHOUSE.
      */
-    clickhouseConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceClickhouseConnectParam>;
+    clickhouseConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceClickhouseConnectParam | undefined>;
     /**
      * Connection source description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Doris configuration, required when Type is DORIS.
      */
-    dorisConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDorisConnectParam>;
+    dorisConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDorisConnectParam | undefined>;
     /**
      * Dts configuration, required when Type is DTS.
      */
-    dtsConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDtsConnectParam>;
+    dtsConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceDtsConnectParam | undefined>;
     /**
      * Es configuration, required when Type is ES.
      */
-    esConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceEsConnectParam>;
+    esConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceEsConnectParam | undefined>;
     /**
      * Kafka configuration, required when Type is KAFKA.
      */
-    kafkaConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceKafkaConnectParam>;
+    kafkaConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceKafkaConnectParam | undefined>;
     /**
      * Maria DB configuration, required when Type is MARIADB.
      */
-    mariadbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMariadbConnectParam>;
+    mariadbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMariadbConnectParam | undefined>;
     /**
      * Mongo DB configuration, required when Type is MONGODB.
      */
-    mongodbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMongodbConnectParam>;
+    mongodbConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMongodbConnectParam | undefined>;
     /**
      * MySQL configuration, required when Type is MYSQL or TDSQL C_MYSQL.
      */
-    mysqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMysqlConnectParam>;
+    mysqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceMysqlConnectParam | undefined>;
     /**
      * Postgresql configuration, required when Type is POSTGRESQL or TDSQL C POSTGRESQL.
      */
-    postgresqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourcePostgresqlConnectParam>;
+    postgresqlConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourcePostgresqlConnectParam | undefined>;
     /**
      * connection source name.
      */
@@ -282,7 +282,7 @@ export interface ConnectResourceArgs {
     /**
      * SQLServer configuration, required when Type is SQLSERVER.
      */
-    sqlserverConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceSqlserverConnectParam>;
+    sqlserverConnectParam?: pulumi.Input<inputs.Ckafka.ConnectResourceSqlserverConnectParam | undefined>;
     /**
      * connection source type.
      */

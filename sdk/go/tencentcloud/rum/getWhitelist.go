@@ -67,12 +67,8 @@ type LookupWhitelistResult struct {
 }
 
 func LookupWhitelistOutput(ctx *pulumi.Context, args LookupWhitelistOutputArgs, opts ...pulumi.InvokeOption) LookupWhitelistResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupWhitelistResultOutput, error) {
-			args := v.(LookupWhitelistArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getWhitelist:getWhitelist", args, LookupWhitelistResultOutput{}, options).(LookupWhitelistResultOutput), nil
-		}).(LookupWhitelistResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getWhitelist:getWhitelist", args, LookupWhitelistResultOutput{}, options).(LookupWhitelistResultOutput)
 }
 
 // A collection of arguments for invoking getWhitelist.

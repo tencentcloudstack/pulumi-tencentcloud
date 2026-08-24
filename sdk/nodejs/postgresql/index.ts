@@ -25,6 +25,11 @@ export type BackupDownloadRestrictionConfig = import("./backupDownloadRestrictio
 export const BackupDownloadRestrictionConfig: typeof import("./backupDownloadRestrictionConfig").BackupDownloadRestrictionConfig = null as any;
 utilities.lazyLoad(exports, ["BackupDownloadRestrictionConfig"], () => require("./backupDownloadRestrictionConfig"));
 
+export { BackupPlanArgs, BackupPlanState } from "./backupPlan";
+export type BackupPlan = import("./backupPlan").BackupPlan;
+export const BackupPlan: typeof import("./backupPlan").BackupPlan = null as any;
+utilities.lazyLoad(exports, ["BackupPlan"], () => require("./backupPlan"));
+
 export { BackupPlanConfigArgs, BackupPlanConfigState } from "./backupPlanConfig";
 export type BackupPlanConfig = import("./backupPlanConfig").BackupPlanConfig;
 export const BackupPlanConfig: typeof import("./backupPlanConfig").BackupPlanConfig = null as any;
@@ -39,6 +44,11 @@ export { CloneDbInstanceArgs, CloneDbInstanceState } from "./cloneDbInstance";
 export type CloneDbInstance = import("./cloneDbInstance").CloneDbInstance;
 export const CloneDbInstance: typeof import("./cloneDbInstance").CloneDbInstance = null as any;
 utilities.lazyLoad(exports, ["CloneDbInstance"], () => require("./cloneDbInstance"));
+
+export { DatabaseArgs, DatabaseState } from "./database";
+export type Database = import("./database").Database;
+export const Database: typeof import("./database").Database = null as any;
+utilities.lazyLoad(exports, ["Database"], () => require("./database"));
 
 export { DeleteLogBackupOperationArgs, DeleteLogBackupOperationState } from "./deleteLogBackupOperation";
 export type DeleteLogBackupOperation = import("./deleteLogBackupOperation").DeleteLogBackupOperation;
@@ -69,6 +79,11 @@ export { GetDbInstanceClassesArgs, GetDbInstanceClassesResult, GetDbInstanceClas
 export const getDbInstanceClasses: typeof import("./getDbInstanceClasses").getDbInstanceClasses = null as any;
 export const getDbInstanceClassesOutput: typeof import("./getDbInstanceClasses").getDbInstanceClassesOutput = null as any;
 utilities.lazyLoad(exports, ["getDbInstanceClasses","getDbInstanceClassesOutput"], () => require("./getDbInstanceClasses"));
+
+export { GetDbInstanceSecurityGroupsArgs, GetDbInstanceSecurityGroupsResult, GetDbInstanceSecurityGroupsOutputArgs } from "./getDbInstanceSecurityGroups";
+export const getDbInstanceSecurityGroups: typeof import("./getDbInstanceSecurityGroups").getDbInstanceSecurityGroups = null as any;
+export const getDbInstanceSecurityGroupsOutput: typeof import("./getDbInstanceSecurityGroups").getDbInstanceSecurityGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getDbInstanceSecurityGroups","getDbInstanceSecurityGroupsOutput"], () => require("./getDbInstanceSecurityGroups"));
 
 export { GetDbInstanceVersionsArgs, GetDbInstanceVersionsResult, GetDbInstanceVersionsOutputArgs } from "./getDbInstanceVersions";
 export const getDbInstanceVersions: typeof import("./getDbInstanceVersions").getDbInstanceVersions = null as any;
@@ -175,6 +190,11 @@ export type ParameterTemplate = import("./parameterTemplate").ParameterTemplate;
 export const ParameterTemplate: typeof import("./parameterTemplate").ParameterTemplate = null as any;
 utilities.lazyLoad(exports, ["ParameterTemplate"], () => require("./parameterTemplate"));
 
+export { ParameterTemplateConfigArgs, ParameterTemplateConfigState } from "./parameterTemplateConfig";
+export type ParameterTemplateConfig = import("./parameterTemplateConfig").ParameterTemplateConfig;
+export const ParameterTemplateConfig: typeof import("./parameterTemplateConfig").ParameterTemplateConfig = null as any;
+utilities.lazyLoad(exports, ["ParameterTemplateConfig"], () => require("./parameterTemplateConfig"));
+
 export { ParametersArgs, ParametersState } from "./parameters";
 export type Parameters = import("./parameters").Parameters;
 export const Parameters: typeof import("./parameters").Parameters = null as any;
@@ -190,10 +210,10 @@ export type ReadonlyGroup = import("./readonlyGroup").ReadonlyGroup;
 export const ReadonlyGroup: typeof import("./readonlyGroup").ReadonlyGroup = null as any;
 utilities.lazyLoad(exports, ["ReadonlyGroup"], () => require("./readonlyGroup"));
 
-export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
-export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
-export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
-utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
+export { ReadonlyInstanceV2Args, ReadonlyInstanceV2State } from "./readonlyInstanceV2";
+export type ReadonlyInstanceV2 = import("./readonlyInstanceV2").ReadonlyInstanceV2;
+export const ReadonlyInstanceV2: typeof import("./readonlyInstanceV2").ReadonlyInstanceV2 = null as any;
+utilities.lazyLoad(exports, ["ReadonlyInstanceV2"], () => require("./readonlyInstanceV2"));
 
 export { RebalanceReadonlyGroupOperationArgs, RebalanceReadonlyGroupOperationState } from "./rebalanceReadonlyGroupOperation";
 export type RebalanceReadonlyGroupOperation = import("./rebalanceReadonlyGroupOperation").RebalanceReadonlyGroupOperation;
@@ -209,6 +229,11 @@ export { RestartDbInstanceOperationArgs, RestartDbInstanceOperationState } from 
 export type RestartDbInstanceOperation = import("./restartDbInstanceOperation").RestartDbInstanceOperation;
 export const RestartDbInstanceOperation: typeof import("./restartDbInstanceOperation").RestartDbInstanceOperation = null as any;
 utilities.lazyLoad(exports, ["RestartDbInstanceOperation"], () => require("./restartDbInstanceOperation"));
+
+export { RestoreDbInstanceObjectsOperationArgs, RestoreDbInstanceObjectsOperationState } from "./restoreDbInstanceObjectsOperation";
+export type RestoreDbInstanceObjectsOperation = import("./restoreDbInstanceObjectsOperation").RestoreDbInstanceObjectsOperation;
+export const RestoreDbInstanceObjectsOperation: typeof import("./restoreDbInstanceObjectsOperation").RestoreDbInstanceObjectsOperation = null as any;
+utilities.lazyLoad(exports, ["RestoreDbInstanceObjectsOperation"], () => require("./restoreDbInstanceObjectsOperation"));
 
 export { SecurityGroupConfigArgs, SecurityGroupConfigState } from "./securityGroupConfig";
 export type SecurityGroupConfig = import("./securityGroupConfig").SecurityGroupConfig;
@@ -233,12 +258,16 @@ const _module = {
                 return new ApplyParameterTemplateOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig":
                 return new BackupDownloadRestrictionConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/backupPlan:BackupPlan":
+                return new BackupPlan(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig":
                 return new BackupPlanConfig(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/baseBackup:BaseBackup":
                 return new BaseBackup(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/cloneDbInstance:CloneDbInstance":
                 return new CloneDbInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/database:Database":
+                return new Database(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/deleteLogBackupOperation:DeleteLogBackupOperation":
                 return new DeleteLogBackupOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation":
@@ -259,20 +288,24 @@ const _module = {
                 return new ModifySwitchTimePeriodOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/parameterTemplate:ParameterTemplate":
                 return new ParameterTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/parameterTemplateConfig:ParameterTemplateConfig":
+                return new ParameterTemplateConfig(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/parameters:Parameters":
                 return new Parameters(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment":
                 return new ReadonlyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup":
                 return new ReadonlyGroup(name, <any>undefined, { urn })
-            case "tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance":
-                return new ReadonlyInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/readonlyInstanceV2:ReadonlyInstanceV2":
+                return new ReadonlyInstanceV2(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/rebalanceReadonlyGroupOperation:RebalanceReadonlyGroupOperation":
                 return new RebalanceReadonlyGroupOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/renewDbInstanceOperation:RenewDbInstanceOperation":
                 return new RenewDbInstanceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/restartDbInstanceOperation:RestartDbInstanceOperation":
                 return new RestartDbInstanceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/restoreDbInstanceObjectsOperation:RestoreDbInstanceObjectsOperation":
+                return new RestoreDbInstanceObjectsOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/securityGroupConfig:SecurityGroupConfig":
                 return new SecurityGroupConfig(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/timeWindow:TimeWindow":
@@ -286,9 +319,11 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/account", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/accountPrivilegesOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/applyParameterTemplateOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/backupDownloadRestrictionConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/backupPlan", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/backupPlanConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/baseBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/cloneDbInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/database", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/deleteLogBackupOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/disisolateDbInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/instance", _module)
@@ -299,12 +334,14 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/isolateDbInsta
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/modifyAccountRemarkOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/modifySwitchTimePeriodOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/parameterTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/parameterTemplateConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/parameters", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyGroup", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/readonlyInstanceV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/rebalanceReadonlyGroupOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/renewDbInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/restartDbInstanceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/restoreDbInstanceObjectsOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/securityGroupConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/timeWindow", _module)

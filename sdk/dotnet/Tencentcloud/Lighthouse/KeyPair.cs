@@ -28,12 +28,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     ///         KeyName = "key_name_test",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["privateKey"] = keyPair.PrivateKey,
+    ///     };
     /// });
     /// ```
     /// 
     /// ## Import
     /// 
-    /// lighthouse key_pair can be imported using the id, e.g.
+    /// lighthouse KeyPair can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Cynosdb.getZone({
+ * const zone = tencentcloud.cynosdb.getZone({
  *     includeVirtualZones: true,
  *     showPermission: true,
  * });
@@ -74,7 +74,7 @@ export interface GetZoneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Cynosdb.getZone({
+ * const zone = tencentcloud.cynosdb.getZone({
  *     includeVirtualZones: true,
  *     showPermission: true,
  * });
@@ -97,13 +97,13 @@ export interface GetZoneOutputArgs {
     /**
      * Is virtual zone included.
      */
-    includeVirtualZones?: pulumi.Input<boolean>;
+    includeVirtualZones?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Whether to display all available zones under the region and display the permissions of each available zone of the user.
      */
-    showPermission?: pulumi.Input<boolean>;
+    showPermission?: pulumi.Input<boolean | undefined>;
 }

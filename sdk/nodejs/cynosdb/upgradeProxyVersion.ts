@@ -94,11 +94,11 @@ export interface UpgradeProxyVersionState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Database Agent Upgrade Version.
      */
-    dstProxyVersion?: pulumi.Input<string>;
+    dstProxyVersion?: pulumi.Input<string | undefined>;
 }
 
 /**

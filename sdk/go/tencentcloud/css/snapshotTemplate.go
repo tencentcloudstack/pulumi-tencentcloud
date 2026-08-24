@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// css snapshot_template can be imported using the id, e.g.
+// css snapshotTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId

@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { BgpInstanceArgs, BgpInstanceState } from "./bgpInstance";
+export type BgpInstance = import("./bgpInstance").BgpInstance;
+export const BgpInstance: typeof import("./bgpInstance").BgpInstance = null as any;
+utilities.lazyLoad(exports, ["BgpInstance"], () => require("./bgpInstance"));
+
 export { CcBlackWhiteIpArgs, CcBlackWhiteIpState } from "./ccBlackWhiteIp";
 export type CcBlackWhiteIp = import("./ccBlackWhiteIp").CcBlackWhiteIp;
 export const CcBlackWhiteIp: typeof import("./ccBlackWhiteIp").CcBlackWhiteIp = null as any;
@@ -44,6 +49,11 @@ export { GetBgpBizTrendArgs, GetBgpBizTrendResult, GetBgpBizTrendOutputArgs } fr
 export const getBgpBizTrend: typeof import("./getBgpBizTrend").getBgpBizTrend = null as any;
 export const getBgpBizTrendOutput: typeof import("./getBgpBizTrend").getBgpBizTrendOutput = null as any;
 utilities.lazyLoad(exports, ["getBgpBizTrend","getBgpBizTrendOutput"], () => require("./getBgpBizTrend"));
+
+export { GetBgpInstancesArgs, GetBgpInstancesResult, GetBgpInstancesOutputArgs } from "./getBgpInstances";
+export const getBgpInstances: typeof import("./getBgpInstances").getBgpInstances = null as any;
+export const getBgpInstancesOutput: typeof import("./getBgpInstances").getBgpInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getBgpInstances","getBgpInstancesOutput"], () => require("./getBgpInstances"));
 
 export { GetListListenerArgs, GetListListenerResult, GetListListenerOutputArgs } from "./getListListener";
 export const getListListener: typeof import("./getListListener").getListListener = null as any;
@@ -105,6 +115,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Antiddos/bgpInstance:BgpInstance":
+                return new BgpInstance(name, <any>undefined, { urn })
             case "tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp":
                 return new CcBlackWhiteIp(name, <any>undefined, { urn })
             case "tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy":
@@ -130,6 +142,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Antiddos/bgpInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Antiddos/ccBlackWhiteIp", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Antiddos/ccPrecisionPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Antiddos/ddosBlackWhiteIp", _module)

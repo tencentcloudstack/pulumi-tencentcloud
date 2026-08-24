@@ -158,19 +158,19 @@ export interface ServiceReleaseState {
     /**
      * API gateway service environment name to be released. Valid values: `test`, `prepub`, `release`.
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * This release description of the API gateway service.
      */
-    releaseDesc?: pulumi.Input<string>;
+    releaseDesc?: pulumi.Input<string | undefined>;
     /**
      * The release version.
      */
-    releaseVersion?: pulumi.Input<string>;
+    releaseVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of API gateway service.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -188,7 +188,7 @@ export interface ServiceReleaseArgs {
     /**
      * The release version.
      */
-    releaseVersion?: pulumi.Input<string>;
+    releaseVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of API gateway service.
      */

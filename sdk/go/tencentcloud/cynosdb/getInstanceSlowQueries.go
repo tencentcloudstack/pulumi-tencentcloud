@@ -177,12 +177,8 @@ type GetInstanceSlowQueriesResult struct {
 }
 
 func GetInstanceSlowQueriesOutput(ctx *pulumi.Context, args GetInstanceSlowQueriesOutputArgs, opts ...pulumi.InvokeOption) GetInstanceSlowQueriesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceSlowQueriesResultOutput, error) {
-			args := v.(GetInstanceSlowQueriesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args, GetInstanceSlowQueriesResultOutput{}, options).(GetInstanceSlowQueriesResultOutput), nil
-		}).(GetInstanceSlowQueriesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args, GetInstanceSlowQueriesResultOutput{}, options).(GetInstanceSlowQueriesResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceSlowQueries.

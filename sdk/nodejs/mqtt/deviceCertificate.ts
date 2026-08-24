@@ -196,55 +196,55 @@ export interface DeviceCertificateState {
     /**
      * Associated CA certificate SN.
      */
-    caSn?: pulumi.Input<string>;
+    caSn?: pulumi.Input<string | undefined>;
     /**
      * Certificate source.
      */
-    certificateSource?: pulumi.Input<string>;
+    certificateSource?: pulumi.Input<string | undefined>;
     /**
      * Client ID.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Certificate create time.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * Device certificate.
      */
-    deviceCertificate?: pulumi.Input<string>;
+    deviceCertificate?: pulumi.Input<string | undefined>;
     /**
      * Certificate common name.
      */
-    deviceCertificateCn?: pulumi.Input<string>;
+    deviceCertificateCn?: pulumi.Input<string | undefined>;
     /**
      * Equipment certificate serial number.
      */
-    deviceCertificateSn?: pulumi.Input<string>;
+    deviceCertificateSn?: pulumi.Input<string | undefined>;
     /**
      * Certificate format, Default is PEM.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Certificate expiring date.
      */
-    notAfterTime?: pulumi.Input<number>;
+    notAfterTime?: pulumi.Input<number | undefined>;
     /**
      * Certificate effective start date.
      */
-    notBeforeTime?: pulumi.Input<number>;
+    notBeforeTime?: pulumi.Input<number | undefined>;
     /**
      * Certificate status, Default is ACTIVE.\n  ACTIVE activation;\n  INACTIVE not active.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Certificate update time.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -258,7 +258,7 @@ export interface DeviceCertificateArgs {
     /**
      * Client ID.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Device certificate.
      */
@@ -266,7 +266,7 @@ export interface DeviceCertificateArgs {
     /**
      * Certificate format, Default is PEM.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -274,5 +274,5 @@ export interface DeviceCertificateArgs {
     /**
      * Certificate status, Default is ACTIVE.\n  ACTIVE activation;\n  INACTIVE not active.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

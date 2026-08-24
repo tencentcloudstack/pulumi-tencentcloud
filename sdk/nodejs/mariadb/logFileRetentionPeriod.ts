@@ -21,8 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb log_file_retention_period can be imported using the id, e.g.
- *
+ * mariadb logFileRetentionPeriod can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
  * ```
@@ -102,11 +101,11 @@ export interface LogFileRetentionPeriodState {
     /**
      * The number of days to save, cannot exceed 30.
      */
-    days?: pulumi.Input<number>;
+    days?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

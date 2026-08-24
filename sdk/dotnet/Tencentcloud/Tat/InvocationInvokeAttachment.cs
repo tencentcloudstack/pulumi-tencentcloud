@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
 {
     /// <summary>
-    /// Provides a resource to create a tat InvocationInvokeAttachment
+    /// Provides a resource to create a tat invocation invoke attachment
     /// 
     /// ## Example Usage
     /// 
@@ -23,15 +23,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var invocationInvokeAttachment = new Tencentcloud.Tat.InvocationInvokeAttachment("invocation_invoke_attachment", new()
+    ///     var example = new Tencentcloud.Tat.InvocationInvokeAttachment("example", new()
     ///     {
-    ///         InstanceId = "ins-881b1c8w",
-    ///         WorkingDirectory = "/root",
-    ///         Timeout = 100,
+    ///         InstanceId = "ins-hoek7x44",
+    ///         WorkingDirectory = "/root/",
+    ///         Timeout = 60,
     ///         Username = "root",
-    ///         OutputCosBucketUrl = "https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
-    ///         OutputCosKeyPrefix = "log",
-    ///         CommandId = "cmd-rxbs7f5z",
+    ///         CommandId = "cmd-l7otm4cn",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### or
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Tat.InvocationInvokeAttachment("example", new()
+    ///     {
+    ///         InstanceId = "ins-hoek7x44",
+    ///         WorkingDirectory = "/root/",
+    ///         Timeout = 60,
+    ///         Username = "root",
+    ///         CommandId = "cmd-l7otm4cn",
+    ///         OutputCosBucketUrl = "https://your-bucket.cos.ap-guangzhou.myqcloud.com",
+    ///         OutputCosKeyPrefix = "tat/invoke",
     ///     });
     /// 
     /// });
@@ -42,7 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// tat invocation can be imported using the invocation_id#instance_id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+    /// $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment example inv-64mrb10i1j#ins-hoek7x44
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment")]
@@ -59,6 +81,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Invocation ID.
+        /// </summary>
+        [Output("invocationId")]
+        public Output<string> InvocationId { get; private set; } = null!;
 
         /// <summary>
         /// The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
@@ -210,6 +238,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
+        /// Invocation ID.
+        /// </summary>
+        [Input("invocationId")]
+        public Input<string>? InvocationId { get; set; }
 
         /// <summary>
         /// The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.

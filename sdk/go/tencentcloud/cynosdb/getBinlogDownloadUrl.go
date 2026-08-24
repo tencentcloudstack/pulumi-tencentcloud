@@ -71,12 +71,8 @@ type GetBinlogDownloadUrlResult struct {
 }
 
 func GetBinlogDownloadUrlOutput(ctx *pulumi.Context, args GetBinlogDownloadUrlOutputArgs, opts ...pulumi.InvokeOption) GetBinlogDownloadUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBinlogDownloadUrlResultOutput, error) {
-			args := v.(GetBinlogDownloadUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args, GetBinlogDownloadUrlResultOutput{}, options).(GetBinlogDownloadUrlResultOutput), nil
-		}).(GetBinlogDownloadUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args, GetBinlogDownloadUrlResultOutput{}, options).(GetBinlogDownloadUrlResultOutput)
 }
 
 // A collection of arguments for invoking getBinlogDownloadUrl.

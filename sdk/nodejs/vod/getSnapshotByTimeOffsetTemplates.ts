@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *     comment: "test",
  *     fillType: "white",
  * });
- * const foo = tencentcloud.Vod.getSnapshotByTimeOffsetTemplatesOutput({
+ * const foo = tencentcloud.vod.getSnapshotByTimeOffsetTemplatesOutput({
  *     type: "Custom",
  *     definition: fooSnapshotByTimeOffsetTemplate.id,
  * });
@@ -104,7 +104,7 @@ export interface GetSnapshotByTimeOffsetTemplatesResult {
  *     comment: "test",
  *     fillType: "white",
  * });
- * const foo = tencentcloud.Vod.getSnapshotByTimeOffsetTemplatesOutput({
+ * const foo = tencentcloud.vod.getSnapshotByTimeOffsetTemplatesOutput({
  *     type: "Custom",
  *     definition: fooSnapshotByTimeOffsetTemplate.id,
  * });
@@ -128,17 +128,17 @@ export interface GetSnapshotByTimeOffsetTemplatesOutputArgs {
     /**
      * Unique ID filter of snapshot by time offset template.
      */
-    definition?: pulumi.Input<string>;
+    definition?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Template type filter. Valid values: `Preset`, `Custom`. `Preset`: preset template; `Custom`: custom template.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

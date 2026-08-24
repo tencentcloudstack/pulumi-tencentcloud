@@ -38,17 +38,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -66,8 +66,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -81,7 +81,7 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -91,10 +91,10 @@ import (
 //				return err
 //			}
 //			_, err = sqlserver.NewAccount(ctx, "example", &sqlserver.AccountArgs{
-//				InstanceId: example.ID(),
-//				Name:       pulumi.String("tf_example_account"),
-//				Password:   pulumi.String("Qwer@234"),
-//				Remark:     pulumi.String("test-remark"),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
+//				Name:       pulumi.String("tf_example"),
+//				Password:   pulumi.String("Password@123"),
+//				Remark:     pulumi.String("remark."),
 //			})
 //			if err != nil {
 //				return err
@@ -110,7 +110,7 @@ import (
 // SQL Server account can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example_account
+// $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example
 // ```
 type Account struct {
 	pulumi.CustomResourceState

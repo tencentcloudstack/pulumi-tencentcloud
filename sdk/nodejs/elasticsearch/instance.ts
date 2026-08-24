@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+ * const availabilityZone = tencentcloud.availability.getZonesByProduct({
  *     product: "es",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -61,13 +61,54 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create a basic version of elasticsearch instance with destroy protection enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const availabilityZone = tencentcloud.availability.getZonesByProduct({
+ *     product: "es",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     name: "tf_es_vpc",
+ * });
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+ *     name: "tf_es_subnet",
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const example = new tencentcloud.elasticsearch.Instance("example", {
+ *     instanceName: "tf_example_es",
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+ *     version: "7.10.1",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     password: "Test12345",
+ *     licenseType: "basic",
+ *     basicSecurityType: 2,
+ *     enableDestroyProtection: "OPEN",
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [{
+ *         nodeNum: 2,
+ *         nodeType: "ES.S1.MEDIUM8",
+ *         encrypt: false,
+ *     }],
+ * });
+ * ```
+ *
  * ### Create a basic version of elasticsearch instance for multi-availability zone deployment
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const availabilityZone = tencentcloud.Availability.getZonesByProduct({
+ * const availabilityZone = tencentcloud.availability.getZonesByProduct({
  *     product: "es",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -210,6 +251,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly elasticsearchVip: pulumi.Output<string>;
     /**
+     * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+     */
+    declare public readonly enableDestroyProtection: pulumi.Output<string>;
+    /**
      * Kibana Access Control Configuration.
      */
     declare public readonly esAcl: pulumi.Output<outputs.Elasticsearch.InstanceEsAcl>;
@@ -270,6 +315,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly renewFlag: pulumi.Output<string | undefined>;
     /**
+     * Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+     */
+    declare public readonly sceneType: pulumi.Output<number>;
+    /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */
     declare public readonly subnetId: pulumi.Output<string | undefined>;
@@ -313,6 +362,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["elasticsearchDomain"] = state?.elasticsearchDomain;
             resourceInputs["elasticsearchPort"] = state?.elasticsearchPort;
             resourceInputs["elasticsearchVip"] = state?.elasticsearchVip;
+            resourceInputs["enableDestroyProtection"] = state?.enableDestroyProtection;
             resourceInputs["esAcl"] = state?.esAcl;
             resourceInputs["esPublicAcl"] = state?.esPublicAcl;
             resourceInputs["esPublicUrl"] = state?.esPublicUrl;
@@ -328,6 +378,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["protocol"] = state?.protocol;
             resourceInputs["publicAccess"] = state?.publicAccess;
             resourceInputs["renewFlag"] = state?.renewFlag;
+            resourceInputs["sceneType"] = state?.sceneType;
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["version"] = state?.version;
@@ -350,6 +401,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["cosBackup"] = args?.cosBackup;
             resourceInputs["deployMode"] = args?.deployMode;
+            resourceInputs["enableDestroyProtection"] = args?.enableDestroyProtection;
             resourceInputs["esAcl"] = args?.esAcl;
             resourceInputs["esPublicAcl"] = args?.esPublicAcl;
             resourceInputs["instanceName"] = args?.instanceName;
@@ -362,6 +414,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["protocol"] = args?.protocol;
             resourceInputs["publicAccess"] = args?.publicAccess;
             resourceInputs["renewFlag"] = args?.renewFlag;
+            resourceInputs["sceneType"] = args?.sceneType;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["version"] = args?.version;
@@ -389,123 +442,131 @@ export interface InstanceState {
     /**
      * Availability zone. When create multi-az es, this parameter must be the primary availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
      */
-    basicSecurityType?: pulumi.Input<number>;
+    basicSecurityType?: pulumi.Input<number | undefined>;
     /**
      * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    chargePeriod?: pulumi.Input<number>;
+    chargePeriod?: pulumi.Input<number | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * COS automatic backup information.
      */
-    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup>;
+    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup | undefined>;
     /**
      * Instance creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
-    deployMode?: pulumi.Input<number>;
+    deployMode?: pulumi.Input<number | undefined>;
     /**
      * Elasticsearch domain name.
      */
-    elasticsearchDomain?: pulumi.Input<string>;
+    elasticsearchDomain?: pulumi.Input<string | undefined>;
     /**
      * Elasticsearch port.
      */
-    elasticsearchPort?: pulumi.Input<number>;
+    elasticsearchPort?: pulumi.Input<number | undefined>;
     /**
      * Elasticsearch VIP.
      */
-    elasticsearchVip?: pulumi.Input<string>;
+    elasticsearchVip?: pulumi.Input<string | undefined>;
+    /**
+     * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+     */
+    enableDestroyProtection?: pulumi.Input<string | undefined>;
     /**
      * Kibana Access Control Configuration.
      */
-    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl>;
+    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl | undefined>;
     /**
      * Public network access control list.
      */
-    esPublicAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsPublicAcl>;
+    esPublicAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsPublicAcl | undefined>;
     /**
      * Es public network address.
      */
-    esPublicUrl?: pulumi.Input<string>;
+    esPublicUrl?: pulumi.Input<string | undefined>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
      */
-    kibanaPrivateAccess?: pulumi.Input<string>;
+    kibanaPrivateAccess?: pulumi.Input<string | undefined>;
     /**
      * Kibana private URL.
      */
-    kibanaPrivateUrl?: pulumi.Input<string>;
+    kibanaPrivateUrl?: pulumi.Input<string | undefined>;
     /**
      * Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
      */
-    kibanaPublicAccess?: pulumi.Input<string>;
+    kibanaPublicAccess?: pulumi.Input<string | undefined>;
     /**
      * Kibana access URL.
      */
-    kibanaUrl?: pulumi.Input<string>;
+    kibanaUrl?: pulumi.Input<string | undefined>;
     /**
      * License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
      */
-    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[]>;
+    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[] | undefined>;
     /**
      * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
      */
-    nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
+    nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[] | undefined>;
     /**
      * Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Create an https cluster, default is http.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `esAcl`.
      */
-    publicAccess?: pulumi.Input<string>;
+    publicAccess?: pulumi.Input<string | undefined>;
     /**
      * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    renewFlag?: pulumi.Input<string>;
+    renewFlag?: pulumi.Input<string | undefined>;
+    /**
+     * Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+     */
+    sceneType?: pulumi.Input<number | undefined>;
     /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Visual node configuration.
      */
-    webNodeTypeInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceWebNodeTypeInfo>[]>;
+    webNodeTypeInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceWebNodeTypeInfo>[] | undefined>;
 }
 
 /**
@@ -515,59 +576,63 @@ export interface InstanceArgs {
     /**
      * Availability zone. When create multi-az es, this parameter must be the primary availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
      */
-    basicSecurityType?: pulumi.Input<number>;
+    basicSecurityType?: pulumi.Input<number | undefined>;
     /**
      * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    chargePeriod?: pulumi.Input<number>;
+    chargePeriod?: pulumi.Input<number | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * COS automatic backup information.
      */
-    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup>;
+    cosBackup?: pulumi.Input<inputs.Elasticsearch.InstanceCosBackup | undefined>;
     /**
      * Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
      */
-    deployMode?: pulumi.Input<number>;
+    deployMode?: pulumi.Input<number | undefined>;
+    /**
+     * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+     */
+    enableDestroyProtection?: pulumi.Input<string | undefined>;
     /**
      * Kibana Access Control Configuration.
      */
-    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl>;
+    esAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsAcl | undefined>;
     /**
      * Public network access control list.
      */
-    esPublicAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsPublicAcl>;
+    esPublicAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsPublicAcl | undefined>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
      */
-    kibanaPrivateAccess?: pulumi.Input<string>;
+    kibanaPrivateAccess?: pulumi.Input<string | undefined>;
     /**
      * Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
      */
-    kibanaPublicAccess?: pulumi.Input<string>;
+    kibanaPublicAccess?: pulumi.Input<string | undefined>;
     /**
      * License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
      */
-    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[]>;
+    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceMultiZoneInfo>[] | undefined>;
     /**
      * Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size.
      */
-    nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[]>;
+    nodeInfoLists?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceNodeInfoList>[] | undefined>;
     /**
      * Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?] special symbols.
      */
@@ -575,23 +640,27 @@ export interface InstanceArgs {
     /**
      * Create an https cluster, default is http.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `esAcl`.
      */
-    publicAccess?: pulumi.Input<string>;
+    publicAccess?: pulumi.Input<string | undefined>;
     /**
      * When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    renewFlag?: pulumi.Input<string>;
+    renewFlag?: pulumi.Input<string | undefined>;
+    /**
+     * Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+     */
+    sceneType?: pulumi.Input<number | undefined>;
     /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
      */
@@ -603,5 +672,5 @@ export interface InstanceArgs {
     /**
      * Visual node configuration.
      */
-    webNodeTypeInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceWebNodeTypeInfo>[]>;
+    webNodeTypeInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.InstanceWebNodeTypeInfo>[] | undefined>;
 }

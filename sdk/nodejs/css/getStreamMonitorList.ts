@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const streamMonitorList = tencentcloud.Css.getStreamMonitorList({});
+ * const streamMonitorList = tencentcloud.css.getStreamMonitorList({});
  * ```
  */
 export function getStreamMonitorList(args?: GetStreamMonitorListArgs, opts?: pulumi.InvokeOptions): Promise<GetStreamMonitorListResult> {
@@ -59,7 +59,7 @@ export interface GetStreamMonitorListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const streamMonitorList = tencentcloud.Css.getStreamMonitorList({});
+ * const streamMonitorList = tencentcloud.css.getStreamMonitorList({});
  * ```
  */
 export function getStreamMonitorListOutput(args?: GetStreamMonitorListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStreamMonitorListResult> {
@@ -77,5 +77,5 @@ export interface GetStreamMonitorListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

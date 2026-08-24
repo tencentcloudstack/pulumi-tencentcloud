@@ -39,7 +39,7 @@ import (
 //				return err
 //			}
 //			_, err = gaap.NewSecurityPolicy(ctx, "foo", &gaap.SecurityPolicyArgs{
-//				ProxyId: foo.ID(),
+//				ProxyId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Action:  pulumi.String("DROP"),
 //			})
 //			if err != nil {
@@ -56,7 +56,9 @@ import (
 // GAAP security policy can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy  tencentcloud_gaap_security_policy.foo pl-xxxx
+//
+//	$ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy foo pl-xxxx
+//
 // ```
 type SecurityPolicy struct {
 	pulumi.CustomResourceState

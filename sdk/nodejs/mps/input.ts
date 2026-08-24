@@ -116,11 +116,11 @@ export interface InputState {
     /**
      * Flow ID.
      */
-    flowId?: pulumi.Input<string>;
+    flowId?: pulumi.Input<string | undefined>;
     /**
      * The input group for the input. Only support one group for one `tencentcloud.Mps.Input`. Use `forEach` to create multiple inputs Scenario.
      */
-    inputGroup?: pulumi.Input<inputs.Mps.InputInputGroup>;
+    inputGroup?: pulumi.Input<inputs.Mps.InputInputGroup | undefined>;
 }
 
 /**
@@ -134,5 +134,5 @@ export interface InputArgs {
     /**
      * The input group for the input. Only support one group for one `tencentcloud.Mps.Input`. Use `forEach` to create multiple inputs Scenario.
      */
-    inputGroup?: pulumi.Input<inputs.Mps.InputInputGroup>;
+    inputGroup?: pulumi.Input<inputs.Mps.InputInputGroup | undefined>;
 }

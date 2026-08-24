@@ -103,12 +103,8 @@ type GetScenarioWithJobsResult struct {
 }
 
 func GetScenarioWithJobsOutput(ctx *pulumi.Context, args GetScenarioWithJobsOutputArgs, opts ...pulumi.InvokeOption) GetScenarioWithJobsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetScenarioWithJobsResultOutput, error) {
-			args := v.(GetScenarioWithJobsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args, GetScenarioWithJobsResultOutput{}, options).(GetScenarioWithJobsResultOutput), nil
-		}).(GetScenarioWithJobsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args, GetScenarioWithJobsResultOutput{}, options).(GetScenarioWithJobsResultOutput)
 }
 
 // A collection of arguments for invoking getScenarioWithJobs.

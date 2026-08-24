@@ -15,8 +15,20 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const kubernetesAddons = tencentcloud.Kubernetes.getAddons({
- *     clusterId: "cls-12345678",
+ * const example = tencentcloud.kubernetes.getAddons({
+ *     clusterId: "cls-5yezvaxo",
+ * });
+ * ```
+ *
+ * ### Or
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.kubernetes.getAddons({
+ *     clusterId: "cls-5yezvaxo",
+ *     addonName: "ip-masq-agent",
  * });
  * ```
  */
@@ -75,8 +87,20 @@ export interface GetAddonsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const kubernetesAddons = tencentcloud.Kubernetes.getAddons({
- *     clusterId: "cls-12345678",
+ * const example = tencentcloud.kubernetes.getAddons({
+ *     clusterId: "cls-5yezvaxo",
+ * });
+ * ```
+ *
+ * ### Or
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.kubernetes.getAddons({
+ *     clusterId: "cls-5yezvaxo",
+ *     addonName: "ip-masq-agent",
  * });
  * ```
  */
@@ -96,7 +120,7 @@ export interface GetAddonsOutputArgs {
     /**
      * Add-on name (all add-ons in the cluster are returned if this parameter is not specified).
      */
-    addonName?: pulumi.Input<string>;
+    addonName?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
@@ -104,5 +128,5 @@ export interface GetAddonsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

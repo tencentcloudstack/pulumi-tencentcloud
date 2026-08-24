@@ -134,6 +134,1216 @@ func (o AntiInfoLeakStrategyArrayOutput) Index(i pulumi.IntInput) AntiInfoLeakSt
 	}).(AntiInfoLeakStrategyOutput)
 }
 
+type ApiSecSensitiveCustomEventRuleApiNameOp struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods []ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op *string `pulumi:"op"`
+	// Match value list.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitiveCustomEventRuleApiNameOpInput is an input type that accepts ApiSecSensitiveCustomEventRuleApiNameOpArgs and ApiSecSensitiveCustomEventRuleApiNameOpOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleApiNameOpInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleApiNameOpArgs{...}
+type ApiSecSensitiveCustomEventRuleApiNameOpInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleApiNameOpOutput() ApiSecSensitiveCustomEventRuleApiNameOpOutput
+	ToApiSecSensitiveCustomEventRuleApiNameOpOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleApiNameOpOutput
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpArgs struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayInput `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op pulumi.StringPtrInput `pulumi:"op"`
+	// Match value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpArgs) ToApiSecSensitiveCustomEventRuleApiNameOpOutput() ApiSecSensitiveCustomEventRuleApiNameOpOutput {
+	return i.ToApiSecSensitiveCustomEventRuleApiNameOpOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpArgs) ToApiSecSensitiveCustomEventRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleApiNameOpOutput)
+}
+
+// ApiSecSensitiveCustomEventRuleApiNameOpArrayInput is an input type that accepts ApiSecSensitiveCustomEventRuleApiNameOpArray and ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleApiNameOpArrayInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleApiNameOpArray{ ApiSecSensitiveCustomEventRuleApiNameOpArgs{...} }
+type ApiSecSensitiveCustomEventRuleApiNameOpArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput
+	ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpArray []ApiSecSensitiveCustomEventRuleApiNameOpInput
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpArray) ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput {
+	return i.ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpArray) ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpOutput) ToApiSecSensitiveCustomEventRuleApiNameOpOutput() ApiSecSensitiveCustomEventRuleApiNameOpOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpOutput) ToApiSecSensitiveCustomEventRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpOutput {
+	return o
+}
+
+// When manually filtering, this structure should be passed.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpOutput) ApiNameMethods() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOp) []ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod {
+		return v.ApiNameMethods
+	}).(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+// Match method, such as belong and regex.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpOutput) Op() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOp) *string { return v.Op }).(pulumi.StringPtrOutput)
+}
+
+// Match value list.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOp) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput) ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput) ToApiSecSensitiveCustomEventRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveCustomEventRuleApiNameOpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveCustomEventRuleApiNameOp {
+		return vs[0].([]ApiSecSensitiveCustomEventRuleApiNameOp)[vs[1].(int)]
+	}).(ApiSecSensitiveCustomEventRuleApiNameOpOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod struct {
+	// API name.
+	ApiName *string `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count *int `pulumi:"count"`
+	// API label.
+	Labels []string `pulumi:"labels"`
+	// API request method.
+	Method *string `pulumi:"method"`
+}
+
+// ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodInput is an input type that accepts ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs and ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs{...}
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput
+	ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs struct {
+	// API name.
+	ApiName pulumi.StringPtrInput `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// API label.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	// API request method.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+}
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput {
+	return i.ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput)
+}
+
+// ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayInput is an input type that accepts ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray and ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray{ ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs{...} }
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput
+	ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray []ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodInput
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput {
+	return i.ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+// API name.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) ApiName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod) *string { return v.ApiName }).(pulumi.StringPtrOutput)
+}
+
+// API request count in the last 30 days.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// API label.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+// API request method.
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod {
+		return vs[0].([]ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethod)[vs[1].(int)]
+	}).(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleMatchRuleList struct {
+	// Match field.
+	Key *string `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name *string `pulumi:"name"`
+	// Operator.
+	Operate *string `pulumi:"operate"`
+	// Match value.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitiveCustomEventRuleMatchRuleListInput is an input type that accepts ApiSecSensitiveCustomEventRuleMatchRuleListArgs and ApiSecSensitiveCustomEventRuleMatchRuleListOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleMatchRuleListInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleMatchRuleListArgs{...}
+type ApiSecSensitiveCustomEventRuleMatchRuleListInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleMatchRuleListOutput() ApiSecSensitiveCustomEventRuleMatchRuleListOutput
+	ToApiSecSensitiveCustomEventRuleMatchRuleListOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListOutput
+}
+
+type ApiSecSensitiveCustomEventRuleMatchRuleListArgs struct {
+	// Match field.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Operator.
+	Operate pulumi.StringPtrInput `pulumi:"operate"`
+	// Match value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitiveCustomEventRuleMatchRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleMatchRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleMatchRuleListArgs) ToApiSecSensitiveCustomEventRuleMatchRuleListOutput() ApiSecSensitiveCustomEventRuleMatchRuleListOutput {
+	return i.ToApiSecSensitiveCustomEventRuleMatchRuleListOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleMatchRuleListArgs) ToApiSecSensitiveCustomEventRuleMatchRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleMatchRuleListOutput)
+}
+
+// ApiSecSensitiveCustomEventRuleMatchRuleListArrayInput is an input type that accepts ApiSecSensitiveCustomEventRuleMatchRuleListArray and ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleMatchRuleListArrayInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleMatchRuleListArray{ ApiSecSensitiveCustomEventRuleMatchRuleListArgs{...} }
+type ApiSecSensitiveCustomEventRuleMatchRuleListArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput() ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput
+	ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput
+}
+
+type ApiSecSensitiveCustomEventRuleMatchRuleListArray []ApiSecSensitiveCustomEventRuleMatchRuleListInput
+
+func (ApiSecSensitiveCustomEventRuleMatchRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleMatchRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleMatchRuleListArray) ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput() ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput {
+	return i.ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleMatchRuleListArray) ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleMatchRuleListOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleMatchRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleMatchRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) ToApiSecSensitiveCustomEventRuleMatchRuleListOutput() ApiSecSensitiveCustomEventRuleMatchRuleListOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) ToApiSecSensitiveCustomEventRuleMatchRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListOutput {
+	return o
+}
+
+// Match field.
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleMatchRuleList) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleMatchRuleList) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Operator.
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) Operate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleMatchRuleList) *string { return v.Operate }).(pulumi.StringPtrOutput)
+}
+
+// Match value.
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleMatchRuleList) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleMatchRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput) ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput() ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput) ToApiSecSensitiveCustomEventRuleMatchRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveCustomEventRuleMatchRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveCustomEventRuleMatchRuleList {
+		return vs[0].([]ApiSecSensitiveCustomEventRuleMatchRuleList)[vs[1].(int)]
+	}).(ApiSecSensitiveCustomEventRuleMatchRuleListOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleStatRuleList struct {
+	// Match field.
+	Key *string `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name *string `pulumi:"name"`
+	// Operator.
+	Operate *string `pulumi:"operate"`
+	// Match value.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitiveCustomEventRuleStatRuleListInput is an input type that accepts ApiSecSensitiveCustomEventRuleStatRuleListArgs and ApiSecSensitiveCustomEventRuleStatRuleListOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleStatRuleListInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleStatRuleListArgs{...}
+type ApiSecSensitiveCustomEventRuleStatRuleListInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleStatRuleListOutput() ApiSecSensitiveCustomEventRuleStatRuleListOutput
+	ToApiSecSensitiveCustomEventRuleStatRuleListOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleStatRuleListOutput
+}
+
+type ApiSecSensitiveCustomEventRuleStatRuleListArgs struct {
+	// Match field.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Operator.
+	Operate pulumi.StringPtrInput `pulumi:"operate"`
+	// Match value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitiveCustomEventRuleStatRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleStatRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleStatRuleListArgs) ToApiSecSensitiveCustomEventRuleStatRuleListOutput() ApiSecSensitiveCustomEventRuleStatRuleListOutput {
+	return i.ToApiSecSensitiveCustomEventRuleStatRuleListOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleStatRuleListArgs) ToApiSecSensitiveCustomEventRuleStatRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleStatRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleStatRuleListOutput)
+}
+
+// ApiSecSensitiveCustomEventRuleStatRuleListArrayInput is an input type that accepts ApiSecSensitiveCustomEventRuleStatRuleListArray and ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveCustomEventRuleStatRuleListArrayInput` via:
+//
+//	ApiSecSensitiveCustomEventRuleStatRuleListArray{ ApiSecSensitiveCustomEventRuleStatRuleListArgs{...} }
+type ApiSecSensitiveCustomEventRuleStatRuleListArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutput() ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput
+	ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutputWithContext(context.Context) ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput
+}
+
+type ApiSecSensitiveCustomEventRuleStatRuleListArray []ApiSecSensitiveCustomEventRuleStatRuleListInput
+
+func (ApiSecSensitiveCustomEventRuleStatRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleStatRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveCustomEventRuleStatRuleListArray) ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutput() ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput {
+	return i.ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveCustomEventRuleStatRuleListArray) ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleStatRuleListOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleStatRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveCustomEventRuleStatRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) ToApiSecSensitiveCustomEventRuleStatRuleListOutput() ApiSecSensitiveCustomEventRuleStatRuleListOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) ToApiSecSensitiveCustomEventRuleStatRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleStatRuleListOutput {
+	return o
+}
+
+// Match field.
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleStatRuleList) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleStatRuleList) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Operator.
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) Operate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleStatRuleList) *string { return v.Operate }).(pulumi.StringPtrOutput)
+}
+
+// Match value.
+func (o ApiSecSensitiveCustomEventRuleStatRuleListOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveCustomEventRuleStatRuleList) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveCustomEventRuleStatRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput) ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutput() ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput) ToApiSecSensitiveCustomEventRuleStatRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveCustomEventRuleStatRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveCustomEventRuleStatRuleList {
+		return vs[0].([]ApiSecSensitiveCustomEventRuleStatRuleList)[vs[1].(int)]
+	}).(ApiSecSensitiveCustomEventRuleStatRuleListOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOp struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods []ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op *string `pulumi:"op"`
+	// Match value list.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitivePrivilegeRuleApiNameOpInput is an input type that accepts ApiSecSensitivePrivilegeRuleApiNameOpArgs and ApiSecSensitivePrivilegeRuleApiNameOpOutput values.
+// You can construct a concrete instance of `ApiSecSensitivePrivilegeRuleApiNameOpInput` via:
+//
+//	ApiSecSensitivePrivilegeRuleApiNameOpArgs{...}
+type ApiSecSensitivePrivilegeRuleApiNameOpInput interface {
+	pulumi.Input
+
+	ToApiSecSensitivePrivilegeRuleApiNameOpOutput() ApiSecSensitivePrivilegeRuleApiNameOpOutput
+	ToApiSecSensitivePrivilegeRuleApiNameOpOutputWithContext(context.Context) ApiSecSensitivePrivilegeRuleApiNameOpOutput
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpArgs struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayInput `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op pulumi.StringPtrInput `pulumi:"op"`
+	// Match value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpArgs) ToApiSecSensitivePrivilegeRuleApiNameOpOutput() ApiSecSensitivePrivilegeRuleApiNameOpOutput {
+	return i.ToApiSecSensitivePrivilegeRuleApiNameOpOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpArgs) ToApiSecSensitivePrivilegeRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitivePrivilegeRuleApiNameOpOutput)
+}
+
+// ApiSecSensitivePrivilegeRuleApiNameOpArrayInput is an input type that accepts ApiSecSensitivePrivilegeRuleApiNameOpArray and ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitivePrivilegeRuleApiNameOpArrayInput` via:
+//
+//	ApiSecSensitivePrivilegeRuleApiNameOpArray{ ApiSecSensitivePrivilegeRuleApiNameOpArgs{...} }
+type ApiSecSensitivePrivilegeRuleApiNameOpArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput
+	ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutputWithContext(context.Context) ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpArray []ApiSecSensitivePrivilegeRuleApiNameOpInput
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitivePrivilegeRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpArray) ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput {
+	return i.ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpArray) ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpOutput) ToApiSecSensitivePrivilegeRuleApiNameOpOutput() ApiSecSensitivePrivilegeRuleApiNameOpOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpOutput) ToApiSecSensitivePrivilegeRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpOutput {
+	return o
+}
+
+// When manually filtering, this structure should be passed.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpOutput) ApiNameMethods() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOp) []ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod {
+		return v.ApiNameMethods
+	}).(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+// Match method, such as belong and regex.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpOutput) Op() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOp) *string { return v.Op }).(pulumi.StringPtrOutput)
+}
+
+// Match value list.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOp) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitivePrivilegeRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput) ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput) ToApiSecSensitivePrivilegeRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput) Index(i pulumi.IntInput) ApiSecSensitivePrivilegeRuleApiNameOpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitivePrivilegeRuleApiNameOp {
+		return vs[0].([]ApiSecSensitivePrivilegeRuleApiNameOp)[vs[1].(int)]
+	}).(ApiSecSensitivePrivilegeRuleApiNameOpOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod struct {
+	// API name.
+	ApiName *string `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count *int `pulumi:"count"`
+	// API label.
+	Labels []string `pulumi:"labels"`
+	// API request method.
+	Method *string `pulumi:"method"`
+}
+
+// ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodInput is an input type that accepts ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs and ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput values.
+// You can construct a concrete instance of `ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodInput` via:
+//
+//	ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs{...}
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodInput interface {
+	pulumi.Input
+
+	ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput
+	ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutputWithContext(context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs struct {
+	// API name.
+	ApiName pulumi.StringPtrInput `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// API label.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	// API request method.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+}
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput {
+	return i.ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput)
+}
+
+// ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayInput is an input type that accepts ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray and ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayInput` via:
+//
+//	ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray{ ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs{...} }
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput
+	ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray []ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodInput
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput {
+	return i.ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+// API name.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) ApiName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod) *string { return v.ApiName }).(pulumi.StringPtrOutput)
+}
+
+// API request count in the last 30 days.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// API label.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+// API request method.
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+type ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput) Index(i pulumi.IntInput) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod {
+		return vs[0].([]ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethod)[vs[1].(int)]
+	}).(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput)
+}
+
+type ApiSecSensitiveSceneRuleRuleList struct {
+	// Match field.
+	Key *string `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name *string `pulumi:"name"`
+	// Operator.
+	Operate *string `pulumi:"operate"`
+	// Match value.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitiveSceneRuleRuleListInput is an input type that accepts ApiSecSensitiveSceneRuleRuleListArgs and ApiSecSensitiveSceneRuleRuleListOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveSceneRuleRuleListInput` via:
+//
+//	ApiSecSensitiveSceneRuleRuleListArgs{...}
+type ApiSecSensitiveSceneRuleRuleListInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveSceneRuleRuleListOutput() ApiSecSensitiveSceneRuleRuleListOutput
+	ToApiSecSensitiveSceneRuleRuleListOutputWithContext(context.Context) ApiSecSensitiveSceneRuleRuleListOutput
+}
+
+type ApiSecSensitiveSceneRuleRuleListArgs struct {
+	// Match field.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Operator.
+	Operate pulumi.StringPtrInput `pulumi:"operate"`
+	// Match value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitiveSceneRuleRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveSceneRuleRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveSceneRuleRuleListArgs) ToApiSecSensitiveSceneRuleRuleListOutput() ApiSecSensitiveSceneRuleRuleListOutput {
+	return i.ToApiSecSensitiveSceneRuleRuleListOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveSceneRuleRuleListArgs) ToApiSecSensitiveSceneRuleRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveSceneRuleRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveSceneRuleRuleListOutput)
+}
+
+// ApiSecSensitiveSceneRuleRuleListArrayInput is an input type that accepts ApiSecSensitiveSceneRuleRuleListArray and ApiSecSensitiveSceneRuleRuleListArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveSceneRuleRuleListArrayInput` via:
+//
+//	ApiSecSensitiveSceneRuleRuleListArray{ ApiSecSensitiveSceneRuleRuleListArgs{...} }
+type ApiSecSensitiveSceneRuleRuleListArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveSceneRuleRuleListArrayOutput() ApiSecSensitiveSceneRuleRuleListArrayOutput
+	ToApiSecSensitiveSceneRuleRuleListArrayOutputWithContext(context.Context) ApiSecSensitiveSceneRuleRuleListArrayOutput
+}
+
+type ApiSecSensitiveSceneRuleRuleListArray []ApiSecSensitiveSceneRuleRuleListInput
+
+func (ApiSecSensitiveSceneRuleRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveSceneRuleRuleList)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveSceneRuleRuleListArray) ToApiSecSensitiveSceneRuleRuleListArrayOutput() ApiSecSensitiveSceneRuleRuleListArrayOutput {
+	return i.ToApiSecSensitiveSceneRuleRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveSceneRuleRuleListArray) ToApiSecSensitiveSceneRuleRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveSceneRuleRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveSceneRuleRuleListArrayOutput)
+}
+
+type ApiSecSensitiveSceneRuleRuleListOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveSceneRuleRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveSceneRuleRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveSceneRuleRuleListOutput) ToApiSecSensitiveSceneRuleRuleListOutput() ApiSecSensitiveSceneRuleRuleListOutput {
+	return o
+}
+
+func (o ApiSecSensitiveSceneRuleRuleListOutput) ToApiSecSensitiveSceneRuleRuleListOutputWithContext(ctx context.Context) ApiSecSensitiveSceneRuleRuleListOutput {
+	return o
+}
+
+// Match field.
+func (o ApiSecSensitiveSceneRuleRuleListOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveSceneRuleRuleList) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// When the match field is get parameter value, post parameter value, cookie parameter value, header parameter value or rsp parameter value, this field can be filled.
+func (o ApiSecSensitiveSceneRuleRuleListOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveSceneRuleRuleList) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Operator.
+func (o ApiSecSensitiveSceneRuleRuleListOutput) Operate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveSceneRuleRuleList) *string { return v.Operate }).(pulumi.StringPtrOutput)
+}
+
+// Match value.
+func (o ApiSecSensitiveSceneRuleRuleListOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveSceneRuleRuleList) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveSceneRuleRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveSceneRuleRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveSceneRuleRuleList)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveSceneRuleRuleListArrayOutput) ToApiSecSensitiveSceneRuleRuleListArrayOutput() ApiSecSensitiveSceneRuleRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveSceneRuleRuleListArrayOutput) ToApiSecSensitiveSceneRuleRuleListArrayOutputWithContext(ctx context.Context) ApiSecSensitiveSceneRuleRuleListArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveSceneRuleRuleListArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveSceneRuleRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveSceneRuleRuleList {
+		return vs[0].([]ApiSecSensitiveSceneRuleRuleList)[vs[1].(int)]
+	}).(ApiSecSensitiveSceneRuleRuleListOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOp struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods []ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op *string `pulumi:"op"`
+	// Match value list.
+	Values []string `pulumi:"values"`
+}
+
+// ApiSecSensitiveWhiteRuleApiNameOpInput is an input type that accepts ApiSecSensitiveWhiteRuleApiNameOpArgs and ApiSecSensitiveWhiteRuleApiNameOpOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleApiNameOpInput` via:
+//
+//	ApiSecSensitiveWhiteRuleApiNameOpArgs{...}
+type ApiSecSensitiveWhiteRuleApiNameOpInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleApiNameOpOutput() ApiSecSensitiveWhiteRuleApiNameOpOutput
+	ToApiSecSensitiveWhiteRuleApiNameOpOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleApiNameOpOutput
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpArgs struct {
+	// When manually filtering, this structure should be passed.
+	ApiNameMethods ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayInput `pulumi:"apiNameMethods"`
+	// Match method, such as belong and regex.
+	Op pulumi.StringPtrInput `pulumi:"op"`
+	// Match value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (ApiSecSensitiveWhiteRuleApiNameOpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpArgs) ToApiSecSensitiveWhiteRuleApiNameOpOutput() ApiSecSensitiveWhiteRuleApiNameOpOutput {
+	return i.ToApiSecSensitiveWhiteRuleApiNameOpOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpArgs) ToApiSecSensitiveWhiteRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleApiNameOpOutput)
+}
+
+// ApiSecSensitiveWhiteRuleApiNameOpArrayInput is an input type that accepts ApiSecSensitiveWhiteRuleApiNameOpArray and ApiSecSensitiveWhiteRuleApiNameOpArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleApiNameOpArrayInput` via:
+//
+//	ApiSecSensitiveWhiteRuleApiNameOpArray{ ApiSecSensitiveWhiteRuleApiNameOpArgs{...} }
+type ApiSecSensitiveWhiteRuleApiNameOpArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleApiNameOpArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpArrayOutput
+	ToApiSecSensitiveWhiteRuleApiNameOpArrayOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleApiNameOpArrayOutput
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpArray []ApiSecSensitiveWhiteRuleApiNameOpInput
+
+func (ApiSecSensitiveWhiteRuleApiNameOpArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleApiNameOp)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpArray) ToApiSecSensitiveWhiteRuleApiNameOpArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpArrayOutput {
+	return i.ToApiSecSensitiveWhiteRuleApiNameOpArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpArray) ToApiSecSensitiveWhiteRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleApiNameOpArrayOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleApiNameOpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpOutput) ToApiSecSensitiveWhiteRuleApiNameOpOutput() ApiSecSensitiveWhiteRuleApiNameOpOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpOutput) ToApiSecSensitiveWhiteRuleApiNameOpOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpOutput {
+	return o
+}
+
+// When manually filtering, this structure should be passed.
+func (o ApiSecSensitiveWhiteRuleApiNameOpOutput) ApiNameMethods() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOp) []ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod {
+		return v.ApiNameMethods
+	}).(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+// Match method, such as belong and regex.
+func (o ApiSecSensitiveWhiteRuleApiNameOpOutput) Op() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOp) *string { return v.Op }).(pulumi.StringPtrOutput)
+}
+
+// Match value list.
+func (o ApiSecSensitiveWhiteRuleApiNameOpOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOp) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleApiNameOpArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleApiNameOp)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpArrayOutput) ToApiSecSensitiveWhiteRuleApiNameOpArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpArrayOutput) ToApiSecSensitiveWhiteRuleApiNameOpArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveWhiteRuleApiNameOpOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveWhiteRuleApiNameOp {
+		return vs[0].([]ApiSecSensitiveWhiteRuleApiNameOp)[vs[1].(int)]
+	}).(ApiSecSensitiveWhiteRuleApiNameOpOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod struct {
+	// API name.
+	ApiName *string `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count *int `pulumi:"count"`
+	// API label.
+	Labels []string `pulumi:"labels"`
+	// API request method.
+	Method *string `pulumi:"method"`
+}
+
+// ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodInput is an input type that accepts ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs and ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodInput` via:
+//
+//	ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs{...}
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput
+	ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs struct {
+	// API name.
+	ApiName pulumi.StringPtrInput `pulumi:"apiName"`
+	// API request count in the last 30 days.
+	Count pulumi.IntPtrInput `pulumi:"count"`
+	// API label.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	// API request method.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+}
+
+func (ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput {
+	return i.ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput)
+}
+
+// ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayInput is an input type that accepts ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray and ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayInput` via:
+//
+//	ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray{ ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs{...} }
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput
+	ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray []ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodInput
+
+func (ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput {
+	return i.ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput {
+	return o
+}
+
+// API name.
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) ApiName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod) *string { return v.ApiName }).(pulumi.StringPtrOutput)
+}
+
+// API request count in the last 30 days.
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) Count() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod) *int { return v.Count }).(pulumi.IntPtrOutput)
+}
+
+// API label.
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+// API request method.
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+type ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput() ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput) ToApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod {
+		return vs[0].([]ApiSecSensitiveWhiteRuleApiNameOpApiNameMethod)[vs[1].(int)]
+	}).(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput)
+}
+
+type ApiSecSensitiveWhiteRuleWhiteField struct {
+	// Field name.
+	FieldName *string `pulumi:"fieldName"`
+	// Field position.
+	FieldType *string `pulumi:"fieldType"`
+	// Sensitive data type list.
+	SensitiveTypes []string `pulumi:"sensitiveTypes"`
+}
+
+// ApiSecSensitiveWhiteRuleWhiteFieldInput is an input type that accepts ApiSecSensitiveWhiteRuleWhiteFieldArgs and ApiSecSensitiveWhiteRuleWhiteFieldOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleWhiteFieldInput` via:
+//
+//	ApiSecSensitiveWhiteRuleWhiteFieldArgs{...}
+type ApiSecSensitiveWhiteRuleWhiteFieldInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleWhiteFieldOutput() ApiSecSensitiveWhiteRuleWhiteFieldOutput
+	ToApiSecSensitiveWhiteRuleWhiteFieldOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleWhiteFieldOutput
+}
+
+type ApiSecSensitiveWhiteRuleWhiteFieldArgs struct {
+	// Field name.
+	FieldName pulumi.StringPtrInput `pulumi:"fieldName"`
+	// Field position.
+	FieldType pulumi.StringPtrInput `pulumi:"fieldType"`
+	// Sensitive data type list.
+	SensitiveTypes pulumi.StringArrayInput `pulumi:"sensitiveTypes"`
+}
+
+func (ApiSecSensitiveWhiteRuleWhiteFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleWhiteField)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleWhiteFieldArgs) ToApiSecSensitiveWhiteRuleWhiteFieldOutput() ApiSecSensitiveWhiteRuleWhiteFieldOutput {
+	return i.ToApiSecSensitiveWhiteRuleWhiteFieldOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleWhiteFieldArgs) ToApiSecSensitiveWhiteRuleWhiteFieldOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleWhiteFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleWhiteFieldOutput)
+}
+
+// ApiSecSensitiveWhiteRuleWhiteFieldArrayInput is an input type that accepts ApiSecSensitiveWhiteRuleWhiteFieldArray and ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput values.
+// You can construct a concrete instance of `ApiSecSensitiveWhiteRuleWhiteFieldArrayInput` via:
+//
+//	ApiSecSensitiveWhiteRuleWhiteFieldArray{ ApiSecSensitiveWhiteRuleWhiteFieldArgs{...} }
+type ApiSecSensitiveWhiteRuleWhiteFieldArrayInput interface {
+	pulumi.Input
+
+	ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutput() ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput
+	ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutputWithContext(context.Context) ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput
+}
+
+type ApiSecSensitiveWhiteRuleWhiteFieldArray []ApiSecSensitiveWhiteRuleWhiteFieldInput
+
+func (ApiSecSensitiveWhiteRuleWhiteFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleWhiteField)(nil)).Elem()
+}
+
+func (i ApiSecSensitiveWhiteRuleWhiteFieldArray) ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutput() ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput {
+	return i.ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutputWithContext(context.Background())
+}
+
+func (i ApiSecSensitiveWhiteRuleWhiteFieldArray) ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput)
+}
+
+type ApiSecSensitiveWhiteRuleWhiteFieldOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleWhiteFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiSecSensitiveWhiteRuleWhiteField)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleWhiteFieldOutput) ToApiSecSensitiveWhiteRuleWhiteFieldOutput() ApiSecSensitiveWhiteRuleWhiteFieldOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleWhiteFieldOutput) ToApiSecSensitiveWhiteRuleWhiteFieldOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleWhiteFieldOutput {
+	return o
+}
+
+// Field name.
+func (o ApiSecSensitiveWhiteRuleWhiteFieldOutput) FieldName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleWhiteField) *string { return v.FieldName }).(pulumi.StringPtrOutput)
+}
+
+// Field position.
+func (o ApiSecSensitiveWhiteRuleWhiteFieldOutput) FieldType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleWhiteField) *string { return v.FieldType }).(pulumi.StringPtrOutput)
+}
+
+// Sensitive data type list.
+func (o ApiSecSensitiveWhiteRuleWhiteFieldOutput) SensitiveTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ApiSecSensitiveWhiteRuleWhiteField) []string { return v.SensitiveTypes }).(pulumi.StringArrayOutput)
+}
+
+type ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiSecSensitiveWhiteRuleWhiteField)(nil)).Elem()
+}
+
+func (o ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput) ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutput() ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput) ToApiSecSensitiveWhiteRuleWhiteFieldArrayOutputWithContext(ctx context.Context) ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput {
+	return o
+}
+
+func (o ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput) Index(i pulumi.IntInput) ApiSecSensitiveWhiteRuleWhiteFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiSecSensitiveWhiteRuleWhiteField {
+		return vs[0].([]ApiSecSensitiveWhiteRuleWhiteField)[vs[1].(int)]
+	}).(ApiSecSensitiveWhiteRuleWhiteFieldOutput)
+}
+
 type AttackWhiteRuleRule struct {
 	// Matching content.
 	MatchContent string `pulumi:"matchContent"`
@@ -256,6 +1466,139 @@ func (o AttackWhiteRuleRuleArrayOutput) Index(i pulumi.IntInput) AttackWhiteRule
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AttackWhiteRuleRule {
 		return vs[0].([]AttackWhiteRuleRule)[vs[1].(int)]
 	}).(AttackWhiteRuleRuleOutput)
+}
+
+type BotIdRuleData struct {
+	// Action configuration.
+	Action string `pulumi:"action"`
+	// Rule name.
+	BotId *string `pulumi:"botId"`
+	// Redirect path.
+	Redirect *string `pulumi:"redirect"`
+	// Rule ID.
+	RuleId string `pulumi:"ruleId"`
+	// Rule switch.
+	Status bool `pulumi:"status"`
+}
+
+// BotIdRuleDataInput is an input type that accepts BotIdRuleDataArgs and BotIdRuleDataOutput values.
+// You can construct a concrete instance of `BotIdRuleDataInput` via:
+//
+//	BotIdRuleDataArgs{...}
+type BotIdRuleDataInput interface {
+	pulumi.Input
+
+	ToBotIdRuleDataOutput() BotIdRuleDataOutput
+	ToBotIdRuleDataOutputWithContext(context.Context) BotIdRuleDataOutput
+}
+
+type BotIdRuleDataArgs struct {
+	// Action configuration.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Rule name.
+	BotId pulumi.StringPtrInput `pulumi:"botId"`
+	// Redirect path.
+	Redirect pulumi.StringPtrInput `pulumi:"redirect"`
+	// Rule ID.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Rule switch.
+	Status pulumi.BoolInput `pulumi:"status"`
+}
+
+func (BotIdRuleDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BotIdRuleData)(nil)).Elem()
+}
+
+func (i BotIdRuleDataArgs) ToBotIdRuleDataOutput() BotIdRuleDataOutput {
+	return i.ToBotIdRuleDataOutputWithContext(context.Background())
+}
+
+func (i BotIdRuleDataArgs) ToBotIdRuleDataOutputWithContext(ctx context.Context) BotIdRuleDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BotIdRuleDataOutput)
+}
+
+// BotIdRuleDataArrayInput is an input type that accepts BotIdRuleDataArray and BotIdRuleDataArrayOutput values.
+// You can construct a concrete instance of `BotIdRuleDataArrayInput` via:
+//
+//	BotIdRuleDataArray{ BotIdRuleDataArgs{...} }
+type BotIdRuleDataArrayInput interface {
+	pulumi.Input
+
+	ToBotIdRuleDataArrayOutput() BotIdRuleDataArrayOutput
+	ToBotIdRuleDataArrayOutputWithContext(context.Context) BotIdRuleDataArrayOutput
+}
+
+type BotIdRuleDataArray []BotIdRuleDataInput
+
+func (BotIdRuleDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BotIdRuleData)(nil)).Elem()
+}
+
+func (i BotIdRuleDataArray) ToBotIdRuleDataArrayOutput() BotIdRuleDataArrayOutput {
+	return i.ToBotIdRuleDataArrayOutputWithContext(context.Background())
+}
+
+func (i BotIdRuleDataArray) ToBotIdRuleDataArrayOutputWithContext(ctx context.Context) BotIdRuleDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BotIdRuleDataArrayOutput)
+}
+
+type BotIdRuleDataOutput struct{ *pulumi.OutputState }
+
+func (BotIdRuleDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BotIdRuleData)(nil)).Elem()
+}
+
+func (o BotIdRuleDataOutput) ToBotIdRuleDataOutput() BotIdRuleDataOutput {
+	return o
+}
+
+func (o BotIdRuleDataOutput) ToBotIdRuleDataOutputWithContext(ctx context.Context) BotIdRuleDataOutput {
+	return o
+}
+
+// Action configuration.
+func (o BotIdRuleDataOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v BotIdRuleData) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Rule name.
+func (o BotIdRuleDataOutput) BotId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BotIdRuleData) *string { return v.BotId }).(pulumi.StringPtrOutput)
+}
+
+// Redirect path.
+func (o BotIdRuleDataOutput) Redirect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BotIdRuleData) *string { return v.Redirect }).(pulumi.StringPtrOutput)
+}
+
+// Rule ID.
+func (o BotIdRuleDataOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v BotIdRuleData) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Rule switch.
+func (o BotIdRuleDataOutput) Status() pulumi.BoolOutput {
+	return o.ApplyT(func(v BotIdRuleData) bool { return v.Status }).(pulumi.BoolOutput)
+}
+
+type BotIdRuleDataArrayOutput struct{ *pulumi.OutputState }
+
+func (BotIdRuleDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BotIdRuleData)(nil)).Elem()
+}
+
+func (o BotIdRuleDataArrayOutput) ToBotIdRuleDataArrayOutput() BotIdRuleDataArrayOutput {
+	return o
+}
+
+func (o BotIdRuleDataArrayOutput) ToBotIdRuleDataArrayOutputWithContext(ctx context.Context) BotIdRuleDataArrayOutput {
+	return o
+}
+
+func (o BotIdRuleDataArrayOutput) Index(i pulumi.IntInput) BotIdRuleDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BotIdRuleData {
+		return vs[0].([]BotIdRuleData)[vs[1].(int)]
+	}).(BotIdRuleDataOutput)
 }
 
 type BotSceneUcbRuleRule struct {
@@ -1912,12 +3255,18 @@ type ClbDomainLoadBalancerSet struct {
 	ListenerId string `pulumi:"listenerId"`
 	// Listener name.
 	ListenerName string `pulumi:"listenerName"`
+	// Load-balanced domain name.
+	LoadBalancerDomain *string `pulumi:"loadBalancerDomain"`
 	// LoadBalancer unique ID.
 	LoadBalancerId string `pulumi:"loadBalancerId"`
 	// LoadBalancer name.
 	LoadBalancerName string `pulumi:"loadBalancerName"`
 	// Network type for load balancer.
 	LoadBalancerType *string `pulumi:"loadBalancerType"`
+	// The ID of the member to whom the listener belongs.
+	MemberAppId *int `pulumi:"memberAppId"`
+	// Uin of the listener member.
+	MemberUin *string `pulumi:"memberUin"`
 	// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
 	NumericalVpcId *int `pulumi:"numericalVpcId"`
 	// Protocol of listener, http or https.
@@ -1925,7 +3274,7 @@ type ClbDomainLoadBalancerSet struct {
 	// LoadBalancer region.
 	Region string `pulumi:"region"`
 	// LoadBalancer IP.
-	Vip string `pulumi:"vip"`
+	Vip *string `pulumi:"vip"`
 	// LoadBalancer port.
 	Vport int `pulumi:"vport"`
 	// LoadBalancer zone.
@@ -1948,12 +3297,18 @@ type ClbDomainLoadBalancerSetArgs struct {
 	ListenerId pulumi.StringInput `pulumi:"listenerId"`
 	// Listener name.
 	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// Load-balanced domain name.
+	LoadBalancerDomain pulumi.StringPtrInput `pulumi:"loadBalancerDomain"`
 	// LoadBalancer unique ID.
 	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
 	// LoadBalancer name.
 	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
 	// Network type for load balancer.
 	LoadBalancerType pulumi.StringPtrInput `pulumi:"loadBalancerType"`
+	// The ID of the member to whom the listener belongs.
+	MemberAppId pulumi.IntPtrInput `pulumi:"memberAppId"`
+	// Uin of the listener member.
+	MemberUin pulumi.StringPtrInput `pulumi:"memberUin"`
 	// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
 	NumericalVpcId pulumi.IntPtrInput `pulumi:"numericalVpcId"`
 	// Protocol of listener, http or https.
@@ -1961,7 +3316,7 @@ type ClbDomainLoadBalancerSetArgs struct {
 	// LoadBalancer region.
 	Region pulumi.StringInput `pulumi:"region"`
 	// LoadBalancer IP.
-	Vip pulumi.StringInput `pulumi:"vip"`
+	Vip pulumi.StringPtrInput `pulumi:"vip"`
 	// LoadBalancer port.
 	Vport pulumi.IntInput `pulumi:"vport"`
 	// LoadBalancer zone.
@@ -2029,6 +3384,11 @@ func (o ClbDomainLoadBalancerSetOutput) ListenerName() pulumi.StringOutput {
 	return o.ApplyT(func(v ClbDomainLoadBalancerSet) string { return v.ListenerName }).(pulumi.StringOutput)
 }
 
+// Load-balanced domain name.
+func (o ClbDomainLoadBalancerSetOutput) LoadBalancerDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClbDomainLoadBalancerSet) *string { return v.LoadBalancerDomain }).(pulumi.StringPtrOutput)
+}
+
 // LoadBalancer unique ID.
 func (o ClbDomainLoadBalancerSetOutput) LoadBalancerId() pulumi.StringOutput {
 	return o.ApplyT(func(v ClbDomainLoadBalancerSet) string { return v.LoadBalancerId }).(pulumi.StringOutput)
@@ -2042,6 +3402,16 @@ func (o ClbDomainLoadBalancerSetOutput) LoadBalancerName() pulumi.StringOutput {
 // Network type for load balancer.
 func (o ClbDomainLoadBalancerSetOutput) LoadBalancerType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClbDomainLoadBalancerSet) *string { return v.LoadBalancerType }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the member to whom the listener belongs.
+func (o ClbDomainLoadBalancerSetOutput) MemberAppId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClbDomainLoadBalancerSet) *int { return v.MemberAppId }).(pulumi.IntPtrOutput)
+}
+
+// Uin of the listener member.
+func (o ClbDomainLoadBalancerSetOutput) MemberUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClbDomainLoadBalancerSet) *string { return v.MemberUin }).(pulumi.StringPtrOutput)
 }
 
 // VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
@@ -2060,8 +3430,8 @@ func (o ClbDomainLoadBalancerSetOutput) Region() pulumi.StringOutput {
 }
 
 // LoadBalancer IP.
-func (o ClbDomainLoadBalancerSetOutput) Vip() pulumi.StringOutput {
-	return o.ApplyT(func(v ClbDomainLoadBalancerSet) string { return v.Vip }).(pulumi.StringOutput)
+func (o ClbDomainLoadBalancerSetOutput) Vip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClbDomainLoadBalancerSet) *string { return v.Vip }).(pulumi.StringPtrOutput)
 }
 
 // LoadBalancer port.
@@ -4826,6 +6196,1939 @@ func (o OwaspWhiteRuleStrategyArrayOutput) Index(i pulumi.IntInput) OwaspWhiteRu
 	}).(OwaspWhiteRuleStrategyOutput)
 }
 
+type RateLimitGetParamsName struct {
+	// Match content.
+	Content *string `pulumi:"content"`
+	// Logic operator.
+	Func *string `pulumi:"func"`
+	// Match parameter.
+	Params *string `pulumi:"params"`
+}
+
+// RateLimitGetParamsNameInput is an input type that accepts RateLimitGetParamsNameArgs and RateLimitGetParamsNameOutput values.
+// You can construct a concrete instance of `RateLimitGetParamsNameInput` via:
+//
+//	RateLimitGetParamsNameArgs{...}
+type RateLimitGetParamsNameInput interface {
+	pulumi.Input
+
+	ToRateLimitGetParamsNameOutput() RateLimitGetParamsNameOutput
+	ToRateLimitGetParamsNameOutputWithContext(context.Context) RateLimitGetParamsNameOutput
+}
+
+type RateLimitGetParamsNameArgs struct {
+	// Match content.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Logic operator.
+	Func pulumi.StringPtrInput `pulumi:"func"`
+	// Match parameter.
+	Params pulumi.StringPtrInput `pulumi:"params"`
+}
+
+func (RateLimitGetParamsNameArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitGetParamsName)(nil)).Elem()
+}
+
+func (i RateLimitGetParamsNameArgs) ToRateLimitGetParamsNameOutput() RateLimitGetParamsNameOutput {
+	return i.ToRateLimitGetParamsNameOutputWithContext(context.Background())
+}
+
+func (i RateLimitGetParamsNameArgs) ToRateLimitGetParamsNameOutputWithContext(ctx context.Context) RateLimitGetParamsNameOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsNameOutput)
+}
+
+func (i RateLimitGetParamsNameArgs) ToRateLimitGetParamsNamePtrOutput() RateLimitGetParamsNamePtrOutput {
+	return i.ToRateLimitGetParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitGetParamsNameArgs) ToRateLimitGetParamsNamePtrOutputWithContext(ctx context.Context) RateLimitGetParamsNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsNameOutput).ToRateLimitGetParamsNamePtrOutputWithContext(ctx)
+}
+
+// RateLimitGetParamsNamePtrInput is an input type that accepts RateLimitGetParamsNameArgs, RateLimitGetParamsNamePtr and RateLimitGetParamsNamePtrOutput values.
+// You can construct a concrete instance of `RateLimitGetParamsNamePtrInput` via:
+//
+//	        RateLimitGetParamsNameArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitGetParamsNamePtrInput interface {
+	pulumi.Input
+
+	ToRateLimitGetParamsNamePtrOutput() RateLimitGetParamsNamePtrOutput
+	ToRateLimitGetParamsNamePtrOutputWithContext(context.Context) RateLimitGetParamsNamePtrOutput
+}
+
+type rateLimitGetParamsNamePtrType RateLimitGetParamsNameArgs
+
+func RateLimitGetParamsNamePtr(v *RateLimitGetParamsNameArgs) RateLimitGetParamsNamePtrInput {
+	return (*rateLimitGetParamsNamePtrType)(v)
+}
+
+func (*rateLimitGetParamsNamePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitGetParamsName)(nil)).Elem()
+}
+
+func (i *rateLimitGetParamsNamePtrType) ToRateLimitGetParamsNamePtrOutput() RateLimitGetParamsNamePtrOutput {
+	return i.ToRateLimitGetParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitGetParamsNamePtrType) ToRateLimitGetParamsNamePtrOutputWithContext(ctx context.Context) RateLimitGetParamsNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsNamePtrOutput)
+}
+
+type RateLimitGetParamsNameOutput struct{ *pulumi.OutputState }
+
+func (RateLimitGetParamsNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitGetParamsName)(nil)).Elem()
+}
+
+func (o RateLimitGetParamsNameOutput) ToRateLimitGetParamsNameOutput() RateLimitGetParamsNameOutput {
+	return o
+}
+
+func (o RateLimitGetParamsNameOutput) ToRateLimitGetParamsNameOutputWithContext(ctx context.Context) RateLimitGetParamsNameOutput {
+	return o
+}
+
+func (o RateLimitGetParamsNameOutput) ToRateLimitGetParamsNamePtrOutput() RateLimitGetParamsNamePtrOutput {
+	return o.ToRateLimitGetParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitGetParamsNameOutput) ToRateLimitGetParamsNamePtrOutputWithContext(ctx context.Context) RateLimitGetParamsNamePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitGetParamsName) *RateLimitGetParamsName {
+		return &v
+	}).(RateLimitGetParamsNamePtrOutput)
+}
+
+// Match content.
+func (o RateLimitGetParamsNameOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsName) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitGetParamsNameOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsName) *string { return v.Func }).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitGetParamsNameOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsName) *string { return v.Params }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitGetParamsNamePtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitGetParamsNamePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitGetParamsName)(nil)).Elem()
+}
+
+func (o RateLimitGetParamsNamePtrOutput) ToRateLimitGetParamsNamePtrOutput() RateLimitGetParamsNamePtrOutput {
+	return o
+}
+
+func (o RateLimitGetParamsNamePtrOutput) ToRateLimitGetParamsNamePtrOutputWithContext(ctx context.Context) RateLimitGetParamsNamePtrOutput {
+	return o
+}
+
+func (o RateLimitGetParamsNamePtrOutput) Elem() RateLimitGetParamsNameOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsName) RateLimitGetParamsName {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitGetParamsName
+		return ret
+	}).(RateLimitGetParamsNameOutput)
+}
+
+// Match content.
+func (o RateLimitGetParamsNamePtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitGetParamsNamePtrOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Func
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitGetParamsNamePtrOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitGetParamsValue struct {
+	// Match content.
+	Content *string `pulumi:"content"`
+	// Logic operator.
+	Func *string `pulumi:"func"`
+	// Match parameter.
+	Params *string `pulumi:"params"`
+}
+
+// RateLimitGetParamsValueInput is an input type that accepts RateLimitGetParamsValueArgs and RateLimitGetParamsValueOutput values.
+// You can construct a concrete instance of `RateLimitGetParamsValueInput` via:
+//
+//	RateLimitGetParamsValueArgs{...}
+type RateLimitGetParamsValueInput interface {
+	pulumi.Input
+
+	ToRateLimitGetParamsValueOutput() RateLimitGetParamsValueOutput
+	ToRateLimitGetParamsValueOutputWithContext(context.Context) RateLimitGetParamsValueOutput
+}
+
+type RateLimitGetParamsValueArgs struct {
+	// Match content.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Logic operator.
+	Func pulumi.StringPtrInput `pulumi:"func"`
+	// Match parameter.
+	Params pulumi.StringPtrInput `pulumi:"params"`
+}
+
+func (RateLimitGetParamsValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitGetParamsValue)(nil)).Elem()
+}
+
+func (i RateLimitGetParamsValueArgs) ToRateLimitGetParamsValueOutput() RateLimitGetParamsValueOutput {
+	return i.ToRateLimitGetParamsValueOutputWithContext(context.Background())
+}
+
+func (i RateLimitGetParamsValueArgs) ToRateLimitGetParamsValueOutputWithContext(ctx context.Context) RateLimitGetParamsValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsValueOutput)
+}
+
+func (i RateLimitGetParamsValueArgs) ToRateLimitGetParamsValuePtrOutput() RateLimitGetParamsValuePtrOutput {
+	return i.ToRateLimitGetParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitGetParamsValueArgs) ToRateLimitGetParamsValuePtrOutputWithContext(ctx context.Context) RateLimitGetParamsValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsValueOutput).ToRateLimitGetParamsValuePtrOutputWithContext(ctx)
+}
+
+// RateLimitGetParamsValuePtrInput is an input type that accepts RateLimitGetParamsValueArgs, RateLimitGetParamsValuePtr and RateLimitGetParamsValuePtrOutput values.
+// You can construct a concrete instance of `RateLimitGetParamsValuePtrInput` via:
+//
+//	        RateLimitGetParamsValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitGetParamsValuePtrInput interface {
+	pulumi.Input
+
+	ToRateLimitGetParamsValuePtrOutput() RateLimitGetParamsValuePtrOutput
+	ToRateLimitGetParamsValuePtrOutputWithContext(context.Context) RateLimitGetParamsValuePtrOutput
+}
+
+type rateLimitGetParamsValuePtrType RateLimitGetParamsValueArgs
+
+func RateLimitGetParamsValuePtr(v *RateLimitGetParamsValueArgs) RateLimitGetParamsValuePtrInput {
+	return (*rateLimitGetParamsValuePtrType)(v)
+}
+
+func (*rateLimitGetParamsValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitGetParamsValue)(nil)).Elem()
+}
+
+func (i *rateLimitGetParamsValuePtrType) ToRateLimitGetParamsValuePtrOutput() RateLimitGetParamsValuePtrOutput {
+	return i.ToRateLimitGetParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitGetParamsValuePtrType) ToRateLimitGetParamsValuePtrOutputWithContext(ctx context.Context) RateLimitGetParamsValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitGetParamsValuePtrOutput)
+}
+
+type RateLimitGetParamsValueOutput struct{ *pulumi.OutputState }
+
+func (RateLimitGetParamsValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitGetParamsValue)(nil)).Elem()
+}
+
+func (o RateLimitGetParamsValueOutput) ToRateLimitGetParamsValueOutput() RateLimitGetParamsValueOutput {
+	return o
+}
+
+func (o RateLimitGetParamsValueOutput) ToRateLimitGetParamsValueOutputWithContext(ctx context.Context) RateLimitGetParamsValueOutput {
+	return o
+}
+
+func (o RateLimitGetParamsValueOutput) ToRateLimitGetParamsValuePtrOutput() RateLimitGetParamsValuePtrOutput {
+	return o.ToRateLimitGetParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitGetParamsValueOutput) ToRateLimitGetParamsValuePtrOutputWithContext(ctx context.Context) RateLimitGetParamsValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitGetParamsValue) *RateLimitGetParamsValue {
+		return &v
+	}).(RateLimitGetParamsValuePtrOutput)
+}
+
+// Match content.
+func (o RateLimitGetParamsValueOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsValue) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitGetParamsValueOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsValue) *string { return v.Func }).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitGetParamsValueOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitGetParamsValue) *string { return v.Params }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitGetParamsValuePtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitGetParamsValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitGetParamsValue)(nil)).Elem()
+}
+
+func (o RateLimitGetParamsValuePtrOutput) ToRateLimitGetParamsValuePtrOutput() RateLimitGetParamsValuePtrOutput {
+	return o
+}
+
+func (o RateLimitGetParamsValuePtrOutput) ToRateLimitGetParamsValuePtrOutputWithContext(ctx context.Context) RateLimitGetParamsValuePtrOutput {
+	return o
+}
+
+func (o RateLimitGetParamsValuePtrOutput) Elem() RateLimitGetParamsValueOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsValue) RateLimitGetParamsValue {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitGetParamsValue
+		return ret
+	}).(RateLimitGetParamsValueOutput)
+}
+
+// Match content.
+func (o RateLimitGetParamsValuePtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitGetParamsValuePtrOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Func
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitGetParamsValuePtrOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitGetParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitIpLocation struct {
+	// Match content.
+	Content *string `pulumi:"content"`
+	// Logic operator.
+	Func *string `pulumi:"func"`
+	// Match parameter.
+	Params *string `pulumi:"params"`
+}
+
+// RateLimitIpLocationInput is an input type that accepts RateLimitIpLocationArgs and RateLimitIpLocationOutput values.
+// You can construct a concrete instance of `RateLimitIpLocationInput` via:
+//
+//	RateLimitIpLocationArgs{...}
+type RateLimitIpLocationInput interface {
+	pulumi.Input
+
+	ToRateLimitIpLocationOutput() RateLimitIpLocationOutput
+	ToRateLimitIpLocationOutputWithContext(context.Context) RateLimitIpLocationOutput
+}
+
+type RateLimitIpLocationArgs struct {
+	// Match content.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Logic operator.
+	Func pulumi.StringPtrInput `pulumi:"func"`
+	// Match parameter.
+	Params pulumi.StringPtrInput `pulumi:"params"`
+}
+
+func (RateLimitIpLocationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitIpLocation)(nil)).Elem()
+}
+
+func (i RateLimitIpLocationArgs) ToRateLimitIpLocationOutput() RateLimitIpLocationOutput {
+	return i.ToRateLimitIpLocationOutputWithContext(context.Background())
+}
+
+func (i RateLimitIpLocationArgs) ToRateLimitIpLocationOutputWithContext(ctx context.Context) RateLimitIpLocationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitIpLocationOutput)
+}
+
+func (i RateLimitIpLocationArgs) ToRateLimitIpLocationPtrOutput() RateLimitIpLocationPtrOutput {
+	return i.ToRateLimitIpLocationPtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitIpLocationArgs) ToRateLimitIpLocationPtrOutputWithContext(ctx context.Context) RateLimitIpLocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitIpLocationOutput).ToRateLimitIpLocationPtrOutputWithContext(ctx)
+}
+
+// RateLimitIpLocationPtrInput is an input type that accepts RateLimitIpLocationArgs, RateLimitIpLocationPtr and RateLimitIpLocationPtrOutput values.
+// You can construct a concrete instance of `RateLimitIpLocationPtrInput` via:
+//
+//	        RateLimitIpLocationArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitIpLocationPtrInput interface {
+	pulumi.Input
+
+	ToRateLimitIpLocationPtrOutput() RateLimitIpLocationPtrOutput
+	ToRateLimitIpLocationPtrOutputWithContext(context.Context) RateLimitIpLocationPtrOutput
+}
+
+type rateLimitIpLocationPtrType RateLimitIpLocationArgs
+
+func RateLimitIpLocationPtr(v *RateLimitIpLocationArgs) RateLimitIpLocationPtrInput {
+	return (*rateLimitIpLocationPtrType)(v)
+}
+
+func (*rateLimitIpLocationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitIpLocation)(nil)).Elem()
+}
+
+func (i *rateLimitIpLocationPtrType) ToRateLimitIpLocationPtrOutput() RateLimitIpLocationPtrOutput {
+	return i.ToRateLimitIpLocationPtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitIpLocationPtrType) ToRateLimitIpLocationPtrOutputWithContext(ctx context.Context) RateLimitIpLocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitIpLocationPtrOutput)
+}
+
+type RateLimitIpLocationOutput struct{ *pulumi.OutputState }
+
+func (RateLimitIpLocationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitIpLocation)(nil)).Elem()
+}
+
+func (o RateLimitIpLocationOutput) ToRateLimitIpLocationOutput() RateLimitIpLocationOutput {
+	return o
+}
+
+func (o RateLimitIpLocationOutput) ToRateLimitIpLocationOutputWithContext(ctx context.Context) RateLimitIpLocationOutput {
+	return o
+}
+
+func (o RateLimitIpLocationOutput) ToRateLimitIpLocationPtrOutput() RateLimitIpLocationPtrOutput {
+	return o.ToRateLimitIpLocationPtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitIpLocationOutput) ToRateLimitIpLocationPtrOutputWithContext(ctx context.Context) RateLimitIpLocationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitIpLocation) *RateLimitIpLocation {
+		return &v
+	}).(RateLimitIpLocationPtrOutput)
+}
+
+// Match content.
+func (o RateLimitIpLocationOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitIpLocation) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitIpLocationOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitIpLocation) *string { return v.Func }).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitIpLocationOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitIpLocation) *string { return v.Params }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitIpLocationPtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitIpLocationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitIpLocation)(nil)).Elem()
+}
+
+func (o RateLimitIpLocationPtrOutput) ToRateLimitIpLocationPtrOutput() RateLimitIpLocationPtrOutput {
+	return o
+}
+
+func (o RateLimitIpLocationPtrOutput) ToRateLimitIpLocationPtrOutputWithContext(ctx context.Context) RateLimitIpLocationPtrOutput {
+	return o
+}
+
+func (o RateLimitIpLocationPtrOutput) Elem() RateLimitIpLocationOutput {
+	return o.ApplyT(func(v *RateLimitIpLocation) RateLimitIpLocation {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitIpLocation
+		return ret
+	}).(RateLimitIpLocationOutput)
+}
+
+// Match content.
+func (o RateLimitIpLocationPtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitIpLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitIpLocationPtrOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitIpLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Func
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitIpLocationPtrOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitIpLocation) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitHeader struct {
+	// Header key.
+	Key *string `pulumi:"key"`
+	// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+	Type *string `pulumi:"type"`
+	// Header value.
+	Value *string `pulumi:"value"`
+}
+
+// RateLimitLimitHeaderInput is an input type that accepts RateLimitLimitHeaderArgs and RateLimitLimitHeaderOutput values.
+// You can construct a concrete instance of `RateLimitLimitHeaderInput` via:
+//
+//	RateLimitLimitHeaderArgs{...}
+type RateLimitLimitHeaderInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitHeaderOutput() RateLimitLimitHeaderOutput
+	ToRateLimitLimitHeaderOutputWithContext(context.Context) RateLimitLimitHeaderOutput
+}
+
+type RateLimitLimitHeaderArgs struct {
+	// Header key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Header value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (RateLimitLimitHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitHeader)(nil)).Elem()
+}
+
+func (i RateLimitLimitHeaderArgs) ToRateLimitLimitHeaderOutput() RateLimitLimitHeaderOutput {
+	return i.ToRateLimitLimitHeaderOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitHeaderArgs) ToRateLimitLimitHeaderOutputWithContext(ctx context.Context) RateLimitLimitHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitHeaderOutput)
+}
+
+// RateLimitLimitHeaderArrayInput is an input type that accepts RateLimitLimitHeaderArray and RateLimitLimitHeaderArrayOutput values.
+// You can construct a concrete instance of `RateLimitLimitHeaderArrayInput` via:
+//
+//	RateLimitLimitHeaderArray{ RateLimitLimitHeaderArgs{...} }
+type RateLimitLimitHeaderArrayInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitHeaderArrayOutput() RateLimitLimitHeaderArrayOutput
+	ToRateLimitLimitHeaderArrayOutputWithContext(context.Context) RateLimitLimitHeaderArrayOutput
+}
+
+type RateLimitLimitHeaderArray []RateLimitLimitHeaderInput
+
+func (RateLimitLimitHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RateLimitLimitHeader)(nil)).Elem()
+}
+
+func (i RateLimitLimitHeaderArray) ToRateLimitLimitHeaderArrayOutput() RateLimitLimitHeaderArrayOutput {
+	return i.ToRateLimitLimitHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitHeaderArray) ToRateLimitLimitHeaderArrayOutputWithContext(ctx context.Context) RateLimitLimitHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitHeaderArrayOutput)
+}
+
+type RateLimitLimitHeaderOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitHeader)(nil)).Elem()
+}
+
+func (o RateLimitLimitHeaderOutput) ToRateLimitLimitHeaderOutput() RateLimitLimitHeaderOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderOutput) ToRateLimitLimitHeaderOutputWithContext(ctx context.Context) RateLimitLimitHeaderOutput {
+	return o
+}
+
+// Header key.
+func (o RateLimitLimitHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+func (o RateLimitLimitHeaderOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitHeader) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Header value.
+func (o RateLimitLimitHeaderOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitHeader) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RateLimitLimitHeader)(nil)).Elem()
+}
+
+func (o RateLimitLimitHeaderArrayOutput) ToRateLimitLimitHeaderArrayOutput() RateLimitLimitHeaderArrayOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderArrayOutput) ToRateLimitLimitHeaderArrayOutputWithContext(ctx context.Context) RateLimitLimitHeaderArrayOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderArrayOutput) Index(i pulumi.IntInput) RateLimitLimitHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RateLimitLimitHeader {
+		return vs[0].([]RateLimitLimitHeader)[vs[1].(int)]
+	}).(RateLimitLimitHeaderOutput)
+}
+
+type RateLimitLimitHeaderName struct {
+	// Parameter name.
+	ParamsName *string `pulumi:"paramsName"`
+	// Operator, supports REGEX, IN, NOT_IN, EACH.
+	Type *string `pulumi:"type"`
+}
+
+// RateLimitLimitHeaderNameInput is an input type that accepts RateLimitLimitHeaderNameArgs and RateLimitLimitHeaderNameOutput values.
+// You can construct a concrete instance of `RateLimitLimitHeaderNameInput` via:
+//
+//	RateLimitLimitHeaderNameArgs{...}
+type RateLimitLimitHeaderNameInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitHeaderNameOutput() RateLimitLimitHeaderNameOutput
+	ToRateLimitLimitHeaderNameOutputWithContext(context.Context) RateLimitLimitHeaderNameOutput
+}
+
+type RateLimitLimitHeaderNameArgs struct {
+	// Parameter name.
+	ParamsName pulumi.StringPtrInput `pulumi:"paramsName"`
+	// Operator, supports REGEX, IN, NOT_IN, EACH.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (RateLimitLimitHeaderNameArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitHeaderName)(nil)).Elem()
+}
+
+func (i RateLimitLimitHeaderNameArgs) ToRateLimitLimitHeaderNameOutput() RateLimitLimitHeaderNameOutput {
+	return i.ToRateLimitLimitHeaderNameOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitHeaderNameArgs) ToRateLimitLimitHeaderNameOutputWithContext(ctx context.Context) RateLimitLimitHeaderNameOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitHeaderNameOutput)
+}
+
+func (i RateLimitLimitHeaderNameArgs) ToRateLimitLimitHeaderNamePtrOutput() RateLimitLimitHeaderNamePtrOutput {
+	return i.ToRateLimitLimitHeaderNamePtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitHeaderNameArgs) ToRateLimitLimitHeaderNamePtrOutputWithContext(ctx context.Context) RateLimitLimitHeaderNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitHeaderNameOutput).ToRateLimitLimitHeaderNamePtrOutputWithContext(ctx)
+}
+
+// RateLimitLimitHeaderNamePtrInput is an input type that accepts RateLimitLimitHeaderNameArgs, RateLimitLimitHeaderNamePtr and RateLimitLimitHeaderNamePtrOutput values.
+// You can construct a concrete instance of `RateLimitLimitHeaderNamePtrInput` via:
+//
+//	        RateLimitLimitHeaderNameArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitLimitHeaderNamePtrInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitHeaderNamePtrOutput() RateLimitLimitHeaderNamePtrOutput
+	ToRateLimitLimitHeaderNamePtrOutputWithContext(context.Context) RateLimitLimitHeaderNamePtrOutput
+}
+
+type rateLimitLimitHeaderNamePtrType RateLimitLimitHeaderNameArgs
+
+func RateLimitLimitHeaderNamePtr(v *RateLimitLimitHeaderNameArgs) RateLimitLimitHeaderNamePtrInput {
+	return (*rateLimitLimitHeaderNamePtrType)(v)
+}
+
+func (*rateLimitLimitHeaderNamePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitHeaderName)(nil)).Elem()
+}
+
+func (i *rateLimitLimitHeaderNamePtrType) ToRateLimitLimitHeaderNamePtrOutput() RateLimitLimitHeaderNamePtrOutput {
+	return i.ToRateLimitLimitHeaderNamePtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitLimitHeaderNamePtrType) ToRateLimitLimitHeaderNamePtrOutputWithContext(ctx context.Context) RateLimitLimitHeaderNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitHeaderNamePtrOutput)
+}
+
+type RateLimitLimitHeaderNameOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitHeaderNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitHeaderName)(nil)).Elem()
+}
+
+func (o RateLimitLimitHeaderNameOutput) ToRateLimitLimitHeaderNameOutput() RateLimitLimitHeaderNameOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderNameOutput) ToRateLimitLimitHeaderNameOutputWithContext(ctx context.Context) RateLimitLimitHeaderNameOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderNameOutput) ToRateLimitLimitHeaderNamePtrOutput() RateLimitLimitHeaderNamePtrOutput {
+	return o.ToRateLimitLimitHeaderNamePtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitLimitHeaderNameOutput) ToRateLimitLimitHeaderNamePtrOutputWithContext(ctx context.Context) RateLimitLimitHeaderNamePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitLimitHeaderName) *RateLimitLimitHeaderName {
+		return &v
+	}).(RateLimitLimitHeaderNamePtrOutput)
+}
+
+// Parameter name.
+func (o RateLimitLimitHeaderNameOutput) ParamsName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitHeaderName) *string { return v.ParamsName }).(pulumi.StringPtrOutput)
+}
+
+// Operator, supports REGEX, IN, NOT_IN, EACH.
+func (o RateLimitLimitHeaderNameOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitHeaderName) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitHeaderNamePtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitHeaderNamePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitHeaderName)(nil)).Elem()
+}
+
+func (o RateLimitLimitHeaderNamePtrOutput) ToRateLimitLimitHeaderNamePtrOutput() RateLimitLimitHeaderNamePtrOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderNamePtrOutput) ToRateLimitLimitHeaderNamePtrOutputWithContext(ctx context.Context) RateLimitLimitHeaderNamePtrOutput {
+	return o
+}
+
+func (o RateLimitLimitHeaderNamePtrOutput) Elem() RateLimitLimitHeaderNameOutput {
+	return o.ApplyT(func(v *RateLimitLimitHeaderName) RateLimitLimitHeaderName {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitLimitHeaderName
+		return ret
+	}).(RateLimitLimitHeaderNameOutput)
+}
+
+// Parameter name.
+func (o RateLimitLimitHeaderNamePtrOutput) ParamsName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitHeaderName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ParamsName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Operator, supports REGEX, IN, NOT_IN, EACH.
+func (o RateLimitLimitHeaderNamePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitHeaderName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitMethod struct {
+	// Request method to rate limit.
+	Method *string `pulumi:"method"`
+	// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+	Type *string `pulumi:"type"`
+}
+
+// RateLimitLimitMethodInput is an input type that accepts RateLimitLimitMethodArgs and RateLimitLimitMethodOutput values.
+// You can construct a concrete instance of `RateLimitLimitMethodInput` via:
+//
+//	RateLimitLimitMethodArgs{...}
+type RateLimitLimitMethodInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitMethodOutput() RateLimitLimitMethodOutput
+	ToRateLimitLimitMethodOutputWithContext(context.Context) RateLimitLimitMethodOutput
+}
+
+type RateLimitLimitMethodArgs struct {
+	// Request method to rate limit.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (RateLimitLimitMethodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitMethod)(nil)).Elem()
+}
+
+func (i RateLimitLimitMethodArgs) ToRateLimitLimitMethodOutput() RateLimitLimitMethodOutput {
+	return i.ToRateLimitLimitMethodOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitMethodArgs) ToRateLimitLimitMethodOutputWithContext(ctx context.Context) RateLimitLimitMethodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitMethodOutput)
+}
+
+func (i RateLimitLimitMethodArgs) ToRateLimitLimitMethodPtrOutput() RateLimitLimitMethodPtrOutput {
+	return i.ToRateLimitLimitMethodPtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitMethodArgs) ToRateLimitLimitMethodPtrOutputWithContext(ctx context.Context) RateLimitLimitMethodPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitMethodOutput).ToRateLimitLimitMethodPtrOutputWithContext(ctx)
+}
+
+// RateLimitLimitMethodPtrInput is an input type that accepts RateLimitLimitMethodArgs, RateLimitLimitMethodPtr and RateLimitLimitMethodPtrOutput values.
+// You can construct a concrete instance of `RateLimitLimitMethodPtrInput` via:
+//
+//	        RateLimitLimitMethodArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitLimitMethodPtrInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitMethodPtrOutput() RateLimitLimitMethodPtrOutput
+	ToRateLimitLimitMethodPtrOutputWithContext(context.Context) RateLimitLimitMethodPtrOutput
+}
+
+type rateLimitLimitMethodPtrType RateLimitLimitMethodArgs
+
+func RateLimitLimitMethodPtr(v *RateLimitLimitMethodArgs) RateLimitLimitMethodPtrInput {
+	return (*rateLimitLimitMethodPtrType)(v)
+}
+
+func (*rateLimitLimitMethodPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitMethod)(nil)).Elem()
+}
+
+func (i *rateLimitLimitMethodPtrType) ToRateLimitLimitMethodPtrOutput() RateLimitLimitMethodPtrOutput {
+	return i.ToRateLimitLimitMethodPtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitLimitMethodPtrType) ToRateLimitLimitMethodPtrOutputWithContext(ctx context.Context) RateLimitLimitMethodPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitMethodPtrOutput)
+}
+
+type RateLimitLimitMethodOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitMethodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitMethod)(nil)).Elem()
+}
+
+func (o RateLimitLimitMethodOutput) ToRateLimitLimitMethodOutput() RateLimitLimitMethodOutput {
+	return o
+}
+
+func (o RateLimitLimitMethodOutput) ToRateLimitLimitMethodOutputWithContext(ctx context.Context) RateLimitLimitMethodOutput {
+	return o
+}
+
+func (o RateLimitLimitMethodOutput) ToRateLimitLimitMethodPtrOutput() RateLimitLimitMethodPtrOutput {
+	return o.ToRateLimitLimitMethodPtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitLimitMethodOutput) ToRateLimitLimitMethodPtrOutputWithContext(ctx context.Context) RateLimitLimitMethodPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitLimitMethod) *RateLimitLimitMethod {
+		return &v
+	}).(RateLimitLimitMethodPtrOutput)
+}
+
+// Request method to rate limit.
+func (o RateLimitLimitMethodOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitMethod) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+func (o RateLimitLimitMethodOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitMethod) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitMethodPtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitMethodPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitMethod)(nil)).Elem()
+}
+
+func (o RateLimitLimitMethodPtrOutput) ToRateLimitLimitMethodPtrOutput() RateLimitLimitMethodPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitMethodPtrOutput) ToRateLimitLimitMethodPtrOutputWithContext(ctx context.Context) RateLimitLimitMethodPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitMethodPtrOutput) Elem() RateLimitLimitMethodOutput {
+	return o.ApplyT(func(v *RateLimitLimitMethod) RateLimitLimitMethod {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitLimitMethod
+		return ret
+	}).(RateLimitLimitMethodOutput)
+}
+
+// Request method to rate limit.
+func (o RateLimitLimitMethodPtrOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitMethod) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Method
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match type, supports EXACT, REGEX, IN, NOT_IN, CONTAINS, NOT_CONTAINS.
+func (o RateLimitLimitMethodPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitMethod) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitPaths struct {
+	// Rate limit path.
+	Path *string `pulumi:"path"`
+	// Match type.
+	Type *string `pulumi:"type"`
+}
+
+// RateLimitLimitPathsInput is an input type that accepts RateLimitLimitPathsArgs and RateLimitLimitPathsOutput values.
+// You can construct a concrete instance of `RateLimitLimitPathsInput` via:
+//
+//	RateLimitLimitPathsArgs{...}
+type RateLimitLimitPathsInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitPathsOutput() RateLimitLimitPathsOutput
+	ToRateLimitLimitPathsOutputWithContext(context.Context) RateLimitLimitPathsOutput
+}
+
+type RateLimitLimitPathsArgs struct {
+	// Rate limit path.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// Match type.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (RateLimitLimitPathsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitPaths)(nil)).Elem()
+}
+
+func (i RateLimitLimitPathsArgs) ToRateLimitLimitPathsOutput() RateLimitLimitPathsOutput {
+	return i.ToRateLimitLimitPathsOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitPathsArgs) ToRateLimitLimitPathsOutputWithContext(ctx context.Context) RateLimitLimitPathsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitPathsOutput)
+}
+
+func (i RateLimitLimitPathsArgs) ToRateLimitLimitPathsPtrOutput() RateLimitLimitPathsPtrOutput {
+	return i.ToRateLimitLimitPathsPtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitPathsArgs) ToRateLimitLimitPathsPtrOutputWithContext(ctx context.Context) RateLimitLimitPathsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitPathsOutput).ToRateLimitLimitPathsPtrOutputWithContext(ctx)
+}
+
+// RateLimitLimitPathsPtrInput is an input type that accepts RateLimitLimitPathsArgs, RateLimitLimitPathsPtr and RateLimitLimitPathsPtrOutput values.
+// You can construct a concrete instance of `RateLimitLimitPathsPtrInput` via:
+//
+//	        RateLimitLimitPathsArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitLimitPathsPtrInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitPathsPtrOutput() RateLimitLimitPathsPtrOutput
+	ToRateLimitLimitPathsPtrOutputWithContext(context.Context) RateLimitLimitPathsPtrOutput
+}
+
+type rateLimitLimitPathsPtrType RateLimitLimitPathsArgs
+
+func RateLimitLimitPathsPtr(v *RateLimitLimitPathsArgs) RateLimitLimitPathsPtrInput {
+	return (*rateLimitLimitPathsPtrType)(v)
+}
+
+func (*rateLimitLimitPathsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitPaths)(nil)).Elem()
+}
+
+func (i *rateLimitLimitPathsPtrType) ToRateLimitLimitPathsPtrOutput() RateLimitLimitPathsPtrOutput {
+	return i.ToRateLimitLimitPathsPtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitLimitPathsPtrType) ToRateLimitLimitPathsPtrOutputWithContext(ctx context.Context) RateLimitLimitPathsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitPathsPtrOutput)
+}
+
+type RateLimitLimitPathsOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitPathsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitPaths)(nil)).Elem()
+}
+
+func (o RateLimitLimitPathsOutput) ToRateLimitLimitPathsOutput() RateLimitLimitPathsOutput {
+	return o
+}
+
+func (o RateLimitLimitPathsOutput) ToRateLimitLimitPathsOutputWithContext(ctx context.Context) RateLimitLimitPathsOutput {
+	return o
+}
+
+func (o RateLimitLimitPathsOutput) ToRateLimitLimitPathsPtrOutput() RateLimitLimitPathsPtrOutput {
+	return o.ToRateLimitLimitPathsPtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitLimitPathsOutput) ToRateLimitLimitPathsPtrOutputWithContext(ctx context.Context) RateLimitLimitPathsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitLimitPaths) *RateLimitLimitPaths {
+		return &v
+	}).(RateLimitLimitPathsPtrOutput)
+}
+
+// Rate limit path.
+func (o RateLimitLimitPathsOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitPaths) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// Match type.
+func (o RateLimitLimitPathsOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitPaths) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitPathsPtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitPathsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitPaths)(nil)).Elem()
+}
+
+func (o RateLimitLimitPathsPtrOutput) ToRateLimitLimitPathsPtrOutput() RateLimitLimitPathsPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitPathsPtrOutput) ToRateLimitLimitPathsPtrOutputWithContext(ctx context.Context) RateLimitLimitPathsPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitPathsPtrOutput) Elem() RateLimitLimitPathsOutput {
+	return o.ApplyT(func(v *RateLimitLimitPaths) RateLimitLimitPaths {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitLimitPaths
+		return ret
+	}).(RateLimitLimitPathsOutput)
+}
+
+// Rate limit path.
+func (o RateLimitLimitPathsPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitPaths) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match type.
+func (o RateLimitLimitPathsPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitPaths) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitLimitWindow struct {
+	// Maximum requests allowed per hour.
+	Hour *int `pulumi:"hour"`
+	// Maximum requests allowed per minute.
+	Minute *int `pulumi:"minute"`
+	// Whether to share quota. Only valid when object is URL. false: URL exclusive quota, true: all URLs share quota.
+	QuotaShare *bool `pulumi:"quotaShare"`
+	// Maximum requests allowed per second.
+	Second *int `pulumi:"second"`
+}
+
+// RateLimitLimitWindowInput is an input type that accepts RateLimitLimitWindowArgs and RateLimitLimitWindowOutput values.
+// You can construct a concrete instance of `RateLimitLimitWindowInput` via:
+//
+//	RateLimitLimitWindowArgs{...}
+type RateLimitLimitWindowInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitWindowOutput() RateLimitLimitWindowOutput
+	ToRateLimitLimitWindowOutputWithContext(context.Context) RateLimitLimitWindowOutput
+}
+
+type RateLimitLimitWindowArgs struct {
+	// Maximum requests allowed per hour.
+	Hour pulumi.IntPtrInput `pulumi:"hour"`
+	// Maximum requests allowed per minute.
+	Minute pulumi.IntPtrInput `pulumi:"minute"`
+	// Whether to share quota. Only valid when object is URL. false: URL exclusive quota, true: all URLs share quota.
+	QuotaShare pulumi.BoolPtrInput `pulumi:"quotaShare"`
+	// Maximum requests allowed per second.
+	Second pulumi.IntPtrInput `pulumi:"second"`
+}
+
+func (RateLimitLimitWindowArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitWindow)(nil)).Elem()
+}
+
+func (i RateLimitLimitWindowArgs) ToRateLimitLimitWindowOutput() RateLimitLimitWindowOutput {
+	return i.ToRateLimitLimitWindowOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitWindowArgs) ToRateLimitLimitWindowOutputWithContext(ctx context.Context) RateLimitLimitWindowOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitWindowOutput)
+}
+
+func (i RateLimitLimitWindowArgs) ToRateLimitLimitWindowPtrOutput() RateLimitLimitWindowPtrOutput {
+	return i.ToRateLimitLimitWindowPtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitLimitWindowArgs) ToRateLimitLimitWindowPtrOutputWithContext(ctx context.Context) RateLimitLimitWindowPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitWindowOutput).ToRateLimitLimitWindowPtrOutputWithContext(ctx)
+}
+
+// RateLimitLimitWindowPtrInput is an input type that accepts RateLimitLimitWindowArgs, RateLimitLimitWindowPtr and RateLimitLimitWindowPtrOutput values.
+// You can construct a concrete instance of `RateLimitLimitWindowPtrInput` via:
+//
+//	        RateLimitLimitWindowArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitLimitWindowPtrInput interface {
+	pulumi.Input
+
+	ToRateLimitLimitWindowPtrOutput() RateLimitLimitWindowPtrOutput
+	ToRateLimitLimitWindowPtrOutputWithContext(context.Context) RateLimitLimitWindowPtrOutput
+}
+
+type rateLimitLimitWindowPtrType RateLimitLimitWindowArgs
+
+func RateLimitLimitWindowPtr(v *RateLimitLimitWindowArgs) RateLimitLimitWindowPtrInput {
+	return (*rateLimitLimitWindowPtrType)(v)
+}
+
+func (*rateLimitLimitWindowPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitWindow)(nil)).Elem()
+}
+
+func (i *rateLimitLimitWindowPtrType) ToRateLimitLimitWindowPtrOutput() RateLimitLimitWindowPtrOutput {
+	return i.ToRateLimitLimitWindowPtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitLimitWindowPtrType) ToRateLimitLimitWindowPtrOutputWithContext(ctx context.Context) RateLimitLimitWindowPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitLimitWindowPtrOutput)
+}
+
+type RateLimitLimitWindowOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitWindowOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitLimitWindow)(nil)).Elem()
+}
+
+func (o RateLimitLimitWindowOutput) ToRateLimitLimitWindowOutput() RateLimitLimitWindowOutput {
+	return o
+}
+
+func (o RateLimitLimitWindowOutput) ToRateLimitLimitWindowOutputWithContext(ctx context.Context) RateLimitLimitWindowOutput {
+	return o
+}
+
+func (o RateLimitLimitWindowOutput) ToRateLimitLimitWindowPtrOutput() RateLimitLimitWindowPtrOutput {
+	return o.ToRateLimitLimitWindowPtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitLimitWindowOutput) ToRateLimitLimitWindowPtrOutputWithContext(ctx context.Context) RateLimitLimitWindowPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitLimitWindow) *RateLimitLimitWindow {
+		return &v
+	}).(RateLimitLimitWindowPtrOutput)
+}
+
+// Maximum requests allowed per hour.
+func (o RateLimitLimitWindowOutput) Hour() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitWindow) *int { return v.Hour }).(pulumi.IntPtrOutput)
+}
+
+// Maximum requests allowed per minute.
+func (o RateLimitLimitWindowOutput) Minute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitWindow) *int { return v.Minute }).(pulumi.IntPtrOutput)
+}
+
+// Whether to share quota. Only valid when object is URL. false: URL exclusive quota, true: all URLs share quota.
+func (o RateLimitLimitWindowOutput) QuotaShare() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitWindow) *bool { return v.QuotaShare }).(pulumi.BoolPtrOutput)
+}
+
+// Maximum requests allowed per second.
+func (o RateLimitLimitWindowOutput) Second() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RateLimitLimitWindow) *int { return v.Second }).(pulumi.IntPtrOutput)
+}
+
+type RateLimitLimitWindowPtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitLimitWindowPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitLimitWindow)(nil)).Elem()
+}
+
+func (o RateLimitLimitWindowPtrOutput) ToRateLimitLimitWindowPtrOutput() RateLimitLimitWindowPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitWindowPtrOutput) ToRateLimitLimitWindowPtrOutputWithContext(ctx context.Context) RateLimitLimitWindowPtrOutput {
+	return o
+}
+
+func (o RateLimitLimitWindowPtrOutput) Elem() RateLimitLimitWindowOutput {
+	return o.ApplyT(func(v *RateLimitLimitWindow) RateLimitLimitWindow {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitLimitWindow
+		return ret
+	}).(RateLimitLimitWindowOutput)
+}
+
+// Maximum requests allowed per hour.
+func (o RateLimitLimitWindowPtrOutput) Hour() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitWindow) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Hour
+	}).(pulumi.IntPtrOutput)
+}
+
+// Maximum requests allowed per minute.
+func (o RateLimitLimitWindowPtrOutput) Minute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitWindow) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Minute
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to share quota. Only valid when object is URL. false: URL exclusive quota, true: all URLs share quota.
+func (o RateLimitLimitWindowPtrOutput) QuotaShare() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitWindow) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.QuotaShare
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Maximum requests allowed per second.
+func (o RateLimitLimitWindowPtrOutput) Second() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RateLimitLimitWindow) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Second
+	}).(pulumi.IntPtrOutput)
+}
+
+type RateLimitPathsOption struct {
+	// Request method.
+	Method *string `pulumi:"method"`
+	// Request path.
+	Path *string `pulumi:"path"`
+}
+
+// RateLimitPathsOptionInput is an input type that accepts RateLimitPathsOptionArgs and RateLimitPathsOptionOutput values.
+// You can construct a concrete instance of `RateLimitPathsOptionInput` via:
+//
+//	RateLimitPathsOptionArgs{...}
+type RateLimitPathsOptionInput interface {
+	pulumi.Input
+
+	ToRateLimitPathsOptionOutput() RateLimitPathsOptionOutput
+	ToRateLimitPathsOptionOutputWithContext(context.Context) RateLimitPathsOptionOutput
+}
+
+type RateLimitPathsOptionArgs struct {
+	// Request method.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Request path.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+}
+
+func (RateLimitPathsOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPathsOption)(nil)).Elem()
+}
+
+func (i RateLimitPathsOptionArgs) ToRateLimitPathsOptionOutput() RateLimitPathsOptionOutput {
+	return i.ToRateLimitPathsOptionOutputWithContext(context.Background())
+}
+
+func (i RateLimitPathsOptionArgs) ToRateLimitPathsOptionOutputWithContext(ctx context.Context) RateLimitPathsOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPathsOptionOutput)
+}
+
+// RateLimitPathsOptionArrayInput is an input type that accepts RateLimitPathsOptionArray and RateLimitPathsOptionArrayOutput values.
+// You can construct a concrete instance of `RateLimitPathsOptionArrayInput` via:
+//
+//	RateLimitPathsOptionArray{ RateLimitPathsOptionArgs{...} }
+type RateLimitPathsOptionArrayInput interface {
+	pulumi.Input
+
+	ToRateLimitPathsOptionArrayOutput() RateLimitPathsOptionArrayOutput
+	ToRateLimitPathsOptionArrayOutputWithContext(context.Context) RateLimitPathsOptionArrayOutput
+}
+
+type RateLimitPathsOptionArray []RateLimitPathsOptionInput
+
+func (RateLimitPathsOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RateLimitPathsOption)(nil)).Elem()
+}
+
+func (i RateLimitPathsOptionArray) ToRateLimitPathsOptionArrayOutput() RateLimitPathsOptionArrayOutput {
+	return i.ToRateLimitPathsOptionArrayOutputWithContext(context.Background())
+}
+
+func (i RateLimitPathsOptionArray) ToRateLimitPathsOptionArrayOutputWithContext(ctx context.Context) RateLimitPathsOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPathsOptionArrayOutput)
+}
+
+type RateLimitPathsOptionOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPathsOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPathsOption)(nil)).Elem()
+}
+
+func (o RateLimitPathsOptionOutput) ToRateLimitPathsOptionOutput() RateLimitPathsOptionOutput {
+	return o
+}
+
+func (o RateLimitPathsOptionOutput) ToRateLimitPathsOptionOutputWithContext(ctx context.Context) RateLimitPathsOptionOutput {
+	return o
+}
+
+// Request method.
+func (o RateLimitPathsOptionOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPathsOption) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+// Request path.
+func (o RateLimitPathsOptionOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPathsOption) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitPathsOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPathsOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RateLimitPathsOption)(nil)).Elem()
+}
+
+func (o RateLimitPathsOptionArrayOutput) ToRateLimitPathsOptionArrayOutput() RateLimitPathsOptionArrayOutput {
+	return o
+}
+
+func (o RateLimitPathsOptionArrayOutput) ToRateLimitPathsOptionArrayOutputWithContext(ctx context.Context) RateLimitPathsOptionArrayOutput {
+	return o
+}
+
+func (o RateLimitPathsOptionArrayOutput) Index(i pulumi.IntInput) RateLimitPathsOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RateLimitPathsOption {
+		return vs[0].([]RateLimitPathsOption)[vs[1].(int)]
+	}).(RateLimitPathsOptionOutput)
+}
+
+type RateLimitPostParamsName struct {
+	// Match content.
+	Content *string `pulumi:"content"`
+	// Logic operator.
+	Func *string `pulumi:"func"`
+	// Match parameter.
+	Params *string `pulumi:"params"`
+}
+
+// RateLimitPostParamsNameInput is an input type that accepts RateLimitPostParamsNameArgs and RateLimitPostParamsNameOutput values.
+// You can construct a concrete instance of `RateLimitPostParamsNameInput` via:
+//
+//	RateLimitPostParamsNameArgs{...}
+type RateLimitPostParamsNameInput interface {
+	pulumi.Input
+
+	ToRateLimitPostParamsNameOutput() RateLimitPostParamsNameOutput
+	ToRateLimitPostParamsNameOutputWithContext(context.Context) RateLimitPostParamsNameOutput
+}
+
+type RateLimitPostParamsNameArgs struct {
+	// Match content.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Logic operator.
+	Func pulumi.StringPtrInput `pulumi:"func"`
+	// Match parameter.
+	Params pulumi.StringPtrInput `pulumi:"params"`
+}
+
+func (RateLimitPostParamsNameArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPostParamsName)(nil)).Elem()
+}
+
+func (i RateLimitPostParamsNameArgs) ToRateLimitPostParamsNameOutput() RateLimitPostParamsNameOutput {
+	return i.ToRateLimitPostParamsNameOutputWithContext(context.Background())
+}
+
+func (i RateLimitPostParamsNameArgs) ToRateLimitPostParamsNameOutputWithContext(ctx context.Context) RateLimitPostParamsNameOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsNameOutput)
+}
+
+func (i RateLimitPostParamsNameArgs) ToRateLimitPostParamsNamePtrOutput() RateLimitPostParamsNamePtrOutput {
+	return i.ToRateLimitPostParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitPostParamsNameArgs) ToRateLimitPostParamsNamePtrOutputWithContext(ctx context.Context) RateLimitPostParamsNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsNameOutput).ToRateLimitPostParamsNamePtrOutputWithContext(ctx)
+}
+
+// RateLimitPostParamsNamePtrInput is an input type that accepts RateLimitPostParamsNameArgs, RateLimitPostParamsNamePtr and RateLimitPostParamsNamePtrOutput values.
+// You can construct a concrete instance of `RateLimitPostParamsNamePtrInput` via:
+//
+//	        RateLimitPostParamsNameArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitPostParamsNamePtrInput interface {
+	pulumi.Input
+
+	ToRateLimitPostParamsNamePtrOutput() RateLimitPostParamsNamePtrOutput
+	ToRateLimitPostParamsNamePtrOutputWithContext(context.Context) RateLimitPostParamsNamePtrOutput
+}
+
+type rateLimitPostParamsNamePtrType RateLimitPostParamsNameArgs
+
+func RateLimitPostParamsNamePtr(v *RateLimitPostParamsNameArgs) RateLimitPostParamsNamePtrInput {
+	return (*rateLimitPostParamsNamePtrType)(v)
+}
+
+func (*rateLimitPostParamsNamePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitPostParamsName)(nil)).Elem()
+}
+
+func (i *rateLimitPostParamsNamePtrType) ToRateLimitPostParamsNamePtrOutput() RateLimitPostParamsNamePtrOutput {
+	return i.ToRateLimitPostParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitPostParamsNamePtrType) ToRateLimitPostParamsNamePtrOutputWithContext(ctx context.Context) RateLimitPostParamsNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsNamePtrOutput)
+}
+
+type RateLimitPostParamsNameOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPostParamsNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPostParamsName)(nil)).Elem()
+}
+
+func (o RateLimitPostParamsNameOutput) ToRateLimitPostParamsNameOutput() RateLimitPostParamsNameOutput {
+	return o
+}
+
+func (o RateLimitPostParamsNameOutput) ToRateLimitPostParamsNameOutputWithContext(ctx context.Context) RateLimitPostParamsNameOutput {
+	return o
+}
+
+func (o RateLimitPostParamsNameOutput) ToRateLimitPostParamsNamePtrOutput() RateLimitPostParamsNamePtrOutput {
+	return o.ToRateLimitPostParamsNamePtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitPostParamsNameOutput) ToRateLimitPostParamsNamePtrOutputWithContext(ctx context.Context) RateLimitPostParamsNamePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitPostParamsName) *RateLimitPostParamsName {
+		return &v
+	}).(RateLimitPostParamsNamePtrOutput)
+}
+
+// Match content.
+func (o RateLimitPostParamsNameOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsName) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitPostParamsNameOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsName) *string { return v.Func }).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitPostParamsNameOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsName) *string { return v.Params }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitPostParamsNamePtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPostParamsNamePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitPostParamsName)(nil)).Elem()
+}
+
+func (o RateLimitPostParamsNamePtrOutput) ToRateLimitPostParamsNamePtrOutput() RateLimitPostParamsNamePtrOutput {
+	return o
+}
+
+func (o RateLimitPostParamsNamePtrOutput) ToRateLimitPostParamsNamePtrOutputWithContext(ctx context.Context) RateLimitPostParamsNamePtrOutput {
+	return o
+}
+
+func (o RateLimitPostParamsNamePtrOutput) Elem() RateLimitPostParamsNameOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsName) RateLimitPostParamsName {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitPostParamsName
+		return ret
+	}).(RateLimitPostParamsNameOutput)
+}
+
+// Match content.
+func (o RateLimitPostParamsNamePtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitPostParamsNamePtrOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Func
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitPostParamsNamePtrOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsName) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitPostParamsValue struct {
+	// Match content.
+	Content *string `pulumi:"content"`
+	// Logic operator.
+	Func *string `pulumi:"func"`
+	// Match parameter.
+	Params *string `pulumi:"params"`
+}
+
+// RateLimitPostParamsValueInput is an input type that accepts RateLimitPostParamsValueArgs and RateLimitPostParamsValueOutput values.
+// You can construct a concrete instance of `RateLimitPostParamsValueInput` via:
+//
+//	RateLimitPostParamsValueArgs{...}
+type RateLimitPostParamsValueInput interface {
+	pulumi.Input
+
+	ToRateLimitPostParamsValueOutput() RateLimitPostParamsValueOutput
+	ToRateLimitPostParamsValueOutputWithContext(context.Context) RateLimitPostParamsValueOutput
+}
+
+type RateLimitPostParamsValueArgs struct {
+	// Match content.
+	Content pulumi.StringPtrInput `pulumi:"content"`
+	// Logic operator.
+	Func pulumi.StringPtrInput `pulumi:"func"`
+	// Match parameter.
+	Params pulumi.StringPtrInput `pulumi:"params"`
+}
+
+func (RateLimitPostParamsValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPostParamsValue)(nil)).Elem()
+}
+
+func (i RateLimitPostParamsValueArgs) ToRateLimitPostParamsValueOutput() RateLimitPostParamsValueOutput {
+	return i.ToRateLimitPostParamsValueOutputWithContext(context.Background())
+}
+
+func (i RateLimitPostParamsValueArgs) ToRateLimitPostParamsValueOutputWithContext(ctx context.Context) RateLimitPostParamsValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsValueOutput)
+}
+
+func (i RateLimitPostParamsValueArgs) ToRateLimitPostParamsValuePtrOutput() RateLimitPostParamsValuePtrOutput {
+	return i.ToRateLimitPostParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitPostParamsValueArgs) ToRateLimitPostParamsValuePtrOutputWithContext(ctx context.Context) RateLimitPostParamsValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsValueOutput).ToRateLimitPostParamsValuePtrOutputWithContext(ctx)
+}
+
+// RateLimitPostParamsValuePtrInput is an input type that accepts RateLimitPostParamsValueArgs, RateLimitPostParamsValuePtr and RateLimitPostParamsValuePtrOutput values.
+// You can construct a concrete instance of `RateLimitPostParamsValuePtrInput` via:
+//
+//	        RateLimitPostParamsValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitPostParamsValuePtrInput interface {
+	pulumi.Input
+
+	ToRateLimitPostParamsValuePtrOutput() RateLimitPostParamsValuePtrOutput
+	ToRateLimitPostParamsValuePtrOutputWithContext(context.Context) RateLimitPostParamsValuePtrOutput
+}
+
+type rateLimitPostParamsValuePtrType RateLimitPostParamsValueArgs
+
+func RateLimitPostParamsValuePtr(v *RateLimitPostParamsValueArgs) RateLimitPostParamsValuePtrInput {
+	return (*rateLimitPostParamsValuePtrType)(v)
+}
+
+func (*rateLimitPostParamsValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitPostParamsValue)(nil)).Elem()
+}
+
+func (i *rateLimitPostParamsValuePtrType) ToRateLimitPostParamsValuePtrOutput() RateLimitPostParamsValuePtrOutput {
+	return i.ToRateLimitPostParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitPostParamsValuePtrType) ToRateLimitPostParamsValuePtrOutputWithContext(ctx context.Context) RateLimitPostParamsValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitPostParamsValuePtrOutput)
+}
+
+type RateLimitPostParamsValueOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPostParamsValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitPostParamsValue)(nil)).Elem()
+}
+
+func (o RateLimitPostParamsValueOutput) ToRateLimitPostParamsValueOutput() RateLimitPostParamsValueOutput {
+	return o
+}
+
+func (o RateLimitPostParamsValueOutput) ToRateLimitPostParamsValueOutputWithContext(ctx context.Context) RateLimitPostParamsValueOutput {
+	return o
+}
+
+func (o RateLimitPostParamsValueOutput) ToRateLimitPostParamsValuePtrOutput() RateLimitPostParamsValuePtrOutput {
+	return o.ToRateLimitPostParamsValuePtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitPostParamsValueOutput) ToRateLimitPostParamsValuePtrOutputWithContext(ctx context.Context) RateLimitPostParamsValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitPostParamsValue) *RateLimitPostParamsValue {
+		return &v
+	}).(RateLimitPostParamsValuePtrOutput)
+}
+
+// Match content.
+func (o RateLimitPostParamsValueOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsValue) *string { return v.Content }).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitPostParamsValueOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsValue) *string { return v.Func }).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitPostParamsValueOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitPostParamsValue) *string { return v.Params }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitPostParamsValuePtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitPostParamsValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitPostParamsValue)(nil)).Elem()
+}
+
+func (o RateLimitPostParamsValuePtrOutput) ToRateLimitPostParamsValuePtrOutput() RateLimitPostParamsValuePtrOutput {
+	return o
+}
+
+func (o RateLimitPostParamsValuePtrOutput) ToRateLimitPostParamsValuePtrOutputWithContext(ctx context.Context) RateLimitPostParamsValuePtrOutput {
+	return o
+}
+
+func (o RateLimitPostParamsValuePtrOutput) Elem() RateLimitPostParamsValueOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsValue) RateLimitPostParamsValue {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitPostParamsValue
+		return ret
+	}).(RateLimitPostParamsValueOutput)
+}
+
+// Match content.
+func (o RateLimitPostParamsValuePtrOutput) Content() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Content
+	}).(pulumi.StringPtrOutput)
+}
+
+// Logic operator.
+func (o RateLimitPostParamsValuePtrOutput) Func() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Func
+	}).(pulumi.StringPtrOutput)
+}
+
+// Match parameter.
+func (o RateLimitPostParamsValuePtrOutput) Params() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitPostParamsValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringPtrOutput)
+}
+
+type RateLimitRedirectInfo struct {
+	// Domain.
+	Domain *string `pulumi:"domain"`
+	// Protocol.
+	Protocol *string `pulumi:"protocol"`
+	// URL path.
+	Url *string `pulumi:"url"`
+}
+
+// RateLimitRedirectInfoInput is an input type that accepts RateLimitRedirectInfoArgs and RateLimitRedirectInfoOutput values.
+// You can construct a concrete instance of `RateLimitRedirectInfoInput` via:
+//
+//	RateLimitRedirectInfoArgs{...}
+type RateLimitRedirectInfoInput interface {
+	pulumi.Input
+
+	ToRateLimitRedirectInfoOutput() RateLimitRedirectInfoOutput
+	ToRateLimitRedirectInfoOutputWithContext(context.Context) RateLimitRedirectInfoOutput
+}
+
+type RateLimitRedirectInfoArgs struct {
+	// Domain.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// Protocol.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// URL path.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+}
+
+func (RateLimitRedirectInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitRedirectInfo)(nil)).Elem()
+}
+
+func (i RateLimitRedirectInfoArgs) ToRateLimitRedirectInfoOutput() RateLimitRedirectInfoOutput {
+	return i.ToRateLimitRedirectInfoOutputWithContext(context.Background())
+}
+
+func (i RateLimitRedirectInfoArgs) ToRateLimitRedirectInfoOutputWithContext(ctx context.Context) RateLimitRedirectInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitRedirectInfoOutput)
+}
+
+func (i RateLimitRedirectInfoArgs) ToRateLimitRedirectInfoPtrOutput() RateLimitRedirectInfoPtrOutput {
+	return i.ToRateLimitRedirectInfoPtrOutputWithContext(context.Background())
+}
+
+func (i RateLimitRedirectInfoArgs) ToRateLimitRedirectInfoPtrOutputWithContext(ctx context.Context) RateLimitRedirectInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitRedirectInfoOutput).ToRateLimitRedirectInfoPtrOutputWithContext(ctx)
+}
+
+// RateLimitRedirectInfoPtrInput is an input type that accepts RateLimitRedirectInfoArgs, RateLimitRedirectInfoPtr and RateLimitRedirectInfoPtrOutput values.
+// You can construct a concrete instance of `RateLimitRedirectInfoPtrInput` via:
+//
+//	        RateLimitRedirectInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type RateLimitRedirectInfoPtrInput interface {
+	pulumi.Input
+
+	ToRateLimitRedirectInfoPtrOutput() RateLimitRedirectInfoPtrOutput
+	ToRateLimitRedirectInfoPtrOutputWithContext(context.Context) RateLimitRedirectInfoPtrOutput
+}
+
+type rateLimitRedirectInfoPtrType RateLimitRedirectInfoArgs
+
+func RateLimitRedirectInfoPtr(v *RateLimitRedirectInfoArgs) RateLimitRedirectInfoPtrInput {
+	return (*rateLimitRedirectInfoPtrType)(v)
+}
+
+func (*rateLimitRedirectInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitRedirectInfo)(nil)).Elem()
+}
+
+func (i *rateLimitRedirectInfoPtrType) ToRateLimitRedirectInfoPtrOutput() RateLimitRedirectInfoPtrOutput {
+	return i.ToRateLimitRedirectInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *rateLimitRedirectInfoPtrType) ToRateLimitRedirectInfoPtrOutputWithContext(ctx context.Context) RateLimitRedirectInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RateLimitRedirectInfoPtrOutput)
+}
+
+type RateLimitRedirectInfoOutput struct{ *pulumi.OutputState }
+
+func (RateLimitRedirectInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RateLimitRedirectInfo)(nil)).Elem()
+}
+
+func (o RateLimitRedirectInfoOutput) ToRateLimitRedirectInfoOutput() RateLimitRedirectInfoOutput {
+	return o
+}
+
+func (o RateLimitRedirectInfoOutput) ToRateLimitRedirectInfoOutputWithContext(ctx context.Context) RateLimitRedirectInfoOutput {
+	return o
+}
+
+func (o RateLimitRedirectInfoOutput) ToRateLimitRedirectInfoPtrOutput() RateLimitRedirectInfoPtrOutput {
+	return o.ToRateLimitRedirectInfoPtrOutputWithContext(context.Background())
+}
+
+func (o RateLimitRedirectInfoOutput) ToRateLimitRedirectInfoPtrOutputWithContext(ctx context.Context) RateLimitRedirectInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RateLimitRedirectInfo) *RateLimitRedirectInfo {
+		return &v
+	}).(RateLimitRedirectInfoPtrOutput)
+}
+
+// Domain.
+func (o RateLimitRedirectInfoOutput) Domain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitRedirectInfo) *string { return v.Domain }).(pulumi.StringPtrOutput)
+}
+
+// Protocol.
+func (o RateLimitRedirectInfoOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitRedirectInfo) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// URL path.
+func (o RateLimitRedirectInfoOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RateLimitRedirectInfo) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+type RateLimitRedirectInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (RateLimitRedirectInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RateLimitRedirectInfo)(nil)).Elem()
+}
+
+func (o RateLimitRedirectInfoPtrOutput) ToRateLimitRedirectInfoPtrOutput() RateLimitRedirectInfoPtrOutput {
+	return o
+}
+
+func (o RateLimitRedirectInfoPtrOutput) ToRateLimitRedirectInfoPtrOutputWithContext(ctx context.Context) RateLimitRedirectInfoPtrOutput {
+	return o
+}
+
+func (o RateLimitRedirectInfoPtrOutput) Elem() RateLimitRedirectInfoOutput {
+	return o.ApplyT(func(v *RateLimitRedirectInfo) RateLimitRedirectInfo {
+		if v != nil {
+			return *v
+		}
+		var ret RateLimitRedirectInfo
+		return ret
+	}).(RateLimitRedirectInfoOutput)
+}
+
+// Domain.
+func (o RateLimitRedirectInfoPtrOutput) Domain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitRedirectInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Domain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Protocol.
+func (o RateLimitRedirectInfoPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitRedirectInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// URL path.
+func (o RateLimitRedirectInfoPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RateLimitRedirectInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
 type SaasDomainPort struct {
 	// Nginx server ID.
 	NginxServerId *string `pulumi:"nginxServerId"`
@@ -7474,8 +10777,30 @@ func (o GetUserDomainsUsersInfoArrayOutput) Index(i pulumi.IntInput) GetUserDoma
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AntiInfoLeakStrategyInput)(nil)).Elem(), AntiInfoLeakStrategyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AntiInfoLeakStrategyArrayInput)(nil)).Elem(), AntiInfoLeakStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleApiNameOpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpArrayInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleApiNameOpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleMatchRuleListInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleMatchRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleMatchRuleListArrayInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleMatchRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleStatRuleListInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleStatRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveCustomEventRuleStatRuleListArrayInput)(nil)).Elem(), ApiSecSensitiveCustomEventRuleStatRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpInput)(nil)).Elem(), ApiSecSensitivePrivilegeRuleApiNameOpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpArrayInput)(nil)).Elem(), ApiSecSensitivePrivilegeRuleApiNameOpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodInput)(nil)).Elem(), ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayInput)(nil)).Elem(), ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveSceneRuleRuleListInput)(nil)).Elem(), ApiSecSensitiveSceneRuleRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveSceneRuleRuleListArrayInput)(nil)).Elem(), ApiSecSensitiveSceneRuleRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleApiNameOpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpArrayInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleApiNameOpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleWhiteFieldInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleWhiteFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiSecSensitiveWhiteRuleWhiteFieldArrayInput)(nil)).Elem(), ApiSecSensitiveWhiteRuleWhiteFieldArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttackWhiteRuleRuleInput)(nil)).Elem(), AttackWhiteRuleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttackWhiteRuleRuleArrayInput)(nil)).Elem(), AttackWhiteRuleRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BotIdRuleDataInput)(nil)).Elem(), BotIdRuleDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BotIdRuleDataArrayInput)(nil)).Elem(), BotIdRuleDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BotSceneUcbRuleRuleInput)(nil)).Elem(), BotSceneUcbRuleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BotSceneUcbRuleRulePtrInput)(nil)).Elem(), BotSceneUcbRuleRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BotSceneUcbRuleRuleActionListInput)(nil)).Elem(), BotSceneUcbRuleRuleActionListArgs{})
@@ -7530,6 +10855,30 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*OwaspWhiteRuleJobDateTimeTimedArrayInput)(nil)).Elem(), OwaspWhiteRuleJobDateTimeTimedArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OwaspWhiteRuleStrategyInput)(nil)).Elem(), OwaspWhiteRuleStrategyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OwaspWhiteRuleStrategyArrayInput)(nil)).Elem(), OwaspWhiteRuleStrategyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitGetParamsNameInput)(nil)).Elem(), RateLimitGetParamsNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitGetParamsNamePtrInput)(nil)).Elem(), RateLimitGetParamsNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitGetParamsValueInput)(nil)).Elem(), RateLimitGetParamsValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitGetParamsValuePtrInput)(nil)).Elem(), RateLimitGetParamsValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitIpLocationInput)(nil)).Elem(), RateLimitIpLocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitIpLocationPtrInput)(nil)).Elem(), RateLimitIpLocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitHeaderInput)(nil)).Elem(), RateLimitLimitHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitHeaderArrayInput)(nil)).Elem(), RateLimitLimitHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitHeaderNameInput)(nil)).Elem(), RateLimitLimitHeaderNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitHeaderNamePtrInput)(nil)).Elem(), RateLimitLimitHeaderNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitMethodInput)(nil)).Elem(), RateLimitLimitMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitMethodPtrInput)(nil)).Elem(), RateLimitLimitMethodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitPathsInput)(nil)).Elem(), RateLimitLimitPathsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitPathsPtrInput)(nil)).Elem(), RateLimitLimitPathsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitWindowInput)(nil)).Elem(), RateLimitLimitWindowArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitLimitWindowPtrInput)(nil)).Elem(), RateLimitLimitWindowArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPathsOptionInput)(nil)).Elem(), RateLimitPathsOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPathsOptionArrayInput)(nil)).Elem(), RateLimitPathsOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPostParamsNameInput)(nil)).Elem(), RateLimitPostParamsNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPostParamsNamePtrInput)(nil)).Elem(), RateLimitPostParamsNameArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPostParamsValueInput)(nil)).Elem(), RateLimitPostParamsValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitPostParamsValuePtrInput)(nil)).Elem(), RateLimitPostParamsValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitRedirectInfoInput)(nil)).Elem(), RateLimitRedirectInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RateLimitRedirectInfoPtrInput)(nil)).Elem(), RateLimitRedirectInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SaasDomainPortInput)(nil)).Elem(), SaasDomainPortArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SaasDomainPortArrayInput)(nil)).Elem(), SaasDomainPortArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttackLogHistogramDataInput)(nil)).Elem(), GetAttackLogHistogramDataArgs{})
@@ -7566,8 +10915,30 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUserDomainsUsersInfoArrayInput)(nil)).Elem(), GetUserDomainsUsersInfoArray{})
 	pulumi.RegisterOutputType(AntiInfoLeakStrategyOutput{})
 	pulumi.RegisterOutputType(AntiInfoLeakStrategyArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleApiNameOpOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleApiNameOpArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleApiNameOpApiNameMethodArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleMatchRuleListOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleMatchRuleListArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleStatRuleListOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveCustomEventRuleStatRuleListArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitivePrivilegeRuleApiNameOpOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitivePrivilegeRuleApiNameOpArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitivePrivilegeRuleApiNameOpApiNameMethodArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveSceneRuleRuleListOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveSceneRuleRuleListArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleApiNameOpOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleApiNameOpArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleApiNameOpApiNameMethodArrayOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleWhiteFieldOutput{})
+	pulumi.RegisterOutputType(ApiSecSensitiveWhiteRuleWhiteFieldArrayOutput{})
 	pulumi.RegisterOutputType(AttackWhiteRuleRuleOutput{})
 	pulumi.RegisterOutputType(AttackWhiteRuleRuleArrayOutput{})
+	pulumi.RegisterOutputType(BotIdRuleDataOutput{})
+	pulumi.RegisterOutputType(BotIdRuleDataArrayOutput{})
 	pulumi.RegisterOutputType(BotSceneUcbRuleRuleOutput{})
 	pulumi.RegisterOutputType(BotSceneUcbRuleRulePtrOutput{})
 	pulumi.RegisterOutputType(BotSceneUcbRuleRuleActionListOutput{})
@@ -7622,6 +10993,30 @@ func init() {
 	pulumi.RegisterOutputType(OwaspWhiteRuleJobDateTimeTimedArrayOutput{})
 	pulumi.RegisterOutputType(OwaspWhiteRuleStrategyOutput{})
 	pulumi.RegisterOutputType(OwaspWhiteRuleStrategyArrayOutput{})
+	pulumi.RegisterOutputType(RateLimitGetParamsNameOutput{})
+	pulumi.RegisterOutputType(RateLimitGetParamsNamePtrOutput{})
+	pulumi.RegisterOutputType(RateLimitGetParamsValueOutput{})
+	pulumi.RegisterOutputType(RateLimitGetParamsValuePtrOutput{})
+	pulumi.RegisterOutputType(RateLimitIpLocationOutput{})
+	pulumi.RegisterOutputType(RateLimitIpLocationPtrOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitHeaderOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitHeaderArrayOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitHeaderNameOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitHeaderNamePtrOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitMethodOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitMethodPtrOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitPathsOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitPathsPtrOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitWindowOutput{})
+	pulumi.RegisterOutputType(RateLimitLimitWindowPtrOutput{})
+	pulumi.RegisterOutputType(RateLimitPathsOptionOutput{})
+	pulumi.RegisterOutputType(RateLimitPathsOptionArrayOutput{})
+	pulumi.RegisterOutputType(RateLimitPostParamsNameOutput{})
+	pulumi.RegisterOutputType(RateLimitPostParamsNamePtrOutput{})
+	pulumi.RegisterOutputType(RateLimitPostParamsValueOutput{})
+	pulumi.RegisterOutputType(RateLimitPostParamsValuePtrOutput{})
+	pulumi.RegisterOutputType(RateLimitRedirectInfoOutput{})
+	pulumi.RegisterOutputType(RateLimitRedirectInfoPtrOutput{})
 	pulumi.RegisterOutputType(SaasDomainPortOutput{})
 	pulumi.RegisterOutputType(SaasDomainPortArrayOutput{})
 	pulumi.RegisterOutputType(GetAttackLogHistogramDataOutput{})

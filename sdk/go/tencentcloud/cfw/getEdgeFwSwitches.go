@@ -62,12 +62,8 @@ type GetEdgeFwSwitchesResult struct {
 }
 
 func GetEdgeFwSwitchesOutput(ctx *pulumi.Context, args GetEdgeFwSwitchesOutputArgs, opts ...pulumi.InvokeOption) GetEdgeFwSwitchesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEdgeFwSwitchesResultOutput, error) {
-			args := v.(GetEdgeFwSwitchesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args, GetEdgeFwSwitchesResultOutput{}, options).(GetEdgeFwSwitchesResultOutput), nil
-		}).(GetEdgeFwSwitchesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cfw/getEdgeFwSwitches:getEdgeFwSwitches", args, GetEdgeFwSwitchesResultOutput{}, options).(GetEdgeFwSwitchesResultOutput)
 }
 
 // A collection of arguments for invoking getEdgeFwSwitches.

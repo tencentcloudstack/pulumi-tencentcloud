@@ -16,7 +16,7 @@ import (
 //
 // ## Example Usage
 //
-// ### Sync mysql database to cynosdb through cdb access type
+// ### Sync MySQL database to CynosDB through cdb access type
 //
 // ```go
 // package main
@@ -26,12 +26,48 @@ import (
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dts"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
+//			example, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+//				InstanceName:     pulumi.String("tf-example"),
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("Mysql@2026"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				SlaveSyncMode:    pulumi.Int(0),
+//				DeviceType:       pulumi.String("CLOUD_NATIVE_CLUSTER"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				Cpu:              pulumi.Int(2),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:         pulumi.String("subnet-hhi88a58"),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-4rd5741x"),
+//				},
+//				Parameters: pulumi.StringMap{
+//					"character_set_server": pulumi.String("utf8"),
+//					"max_connections":      pulumi.String("1000"),
+//				},
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("terraform"),
+//				},
+//				ClusterTopology: &mysql.InstanceClusterTopologyArgs{
+//					ReadWriteNode: &mysql.InstanceClusterTopologyReadWriteNodeArgs{
+//						Zone: pulumi.String("ap-guangzhou-6"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleCluster, err := cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
 //				AvailableZone:             pulumi.String("ap-guangzhou-6"),
 //				VpcId:                     pulumi.String("vpc-i5yyodl9"),
 //				SubnetId:                  pulumi.String("subnet-hhi88a58"),
@@ -40,7 +76,7 @@ import (
 //				DbVersion:                 pulumi.String("5.7"),
 //				Port:                      pulumi.Int(3306),
 //				ClusterName:               pulumi.String("tf-example"),
-//				Password:                  pulumi.String("cynosDB@123"),
+//				Password:                  pulumi.String("CynosDB@2026"),
 //				InstanceMaintainDuration:  pulumi.Int(7200),
 //				InstanceMaintainStartTime: pulumi.Int(10800),
 //				InstanceCpuCore:           pulumi.Int(2),
@@ -101,145 +137,57 @@ import (
 //					Mode: pulumi.String("Partial"),
 //					Databases: dts.SyncConfigObjectsDatabaseArray{
 //						&dts.SyncConfigObjectsDatabaseArgs{
-//							DbName:    pulumi.String("tf_ci_test"),
-//							NewDbName: pulumi.String("tf_ci_test_new"),
-//							DbMode:    pulumi.String("Partial"),
-//							TableMode: pulumi.String("All"),
+//							DbName:        pulumi.String("testDB"),
+//							DbMode:        pulumi.String("Partial"),
+//							TableMode:     pulumi.String("Partial"),
+//							ViewMode:      pulumi.String("Partial"),
+//							ProcedureMode: pulumi.String("Partial"),
+//							FunctionMode:  pulumi.String("Partial"),
 //							Tables: dts.SyncConfigObjectsDatabaseTableArray{
 //								&dts.SyncConfigObjectsDatabaseTableArgs{
-//									TableName:    pulumi.String("test"),
-//									NewTableName: pulumi.String("test_new"),
+//									TableName:  pulumi.String("testTable"),
+//									ColumnMode: pulumi.String("Partial"),
+//									Columns: dts.SyncConfigObjectsDatabaseTableColumnArray{
+//										&dts.SyncConfigObjectsDatabaseTableColumnArgs{
+//											ColumnName: pulumi.String("id"),
+//										},
+//									},
+//									TmpTables: pulumi.StringArray{
+//										pulumi.String("_testTable_new"),
+//										pulumi.String("_testTable_old"),
+//										pulumi.String("_testTable_ghc"),
+//										pulumi.String("_testTable_gho"),
+//										pulumi.String("_testTable_del"),
+//									},
+//									TableEditMode: pulumi.String("pt"),
 //								},
 //							},
 //						},
 //					},
+//					AdvancedObjects: pulumi.StringArray{
+//						pulumi.String("procedure"),
+//						pulumi.String("function"),
+//					},
 //				},
 //				SrcInfo: &dts.SyncConfigSrcInfoArgs{
 //					Region:     pulumi.String("ap-guangzhou"),
-//					InstanceId: pulumi.String("cdb-fitq5t9h"),
-//					User:       pulumi.String("your_user_name"),
-//					Password:   pulumi.String("*"),
-//					DbName:     pulumi.String("tf_ci_test"),
-//					VpcId:      pulumi.String("vpc-i5yyodl9"),
-//					SubnetId:   pulumi.String("subnet-hhi88a58"),
-//				},
-//				DstInfo: &dts.SyncConfigDstInfoArgs{
-//					Region:     pulumi.String("ap-guangzhou"),
-//					InstanceId: example.ID(),
+//					InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //					User:       pulumi.String("root"),
-//					Password:   pulumi.String("*"),
-//					DbName:     pulumi.String("tf_ci_test_new"),
+//					Password:   example.RootPassword,
+//					DbName:     pulumi.String("testDB"),
 //					VpcId:      pulumi.String("vpc-i5yyodl9"),
 //					SubnetId:   pulumi.String("subnet-hhi88a58"),
 //				},
-//				AutoRetryTimeRangeMinutes: pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ccn"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dts"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mysql"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpcIdSh := "vpc-evtcyb3g"
-//			subnetIdSh := "subnet-1t83cxkp"
-//			srcMysql, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-//				InstanceName: pulumi.StringRef("your_user_name_mysql_src"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			srcIp := srcMysql.InstanceLists[0].IntranetIp
-//			srcPort := srcMysql.InstanceLists[0].IntranetPort
-//			ccns, err := ccn.GetInstances(ctx, &ccn.GetInstancesArgs{
-//				Name: pulumi.StringRef("keep-ccn-dts-sh"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			ccnId := ccns.InstanceLists[0].CcnId
-//			dstMysql, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-//				InstanceName: pulumi.StringRef("your_user_name_mysql_src"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			dstMysqlId := dstMysql.InstanceLists[0].MysqlId
-//			cfg := config.New(ctx, "")
-//			srcAzSh := "ap-shanghai"
-//			if param := cfg.Get("srcAzSh"); param != "" {
-//				srcAzSh = param
-//			}
-//			dstAzGz := "ap-guangzhou"
-//			if param := cfg.Get("dstAzGz"); param != "" {
-//				dstAzGz = param
-//			}
-//			syncJobs, err := dts.GetSyncJobs(ctx, &dts.GetSyncJobsArgs{
-//				JobName: pulumi.StringRef("keep_sync_config_ccn_2_cdb"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = dts.NewSyncConfig(ctx, "example", &dts.SyncConfigArgs{
-//				JobId:         pulumi.String(syncJobs.Lists[0].JobId),
-//				SrcAccessType: pulumi.String("ccn"),
-//				DstAccessType: pulumi.String("cdb"),
-//				JobMode:       pulumi.String("liteMode"),
-//				RunMode:       pulumi.String("Immediate"),
-//				Objects: &dts.SyncConfigObjectsArgs{
-//					Mode: pulumi.String("Partial"),
-//					Databases: dts.SyncConfigObjectsDatabaseArray{
-//						&dts.SyncConfigObjectsDatabaseArgs{
-//							DbName:    pulumi.String("tf_ci_test"),
-//							NewDbName: pulumi.String("tf_ci_test_new"),
-//							DbMode:    pulumi.String("Partial"),
-//							TableMode: pulumi.String("All"),
-//							Tables: dts.SyncConfigObjectsDatabaseTableArray{
-//								&dts.SyncConfigObjectsDatabaseTableArgs{
-//									TableName:    pulumi.String("test"),
-//									NewTableName: pulumi.String("test_new"),
-//								},
-//							},
-//						},
-//					},
-//				},
-//				SrcInfo: &dts.SyncConfigSrcInfoArgs{
-//					Region:         pulumi.String(srcAzSh),
-//					User:           pulumi.String("your_user_name"),
-//					Password:       pulumi.String("your_pass_word"),
-//					Ip:             pulumi.String(srcIp),
-//					Port:           pulumi.Int(srcPort),
-//					VpcId:          pulumi.String(vpcIdSh),
-//					SubnetId:       pulumi.String(subnetIdSh),
-//					CcnId:          pulumi.String(ccnId),
-//					DatabaseNetEnv: pulumi.String("TencentVPC"),
-//				},
 //				DstInfo: &dts.SyncConfigDstInfoArgs{
-//					Region:     pulumi.String(dstAzGz),
-//					InstanceId: pulumi.String(dstMysqlId),
-//					User:       pulumi.String("your_user_name"),
-//					Password:   pulumi.String("your_pass_word"),
+//					Region:     pulumi.String("ap-guangzhou"),
+//					InstanceId: exampleCluster.ID().ToIDOutput().ToStringOutput(),
+//					User:       pulumi.String("root"),
+//					Password:   exampleCluster.Password,
+//					DbName:     pulumi.String("testDB"),
+//					VpcId:      pulumi.String("vpc-i5yyodl9"),
+//					SubnetId:   pulumi.String("subnet-hhi88a58"),
 //				},
-//				AutoRetryTimeRangeMinutes: pulumi.Int(0),
+//				AutoRetryTimeRangeMinutes: pulumi.Int(5),
 //			})
 //			if err != nil {
 //				return err

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpc.getAcls({});
+ * const example = tencentcloud.vpc.getAcls({});
  * ```
  *
  * ### Query acls by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpc.getAcls({
+ * const example = tencentcloud.vpc.getAcls({
  *     id: "acl-b7kiagdc",
  *     vpcId: "vpc-2l5kmsbx",
  *     name: "tf-example",
@@ -99,7 +99,7 @@ export interface GetAclsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpc.getAcls({});
+ * const example = tencentcloud.vpc.getAcls({});
  * ```
  *
  * ### Query acls by filters
@@ -108,7 +108,7 @@ export interface GetAclsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpc.getAcls({
+ * const example = tencentcloud.vpc.getAcls({
  *     id: "acl-b7kiagdc",
  *     vpcId: "vpc-2l5kmsbx",
  *     name: "tf-example",
@@ -133,17 +133,17 @@ export interface GetAclsOutputArgs {
     /**
      * ID of the network ACL instance.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the network ACL.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC instance.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

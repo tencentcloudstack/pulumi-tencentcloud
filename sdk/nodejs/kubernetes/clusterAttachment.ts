@@ -11,6 +11,8 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `isSchedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
  *
+ * > **NOTE:** Starting from version `1.24`, Kubernetes has abandoned Docker, so after version `1.24`, the default value of the `dockerGraphPath` field is `/var/lib/containerd`. For details, please visit the link [Kubernetes blog](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/).
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -21,15 +23,15 @@ import * as utilities from "../utilities";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
  * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "centos",
  * });
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
- * const defaultGetTypes = tencentcloud.Instance.getTypes({
+ * const defaultGetTypes = tencentcloud.instance.getTypes({
  *     filters: [{
  *         name: "instance-family",
  *         values: ["SA2"],
@@ -224,51 +226,51 @@ export interface ClusterAttachmentState {
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * ID of Node image.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
      */
-    keyIds?: pulumi.Input<string>;
+    keyIds?: pulumi.Input<string | undefined>;
     /**
      * Labels of tke attachment exits CVM.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Password to access, should be set if `keyIds` not set.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * A list of security group IDs after attach to cluster.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * State of the node.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
      */
-    workerConfig?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfig>;
+    workerConfig?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfig | undefined>;
     /**
      * Override variable worker_config, commonly used to attach existing instances.
      */
-    workerConfigOverrides?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfigOverrides>;
+    workerConfigOverrides?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfigOverrides | undefined>;
 }
 
 /**
@@ -282,11 +284,11 @@ export interface ClusterAttachmentArgs {
     /**
      * The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * ID of Node image.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
@@ -294,29 +296,29 @@ export interface ClusterAttachmentArgs {
     /**
      * The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
      */
-    keyIds?: pulumi.Input<string>;
+    keyIds?: pulumi.Input<string | undefined>;
     /**
      * Labels of tke attachment exits CVM.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Password to access, should be set if `keyIds` not set.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * A list of security group IDs after attach to cluster.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
      */
-    workerConfig?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfig>;
+    workerConfig?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfig | undefined>;
     /**
      * Override variable worker_config, commonly used to attach existing instances.
      */
-    workerConfigOverrides?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfigOverrides>;
+    workerConfigOverrides?: pulumi.Input<inputs.Kubernetes.ClusterAttachmentWorkerConfigOverrides | undefined>;
 }

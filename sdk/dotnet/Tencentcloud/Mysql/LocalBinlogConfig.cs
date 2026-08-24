@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -92,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Import
     /// 
-    /// mysql local_binlog_config can be imported using the id, e.g.
+    /// mysql LocalBinlogConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mysql/localBinlogConfig:LocalBinlogConfig local_binlog_config instance_id

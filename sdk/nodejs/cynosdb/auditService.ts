@@ -139,23 +139,23 @@ export interface AuditServiceState {
     /**
      * Audit type. true - full audit; default false - rule-based audit.
      */
-    auditAll?: pulumi.Input<boolean>;
+    auditAll?: pulumi.Input<boolean | undefined>;
     /**
      * Frequent log retention period.
      */
-    highLogExpireDay?: pulumi.Input<number>;
+    highLogExpireDay?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Log retention period.
      */
-    logExpireDay?: pulumi.Input<number>;
+    logExpireDay?: pulumi.Input<number | undefined>;
     /**
      * Rule template ID set.
      */
-    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -165,11 +165,11 @@ export interface AuditServiceArgs {
     /**
      * Audit type. true - full audit; default false - rule-based audit.
      */
-    auditAll?: pulumi.Input<boolean>;
+    auditAll?: pulumi.Input<boolean | undefined>;
     /**
      * Frequent log retention period.
      */
-    highLogExpireDay?: pulumi.Input<number>;
+    highLogExpireDay?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
@@ -181,5 +181,5 @@ export interface AuditServiceArgs {
     /**
      * Rule template ID set.
      */
-    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleTemplateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

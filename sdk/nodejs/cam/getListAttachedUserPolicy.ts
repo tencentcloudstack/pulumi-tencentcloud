@@ -59,8 +59,8 @@ export function getListAttachedUserPolicyOutput(args: GetListAttachedUserPolicyO
  */
 export interface GetListAttachedUserPolicyOutputArgs {
     attachType: pulumi.Input<number>;
-    keyword?: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
-    strategyType?: pulumi.Input<number>;
+    keyword?: pulumi.Input<string | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    strategyType?: pulumi.Input<number | undefined>;
     targetUin: pulumi.Input<number>;
 }

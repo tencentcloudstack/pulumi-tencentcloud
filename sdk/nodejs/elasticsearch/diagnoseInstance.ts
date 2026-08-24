@@ -98,15 +98,15 @@ export interface DiagnoseInstanceState {
     /**
      * Indexes that need to be diagnosed. Wildcards are supported.
      */
-    diagnoseIndices?: pulumi.Input<string>;
+    diagnoseIndices?: pulumi.Input<string | undefined>;
     /**
      * Diagnostic items that need to be triggered.
      */
-    diagnoseJobs?: pulumi.Input<pulumi.Input<string>[]>;
+    diagnoseJobs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -116,11 +116,11 @@ export interface DiagnoseInstanceArgs {
     /**
      * Indexes that need to be diagnosed. Wildcards are supported.
      */
-    diagnoseIndices?: pulumi.Input<string>;
+    diagnoseIndices?: pulumi.Input<string | undefined>;
     /**
      * Diagnostic items that need to be triggered.
      */
-    diagnoseJobs?: pulumi.Input<pulumi.Input<string>[]>;
+    diagnoseJobs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */

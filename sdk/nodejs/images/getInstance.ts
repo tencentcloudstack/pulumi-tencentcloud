@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({});
+ * const example = tencentcloud.images.getInstance({});
  * ```
  *
  * ### Query images by image ID
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageId: "img-9qrfy1xt",
  * });
  * ```
@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
  * ```
@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageNameRegex: "^TencentOS",
  * });
  * ```
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  * });
  * ```
@@ -70,7 +70,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     instanceType: "S1.SMALL1",
  * });
  * ```
@@ -157,7 +157,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({});
+ * const example = tencentcloud.images.getInstance({});
  * ```
  *
  * ### Query images by image ID
@@ -166,7 +166,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageId: "img-9qrfy1xt",
  * });
  * ```
@@ -177,7 +177,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
  * ```
@@ -188,7 +188,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageNameRegex: "^TencentOS",
  * });
  * ```
@@ -199,7 +199,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  * });
  * ```
@@ -210,7 +210,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     instanceType: "S1.SMALL1",
  * });
  * ```
@@ -235,25 +235,25 @@ export interface GetInstanceOutputArgs {
     /**
      * ID of the image to be queried.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * A regex string to apply to the image list returned by TencentCloud, conflict with 'os_name'. **NOTE**: it is not wildcard, should look like `imageNameRegex = "^CentOS\s+6\.8\s+64\w*"`.
      */
-    imageNameRegex?: pulumi.Input<string>;
+    imageNameRegex?: pulumi.Input<string | undefined>;
     /**
      * A list of the image type to be queried. Valid values: 'PUBLIC_IMAGE', 'PRIVATE_IMAGE', 'SHARED_IMAGE', 'MARKET_IMAGE'.
      */
-    imageTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    imageTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance type, such as `S1.SMALL1`.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud, conflict with 'image_name_regex'.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

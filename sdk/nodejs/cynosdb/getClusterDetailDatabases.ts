@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterDetailDatabases = tencentcloud.Cynosdb.getClusterDetailDatabases({
+ * const clusterDetailDatabases = tencentcloud.cynosdb.getClusterDetailDatabases({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     dbName: "users",
  * });
@@ -79,7 +79,7 @@ export interface GetClusterDetailDatabasesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterDetailDatabases = tencentcloud.Cynosdb.getClusterDetailDatabases({
+ * const clusterDetailDatabases = tencentcloud.cynosdb.getClusterDetailDatabases({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     dbName: "users",
  * });
@@ -105,9 +105,9 @@ export interface GetClusterDetailDatabasesOutputArgs {
     /**
      * Database Name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

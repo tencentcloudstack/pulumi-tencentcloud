@@ -92,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         }
 
         /// <summary>
+        /// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        [Input("schemaMode")]
+        public Input<string>? SchemaMode { get; set; }
+
+        /// <summary>
         /// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("schemaName")]

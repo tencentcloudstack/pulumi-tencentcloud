@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// <summary>
     /// Provide a resource to create a VPC.
     /// 
+    /// &gt; **NOTE:** In accordance with VPC business requirements, the default value for `IsMulticast` has been updated to `False`(previously `True`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `IsMulticast` field to `True`.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a basic VPC
@@ -37,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///         IsMulticast = false,
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "createBy", "Terraform" },
     ///         },
     ///     });
     /// 
@@ -65,7 +67,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "test", "test" },
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Enable route vpc publish
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         DnsServers = new[]
+    ///         {
+    ///             "119.29.29.29",
+    ///             "8.8.8.8",
+    ///         },
+    ///         IsMulticast = false,
+    ///         EnableRouteVpcPublish = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
     ///         },
     ///     });
     /// 
@@ -77,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Vpc instance can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+    /// $ pulumi import tencentcloud:Vpc/instance:Instance vpc vpc-8vazrwjv
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/instance:Instance")]
@@ -120,16 +152,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<ImmutableArray<string>> DockerAssistantCidrs { get; private set; } = null!;
 
         /// <summary>
+        /// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Output("enableRouteVpcPublish")]
+        public Output<bool> EnableRouteVpcPublish { get; private set; } = null!;
+
+        /// <summary>
+        /// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Output("enableRouteVpcPublishIpv6")]
+        public Output<bool> EnableRouteVpcPublishIpv6 { get; private set; } = null!;
+
+        /// <summary>
         /// Indicates whether it is the default VPC for this region.
         /// </summary>
         [Output("isDefault")]
         public Output<bool> IsDefault { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether VPC multicast is enabled. The default value is 'true'.
+        /// Indicates whether VPC multicast is enabled. The default value is `False`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Output("isMulticast")]
-        public Output<bool?> IsMulticast { get; private set; } = null!;
+        public Output<bool> IsMulticast { get; private set; } = null!;
 
         /// <summary>
         /// The name of the VPC.
@@ -221,7 +265,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
 
         /// <summary>
-        /// Indicates whether VPC multicast is enabled. The default value is 'true'.
+        /// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Input("enableRouteVpcPublish")]
+        public Input<bool>? EnableRouteVpcPublish { get; set; }
+
+        /// <summary>
+        /// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Input("enableRouteVpcPublishIpv6")]
+        public Input<bool>? EnableRouteVpcPublishIpv6 { get; set; }
+
+        /// <summary>
+        /// Indicates whether VPC multicast is enabled. The default value is `False`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Input("isMulticast")]
         public Input<bool>? IsMulticast { get; set; }
@@ -307,13 +363,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
 
         /// <summary>
+        /// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Input("enableRouteVpcPublish")]
+        public Input<bool>? EnableRouteVpcPublish { get; set; }
+
+        /// <summary>
+        /// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+        /// </summary>
+        [Input("enableRouteVpcPublishIpv6")]
+        public Input<bool>? EnableRouteVpcPublishIpv6 { get; set; }
+
+        /// <summary>
         /// Indicates whether it is the default VPC for this region.
         /// </summary>
         [Input("isDefault")]
         public Input<bool>? IsDefault { get; set; }
 
         /// <summary>
-        /// Indicates whether VPC multicast is enabled. The default value is 'true'.
+        /// Indicates whether VPC multicast is enabled. The default value is `False`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Input("isMulticast")]
         public Input<bool>? IsMulticast { get; set; }

@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to creating direct connect gateway instance.
  *
+ * > **NOTE:** Currently, it is not supported to set `cnnRouteType` to `BGP` simultaneously during the creation of resource `tencentcloud.Dc.Gateway`(only configuration modification is supported); This feature requires contacting the VPC product team to be added to the whitelist.
+ *
  * ## Example Usage
  *
  * ### If networkType is VPC
@@ -26,6 +28,10 @@ import * as utilities from "../utilities";
  *     networkInstanceId: vpc.id,
  *     networkType: "VPC",
  *     gatewayType: "NORMAL",
+ *     tags: {
+ *         Environment: "production",
+ *         Owner: "ops-team",
+ *     },
  * });
  * ```
  *
@@ -52,12 +58,35 @@ import * as utilities from "../utilities";
  *     networkInstanceId: ccn.id,
  *     networkType: "CCN",
  *     gatewayType: "NORMAL",
+ *     tags: {
+ *         Team: "networking",
+ *         Purpose: "production",
+ *     },
+ * });
+ * ```
+ *
+ * ### Update tags
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.dc.Gateway("example", {
+ *     name: "tf-example",
+ *     networkInstanceId: ccn.id,
+ *     networkType: "CCN",
+ *     gatewayType: "NORMAL",
+ *     tags: {
+ *         Environment: "staging",
+ *         Team: "devops",
+ *         CostCenter: "IT-001",
+ *     },
  * });
  * ```
  *
  * ## Import
  *
- * Direct connect gateway instance can be imported, e.g.
+ * Direct connect gateway instance can be imported, e.g. Tags will be imported automatically.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dc/gateway:Gateway example dcg-dr1y0hu7
@@ -94,7 +123,7 @@ export class Gateway extends pulumi.CustomResource {
     /**
      * Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
      */
-    declare public /*out*/ readonly cnnRouteType: pulumi.Output<string>;
+    declare public readonly cnnRouteType: pulumi.Output<string>;
     /**
      * Creation time of resource.
      */
@@ -104,9 +133,21 @@ export class Gateway extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly enableBgp: pulumi.Output<boolean>;
     /**
+     * Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+     */
+    declare public readonly gatewayAsn: pulumi.Output<number>;
+    /**
      * Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
      */
     declare public readonly gatewayType: pulumi.Output<string | undefined>;
+    /**
+     * ID of DC highly available placement group.
+     */
+    declare public readonly haZoneGroupId: pulumi.Output<string | undefined>;
+    /**
+     * CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+     */
+    declare public readonly modeType: pulumi.Output<string>;
     /**
      * Name of the DCG.
      */
@@ -119,6 +160,14 @@ export class Gateway extends pulumi.CustomResource {
      * Type of associated network. Valid value: `VPC` and `CCN`.
      */
     declare public readonly networkType: pulumi.Output<string>;
+    /**
+     * Tag key-value pairs for the DC gateway. Multiple tags can be set.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
+     * Availability zone where the direct connect gateway resides.
+     */
+    declare public readonly zone: pulumi.Output<string>;
 
     /**
      * Create a Gateway resource with the given unique name, arguments, and options.
@@ -136,10 +185,15 @@ export class Gateway extends pulumi.CustomResource {
             resourceInputs["cnnRouteType"] = state?.cnnRouteType;
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["enableBgp"] = state?.enableBgp;
+            resourceInputs["gatewayAsn"] = state?.gatewayAsn;
             resourceInputs["gatewayType"] = state?.gatewayType;
+            resourceInputs["haZoneGroupId"] = state?.haZoneGroupId;
+            resourceInputs["modeType"] = state?.modeType;
             resourceInputs["name"] = state?.name;
             resourceInputs["networkInstanceId"] = state?.networkInstanceId;
             resourceInputs["networkType"] = state?.networkType;
+            resourceInputs["tags"] = state?.tags;
+            resourceInputs["zone"] = state?.zone;
         } else {
             const args = argsOrState as GatewayArgs | undefined;
             if (args?.networkInstanceId === undefined && !opts.urn) {
@@ -148,11 +202,16 @@ export class Gateway extends pulumi.CustomResource {
             if (args?.networkType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'networkType'");
             }
+            resourceInputs["cnnRouteType"] = args?.cnnRouteType;
+            resourceInputs["gatewayAsn"] = args?.gatewayAsn;
             resourceInputs["gatewayType"] = args?.gatewayType;
+            resourceInputs["haZoneGroupId"] = args?.haZoneGroupId;
+            resourceInputs["modeType"] = args?.modeType;
             resourceInputs["name"] = args?.name;
             resourceInputs["networkInstanceId"] = args?.networkInstanceId;
             resourceInputs["networkType"] = args?.networkType;
-            resourceInputs["cnnRouteType"] = undefined /*out*/;
+            resourceInputs["tags"] = args?.tags;
+            resourceInputs["zone"] = args?.zone;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["enableBgp"] = undefined /*out*/;
         }
@@ -168,31 +227,51 @@ export interface GatewayState {
     /**
      * Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
      */
-    cnnRouteType?: pulumi.Input<string>;
+    cnnRouteType?: pulumi.Input<string | undefined>;
     /**
      * Creation time of resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether the BGP is enabled.
      */
-    enableBgp?: pulumi.Input<boolean>;
+    enableBgp?: pulumi.Input<boolean | undefined>;
+    /**
+     * Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+     */
+    gatewayAsn?: pulumi.Input<number | undefined>;
     /**
      * Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
      */
-    gatewayType?: pulumi.Input<string>;
+    gatewayType?: pulumi.Input<string | undefined>;
+    /**
+     * ID of DC highly available placement group.
+     */
+    haZoneGroupId?: pulumi.Input<string | undefined>;
+    /**
+     * CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+     */
+    modeType?: pulumi.Input<string | undefined>;
     /**
      * Name of the DCG.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
      */
-    networkInstanceId?: pulumi.Input<string>;
+    networkInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Type of associated network. Valid value: `VPC` and `CCN`.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
+    /**
+     * Tag key-value pairs for the DC gateway. Multiple tags can be set.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Availability zone where the direct connect gateway resides.
+     */
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -200,13 +279,29 @@ export interface GatewayState {
  */
 export interface GatewayArgs {
     /**
+     * Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
+     */
+    cnnRouteType?: pulumi.Input<string | undefined>;
+    /**
+     * Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+     */
+    gatewayAsn?: pulumi.Input<number | undefined>;
+    /**
      * Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
      */
-    gatewayType?: pulumi.Input<string>;
+    gatewayType?: pulumi.Input<string | undefined>;
+    /**
+     * ID of DC highly available placement group.
+     */
+    haZoneGroupId?: pulumi.Input<string | undefined>;
+    /**
+     * CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+     */
+    modeType?: pulumi.Input<string | undefined>;
     /**
      * Name of the DCG.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
      */
@@ -215,4 +310,12 @@ export interface GatewayArgs {
      * Type of associated network. Valid value: `VPC` and `CCN`.
      */
     networkType: pulumi.Input<string>;
+    /**
+     * Tag key-value pairs for the DC gateway. Multiple tags can be set.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Availability zone where the direct connect gateway resides.
+     */
+    zone?: pulumi.Input<string | undefined>;
 }

@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// monitor grafana_dns_config can be imported using the id, e.g.
+// monitor grafanaDnsConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id

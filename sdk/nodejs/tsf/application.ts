@@ -167,47 +167,47 @@ export interface ApplicationState {
     /**
      * Application description.
      */
-    applicationDesc?: pulumi.Input<string>;
+    applicationDesc?: pulumi.Input<string | undefined>;
     /**
      * Application log configuration, deprecated parameter.
      */
-    applicationLogConfig?: pulumi.Input<string>;
+    applicationLogConfig?: pulumi.Input<string | undefined>;
     /**
      * Application name.
      */
-    applicationName?: pulumi.Input<string>;
+    applicationName?: pulumi.Input<string | undefined>;
     /**
      * Application resource type, deprecated parameter.
      */
-    applicationResourceType?: pulumi.Input<string>;
+    applicationResourceType?: pulumi.Input<string | undefined>;
     /**
      * Application runtime type.
      */
-    applicationRuntimeType?: pulumi.Input<string>;
+    applicationRuntimeType?: pulumi.Input<string | undefined>;
     /**
      * Application type: V for virtual machine, C for container, S for serverless.
      */
-    applicationType?: pulumi.Input<string>;
+    applicationType?: pulumi.Input<string | undefined>;
     /**
      * Ignore creating image repository.
      */
-    ignoreCreateImageRepository?: pulumi.Input<boolean>;
+    ignoreCreateImageRepository?: pulumi.Input<boolean | undefined>;
     /**
      * Application microservice type: M for service mesh, N for normal application, G for gateway application.
      */
-    microserviceType?: pulumi.Input<string>;
+    microserviceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the dataset to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * N/A.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of service configuration information.
      */
-    serviceConfigLists?: pulumi.Input<pulumi.Input<inputs.Tsf.ApplicationServiceConfigList>[]>;
+    serviceConfigLists?: pulumi.Input<pulumi.Input<inputs.Tsf.ApplicationServiceConfigList>[] | undefined>;
 }
 
 /**
@@ -217,11 +217,11 @@ export interface ApplicationArgs {
     /**
      * Application description.
      */
-    applicationDesc?: pulumi.Input<string>;
+    applicationDesc?: pulumi.Input<string | undefined>;
     /**
      * Application log configuration, deprecated parameter.
      */
-    applicationLogConfig?: pulumi.Input<string>;
+    applicationLogConfig?: pulumi.Input<string | undefined>;
     /**
      * Application name.
      */
@@ -229,11 +229,11 @@ export interface ApplicationArgs {
     /**
      * Application resource type, deprecated parameter.
      */
-    applicationResourceType?: pulumi.Input<string>;
+    applicationResourceType?: pulumi.Input<string | undefined>;
     /**
      * Application runtime type.
      */
-    applicationRuntimeType?: pulumi.Input<string>;
+    applicationRuntimeType?: pulumi.Input<string | undefined>;
     /**
      * Application type: V for virtual machine, C for container, S for serverless.
      */
@@ -241,7 +241,7 @@ export interface ApplicationArgs {
     /**
      * Ignore creating image repository.
      */
-    ignoreCreateImageRepository?: pulumi.Input<boolean>;
+    ignoreCreateImageRepository?: pulumi.Input<boolean | undefined>;
     /**
      * Application microservice type: M for service mesh, N for normal application, G for gateway application.
      */
@@ -249,13 +249,13 @@ export interface ApplicationArgs {
     /**
      * ID of the dataset to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * N/A.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of service configuration information.
      */
-    serviceConfigLists?: pulumi.Input<pulumi.Input<inputs.Tsf.ApplicationServiceConfigList>[]>;
+    serviceConfigLists?: pulumi.Input<pulumi.Input<inputs.Tsf.ApplicationServiceConfigList>[] | undefined>;
 }

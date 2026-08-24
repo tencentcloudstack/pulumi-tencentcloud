@@ -21,13 +21,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var kubernetesAddons = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
         ///     {
-        ///         ClusterId = "cls-12345678",
+        ///         ClusterId = "cls-5yezvaxo",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-5yezvaxo",
+        ///         AddonName = "ip-masq-agent",
         ///     });
         /// 
         /// });
@@ -45,13 +64,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var kubernetesAddons = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
         ///     {
-        ///         ClusterId = "cls-12345678",
+        ///         ClusterId = "cls-5yezvaxo",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-5yezvaxo",
+        ///         AddonName = "ip-masq-agent",
         ///     });
         /// 
         /// });
@@ -69,13 +107,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var kubernetesAddons = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
         ///     {
-        ///         ClusterId = "cls-12345678",
+        ///         ClusterId = "cls-5yezvaxo",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Kubernetes.GetAddons.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-5yezvaxo",
+        ///         AddonName = "ip-masq-agent",
         ///     });
         /// 
         /// });

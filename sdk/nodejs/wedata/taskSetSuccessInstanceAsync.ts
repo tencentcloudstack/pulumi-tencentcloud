@@ -94,11 +94,11 @@ export interface TaskSetSuccessInstanceAsyncState {
     /**
      * Instance id list, which can be obtained from ListInstances.
      */
-    instanceKeyLists?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceKeyLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project Id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**

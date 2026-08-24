@@ -6,99 +6,6 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
-/**
- * Provide a resource to create a VOD super player config.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const foo = new tencentcloud.vod.AdaptiveDynamicStreamingTemplate("foo", {
- *     format: "HLS",
- *     name: "tf-adaptive",
- *     drmType: "SimpleAES",
- *     disableHigherVideoBitrate: false,
- *     disableHigherVideoResolution: false,
- *     comment: "test",
- *     streamInfos: [
- *         {
- *             video: {
- *                 codec: "libx265",
- *                 fps: 4,
- *                 bitrate: 129,
- *                 resolutionAdaptive: false,
- *                 width: 128,
- *                 height: 128,
- *                 fillType: "stretch",
- *             },
- *             audio: {
- *                 codec: "libmp3lame",
- *                 bitrate: 129,
- *                 sampleRate: 44100,
- *                 audioChannel: "dual",
- *             },
- *             removeAudio: false,
- *         },
- *         {
- *             video: {
- *                 codec: "libx264",
- *                 fps: 4,
- *                 bitrate: 256,
- *             },
- *             audio: {
- *                 codec: "libfdk_aac",
- *                 bitrate: 256,
- *                 sampleRate: 44100,
- *             },
- *             removeAudio: true,
- *         },
- *     ],
- * });
- * const fooImageSpriteTemplate = new tencentcloud.vod.ImageSpriteTemplate("foo", {
- *     sampleType: "Percent",
- *     sampleInterval: 10,
- *     rowCount: 3,
- *     columnCount: 3,
- *     name: "tf-sprite",
- *     comment: "test",
- *     fillType: "stretch",
- *     width: 128,
- *     height: 128,
- *     resolutionAdaptive: false,
- * });
- * const fooSuperPlayerConfig = new tencentcloud.vod.SuperPlayerConfig("foo", {
- *     name: "tf-super-player",
- *     drmSwitch: true,
- *     drmStreamingInfo: {
- *         simpleAesDefinition: foo.id,
- *     },
- *     imageSpriteDefinition: fooImageSpriteTemplate.id,
- *     resolutionNames: [
- *         {
- *             minEdgeLength: 889,
- *             name: "test1",
- *         },
- *         {
- *             minEdgeLength: 890,
- *             name: "test2",
- *         },
- *     ],
- *     domain: "Default",
- *     scheme: "Default",
- *     comment: "test",
- * });
- * ```
- *
- * ## Import
- *
- * VOD super player config can be imported using the name, e.g.
- *
- * ```sh
- * $ pulumi import tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig foo tf-super-player
- * ```
- */
 export class SuperPlayerConfig extends pulumi.CustomResource {
     /**
      * Get an existing SuperPlayerConfig resource's state with the given name, ID, and optional extra
@@ -228,51 +135,51 @@ export interface SuperPlayerConfigState {
     /**
      * ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drmSwitch` is `false`.
      */
-    adaptiveDynamicStreamingDefinition?: pulumi.Input<string>;
+    adaptiveDynamicStreamingDefinition?: pulumi.Input<string | undefined>;
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Creation time of template in ISO date format.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. `Default` by default.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if `drmSwitch` is `true`.
      */
-    drmStreamingInfo?: pulumi.Input<inputs.Vod.SuperPlayerConfigDrmStreamingInfo>;
+    drmStreamingInfo?: pulumi.Input<inputs.Vod.SuperPlayerConfigDrmStreamingInfo | undefined>;
     /**
      * Switch of DRM-protected adaptive bitstream playback: `true`: enabled, indicating to play back only output adaptive bitstreams protected by DRM; `false`: disabled, indicating to play back unencrypted output adaptive bitstreams. Default value: `false`.
      */
-    drmSwitch?: pulumi.Input<boolean>;
+    drmSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the image sprite template that allows output.
      */
-    imageSpriteDefinition?: pulumi.Input<string>;
+    imageSpriteDefinition?: pulumi.Input<string | undefined>;
     /**
      * Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: `min_edge_length: 240, name: LD`; `min_edge_length: 480, name: SD`; `min_edge_length: 720, name: HD`; `min_edge_length: 1080, name: FHD`; `min_edge_length: 1440, name: 2K`; `min_edge_length: 2160, name: 4K`; `min_edge_length: 4320, name: 8K`.
      */
-    resolutionNames?: pulumi.Input<pulumi.Input<inputs.Vod.SuperPlayerConfigResolutionName>[]>;
+    resolutionNames?: pulumi.Input<pulumi.Input<inputs.Vod.SuperPlayerConfigResolutionName>[] | undefined>;
     /**
      * Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values: `HTTP`; `HTTPS`.
      */
-    scheme?: pulumi.Input<string>;
+    scheme?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Last modified time of template in ISO date format.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -282,41 +189,41 @@ export interface SuperPlayerConfigArgs {
     /**
      * ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drmSwitch` is `false`.
      */
-    adaptiveDynamicStreamingDefinition?: pulumi.Input<string>;
+    adaptiveDynamicStreamingDefinition?: pulumi.Input<string | undefined>;
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. `Default` by default.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if `drmSwitch` is `true`.
      */
-    drmStreamingInfo?: pulumi.Input<inputs.Vod.SuperPlayerConfigDrmStreamingInfo>;
+    drmStreamingInfo?: pulumi.Input<inputs.Vod.SuperPlayerConfigDrmStreamingInfo | undefined>;
     /**
      * Switch of DRM-protected adaptive bitstream playback: `true`: enabled, indicating to play back only output adaptive bitstreams protected by DRM; `false`: disabled, indicating to play back unencrypted output adaptive bitstreams. Default value: `false`.
      */
-    drmSwitch?: pulumi.Input<boolean>;
+    drmSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the image sprite template that allows output.
      */
-    imageSpriteDefinition?: pulumi.Input<string>;
+    imageSpriteDefinition?: pulumi.Input<string | undefined>;
     /**
      * Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used: `min_edge_length: 240, name: LD`; `min_edge_length: 480, name: SD`; `min_edge_length: 720, name: HD`; `min_edge_length: 1080, name: FHD`; `min_edge_length: 1440, name: 2K`; `min_edge_length: 2160, name: 4K`; `min_edge_length: 4320, name: 8K`.
      */
-    resolutionNames?: pulumi.Input<pulumi.Input<inputs.Vod.SuperPlayerConfigResolutionName>[]>;
+    resolutionNames?: pulumi.Input<pulumi.Input<inputs.Vod.SuperPlayerConfigResolutionName>[] | undefined>;
     /**
      * Scheme used for playback. If it is left empty or set to `Default`, the scheme configured in [Default Distribution Configuration](https://cloud.tencent.com/document/product/266/33373) will be used. Other valid values: `HTTP`; `HTTPS`.
      */
-    scheme?: pulumi.Input<string>;
+    scheme?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
 }

@@ -98,7 +98,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Import
     /// 
-    /// apigateway api_app_attachment can be imported using the id, e.g.
+    /// apigateway ApiAppAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w

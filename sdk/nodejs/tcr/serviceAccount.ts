@@ -205,39 +205,39 @@ export interface ServiceAccountState {
     /**
      * Service account description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * whether to disable Service accounts.
      */
-    disable?: pulumi.Input<boolean>;
+    disable?: pulumi.Input<boolean | undefined>;
     /**
      * expiration date (unit: day), calculated from the current time, priority is higher than ExpiresAt Service account description.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * Service account expiration time (time stamp, unit: milliseconds).
      */
-    expiresAt?: pulumi.Input<number>;
+    expiresAt?: pulumi.Input<number | undefined>;
     /**
      * Service account name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Password of the service account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * strategy list.
      */
-    permissions?: pulumi.Input<pulumi.Input<inputs.Tcr.ServiceAccountPermission>[]>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.Tcr.ServiceAccountPermission>[] | undefined>;
     /**
      * instance id.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -247,27 +247,27 @@ export interface ServiceAccountArgs {
     /**
      * Service account description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * whether to disable Service accounts.
      */
-    disable?: pulumi.Input<boolean>;
+    disable?: pulumi.Input<boolean | undefined>;
     /**
      * expiration date (unit: day), calculated from the current time, priority is higher than ExpiresAt Service account description.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * Service account expiration time (time stamp, unit: milliseconds).
      */
-    expiresAt?: pulumi.Input<number>;
+    expiresAt?: pulumi.Input<number | undefined>;
     /**
      * Service account name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Password of the service account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * strategy list.
      */
@@ -279,5 +279,5 @@ export interface ServiceAccountArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

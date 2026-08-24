@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -84,7 +84,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver database_tde can be imported using the id, e.g.
+ * sqlserver databaseTde can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde example mssql-farjz9tz#tf_example_db
@@ -174,15 +174,15 @@ export interface DatabaseTdeState {
     /**
      * Database name list.
      */
-    dbNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dbNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * `enable` - enable encryption, `disable` - disable encryption.
      */
-    encryption?: pulumi.Input<string>;
+    encryption?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

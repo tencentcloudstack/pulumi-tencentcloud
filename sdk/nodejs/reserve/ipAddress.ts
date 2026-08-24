@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc reserve_ip_addresses can be imported using the id, e.g.
+ * vpc reserveIpAddresses can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
@@ -159,47 +159,47 @@ export interface IpAddressState {
     /**
      * Created time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * The IP description is retained on the intranet.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specify the reserved IP address of the intranet for which the IP application is requested.
      */
-    ipAddress?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string | undefined>;
     /**
      * Ip type for product application.
      */
-    ipType?: pulumi.Input<number>;
+    ipType?: pulumi.Input<number | undefined>;
     /**
      * The IP name is reserved for the intranet.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Reserve ip ID.
      */
-    reserveIpId?: pulumi.Input<string>;
+    reserveIpId?: pulumi.Input<string | undefined>;
     /**
      * The intranet retains the resource instance ID bound to the IPs.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Binding status.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC unique ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -209,23 +209,23 @@ export interface IpAddressArgs {
     /**
      * The IP description is retained on the intranet.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specify the reserved IP address of the intranet for which the IP application is requested.
      */
-    ipAddress?: pulumi.Input<string>;
+    ipAddress?: pulumi.Input<string | undefined>;
     /**
      * The IP name is reserved for the intranet.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC unique ID.
      */

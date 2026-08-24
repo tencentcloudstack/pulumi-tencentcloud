@@ -99,11 +99,11 @@ export interface RunJobState {
     /**
      * The description information for batch job startup.
      */
-    runJobDescriptions?: pulumi.Input<pulumi.Input<inputs.Oceanus.RunJobRunJobDescription>[]>;
+    runJobDescriptions?: pulumi.Input<pulumi.Input<inputs.Oceanus.RunJobRunJobDescription>[] | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -117,5 +117,5 @@ export interface RunJobArgs {
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

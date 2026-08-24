@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myLogs = tencentcloud.Tcr.getWebhookTriggerLogs({
+ * const myLogs = tencentcloud.tcr.getWebhookTriggerLogs({
  *     registryId: tcrId,
  *     namespace: tcrNamespace,
- *     triggerId: triggerId,
+ *     triggerId: Number(triggerId),
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -92,10 +92,10 @@ export interface GetWebhookTriggerLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myLogs = tencentcloud.Tcr.getWebhookTriggerLogs({
+ * const myLogs = tencentcloud.tcr.getWebhookTriggerLogs({
  *     registryId: tcrId,
  *     namespace: tcrNamespace,
- *     triggerId: triggerId,
+ *     triggerId: Number(triggerId),
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -128,11 +128,11 @@ export interface GetWebhookTriggerLogsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trigger id.
      */

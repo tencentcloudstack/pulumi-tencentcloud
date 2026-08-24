@@ -44,7 +44,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -55,7 +55,7 @@ import (
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -78,7 +78,7 @@ import (
 //			}
 //			// create ccn route table
 //			exampleRouteTable, err := ccn.NewRouteTable(ctx, "example", &ccn.RouteTableArgs{
-//				CcnId:       example.ID(),
+//				CcnId:       example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("tf-example"),
 //				Description: pulumi.String("desc."),
 //			})
@@ -88,7 +88,7 @@ import (
 //			// attachment instance
 //			_, err = tencentcloud.NewCcnAttachment(ctx, "attachment", &tencentcloud.CcnAttachmentArgs{
 //				CcnId:          example.ID(),
-//				InstanceId:     vpc.ID(),
+//				InstanceId:     vpc2.ID(),
 //				InstanceType:   "VPC",
 //				InstanceRegion: region,
 //				RouteTableId:   exampleRouteTable.ID(),
@@ -98,8 +98,8 @@ import (
 //			}
 //			// create route table input policy
 //			_, err = ccn.NewRouteTableInputPolicies(ctx, "example", &ccn.RouteTableInputPoliciesArgs{
-//				CcnId:        example.ID(),
-//				RouteTableId: exampleRouteTable.ID(),
+//				CcnId:        example.ID().ToIDOutput().ToStringOutput(),
+//				RouteTableId: exampleRouteTable.ID().ToIDOutput().ToStringOutput(),
 //				Policies: ccn.RouteTableInputPoliciesPolicyArray{
 //					&ccn.RouteTableInputPoliciesPolicyArgs{
 //						Action:      pulumi.String("accept"),

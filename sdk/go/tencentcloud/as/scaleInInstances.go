@@ -47,15 +47,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
@@ -81,20 +81,20 @@ import (
 //			}
 //			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(4),
 //				MinSize:          pulumi.Int(1),
 //				DesiredCapacity:  pulumi.Int(2),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = as.NewScaleInInstances(ctx, "scale_in_instances", &as.ScaleInInstancesArgs{
-//				AutoScalingGroupId: exampleScalingGroup.ID(),
+//				AutoScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
 //				ScaleInNumber:      pulumi.Int(1),
 //			})
 //			if err != nil {
@@ -108,7 +108,7 @@ import (
 //
 // ## Import
 //
-// as scale_in_instances can be imported using the id, e.g.
+// as scaleInInstances can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:As/scaleInInstances:ScaleInInstances scale_in_instances scale_in_instances_id

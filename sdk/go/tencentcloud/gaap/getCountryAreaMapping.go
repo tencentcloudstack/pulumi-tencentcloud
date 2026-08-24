@@ -62,12 +62,8 @@ type GetCountryAreaMappingResult struct {
 }
 
 func GetCountryAreaMappingOutput(ctx *pulumi.Context, args GetCountryAreaMappingOutputArgs, opts ...pulumi.InvokeOption) GetCountryAreaMappingResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCountryAreaMappingResultOutput, error) {
-			args := v.(GetCountryAreaMappingArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args, GetCountryAreaMappingResultOutput{}, options).(GetCountryAreaMappingResultOutput), nil
-		}).(GetCountryAreaMappingResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getCountryAreaMapping:getCountryAreaMapping", args, GetCountryAreaMappingResultOutput{}, options).(GetCountryAreaMappingResultOutput)
 }
 
 // A collection of arguments for invoking getCountryAreaMapping.

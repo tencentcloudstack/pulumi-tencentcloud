@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emrServiceNodeInfos = tencentcloud.Emr.getServiceNodeInfos({
+ * const emrServiceNodeInfos = tencentcloud.emr.getServiceNodeInfos({
  *     instanceId: "emr-rzrochgp",
  *     offset: 1,
  *     limit: 10,
@@ -157,7 +157,7 @@ export interface GetServiceNodeInfosResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emrServiceNodeInfos = tencentcloud.Emr.getServiceNodeInfos({
+ * const emrServiceNodeInfos = tencentcloud.emr.getServiceNodeInfos({
  *     instanceId: "emr-rzrochgp",
  *     offset: 1,
  *     limit: 10,
@@ -198,15 +198,15 @@ export interface GetServiceNodeInfosOutputArgs {
     /**
      * Configuration Status, -2: Configuration Failed, -1: Configuration Expired, 1: Synchronized, -99 All.
      */
-    confStatus?: pulumi.Input<number>;
+    confStatus?: pulumi.Input<number | undefined>;
     /**
      * Filter Condition: Whether DN is in Maintenance Mode - 0 represents all statuses, 1 represents in maintenance mode.
      */
-    dataNodeMaintenanceId?: pulumi.Input<number>;
+    dataNodeMaintenanceId?: pulumi.Input<number | undefined>;
     /**
      * Filter Conditions: Health Status, 0 represents unavailable, 1 represents good, -2 represents unknown, -99 represents all, -3 represents potential risks, -4 represents not detected.
      */
-    healthStateId?: pulumi.Input<string>;
+    healthStateId?: pulumi.Input<string | undefined>;
     /**
      * EMR Instance ID.
      */
@@ -214,37 +214,37 @@ export interface GetServiceNodeInfosOutputArgs {
     /**
      * Number of Items per Page.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Filter Condition: Maintenance Status - 0 represents all statuses, 1 represents normal mode, 2 represents maintenance mode.
      */
-    maintainStateId?: pulumi.Input<number>;
+    maintainStateId?: pulumi.Input<number | undefined>;
     /**
      * Node Names: master, core, task, common, router, all.
      */
-    nodeTypeName?: pulumi.Input<string>;
+    nodeTypeName?: pulumi.Input<string | undefined>;
     /**
      * Page Number.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Filter Condition: Operation Status - 0 represents all statuses, 1 represents started, 2 represents stopped.
      */
-    operatorStateId?: pulumi.Input<number>;
+    operatorStateId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search Fields.
      */
-    searchFields?: pulumi.Input<pulumi.Input<inputs.Emr.GetServiceNodeInfosSearchFieldArgs>[]>;
+    searchFields?: pulumi.Input<pulumi.Input<inputs.Emr.GetServiceNodeInfosSearchFieldArgs>[] | undefined>;
     /**
      * Search Field.
      */
-    searchText?: pulumi.Input<string>;
+    searchText?: pulumi.Input<string | undefined>;
     /**
      * Service Component Name, all in uppercase, e.g., YARN.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
 }

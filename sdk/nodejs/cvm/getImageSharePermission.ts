@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cvm.getImageSharePermission({
+ * const example = tencentcloud.cvm.getImageSharePermission({
  *     imageId: "img-0elsru2u",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetImageSharePermissionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cvm.getImageSharePermission({
+ * const example = tencentcloud.cvm.getImageSharePermission({
  *     imageId: "img-0elsru2u",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetImageSharePermissionOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

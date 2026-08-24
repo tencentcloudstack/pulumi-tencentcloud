@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDownstreamTasks = tencentcloud.Wedata.getDownstreamTasks({
+ * const wedataDownstreamTasks = tencentcloud.wedata.getDownstreamTasks({
  *     projectId: "2905622749543821312",
  *     taskId: "20251015164958429",
  * });
@@ -73,7 +73,7 @@ export interface GetDownstreamTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDownstreamTasks = tencentcloud.Wedata.getDownstreamTasks({
+ * const wedataDownstreamTasks = tencentcloud.wedata.getDownstreamTasks({
  *     projectId: "2905622749543821312",
  *     taskId: "20251015164958429",
  * });
@@ -99,7 +99,7 @@ export interface GetDownstreamTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */

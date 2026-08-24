@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
 {
     /// <summary>
-    /// Provides a resource to create security group.
+    /// Provides a resource to create Security group.
     /// 
     /// ## Example Usage
     /// 
@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// {
     ///     var example = new Tencentcloud.Security.Group("example", new()
     ///     {
-    ///         Name = "tf-example-sg",
+    ///         Name = "tf-example",
     ///         Description = "sg test",
     ///     });
     /// 
@@ -46,12 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// {
     ///     var example = new Tencentcloud.Security.Group("example", new()
     ///     {
-    ///         Name = "tf-example-sg",
+    ///         Name = "tf-example",
     ///         Description = "sg test",
     ///         ProjectId = 0,
     ///         Tags = 
     ///         {
-    ///             { "example", "test" },
+    ///             { "createdBy", "Terraform" },
     ///         },
     ///     });
     /// 
@@ -63,7 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// Security group can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Security/group:Group  tencentcloud_security_group.sglab sg-ey3wmiz1
+    /// $ pulumi import tencentcloud:Security/group:Group example sg-ey3wmiz1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/group:Group")]

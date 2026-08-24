@@ -11,66 +11,38 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     /// <summary>
-    /// Provides a resource to create a cynosdb cluster slave zone.
+    /// Provides a resource to create a CynosDB cluster slave zone.
+    /// 
+    /// &gt; **NOTE:** If you use resource `tencentcloud.Cynosdb.ClusterSlaveZone` to configure `SlaveZone` for `tencentcloud.Cynosdb.Cluster`, then you cannot simultaneously set the `SlaveZone` field of resource `tencentcloud.Cynosdb.Cluster`.
     /// 
     /// ## Example Usage
     /// 
-    /// ### Set a new slave zone for a cynosdb cluster.
+    /// ### Set a new slave zone for a cynosdb cluster
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var gz3 = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    ///     var example = new Tencentcloud.Cynosdb.Cluster("example", new()
     ///     {
-    ///         AvailabilityZone = defaultAz,
-    ///         IsDefault = true,
-    ///     });
-    /// 
-    ///     var vpcId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
-    /// 
-    ///     var subnetId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
-    /// 
-    ///     var config = new Config();
-    ///     var fixedTags = config.GetObject&lt;dynamic&gt;("fixedTags") ?? 
-    ///     {
-    ///         { "fixedResource", "do_not_remove" },
-    ///     };
-    ///     var @internal = Tencentcloud.Security.GetGroups.Invoke(new()
-    ///     {
-    ///         Name = "default",
-    ///         Tags = fixedTags,
-    ///     });
-    /// 
-    ///     var sgId = @internal.Apply(@internal =&gt; @internal.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId));
-    /// 
-    ///     var exclusive = Tencentcloud.Security.GetGroups.Invoke(new()
-    ///     {
-    ///         Name = "test_preset_sg",
-    ///     });
-    /// 
-    ///     var sgId2 = exclusive.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId);
-    /// 
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///     var newAvailabilityZone = config.Get("newAvailabilityZone") ?? "ap-guangzhou-6";
-    ///     var myParamTemplate = config.Get("myParamTemplate") ?? "15765";
-    ///     var instance = new Tencentcloud.Cynosdb.Cluster("instance", new()
-    ///     {
-    ///         AvailableZone = availabilityZone,
-    ///         VpcId = vpcId,
-    ///         SubnetId = subnetId,
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         DbMode = "NORMAL",
     ///         DbType = "MYSQL",
     ///         DbVersion = "5.7",
-    ///         StorageLimit = 1000,
-    ///         ClusterName = "tf_test_cynosdb_cluster_slave_zone",
-    ///         Password = "cynos@123",
-    ///         InstanceMaintainDuration = 3600,
+    ///         Port = 3306,
+    ///         ClusterName = "tf-example",
+    ///         Password = "CynosDB@123",
+    ///         InstanceMaintainDuration = 7200,
     ///         InstanceMaintainStartTime = 10800,
+    ///         InstanceCpuCore = 2,
+    ///         InstanceMemorySize = 4,
+    ///         ForceDelete = true,
     ///         InstanceMaintainWeekdays = new[]
     ///         {
     ///             "Fri",
@@ -81,56 +53,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///             "Wed",
     ///             "Tue",
     ///         },
-    ///         InstanceCpuCore = 1,
-    ///         InstanceMemorySize = 2,
     ///         ParamItems = new[]
     ///         {
     ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
     ///             {
     ///                 Name = "character_set_server",
-    ///                 CurrentValue = "utf8",
+    ///                 CurrentValue = "utf8mb4",
     ///             },
     ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
     ///             {
-    ///                 Name = "time_zone",
-    ///                 CurrentValue = "+09:00",
+    ///                 Name = "lower_case_table_names",
+    ///                 CurrentValue = "0",
     ///             },
     ///         },
-    ///         ForceDelete = true,
-    ///         RwGroupSgs = new[]
+    ///         Tags = 
     ///         {
-    ///             sgId,
+    ///             { "createBy", "Terraform" },
     ///         },
-    ///         RoGroupSgs = new[]
-    ///         {
-    ///             sgId,
-    ///         },
-    ///         PrarmTemplateId = myParamTemplate,
     ///     });
     /// 
-    ///     var clusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("cluster_slave_zone", new()
+    ///     var exampleClusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("example", new()
     ///     {
-    ///         ClusterId = instance.Id,
-    ///         SlaveZone = newAvailabilityZone,
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ### Update the slave zone with specified value.
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var clusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("cluster_slave_zone", new()
-    ///     {
-    ///         ClusterId = instance.Id,
-    ///         SlaveZone = availabilityZone,
+    ///         ClusterId = example.Id,
+    ///         SlaveZone = "ap-guangzhou-7",
     ///     });
     /// 
     /// });
@@ -138,10 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb cluster_slave_zone can be imported using the id, e.g.
+    /// CynosDB cluster slave zone can be imported using the clusterId#slaveZone, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
+    /// $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone example cynosdbmysql-g76di9j5#ap-guangzhou-7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone")]

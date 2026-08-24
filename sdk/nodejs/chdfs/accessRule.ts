@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs access_rule can be imported using the id, e.g.
+ * chdfs accessRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id
@@ -108,11 +108,11 @@ export interface AccessRuleState {
     /**
      * access group id.
      */
-    accessGroupId?: pulumi.Input<string>;
+    accessGroupId?: pulumi.Input<string | undefined>;
     /**
      * rule detail.
      */
-    accessRule?: pulumi.Input<inputs.Chdfs.AccessRuleAccessRule>;
+    accessRule?: pulumi.Input<inputs.Chdfs.AccessRuleAccessRule | undefined>;
 }
 
 /**

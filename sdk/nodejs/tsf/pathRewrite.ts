@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf path_rewrite can be imported using the id, e.g.
+ * tsf pathRewrite can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
@@ -138,27 +138,27 @@ export interface PathRewriteState {
     /**
      * Whether to shield the mapped path, Y: Yes N: No.
      */
-    blocked?: pulumi.Input<string>;
+    blocked?: pulumi.Input<string | undefined>;
     /**
      * gateway deployment group ID.
      */
-    gatewayGroupId?: pulumi.Input<string>;
+    gatewayGroupId?: pulumi.Input<string | undefined>;
     /**
      * rule order, the smaller the higher the priority.
      */
-    order?: pulumi.Input<number>;
+    order?: pulumi.Input<number | undefined>;
     /**
      * path rewrite rule ID.
      */
-    pathRewriteId?: pulumi.Input<string>;
+    pathRewriteId?: pulumi.Input<string | undefined>;
     /**
      * regular expression.
      */
-    regex?: pulumi.Input<string>;
+    regex?: pulumi.Input<string | undefined>;
     /**
      * content to replace.
      */
-    replacement?: pulumi.Input<string>;
+    replacement?: pulumi.Input<string | undefined>;
 }
 
 /**

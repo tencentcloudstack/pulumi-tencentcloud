@@ -133,6 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Output("engineVersion")]
         public Output<string> EngineVersion { get; private set; } = null!;
@@ -351,6 +352,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion", required: true)]
         public Input<string> EngineVersion { get; set; } = null!;
@@ -530,6 +532,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }

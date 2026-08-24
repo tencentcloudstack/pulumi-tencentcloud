@@ -76,12 +76,8 @@ type GetInstanceOperationsResult struct {
 }
 
 func GetInstanceOperationsOutput(ctx *pulumi.Context, args GetInstanceOperationsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceOperationsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceOperationsResultOutput, error) {
-			args := v.(GetInstanceOperationsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args, GetInstanceOperationsResultOutput{}, options).(GetInstanceOperationsResultOutput), nil
-		}).(GetInstanceOperationsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstanceOperations:getInstanceOperations", args, GetInstanceOperationsResultOutput{}, options).(GetInstanceOperationsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceOperations.

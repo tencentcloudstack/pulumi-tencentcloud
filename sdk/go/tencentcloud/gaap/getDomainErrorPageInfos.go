@@ -69,12 +69,8 @@ type GetDomainErrorPageInfosResult struct {
 }
 
 func GetDomainErrorPageInfosOutput(ctx *pulumi.Context, args GetDomainErrorPageInfosOutputArgs, opts ...pulumi.InvokeOption) GetDomainErrorPageInfosResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainErrorPageInfosResultOutput, error) {
-			args := v.(GetDomainErrorPageInfosArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args, GetDomainErrorPageInfosResultOutput{}, options).(GetDomainErrorPageInfosResultOutput), nil
-		}).(GetDomainErrorPageInfosResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args, GetDomainErrorPageInfosResultOutput{}, options).(GetDomainErrorPageInfosResultOutput)
 }
 
 // A collection of arguments for invoking getDomainErrorPageInfos.

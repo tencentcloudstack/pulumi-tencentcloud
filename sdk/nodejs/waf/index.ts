@@ -15,6 +15,41 @@ export type AntiInfoLeak = import("./antiInfoLeak").AntiInfoLeak;
 export const AntiInfoLeak: typeof import("./antiInfoLeak").AntiInfoLeak = null as any;
 utilities.lazyLoad(exports, ["AntiInfoLeak"], () => require("./antiInfoLeak"));
 
+export { ApiSecSensitiveCustomApiExcludeRuleArgs, ApiSecSensitiveCustomApiExcludeRuleState } from "./apiSecSensitiveCustomApiExcludeRule";
+export type ApiSecSensitiveCustomApiExcludeRule = import("./apiSecSensitiveCustomApiExcludeRule").ApiSecSensitiveCustomApiExcludeRule;
+export const ApiSecSensitiveCustomApiExcludeRule: typeof import("./apiSecSensitiveCustomApiExcludeRule").ApiSecSensitiveCustomApiExcludeRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveCustomApiExcludeRule"], () => require("./apiSecSensitiveCustomApiExcludeRule"));
+
+export { ApiSecSensitiveCustomApiExtractRuleArgs, ApiSecSensitiveCustomApiExtractRuleState } from "./apiSecSensitiveCustomApiExtractRule";
+export type ApiSecSensitiveCustomApiExtractRule = import("./apiSecSensitiveCustomApiExtractRule").ApiSecSensitiveCustomApiExtractRule;
+export const ApiSecSensitiveCustomApiExtractRule: typeof import("./apiSecSensitiveCustomApiExtractRule").ApiSecSensitiveCustomApiExtractRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveCustomApiExtractRule"], () => require("./apiSecSensitiveCustomApiExtractRule"));
+
+export { ApiSecSensitiveCustomEventRuleArgs, ApiSecSensitiveCustomEventRuleState } from "./apiSecSensitiveCustomEventRule";
+export type ApiSecSensitiveCustomEventRule = import("./apiSecSensitiveCustomEventRule").ApiSecSensitiveCustomEventRule;
+export const ApiSecSensitiveCustomEventRule: typeof import("./apiSecSensitiveCustomEventRule").ApiSecSensitiveCustomEventRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveCustomEventRule"], () => require("./apiSecSensitiveCustomEventRule"));
+
+export { ApiSecSensitiveCustomRuleArgs, ApiSecSensitiveCustomRuleState } from "./apiSecSensitiveCustomRule";
+export type ApiSecSensitiveCustomRule = import("./apiSecSensitiveCustomRule").ApiSecSensitiveCustomRule;
+export const ApiSecSensitiveCustomRule: typeof import("./apiSecSensitiveCustomRule").ApiSecSensitiveCustomRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveCustomRule"], () => require("./apiSecSensitiveCustomRule"));
+
+export { ApiSecSensitivePrivilegeRuleArgs, ApiSecSensitivePrivilegeRuleState } from "./apiSecSensitivePrivilegeRule";
+export type ApiSecSensitivePrivilegeRule = import("./apiSecSensitivePrivilegeRule").ApiSecSensitivePrivilegeRule;
+export const ApiSecSensitivePrivilegeRule: typeof import("./apiSecSensitivePrivilegeRule").ApiSecSensitivePrivilegeRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitivePrivilegeRule"], () => require("./apiSecSensitivePrivilegeRule"));
+
+export { ApiSecSensitiveSceneRuleArgs, ApiSecSensitiveSceneRuleState } from "./apiSecSensitiveSceneRule";
+export type ApiSecSensitiveSceneRule = import("./apiSecSensitiveSceneRule").ApiSecSensitiveSceneRule;
+export const ApiSecSensitiveSceneRule: typeof import("./apiSecSensitiveSceneRule").ApiSecSensitiveSceneRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveSceneRule"], () => require("./apiSecSensitiveSceneRule"));
+
+export { ApiSecSensitiveWhiteRuleArgs, ApiSecSensitiveWhiteRuleState } from "./apiSecSensitiveWhiteRule";
+export type ApiSecSensitiveWhiteRule = import("./apiSecSensitiveWhiteRule").ApiSecSensitiveWhiteRule;
+export const ApiSecSensitiveWhiteRule: typeof import("./apiSecSensitiveWhiteRule").ApiSecSensitiveWhiteRule = null as any;
+utilities.lazyLoad(exports, ["ApiSecSensitiveWhiteRule"], () => require("./apiSecSensitiveWhiteRule"));
+
 export { AttackWhiteRuleArgs, AttackWhiteRuleState } from "./attackWhiteRule";
 export type AttackWhiteRule = import("./attackWhiteRule").AttackWhiteRule;
 export const AttackWhiteRule: typeof import("./attackWhiteRule").AttackWhiteRule = null as any;
@@ -24,6 +59,11 @@ export { AutoDenyRulesArgs, AutoDenyRulesState } from "./autoDenyRules";
 export type AutoDenyRules = import("./autoDenyRules").AutoDenyRules;
 export const AutoDenyRules: typeof import("./autoDenyRules").AutoDenyRules = null as any;
 utilities.lazyLoad(exports, ["AutoDenyRules"], () => require("./autoDenyRules"));
+
+export { BotIdRuleArgs, BotIdRuleState } from "./botIdRule";
+export type BotIdRule = import("./botIdRule").BotIdRule;
+export const BotIdRule: typeof import("./botIdRule").BotIdRule = null as any;
+utilities.lazyLoad(exports, ["BotIdRule"], () => require("./botIdRule"));
 
 export { BotSceneStatusConfigArgs, BotSceneStatusConfigState } from "./botSceneStatusConfig";
 export type BotSceneStatusConfig = import("./botSceneStatusConfig").BotSceneStatusConfig;
@@ -205,6 +245,11 @@ export type ProtectionMode = import("./protectionMode").ProtectionMode;
 export const ProtectionMode: typeof import("./protectionMode").ProtectionMode = null as any;
 utilities.lazyLoad(exports, ["ProtectionMode"], () => require("./protectionMode"));
 
+export { RateLimitArgs, RateLimitState } from "./rateLimit";
+export type RateLimit = import("./rateLimit").RateLimit;
+export const RateLimit: typeof import("./rateLimit").RateLimit = null as any;
+utilities.lazyLoad(exports, ["RateLimit"], () => require("./rateLimit"));
+
 export { SaasDomainArgs, SaasDomainState } from "./saasDomain";
 export type SaasDomain = import("./saasDomain").SaasDomain;
 export const SaasDomain: typeof import("./saasDomain").SaasDomain = null as any;
@@ -214,6 +259,11 @@ export { SaasInstanceArgs, SaasInstanceState } from "./saasInstance";
 export type SaasInstance = import("./saasInstance").SaasInstance;
 export const SaasInstance: typeof import("./saasInstance").SaasInstance = null as any;
 utilities.lazyLoad(exports, ["SaasInstance"], () => require("./saasInstance"));
+
+export { WafObjectArgs, WafObjectState } from "./wafObject";
+export type WafObject = import("./wafObject").WafObject;
+export const WafObject: typeof import("./wafObject").WafObject = null as any;
+utilities.lazyLoad(exports, ["WafObject"], () => require("./wafObject"));
 
 export { WebShellArgs, WebShellState } from "./webShell";
 export type WebShell = import("./webShell").WebShell;
@@ -229,10 +279,26 @@ const _module = {
                 return new AntiFake(name, <any>undefined, { urn })
             case "tencentcloud:Waf/antiInfoLeak:AntiInfoLeak":
                 return new AntiInfoLeak(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveCustomApiExcludeRule:ApiSecSensitiveCustomApiExcludeRule":
+                return new ApiSecSensitiveCustomApiExcludeRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveCustomApiExtractRule:ApiSecSensitiveCustomApiExtractRule":
+                return new ApiSecSensitiveCustomApiExtractRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveCustomEventRule:ApiSecSensitiveCustomEventRule":
+                return new ApiSecSensitiveCustomEventRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveCustomRule:ApiSecSensitiveCustomRule":
+                return new ApiSecSensitiveCustomRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitivePrivilegeRule:ApiSecSensitivePrivilegeRule":
+                return new ApiSecSensitivePrivilegeRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveSceneRule:ApiSecSensitiveSceneRule":
+                return new ApiSecSensitiveSceneRule(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/apiSecSensitiveWhiteRule:ApiSecSensitiveWhiteRule":
+                return new ApiSecSensitiveWhiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Waf/attackWhiteRule:AttackWhiteRule":
                 return new AttackWhiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Waf/autoDenyRules:AutoDenyRules":
                 return new AutoDenyRules(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/botIdRule:BotIdRule":
+                return new BotIdRule(name, <any>undefined, { urn })
             case "tencentcloud:Waf/botSceneStatusConfig:BotSceneStatusConfig":
                 return new BotSceneStatusConfig(name, <any>undefined, { urn })
             case "tencentcloud:Waf/botSceneUcbRule:BotSceneUcbRule":
@@ -275,10 +341,14 @@ const _module = {
                 return new OwaspWhiteRule(name, <any>undefined, { urn })
             case "tencentcloud:Waf/protectionMode:ProtectionMode":
                 return new ProtectionMode(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/rateLimit:RateLimit":
+                return new RateLimit(name, <any>undefined, { urn })
             case "tencentcloud:Waf/saasDomain:SaasDomain":
                 return new SaasDomain(name, <any>undefined, { urn })
             case "tencentcloud:Waf/saasInstance:SaasInstance":
                 return new SaasInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Waf/wafObject:WafObject":
+                return new WafObject(name, <any>undefined, { urn })
             case "tencentcloud:Waf/webShell:WebShell":
                 return new WebShell(name, <any>undefined, { urn })
             default:
@@ -288,8 +358,16 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/antiFake", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/antiInfoLeak", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveCustomApiExcludeRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveCustomApiExtractRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveCustomEventRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveCustomRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitivePrivilegeRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveSceneRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/apiSecSensitiveWhiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/attackWhiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/autoDenyRules", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/botIdRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/botSceneStatusConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/botSceneUcbRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/botStatusConfig", _module)
@@ -311,6 +389,8 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Waf/owaspRuleStatusConfig
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/owaspRuleTypeConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/owaspWhiteRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/protectionMode", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/rateLimit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/saasDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/saasInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Waf/wafObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Waf/webShell", _module)

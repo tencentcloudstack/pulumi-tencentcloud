@@ -62,12 +62,8 @@ type GetImageQuotaResult struct {
 }
 
 func GetImageQuotaOutput(ctx *pulumi.Context, args GetImageQuotaOutputArgs, opts ...pulumi.InvokeOption) GetImageQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetImageQuotaResultOutput, error) {
-			args := v.(GetImageQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getImageQuota:getImageQuota", args, GetImageQuotaResultOutput{}, options).(GetImageQuotaResultOutput), nil
-		}).(GetImageQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getImageQuota:getImageQuota", args, GetImageQuotaResultOutput{}, options).(GetImageQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getImageQuota.

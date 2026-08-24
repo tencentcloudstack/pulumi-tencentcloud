@@ -6,81 +6,6 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create postgresql account privileges
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * // create vpc
- * const vpc = new tencentcloud.vpc.Instance("vpc", {
- *     name: "vpc",
- *     cidrBlock: "10.0.0.0/16",
- * });
- * // create vpc subnet
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: availabilityZone,
- *     name: "subnet",
- *     vpcId: vpc.id,
- *     cidrBlock: "10.0.20.0/28",
- *     isMulticast: false,
- * });
- * // create postgresql
- * const example = new tencentcloud.postgresql.Instance("example", {
- *     name: "example",
- *     availabilityZone: availabilityZone,
- *     chargeType: "POSTPAID_BY_HOUR",
- *     vpcId: vpc.id,
- *     subnetId: subnet.id,
- *     dbMajorVersion: "10",
- *     engineVersion: "10.23",
- *     rootUser: "root123",
- *     rootPassword: "Root123$",
- *     charset: "UTF8",
- *     projectId: 0,
- *     cpu: 1,
- *     memory: 2,
- *     storage: 10,
- *     tags: {
- *         test: "tf",
- *     },
- * });
- * // create account
- * const exampleAccount = new tencentcloud.postgresql.Account("example", {
- *     dbInstanceId: example.id,
- *     userName: "tf_example",
- *     password: "Password@123",
- *     type: "normal",
- *     remark: "remark",
- *     lockStatus: false,
- * });
- * // create account privileges
- * const exampleAccountPrivilegesOperation = new tencentcloud.postgresql.AccountPrivilegesOperation("example", {
- *     dbInstanceId: example.id,
- *     userName: exampleAccount.userName,
- *     modifyPrivilegeSets: [{
- *         databasePrivilege: {
- *             object: {
- *                 objectName: "postgres",
- *                 objectType: "database",
- *             },
- *             privilegeSets: [
- *                 "CONNECT",
- *                 "TEMPORARY",
- *                 "CREATE",
- *             ],
- *         },
- *         modifyType: "grantObject",
- *         isCascade: false,
- *     }],
- * });
- * ```
- */
 export class AccountPrivilegesOperation extends pulumi.CustomResource {
     /**
      * Get an existing AccountPrivilegesOperation resource's state with the given name, ID, and optional extra
@@ -165,15 +90,15 @@ export interface AccountPrivilegesOperationState {
     /**
      * Instance ID in the format of postgres-4wdeb0zv.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Privileges to modify. Batch modification supported, up to 50 entries at a time.
      */
-    modifyPrivilegeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.AccountPrivilegesOperationModifyPrivilegeSet>[]>;
+    modifyPrivilegeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.AccountPrivilegesOperationModifyPrivilegeSet>[] | undefined>;
     /**
      * Instance username.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**

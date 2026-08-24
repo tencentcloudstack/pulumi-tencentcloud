@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Import
     /// 
-    /// gaap global_domain can be imported using the id, e.g.
+    /// gaap GlobalDomain can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}

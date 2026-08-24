@@ -71,11 +71,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Clb/customizedConfigV2:CustomizedConfigV2 example pz-diowqstq#SERVER
-    /// ```
     /// 
     /// Or
     /// 
-    /// ```sh
     /// $ pulumi import tencentcloud:Clb/customizedConfigV2:CustomizedConfigV2 example pz-4r10y4b2#LOCATION
     /// ```
     /// </summary>

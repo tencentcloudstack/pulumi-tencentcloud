@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a postgres backupPlanConfig
+ * Provides a resource to create a postgres backup plan config
  *
  * ## Example Usage
  *
@@ -13,25 +13,31 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupPlanConfig = new tencentcloud.postgresql.BackupPlanConfig("backup_plan_config", {
- *     dbInstanceId: pgsqlId,
+ * const example = new tencentcloud.postgresql.BackupPlanConfig("example", {
+ *     dbInstanceId: "postgres-ckwcgdf1",
  *     minBackupStartTime: "01:00:00",
- *     maxBackupStartTime: "02:00:00",
- *     baseBackupRetentionPeriod: 7,
+ *     maxBackupStartTime: "03:00:00",
  *     backupPeriods: [
  *         "monday",
+ *         "tuesday",
  *         "wednesday",
+ *         "thursday",
  *         "friday",
+ *         "saturday",
+ *         "sunday",
  *     ],
+ *     baseBackupRetentionPeriod: 7,
+ *     logBackupRetentionPeriod: 7,
+ *     backupMethod: "physical",
  * });
  * ```
  *
  * ## Import
  *
- * postgres backup_plan_config can be imported using the id, e.g.
+ * postgres backup plan config can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+ * $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig example postgres-ckwcgdf1
  * ```
  */
 export class BackupPlanConfig extends pulumi.CustomResource {
@@ -63,25 +69,33 @@ export class BackupPlanConfig extends pulumi.CustomResource {
     }
 
     /**
+     * Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+     */
+    declare public readonly backupMethod: pulumi.Output<string>;
+    /**
      * Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
      */
-    declare public readonly backupPeriods: pulumi.Output<string[] | undefined>;
+    declare public readonly backupPeriods: pulumi.Output<string[]>;
     /**
      * Backup retention period in days. Value range:7-1830.
      */
-    declare public readonly baseBackupRetentionPeriod: pulumi.Output<number | undefined>;
+    declare public readonly baseBackupRetentionPeriod: pulumi.Output<number>;
     /**
      * instance id.
      */
     declare public readonly dbInstanceId: pulumi.Output<string>;
     /**
+     * Log backup retention period in days. Value range: 7-1830.
+     */
+    declare public readonly logBackupRetentionPeriod: pulumi.Output<number>;
+    /**
      * The latest time to start a backup.
      */
-    declare public readonly maxBackupStartTime: pulumi.Output<string | undefined>;
+    declare public readonly maxBackupStartTime: pulumi.Output<string>;
     /**
      * The earliest time to start a backup.
      */
-    declare public readonly minBackupStartTime: pulumi.Output<string | undefined>;
+    declare public readonly minBackupStartTime: pulumi.Output<string>;
 
     /**
      * Create a BackupPlanConfig resource with the given unique name, arguments, and options.
@@ -96,9 +110,11 @@ export class BackupPlanConfig extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as BackupPlanConfigState | undefined;
+            resourceInputs["backupMethod"] = state?.backupMethod;
             resourceInputs["backupPeriods"] = state?.backupPeriods;
             resourceInputs["baseBackupRetentionPeriod"] = state?.baseBackupRetentionPeriod;
             resourceInputs["dbInstanceId"] = state?.dbInstanceId;
+            resourceInputs["logBackupRetentionPeriod"] = state?.logBackupRetentionPeriod;
             resourceInputs["maxBackupStartTime"] = state?.maxBackupStartTime;
             resourceInputs["minBackupStartTime"] = state?.minBackupStartTime;
         } else {
@@ -106,9 +122,11 @@ export class BackupPlanConfig extends pulumi.CustomResource {
             if (args?.dbInstanceId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'dbInstanceId'");
             }
+            resourceInputs["backupMethod"] = args?.backupMethod;
             resourceInputs["backupPeriods"] = args?.backupPeriods;
             resourceInputs["baseBackupRetentionPeriod"] = args?.baseBackupRetentionPeriod;
             resourceInputs["dbInstanceId"] = args?.dbInstanceId;
+            resourceInputs["logBackupRetentionPeriod"] = args?.logBackupRetentionPeriod;
             resourceInputs["maxBackupStartTime"] = args?.maxBackupStartTime;
             resourceInputs["minBackupStartTime"] = args?.minBackupStartTime;
         }
@@ -122,25 +140,33 @@ export class BackupPlanConfig extends pulumi.CustomResource {
  */
 export interface BackupPlanConfigState {
     /**
+     * Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+     */
+    backupMethod?: pulumi.Input<string | undefined>;
+    /**
      * Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
      */
-    backupPeriods?: pulumi.Input<pulumi.Input<string>[]>;
+    backupPeriods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup retention period in days. Value range:7-1830.
      */
-    baseBackupRetentionPeriod?: pulumi.Input<number>;
+    baseBackupRetentionPeriod?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
+    /**
+     * Log backup retention period in days. Value range: 7-1830.
+     */
+    logBackupRetentionPeriod?: pulumi.Input<number | undefined>;
     /**
      * The latest time to start a backup.
      */
-    maxBackupStartTime?: pulumi.Input<string>;
+    maxBackupStartTime?: pulumi.Input<string | undefined>;
     /**
      * The earliest time to start a backup.
      */
-    minBackupStartTime?: pulumi.Input<string>;
+    minBackupStartTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -148,23 +174,31 @@ export interface BackupPlanConfigState {
  */
 export interface BackupPlanConfigArgs {
     /**
+     * Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+     */
+    backupMethod?: pulumi.Input<string | undefined>;
+    /**
      * Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
      */
-    backupPeriods?: pulumi.Input<pulumi.Input<string>[]>;
+    backupPeriods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup retention period in days. Value range:7-1830.
      */
-    baseBackupRetentionPeriod?: pulumi.Input<number>;
+    baseBackupRetentionPeriod?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
     dbInstanceId: pulumi.Input<string>;
     /**
+     * Log backup retention period in days. Value range: 7-1830.
+     */
+    logBackupRetentionPeriod?: pulumi.Input<number | undefined>;
+    /**
      * The latest time to start a backup.
      */
-    maxBackupStartTime?: pulumi.Input<string>;
+    maxBackupStartTime?: pulumi.Input<string | undefined>;
     /**
      * The earliest time to start a backup.
      */
-    minBackupStartTime?: pulumi.Input<string>;
+    minBackupStartTime?: pulumi.Input<string | undefined>;
 }

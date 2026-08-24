@@ -68,12 +68,8 @@ type GetCompareTasksResult struct {
 }
 
 func GetCompareTasksOutput(ctx *pulumi.Context, args GetCompareTasksOutputArgs, opts ...pulumi.InvokeOption) GetCompareTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCompareTasksResultOutput, error) {
-			args := v.(GetCompareTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dts/getCompareTasks:getCompareTasks", args, GetCompareTasksResultOutput{}, options).(GetCompareTasksResultOutput), nil
-		}).(GetCompareTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dts/getCompareTasks:getCompareTasks", args, GetCompareTasksResultOutput{}, options).(GetCompareTasksResultOutput)
 }
 
 // A collection of arguments for invoking getCompareTasks.

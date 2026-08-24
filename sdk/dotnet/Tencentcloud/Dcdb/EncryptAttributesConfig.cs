@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -124,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Import
     /// 
-    /// dcdb encrypt_attributes_config can be imported using the id, e.g.
+    /// dcdb EncryptAttributesConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id

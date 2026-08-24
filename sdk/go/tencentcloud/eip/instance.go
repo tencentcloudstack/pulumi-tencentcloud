@@ -150,7 +150,7 @@ type Instance struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// The tags of eip.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 	Type pulumi.StringPtrOutput `pulumi:"type"`
 }
 
@@ -216,7 +216,7 @@ type instanceState struct {
 	Status *string `pulumi:"status"`
 	// The tags of eip.
 	Tags map[string]string `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
@@ -253,7 +253,7 @@ type InstanceState struct {
 	Status pulumi.StringPtrInput
 	// The tags of eip.
 	Tags pulumi.StringMapInput
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -290,7 +290,7 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// The tags of eip.
 	Tags map[string]string `pulumi:"tags"`
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 	Type *string `pulumi:"type"`
 }
 
@@ -324,7 +324,7 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// The tags of eip.
 	Tags pulumi.StringMapInput
-	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+	// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 	Type pulumi.StringPtrInput
 }
 
@@ -492,7 +492,7 @@ func (o InstanceOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
-// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
 func (o InstanceOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }

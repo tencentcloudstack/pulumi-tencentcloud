@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// mdl stream_live_input can be imported using the id, e.g.
+// mdl streamLiveInput can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id

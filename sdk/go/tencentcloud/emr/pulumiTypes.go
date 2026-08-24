@@ -1865,6 +1865,211 @@ func (o AutoScaleStrategyTimeAutoScaleStrategyTagArrayOutput) Index(i pulumi.Int
 	}).(AutoScaleStrategyTimeAutoScaleStrategyTagOutput)
 }
 
+type BootScriptPreExecutedFileSetting struct {
+	// COS AppId.
+	AppId *string `pulumi:"appId"`
+	// Script execution parameters.
+	Args *string `pulumi:"args"`
+	// COS bucket name.
+	Bucket *string `pulumi:"bucket"`
+	// Script file name.
+	CosFileName *string `pulumi:"cosFileName"`
+	// Script COS address.
+	CosFileUri *string `pulumi:"cosFileUri"`
+	// COS SecretId.
+	CosSecretId *string `pulumi:"cosSecretId"`
+	// COS SecretKey.
+	CosSecretKey *string `pulumi:"cosSecretKey"`
+	// COS domain data.
+	Domain *string `pulumi:"domain"`
+	// Script path on COS.
+	Path *string `pulumi:"path"`
+	// COS region name.
+	Region *string `pulumi:"region"`
+	// Remark.
+	Remark *string `pulumi:"remark"`
+	// Execution order.
+	RunOrder *int `pulumi:"runOrder"`
+	// Execution timing. Valid values: `resourceAfter`, `clusterAfter`.
+	WhenRun *string `pulumi:"whenRun"`
+}
+
+// BootScriptPreExecutedFileSettingInput is an input type that accepts BootScriptPreExecutedFileSettingArgs and BootScriptPreExecutedFileSettingOutput values.
+// You can construct a concrete instance of `BootScriptPreExecutedFileSettingInput` via:
+//
+//	BootScriptPreExecutedFileSettingArgs{...}
+type BootScriptPreExecutedFileSettingInput interface {
+	pulumi.Input
+
+	ToBootScriptPreExecutedFileSettingOutput() BootScriptPreExecutedFileSettingOutput
+	ToBootScriptPreExecutedFileSettingOutputWithContext(context.Context) BootScriptPreExecutedFileSettingOutput
+}
+
+type BootScriptPreExecutedFileSettingArgs struct {
+	// COS AppId.
+	AppId pulumi.StringPtrInput `pulumi:"appId"`
+	// Script execution parameters.
+	Args pulumi.StringPtrInput `pulumi:"args"`
+	// COS bucket name.
+	Bucket pulumi.StringPtrInput `pulumi:"bucket"`
+	// Script file name.
+	CosFileName pulumi.StringPtrInput `pulumi:"cosFileName"`
+	// Script COS address.
+	CosFileUri pulumi.StringPtrInput `pulumi:"cosFileUri"`
+	// COS SecretId.
+	CosSecretId pulumi.StringPtrInput `pulumi:"cosSecretId"`
+	// COS SecretKey.
+	CosSecretKey pulumi.StringPtrInput `pulumi:"cosSecretKey"`
+	// COS domain data.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// Script path on COS.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// COS region name.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Remark.
+	Remark pulumi.StringPtrInput `pulumi:"remark"`
+	// Execution order.
+	RunOrder pulumi.IntPtrInput `pulumi:"runOrder"`
+	// Execution timing. Valid values: `resourceAfter`, `clusterAfter`.
+	WhenRun pulumi.StringPtrInput `pulumi:"whenRun"`
+}
+
+func (BootScriptPreExecutedFileSettingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BootScriptPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (i BootScriptPreExecutedFileSettingArgs) ToBootScriptPreExecutedFileSettingOutput() BootScriptPreExecutedFileSettingOutput {
+	return i.ToBootScriptPreExecutedFileSettingOutputWithContext(context.Background())
+}
+
+func (i BootScriptPreExecutedFileSettingArgs) ToBootScriptPreExecutedFileSettingOutputWithContext(ctx context.Context) BootScriptPreExecutedFileSettingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootScriptPreExecutedFileSettingOutput)
+}
+
+// BootScriptPreExecutedFileSettingArrayInput is an input type that accepts BootScriptPreExecutedFileSettingArray and BootScriptPreExecutedFileSettingArrayOutput values.
+// You can construct a concrete instance of `BootScriptPreExecutedFileSettingArrayInput` via:
+//
+//	BootScriptPreExecutedFileSettingArray{ BootScriptPreExecutedFileSettingArgs{...} }
+type BootScriptPreExecutedFileSettingArrayInput interface {
+	pulumi.Input
+
+	ToBootScriptPreExecutedFileSettingArrayOutput() BootScriptPreExecutedFileSettingArrayOutput
+	ToBootScriptPreExecutedFileSettingArrayOutputWithContext(context.Context) BootScriptPreExecutedFileSettingArrayOutput
+}
+
+type BootScriptPreExecutedFileSettingArray []BootScriptPreExecutedFileSettingInput
+
+func (BootScriptPreExecutedFileSettingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BootScriptPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (i BootScriptPreExecutedFileSettingArray) ToBootScriptPreExecutedFileSettingArrayOutput() BootScriptPreExecutedFileSettingArrayOutput {
+	return i.ToBootScriptPreExecutedFileSettingArrayOutputWithContext(context.Background())
+}
+
+func (i BootScriptPreExecutedFileSettingArray) ToBootScriptPreExecutedFileSettingArrayOutputWithContext(ctx context.Context) BootScriptPreExecutedFileSettingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BootScriptPreExecutedFileSettingArrayOutput)
+}
+
+type BootScriptPreExecutedFileSettingOutput struct{ *pulumi.OutputState }
+
+func (BootScriptPreExecutedFileSettingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BootScriptPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (o BootScriptPreExecutedFileSettingOutput) ToBootScriptPreExecutedFileSettingOutput() BootScriptPreExecutedFileSettingOutput {
+	return o
+}
+
+func (o BootScriptPreExecutedFileSettingOutput) ToBootScriptPreExecutedFileSettingOutputWithContext(ctx context.Context) BootScriptPreExecutedFileSettingOutput {
+	return o
+}
+
+// COS AppId.
+func (o BootScriptPreExecutedFileSettingOutput) AppId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.AppId }).(pulumi.StringPtrOutput)
+}
+
+// Script execution parameters.
+func (o BootScriptPreExecutedFileSettingOutput) Args() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Args }).(pulumi.StringPtrOutput)
+}
+
+// COS bucket name.
+func (o BootScriptPreExecutedFileSettingOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Bucket }).(pulumi.StringPtrOutput)
+}
+
+// Script file name.
+func (o BootScriptPreExecutedFileSettingOutput) CosFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.CosFileName }).(pulumi.StringPtrOutput)
+}
+
+// Script COS address.
+func (o BootScriptPreExecutedFileSettingOutput) CosFileUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.CosFileUri }).(pulumi.StringPtrOutput)
+}
+
+// COS SecretId.
+func (o BootScriptPreExecutedFileSettingOutput) CosSecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.CosSecretId }).(pulumi.StringPtrOutput)
+}
+
+// COS SecretKey.
+func (o BootScriptPreExecutedFileSettingOutput) CosSecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.CosSecretKey }).(pulumi.StringPtrOutput)
+}
+
+// COS domain data.
+func (o BootScriptPreExecutedFileSettingOutput) Domain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Domain }).(pulumi.StringPtrOutput)
+}
+
+// Script path on COS.
+func (o BootScriptPreExecutedFileSettingOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// COS region name.
+func (o BootScriptPreExecutedFileSettingOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// Remark.
+func (o BootScriptPreExecutedFileSettingOutput) Remark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Execution order.
+func (o BootScriptPreExecutedFileSettingOutput) RunOrder() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *int { return v.RunOrder }).(pulumi.IntPtrOutput)
+}
+
+// Execution timing. Valid values: `resourceAfter`, `clusterAfter`.
+func (o BootScriptPreExecutedFileSettingOutput) WhenRun() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BootScriptPreExecutedFileSetting) *string { return v.WhenRun }).(pulumi.StringPtrOutput)
+}
+
+type BootScriptPreExecutedFileSettingArrayOutput struct{ *pulumi.OutputState }
+
+func (BootScriptPreExecutedFileSettingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BootScriptPreExecutedFileSetting)(nil)).Elem()
+}
+
+func (o BootScriptPreExecutedFileSettingArrayOutput) ToBootScriptPreExecutedFileSettingArrayOutput() BootScriptPreExecutedFileSettingArrayOutput {
+	return o
+}
+
+func (o BootScriptPreExecutedFileSettingArrayOutput) ToBootScriptPreExecutedFileSettingArrayOutputWithContext(ctx context.Context) BootScriptPreExecutedFileSettingArrayOutput {
+	return o
+}
+
+func (o BootScriptPreExecutedFileSettingArrayOutput) Index(i pulumi.IntInput) BootScriptPreExecutedFileSettingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BootScriptPreExecutedFileSetting {
+		return vs[0].([]BootScriptPreExecutedFileSetting)[vs[1].(int)]
+	}).(BootScriptPreExecutedFileSettingOutput)
+}
+
 type ClusterMultiZoneSetting struct {
 	// The location of the instance.
 	Placement *ClusterMultiZoneSettingPlacement `pulumi:"placement"`
@@ -6511,6 +6716,4683 @@ func (o ClusterTerminateNodeInfoArrayOutput) Index(i pulumi.IntInput) ClusterTer
 	}).(ClusterTerminateNodeInfoOutput)
 }
 
+type ClusterV2DependService struct {
+	// Shared component cluster instance ID.
+	InstanceId *string `pulumi:"instanceId"`
+	// Shared component name.
+	ServiceName *string `pulumi:"serviceName"`
+}
+
+// ClusterV2DependServiceInput is an input type that accepts ClusterV2DependServiceArgs and ClusterV2DependServiceOutput values.
+// You can construct a concrete instance of `ClusterV2DependServiceInput` via:
+//
+//	ClusterV2DependServiceArgs{...}
+type ClusterV2DependServiceInput interface {
+	pulumi.Input
+
+	ToClusterV2DependServiceOutput() ClusterV2DependServiceOutput
+	ToClusterV2DependServiceOutputWithContext(context.Context) ClusterV2DependServiceOutput
+}
+
+type ClusterV2DependServiceArgs struct {
+	// Shared component cluster instance ID.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Shared component name.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
+}
+
+func (ClusterV2DependServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2DependService)(nil)).Elem()
+}
+
+func (i ClusterV2DependServiceArgs) ToClusterV2DependServiceOutput() ClusterV2DependServiceOutput {
+	return i.ToClusterV2DependServiceOutputWithContext(context.Background())
+}
+
+func (i ClusterV2DependServiceArgs) ToClusterV2DependServiceOutputWithContext(ctx context.Context) ClusterV2DependServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2DependServiceOutput)
+}
+
+// ClusterV2DependServiceArrayInput is an input type that accepts ClusterV2DependServiceArray and ClusterV2DependServiceArrayOutput values.
+// You can construct a concrete instance of `ClusterV2DependServiceArrayInput` via:
+//
+//	ClusterV2DependServiceArray{ ClusterV2DependServiceArgs{...} }
+type ClusterV2DependServiceArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2DependServiceArrayOutput() ClusterV2DependServiceArrayOutput
+	ToClusterV2DependServiceArrayOutputWithContext(context.Context) ClusterV2DependServiceArrayOutput
+}
+
+type ClusterV2DependServiceArray []ClusterV2DependServiceInput
+
+func (ClusterV2DependServiceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2DependService)(nil)).Elem()
+}
+
+func (i ClusterV2DependServiceArray) ToClusterV2DependServiceArrayOutput() ClusterV2DependServiceArrayOutput {
+	return i.ToClusterV2DependServiceArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2DependServiceArray) ToClusterV2DependServiceArrayOutputWithContext(ctx context.Context) ClusterV2DependServiceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2DependServiceArrayOutput)
+}
+
+type ClusterV2DependServiceOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2DependServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2DependService)(nil)).Elem()
+}
+
+func (o ClusterV2DependServiceOutput) ToClusterV2DependServiceOutput() ClusterV2DependServiceOutput {
+	return o
+}
+
+func (o ClusterV2DependServiceOutput) ToClusterV2DependServiceOutputWithContext(ctx context.Context) ClusterV2DependServiceOutput {
+	return o
+}
+
+// Shared component cluster instance ID.
+func (o ClusterV2DependServiceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2DependService) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Shared component name.
+func (o ClusterV2DependServiceOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2DependService) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2DependServiceArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2DependServiceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2DependService)(nil)).Elem()
+}
+
+func (o ClusterV2DependServiceArrayOutput) ToClusterV2DependServiceArrayOutput() ClusterV2DependServiceArrayOutput {
+	return o
+}
+
+func (o ClusterV2DependServiceArrayOutput) ToClusterV2DependServiceArrayOutputWithContext(ctx context.Context) ClusterV2DependServiceArrayOutput {
+	return o
+}
+
+func (o ClusterV2DependServiceArrayOutput) Index(i pulumi.IntInput) ClusterV2DependServiceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2DependService {
+		return vs[0].([]ClusterV2DependService)[vs[1].(int)]
+	}).(ClusterV2DependServiceOutput)
+}
+
+type ClusterV2InstanceChargePrepaid struct {
+	// Purchase duration in months. Valid values: 1-12, 24, 36, 48, 60.
+	Period *int `pulumi:"period"`
+	// Auto-renew flag. Default is false.
+	RenewFlag *bool `pulumi:"renewFlag"`
+}
+
+// ClusterV2InstanceChargePrepaidInput is an input type that accepts ClusterV2InstanceChargePrepaidArgs and ClusterV2InstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `ClusterV2InstanceChargePrepaidInput` via:
+//
+//	ClusterV2InstanceChargePrepaidArgs{...}
+type ClusterV2InstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToClusterV2InstanceChargePrepaidOutput() ClusterV2InstanceChargePrepaidOutput
+	ToClusterV2InstanceChargePrepaidOutputWithContext(context.Context) ClusterV2InstanceChargePrepaidOutput
+}
+
+type ClusterV2InstanceChargePrepaidArgs struct {
+	// Purchase duration in months. Valid values: 1-12, 24, 36, 48, 60.
+	Period pulumi.IntPtrInput `pulumi:"period"`
+	// Auto-renew flag. Default is false.
+	RenewFlag pulumi.BoolPtrInput `pulumi:"renewFlag"`
+}
+
+func (ClusterV2InstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2InstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i ClusterV2InstanceChargePrepaidArgs) ToClusterV2InstanceChargePrepaidOutput() ClusterV2InstanceChargePrepaidOutput {
+	return i.ToClusterV2InstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i ClusterV2InstanceChargePrepaidArgs) ToClusterV2InstanceChargePrepaidOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2InstanceChargePrepaidOutput)
+}
+
+func (i ClusterV2InstanceChargePrepaidArgs) ToClusterV2InstanceChargePrepaidPtrOutput() ClusterV2InstanceChargePrepaidPtrOutput {
+	return i.ToClusterV2InstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2InstanceChargePrepaidArgs) ToClusterV2InstanceChargePrepaidPtrOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2InstanceChargePrepaidOutput).ToClusterV2InstanceChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// ClusterV2InstanceChargePrepaidPtrInput is an input type that accepts ClusterV2InstanceChargePrepaidArgs, ClusterV2InstanceChargePrepaidPtr and ClusterV2InstanceChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `ClusterV2InstanceChargePrepaidPtrInput` via:
+//
+//	        ClusterV2InstanceChargePrepaidArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2InstanceChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2InstanceChargePrepaidPtrOutput() ClusterV2InstanceChargePrepaidPtrOutput
+	ToClusterV2InstanceChargePrepaidPtrOutputWithContext(context.Context) ClusterV2InstanceChargePrepaidPtrOutput
+}
+
+type clusterV2InstanceChargePrepaidPtrType ClusterV2InstanceChargePrepaidArgs
+
+func ClusterV2InstanceChargePrepaidPtr(v *ClusterV2InstanceChargePrepaidArgs) ClusterV2InstanceChargePrepaidPtrInput {
+	return (*clusterV2InstanceChargePrepaidPtrType)(v)
+}
+
+func (*clusterV2InstanceChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2InstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i *clusterV2InstanceChargePrepaidPtrType) ToClusterV2InstanceChargePrepaidPtrOutput() ClusterV2InstanceChargePrepaidPtrOutput {
+	return i.ToClusterV2InstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2InstanceChargePrepaidPtrType) ToClusterV2InstanceChargePrepaidPtrOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2InstanceChargePrepaidPtrOutput)
+}
+
+type ClusterV2InstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2InstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2InstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o ClusterV2InstanceChargePrepaidOutput) ToClusterV2InstanceChargePrepaidOutput() ClusterV2InstanceChargePrepaidOutput {
+	return o
+}
+
+func (o ClusterV2InstanceChargePrepaidOutput) ToClusterV2InstanceChargePrepaidOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidOutput {
+	return o
+}
+
+func (o ClusterV2InstanceChargePrepaidOutput) ToClusterV2InstanceChargePrepaidPtrOutput() ClusterV2InstanceChargePrepaidPtrOutput {
+	return o.ToClusterV2InstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2InstanceChargePrepaidOutput) ToClusterV2InstanceChargePrepaidPtrOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2InstanceChargePrepaid) *ClusterV2InstanceChargePrepaid {
+		return &v
+	}).(ClusterV2InstanceChargePrepaidPtrOutput)
+}
+
+// Purchase duration in months. Valid values: 1-12, 24, 36, 48, 60.
+func (o ClusterV2InstanceChargePrepaidOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceChargePrepaid) *int { return v.Period }).(pulumi.IntPtrOutput)
+}
+
+// Auto-renew flag. Default is false.
+func (o ClusterV2InstanceChargePrepaidOutput) RenewFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceChargePrepaid) *bool { return v.RenewFlag }).(pulumi.BoolPtrOutput)
+}
+
+type ClusterV2InstanceChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2InstanceChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2InstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o ClusterV2InstanceChargePrepaidPtrOutput) ToClusterV2InstanceChargePrepaidPtrOutput() ClusterV2InstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o ClusterV2InstanceChargePrepaidPtrOutput) ToClusterV2InstanceChargePrepaidPtrOutputWithContext(ctx context.Context) ClusterV2InstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o ClusterV2InstanceChargePrepaidPtrOutput) Elem() ClusterV2InstanceChargePrepaidOutput {
+	return o.ApplyT(func(v *ClusterV2InstanceChargePrepaid) ClusterV2InstanceChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2InstanceChargePrepaid
+		return ret
+	}).(ClusterV2InstanceChargePrepaidOutput)
+}
+
+// Purchase duration in months. Valid values: 1-12, 24, 36, 48, 60.
+func (o ClusterV2InstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2InstanceChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Auto-renew flag. Default is false.
+func (o ClusterV2InstanceChargePrepaidPtrOutput) RenewFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterV2InstanceChargePrepaid) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ClusterV2LoginSettings struct {
+	// Login password, 8-16 characters, must contain uppercase, lowercase, digit and special character (supported special chars: `!@%^*`). First char cannot be special.
+	Password *string `pulumi:"password"`
+	// Public key ID for key-based login.
+	PublicKeyId *string `pulumi:"publicKeyId"`
+}
+
+// ClusterV2LoginSettingsInput is an input type that accepts ClusterV2LoginSettingsArgs and ClusterV2LoginSettingsOutput values.
+// You can construct a concrete instance of `ClusterV2LoginSettingsInput` via:
+//
+//	ClusterV2LoginSettingsArgs{...}
+type ClusterV2LoginSettingsInput interface {
+	pulumi.Input
+
+	ToClusterV2LoginSettingsOutput() ClusterV2LoginSettingsOutput
+	ToClusterV2LoginSettingsOutputWithContext(context.Context) ClusterV2LoginSettingsOutput
+}
+
+type ClusterV2LoginSettingsArgs struct {
+	// Login password, 8-16 characters, must contain uppercase, lowercase, digit and special character (supported special chars: `!@%^*`). First char cannot be special.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Public key ID for key-based login.
+	PublicKeyId pulumi.StringPtrInput `pulumi:"publicKeyId"`
+}
+
+func (ClusterV2LoginSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2LoginSettings)(nil)).Elem()
+}
+
+func (i ClusterV2LoginSettingsArgs) ToClusterV2LoginSettingsOutput() ClusterV2LoginSettingsOutput {
+	return i.ToClusterV2LoginSettingsOutputWithContext(context.Background())
+}
+
+func (i ClusterV2LoginSettingsArgs) ToClusterV2LoginSettingsOutputWithContext(ctx context.Context) ClusterV2LoginSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2LoginSettingsOutput)
+}
+
+func (i ClusterV2LoginSettingsArgs) ToClusterV2LoginSettingsPtrOutput() ClusterV2LoginSettingsPtrOutput {
+	return i.ToClusterV2LoginSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2LoginSettingsArgs) ToClusterV2LoginSettingsPtrOutputWithContext(ctx context.Context) ClusterV2LoginSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2LoginSettingsOutput).ToClusterV2LoginSettingsPtrOutputWithContext(ctx)
+}
+
+// ClusterV2LoginSettingsPtrInput is an input type that accepts ClusterV2LoginSettingsArgs, ClusterV2LoginSettingsPtr and ClusterV2LoginSettingsPtrOutput values.
+// You can construct a concrete instance of `ClusterV2LoginSettingsPtrInput` via:
+//
+//	        ClusterV2LoginSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2LoginSettingsPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2LoginSettingsPtrOutput() ClusterV2LoginSettingsPtrOutput
+	ToClusterV2LoginSettingsPtrOutputWithContext(context.Context) ClusterV2LoginSettingsPtrOutput
+}
+
+type clusterV2LoginSettingsPtrType ClusterV2LoginSettingsArgs
+
+func ClusterV2LoginSettingsPtr(v *ClusterV2LoginSettingsArgs) ClusterV2LoginSettingsPtrInput {
+	return (*clusterV2LoginSettingsPtrType)(v)
+}
+
+func (*clusterV2LoginSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2LoginSettings)(nil)).Elem()
+}
+
+func (i *clusterV2LoginSettingsPtrType) ToClusterV2LoginSettingsPtrOutput() ClusterV2LoginSettingsPtrOutput {
+	return i.ToClusterV2LoginSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2LoginSettingsPtrType) ToClusterV2LoginSettingsPtrOutputWithContext(ctx context.Context) ClusterV2LoginSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2LoginSettingsPtrOutput)
+}
+
+type ClusterV2LoginSettingsOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2LoginSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2LoginSettings)(nil)).Elem()
+}
+
+func (o ClusterV2LoginSettingsOutput) ToClusterV2LoginSettingsOutput() ClusterV2LoginSettingsOutput {
+	return o
+}
+
+func (o ClusterV2LoginSettingsOutput) ToClusterV2LoginSettingsOutputWithContext(ctx context.Context) ClusterV2LoginSettingsOutput {
+	return o
+}
+
+func (o ClusterV2LoginSettingsOutput) ToClusterV2LoginSettingsPtrOutput() ClusterV2LoginSettingsPtrOutput {
+	return o.ToClusterV2LoginSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2LoginSettingsOutput) ToClusterV2LoginSettingsPtrOutputWithContext(ctx context.Context) ClusterV2LoginSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2LoginSettings) *ClusterV2LoginSettings {
+		return &v
+	}).(ClusterV2LoginSettingsPtrOutput)
+}
+
+// Login password, 8-16 characters, must contain uppercase, lowercase, digit and special character (supported special chars: `!@%^*`). First char cannot be special.
+func (o ClusterV2LoginSettingsOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2LoginSettings) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Public key ID for key-based login.
+func (o ClusterV2LoginSettingsOutput) PublicKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2LoginSettings) *string { return v.PublicKeyId }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2LoginSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2LoginSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2LoginSettings)(nil)).Elem()
+}
+
+func (o ClusterV2LoginSettingsPtrOutput) ToClusterV2LoginSettingsPtrOutput() ClusterV2LoginSettingsPtrOutput {
+	return o
+}
+
+func (o ClusterV2LoginSettingsPtrOutput) ToClusterV2LoginSettingsPtrOutputWithContext(ctx context.Context) ClusterV2LoginSettingsPtrOutput {
+	return o
+}
+
+func (o ClusterV2LoginSettingsPtrOutput) Elem() ClusterV2LoginSettingsOutput {
+	return o.ApplyT(func(v *ClusterV2LoginSettings) ClusterV2LoginSettings {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2LoginSettings
+		return ret
+	}).(ClusterV2LoginSettingsOutput)
+}
+
+// Login password, 8-16 characters, must contain uppercase, lowercase, digit and special character (supported special chars: `!@%^*`). First char cannot be special.
+func (o ClusterV2LoginSettingsPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2LoginSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Public key ID for key-based login.
+func (o ClusterV2LoginSettingsPtrOutput) PublicKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2LoginSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PublicKeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2MetaDbInfo struct {
+	// Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
+	MetaDataJdbcUrl *string `pulumi:"metaDataJdbcUrl"`
+	// Custom MetaDB password.
+	MetaDataPass *string `pulumi:"metaDataPass"`
+	// Custom MetaDB username.
+	MetaDataUser *string `pulumi:"metaDataUser"`
+	// Hive shared metadata DB type. Valid values: `EMR_DEFAULT_META`, `EMR_EXIT_META`, `USER_CUSTOM_META`.
+	MetaType *string `pulumi:"metaType"`
+	// EMR-MetaDB instance ID.
+	UnifyMetaInstanceId *string `pulumi:"unifyMetaInstanceId"`
+}
+
+// ClusterV2MetaDbInfoInput is an input type that accepts ClusterV2MetaDbInfoArgs and ClusterV2MetaDbInfoOutput values.
+// You can construct a concrete instance of `ClusterV2MetaDbInfoInput` via:
+//
+//	ClusterV2MetaDbInfoArgs{...}
+type ClusterV2MetaDbInfoInput interface {
+	pulumi.Input
+
+	ToClusterV2MetaDbInfoOutput() ClusterV2MetaDbInfoOutput
+	ToClusterV2MetaDbInfoOutputWithContext(context.Context) ClusterV2MetaDbInfoOutput
+}
+
+type ClusterV2MetaDbInfoArgs struct {
+	// Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
+	MetaDataJdbcUrl pulumi.StringPtrInput `pulumi:"metaDataJdbcUrl"`
+	// Custom MetaDB password.
+	MetaDataPass pulumi.StringPtrInput `pulumi:"metaDataPass"`
+	// Custom MetaDB username.
+	MetaDataUser pulumi.StringPtrInput `pulumi:"metaDataUser"`
+	// Hive shared metadata DB type. Valid values: `EMR_DEFAULT_META`, `EMR_EXIT_META`, `USER_CUSTOM_META`.
+	MetaType pulumi.StringPtrInput `pulumi:"metaType"`
+	// EMR-MetaDB instance ID.
+	UnifyMetaInstanceId pulumi.StringPtrInput `pulumi:"unifyMetaInstanceId"`
+}
+
+func (ClusterV2MetaDbInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2MetaDbInfo)(nil)).Elem()
+}
+
+func (i ClusterV2MetaDbInfoArgs) ToClusterV2MetaDbInfoOutput() ClusterV2MetaDbInfoOutput {
+	return i.ToClusterV2MetaDbInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterV2MetaDbInfoArgs) ToClusterV2MetaDbInfoOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2MetaDbInfoOutput)
+}
+
+func (i ClusterV2MetaDbInfoArgs) ToClusterV2MetaDbInfoPtrOutput() ClusterV2MetaDbInfoPtrOutput {
+	return i.ToClusterV2MetaDbInfoPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2MetaDbInfoArgs) ToClusterV2MetaDbInfoPtrOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2MetaDbInfoOutput).ToClusterV2MetaDbInfoPtrOutputWithContext(ctx)
+}
+
+// ClusterV2MetaDbInfoPtrInput is an input type that accepts ClusterV2MetaDbInfoArgs, ClusterV2MetaDbInfoPtr and ClusterV2MetaDbInfoPtrOutput values.
+// You can construct a concrete instance of `ClusterV2MetaDbInfoPtrInput` via:
+//
+//	        ClusterV2MetaDbInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2MetaDbInfoPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2MetaDbInfoPtrOutput() ClusterV2MetaDbInfoPtrOutput
+	ToClusterV2MetaDbInfoPtrOutputWithContext(context.Context) ClusterV2MetaDbInfoPtrOutput
+}
+
+type clusterV2MetaDbInfoPtrType ClusterV2MetaDbInfoArgs
+
+func ClusterV2MetaDbInfoPtr(v *ClusterV2MetaDbInfoArgs) ClusterV2MetaDbInfoPtrInput {
+	return (*clusterV2MetaDbInfoPtrType)(v)
+}
+
+func (*clusterV2MetaDbInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2MetaDbInfo)(nil)).Elem()
+}
+
+func (i *clusterV2MetaDbInfoPtrType) ToClusterV2MetaDbInfoPtrOutput() ClusterV2MetaDbInfoPtrOutput {
+	return i.ToClusterV2MetaDbInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2MetaDbInfoPtrType) ToClusterV2MetaDbInfoPtrOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2MetaDbInfoPtrOutput)
+}
+
+type ClusterV2MetaDbInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2MetaDbInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2MetaDbInfo)(nil)).Elem()
+}
+
+func (o ClusterV2MetaDbInfoOutput) ToClusterV2MetaDbInfoOutput() ClusterV2MetaDbInfoOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbInfoOutput) ToClusterV2MetaDbInfoOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbInfoOutput) ToClusterV2MetaDbInfoPtrOutput() ClusterV2MetaDbInfoPtrOutput {
+	return o.ToClusterV2MetaDbInfoPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2MetaDbInfoOutput) ToClusterV2MetaDbInfoPtrOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2MetaDbInfo) *ClusterV2MetaDbInfo {
+		return &v
+	}).(ClusterV2MetaDbInfoPtrOutput)
+}
+
+// Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
+func (o ClusterV2MetaDbInfoOutput) MetaDataJdbcUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbInfo) *string { return v.MetaDataJdbcUrl }).(pulumi.StringPtrOutput)
+}
+
+// Custom MetaDB password.
+func (o ClusterV2MetaDbInfoOutput) MetaDataPass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbInfo) *string { return v.MetaDataPass }).(pulumi.StringPtrOutput)
+}
+
+// Custom MetaDB username.
+func (o ClusterV2MetaDbInfoOutput) MetaDataUser() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbInfo) *string { return v.MetaDataUser }).(pulumi.StringPtrOutput)
+}
+
+// Hive shared metadata DB type. Valid values: `EMR_DEFAULT_META`, `EMR_EXIT_META`, `USER_CUSTOM_META`.
+func (o ClusterV2MetaDbInfoOutput) MetaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbInfo) *string { return v.MetaType }).(pulumi.StringPtrOutput)
+}
+
+// EMR-MetaDB instance ID.
+func (o ClusterV2MetaDbInfoOutput) UnifyMetaInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbInfo) *string { return v.UnifyMetaInstanceId }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2MetaDbInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2MetaDbInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2MetaDbInfo)(nil)).Elem()
+}
+
+func (o ClusterV2MetaDbInfoPtrOutput) ToClusterV2MetaDbInfoPtrOutput() ClusterV2MetaDbInfoPtrOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbInfoPtrOutput) ToClusterV2MetaDbInfoPtrOutputWithContext(ctx context.Context) ClusterV2MetaDbInfoPtrOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbInfoPtrOutput) Elem() ClusterV2MetaDbInfoOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) ClusterV2MetaDbInfo {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2MetaDbInfo
+		return ret
+	}).(ClusterV2MetaDbInfoOutput)
+}
+
+// Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
+func (o ClusterV2MetaDbInfoPtrOutput) MetaDataJdbcUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaDataJdbcUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom MetaDB password.
+func (o ClusterV2MetaDbInfoPtrOutput) MetaDataPass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaDataPass
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom MetaDB username.
+func (o ClusterV2MetaDbInfoPtrOutput) MetaDataUser() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaDataUser
+	}).(pulumi.StringPtrOutput)
+}
+
+// Hive shared metadata DB type. Valid values: `EMR_DEFAULT_META`, `EMR_EXIT_META`, `USER_CUSTOM_META`.
+func (o ClusterV2MetaDbInfoPtrOutput) MetaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaType
+	}).(pulumi.StringPtrOutput)
+}
+
+// EMR-MetaDB instance ID.
+func (o ClusterV2MetaDbInfoPtrOutput) UnifyMetaInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2MetaDbInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UnifyMetaInstanceId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2SceneSoftwareConfig struct {
+	// Scenario name, e.g., `Hadoop-Default`, `Hadoop-Kudu`, `Hadoop-Zookeeper`, `Hadoop-Presto`, `Hadoop-Hbase`.
+	SceneName *string `pulumi:"sceneName"`
+	// Deduped list of components actually deployed on the cluster (read-back from API).
+	Softwares []string `pulumi:"softwares"`
+}
+
+// ClusterV2SceneSoftwareConfigInput is an input type that accepts ClusterV2SceneSoftwareConfigArgs and ClusterV2SceneSoftwareConfigOutput values.
+// You can construct a concrete instance of `ClusterV2SceneSoftwareConfigInput` via:
+//
+//	ClusterV2SceneSoftwareConfigArgs{...}
+type ClusterV2SceneSoftwareConfigInput interface {
+	pulumi.Input
+
+	ToClusterV2SceneSoftwareConfigOutput() ClusterV2SceneSoftwareConfigOutput
+	ToClusterV2SceneSoftwareConfigOutputWithContext(context.Context) ClusterV2SceneSoftwareConfigOutput
+}
+
+type ClusterV2SceneSoftwareConfigArgs struct {
+	// Scenario name, e.g., `Hadoop-Default`, `Hadoop-Kudu`, `Hadoop-Zookeeper`, `Hadoop-Presto`, `Hadoop-Hbase`.
+	SceneName pulumi.StringPtrInput `pulumi:"sceneName"`
+	// Deduped list of components actually deployed on the cluster (read-back from API).
+	Softwares pulumi.StringArrayInput `pulumi:"softwares"`
+}
+
+func (ClusterV2SceneSoftwareConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SceneSoftwareConfig)(nil)).Elem()
+}
+
+func (i ClusterV2SceneSoftwareConfigArgs) ToClusterV2SceneSoftwareConfigOutput() ClusterV2SceneSoftwareConfigOutput {
+	return i.ToClusterV2SceneSoftwareConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SceneSoftwareConfigArgs) ToClusterV2SceneSoftwareConfigOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SceneSoftwareConfigOutput)
+}
+
+func (i ClusterV2SceneSoftwareConfigArgs) ToClusterV2SceneSoftwareConfigPtrOutput() ClusterV2SceneSoftwareConfigPtrOutput {
+	return i.ToClusterV2SceneSoftwareConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SceneSoftwareConfigArgs) ToClusterV2SceneSoftwareConfigPtrOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SceneSoftwareConfigOutput).ToClusterV2SceneSoftwareConfigPtrOutputWithContext(ctx)
+}
+
+// ClusterV2SceneSoftwareConfigPtrInput is an input type that accepts ClusterV2SceneSoftwareConfigArgs, ClusterV2SceneSoftwareConfigPtr and ClusterV2SceneSoftwareConfigPtrOutput values.
+// You can construct a concrete instance of `ClusterV2SceneSoftwareConfigPtrInput` via:
+//
+//	        ClusterV2SceneSoftwareConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2SceneSoftwareConfigPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2SceneSoftwareConfigPtrOutput() ClusterV2SceneSoftwareConfigPtrOutput
+	ToClusterV2SceneSoftwareConfigPtrOutputWithContext(context.Context) ClusterV2SceneSoftwareConfigPtrOutput
+}
+
+type clusterV2SceneSoftwareConfigPtrType ClusterV2SceneSoftwareConfigArgs
+
+func ClusterV2SceneSoftwareConfigPtr(v *ClusterV2SceneSoftwareConfigArgs) ClusterV2SceneSoftwareConfigPtrInput {
+	return (*clusterV2SceneSoftwareConfigPtrType)(v)
+}
+
+func (*clusterV2SceneSoftwareConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2SceneSoftwareConfig)(nil)).Elem()
+}
+
+func (i *clusterV2SceneSoftwareConfigPtrType) ToClusterV2SceneSoftwareConfigPtrOutput() ClusterV2SceneSoftwareConfigPtrOutput {
+	return i.ToClusterV2SceneSoftwareConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2SceneSoftwareConfigPtrType) ToClusterV2SceneSoftwareConfigPtrOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SceneSoftwareConfigPtrOutput)
+}
+
+type ClusterV2SceneSoftwareConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SceneSoftwareConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SceneSoftwareConfig)(nil)).Elem()
+}
+
+func (o ClusterV2SceneSoftwareConfigOutput) ToClusterV2SceneSoftwareConfigOutput() ClusterV2SceneSoftwareConfigOutput {
+	return o
+}
+
+func (o ClusterV2SceneSoftwareConfigOutput) ToClusterV2SceneSoftwareConfigOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigOutput {
+	return o
+}
+
+func (o ClusterV2SceneSoftwareConfigOutput) ToClusterV2SceneSoftwareConfigPtrOutput() ClusterV2SceneSoftwareConfigPtrOutput {
+	return o.ToClusterV2SceneSoftwareConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2SceneSoftwareConfigOutput) ToClusterV2SceneSoftwareConfigPtrOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2SceneSoftwareConfig) *ClusterV2SceneSoftwareConfig {
+		return &v
+	}).(ClusterV2SceneSoftwareConfigPtrOutput)
+}
+
+// Scenario name, e.g., `Hadoop-Default`, `Hadoop-Kudu`, `Hadoop-Zookeeper`, `Hadoop-Presto`, `Hadoop-Hbase`.
+func (o ClusterV2SceneSoftwareConfigOutput) SceneName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2SceneSoftwareConfig) *string { return v.SceneName }).(pulumi.StringPtrOutput)
+}
+
+// Deduped list of components actually deployed on the cluster (read-back from API).
+func (o ClusterV2SceneSoftwareConfigOutput) Softwares() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2SceneSoftwareConfig) []string { return v.Softwares }).(pulumi.StringArrayOutput)
+}
+
+type ClusterV2SceneSoftwareConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SceneSoftwareConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2SceneSoftwareConfig)(nil)).Elem()
+}
+
+func (o ClusterV2SceneSoftwareConfigPtrOutput) ToClusterV2SceneSoftwareConfigPtrOutput() ClusterV2SceneSoftwareConfigPtrOutput {
+	return o
+}
+
+func (o ClusterV2SceneSoftwareConfigPtrOutput) ToClusterV2SceneSoftwareConfigPtrOutputWithContext(ctx context.Context) ClusterV2SceneSoftwareConfigPtrOutput {
+	return o
+}
+
+func (o ClusterV2SceneSoftwareConfigPtrOutput) Elem() ClusterV2SceneSoftwareConfigOutput {
+	return o.ApplyT(func(v *ClusterV2SceneSoftwareConfig) ClusterV2SceneSoftwareConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2SceneSoftwareConfig
+		return ret
+	}).(ClusterV2SceneSoftwareConfigOutput)
+}
+
+// Scenario name, e.g., `Hadoop-Default`, `Hadoop-Kudu`, `Hadoop-Zookeeper`, `Hadoop-Presto`, `Hadoop-Hbase`.
+func (o ClusterV2SceneSoftwareConfigPtrOutput) SceneName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2SceneSoftwareConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SceneName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Deduped list of components actually deployed on the cluster (read-back from API).
+func (o ClusterV2SceneSoftwareConfigPtrOutput) Softwares() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterV2SceneSoftwareConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Softwares
+	}).(pulumi.StringArrayOutput)
+}
+
+type ClusterV2ScriptBootstrapActionConfig struct {
+	// Script arguments, following standard Shell convention.
+	Args []string `pulumi:"args"`
+	// Script file name.
+	CosFileName *string `pulumi:"cosFileName"`
+	// COS URI of the script.
+	CosFileUri *string `pulumi:"cosFileUri"`
+	// Execution timing. Valid values: `resourceAfter`, `clusterAfter`, `clusterBefore`.
+	ExecutionMoment *string `pulumi:"executionMoment"`
+	// Remark.
+	Remark *string `pulumi:"remark"`
+}
+
+// ClusterV2ScriptBootstrapActionConfigInput is an input type that accepts ClusterV2ScriptBootstrapActionConfigArgs and ClusterV2ScriptBootstrapActionConfigOutput values.
+// You can construct a concrete instance of `ClusterV2ScriptBootstrapActionConfigInput` via:
+//
+//	ClusterV2ScriptBootstrapActionConfigArgs{...}
+type ClusterV2ScriptBootstrapActionConfigInput interface {
+	pulumi.Input
+
+	ToClusterV2ScriptBootstrapActionConfigOutput() ClusterV2ScriptBootstrapActionConfigOutput
+	ToClusterV2ScriptBootstrapActionConfigOutputWithContext(context.Context) ClusterV2ScriptBootstrapActionConfigOutput
+}
+
+type ClusterV2ScriptBootstrapActionConfigArgs struct {
+	// Script arguments, following standard Shell convention.
+	Args pulumi.StringArrayInput `pulumi:"args"`
+	// Script file name.
+	CosFileName pulumi.StringPtrInput `pulumi:"cosFileName"`
+	// COS URI of the script.
+	CosFileUri pulumi.StringPtrInput `pulumi:"cosFileUri"`
+	// Execution timing. Valid values: `resourceAfter`, `clusterAfter`, `clusterBefore`.
+	ExecutionMoment pulumi.StringPtrInput `pulumi:"executionMoment"`
+	// Remark.
+	Remark pulumi.StringPtrInput `pulumi:"remark"`
+}
+
+func (ClusterV2ScriptBootstrapActionConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ScriptBootstrapActionConfig)(nil)).Elem()
+}
+
+func (i ClusterV2ScriptBootstrapActionConfigArgs) ToClusterV2ScriptBootstrapActionConfigOutput() ClusterV2ScriptBootstrapActionConfigOutput {
+	return i.ToClusterV2ScriptBootstrapActionConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ScriptBootstrapActionConfigArgs) ToClusterV2ScriptBootstrapActionConfigOutputWithContext(ctx context.Context) ClusterV2ScriptBootstrapActionConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ScriptBootstrapActionConfigOutput)
+}
+
+// ClusterV2ScriptBootstrapActionConfigArrayInput is an input type that accepts ClusterV2ScriptBootstrapActionConfigArray and ClusterV2ScriptBootstrapActionConfigArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ScriptBootstrapActionConfigArrayInput` via:
+//
+//	ClusterV2ScriptBootstrapActionConfigArray{ ClusterV2ScriptBootstrapActionConfigArgs{...} }
+type ClusterV2ScriptBootstrapActionConfigArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ScriptBootstrapActionConfigArrayOutput() ClusterV2ScriptBootstrapActionConfigArrayOutput
+	ToClusterV2ScriptBootstrapActionConfigArrayOutputWithContext(context.Context) ClusterV2ScriptBootstrapActionConfigArrayOutput
+}
+
+type ClusterV2ScriptBootstrapActionConfigArray []ClusterV2ScriptBootstrapActionConfigInput
+
+func (ClusterV2ScriptBootstrapActionConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ScriptBootstrapActionConfig)(nil)).Elem()
+}
+
+func (i ClusterV2ScriptBootstrapActionConfigArray) ToClusterV2ScriptBootstrapActionConfigArrayOutput() ClusterV2ScriptBootstrapActionConfigArrayOutput {
+	return i.ToClusterV2ScriptBootstrapActionConfigArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ScriptBootstrapActionConfigArray) ToClusterV2ScriptBootstrapActionConfigArrayOutputWithContext(ctx context.Context) ClusterV2ScriptBootstrapActionConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ScriptBootstrapActionConfigArrayOutput)
+}
+
+type ClusterV2ScriptBootstrapActionConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ScriptBootstrapActionConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ScriptBootstrapActionConfig)(nil)).Elem()
+}
+
+func (o ClusterV2ScriptBootstrapActionConfigOutput) ToClusterV2ScriptBootstrapActionConfigOutput() ClusterV2ScriptBootstrapActionConfigOutput {
+	return o
+}
+
+func (o ClusterV2ScriptBootstrapActionConfigOutput) ToClusterV2ScriptBootstrapActionConfigOutputWithContext(ctx context.Context) ClusterV2ScriptBootstrapActionConfigOutput {
+	return o
+}
+
+// Script arguments, following standard Shell convention.
+func (o ClusterV2ScriptBootstrapActionConfigOutput) Args() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ScriptBootstrapActionConfig) []string { return v.Args }).(pulumi.StringArrayOutput)
+}
+
+// Script file name.
+func (o ClusterV2ScriptBootstrapActionConfigOutput) CosFileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ScriptBootstrapActionConfig) *string { return v.CosFileName }).(pulumi.StringPtrOutput)
+}
+
+// COS URI of the script.
+func (o ClusterV2ScriptBootstrapActionConfigOutput) CosFileUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ScriptBootstrapActionConfig) *string { return v.CosFileUri }).(pulumi.StringPtrOutput)
+}
+
+// Execution timing. Valid values: `resourceAfter`, `clusterAfter`, `clusterBefore`.
+func (o ClusterV2ScriptBootstrapActionConfigOutput) ExecutionMoment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ScriptBootstrapActionConfig) *string { return v.ExecutionMoment }).(pulumi.StringPtrOutput)
+}
+
+// Remark.
+func (o ClusterV2ScriptBootstrapActionConfigOutput) Remark() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ScriptBootstrapActionConfig) *string { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ScriptBootstrapActionConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ScriptBootstrapActionConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ScriptBootstrapActionConfig)(nil)).Elem()
+}
+
+func (o ClusterV2ScriptBootstrapActionConfigArrayOutput) ToClusterV2ScriptBootstrapActionConfigArrayOutput() ClusterV2ScriptBootstrapActionConfigArrayOutput {
+	return o
+}
+
+func (o ClusterV2ScriptBootstrapActionConfigArrayOutput) ToClusterV2ScriptBootstrapActionConfigArrayOutputWithContext(ctx context.Context) ClusterV2ScriptBootstrapActionConfigArrayOutput {
+	return o
+}
+
+func (o ClusterV2ScriptBootstrapActionConfigArrayOutput) Index(i pulumi.IntInput) ClusterV2ScriptBootstrapActionConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ScriptBootstrapActionConfig {
+		return vs[0].([]ClusterV2ScriptBootstrapActionConfig)[vs[1].(int)]
+	}).(ClusterV2ScriptBootstrapActionConfigOutput)
+}
+
+type ClusterV2Tag struct {
+	// Tag key.
+	TagKey *string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue *string `pulumi:"tagValue"`
+}
+
+// ClusterV2TagInput is an input type that accepts ClusterV2TagArgs and ClusterV2TagOutput values.
+// You can construct a concrete instance of `ClusterV2TagInput` via:
+//
+//	ClusterV2TagArgs{...}
+type ClusterV2TagInput interface {
+	pulumi.Input
+
+	ToClusterV2TagOutput() ClusterV2TagOutput
+	ToClusterV2TagOutputWithContext(context.Context) ClusterV2TagOutput
+}
+
+type ClusterV2TagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringPtrInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringPtrInput `pulumi:"tagValue"`
+}
+
+func (ClusterV2TagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2Tag)(nil)).Elem()
+}
+
+func (i ClusterV2TagArgs) ToClusterV2TagOutput() ClusterV2TagOutput {
+	return i.ToClusterV2TagOutputWithContext(context.Background())
+}
+
+func (i ClusterV2TagArgs) ToClusterV2TagOutputWithContext(ctx context.Context) ClusterV2TagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2TagOutput)
+}
+
+// ClusterV2TagArrayInput is an input type that accepts ClusterV2TagArray and ClusterV2TagArrayOutput values.
+// You can construct a concrete instance of `ClusterV2TagArrayInput` via:
+//
+//	ClusterV2TagArray{ ClusterV2TagArgs{...} }
+type ClusterV2TagArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2TagArrayOutput() ClusterV2TagArrayOutput
+	ToClusterV2TagArrayOutputWithContext(context.Context) ClusterV2TagArrayOutput
+}
+
+type ClusterV2TagArray []ClusterV2TagInput
+
+func (ClusterV2TagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2Tag)(nil)).Elem()
+}
+
+func (i ClusterV2TagArray) ToClusterV2TagArrayOutput() ClusterV2TagArrayOutput {
+	return i.ToClusterV2TagArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2TagArray) ToClusterV2TagArrayOutputWithContext(ctx context.Context) ClusterV2TagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2TagArrayOutput)
+}
+
+type ClusterV2TagOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2TagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2Tag)(nil)).Elem()
+}
+
+func (o ClusterV2TagOutput) ToClusterV2TagOutput() ClusterV2TagOutput {
+	return o
+}
+
+func (o ClusterV2TagOutput) ToClusterV2TagOutputWithContext(ctx context.Context) ClusterV2TagOutput {
+	return o
+}
+
+// Tag key.
+func (o ClusterV2TagOutput) TagKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2Tag) *string { return v.TagKey }).(pulumi.StringPtrOutput)
+}
+
+// Tag value.
+func (o ClusterV2TagOutput) TagValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2Tag) *string { return v.TagValue }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2TagArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2TagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2Tag)(nil)).Elem()
+}
+
+func (o ClusterV2TagArrayOutput) ToClusterV2TagArrayOutput() ClusterV2TagArrayOutput {
+	return o
+}
+
+func (o ClusterV2TagArrayOutput) ToClusterV2TagArrayOutputWithContext(ctx context.Context) ClusterV2TagArrayOutput {
+	return o
+}
+
+func (o ClusterV2TagArrayOutput) Index(i pulumi.IntInput) ClusterV2TagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2Tag {
+		return vs[0].([]ClusterV2Tag)[vs[1].(int)]
+	}).(ClusterV2TagOutput)
+}
+
+type ClusterV2ZoneResourceConfiguration struct {
+	// Resource specifications for all node roles.
+	AllNodeResourceSpec *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec `pulumi:"allNodeResourceSpec"`
+	// Zone and project placement.
+	Placement *ClusterV2ZoneResourceConfigurationPlacement `pulumi:"placement"`
+	// VPC/Subnet information.
+	VirtualPrivateCloud *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud `pulumi:"virtualPrivateCloud"`
+}
+
+// ClusterV2ZoneResourceConfigurationInput is an input type that accepts ClusterV2ZoneResourceConfigurationArgs and ClusterV2ZoneResourceConfigurationOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationArgs{...}
+type ClusterV2ZoneResourceConfigurationInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationOutput() ClusterV2ZoneResourceConfigurationOutput
+	ToClusterV2ZoneResourceConfigurationOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationOutput
+}
+
+type ClusterV2ZoneResourceConfigurationArgs struct {
+	// Resource specifications for all node roles.
+	AllNodeResourceSpec ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput `pulumi:"allNodeResourceSpec"`
+	// Zone and project placement.
+	Placement ClusterV2ZoneResourceConfigurationPlacementPtrInput `pulumi:"placement"`
+	// VPC/Subnet information.
+	VirtualPrivateCloud ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput `pulumi:"virtualPrivateCloud"`
+}
+
+func (ClusterV2ZoneResourceConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfiguration)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationArgs) ToClusterV2ZoneResourceConfigurationOutput() ClusterV2ZoneResourceConfigurationOutput {
+	return i.ToClusterV2ZoneResourceConfigurationOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationArgs) ToClusterV2ZoneResourceConfigurationOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationArray and ClusterV2ZoneResourceConfigurationArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationArray{ ClusterV2ZoneResourceConfigurationArgs{...} }
+type ClusterV2ZoneResourceConfigurationArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationArrayOutput() ClusterV2ZoneResourceConfigurationArrayOutput
+	ToClusterV2ZoneResourceConfigurationArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationArray []ClusterV2ZoneResourceConfigurationInput
+
+func (ClusterV2ZoneResourceConfigurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfiguration)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationArray) ToClusterV2ZoneResourceConfigurationArrayOutput() ClusterV2ZoneResourceConfigurationArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationArray) ToClusterV2ZoneResourceConfigurationArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfiguration)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationOutput) ToClusterV2ZoneResourceConfigurationOutput() ClusterV2ZoneResourceConfigurationOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationOutput) ToClusterV2ZoneResourceConfigurationOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationOutput {
+	return o
+}
+
+// Resource specifications for all node roles.
+func (o ClusterV2ZoneResourceConfigurationOutput) AllNodeResourceSpec() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfiguration) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec {
+		return v.AllNodeResourceSpec
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput)
+}
+
+// Zone and project placement.
+func (o ClusterV2ZoneResourceConfigurationOutput) Placement() ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfiguration) *ClusterV2ZoneResourceConfigurationPlacement {
+		return v.Placement
+	}).(ClusterV2ZoneResourceConfigurationPlacementPtrOutput)
+}
+
+// VPC/Subnet information.
+func (o ClusterV2ZoneResourceConfigurationOutput) VirtualPrivateCloud() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfiguration) *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud {
+		return v.VirtualPrivateCloud
+	}).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfiguration)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationArrayOutput) ToClusterV2ZoneResourceConfigurationArrayOutput() ClusterV2ZoneResourceConfigurationArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationArrayOutput) ToClusterV2ZoneResourceConfigurationArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfiguration {
+		return vs[0].([]ClusterV2ZoneResourceConfiguration)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpec struct {
+	// Common node resource specifications. Number of blocks = `CommonCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	CommonResourceSpecs []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec `pulumi:"commonResourceSpecs"`
+	// Core node resource specifications. Number of blocks = `CoreCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	CoreResourceSpecs []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec `pulumi:"coreResourceSpecs"`
+	// Master node resource specifications. Number of blocks = `MasterCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	MasterResourceSpecs []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec `pulumi:"masterResourceSpecs"`
+	// Router node resource specifications. Router nodes are NOT created by `CreateCluster`; instead they are added via `ScaleOutCluster` (NodeFlag=ROUTER) after the cluster becomes running. Unlike the other roles, router blocks are NOT required to be identical to each other. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	RouterResourceSpecs []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec `pulumi:"routerResourceSpecs"`
+	// Task node resource specifications. Number of blocks = `TaskCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	TaskResourceSpecs []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec `pulumi:"taskResourceSpecs"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs struct {
+	// Common node resource specifications. Number of blocks = `CommonCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	CommonResourceSpecs ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayInput `pulumi:"commonResourceSpecs"`
+	// Core node resource specifications. Number of blocks = `CoreCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	CoreResourceSpecs ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayInput `pulumi:"coreResourceSpecs"`
+	// Master node resource specifications. Number of blocks = `MasterCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	MasterResourceSpecs ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayInput `pulumi:"masterResourceSpecs"`
+	// Router node resource specifications. Router nodes are NOT created by `CreateCluster`; instead they are added via `ScaleOutCluster` (NodeFlag=ROUTER) after the cluster becomes running. Unlike the other roles, router blocks are NOT required to be identical to each other. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	RouterResourceSpecs ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayInput `pulumi:"routerResourceSpecs"`
+	// Task node resource specifications. Number of blocks = `TaskCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+	TaskResourceSpecs ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayInput `pulumi:"taskResourceSpecs"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpec)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput)
+}
+
+// Common node resource specifications. Number of blocks = `CommonCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) CommonResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec {
+		return v.CommonResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput)
+}
+
+// Core node resource specifications. Number of blocks = `CoreCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) CoreResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec {
+		return v.CoreResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput)
+}
+
+// Master node resource specifications. Number of blocks = `MasterCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) MasterResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec {
+		return v.MasterResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput)
+}
+
+// Router node resource specifications. Router nodes are NOT created by `CreateCluster`; instead they are added via `ScaleOutCluster` (NodeFlag=ROUTER) after the cluster becomes running. Unlike the other roles, router blocks are NOT required to be identical to each other. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) RouterResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec {
+		return v.RouterResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput)
+}
+
+// Task node resource specifications. Number of blocks = `TaskCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput) TaskResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec {
+		return v.TaskResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) ClusterV2ZoneResourceConfigurationAllNodeResourceSpec {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpec
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput)
+}
+
+// Common node resource specifications. Number of blocks = `CommonCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) CommonResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec {
+		if v == nil {
+			return nil
+		}
+		return v.CommonResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput)
+}
+
+// Core node resource specifications. Number of blocks = `CoreCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) CoreResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec {
+		if v == nil {
+			return nil
+		}
+		return v.CoreResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput)
+}
+
+// Master node resource specifications. Number of blocks = `MasterCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) MasterResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec {
+		if v == nil {
+			return nil
+		}
+		return v.MasterResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput)
+}
+
+// Router node resource specifications. Router nodes are NOT created by `CreateCluster`; instead they are added via `ScaleOutCluster` (NodeFlag=ROUTER) after the cluster becomes running. Unlike the other roles, router blocks are NOT required to be identical to each other. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) RouterResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec {
+		if v == nil {
+			return nil
+		}
+		return v.RouterResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput)
+}
+
+// Task node resource specifications. Number of blocks = `TaskCount`. All blocks must have identical configuration; the first block is the single resource template sent to the API. This field is a `TypeSet` keyed by `_node_index` only  block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput) TaskResourceSpecs() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec {
+		if v == nil {
+			return nil
+		}
+		return v.TaskResourceSpecs
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex string `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId *string `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType *string `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo *string `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo *string `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk `pulumi:"systemDisk"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex pulumi.StringInput `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId pulumi.StringPtrInput `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo pulumi.StringPtrInput `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo pulumi.StringPtrInput `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayInput `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput `pulumi:"systemDisk"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput {
+	return o
+}
+
+// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) _nodeIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) string {
+		return v._nodeIndex
+	}).(pulumi.StringOutput)
+}
+
+// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) DataDisks() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk {
+		return v.DataDisks
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput)
+}
+
+// EMR node resource ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) EmrResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) *string {
+		return v.EmrResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) *string {
+		return v.InstanceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine instance ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) OrderNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) *string {
+		return v.OrderNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Serial number (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) SerialNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) *string {
+		return v.SerialNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) Softwares() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware {
+		return v.Softwares
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput)
+}
+
+// System disk specifications.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput) SystemDisk() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk {
+		return v.SystemDisk
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpec)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex string `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput {
+	return o
+}
+
+// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) _diskIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk) string {
+		return v._diskIndex
+	}).(pulumi.StringOutput)
+}
+
+// Disk ID (read-only, populated from API).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles []string `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services string `pulumi:"services"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services pulumi.StringInput `pulumi:"services"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput {
+	return o
+}
+
+// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware) []string {
+		return v.Roles
+	}).(pulumi.StringArrayOutput)
+}
+
+// Component name with version, e.g., `hdfs-3.2.2`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware) string {
+		return v.Services
+	}).(pulumi.StringOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftware)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk struct {
+	// Disk ID.
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs struct {
+	// Disk ID.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex string `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId *string `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType *string `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo *string `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo *string `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk `pulumi:"systemDisk"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex pulumi.StringInput `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId pulumi.StringPtrInput `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo pulumi.StringPtrInput `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo pulumi.StringPtrInput `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayInput `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput `pulumi:"systemDisk"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput {
+	return o
+}
+
+// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) _nodeIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) string {
+		return v._nodeIndex
+	}).(pulumi.StringOutput)
+}
+
+// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) DataDisks() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk {
+		return v.DataDisks
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput)
+}
+
+// EMR node resource ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) EmrResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) *string {
+		return v.EmrResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) *string {
+		return v.InstanceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine instance ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) OrderNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) *string {
+		return v.OrderNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Serial number (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) SerialNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) *string {
+		return v.SerialNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) Softwares() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware {
+		return v.Softwares
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput)
+}
+
+// System disk specifications.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput) SystemDisk() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk {
+		return v.SystemDisk
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpec)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex string `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput {
+	return o
+}
+
+// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) _diskIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk) string {
+		return v._diskIndex
+	}).(pulumi.StringOutput)
+}
+
+// Disk ID (read-only, populated from API).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles []string `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services string `pulumi:"services"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services pulumi.StringInput `pulumi:"services"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput {
+	return o
+}
+
+// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware) []string {
+		return v.Roles
+	}).(pulumi.StringArrayOutput)
+}
+
+// Component name with version, e.g., `hdfs-3.2.2`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware) string {
+		return v.Services
+	}).(pulumi.StringOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftware)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk struct {
+	// Disk ID.
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs struct {
+	// Disk ID.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex string `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId *string `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType *string `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo *string `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo *string `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk `pulumi:"systemDisk"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex pulumi.StringInput `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId pulumi.StringPtrInput `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo pulumi.StringPtrInput `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo pulumi.StringPtrInput `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayInput `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput `pulumi:"systemDisk"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput {
+	return o
+}
+
+// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) _nodeIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) string {
+		return v._nodeIndex
+	}).(pulumi.StringOutput)
+}
+
+// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) DataDisks() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk {
+		return v.DataDisks
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput)
+}
+
+// EMR node resource ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) EmrResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) *string {
+		return v.EmrResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) *string {
+		return v.InstanceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine instance ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) OrderNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) *string {
+		return v.OrderNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Serial number (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) SerialNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) *string {
+		return v.SerialNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) Softwares() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware {
+		return v.Softwares
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput)
+}
+
+// System disk specifications.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput) SystemDisk() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk {
+		return v.SystemDisk
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpec)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex string `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput {
+	return o
+}
+
+// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) _diskIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk) string {
+		return v._diskIndex
+	}).(pulumi.StringOutput)
+}
+
+// Disk ID (read-only, populated from API).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles []string `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services string `pulumi:"services"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services pulumi.StringInput `pulumi:"services"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput {
+	return o
+}
+
+// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware) []string {
+		return v.Roles
+	}).(pulumi.StringArrayOutput)
+}
+
+// Component name with version, e.g., `hdfs-3.2.2`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware) string {
+		return v.Services
+	}).(pulumi.StringOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftware)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk struct {
+	// Disk ID.
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs struct {
+	// Disk ID.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex string `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId *string `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType *string `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo *string `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo *string `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk `pulumi:"systemDisk"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex pulumi.StringInput `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId pulumi.StringPtrInput `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo pulumi.StringPtrInput `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo pulumi.StringPtrInput `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayInput `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput `pulumi:"systemDisk"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput {
+	return o
+}
+
+// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) _nodeIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) string {
+		return v._nodeIndex
+	}).(pulumi.StringOutput)
+}
+
+// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) DataDisks() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk {
+		return v.DataDisks
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput)
+}
+
+// EMR node resource ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) EmrResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) *string {
+		return v.EmrResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) *string {
+		return v.InstanceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine instance ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) OrderNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) *string {
+		return v.OrderNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Serial number (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) SerialNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) *string {
+		return v.SerialNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) Softwares() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware {
+		return v.Softwares
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput)
+}
+
+// System disk specifications.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput) SystemDisk() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk {
+		return v.SystemDisk
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpec)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex string `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput {
+	return o
+}
+
+// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) _diskIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk) string {
+		return v._diskIndex
+	}).(pulumi.StringOutput)
+}
+
+// Disk ID (read-only, populated from API).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles []string `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services string `pulumi:"services"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services pulumi.StringInput `pulumi:"services"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput {
+	return o
+}
+
+// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware) []string {
+		return v.Roles
+	}).(pulumi.StringArrayOutput)
+}
+
+// Component name with version, e.g., `hdfs-3.2.2`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware) string {
+		return v.Services
+	}).(pulumi.StringOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftware)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk struct {
+	// Disk ID.
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs struct {
+	// Disk ID.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex string `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId *string `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType *string `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo *string `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo *string `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk `pulumi:"systemDisk"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs struct {
+	// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+	_nodeIndex pulumi.StringInput `pulumi:"_nodeIndex"`
+	// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+	DataDisks ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayInput `pulumi:"dataDisks"`
+	// EMR node resource ID (read-only).
+	EmrResourceId pulumi.StringPtrInput `pulumi:"emrResourceId"`
+	// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Machine instance ID (read-only).
+	OrderNo pulumi.StringPtrInput `pulumi:"orderNo"`
+	// Serial number (read-only).
+	SerialNo pulumi.StringPtrInput `pulumi:"serialNo"`
+	// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+	Softwares ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayInput `pulumi:"softwares"`
+	// System disk specifications.
+	SystemDisk ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput `pulumi:"systemDisk"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput {
+	return o
+}
+
+// **Required** stable identity key for this node spec block. Must be unique within the same role's set, and must remain stable across plan/apply. Used by the Update handler to pair old/new blocks for in-place modification. Renaming an existing `_node_index` is rejected by CustomizeDiff for master/common (length immutable); for core/task it is interpreted as scale-in old + scale-out new.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) _nodeIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) string {
+		return v._nodeIndex
+	}).(pulumi.StringOutput)
+}
+
+// Cloud data disk specifications. `TypeSet` keyed by full content (including `_disk_index`); block order in HCL is irrelevant.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) DataDisks() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk {
+		return v.DataDisks
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput)
+}
+
+// EMR node resource ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) EmrResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) *string {
+		return v.EmrResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CVM instance type, e.g., `S6.2XLARGE32`, `SA4.8XLARGE64`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) InstanceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) *string {
+		return v.InstanceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Machine instance ID (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) OrderNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) *string {
+		return v.OrderNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Serial number (read-only).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) SerialNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) *string {
+		return v.SerialNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Per-role software components (with their role/process lists) deployed on this node role. Must be identical across every block of the same role at create time. Aggregated across all four roles (deduped by `services`) and passed to `CreateCluster` as `SceneSoftwareConfig.Software`. Immutable after create modification is rejected at plan time by CustomizeDiff.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) Softwares() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware {
+		return v.Softwares
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput)
+}
+
+// System disk specifications.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput) SystemDisk() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk {
+		return v.SystemDisk
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpec)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex string `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs struct {
+	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
+	// Disk ID (read-only, populated from API).
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput {
+	return o
+}
+
+// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) _diskIndex() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk) string {
+		return v._diskIndex
+	}).(pulumi.StringOutput)
+}
+
+// Disk ID (read-only, populated from API).
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_HSSD`, `CLOUD_THROUGHPUT`, `CLOUD_TSSD`, `CLOUD_BIGDATA`, `CLOUD_HIGHIO`, `CLOUD_BSSD`, `REMOTE_SSD`. Immutable after creation.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles []string `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services string `pulumi:"services"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs struct {
+	// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+	Roles pulumi.StringArrayInput `pulumi:"roles"`
+	// Component name with version, e.g., `hdfs-3.2.2`.
+	Services pulumi.StringInput `pulumi:"services"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray{ ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{...} }
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray []ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareInput
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput {
+	return o
+}
+
+// Process list for this component on this role, e.g., `["NameNode", "ZKFailoverController"]` for hdfs.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware) []string {
+		return v.Roles
+	}).(pulumi.StringArrayOutput)
+}
+
+// Component name with version, e.g., `hdfs-3.2.2`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput) Services() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware) string {
+		return v.Services
+	}).(pulumi.StringOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput) Index(i pulumi.IntInput) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware {
+		return vs[0].([]ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftware)[vs[1].(int)]
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk struct {
+	// Disk ID.
+	DiskId *string `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize *int `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType *string `pulumi:"diskType"`
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{...}
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs struct {
+	// Disk ID.
+	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
+	// Disk size in GB.
+	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
+	// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+	DiskType pulumi.StringPtrInput `pulumi:"diskType"`
+}
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput).ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs, ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtr and ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput
+	ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrType ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs
+
+func ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtr(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput {
+	return (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrType) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *string {
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *int {
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *string {
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) ToClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) Elem() ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput)
+}
+
+// Disk ID.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) DiskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Disk size in GB.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Disk type. Valid values: `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_BASIC`, `LOCAL_BASIC`, `LOCAL_SSD`.
+func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationPlacement struct {
+	// Project ID. Defaults to default project if omitted.
+	ProjectId *int `pulumi:"projectId"`
+	// Availability zone, e.g., `ap-guangzhou-7`.
+	Zone *string `pulumi:"zone"`
+}
+
+// ClusterV2ZoneResourceConfigurationPlacementInput is an input type that accepts ClusterV2ZoneResourceConfigurationPlacementArgs and ClusterV2ZoneResourceConfigurationPlacementOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationPlacementInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationPlacementArgs{...}
+type ClusterV2ZoneResourceConfigurationPlacementInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationPlacementOutput() ClusterV2ZoneResourceConfigurationPlacementOutput
+	ToClusterV2ZoneResourceConfigurationPlacementOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationPlacementOutput
+}
+
+type ClusterV2ZoneResourceConfigurationPlacementArgs struct {
+	// Project ID. Defaults to default project if omitted.
+	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
+	// Availability zone, e.g., `ap-guangzhou-7`.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (ClusterV2ZoneResourceConfigurationPlacementArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationPlacement)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationPlacementArgs) ToClusterV2ZoneResourceConfigurationPlacementOutput() ClusterV2ZoneResourceConfigurationPlacementOutput {
+	return i.ToClusterV2ZoneResourceConfigurationPlacementOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationPlacementArgs) ToClusterV2ZoneResourceConfigurationPlacementOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationPlacementOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationPlacementArgs) ToClusterV2ZoneResourceConfigurationPlacementPtrOutput() ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationPlacementArgs) ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationPlacementOutput).ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationPlacementPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationPlacementArgs, ClusterV2ZoneResourceConfigurationPlacementPtr and ClusterV2ZoneResourceConfigurationPlacementPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationPlacementPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationPlacementArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationPlacementPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationPlacementPtrOutput() ClusterV2ZoneResourceConfigurationPlacementPtrOutput
+	ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationPlacementPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationPlacementPtrType ClusterV2ZoneResourceConfigurationPlacementArgs
+
+func ClusterV2ZoneResourceConfigurationPlacementPtr(v *ClusterV2ZoneResourceConfigurationPlacementArgs) ClusterV2ZoneResourceConfigurationPlacementPtrInput {
+	return (*clusterV2ZoneResourceConfigurationPlacementPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationPlacementPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationPlacement)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationPlacementPtrType) ToClusterV2ZoneResourceConfigurationPlacementPtrOutput() ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationPlacementPtrType) ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationPlacementPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationPlacementOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationPlacementOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationPlacement)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) ToClusterV2ZoneResourceConfigurationPlacementOutput() ClusterV2ZoneResourceConfigurationPlacementOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) ToClusterV2ZoneResourceConfigurationPlacementOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) ToClusterV2ZoneResourceConfigurationPlacementPtrOutput() ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationPlacement) *ClusterV2ZoneResourceConfigurationPlacement {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationPlacementPtrOutput)
+}
+
+// Project ID. Defaults to default project if omitted.
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationPlacement) *int { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Availability zone, e.g., `ap-guangzhou-7`.
+func (o ClusterV2ZoneResourceConfigurationPlacementOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationPlacement) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationPlacementPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationPlacementPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationPlacement)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementPtrOutput) ToClusterV2ZoneResourceConfigurationPlacementPtrOutput() ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementPtrOutput) ToClusterV2ZoneResourceConfigurationPlacementPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationPlacementPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationPlacementPtrOutput) Elem() ClusterV2ZoneResourceConfigurationPlacementOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationPlacement) ClusterV2ZoneResourceConfigurationPlacement {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationPlacement
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationPlacementOutput)
+}
+
+// Project ID. Defaults to default project if omitted.
+func (o ClusterV2ZoneResourceConfigurationPlacementPtrOutput) ProjectId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationPlacement) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProjectId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Availability zone, e.g., `ap-guangzhou-7`.
+func (o ClusterV2ZoneResourceConfigurationPlacementPtrOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationPlacement) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Zone
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloud struct {
+	// Subnet ID.
+	SubnetId *string `pulumi:"subnetId"`
+	// VPC ID.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// ClusterV2ZoneResourceConfigurationVirtualPrivateCloudInput is an input type that accepts ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs and ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationVirtualPrivateCloudInput` via:
+//
+//	ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs{...}
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloudInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput
+	ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput
+}
+
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs struct {
+	// Subnet ID.
+	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
+	// VPC ID.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationVirtualPrivateCloud)(nil)).Elem()
+}
+
+func (i ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput {
+	return i.ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput)
+}
+
+func (i ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput).ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(ctx)
+}
+
+// ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput is an input type that accepts ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs, ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtr and ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput values.
+// You can construct a concrete instance of `ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput` via:
+//
+//	        ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput interface {
+	pulumi.Input
+
+	ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput
+	ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput
+}
+
+type clusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrType ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs
+
+func ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtr(v *ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput {
+	return (*clusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrType)(v)
+}
+
+func (*clusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationVirtualPrivateCloud)(nil)).Elem()
+}
+
+func (i *clusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrType) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return i.ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrType) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ZoneResourceConfigurationVirtualPrivateCloud)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return o.ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud {
+		return &v
+	}).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput)
+}
+
+// Subnet ID.
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) *string { return v.SubnetId }).(pulumi.StringPtrOutput)
+}
+
+// VPC ID.
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterV2ZoneResourceConfigurationVirtualPrivateCloud)(nil)).Elem()
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) ToClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutputWithContext(ctx context.Context) ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput {
+	return o
+}
+
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) Elem() ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) ClusterV2ZoneResourceConfigurationVirtualPrivateCloud {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterV2ZoneResourceConfigurationVirtualPrivateCloud
+		return ret
+	}).(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput)
+}
+
+// Subnet ID.
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) SubnetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// VPC ID.
+func (o ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterV2ZoneResourceConfigurationVirtualPrivateCloud) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
+	}).(pulumi.StringPtrOutput)
+}
+
 type YarnCapacityGlobalConfig struct {
 	// Advanced settings.
 	DefaultSettings []YarnCapacityGlobalConfigDefaultSetting `pulumi:"defaultSettings"`
@@ -10005,6 +14887,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AutoScaleStrategyTimeAutoScaleStrategyRepeatStrategyWeekRepeatPtrInput)(nil)).Elem(), AutoScaleStrategyTimeAutoScaleStrategyRepeatStrategyWeekRepeatArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutoScaleStrategyTimeAutoScaleStrategyTagInput)(nil)).Elem(), AutoScaleStrategyTimeAutoScaleStrategyTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AutoScaleStrategyTimeAutoScaleStrategyTagArrayInput)(nil)).Elem(), AutoScaleStrategyTimeAutoScaleStrategyTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BootScriptPreExecutedFileSettingInput)(nil)).Elem(), BootScriptPreExecutedFileSettingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BootScriptPreExecutedFileSettingArrayInput)(nil)).Elem(), BootScriptPreExecutedFileSettingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMultiZoneSettingInput)(nil)).Elem(), ClusterMultiZoneSettingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMultiZoneSettingArrayInput)(nil)).Elem(), ClusterMultiZoneSettingArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMultiZoneSettingPlacementInput)(nil)).Elem(), ClusterMultiZoneSettingPlacementArgs{})
@@ -10051,6 +14935,68 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceSpecTaskResourceSpecMultiDiskArrayInput)(nil)).Elem(), ClusterResourceSpecTaskResourceSpecMultiDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterTerminateNodeInfoInput)(nil)).Elem(), ClusterTerminateNodeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterTerminateNodeInfoArrayInput)(nil)).Elem(), ClusterTerminateNodeInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2DependServiceInput)(nil)).Elem(), ClusterV2DependServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2DependServiceArrayInput)(nil)).Elem(), ClusterV2DependServiceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2InstanceChargePrepaidInput)(nil)).Elem(), ClusterV2InstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2InstanceChargePrepaidPtrInput)(nil)).Elem(), ClusterV2InstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2LoginSettingsInput)(nil)).Elem(), ClusterV2LoginSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2LoginSettingsPtrInput)(nil)).Elem(), ClusterV2LoginSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbInfoInput)(nil)).Elem(), ClusterV2MetaDbInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbInfoPtrInput)(nil)).Elem(), ClusterV2MetaDbInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SceneSoftwareConfigInput)(nil)).Elem(), ClusterV2SceneSoftwareConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SceneSoftwareConfigPtrInput)(nil)).Elem(), ClusterV2SceneSoftwareConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ScriptBootstrapActionConfigInput)(nil)).Elem(), ClusterV2ScriptBootstrapActionConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ScriptBootstrapActionConfigArrayInput)(nil)).Elem(), ClusterV2ScriptBootstrapActionConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2TagInput)(nil)).Elem(), ClusterV2TagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2TagArrayInput)(nil)).Elem(), ClusterV2TagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationPlacementInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationPlacementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationPlacementPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationPlacementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationVirtualPrivateCloudInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrInput)(nil)).Elem(), ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*YarnCapacityGlobalConfigInput)(nil)).Elem(), YarnCapacityGlobalConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*YarnCapacityGlobalConfigArrayInput)(nil)).Elem(), YarnCapacityGlobalConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*YarnCapacityGlobalConfigDefaultSettingInput)(nil)).Elem(), YarnCapacityGlobalConfigDefaultSettingArgs{})
@@ -10119,6 +15065,8 @@ func init() {
 	pulumi.RegisterOutputType(AutoScaleStrategyTimeAutoScaleStrategyRepeatStrategyWeekRepeatPtrOutput{})
 	pulumi.RegisterOutputType(AutoScaleStrategyTimeAutoScaleStrategyTagOutput{})
 	pulumi.RegisterOutputType(AutoScaleStrategyTimeAutoScaleStrategyTagArrayOutput{})
+	pulumi.RegisterOutputType(BootScriptPreExecutedFileSettingOutput{})
+	pulumi.RegisterOutputType(BootScriptPreExecutedFileSettingArrayOutput{})
 	pulumi.RegisterOutputType(ClusterMultiZoneSettingOutput{})
 	pulumi.RegisterOutputType(ClusterMultiZoneSettingArrayOutput{})
 	pulumi.RegisterOutputType(ClusterMultiZoneSettingPlacementOutput{})
@@ -10165,6 +15113,68 @@ func init() {
 	pulumi.RegisterOutputType(ClusterResourceSpecTaskResourceSpecMultiDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterTerminateNodeInfoOutput{})
 	pulumi.RegisterOutputType(ClusterTerminateNodeInfoArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2DependServiceOutput{})
+	pulumi.RegisterOutputType(ClusterV2DependServiceArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2InstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(ClusterV2InstanceChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2LoginSettingsOutput{})
+	pulumi.RegisterOutputType(ClusterV2LoginSettingsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2MetaDbInfoOutput{})
+	pulumi.RegisterOutputType(ClusterV2MetaDbInfoPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2SceneSoftwareConfigOutput{})
+	pulumi.RegisterOutputType(ClusterV2SceneSoftwareConfigPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ScriptBootstrapActionConfigOutput{})
+	pulumi.RegisterOutputType(ClusterV2ScriptBootstrapActionConfigArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2TagOutput{})
+	pulumi.RegisterOutputType(ClusterV2TagArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSoftwareArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationPlacementOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationPlacementPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudOutput{})
+	pulumi.RegisterOutputType(ClusterV2ZoneResourceConfigurationVirtualPrivateCloudPtrOutput{})
 	pulumi.RegisterOutputType(YarnCapacityGlobalConfigOutput{})
 	pulumi.RegisterOutputType(YarnCapacityGlobalConfigArrayOutput{})
 	pulumi.RegisterOutputType(YarnCapacityGlobalConfigDefaultSettingOutput{})

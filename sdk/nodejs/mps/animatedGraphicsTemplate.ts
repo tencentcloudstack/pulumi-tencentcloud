@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps animated_graphics_template can be imported using the id, e.g.
+ * mps animatedGraphicsTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id
@@ -140,35 +140,35 @@ export interface AnimatedGraphicsTemplateState {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Animation format, the values are gif and webp. Default is gif.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Frame rate, value range: [1, 30], unit: Hz.
      */
-    fps?: pulumi.Input<number>;
+    fps?: pulumi.Input<number | undefined>;
     /**
      * The maximum value of the animation height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default value: 0.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Rotation diagram template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Image quality, value range: [1, 100], default value is 75.
      */
-    quality?: pulumi.Input<number>;
+    quality?: pulumi.Input<number | undefined>;
     /**
      * Adaptive resolution, optional value:open: At this time, Width represents the long side of the video, Height represents the short side of the video.close: At this point, Width represents the width of the video, and Height represents the height of the video.Default value: open.
      */
-    resolutionAdaptive?: pulumi.Input<string>;
+    resolutionAdaptive?: pulumi.Input<string | undefined>;
     /**
      * The maximum value of the animation width (or long side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default value: 0.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -178,11 +178,11 @@ export interface AnimatedGraphicsTemplateArgs {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Animation format, the values are gif and webp. Default is gif.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Frame rate, value range: [1, 30], unit: Hz.
      */
@@ -190,21 +190,21 @@ export interface AnimatedGraphicsTemplateArgs {
     /**
      * The maximum value of the animation height (or short side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default value: 0.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Rotation diagram template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Image quality, value range: [1, 100], default value is 75.
      */
-    quality?: pulumi.Input<number>;
+    quality?: pulumi.Input<number | undefined>;
     /**
      * Adaptive resolution, optional value:open: At this time, Width represents the long side of the video, Height represents the short side of the video.close: At this point, Width represents the width of the video, and Height represents the height of the video.Default value: open.
      */
-    resolutionAdaptive?: pulumi.Input<string>;
+    resolutionAdaptive?: pulumi.Input<string | undefined>;
     /**
      * The maximum value of the animation width (or long side), value range: 0 and [128, 4096], unit: px.When Width and Height are both 0, the resolution is the same.When Width is 0 and Height is not 0, Width is scaled proportionally.When Width is not 0 and Height is 0, Height is scaled proportionally.When both Width and Height are not 0, the resolution is specified by the user.Default value: 0.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }

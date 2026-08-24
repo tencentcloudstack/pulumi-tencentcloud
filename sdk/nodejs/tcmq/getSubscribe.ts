@@ -88,19 +88,19 @@ export interface GetSubscribeOutputArgs {
     /**
      * Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Fuzzy search by SubscriptionName.
      */
-    subscriptionName?: pulumi.Input<string>;
+    subscriptionName?: pulumi.Input<string | undefined>;
     /**
      * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
      */

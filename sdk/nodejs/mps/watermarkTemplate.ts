@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps watermark_template can be imported using the id, e.g.
+ * mps watermarkTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
@@ -155,39 +155,39 @@ export interface WatermarkTemplateState {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Origin position, optional value:TopLeft: Indicates that the origin of the coordinates is at the upper left corner of the video image, and the origin of the watermark is the upper left corner of the picture or text.TopRight: Indicates that the origin of the coordinates is at the upper right corner of the video image, and the origin of the watermark is at the upper right corner of the picture or text.BottomLeft: Indicates that the origin of the coordinates is at the lower left corner of the video image, and the origin of the watermark is the lower left corner of the picture or text.BottomRight: Indicates that the origin of the coordinates is at the lower right corner of the video image, and the origin of the watermark is at the lower right corner of the picture or text.Default value: TopLeft.
      */
-    coordinateOrigin?: pulumi.Input<string>;
+    coordinateOrigin?: pulumi.Input<string | undefined>;
     /**
      * Image watermark template, only when Type is image, this field is required and valid.
      */
-    imageTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateImageTemplate>;
+    imageTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateImageTemplate | undefined>;
     /**
      * Watermark template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * SVG watermark template, only when Type is svg, this field is required and valid.
      */
-    svgTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateSvgTemplate>;
+    svgTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateSvgTemplate | undefined>;
     /**
      * Text watermark template, only when Type is text, this field is required and valid.
      */
-    textTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateTextTemplate>;
+    textTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateTextTemplate | undefined>;
     /**
      * Watermark type, optional value:image, text, svg.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * The horizontal position of the origin of the watermark from the origin of the coordinates of the video image. Support %, px two formats.When the string ends with %, it means that the watermark XPos specifies a percentage for the video width, such as 10% means that XPos is 10% of the video width.When the string ends with px, it means that the watermark XPos is the specified pixel, such as 100px means that the XPos is 100 pixels.Default value: 0px.
      */
-    xPos?: pulumi.Input<string>;
+    xPos?: pulumi.Input<string | undefined>;
     /**
      * The vertical position of the origin of the watermark from the origin of the coordinates of the video image. Support %, px two formats.When the string ends with %, it means that the watermark YPos specifies a percentage for the video height, such as 10% means that YPos is 10% of the video height.When the string ends with px, it means that the watermark YPos is the specified pixel, such as 100px means that the YPos is 100 pixels.Default value: 0px.
      */
-    yPos?: pulumi.Input<string>;
+    yPos?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -197,27 +197,27 @@ export interface WatermarkTemplateArgs {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Origin position, optional value:TopLeft: Indicates that the origin of the coordinates is at the upper left corner of the video image, and the origin of the watermark is the upper left corner of the picture or text.TopRight: Indicates that the origin of the coordinates is at the upper right corner of the video image, and the origin of the watermark is at the upper right corner of the picture or text.BottomLeft: Indicates that the origin of the coordinates is at the lower left corner of the video image, and the origin of the watermark is the lower left corner of the picture or text.BottomRight: Indicates that the origin of the coordinates is at the lower right corner of the video image, and the origin of the watermark is at the lower right corner of the picture or text.Default value: TopLeft.
      */
-    coordinateOrigin?: pulumi.Input<string>;
+    coordinateOrigin?: pulumi.Input<string | undefined>;
     /**
      * Image watermark template, only when Type is image, this field is required and valid.
      */
-    imageTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateImageTemplate>;
+    imageTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateImageTemplate | undefined>;
     /**
      * Watermark template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * SVG watermark template, only when Type is svg, this field is required and valid.
      */
-    svgTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateSvgTemplate>;
+    svgTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateSvgTemplate | undefined>;
     /**
      * Text watermark template, only when Type is text, this field is required and valid.
      */
-    textTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateTextTemplate>;
+    textTemplate?: pulumi.Input<inputs.Mps.WatermarkTemplateTextTemplate | undefined>;
     /**
      * Watermark type, optional value:image, text, svg.
      */
@@ -225,9 +225,9 @@ export interface WatermarkTemplateArgs {
     /**
      * The horizontal position of the origin of the watermark from the origin of the coordinates of the video image. Support %, px two formats.When the string ends with %, it means that the watermark XPos specifies a percentage for the video width, such as 10% means that XPos is 10% of the video width.When the string ends with px, it means that the watermark XPos is the specified pixel, such as 100px means that the XPos is 100 pixels.Default value: 0px.
      */
-    xPos?: pulumi.Input<string>;
+    xPos?: pulumi.Input<string | undefined>;
     /**
      * The vertical position of the origin of the watermark from the origin of the coordinates of the video image. Support %, px two formats.When the string ends with %, it means that the watermark YPos specifies a percentage for the video height, such as 10% means that YPos is 10% of the video height.When the string ends with px, it means that the watermark YPos is the specified pixel, such as 100px means that the YPos is 100 pixels.Default value: 0px.
      */
-    yPos?: pulumi.Input<string>;
+    yPos?: pulumi.Input<string | undefined>;
 }

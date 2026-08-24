@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
+ * const snapshotFiles = tencentcloud.vpc.getSnapshotFiles({
  *     businessType: "securitygroup",
  *     instanceId: "sg-902tl7t7",
  *     startDate: "2022-10-10 00:00:00",
@@ -90,7 +90,7 @@ export interface GetSnapshotFilesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
+ * const snapshotFiles = tencentcloud.vpc.getSnapshotFiles({
  *     businessType: "securitygroup",
  *     instanceId: "sg-902tl7t7",
  *     startDate: "2022-10-10 00:00:00",
@@ -128,7 +128,7 @@ export interface GetSnapshotFilesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start date in the format %Y-%m-%d %H:%M:%S.
      */

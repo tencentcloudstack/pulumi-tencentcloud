@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dnspod record_group can be imported using the domain#groupId, e.g.
+ * dnspod recordGroup can be imported using the domain#groupId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId
@@ -108,15 +108,15 @@ export interface RecordGroupState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Group ID.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * Record Group Name.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
 }
 
 /**

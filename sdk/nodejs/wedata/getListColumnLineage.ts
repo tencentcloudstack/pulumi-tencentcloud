@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListColumnLineage({
+ * const example = tencentcloud.wedata.getListColumnLineage({
  *     tableUniqueId: "B_CRyO4-3rMvNFPH_7aTaw",
  *     direction: "INPUT",
  *     columnName: "example_column",
@@ -91,7 +91,7 @@ export interface GetListColumnLineageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListColumnLineage({
+ * const example = tencentcloud.wedata.getListColumnLineage({
  *     tableUniqueId: "B_CRyO4-3rMvNFPH_7aTaw",
  *     direction: "INPUT",
  *     columnName: "example_column",
@@ -129,7 +129,7 @@ export interface GetListColumnLineageOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Table unique ID.
      */

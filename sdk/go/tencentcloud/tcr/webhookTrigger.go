@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   exampleInstance.ID(),
+//				InstanceId:   exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf_example_ns_retention"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -61,10 +61,10 @@ import (
 //				InstanceId: exampleNamespace.InstanceId,
 //			}, nil)
 //			nsId := example.ApplyT(func(example tcr.GetNamespacesResult) (*int, error) {
-//				return &example.NamespaceLists[0].Id, nil
+//				return example.NamespaceLists[0].Id, nil
 //			}).(pulumi.IntPtrOutput)
 //			_, err = tcr.NewWebhookTrigger(ctx, "example", &tcr.WebhookTriggerArgs{
-//				RegistryId: exampleInstance.ID(),
+//				RegistryId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				Namespace:  exampleNamespace.Name,
 //				Trigger: &tcr.WebhookTriggerTriggerArgs{
 //					Name: pulumi.String("trigger-example"),
@@ -87,7 +87,7 @@ import (
 //					Condition:   pulumi.String(".*"),
 //					Enabled:     pulumi.Bool(true),
 //					Description: pulumi.String("example for trigger description"),
-//					NamespaceId: pulumi.Int(nsId),
+//					NamespaceId: nsId,
 //				},
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
@@ -104,7 +104,7 @@ import (
 //
 // ## Import
 //
-// tcr webhook_trigger can be imported using the id, e.g.
+// tcr webhookTrigger can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id

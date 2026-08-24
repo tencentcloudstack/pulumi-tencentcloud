@@ -62,12 +62,8 @@ type GetNetworkAccountTypeResult struct {
 }
 
 func GetNetworkAccountTypeOutput(ctx *pulumi.Context, args GetNetworkAccountTypeOutputArgs, opts ...pulumi.InvokeOption) GetNetworkAccountTypeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNetworkAccountTypeResultOutput, error) {
-			args := v.(GetNetworkAccountTypeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args, GetNetworkAccountTypeResultOutput{}, options).(GetNetworkAccountTypeResultOutput), nil
-		}).(GetNetworkAccountTypeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args, GetNetworkAccountTypeResultOutput{}, options).(GetNetworkAccountTypeResultOutput)
 }
 
 // A collection of arguments for invoking getNetworkAccountType.

@@ -93,12 +93,8 @@ type GetTimeShiftRecordDetailResult struct {
 }
 
 func GetTimeShiftRecordDetailOutput(ctx *pulumi.Context, args GetTimeShiftRecordDetailOutputArgs, opts ...pulumi.InvokeOption) GetTimeShiftRecordDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTimeShiftRecordDetailResultOutput, error) {
-			args := v.(GetTimeShiftRecordDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args, GetTimeShiftRecordDetailResultOutput{}, options).(GetTimeShiftRecordDetailResultOutput), nil
-		}).(GetTimeShiftRecordDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getTimeShiftRecordDetail:getTimeShiftRecordDetail", args, GetTimeShiftRecordDetailResultOutput{}, options).(GetTimeShiftRecordDetailResultOutput)
 }
 
 // A collection of arguments for invoking getTimeShiftRecordDetail.

@@ -493,7 +493,426 @@ func (o CodeFileCodeFileConfigNotebookSessionInfoPtrOutput) NotebookSessionName(
 	}).(pulumi.StringPtrOutput)
 }
 
-type DataBackfillPlanOperationDataBackfillRangeList struct {
+type CodePermissionsAuthorizePermissionObject struct {
+	// Authorization details.
+	AuthorizeSubjects []CodePermissionsAuthorizePermissionObjectAuthorizeSubject `pulumi:"authorizeSubjects"`
+	// Authorization resource information, including resourceId and resourceType.
+	Resource *CodePermissionsAuthorizePermissionObjectResource `pulumi:"resource"`
+}
+
+// CodePermissionsAuthorizePermissionObjectInput is an input type that accepts CodePermissionsAuthorizePermissionObjectArgs and CodePermissionsAuthorizePermissionObjectOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectInput` via:
+//
+//	CodePermissionsAuthorizePermissionObjectArgs{...}
+type CodePermissionsAuthorizePermissionObjectInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectOutput() CodePermissionsAuthorizePermissionObjectOutput
+	ToCodePermissionsAuthorizePermissionObjectOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectOutput
+}
+
+type CodePermissionsAuthorizePermissionObjectArgs struct {
+	// Authorization details.
+	AuthorizeSubjects CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayInput `pulumi:"authorizeSubjects"`
+	// Authorization resource information, including resourceId and resourceType.
+	Resource CodePermissionsAuthorizePermissionObjectResourcePtrInput `pulumi:"resource"`
+}
+
+func (CodePermissionsAuthorizePermissionObjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObject)(nil)).Elem()
+}
+
+func (i CodePermissionsAuthorizePermissionObjectArgs) ToCodePermissionsAuthorizePermissionObjectOutput() CodePermissionsAuthorizePermissionObjectOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectArgs) ToCodePermissionsAuthorizePermissionObjectOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectOutput)
+}
+
+// CodePermissionsAuthorizePermissionObjectArrayInput is an input type that accepts CodePermissionsAuthorizePermissionObjectArray and CodePermissionsAuthorizePermissionObjectArrayOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectArrayInput` via:
+//
+//	CodePermissionsAuthorizePermissionObjectArray{ CodePermissionsAuthorizePermissionObjectArgs{...} }
+type CodePermissionsAuthorizePermissionObjectArrayInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectArrayOutput() CodePermissionsAuthorizePermissionObjectArrayOutput
+	ToCodePermissionsAuthorizePermissionObjectArrayOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectArrayOutput
+}
+
+type CodePermissionsAuthorizePermissionObjectArray []CodePermissionsAuthorizePermissionObjectInput
+
+func (CodePermissionsAuthorizePermissionObjectArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CodePermissionsAuthorizePermissionObject)(nil)).Elem()
+}
+
+func (i CodePermissionsAuthorizePermissionObjectArray) ToCodePermissionsAuthorizePermissionObjectArrayOutput() CodePermissionsAuthorizePermissionObjectArrayOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectArrayOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectArray) ToCodePermissionsAuthorizePermissionObjectArrayOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectArrayOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObject)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectOutput) ToCodePermissionsAuthorizePermissionObjectOutput() CodePermissionsAuthorizePermissionObjectOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectOutput) ToCodePermissionsAuthorizePermissionObjectOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectOutput {
+	return o
+}
+
+// Authorization details.
+func (o CodePermissionsAuthorizePermissionObjectOutput) AuthorizeSubjects() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObject) []CodePermissionsAuthorizePermissionObjectAuthorizeSubject {
+		return v.AuthorizeSubjects
+	}).(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput)
+}
+
+// Authorization resource information, including resourceId and resourceType.
+func (o CodePermissionsAuthorizePermissionObjectOutput) Resource() CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObject) *CodePermissionsAuthorizePermissionObjectResource {
+		return v.Resource
+	}).(CodePermissionsAuthorizePermissionObjectResourcePtrOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectArrayOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CodePermissionsAuthorizePermissionObject)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectArrayOutput) ToCodePermissionsAuthorizePermissionObjectArrayOutput() CodePermissionsAuthorizePermissionObjectArrayOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectArrayOutput) ToCodePermissionsAuthorizePermissionObjectArrayOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectArrayOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectArrayOutput) Index(i pulumi.IntInput) CodePermissionsAuthorizePermissionObjectOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CodePermissionsAuthorizePermissionObject {
+		return vs[0].([]CodePermissionsAuthorizePermissionObject)[vs[1].(int)]
+	}).(CodePermissionsAuthorizePermissionObjectOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubject struct {
+	// Permission list.
+	Privileges []string `pulumi:"privileges"`
+	// Subject type (user: user, role: role, group: group).
+	SubjectType *string `pulumi:"subjectType"`
+	// Subject value list.
+	SubjectValues []string `pulumi:"subjectValues"`
+}
+
+// CodePermissionsAuthorizePermissionObjectAuthorizeSubjectInput is an input type that accepts CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs and CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectAuthorizeSubjectInput` via:
+//
+//	CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs{...}
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput
+	ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput
+}
+
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs struct {
+	// Permission list.
+	Privileges pulumi.StringArrayInput `pulumi:"privileges"`
+	// Subject type (user: user, role: role, group: group).
+	SubjectType pulumi.StringPtrInput `pulumi:"subjectType"`
+	// Subject value list.
+	SubjectValues pulumi.StringArrayInput `pulumi:"subjectValues"`
+}
+
+func (CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectAuthorizeSubject)(nil)).Elem()
+}
+
+func (i CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput)
+}
+
+// CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayInput is an input type that accepts CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray and CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayInput` via:
+//
+//	CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray{ CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs{...} }
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput
+	ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput
+}
+
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray []CodePermissionsAuthorizePermissionObjectAuthorizeSubjectInput
+
+func (CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CodePermissionsAuthorizePermissionObjectAuthorizeSubject)(nil)).Elem()
+}
+
+func (i CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectAuthorizeSubject)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput {
+	return o
+}
+
+// Permission list.
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) Privileges() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectAuthorizeSubject) []string { return v.Privileges }).(pulumi.StringArrayOutput)
+}
+
+// Subject type (user: user, role: role, group: group).
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) SubjectType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectAuthorizeSubject) *string { return v.SubjectType }).(pulumi.StringPtrOutput)
+}
+
+// Subject value list.
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput) SubjectValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectAuthorizeSubject) []string { return v.SubjectValues }).(pulumi.StringArrayOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CodePermissionsAuthorizePermissionObjectAuthorizeSubject)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput() CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput) ToCodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput) Index(i pulumi.IntInput) CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CodePermissionsAuthorizePermissionObjectAuthorizeSubject {
+		return vs[0].([]CodePermissionsAuthorizePermissionObjectAuthorizeSubject)[vs[1].(int)]
+	}).(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectResource struct {
+	// CFS path.
+	ResourceCfsPath *string `pulumi:"resourceCfsPath"`
+	// Resource ID: directory ID or script ID.
+	ResourceId *string `pulumi:"resourceId"`
+	// Full ID path, used for recursive authentication.
+	ResourceIdForPath *string `pulumi:"resourceIdForPath"`
+	// Resource type, can only be these two types: folder, script.
+	ResourceType *string `pulumi:"resourceType"`
+}
+
+// CodePermissionsAuthorizePermissionObjectResourceInput is an input type that accepts CodePermissionsAuthorizePermissionObjectResourceArgs and CodePermissionsAuthorizePermissionObjectResourceOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectResourceInput` via:
+//
+//	CodePermissionsAuthorizePermissionObjectResourceArgs{...}
+type CodePermissionsAuthorizePermissionObjectResourceInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectResourceOutput() CodePermissionsAuthorizePermissionObjectResourceOutput
+	ToCodePermissionsAuthorizePermissionObjectResourceOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectResourceOutput
+}
+
+type CodePermissionsAuthorizePermissionObjectResourceArgs struct {
+	// CFS path.
+	ResourceCfsPath pulumi.StringPtrInput `pulumi:"resourceCfsPath"`
+	// Resource ID: directory ID or script ID.
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Full ID path, used for recursive authentication.
+	ResourceIdForPath pulumi.StringPtrInput `pulumi:"resourceIdForPath"`
+	// Resource type, can only be these two types: folder, script.
+	ResourceType pulumi.StringPtrInput `pulumi:"resourceType"`
+}
+
+func (CodePermissionsAuthorizePermissionObjectResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectResource)(nil)).Elem()
+}
+
+func (i CodePermissionsAuthorizePermissionObjectResourceArgs) ToCodePermissionsAuthorizePermissionObjectResourceOutput() CodePermissionsAuthorizePermissionObjectResourceOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectResourceOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectResourceArgs) ToCodePermissionsAuthorizePermissionObjectResourceOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectResourceOutput)
+}
+
+func (i CodePermissionsAuthorizePermissionObjectResourceArgs) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutput() CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(context.Background())
+}
+
+func (i CodePermissionsAuthorizePermissionObjectResourceArgs) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectResourceOutput).ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(ctx)
+}
+
+// CodePermissionsAuthorizePermissionObjectResourcePtrInput is an input type that accepts CodePermissionsAuthorizePermissionObjectResourceArgs, CodePermissionsAuthorizePermissionObjectResourcePtr and CodePermissionsAuthorizePermissionObjectResourcePtrOutput values.
+// You can construct a concrete instance of `CodePermissionsAuthorizePermissionObjectResourcePtrInput` via:
+//
+//	        CodePermissionsAuthorizePermissionObjectResourceArgs{...}
+//
+//	or:
+//
+//	        nil
+type CodePermissionsAuthorizePermissionObjectResourcePtrInput interface {
+	pulumi.Input
+
+	ToCodePermissionsAuthorizePermissionObjectResourcePtrOutput() CodePermissionsAuthorizePermissionObjectResourcePtrOutput
+	ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(context.Context) CodePermissionsAuthorizePermissionObjectResourcePtrOutput
+}
+
+type codePermissionsAuthorizePermissionObjectResourcePtrType CodePermissionsAuthorizePermissionObjectResourceArgs
+
+func CodePermissionsAuthorizePermissionObjectResourcePtr(v *CodePermissionsAuthorizePermissionObjectResourceArgs) CodePermissionsAuthorizePermissionObjectResourcePtrInput {
+	return (*codePermissionsAuthorizePermissionObjectResourcePtrType)(v)
+}
+
+func (*codePermissionsAuthorizePermissionObjectResourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CodePermissionsAuthorizePermissionObjectResource)(nil)).Elem()
+}
+
+func (i *codePermissionsAuthorizePermissionObjectResourcePtrType) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutput() CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return i.ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(context.Background())
+}
+
+func (i *codePermissionsAuthorizePermissionObjectResourcePtrType) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CodePermissionsAuthorizePermissionObjectResourcePtrOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectResourceOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectResource)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ToCodePermissionsAuthorizePermissionObjectResourceOutput() CodePermissionsAuthorizePermissionObjectResourceOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ToCodePermissionsAuthorizePermissionObjectResourceOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourceOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutput() CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return o.ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(context.Background())
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CodePermissionsAuthorizePermissionObjectResource) *CodePermissionsAuthorizePermissionObjectResource {
+		return &v
+	}).(CodePermissionsAuthorizePermissionObjectResourcePtrOutput)
+}
+
+// CFS path.
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ResourceCfsPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectResource) *string { return v.ResourceCfsPath }).(pulumi.StringPtrOutput)
+}
+
+// Resource ID: directory ID or script ID.
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectResource) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Full ID path, used for recursive authentication.
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ResourceIdForPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectResource) *string { return v.ResourceIdForPath }).(pulumi.StringPtrOutput)
+}
+
+// Resource type, can only be these two types: folder, script.
+func (o CodePermissionsAuthorizePermissionObjectResourceOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CodePermissionsAuthorizePermissionObjectResource) *string { return v.ResourceType }).(pulumi.StringPtrOutput)
+}
+
+type CodePermissionsAuthorizePermissionObjectResourcePtrOutput struct{ *pulumi.OutputState }
+
+func (CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CodePermissionsAuthorizePermissionObjectResource)(nil)).Elem()
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutput() CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ToCodePermissionsAuthorizePermissionObjectResourcePtrOutputWithContext(ctx context.Context) CodePermissionsAuthorizePermissionObjectResourcePtrOutput {
+	return o
+}
+
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) Elem() CodePermissionsAuthorizePermissionObjectResourceOutput {
+	return o.ApplyT(func(v *CodePermissionsAuthorizePermissionObjectResource) CodePermissionsAuthorizePermissionObjectResource {
+		if v != nil {
+			return *v
+		}
+		var ret CodePermissionsAuthorizePermissionObjectResource
+		return ret
+	}).(CodePermissionsAuthorizePermissionObjectResourceOutput)
+}
+
+// CFS path.
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ResourceCfsPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CodePermissionsAuthorizePermissionObjectResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceCfsPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Resource ID: directory ID or script ID.
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CodePermissionsAuthorizePermissionObjectResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Full ID path, used for recursive authentication.
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ResourceIdForPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CodePermissionsAuthorizePermissionObjectResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceIdForPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Resource type, can only be these two types: folder, script.
+func (o CodePermissionsAuthorizePermissionObjectResourcePtrOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CodePermissionsAuthorizePermissionObjectResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceType
+	}).(pulumi.StringPtrOutput)
+}
+
+type DataBackfillPlanDataBackfillRangeList struct {
 	// End date in the format yyyy-MM-dd, indicates ending at 23:59:59 of the specified date.
 	EndDate *string `pulumi:"endDate"`
 	// End time point between [StartDate, EndDate] in HH:mm format. effective for tasks with a period of hours or less.
@@ -504,18 +923,18 @@ type DataBackfillPlanOperationDataBackfillRangeList struct {
 	StartDate *string `pulumi:"startDate"`
 }
 
-// DataBackfillPlanOperationDataBackfillRangeListInput is an input type that accepts DataBackfillPlanOperationDataBackfillRangeListArgs and DataBackfillPlanOperationDataBackfillRangeListOutput values.
-// You can construct a concrete instance of `DataBackfillPlanOperationDataBackfillRangeListInput` via:
+// DataBackfillPlanDataBackfillRangeListInput is an input type that accepts DataBackfillPlanDataBackfillRangeListArgs and DataBackfillPlanDataBackfillRangeListOutput values.
+// You can construct a concrete instance of `DataBackfillPlanDataBackfillRangeListInput` via:
 //
-//	DataBackfillPlanOperationDataBackfillRangeListArgs{...}
-type DataBackfillPlanOperationDataBackfillRangeListInput interface {
+//	DataBackfillPlanDataBackfillRangeListArgs{...}
+type DataBackfillPlanDataBackfillRangeListInput interface {
 	pulumi.Input
 
-	ToDataBackfillPlanOperationDataBackfillRangeListOutput() DataBackfillPlanOperationDataBackfillRangeListOutput
-	ToDataBackfillPlanOperationDataBackfillRangeListOutputWithContext(context.Context) DataBackfillPlanOperationDataBackfillRangeListOutput
+	ToDataBackfillPlanDataBackfillRangeListOutput() DataBackfillPlanDataBackfillRangeListOutput
+	ToDataBackfillPlanDataBackfillRangeListOutputWithContext(context.Context) DataBackfillPlanDataBackfillRangeListOutput
 }
 
-type DataBackfillPlanOperationDataBackfillRangeListArgs struct {
+type DataBackfillPlanDataBackfillRangeListArgs struct {
 	// End date in the format yyyy-MM-dd, indicates ending at 23:59:59 of the specified date.
 	EndDate pulumi.StringPtrInput `pulumi:"endDate"`
 	// End time point between [StartDate, EndDate] in HH:mm format. effective for tasks with a period of hours or less.
@@ -526,201 +945,201 @@ type DataBackfillPlanOperationDataBackfillRangeListArgs struct {
 	StartDate pulumi.StringPtrInput `pulumi:"startDate"`
 }
 
-func (DataBackfillPlanOperationDataBackfillRangeListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataBackfillPlanOperationDataBackfillRangeList)(nil)).Elem()
+func (DataBackfillPlanDataBackfillRangeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataBackfillPlanDataBackfillRangeList)(nil)).Elem()
 }
 
-func (i DataBackfillPlanOperationDataBackfillRangeListArgs) ToDataBackfillPlanOperationDataBackfillRangeListOutput() DataBackfillPlanOperationDataBackfillRangeListOutput {
-	return i.ToDataBackfillPlanOperationDataBackfillRangeListOutputWithContext(context.Background())
+func (i DataBackfillPlanDataBackfillRangeListArgs) ToDataBackfillPlanDataBackfillRangeListOutput() DataBackfillPlanDataBackfillRangeListOutput {
+	return i.ToDataBackfillPlanDataBackfillRangeListOutputWithContext(context.Background())
 }
 
-func (i DataBackfillPlanOperationDataBackfillRangeListArgs) ToDataBackfillPlanOperationDataBackfillRangeListOutputWithContext(ctx context.Context) DataBackfillPlanOperationDataBackfillRangeListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanOperationDataBackfillRangeListOutput)
+func (i DataBackfillPlanDataBackfillRangeListArgs) ToDataBackfillPlanDataBackfillRangeListOutputWithContext(ctx context.Context) DataBackfillPlanDataBackfillRangeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanDataBackfillRangeListOutput)
 }
 
-// DataBackfillPlanOperationDataBackfillRangeListArrayInput is an input type that accepts DataBackfillPlanOperationDataBackfillRangeListArray and DataBackfillPlanOperationDataBackfillRangeListArrayOutput values.
-// You can construct a concrete instance of `DataBackfillPlanOperationDataBackfillRangeListArrayInput` via:
+// DataBackfillPlanDataBackfillRangeListArrayInput is an input type that accepts DataBackfillPlanDataBackfillRangeListArray and DataBackfillPlanDataBackfillRangeListArrayOutput values.
+// You can construct a concrete instance of `DataBackfillPlanDataBackfillRangeListArrayInput` via:
 //
-//	DataBackfillPlanOperationDataBackfillRangeListArray{ DataBackfillPlanOperationDataBackfillRangeListArgs{...} }
-type DataBackfillPlanOperationDataBackfillRangeListArrayInput interface {
+//	DataBackfillPlanDataBackfillRangeListArray{ DataBackfillPlanDataBackfillRangeListArgs{...} }
+type DataBackfillPlanDataBackfillRangeListArrayInput interface {
 	pulumi.Input
 
-	ToDataBackfillPlanOperationDataBackfillRangeListArrayOutput() DataBackfillPlanOperationDataBackfillRangeListArrayOutput
-	ToDataBackfillPlanOperationDataBackfillRangeListArrayOutputWithContext(context.Context) DataBackfillPlanOperationDataBackfillRangeListArrayOutput
+	ToDataBackfillPlanDataBackfillRangeListArrayOutput() DataBackfillPlanDataBackfillRangeListArrayOutput
+	ToDataBackfillPlanDataBackfillRangeListArrayOutputWithContext(context.Context) DataBackfillPlanDataBackfillRangeListArrayOutput
 }
 
-type DataBackfillPlanOperationDataBackfillRangeListArray []DataBackfillPlanOperationDataBackfillRangeListInput
+type DataBackfillPlanDataBackfillRangeListArray []DataBackfillPlanDataBackfillRangeListInput
 
-func (DataBackfillPlanOperationDataBackfillRangeListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataBackfillPlanOperationDataBackfillRangeList)(nil)).Elem()
+func (DataBackfillPlanDataBackfillRangeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataBackfillPlanDataBackfillRangeList)(nil)).Elem()
 }
 
-func (i DataBackfillPlanOperationDataBackfillRangeListArray) ToDataBackfillPlanOperationDataBackfillRangeListArrayOutput() DataBackfillPlanOperationDataBackfillRangeListArrayOutput {
-	return i.ToDataBackfillPlanOperationDataBackfillRangeListArrayOutputWithContext(context.Background())
+func (i DataBackfillPlanDataBackfillRangeListArray) ToDataBackfillPlanDataBackfillRangeListArrayOutput() DataBackfillPlanDataBackfillRangeListArrayOutput {
+	return i.ToDataBackfillPlanDataBackfillRangeListArrayOutputWithContext(context.Background())
 }
 
-func (i DataBackfillPlanOperationDataBackfillRangeListArray) ToDataBackfillPlanOperationDataBackfillRangeListArrayOutputWithContext(ctx context.Context) DataBackfillPlanOperationDataBackfillRangeListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanOperationDataBackfillRangeListArrayOutput)
+func (i DataBackfillPlanDataBackfillRangeListArray) ToDataBackfillPlanDataBackfillRangeListArrayOutputWithContext(ctx context.Context) DataBackfillPlanDataBackfillRangeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanDataBackfillRangeListArrayOutput)
 }
 
-type DataBackfillPlanOperationDataBackfillRangeListOutput struct{ *pulumi.OutputState }
+type DataBackfillPlanDataBackfillRangeListOutput struct{ *pulumi.OutputState }
 
-func (DataBackfillPlanOperationDataBackfillRangeListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataBackfillPlanOperationDataBackfillRangeList)(nil)).Elem()
+func (DataBackfillPlanDataBackfillRangeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataBackfillPlanDataBackfillRangeList)(nil)).Elem()
 }
 
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) ToDataBackfillPlanOperationDataBackfillRangeListOutput() DataBackfillPlanOperationDataBackfillRangeListOutput {
+func (o DataBackfillPlanDataBackfillRangeListOutput) ToDataBackfillPlanDataBackfillRangeListOutput() DataBackfillPlanDataBackfillRangeListOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) ToDataBackfillPlanOperationDataBackfillRangeListOutputWithContext(ctx context.Context) DataBackfillPlanOperationDataBackfillRangeListOutput {
+func (o DataBackfillPlanDataBackfillRangeListOutput) ToDataBackfillPlanDataBackfillRangeListOutputWithContext(ctx context.Context) DataBackfillPlanDataBackfillRangeListOutput {
 	return o
 }
 
 // End date in the format yyyy-MM-dd, indicates ending at 23:59:59 of the specified date.
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) EndDate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationDataBackfillRangeList) *string { return v.EndDate }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanDataBackfillRangeListOutput) EndDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanDataBackfillRangeList) *string { return v.EndDate }).(pulumi.StringPtrOutput)
 }
 
 // End time point between [StartDate, EndDate] in HH:mm format. effective for tasks with a period of hours or less.
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) ExecutionEndTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationDataBackfillRangeList) *string { return v.ExecutionEndTime }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanDataBackfillRangeListOutput) ExecutionEndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanDataBackfillRangeList) *string { return v.ExecutionEndTime }).(pulumi.StringPtrOutput)
 }
 
 // Start time of each day between [StartDate, EndDate] in HH:mm format. effective for tasks with a period of hours or less.
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) ExecutionStartTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationDataBackfillRangeList) *string { return v.ExecutionStartTime }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanDataBackfillRangeListOutput) ExecutionStartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanDataBackfillRangeList) *string { return v.ExecutionStartTime }).(pulumi.StringPtrOutput)
 }
 
 // Start date in yyyy-MM-dd format. indicates the start from 00:00:00 on the specified date.
-func (o DataBackfillPlanOperationDataBackfillRangeListOutput) StartDate() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationDataBackfillRangeList) *string { return v.StartDate }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanDataBackfillRangeListOutput) StartDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanDataBackfillRangeList) *string { return v.StartDate }).(pulumi.StringPtrOutput)
 }
 
-type DataBackfillPlanOperationDataBackfillRangeListArrayOutput struct{ *pulumi.OutputState }
+type DataBackfillPlanDataBackfillRangeListArrayOutput struct{ *pulumi.OutputState }
 
-func (DataBackfillPlanOperationDataBackfillRangeListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataBackfillPlanOperationDataBackfillRangeList)(nil)).Elem()
+func (DataBackfillPlanDataBackfillRangeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataBackfillPlanDataBackfillRangeList)(nil)).Elem()
 }
 
-func (o DataBackfillPlanOperationDataBackfillRangeListArrayOutput) ToDataBackfillPlanOperationDataBackfillRangeListArrayOutput() DataBackfillPlanOperationDataBackfillRangeListArrayOutput {
+func (o DataBackfillPlanDataBackfillRangeListArrayOutput) ToDataBackfillPlanDataBackfillRangeListArrayOutput() DataBackfillPlanDataBackfillRangeListArrayOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationDataBackfillRangeListArrayOutput) ToDataBackfillPlanOperationDataBackfillRangeListArrayOutputWithContext(ctx context.Context) DataBackfillPlanOperationDataBackfillRangeListArrayOutput {
+func (o DataBackfillPlanDataBackfillRangeListArrayOutput) ToDataBackfillPlanDataBackfillRangeListArrayOutputWithContext(ctx context.Context) DataBackfillPlanDataBackfillRangeListArrayOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationDataBackfillRangeListArrayOutput) Index(i pulumi.IntInput) DataBackfillPlanOperationDataBackfillRangeListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataBackfillPlanOperationDataBackfillRangeList {
-		return vs[0].([]DataBackfillPlanOperationDataBackfillRangeList)[vs[1].(int)]
-	}).(DataBackfillPlanOperationDataBackfillRangeListOutput)
+func (o DataBackfillPlanDataBackfillRangeListArrayOutput) Index(i pulumi.IntInput) DataBackfillPlanDataBackfillRangeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataBackfillPlanDataBackfillRangeList {
+		return vs[0].([]DataBackfillPlanDataBackfillRangeList)[vs[1].(int)]
+	}).(DataBackfillPlanDataBackfillRangeListOutput)
 }
 
-type DataBackfillPlanOperationRedefineParamList struct {
+type DataBackfillPlanRedefineParamList struct {
 	// Key name.
 	K *string `pulumi:"k"`
 	// The value. do not pass SQL (the request will be deemed as an attack on the api). if needed, transcode the SQL with Base64 and decode it.
 	V *string `pulumi:"v"`
 }
 
-// DataBackfillPlanOperationRedefineParamListInput is an input type that accepts DataBackfillPlanOperationRedefineParamListArgs and DataBackfillPlanOperationRedefineParamListOutput values.
-// You can construct a concrete instance of `DataBackfillPlanOperationRedefineParamListInput` via:
+// DataBackfillPlanRedefineParamListInput is an input type that accepts DataBackfillPlanRedefineParamListArgs and DataBackfillPlanRedefineParamListOutput values.
+// You can construct a concrete instance of `DataBackfillPlanRedefineParamListInput` via:
 //
-//	DataBackfillPlanOperationRedefineParamListArgs{...}
-type DataBackfillPlanOperationRedefineParamListInput interface {
+//	DataBackfillPlanRedefineParamListArgs{...}
+type DataBackfillPlanRedefineParamListInput interface {
 	pulumi.Input
 
-	ToDataBackfillPlanOperationRedefineParamListOutput() DataBackfillPlanOperationRedefineParamListOutput
-	ToDataBackfillPlanOperationRedefineParamListOutputWithContext(context.Context) DataBackfillPlanOperationRedefineParamListOutput
+	ToDataBackfillPlanRedefineParamListOutput() DataBackfillPlanRedefineParamListOutput
+	ToDataBackfillPlanRedefineParamListOutputWithContext(context.Context) DataBackfillPlanRedefineParamListOutput
 }
 
-type DataBackfillPlanOperationRedefineParamListArgs struct {
+type DataBackfillPlanRedefineParamListArgs struct {
 	// Key name.
 	K pulumi.StringPtrInput `pulumi:"k"`
 	// The value. do not pass SQL (the request will be deemed as an attack on the api). if needed, transcode the SQL with Base64 and decode it.
 	V pulumi.StringPtrInput `pulumi:"v"`
 }
 
-func (DataBackfillPlanOperationRedefineParamListArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataBackfillPlanOperationRedefineParamList)(nil)).Elem()
+func (DataBackfillPlanRedefineParamListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataBackfillPlanRedefineParamList)(nil)).Elem()
 }
 
-func (i DataBackfillPlanOperationRedefineParamListArgs) ToDataBackfillPlanOperationRedefineParamListOutput() DataBackfillPlanOperationRedefineParamListOutput {
-	return i.ToDataBackfillPlanOperationRedefineParamListOutputWithContext(context.Background())
+func (i DataBackfillPlanRedefineParamListArgs) ToDataBackfillPlanRedefineParamListOutput() DataBackfillPlanRedefineParamListOutput {
+	return i.ToDataBackfillPlanRedefineParamListOutputWithContext(context.Background())
 }
 
-func (i DataBackfillPlanOperationRedefineParamListArgs) ToDataBackfillPlanOperationRedefineParamListOutputWithContext(ctx context.Context) DataBackfillPlanOperationRedefineParamListOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanOperationRedefineParamListOutput)
+func (i DataBackfillPlanRedefineParamListArgs) ToDataBackfillPlanRedefineParamListOutputWithContext(ctx context.Context) DataBackfillPlanRedefineParamListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanRedefineParamListOutput)
 }
 
-// DataBackfillPlanOperationRedefineParamListArrayInput is an input type that accepts DataBackfillPlanOperationRedefineParamListArray and DataBackfillPlanOperationRedefineParamListArrayOutput values.
-// You can construct a concrete instance of `DataBackfillPlanOperationRedefineParamListArrayInput` via:
+// DataBackfillPlanRedefineParamListArrayInput is an input type that accepts DataBackfillPlanRedefineParamListArray and DataBackfillPlanRedefineParamListArrayOutput values.
+// You can construct a concrete instance of `DataBackfillPlanRedefineParamListArrayInput` via:
 //
-//	DataBackfillPlanOperationRedefineParamListArray{ DataBackfillPlanOperationRedefineParamListArgs{...} }
-type DataBackfillPlanOperationRedefineParamListArrayInput interface {
+//	DataBackfillPlanRedefineParamListArray{ DataBackfillPlanRedefineParamListArgs{...} }
+type DataBackfillPlanRedefineParamListArrayInput interface {
 	pulumi.Input
 
-	ToDataBackfillPlanOperationRedefineParamListArrayOutput() DataBackfillPlanOperationRedefineParamListArrayOutput
-	ToDataBackfillPlanOperationRedefineParamListArrayOutputWithContext(context.Context) DataBackfillPlanOperationRedefineParamListArrayOutput
+	ToDataBackfillPlanRedefineParamListArrayOutput() DataBackfillPlanRedefineParamListArrayOutput
+	ToDataBackfillPlanRedefineParamListArrayOutputWithContext(context.Context) DataBackfillPlanRedefineParamListArrayOutput
 }
 
-type DataBackfillPlanOperationRedefineParamListArray []DataBackfillPlanOperationRedefineParamListInput
+type DataBackfillPlanRedefineParamListArray []DataBackfillPlanRedefineParamListInput
 
-func (DataBackfillPlanOperationRedefineParamListArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataBackfillPlanOperationRedefineParamList)(nil)).Elem()
+func (DataBackfillPlanRedefineParamListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataBackfillPlanRedefineParamList)(nil)).Elem()
 }
 
-func (i DataBackfillPlanOperationRedefineParamListArray) ToDataBackfillPlanOperationRedefineParamListArrayOutput() DataBackfillPlanOperationRedefineParamListArrayOutput {
-	return i.ToDataBackfillPlanOperationRedefineParamListArrayOutputWithContext(context.Background())
+func (i DataBackfillPlanRedefineParamListArray) ToDataBackfillPlanRedefineParamListArrayOutput() DataBackfillPlanRedefineParamListArrayOutput {
+	return i.ToDataBackfillPlanRedefineParamListArrayOutputWithContext(context.Background())
 }
 
-func (i DataBackfillPlanOperationRedefineParamListArray) ToDataBackfillPlanOperationRedefineParamListArrayOutputWithContext(ctx context.Context) DataBackfillPlanOperationRedefineParamListArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanOperationRedefineParamListArrayOutput)
+func (i DataBackfillPlanRedefineParamListArray) ToDataBackfillPlanRedefineParamListArrayOutputWithContext(ctx context.Context) DataBackfillPlanRedefineParamListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataBackfillPlanRedefineParamListArrayOutput)
 }
 
-type DataBackfillPlanOperationRedefineParamListOutput struct{ *pulumi.OutputState }
+type DataBackfillPlanRedefineParamListOutput struct{ *pulumi.OutputState }
 
-func (DataBackfillPlanOperationRedefineParamListOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DataBackfillPlanOperationRedefineParamList)(nil)).Elem()
+func (DataBackfillPlanRedefineParamListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataBackfillPlanRedefineParamList)(nil)).Elem()
 }
 
-func (o DataBackfillPlanOperationRedefineParamListOutput) ToDataBackfillPlanOperationRedefineParamListOutput() DataBackfillPlanOperationRedefineParamListOutput {
+func (o DataBackfillPlanRedefineParamListOutput) ToDataBackfillPlanRedefineParamListOutput() DataBackfillPlanRedefineParamListOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationRedefineParamListOutput) ToDataBackfillPlanOperationRedefineParamListOutputWithContext(ctx context.Context) DataBackfillPlanOperationRedefineParamListOutput {
+func (o DataBackfillPlanRedefineParamListOutput) ToDataBackfillPlanRedefineParamListOutputWithContext(ctx context.Context) DataBackfillPlanRedefineParamListOutput {
 	return o
 }
 
 // Key name.
-func (o DataBackfillPlanOperationRedefineParamListOutput) K() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationRedefineParamList) *string { return v.K }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanRedefineParamListOutput) K() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanRedefineParamList) *string { return v.K }).(pulumi.StringPtrOutput)
 }
 
 // The value. do not pass SQL (the request will be deemed as an attack on the api). if needed, transcode the SQL with Base64 and decode it.
-func (o DataBackfillPlanOperationRedefineParamListOutput) V() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v DataBackfillPlanOperationRedefineParamList) *string { return v.V }).(pulumi.StringPtrOutput)
+func (o DataBackfillPlanRedefineParamListOutput) V() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataBackfillPlanRedefineParamList) *string { return v.V }).(pulumi.StringPtrOutput)
 }
 
-type DataBackfillPlanOperationRedefineParamListArrayOutput struct{ *pulumi.OutputState }
+type DataBackfillPlanRedefineParamListArrayOutput struct{ *pulumi.OutputState }
 
-func (DataBackfillPlanOperationRedefineParamListArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]DataBackfillPlanOperationRedefineParamList)(nil)).Elem()
+func (DataBackfillPlanRedefineParamListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataBackfillPlanRedefineParamList)(nil)).Elem()
 }
 
-func (o DataBackfillPlanOperationRedefineParamListArrayOutput) ToDataBackfillPlanOperationRedefineParamListArrayOutput() DataBackfillPlanOperationRedefineParamListArrayOutput {
+func (o DataBackfillPlanRedefineParamListArrayOutput) ToDataBackfillPlanRedefineParamListArrayOutput() DataBackfillPlanRedefineParamListArrayOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationRedefineParamListArrayOutput) ToDataBackfillPlanOperationRedefineParamListArrayOutputWithContext(ctx context.Context) DataBackfillPlanOperationRedefineParamListArrayOutput {
+func (o DataBackfillPlanRedefineParamListArrayOutput) ToDataBackfillPlanRedefineParamListArrayOutputWithContext(ctx context.Context) DataBackfillPlanRedefineParamListArrayOutput {
 	return o
 }
 
-func (o DataBackfillPlanOperationRedefineParamListArrayOutput) Index(i pulumi.IntInput) DataBackfillPlanOperationRedefineParamListOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataBackfillPlanOperationRedefineParamList {
-		return vs[0].([]DataBackfillPlanOperationRedefineParamList)[vs[1].(int)]
-	}).(DataBackfillPlanOperationRedefineParamListOutput)
+func (o DataBackfillPlanRedefineParamListArrayOutput) Index(i pulumi.IntInput) DataBackfillPlanRedefineParamListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataBackfillPlanRedefineParamList {
+		return vs[0].([]DataBackfillPlanRedefineParamList)[vs[1].(int)]
+	}).(DataBackfillPlanRedefineParamListOutput)
 }
 
 type DqRuleCompareRule struct {
@@ -11757,6 +12176,2721 @@ func (o ProjectProjectPtrOutput) ProjectName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type QualityRuleCompareRule struct {
+	// `o` represents OR, `a` represents AND, numbers represent items index.
+	ComputeExpression *string `pulumi:"computeExpression"`
+	// Periodic template default cycle in seconds.
+	CycleStep *int `pulumi:"cycleStep"`
+	// Comparison condition list.
+	Items []QualityRuleCompareRuleItem `pulumi:"items"`
+}
+
+// QualityRuleCompareRuleInput is an input type that accepts QualityRuleCompareRuleArgs and QualityRuleCompareRuleOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRuleInput` via:
+//
+//	QualityRuleCompareRuleArgs{...}
+type QualityRuleCompareRuleInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRuleOutput() QualityRuleCompareRuleOutput
+	ToQualityRuleCompareRuleOutputWithContext(context.Context) QualityRuleCompareRuleOutput
+}
+
+type QualityRuleCompareRuleArgs struct {
+	// `o` represents OR, `a` represents AND, numbers represent items index.
+	ComputeExpression pulumi.StringPtrInput `pulumi:"computeExpression"`
+	// Periodic template default cycle in seconds.
+	CycleStep pulumi.IntPtrInput `pulumi:"cycleStep"`
+	// Comparison condition list.
+	Items QualityRuleCompareRuleItemArrayInput `pulumi:"items"`
+}
+
+func (QualityRuleCompareRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRule)(nil)).Elem()
+}
+
+func (i QualityRuleCompareRuleArgs) ToQualityRuleCompareRuleOutput() QualityRuleCompareRuleOutput {
+	return i.ToQualityRuleCompareRuleOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleArgs) ToQualityRuleCompareRuleOutputWithContext(ctx context.Context) QualityRuleCompareRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleOutput)
+}
+
+func (i QualityRuleCompareRuleArgs) ToQualityRuleCompareRulePtrOutput() QualityRuleCompareRulePtrOutput {
+	return i.ToQualityRuleCompareRulePtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleArgs) ToQualityRuleCompareRulePtrOutputWithContext(ctx context.Context) QualityRuleCompareRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleOutput).ToQualityRuleCompareRulePtrOutputWithContext(ctx)
+}
+
+// QualityRuleCompareRulePtrInput is an input type that accepts QualityRuleCompareRuleArgs, QualityRuleCompareRulePtr and QualityRuleCompareRulePtrOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRulePtrInput` via:
+//
+//	        QualityRuleCompareRuleArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleCompareRulePtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRulePtrOutput() QualityRuleCompareRulePtrOutput
+	ToQualityRuleCompareRulePtrOutputWithContext(context.Context) QualityRuleCompareRulePtrOutput
+}
+
+type qualityRuleCompareRulePtrType QualityRuleCompareRuleArgs
+
+func QualityRuleCompareRulePtr(v *QualityRuleCompareRuleArgs) QualityRuleCompareRulePtrInput {
+	return (*qualityRuleCompareRulePtrType)(v)
+}
+
+func (*qualityRuleCompareRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleCompareRule)(nil)).Elem()
+}
+
+func (i *qualityRuleCompareRulePtrType) ToQualityRuleCompareRulePtrOutput() QualityRuleCompareRulePtrOutput {
+	return i.ToQualityRuleCompareRulePtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleCompareRulePtrType) ToQualityRuleCompareRulePtrOutputWithContext(ctx context.Context) QualityRuleCompareRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRulePtrOutput)
+}
+
+type QualityRuleCompareRuleOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRule)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRuleOutput) ToQualityRuleCompareRuleOutput() QualityRuleCompareRuleOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleOutput) ToQualityRuleCompareRuleOutputWithContext(ctx context.Context) QualityRuleCompareRuleOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleOutput) ToQualityRuleCompareRulePtrOutput() QualityRuleCompareRulePtrOutput {
+	return o.ToQualityRuleCompareRulePtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleCompareRuleOutput) ToQualityRuleCompareRulePtrOutputWithContext(ctx context.Context) QualityRuleCompareRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleCompareRule) *QualityRuleCompareRule {
+		return &v
+	}).(QualityRuleCompareRulePtrOutput)
+}
+
+// `o` represents OR, `a` represents AND, numbers represent items index.
+func (o QualityRuleCompareRuleOutput) ComputeExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRule) *string { return v.ComputeExpression }).(pulumi.StringPtrOutput)
+}
+
+// Periodic template default cycle in seconds.
+func (o QualityRuleCompareRuleOutput) CycleStep() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRule) *int { return v.CycleStep }).(pulumi.IntPtrOutput)
+}
+
+// Comparison condition list.
+func (o QualityRuleCompareRuleOutput) Items() QualityRuleCompareRuleItemArrayOutput {
+	return o.ApplyT(func(v QualityRuleCompareRule) []QualityRuleCompareRuleItem { return v.Items }).(QualityRuleCompareRuleItemArrayOutput)
+}
+
+type QualityRuleCompareRulePtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleCompareRule)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRulePtrOutput) ToQualityRuleCompareRulePtrOutput() QualityRuleCompareRulePtrOutput {
+	return o
+}
+
+func (o QualityRuleCompareRulePtrOutput) ToQualityRuleCompareRulePtrOutputWithContext(ctx context.Context) QualityRuleCompareRulePtrOutput {
+	return o
+}
+
+func (o QualityRuleCompareRulePtrOutput) Elem() QualityRuleCompareRuleOutput {
+	return o.ApplyT(func(v *QualityRuleCompareRule) QualityRuleCompareRule {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleCompareRule
+		return ret
+	}).(QualityRuleCompareRuleOutput)
+}
+
+// `o` represents OR, `a` represents AND, numbers represent items index.
+func (o QualityRuleCompareRulePtrOutput) ComputeExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleCompareRule) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComputeExpression
+	}).(pulumi.StringPtrOutput)
+}
+
+// Periodic template default cycle in seconds.
+func (o QualityRuleCompareRulePtrOutput) CycleStep() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleCompareRule) *int {
+		if v == nil {
+			return nil
+		}
+		return v.CycleStep
+	}).(pulumi.IntPtrOutput)
+}
+
+// Comparison condition list.
+func (o QualityRuleCompareRulePtrOutput) Items() QualityRuleCompareRuleItemArrayOutput {
+	return o.ApplyT(func(v *QualityRuleCompareRule) []QualityRuleCompareRuleItem {
+		if v == nil {
+			return nil
+		}
+		return v.Items
+	}).(QualityRuleCompareRuleItemArrayOutput)
+}
+
+type QualityRuleCompareRuleItem struct {
+	// Comparison type (required). Valid values: `1` (fixed value), `2` (fluctuation value), `3` (numerical range comparison), `4` (enumeration range comparison), `5` (no comparison), `6` (field data correlation), `7` (fairness).
+	CompareType *int `pulumi:"compareType"`
+	// Comparison operator type (conditionally required). Required when CompareType belongs to {1,2,6,7}. Valid values: `<`, `<=`, `==`, `=>`, `>`, `!=`, `IRLCRO` (within interval, left closed right open), `IRLORC` (within interval, left open right closed), `IRLCRC` (within interval, left closed right closed), `IRLORO` (within interval, left open right open), `NRLCRO` (not within interval, left closed right open), `NRLORC` (not within interval, left open right closed), `NRLCRC` (not within interval, left closed right closed), `NRLORO` (not within interval, left open right open).
+	Operator *string `pulumi:"operator"`
+	// Quality statistics value type (conditionally required). Required when CompareType belongs to {2,3,7}. When compareType = 2 (fluctuation value): `1` = absolute value (ABS), `2` = ascending (ASCEND), `3` = descending (DESCEND). When compareType = 3 (numerical range): `4` = within range (WITH_IN_RANGE), `5` = out of range (OUT_OF_RANGE). When compareType = 7 (fairness): `6` = fairness rate (FAIRNESS_RATE), `7` = fairness gap (FAIRNESS_GAP).
+	ValueComputeType *int `pulumi:"valueComputeType"`
+	// Comparison threshold list (required).
+	ValueLists []QualityRuleCompareRuleItemValueList `pulumi:"valueLists"`
+}
+
+// QualityRuleCompareRuleItemInput is an input type that accepts QualityRuleCompareRuleItemArgs and QualityRuleCompareRuleItemOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRuleItemInput` via:
+//
+//	QualityRuleCompareRuleItemArgs{...}
+type QualityRuleCompareRuleItemInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRuleItemOutput() QualityRuleCompareRuleItemOutput
+	ToQualityRuleCompareRuleItemOutputWithContext(context.Context) QualityRuleCompareRuleItemOutput
+}
+
+type QualityRuleCompareRuleItemArgs struct {
+	// Comparison type (required). Valid values: `1` (fixed value), `2` (fluctuation value), `3` (numerical range comparison), `4` (enumeration range comparison), `5` (no comparison), `6` (field data correlation), `7` (fairness).
+	CompareType pulumi.IntPtrInput `pulumi:"compareType"`
+	// Comparison operator type (conditionally required). Required when CompareType belongs to {1,2,6,7}. Valid values: `<`, `<=`, `==`, `=>`, `>`, `!=`, `IRLCRO` (within interval, left closed right open), `IRLORC` (within interval, left open right closed), `IRLCRC` (within interval, left closed right closed), `IRLORO` (within interval, left open right open), `NRLCRO` (not within interval, left closed right open), `NRLORC` (not within interval, left open right closed), `NRLCRC` (not within interval, left closed right closed), `NRLORO` (not within interval, left open right open).
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// Quality statistics value type (conditionally required). Required when CompareType belongs to {2,3,7}. When compareType = 2 (fluctuation value): `1` = absolute value (ABS), `2` = ascending (ASCEND), `3` = descending (DESCEND). When compareType = 3 (numerical range): `4` = within range (WITH_IN_RANGE), `5` = out of range (OUT_OF_RANGE). When compareType = 7 (fairness): `6` = fairness rate (FAIRNESS_RATE), `7` = fairness gap (FAIRNESS_GAP).
+	ValueComputeType pulumi.IntPtrInput `pulumi:"valueComputeType"`
+	// Comparison threshold list (required).
+	ValueLists QualityRuleCompareRuleItemValueListArrayInput `pulumi:"valueLists"`
+}
+
+func (QualityRuleCompareRuleItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRuleItem)(nil)).Elem()
+}
+
+func (i QualityRuleCompareRuleItemArgs) ToQualityRuleCompareRuleItemOutput() QualityRuleCompareRuleItemOutput {
+	return i.ToQualityRuleCompareRuleItemOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleItemArgs) ToQualityRuleCompareRuleItemOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleItemOutput)
+}
+
+// QualityRuleCompareRuleItemArrayInput is an input type that accepts QualityRuleCompareRuleItemArray and QualityRuleCompareRuleItemArrayOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRuleItemArrayInput` via:
+//
+//	QualityRuleCompareRuleItemArray{ QualityRuleCompareRuleItemArgs{...} }
+type QualityRuleCompareRuleItemArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRuleItemArrayOutput() QualityRuleCompareRuleItemArrayOutput
+	ToQualityRuleCompareRuleItemArrayOutputWithContext(context.Context) QualityRuleCompareRuleItemArrayOutput
+}
+
+type QualityRuleCompareRuleItemArray []QualityRuleCompareRuleItemInput
+
+func (QualityRuleCompareRuleItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleCompareRuleItem)(nil)).Elem()
+}
+
+func (i QualityRuleCompareRuleItemArray) ToQualityRuleCompareRuleItemArrayOutput() QualityRuleCompareRuleItemArrayOutput {
+	return i.ToQualityRuleCompareRuleItemArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleItemArray) ToQualityRuleCompareRuleItemArrayOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleItemArrayOutput)
+}
+
+type QualityRuleCompareRuleItemOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRuleItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRuleItem)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRuleItemOutput) ToQualityRuleCompareRuleItemOutput() QualityRuleCompareRuleItemOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemOutput) ToQualityRuleCompareRuleItemOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemOutput {
+	return o
+}
+
+// Comparison type (required). Valid values: `1` (fixed value), `2` (fluctuation value), `3` (numerical range comparison), `4` (enumeration range comparison), `5` (no comparison), `6` (field data correlation), `7` (fairness).
+func (o QualityRuleCompareRuleItemOutput) CompareType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItem) *int { return v.CompareType }).(pulumi.IntPtrOutput)
+}
+
+// Comparison operator type (conditionally required). Required when CompareType belongs to {1,2,6,7}. Valid values: `<`, `<=`, `==`, `=>`, `>`, `!=`, `IRLCRO` (within interval, left closed right open), `IRLORC` (within interval, left open right closed), `IRLCRC` (within interval, left closed right closed), `IRLORO` (within interval, left open right open), `NRLCRO` (not within interval, left closed right open), `NRLORC` (not within interval, left open right closed), `NRLCRC` (not within interval, left closed right closed), `NRLORO` (not within interval, left open right open).
+func (o QualityRuleCompareRuleItemOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItem) *string { return v.Operator }).(pulumi.StringPtrOutput)
+}
+
+// Quality statistics value type (conditionally required). Required when CompareType belongs to {2,3,7}. When compareType = 2 (fluctuation value): `1` = absolute value (ABS), `2` = ascending (ASCEND), `3` = descending (DESCEND). When compareType = 3 (numerical range): `4` = within range (WITH_IN_RANGE), `5` = out of range (OUT_OF_RANGE). When compareType = 7 (fairness): `6` = fairness rate (FAIRNESS_RATE), `7` = fairness gap (FAIRNESS_GAP).
+func (o QualityRuleCompareRuleItemOutput) ValueComputeType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItem) *int { return v.ValueComputeType }).(pulumi.IntPtrOutput)
+}
+
+// Comparison threshold list (required).
+func (o QualityRuleCompareRuleItemOutput) ValueLists() QualityRuleCompareRuleItemValueListArrayOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItem) []QualityRuleCompareRuleItemValueList { return v.ValueLists }).(QualityRuleCompareRuleItemValueListArrayOutput)
+}
+
+type QualityRuleCompareRuleItemArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRuleItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleCompareRuleItem)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRuleItemArrayOutput) ToQualityRuleCompareRuleItemArrayOutput() QualityRuleCompareRuleItemArrayOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemArrayOutput) ToQualityRuleCompareRuleItemArrayOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemArrayOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemArrayOutput) Index(i pulumi.IntInput) QualityRuleCompareRuleItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleCompareRuleItem {
+		return vs[0].([]QualityRuleCompareRuleItem)[vs[1].(int)]
+	}).(QualityRuleCompareRuleItemOutput)
+}
+
+type QualityRuleCompareRuleItemValueList struct {
+	// Threshold value (required).
+	Value *string `pulumi:"value"`
+	// Threshold type (required). Valid values: `1` (low threshold), `2` (high threshold), `3` (normal threshold), `4` (enumeration value).
+	ValueType *int `pulumi:"valueType"`
+}
+
+// QualityRuleCompareRuleItemValueListInput is an input type that accepts QualityRuleCompareRuleItemValueListArgs and QualityRuleCompareRuleItemValueListOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRuleItemValueListInput` via:
+//
+//	QualityRuleCompareRuleItemValueListArgs{...}
+type QualityRuleCompareRuleItemValueListInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRuleItemValueListOutput() QualityRuleCompareRuleItemValueListOutput
+	ToQualityRuleCompareRuleItemValueListOutputWithContext(context.Context) QualityRuleCompareRuleItemValueListOutput
+}
+
+type QualityRuleCompareRuleItemValueListArgs struct {
+	// Threshold value (required).
+	Value pulumi.StringPtrInput `pulumi:"value"`
+	// Threshold type (required). Valid values: `1` (low threshold), `2` (high threshold), `3` (normal threshold), `4` (enumeration value).
+	ValueType pulumi.IntPtrInput `pulumi:"valueType"`
+}
+
+func (QualityRuleCompareRuleItemValueListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRuleItemValueList)(nil)).Elem()
+}
+
+func (i QualityRuleCompareRuleItemValueListArgs) ToQualityRuleCompareRuleItemValueListOutput() QualityRuleCompareRuleItemValueListOutput {
+	return i.ToQualityRuleCompareRuleItemValueListOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleItemValueListArgs) ToQualityRuleCompareRuleItemValueListOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemValueListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleItemValueListOutput)
+}
+
+// QualityRuleCompareRuleItemValueListArrayInput is an input type that accepts QualityRuleCompareRuleItemValueListArray and QualityRuleCompareRuleItemValueListArrayOutput values.
+// You can construct a concrete instance of `QualityRuleCompareRuleItemValueListArrayInput` via:
+//
+//	QualityRuleCompareRuleItemValueListArray{ QualityRuleCompareRuleItemValueListArgs{...} }
+type QualityRuleCompareRuleItemValueListArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleCompareRuleItemValueListArrayOutput() QualityRuleCompareRuleItemValueListArrayOutput
+	ToQualityRuleCompareRuleItemValueListArrayOutputWithContext(context.Context) QualityRuleCompareRuleItemValueListArrayOutput
+}
+
+type QualityRuleCompareRuleItemValueListArray []QualityRuleCompareRuleItemValueListInput
+
+func (QualityRuleCompareRuleItemValueListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleCompareRuleItemValueList)(nil)).Elem()
+}
+
+func (i QualityRuleCompareRuleItemValueListArray) ToQualityRuleCompareRuleItemValueListArrayOutput() QualityRuleCompareRuleItemValueListArrayOutput {
+	return i.ToQualityRuleCompareRuleItemValueListArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleCompareRuleItemValueListArray) ToQualityRuleCompareRuleItemValueListArrayOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemValueListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleCompareRuleItemValueListArrayOutput)
+}
+
+type QualityRuleCompareRuleItemValueListOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRuleItemValueListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleCompareRuleItemValueList)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRuleItemValueListOutput) ToQualityRuleCompareRuleItemValueListOutput() QualityRuleCompareRuleItemValueListOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemValueListOutput) ToQualityRuleCompareRuleItemValueListOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemValueListOutput {
+	return o
+}
+
+// Threshold value (required).
+func (o QualityRuleCompareRuleItemValueListOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItemValueList) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+// Threshold type (required). Valid values: `1` (low threshold), `2` (high threshold), `3` (normal threshold), `4` (enumeration value).
+func (o QualityRuleCompareRuleItemValueListOutput) ValueType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleCompareRuleItemValueList) *int { return v.ValueType }).(pulumi.IntPtrOutput)
+}
+
+type QualityRuleCompareRuleItemValueListArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleCompareRuleItemValueListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleCompareRuleItemValueList)(nil)).Elem()
+}
+
+func (o QualityRuleCompareRuleItemValueListArrayOutput) ToQualityRuleCompareRuleItemValueListArrayOutput() QualityRuleCompareRuleItemValueListArrayOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemValueListArrayOutput) ToQualityRuleCompareRuleItemValueListArrayOutputWithContext(ctx context.Context) QualityRuleCompareRuleItemValueListArrayOutput {
+	return o
+}
+
+func (o QualityRuleCompareRuleItemValueListArrayOutput) Index(i pulumi.IntInput) QualityRuleCompareRuleItemValueListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleCompareRuleItemValueList {
+		return vs[0].([]QualityRuleCompareRuleItemValueList)[vs[1].(int)]
+	}).(QualityRuleCompareRuleItemValueListOutput)
+}
+
+type QualityRuleFieldConfig struct {
+	// Database and table variables.
+	TableConfigs []QualityRuleFieldConfigTableConfig `pulumi:"tableConfigs"`
+	// WHERE variables.
+	WhereConfigs []QualityRuleFieldConfigWhereConfig `pulumi:"whereConfigs"`
+}
+
+// QualityRuleFieldConfigInput is an input type that accepts QualityRuleFieldConfigArgs and QualityRuleFieldConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigInput` via:
+//
+//	QualityRuleFieldConfigArgs{...}
+type QualityRuleFieldConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigOutput() QualityRuleFieldConfigOutput
+	ToQualityRuleFieldConfigOutputWithContext(context.Context) QualityRuleFieldConfigOutput
+}
+
+type QualityRuleFieldConfigArgs struct {
+	// Database and table variables.
+	TableConfigs QualityRuleFieldConfigTableConfigArrayInput `pulumi:"tableConfigs"`
+	// WHERE variables.
+	WhereConfigs QualityRuleFieldConfigWhereConfigArrayInput `pulumi:"whereConfigs"`
+}
+
+func (QualityRuleFieldConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigArgs) ToQualityRuleFieldConfigOutput() QualityRuleFieldConfigOutput {
+	return i.ToQualityRuleFieldConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigArgs) ToQualityRuleFieldConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigOutput)
+}
+
+func (i QualityRuleFieldConfigArgs) ToQualityRuleFieldConfigPtrOutput() QualityRuleFieldConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigArgs) ToQualityRuleFieldConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigOutput).ToQualityRuleFieldConfigPtrOutputWithContext(ctx)
+}
+
+// QualityRuleFieldConfigPtrInput is an input type that accepts QualityRuleFieldConfigArgs, QualityRuleFieldConfigPtr and QualityRuleFieldConfigPtrOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigPtrInput` via:
+//
+//	        QualityRuleFieldConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleFieldConfigPtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigPtrOutput() QualityRuleFieldConfigPtrOutput
+	ToQualityRuleFieldConfigPtrOutputWithContext(context.Context) QualityRuleFieldConfigPtrOutput
+}
+
+type qualityRuleFieldConfigPtrType QualityRuleFieldConfigArgs
+
+func QualityRuleFieldConfigPtr(v *QualityRuleFieldConfigArgs) QualityRuleFieldConfigPtrInput {
+	return (*qualityRuleFieldConfigPtrType)(v)
+}
+
+func (*qualityRuleFieldConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfig)(nil)).Elem()
+}
+
+func (i *qualityRuleFieldConfigPtrType) ToQualityRuleFieldConfigPtrOutput() QualityRuleFieldConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleFieldConfigPtrType) ToQualityRuleFieldConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigPtrOutput)
+}
+
+type QualityRuleFieldConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigOutput) ToQualityRuleFieldConfigOutput() QualityRuleFieldConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigOutput) ToQualityRuleFieldConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigOutput) ToQualityRuleFieldConfigPtrOutput() QualityRuleFieldConfigPtrOutput {
+	return o.ToQualityRuleFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleFieldConfigOutput) ToQualityRuleFieldConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleFieldConfig) *QualityRuleFieldConfig {
+		return &v
+	}).(QualityRuleFieldConfigPtrOutput)
+}
+
+// Database and table variables.
+func (o QualityRuleFieldConfigOutput) TableConfigs() QualityRuleFieldConfigTableConfigArrayOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfig) []QualityRuleFieldConfigTableConfig { return v.TableConfigs }).(QualityRuleFieldConfigTableConfigArrayOutput)
+}
+
+// WHERE variables.
+func (o QualityRuleFieldConfigOutput) WhereConfigs() QualityRuleFieldConfigWhereConfigArrayOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfig) []QualityRuleFieldConfigWhereConfig { return v.WhereConfigs }).(QualityRuleFieldConfigWhereConfigArrayOutput)
+}
+
+type QualityRuleFieldConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigPtrOutput) ToQualityRuleFieldConfigPtrOutput() QualityRuleFieldConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigPtrOutput) ToQualityRuleFieldConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigPtrOutput) Elem() QualityRuleFieldConfigOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfig) QualityRuleFieldConfig {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleFieldConfig
+		return ret
+	}).(QualityRuleFieldConfigOutput)
+}
+
+// Database and table variables.
+func (o QualityRuleFieldConfigPtrOutput) TableConfigs() QualityRuleFieldConfigTableConfigArrayOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfig) []QualityRuleFieldConfigTableConfig {
+		if v == nil {
+			return nil
+		}
+		return v.TableConfigs
+	}).(QualityRuleFieldConfigTableConfigArrayOutput)
+}
+
+// WHERE variables.
+func (o QualityRuleFieldConfigPtrOutput) WhereConfigs() QualityRuleFieldConfigWhereConfigArrayOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfig) []QualityRuleFieldConfigWhereConfig {
+		if v == nil {
+			return nil
+		}
+		return v.WhereConfigs
+	}).(QualityRuleFieldConfigWhereConfigArrayOutput)
+}
+
+type QualityRuleFieldConfigTableConfig struct {
+	// Database ID.
+	DatabaseId *string `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Field variables.
+	FieldConfigs []QualityRuleFieldConfigTableConfigFieldConfig `pulumi:"fieldConfigs"`
+	// Table ID.
+	TableId *string `pulumi:"tableId"`
+	// Table key.
+	TableKey *string `pulumi:"tableKey"`
+	// Table name.
+	TableName *string `pulumi:"tableName"`
+}
+
+// QualityRuleFieldConfigTableConfigInput is an input type that accepts QualityRuleFieldConfigTableConfigArgs and QualityRuleFieldConfigTableConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigInput` via:
+//
+//	QualityRuleFieldConfigTableConfigArgs{...}
+type QualityRuleFieldConfigTableConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigOutput() QualityRuleFieldConfigTableConfigOutput
+	ToQualityRuleFieldConfigTableConfigOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigOutput
+}
+
+type QualityRuleFieldConfigTableConfigArgs struct {
+	// Database ID.
+	DatabaseId pulumi.StringPtrInput `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Field variables.
+	FieldConfigs QualityRuleFieldConfigTableConfigFieldConfigArrayInput `pulumi:"fieldConfigs"`
+	// Table ID.
+	TableId pulumi.StringPtrInput `pulumi:"tableId"`
+	// Table key.
+	TableKey pulumi.StringPtrInput `pulumi:"tableKey"`
+	// Table name.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (QualityRuleFieldConfigTableConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigTableConfigArgs) ToQualityRuleFieldConfigTableConfigOutput() QualityRuleFieldConfigTableConfigOutput {
+	return i.ToQualityRuleFieldConfigTableConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigArgs) ToQualityRuleFieldConfigTableConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigOutput)
+}
+
+// QualityRuleFieldConfigTableConfigArrayInput is an input type that accepts QualityRuleFieldConfigTableConfigArray and QualityRuleFieldConfigTableConfigArrayOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigArrayInput` via:
+//
+//	QualityRuleFieldConfigTableConfigArray{ QualityRuleFieldConfigTableConfigArgs{...} }
+type QualityRuleFieldConfigTableConfigArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigArrayOutput() QualityRuleFieldConfigTableConfigArrayOutput
+	ToQualityRuleFieldConfigTableConfigArrayOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigArrayOutput
+}
+
+type QualityRuleFieldConfigTableConfigArray []QualityRuleFieldConfigTableConfigInput
+
+func (QualityRuleFieldConfigTableConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigTableConfigArray) ToQualityRuleFieldConfigTableConfigArrayOutput() QualityRuleFieldConfigTableConfigArrayOutput {
+	return i.ToQualityRuleFieldConfigTableConfigArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigArray) ToQualityRuleFieldConfigTableConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigArrayOutput)
+}
+
+type QualityRuleFieldConfigTableConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigOutput) ToQualityRuleFieldConfigTableConfigOutput() QualityRuleFieldConfigTableConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigOutput) ToQualityRuleFieldConfigTableConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigOutput {
+	return o
+}
+
+// Database ID.
+func (o QualityRuleFieldConfigTableConfigOutput) DatabaseId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) *string { return v.DatabaseId }).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o QualityRuleFieldConfigTableConfigOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) *string { return v.DatabaseName }).(pulumi.StringPtrOutput)
+}
+
+// Field variables.
+func (o QualityRuleFieldConfigTableConfigOutput) FieldConfigs() QualityRuleFieldConfigTableConfigFieldConfigArrayOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) []QualityRuleFieldConfigTableConfigFieldConfig {
+		return v.FieldConfigs
+	}).(QualityRuleFieldConfigTableConfigFieldConfigArrayOutput)
+}
+
+// Table ID.
+func (o QualityRuleFieldConfigTableConfigOutput) TableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) *string { return v.TableId }).(pulumi.StringPtrOutput)
+}
+
+// Table key.
+func (o QualityRuleFieldConfigTableConfigOutput) TableKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) *string { return v.TableKey }).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o QualityRuleFieldConfigTableConfigOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfig) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleFieldConfigTableConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigArrayOutput) ToQualityRuleFieldConfigTableConfigArrayOutput() QualityRuleFieldConfigTableConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigArrayOutput) ToQualityRuleFieldConfigTableConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigArrayOutput) Index(i pulumi.IntInput) QualityRuleFieldConfigTableConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleFieldConfigTableConfig {
+		return vs[0].([]QualityRuleFieldConfigTableConfig)[vs[1].(int)]
+	}).(QualityRuleFieldConfigTableConfigOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfig struct {
+	// Field data type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig *QualityRuleFieldConfigTableConfigFieldConfigValueConfig `pulumi:"valueConfig"`
+}
+
+// QualityRuleFieldConfigTableConfigFieldConfigInput is an input type that accepts QualityRuleFieldConfigTableConfigFieldConfigArgs and QualityRuleFieldConfigTableConfigFieldConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigFieldConfigInput` via:
+//
+//	QualityRuleFieldConfigTableConfigFieldConfigArgs{...}
+type QualityRuleFieldConfigTableConfigFieldConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigFieldConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigOutput
+	ToQualityRuleFieldConfigTableConfigFieldConfigOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigFieldConfigOutput
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigArgs struct {
+	// Field data type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput `pulumi:"valueConfig"`
+}
+
+func (QualityRuleFieldConfigTableConfigFieldConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigOutput {
+	return i.ToQualityRuleFieldConfigTableConfigFieldConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigFieldConfigOutput)
+}
+
+// QualityRuleFieldConfigTableConfigFieldConfigArrayInput is an input type that accepts QualityRuleFieldConfigTableConfigFieldConfigArray and QualityRuleFieldConfigTableConfigFieldConfigArrayOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigFieldConfigArrayInput` via:
+//
+//	QualityRuleFieldConfigTableConfigFieldConfigArray{ QualityRuleFieldConfigTableConfigFieldConfigArgs{...} }
+type QualityRuleFieldConfigTableConfigFieldConfigArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutput() QualityRuleFieldConfigTableConfigFieldConfigArrayOutput
+	ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigFieldConfigArrayOutput
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigArray []QualityRuleFieldConfigTableConfigFieldConfigInput
+
+func (QualityRuleFieldConfigTableConfigFieldConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigArray) ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutput() QualityRuleFieldConfigTableConfigFieldConfigArrayOutput {
+	return i.ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigArray) ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigFieldConfigArrayOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigFieldConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigOutput {
+	return o
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfig) *string { return v.FieldDataType }).(pulumi.StringPtrOutput)
+}
+
+// Field key.
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfig) *string { return v.FieldKey }).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfig) *string { return v.FieldValue }).(pulumi.StringPtrOutput)
+}
+
+// Field value variable information.
+func (o QualityRuleFieldConfigTableConfigFieldConfigOutput) ValueConfig() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfig) *QualityRuleFieldConfigTableConfigFieldConfigValueConfig {
+		return v.ValueConfig
+	}).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigFieldConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigArrayOutput) ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutput() QualityRuleFieldConfigTableConfigFieldConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigArrayOutput) ToQualityRuleFieldConfigTableConfigFieldConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigArrayOutput) Index(i pulumi.IntInput) QualityRuleFieldConfigTableConfigFieldConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleFieldConfigTableConfigFieldConfig {
+		return vs[0].([]QualityRuleFieldConfigTableConfigFieldConfig)[vs[1].(int)]
+	}).(QualityRuleFieldConfigTableConfigFieldConfigOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfig struct {
+	// Field data type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+}
+
+// QualityRuleFieldConfigTableConfigFieldConfigValueConfigInput is an input type that accepts QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs and QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigFieldConfigValueConfigInput` via:
+//
+//	QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs{...}
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput
+	ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs struct {
+	// Field data type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+}
+
+func (QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return i.ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput)
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput).ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx)
+}
+
+// QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput is an input type that accepts QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs, QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtr and QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput` via:
+//
+//	        QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput
+	ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput
+}
+
+type qualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrType QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs
+
+func QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtr(v *QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput {
+	return (*qualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrType)(v)
+}
+
+func (*qualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (i *qualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrType) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrType) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *QualityRuleFieldConfigTableConfigFieldConfigValueConfig {
+		return &v
+	}).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string { return v.FieldDataType }).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string { return v.FieldKey }).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string { return v.FieldValue }).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput() QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ToQualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) Elem() QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigTableConfigFieldConfigValueConfig) QualityRuleFieldConfigTableConfigFieldConfigValueConfig {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleFieldConfigTableConfigFieldConfigValueConfig
+		return ret
+	}).(QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput)
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleFieldConfigWhereConfig struct {
+	// Field data type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig *QualityRuleFieldConfigWhereConfigValueConfig `pulumi:"valueConfig"`
+}
+
+// QualityRuleFieldConfigWhereConfigInput is an input type that accepts QualityRuleFieldConfigWhereConfigArgs and QualityRuleFieldConfigWhereConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigWhereConfigInput` via:
+//
+//	QualityRuleFieldConfigWhereConfigArgs{...}
+type QualityRuleFieldConfigWhereConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigWhereConfigOutput() QualityRuleFieldConfigWhereConfigOutput
+	ToQualityRuleFieldConfigWhereConfigOutputWithContext(context.Context) QualityRuleFieldConfigWhereConfigOutput
+}
+
+type QualityRuleFieldConfigWhereConfigArgs struct {
+	// Field data type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig QualityRuleFieldConfigWhereConfigValueConfigPtrInput `pulumi:"valueConfig"`
+}
+
+func (QualityRuleFieldConfigWhereConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigWhereConfigArgs) ToQualityRuleFieldConfigWhereConfigOutput() QualityRuleFieldConfigWhereConfigOutput {
+	return i.ToQualityRuleFieldConfigWhereConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigWhereConfigArgs) ToQualityRuleFieldConfigWhereConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigWhereConfigOutput)
+}
+
+// QualityRuleFieldConfigWhereConfigArrayInput is an input type that accepts QualityRuleFieldConfigWhereConfigArray and QualityRuleFieldConfigWhereConfigArrayOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigWhereConfigArrayInput` via:
+//
+//	QualityRuleFieldConfigWhereConfigArray{ QualityRuleFieldConfigWhereConfigArgs{...} }
+type QualityRuleFieldConfigWhereConfigArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigWhereConfigArrayOutput() QualityRuleFieldConfigWhereConfigArrayOutput
+	ToQualityRuleFieldConfigWhereConfigArrayOutputWithContext(context.Context) QualityRuleFieldConfigWhereConfigArrayOutput
+}
+
+type QualityRuleFieldConfigWhereConfigArray []QualityRuleFieldConfigWhereConfigInput
+
+func (QualityRuleFieldConfigWhereConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigWhereConfigArray) ToQualityRuleFieldConfigWhereConfigArrayOutput() QualityRuleFieldConfigWhereConfigArrayOutput {
+	return i.ToQualityRuleFieldConfigWhereConfigArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigWhereConfigArray) ToQualityRuleFieldConfigWhereConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigWhereConfigArrayOutput)
+}
+
+type QualityRuleFieldConfigWhereConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigWhereConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigWhereConfigOutput) ToQualityRuleFieldConfigWhereConfigOutput() QualityRuleFieldConfigWhereConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigOutput) ToQualityRuleFieldConfigWhereConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigOutput {
+	return o
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigWhereConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfig) *string { return v.FieldDataType }).(pulumi.StringPtrOutput)
+}
+
+// Field key.
+func (o QualityRuleFieldConfigWhereConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfig) *string { return v.FieldKey }).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigWhereConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfig) *string { return v.FieldValue }).(pulumi.StringPtrOutput)
+}
+
+// Field value variable information.
+func (o QualityRuleFieldConfigWhereConfigOutput) ValueConfig() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfig) *QualityRuleFieldConfigWhereConfigValueConfig {
+		return v.ValueConfig
+	}).(QualityRuleFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+type QualityRuleFieldConfigWhereConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigWhereConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigWhereConfigArrayOutput) ToQualityRuleFieldConfigWhereConfigArrayOutput() QualityRuleFieldConfigWhereConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigArrayOutput) ToQualityRuleFieldConfigWhereConfigArrayOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigArrayOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigArrayOutput) Index(i pulumi.IntInput) QualityRuleFieldConfigWhereConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleFieldConfigWhereConfig {
+		return vs[0].([]QualityRuleFieldConfigWhereConfig)[vs[1].(int)]
+	}).(QualityRuleFieldConfigWhereConfigOutput)
+}
+
+type QualityRuleFieldConfigWhereConfigValueConfig struct {
+	// Field data type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+}
+
+// QualityRuleFieldConfigWhereConfigValueConfigInput is an input type that accepts QualityRuleFieldConfigWhereConfigValueConfigArgs and QualityRuleFieldConfigWhereConfigValueConfigOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigWhereConfigValueConfigInput` via:
+//
+//	QualityRuleFieldConfigWhereConfigValueConfigArgs{...}
+type QualityRuleFieldConfigWhereConfigValueConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigWhereConfigValueConfigOutput() QualityRuleFieldConfigWhereConfigValueConfigOutput
+	ToQualityRuleFieldConfigWhereConfigValueConfigOutputWithContext(context.Context) QualityRuleFieldConfigWhereConfigValueConfigOutput
+}
+
+type QualityRuleFieldConfigWhereConfigValueConfigArgs struct {
+	// Field data type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+}
+
+func (QualityRuleFieldConfigWhereConfigValueConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (i QualityRuleFieldConfigWhereConfigValueConfigArgs) ToQualityRuleFieldConfigWhereConfigValueConfigOutput() QualityRuleFieldConfigWhereConfigValueConfigOutput {
+	return i.ToQualityRuleFieldConfigWhereConfigValueConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigWhereConfigValueConfigArgs) ToQualityRuleFieldConfigWhereConfigValueConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigWhereConfigValueConfigOutput)
+}
+
+func (i QualityRuleFieldConfigWhereConfigValueConfigArgs) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutput() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleFieldConfigWhereConfigValueConfigArgs) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigWhereConfigValueConfigOutput).ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx)
+}
+
+// QualityRuleFieldConfigWhereConfigValueConfigPtrInput is an input type that accepts QualityRuleFieldConfigWhereConfigValueConfigArgs, QualityRuleFieldConfigWhereConfigValueConfigPtr and QualityRuleFieldConfigWhereConfigValueConfigPtrOutput values.
+// You can construct a concrete instance of `QualityRuleFieldConfigWhereConfigValueConfigPtrInput` via:
+//
+//	        QualityRuleFieldConfigWhereConfigValueConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleFieldConfigWhereConfigValueConfigPtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutput() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput
+	ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Context) QualityRuleFieldConfigWhereConfigValueConfigPtrOutput
+}
+
+type qualityRuleFieldConfigWhereConfigValueConfigPtrType QualityRuleFieldConfigWhereConfigValueConfigArgs
+
+func QualityRuleFieldConfigWhereConfigValueConfigPtr(v *QualityRuleFieldConfigWhereConfigValueConfigArgs) QualityRuleFieldConfigWhereConfigValueConfigPtrInput {
+	return (*qualityRuleFieldConfigWhereConfigValueConfigPtrType)(v)
+}
+
+func (*qualityRuleFieldConfigWhereConfigValueConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (i *qualityRuleFieldConfigWhereConfigValueConfigPtrType) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutput() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return i.ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleFieldConfigWhereConfigValueConfigPtrType) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+type QualityRuleFieldConfigWhereConfigValueConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigWhereConfigValueConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) ToQualityRuleFieldConfigWhereConfigValueConfigOutput() QualityRuleFieldConfigWhereConfigValueConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) ToQualityRuleFieldConfigWhereConfigValueConfigOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutput() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleFieldConfigWhereConfigValueConfig) *QualityRuleFieldConfigWhereConfigValueConfig {
+		return &v
+	}).(QualityRuleFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfigValueConfig) *string { return v.FieldDataType }).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfigValueConfig) *string { return v.FieldKey }).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigWhereConfigValueConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleFieldConfigWhereConfigValueConfig) *string { return v.FieldValue }).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleFieldConfigWhereConfigValueConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutput() QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) ToQualityRuleFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) QualityRuleFieldConfigWhereConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) Elem() QualityRuleFieldConfigWhereConfigValueConfigOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigWhereConfigValueConfig) QualityRuleFieldConfigWhereConfigValueConfig {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleFieldConfigWhereConfigValueConfig
+		return ret
+	}).(QualityRuleFieldConfigWhereConfigValueConfigOutput)
+}
+
+// Field data type.
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o QualityRuleFieldConfigWhereConfigValueConfigPtrOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoList struct {
+	// Data catalog name, defaults to DataLakeCatalog if not filled (this parameter is invalid when updating quality monitoring).
+	CatalogName *string `pulumi:"catalogName"`
+	// Interval, required when MonitorType=3, indicates the interval time of periodic tasks; Week/Month/Day tasks can choose: `1`; Minute tasks can choose: `10`, `20`, `30`; Hour tasks can choose: `1`, `2`, `3`, `4`, `6`, `8`, `12`.
+	CycleStep *int `pulumi:"cycleStep"`
+	// Production scheduling task cycle type.
+	CycleType *string `pulumi:"cycleType"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId string `pulumi:"datasourceId"`
+	// Delayed scheduling time, required when MonitorType=3, mainly used for day/week/month tasks, measured in minutes. For example, if a day task needs to be delayed to 02:00, this field value is 120, indicating a delay of 2 hours (120 minutes). For hour/minute tasks, this field is meaningless, fill in fixed value 0, otherwise field validation will fail.
+	DelayTime *int `pulumi:"delayTime"`
+	// Task description.
+	Description *string `pulumi:"description"`
+	// When data source is DLC, corresponds to DLC resource group. According to the DLC engine name filled in ExecQueue, select the resource group under the corresponding engine.
+	DlcGroupName *string `pulumi:"dlcGroupName"`
+	// Cycle end time, required when MonitorType=3.
+	EndTime *string `pulumi:"endTime"`
+	// Engine parameters.
+	EngineParam *string `pulumi:"engineParam"`
+	// Running execution engine, if not passed, will request the default execution engine under this data source.
+	ExecEngineType *string `pulumi:"execEngineType"`
+	// Execution plan.
+	ExecPlan *string `pulumi:"execPlan"`
+	// Compute queue, required when data source is HIVE, ICEBERG, DLC. When data source is DLC, this field should be filled with DLC data engine name.
+	ExecQueue *string `pulumi:"execQueue"`
+	// Execution resource group ID.
+	ExecutorGroupId string `pulumi:"executorGroupId"`
+	// Execution resource group name.
+	ExecutorGroupName *string `pulumi:"executorGroupName"`
+	// Task monitoring parameters.
+	GroupConfig *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig `pulumi:"groupConfig"`
+	// Monitor type `2`. Associated production scheduling, `3`. Offline periodic detection.
+	MonitorType int `pulumi:"monitorType"`
+	// Monitor task ID, required when editing monitor tasks.
+	RuleGroupId *int `pulumi:"ruleGroupId"`
+	// Monitor task name.
+	RuleGroupName string `pulumi:"ruleGroupName"`
+	// Rule ID.
+	RuleId *int `pulumi:"ruleId"`
+	// Rule name.
+	RuleName *string `pulumi:"ruleName"`
+	// Time zone.
+	ScheduleTimeZone *string `pulumi:"scheduleTimeZone"`
+	// Schema name.
+	SchemaName *string `pulumi:"schemaName"`
+	// Cycle start time, required when MonitorType=3.
+	StartTime *string `pulumi:"startTime"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
+	// Time specification, mainly used for week/month scheduling cycle tasks. For week scheduling cycle: means specifying which day of the week to run, multiple options separated by English commas, can fill 1,2...7, representing Sunday, Monday...Saturday respectively, for example fill "1,2", means execute on Sunday and Monday; For month scheduling cycle: means specifying which day of the month to run, multiple options separated by English commas, can fill 1,2,...,31, representing 1st, 2nd...31st respectively, for example fill "1,2", means execute on 1st and 2nd of each month.
+	TaskAction *string `pulumi:"taskAction"`
+	// Associated production scheduling task list, required when MonitorType=2.
+	Tasks []QualityRuleGroupRuleGroupExecStrategyBoListTask `pulumi:"tasks"`
+	// Trigger type, mainly used for "Associated production scheduling" (MonitorType=2) monitoring tasks, optional values: `CYCLE`: Periodic scheduling; `MAKE_UP`: Backfill; `RERUN`: Rerun.
+	TriggerTypes []string `pulumi:"triggerTypes"`
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListArgs and QualityRuleGroupRuleGroupExecStrategyBoListOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListInput` via:
+//
+//	QualityRuleGroupRuleGroupExecStrategyBoListArgs{...}
+type QualityRuleGroupRuleGroupExecStrategyBoListInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListOutput() QualityRuleGroupRuleGroupExecStrategyBoListOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListOutput
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListArgs struct {
+	// Data catalog name, defaults to DataLakeCatalog if not filled (this parameter is invalid when updating quality monitoring).
+	CatalogName pulumi.StringPtrInput `pulumi:"catalogName"`
+	// Interval, required when MonitorType=3, indicates the interval time of periodic tasks; Week/Month/Day tasks can choose: `1`; Minute tasks can choose: `10`, `20`, `30`; Hour tasks can choose: `1`, `2`, `3`, `4`, `6`, `8`, `12`.
+	CycleStep pulumi.IntPtrInput `pulumi:"cycleStep"`
+	// Production scheduling task cycle type.
+	CycleType pulumi.StringPtrInput `pulumi:"cycleType"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId pulumi.StringInput `pulumi:"datasourceId"`
+	// Delayed scheduling time, required when MonitorType=3, mainly used for day/week/month tasks, measured in minutes. For example, if a day task needs to be delayed to 02:00, this field value is 120, indicating a delay of 2 hours (120 minutes). For hour/minute tasks, this field is meaningless, fill in fixed value 0, otherwise field validation will fail.
+	DelayTime pulumi.IntPtrInput `pulumi:"delayTime"`
+	// Task description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// When data source is DLC, corresponds to DLC resource group. According to the DLC engine name filled in ExecQueue, select the resource group under the corresponding engine.
+	DlcGroupName pulumi.StringPtrInput `pulumi:"dlcGroupName"`
+	// Cycle end time, required when MonitorType=3.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// Engine parameters.
+	EngineParam pulumi.StringPtrInput `pulumi:"engineParam"`
+	// Running execution engine, if not passed, will request the default execution engine under this data source.
+	ExecEngineType pulumi.StringPtrInput `pulumi:"execEngineType"`
+	// Execution plan.
+	ExecPlan pulumi.StringPtrInput `pulumi:"execPlan"`
+	// Compute queue, required when data source is HIVE, ICEBERG, DLC. When data source is DLC, this field should be filled with DLC data engine name.
+	ExecQueue pulumi.StringPtrInput `pulumi:"execQueue"`
+	// Execution resource group ID.
+	ExecutorGroupId pulumi.StringInput `pulumi:"executorGroupId"`
+	// Execution resource group name.
+	ExecutorGroupName pulumi.StringPtrInput `pulumi:"executorGroupName"`
+	// Task monitoring parameters.
+	GroupConfig QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput `pulumi:"groupConfig"`
+	// Monitor type `2`. Associated production scheduling, `3`. Offline periodic detection.
+	MonitorType pulumi.IntInput `pulumi:"monitorType"`
+	// Monitor task ID, required when editing monitor tasks.
+	RuleGroupId pulumi.IntPtrInput `pulumi:"ruleGroupId"`
+	// Monitor task name.
+	RuleGroupName pulumi.StringInput `pulumi:"ruleGroupName"`
+	// Rule ID.
+	RuleId pulumi.IntPtrInput `pulumi:"ruleId"`
+	// Rule name.
+	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
+	// Time zone.
+	ScheduleTimeZone pulumi.StringPtrInput `pulumi:"scheduleTimeZone"`
+	// Schema name.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Cycle start time, required when MonitorType=3.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Time specification, mainly used for week/month scheduling cycle tasks. For week scheduling cycle: means specifying which day of the week to run, multiple options separated by English commas, can fill 1,2...7, representing Sunday, Monday...Saturday respectively, for example fill "1,2", means execute on Sunday and Monday; For month scheduling cycle: means specifying which day of the month to run, multiple options separated by English commas, can fill 1,2,...,31, representing 1st, 2nd...31st respectively, for example fill "1,2", means execute on 1st and 2nd of each month.
+	TaskAction pulumi.StringPtrInput `pulumi:"taskAction"`
+	// Associated production scheduling task list, required when MonitorType=2.
+	Tasks QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayInput `pulumi:"tasks"`
+	// Trigger type, mainly used for "Associated production scheduling" (MonitorType=2) monitoring tasks, optional values: `CYCLE`: Periodic scheduling; `MAKE_UP`: Backfill; `RERUN`: Rerun.
+	TriggerTypes pulumi.StringArrayInput `pulumi:"triggerTypes"`
+}
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoList)(nil)).Elem()
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListOutput() QualityRuleGroupRuleGroupExecStrategyBoListOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListOutput)
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListOutput).ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(ctx)
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListPtrInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListArgs, QualityRuleGroupRuleGroupExecStrategyBoListPtr and QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListPtrInput` via:
+//
+//	        QualityRuleGroupRuleGroupExecStrategyBoListArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleGroupRuleGroupExecStrategyBoListPtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput
+}
+
+type qualityRuleGroupRuleGroupExecStrategyBoListPtrType QualityRuleGroupRuleGroupExecStrategyBoListArgs
+
+func QualityRuleGroupRuleGroupExecStrategyBoListPtr(v *QualityRuleGroupRuleGroupExecStrategyBoListArgs) QualityRuleGroupRuleGroupExecStrategyBoListPtrInput {
+	return (*qualityRuleGroupRuleGroupExecStrategyBoListPtrType)(v)
+}
+
+func (*qualityRuleGroupRuleGroupExecStrategyBoListPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleGroupRuleGroupExecStrategyBoList)(nil)).Elem()
+}
+
+func (i *qualityRuleGroupRuleGroupExecStrategyBoListPtrType) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleGroupRuleGroupExecStrategyBoListPtrType) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoList)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListOutput() QualityRuleGroupRuleGroupExecStrategyBoListOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return o.ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleGroupRuleGroupExecStrategyBoList) *QualityRuleGroupRuleGroupExecStrategyBoList {
+		return &v
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput)
+}
+
+// Data catalog name, defaults to DataLakeCatalog if not filled (this parameter is invalid when updating quality monitoring).
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) CatalogName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.CatalogName }).(pulumi.StringPtrOutput)
+}
+
+// Interval, required when MonitorType=3, indicates the interval time of periodic tasks; Week/Month/Day tasks can choose: `1`; Minute tasks can choose: `10`, `20`, `30`; Hour tasks can choose: `1`, `2`, `3`, `4`, `6`, `8`, `12`.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) CycleStep() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *int { return v.CycleStep }).(pulumi.IntPtrOutput)
+}
+
+// Production scheduling task cycle type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) CycleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.CycleType }).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// Data source ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) DatasourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) string { return v.DatasourceId }).(pulumi.StringOutput)
+}
+
+// Delayed scheduling time, required when MonitorType=3, mainly used for day/week/month tasks, measured in minutes. For example, if a day task needs to be delayed to 02:00, this field value is 120, indicating a delay of 2 hours (120 minutes). For hour/minute tasks, this field is meaningless, fill in fixed value 0, otherwise field validation will fail.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) DelayTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *int { return v.DelayTime }).(pulumi.IntPtrOutput)
+}
+
+// Task description.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// When data source is DLC, corresponds to DLC resource group. According to the DLC engine name filled in ExecQueue, select the resource group under the corresponding engine.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) DlcGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.DlcGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Cycle end time, required when MonitorType=3.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// Engine parameters.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) EngineParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.EngineParam }).(pulumi.StringPtrOutput)
+}
+
+// Running execution engine, if not passed, will request the default execution engine under this data source.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ExecEngineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.ExecEngineType }).(pulumi.StringPtrOutput)
+}
+
+// Execution plan.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ExecPlan() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.ExecPlan }).(pulumi.StringPtrOutput)
+}
+
+// Compute queue, required when data source is HIVE, ICEBERG, DLC. When data source is DLC, this field should be filled with DLC data engine name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ExecQueue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.ExecQueue }).(pulumi.StringPtrOutput)
+}
+
+// Execution resource group ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ExecutorGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) string { return v.ExecutorGroupId }).(pulumi.StringOutput)
+}
+
+// Execution resource group name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ExecutorGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.ExecutorGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Task monitoring parameters.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) GroupConfig() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig {
+		return v.GroupConfig
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput)
+}
+
+// Monitor type `2`. Associated production scheduling, `3`. Offline periodic detection.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) MonitorType() pulumi.IntOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) int { return v.MonitorType }).(pulumi.IntOutput)
+}
+
+// Monitor task ID, required when editing monitor tasks.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) RuleGroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *int { return v.RuleGroupId }).(pulumi.IntPtrOutput)
+}
+
+// Monitor task name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) RuleGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) string { return v.RuleGroupName }).(pulumi.StringOutput)
+}
+
+// Rule ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) RuleId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *int { return v.RuleId }).(pulumi.IntPtrOutput)
+}
+
+// Rule name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.RuleName }).(pulumi.StringPtrOutput)
+}
+
+// Time zone.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) ScheduleTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.ScheduleTimeZone }).(pulumi.StringPtrOutput)
+}
+
+// Schema name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Cycle start time, required when MonitorType=3.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// Time specification, mainly used for week/month scheduling cycle tasks. For week scheduling cycle: means specifying which day of the week to run, multiple options separated by English commas, can fill 1,2...7, representing Sunday, Monday...Saturday respectively, for example fill "1,2", means execute on Sunday and Monday; For month scheduling cycle: means specifying which day of the month to run, multiple options separated by English commas, can fill 1,2,...,31, representing 1st, 2nd...31st respectively, for example fill "1,2", means execute on 1st and 2nd of each month.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) TaskAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) *string { return v.TaskAction }).(pulumi.StringPtrOutput)
+}
+
+// Associated production scheduling task list, required when MonitorType=2.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) Tasks() QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) []QualityRuleGroupRuleGroupExecStrategyBoListTask {
+		return v.Tasks
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput)
+}
+
+// Trigger type, mainly used for "Associated production scheduling" (MonitorType=2) monitoring tasks, optional values: `CYCLE`: Periodic scheduling; `MAKE_UP`: Backfill; `RERUN`: Rerun.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListOutput) TriggerTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoList) []string { return v.TriggerTypes }).(pulumi.StringArrayOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleGroupRuleGroupExecStrategyBoList)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) Elem() QualityRuleGroupRuleGroupExecStrategyBoListOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) QualityRuleGroupRuleGroupExecStrategyBoList {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleGroupRuleGroupExecStrategyBoList
+		return ret
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListOutput)
+}
+
+// Data catalog name, defaults to DataLakeCatalog if not filled (this parameter is invalid when updating quality monitoring).
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) CatalogName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CatalogName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Interval, required when MonitorType=3, indicates the interval time of periodic tasks; Week/Month/Day tasks can choose: `1`; Minute tasks can choose: `10`, `20`, `30`; Hour tasks can choose: `1`, `2`, `3`, `4`, `6`, `8`, `12`.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) CycleStep() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *int {
+		if v == nil {
+			return nil
+		}
+		return v.CycleStep
+	}).(pulumi.IntPtrOutput)
+}
+
+// Production scheduling task cycle type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) CycleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CycleType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Data source ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) DatasourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatasourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Delayed scheduling time, required when MonitorType=3, mainly used for day/week/month tasks, measured in minutes. For example, if a day task needs to be delayed to 02:00, this field value is 120, indicating a delay of 2 hours (120 minutes). For hour/minute tasks, this field is meaningless, fill in fixed value 0, otherwise field validation will fail.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) DelayTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *int {
+		if v == nil {
+			return nil
+		}
+		return v.DelayTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Task description.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// When data source is DLC, corresponds to DLC resource group. According to the DLC engine name filled in ExecQueue, select the resource group under the corresponding engine.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) DlcGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DlcGroupName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cycle end time, required when MonitorType=3.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EndTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Engine parameters.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) EngineParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EngineParam
+	}).(pulumi.StringPtrOutput)
+}
+
+// Running execution engine, if not passed, will request the default execution engine under this data source.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ExecEngineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecEngineType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Execution plan.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ExecPlan() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecPlan
+	}).(pulumi.StringPtrOutput)
+}
+
+// Compute queue, required when data source is HIVE, ICEBERG, DLC. When data source is DLC, this field should be filled with DLC data engine name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ExecQueue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecQueue
+	}).(pulumi.StringPtrOutput)
+}
+
+// Execution resource group ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ExecutorGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ExecutorGroupId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Execution resource group name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ExecutorGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecutorGroupName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task monitoring parameters.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) GroupConfig() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig {
+		if v == nil {
+			return nil
+		}
+		return v.GroupConfig
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput)
+}
+
+// Monitor type `2`. Associated production scheduling, `3`. Offline periodic detection.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) MonitorType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MonitorType
+	}).(pulumi.IntPtrOutput)
+}
+
+// Monitor task ID, required when editing monitor tasks.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) RuleGroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RuleGroupId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Monitor task name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) RuleGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RuleGroupName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Rule ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) RuleId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RuleId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Rule name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RuleName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Time zone.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) ScheduleTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ScheduleTimeZone
+	}).(pulumi.StringPtrOutput)
+}
+
+// Schema name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SchemaName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cycle start time, required when MonitorType=3.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StartTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TableName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Time specification, mainly used for week/month scheduling cycle tasks. For week scheduling cycle: means specifying which day of the week to run, multiple options separated by English commas, can fill 1,2...7, representing Sunday, Monday...Saturday respectively, for example fill "1,2", means execute on Sunday and Monday; For month scheduling cycle: means specifying which day of the month to run, multiple options separated by English commas, can fill 1,2,...,31, representing 1st, 2nd...31st respectively, for example fill "1,2", means execute on 1st and 2nd of each month.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) TaskAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TaskAction
+	}).(pulumi.StringPtrOutput)
+}
+
+// Associated production scheduling task list, required when MonitorType=2.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) Tasks() QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) []QualityRuleGroupRuleGroupExecStrategyBoListTask {
+		if v == nil {
+			return nil
+		}
+		return v.Tasks
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput)
+}
+
+// Trigger type, mainly used for "Associated production scheduling" (MonitorType=2) monitoring tasks, optional values: `CYCLE`: Periodic scheduling; `MAKE_UP`: Backfill; `RERUN`: Rerun.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput) TriggerTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoList) []string {
+		if v == nil {
+			return nil
+		}
+		return v.TriggerTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig struct {
+	// Analysis type, optional values: `INFERENCE`-inference table; `TIME_SERIES`-time series table; `SNAPSHOT`-snapshot table.
+	AnalysisType *string `pulumi:"analysisType"`
+	// Base database.
+	BaseDb *string `pulumi:"baseDb"`
+	// Base table.
+	BaseTable *string `pulumi:"baseTable"`
+	// Comparison column.
+	ComparisonColumn *string `pulumi:"comparisonColumn"`
+	// Comparison column type.
+	ComparisonColumnType *string `pulumi:"comparisonColumnType"`
+	// Feature column.
+	FeatureColumn *string `pulumi:"featureColumn"`
+	// Metric granularity.
+	Granularity *int `pulumi:"granularity"`
+	// Metric granularity unit.
+	GranularityType *string `pulumi:"granularityType"`
+	// Label column.
+	LabelColumn *string `pulumi:"labelColumn"`
+	// Label column type.
+	LabelColumnType *string `pulumi:"labelColumnType"`
+	// Model ID column.
+	ModelIdColumn *string `pulumi:"modelIdColumn"`
+	// Model ID column type.
+	ModelIdColumnType *string `pulumi:"modelIdColumnType"`
+	// Model detection type, required when analysis type is inference table (INFERENCE), optional values: `CLAASSIFICATION`-classification; `REGRESSION`-regression.
+	ModelMonitorType *string `pulumi:"modelMonitorType"`
+	// Positive class value.
+	PositiveValue *string `pulumi:"positiveValue"`
+	// Prediction column.
+	PredictColumn *string `pulumi:"predictColumn"`
+	// Prediction column type.
+	PredictColumnType *string `pulumi:"predictColumnType"`
+	// Protection group.
+	ProtectionValue *string `pulumi:"protectionValue"`
+	// Timestamp column.
+	TimestampColumn *string `pulumi:"timestampColumn"`
+	// Timestamp column type.
+	TimestampColumnType *string `pulumi:"timestampColumnType"`
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs and QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigInput` via:
+//
+//	QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs{...}
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs struct {
+	// Analysis type, optional values: `INFERENCE`-inference table; `TIME_SERIES`-time series table; `SNAPSHOT`-snapshot table.
+	AnalysisType pulumi.StringPtrInput `pulumi:"analysisType"`
+	// Base database.
+	BaseDb pulumi.StringPtrInput `pulumi:"baseDb"`
+	// Base table.
+	BaseTable pulumi.StringPtrInput `pulumi:"baseTable"`
+	// Comparison column.
+	ComparisonColumn pulumi.StringPtrInput `pulumi:"comparisonColumn"`
+	// Comparison column type.
+	ComparisonColumnType pulumi.StringPtrInput `pulumi:"comparisonColumnType"`
+	// Feature column.
+	FeatureColumn pulumi.StringPtrInput `pulumi:"featureColumn"`
+	// Metric granularity.
+	Granularity pulumi.IntPtrInput `pulumi:"granularity"`
+	// Metric granularity unit.
+	GranularityType pulumi.StringPtrInput `pulumi:"granularityType"`
+	// Label column.
+	LabelColumn pulumi.StringPtrInput `pulumi:"labelColumn"`
+	// Label column type.
+	LabelColumnType pulumi.StringPtrInput `pulumi:"labelColumnType"`
+	// Model ID column.
+	ModelIdColumn pulumi.StringPtrInput `pulumi:"modelIdColumn"`
+	// Model ID column type.
+	ModelIdColumnType pulumi.StringPtrInput `pulumi:"modelIdColumnType"`
+	// Model detection type, required when analysis type is inference table (INFERENCE), optional values: `CLAASSIFICATION`-classification; `REGRESSION`-regression.
+	ModelMonitorType pulumi.StringPtrInput `pulumi:"modelMonitorType"`
+	// Positive class value.
+	PositiveValue pulumi.StringPtrInput `pulumi:"positiveValue"`
+	// Prediction column.
+	PredictColumn pulumi.StringPtrInput `pulumi:"predictColumn"`
+	// Prediction column type.
+	PredictColumnType pulumi.StringPtrInput `pulumi:"predictColumnType"`
+	// Protection group.
+	ProtectionValue pulumi.StringPtrInput `pulumi:"protectionValue"`
+	// Timestamp column.
+	TimestampColumn pulumi.StringPtrInput `pulumi:"timestampColumn"`
+	// Timestamp column type.
+	TimestampColumnType pulumi.StringPtrInput `pulumi:"timestampColumnType"`
+}
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig)(nil)).Elem()
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput)
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput).ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(ctx)
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs, QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtr and QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput` via:
+//
+//	        QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput
+}
+
+type qualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrType QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs
+
+func QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtr(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput {
+	return (*qualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrType)(v)
+}
+
+func (*qualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig)(nil)).Elem()
+}
+
+func (i *qualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrType) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *qualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrType) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o.ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(context.Background())
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig {
+		return &v
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput)
+}
+
+// Analysis type, optional values: `INFERENCE`-inference table; `TIME_SERIES`-time series table; `SNAPSHOT`-snapshot table.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) AnalysisType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.AnalysisType }).(pulumi.StringPtrOutput)
+}
+
+// Base database.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) BaseDb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.BaseDb }).(pulumi.StringPtrOutput)
+}
+
+// Base table.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) BaseTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.BaseTable }).(pulumi.StringPtrOutput)
+}
+
+// Comparison column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ComparisonColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ComparisonColumn }).(pulumi.StringPtrOutput)
+}
+
+// Comparison column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ComparisonColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ComparisonColumnType }).(pulumi.StringPtrOutput)
+}
+
+// Feature column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) FeatureColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.FeatureColumn }).(pulumi.StringPtrOutput)
+}
+
+// Metric granularity.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) Granularity() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *int { return v.Granularity }).(pulumi.IntPtrOutput)
+}
+
+// Metric granularity unit.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) GranularityType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.GranularityType }).(pulumi.StringPtrOutput)
+}
+
+// Label column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) LabelColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.LabelColumn }).(pulumi.StringPtrOutput)
+}
+
+// Label column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) LabelColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.LabelColumnType }).(pulumi.StringPtrOutput)
+}
+
+// Model ID column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ModelIdColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ModelIdColumn }).(pulumi.StringPtrOutput)
+}
+
+// Model ID column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ModelIdColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ModelIdColumnType }).(pulumi.StringPtrOutput)
+}
+
+// Model detection type, required when analysis type is inference table (INFERENCE), optional values: `CLAASSIFICATION`-classification; `REGRESSION`-regression.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ModelMonitorType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ModelMonitorType }).(pulumi.StringPtrOutput)
+}
+
+// Positive class value.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) PositiveValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.PositiveValue }).(pulumi.StringPtrOutput)
+}
+
+// Prediction column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) PredictColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.PredictColumn }).(pulumi.StringPtrOutput)
+}
+
+// Prediction column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) PredictColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.PredictColumnType }).(pulumi.StringPtrOutput)
+}
+
+// Protection group.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) ProtectionValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.ProtectionValue }).(pulumi.StringPtrOutput)
+}
+
+// Timestamp column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) TimestampColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.TimestampColumn }).(pulumi.StringPtrOutput)
+}
+
+// Timestamp column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput) TimestampColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string { return v.TimestampColumnType }).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) Elem() QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig {
+		if v != nil {
+			return *v
+		}
+		var ret QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig
+		return ret
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput)
+}
+
+// Analysis type, optional values: `INFERENCE`-inference table; `TIME_SERIES`-time series table; `SNAPSHOT`-snapshot table.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) AnalysisType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AnalysisType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Base database.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) BaseDb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BaseDb
+	}).(pulumi.StringPtrOutput)
+}
+
+// Base table.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) BaseTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BaseTable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Comparison column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ComparisonColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComparisonColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Comparison column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ComparisonColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComparisonColumnType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Feature column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) FeatureColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FeatureColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Metric granularity.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) Granularity() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Granularity
+	}).(pulumi.IntPtrOutput)
+}
+
+// Metric granularity unit.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) GranularityType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.GranularityType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Label column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) LabelColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LabelColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Label column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) LabelColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LabelColumnType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Model ID column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ModelIdColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ModelIdColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Model ID column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ModelIdColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ModelIdColumnType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Model detection type, required when analysis type is inference table (INFERENCE), optional values: `CLAASSIFICATION`-classification; `REGRESSION`-regression.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ModelMonitorType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ModelMonitorType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Positive class value.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) PositiveValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PositiveValue
+	}).(pulumi.StringPtrOutput)
+}
+
+// Prediction column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) PredictColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Prediction column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) PredictColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictColumnType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Protection group.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) ProtectionValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ProtectionValue
+	}).(pulumi.StringPtrOutput)
+}
+
+// Timestamp column.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) TimestampColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimestampColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Timestamp column type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput) TimestampColumnType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *QualityRuleGroupRuleGroupExecStrategyBoListGroupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimestampColumnType
+	}).(pulumi.StringPtrOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListTask struct {
+	// Production scheduling task cycle type.
+	CycleType *int `pulumi:"cycleType"`
+	// Person in charge ID.
+	InChargeIdLists []string `pulumi:"inChargeIdLists"`
+	// Person in charge name.
+	InChargeNameLists []string `pulumi:"inChargeNameLists"`
+	// Time zone.
+	ScheduleTimeZone *string `pulumi:"scheduleTimeZone"`
+	// Production scheduling task ID.
+	TaskId string `pulumi:"taskId"`
+	// Production scheduling task name.
+	TaskName string `pulumi:"taskName"`
+	// Production task type.
+	TaskType *string `pulumi:"taskType"`
+	// Production scheduling task workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListTaskInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs and QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListTaskInput` via:
+//
+//	QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs{...}
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs struct {
+	// Production scheduling task cycle type.
+	CycleType pulumi.IntPtrInput `pulumi:"cycleType"`
+	// Person in charge ID.
+	InChargeIdLists pulumi.StringArrayInput `pulumi:"inChargeIdLists"`
+	// Person in charge name.
+	InChargeNameLists pulumi.StringArrayInput `pulumi:"inChargeNameLists"`
+	// Time zone.
+	ScheduleTimeZone pulumi.StringPtrInput `pulumi:"scheduleTimeZone"`
+	// Production scheduling task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Production scheduling task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Production task type.
+	TaskType pulumi.StringPtrInput `pulumi:"taskType"`
+	// Production scheduling task workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+}
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListTask)(nil)).Elem()
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput)
+}
+
+// QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayInput is an input type that accepts QualityRuleGroupRuleGroupExecStrategyBoListTaskArray and QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput values.
+// You can construct a concrete instance of `QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayInput` via:
+//
+//	QualityRuleGroupRuleGroupExecStrategyBoListTaskArray{ QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs{...} }
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayInput interface {
+	pulumi.Input
+
+	ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput
+	ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutputWithContext(context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskArray []QualityRuleGroupRuleGroupExecStrategyBoListTaskInput
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleGroupRuleGroupExecStrategyBoListTask)(nil)).Elem()
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListTaskArray) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return i.ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutputWithContext(context.Background())
+}
+
+func (i QualityRuleGroupRuleGroupExecStrategyBoListTaskArray) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListTask)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput {
+	return o
+}
+
+// Production scheduling task cycle type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) CycleType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) *int { return v.CycleType }).(pulumi.IntPtrOutput)
+}
+
+// Person in charge ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) InChargeIdLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) []string { return v.InChargeIdLists }).(pulumi.StringArrayOutput)
+}
+
+// Person in charge name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) InChargeNameLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) []string { return v.InChargeNameLists }).(pulumi.StringArrayOutput)
+}
+
+// Time zone.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) ScheduleTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) *string { return v.ScheduleTimeZone }).(pulumi.StringPtrOutput)
+}
+
+// Production scheduling task ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Production scheduling task name.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Production task type.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) TaskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) *string { return v.TaskType }).(pulumi.StringPtrOutput)
+}
+
+// Production scheduling task workflow ID.
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v QualityRuleGroupRuleGroupExecStrategyBoListTask) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+type QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QualityRuleGroupRuleGroupExecStrategyBoListTask)(nil)).Elem()
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput() QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput) ToQualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutputWithContext(ctx context.Context) QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput {
+	return o
+}
+
+func (o QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput) Index(i pulumi.IntInput) QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QualityRuleGroupRuleGroupExecStrategyBoListTask {
+		return vs[0].([]QualityRuleGroupRuleGroupExecStrategyBoListTask)[vs[1].(int)]
+	}).(QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput)
+}
+
+type RerunTriggerWorkflowRunAsyncAdvancedParam struct {
+	// Extended properties in JSON format, example: "{}".
+	ExtProperties *string `pulumi:"extProperties"`
+	// Parameter name.
+	ParamKey *string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue *string `pulumi:"paramValue"`
+}
+
+// RerunTriggerWorkflowRunAsyncAdvancedParamInput is an input type that accepts RerunTriggerWorkflowRunAsyncAdvancedParamArgs and RerunTriggerWorkflowRunAsyncAdvancedParamOutput values.
+// You can construct a concrete instance of `RerunTriggerWorkflowRunAsyncAdvancedParamInput` via:
+//
+//	RerunTriggerWorkflowRunAsyncAdvancedParamArgs{...}
+type RerunTriggerWorkflowRunAsyncAdvancedParamInput interface {
+	pulumi.Input
+
+	ToRerunTriggerWorkflowRunAsyncAdvancedParamOutput() RerunTriggerWorkflowRunAsyncAdvancedParamOutput
+	ToRerunTriggerWorkflowRunAsyncAdvancedParamOutputWithContext(context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamOutput
+}
+
+type RerunTriggerWorkflowRunAsyncAdvancedParamArgs struct {
+	// Extended properties in JSON format, example: "{}".
+	ExtProperties pulumi.StringPtrInput `pulumi:"extProperties"`
+	// Parameter name.
+	ParamKey pulumi.StringPtrInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringPtrInput `pulumi:"paramValue"`
+}
+
+func (RerunTriggerWorkflowRunAsyncAdvancedParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RerunTriggerWorkflowRunAsyncAdvancedParam)(nil)).Elem()
+}
+
+func (i RerunTriggerWorkflowRunAsyncAdvancedParamArgs) ToRerunTriggerWorkflowRunAsyncAdvancedParamOutput() RerunTriggerWorkflowRunAsyncAdvancedParamOutput {
+	return i.ToRerunTriggerWorkflowRunAsyncAdvancedParamOutputWithContext(context.Background())
+}
+
+func (i RerunTriggerWorkflowRunAsyncAdvancedParamArgs) ToRerunTriggerWorkflowRunAsyncAdvancedParamOutputWithContext(ctx context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RerunTriggerWorkflowRunAsyncAdvancedParamOutput)
+}
+
+// RerunTriggerWorkflowRunAsyncAdvancedParamArrayInput is an input type that accepts RerunTriggerWorkflowRunAsyncAdvancedParamArray and RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput values.
+// You can construct a concrete instance of `RerunTriggerWorkflowRunAsyncAdvancedParamArrayInput` via:
+//
+//	RerunTriggerWorkflowRunAsyncAdvancedParamArray{ RerunTriggerWorkflowRunAsyncAdvancedParamArgs{...} }
+type RerunTriggerWorkflowRunAsyncAdvancedParamArrayInput interface {
+	pulumi.Input
+
+	ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput() RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput
+	ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutputWithContext(context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput
+}
+
+type RerunTriggerWorkflowRunAsyncAdvancedParamArray []RerunTriggerWorkflowRunAsyncAdvancedParamInput
+
+func (RerunTriggerWorkflowRunAsyncAdvancedParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RerunTriggerWorkflowRunAsyncAdvancedParam)(nil)).Elem()
+}
+
+func (i RerunTriggerWorkflowRunAsyncAdvancedParamArray) ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput() RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput {
+	return i.ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutputWithContext(context.Background())
+}
+
+func (i RerunTriggerWorkflowRunAsyncAdvancedParamArray) ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutputWithContext(ctx context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput)
+}
+
+type RerunTriggerWorkflowRunAsyncAdvancedParamOutput struct{ *pulumi.OutputState }
+
+func (RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RerunTriggerWorkflowRunAsyncAdvancedParam)(nil)).Elem()
+}
+
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ToRerunTriggerWorkflowRunAsyncAdvancedParamOutput() RerunTriggerWorkflowRunAsyncAdvancedParamOutput {
+	return o
+}
+
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ToRerunTriggerWorkflowRunAsyncAdvancedParamOutputWithContext(ctx context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamOutput {
+	return o
+}
+
+// Extended properties in JSON format, example: "{}".
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ExtProperties() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RerunTriggerWorkflowRunAsyncAdvancedParam) *string { return v.ExtProperties }).(pulumi.StringPtrOutput)
+}
+
+// Parameter name.
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ParamKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RerunTriggerWorkflowRunAsyncAdvancedParam) *string { return v.ParamKey }).(pulumi.StringPtrOutput)
+}
+
+// Parameter value.
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamOutput) ParamValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RerunTriggerWorkflowRunAsyncAdvancedParam) *string { return v.ParamValue }).(pulumi.StringPtrOutput)
+}
+
+type RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput struct{ *pulumi.OutputState }
+
+func (RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RerunTriggerWorkflowRunAsyncAdvancedParam)(nil)).Elem()
+}
+
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput) ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput() RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput {
+	return o
+}
+
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput) ToRerunTriggerWorkflowRunAsyncAdvancedParamArrayOutputWithContext(ctx context.Context) RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput {
+	return o
+}
+
+func (o RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput) Index(i pulumi.IntInput) RerunTriggerWorkflowRunAsyncAdvancedParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RerunTriggerWorkflowRunAsyncAdvancedParam {
+		return vs[0].([]RerunTriggerWorkflowRunAsyncAdvancedParam)[vs[1].(int)]
+	}).(RerunTriggerWorkflowRunAsyncAdvancedParamOutput)
+}
+
 type SqlScriptScriptConfig struct {
 	// Advanced settings, execution configuration parameters, map-json String,String. Encoded in Base64.
 	AdvanceConfig *string `pulumi:"advanceConfig"`
@@ -14697,6 +17831,2218 @@ func (o TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStra
 	}).(pulumi.IntPtrOutput)
 }
 
+type TriggerTaskTriggerTaskBaseAttribute struct {
+	// Task owner ID, defaults to the current user.
+	OwnerUin *string `pulumi:"ownerUin"`
+	// Task description.
+	TaskDescription *string `pulumi:"taskDescription"`
+	// Task folder path. Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, to create a shell task in the tf01 folder under this category, set the value to /tf_01. If the tf01 folder does not exist, it must be created first (using the CreateTaskFolder API) before the operation can succeed.
+	TaskFolderPath *string `pulumi:"taskFolderPath"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type ID: `26`: OfflineSynchronization; `30`: Python; `32`: DLC SQL; `35`: Shell; `38`: Shell Form Mode; `46`: DLC Spark; `50`: DLC PySpark; `130`: Branch Node; `131`: Merged Node; `132`: Notebook; `133`: SSH; `137`: For-each; `139`: DLC Spark Streaming; `140`: Run Workflow.
+	TaskTypeId string `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+}
+
+// TriggerTaskTriggerTaskBaseAttributeInput is an input type that accepts TriggerTaskTriggerTaskBaseAttributeArgs and TriggerTaskTriggerTaskBaseAttributeOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskBaseAttributeInput` via:
+//
+//	TriggerTaskTriggerTaskBaseAttributeArgs{...}
+type TriggerTaskTriggerTaskBaseAttributeInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskBaseAttributeOutput() TriggerTaskTriggerTaskBaseAttributeOutput
+	ToTriggerTaskTriggerTaskBaseAttributeOutputWithContext(context.Context) TriggerTaskTriggerTaskBaseAttributeOutput
+}
+
+type TriggerTaskTriggerTaskBaseAttributeArgs struct {
+	// Task owner ID, defaults to the current user.
+	OwnerUin pulumi.StringPtrInput `pulumi:"ownerUin"`
+	// Task description.
+	TaskDescription pulumi.StringPtrInput `pulumi:"taskDescription"`
+	// Task folder path. Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, to create a shell task in the tf01 folder under this category, set the value to /tf_01. If the tf01 folder does not exist, it must be created first (using the CreateTaskFolder API) before the operation can succeed.
+	TaskFolderPath pulumi.StringPtrInput `pulumi:"taskFolderPath"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type ID: `26`: OfflineSynchronization; `30`: Python; `32`: DLC SQL; `35`: Shell; `38`: Shell Form Mode; `46`: DLC Spark; `50`: DLC PySpark; `130`: Branch Node; `131`: Merged Node; `132`: Notebook; `133`: SSH; `137`: For-each; `139`: DLC Spark Streaming; `140`: Run Workflow.
+	TaskTypeId pulumi.StringInput `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+}
+
+func (TriggerTaskTriggerTaskBaseAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskBaseAttributeArgs) ToTriggerTaskTriggerTaskBaseAttributeOutput() TriggerTaskTriggerTaskBaseAttributeOutput {
+	return i.ToTriggerTaskTriggerTaskBaseAttributeOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskBaseAttributeArgs) ToTriggerTaskTriggerTaskBaseAttributeOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskBaseAttributeOutput)
+}
+
+func (i TriggerTaskTriggerTaskBaseAttributeArgs) ToTriggerTaskTriggerTaskBaseAttributePtrOutput() TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return i.ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskBaseAttributeArgs) ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskBaseAttributeOutput).ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(ctx)
+}
+
+// TriggerTaskTriggerTaskBaseAttributePtrInput is an input type that accepts TriggerTaskTriggerTaskBaseAttributeArgs, TriggerTaskTriggerTaskBaseAttributePtr and TriggerTaskTriggerTaskBaseAttributePtrOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskBaseAttributePtrInput` via:
+//
+//	        TriggerTaskTriggerTaskBaseAttributeArgs{...}
+//
+//	or:
+//
+//	        nil
+type TriggerTaskTriggerTaskBaseAttributePtrInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskBaseAttributePtrOutput() TriggerTaskTriggerTaskBaseAttributePtrOutput
+	ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(context.Context) TriggerTaskTriggerTaskBaseAttributePtrOutput
+}
+
+type triggerTaskTriggerTaskBaseAttributePtrType TriggerTaskTriggerTaskBaseAttributeArgs
+
+func TriggerTaskTriggerTaskBaseAttributePtr(v *TriggerTaskTriggerTaskBaseAttributeArgs) TriggerTaskTriggerTaskBaseAttributePtrInput {
+	return (*triggerTaskTriggerTaskBaseAttributePtrType)(v)
+}
+
+func (*triggerTaskTriggerTaskBaseAttributePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (i *triggerTaskTriggerTaskBaseAttributePtrType) ToTriggerTaskTriggerTaskBaseAttributePtrOutput() TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return i.ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(context.Background())
+}
+
+func (i *triggerTaskTriggerTaskBaseAttributePtrType) ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskBaseAttributePtrOutput)
+}
+
+type TriggerTaskTriggerTaskBaseAttributeOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskBaseAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) ToTriggerTaskTriggerTaskBaseAttributeOutput() TriggerTaskTriggerTaskBaseAttributeOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) ToTriggerTaskTriggerTaskBaseAttributeOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributeOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) ToTriggerTaskTriggerTaskBaseAttributePtrOutput() TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return o.ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(context.Background())
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TriggerTaskTriggerTaskBaseAttribute) *TriggerTaskTriggerTaskBaseAttribute {
+		return &v
+	}).(TriggerTaskTriggerTaskBaseAttributePtrOutput)
+}
+
+// Task owner ID, defaults to the current user.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) OwnerUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) *string { return v.OwnerUin }).(pulumi.StringPtrOutput)
+}
+
+// Task description.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) TaskDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) *string { return v.TaskDescription }).(pulumi.StringPtrOutput)
+}
+
+// Task folder path. Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, to create a shell task in the tf01 folder under this category, set the value to /tf_01. If the tf01 folder does not exist, it must be created first (using the CreateTaskFolder API) before the operation can succeed.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) TaskFolderPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) *string { return v.TaskFolderPath }).(pulumi.StringPtrOutput)
+}
+
+// Task name.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type ID: `26`: OfflineSynchronization; `30`: Python; `32`: DLC SQL; `35`: Shell; `38`: Shell Form Mode; `46`: DLC Spark; `50`: DLC PySpark; `130`: Branch Node; `131`: Merged Node; `132`: Notebook; `133`: SSH; `137`: For-each; `139`: DLC Spark Streaming; `140`: Run Workflow.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) TaskTypeId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) string { return v.TaskTypeId }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o TriggerTaskTriggerTaskBaseAttributeOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskBaseAttribute) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskBaseAttributePtrOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskBaseAttributePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) ToTriggerTaskTriggerTaskBaseAttributePtrOutput() TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) ToTriggerTaskTriggerTaskBaseAttributePtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskBaseAttributePtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) Elem() TriggerTaskTriggerTaskBaseAttributeOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) TriggerTaskTriggerTaskBaseAttribute {
+		if v != nil {
+			return *v
+		}
+		var ret TriggerTaskTriggerTaskBaseAttribute
+		return ret
+	}).(TriggerTaskTriggerTaskBaseAttributeOutput)
+}
+
+// Task owner ID, defaults to the current user.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) OwnerUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OwnerUin
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task description.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) TaskDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TaskDescription
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task folder path. Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, to create a shell task in the tf01 folder under this category, set the value to /tf_01. If the tf01 folder does not exist, it must be created first (using the CreateTaskFolder API) before the operation can succeed.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) TaskFolderPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TaskFolderPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task name.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) TaskName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TaskName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task type ID: `26`: OfflineSynchronization; `30`: Python; `32`: DLC SQL; `35`: Shell; `38`: Shell Form Mode; `46`: DLC Spark; `50`: DLC PySpark; `130`: Branch Node; `131`: Merged Node; `132`: Notebook; `133`: SSH; `137`: For-each; `139`: DLC Spark Streaming; `140`: Run Workflow.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) TaskTypeId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TaskTypeId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Workflow ID.
+func (o TriggerTaskTriggerTaskBaseAttributePtrOutput) WorkflowId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskBaseAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.WorkflowId
+	}).(pulumi.StringPtrOutput)
+}
+
+type TriggerTaskTriggerTaskConfiguration struct {
+	// Specified execution node.
+	BrokerIp *string `pulumi:"brokerIp"`
+	// Bundle ID in use.
+	BundleId *string `pulumi:"bundleId"`
+	// Bundle information.
+	BundleInfo *string `pulumi:"bundleInfo"`
+	// Base64-encoded code content.
+	CodeContent *string `pulumi:"codeContent"`
+	// Cluster ID.
+	DataCluster *string `pulumi:"dataCluster"`
+	// Resource group ID. Obtain ExecutorGroupId via DescribeNormalSchedulerExecutorGroups.
+	ResourceGroup *string `pulumi:"resourceGroup"`
+	// Source data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+	SourceServiceId *string `pulumi:"sourceServiceId"`
+	// The source data source name needs to be obtained through DescribeDataSourceWithoutInfo..
+	SourceServiceName *string `pulumi:"sourceServiceName"`
+	// The source data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+	SourceServiceType *string `pulumi:"sourceServiceType"`
+	// Target data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+	TargetServiceId *string `pulumi:"targetServiceId"`
+	// The target data source name, which needs to be obtained through DescribeDataSourceWithoutInfo.
+	TargetServiceName *string `pulumi:"targetServiceName"`
+	// The target data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+	TargetServiceType *string `pulumi:"targetServiceType"`
+	// Task extended attribute configuration list. [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] cannot be customized; they are generated by the system.
+	TaskExtConfigurationLists []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList `pulumi:"taskExtConfigurationLists"`
+	// Configuration [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] generated by the system.
+	TaskExtConfigurationSystemLists []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList `pulumi:"taskExtConfigurationSystemLists"`
+	// Scheduling parameters.
+	TaskSchedulingParameterLists []TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList `pulumi:"taskSchedulingParameterLists"`
+	// Resource pool queue name. Obtain via DescribeProjectClusterQueues.
+	YarnQueue *string `pulumi:"yarnQueue"`
+}
+
+// TriggerTaskTriggerTaskConfigurationInput is an input type that accepts TriggerTaskTriggerTaskConfigurationArgs and TriggerTaskTriggerTaskConfigurationOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationArgs{...}
+type TriggerTaskTriggerTaskConfigurationInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationOutput() TriggerTaskTriggerTaskConfigurationOutput
+	ToTriggerTaskTriggerTaskConfigurationOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationArgs struct {
+	// Specified execution node.
+	BrokerIp pulumi.StringPtrInput `pulumi:"brokerIp"`
+	// Bundle ID in use.
+	BundleId pulumi.StringPtrInput `pulumi:"bundleId"`
+	// Bundle information.
+	BundleInfo pulumi.StringPtrInput `pulumi:"bundleInfo"`
+	// Base64-encoded code content.
+	CodeContent pulumi.StringPtrInput `pulumi:"codeContent"`
+	// Cluster ID.
+	DataCluster pulumi.StringPtrInput `pulumi:"dataCluster"`
+	// Resource group ID. Obtain ExecutorGroupId via DescribeNormalSchedulerExecutorGroups.
+	ResourceGroup pulumi.StringPtrInput `pulumi:"resourceGroup"`
+	// Source data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+	SourceServiceId pulumi.StringPtrInput `pulumi:"sourceServiceId"`
+	// The source data source name needs to be obtained through DescribeDataSourceWithoutInfo..
+	SourceServiceName pulumi.StringPtrInput `pulumi:"sourceServiceName"`
+	// The source data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+	SourceServiceType pulumi.StringPtrInput `pulumi:"sourceServiceType"`
+	// Target data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+	TargetServiceId pulumi.StringPtrInput `pulumi:"targetServiceId"`
+	// The target data source name, which needs to be obtained through DescribeDataSourceWithoutInfo.
+	TargetServiceName pulumi.StringPtrInput `pulumi:"targetServiceName"`
+	// The target data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+	TargetServiceType pulumi.StringPtrInput `pulumi:"targetServiceType"`
+	// Task extended attribute configuration list. [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] cannot be customized; they are generated by the system.
+	TaskExtConfigurationLists TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput `pulumi:"taskExtConfigurationLists"`
+	// Configuration [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] generated by the system.
+	TaskExtConfigurationSystemLists TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayInput `pulumi:"taskExtConfigurationSystemLists"`
+	// Scheduling parameters.
+	TaskSchedulingParameterLists TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput `pulumi:"taskSchedulingParameterLists"`
+	// Resource pool queue name. Obtain via DescribeProjectClusterQueues.
+	YarnQueue pulumi.StringPtrInput `pulumi:"yarnQueue"`
+}
+
+func (TriggerTaskTriggerTaskConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationArgs) ToTriggerTaskTriggerTaskConfigurationOutput() TriggerTaskTriggerTaskConfigurationOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationArgs) ToTriggerTaskTriggerTaskConfigurationOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationOutput)
+}
+
+func (i TriggerTaskTriggerTaskConfigurationArgs) ToTriggerTaskTriggerTaskConfigurationPtrOutput() TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationArgs) ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationOutput).ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(ctx)
+}
+
+// TriggerTaskTriggerTaskConfigurationPtrInput is an input type that accepts TriggerTaskTriggerTaskConfigurationArgs, TriggerTaskTriggerTaskConfigurationPtr and TriggerTaskTriggerTaskConfigurationPtrOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationPtrInput` via:
+//
+//	        TriggerTaskTriggerTaskConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type TriggerTaskTriggerTaskConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationPtrOutput() TriggerTaskTriggerTaskConfigurationPtrOutput
+	ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationPtrOutput
+}
+
+type triggerTaskTriggerTaskConfigurationPtrType TriggerTaskTriggerTaskConfigurationArgs
+
+func TriggerTaskTriggerTaskConfigurationPtr(v *TriggerTaskTriggerTaskConfigurationArgs) TriggerTaskTriggerTaskConfigurationPtrInput {
+	return (*triggerTaskTriggerTaskConfigurationPtrType)(v)
+}
+
+func (*triggerTaskTriggerTaskConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (i *triggerTaskTriggerTaskConfigurationPtrType) ToTriggerTaskTriggerTaskConfigurationPtrOutput() TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *triggerTaskTriggerTaskConfigurationPtrType) ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationPtrOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationOutput) ToTriggerTaskTriggerTaskConfigurationOutput() TriggerTaskTriggerTaskConfigurationOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationOutput) ToTriggerTaskTriggerTaskConfigurationOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationOutput) ToTriggerTaskTriggerTaskConfigurationPtrOutput() TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return o.ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o TriggerTaskTriggerTaskConfigurationOutput) ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TriggerTaskTriggerTaskConfiguration) *TriggerTaskTriggerTaskConfiguration {
+		return &v
+	}).(TriggerTaskTriggerTaskConfigurationPtrOutput)
+}
+
+// Specified execution node.
+func (o TriggerTaskTriggerTaskConfigurationOutput) BrokerIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.BrokerIp }).(pulumi.StringPtrOutput)
+}
+
+// Bundle ID in use.
+func (o TriggerTaskTriggerTaskConfigurationOutput) BundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.BundleId }).(pulumi.StringPtrOutput)
+}
+
+// Bundle information.
+func (o TriggerTaskTriggerTaskConfigurationOutput) BundleInfo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.BundleInfo }).(pulumi.StringPtrOutput)
+}
+
+// Base64-encoded code content.
+func (o TriggerTaskTriggerTaskConfigurationOutput) CodeContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.CodeContent }).(pulumi.StringPtrOutput)
+}
+
+// Cluster ID.
+func (o TriggerTaskTriggerTaskConfigurationOutput) DataCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.DataCluster }).(pulumi.StringPtrOutput)
+}
+
+// Resource group ID. Obtain ExecutorGroupId via DescribeNormalSchedulerExecutorGroups.
+func (o TriggerTaskTriggerTaskConfigurationOutput) ResourceGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.ResourceGroup }).(pulumi.StringPtrOutput)
+}
+
+// Source data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationOutput) SourceServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.SourceServiceId }).(pulumi.StringPtrOutput)
+}
+
+// The source data source name needs to be obtained through DescribeDataSourceWithoutInfo..
+func (o TriggerTaskTriggerTaskConfigurationOutput) SourceServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.SourceServiceName }).(pulumi.StringPtrOutput)
+}
+
+// The source data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationOutput) SourceServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.SourceServiceType }).(pulumi.StringPtrOutput)
+}
+
+// Target data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TargetServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.TargetServiceId }).(pulumi.StringPtrOutput)
+}
+
+// The target data source name, which needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TargetServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.TargetServiceName }).(pulumi.StringPtrOutput)
+}
+
+// The target data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TargetServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.TargetServiceType }).(pulumi.StringPtrOutput)
+}
+
+// Task extended attribute configuration list. [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] cannot be customized; they are generated by the system.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TaskExtConfigurationLists() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList {
+		return v.TaskExtConfigurationLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput)
+}
+
+// Configuration [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] generated by the system.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TaskExtConfigurationSystemLists() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList {
+		return v.TaskExtConfigurationSystemLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput)
+}
+
+// Scheduling parameters.
+func (o TriggerTaskTriggerTaskConfigurationOutput) TaskSchedulingParameterLists() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList {
+		return v.TaskSchedulingParameterLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput)
+}
+
+// Resource pool queue name. Obtain via DescribeProjectClusterQueues.
+func (o TriggerTaskTriggerTaskConfigurationOutput) YarnQueue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfiguration) *string { return v.YarnQueue }).(pulumi.StringPtrOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) ToTriggerTaskTriggerTaskConfigurationPtrOutput() TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) ToTriggerTaskTriggerTaskConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationPtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) Elem() TriggerTaskTriggerTaskConfigurationOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) TriggerTaskTriggerTaskConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret TriggerTaskTriggerTaskConfiguration
+		return ret
+	}).(TriggerTaskTriggerTaskConfigurationOutput)
+}
+
+// Specified execution node.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) BrokerIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BrokerIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// Bundle ID in use.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) BundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BundleId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Bundle information.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) BundleInfo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BundleInfo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Base64-encoded code content.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) CodeContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CodeContent
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cluster ID.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) DataCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataCluster
+	}).(pulumi.StringPtrOutput)
+}
+
+// Resource group ID. Obtain ExecutorGroupId via DescribeNormalSchedulerExecutorGroups.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) ResourceGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceGroup
+	}).(pulumi.StringPtrOutput)
+}
+
+// Source data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) SourceServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceServiceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The source data source name needs to be obtained through DescribeDataSourceWithoutInfo..
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) SourceServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceServiceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The source data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) SourceServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceServiceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Target data source IDs, separated by semicolons (;). Obtain via DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TargetServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetServiceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The target data source name, which needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TargetServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetServiceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The target data source type needs to be obtained through DescribeDataSourceWithoutInfo.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TargetServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetServiceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Task extended attribute configuration list. [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] cannot be customized; they are generated by the system.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TaskExtConfigurationLists() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList {
+		if v == nil {
+			return nil
+		}
+		return v.TaskExtConfigurationLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput)
+}
+
+// Configuration [notebook.workspace.mapping notebook.engineClusters notebook.workspaceEnvs ftp.file.name notebook.script.scriptmd5 notebook.task.name notebook.scriptEnvs tenantId region bucket notebook.scriptId isGitTask git.repo.filepath notebook.source git.config.id] generated by the system.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TaskExtConfigurationSystemLists() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList {
+		if v == nil {
+			return nil
+		}
+		return v.TaskExtConfigurationSystemLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput)
+}
+
+// Scheduling parameters.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) TaskSchedulingParameterLists() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) []TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList {
+		if v == nil {
+			return nil
+		}
+		return v.TaskSchedulingParameterLists
+	}).(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput)
+}
+
+// Resource pool queue name. Obtain via DescribeProjectClusterQueues.
+func (o TriggerTaskTriggerTaskConfigurationPtrOutput) YarnQueue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.YarnQueue
+	}).(pulumi.StringPtrOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs and TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{...}
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput)
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray and TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray{ TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{...} }
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListInput
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return o
+}
+
+// Parameter name.
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList) string { return v.ParamKey }).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList) string { return v.ParamValue }).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList {
+		return vs[0].([]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList struct {
+	// Parameter name.
+	ParamKey *string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue *string `pulumi:"paramValue"`
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs and TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs{...}
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringPtrInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringPtrInput `pulumi:"paramValue"`
+}
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput)
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray and TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray{ TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs{...} }
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray []TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListInput
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput {
+	return o
+}
+
+// Parameter name.
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput) ParamKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList) *string { return v.ParamKey }).(pulumi.StringPtrOutput)
+}
+
+// Parameter value.
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput) ParamValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList) *string { return v.ParamValue }).(pulumi.StringPtrOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList {
+		return vs[0].([]TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs and TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{...}
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput)
+}
+
+// TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput is an input type that accepts TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray and TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray{ TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{...} }
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput
+	ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray []TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListInput
+
+func (TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return o
+}
+
+// Parameter name.
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList) string { return v.ParamKey }).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList) string { return v.ParamValue }).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ToTriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList {
+		return vs[0].([]TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfiguration struct {
+	// Rerun & backfill configuration. Default: ALL. ALL: rerun or backfill allowed after success or failure; FAILURE: not allowed after success, allowed after failure; NONE: not allowed after success or failure.
+	AllowRedoType *string `pulumi:"allowRedoType"`
+	// Timeout handling policy. Execution timeout in minutes. Default: -1.
+	ExecutionTtlMinute *int `pulumi:"executionTtlMinute"`
+	// Retry policy. Maximum retry attempts. Default: 4.
+	MaxRetryNumber *int `pulumi:"maxRetryNumber"`
+	// Input parameter list.
+	ParamTaskInLists []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList `pulumi:"paramTaskInLists"`
+	// Output parameter list.
+	ParamTaskOutLists []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList `pulumi:"paramTaskOutLists"`
+	// Retry policy. Retry wait time in minutes. Default: 5.
+	RetryWaitMinute *int `pulumi:"retryWaitMinute"`
+	// Task scheduling priority. Run priority: `4`-High; `5`-Medium; `6`-Low. Default: 6.
+	RunPriorityType *int `pulumi:"runPriorityType"`
+	// Output registry.
+	TaskOutputRegistryLists []TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList `pulumi:"taskOutputRegistryLists"`
+	// List of upstream dependent tasks.
+	UpstreamDependencyConfigLists []TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList `pulumi:"upstreamDependencyConfigLists"`
+	// Timeout handling policy. Total wait timeout in minutes. Default: -1.
+	WaitExecutionTotalTtlMinute *int `pulumi:"waitExecutionTotalTtlMinute"`
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationArgs and TriggerTaskTriggerTaskSchedulerConfigurationOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationArgs{...}
+type TriggerTaskTriggerTaskSchedulerConfigurationInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationOutput() TriggerTaskTriggerTaskSchedulerConfigurationOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationArgs struct {
+	// Rerun & backfill configuration. Default: ALL. ALL: rerun or backfill allowed after success or failure; FAILURE: not allowed after success, allowed after failure; NONE: not allowed after success or failure.
+	AllowRedoType pulumi.StringPtrInput `pulumi:"allowRedoType"`
+	// Timeout handling policy. Execution timeout in minutes. Default: -1.
+	ExecutionTtlMinute pulumi.IntPtrInput `pulumi:"executionTtlMinute"`
+	// Retry policy. Maximum retry attempts. Default: 4.
+	MaxRetryNumber pulumi.IntPtrInput `pulumi:"maxRetryNumber"`
+	// Input parameter list.
+	ParamTaskInLists TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput `pulumi:"paramTaskInLists"`
+	// Output parameter list.
+	ParamTaskOutLists TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput `pulumi:"paramTaskOutLists"`
+	// Retry policy. Retry wait time in minutes. Default: 5.
+	RetryWaitMinute pulumi.IntPtrInput `pulumi:"retryWaitMinute"`
+	// Task scheduling priority. Run priority: `4`-High; `5`-Medium; `6`-Low. Default: 6.
+	RunPriorityType pulumi.IntPtrInput `pulumi:"runPriorityType"`
+	// Output registry.
+	TaskOutputRegistryLists TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput `pulumi:"taskOutputRegistryLists"`
+	// List of upstream dependent tasks.
+	UpstreamDependencyConfigLists TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput `pulumi:"upstreamDependencyConfigLists"`
+	// Timeout handling policy. Total wait timeout in minutes. Default: -1.
+	WaitExecutionTotalTtlMinute pulumi.IntPtrInput `pulumi:"waitExecutionTotalTtlMinute"`
+}
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationOutput() TriggerTaskTriggerTaskSchedulerConfigurationOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationOutput)
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutput() TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationOutput).ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(ctx)
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationPtrInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationArgs, TriggerTaskTriggerTaskSchedulerConfigurationPtr and TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationPtrInput` via:
+//
+//	        TriggerTaskTriggerTaskSchedulerConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type TriggerTaskTriggerTaskSchedulerConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutput() TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput
+}
+
+type triggerTaskTriggerTaskSchedulerConfigurationPtrType TriggerTaskTriggerTaskSchedulerConfigurationArgs
+
+func TriggerTaskTriggerTaskSchedulerConfigurationPtr(v *TriggerTaskTriggerTaskSchedulerConfigurationArgs) TriggerTaskTriggerTaskSchedulerConfigurationPtrInput {
+	return (*triggerTaskTriggerTaskSchedulerConfigurationPtrType)(v)
+}
+
+func (*triggerTaskTriggerTaskSchedulerConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (i *triggerTaskTriggerTaskSchedulerConfigurationPtrType) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutput() TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *triggerTaskTriggerTaskSchedulerConfigurationPtrType) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationOutput() TriggerTaskTriggerTaskSchedulerConfigurationOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutput() TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return o.ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TriggerTaskTriggerTaskSchedulerConfiguration) *TriggerTaskTriggerTaskSchedulerConfiguration {
+		return &v
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput)
+}
+
+// Rerun & backfill configuration. Default: ALL. ALL: rerun or backfill allowed after success or failure; FAILURE: not allowed after success, allowed after failure; NONE: not allowed after success or failure.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) AllowRedoType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *string { return v.AllowRedoType }).(pulumi.StringPtrOutput)
+}
+
+// Timeout handling policy. Execution timeout in minutes. Default: -1.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ExecutionTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *int { return v.ExecutionTtlMinute }).(pulumi.IntPtrOutput)
+}
+
+// Retry policy. Maximum retry attempts. Default: 4.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) MaxRetryNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *int { return v.MaxRetryNumber }).(pulumi.IntPtrOutput)
+}
+
+// Input parameter list.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ParamTaskInLists() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList {
+		return v.ParamTaskInLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput)
+}
+
+// Output parameter list.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) ParamTaskOutLists() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList {
+		return v.ParamTaskOutLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput)
+}
+
+// Retry policy. Retry wait time in minutes. Default: 5.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) RetryWaitMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *int { return v.RetryWaitMinute }).(pulumi.IntPtrOutput)
+}
+
+// Task scheduling priority. Run priority: `4`-High; `5`-Medium; `6`-Low. Default: 6.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) RunPriorityType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *int { return v.RunPriorityType }).(pulumi.IntPtrOutput)
+}
+
+// Output registry.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) TaskOutputRegistryLists() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList {
+		return v.TaskOutputRegistryLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput)
+}
+
+// List of upstream dependent tasks.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) UpstreamDependencyConfigLists() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList {
+		return v.UpstreamDependencyConfigLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput)
+}
+
+// Timeout handling policy. Total wait timeout in minutes. Default: -1.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationOutput) WaitExecutionTotalTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfiguration) *int { return v.WaitExecutionTotalTtlMinute }).(pulumi.IntPtrOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TriggerTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutput() TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationPtrOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) Elem() TriggerTaskTriggerTaskSchedulerConfigurationOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) TriggerTaskTriggerTaskSchedulerConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret TriggerTaskTriggerTaskSchedulerConfiguration
+		return ret
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationOutput)
+}
+
+// Rerun & backfill configuration. Default: ALL. ALL: rerun or backfill allowed after success or failure; FAILURE: not allowed after success, allowed after failure; NONE: not allowed after success or failure.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) AllowRedoType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowRedoType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Timeout handling policy. Execution timeout in minutes. Default: -1.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ExecutionTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExecutionTtlMinute
+	}).(pulumi.IntPtrOutput)
+}
+
+// Retry policy. Maximum retry attempts. Default: 4.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) MaxRetryNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxRetryNumber
+	}).(pulumi.IntPtrOutput)
+}
+
+// Input parameter list.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ParamTaskInLists() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList {
+		if v == nil {
+			return nil
+		}
+		return v.ParamTaskInLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput)
+}
+
+// Output parameter list.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) ParamTaskOutLists() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList {
+		if v == nil {
+			return nil
+		}
+		return v.ParamTaskOutLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput)
+}
+
+// Retry policy. Retry wait time in minutes. Default: 5.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) RetryWaitMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RetryWaitMinute
+	}).(pulumi.IntPtrOutput)
+}
+
+// Task scheduling priority. Run priority: `4`-High; `5`-Medium; `6`-Low. Default: 6.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) RunPriorityType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RunPriorityType
+	}).(pulumi.IntPtrOutput)
+}
+
+// Output registry.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) TaskOutputRegistryLists() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList {
+		if v == nil {
+			return nil
+		}
+		return v.TaskOutputRegistryLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput)
+}
+
+// List of upstream dependent tasks.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) UpstreamDependencyConfigLists() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) []TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList {
+		if v == nil {
+			return nil
+		}
+		return v.UpstreamDependencyConfigLists
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput)
+}
+
+// Timeout handling policy. Total wait timeout in minutes. Default: -1.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput) WaitExecutionTotalTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TriggerTaskTriggerTaskSchedulerConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.WaitExecutionTotalTtlMinute
+	}).(pulumi.IntPtrOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList struct {
+	// Parent task parameter key.
+	FromParamKey string `pulumi:"fromParamKey"`
+	// Parent task ID.
+	FromTaskId string `pulumi:"fromTaskId"`
+	// Parameter description. Format: project_identifier.task_name.parameter_name; e.g., project_wedata_1.sh_250820_104107.pp_out.
+	ParamDesc string `pulumi:"paramDesc"`
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs and TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{...}
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs struct {
+	// Parent task parameter key.
+	FromParamKey pulumi.StringInput `pulumi:"fromParamKey"`
+	// Parent task ID.
+	FromTaskId pulumi.StringInput `pulumi:"fromTaskId"`
+	// Parameter description. Format: project_identifier.task_name.parameter_name; e.g., project_wedata_1.sh_250820_104107.pp_out.
+	ParamDesc pulumi.StringInput `pulumi:"paramDesc"`
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+}
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput)
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray and TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray{ TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{...} }
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListInput
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return o
+}
+
+// Parent task parameter key.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) FromParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList) string { return v.FromParamKey }).(pulumi.StringOutput)
+}
+
+// Parent task ID.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) FromTaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList) string { return v.FromTaskId }).(pulumi.StringOutput)
+}
+
+// Parameter description. Format: project_identifier.task_name.parameter_name; e.g., project_wedata_1.sh_250820_104107.pp_out.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ParamDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList) string { return v.ParamDesc }).(pulumi.StringOutput)
+}
+
+// Parameter name.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList) string { return v.ParamKey }).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList {
+		return vs[0].([]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter definition.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs and TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{...}
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter definition.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput)
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray and TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray{ TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{...} }
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray []TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return o
+}
+
+// Parameter name.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList) string { return v.ParamKey }).(pulumi.StringOutput)
+}
+
+// Parameter definition.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList) string { return v.ParamValue }).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList {
+		return vs[0].([]TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList struct {
+	// Input/output table type: input stream: `UPSTREAM`, output stream: `DOWNSTREAM`.
+	DataFlowType string `pulumi:"dataFlowType"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId string `pulumi:"datasourceId"`
+	// Database unique identifier.
+	DbGuid *string `pulumi:"dbGuid"`
+	// Partition name.
+	PartitionName string `pulumi:"partitionName"`
+	// Table unique identifier.
+	TableGuid *string `pulumi:"tableGuid"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
+	// Table physical unique ID.
+	TablePhysicalId string `pulumi:"tablePhysicalId"`
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs and TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{...}
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs struct {
+	// Input/output table type: input stream: `UPSTREAM`, output stream: `DOWNSTREAM`.
+	DataFlowType pulumi.StringInput `pulumi:"dataFlowType"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId pulumi.StringInput `pulumi:"datasourceId"`
+	// Database unique identifier.
+	DbGuid pulumi.StringPtrInput `pulumi:"dbGuid"`
+	// Partition name.
+	PartitionName pulumi.StringInput `pulumi:"partitionName"`
+	// Table unique identifier.
+	TableGuid pulumi.StringPtrInput `pulumi:"tableGuid"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Table physical unique ID.
+	TablePhysicalId pulumi.StringInput `pulumi:"tablePhysicalId"`
+}
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput)
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray and TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray{ TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{...} }
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray []TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return o
+}
+
+// Input/output table type: input stream: `UPSTREAM`, output stream: `DOWNSTREAM`.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DataFlowType() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DataFlowType
+	}).(pulumi.StringOutput)
+}
+
+// Database name.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DatabaseName
+	}).(pulumi.StringOutput)
+}
+
+// Data source ID.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DatasourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DatasourceId
+	}).(pulumi.StringOutput)
+}
+
+// Database unique identifier.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DbGuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) *string { return v.DbGuid }).(pulumi.StringPtrOutput)
+}
+
+// Partition name.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) PartitionName() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.PartitionName
+	}).(pulumi.StringOutput)
+}
+
+// Table unique identifier.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TableGuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) *string { return v.TableGuid }).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+// Table physical unique ID.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TablePhysicalId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.TablePhysicalId
+	}).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList {
+		return vs[0].([]TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList struct {
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs and TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{...}
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs struct {
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+}
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput)
+}
+
+// TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput is an input type that accepts TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray and TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput values.
+// You can construct a concrete instance of `TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput` via:
+//
+//	TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray{ TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{...} }
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput interface {
+	pulumi.Input
+
+	ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput
+	ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray []TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return i.ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return o
+}
+
+// Task ID.
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList) string {
+		return v.TaskId
+	}).(pulumi.StringOutput)
+}
+
+type TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ToTriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(ctx context.Context) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o
+}
+
+func (o TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) Index(i pulumi.IntInput) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList {
+		return vs[0].([]TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)[vs[1].(int)]
+	}).(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput)
+}
+
+type TriggerWorkflowGeneralTaskParam struct {
+	// General task parameter type, currently only SPARK_SQL is supported.
+	Type *string `pulumi:"type"`
+	// General task parameter content; multiple parameters are separated by semicolons (;).
+	Value *string `pulumi:"value"`
+}
+
+// TriggerWorkflowGeneralTaskParamInput is an input type that accepts TriggerWorkflowGeneralTaskParamArgs and TriggerWorkflowGeneralTaskParamOutput values.
+// You can construct a concrete instance of `TriggerWorkflowGeneralTaskParamInput` via:
+//
+//	TriggerWorkflowGeneralTaskParamArgs{...}
+type TriggerWorkflowGeneralTaskParamInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowGeneralTaskParamOutput() TriggerWorkflowGeneralTaskParamOutput
+	ToTriggerWorkflowGeneralTaskParamOutputWithContext(context.Context) TriggerWorkflowGeneralTaskParamOutput
+}
+
+type TriggerWorkflowGeneralTaskParamArgs struct {
+	// General task parameter type, currently only SPARK_SQL is supported.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// General task parameter content; multiple parameters are separated by semicolons (;).
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (TriggerWorkflowGeneralTaskParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowGeneralTaskParam)(nil)).Elem()
+}
+
+func (i TriggerWorkflowGeneralTaskParamArgs) ToTriggerWorkflowGeneralTaskParamOutput() TriggerWorkflowGeneralTaskParamOutput {
+	return i.ToTriggerWorkflowGeneralTaskParamOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowGeneralTaskParamArgs) ToTriggerWorkflowGeneralTaskParamOutputWithContext(ctx context.Context) TriggerWorkflowGeneralTaskParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowGeneralTaskParamOutput)
+}
+
+// TriggerWorkflowGeneralTaskParamArrayInput is an input type that accepts TriggerWorkflowGeneralTaskParamArray and TriggerWorkflowGeneralTaskParamArrayOutput values.
+// You can construct a concrete instance of `TriggerWorkflowGeneralTaskParamArrayInput` via:
+//
+//	TriggerWorkflowGeneralTaskParamArray{ TriggerWorkflowGeneralTaskParamArgs{...} }
+type TriggerWorkflowGeneralTaskParamArrayInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowGeneralTaskParamArrayOutput() TriggerWorkflowGeneralTaskParamArrayOutput
+	ToTriggerWorkflowGeneralTaskParamArrayOutputWithContext(context.Context) TriggerWorkflowGeneralTaskParamArrayOutput
+}
+
+type TriggerWorkflowGeneralTaskParamArray []TriggerWorkflowGeneralTaskParamInput
+
+func (TriggerWorkflowGeneralTaskParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowGeneralTaskParam)(nil)).Elem()
+}
+
+func (i TriggerWorkflowGeneralTaskParamArray) ToTriggerWorkflowGeneralTaskParamArrayOutput() TriggerWorkflowGeneralTaskParamArrayOutput {
+	return i.ToTriggerWorkflowGeneralTaskParamArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowGeneralTaskParamArray) ToTriggerWorkflowGeneralTaskParamArrayOutputWithContext(ctx context.Context) TriggerWorkflowGeneralTaskParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowGeneralTaskParamArrayOutput)
+}
+
+type TriggerWorkflowGeneralTaskParamOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowGeneralTaskParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowGeneralTaskParam)(nil)).Elem()
+}
+
+func (o TriggerWorkflowGeneralTaskParamOutput) ToTriggerWorkflowGeneralTaskParamOutput() TriggerWorkflowGeneralTaskParamOutput {
+	return o
+}
+
+func (o TriggerWorkflowGeneralTaskParamOutput) ToTriggerWorkflowGeneralTaskParamOutputWithContext(ctx context.Context) TriggerWorkflowGeneralTaskParamOutput {
+	return o
+}
+
+// General task parameter type, currently only SPARK_SQL is supported.
+func (o TriggerWorkflowGeneralTaskParamOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowGeneralTaskParam) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// General task parameter content; multiple parameters are separated by semicolons (;).
+func (o TriggerWorkflowGeneralTaskParamOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowGeneralTaskParam) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type TriggerWorkflowGeneralTaskParamArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowGeneralTaskParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowGeneralTaskParam)(nil)).Elem()
+}
+
+func (o TriggerWorkflowGeneralTaskParamArrayOutput) ToTriggerWorkflowGeneralTaskParamArrayOutput() TriggerWorkflowGeneralTaskParamArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowGeneralTaskParamArrayOutput) ToTriggerWorkflowGeneralTaskParamArrayOutputWithContext(ctx context.Context) TriggerWorkflowGeneralTaskParamArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowGeneralTaskParamArrayOutput) Index(i pulumi.IntInput) TriggerWorkflowGeneralTaskParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerWorkflowGeneralTaskParam {
+		return vs[0].([]TriggerWorkflowGeneralTaskParam)[vs[1].(int)]
+	}).(TriggerWorkflowGeneralTaskParamOutput)
+}
+
+type TriggerWorkflowTriggerWorkflowSchedulerConfiguration struct {
+	// Configuration mode, COMMON or CRON_EXPRESSION.
+	ConfigMode *string `pulumi:"configMode"`
+	// Cron expression.
+	CrontabExpression *string `pulumi:"crontabExpression"`
+	// Cycle type. Supported values: `ONEOFF_CYCLE`: One-time; `YEAR_CYCLE`: Yearly; `MONTH_CYCLE`: Monthly; `WEEK_CYCLE`: Weekly; `DAY_CYCLE`: Daily; `HOUR_CYCLE`: Hourly; `MINUTE_CYCLE`: Minutely; `CRONTAB_CYCLE`: Crontab expression.
+	CycleType *string `pulumi:"cycleType"`
+	// Schedule end time.
+	EndTime *string `pulumi:"endTime"`
+	// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+	ExtraInfo *string `pulumi:"extraInfo"`
+	// Listening path in the storage system for file arrival mode.
+	FileArrivalPath *string `pulumi:"fileArrivalPath"`
+	// Scheduler time zone.
+	ScheduleTimeZone *string `pulumi:"scheduleTimeZone"`
+	// Trigger status, ACTIVE or PAUSED.
+	SchedulerStatus *string `pulumi:"schedulerStatus"`
+	// Schedule effective start time.
+	StartTime *string `pulumi:"startTime"`
+	// Trigger ID (UUID).
+	TriggerId *string `pulumi:"triggerId"`
+	// Minimum trigger interval in file arrival mode (seconds).
+	TriggerMinimumIntervalSecond *int `pulumi:"triggerMinimumIntervalSecond"`
+	// Trigger mode: Scheduled trigger:  `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. Notes: For `TIME_TRIGGER` and `CONTINUE_RUN` modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required; For `FILE_ARRIVAL` mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+	TriggerMode string `pulumi:"triggerMode"`
+	// Trigger wait time in file arrival mode (seconds).
+	TriggerWaitTimeSecond *int `pulumi:"triggerWaitTimeSecond"`
+}
+
+// TriggerWorkflowTriggerWorkflowSchedulerConfigurationInput is an input type that accepts TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs and TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput values.
+// You can construct a concrete instance of `TriggerWorkflowTriggerWorkflowSchedulerConfigurationInput` via:
+//
+//	TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs{...}
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput
+	ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutputWithContext(context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput
+}
+
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs struct {
+	// Configuration mode, COMMON or CRON_EXPRESSION.
+	ConfigMode pulumi.StringPtrInput `pulumi:"configMode"`
+	// Cron expression.
+	CrontabExpression pulumi.StringPtrInput `pulumi:"crontabExpression"`
+	// Cycle type. Supported values: `ONEOFF_CYCLE`: One-time; `YEAR_CYCLE`: Yearly; `MONTH_CYCLE`: Monthly; `WEEK_CYCLE`: Weekly; `DAY_CYCLE`: Daily; `HOUR_CYCLE`: Hourly; `MINUTE_CYCLE`: Minutely; `CRONTAB_CYCLE`: Crontab expression.
+	CycleType pulumi.StringPtrInput `pulumi:"cycleType"`
+	// Schedule end time.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+	ExtraInfo pulumi.StringPtrInput `pulumi:"extraInfo"`
+	// Listening path in the storage system for file arrival mode.
+	FileArrivalPath pulumi.StringPtrInput `pulumi:"fileArrivalPath"`
+	// Scheduler time zone.
+	ScheduleTimeZone pulumi.StringPtrInput `pulumi:"scheduleTimeZone"`
+	// Trigger status, ACTIVE or PAUSED.
+	SchedulerStatus pulumi.StringPtrInput `pulumi:"schedulerStatus"`
+	// Schedule effective start time.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+	// Trigger ID (UUID).
+	TriggerId pulumi.StringPtrInput `pulumi:"triggerId"`
+	// Minimum trigger interval in file arrival mode (seconds).
+	TriggerMinimumIntervalSecond pulumi.IntPtrInput `pulumi:"triggerMinimumIntervalSecond"`
+	// Trigger mode: Scheduled trigger:  `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. Notes: For `TIME_TRIGGER` and `CONTINUE_RUN` modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required; For `FILE_ARRIVAL` mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+	TriggerMode pulumi.StringInput `pulumi:"triggerMode"`
+	// Trigger wait time in file arrival mode (seconds).
+	TriggerWaitTimeSecond pulumi.IntPtrInput `pulumi:"triggerWaitTimeSecond"`
+}
+
+func (TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowTriggerWorkflowSchedulerConfiguration)(nil)).Elem()
+}
+
+func (i TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput {
+	return i.ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutputWithContext(ctx context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput)
+}
+
+// TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayInput is an input type that accepts TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray and TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput values.
+// You can construct a concrete instance of `TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayInput` via:
+//
+//	TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray{ TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs{...} }
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput
+	ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutputWithContext(context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput
+}
+
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray []TriggerWorkflowTriggerWorkflowSchedulerConfigurationInput
+
+func (TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowTriggerWorkflowSchedulerConfiguration)(nil)).Elem()
+}
+
+func (i TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput {
+	return i.ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutputWithContext(ctx context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput)
+}
+
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowTriggerWorkflowSchedulerConfiguration)(nil)).Elem()
+}
+
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput {
+	return o
+}
+
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationOutputWithContext(ctx context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput {
+	return o
+}
+
+// Configuration mode, COMMON or CRON_EXPRESSION.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ConfigMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.ConfigMode }).(pulumi.StringPtrOutput)
+}
+
+// Cron expression.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) CrontabExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.CrontabExpression }).(pulumi.StringPtrOutput)
+}
+
+// Cycle type. Supported values: `ONEOFF_CYCLE`: One-time; `YEAR_CYCLE`: Yearly; `MONTH_CYCLE`: Monthly; `WEEK_CYCLE`: Weekly; `DAY_CYCLE`: Daily; `HOUR_CYCLE`: Hourly; `MINUTE_CYCLE`: Minutely; `CRONTAB_CYCLE`: Crontab expression.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) CycleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.CycleType }).(pulumi.StringPtrOutput)
+}
+
+// Schedule end time.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ExtraInfo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.ExtraInfo }).(pulumi.StringPtrOutput)
+}
+
+// Listening path in the storage system for file arrival mode.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) FileArrivalPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.FileArrivalPath }).(pulumi.StringPtrOutput)
+}
+
+// Scheduler time zone.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) ScheduleTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.ScheduleTimeZone }).(pulumi.StringPtrOutput)
+}
+
+// Trigger status, ACTIVE or PAUSED.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) SchedulerStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.SchedulerStatus }).(pulumi.StringPtrOutput)
+}
+
+// Schedule effective start time.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+// Trigger ID (UUID).
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *string { return v.TriggerId }).(pulumi.StringPtrOutput)
+}
+
+// Minimum trigger interval in file arrival mode (seconds).
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerMinimumIntervalSecond() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *int {
+		return v.TriggerMinimumIntervalSecond
+	}).(pulumi.IntPtrOutput)
+}
+
+// Trigger mode: Scheduled trigger:  `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. Notes: For `TIME_TRIGGER` and `CONTINUE_RUN` modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required; For `FILE_ARRIVAL` mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerMode() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) string { return v.TriggerMode }).(pulumi.StringOutput)
+}
+
+// Trigger wait time in file arrival mode (seconds).
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput) TriggerWaitTimeSecond() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TriggerWorkflowTriggerWorkflowSchedulerConfiguration) *int { return v.TriggerWaitTimeSecond }).(pulumi.IntPtrOutput)
+}
+
+type TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowTriggerWorkflowSchedulerConfiguration)(nil)).Elem()
+}
+
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput() TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput) ToTriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutputWithContext(ctx context.Context) TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput) Index(i pulumi.IntInput) TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerWorkflowTriggerWorkflowSchedulerConfiguration {
+		return vs[0].([]TriggerWorkflowTriggerWorkflowSchedulerConfiguration)[vs[1].(int)]
+	}).(TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput)
+}
+
+type TriggerWorkflowWorkflowParam struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// TriggerWorkflowWorkflowParamInput is an input type that accepts TriggerWorkflowWorkflowParamArgs and TriggerWorkflowWorkflowParamOutput values.
+// You can construct a concrete instance of `TriggerWorkflowWorkflowParamInput` via:
+//
+//	TriggerWorkflowWorkflowParamArgs{...}
+type TriggerWorkflowWorkflowParamInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowWorkflowParamOutput() TriggerWorkflowWorkflowParamOutput
+	ToTriggerWorkflowWorkflowParamOutputWithContext(context.Context) TriggerWorkflowWorkflowParamOutput
+}
+
+type TriggerWorkflowWorkflowParamArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (TriggerWorkflowWorkflowParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowWorkflowParam)(nil)).Elem()
+}
+
+func (i TriggerWorkflowWorkflowParamArgs) ToTriggerWorkflowWorkflowParamOutput() TriggerWorkflowWorkflowParamOutput {
+	return i.ToTriggerWorkflowWorkflowParamOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowWorkflowParamArgs) ToTriggerWorkflowWorkflowParamOutputWithContext(ctx context.Context) TriggerWorkflowWorkflowParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowWorkflowParamOutput)
+}
+
+// TriggerWorkflowWorkflowParamArrayInput is an input type that accepts TriggerWorkflowWorkflowParamArray and TriggerWorkflowWorkflowParamArrayOutput values.
+// You can construct a concrete instance of `TriggerWorkflowWorkflowParamArrayInput` via:
+//
+//	TriggerWorkflowWorkflowParamArray{ TriggerWorkflowWorkflowParamArgs{...} }
+type TriggerWorkflowWorkflowParamArrayInput interface {
+	pulumi.Input
+
+	ToTriggerWorkflowWorkflowParamArrayOutput() TriggerWorkflowWorkflowParamArrayOutput
+	ToTriggerWorkflowWorkflowParamArrayOutputWithContext(context.Context) TriggerWorkflowWorkflowParamArrayOutput
+}
+
+type TriggerWorkflowWorkflowParamArray []TriggerWorkflowWorkflowParamInput
+
+func (TriggerWorkflowWorkflowParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowWorkflowParam)(nil)).Elem()
+}
+
+func (i TriggerWorkflowWorkflowParamArray) ToTriggerWorkflowWorkflowParamArrayOutput() TriggerWorkflowWorkflowParamArrayOutput {
+	return i.ToTriggerWorkflowWorkflowParamArrayOutputWithContext(context.Background())
+}
+
+func (i TriggerWorkflowWorkflowParamArray) ToTriggerWorkflowWorkflowParamArrayOutputWithContext(ctx context.Context) TriggerWorkflowWorkflowParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TriggerWorkflowWorkflowParamArrayOutput)
+}
+
+type TriggerWorkflowWorkflowParamOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowWorkflowParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TriggerWorkflowWorkflowParam)(nil)).Elem()
+}
+
+func (o TriggerWorkflowWorkflowParamOutput) ToTriggerWorkflowWorkflowParamOutput() TriggerWorkflowWorkflowParamOutput {
+	return o
+}
+
+func (o TriggerWorkflowWorkflowParamOutput) ToTriggerWorkflowWorkflowParamOutputWithContext(ctx context.Context) TriggerWorkflowWorkflowParamOutput {
+	return o
+}
+
+// Parameter name.
+func (o TriggerWorkflowWorkflowParamOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerWorkflowWorkflowParam) string { return v.ParamKey }).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o TriggerWorkflowWorkflowParamOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TriggerWorkflowWorkflowParam) string { return v.ParamValue }).(pulumi.StringOutput)
+}
+
+type TriggerWorkflowWorkflowParamArrayOutput struct{ *pulumi.OutputState }
+
+func (TriggerWorkflowWorkflowParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TriggerWorkflowWorkflowParam)(nil)).Elem()
+}
+
+func (o TriggerWorkflowWorkflowParamArrayOutput) ToTriggerWorkflowWorkflowParamArrayOutput() TriggerWorkflowWorkflowParamArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowWorkflowParamArrayOutput) ToTriggerWorkflowWorkflowParamArrayOutputWithContext(ctx context.Context) TriggerWorkflowWorkflowParamArrayOutput {
+	return o
+}
+
+func (o TriggerWorkflowWorkflowParamArrayOutput) Index(i pulumi.IntInput) TriggerWorkflowWorkflowParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TriggerWorkflowWorkflowParam {
+		return vs[0].([]TriggerWorkflowWorkflowParam)[vs[1].(int)]
+	}).(TriggerWorkflowWorkflowParamOutput)
+}
+
 type WeDataDataSourceDevFileUpload struct {
 	// core-site.xml file.
 	CoreSite *string `pulumi:"coreSite"`
@@ -16274,6 +21620,121 @@ func (o WeDataDataSourcesItemArrayOutput) Index(i pulumi.IntInput) WeDataDataSou
 	}).(WeDataDataSourcesItemOutput)
 }
 
+type WorkflowPermissionsPermissionList struct {
+	// Authorization target ID array (userId/roleId).
+	PermissionTargetId string `pulumi:"permissionTargetId"`
+	// Authorization target type (user: user, role: role).
+	PermissionTargetType string `pulumi:"permissionTargetType"`
+	// Authorization permission type array (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+	PermissionTypeLists []string `pulumi:"permissionTypeLists"`
+}
+
+// WorkflowPermissionsPermissionListInput is an input type that accepts WorkflowPermissionsPermissionListArgs and WorkflowPermissionsPermissionListOutput values.
+// You can construct a concrete instance of `WorkflowPermissionsPermissionListInput` via:
+//
+//	WorkflowPermissionsPermissionListArgs{...}
+type WorkflowPermissionsPermissionListInput interface {
+	pulumi.Input
+
+	ToWorkflowPermissionsPermissionListOutput() WorkflowPermissionsPermissionListOutput
+	ToWorkflowPermissionsPermissionListOutputWithContext(context.Context) WorkflowPermissionsPermissionListOutput
+}
+
+type WorkflowPermissionsPermissionListArgs struct {
+	// Authorization target ID array (userId/roleId).
+	PermissionTargetId pulumi.StringInput `pulumi:"permissionTargetId"`
+	// Authorization target type (user: user, role: role).
+	PermissionTargetType pulumi.StringInput `pulumi:"permissionTargetType"`
+	// Authorization permission type array (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+	PermissionTypeLists pulumi.StringArrayInput `pulumi:"permissionTypeLists"`
+}
+
+func (WorkflowPermissionsPermissionListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkflowPermissionsPermissionList)(nil)).Elem()
+}
+
+func (i WorkflowPermissionsPermissionListArgs) ToWorkflowPermissionsPermissionListOutput() WorkflowPermissionsPermissionListOutput {
+	return i.ToWorkflowPermissionsPermissionListOutputWithContext(context.Background())
+}
+
+func (i WorkflowPermissionsPermissionListArgs) ToWorkflowPermissionsPermissionListOutputWithContext(ctx context.Context) WorkflowPermissionsPermissionListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkflowPermissionsPermissionListOutput)
+}
+
+// WorkflowPermissionsPermissionListArrayInput is an input type that accepts WorkflowPermissionsPermissionListArray and WorkflowPermissionsPermissionListArrayOutput values.
+// You can construct a concrete instance of `WorkflowPermissionsPermissionListArrayInput` via:
+//
+//	WorkflowPermissionsPermissionListArray{ WorkflowPermissionsPermissionListArgs{...} }
+type WorkflowPermissionsPermissionListArrayInput interface {
+	pulumi.Input
+
+	ToWorkflowPermissionsPermissionListArrayOutput() WorkflowPermissionsPermissionListArrayOutput
+	ToWorkflowPermissionsPermissionListArrayOutputWithContext(context.Context) WorkflowPermissionsPermissionListArrayOutput
+}
+
+type WorkflowPermissionsPermissionListArray []WorkflowPermissionsPermissionListInput
+
+func (WorkflowPermissionsPermissionListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkflowPermissionsPermissionList)(nil)).Elem()
+}
+
+func (i WorkflowPermissionsPermissionListArray) ToWorkflowPermissionsPermissionListArrayOutput() WorkflowPermissionsPermissionListArrayOutput {
+	return i.ToWorkflowPermissionsPermissionListArrayOutputWithContext(context.Background())
+}
+
+func (i WorkflowPermissionsPermissionListArray) ToWorkflowPermissionsPermissionListArrayOutputWithContext(ctx context.Context) WorkflowPermissionsPermissionListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkflowPermissionsPermissionListArrayOutput)
+}
+
+type WorkflowPermissionsPermissionListOutput struct{ *pulumi.OutputState }
+
+func (WorkflowPermissionsPermissionListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkflowPermissionsPermissionList)(nil)).Elem()
+}
+
+func (o WorkflowPermissionsPermissionListOutput) ToWorkflowPermissionsPermissionListOutput() WorkflowPermissionsPermissionListOutput {
+	return o
+}
+
+func (o WorkflowPermissionsPermissionListOutput) ToWorkflowPermissionsPermissionListOutputWithContext(ctx context.Context) WorkflowPermissionsPermissionListOutput {
+	return o
+}
+
+// Authorization target ID array (userId/roleId).
+func (o WorkflowPermissionsPermissionListOutput) PermissionTargetId() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkflowPermissionsPermissionList) string { return v.PermissionTargetId }).(pulumi.StringOutput)
+}
+
+// Authorization target type (user: user, role: role).
+func (o WorkflowPermissionsPermissionListOutput) PermissionTargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkflowPermissionsPermissionList) string { return v.PermissionTargetType }).(pulumi.StringOutput)
+}
+
+// Authorization permission type array (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+func (o WorkflowPermissionsPermissionListOutput) PermissionTypeLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WorkflowPermissionsPermissionList) []string { return v.PermissionTypeLists }).(pulumi.StringArrayOutput)
+}
+
+type WorkflowPermissionsPermissionListArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkflowPermissionsPermissionListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkflowPermissionsPermissionList)(nil)).Elem()
+}
+
+func (o WorkflowPermissionsPermissionListArrayOutput) ToWorkflowPermissionsPermissionListArrayOutput() WorkflowPermissionsPermissionListArrayOutput {
+	return o
+}
+
+func (o WorkflowPermissionsPermissionListArrayOutput) ToWorkflowPermissionsPermissionListArrayOutputWithContext(ctx context.Context) WorkflowPermissionsPermissionListArrayOutput {
+	return o
+}
+
+func (o WorkflowPermissionsPermissionListArrayOutput) Index(i pulumi.IntInput) WorkflowPermissionsPermissionListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkflowPermissionsPermissionList {
+		return vs[0].([]WorkflowPermissionsPermissionList)[vs[1].(int)]
+	}).(WorkflowPermissionsPermissionListOutput)
+}
+
 type WorkflowWorkflowParam struct {
 	// Parameter name.
 	ParamKey string `pulumi:"paramKey"`
@@ -16973,6 +22434,103 @@ func (o WorkflowWorkflowSchedulerConfigurationPtrOutput) SubordinateCyclicConfig
 		}
 		return v.SubordinateCyclicConfig
 	}).(pulumi.StringPtrOutput)
+}
+
+type GetCodeMaxPermissionData struct {
+	// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE).
+	PermissionType string `pulumi:"permissionType"`
+}
+
+// GetCodeMaxPermissionDataInput is an input type that accepts GetCodeMaxPermissionDataArgs and GetCodeMaxPermissionDataOutput values.
+// You can construct a concrete instance of `GetCodeMaxPermissionDataInput` via:
+//
+//	GetCodeMaxPermissionDataArgs{...}
+type GetCodeMaxPermissionDataInput interface {
+	pulumi.Input
+
+	ToGetCodeMaxPermissionDataOutput() GetCodeMaxPermissionDataOutput
+	ToGetCodeMaxPermissionDataOutputWithContext(context.Context) GetCodeMaxPermissionDataOutput
+}
+
+type GetCodeMaxPermissionDataArgs struct {
+	// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE).
+	PermissionType pulumi.StringInput `pulumi:"permissionType"`
+}
+
+func (GetCodeMaxPermissionDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCodeMaxPermissionData)(nil)).Elem()
+}
+
+func (i GetCodeMaxPermissionDataArgs) ToGetCodeMaxPermissionDataOutput() GetCodeMaxPermissionDataOutput {
+	return i.ToGetCodeMaxPermissionDataOutputWithContext(context.Background())
+}
+
+func (i GetCodeMaxPermissionDataArgs) ToGetCodeMaxPermissionDataOutputWithContext(ctx context.Context) GetCodeMaxPermissionDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCodeMaxPermissionDataOutput)
+}
+
+// GetCodeMaxPermissionDataArrayInput is an input type that accepts GetCodeMaxPermissionDataArray and GetCodeMaxPermissionDataArrayOutput values.
+// You can construct a concrete instance of `GetCodeMaxPermissionDataArrayInput` via:
+//
+//	GetCodeMaxPermissionDataArray{ GetCodeMaxPermissionDataArgs{...} }
+type GetCodeMaxPermissionDataArrayInput interface {
+	pulumi.Input
+
+	ToGetCodeMaxPermissionDataArrayOutput() GetCodeMaxPermissionDataArrayOutput
+	ToGetCodeMaxPermissionDataArrayOutputWithContext(context.Context) GetCodeMaxPermissionDataArrayOutput
+}
+
+type GetCodeMaxPermissionDataArray []GetCodeMaxPermissionDataInput
+
+func (GetCodeMaxPermissionDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCodeMaxPermissionData)(nil)).Elem()
+}
+
+func (i GetCodeMaxPermissionDataArray) ToGetCodeMaxPermissionDataArrayOutput() GetCodeMaxPermissionDataArrayOutput {
+	return i.ToGetCodeMaxPermissionDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetCodeMaxPermissionDataArray) ToGetCodeMaxPermissionDataArrayOutputWithContext(ctx context.Context) GetCodeMaxPermissionDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCodeMaxPermissionDataArrayOutput)
+}
+
+type GetCodeMaxPermissionDataOutput struct{ *pulumi.OutputState }
+
+func (GetCodeMaxPermissionDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCodeMaxPermissionData)(nil)).Elem()
+}
+
+func (o GetCodeMaxPermissionDataOutput) ToGetCodeMaxPermissionDataOutput() GetCodeMaxPermissionDataOutput {
+	return o
+}
+
+func (o GetCodeMaxPermissionDataOutput) ToGetCodeMaxPermissionDataOutputWithContext(ctx context.Context) GetCodeMaxPermissionDataOutput {
+	return o
+}
+
+// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE).
+func (o GetCodeMaxPermissionDataOutput) PermissionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCodeMaxPermissionData) string { return v.PermissionType }).(pulumi.StringOutput)
+}
+
+type GetCodeMaxPermissionDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCodeMaxPermissionDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCodeMaxPermissionData)(nil)).Elem()
+}
+
+func (o GetCodeMaxPermissionDataArrayOutput) ToGetCodeMaxPermissionDataArrayOutput() GetCodeMaxPermissionDataArrayOutput {
+	return o
+}
+
+func (o GetCodeMaxPermissionDataArrayOutput) ToGetCodeMaxPermissionDataArrayOutputWithContext(ctx context.Context) GetCodeMaxPermissionDataArrayOutput {
+	return o
+}
+
+func (o GetCodeMaxPermissionDataArrayOutput) Index(i pulumi.IntInput) GetCodeMaxPermissionDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCodeMaxPermissionData {
+		return vs[0].([]GetCodeMaxPermissionData)[vs[1].(int)]
+	}).(GetCodeMaxPermissionDataOutput)
 }
 
 type GetDataBackfillInstancesData struct {
@@ -18614,6 +24172,272 @@ func (o GetDownstreamTasksDataArrayOutput) Index(i pulumi.IntInput) GetDownstrea
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDownstreamTasksData {
 		return vs[0].([]GetDownstreamTasksData)[vs[1].(int)]
 	}).(GetDownstreamTasksDataOutput)
+}
+
+type GetDownstreamTriggerTasksData struct {
+	// Paginated data.
+	Items []GetDownstreamTriggerTasksDataItem `pulumi:"items"`
+}
+
+// GetDownstreamTriggerTasksDataInput is an input type that accepts GetDownstreamTriggerTasksDataArgs and GetDownstreamTriggerTasksDataOutput values.
+// You can construct a concrete instance of `GetDownstreamTriggerTasksDataInput` via:
+//
+//	GetDownstreamTriggerTasksDataArgs{...}
+type GetDownstreamTriggerTasksDataInput interface {
+	pulumi.Input
+
+	ToGetDownstreamTriggerTasksDataOutput() GetDownstreamTriggerTasksDataOutput
+	ToGetDownstreamTriggerTasksDataOutputWithContext(context.Context) GetDownstreamTriggerTasksDataOutput
+}
+
+type GetDownstreamTriggerTasksDataArgs struct {
+	// Paginated data.
+	Items GetDownstreamTriggerTasksDataItemArrayInput `pulumi:"items"`
+}
+
+func (GetDownstreamTriggerTasksDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDownstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (i GetDownstreamTriggerTasksDataArgs) ToGetDownstreamTriggerTasksDataOutput() GetDownstreamTriggerTasksDataOutput {
+	return i.ToGetDownstreamTriggerTasksDataOutputWithContext(context.Background())
+}
+
+func (i GetDownstreamTriggerTasksDataArgs) ToGetDownstreamTriggerTasksDataOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDownstreamTriggerTasksDataOutput)
+}
+
+// GetDownstreamTriggerTasksDataArrayInput is an input type that accepts GetDownstreamTriggerTasksDataArray and GetDownstreamTriggerTasksDataArrayOutput values.
+// You can construct a concrete instance of `GetDownstreamTriggerTasksDataArrayInput` via:
+//
+//	GetDownstreamTriggerTasksDataArray{ GetDownstreamTriggerTasksDataArgs{...} }
+type GetDownstreamTriggerTasksDataArrayInput interface {
+	pulumi.Input
+
+	ToGetDownstreamTriggerTasksDataArrayOutput() GetDownstreamTriggerTasksDataArrayOutput
+	ToGetDownstreamTriggerTasksDataArrayOutputWithContext(context.Context) GetDownstreamTriggerTasksDataArrayOutput
+}
+
+type GetDownstreamTriggerTasksDataArray []GetDownstreamTriggerTasksDataInput
+
+func (GetDownstreamTriggerTasksDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDownstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (i GetDownstreamTriggerTasksDataArray) ToGetDownstreamTriggerTasksDataArrayOutput() GetDownstreamTriggerTasksDataArrayOutput {
+	return i.ToGetDownstreamTriggerTasksDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetDownstreamTriggerTasksDataArray) ToGetDownstreamTriggerTasksDataArrayOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDownstreamTriggerTasksDataArrayOutput)
+}
+
+type GetDownstreamTriggerTasksDataOutput struct{ *pulumi.OutputState }
+
+func (GetDownstreamTriggerTasksDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDownstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (o GetDownstreamTriggerTasksDataOutput) ToGetDownstreamTriggerTasksDataOutput() GetDownstreamTriggerTasksDataOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataOutput) ToGetDownstreamTriggerTasksDataOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataOutput {
+	return o
+}
+
+// Paginated data.
+func (o GetDownstreamTriggerTasksDataOutput) Items() GetDownstreamTriggerTasksDataItemArrayOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksData) []GetDownstreamTriggerTasksDataItem { return v.Items }).(GetDownstreamTriggerTasksDataItemArrayOutput)
+}
+
+type GetDownstreamTriggerTasksDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDownstreamTriggerTasksDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDownstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (o GetDownstreamTriggerTasksDataArrayOutput) ToGetDownstreamTriggerTasksDataArrayOutput() GetDownstreamTriggerTasksDataArrayOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataArrayOutput) ToGetDownstreamTriggerTasksDataArrayOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataArrayOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataArrayOutput) Index(i pulumi.IntInput) GetDownstreamTriggerTasksDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDownstreamTriggerTasksData {
+		return vs[0].([]GetDownstreamTriggerTasksData)[vs[1].(int)]
+	}).(GetDownstreamTriggerTasksDataOutput)
+}
+
+type GetDownstreamTriggerTasksDataItem struct {
+	// Owner.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Task status: `Y`: Running, `N`: New.
+	Status string `pulumi:"status"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+	TaskTypeDesc string `pulumi:"taskTypeDesc"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+}
+
+// GetDownstreamTriggerTasksDataItemInput is an input type that accepts GetDownstreamTriggerTasksDataItemArgs and GetDownstreamTriggerTasksDataItemOutput values.
+// You can construct a concrete instance of `GetDownstreamTriggerTasksDataItemInput` via:
+//
+//	GetDownstreamTriggerTasksDataItemArgs{...}
+type GetDownstreamTriggerTasksDataItemInput interface {
+	pulumi.Input
+
+	ToGetDownstreamTriggerTasksDataItemOutput() GetDownstreamTriggerTasksDataItemOutput
+	ToGetDownstreamTriggerTasksDataItemOutputWithContext(context.Context) GetDownstreamTriggerTasksDataItemOutput
+}
+
+type GetDownstreamTriggerTasksDataItemArgs struct {
+	// Owner.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Task status: `Y`: Running, `N`: New.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+	TaskTypeDesc pulumi.StringInput `pulumi:"taskTypeDesc"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+}
+
+func (GetDownstreamTriggerTasksDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDownstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (i GetDownstreamTriggerTasksDataItemArgs) ToGetDownstreamTriggerTasksDataItemOutput() GetDownstreamTriggerTasksDataItemOutput {
+	return i.ToGetDownstreamTriggerTasksDataItemOutputWithContext(context.Background())
+}
+
+func (i GetDownstreamTriggerTasksDataItemArgs) ToGetDownstreamTriggerTasksDataItemOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDownstreamTriggerTasksDataItemOutput)
+}
+
+// GetDownstreamTriggerTasksDataItemArrayInput is an input type that accepts GetDownstreamTriggerTasksDataItemArray and GetDownstreamTriggerTasksDataItemArrayOutput values.
+// You can construct a concrete instance of `GetDownstreamTriggerTasksDataItemArrayInput` via:
+//
+//	GetDownstreamTriggerTasksDataItemArray{ GetDownstreamTriggerTasksDataItemArgs{...} }
+type GetDownstreamTriggerTasksDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetDownstreamTriggerTasksDataItemArrayOutput() GetDownstreamTriggerTasksDataItemArrayOutput
+	ToGetDownstreamTriggerTasksDataItemArrayOutputWithContext(context.Context) GetDownstreamTriggerTasksDataItemArrayOutput
+}
+
+type GetDownstreamTriggerTasksDataItemArray []GetDownstreamTriggerTasksDataItemInput
+
+func (GetDownstreamTriggerTasksDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDownstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (i GetDownstreamTriggerTasksDataItemArray) ToGetDownstreamTriggerTasksDataItemArrayOutput() GetDownstreamTriggerTasksDataItemArrayOutput {
+	return i.ToGetDownstreamTriggerTasksDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetDownstreamTriggerTasksDataItemArray) ToGetDownstreamTriggerTasksDataItemArrayOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDownstreamTriggerTasksDataItemArrayOutput)
+}
+
+type GetDownstreamTriggerTasksDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetDownstreamTriggerTasksDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDownstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (o GetDownstreamTriggerTasksDataItemOutput) ToGetDownstreamTriggerTasksDataItemOutput() GetDownstreamTriggerTasksDataItemOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataItemOutput) ToGetDownstreamTriggerTasksDataItemOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataItemOutput {
+	return o
+}
+
+// Owner.
+func (o GetDownstreamTriggerTasksDataItemOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetDownstreamTriggerTasksDataItemOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Task status: `Y`: Running, `N`: New.
+func (o GetDownstreamTriggerTasksDataItemOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetDownstreamTriggerTasksDataItemOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task name.
+func (o GetDownstreamTriggerTasksDataItemOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+func (o GetDownstreamTriggerTasksDataItemOutput) TaskTypeDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.TaskTypeDesc }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetDownstreamTriggerTasksDataItemOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Workflow ID.
+func (o GetDownstreamTriggerTasksDataItemOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetDownstreamTriggerTasksDataItemOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDownstreamTriggerTasksDataItem) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+type GetDownstreamTriggerTasksDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDownstreamTriggerTasksDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDownstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (o GetDownstreamTriggerTasksDataItemArrayOutput) ToGetDownstreamTriggerTasksDataItemArrayOutput() GetDownstreamTriggerTasksDataItemArrayOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataItemArrayOutput) ToGetDownstreamTriggerTasksDataItemArrayOutputWithContext(ctx context.Context) GetDownstreamTriggerTasksDataItemArrayOutput {
+	return o
+}
+
+func (o GetDownstreamTriggerTasksDataItemArrayOutput) Index(i pulumi.IntInput) GetDownstreamTriggerTasksDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDownstreamTriggerTasksDataItem {
+		return vs[0].([]GetDownstreamTriggerTasksDataItem)[vs[1].(int)]
+	}).(GetDownstreamTriggerTasksDataItemOutput)
 }
 
 type GetGetTableColumnsData struct {
@@ -25539,6 +31363,1148 @@ func (o GetOpsTasksDataItemArrayOutput) Index(i pulumi.IntInput) GetOpsTasksData
 	}).(GetOpsTasksDataItemOutput)
 }
 
+type GetOpsTriggerWorkflowData struct {
+	// Collection of task link information.
+	TriggerTaskLinks []GetOpsTriggerWorkflowDataTriggerTaskLink `pulumi:"triggerTaskLinks"`
+	// Collection of task information.
+	TriggerTasks []GetOpsTriggerWorkflowDataTriggerTask `pulumi:"triggerTasks"`
+}
+
+// GetOpsTriggerWorkflowDataInput is an input type that accepts GetOpsTriggerWorkflowDataArgs and GetOpsTriggerWorkflowDataOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataInput` via:
+//
+//	GetOpsTriggerWorkflowDataArgs{...}
+type GetOpsTriggerWorkflowDataInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataOutput() GetOpsTriggerWorkflowDataOutput
+	ToGetOpsTriggerWorkflowDataOutputWithContext(context.Context) GetOpsTriggerWorkflowDataOutput
+}
+
+type GetOpsTriggerWorkflowDataArgs struct {
+	// Collection of task link information.
+	TriggerTaskLinks GetOpsTriggerWorkflowDataTriggerTaskLinkArrayInput `pulumi:"triggerTaskLinks"`
+	// Collection of task information.
+	TriggerTasks GetOpsTriggerWorkflowDataTriggerTaskArrayInput `pulumi:"triggerTasks"`
+}
+
+func (GetOpsTriggerWorkflowDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowData)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataArgs) ToGetOpsTriggerWorkflowDataOutput() GetOpsTriggerWorkflowDataOutput {
+	return i.ToGetOpsTriggerWorkflowDataOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataArgs) ToGetOpsTriggerWorkflowDataOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataOutput)
+}
+
+// GetOpsTriggerWorkflowDataArrayInput is an input type that accepts GetOpsTriggerWorkflowDataArray and GetOpsTriggerWorkflowDataArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataArrayInput` via:
+//
+//	GetOpsTriggerWorkflowDataArray{ GetOpsTriggerWorkflowDataArgs{...} }
+type GetOpsTriggerWorkflowDataArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataArrayOutput() GetOpsTriggerWorkflowDataArrayOutput
+	ToGetOpsTriggerWorkflowDataArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowDataArrayOutput
+}
+
+type GetOpsTriggerWorkflowDataArray []GetOpsTriggerWorkflowDataInput
+
+func (GetOpsTriggerWorkflowDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowData)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataArray) ToGetOpsTriggerWorkflowDataArrayOutput() GetOpsTriggerWorkflowDataArrayOutput {
+	return i.ToGetOpsTriggerWorkflowDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataArray) ToGetOpsTriggerWorkflowDataArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataArrayOutput)
+}
+
+type GetOpsTriggerWorkflowDataOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowData)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataOutput) ToGetOpsTriggerWorkflowDataOutput() GetOpsTriggerWorkflowDataOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataOutput) ToGetOpsTriggerWorkflowDataOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataOutput {
+	return o
+}
+
+// Collection of task link information.
+func (o GetOpsTriggerWorkflowDataOutput) TriggerTaskLinks() GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowData) []GetOpsTriggerWorkflowDataTriggerTaskLink {
+		return v.TriggerTaskLinks
+	}).(GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput)
+}
+
+// Collection of task information.
+func (o GetOpsTriggerWorkflowDataOutput) TriggerTasks() GetOpsTriggerWorkflowDataTriggerTaskArrayOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowData) []GetOpsTriggerWorkflowDataTriggerTask { return v.TriggerTasks }).(GetOpsTriggerWorkflowDataTriggerTaskArrayOutput)
+}
+
+type GetOpsTriggerWorkflowDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowData)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataArrayOutput) ToGetOpsTriggerWorkflowDataArrayOutput() GetOpsTriggerWorkflowDataArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataArrayOutput) ToGetOpsTriggerWorkflowDataArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowData {
+		return vs[0].([]GetOpsTriggerWorkflowData)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowDataOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTask struct {
+	// Execution start time.
+	ExecutionStartTime string `pulumi:"executionStartTime"`
+	// Task status.
+	ExecutionState string `pulumi:"executionState"`
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type.
+	TaskType string `pulumi:"taskType"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Person in charge name.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// Person in charge user UIN.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+}
+
+// GetOpsTriggerWorkflowDataTriggerTaskInput is an input type that accepts GetOpsTriggerWorkflowDataTriggerTaskArgs and GetOpsTriggerWorkflowDataTriggerTaskOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataTriggerTaskInput` via:
+//
+//	GetOpsTriggerWorkflowDataTriggerTaskArgs{...}
+type GetOpsTriggerWorkflowDataTriggerTaskInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataTriggerTaskOutput() GetOpsTriggerWorkflowDataTriggerTaskOutput
+	ToGetOpsTriggerWorkflowDataTriggerTaskOutputWithContext(context.Context) GetOpsTriggerWorkflowDataTriggerTaskOutput
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskArgs struct {
+	// Execution start time.
+	ExecutionStartTime pulumi.StringInput `pulumi:"executionStartTime"`
+	// Task status.
+	ExecutionState pulumi.StringInput `pulumi:"executionState"`
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type.
+	TaskType pulumi.StringInput `pulumi:"taskType"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Person in charge name.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// Person in charge user UIN.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+}
+
+func (GetOpsTriggerWorkflowDataTriggerTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTask)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskArgs) ToGetOpsTriggerWorkflowDataTriggerTaskOutput() GetOpsTriggerWorkflowDataTriggerTaskOutput {
+	return i.ToGetOpsTriggerWorkflowDataTriggerTaskOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskArgs) ToGetOpsTriggerWorkflowDataTriggerTaskOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataTriggerTaskOutput)
+}
+
+// GetOpsTriggerWorkflowDataTriggerTaskArrayInput is an input type that accepts GetOpsTriggerWorkflowDataTriggerTaskArray and GetOpsTriggerWorkflowDataTriggerTaskArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataTriggerTaskArrayInput` via:
+//
+//	GetOpsTriggerWorkflowDataTriggerTaskArray{ GetOpsTriggerWorkflowDataTriggerTaskArgs{...} }
+type GetOpsTriggerWorkflowDataTriggerTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskArrayOutput
+	ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowDataTriggerTaskArrayOutput
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskArray []GetOpsTriggerWorkflowDataTriggerTaskInput
+
+func (GetOpsTriggerWorkflowDataTriggerTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowDataTriggerTask)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskArray) ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskArrayOutput {
+	return i.ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskArray) ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataTriggerTaskArrayOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataTriggerTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTask)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ToGetOpsTriggerWorkflowDataTriggerTaskOutput() GetOpsTriggerWorkflowDataTriggerTaskOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ToGetOpsTriggerWorkflowDataTriggerTaskOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskOutput {
+	return o
+}
+
+// Execution start time.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ExecutionStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.ExecutionStartTime }).(pulumi.StringOutput)
+}
+
+// Task status.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.ExecutionState }).(pulumi.StringOutput)
+}
+
+// Folder ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Project name.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task name.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) TaskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.TaskType }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Person in charge name.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// Person in charge user UIN.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetOpsTriggerWorkflowDataTriggerTaskOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTask) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataTriggerTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowDataTriggerTask)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskArrayOutput) ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskArrayOutput) ToGetOpsTriggerWorkflowDataTriggerTaskArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowDataTriggerTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowDataTriggerTask {
+		return vs[0].([]GetOpsTriggerWorkflowDataTriggerTask)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowDataTriggerTaskOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskLink struct {
+	// Downstream task ID.
+	DownstreamTaskId string `pulumi:"downstreamTaskId"`
+	// Link ID.
+	LinkId string `pulumi:"linkId"`
+	// Upstream task ID.
+	UpstreamTaskId string `pulumi:"upstreamTaskId"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Associated workflow version ID.
+	WorkflowVersionId string `pulumi:"workflowVersionId"`
+}
+
+// GetOpsTriggerWorkflowDataTriggerTaskLinkInput is an input type that accepts GetOpsTriggerWorkflowDataTriggerTaskLinkArgs and GetOpsTriggerWorkflowDataTriggerTaskLinkOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataTriggerTaskLinkInput` via:
+//
+//	GetOpsTriggerWorkflowDataTriggerTaskLinkArgs{...}
+type GetOpsTriggerWorkflowDataTriggerTaskLinkInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkOutput
+	ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutputWithContext(context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkOutput
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskLinkArgs struct {
+	// Downstream task ID.
+	DownstreamTaskId pulumi.StringInput `pulumi:"downstreamTaskId"`
+	// Link ID.
+	LinkId pulumi.StringInput `pulumi:"linkId"`
+	// Upstream task ID.
+	UpstreamTaskId pulumi.StringInput `pulumi:"upstreamTaskId"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Associated workflow version ID.
+	WorkflowVersionId pulumi.StringInput `pulumi:"workflowVersionId"`
+}
+
+func (GetOpsTriggerWorkflowDataTriggerTaskLinkArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskLink)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskLinkArgs) ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkOutput {
+	return i.ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskLinkArgs) ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataTriggerTaskLinkOutput)
+}
+
+// GetOpsTriggerWorkflowDataTriggerTaskLinkArrayInput is an input type that accepts GetOpsTriggerWorkflowDataTriggerTaskLinkArray and GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowDataTriggerTaskLinkArrayInput` via:
+//
+//	GetOpsTriggerWorkflowDataTriggerTaskLinkArray{ GetOpsTriggerWorkflowDataTriggerTaskLinkArgs{...} }
+type GetOpsTriggerWorkflowDataTriggerTaskLinkArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput
+	ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskLinkArray []GetOpsTriggerWorkflowDataTriggerTaskLinkInput
+
+func (GetOpsTriggerWorkflowDataTriggerTaskLinkArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowDataTriggerTaskLink)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskLinkArray) ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput {
+	return i.ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowDataTriggerTaskLinkArray) ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskLinkOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskLink)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) ToGetOpsTriggerWorkflowDataTriggerTaskLinkOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkOutput {
+	return o
+}
+
+// Downstream task ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) DownstreamTaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTaskLink) string { return v.DownstreamTaskId }).(pulumi.StringOutput)
+}
+
+// Link ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) LinkId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTaskLink) string { return v.LinkId }).(pulumi.StringOutput)
+}
+
+// Upstream task ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) UpstreamTaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTaskLink) string { return v.UpstreamTaskId }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTaskLink) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Associated workflow version ID.
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkOutput) WorkflowVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowDataTriggerTaskLink) string { return v.WorkflowVersionId }).(pulumi.StringOutput)
+}
+
+type GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowDataTriggerTaskLink)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput) ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput() GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput) ToGetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowDataTriggerTaskLinkOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowDataTriggerTaskLink {
+		return vs[0].([]GetOpsTriggerWorkflowDataTriggerTaskLink)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowDataTriggerTaskLinkOutput)
+}
+
+type GetOpsTriggerWorkflowsData struct {
+	// Collection of workflow information.
+	Items []GetOpsTriggerWorkflowsDataItem `pulumi:"items"`
+	// Page number.
+	PageNumber int `pulumi:"pageNumber"`
+	// Page size.
+	PageSize int `pulumi:"pageSize"`
+	// Total record count.
+	TotalCount int `pulumi:"totalCount"`
+	// Number of pages.
+	TotalPageNumber int `pulumi:"totalPageNumber"`
+}
+
+// GetOpsTriggerWorkflowsDataInput is an input type that accepts GetOpsTriggerWorkflowsDataArgs and GetOpsTriggerWorkflowsDataOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsDataInput` via:
+//
+//	GetOpsTriggerWorkflowsDataArgs{...}
+type GetOpsTriggerWorkflowsDataInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsDataOutput() GetOpsTriggerWorkflowsDataOutput
+	ToGetOpsTriggerWorkflowsDataOutputWithContext(context.Context) GetOpsTriggerWorkflowsDataOutput
+}
+
+type GetOpsTriggerWorkflowsDataArgs struct {
+	// Collection of workflow information.
+	Items GetOpsTriggerWorkflowsDataItemArrayInput `pulumi:"items"`
+	// Page number.
+	PageNumber pulumi.IntInput `pulumi:"pageNumber"`
+	// Page size.
+	PageSize pulumi.IntInput `pulumi:"pageSize"`
+	// Total record count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+	// Number of pages.
+	TotalPageNumber pulumi.IntInput `pulumi:"totalPageNumber"`
+}
+
+func (GetOpsTriggerWorkflowsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsDataArgs) ToGetOpsTriggerWorkflowsDataOutput() GetOpsTriggerWorkflowsDataOutput {
+	return i.ToGetOpsTriggerWorkflowsDataOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsDataArgs) ToGetOpsTriggerWorkflowsDataOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsDataOutput)
+}
+
+// GetOpsTriggerWorkflowsDataArrayInput is an input type that accepts GetOpsTriggerWorkflowsDataArray and GetOpsTriggerWorkflowsDataArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsDataArrayInput` via:
+//
+//	GetOpsTriggerWorkflowsDataArray{ GetOpsTriggerWorkflowsDataArgs{...} }
+type GetOpsTriggerWorkflowsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsDataArrayOutput() GetOpsTriggerWorkflowsDataArrayOutput
+	ToGetOpsTriggerWorkflowsDataArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowsDataArrayOutput
+}
+
+type GetOpsTriggerWorkflowsDataArray []GetOpsTriggerWorkflowsDataInput
+
+func (GetOpsTriggerWorkflowsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsDataArray) ToGetOpsTriggerWorkflowsDataArrayOutput() GetOpsTriggerWorkflowsDataArrayOutput {
+	return i.ToGetOpsTriggerWorkflowsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsDataArray) ToGetOpsTriggerWorkflowsDataArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsDataArrayOutput)
+}
+
+type GetOpsTriggerWorkflowsDataOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsDataOutput) ToGetOpsTriggerWorkflowsDataOutput() GetOpsTriggerWorkflowsDataOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataOutput) ToGetOpsTriggerWorkflowsDataOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataOutput {
+	return o
+}
+
+// Collection of workflow information.
+func (o GetOpsTriggerWorkflowsDataOutput) Items() GetOpsTriggerWorkflowsDataItemArrayOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsData) []GetOpsTriggerWorkflowsDataItem { return v.Items }).(GetOpsTriggerWorkflowsDataItemArrayOutput)
+}
+
+// Page number.
+func (o GetOpsTriggerWorkflowsDataOutput) PageNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsData) int { return v.PageNumber }).(pulumi.IntOutput)
+}
+
+// Page size.
+func (o GetOpsTriggerWorkflowsDataOutput) PageSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsData) int { return v.PageSize }).(pulumi.IntOutput)
+}
+
+// Total record count.
+func (o GetOpsTriggerWorkflowsDataOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsData) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+// Number of pages.
+func (o GetOpsTriggerWorkflowsDataOutput) TotalPageNumber() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsData) int { return v.TotalPageNumber }).(pulumi.IntOutput)
+}
+
+type GetOpsTriggerWorkflowsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsDataArrayOutput) ToGetOpsTriggerWorkflowsDataArrayOutput() GetOpsTriggerWorkflowsDataArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataArrayOutput) ToGetOpsTriggerWorkflowsDataArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowsData {
+		return vs[0].([]GetOpsTriggerWorkflowsData)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowsDataOutput)
+}
+
+type GetOpsTriggerWorkflowsDataItem struct {
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Number of tasks.
+	TaskCount int `pulumi:"taskCount"`
+	// Person in charge.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams string `pulumi:"workflowParams"`
+	// Scheduling configuration.
+	WorkflowTriggerConfig GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig `pulumi:"workflowTriggerConfig"`
+}
+
+// GetOpsTriggerWorkflowsDataItemInput is an input type that accepts GetOpsTriggerWorkflowsDataItemArgs and GetOpsTriggerWorkflowsDataItemOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsDataItemInput` via:
+//
+//	GetOpsTriggerWorkflowsDataItemArgs{...}
+type GetOpsTriggerWorkflowsDataItemInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsDataItemOutput() GetOpsTriggerWorkflowsDataItemOutput
+	ToGetOpsTriggerWorkflowsDataItemOutputWithContext(context.Context) GetOpsTriggerWorkflowsDataItemOutput
+}
+
+type GetOpsTriggerWorkflowsDataItemArgs struct {
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Number of tasks.
+	TaskCount pulumi.IntInput `pulumi:"taskCount"`
+	// Person in charge.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams pulumi.StringInput `pulumi:"workflowParams"`
+	// Scheduling configuration.
+	WorkflowTriggerConfig GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigInput `pulumi:"workflowTriggerConfig"`
+}
+
+func (GetOpsTriggerWorkflowsDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsDataItemArgs) ToGetOpsTriggerWorkflowsDataItemOutput() GetOpsTriggerWorkflowsDataItemOutput {
+	return i.ToGetOpsTriggerWorkflowsDataItemOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsDataItemArgs) ToGetOpsTriggerWorkflowsDataItemOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsDataItemOutput)
+}
+
+// GetOpsTriggerWorkflowsDataItemArrayInput is an input type that accepts GetOpsTriggerWorkflowsDataItemArray and GetOpsTriggerWorkflowsDataItemArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsDataItemArrayInput` via:
+//
+//	GetOpsTriggerWorkflowsDataItemArray{ GetOpsTriggerWorkflowsDataItemArgs{...} }
+type GetOpsTriggerWorkflowsDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsDataItemArrayOutput() GetOpsTriggerWorkflowsDataItemArrayOutput
+	ToGetOpsTriggerWorkflowsDataItemArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowsDataItemArrayOutput
+}
+
+type GetOpsTriggerWorkflowsDataItemArray []GetOpsTriggerWorkflowsDataItemInput
+
+func (GetOpsTriggerWorkflowsDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsDataItemArray) ToGetOpsTriggerWorkflowsDataItemArrayOutput() GetOpsTriggerWorkflowsDataItemArrayOutput {
+	return i.ToGetOpsTriggerWorkflowsDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsDataItemArray) ToGetOpsTriggerWorkflowsDataItemArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsDataItemArrayOutput)
+}
+
+type GetOpsTriggerWorkflowsDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsDataItemOutput) ToGetOpsTriggerWorkflowsDataItemOutput() GetOpsTriggerWorkflowsDataItemOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataItemOutput) ToGetOpsTriggerWorkflowsDataItemOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemOutput {
+	return o
+}
+
+// Folder ID.
+func (o GetOpsTriggerWorkflowsDataItemOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetOpsTriggerWorkflowsDataItemOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetOpsTriggerWorkflowsDataItemOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Number of tasks.
+func (o GetOpsTriggerWorkflowsDataItemOutput) TaskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) int { return v.TaskCount }).(pulumi.IntOutput)
+}
+
+// Person in charge.
+func (o GetOpsTriggerWorkflowsDataItemOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// Person in charge ID.
+func (o GetOpsTriggerWorkflowsDataItemOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetOpsTriggerWorkflowsDataItemOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetOpsTriggerWorkflowsDataItemOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+// Workflow parameters.
+func (o GetOpsTriggerWorkflowsDataItemOutput) WorkflowParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) string { return v.WorkflowParams }).(pulumi.StringOutput)
+}
+
+// Scheduling configuration.
+func (o GetOpsTriggerWorkflowsDataItemOutput) WorkflowTriggerConfig() GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItem) GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig {
+		return v.WorkflowTriggerConfig
+	}).(GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput)
+}
+
+type GetOpsTriggerWorkflowsDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsDataItemArrayOutput) ToGetOpsTriggerWorkflowsDataItemArrayOutput() GetOpsTriggerWorkflowsDataItemArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataItemArrayOutput) ToGetOpsTriggerWorkflowsDataItemArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataItemArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowsDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowsDataItem {
+		return vs[0].([]GetOpsTriggerWorkflowsDataItem)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowsDataItemOutput)
+}
+
+type GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig struct {
+	// Configuration mode, common: COMMON; cron expression: CRON_EXPRESSION.
+	ConfigMode *string `pulumi:"configMode"`
+	// Cron expression.
+	CrontabExpression *string `pulumi:"crontabExpression"`
+	// Cycle type. Supported types: `ONEOFF_CYCLE`: one-time; `YEAR_CYCLE`: year; `MONTH_CYCLE`: month; `WEEK_CYCLE`: week; `DAY_CYCLE`: day; `HOUR_CYCLE`: hour; `MINUTE_CYCLE`: minute; `CRONTAB_CYCLE`: crontab expression type.
+	CycleType *string `pulumi:"cycleType"`
+	// Schedule end time.
+	EndTime *string `pulumi:"endTime"`
+	// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+	ExtraInfo *string `pulumi:"extraInfo"`
+	// In file arrival mode, the listening path in the storage system.
+	FileArrivalPath *string `pulumi:"fileArrivalPath"`
+	// Scheduling time zone.
+	ScheduleTimeZone *string `pulumi:"scheduleTimeZone"`
+	// Trigger status: start `ACTIVE`, pause `PAUSED`.
+	SchedulerStatus *string `pulumi:"schedulerStatus"`
+	// Schedule effective start time.
+	StartTime *string `pulumi:"startTime"`
+	// Trigger ID, UUID.
+	TriggerId *string `pulumi:"triggerId"`
+	// In file arrival mode, minimum trigger interval (seconds).
+	TriggerMinimumIntervalSecond *int `pulumi:"triggerMinimumIntervalSecond"`
+	// Trigger mode. Scheduled trigger: `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. In TIME_TRIGGER and CONTINUE_RUN modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required. In FILE_ARRIVAL mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+	TriggerMode string `pulumi:"triggerMode"`
+	// In file arrival mode, trigger wait time (seconds).
+	TriggerWaitTimeSecond *int `pulumi:"triggerWaitTimeSecond"`
+}
+
+// GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigInput is an input type that accepts GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs and GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigInput` via:
+//
+//	GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs{...}
+type GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput() GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput
+	ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutputWithContext(context.Context) GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput
+}
+
+type GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs struct {
+	// Configuration mode, common: COMMON; cron expression: CRON_EXPRESSION.
+	ConfigMode pulumi.StringPtrInput `pulumi:"configMode"`
+	// Cron expression.
+	CrontabExpression pulumi.StringPtrInput `pulumi:"crontabExpression"`
+	// Cycle type. Supported types: `ONEOFF_CYCLE`: one-time; `YEAR_CYCLE`: year; `MONTH_CYCLE`: month; `WEEK_CYCLE`: week; `DAY_CYCLE`: day; `HOUR_CYCLE`: hour; `MINUTE_CYCLE`: minute; `CRONTAB_CYCLE`: crontab expression type.
+	CycleType pulumi.StringPtrInput `pulumi:"cycleType"`
+	// Schedule end time.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+	ExtraInfo pulumi.StringPtrInput `pulumi:"extraInfo"`
+	// In file arrival mode, the listening path in the storage system.
+	FileArrivalPath pulumi.StringPtrInput `pulumi:"fileArrivalPath"`
+	// Scheduling time zone.
+	ScheduleTimeZone pulumi.StringPtrInput `pulumi:"scheduleTimeZone"`
+	// Trigger status: start `ACTIVE`, pause `PAUSED`.
+	SchedulerStatus pulumi.StringPtrInput `pulumi:"schedulerStatus"`
+	// Schedule effective start time.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+	// Trigger ID, UUID.
+	TriggerId pulumi.StringPtrInput `pulumi:"triggerId"`
+	// In file arrival mode, minimum trigger interval (seconds).
+	TriggerMinimumIntervalSecond pulumi.IntPtrInput `pulumi:"triggerMinimumIntervalSecond"`
+	// Trigger mode. Scheduled trigger: `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. In TIME_TRIGGER and CONTINUE_RUN modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required. In FILE_ARRIVAL mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+	TriggerMode pulumi.StringInput `pulumi:"triggerMode"`
+	// In file arrival mode, trigger wait time (seconds).
+	TriggerWaitTimeSecond pulumi.IntPtrInput `pulumi:"triggerWaitTimeSecond"`
+}
+
+func (GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs) ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput() GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput {
+	return i.ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs) ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput)
+}
+
+type GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput() GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ToGetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput {
+	return o
+}
+
+// Configuration mode, common: COMMON; cron expression: CRON_EXPRESSION.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ConfigMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.ConfigMode }).(pulumi.StringPtrOutput)
+}
+
+// Cron expression.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) CrontabExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.CrontabExpression }).(pulumi.StringPtrOutput)
+}
+
+// Cycle type. Supported types: `ONEOFF_CYCLE`: one-time; `YEAR_CYCLE`: year; `MONTH_CYCLE`: month; `WEEK_CYCLE`: week; `DAY_CYCLE`: day; `HOUR_CYCLE`: hour; `MINUTE_CYCLE`: minute; `CRONTAB_CYCLE`: crontab expression type.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) CycleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.CycleType }).(pulumi.StringPtrOutput)
+}
+
+// Schedule end time.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// WorkflowTriggerConfig converted to JSON format, used for reconciliation.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ExtraInfo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.ExtraInfo }).(pulumi.StringPtrOutput)
+}
+
+// In file arrival mode, the listening path in the storage system.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) FileArrivalPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.FileArrivalPath }).(pulumi.StringPtrOutput)
+}
+
+// Scheduling time zone.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) ScheduleTimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.ScheduleTimeZone }).(pulumi.StringPtrOutput)
+}
+
+// Trigger status: start `ACTIVE`, pause `PAUSED`.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) SchedulerStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.SchedulerStatus }).(pulumi.StringPtrOutput)
+}
+
+// Schedule effective start time.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+// Trigger ID, UUID.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) TriggerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *string { return v.TriggerId }).(pulumi.StringPtrOutput)
+}
+
+// In file arrival mode, minimum trigger interval (seconds).
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) TriggerMinimumIntervalSecond() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *int {
+		return v.TriggerMinimumIntervalSecond
+	}).(pulumi.IntPtrOutput)
+}
+
+// Trigger mode. Scheduled trigger: `TIME_TRIGGER`; Continuous run: `CONTINUE_RUN`; File arrival: `FILE_ARRIVAL`. In TIME_TRIGGER and CONTINUE_RUN modes, SchedulerStatus, SchedulerTimeZone, StartTime, EndTime, ConfigMode, CycleType, and CrontabExpression are required. In FILE_ARRIVAL mode, FileArrivalPath, TriggerMinimumIntervalSecond, and TriggerWaitTimeSecond are required.
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) TriggerMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) string { return v.TriggerMode }).(pulumi.StringOutput)
+}
+
+// In file arrival mode, trigger wait time (seconds).
+func (o GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput) TriggerWaitTimeSecond() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfig) *int { return v.TriggerWaitTimeSecond }).(pulumi.IntPtrOutput)
+}
+
+type GetOpsTriggerWorkflowsFilter struct {
+	// Filter field name.
+	Name *string `pulumi:"name"`
+	// List of filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetOpsTriggerWorkflowsFilterInput is an input type that accepts GetOpsTriggerWorkflowsFilterArgs and GetOpsTriggerWorkflowsFilterOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsFilterInput` via:
+//
+//	GetOpsTriggerWorkflowsFilterArgs{...}
+type GetOpsTriggerWorkflowsFilterInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsFilterOutput() GetOpsTriggerWorkflowsFilterOutput
+	ToGetOpsTriggerWorkflowsFilterOutputWithContext(context.Context) GetOpsTriggerWorkflowsFilterOutput
+}
+
+type GetOpsTriggerWorkflowsFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// List of filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetOpsTriggerWorkflowsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsFilter)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsFilterArgs) ToGetOpsTriggerWorkflowsFilterOutput() GetOpsTriggerWorkflowsFilterOutput {
+	return i.ToGetOpsTriggerWorkflowsFilterOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsFilterArgs) ToGetOpsTriggerWorkflowsFilterOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsFilterOutput)
+}
+
+// GetOpsTriggerWorkflowsFilterArrayInput is an input type that accepts GetOpsTriggerWorkflowsFilterArray and GetOpsTriggerWorkflowsFilterArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsFilterArrayInput` via:
+//
+//	GetOpsTriggerWorkflowsFilterArray{ GetOpsTriggerWorkflowsFilterArgs{...} }
+type GetOpsTriggerWorkflowsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsFilterArrayOutput() GetOpsTriggerWorkflowsFilterArrayOutput
+	ToGetOpsTriggerWorkflowsFilterArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowsFilterArrayOutput
+}
+
+type GetOpsTriggerWorkflowsFilterArray []GetOpsTriggerWorkflowsFilterInput
+
+func (GetOpsTriggerWorkflowsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsFilter)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsFilterArray) ToGetOpsTriggerWorkflowsFilterArrayOutput() GetOpsTriggerWorkflowsFilterArrayOutput {
+	return i.ToGetOpsTriggerWorkflowsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsFilterArray) ToGetOpsTriggerWorkflowsFilterArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsFilterArrayOutput)
+}
+
+type GetOpsTriggerWorkflowsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsFilter)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsFilterOutput) ToGetOpsTriggerWorkflowsFilterOutput() GetOpsTriggerWorkflowsFilterOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsFilterOutput) ToGetOpsTriggerWorkflowsFilterOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetOpsTriggerWorkflowsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// List of filter values.
+func (o GetOpsTriggerWorkflowsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetOpsTriggerWorkflowsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsFilter)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsFilterArrayOutput) ToGetOpsTriggerWorkflowsFilterArrayOutput() GetOpsTriggerWorkflowsFilterArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsFilterArrayOutput) ToGetOpsTriggerWorkflowsFilterArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsFilterArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsFilterArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowsFilter {
+		return vs[0].([]GetOpsTriggerWorkflowsFilter)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowsFilterOutput)
+}
+
+type GetOpsTriggerWorkflowsOrderField struct {
+	// Sort direction: ASC|DESC.
+	Direction string `pulumi:"direction"`
+	// Sort field name.
+	Name string `pulumi:"name"`
+}
+
+// GetOpsTriggerWorkflowsOrderFieldInput is an input type that accepts GetOpsTriggerWorkflowsOrderFieldArgs and GetOpsTriggerWorkflowsOrderFieldOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsOrderFieldInput` via:
+//
+//	GetOpsTriggerWorkflowsOrderFieldArgs{...}
+type GetOpsTriggerWorkflowsOrderFieldInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsOrderFieldOutput() GetOpsTriggerWorkflowsOrderFieldOutput
+	ToGetOpsTriggerWorkflowsOrderFieldOutputWithContext(context.Context) GetOpsTriggerWorkflowsOrderFieldOutput
+}
+
+type GetOpsTriggerWorkflowsOrderFieldArgs struct {
+	// Sort direction: ASC|DESC.
+	Direction pulumi.StringInput `pulumi:"direction"`
+	// Sort field name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetOpsTriggerWorkflowsOrderFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsOrderField)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsOrderFieldArgs) ToGetOpsTriggerWorkflowsOrderFieldOutput() GetOpsTriggerWorkflowsOrderFieldOutput {
+	return i.ToGetOpsTriggerWorkflowsOrderFieldOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsOrderFieldArgs) ToGetOpsTriggerWorkflowsOrderFieldOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsOrderFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsOrderFieldOutput)
+}
+
+// GetOpsTriggerWorkflowsOrderFieldArrayInput is an input type that accepts GetOpsTriggerWorkflowsOrderFieldArray and GetOpsTriggerWorkflowsOrderFieldArrayOutput values.
+// You can construct a concrete instance of `GetOpsTriggerWorkflowsOrderFieldArrayInput` via:
+//
+//	GetOpsTriggerWorkflowsOrderFieldArray{ GetOpsTriggerWorkflowsOrderFieldArgs{...} }
+type GetOpsTriggerWorkflowsOrderFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetOpsTriggerWorkflowsOrderFieldArrayOutput() GetOpsTriggerWorkflowsOrderFieldArrayOutput
+	ToGetOpsTriggerWorkflowsOrderFieldArrayOutputWithContext(context.Context) GetOpsTriggerWorkflowsOrderFieldArrayOutput
+}
+
+type GetOpsTriggerWorkflowsOrderFieldArray []GetOpsTriggerWorkflowsOrderFieldInput
+
+func (GetOpsTriggerWorkflowsOrderFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsOrderField)(nil)).Elem()
+}
+
+func (i GetOpsTriggerWorkflowsOrderFieldArray) ToGetOpsTriggerWorkflowsOrderFieldArrayOutput() GetOpsTriggerWorkflowsOrderFieldArrayOutput {
+	return i.ToGetOpsTriggerWorkflowsOrderFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetOpsTriggerWorkflowsOrderFieldArray) ToGetOpsTriggerWorkflowsOrderFieldArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsOrderFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOpsTriggerWorkflowsOrderFieldArrayOutput)
+}
+
+type GetOpsTriggerWorkflowsOrderFieldOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsOrderFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOpsTriggerWorkflowsOrderField)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsOrderFieldOutput) ToGetOpsTriggerWorkflowsOrderFieldOutput() GetOpsTriggerWorkflowsOrderFieldOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsOrderFieldOutput) ToGetOpsTriggerWorkflowsOrderFieldOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsOrderFieldOutput {
+	return o
+}
+
+// Sort direction: ASC|DESC.
+func (o GetOpsTriggerWorkflowsOrderFieldOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsOrderField) string { return v.Direction }).(pulumi.StringOutput)
+}
+
+// Sort field name.
+func (o GetOpsTriggerWorkflowsOrderFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOpsTriggerWorkflowsOrderField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetOpsTriggerWorkflowsOrderFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOpsTriggerWorkflowsOrderFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOpsTriggerWorkflowsOrderField)(nil)).Elem()
+}
+
+func (o GetOpsTriggerWorkflowsOrderFieldArrayOutput) ToGetOpsTriggerWorkflowsOrderFieldArrayOutput() GetOpsTriggerWorkflowsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsOrderFieldArrayOutput) ToGetOpsTriggerWorkflowsOrderFieldArrayOutputWithContext(ctx context.Context) GetOpsTriggerWorkflowsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetOpsTriggerWorkflowsOrderFieldArrayOutput) Index(i pulumi.IntInput) GetOpsTriggerWorkflowsOrderFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOpsTriggerWorkflowsOrderField {
+		return vs[0].([]GetOpsTriggerWorkflowsOrderField)[vs[1].(int)]
+	}).(GetOpsTriggerWorkflowsOrderFieldOutput)
+}
+
 type GetOpsUpstreamTasksData struct {
 	// Paging data.
 	Items []GetOpsUpstreamTasksDataItem `pulumi:"items"`
@@ -26692,6 +33658,3321 @@ func (o GetProjectsItemArrayOutput) Index(i pulumi.IntInput) GetProjectsItemOutp
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetProjectsItem {
 		return vs[0].([]GetProjectsItem)[vs[1].(int)]
 	}).(GetProjectsItemOutput)
+}
+
+type GetQualityRuleGroupExecResultsData struct {
+	// Rule group execution results.
+	Items []GetQualityRuleGroupExecResultsDataItem `pulumi:"items"`
+	// Total count.
+	TotalCount *int `pulumi:"totalCount"`
+}
+
+// GetQualityRuleGroupExecResultsDataInput is an input type that accepts GetQualityRuleGroupExecResultsDataArgs and GetQualityRuleGroupExecResultsDataOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataArgs{...}
+type GetQualityRuleGroupExecResultsDataInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataOutput() GetQualityRuleGroupExecResultsDataOutput
+	ToGetQualityRuleGroupExecResultsDataOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataOutput
+}
+
+type GetQualityRuleGroupExecResultsDataArgs struct {
+	// Rule group execution results.
+	Items GetQualityRuleGroupExecResultsDataItemArrayInput `pulumi:"items"`
+	// Total count.
+	TotalCount pulumi.IntPtrInput `pulumi:"totalCount"`
+}
+
+func (GetQualityRuleGroupExecResultsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsData)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataArgs) ToGetQualityRuleGroupExecResultsDataOutput() GetQualityRuleGroupExecResultsDataOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataArgs) ToGetQualityRuleGroupExecResultsDataOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataArray and GetQualityRuleGroupExecResultsDataArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataArray{ GetQualityRuleGroupExecResultsDataArgs{...} }
+type GetQualityRuleGroupExecResultsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataArrayOutput() GetQualityRuleGroupExecResultsDataArrayOutput
+	ToGetQualityRuleGroupExecResultsDataArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataArray []GetQualityRuleGroupExecResultsDataInput
+
+func (GetQualityRuleGroupExecResultsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsData)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataArray) ToGetQualityRuleGroupExecResultsDataArrayOutput() GetQualityRuleGroupExecResultsDataArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataArray) ToGetQualityRuleGroupExecResultsDataArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsData)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataOutput) ToGetQualityRuleGroupExecResultsDataOutput() GetQualityRuleGroupExecResultsDataOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataOutput) ToGetQualityRuleGroupExecResultsDataOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataOutput {
+	return o
+}
+
+// Rule group execution results.
+func (o GetQualityRuleGroupExecResultsDataOutput) Items() GetQualityRuleGroupExecResultsDataItemArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsData) []GetQualityRuleGroupExecResultsDataItem { return v.Items }).(GetQualityRuleGroupExecResultsDataItemArrayOutput)
+}
+
+// Total count.
+func (o GetQualityRuleGroupExecResultsDataOutput) TotalCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsData) *int { return v.TotalCount }).(pulumi.IntPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsData)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataArrayOutput) ToGetQualityRuleGroupExecResultsDataArrayOutput() GetQualityRuleGroupExecResultsDataArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataArrayOutput) ToGetQualityRuleGroupExecResultsDataArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsData {
+		return vs[0].([]GetQualityRuleGroupExecResultsData)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItem struct {
+	// Abnormal rule count.
+	AlarmRuleCount *int `pulumi:"alarmRuleCount"`
+	// Category ID.
+	BizCatalogId *string `pulumi:"bizCatalogId"`
+	// Category name.
+	BizCatalogName *string `pulumi:"bizCatalogName"`
+	// Cluster deployment type.
+	ClusterDeployType *string `pulumi:"clusterDeployType"`
+	// Database ID.
+	DatabaseId *string `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId *string `pulumi:"datasourceId"`
+	// Database environment: 0-Undefined, 1-Production, 2-Development.
+	DsEnvType *int `pulumi:"dsEnvType"`
+	// Actual execution engine.
+	EngineType *string `pulumi:"engineType"`
+	// Execution details, schedule plan or associated production task ID.
+	ExecDetail *string `pulumi:"execDetail"`
+	// Execution time yyyy-MM-dd HH:mm:ss.
+	ExecTime *string `pulumi:"execTime"`
+	// Failure reason.
+	FailMsg *string `pulumi:"failMsg"`
+	// Instance end time.
+	FinishTime *string `pulumi:"finishTime"`
+	// Instance ID.
+	InstanceId *string `pulumi:"instanceId"`
+	// Instance status.
+	InstanceStatus *string `pulumi:"instanceStatus"`
+	// Permission status.
+	Permission *bool `pulumi:"permission"`
+	// Project ID.
+	ProjectId *string `pulumi:"projectId"`
+	// Project name.
+	ProjectName *string `pulumi:"projectName"`
+	// Rule execution results.
+	RuleExecResultVoLists []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList `pulumi:"ruleExecResultVoLists"`
+	// Rule group execution ID.
+	RuleGroupExecId *int `pulumi:"ruleGroupExecId"`
+	// Whether to block monitoring: 0-Block, 1-Not block.
+	RuleGroupExist *int `pulumi:"ruleGroupExist"`
+	// Rule group ID.
+	RuleGroupId *int `pulumi:"ruleGroupId"`
+	// Monitor name.
+	RuleGroupName *string `pulumi:"ruleGroupName"`
+	// Local rule table ID.
+	RuleGroupTableId *int `pulumi:"ruleGroupTableId"`
+	// Instance start time.
+	StartTime *string `pulumi:"startTime"`
+	// Execution status: 1-Submitted, 2-Detecting, 3-Normal, 4-Abnormal.
+	Status *int `pulumi:"status"`
+	// Table ID.
+	TableId *string `pulumi:"tableId"`
+	// Source table name.
+	TableName *string `pulumi:"tableName"`
+	// Source table owner.
+	TableOwnerName *string `pulumi:"tableOwnerName"`
+	// Total rule count.
+	TotalRuleCount *int `pulumi:"totalRuleCount"`
+	// Execution trigger type: 1-Manual trigger, 2-Schedule trigger, 3-Periodic schedule trigger.
+	TriggerType *int `pulumi:"triggerType"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemArgs and GetQualityRuleGroupExecResultsDataItemOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemArgs{...}
+type GetQualityRuleGroupExecResultsDataItemInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemOutput() GetQualityRuleGroupExecResultsDataItemOutput
+	ToGetQualityRuleGroupExecResultsDataItemOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemArgs struct {
+	// Abnormal rule count.
+	AlarmRuleCount pulumi.IntPtrInput `pulumi:"alarmRuleCount"`
+	// Category ID.
+	BizCatalogId pulumi.StringPtrInput `pulumi:"bizCatalogId"`
+	// Category name.
+	BizCatalogName pulumi.StringPtrInput `pulumi:"bizCatalogName"`
+	// Cluster deployment type.
+	ClusterDeployType pulumi.StringPtrInput `pulumi:"clusterDeployType"`
+	// Database ID.
+	DatabaseId pulumi.StringPtrInput `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId pulumi.StringPtrInput `pulumi:"datasourceId"`
+	// Database environment: 0-Undefined, 1-Production, 2-Development.
+	DsEnvType pulumi.IntPtrInput `pulumi:"dsEnvType"`
+	// Actual execution engine.
+	EngineType pulumi.StringPtrInput `pulumi:"engineType"`
+	// Execution details, schedule plan or associated production task ID.
+	ExecDetail pulumi.StringPtrInput `pulumi:"execDetail"`
+	// Execution time yyyy-MM-dd HH:mm:ss.
+	ExecTime pulumi.StringPtrInput `pulumi:"execTime"`
+	// Failure reason.
+	FailMsg pulumi.StringPtrInput `pulumi:"failMsg"`
+	// Instance end time.
+	FinishTime pulumi.StringPtrInput `pulumi:"finishTime"`
+	// Instance ID.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Instance status.
+	InstanceStatus pulumi.StringPtrInput `pulumi:"instanceStatus"`
+	// Permission status.
+	Permission pulumi.BoolPtrInput `pulumi:"permission"`
+	// Project ID.
+	ProjectId pulumi.StringPtrInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringPtrInput `pulumi:"projectName"`
+	// Rule execution results.
+	RuleExecResultVoLists GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayInput `pulumi:"ruleExecResultVoLists"`
+	// Rule group execution ID.
+	RuleGroupExecId pulumi.IntPtrInput `pulumi:"ruleGroupExecId"`
+	// Whether to block monitoring: 0-Block, 1-Not block.
+	RuleGroupExist pulumi.IntPtrInput `pulumi:"ruleGroupExist"`
+	// Rule group ID.
+	RuleGroupId pulumi.IntPtrInput `pulumi:"ruleGroupId"`
+	// Monitor name.
+	RuleGroupName pulumi.StringPtrInput `pulumi:"ruleGroupName"`
+	// Local rule table ID.
+	RuleGroupTableId pulumi.IntPtrInput `pulumi:"ruleGroupTableId"`
+	// Instance start time.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+	// Execution status: 1-Submitted, 2-Detecting, 3-Normal, 4-Abnormal.
+	Status pulumi.IntPtrInput `pulumi:"status"`
+	// Table ID.
+	TableId pulumi.StringPtrInput `pulumi:"tableId"`
+	// Source table name.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Source table owner.
+	TableOwnerName pulumi.StringPtrInput `pulumi:"tableOwnerName"`
+	// Total rule count.
+	TotalRuleCount pulumi.IntPtrInput `pulumi:"totalRuleCount"`
+	// Execution trigger type: 1-Manual trigger, 2-Schedule trigger, 3-Periodic schedule trigger.
+	TriggerType pulumi.IntPtrInput `pulumi:"triggerType"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemArgs) ToGetQualityRuleGroupExecResultsDataItemOutput() GetQualityRuleGroupExecResultsDataItemOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemArgs) ToGetQualityRuleGroupExecResultsDataItemOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemArray and GetQualityRuleGroupExecResultsDataItemArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemArray{ GetQualityRuleGroupExecResultsDataItemArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemArrayOutput() GetQualityRuleGroupExecResultsDataItemArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemArray []GetQualityRuleGroupExecResultsDataItemInput
+
+func (GetQualityRuleGroupExecResultsDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemArray) ToGetQualityRuleGroupExecResultsDataItemArrayOutput() GetQualityRuleGroupExecResultsDataItemArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemArray) ToGetQualityRuleGroupExecResultsDataItemArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ToGetQualityRuleGroupExecResultsDataItemOutput() GetQualityRuleGroupExecResultsDataItemOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ToGetQualityRuleGroupExecResultsDataItemOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemOutput {
+	return o
+}
+
+// Abnormal rule count.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) AlarmRuleCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.AlarmRuleCount }).(pulumi.IntPtrOutput)
+}
+
+// Category ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) BizCatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.BizCatalogId }).(pulumi.StringPtrOutput)
+}
+
+// Category name.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) BizCatalogName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.BizCatalogName }).(pulumi.StringPtrOutput)
+}
+
+// Cluster deployment type.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ClusterDeployType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.ClusterDeployType }).(pulumi.StringPtrOutput)
+}
+
+// Database ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) DatabaseId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.DatabaseId }).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.DatabaseName }).(pulumi.StringPtrOutput)
+}
+
+// Data source ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) DatasourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.DatasourceId }).(pulumi.StringPtrOutput)
+}
+
+// Database environment: 0-Undefined, 1-Production, 2-Development.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) DsEnvType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.DsEnvType }).(pulumi.IntPtrOutput)
+}
+
+// Actual execution engine.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) EngineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.EngineType }).(pulumi.StringPtrOutput)
+}
+
+// Execution details, schedule plan or associated production task ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ExecDetail() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.ExecDetail }).(pulumi.StringPtrOutput)
+}
+
+// Execution time yyyy-MM-dd HH:mm:ss.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ExecTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.ExecTime }).(pulumi.StringPtrOutput)
+}
+
+// Failure reason.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) FailMsg() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.FailMsg }).(pulumi.StringPtrOutput)
+}
+
+// Instance end time.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) FinishTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.FinishTime }).(pulumi.StringPtrOutput)
+}
+
+// Instance ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Instance status.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) InstanceStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.InstanceStatus }).(pulumi.StringPtrOutput)
+}
+
+// Permission status.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) Permission() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *bool { return v.Permission }).(pulumi.BoolPtrOutput)
+}
+
+// Project ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ProjectId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.ProjectId }).(pulumi.StringPtrOutput)
+}
+
+// Project name.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) ProjectName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.ProjectName }).(pulumi.StringPtrOutput)
+}
+
+// Rule execution results.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleExecResultVoLists() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList {
+		return v.RuleExecResultVoLists
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput)
+}
+
+// Rule group execution ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleGroupExecId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.RuleGroupExecId }).(pulumi.IntPtrOutput)
+}
+
+// Whether to block monitoring: 0-Block, 1-Not block.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleGroupExist() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.RuleGroupExist }).(pulumi.IntPtrOutput)
+}
+
+// Rule group ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleGroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.RuleGroupId }).(pulumi.IntPtrOutput)
+}
+
+// Monitor name.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.RuleGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Local rule table ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) RuleGroupTableId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.RuleGroupTableId }).(pulumi.IntPtrOutput)
+}
+
+// Instance start time.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+// Execution status: 1-Submitted, 2-Detecting, 3-Normal, 4-Abnormal.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) Status() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.Status }).(pulumi.IntPtrOutput)
+}
+
+// Table ID.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) TableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.TableId }).(pulumi.StringPtrOutput)
+}
+
+// Source table name.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+// Source table owner.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) TableOwnerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *string { return v.TableOwnerName }).(pulumi.StringPtrOutput)
+}
+
+// Total rule count.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) TotalRuleCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.TotalRuleCount }).(pulumi.IntPtrOutput)
+}
+
+// Execution trigger type: 1-Manual trigger, 2-Schedule trigger, 3-Periodic schedule trigger.
+func (o GetQualityRuleGroupExecResultsDataItemOutput) TriggerType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItem) *int { return v.TriggerType }).(pulumi.IntPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemArrayOutput) ToGetQualityRuleGroupExecResultsDataItemArrayOutput() GetQualityRuleGroupExecResultsDataItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemArrayOutput) ToGetQualityRuleGroupExecResultsDataItemArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItem {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItem)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList struct {
+	// Alarm level: 1-Low, 2-Medium, 3-High.
+	AlarmLevel *int `pulumi:"alarmLevel"`
+	// Orchestration task ID.
+	AspectTaskId *string `pulumi:"aspectTaskId"`
+	// Data catalog.
+	CatalogName *string `pulumi:"catalogName"`
+	// Comparison result.
+	CompareResult *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult `pulumi:"compareResult"`
+	// Condition scan WHERE expression.
+	ConditionExpression *string `pulumi:"conditionExpression"`
+	// Database name.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId *string `pulumi:"datasourceId"`
+	// Data source name.
+	DatasourceName *string `pulumi:"datasourceName"`
+	// Data source type.
+	DatasourceType *int `pulumi:"datasourceType"`
+	// Detection result: 1-Passed, 2-Triggered rule, 3-Detection failed.
+	ExecResultStatus *int `pulumi:"execResultStatus"`
+	// Custom template SQL expression parameters.
+	FieldConfig *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig `pulumi:"fieldConfig"`
+	// Execution end time.
+	FinishTime *string `pulumi:"finishTime"`
+	// Monitor task type.
+	GroupType *string `pulumi:"groupType"`
+	// Monitor type: 1-Not configured, 2-Associated with production scheduling, 3-Offline periodic detection.
+	MonitorType *int `pulumi:"monitorType"`
+	// Quality dimension.
+	QualityDim *int `pulumi:"qualityDim"`
+	// Source field and target field association condition ON expression.
+	RelConditionExpr *string `pulumi:"relConditionExpr"`
+	// Rule execution ID.
+	RuleExecId *int `pulumi:"ruleExecId"`
+	// Rule group execution ID.
+	RuleGroupExecId *int `pulumi:"ruleGroupExecId"`
+	// Whether to block monitoring: 0-Block, 1-Not block.
+	RuleGroupExist *int `pulumi:"ruleGroupExist"`
+	// Rule group ID.
+	RuleGroupId *int `pulumi:"ruleGroupId"`
+	// Task name.
+	RuleGroupName *string `pulumi:"ruleGroupName"`
+	// Data table ID.
+	RuleGroupTableId *int `pulumi:"ruleGroupTableId"`
+	// Rule ID.
+	RuleId *int `pulumi:"ruleId"`
+	// Rule name.
+	RuleName *string `pulumi:"ruleName"`
+	// Rule type: 1-System template, 2-Custom template, 3-Custom SQL.
+	RuleType *int `pulumi:"ruleType"`
+	// Schema name.
+	SchemaName *string `pulumi:"schemaName"`
+	// Source field detailed type (int, string).
+	SourceObjectDataTypeName *string `pulumi:"sourceObjectDataTypeName"`
+	// Source field name.
+	SourceObjectValue *string `pulumi:"sourceObjectValue"`
+	// Execution time.
+	StartTime *string `pulumi:"startTime"`
+	// Table name.
+	TableName *string `pulumi:"tableName"`
+	// Target table - database table name.
+	TargetDbTableName *string `pulumi:"targetDbTableName"`
+	// Target table - field type.
+	TargetObjectDataType *string `pulumi:"targetObjectDataType"`
+	// Target table - field name.
+	TargetObjectValue *string `pulumi:"targetObjectValue"`
+	// Template name.
+	TemplateName *string `pulumi:"templateName"`
+	// Trigger condition.
+	TriggerCondition *string `pulumi:"triggerCondition"`
+	// Trigger result (alarm sent successfully, task blocked successfully).
+	TriggerResult *string `pulumi:"triggerResult"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs struct {
+	// Alarm level: 1-Low, 2-Medium, 3-High.
+	AlarmLevel pulumi.IntPtrInput `pulumi:"alarmLevel"`
+	// Orchestration task ID.
+	AspectTaskId pulumi.StringPtrInput `pulumi:"aspectTaskId"`
+	// Data catalog.
+	CatalogName pulumi.StringPtrInput `pulumi:"catalogName"`
+	// Comparison result.
+	CompareResult GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput `pulumi:"compareResult"`
+	// Condition scan WHERE expression.
+	ConditionExpression pulumi.StringPtrInput `pulumi:"conditionExpression"`
+	// Database name.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId pulumi.StringPtrInput `pulumi:"datasourceId"`
+	// Data source name.
+	DatasourceName pulumi.StringPtrInput `pulumi:"datasourceName"`
+	// Data source type.
+	DatasourceType pulumi.IntPtrInput `pulumi:"datasourceType"`
+	// Detection result: 1-Passed, 2-Triggered rule, 3-Detection failed.
+	ExecResultStatus pulumi.IntPtrInput `pulumi:"execResultStatus"`
+	// Custom template SQL expression parameters.
+	FieldConfig GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput `pulumi:"fieldConfig"`
+	// Execution end time.
+	FinishTime pulumi.StringPtrInput `pulumi:"finishTime"`
+	// Monitor task type.
+	GroupType pulumi.StringPtrInput `pulumi:"groupType"`
+	// Monitor type: 1-Not configured, 2-Associated with production scheduling, 3-Offline periodic detection.
+	MonitorType pulumi.IntPtrInput `pulumi:"monitorType"`
+	// Quality dimension.
+	QualityDim pulumi.IntPtrInput `pulumi:"qualityDim"`
+	// Source field and target field association condition ON expression.
+	RelConditionExpr pulumi.StringPtrInput `pulumi:"relConditionExpr"`
+	// Rule execution ID.
+	RuleExecId pulumi.IntPtrInput `pulumi:"ruleExecId"`
+	// Rule group execution ID.
+	RuleGroupExecId pulumi.IntPtrInput `pulumi:"ruleGroupExecId"`
+	// Whether to block monitoring: 0-Block, 1-Not block.
+	RuleGroupExist pulumi.IntPtrInput `pulumi:"ruleGroupExist"`
+	// Rule group ID.
+	RuleGroupId pulumi.IntPtrInput `pulumi:"ruleGroupId"`
+	// Task name.
+	RuleGroupName pulumi.StringPtrInput `pulumi:"ruleGroupName"`
+	// Data table ID.
+	RuleGroupTableId pulumi.IntPtrInput `pulumi:"ruleGroupTableId"`
+	// Rule ID.
+	RuleId pulumi.IntPtrInput `pulumi:"ruleId"`
+	// Rule name.
+	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
+	// Rule type: 1-System template, 2-Custom template, 3-Custom SQL.
+	RuleType pulumi.IntPtrInput `pulumi:"ruleType"`
+	// Schema name.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Source field detailed type (int, string).
+	SourceObjectDataTypeName pulumi.StringPtrInput `pulumi:"sourceObjectDataTypeName"`
+	// Source field name.
+	SourceObjectValue pulumi.StringPtrInput `pulumi:"sourceObjectValue"`
+	// Execution time.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+	// Table name.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Target table - database table name.
+	TargetDbTableName pulumi.StringPtrInput `pulumi:"targetDbTableName"`
+	// Target table - field type.
+	TargetObjectDataType pulumi.StringPtrInput `pulumi:"targetObjectDataType"`
+	// Target table - field name.
+	TargetObjectValue pulumi.StringPtrInput `pulumi:"targetObjectValue"`
+	// Template name.
+	TemplateName pulumi.StringPtrInput `pulumi:"templateName"`
+	// Trigger condition.
+	TriggerCondition pulumi.StringPtrInput `pulumi:"triggerCondition"`
+	// Trigger result (alarm sent successfully, task blocked successfully).
+	TriggerResult pulumi.StringPtrInput `pulumi:"triggerResult"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput {
+	return o
+}
+
+// Alarm level: 1-Low, 2-Medium, 3-High.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) AlarmLevel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.AlarmLevel }).(pulumi.IntPtrOutput)
+}
+
+// Orchestration task ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) AspectTaskId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.AspectTaskId }).(pulumi.StringPtrOutput)
+}
+
+// Data catalog.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) CatalogName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.CatalogName }).(pulumi.StringPtrOutput)
+}
+
+// Comparison result.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) CompareResult() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult {
+		return v.CompareResult
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput)
+}
+
+// Condition scan WHERE expression.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) ConditionExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string {
+		return v.ConditionExpression
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.DatabaseName }).(pulumi.StringPtrOutput)
+}
+
+// Data source ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) DatasourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.DatasourceId }).(pulumi.StringPtrOutput)
+}
+
+// Data source name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) DatasourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.DatasourceName }).(pulumi.StringPtrOutput)
+}
+
+// Data source type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) DatasourceType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.DatasourceType }).(pulumi.IntPtrOutput)
+}
+
+// Detection result: 1-Passed, 2-Triggered rule, 3-Detection failed.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) ExecResultStatus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.ExecResultStatus }).(pulumi.IntPtrOutput)
+}
+
+// Custom template SQL expression parameters.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) FieldConfig() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig {
+		return v.FieldConfig
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput)
+}
+
+// Execution end time.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) FinishTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.FinishTime }).(pulumi.StringPtrOutput)
+}
+
+// Monitor task type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) GroupType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.GroupType }).(pulumi.StringPtrOutput)
+}
+
+// Monitor type: 1-Not configured, 2-Associated with production scheduling, 3-Offline periodic detection.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) MonitorType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.MonitorType }).(pulumi.IntPtrOutput)
+}
+
+// Quality dimension.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) QualityDim() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.QualityDim }).(pulumi.IntPtrOutput)
+}
+
+// Source field and target field association condition ON expression.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RelConditionExpr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.RelConditionExpr }).(pulumi.StringPtrOutput)
+}
+
+// Rule execution ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleExecId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleExecId }).(pulumi.IntPtrOutput)
+}
+
+// Rule group execution ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleGroupExecId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleGroupExecId }).(pulumi.IntPtrOutput)
+}
+
+// Whether to block monitoring: 0-Block, 1-Not block.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleGroupExist() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleGroupExist }).(pulumi.IntPtrOutput)
+}
+
+// Rule group ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleGroupId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleGroupId }).(pulumi.IntPtrOutput)
+}
+
+// Task name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.RuleGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Data table ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleGroupTableId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleGroupTableId }).(pulumi.IntPtrOutput)
+}
+
+// Rule ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleId }).(pulumi.IntPtrOutput)
+}
+
+// Rule name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.RuleName }).(pulumi.StringPtrOutput)
+}
+
+// Rule type: 1-System template, 2-Custom template, 3-Custom SQL.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) RuleType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *int { return v.RuleType }).(pulumi.IntPtrOutput)
+}
+
+// Schema name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Source field detailed type (int, string).
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) SourceObjectDataTypeName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string {
+		return v.SourceObjectDataTypeName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Source field name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) SourceObjectValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.SourceObjectValue }).(pulumi.StringPtrOutput)
+}
+
+// Execution time.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+// Target table - database table name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TargetDbTableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TargetDbTableName }).(pulumi.StringPtrOutput)
+}
+
+// Target table - field type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TargetObjectDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string {
+		return v.TargetObjectDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Target table - field name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TargetObjectValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TargetObjectValue }).(pulumi.StringPtrOutput)
+}
+
+// Template name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TemplateName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TemplateName }).(pulumi.StringPtrOutput)
+}
+
+// Trigger condition.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TriggerCondition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TriggerCondition }).(pulumi.StringPtrOutput)
+}
+
+// Trigger result (alarm sent successfully, task blocked successfully).
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput) TriggerResult() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList) *string { return v.TriggerResult }).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoList)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult struct {
+	// Comparison relationship.
+	ComputeExpression *string `pulumi:"computeExpression"`
+	// Comparison result item list.
+	Items []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem `pulumi:"items"`
+	// Passed rows count.
+	PassRows int `pulumi:"passRows"`
+	// Total rows count.
+	TotalRows int `pulumi:"totalRows"`
+	// Failed rows count.
+	TriggerRows int `pulumi:"triggerRows"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs struct {
+	// Comparison relationship.
+	ComputeExpression pulumi.StringPtrInput `pulumi:"computeExpression"`
+	// Comparison result item list.
+	Items GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayInput `pulumi:"items"`
+	// Passed rows count.
+	PassRows pulumi.IntInput `pulumi:"passRows"`
+	// Total rows count.
+	TotalRows pulumi.IntInput `pulumi:"totalRows"`
+	// Failed rows count.
+	TriggerRows pulumi.IntInput `pulumi:"triggerRows"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput)
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput).ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(ctx)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs, GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtr and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput` via:
+//
+//	        GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput
+}
+
+type getQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrType GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs
+
+func GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtr(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput {
+	return (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrType)(v)
+}
+
+func (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult)(nil)).Elem()
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(context.Background())
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return o.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(context.Background())
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult {
+		return &v
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput)
+}
+
+// Comparison relationship.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) ComputeExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *string {
+		return v.ComputeExpression
+	}).(pulumi.StringPtrOutput)
+}
+
+// Comparison result item list.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) Items() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem {
+		return v.Items
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput)
+}
+
+// Passed rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) PassRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) int { return v.PassRows }).(pulumi.IntOutput)
+}
+
+// Total rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) TotalRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) int {
+		return v.TotalRows
+	}).(pulumi.IntOutput)
+}
+
+// Failed rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput) TriggerRows() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) int {
+		return v.TriggerRows
+	}).(pulumi.IntOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) Elem() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult {
+		if v != nil {
+			return *v
+		}
+		var ret GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult
+		return ret
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput)
+}
+
+// Comparison relationship.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) ComputeExpression() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComputeExpression
+	}).(pulumi.StringPtrOutput)
+}
+
+// Comparison result item list.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) Items() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem {
+		if v == nil {
+			return nil
+		}
+		return v.Items
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput)
+}
+
+// Passed rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) PassRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.PassRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// Total rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) TotalRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.TotalRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// Failed rows count.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput) TriggerRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResult) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.TriggerRows
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem struct {
+	// Comparison type.
+	CompareType int `pulumi:"compareType"`
+	// Comparison result: 1-True, 2-False.
+	FixResult int `pulumi:"fixResult"`
+	// Comparison operator type.
+	Operator string `pulumi:"operator"`
+	// Quality SQL execution result.
+	ResultValue string `pulumi:"resultValue"`
+	// Value comparison type.
+	ValueComputeType int `pulumi:"valueComputeType"`
+	// Threshold list.
+	Values []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue `pulumi:"values"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs struct {
+	// Comparison type.
+	CompareType pulumi.IntInput `pulumi:"compareType"`
+	// Comparison result: 1-True, 2-False.
+	FixResult pulumi.IntInput `pulumi:"fixResult"`
+	// Comparison operator type.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// Quality SQL execution result.
+	ResultValue pulumi.StringInput `pulumi:"resultValue"`
+	// Value comparison type.
+	ValueComputeType pulumi.IntInput `pulumi:"valueComputeType"`
+	// Threshold list.
+	Values GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayInput `pulumi:"values"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput {
+	return o
+}
+
+// Comparison type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) CompareType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) int {
+		return v.CompareType
+	}).(pulumi.IntOutput)
+}
+
+// Comparison result: 1-True, 2-False.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) FixResult() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) int {
+		return v.FixResult
+	}).(pulumi.IntOutput)
+}
+
+// Comparison operator type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) string {
+		return v.Operator
+	}).(pulumi.StringOutput)
+}
+
+// Quality SQL execution result.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) ResultValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) string {
+		return v.ResultValue
+	}).(pulumi.StringOutput)
+}
+
+// Value comparison type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) ValueComputeType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) int {
+		return v.ValueComputeType
+	}).(pulumi.IntOutput)
+}
+
+// Threshold list.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput) Values() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue {
+		return v.Values
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItem)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue struct {
+	// Threshold value.
+	Value *string `pulumi:"value"`
+	// Threshold type: 1-Low threshold, 2-High threshold, 3-Normal threshold, 4-Enum value.
+	ValueType *int `pulumi:"valueType"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs struct {
+	// Threshold value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+	// Threshold type: 1-Low threshold, 2-High threshold, 3-Normal threshold, 4-Enum value.
+	ValueType pulumi.IntPtrInput `pulumi:"valueType"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput {
+	return o
+}
+
+// Threshold value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue) *string {
+		return v.Value
+	}).(pulumi.StringPtrOutput)
+}
+
+// Threshold type: 1-Low threshold, 2-High threshold, 3-Normal threshold, 4-Enum value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput) ValueType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue) *int {
+		return v.ValueType
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValue)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig struct {
+	// Database table variables.
+	TableConfigs []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig `pulumi:"tableConfigs"`
+	// WHERE variables.
+	WhereConfigs []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig `pulumi:"whereConfigs"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs struct {
+	// Database table variables.
+	TableConfigs GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayInput `pulumi:"tableConfigs"`
+	// WHERE variables.
+	WhereConfigs GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayInput `pulumi:"whereConfigs"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput)
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput).ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(ctx)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs, GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtr and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput` via:
+//
+//	        GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput
+}
+
+type getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrType GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs
+
+func GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtr(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput {
+	return (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrType)(v)
+}
+
+func (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig)(nil)).Elem()
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return o.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig {
+		return &v
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput)
+}
+
+// Database table variables.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) TableConfigs() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig {
+		return v.TableConfigs
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput)
+}
+
+// WHERE variables.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput) WhereConfigs() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig {
+		return v.WhereConfigs
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) Elem() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig
+		return ret
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput)
+}
+
+// Database table variables.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) TableConfigs() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig {
+		if v == nil {
+			return nil
+		}
+		return v.TableConfigs
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput)
+}
+
+// WHERE variables.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput) WhereConfigs() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfig) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig {
+		if v == nil {
+			return nil
+		}
+		return v.WhereConfigs
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig struct {
+	// Database ID.
+	DatabaseId *string `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Field variables.
+	FieldConfigs []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig `pulumi:"fieldConfigs"`
+	// Table ID.
+	TableId *string `pulumi:"tableId"`
+	// Table key.
+	TableKey *string `pulumi:"tableKey"`
+	// Table name.
+	TableName *string `pulumi:"tableName"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs struct {
+	// Database ID.
+	DatabaseId pulumi.StringPtrInput `pulumi:"databaseId"`
+	// Database name.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Field variables.
+	FieldConfigs GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayInput `pulumi:"fieldConfigs"`
+	// Table ID.
+	TableId pulumi.StringPtrInput `pulumi:"tableId"`
+	// Table key.
+	TableKey pulumi.StringPtrInput `pulumi:"tableKey"`
+	// Table name.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput {
+	return o
+}
+
+// Database ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) DatabaseId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) *string {
+		return v.DatabaseId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) *string {
+		return v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field variables.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) FieldConfigs() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig {
+		return v.FieldConfigs
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput)
+}
+
+// Table ID.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) TableId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) *string {
+		return v.TableId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) TableKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) *string {
+		return v.TableKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig) *string {
+		return v.TableName
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfig)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig struct {
+	// Field value type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig `pulumi:"valueConfig"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs struct {
+	// Field value type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput `pulumi:"valueConfig"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput {
+	return o
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig) *string {
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig) *string {
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig) *string {
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value variable information.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput) ValueConfig() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig {
+		return v.ValueConfig
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfig)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig struct {
+	// Field value type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs struct {
+	// Field value type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput)
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput).ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs, GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtr and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput` via:
+//
+//	        GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput
+}
+
+type getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrType GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs
+
+func GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtr(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput {
+	return (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrType)(v)
+}
+
+func (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig {
+		return &v
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput)
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) Elem() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig
+		return ret
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput)
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig struct {
+	// Field value type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig `pulumi:"valueConfig"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs struct {
+	// Field value type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+	// Field value variable information.
+	ValueConfig GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput `pulumi:"valueConfig"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray{ GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs{...} }
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray []GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigInput
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput {
+	return o
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig) *string {
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig) *string {
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig) *string {
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value variable information.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput) ValueConfig() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig {
+		return v.ValueConfig
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig {
+		return vs[0].([]GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfig)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig struct {
+	// Field value type.
+	FieldDataType *string `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey *string `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue *string `pulumi:"fieldValue"`
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigInput` via:
+//
+//	GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs{...}
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs struct {
+	// Field value type.
+	FieldDataType pulumi.StringPtrInput `pulumi:"fieldDataType"`
+	// Field value key.
+	FieldKey pulumi.StringPtrInput `pulumi:"fieldKey"`
+	// Field value.
+	FieldValue pulumi.StringPtrInput `pulumi:"fieldValue"`
+}
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput)
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput).ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx)
+}
+
+// GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput is an input type that accepts GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs, GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtr and GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput` via:
+//
+//	        GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput
+	ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput
+}
+
+type getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrType GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs
+
+func GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtr(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput {
+	return (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrType)(v)
+}
+
+func (*getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return i.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *getQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrType) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(context.Background())
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig {
+		return &v
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput)
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) ToGetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) Elem() GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig {
+		if v != nil {
+			return *v
+		}
+		var ret GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig
+		return ret
+	}).(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput)
+}
+
+// Field value type.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) FieldDataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldDataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value key.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) FieldKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field value.
+func (o GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput) FieldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldValue
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetQualityRuleGroupExecResultsFilter struct {
+	// Filter field name.
+	Name *string `pulumi:"name"`
+	// Filter value list.
+	Values []string `pulumi:"values"`
+}
+
+// GetQualityRuleGroupExecResultsFilterInput is an input type that accepts GetQualityRuleGroupExecResultsFilterArgs and GetQualityRuleGroupExecResultsFilterOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsFilterInput` via:
+//
+//	GetQualityRuleGroupExecResultsFilterArgs{...}
+type GetQualityRuleGroupExecResultsFilterInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsFilterOutput() GetQualityRuleGroupExecResultsFilterOutput
+	ToGetQualityRuleGroupExecResultsFilterOutputWithContext(context.Context) GetQualityRuleGroupExecResultsFilterOutput
+}
+
+type GetQualityRuleGroupExecResultsFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Filter value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetQualityRuleGroupExecResultsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsFilter)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsFilterArgs) ToGetQualityRuleGroupExecResultsFilterOutput() GetQualityRuleGroupExecResultsFilterOutput {
+	return i.ToGetQualityRuleGroupExecResultsFilterOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsFilterArgs) ToGetQualityRuleGroupExecResultsFilterOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsFilterOutput)
+}
+
+// GetQualityRuleGroupExecResultsFilterArrayInput is an input type that accepts GetQualityRuleGroupExecResultsFilterArray and GetQualityRuleGroupExecResultsFilterArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsFilterArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsFilterArray{ GetQualityRuleGroupExecResultsFilterArgs{...} }
+type GetQualityRuleGroupExecResultsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsFilterArrayOutput() GetQualityRuleGroupExecResultsFilterArrayOutput
+	ToGetQualityRuleGroupExecResultsFilterArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsFilterArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsFilterArray []GetQualityRuleGroupExecResultsFilterInput
+
+func (GetQualityRuleGroupExecResultsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsFilter)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsFilterArray) ToGetQualityRuleGroupExecResultsFilterArrayOutput() GetQualityRuleGroupExecResultsFilterArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsFilterArray) ToGetQualityRuleGroupExecResultsFilterArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsFilterArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsFilter)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsFilterOutput) ToGetQualityRuleGroupExecResultsFilterOutput() GetQualityRuleGroupExecResultsFilterOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsFilterOutput) ToGetQualityRuleGroupExecResultsFilterOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetQualityRuleGroupExecResultsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Filter value list.
+func (o GetQualityRuleGroupExecResultsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsFilter)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsFilterArrayOutput) ToGetQualityRuleGroupExecResultsFilterArrayOutput() GetQualityRuleGroupExecResultsFilterArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsFilterArrayOutput) ToGetQualityRuleGroupExecResultsFilterArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsFilterArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsFilterArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsFilter {
+		return vs[0].([]GetQualityRuleGroupExecResultsFilter)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsFilterOutput)
+}
+
+type GetQualityRuleGroupExecResultsOrderField struct {
+	// Sort direction: ASC|DESC.
+	Direction string `pulumi:"direction"`
+	// Sort field name.
+	Name string `pulumi:"name"`
+}
+
+// GetQualityRuleGroupExecResultsOrderFieldInput is an input type that accepts GetQualityRuleGroupExecResultsOrderFieldArgs and GetQualityRuleGroupExecResultsOrderFieldOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsOrderFieldInput` via:
+//
+//	GetQualityRuleGroupExecResultsOrderFieldArgs{...}
+type GetQualityRuleGroupExecResultsOrderFieldInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsOrderFieldOutput() GetQualityRuleGroupExecResultsOrderFieldOutput
+	ToGetQualityRuleGroupExecResultsOrderFieldOutputWithContext(context.Context) GetQualityRuleGroupExecResultsOrderFieldOutput
+}
+
+type GetQualityRuleGroupExecResultsOrderFieldArgs struct {
+	// Sort direction: ASC|DESC.
+	Direction pulumi.StringInput `pulumi:"direction"`
+	// Sort field name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetQualityRuleGroupExecResultsOrderFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsOrderField)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsOrderFieldArgs) ToGetQualityRuleGroupExecResultsOrderFieldOutput() GetQualityRuleGroupExecResultsOrderFieldOutput {
+	return i.ToGetQualityRuleGroupExecResultsOrderFieldOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsOrderFieldArgs) ToGetQualityRuleGroupExecResultsOrderFieldOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsOrderFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsOrderFieldOutput)
+}
+
+// GetQualityRuleGroupExecResultsOrderFieldArrayInput is an input type that accepts GetQualityRuleGroupExecResultsOrderFieldArray and GetQualityRuleGroupExecResultsOrderFieldArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleGroupExecResultsOrderFieldArrayInput` via:
+//
+//	GetQualityRuleGroupExecResultsOrderFieldArray{ GetQualityRuleGroupExecResultsOrderFieldArgs{...} }
+type GetQualityRuleGroupExecResultsOrderFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleGroupExecResultsOrderFieldArrayOutput() GetQualityRuleGroupExecResultsOrderFieldArrayOutput
+	ToGetQualityRuleGroupExecResultsOrderFieldArrayOutputWithContext(context.Context) GetQualityRuleGroupExecResultsOrderFieldArrayOutput
+}
+
+type GetQualityRuleGroupExecResultsOrderFieldArray []GetQualityRuleGroupExecResultsOrderFieldInput
+
+func (GetQualityRuleGroupExecResultsOrderFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsOrderField)(nil)).Elem()
+}
+
+func (i GetQualityRuleGroupExecResultsOrderFieldArray) ToGetQualityRuleGroupExecResultsOrderFieldArrayOutput() GetQualityRuleGroupExecResultsOrderFieldArrayOutput {
+	return i.ToGetQualityRuleGroupExecResultsOrderFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleGroupExecResultsOrderFieldArray) ToGetQualityRuleGroupExecResultsOrderFieldArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsOrderFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleGroupExecResultsOrderFieldArrayOutput)
+}
+
+type GetQualityRuleGroupExecResultsOrderFieldOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsOrderFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleGroupExecResultsOrderField)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsOrderFieldOutput) ToGetQualityRuleGroupExecResultsOrderFieldOutput() GetQualityRuleGroupExecResultsOrderFieldOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsOrderFieldOutput) ToGetQualityRuleGroupExecResultsOrderFieldOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsOrderFieldOutput {
+	return o
+}
+
+// Sort direction: ASC|DESC.
+func (o GetQualityRuleGroupExecResultsOrderFieldOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsOrderField) string { return v.Direction }).(pulumi.StringOutput)
+}
+
+// Sort field name.
+func (o GetQualityRuleGroupExecResultsOrderFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleGroupExecResultsOrderField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetQualityRuleGroupExecResultsOrderFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleGroupExecResultsOrderFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleGroupExecResultsOrderField)(nil)).Elem()
+}
+
+func (o GetQualityRuleGroupExecResultsOrderFieldArrayOutput) ToGetQualityRuleGroupExecResultsOrderFieldArrayOutput() GetQualityRuleGroupExecResultsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsOrderFieldArrayOutput) ToGetQualityRuleGroupExecResultsOrderFieldArrayOutputWithContext(ctx context.Context) GetQualityRuleGroupExecResultsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleGroupExecResultsOrderFieldArrayOutput) Index(i pulumi.IntInput) GetQualityRuleGroupExecResultsOrderFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleGroupExecResultsOrderField {
+		return vs[0].([]GetQualityRuleGroupExecResultsOrderField)[vs[1].(int)]
+	}).(GetQualityRuleGroupExecResultsOrderFieldOutput)
+}
+
+type GetQualityRuleTemplatesData struct {
+	// Template list.
+	Items []GetQualityRuleTemplatesDataItem `pulumi:"items"`
+	// Total count.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetQualityRuleTemplatesDataInput is an input type that accepts GetQualityRuleTemplatesDataArgs and GetQualityRuleTemplatesDataOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataInput` via:
+//
+//	GetQualityRuleTemplatesDataArgs{...}
+type GetQualityRuleTemplatesDataInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataOutput() GetQualityRuleTemplatesDataOutput
+	ToGetQualityRuleTemplatesDataOutputWithContext(context.Context) GetQualityRuleTemplatesDataOutput
+}
+
+type GetQualityRuleTemplatesDataArgs struct {
+	// Template list.
+	Items GetQualityRuleTemplatesDataItemArrayInput `pulumi:"items"`
+	// Total count.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetQualityRuleTemplatesDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesData)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataArgs) ToGetQualityRuleTemplatesDataOutput() GetQualityRuleTemplatesDataOutput {
+	return i.ToGetQualityRuleTemplatesDataOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataArgs) ToGetQualityRuleTemplatesDataOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataOutput)
+}
+
+// GetQualityRuleTemplatesDataArrayInput is an input type that accepts GetQualityRuleTemplatesDataArray and GetQualityRuleTemplatesDataArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataArrayInput` via:
+//
+//	GetQualityRuleTemplatesDataArray{ GetQualityRuleTemplatesDataArgs{...} }
+type GetQualityRuleTemplatesDataArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataArrayOutput() GetQualityRuleTemplatesDataArrayOutput
+	ToGetQualityRuleTemplatesDataArrayOutputWithContext(context.Context) GetQualityRuleTemplatesDataArrayOutput
+}
+
+type GetQualityRuleTemplatesDataArray []GetQualityRuleTemplatesDataInput
+
+func (GetQualityRuleTemplatesDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesData)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataArray) ToGetQualityRuleTemplatesDataArrayOutput() GetQualityRuleTemplatesDataArrayOutput {
+	return i.ToGetQualityRuleTemplatesDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataArray) ToGetQualityRuleTemplatesDataArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataArrayOutput)
+}
+
+type GetQualityRuleTemplatesDataOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesData)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataOutput) ToGetQualityRuleTemplatesDataOutput() GetQualityRuleTemplatesDataOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataOutput) ToGetQualityRuleTemplatesDataOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataOutput {
+	return o
+}
+
+// Template list.
+func (o GetQualityRuleTemplatesDataOutput) Items() GetQualityRuleTemplatesDataItemArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesData) []GetQualityRuleTemplatesDataItem { return v.Items }).(GetQualityRuleTemplatesDataItemArrayOutput)
+}
+
+// Total count.
+func (o GetQualityRuleTemplatesDataOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesData) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetQualityRuleTemplatesDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesData)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataArrayOutput) ToGetQualityRuleTemplatesDataArrayOutput() GetQualityRuleTemplatesDataArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataArrayOutput) ToGetQualityRuleTemplatesDataArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataArrayOutput) Index(i pulumi.IntInput) GetQualityRuleTemplatesDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleTemplatesData {
+		return vs[0].([]GetQualityRuleTemplatesData)[vs[1].(int)]
+	}).(GetQualityRuleTemplatesDataOutput)
+}
+
+type GetQualityRuleTemplatesDataItem struct {
+	// Citation count.
+	CitationCount int `pulumi:"citationCount"`
+	// Comparison type supported by the rule (1: Fixed value comparison, greater than, less than, greater than or equal to, etc. 2: Fluctuation value comparison, absolute value, increase, decrease).
+	CompareType int `pulumi:"compareType"`
+	// Supported data source types.
+	DatasourceTypes []int `pulumi:"datasourceTypes"`
+	// Rule template description.
+	Description string `pulumi:"description"`
+	// Whether to associate multiple database tables.
+	MultiSourceFlag bool `pulumi:"multiSourceFlag"`
+	// Rule template name.
+	Name string `pulumi:"name"`
+	// Quality dimension of the rule (1: Accuracy, 2: Uniqueness, 3: Completeness, 4: Consistency, 5: Timeliness, 6: Validity).
+	QualityDim int `pulumi:"qualityDim"`
+	// SQL expression parsing object.
+	ResolvedSqlExpression GetQualityRuleTemplatesDataItemResolvedSqlExpression `pulumi:"resolvedSqlExpression"`
+	// Rule template ID.
+	RuleTemplateId int `pulumi:"ruleTemplateId"`
+	// Rule template source content, differentiated by engine, JSON structure.
+	SourceContent string `pulumi:"sourceContent"`
+	// Source data applicable types.
+	SourceEngineTypes []int `pulumi:"sourceEngineTypes"`
+	// Source data object data type applicable to the rule (1: Numeric, 2: String).
+	SourceObjectDataType int `pulumi:"sourceObjectDataType"`
+	// Source data object type applicable to the rule (1: Constant, 2: Offline table level, 3: Offline field level).
+	SourceObjectType int `pulumi:"sourceObjectType"`
+	// Custom template SQL expression.
+	SqlExpression string `pulumi:"sqlExpression"`
+	// Template sub-dimension, 0. Parent dimension type, 1. Consistency: Enumeration range consistency, 2. Consistency: Numeric range consistency, 3. Consistency: Field data correlation.
+	SubQualityDim int `pulumi:"subQualityDim"`
+	// Template type (1: System template, 2: Custom template).
+	Type int `pulumi:"type"`
+	// Update time yyyy-MM-dd HH:mm:ss.
+	UpdateTime string `pulumi:"updateTime"`
+	// Creator user ID.
+	UserId int `pulumi:"userId"`
+	// Creator user ID string.
+	UserIdStr string `pulumi:"userIdStr"`
+	// Creator username.
+	UserName string `pulumi:"userName"`
+	// Whether to add where parameter.
+	WhereFlag bool `pulumi:"whereFlag"`
+}
+
+// GetQualityRuleTemplatesDataItemInput is an input type that accepts GetQualityRuleTemplatesDataItemArgs and GetQualityRuleTemplatesDataItemOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataItemInput` via:
+//
+//	GetQualityRuleTemplatesDataItemArgs{...}
+type GetQualityRuleTemplatesDataItemInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataItemOutput() GetQualityRuleTemplatesDataItemOutput
+	ToGetQualityRuleTemplatesDataItemOutputWithContext(context.Context) GetQualityRuleTemplatesDataItemOutput
+}
+
+type GetQualityRuleTemplatesDataItemArgs struct {
+	// Citation count.
+	CitationCount pulumi.IntInput `pulumi:"citationCount"`
+	// Comparison type supported by the rule (1: Fixed value comparison, greater than, less than, greater than or equal to, etc. 2: Fluctuation value comparison, absolute value, increase, decrease).
+	CompareType pulumi.IntInput `pulumi:"compareType"`
+	// Supported data source types.
+	DatasourceTypes pulumi.IntArrayInput `pulumi:"datasourceTypes"`
+	// Rule template description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Whether to associate multiple database tables.
+	MultiSourceFlag pulumi.BoolInput `pulumi:"multiSourceFlag"`
+	// Rule template name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Quality dimension of the rule (1: Accuracy, 2: Uniqueness, 3: Completeness, 4: Consistency, 5: Timeliness, 6: Validity).
+	QualityDim pulumi.IntInput `pulumi:"qualityDim"`
+	// SQL expression parsing object.
+	ResolvedSqlExpression GetQualityRuleTemplatesDataItemResolvedSqlExpressionInput `pulumi:"resolvedSqlExpression"`
+	// Rule template ID.
+	RuleTemplateId pulumi.IntInput `pulumi:"ruleTemplateId"`
+	// Rule template source content, differentiated by engine, JSON structure.
+	SourceContent pulumi.StringInput `pulumi:"sourceContent"`
+	// Source data applicable types.
+	SourceEngineTypes pulumi.IntArrayInput `pulumi:"sourceEngineTypes"`
+	// Source data object data type applicable to the rule (1: Numeric, 2: String).
+	SourceObjectDataType pulumi.IntInput `pulumi:"sourceObjectDataType"`
+	// Source data object type applicable to the rule (1: Constant, 2: Offline table level, 3: Offline field level).
+	SourceObjectType pulumi.IntInput `pulumi:"sourceObjectType"`
+	// Custom template SQL expression.
+	SqlExpression pulumi.StringInput `pulumi:"sqlExpression"`
+	// Template sub-dimension, 0. Parent dimension type, 1. Consistency: Enumeration range consistency, 2. Consistency: Numeric range consistency, 3. Consistency: Field data correlation.
+	SubQualityDim pulumi.IntInput `pulumi:"subQualityDim"`
+	// Template type (1: System template, 2: Custom template).
+	Type pulumi.IntInput `pulumi:"type"`
+	// Update time yyyy-MM-dd HH:mm:ss.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Creator user ID.
+	UserId pulumi.IntInput `pulumi:"userId"`
+	// Creator user ID string.
+	UserIdStr pulumi.StringInput `pulumi:"userIdStr"`
+	// Creator username.
+	UserName pulumi.StringInput `pulumi:"userName"`
+	// Whether to add where parameter.
+	WhereFlag pulumi.BoolInput `pulumi:"whereFlag"`
+}
+
+func (GetQualityRuleTemplatesDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataItemArgs) ToGetQualityRuleTemplatesDataItemOutput() GetQualityRuleTemplatesDataItemOutput {
+	return i.ToGetQualityRuleTemplatesDataItemOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataItemArgs) ToGetQualityRuleTemplatesDataItemOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataItemOutput)
+}
+
+// GetQualityRuleTemplatesDataItemArrayInput is an input type that accepts GetQualityRuleTemplatesDataItemArray and GetQualityRuleTemplatesDataItemArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataItemArrayInput` via:
+//
+//	GetQualityRuleTemplatesDataItemArray{ GetQualityRuleTemplatesDataItemArgs{...} }
+type GetQualityRuleTemplatesDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataItemArrayOutput() GetQualityRuleTemplatesDataItemArrayOutput
+	ToGetQualityRuleTemplatesDataItemArrayOutputWithContext(context.Context) GetQualityRuleTemplatesDataItemArrayOutput
+}
+
+type GetQualityRuleTemplatesDataItemArray []GetQualityRuleTemplatesDataItemInput
+
+func (GetQualityRuleTemplatesDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesDataItem)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataItemArray) ToGetQualityRuleTemplatesDataItemArrayOutput() GetQualityRuleTemplatesDataItemArrayOutput {
+	return i.ToGetQualityRuleTemplatesDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataItemArray) ToGetQualityRuleTemplatesDataItemArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataItemArrayOutput)
+}
+
+type GetQualityRuleTemplatesDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataItemOutput) ToGetQualityRuleTemplatesDataItemOutput() GetQualityRuleTemplatesDataItemOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemOutput) ToGetQualityRuleTemplatesDataItemOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemOutput {
+	return o
+}
+
+// Citation count.
+func (o GetQualityRuleTemplatesDataItemOutput) CitationCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.CitationCount }).(pulumi.IntOutput)
+}
+
+// Comparison type supported by the rule (1: Fixed value comparison, greater than, less than, greater than or equal to, etc. 2: Fluctuation value comparison, absolute value, increase, decrease).
+func (o GetQualityRuleTemplatesDataItemOutput) CompareType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.CompareType }).(pulumi.IntOutput)
+}
+
+// Supported data source types.
+func (o GetQualityRuleTemplatesDataItemOutput) DatasourceTypes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) []int { return v.DatasourceTypes }).(pulumi.IntArrayOutput)
+}
+
+// Rule template description.
+func (o GetQualityRuleTemplatesDataItemOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether to associate multiple database tables.
+func (o GetQualityRuleTemplatesDataItemOutput) MultiSourceFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) bool { return v.MultiSourceFlag }).(pulumi.BoolOutput)
+}
+
+// Rule template name.
+func (o GetQualityRuleTemplatesDataItemOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Quality dimension of the rule (1: Accuracy, 2: Uniqueness, 3: Completeness, 4: Consistency, 5: Timeliness, 6: Validity).
+func (o GetQualityRuleTemplatesDataItemOutput) QualityDim() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.QualityDim }).(pulumi.IntOutput)
+}
+
+// SQL expression parsing object.
+func (o GetQualityRuleTemplatesDataItemOutput) ResolvedSqlExpression() GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) GetQualityRuleTemplatesDataItemResolvedSqlExpression {
+		return v.ResolvedSqlExpression
+	}).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput)
+}
+
+// Rule template ID.
+func (o GetQualityRuleTemplatesDataItemOutput) RuleTemplateId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.RuleTemplateId }).(pulumi.IntOutput)
+}
+
+// Rule template source content, differentiated by engine, JSON structure.
+func (o GetQualityRuleTemplatesDataItemOutput) SourceContent() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.SourceContent }).(pulumi.StringOutput)
+}
+
+// Source data applicable types.
+func (o GetQualityRuleTemplatesDataItemOutput) SourceEngineTypes() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) []int { return v.SourceEngineTypes }).(pulumi.IntArrayOutput)
+}
+
+// Source data object data type applicable to the rule (1: Numeric, 2: String).
+func (o GetQualityRuleTemplatesDataItemOutput) SourceObjectDataType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.SourceObjectDataType }).(pulumi.IntOutput)
+}
+
+// Source data object type applicable to the rule (1: Constant, 2: Offline table level, 3: Offline field level).
+func (o GetQualityRuleTemplatesDataItemOutput) SourceObjectType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.SourceObjectType }).(pulumi.IntOutput)
+}
+
+// Custom template SQL expression.
+func (o GetQualityRuleTemplatesDataItemOutput) SqlExpression() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.SqlExpression }).(pulumi.StringOutput)
+}
+
+// Template sub-dimension, 0. Parent dimension type, 1. Consistency: Enumeration range consistency, 2. Consistency: Numeric range consistency, 3. Consistency: Field data correlation.
+func (o GetQualityRuleTemplatesDataItemOutput) SubQualityDim() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.SubQualityDim }).(pulumi.IntOutput)
+}
+
+// Template type (1: System template, 2: Custom template).
+func (o GetQualityRuleTemplatesDataItemOutput) Type() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.Type }).(pulumi.IntOutput)
+}
+
+// Update time yyyy-MM-dd HH:mm:ss.
+func (o GetQualityRuleTemplatesDataItemOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Creator user ID.
+func (o GetQualityRuleTemplatesDataItemOutput) UserId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) int { return v.UserId }).(pulumi.IntOutput)
+}
+
+// Creator user ID string.
+func (o GetQualityRuleTemplatesDataItemOutput) UserIdStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.UserIdStr }).(pulumi.StringOutput)
+}
+
+// Creator username.
+func (o GetQualityRuleTemplatesDataItemOutput) UserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) string { return v.UserName }).(pulumi.StringOutput)
+}
+
+// Whether to add where parameter.
+func (o GetQualityRuleTemplatesDataItemOutput) WhereFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItem) bool { return v.WhereFlag }).(pulumi.BoolOutput)
+}
+
+type GetQualityRuleTemplatesDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesDataItem)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataItemArrayOutput) ToGetQualityRuleTemplatesDataItemArrayOutput() GetQualityRuleTemplatesDataItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemArrayOutput) ToGetQualityRuleTemplatesDataItemArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemArrayOutput) Index(i pulumi.IntInput) GetQualityRuleTemplatesDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleTemplatesDataItem {
+		return vs[0].([]GetQualityRuleTemplatesDataItem)[vs[1].(int)]
+	}).(GetQualityRuleTemplatesDataItemOutput)
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpression struct {
+	// SQL expression field names.
+	ParamExpressions []string `pulumi:"paramExpressions"`
+	// Placeholder collection in system template SQL for new model detection.
+	SystemTemplateExpressions []string `pulumi:"systemTemplateExpressions"`
+	// SQL expression table names.
+	TableExpressions []GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression `pulumi:"tableExpressions"`
+}
+
+// GetQualityRuleTemplatesDataItemResolvedSqlExpressionInput is an input type that accepts GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs and GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataItemResolvedSqlExpressionInput` via:
+//
+//	GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs{...}
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutputWithContext(context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs struct {
+	// SQL expression field names.
+	ParamExpressions pulumi.StringArrayInput `pulumi:"paramExpressions"`
+	// Placeholder collection in system template SQL for new model detection.
+	SystemTemplateExpressions pulumi.StringArrayInput `pulumi:"systemTemplateExpressions"`
+	// SQL expression table names.
+	TableExpressions GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayInput `pulumi:"tableExpressions"`
+}
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpression)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput {
+	return i.ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput)
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpression)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput {
+	return o
+}
+
+// SQL expression field names.
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) ParamExpressions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItemResolvedSqlExpression) []string { return v.ParamExpressions }).(pulumi.StringArrayOutput)
+}
+
+// Placeholder collection in system template SQL for new model detection.
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) SystemTemplateExpressions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItemResolvedSqlExpression) []string {
+		return v.SystemTemplateExpressions
+	}).(pulumi.StringArrayOutput)
+}
+
+// SQL expression table names.
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput) TableExpressions() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItemResolvedSqlExpression) []GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression {
+		return v.TableExpressions
+	}).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput)
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression struct {
+	// SQL expression field names.
+	ColumnExpressions []string `pulumi:"columnExpressions"`
+	// SQL expression table name.
+	TableExpression string `pulumi:"tableExpression"`
+}
+
+// GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionInput is an input type that accepts GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs and GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionInput` via:
+//
+//	GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs{...}
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutputWithContext(context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs struct {
+	// SQL expression field names.
+	ColumnExpressions pulumi.StringArrayInput `pulumi:"columnExpressions"`
+	// SQL expression table name.
+	TableExpression pulumi.StringInput `pulumi:"tableExpression"`
+}
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput {
+	return i.ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput)
+}
+
+// GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayInput is an input type that accepts GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray and GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayInput` via:
+//
+//	GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray{ GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs{...} }
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput
+	ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutputWithContext(context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray []GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionInput
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput {
+	return i.ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput)
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput {
+	return o
+}
+
+// SQL expression field names.
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput) ColumnExpressions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression) []string {
+		return v.ColumnExpressions
+	}).(pulumi.StringArrayOutput)
+}
+
+// SQL expression table name.
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput) TableExpression() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression) string {
+		return v.TableExpression
+	}).(pulumi.StringOutput)
+}
+
+type GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput() GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput) ToGetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput) Index(i pulumi.IntInput) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression {
+		return vs[0].([]GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpression)[vs[1].(int)]
+	}).(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput)
+}
+
+type GetQualityRuleTemplatesFilter struct {
+	// Filter field name.
+	Name *string `pulumi:"name"`
+	// Filter value list.
+	Values []string `pulumi:"values"`
+}
+
+// GetQualityRuleTemplatesFilterInput is an input type that accepts GetQualityRuleTemplatesFilterArgs and GetQualityRuleTemplatesFilterOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesFilterInput` via:
+//
+//	GetQualityRuleTemplatesFilterArgs{...}
+type GetQualityRuleTemplatesFilterInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesFilterOutput() GetQualityRuleTemplatesFilterOutput
+	ToGetQualityRuleTemplatesFilterOutputWithContext(context.Context) GetQualityRuleTemplatesFilterOutput
+}
+
+type GetQualityRuleTemplatesFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Filter value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetQualityRuleTemplatesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesFilter)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesFilterArgs) ToGetQualityRuleTemplatesFilterOutput() GetQualityRuleTemplatesFilterOutput {
+	return i.ToGetQualityRuleTemplatesFilterOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesFilterArgs) ToGetQualityRuleTemplatesFilterOutputWithContext(ctx context.Context) GetQualityRuleTemplatesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesFilterOutput)
+}
+
+// GetQualityRuleTemplatesFilterArrayInput is an input type that accepts GetQualityRuleTemplatesFilterArray and GetQualityRuleTemplatesFilterArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesFilterArrayInput` via:
+//
+//	GetQualityRuleTemplatesFilterArray{ GetQualityRuleTemplatesFilterArgs{...} }
+type GetQualityRuleTemplatesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesFilterArrayOutput() GetQualityRuleTemplatesFilterArrayOutput
+	ToGetQualityRuleTemplatesFilterArrayOutputWithContext(context.Context) GetQualityRuleTemplatesFilterArrayOutput
+}
+
+type GetQualityRuleTemplatesFilterArray []GetQualityRuleTemplatesFilterInput
+
+func (GetQualityRuleTemplatesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesFilter)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesFilterArray) ToGetQualityRuleTemplatesFilterArrayOutput() GetQualityRuleTemplatesFilterArrayOutput {
+	return i.ToGetQualityRuleTemplatesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesFilterArray) ToGetQualityRuleTemplatesFilterArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesFilterArrayOutput)
+}
+
+type GetQualityRuleTemplatesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesFilter)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesFilterOutput) ToGetQualityRuleTemplatesFilterOutput() GetQualityRuleTemplatesFilterOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesFilterOutput) ToGetQualityRuleTemplatesFilterOutputWithContext(ctx context.Context) GetQualityRuleTemplatesFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetQualityRuleTemplatesFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Filter value list.
+func (o GetQualityRuleTemplatesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetQualityRuleTemplatesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesFilter)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesFilterArrayOutput) ToGetQualityRuleTemplatesFilterArrayOutput() GetQualityRuleTemplatesFilterArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesFilterArrayOutput) ToGetQualityRuleTemplatesFilterArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesFilterArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesFilterArrayOutput) Index(i pulumi.IntInput) GetQualityRuleTemplatesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleTemplatesFilter {
+		return vs[0].([]GetQualityRuleTemplatesFilter)[vs[1].(int)]
+	}).(GetQualityRuleTemplatesFilterOutput)
+}
+
+type GetQualityRuleTemplatesOrderField struct {
+	// Sort direction: ASC|DESC.
+	Direction string `pulumi:"direction"`
+	// Sort field name.
+	Name string `pulumi:"name"`
+}
+
+// GetQualityRuleTemplatesOrderFieldInput is an input type that accepts GetQualityRuleTemplatesOrderFieldArgs and GetQualityRuleTemplatesOrderFieldOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesOrderFieldInput` via:
+//
+//	GetQualityRuleTemplatesOrderFieldArgs{...}
+type GetQualityRuleTemplatesOrderFieldInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesOrderFieldOutput() GetQualityRuleTemplatesOrderFieldOutput
+	ToGetQualityRuleTemplatesOrderFieldOutputWithContext(context.Context) GetQualityRuleTemplatesOrderFieldOutput
+}
+
+type GetQualityRuleTemplatesOrderFieldArgs struct {
+	// Sort direction: ASC|DESC.
+	Direction pulumi.StringInput `pulumi:"direction"`
+	// Sort field name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetQualityRuleTemplatesOrderFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesOrderField)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesOrderFieldArgs) ToGetQualityRuleTemplatesOrderFieldOutput() GetQualityRuleTemplatesOrderFieldOutput {
+	return i.ToGetQualityRuleTemplatesOrderFieldOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesOrderFieldArgs) ToGetQualityRuleTemplatesOrderFieldOutputWithContext(ctx context.Context) GetQualityRuleTemplatesOrderFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesOrderFieldOutput)
+}
+
+// GetQualityRuleTemplatesOrderFieldArrayInput is an input type that accepts GetQualityRuleTemplatesOrderFieldArray and GetQualityRuleTemplatesOrderFieldArrayOutput values.
+// You can construct a concrete instance of `GetQualityRuleTemplatesOrderFieldArrayInput` via:
+//
+//	GetQualityRuleTemplatesOrderFieldArray{ GetQualityRuleTemplatesOrderFieldArgs{...} }
+type GetQualityRuleTemplatesOrderFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetQualityRuleTemplatesOrderFieldArrayOutput() GetQualityRuleTemplatesOrderFieldArrayOutput
+	ToGetQualityRuleTemplatesOrderFieldArrayOutputWithContext(context.Context) GetQualityRuleTemplatesOrderFieldArrayOutput
+}
+
+type GetQualityRuleTemplatesOrderFieldArray []GetQualityRuleTemplatesOrderFieldInput
+
+func (GetQualityRuleTemplatesOrderFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesOrderField)(nil)).Elem()
+}
+
+func (i GetQualityRuleTemplatesOrderFieldArray) ToGetQualityRuleTemplatesOrderFieldArrayOutput() GetQualityRuleTemplatesOrderFieldArrayOutput {
+	return i.ToGetQualityRuleTemplatesOrderFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetQualityRuleTemplatesOrderFieldArray) ToGetQualityRuleTemplatesOrderFieldArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesOrderFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetQualityRuleTemplatesOrderFieldArrayOutput)
+}
+
+type GetQualityRuleTemplatesOrderFieldOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesOrderFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetQualityRuleTemplatesOrderField)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesOrderFieldOutput) ToGetQualityRuleTemplatesOrderFieldOutput() GetQualityRuleTemplatesOrderFieldOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesOrderFieldOutput) ToGetQualityRuleTemplatesOrderFieldOutputWithContext(ctx context.Context) GetQualityRuleTemplatesOrderFieldOutput {
+	return o
+}
+
+// Sort direction: ASC|DESC.
+func (o GetQualityRuleTemplatesOrderFieldOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesOrderField) string { return v.Direction }).(pulumi.StringOutput)
+}
+
+// Sort field name.
+func (o GetQualityRuleTemplatesOrderFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetQualityRuleTemplatesOrderField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetQualityRuleTemplatesOrderFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetQualityRuleTemplatesOrderFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetQualityRuleTemplatesOrderField)(nil)).Elem()
+}
+
+func (o GetQualityRuleTemplatesOrderFieldArrayOutput) ToGetQualityRuleTemplatesOrderFieldArrayOutput() GetQualityRuleTemplatesOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesOrderFieldArrayOutput) ToGetQualityRuleTemplatesOrderFieldArrayOutputWithContext(ctx context.Context) GetQualityRuleTemplatesOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetQualityRuleTemplatesOrderFieldArrayOutput) Index(i pulumi.IntInput) GetQualityRuleTemplatesOrderFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetQualityRuleTemplatesOrderField {
+		return vs[0].([]GetQualityRuleTemplatesOrderField)[vs[1].(int)]
+	}).(GetQualityRuleTemplatesOrderFieldOutput)
 }
 
 type GetResourceFilesData struct {
@@ -32890,6 +43171,4821 @@ func (o GetTenantRolesDataArrayOutput) Index(i pulumi.IntInput) GetTenantRolesDa
 	}).(GetTenantRolesDataOutput)
 }
 
+type GetTriggerTaskCodeData struct {
+	// Code file size, in kilobytes (KB).
+	CodeFileSize string `pulumi:"codeFileSize"`
+	// Code content.
+	CodeInfo string `pulumi:"codeInfo"`
+}
+
+// GetTriggerTaskCodeDataInput is an input type that accepts GetTriggerTaskCodeDataArgs and GetTriggerTaskCodeDataOutput values.
+// You can construct a concrete instance of `GetTriggerTaskCodeDataInput` via:
+//
+//	GetTriggerTaskCodeDataArgs{...}
+type GetTriggerTaskCodeDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskCodeDataOutput() GetTriggerTaskCodeDataOutput
+	ToGetTriggerTaskCodeDataOutputWithContext(context.Context) GetTriggerTaskCodeDataOutput
+}
+
+type GetTriggerTaskCodeDataArgs struct {
+	// Code file size, in kilobytes (KB).
+	CodeFileSize pulumi.StringInput `pulumi:"codeFileSize"`
+	// Code content.
+	CodeInfo pulumi.StringInput `pulumi:"codeInfo"`
+}
+
+func (GetTriggerTaskCodeDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskCodeData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskCodeDataArgs) ToGetTriggerTaskCodeDataOutput() GetTriggerTaskCodeDataOutput {
+	return i.ToGetTriggerTaskCodeDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskCodeDataArgs) ToGetTriggerTaskCodeDataOutputWithContext(ctx context.Context) GetTriggerTaskCodeDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskCodeDataOutput)
+}
+
+// GetTriggerTaskCodeDataArrayInput is an input type that accepts GetTriggerTaskCodeDataArray and GetTriggerTaskCodeDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskCodeDataArrayInput` via:
+//
+//	GetTriggerTaskCodeDataArray{ GetTriggerTaskCodeDataArgs{...} }
+type GetTriggerTaskCodeDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskCodeDataArrayOutput() GetTriggerTaskCodeDataArrayOutput
+	ToGetTriggerTaskCodeDataArrayOutputWithContext(context.Context) GetTriggerTaskCodeDataArrayOutput
+}
+
+type GetTriggerTaskCodeDataArray []GetTriggerTaskCodeDataInput
+
+func (GetTriggerTaskCodeDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskCodeData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskCodeDataArray) ToGetTriggerTaskCodeDataArrayOutput() GetTriggerTaskCodeDataArrayOutput {
+	return i.ToGetTriggerTaskCodeDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskCodeDataArray) ToGetTriggerTaskCodeDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskCodeDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskCodeDataArrayOutput)
+}
+
+type GetTriggerTaskCodeDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskCodeDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskCodeData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskCodeDataOutput) ToGetTriggerTaskCodeDataOutput() GetTriggerTaskCodeDataOutput {
+	return o
+}
+
+func (o GetTriggerTaskCodeDataOutput) ToGetTriggerTaskCodeDataOutputWithContext(ctx context.Context) GetTriggerTaskCodeDataOutput {
+	return o
+}
+
+// Code file size, in kilobytes (KB).
+func (o GetTriggerTaskCodeDataOutput) CodeFileSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskCodeData) string { return v.CodeFileSize }).(pulumi.StringOutput)
+}
+
+// Code content.
+func (o GetTriggerTaskCodeDataOutput) CodeInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskCodeData) string { return v.CodeInfo }).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskCodeDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskCodeDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskCodeData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskCodeDataArrayOutput) ToGetTriggerTaskCodeDataArrayOutput() GetTriggerTaskCodeDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskCodeDataArrayOutput) ToGetTriggerTaskCodeDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskCodeDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskCodeDataArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskCodeDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskCodeData {
+		return vs[0].([]GetTriggerTaskCodeData)[vs[1].(int)]
+	}).(GetTriggerTaskCodeDataOutput)
+}
+
+type GetTriggerTaskRunData struct {
+	// Total cost time.
+	AllCostTime string `pulumi:"allCostTime"`
+	// Create timestamp.
+	CreateTime string `pulumi:"createTime"`
+	// Creator UIN.
+	CreateUin string `pulumi:"createUin"`
+	// Creator UIN.
+	CreaterUin string `pulumi:"createrUin"`
+	// Cycle type.
+	CycleType string `pulumi:"cycleType"`
+	// Dependent upstream task ID list.
+	DependOnLists []string `pulumi:"dependOnLists"`
+	// Dependency task completion time.
+	DependenceFinishedTime string `pulumi:"dependenceFinishedTime"`
+	// Error code.
+	ErrorCode string `pulumi:"errorCode"`
+	// Error code description.
+	ErrorCodeStr string `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName string `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin string `pulumi:"executeUserUin"`
+	// Execution end time.
+	ExecutionEndTime string `pulumi:"executionEndTime"`
+	// Task execution ID.
+	ExecutionId string `pulumi:"executionId"`
+	// Task execution result.
+	ExecutionResult string `pulumi:"executionResult"`
+	// Execution start time.
+	ExecutionStartTime string `pulumi:"executionStartTime"`
+	// Execution state. Valid values: `FAILED` (execution failed), `SUCCESS` (execution successful), `PENDING` (waiting), `SKIP` (skipped execution), `RUNNING` (executing).
+	ExecutionState string `pulumi:"executionState"`
+	// Execution time.
+	ExecutionTime string `pulumi:"executionTime"`
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Whether it is the latest execution.
+	IsLatestExecution bool `pulumi:"isLatestExecution"`
+	// Issue time to execution platform.
+	IssueTime string `pulumi:"issueTime"`
+	// Execution platform job ID.
+	JobId string `pulumi:"jobId"`
+	// Left coordinate.
+	LeftCoordinate float64 `pulumi:"leftCoordinate"`
+	// Pending start time.
+	PendingStartTime string `pulumi:"pendingStartTime"`
+	// Workspace ID.
+	ProjectId string `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// Queue cost time.
+	QueueCostTime string `pulumi:"queueCostTime"`
+	// Task queue start time.
+	QueueStartTime string `pulumi:"queueStartTime"`
+	// Rerun times.
+	RerunTimes int `pulumi:"rerunTimes"`
+	// Resource group.
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Resource group ID.
+	ResourceGroupId string `pulumi:"resourceGroupId"`
+	// Resource group name.
+	ResourceGroupName string `pulumi:"resourceGroupName"`
+	// Retry times. 0 means first execution.
+	RetryTimes int `pulumi:"retryTimes"`
+	// Run parameters.
+	RunParams string `pulumi:"runParams"`
+	// Whether support rerun.
+	SupportRerun bool `pulumi:"supportRerun"`
+	// Task execution state.
+	TaskExecutionState string `pulumi:"taskExecutionState"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type.
+	TaskType string `pulumi:"taskType"`
+	// Task type extensions including script path.
+	TaskTypeExtensions string `pulumi:"taskTypeExtensions"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Task version ID.
+	TaskVersionId string `pulumi:"taskVersionId"`
+	// Time zone.
+	TimeZone string `pulumi:"timeZone"`
+	// Timezone.
+	Timezone string `pulumi:"timezone"`
+	// Top coordinate.
+	TopCoordinate float64 `pulumi:"topCoordinate"`
+	// Trigger type.
+	TriggerType string `pulumi:"triggerType"`
+	// Update timestamp.
+	UpdateTime string `pulumi:"updateTime"`
+	// User name in charge.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// User UIN in charge.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Wait time in seconds.
+	WaitTime string `pulumi:"waitTime"`
+	// Workflow execution ID.
+	WorkflowExecutionId string `pulumi:"workflowExecutionId"`
+	// Workflow execution state.
+	WorkflowExecutionState string `pulumi:"workflowExecutionState"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams string `pulumi:"workflowParams"`
+}
+
+// GetTriggerTaskRunDataInput is an input type that accepts GetTriggerTaskRunDataArgs and GetTriggerTaskRunDataOutput values.
+// You can construct a concrete instance of `GetTriggerTaskRunDataInput` via:
+//
+//	GetTriggerTaskRunDataArgs{...}
+type GetTriggerTaskRunDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskRunDataOutput() GetTriggerTaskRunDataOutput
+	ToGetTriggerTaskRunDataOutputWithContext(context.Context) GetTriggerTaskRunDataOutput
+}
+
+type GetTriggerTaskRunDataArgs struct {
+	// Total cost time.
+	AllCostTime pulumi.StringInput `pulumi:"allCostTime"`
+	// Create timestamp.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Creator UIN.
+	CreateUin pulumi.StringInput `pulumi:"createUin"`
+	// Creator UIN.
+	CreaterUin pulumi.StringInput `pulumi:"createrUin"`
+	// Cycle type.
+	CycleType pulumi.StringInput `pulumi:"cycleType"`
+	// Dependent upstream task ID list.
+	DependOnLists pulumi.StringArrayInput `pulumi:"dependOnLists"`
+	// Dependency task completion time.
+	DependenceFinishedTime pulumi.StringInput `pulumi:"dependenceFinishedTime"`
+	// Error code.
+	ErrorCode pulumi.StringInput `pulumi:"errorCode"`
+	// Error code description.
+	ErrorCodeStr pulumi.StringInput `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName pulumi.StringInput `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin pulumi.StringInput `pulumi:"executeUserUin"`
+	// Execution end time.
+	ExecutionEndTime pulumi.StringInput `pulumi:"executionEndTime"`
+	// Task execution ID.
+	ExecutionId pulumi.StringInput `pulumi:"executionId"`
+	// Task execution result.
+	ExecutionResult pulumi.StringInput `pulumi:"executionResult"`
+	// Execution start time.
+	ExecutionStartTime pulumi.StringInput `pulumi:"executionStartTime"`
+	// Execution state. Valid values: `FAILED` (execution failed), `SUCCESS` (execution successful), `PENDING` (waiting), `SKIP` (skipped execution), `RUNNING` (executing).
+	ExecutionState pulumi.StringInput `pulumi:"executionState"`
+	// Execution time.
+	ExecutionTime pulumi.StringInput `pulumi:"executionTime"`
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Whether it is the latest execution.
+	IsLatestExecution pulumi.BoolInput `pulumi:"isLatestExecution"`
+	// Issue time to execution platform.
+	IssueTime pulumi.StringInput `pulumi:"issueTime"`
+	// Execution platform job ID.
+	JobId pulumi.StringInput `pulumi:"jobId"`
+	// Left coordinate.
+	LeftCoordinate pulumi.Float64Input `pulumi:"leftCoordinate"`
+	// Pending start time.
+	PendingStartTime pulumi.StringInput `pulumi:"pendingStartTime"`
+	// Workspace ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// Queue cost time.
+	QueueCostTime pulumi.StringInput `pulumi:"queueCostTime"`
+	// Task queue start time.
+	QueueStartTime pulumi.StringInput `pulumi:"queueStartTime"`
+	// Rerun times.
+	RerunTimes pulumi.IntInput `pulumi:"rerunTimes"`
+	// Resource group.
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Resource group ID.
+	ResourceGroupId pulumi.StringInput `pulumi:"resourceGroupId"`
+	// Resource group name.
+	ResourceGroupName pulumi.StringInput `pulumi:"resourceGroupName"`
+	// Retry times. 0 means first execution.
+	RetryTimes pulumi.IntInput `pulumi:"retryTimes"`
+	// Run parameters.
+	RunParams pulumi.StringInput `pulumi:"runParams"`
+	// Whether support rerun.
+	SupportRerun pulumi.BoolInput `pulumi:"supportRerun"`
+	// Task execution state.
+	TaskExecutionState pulumi.StringInput `pulumi:"taskExecutionState"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type.
+	TaskType pulumi.StringInput `pulumi:"taskType"`
+	// Task type extensions including script path.
+	TaskTypeExtensions pulumi.StringInput `pulumi:"taskTypeExtensions"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Task version ID.
+	TaskVersionId pulumi.StringInput `pulumi:"taskVersionId"`
+	// Time zone.
+	TimeZone pulumi.StringInput `pulumi:"timeZone"`
+	// Timezone.
+	Timezone pulumi.StringInput `pulumi:"timezone"`
+	// Top coordinate.
+	TopCoordinate pulumi.Float64Input `pulumi:"topCoordinate"`
+	// Trigger type.
+	TriggerType pulumi.StringInput `pulumi:"triggerType"`
+	// Update timestamp.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// User name in charge.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// User UIN in charge.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Wait time in seconds.
+	WaitTime pulumi.StringInput `pulumi:"waitTime"`
+	// Workflow execution ID.
+	WorkflowExecutionId pulumi.StringInput `pulumi:"workflowExecutionId"`
+	// Workflow execution state.
+	WorkflowExecutionState pulumi.StringInput `pulumi:"workflowExecutionState"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams pulumi.StringInput `pulumi:"workflowParams"`
+}
+
+func (GetTriggerTaskRunDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskRunData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskRunDataArgs) ToGetTriggerTaskRunDataOutput() GetTriggerTaskRunDataOutput {
+	return i.ToGetTriggerTaskRunDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskRunDataArgs) ToGetTriggerTaskRunDataOutputWithContext(ctx context.Context) GetTriggerTaskRunDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskRunDataOutput)
+}
+
+// GetTriggerTaskRunDataArrayInput is an input type that accepts GetTriggerTaskRunDataArray and GetTriggerTaskRunDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskRunDataArrayInput` via:
+//
+//	GetTriggerTaskRunDataArray{ GetTriggerTaskRunDataArgs{...} }
+type GetTriggerTaskRunDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskRunDataArrayOutput() GetTriggerTaskRunDataArrayOutput
+	ToGetTriggerTaskRunDataArrayOutputWithContext(context.Context) GetTriggerTaskRunDataArrayOutput
+}
+
+type GetTriggerTaskRunDataArray []GetTriggerTaskRunDataInput
+
+func (GetTriggerTaskRunDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskRunData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskRunDataArray) ToGetTriggerTaskRunDataArrayOutput() GetTriggerTaskRunDataArrayOutput {
+	return i.ToGetTriggerTaskRunDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskRunDataArray) ToGetTriggerTaskRunDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskRunDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskRunDataArrayOutput)
+}
+
+type GetTriggerTaskRunDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskRunDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskRunData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskRunDataOutput) ToGetTriggerTaskRunDataOutput() GetTriggerTaskRunDataOutput {
+	return o
+}
+
+func (o GetTriggerTaskRunDataOutput) ToGetTriggerTaskRunDataOutputWithContext(ctx context.Context) GetTriggerTaskRunDataOutput {
+	return o
+}
+
+// Total cost time.
+func (o GetTriggerTaskRunDataOutput) AllCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.AllCostTime }).(pulumi.StringOutput)
+}
+
+// Create timestamp.
+func (o GetTriggerTaskRunDataOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Creator UIN.
+func (o GetTriggerTaskRunDataOutput) CreateUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.CreateUin }).(pulumi.StringOutput)
+}
+
+// Creator UIN.
+func (o GetTriggerTaskRunDataOutput) CreaterUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.CreaterUin }).(pulumi.StringOutput)
+}
+
+// Cycle type.
+func (o GetTriggerTaskRunDataOutput) CycleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.CycleType }).(pulumi.StringOutput)
+}
+
+// Dependent upstream task ID list.
+func (o GetTriggerTaskRunDataOutput) DependOnLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) []string { return v.DependOnLists }).(pulumi.StringArrayOutput)
+}
+
+// Dependency task completion time.
+func (o GetTriggerTaskRunDataOutput) DependenceFinishedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.DependenceFinishedTime }).(pulumi.StringOutput)
+}
+
+// Error code.
+func (o GetTriggerTaskRunDataOutput) ErrorCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ErrorCode }).(pulumi.StringOutput)
+}
+
+// Error code description.
+func (o GetTriggerTaskRunDataOutput) ErrorCodeStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ErrorCodeStr }).(pulumi.StringOutput)
+}
+
+// Execute user name.
+func (o GetTriggerTaskRunDataOutput) ExecuteUserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecuteUserName }).(pulumi.StringOutput)
+}
+
+// Execute user UIN.
+func (o GetTriggerTaskRunDataOutput) ExecuteUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecuteUserUin }).(pulumi.StringOutput)
+}
+
+// Execution end time.
+func (o GetTriggerTaskRunDataOutput) ExecutionEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionEndTime }).(pulumi.StringOutput)
+}
+
+// Task execution ID.
+func (o GetTriggerTaskRunDataOutput) ExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionId }).(pulumi.StringOutput)
+}
+
+// Task execution result.
+func (o GetTriggerTaskRunDataOutput) ExecutionResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionResult }).(pulumi.StringOutput)
+}
+
+// Execution start time.
+func (o GetTriggerTaskRunDataOutput) ExecutionStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionStartTime }).(pulumi.StringOutput)
+}
+
+// Execution state. Valid values: `FAILED` (execution failed), `SUCCESS` (execution successful), `PENDING` (waiting), `SKIP` (skipped execution), `RUNNING` (executing).
+func (o GetTriggerTaskRunDataOutput) ExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionState }).(pulumi.StringOutput)
+}
+
+// Execution time.
+func (o GetTriggerTaskRunDataOutput) ExecutionTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ExecutionTime }).(pulumi.StringOutput)
+}
+
+// Folder ID.
+func (o GetTriggerTaskRunDataOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetTriggerTaskRunDataOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Whether it is the latest execution.
+func (o GetTriggerTaskRunDataOutput) IsLatestExecution() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) bool { return v.IsLatestExecution }).(pulumi.BoolOutput)
+}
+
+// Issue time to execution platform.
+func (o GetTriggerTaskRunDataOutput) IssueTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.IssueTime }).(pulumi.StringOutput)
+}
+
+// Execution platform job ID.
+func (o GetTriggerTaskRunDataOutput) JobId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.JobId }).(pulumi.StringOutput)
+}
+
+// Left coordinate.
+func (o GetTriggerTaskRunDataOutput) LeftCoordinate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTriggerTaskRunData) float64 { return v.LeftCoordinate }).(pulumi.Float64Output)
+}
+
+// Pending start time.
+func (o GetTriggerTaskRunDataOutput) PendingStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.PendingStartTime }).(pulumi.StringOutput)
+}
+
+// Workspace ID.
+func (o GetTriggerTaskRunDataOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Project name.
+func (o GetTriggerTaskRunDataOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// Queue cost time.
+func (o GetTriggerTaskRunDataOutput) QueueCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.QueueCostTime }).(pulumi.StringOutput)
+}
+
+// Task queue start time.
+func (o GetTriggerTaskRunDataOutput) QueueStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.QueueStartTime }).(pulumi.StringOutput)
+}
+
+// Rerun times.
+func (o GetTriggerTaskRunDataOutput) RerunTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) int { return v.RerunTimes }).(pulumi.IntOutput)
+}
+
+// Resource group.
+func (o GetTriggerTaskRunDataOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Resource group ID.
+func (o GetTriggerTaskRunDataOutput) ResourceGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ResourceGroupId }).(pulumi.StringOutput)
+}
+
+// Resource group name.
+func (o GetTriggerTaskRunDataOutput) ResourceGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.ResourceGroupName }).(pulumi.StringOutput)
+}
+
+// Retry times. 0 means first execution.
+func (o GetTriggerTaskRunDataOutput) RetryTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) int { return v.RetryTimes }).(pulumi.IntOutput)
+}
+
+// Run parameters.
+func (o GetTriggerTaskRunDataOutput) RunParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.RunParams }).(pulumi.StringOutput)
+}
+
+// Whether support rerun.
+func (o GetTriggerTaskRunDataOutput) SupportRerun() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) bool { return v.SupportRerun }).(pulumi.BoolOutput)
+}
+
+// Task execution state.
+func (o GetTriggerTaskRunDataOutput) TaskExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskExecutionState }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetTriggerTaskRunDataOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task name.
+func (o GetTriggerTaskRunDataOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type.
+func (o GetTriggerTaskRunDataOutput) TaskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskType }).(pulumi.StringOutput)
+}
+
+// Task type extensions including script path.
+func (o GetTriggerTaskRunDataOutput) TaskTypeExtensions() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskTypeExtensions }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetTriggerTaskRunDataOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Task version ID.
+func (o GetTriggerTaskRunDataOutput) TaskVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TaskVersionId }).(pulumi.StringOutput)
+}
+
+// Time zone.
+func (o GetTriggerTaskRunDataOutput) TimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TimeZone }).(pulumi.StringOutput)
+}
+
+// Timezone.
+func (o GetTriggerTaskRunDataOutput) Timezone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.Timezone }).(pulumi.StringOutput)
+}
+
+// Top coordinate.
+func (o GetTriggerTaskRunDataOutput) TopCoordinate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTriggerTaskRunData) float64 { return v.TopCoordinate }).(pulumi.Float64Output)
+}
+
+// Trigger type.
+func (o GetTriggerTaskRunDataOutput) TriggerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.TriggerType }).(pulumi.StringOutput)
+}
+
+// Update timestamp.
+func (o GetTriggerTaskRunDataOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// User name in charge.
+func (o GetTriggerTaskRunDataOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// User UIN in charge.
+func (o GetTriggerTaskRunDataOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Wait time in seconds.
+func (o GetTriggerTaskRunDataOutput) WaitTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WaitTime }).(pulumi.StringOutput)
+}
+
+// Workflow execution ID.
+func (o GetTriggerTaskRunDataOutput) WorkflowExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WorkflowExecutionId }).(pulumi.StringOutput)
+}
+
+// Workflow execution state.
+func (o GetTriggerTaskRunDataOutput) WorkflowExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WorkflowExecutionState }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerTaskRunDataOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerTaskRunDataOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+// Workflow parameters.
+func (o GetTriggerTaskRunDataOutput) WorkflowParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskRunData) string { return v.WorkflowParams }).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskRunDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskRunDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskRunData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskRunDataArrayOutput) ToGetTriggerTaskRunDataArrayOutput() GetTriggerTaskRunDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskRunDataArrayOutput) ToGetTriggerTaskRunDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskRunDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskRunDataArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskRunDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskRunData {
+		return vs[0].([]GetTriggerTaskRunData)[vs[1].(int)]
+	}).(GetTriggerTaskRunDataOutput)
+}
+
+type GetTriggerTaskVersionData struct {
+	// Approval status (only for submitted versions).
+	ApproveStatus string `pulumi:"approveStatus"`
+	// Production status (only for submitted versions).
+	ApproveTime string `pulumi:"approveTime"`
+	// Approver ID.
+	ApproveUserUin string `pulumi:"approveUserUin"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Version creator.
+	CreateUserUin string `pulumi:"createUserUin"`
+	// Task details of the version.
+	Task GetTriggerTaskVersionDataTask `pulumi:"task"`
+	// Submitted version ID; if not provided, the latest submitted version is used by default.
+	VersionId string `pulumi:"versionId"`
+	// Version number.
+	VersionNum string `pulumi:"versionNum"`
+	// Version description.
+	VersionRemark string `pulumi:"versionRemark"`
+}
+
+// GetTriggerTaskVersionDataInput is an input type that accepts GetTriggerTaskVersionDataArgs and GetTriggerTaskVersionDataOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataInput` via:
+//
+//	GetTriggerTaskVersionDataArgs{...}
+type GetTriggerTaskVersionDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataOutput() GetTriggerTaskVersionDataOutput
+	ToGetTriggerTaskVersionDataOutputWithContext(context.Context) GetTriggerTaskVersionDataOutput
+}
+
+type GetTriggerTaskVersionDataArgs struct {
+	// Approval status (only for submitted versions).
+	ApproveStatus pulumi.StringInput `pulumi:"approveStatus"`
+	// Production status (only for submitted versions).
+	ApproveTime pulumi.StringInput `pulumi:"approveTime"`
+	// Approver ID.
+	ApproveUserUin pulumi.StringInput `pulumi:"approveUserUin"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Version creator.
+	CreateUserUin pulumi.StringInput `pulumi:"createUserUin"`
+	// Task details of the version.
+	Task GetTriggerTaskVersionDataTaskInput `pulumi:"task"`
+	// Submitted version ID; if not provided, the latest submitted version is used by default.
+	VersionId pulumi.StringInput `pulumi:"versionId"`
+	// Version number.
+	VersionNum pulumi.StringInput `pulumi:"versionNum"`
+	// Version description.
+	VersionRemark pulumi.StringInput `pulumi:"versionRemark"`
+}
+
+func (GetTriggerTaskVersionDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataArgs) ToGetTriggerTaskVersionDataOutput() GetTriggerTaskVersionDataOutput {
+	return i.ToGetTriggerTaskVersionDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataArgs) ToGetTriggerTaskVersionDataOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataOutput)
+}
+
+// GetTriggerTaskVersionDataArrayInput is an input type that accepts GetTriggerTaskVersionDataArray and GetTriggerTaskVersionDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataArrayInput` via:
+//
+//	GetTriggerTaskVersionDataArray{ GetTriggerTaskVersionDataArgs{...} }
+type GetTriggerTaskVersionDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataArrayOutput() GetTriggerTaskVersionDataArrayOutput
+	ToGetTriggerTaskVersionDataArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataArrayOutput
+}
+
+type GetTriggerTaskVersionDataArray []GetTriggerTaskVersionDataInput
+
+func (GetTriggerTaskVersionDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataArray) ToGetTriggerTaskVersionDataArrayOutput() GetTriggerTaskVersionDataArrayOutput {
+	return i.ToGetTriggerTaskVersionDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataArray) ToGetTriggerTaskVersionDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataArrayOutput)
+}
+
+type GetTriggerTaskVersionDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataOutput) ToGetTriggerTaskVersionDataOutput() GetTriggerTaskVersionDataOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataOutput) ToGetTriggerTaskVersionDataOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataOutput {
+	return o
+}
+
+// Approval status (only for submitted versions).
+func (o GetTriggerTaskVersionDataOutput) ApproveStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.ApproveStatus }).(pulumi.StringOutput)
+}
+
+// Production status (only for submitted versions).
+func (o GetTriggerTaskVersionDataOutput) ApproveTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.ApproveTime }).(pulumi.StringOutput)
+}
+
+// Approver ID.
+func (o GetTriggerTaskVersionDataOutput) ApproveUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.ApproveUserUin }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetTriggerTaskVersionDataOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Version creator.
+func (o GetTriggerTaskVersionDataOutput) CreateUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.CreateUserUin }).(pulumi.StringOutput)
+}
+
+// Task details of the version.
+func (o GetTriggerTaskVersionDataOutput) Task() GetTriggerTaskVersionDataTaskOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) GetTriggerTaskVersionDataTask { return v.Task }).(GetTriggerTaskVersionDataTaskOutput)
+}
+
+// Submitted version ID; if not provided, the latest submitted version is used by default.
+func (o GetTriggerTaskVersionDataOutput) VersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.VersionId }).(pulumi.StringOutput)
+}
+
+// Version number.
+func (o GetTriggerTaskVersionDataOutput) VersionNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.VersionNum }).(pulumi.StringOutput)
+}
+
+// Version description.
+func (o GetTriggerTaskVersionDataOutput) VersionRemark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionData) string { return v.VersionRemark }).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataArrayOutput) ToGetTriggerTaskVersionDataArrayOutput() GetTriggerTaskVersionDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataArrayOutput) ToGetTriggerTaskVersionDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionData {
+		return vs[0].([]GetTriggerTaskVersionData)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataOutput)
+}
+
+type GetTriggerTaskVersionDataTask struct {
+	// Basic task attributes.
+	TriggerTaskBaseAttribute GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute `pulumi:"triggerTaskBaseAttribute"`
+	// Task configuration.
+	TriggerTaskConfiguration GetTriggerTaskVersionDataTaskTriggerTaskConfiguration `pulumi:"triggerTaskConfiguration"`
+	// Task scheduling configuration.
+	TriggerTaskSchedulerConfiguration GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration `pulumi:"triggerTaskSchedulerConfiguration"`
+}
+
+// GetTriggerTaskVersionDataTaskInput is an input type that accepts GetTriggerTaskVersionDataTaskArgs and GetTriggerTaskVersionDataTaskOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskInput` via:
+//
+//	GetTriggerTaskVersionDataTaskArgs{...}
+type GetTriggerTaskVersionDataTaskInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskOutput() GetTriggerTaskVersionDataTaskOutput
+	ToGetTriggerTaskVersionDataTaskOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskOutput
+}
+
+type GetTriggerTaskVersionDataTaskArgs struct {
+	// Basic task attributes.
+	TriggerTaskBaseAttribute GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeInput `pulumi:"triggerTaskBaseAttribute"`
+	// Task configuration.
+	TriggerTaskConfiguration GetTriggerTaskVersionDataTaskTriggerTaskConfigurationInput `pulumi:"triggerTaskConfiguration"`
+	// Task scheduling configuration.
+	TriggerTaskSchedulerConfiguration GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationInput `pulumi:"triggerTaskSchedulerConfiguration"`
+}
+
+func (GetTriggerTaskVersionDataTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTask)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskArgs) ToGetTriggerTaskVersionDataTaskOutput() GetTriggerTaskVersionDataTaskOutput {
+	return i.ToGetTriggerTaskVersionDataTaskOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskArgs) ToGetTriggerTaskVersionDataTaskOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskOutput)
+}
+
+type GetTriggerTaskVersionDataTaskOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTask)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskOutput) ToGetTriggerTaskVersionDataTaskOutput() GetTriggerTaskVersionDataTaskOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskOutput) ToGetTriggerTaskVersionDataTaskOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskOutput {
+	return o
+}
+
+// Basic task attributes.
+func (o GetTriggerTaskVersionDataTaskOutput) TriggerTaskBaseAttribute() GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTask) GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute {
+		return v.TriggerTaskBaseAttribute
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput)
+}
+
+// Task configuration.
+func (o GetTriggerTaskVersionDataTaskOutput) TriggerTaskConfiguration() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTask) GetTriggerTaskVersionDataTaskTriggerTaskConfiguration {
+		return v.TriggerTaskConfiguration
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput)
+}
+
+// Task scheduling configuration.
+func (o GetTriggerTaskVersionDataTaskOutput) TriggerTaskSchedulerConfiguration() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTask) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration {
+		return v.TriggerTaskSchedulerConfiguration
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute struct {
+	// Task creation time, example: 2022-02-12 11:13:41.
+	CreateTime *string `pulumi:"createTime"`
+	// Creator user ID.
+	CreateUserUin *string `pulumi:"createUserUin"`
+	// Last operations time.
+	LastOpsTime *string `pulumi:"lastOpsTime"`
+	// Last operations user name.
+	LastOpsUserName *string `pulumi:"lastOpsUserName"`
+	// Last update time, example: 2025-08-13 16:34:06.
+	LastUpdateTime *string `pulumi:"lastUpdateTime"`
+	// Last updater name.
+	LastUpdateUserName *string `pulumi:"lastUpdateUserName"`
+	// Task owner ID.
+	OwnerUin *string `pulumi:"ownerUin"`
+	// Task status:
+	// * N: New
+	// * Y: Scheduling.
+	Status *string `pulumi:"status"`
+	// Latest submission status of the task; whether the task has been submitted: true/false.
+	Submit *bool `pulumi:"submit"`
+	// Task description.
+	TaskDescription *string `pulumi:"taskDescription"`
+	// Task folder path. Notes: Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, if you want to create a shell task in the tf01 folder under this category, just fill in /tf_01; If the tf01 folder does not exist, you must create it first (using the CreateTaskFolder API) before the operation can succeed.
+	TaskFolderPath *string `pulumi:"taskFolderPath"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Latest submitted version number.
+	TaskLatestSubmitVersionNo *string `pulumi:"taskLatestSubmitVersionNo"`
+	// Latest saved version number.
+	TaskLatestVersionNo *string `pulumi:"taskLatestVersionNo"`
+	// Task name.
+	TaskName *string `pulumi:"taskName"`
+	// Task type ID:
+	//
+	// - 26: OfflineSynchronization
+	// - 30: Python
+	// - 32: DLC SQL
+	// - 35: Shell
+	// - 38: Shell Form Mode
+	// - 46: DLC Spark
+	// - 50: DLC PySpark
+	// - 130: Branch Node
+	// - 131: Merged Node
+	// - 132: Notebook
+	// - 133: SSH
+	// - 137: For-each
+	// - 139: DLC Spark Streaming
+	// - 140: Run Workflow.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Most recent updater user ID.
+	UpdateUserUin *string `pulumi:"updateUserUin"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName *string `pulumi:"workflowName"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs and GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput() GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs struct {
+	// Task creation time, example: 2022-02-12 11:13:41.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Creator user ID.
+	CreateUserUin pulumi.StringPtrInput `pulumi:"createUserUin"`
+	// Last operations time.
+	LastOpsTime pulumi.StringPtrInput `pulumi:"lastOpsTime"`
+	// Last operations user name.
+	LastOpsUserName pulumi.StringPtrInput `pulumi:"lastOpsUserName"`
+	// Last update time, example: 2025-08-13 16:34:06.
+	LastUpdateTime pulumi.StringPtrInput `pulumi:"lastUpdateTime"`
+	// Last updater name.
+	LastUpdateUserName pulumi.StringPtrInput `pulumi:"lastUpdateUserName"`
+	// Task owner ID.
+	OwnerUin pulumi.StringPtrInput `pulumi:"ownerUin"`
+	// Task status:
+	// * N: New
+	// * Y: Scheduling.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Latest submission status of the task; whether the task has been submitted: true/false.
+	Submit pulumi.BoolPtrInput `pulumi:"submit"`
+	// Task description.
+	TaskDescription pulumi.StringPtrInput `pulumi:"taskDescription"`
+	// Task folder path. Notes: Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, if you want to create a shell task in the tf01 folder under this category, just fill in /tf_01; If the tf01 folder does not exist, you must create it first (using the CreateTaskFolder API) before the operation can succeed.
+	TaskFolderPath pulumi.StringPtrInput `pulumi:"taskFolderPath"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Latest submitted version number.
+	TaskLatestSubmitVersionNo pulumi.StringPtrInput `pulumi:"taskLatestSubmitVersionNo"`
+	// Latest saved version number.
+	TaskLatestVersionNo pulumi.StringPtrInput `pulumi:"taskLatestVersionNo"`
+	// Task name.
+	TaskName pulumi.StringPtrInput `pulumi:"taskName"`
+	// Task type ID:
+	//
+	// - 26: OfflineSynchronization
+	// - 30: Python
+	// - 32: DLC SQL
+	// - 35: Shell
+	// - 38: Shell Form Mode
+	// - 46: DLC Spark
+	// - 50: DLC PySpark
+	// - 130: Branch Node
+	// - 131: Merged Node
+	// - 132: Notebook
+	// - 133: SSH
+	// - 137: For-each
+	// - 139: DLC Spark Streaming
+	// - 140: Run Workflow.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Most recent updater user ID.
+	UpdateUserUin pulumi.StringPtrInput `pulumi:"updateUserUin"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringPtrInput `pulumi:"workflowName"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput() GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput() GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput {
+	return o
+}
+
+// Task creation time, example: 2022-02-12 11:13:41.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Creator user ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) CreateUserUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.CreateUserUin }).(pulumi.StringPtrOutput)
+}
+
+// Last operations time.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) LastOpsTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.LastOpsTime }).(pulumi.StringPtrOutput)
+}
+
+// Last operations user name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) LastOpsUserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.LastOpsUserName }).(pulumi.StringPtrOutput)
+}
+
+// Last update time, example: 2025-08-13 16:34:06.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) LastUpdateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.LastUpdateTime }).(pulumi.StringPtrOutput)
+}
+
+// Last updater name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) LastUpdateUserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.LastUpdateUserName }).(pulumi.StringPtrOutput)
+}
+
+// Task owner ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) OwnerUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.OwnerUin }).(pulumi.StringPtrOutput)
+}
+
+// Task status:
+// * N: New
+// * Y: Scheduling.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+// Latest submission status of the task; whether the task has been submitted: true/false.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) Submit() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *bool { return v.Submit }).(pulumi.BoolPtrOutput)
+}
+
+// Task description.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskDescription() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.TaskDescription }).(pulumi.StringPtrOutput)
+}
+
+// Task folder path. Notes: Do not include the task node type in the path. For example, in a workflow named wf01 under the "General" category, if you want to create a shell task in the tf01 folder under this category, just fill in /tf_01; If the tf01 folder does not exist, you must create it first (using the CreateTaskFolder API) before the operation can succeed.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskFolderPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.TaskFolderPath }).(pulumi.StringPtrOutput)
+}
+
+// Task ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Latest submitted version number.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskLatestSubmitVersionNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string {
+		return v.TaskLatestSubmitVersionNo
+	}).(pulumi.StringPtrOutput)
+}
+
+// Latest saved version number.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskLatestVersionNo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.TaskLatestVersionNo }).(pulumi.StringPtrOutput)
+}
+
+// Task name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.TaskName }).(pulumi.StringPtrOutput)
+}
+
+// Task type ID:
+//
+// - 26: OfflineSynchronization
+// - 30: Python
+// - 32: DLC SQL
+// - 35: Shell
+// - 38: Shell Form Mode
+// - 46: DLC Spark
+// - 50: DLC PySpark
+// - 130: Branch Node
+// - 131: Merged Node
+// - 132: Notebook
+// - 133: SSH
+// - 137: For-each
+// - 139: DLC Spark Streaming
+// - 140: Run Workflow.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Most recent updater user ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) UpdateUserUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.UpdateUserUin }).(pulumi.StringPtrOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput) WorkflowName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskBaseAttribute) *string { return v.WorkflowName }).(pulumi.StringPtrOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfiguration struct {
+	// Specified execution node.
+	BrokerIp *string `pulumi:"brokerIp"`
+	// Bundle ID in use.
+	BundleId *string `pulumi:"bundleId"`
+	// Bundle information.
+	BundleInfo *string `pulumi:"bundleInfo"`
+	// Base64-encoded code content.
+	CodeContent *string `pulumi:"codeContent"`
+	// Cluster ID.
+	DataCluster *string `pulumi:"dataCluster"`
+	// Resource group ID; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupId.
+	ResourceGroup *string `pulumi:"resourceGroup"`
+	// Resource group name; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupName.
+	ResourceGroupName *string `pulumi:"resourceGroupName"`
+	// Source data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceId *string `pulumi:"sourceServiceId"`
+	// Source data source name; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceName *string `pulumi:"sourceServiceName"`
+	// Source data source type; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceType *string `pulumi:"sourceServiceType"`
+	// Target data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceId *string `pulumi:"targetServiceId"`
+	// Target data source name; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceName *string `pulumi:"targetServiceName"`
+	// Target data source type; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceType *string `pulumi:"targetServiceType"`
+	// Task extended attribute configuration list.
+	TaskExtConfigurationLists []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList `pulumi:"taskExtConfigurationLists"`
+	// Scheduling parameters.
+	TaskSchedulingParameterLists []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList `pulumi:"taskSchedulingParameterLists"`
+	// Resource pool queue name; must be obtained via DescribeProjectClusterQueues.
+	YarnQueue *string `pulumi:"yarnQueue"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskConfigurationInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs and GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskConfigurationInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs struct {
+	// Specified execution node.
+	BrokerIp pulumi.StringPtrInput `pulumi:"brokerIp"`
+	// Bundle ID in use.
+	BundleId pulumi.StringPtrInput `pulumi:"bundleId"`
+	// Bundle information.
+	BundleInfo pulumi.StringPtrInput `pulumi:"bundleInfo"`
+	// Base64-encoded code content.
+	CodeContent pulumi.StringPtrInput `pulumi:"codeContent"`
+	// Cluster ID.
+	DataCluster pulumi.StringPtrInput `pulumi:"dataCluster"`
+	// Resource group ID; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupId.
+	ResourceGroup pulumi.StringPtrInput `pulumi:"resourceGroup"`
+	// Resource group name; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupName.
+	ResourceGroupName pulumi.StringPtrInput `pulumi:"resourceGroupName"`
+	// Source data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceId pulumi.StringPtrInput `pulumi:"sourceServiceId"`
+	// Source data source name; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceName pulumi.StringPtrInput `pulumi:"sourceServiceName"`
+	// Source data source type; must be obtained via DescribeDataSourceWithoutInfo.
+	SourceServiceType pulumi.StringPtrInput `pulumi:"sourceServiceType"`
+	// Target data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceId pulumi.StringPtrInput `pulumi:"targetServiceId"`
+	// Target data source name; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceName pulumi.StringPtrInput `pulumi:"targetServiceName"`
+	// Target data source type; must be obtained via DescribeDataSourceWithoutInfo.
+	TargetServiceType pulumi.StringPtrInput `pulumi:"targetServiceType"`
+	// Task extended attribute configuration list.
+	TaskExtConfigurationLists GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput `pulumi:"taskExtConfigurationLists"`
+	// Scheduling parameters.
+	TaskSchedulingParameterLists GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput `pulumi:"taskSchedulingParameterLists"`
+	// Resource pool queue name; must be obtained via DescribeProjectClusterQueues.
+	YarnQueue pulumi.StringPtrInput `pulumi:"yarnQueue"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfiguration)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput {
+	return o
+}
+
+// Specified execution node.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) BrokerIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.BrokerIp }).(pulumi.StringPtrOutput)
+}
+
+// Bundle ID in use.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) BundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.BundleId }).(pulumi.StringPtrOutput)
+}
+
+// Bundle information.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) BundleInfo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.BundleInfo }).(pulumi.StringPtrOutput)
+}
+
+// Base64-encoded code content.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) CodeContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.CodeContent }).(pulumi.StringPtrOutput)
+}
+
+// Cluster ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) DataCluster() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.DataCluster }).(pulumi.StringPtrOutput)
+}
+
+// Resource group ID; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupId.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) ResourceGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.ResourceGroup }).(pulumi.StringPtrOutput)
+}
+
+// Resource group name; must be obtained via DescribeNormalSchedulerExecutorGroups to get ExecutorGroupName.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) ResourceGroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.ResourceGroupName }).(pulumi.StringPtrOutput)
+}
+
+// Source data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) SourceServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.SourceServiceId }).(pulumi.StringPtrOutput)
+}
+
+// Source data source name; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) SourceServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.SourceServiceName }).(pulumi.StringPtrOutput)
+}
+
+// Source data source type; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) SourceServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.SourceServiceType }).(pulumi.StringPtrOutput)
+}
+
+// Target data source ID; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) TargetServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.TargetServiceId }).(pulumi.StringPtrOutput)
+}
+
+// Target data source name; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) TargetServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.TargetServiceName }).(pulumi.StringPtrOutput)
+}
+
+// Target data source type; must be obtained via DescribeDataSourceWithoutInfo.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) TargetServiceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.TargetServiceType }).(pulumi.StringPtrOutput)
+}
+
+// Task extended attribute configuration list.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) TaskExtConfigurationLists() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList {
+		return v.TaskExtConfigurationLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput)
+}
+
+// Scheduling parameters.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) TaskSchedulingParameterLists() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList {
+		return v.TaskSchedulingParameterLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput)
+}
+
+// Resource pool queue name; must be obtained via DescribeProjectClusterQueues.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput) YarnQueue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfiguration) *string { return v.YarnQueue }).(pulumi.StringPtrOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs and GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray and GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray{ GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList) string {
+		return v.ParamKey
+	}).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList) string {
+		return v.ParamValue
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs and GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter value.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray and GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray{ GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray []GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList) string {
+		return v.ParamKey
+	}).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList) string {
+		return v.ParamValue
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration struct {
+	// Re-run & backfill configuration; default is ALL; ALL allows re-run or backfill after success or failure; FAILURE disallows re-run or backfill after success but allows after failure; NONE disallows re-run or backfill after both success and failure.
+	AllowRedoType *string `pulumi:"allowRedoType"`
+	// Timeout handling strategy for execution duration timeout (minutes); default is -1.
+	ExecutionTtlMinute *int `pulumi:"executionTtlMinute"`
+	// Retry strategy maximum retry attempts; default: 4.
+	MaxRetryNumber *int `pulumi:"maxRetryNumber"`
+	// Input parameter array.
+	ParamTaskInLists []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList `pulumi:"paramTaskInLists"`
+	// Output parameter array.
+	ParamTaskOutLists []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList `pulumi:"paramTaskOutLists"`
+	// Retry strategy retry wait time, in minutes; default: 5.
+	RetryWaitMinute *int `pulumi:"retryWaitMinute"`
+	// Task scheduling priority; run priority 4 high, 5 medium, 6 low; default: 6.
+	RunPriorityType *int `pulumi:"runPriorityType"`
+	// Output registration.
+	TaskOutputRegistryLists []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList `pulumi:"taskOutputRegistryLists"`
+	// Upstream dependency array.
+	UpstreamDependencyConfigLists []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList `pulumi:"upstreamDependencyConfigLists"`
+	// Timeout handling strategy for total waiting duration timeout (minutes); default is -1.
+	WaitExecutionTotalTtlMinute *int `pulumi:"waitExecutionTotalTtlMinute"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs struct {
+	// Re-run & backfill configuration; default is ALL; ALL allows re-run or backfill after success or failure; FAILURE disallows re-run or backfill after success but allows after failure; NONE disallows re-run or backfill after both success and failure.
+	AllowRedoType pulumi.StringPtrInput `pulumi:"allowRedoType"`
+	// Timeout handling strategy for execution duration timeout (minutes); default is -1.
+	ExecutionTtlMinute pulumi.IntPtrInput `pulumi:"executionTtlMinute"`
+	// Retry strategy maximum retry attempts; default: 4.
+	MaxRetryNumber pulumi.IntPtrInput `pulumi:"maxRetryNumber"`
+	// Input parameter array.
+	ParamTaskInLists GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput `pulumi:"paramTaskInLists"`
+	// Output parameter array.
+	ParamTaskOutLists GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput `pulumi:"paramTaskOutLists"`
+	// Retry strategy retry wait time, in minutes; default: 5.
+	RetryWaitMinute pulumi.IntPtrInput `pulumi:"retryWaitMinute"`
+	// Task scheduling priority; run priority 4 high, 5 medium, 6 low; default: 6.
+	RunPriorityType pulumi.IntPtrInput `pulumi:"runPriorityType"`
+	// Output registration.
+	TaskOutputRegistryLists GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput `pulumi:"taskOutputRegistryLists"`
+	// Upstream dependency array.
+	UpstreamDependencyConfigLists GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput `pulumi:"upstreamDependencyConfigLists"`
+	// Timeout handling strategy for total waiting duration timeout (minutes); default is -1.
+	WaitExecutionTotalTtlMinute pulumi.IntPtrInput `pulumi:"waitExecutionTotalTtlMinute"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput {
+	return o
+}
+
+// Re-run & backfill configuration; default is ALL; ALL allows re-run or backfill after success or failure; FAILURE disallows re-run or backfill after success but allows after failure; NONE disallows re-run or backfill after both success and failure.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) AllowRedoType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *string { return v.AllowRedoType }).(pulumi.StringPtrOutput)
+}
+
+// Timeout handling strategy for execution duration timeout (minutes); default is -1.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ExecutionTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *int {
+		return v.ExecutionTtlMinute
+	}).(pulumi.IntPtrOutput)
+}
+
+// Retry strategy maximum retry attempts; default: 4.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) MaxRetryNumber() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *int { return v.MaxRetryNumber }).(pulumi.IntPtrOutput)
+}
+
+// Input parameter array.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ParamTaskInLists() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList {
+		return v.ParamTaskInLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput)
+}
+
+// Output parameter array.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) ParamTaskOutLists() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList {
+		return v.ParamTaskOutLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput)
+}
+
+// Retry strategy retry wait time, in minutes; default: 5.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) RetryWaitMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *int { return v.RetryWaitMinute }).(pulumi.IntPtrOutput)
+}
+
+// Task scheduling priority; run priority 4 high, 5 medium, 6 low; default: 6.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) RunPriorityType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *int { return v.RunPriorityType }).(pulumi.IntPtrOutput)
+}
+
+// Output registration.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) TaskOutputRegistryLists() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList {
+		return v.TaskOutputRegistryLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput)
+}
+
+// Upstream dependency array.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) UpstreamDependencyConfigLists() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList {
+		return v.UpstreamDependencyConfigLists
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput)
+}
+
+// Timeout handling strategy for total waiting duration timeout (minutes); default is -1.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput) WaitExecutionTotalTtlMinute() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfiguration) *int {
+		return v.WaitExecutionTotalTtlMinute
+	}).(pulumi.IntPtrOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList struct {
+	// Parent task parameter key.
+	FromParamKey string `pulumi:"fromParamKey"`
+	// Parent task ID.
+	FromTaskId string `pulumi:"fromTaskId"`
+	// Parameter description; format: project identifier.task name.parameter name; example: project_wedata_1.sh_250820_104107.pp_out.
+	ParamDesc string `pulumi:"paramDesc"`
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs struct {
+	// Parent task parameter key.
+	FromParamKey pulumi.StringInput `pulumi:"fromParamKey"`
+	// Parent task ID.
+	FromTaskId pulumi.StringInput `pulumi:"fromTaskId"`
+	// Parameter description; format: project identifier.task name.parameter name; example: project_wedata_1.sh_250820_104107.pp_out.
+	ParamDesc pulumi.StringInput `pulumi:"paramDesc"`
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray{ GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return o
+}
+
+// Parent task parameter key.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) FromParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList) string {
+		return v.FromParamKey
+	}).(pulumi.StringOutput)
+}
+
+// Parent task ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) FromTaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList) string {
+		return v.FromTaskId
+	}).(pulumi.StringOutput)
+}
+
+// Parameter description; format: project identifier.task name.parameter name; example: project_wedata_1.sh_250820_104107.pp_out.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ParamDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList) string {
+		return v.ParamDesc
+	}).(pulumi.StringOutput)
+}
+
+// Parameter name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList) string {
+		return v.ParamKey
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList struct {
+	// Parameter name.
+	ParamKey string `pulumi:"paramKey"`
+	// Parameter definition.
+	ParamValue string `pulumi:"paramValue"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs struct {
+	// Parameter name.
+	ParamKey pulumi.StringInput `pulumi:"paramKey"`
+	// Parameter definition.
+	ParamValue pulumi.StringInput `pulumi:"paramValue"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray{ GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return o
+}
+
+// Parameter name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ParamKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList) string {
+		return v.ParamKey
+	}).(pulumi.StringOutput)
+}
+
+// Parameter definition.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput) ParamValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList) string {
+		return v.ParamValue
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList struct {
+	// Input/output table type: Input stream UPSTREAM, Output stream DOWNSTREAM.
+	DataFlowType string `pulumi:"dataFlowType"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId string `pulumi:"datasourceId"`
+	// Database unique identifier.
+	DbGuid *string `pulumi:"dbGuid"`
+	// Partition name.
+	PartitionName string `pulumi:"partitionName"`
+	// Table unique identifier.
+	TableGuid *string `pulumi:"tableGuid"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
+	// Table physical unique ID.
+	TablePhysicalId string `pulumi:"tablePhysicalId"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs struct {
+	// Input/output table type: Input stream UPSTREAM, Output stream DOWNSTREAM.
+	DataFlowType pulumi.StringInput `pulumi:"dataFlowType"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Data source ID.
+	DatasourceId pulumi.StringInput `pulumi:"datasourceId"`
+	// Database unique identifier.
+	DbGuid pulumi.StringPtrInput `pulumi:"dbGuid"`
+	// Partition name.
+	PartitionName pulumi.StringInput `pulumi:"partitionName"`
+	// Table unique identifier.
+	TableGuid pulumi.StringPtrInput `pulumi:"tableGuid"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+	// Table physical unique ID.
+	TablePhysicalId pulumi.StringInput `pulumi:"tablePhysicalId"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray{ GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return o
+}
+
+// Input/output table type: Input stream UPSTREAM, Output stream DOWNSTREAM.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DataFlowType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DataFlowType
+	}).(pulumi.StringOutput)
+}
+
+// Database name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DatabaseName
+	}).(pulumi.StringOutput)
+}
+
+// Data source ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DatasourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.DatasourceId
+	}).(pulumi.StringOutput)
+}
+
+// Database unique identifier.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) DbGuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) *string {
+		return v.DbGuid
+	}).(pulumi.StringPtrOutput)
+}
+
+// Partition name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) PartitionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.PartitionName
+	}).(pulumi.StringOutput)
+}
+
+// Table unique identifier.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TableGuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) *string {
+		return v.TableGuid
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.TableName
+	}).(pulumi.StringOutput)
+}
+
+// Table physical unique ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput) TablePhysicalId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList) string {
+		return v.TablePhysicalId
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList struct {
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{...}
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs struct {
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+}
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput)
+}
+
+// GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput is an input type that accepts GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray and GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput` via:
+//
+//	GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray{ GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{...} }
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput
+	ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray []GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return i.ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return o
+}
+
+// Task ID.
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList) string {
+		return v.TaskId
+	}).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput() GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) ToGetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList {
+		return vs[0].([]GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigList)[vs[1].(int)]
+	}).(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput)
+}
+
+type GetTriggerTaskVersionsData struct {
+	// Record list.
+	Items []GetTriggerTaskVersionsDataItem `pulumi:"items"`
+}
+
+// GetTriggerTaskVersionsDataInput is an input type that accepts GetTriggerTaskVersionsDataArgs and GetTriggerTaskVersionsDataOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionsDataInput` via:
+//
+//	GetTriggerTaskVersionsDataArgs{...}
+type GetTriggerTaskVersionsDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionsDataOutput() GetTriggerTaskVersionsDataOutput
+	ToGetTriggerTaskVersionsDataOutputWithContext(context.Context) GetTriggerTaskVersionsDataOutput
+}
+
+type GetTriggerTaskVersionsDataArgs struct {
+	// Record list.
+	Items GetTriggerTaskVersionsDataItemArrayInput `pulumi:"items"`
+}
+
+func (GetTriggerTaskVersionsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionsData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionsDataArgs) ToGetTriggerTaskVersionsDataOutput() GetTriggerTaskVersionsDataOutput {
+	return i.ToGetTriggerTaskVersionsDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionsDataArgs) ToGetTriggerTaskVersionsDataOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionsDataOutput)
+}
+
+// GetTriggerTaskVersionsDataArrayInput is an input type that accepts GetTriggerTaskVersionsDataArray and GetTriggerTaskVersionsDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionsDataArrayInput` via:
+//
+//	GetTriggerTaskVersionsDataArray{ GetTriggerTaskVersionsDataArgs{...} }
+type GetTriggerTaskVersionsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionsDataArrayOutput() GetTriggerTaskVersionsDataArrayOutput
+	ToGetTriggerTaskVersionsDataArrayOutputWithContext(context.Context) GetTriggerTaskVersionsDataArrayOutput
+}
+
+type GetTriggerTaskVersionsDataArray []GetTriggerTaskVersionsDataInput
+
+func (GetTriggerTaskVersionsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionsData)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionsDataArray) ToGetTriggerTaskVersionsDataArrayOutput() GetTriggerTaskVersionsDataArrayOutput {
+	return i.ToGetTriggerTaskVersionsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionsDataArray) ToGetTriggerTaskVersionsDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionsDataArrayOutput)
+}
+
+type GetTriggerTaskVersionsDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionsData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionsDataOutput) ToGetTriggerTaskVersionsDataOutput() GetTriggerTaskVersionsDataOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataOutput) ToGetTriggerTaskVersionsDataOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataOutput {
+	return o
+}
+
+// Record list.
+func (o GetTriggerTaskVersionsDataOutput) Items() GetTriggerTaskVersionsDataItemArrayOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsData) []GetTriggerTaskVersionsDataItem { return v.Items }).(GetTriggerTaskVersionsDataItemArrayOutput)
+}
+
+type GetTriggerTaskVersionsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionsData)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionsDataArrayOutput) ToGetTriggerTaskVersionsDataArrayOutput() GetTriggerTaskVersionsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataArrayOutput) ToGetTriggerTaskVersionsDataArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionsData {
+		return vs[0].([]GetTriggerTaskVersionsData)[vs[1].(int)]
+	}).(GetTriggerTaskVersionsDataOutput)
+}
+
+type GetTriggerTaskVersionsDataItem struct {
+	// Approval status (only for submitted versions).
+	ApproveStatus string `pulumi:"approveStatus"`
+	// Approver (only for submitted versions).
+	ApproveUserUin string `pulumi:"approveUserUin"`
+	// Save time.
+	CreateTime string `pulumi:"createTime"`
+	// Creator.
+	CreateUserUin string `pulumi:"createUserUin"`
+	// Production status (only for submitted versions).
+	Status string `pulumi:"status"`
+	// Saved version ID.
+	VersionId string `pulumi:"versionId"`
+	// Version number.
+	VersionNum string `pulumi:"versionNum"`
+	// Version description.
+	VersionRemark string `pulumi:"versionRemark"`
+}
+
+// GetTriggerTaskVersionsDataItemInput is an input type that accepts GetTriggerTaskVersionsDataItemArgs and GetTriggerTaskVersionsDataItemOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionsDataItemInput` via:
+//
+//	GetTriggerTaskVersionsDataItemArgs{...}
+type GetTriggerTaskVersionsDataItemInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionsDataItemOutput() GetTriggerTaskVersionsDataItemOutput
+	ToGetTriggerTaskVersionsDataItemOutputWithContext(context.Context) GetTriggerTaskVersionsDataItemOutput
+}
+
+type GetTriggerTaskVersionsDataItemArgs struct {
+	// Approval status (only for submitted versions).
+	ApproveStatus pulumi.StringInput `pulumi:"approveStatus"`
+	// Approver (only for submitted versions).
+	ApproveUserUin pulumi.StringInput `pulumi:"approveUserUin"`
+	// Save time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Creator.
+	CreateUserUin pulumi.StringInput `pulumi:"createUserUin"`
+	// Production status (only for submitted versions).
+	Status pulumi.StringInput `pulumi:"status"`
+	// Saved version ID.
+	VersionId pulumi.StringInput `pulumi:"versionId"`
+	// Version number.
+	VersionNum pulumi.StringInput `pulumi:"versionNum"`
+	// Version description.
+	VersionRemark pulumi.StringInput `pulumi:"versionRemark"`
+}
+
+func (GetTriggerTaskVersionsDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionsDataItemArgs) ToGetTriggerTaskVersionsDataItemOutput() GetTriggerTaskVersionsDataItemOutput {
+	return i.ToGetTriggerTaskVersionsDataItemOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionsDataItemArgs) ToGetTriggerTaskVersionsDataItemOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionsDataItemOutput)
+}
+
+// GetTriggerTaskVersionsDataItemArrayInput is an input type that accepts GetTriggerTaskVersionsDataItemArray and GetTriggerTaskVersionsDataItemArrayOutput values.
+// You can construct a concrete instance of `GetTriggerTaskVersionsDataItemArrayInput` via:
+//
+//	GetTriggerTaskVersionsDataItemArray{ GetTriggerTaskVersionsDataItemArgs{...} }
+type GetTriggerTaskVersionsDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerTaskVersionsDataItemArrayOutput() GetTriggerTaskVersionsDataItemArrayOutput
+	ToGetTriggerTaskVersionsDataItemArrayOutputWithContext(context.Context) GetTriggerTaskVersionsDataItemArrayOutput
+}
+
+type GetTriggerTaskVersionsDataItemArray []GetTriggerTaskVersionsDataItemInput
+
+func (GetTriggerTaskVersionsDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerTaskVersionsDataItemArray) ToGetTriggerTaskVersionsDataItemArrayOutput() GetTriggerTaskVersionsDataItemArrayOutput {
+	return i.ToGetTriggerTaskVersionsDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerTaskVersionsDataItemArray) ToGetTriggerTaskVersionsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerTaskVersionsDataItemArrayOutput)
+}
+
+type GetTriggerTaskVersionsDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionsDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerTaskVersionsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionsDataItemOutput) ToGetTriggerTaskVersionsDataItemOutput() GetTriggerTaskVersionsDataItemOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataItemOutput) ToGetTriggerTaskVersionsDataItemOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataItemOutput {
+	return o
+}
+
+// Approval status (only for submitted versions).
+func (o GetTriggerTaskVersionsDataItemOutput) ApproveStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.ApproveStatus }).(pulumi.StringOutput)
+}
+
+// Approver (only for submitted versions).
+func (o GetTriggerTaskVersionsDataItemOutput) ApproveUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.ApproveUserUin }).(pulumi.StringOutput)
+}
+
+// Save time.
+func (o GetTriggerTaskVersionsDataItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Creator.
+func (o GetTriggerTaskVersionsDataItemOutput) CreateUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.CreateUserUin }).(pulumi.StringOutput)
+}
+
+// Production status (only for submitted versions).
+func (o GetTriggerTaskVersionsDataItemOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Saved version ID.
+func (o GetTriggerTaskVersionsDataItemOutput) VersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.VersionId }).(pulumi.StringOutput)
+}
+
+// Version number.
+func (o GetTriggerTaskVersionsDataItemOutput) VersionNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.VersionNum }).(pulumi.StringOutput)
+}
+
+// Version description.
+func (o GetTriggerTaskVersionsDataItemOutput) VersionRemark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerTaskVersionsDataItem) string { return v.VersionRemark }).(pulumi.StringOutput)
+}
+
+type GetTriggerTaskVersionsDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerTaskVersionsDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerTaskVersionsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerTaskVersionsDataItemArrayOutput) ToGetTriggerTaskVersionsDataItemArrayOutput() GetTriggerTaskVersionsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataItemArrayOutput) ToGetTriggerTaskVersionsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerTaskVersionsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerTaskVersionsDataItemArrayOutput) Index(i pulumi.IntInput) GetTriggerTaskVersionsDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerTaskVersionsDataItem {
+		return vs[0].([]GetTriggerTaskVersionsDataItem)[vs[1].(int)]
+	}).(GetTriggerTaskVersionsDataItemOutput)
+}
+
+type GetTriggerWorkflowRunData struct {
+	// Business state enum information.
+	BizStateEnumInfos []GetTriggerWorkflowRunDataBizStateEnumInfo `pulumi:"bizStateEnumInfos"`
+	// Task run information.
+	TriggerTaskRuns []GetTriggerWorkflowRunDataTriggerTaskRun `pulumi:"triggerTaskRuns"`
+	// Workflow run information.
+	TriggerWorkflowRun GetTriggerWorkflowRunDataTriggerWorkflowRun `pulumi:"triggerWorkflowRun"`
+}
+
+// GetTriggerWorkflowRunDataInput is an input type that accepts GetTriggerWorkflowRunDataArgs and GetTriggerWorkflowRunDataOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataInput` via:
+//
+//	GetTriggerWorkflowRunDataArgs{...}
+type GetTriggerWorkflowRunDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataOutput() GetTriggerWorkflowRunDataOutput
+	ToGetTriggerWorkflowRunDataOutputWithContext(context.Context) GetTriggerWorkflowRunDataOutput
+}
+
+type GetTriggerWorkflowRunDataArgs struct {
+	// Business state enum information.
+	BizStateEnumInfos GetTriggerWorkflowRunDataBizStateEnumInfoArrayInput `pulumi:"bizStateEnumInfos"`
+	// Task run information.
+	TriggerTaskRuns GetTriggerWorkflowRunDataTriggerTaskRunArrayInput `pulumi:"triggerTaskRuns"`
+	// Workflow run information.
+	TriggerWorkflowRun GetTriggerWorkflowRunDataTriggerWorkflowRunInput `pulumi:"triggerWorkflowRun"`
+}
+
+func (GetTriggerWorkflowRunDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataArgs) ToGetTriggerWorkflowRunDataOutput() GetTriggerWorkflowRunDataOutput {
+	return i.ToGetTriggerWorkflowRunDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataArgs) ToGetTriggerWorkflowRunDataOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataOutput)
+}
+
+// GetTriggerWorkflowRunDataArrayInput is an input type that accepts GetTriggerWorkflowRunDataArray and GetTriggerWorkflowRunDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataArrayInput` via:
+//
+//	GetTriggerWorkflowRunDataArray{ GetTriggerWorkflowRunDataArgs{...} }
+type GetTriggerWorkflowRunDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataArrayOutput() GetTriggerWorkflowRunDataArrayOutput
+	ToGetTriggerWorkflowRunDataArrayOutputWithContext(context.Context) GetTriggerWorkflowRunDataArrayOutput
+}
+
+type GetTriggerWorkflowRunDataArray []GetTriggerWorkflowRunDataInput
+
+func (GetTriggerWorkflowRunDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataArray) ToGetTriggerWorkflowRunDataArrayOutput() GetTriggerWorkflowRunDataArrayOutput {
+	return i.ToGetTriggerWorkflowRunDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataArray) ToGetTriggerWorkflowRunDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataArrayOutput)
+}
+
+type GetTriggerWorkflowRunDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataOutput) ToGetTriggerWorkflowRunDataOutput() GetTriggerWorkflowRunDataOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataOutput) ToGetTriggerWorkflowRunDataOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataOutput {
+	return o
+}
+
+// Business state enum information.
+func (o GetTriggerWorkflowRunDataOutput) BizStateEnumInfos() GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunData) []GetTriggerWorkflowRunDataBizStateEnumInfo {
+		return v.BizStateEnumInfos
+	}).(GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput)
+}
+
+// Task run information.
+func (o GetTriggerWorkflowRunDataOutput) TriggerTaskRuns() GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunData) []GetTriggerWorkflowRunDataTriggerTaskRun { return v.TriggerTaskRuns }).(GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput)
+}
+
+// Workflow run information.
+func (o GetTriggerWorkflowRunDataOutput) TriggerWorkflowRun() GetTriggerWorkflowRunDataTriggerWorkflowRunOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunData) GetTriggerWorkflowRunDataTriggerWorkflowRun {
+		return v.TriggerWorkflowRun
+	}).(GetTriggerWorkflowRunDataTriggerWorkflowRunOutput)
+}
+
+type GetTriggerWorkflowRunDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataArrayOutput) ToGetTriggerWorkflowRunDataArrayOutput() GetTriggerWorkflowRunDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataArrayOutput) ToGetTriggerWorkflowRunDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunData {
+		return vs[0].([]GetTriggerWorkflowRunData)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunDataOutput)
+}
+
+type GetTriggerWorkflowRunDataBizStateEnumInfo struct {
+	// Label total count.
+	Count int `pulumi:"count"`
+	// Label key.
+	LabelKey string `pulumi:"labelKey"`
+	// Label value.
+	LabelValue string `pulumi:"labelValue"`
+}
+
+// GetTriggerWorkflowRunDataBizStateEnumInfoInput is an input type that accepts GetTriggerWorkflowRunDataBizStateEnumInfoArgs and GetTriggerWorkflowRunDataBizStateEnumInfoOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataBizStateEnumInfoInput` via:
+//
+//	GetTriggerWorkflowRunDataBizStateEnumInfoArgs{...}
+type GetTriggerWorkflowRunDataBizStateEnumInfoInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataBizStateEnumInfoOutput() GetTriggerWorkflowRunDataBizStateEnumInfoOutput
+	ToGetTriggerWorkflowRunDataBizStateEnumInfoOutputWithContext(context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoOutput
+}
+
+type GetTriggerWorkflowRunDataBizStateEnumInfoArgs struct {
+	// Label total count.
+	Count pulumi.IntInput `pulumi:"count"`
+	// Label key.
+	LabelKey pulumi.StringInput `pulumi:"labelKey"`
+	// Label value.
+	LabelValue pulumi.StringInput `pulumi:"labelValue"`
+}
+
+func (GetTriggerWorkflowRunDataBizStateEnumInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataBizStateEnumInfo)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataBizStateEnumInfoArgs) ToGetTriggerWorkflowRunDataBizStateEnumInfoOutput() GetTriggerWorkflowRunDataBizStateEnumInfoOutput {
+	return i.ToGetTriggerWorkflowRunDataBizStateEnumInfoOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataBizStateEnumInfoArgs) ToGetTriggerWorkflowRunDataBizStateEnumInfoOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataBizStateEnumInfoOutput)
+}
+
+// GetTriggerWorkflowRunDataBizStateEnumInfoArrayInput is an input type that accepts GetTriggerWorkflowRunDataBizStateEnumInfoArray and GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataBizStateEnumInfoArrayInput` via:
+//
+//	GetTriggerWorkflowRunDataBizStateEnumInfoArray{ GetTriggerWorkflowRunDataBizStateEnumInfoArgs{...} }
+type GetTriggerWorkflowRunDataBizStateEnumInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput() GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput
+	ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutputWithContext(context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput
+}
+
+type GetTriggerWorkflowRunDataBizStateEnumInfoArray []GetTriggerWorkflowRunDataBizStateEnumInfoInput
+
+func (GetTriggerWorkflowRunDataBizStateEnumInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunDataBizStateEnumInfo)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataBizStateEnumInfoArray) ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput() GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput {
+	return i.ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataBizStateEnumInfoArray) ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput)
+}
+
+type GetTriggerWorkflowRunDataBizStateEnumInfoOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataBizStateEnumInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataBizStateEnumInfo)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoOutput) ToGetTriggerWorkflowRunDataBizStateEnumInfoOutput() GetTriggerWorkflowRunDataBizStateEnumInfoOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoOutput) ToGetTriggerWorkflowRunDataBizStateEnumInfoOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoOutput {
+	return o
+}
+
+// Label total count.
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoOutput) Count() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataBizStateEnumInfo) int { return v.Count }).(pulumi.IntOutput)
+}
+
+// Label key.
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoOutput) LabelKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataBizStateEnumInfo) string { return v.LabelKey }).(pulumi.StringOutput)
+}
+
+// Label value.
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoOutput) LabelValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataBizStateEnumInfo) string { return v.LabelValue }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunDataBizStateEnumInfo)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput) ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput() GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput) ToGetTriggerWorkflowRunDataBizStateEnumInfoArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunDataBizStateEnumInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunDataBizStateEnumInfo {
+		return vs[0].([]GetTriggerWorkflowRunDataBizStateEnumInfo)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunDataBizStateEnumInfoOutput)
+}
+
+type GetTriggerWorkflowRunDataTriggerTaskRun struct {
+	// Total cost time.
+	AllCostTime string `pulumi:"allCostTime"`
+	// Create timestamp.
+	CreateTime string `pulumi:"createTime"`
+	// Creator UIN.
+	CreateUin string `pulumi:"createUin"`
+	// Creator UIN.
+	CreaterUin string `pulumi:"createrUin"`
+	// Cycle type.
+	CycleType string `pulumi:"cycleType"`
+	// Dependent upstream task ID list.
+	DependOnLists []string `pulumi:"dependOnLists"`
+	// Dependency task completion time.
+	DependenceFinishedTime string `pulumi:"dependenceFinishedTime"`
+	// Error code.
+	ErrorCode string `pulumi:"errorCode"`
+	// Error code description.
+	ErrorCodeStr string `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName string `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin string `pulumi:"executeUserUin"`
+	// Execution end time.
+	ExecutionEndTime string `pulumi:"executionEndTime"`
+	// Task execution ID.
+	ExecutionId string `pulumi:"executionId"`
+	// Task execution result.
+	ExecutionResult string `pulumi:"executionResult"`
+	// Execution start time.
+	ExecutionStartTime string `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIP`, running `RUNNING`.
+	ExecutionState string `pulumi:"executionState"`
+	// Execution time.
+	ExecutionTime string `pulumi:"executionTime"`
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Whether it is the latest execution.
+	IsLatestExecution bool `pulumi:"isLatestExecution"`
+	// Issue to execution platform time.
+	IssueTime string `pulumi:"issueTime"`
+	// Execution platform job ID.
+	JobId string `pulumi:"jobId"`
+	// Left coordinate.
+	LeftCoordinate float64 `pulumi:"leftCoordinate"`
+	// Resource waiting start time.
+	PendingStartTime string `pulumi:"pendingStartTime"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Project name.
+	ProjectName string `pulumi:"projectName"`
+	// Queue time.
+	QueueCostTime string `pulumi:"queueCostTime"`
+	// Task delivery to execution platform time.
+	QueueStartTime string `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes int `pulumi:"rerunTimes"`
+	// Resource group.
+	ResourceGroup string `pulumi:"resourceGroup"`
+	// Resource group ID.
+	ResourceGroupId string `pulumi:"resourceGroupId"`
+	// Resource group name.
+	ResourceGroupName string `pulumi:"resourceGroupName"`
+	// Retry times, 0 means first run.
+	RetryTimes int `pulumi:"retryTimes"`
+	// Run parameters.
+	RunParams string `pulumi:"runParams"`
+	// Whether rerun is supported.
+	SupportRerun bool `pulumi:"supportRerun"`
+	// Task execution state.
+	TaskExecutionState string `pulumi:"taskExecutionState"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type.
+	TaskType string `pulumi:"taskType"`
+	// Task extension information, including script path.
+	TaskTypeExtensions string `pulumi:"taskTypeExtensions"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Task version.
+	TaskVersionId string `pulumi:"taskVersionId"`
+	// Time zone.
+	TimeZone string `pulumi:"timeZone"`
+	// Time zone.
+	Timezone string `pulumi:"timezone"`
+	// Top coordinate.
+	TopCoordinate float64 `pulumi:"topCoordinate"`
+	// Trigger type.
+	TriggerType string `pulumi:"triggerType"`
+	// Update timestamp.
+	UpdateTime string `pulumi:"updateTime"`
+	// Person in charge name.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Wait time in seconds.
+	WaitTime string `pulumi:"waitTime"`
+	// Workflow execution ID.
+	WorkflowExecutionId string `pulumi:"workflowExecutionId"`
+	// Workflow execution state.
+	WorkflowExecutionState string `pulumi:"workflowExecutionState"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+	// Workflow run parameters.
+	WorkflowParams string `pulumi:"workflowParams"`
+}
+
+// GetTriggerWorkflowRunDataTriggerTaskRunInput is an input type that accepts GetTriggerWorkflowRunDataTriggerTaskRunArgs and GetTriggerWorkflowRunDataTriggerTaskRunOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataTriggerTaskRunInput` via:
+//
+//	GetTriggerWorkflowRunDataTriggerTaskRunArgs{...}
+type GetTriggerWorkflowRunDataTriggerTaskRunInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataTriggerTaskRunOutput() GetTriggerWorkflowRunDataTriggerTaskRunOutput
+	ToGetTriggerWorkflowRunDataTriggerTaskRunOutputWithContext(context.Context) GetTriggerWorkflowRunDataTriggerTaskRunOutput
+}
+
+type GetTriggerWorkflowRunDataTriggerTaskRunArgs struct {
+	// Total cost time.
+	AllCostTime pulumi.StringInput `pulumi:"allCostTime"`
+	// Create timestamp.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Creator UIN.
+	CreateUin pulumi.StringInput `pulumi:"createUin"`
+	// Creator UIN.
+	CreaterUin pulumi.StringInput `pulumi:"createrUin"`
+	// Cycle type.
+	CycleType pulumi.StringInput `pulumi:"cycleType"`
+	// Dependent upstream task ID list.
+	DependOnLists pulumi.StringArrayInput `pulumi:"dependOnLists"`
+	// Dependency task completion time.
+	DependenceFinishedTime pulumi.StringInput `pulumi:"dependenceFinishedTime"`
+	// Error code.
+	ErrorCode pulumi.StringInput `pulumi:"errorCode"`
+	// Error code description.
+	ErrorCodeStr pulumi.StringInput `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName pulumi.StringInput `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin pulumi.StringInput `pulumi:"executeUserUin"`
+	// Execution end time.
+	ExecutionEndTime pulumi.StringInput `pulumi:"executionEndTime"`
+	// Task execution ID.
+	ExecutionId pulumi.StringInput `pulumi:"executionId"`
+	// Task execution result.
+	ExecutionResult pulumi.StringInput `pulumi:"executionResult"`
+	// Execution start time.
+	ExecutionStartTime pulumi.StringInput `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIP`, running `RUNNING`.
+	ExecutionState pulumi.StringInput `pulumi:"executionState"`
+	// Execution time.
+	ExecutionTime pulumi.StringInput `pulumi:"executionTime"`
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Whether it is the latest execution.
+	IsLatestExecution pulumi.BoolInput `pulumi:"isLatestExecution"`
+	// Issue to execution platform time.
+	IssueTime pulumi.StringInput `pulumi:"issueTime"`
+	// Execution platform job ID.
+	JobId pulumi.StringInput `pulumi:"jobId"`
+	// Left coordinate.
+	LeftCoordinate pulumi.Float64Input `pulumi:"leftCoordinate"`
+	// Resource waiting start time.
+	PendingStartTime pulumi.StringInput `pulumi:"pendingStartTime"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Project name.
+	ProjectName pulumi.StringInput `pulumi:"projectName"`
+	// Queue time.
+	QueueCostTime pulumi.StringInput `pulumi:"queueCostTime"`
+	// Task delivery to execution platform time.
+	QueueStartTime pulumi.StringInput `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes pulumi.IntInput `pulumi:"rerunTimes"`
+	// Resource group.
+	ResourceGroup pulumi.StringInput `pulumi:"resourceGroup"`
+	// Resource group ID.
+	ResourceGroupId pulumi.StringInput `pulumi:"resourceGroupId"`
+	// Resource group name.
+	ResourceGroupName pulumi.StringInput `pulumi:"resourceGroupName"`
+	// Retry times, 0 means first run.
+	RetryTimes pulumi.IntInput `pulumi:"retryTimes"`
+	// Run parameters.
+	RunParams pulumi.StringInput `pulumi:"runParams"`
+	// Whether rerun is supported.
+	SupportRerun pulumi.BoolInput `pulumi:"supportRerun"`
+	// Task execution state.
+	TaskExecutionState pulumi.StringInput `pulumi:"taskExecutionState"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type.
+	TaskType pulumi.StringInput `pulumi:"taskType"`
+	// Task extension information, including script path.
+	TaskTypeExtensions pulumi.StringInput `pulumi:"taskTypeExtensions"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Task version.
+	TaskVersionId pulumi.StringInput `pulumi:"taskVersionId"`
+	// Time zone.
+	TimeZone pulumi.StringInput `pulumi:"timeZone"`
+	// Time zone.
+	Timezone pulumi.StringInput `pulumi:"timezone"`
+	// Top coordinate.
+	TopCoordinate pulumi.Float64Input `pulumi:"topCoordinate"`
+	// Trigger type.
+	TriggerType pulumi.StringInput `pulumi:"triggerType"`
+	// Update timestamp.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// Person in charge name.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Wait time in seconds.
+	WaitTime pulumi.StringInput `pulumi:"waitTime"`
+	// Workflow execution ID.
+	WorkflowExecutionId pulumi.StringInput `pulumi:"workflowExecutionId"`
+	// Workflow execution state.
+	WorkflowExecutionState pulumi.StringInput `pulumi:"workflowExecutionState"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+	// Workflow run parameters.
+	WorkflowParams pulumi.StringInput `pulumi:"workflowParams"`
+}
+
+func (GetTriggerWorkflowRunDataTriggerTaskRunArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerTaskRun)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataTriggerTaskRunArgs) ToGetTriggerWorkflowRunDataTriggerTaskRunOutput() GetTriggerWorkflowRunDataTriggerTaskRunOutput {
+	return i.ToGetTriggerWorkflowRunDataTriggerTaskRunOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataTriggerTaskRunArgs) ToGetTriggerWorkflowRunDataTriggerTaskRunOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerTaskRunOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataTriggerTaskRunOutput)
+}
+
+// GetTriggerWorkflowRunDataTriggerTaskRunArrayInput is an input type that accepts GetTriggerWorkflowRunDataTriggerTaskRunArray and GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataTriggerTaskRunArrayInput` via:
+//
+//	GetTriggerWorkflowRunDataTriggerTaskRunArray{ GetTriggerWorkflowRunDataTriggerTaskRunArgs{...} }
+type GetTriggerWorkflowRunDataTriggerTaskRunArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutput() GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput
+	ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutputWithContext(context.Context) GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput
+}
+
+type GetTriggerWorkflowRunDataTriggerTaskRunArray []GetTriggerWorkflowRunDataTriggerTaskRunInput
+
+func (GetTriggerWorkflowRunDataTriggerTaskRunArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunDataTriggerTaskRun)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataTriggerTaskRunArray) ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutput() GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput {
+	return i.ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataTriggerTaskRunArray) ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput)
+}
+
+type GetTriggerWorkflowRunDataTriggerTaskRunOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataTriggerTaskRunOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerTaskRun)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ToGetTriggerWorkflowRunDataTriggerTaskRunOutput() GetTriggerWorkflowRunDataTriggerTaskRunOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ToGetTriggerWorkflowRunDataTriggerTaskRunOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerTaskRunOutput {
+	return o
+}
+
+// Total cost time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) AllCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.AllCostTime }).(pulumi.StringOutput)
+}
+
+// Create timestamp.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Creator UIN.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) CreateUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.CreateUin }).(pulumi.StringOutput)
+}
+
+// Creator UIN.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) CreaterUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.CreaterUin }).(pulumi.StringOutput)
+}
+
+// Cycle type.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) CycleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.CycleType }).(pulumi.StringOutput)
+}
+
+// Dependent upstream task ID list.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) DependOnLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) []string { return v.DependOnLists }).(pulumi.StringArrayOutput)
+}
+
+// Dependency task completion time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) DependenceFinishedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.DependenceFinishedTime }).(pulumi.StringOutput)
+}
+
+// Error code.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ErrorCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ErrorCode }).(pulumi.StringOutput)
+}
+
+// Error code description.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ErrorCodeStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ErrorCodeStr }).(pulumi.StringOutput)
+}
+
+// Execute user name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecuteUserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecuteUserName }).(pulumi.StringOutput)
+}
+
+// Execute user UIN.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecuteUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecuteUserUin }).(pulumi.StringOutput)
+}
+
+// Execution end time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionEndTime }).(pulumi.StringOutput)
+}
+
+// Task execution ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionId }).(pulumi.StringOutput)
+}
+
+// Task execution result.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionResult }).(pulumi.StringOutput)
+}
+
+// Execution start time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionStartTime }).(pulumi.StringOutput)
+}
+
+// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIP`, running `RUNNING`.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionState }).(pulumi.StringOutput)
+}
+
+// Execution time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ExecutionTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ExecutionTime }).(pulumi.StringOutput)
+}
+
+// Folder ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Whether it is the latest execution.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) IsLatestExecution() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) bool { return v.IsLatestExecution }).(pulumi.BoolOutput)
+}
+
+// Issue to execution platform time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) IssueTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.IssueTime }).(pulumi.StringOutput)
+}
+
+// Execution platform job ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) JobId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.JobId }).(pulumi.StringOutput)
+}
+
+// Left coordinate.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) LeftCoordinate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) float64 { return v.LeftCoordinate }).(pulumi.Float64Output)
+}
+
+// Resource waiting start time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) PendingStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.PendingStartTime }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Project name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ProjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ProjectName }).(pulumi.StringOutput)
+}
+
+// Queue time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) QueueCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.QueueCostTime }).(pulumi.StringOutput)
+}
+
+// Task delivery to execution platform time.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) QueueStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.QueueStartTime }).(pulumi.StringOutput)
+}
+
+// Number of reruns.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) RerunTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) int { return v.RerunTimes }).(pulumi.IntOutput)
+}
+
+// Resource group.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ResourceGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ResourceGroup }).(pulumi.StringOutput)
+}
+
+// Resource group ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ResourceGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ResourceGroupId }).(pulumi.StringOutput)
+}
+
+// Resource group name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) ResourceGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.ResourceGroupName }).(pulumi.StringOutput)
+}
+
+// Retry times, 0 means first run.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) RetryTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) int { return v.RetryTimes }).(pulumi.IntOutput)
+}
+
+// Run parameters.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) RunParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.RunParams }).(pulumi.StringOutput)
+}
+
+// Whether rerun is supported.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) SupportRerun() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) bool { return v.SupportRerun }).(pulumi.BoolOutput)
+}
+
+// Task execution state.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskExecutionState }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskType }).(pulumi.StringOutput)
+}
+
+// Task extension information, including script path.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskTypeExtensions() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskTypeExtensions }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Task version.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TaskVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TaskVersionId }).(pulumi.StringOutput)
+}
+
+// Time zone.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TimeZone }).(pulumi.StringOutput)
+}
+
+// Time zone.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) Timezone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.Timezone }).(pulumi.StringOutput)
+}
+
+// Top coordinate.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TopCoordinate() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) float64 { return v.TopCoordinate }).(pulumi.Float64Output)
+}
+
+// Trigger type.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) TriggerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.TriggerType }).(pulumi.StringOutput)
+}
+
+// Update timestamp.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// Person in charge name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// Person in charge ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Wait time in seconds.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WaitTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WaitTime }).(pulumi.StringOutput)
+}
+
+// Workflow execution ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WorkflowExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WorkflowExecutionId }).(pulumi.StringOutput)
+}
+
+// Workflow execution state.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WorkflowExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WorkflowExecutionState }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+// Workflow run parameters.
+func (o GetTriggerWorkflowRunDataTriggerTaskRunOutput) WorkflowParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerTaskRun) string { return v.WorkflowParams }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunDataTriggerTaskRun)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput) ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutput() GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput) ToGetTriggerWorkflowRunDataTriggerTaskRunArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunDataTriggerTaskRunOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunDataTriggerTaskRun {
+		return vs[0].([]GetTriggerWorkflowRunDataTriggerTaskRun)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunDataTriggerTaskRunOutput)
+}
+
+type GetTriggerWorkflowRunDataTriggerWorkflowRun struct {
+	// User AppId.
+	AppId string `pulumi:"appId"`
+	// Workflow trigger time.
+	CreateTime string `pulumi:"createTime"`
+	// Cycle type.
+	CycleType string `pulumi:"cycleType"`
+	// End time.
+	EndTime string `pulumi:"endTime"`
+	// Error code.
+	ErrorCodeStr string `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName string `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin string `pulumi:"executeUserUin"`
+	// Execution duration in seconds.
+	ExecutionCostTime string `pulumi:"executionCostTime"`
+	// Execution end timestamp.
+	ExecutionEndTime string `pulumi:"executionEndTime"`
+	// Workflow execution ID.
+	ExecutionId string `pulumi:"executionId"`
+	// Execution start timestamp.
+	ExecutionStartTime string `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+	ExecutionState string `pulumi:"executionState"`
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Resource waiting time in seconds.
+	PendingCostTime string `pulumi:"pendingCostTime"`
+	// Pending start time.
+	PendingStartTime string `pulumi:"pendingStartTime"`
+	// Planned scheduling time.
+	PlannedSchedulingTime string `pulumi:"plannedSchedulingTime"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Concurrent queue time in seconds.
+	QueueCostTime string `pulumi:"queueCostTime"`
+	// Queue start time.
+	QueueStartTime string `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes int `pulumi:"rerunTimes"`
+	// Task scope for execution, comma-separated task ID list.
+	SelectedTaskIds []string `pulumi:"selectedTaskIds"`
+	// Whether rerun is supported.
+	SupportRerun bool `pulumi:"supportRerun"`
+	// Trigger ID.
+	TriggerId string `pulumi:"triggerId"`
+	// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+	TriggerType string `pulumi:"triggerType"`
+	// Person in charge name.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams string `pulumi:"workflowParams"`
+	// Workflow version ID.
+	WorkflowVersionId string `pulumi:"workflowVersionId"`
+}
+
+// GetTriggerWorkflowRunDataTriggerWorkflowRunInput is an input type that accepts GetTriggerWorkflowRunDataTriggerWorkflowRunArgs and GetTriggerWorkflowRunDataTriggerWorkflowRunOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunDataTriggerWorkflowRunInput` via:
+//
+//	GetTriggerWorkflowRunDataTriggerWorkflowRunArgs{...}
+type GetTriggerWorkflowRunDataTriggerWorkflowRunInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutput() GetTriggerWorkflowRunDataTriggerWorkflowRunOutput
+	ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutputWithContext(context.Context) GetTriggerWorkflowRunDataTriggerWorkflowRunOutput
+}
+
+type GetTriggerWorkflowRunDataTriggerWorkflowRunArgs struct {
+	// User AppId.
+	AppId pulumi.StringInput `pulumi:"appId"`
+	// Workflow trigger time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Cycle type.
+	CycleType pulumi.StringInput `pulumi:"cycleType"`
+	// End time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Error code.
+	ErrorCodeStr pulumi.StringInput `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName pulumi.StringInput `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin pulumi.StringInput `pulumi:"executeUserUin"`
+	// Execution duration in seconds.
+	ExecutionCostTime pulumi.StringInput `pulumi:"executionCostTime"`
+	// Execution end timestamp.
+	ExecutionEndTime pulumi.StringInput `pulumi:"executionEndTime"`
+	// Workflow execution ID.
+	ExecutionId pulumi.StringInput `pulumi:"executionId"`
+	// Execution start timestamp.
+	ExecutionStartTime pulumi.StringInput `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+	ExecutionState pulumi.StringInput `pulumi:"executionState"`
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Resource waiting time in seconds.
+	PendingCostTime pulumi.StringInput `pulumi:"pendingCostTime"`
+	// Pending start time.
+	PendingStartTime pulumi.StringInput `pulumi:"pendingStartTime"`
+	// Planned scheduling time.
+	PlannedSchedulingTime pulumi.StringInput `pulumi:"plannedSchedulingTime"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Concurrent queue time in seconds.
+	QueueCostTime pulumi.StringInput `pulumi:"queueCostTime"`
+	// Queue start time.
+	QueueStartTime pulumi.StringInput `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes pulumi.IntInput `pulumi:"rerunTimes"`
+	// Task scope for execution, comma-separated task ID list.
+	SelectedTaskIds pulumi.StringArrayInput `pulumi:"selectedTaskIds"`
+	// Whether rerun is supported.
+	SupportRerun pulumi.BoolInput `pulumi:"supportRerun"`
+	// Trigger ID.
+	TriggerId pulumi.StringInput `pulumi:"triggerId"`
+	// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+	TriggerType pulumi.StringInput `pulumi:"triggerType"`
+	// Person in charge name.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams pulumi.StringInput `pulumi:"workflowParams"`
+	// Workflow version ID.
+	WorkflowVersionId pulumi.StringInput `pulumi:"workflowVersionId"`
+}
+
+func (GetTriggerWorkflowRunDataTriggerWorkflowRunArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerWorkflowRun)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunDataTriggerWorkflowRunArgs) ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutput() GetTriggerWorkflowRunDataTriggerWorkflowRunOutput {
+	return i.ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunDataTriggerWorkflowRunArgs) ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerWorkflowRunOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunDataTriggerWorkflowRunOutput)
+}
+
+type GetTriggerWorkflowRunDataTriggerWorkflowRunOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerWorkflowRun)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutput() GetTriggerWorkflowRunDataTriggerWorkflowRunOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ToGetTriggerWorkflowRunDataTriggerWorkflowRunOutputWithContext(ctx context.Context) GetTriggerWorkflowRunDataTriggerWorkflowRunOutput {
+	return o
+}
+
+// User AppId.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) AppId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.AppId }).(pulumi.StringOutput)
+}
+
+// Workflow trigger time.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Cycle type.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) CycleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.CycleType }).(pulumi.StringOutput)
+}
+
+// End time.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Error code.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ErrorCodeStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ErrorCodeStr }).(pulumi.StringOutput)
+}
+
+// Execute user name.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecuteUserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecuteUserName }).(pulumi.StringOutput)
+}
+
+// Execute user UIN.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecuteUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecuteUserUin }).(pulumi.StringOutput)
+}
+
+// Execution duration in seconds.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecutionCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecutionCostTime }).(pulumi.StringOutput)
+}
+
+// Execution end timestamp.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecutionEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecutionEndTime }).(pulumi.StringOutput)
+}
+
+// Workflow execution ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecutionId }).(pulumi.StringOutput)
+}
+
+// Execution start timestamp.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecutionStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecutionStartTime }).(pulumi.StringOutput)
+}
+
+// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ExecutionState }).(pulumi.StringOutput)
+}
+
+// Folder ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Resource waiting time in seconds.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) PendingCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.PendingCostTime }).(pulumi.StringOutput)
+}
+
+// Pending start time.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) PendingStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.PendingStartTime }).(pulumi.StringOutput)
+}
+
+// Planned scheduling time.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) PlannedSchedulingTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.PlannedSchedulingTime }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Concurrent queue time in seconds.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) QueueCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.QueueCostTime }).(pulumi.StringOutput)
+}
+
+// Queue start time.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) QueueStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.QueueStartTime }).(pulumi.StringOutput)
+}
+
+// Number of reruns.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) RerunTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) int { return v.RerunTimes }).(pulumi.IntOutput)
+}
+
+// Task scope for execution, comma-separated task ID list.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) SelectedTaskIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) []string { return v.SelectedTaskIds }).(pulumi.StringArrayOutput)
+}
+
+// Whether rerun is supported.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) SupportRerun() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) bool { return v.SupportRerun }).(pulumi.BoolOutput)
+}
+
+// Trigger ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) TriggerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.TriggerId }).(pulumi.StringOutput)
+}
+
+// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) TriggerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.TriggerType }).(pulumi.StringOutput)
+}
+
+// Person in charge name.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// Person in charge ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+// Workflow parameters.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) WorkflowParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.WorkflowParams }).(pulumi.StringOutput)
+}
+
+// Workflow version ID.
+func (o GetTriggerWorkflowRunDataTriggerWorkflowRunOutput) WorkflowVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunDataTriggerWorkflowRun) string { return v.WorkflowVersionId }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunFilter struct {
+	// Filter field name.
+	Name *string `pulumi:"name"`
+	// Filter value list.
+	Values []string `pulumi:"values"`
+}
+
+// GetTriggerWorkflowRunFilterInput is an input type that accepts GetTriggerWorkflowRunFilterArgs and GetTriggerWorkflowRunFilterOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunFilterInput` via:
+//
+//	GetTriggerWorkflowRunFilterArgs{...}
+type GetTriggerWorkflowRunFilterInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunFilterOutput() GetTriggerWorkflowRunFilterOutput
+	ToGetTriggerWorkflowRunFilterOutputWithContext(context.Context) GetTriggerWorkflowRunFilterOutput
+}
+
+type GetTriggerWorkflowRunFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Filter value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetTriggerWorkflowRunFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunFilter)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunFilterArgs) ToGetTriggerWorkflowRunFilterOutput() GetTriggerWorkflowRunFilterOutput {
+	return i.ToGetTriggerWorkflowRunFilterOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunFilterArgs) ToGetTriggerWorkflowRunFilterOutputWithContext(ctx context.Context) GetTriggerWorkflowRunFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunFilterOutput)
+}
+
+// GetTriggerWorkflowRunFilterArrayInput is an input type that accepts GetTriggerWorkflowRunFilterArray and GetTriggerWorkflowRunFilterArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunFilterArrayInput` via:
+//
+//	GetTriggerWorkflowRunFilterArray{ GetTriggerWorkflowRunFilterArgs{...} }
+type GetTriggerWorkflowRunFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunFilterArrayOutput() GetTriggerWorkflowRunFilterArrayOutput
+	ToGetTriggerWorkflowRunFilterArrayOutputWithContext(context.Context) GetTriggerWorkflowRunFilterArrayOutput
+}
+
+type GetTriggerWorkflowRunFilterArray []GetTriggerWorkflowRunFilterInput
+
+func (GetTriggerWorkflowRunFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunFilter)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunFilterArray) ToGetTriggerWorkflowRunFilterArrayOutput() GetTriggerWorkflowRunFilterArrayOutput {
+	return i.ToGetTriggerWorkflowRunFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunFilterArray) ToGetTriggerWorkflowRunFilterArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunFilterArrayOutput)
+}
+
+type GetTriggerWorkflowRunFilterOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunFilter)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunFilterOutput) ToGetTriggerWorkflowRunFilterOutput() GetTriggerWorkflowRunFilterOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunFilterOutput) ToGetTriggerWorkflowRunFilterOutputWithContext(ctx context.Context) GetTriggerWorkflowRunFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetTriggerWorkflowRunFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Filter value list.
+func (o GetTriggerWorkflowRunFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetTriggerWorkflowRunFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunFilter)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunFilterArrayOutput) ToGetTriggerWorkflowRunFilterArrayOutput() GetTriggerWorkflowRunFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunFilterArrayOutput) ToGetTriggerWorkflowRunFilterArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunFilterArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunFilter {
+		return vs[0].([]GetTriggerWorkflowRunFilter)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunFilterOutput)
+}
+
+type GetTriggerWorkflowRunOrderField struct {
+	// Sort direction: `ASC`, `DESC`.
+	Direction string `pulumi:"direction"`
+	// Sort field name.
+	Name string `pulumi:"name"`
+}
+
+// GetTriggerWorkflowRunOrderFieldInput is an input type that accepts GetTriggerWorkflowRunOrderFieldArgs and GetTriggerWorkflowRunOrderFieldOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunOrderFieldInput` via:
+//
+//	GetTriggerWorkflowRunOrderFieldArgs{...}
+type GetTriggerWorkflowRunOrderFieldInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunOrderFieldOutput() GetTriggerWorkflowRunOrderFieldOutput
+	ToGetTriggerWorkflowRunOrderFieldOutputWithContext(context.Context) GetTriggerWorkflowRunOrderFieldOutput
+}
+
+type GetTriggerWorkflowRunOrderFieldArgs struct {
+	// Sort direction: `ASC`, `DESC`.
+	Direction pulumi.StringInput `pulumi:"direction"`
+	// Sort field name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetTriggerWorkflowRunOrderFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunOrderField)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunOrderFieldArgs) ToGetTriggerWorkflowRunOrderFieldOutput() GetTriggerWorkflowRunOrderFieldOutput {
+	return i.ToGetTriggerWorkflowRunOrderFieldOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunOrderFieldArgs) ToGetTriggerWorkflowRunOrderFieldOutputWithContext(ctx context.Context) GetTriggerWorkflowRunOrderFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunOrderFieldOutput)
+}
+
+// GetTriggerWorkflowRunOrderFieldArrayInput is an input type that accepts GetTriggerWorkflowRunOrderFieldArray and GetTriggerWorkflowRunOrderFieldArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunOrderFieldArrayInput` via:
+//
+//	GetTriggerWorkflowRunOrderFieldArray{ GetTriggerWorkflowRunOrderFieldArgs{...} }
+type GetTriggerWorkflowRunOrderFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunOrderFieldArrayOutput() GetTriggerWorkflowRunOrderFieldArrayOutput
+	ToGetTriggerWorkflowRunOrderFieldArrayOutputWithContext(context.Context) GetTriggerWorkflowRunOrderFieldArrayOutput
+}
+
+type GetTriggerWorkflowRunOrderFieldArray []GetTriggerWorkflowRunOrderFieldInput
+
+func (GetTriggerWorkflowRunOrderFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunOrderField)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunOrderFieldArray) ToGetTriggerWorkflowRunOrderFieldArrayOutput() GetTriggerWorkflowRunOrderFieldArrayOutput {
+	return i.ToGetTriggerWorkflowRunOrderFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunOrderFieldArray) ToGetTriggerWorkflowRunOrderFieldArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunOrderFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunOrderFieldArrayOutput)
+}
+
+type GetTriggerWorkflowRunOrderFieldOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunOrderFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunOrderField)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunOrderFieldOutput) ToGetTriggerWorkflowRunOrderFieldOutput() GetTriggerWorkflowRunOrderFieldOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunOrderFieldOutput) ToGetTriggerWorkflowRunOrderFieldOutputWithContext(ctx context.Context) GetTriggerWorkflowRunOrderFieldOutput {
+	return o
+}
+
+// Sort direction: `ASC`, `DESC`.
+func (o GetTriggerWorkflowRunOrderFieldOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunOrderField) string { return v.Direction }).(pulumi.StringOutput)
+}
+
+// Sort field name.
+func (o GetTriggerWorkflowRunOrderFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunOrderField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunOrderFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunOrderFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunOrderField)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunOrderFieldArrayOutput) ToGetTriggerWorkflowRunOrderFieldArrayOutput() GetTriggerWorkflowRunOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunOrderFieldArrayOutput) ToGetTriggerWorkflowRunOrderFieldArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunOrderFieldArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunOrderFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunOrderField {
+		return vs[0].([]GetTriggerWorkflowRunOrderField)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunOrderFieldOutput)
+}
+
+type GetTriggerWorkflowRunsData struct {
+	// Collection of workflow run and related task run information.
+	Items []GetTriggerWorkflowRunsDataItem `pulumi:"items"`
+}
+
+// GetTriggerWorkflowRunsDataInput is an input type that accepts GetTriggerWorkflowRunsDataArgs and GetTriggerWorkflowRunsDataOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsDataInput` via:
+//
+//	GetTriggerWorkflowRunsDataArgs{...}
+type GetTriggerWorkflowRunsDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsDataOutput() GetTriggerWorkflowRunsDataOutput
+	ToGetTriggerWorkflowRunsDataOutputWithContext(context.Context) GetTriggerWorkflowRunsDataOutput
+}
+
+type GetTriggerWorkflowRunsDataArgs struct {
+	// Collection of workflow run and related task run information.
+	Items GetTriggerWorkflowRunsDataItemArrayInput `pulumi:"items"`
+}
+
+func (GetTriggerWorkflowRunsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsDataArgs) ToGetTriggerWorkflowRunsDataOutput() GetTriggerWorkflowRunsDataOutput {
+	return i.ToGetTriggerWorkflowRunsDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsDataArgs) ToGetTriggerWorkflowRunsDataOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsDataOutput)
+}
+
+// GetTriggerWorkflowRunsDataArrayInput is an input type that accepts GetTriggerWorkflowRunsDataArray and GetTriggerWorkflowRunsDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsDataArrayInput` via:
+//
+//	GetTriggerWorkflowRunsDataArray{ GetTriggerWorkflowRunsDataArgs{...} }
+type GetTriggerWorkflowRunsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsDataArrayOutput() GetTriggerWorkflowRunsDataArrayOutput
+	ToGetTriggerWorkflowRunsDataArrayOutputWithContext(context.Context) GetTriggerWorkflowRunsDataArrayOutput
+}
+
+type GetTriggerWorkflowRunsDataArray []GetTriggerWorkflowRunsDataInput
+
+func (GetTriggerWorkflowRunsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsDataArray) ToGetTriggerWorkflowRunsDataArrayOutput() GetTriggerWorkflowRunsDataArrayOutput {
+	return i.ToGetTriggerWorkflowRunsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsDataArray) ToGetTriggerWorkflowRunsDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsDataArrayOutput)
+}
+
+type GetTriggerWorkflowRunsDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsDataOutput) ToGetTriggerWorkflowRunsDataOutput() GetTriggerWorkflowRunsDataOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataOutput) ToGetTriggerWorkflowRunsDataOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataOutput {
+	return o
+}
+
+// Collection of workflow run and related task run information.
+func (o GetTriggerWorkflowRunsDataOutput) Items() GetTriggerWorkflowRunsDataItemArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsData) []GetTriggerWorkflowRunsDataItem { return v.Items }).(GetTriggerWorkflowRunsDataItemArrayOutput)
+}
+
+type GetTriggerWorkflowRunsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsDataArrayOutput) ToGetTriggerWorkflowRunsDataArrayOutput() GetTriggerWorkflowRunsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataArrayOutput) ToGetTriggerWorkflowRunsDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunsData {
+		return vs[0].([]GetTriggerWorkflowRunsData)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunsDataOutput)
+}
+
+type GetTriggerWorkflowRunsDataItem struct {
+	// User AppId.
+	AppId string `pulumi:"appId"`
+	// Workflow trigger time.
+	CreateTime string `pulumi:"createTime"`
+	// Cycle type.
+	CycleType string `pulumi:"cycleType"`
+	// End time.
+	EndTime string `pulumi:"endTime"`
+	// Error code.
+	ErrorCodeStr string `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName string `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin string `pulumi:"executeUserUin"`
+	// Execution duration in seconds.
+	ExecutionCostTime string `pulumi:"executionCostTime"`
+	// Execution end timestamp.
+	ExecutionEndTime string `pulumi:"executionEndTime"`
+	// Workflow execution ID.
+	ExecutionId string `pulumi:"executionId"`
+	// Execution start timestamp.
+	ExecutionStartTime string `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+	ExecutionState string `pulumi:"executionState"`
+	// Folder ID.
+	FolderId string `pulumi:"folderId"`
+	// Folder name.
+	FolderName string `pulumi:"folderName"`
+	// Resource waiting time in seconds.
+	PendingCostTime string `pulumi:"pendingCostTime"`
+	// Pending start time.
+	PendingStartTime string `pulumi:"pendingStartTime"`
+	// Planned scheduling time.
+	PlannedSchedulingTime string `pulumi:"plannedSchedulingTime"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Concurrent queue time in seconds.
+	QueueCostTime string `pulumi:"queueCostTime"`
+	// Queue start time.
+	QueueStartTime string `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes int `pulumi:"rerunTimes"`
+	// Task scope for execution, comma-separated task ID list.
+	SelectedTaskIds []string `pulumi:"selectedTaskIds"`
+	// Whether rerun is supported.
+	SupportRerun bool `pulumi:"supportRerun"`
+	// Trigger ID.
+	TriggerId string `pulumi:"triggerId"`
+	// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+	TriggerType string `pulumi:"triggerType"`
+	// Person in charge name.
+	UserNameInCharge string `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge string `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams string `pulumi:"workflowParams"`
+	// Workflow version ID.
+	WorkflowVersionId string `pulumi:"workflowVersionId"`
+}
+
+// GetTriggerWorkflowRunsDataItemInput is an input type that accepts GetTriggerWorkflowRunsDataItemArgs and GetTriggerWorkflowRunsDataItemOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsDataItemInput` via:
+//
+//	GetTriggerWorkflowRunsDataItemArgs{...}
+type GetTriggerWorkflowRunsDataItemInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsDataItemOutput() GetTriggerWorkflowRunsDataItemOutput
+	ToGetTriggerWorkflowRunsDataItemOutputWithContext(context.Context) GetTriggerWorkflowRunsDataItemOutput
+}
+
+type GetTriggerWorkflowRunsDataItemArgs struct {
+	// User AppId.
+	AppId pulumi.StringInput `pulumi:"appId"`
+	// Workflow trigger time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Cycle type.
+	CycleType pulumi.StringInput `pulumi:"cycleType"`
+	// End time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Error code.
+	ErrorCodeStr pulumi.StringInput `pulumi:"errorCodeStr"`
+	// Execute user name.
+	ExecuteUserName pulumi.StringInput `pulumi:"executeUserName"`
+	// Execute user UIN.
+	ExecuteUserUin pulumi.StringInput `pulumi:"executeUserUin"`
+	// Execution duration in seconds.
+	ExecutionCostTime pulumi.StringInput `pulumi:"executionCostTime"`
+	// Execution end timestamp.
+	ExecutionEndTime pulumi.StringInput `pulumi:"executionEndTime"`
+	// Workflow execution ID.
+	ExecutionId pulumi.StringInput `pulumi:"executionId"`
+	// Execution start timestamp.
+	ExecutionStartTime pulumi.StringInput `pulumi:"executionStartTime"`
+	// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+	ExecutionState pulumi.StringInput `pulumi:"executionState"`
+	// Folder ID.
+	FolderId pulumi.StringInput `pulumi:"folderId"`
+	// Folder name.
+	FolderName pulumi.StringInput `pulumi:"folderName"`
+	// Resource waiting time in seconds.
+	PendingCostTime pulumi.StringInput `pulumi:"pendingCostTime"`
+	// Pending start time.
+	PendingStartTime pulumi.StringInput `pulumi:"pendingStartTime"`
+	// Planned scheduling time.
+	PlannedSchedulingTime pulumi.StringInput `pulumi:"plannedSchedulingTime"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Concurrent queue time in seconds.
+	QueueCostTime pulumi.StringInput `pulumi:"queueCostTime"`
+	// Queue start time.
+	QueueStartTime pulumi.StringInput `pulumi:"queueStartTime"`
+	// Number of reruns.
+	RerunTimes pulumi.IntInput `pulumi:"rerunTimes"`
+	// Task scope for execution, comma-separated task ID list.
+	SelectedTaskIds pulumi.StringArrayInput `pulumi:"selectedTaskIds"`
+	// Whether rerun is supported.
+	SupportRerun pulumi.BoolInput `pulumi:"supportRerun"`
+	// Trigger ID.
+	TriggerId pulumi.StringInput `pulumi:"triggerId"`
+	// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+	TriggerType pulumi.StringInput `pulumi:"triggerType"`
+	// Person in charge name.
+	UserNameInCharge pulumi.StringInput `pulumi:"userNameInCharge"`
+	// Person in charge ID.
+	UserUinInCharge pulumi.StringInput `pulumi:"userUinInCharge"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+	// Workflow parameters.
+	WorkflowParams pulumi.StringInput `pulumi:"workflowParams"`
+	// Workflow version ID.
+	WorkflowVersionId pulumi.StringInput `pulumi:"workflowVersionId"`
+}
+
+func (GetTriggerWorkflowRunsDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsDataItemArgs) ToGetTriggerWorkflowRunsDataItemOutput() GetTriggerWorkflowRunsDataItemOutput {
+	return i.ToGetTriggerWorkflowRunsDataItemOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsDataItemArgs) ToGetTriggerWorkflowRunsDataItemOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsDataItemOutput)
+}
+
+// GetTriggerWorkflowRunsDataItemArrayInput is an input type that accepts GetTriggerWorkflowRunsDataItemArray and GetTriggerWorkflowRunsDataItemArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsDataItemArrayInput` via:
+//
+//	GetTriggerWorkflowRunsDataItemArray{ GetTriggerWorkflowRunsDataItemArgs{...} }
+type GetTriggerWorkflowRunsDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsDataItemArrayOutput() GetTriggerWorkflowRunsDataItemArrayOutput
+	ToGetTriggerWorkflowRunsDataItemArrayOutputWithContext(context.Context) GetTriggerWorkflowRunsDataItemArrayOutput
+}
+
+type GetTriggerWorkflowRunsDataItemArray []GetTriggerWorkflowRunsDataItemInput
+
+func (GetTriggerWorkflowRunsDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsDataItemArray) ToGetTriggerWorkflowRunsDataItemArrayOutput() GetTriggerWorkflowRunsDataItemArrayOutput {
+	return i.ToGetTriggerWorkflowRunsDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsDataItemArray) ToGetTriggerWorkflowRunsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsDataItemArrayOutput)
+}
+
+type GetTriggerWorkflowRunsDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsDataItemOutput) ToGetTriggerWorkflowRunsDataItemOutput() GetTriggerWorkflowRunsDataItemOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataItemOutput) ToGetTriggerWorkflowRunsDataItemOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataItemOutput {
+	return o
+}
+
+// User AppId.
+func (o GetTriggerWorkflowRunsDataItemOutput) AppId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.AppId }).(pulumi.StringOutput)
+}
+
+// Workflow trigger time.
+func (o GetTriggerWorkflowRunsDataItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Cycle type.
+func (o GetTriggerWorkflowRunsDataItemOutput) CycleType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.CycleType }).(pulumi.StringOutput)
+}
+
+// End time.
+func (o GetTriggerWorkflowRunsDataItemOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Error code.
+func (o GetTriggerWorkflowRunsDataItemOutput) ErrorCodeStr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ErrorCodeStr }).(pulumi.StringOutput)
+}
+
+// Execute user name.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecuteUserName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecuteUserName }).(pulumi.StringOutput)
+}
+
+// Execute user UIN.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecuteUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecuteUserUin }).(pulumi.StringOutput)
+}
+
+// Execution duration in seconds.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecutionCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecutionCostTime }).(pulumi.StringOutput)
+}
+
+// Execution end timestamp.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecutionEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecutionEndTime }).(pulumi.StringOutput)
+}
+
+// Workflow execution ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecutionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecutionId }).(pulumi.StringOutput)
+}
+
+// Execution start timestamp.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecutionStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecutionStartTime }).(pulumi.StringOutput)
+}
+
+// Execution state: failed `FAILED`, success `SUCCESS`, pending `PENDING`, skipped `SKIPED`, running `RUNNING`.
+func (o GetTriggerWorkflowRunsDataItemOutput) ExecutionState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ExecutionState }).(pulumi.StringOutput)
+}
+
+// Folder ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) FolderId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.FolderId }).(pulumi.StringOutput)
+}
+
+// Folder name.
+func (o GetTriggerWorkflowRunsDataItemOutput) FolderName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.FolderName }).(pulumi.StringOutput)
+}
+
+// Resource waiting time in seconds.
+func (o GetTriggerWorkflowRunsDataItemOutput) PendingCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.PendingCostTime }).(pulumi.StringOutput)
+}
+
+// Pending start time.
+func (o GetTriggerWorkflowRunsDataItemOutput) PendingStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.PendingStartTime }).(pulumi.StringOutput)
+}
+
+// Planned scheduling time.
+func (o GetTriggerWorkflowRunsDataItemOutput) PlannedSchedulingTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.PlannedSchedulingTime }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Concurrent queue time in seconds.
+func (o GetTriggerWorkflowRunsDataItemOutput) QueueCostTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.QueueCostTime }).(pulumi.StringOutput)
+}
+
+// Queue start time.
+func (o GetTriggerWorkflowRunsDataItemOutput) QueueStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.QueueStartTime }).(pulumi.StringOutput)
+}
+
+// Number of reruns.
+func (o GetTriggerWorkflowRunsDataItemOutput) RerunTimes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) int { return v.RerunTimes }).(pulumi.IntOutput)
+}
+
+// Task scope for execution, comma-separated task ID list.
+func (o GetTriggerWorkflowRunsDataItemOutput) SelectedTaskIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) []string { return v.SelectedTaskIds }).(pulumi.StringArrayOutput)
+}
+
+// Whether rerun is supported.
+func (o GetTriggerWorkflowRunsDataItemOutput) SupportRerun() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) bool { return v.SupportRerun }).(pulumi.BoolOutput)
+}
+
+// Trigger ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) TriggerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.TriggerId }).(pulumi.StringOutput)
+}
+
+// Trigger type: scheduled trigger `Scheduler`, manual trigger `ManualTrigger`, event trigger `Event`.
+func (o GetTriggerWorkflowRunsDataItemOutput) TriggerType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.TriggerType }).(pulumi.StringOutput)
+}
+
+// Person in charge name.
+func (o GetTriggerWorkflowRunsDataItemOutput) UserNameInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.UserNameInCharge }).(pulumi.StringOutput)
+}
+
+// Person in charge ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) UserUinInCharge() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.UserUinInCharge }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerWorkflowRunsDataItemOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+// Workflow parameters.
+func (o GetTriggerWorkflowRunsDataItemOutput) WorkflowParams() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.WorkflowParams }).(pulumi.StringOutput)
+}
+
+// Workflow version ID.
+func (o GetTriggerWorkflowRunsDataItemOutput) WorkflowVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsDataItem) string { return v.WorkflowVersionId }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunsDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsDataItemArrayOutput) ToGetTriggerWorkflowRunsDataItemArrayOutput() GetTriggerWorkflowRunsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataItemArrayOutput) ToGetTriggerWorkflowRunsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsDataItemArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunsDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunsDataItem {
+		return vs[0].([]GetTriggerWorkflowRunsDataItem)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunsDataItemOutput)
+}
+
+type GetTriggerWorkflowRunsFilter struct {
+	// Filter field name.
+	Name *string `pulumi:"name"`
+	// List of filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetTriggerWorkflowRunsFilterInput is an input type that accepts GetTriggerWorkflowRunsFilterArgs and GetTriggerWorkflowRunsFilterOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsFilterInput` via:
+//
+//	GetTriggerWorkflowRunsFilterArgs{...}
+type GetTriggerWorkflowRunsFilterInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsFilterOutput() GetTriggerWorkflowRunsFilterOutput
+	ToGetTriggerWorkflowRunsFilterOutputWithContext(context.Context) GetTriggerWorkflowRunsFilterOutput
+}
+
+type GetTriggerWorkflowRunsFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// List of filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetTriggerWorkflowRunsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsFilter)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsFilterArgs) ToGetTriggerWorkflowRunsFilterOutput() GetTriggerWorkflowRunsFilterOutput {
+	return i.ToGetTriggerWorkflowRunsFilterOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsFilterArgs) ToGetTriggerWorkflowRunsFilterOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsFilterOutput)
+}
+
+// GetTriggerWorkflowRunsFilterArrayInput is an input type that accepts GetTriggerWorkflowRunsFilterArray and GetTriggerWorkflowRunsFilterArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsFilterArrayInput` via:
+//
+//	GetTriggerWorkflowRunsFilterArray{ GetTriggerWorkflowRunsFilterArgs{...} }
+type GetTriggerWorkflowRunsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsFilterArrayOutput() GetTriggerWorkflowRunsFilterArrayOutput
+	ToGetTriggerWorkflowRunsFilterArrayOutputWithContext(context.Context) GetTriggerWorkflowRunsFilterArrayOutput
+}
+
+type GetTriggerWorkflowRunsFilterArray []GetTriggerWorkflowRunsFilterInput
+
+func (GetTriggerWorkflowRunsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsFilter)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsFilterArray) ToGetTriggerWorkflowRunsFilterArrayOutput() GetTriggerWorkflowRunsFilterArrayOutput {
+	return i.ToGetTriggerWorkflowRunsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsFilterArray) ToGetTriggerWorkflowRunsFilterArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsFilterArrayOutput)
+}
+
+type GetTriggerWorkflowRunsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsFilter)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsFilterOutput) ToGetTriggerWorkflowRunsFilterOutput() GetTriggerWorkflowRunsFilterOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsFilterOutput) ToGetTriggerWorkflowRunsFilterOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetTriggerWorkflowRunsFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// List of filter values.
+func (o GetTriggerWorkflowRunsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetTriggerWorkflowRunsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsFilter)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsFilterArrayOutput) ToGetTriggerWorkflowRunsFilterArrayOutput() GetTriggerWorkflowRunsFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsFilterArrayOutput) ToGetTriggerWorkflowRunsFilterArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsFilterArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsFilterArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunsFilter {
+		return vs[0].([]GetTriggerWorkflowRunsFilter)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunsFilterOutput)
+}
+
+type GetTriggerWorkflowRunsOrderField struct {
+	// Sort direction: ASC|DESC.
+	Direction string `pulumi:"direction"`
+	// Sort field name.
+	Name string `pulumi:"name"`
+}
+
+// GetTriggerWorkflowRunsOrderFieldInput is an input type that accepts GetTriggerWorkflowRunsOrderFieldArgs and GetTriggerWorkflowRunsOrderFieldOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsOrderFieldInput` via:
+//
+//	GetTriggerWorkflowRunsOrderFieldArgs{...}
+type GetTriggerWorkflowRunsOrderFieldInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsOrderFieldOutput() GetTriggerWorkflowRunsOrderFieldOutput
+	ToGetTriggerWorkflowRunsOrderFieldOutputWithContext(context.Context) GetTriggerWorkflowRunsOrderFieldOutput
+}
+
+type GetTriggerWorkflowRunsOrderFieldArgs struct {
+	// Sort direction: ASC|DESC.
+	Direction pulumi.StringInput `pulumi:"direction"`
+	// Sort field name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetTriggerWorkflowRunsOrderFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsOrderField)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsOrderFieldArgs) ToGetTriggerWorkflowRunsOrderFieldOutput() GetTriggerWorkflowRunsOrderFieldOutput {
+	return i.ToGetTriggerWorkflowRunsOrderFieldOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsOrderFieldArgs) ToGetTriggerWorkflowRunsOrderFieldOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsOrderFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsOrderFieldOutput)
+}
+
+// GetTriggerWorkflowRunsOrderFieldArrayInput is an input type that accepts GetTriggerWorkflowRunsOrderFieldArray and GetTriggerWorkflowRunsOrderFieldArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowRunsOrderFieldArrayInput` via:
+//
+//	GetTriggerWorkflowRunsOrderFieldArray{ GetTriggerWorkflowRunsOrderFieldArgs{...} }
+type GetTriggerWorkflowRunsOrderFieldArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowRunsOrderFieldArrayOutput() GetTriggerWorkflowRunsOrderFieldArrayOutput
+	ToGetTriggerWorkflowRunsOrderFieldArrayOutputWithContext(context.Context) GetTriggerWorkflowRunsOrderFieldArrayOutput
+}
+
+type GetTriggerWorkflowRunsOrderFieldArray []GetTriggerWorkflowRunsOrderFieldInput
+
+func (GetTriggerWorkflowRunsOrderFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsOrderField)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowRunsOrderFieldArray) ToGetTriggerWorkflowRunsOrderFieldArrayOutput() GetTriggerWorkflowRunsOrderFieldArrayOutput {
+	return i.ToGetTriggerWorkflowRunsOrderFieldArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowRunsOrderFieldArray) ToGetTriggerWorkflowRunsOrderFieldArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsOrderFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowRunsOrderFieldArrayOutput)
+}
+
+type GetTriggerWorkflowRunsOrderFieldOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsOrderFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowRunsOrderField)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsOrderFieldOutput) ToGetTriggerWorkflowRunsOrderFieldOutput() GetTriggerWorkflowRunsOrderFieldOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsOrderFieldOutput) ToGetTriggerWorkflowRunsOrderFieldOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsOrderFieldOutput {
+	return o
+}
+
+// Sort direction: ASC|DESC.
+func (o GetTriggerWorkflowRunsOrderFieldOutput) Direction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsOrderField) string { return v.Direction }).(pulumi.StringOutput)
+}
+
+// Sort field name.
+func (o GetTriggerWorkflowRunsOrderFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowRunsOrderField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowRunsOrderFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowRunsOrderFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowRunsOrderField)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowRunsOrderFieldArrayOutput) ToGetTriggerWorkflowRunsOrderFieldArrayOutput() GetTriggerWorkflowRunsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsOrderFieldArrayOutput) ToGetTriggerWorkflowRunsOrderFieldArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowRunsOrderFieldArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowRunsOrderFieldArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowRunsOrderFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowRunsOrderField {
+		return vs[0].([]GetTriggerWorkflowRunsOrderField)[vs[1].(int)]
+	}).(GetTriggerWorkflowRunsOrderFieldOutput)
+}
+
+type GetTriggerWorkflowsData struct {
+	// List items.
+	Items []GetTriggerWorkflowsDataItem `pulumi:"items"`
+}
+
+// GetTriggerWorkflowsDataInput is an input type that accepts GetTriggerWorkflowsDataArgs and GetTriggerWorkflowsDataOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowsDataInput` via:
+//
+//	GetTriggerWorkflowsDataArgs{...}
+type GetTriggerWorkflowsDataInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowsDataOutput() GetTriggerWorkflowsDataOutput
+	ToGetTriggerWorkflowsDataOutputWithContext(context.Context) GetTriggerWorkflowsDataOutput
+}
+
+type GetTriggerWorkflowsDataArgs struct {
+	// List items.
+	Items GetTriggerWorkflowsDataItemArrayInput `pulumi:"items"`
+}
+
+func (GetTriggerWorkflowsDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowsDataArgs) ToGetTriggerWorkflowsDataOutput() GetTriggerWorkflowsDataOutput {
+	return i.ToGetTriggerWorkflowsDataOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowsDataArgs) ToGetTriggerWorkflowsDataOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowsDataOutput)
+}
+
+// GetTriggerWorkflowsDataArrayInput is an input type that accepts GetTriggerWorkflowsDataArray and GetTriggerWorkflowsDataArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowsDataArrayInput` via:
+//
+//	GetTriggerWorkflowsDataArray{ GetTriggerWorkflowsDataArgs{...} }
+type GetTriggerWorkflowsDataArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowsDataArrayOutput() GetTriggerWorkflowsDataArrayOutput
+	ToGetTriggerWorkflowsDataArrayOutputWithContext(context.Context) GetTriggerWorkflowsDataArrayOutput
+}
+
+type GetTriggerWorkflowsDataArray []GetTriggerWorkflowsDataInput
+
+func (GetTriggerWorkflowsDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowsDataArray) ToGetTriggerWorkflowsDataArrayOutput() GetTriggerWorkflowsDataArrayOutput {
+	return i.ToGetTriggerWorkflowsDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowsDataArray) ToGetTriggerWorkflowsDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowsDataArrayOutput)
+}
+
+type GetTriggerWorkflowsDataOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowsDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowsDataOutput) ToGetTriggerWorkflowsDataOutput() GetTriggerWorkflowsDataOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataOutput) ToGetTriggerWorkflowsDataOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataOutput {
+	return o
+}
+
+// List items.
+func (o GetTriggerWorkflowsDataOutput) Items() GetTriggerWorkflowsDataItemArrayOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsData) []GetTriggerWorkflowsDataItem { return v.Items }).(GetTriggerWorkflowsDataItemArrayOutput)
+}
+
+type GetTriggerWorkflowsDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowsDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowsData)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowsDataArrayOutput) ToGetTriggerWorkflowsDataArrayOutput() GetTriggerWorkflowsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataArrayOutput) ToGetTriggerWorkflowsDataArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowsDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowsData {
+		return vs[0].([]GetTriggerWorkflowsData)[vs[1].(int)]
+	}).(GetTriggerWorkflowsDataOutput)
+}
+
+type GetTriggerWorkflowsDataItem struct {
+	// Creation time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+	CreateTime string `pulumi:"createTime"`
+	// Creator ID.
+	CreateUserUin string `pulumi:"createUserUin"`
+	// Modification time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+	ModifyTime string `pulumi:"modifyTime"`
+	// Owner ID.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Last updater ID.
+	UpdateUserUin string `pulumi:"updateUserUin"`
+	// Workflow description.
+	WorkflowDesc string `pulumi:"workflowDesc"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+}
+
+// GetTriggerWorkflowsDataItemInput is an input type that accepts GetTriggerWorkflowsDataItemArgs and GetTriggerWorkflowsDataItemOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowsDataItemInput` via:
+//
+//	GetTriggerWorkflowsDataItemArgs{...}
+type GetTriggerWorkflowsDataItemInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowsDataItemOutput() GetTriggerWorkflowsDataItemOutput
+	ToGetTriggerWorkflowsDataItemOutputWithContext(context.Context) GetTriggerWorkflowsDataItemOutput
+}
+
+type GetTriggerWorkflowsDataItemArgs struct {
+	// Creation time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Creator ID.
+	CreateUserUin pulumi.StringInput `pulumi:"createUserUin"`
+	// Modification time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// Owner ID.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Last updater ID.
+	UpdateUserUin pulumi.StringInput `pulumi:"updateUserUin"`
+	// Workflow description.
+	WorkflowDesc pulumi.StringInput `pulumi:"workflowDesc"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+}
+
+func (GetTriggerWorkflowsDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowsDataItemArgs) ToGetTriggerWorkflowsDataItemOutput() GetTriggerWorkflowsDataItemOutput {
+	return i.ToGetTriggerWorkflowsDataItemOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowsDataItemArgs) ToGetTriggerWorkflowsDataItemOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowsDataItemOutput)
+}
+
+// GetTriggerWorkflowsDataItemArrayInput is an input type that accepts GetTriggerWorkflowsDataItemArray and GetTriggerWorkflowsDataItemArrayOutput values.
+// You can construct a concrete instance of `GetTriggerWorkflowsDataItemArrayInput` via:
+//
+//	GetTriggerWorkflowsDataItemArray{ GetTriggerWorkflowsDataItemArgs{...} }
+type GetTriggerWorkflowsDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetTriggerWorkflowsDataItemArrayOutput() GetTriggerWorkflowsDataItemArrayOutput
+	ToGetTriggerWorkflowsDataItemArrayOutputWithContext(context.Context) GetTriggerWorkflowsDataItemArrayOutput
+}
+
+type GetTriggerWorkflowsDataItemArray []GetTriggerWorkflowsDataItemInput
+
+func (GetTriggerWorkflowsDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (i GetTriggerWorkflowsDataItemArray) ToGetTriggerWorkflowsDataItemArrayOutput() GetTriggerWorkflowsDataItemArrayOutput {
+	return i.ToGetTriggerWorkflowsDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetTriggerWorkflowsDataItemArray) ToGetTriggerWorkflowsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTriggerWorkflowsDataItemArrayOutput)
+}
+
+type GetTriggerWorkflowsDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowsDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowsDataItemOutput) ToGetTriggerWorkflowsDataItemOutput() GetTriggerWorkflowsDataItemOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataItemOutput) ToGetTriggerWorkflowsDataItemOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataItemOutput {
+	return o
+}
+
+// Creation time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+func (o GetTriggerWorkflowsDataItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Creator ID.
+func (o GetTriggerWorkflowsDataItemOutput) CreateUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.CreateUserUin }).(pulumi.StringOutput)
+}
+
+// Modification time range yyyy-MM-dd HH:mm:ss, two timestamps need to be filled in the array.
+func (o GetTriggerWorkflowsDataItemOutput) ModifyTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.ModifyTime }).(pulumi.StringOutput)
+}
+
+// Owner ID.
+func (o GetTriggerWorkflowsDataItemOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Last updater ID.
+func (o GetTriggerWorkflowsDataItemOutput) UpdateUserUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.UpdateUserUin }).(pulumi.StringOutput)
+}
+
+// Workflow description.
+func (o GetTriggerWorkflowsDataItemOutput) WorkflowDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.WorkflowDesc }).(pulumi.StringOutput)
+}
+
+// Workflow ID.
+func (o GetTriggerWorkflowsDataItemOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetTriggerWorkflowsDataItemOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTriggerWorkflowsDataItem) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+type GetTriggerWorkflowsDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTriggerWorkflowsDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTriggerWorkflowsDataItem)(nil)).Elem()
+}
+
+func (o GetTriggerWorkflowsDataItemArrayOutput) ToGetTriggerWorkflowsDataItemArrayOutput() GetTriggerWorkflowsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataItemArrayOutput) ToGetTriggerWorkflowsDataItemArrayOutputWithContext(ctx context.Context) GetTriggerWorkflowsDataItemArrayOutput {
+	return o
+}
+
+func (o GetTriggerWorkflowsDataItemArrayOutput) Index(i pulumi.IntInput) GetTriggerWorkflowsDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTriggerWorkflowsDataItem {
+		return vs[0].([]GetTriggerWorkflowsDataItem)[vs[1].(int)]
+	}).(GetTriggerWorkflowsDataItemOutput)
+}
+
 type GetUpstreamTaskInstancesData struct {
 	// Data list.
 	Items []GetUpstreamTaskInstancesDataItem `pulumi:"items"`
@@ -33820,6 +48916,275 @@ func (o GetUpstreamTasksDataArrayOutput) Index(i pulumi.IntInput) GetUpstreamTas
 	}).(GetUpstreamTasksDataOutput)
 }
 
+type GetUpstreamTriggerTasksData struct {
+	// Paginated data.
+	Items []GetUpstreamTriggerTasksDataItem `pulumi:"items"`
+}
+
+// GetUpstreamTriggerTasksDataInput is an input type that accepts GetUpstreamTriggerTasksDataArgs and GetUpstreamTriggerTasksDataOutput values.
+// You can construct a concrete instance of `GetUpstreamTriggerTasksDataInput` via:
+//
+//	GetUpstreamTriggerTasksDataArgs{...}
+type GetUpstreamTriggerTasksDataInput interface {
+	pulumi.Input
+
+	ToGetUpstreamTriggerTasksDataOutput() GetUpstreamTriggerTasksDataOutput
+	ToGetUpstreamTriggerTasksDataOutputWithContext(context.Context) GetUpstreamTriggerTasksDataOutput
+}
+
+type GetUpstreamTriggerTasksDataArgs struct {
+	// Paginated data.
+	Items GetUpstreamTriggerTasksDataItemArrayInput `pulumi:"items"`
+}
+
+func (GetUpstreamTriggerTasksDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (i GetUpstreamTriggerTasksDataArgs) ToGetUpstreamTriggerTasksDataOutput() GetUpstreamTriggerTasksDataOutput {
+	return i.ToGetUpstreamTriggerTasksDataOutputWithContext(context.Background())
+}
+
+func (i GetUpstreamTriggerTasksDataArgs) ToGetUpstreamTriggerTasksDataOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpstreamTriggerTasksDataOutput)
+}
+
+// GetUpstreamTriggerTasksDataArrayInput is an input type that accepts GetUpstreamTriggerTasksDataArray and GetUpstreamTriggerTasksDataArrayOutput values.
+// You can construct a concrete instance of `GetUpstreamTriggerTasksDataArrayInput` via:
+//
+//	GetUpstreamTriggerTasksDataArray{ GetUpstreamTriggerTasksDataArgs{...} }
+type GetUpstreamTriggerTasksDataArrayInput interface {
+	pulumi.Input
+
+	ToGetUpstreamTriggerTasksDataArrayOutput() GetUpstreamTriggerTasksDataArrayOutput
+	ToGetUpstreamTriggerTasksDataArrayOutputWithContext(context.Context) GetUpstreamTriggerTasksDataArrayOutput
+}
+
+type GetUpstreamTriggerTasksDataArray []GetUpstreamTriggerTasksDataInput
+
+func (GetUpstreamTriggerTasksDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (i GetUpstreamTriggerTasksDataArray) ToGetUpstreamTriggerTasksDataArrayOutput() GetUpstreamTriggerTasksDataArrayOutput {
+	return i.ToGetUpstreamTriggerTasksDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetUpstreamTriggerTasksDataArray) ToGetUpstreamTriggerTasksDataArrayOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpstreamTriggerTasksDataArrayOutput)
+}
+
+type GetUpstreamTriggerTasksDataOutput struct{ *pulumi.OutputState }
+
+func (GetUpstreamTriggerTasksDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (o GetUpstreamTriggerTasksDataOutput) ToGetUpstreamTriggerTasksDataOutput() GetUpstreamTriggerTasksDataOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataOutput) ToGetUpstreamTriggerTasksDataOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataOutput {
+	return o
+}
+
+// Paginated data.
+func (o GetUpstreamTriggerTasksDataOutput) Items() GetUpstreamTriggerTasksDataItemArrayOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksData) []GetUpstreamTriggerTasksDataItem { return v.Items }).(GetUpstreamTriggerTasksDataItemArrayOutput)
+}
+
+type GetUpstreamTriggerTasksDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUpstreamTriggerTasksDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpstreamTriggerTasksData)(nil)).Elem()
+}
+
+func (o GetUpstreamTriggerTasksDataArrayOutput) ToGetUpstreamTriggerTasksDataArrayOutput() GetUpstreamTriggerTasksDataArrayOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataArrayOutput) ToGetUpstreamTriggerTasksDataArrayOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataArrayOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataArrayOutput) Index(i pulumi.IntInput) GetUpstreamTriggerTasksDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUpstreamTriggerTasksData {
+		return vs[0].([]GetUpstreamTriggerTasksData)[vs[1].(int)]
+	}).(GetUpstreamTriggerTasksDataOutput)
+}
+
+type GetUpstreamTriggerTasksDataItem struct {
+	// Owner.
+	OwnerUin string `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId string `pulumi:"projectId"`
+	// Task status: - `Y`: Running
+	// - `N`: New.
+	Status string `pulumi:"status"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task name.
+	TaskName string `pulumi:"taskName"`
+	// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+	TaskTypeDesc string `pulumi:"taskTypeDesc"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId string `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName string `pulumi:"workflowName"`
+}
+
+// GetUpstreamTriggerTasksDataItemInput is an input type that accepts GetUpstreamTriggerTasksDataItemArgs and GetUpstreamTriggerTasksDataItemOutput values.
+// You can construct a concrete instance of `GetUpstreamTriggerTasksDataItemInput` via:
+//
+//	GetUpstreamTriggerTasksDataItemArgs{...}
+type GetUpstreamTriggerTasksDataItemInput interface {
+	pulumi.Input
+
+	ToGetUpstreamTriggerTasksDataItemOutput() GetUpstreamTriggerTasksDataItemOutput
+	ToGetUpstreamTriggerTasksDataItemOutputWithContext(context.Context) GetUpstreamTriggerTasksDataItemOutput
+}
+
+type GetUpstreamTriggerTasksDataItemArgs struct {
+	// Owner.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
+	// Project ID.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// Task status: - `Y`: Running
+	// - `N`: New.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task name.
+	TaskName pulumi.StringInput `pulumi:"taskName"`
+	// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+	TaskTypeDesc pulumi.StringInput `pulumi:"taskTypeDesc"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Workflow ID.
+	WorkflowId pulumi.StringInput `pulumi:"workflowId"`
+	// Workflow name.
+	WorkflowName pulumi.StringInput `pulumi:"workflowName"`
+}
+
+func (GetUpstreamTriggerTasksDataItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (i GetUpstreamTriggerTasksDataItemArgs) ToGetUpstreamTriggerTasksDataItemOutput() GetUpstreamTriggerTasksDataItemOutput {
+	return i.ToGetUpstreamTriggerTasksDataItemOutputWithContext(context.Background())
+}
+
+func (i GetUpstreamTriggerTasksDataItemArgs) ToGetUpstreamTriggerTasksDataItemOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpstreamTriggerTasksDataItemOutput)
+}
+
+// GetUpstreamTriggerTasksDataItemArrayInput is an input type that accepts GetUpstreamTriggerTasksDataItemArray and GetUpstreamTriggerTasksDataItemArrayOutput values.
+// You can construct a concrete instance of `GetUpstreamTriggerTasksDataItemArrayInput` via:
+//
+//	GetUpstreamTriggerTasksDataItemArray{ GetUpstreamTriggerTasksDataItemArgs{...} }
+type GetUpstreamTriggerTasksDataItemArrayInput interface {
+	pulumi.Input
+
+	ToGetUpstreamTriggerTasksDataItemArrayOutput() GetUpstreamTriggerTasksDataItemArrayOutput
+	ToGetUpstreamTriggerTasksDataItemArrayOutputWithContext(context.Context) GetUpstreamTriggerTasksDataItemArrayOutput
+}
+
+type GetUpstreamTriggerTasksDataItemArray []GetUpstreamTriggerTasksDataItemInput
+
+func (GetUpstreamTriggerTasksDataItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (i GetUpstreamTriggerTasksDataItemArray) ToGetUpstreamTriggerTasksDataItemArrayOutput() GetUpstreamTriggerTasksDataItemArrayOutput {
+	return i.ToGetUpstreamTriggerTasksDataItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetUpstreamTriggerTasksDataItemArray) ToGetUpstreamTriggerTasksDataItemArrayOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpstreamTriggerTasksDataItemArrayOutput)
+}
+
+type GetUpstreamTriggerTasksDataItemOutput struct{ *pulumi.OutputState }
+
+func (GetUpstreamTriggerTasksDataItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (o GetUpstreamTriggerTasksDataItemOutput) ToGetUpstreamTriggerTasksDataItemOutput() GetUpstreamTriggerTasksDataItemOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataItemOutput) ToGetUpstreamTriggerTasksDataItemOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataItemOutput {
+	return o
+}
+
+// Owner.
+func (o GetUpstreamTriggerTasksDataItemOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetUpstreamTriggerTasksDataItemOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// Task status: - `Y`: Running
+// - `N`: New.
+func (o GetUpstreamTriggerTasksDataItemOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetUpstreamTriggerTasksDataItemOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task name.
+func (o GetUpstreamTriggerTasksDataItemOutput) TaskName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.TaskName }).(pulumi.StringOutput)
+}
+
+// Task type description; `20`: General Data Synchronization; `25`: ETLTaskType; `26`: ETLTaskType; `30`: Python; `31`: PySpark; `34`: HiveSQL; `35`: Shell; `36`: SparkSQL; `21`: JdbcSQL; `32`: DLC; `33`: ImpalaTaskType; `40`: CDWTaskType; `41`: Kettle; `42`: TCHouse-X; `43`: TCHouse-X SQL; `46`: DLCSparkTaskType; `47`: TiOneMachineLearningTaskType; `48`: Trino; `50`: DLCPySpark; `23`: TencentDistributedSQL; `39`: Spark; `92`: MRTaskType; `38`: ShellScript; `70`: HiveSQLScript; `130`: Branch; `131`: Merge; `132`: Notebook Exploration; `133`: SSH Node; `134`: StarRocks; `137`: For-each; `10000`: Custom Business General.
+func (o GetUpstreamTriggerTasksDataItemOutput) TaskTypeDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.TaskTypeDesc }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetUpstreamTriggerTasksDataItemOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Workflow ID.
+func (o GetUpstreamTriggerTasksDataItemOutput) WorkflowId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.WorkflowId }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetUpstreamTriggerTasksDataItemOutput) WorkflowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpstreamTriggerTasksDataItem) string { return v.WorkflowName }).(pulumi.StringOutput)
+}
+
+type GetUpstreamTriggerTasksDataItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUpstreamTriggerTasksDataItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpstreamTriggerTasksDataItem)(nil)).Elem()
+}
+
+func (o GetUpstreamTriggerTasksDataItemArrayOutput) ToGetUpstreamTriggerTasksDataItemArrayOutput() GetUpstreamTriggerTasksDataItemArrayOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataItemArrayOutput) ToGetUpstreamTriggerTasksDataItemArrayOutputWithContext(ctx context.Context) GetUpstreamTriggerTasksDataItemArrayOutput {
+	return o
+}
+
+func (o GetUpstreamTriggerTasksDataItemArrayOutput) Index(i pulumi.IntInput) GetUpstreamTriggerTasksDataItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUpstreamTriggerTasksDataItem {
+		return vs[0].([]GetUpstreamTriggerTasksDataItem)[vs[1].(int)]
+	}).(GetUpstreamTriggerTasksDataItemOutput)
+}
+
 type GetWorkflowFoldersData struct {
 	// Creator ID.
 	CreateUserUin string `pulumi:"createUserUin"`
@@ -33942,6 +49307,103 @@ func (o GetWorkflowFoldersDataArrayOutput) Index(i pulumi.IntInput) GetWorkflowF
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWorkflowFoldersData {
 		return vs[0].([]GetWorkflowFoldersData)[vs[1].(int)]
 	}).(GetWorkflowFoldersDataOutput)
+}
+
+type GetWorkflowMaxPermissionData struct {
+	// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+	PermissionType string `pulumi:"permissionType"`
+}
+
+// GetWorkflowMaxPermissionDataInput is an input type that accepts GetWorkflowMaxPermissionDataArgs and GetWorkflowMaxPermissionDataOutput values.
+// You can construct a concrete instance of `GetWorkflowMaxPermissionDataInput` via:
+//
+//	GetWorkflowMaxPermissionDataArgs{...}
+type GetWorkflowMaxPermissionDataInput interface {
+	pulumi.Input
+
+	ToGetWorkflowMaxPermissionDataOutput() GetWorkflowMaxPermissionDataOutput
+	ToGetWorkflowMaxPermissionDataOutputWithContext(context.Context) GetWorkflowMaxPermissionDataOutput
+}
+
+type GetWorkflowMaxPermissionDataArgs struct {
+	// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+	PermissionType pulumi.StringInput `pulumi:"permissionType"`
+}
+
+func (GetWorkflowMaxPermissionDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWorkflowMaxPermissionData)(nil)).Elem()
+}
+
+func (i GetWorkflowMaxPermissionDataArgs) ToGetWorkflowMaxPermissionDataOutput() GetWorkflowMaxPermissionDataOutput {
+	return i.ToGetWorkflowMaxPermissionDataOutputWithContext(context.Background())
+}
+
+func (i GetWorkflowMaxPermissionDataArgs) ToGetWorkflowMaxPermissionDataOutputWithContext(ctx context.Context) GetWorkflowMaxPermissionDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWorkflowMaxPermissionDataOutput)
+}
+
+// GetWorkflowMaxPermissionDataArrayInput is an input type that accepts GetWorkflowMaxPermissionDataArray and GetWorkflowMaxPermissionDataArrayOutput values.
+// You can construct a concrete instance of `GetWorkflowMaxPermissionDataArrayInput` via:
+//
+//	GetWorkflowMaxPermissionDataArray{ GetWorkflowMaxPermissionDataArgs{...} }
+type GetWorkflowMaxPermissionDataArrayInput interface {
+	pulumi.Input
+
+	ToGetWorkflowMaxPermissionDataArrayOutput() GetWorkflowMaxPermissionDataArrayOutput
+	ToGetWorkflowMaxPermissionDataArrayOutputWithContext(context.Context) GetWorkflowMaxPermissionDataArrayOutput
+}
+
+type GetWorkflowMaxPermissionDataArray []GetWorkflowMaxPermissionDataInput
+
+func (GetWorkflowMaxPermissionDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWorkflowMaxPermissionData)(nil)).Elem()
+}
+
+func (i GetWorkflowMaxPermissionDataArray) ToGetWorkflowMaxPermissionDataArrayOutput() GetWorkflowMaxPermissionDataArrayOutput {
+	return i.ToGetWorkflowMaxPermissionDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetWorkflowMaxPermissionDataArray) ToGetWorkflowMaxPermissionDataArrayOutputWithContext(ctx context.Context) GetWorkflowMaxPermissionDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetWorkflowMaxPermissionDataArrayOutput)
+}
+
+type GetWorkflowMaxPermissionDataOutput struct{ *pulumi.OutputState }
+
+func (GetWorkflowMaxPermissionDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetWorkflowMaxPermissionData)(nil)).Elem()
+}
+
+func (o GetWorkflowMaxPermissionDataOutput) ToGetWorkflowMaxPermissionDataOutput() GetWorkflowMaxPermissionDataOutput {
+	return o
+}
+
+func (o GetWorkflowMaxPermissionDataOutput) ToGetWorkflowMaxPermissionDataOutputWithContext(ctx context.Context) GetWorkflowMaxPermissionDataOutput {
+	return o
+}
+
+// Authorization permission type (CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE, currently only supports CAN_MANAGE).
+func (o GetWorkflowMaxPermissionDataOutput) PermissionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetWorkflowMaxPermissionData) string { return v.PermissionType }).(pulumi.StringOutput)
+}
+
+type GetWorkflowMaxPermissionDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetWorkflowMaxPermissionDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetWorkflowMaxPermissionData)(nil)).Elem()
+}
+
+func (o GetWorkflowMaxPermissionDataArrayOutput) ToGetWorkflowMaxPermissionDataArrayOutput() GetWorkflowMaxPermissionDataArrayOutput {
+	return o
+}
+
+func (o GetWorkflowMaxPermissionDataArrayOutput) ToGetWorkflowMaxPermissionDataArrayOutputWithContext(ctx context.Context) GetWorkflowMaxPermissionDataArrayOutput {
+	return o
+}
+
+func (o GetWorkflowMaxPermissionDataArrayOutput) Index(i pulumi.IntInput) GetWorkflowMaxPermissionDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetWorkflowMaxPermissionData {
+		return vs[0].([]GetWorkflowMaxPermissionData)[vs[1].(int)]
+	}).(GetWorkflowMaxPermissionDataOutput)
 }
 
 type GetWorkflowsData struct {
@@ -34120,10 +49582,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CodeFileCodeFileConfigPtrInput)(nil)).Elem(), CodeFileCodeFileConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CodeFileCodeFileConfigNotebookSessionInfoInput)(nil)).Elem(), CodeFileCodeFileConfigNotebookSessionInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CodeFileCodeFileConfigNotebookSessionInfoPtrInput)(nil)).Elem(), CodeFileCodeFileConfigNotebookSessionInfoArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanOperationDataBackfillRangeListInput)(nil)).Elem(), DataBackfillPlanOperationDataBackfillRangeListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanOperationDataBackfillRangeListArrayInput)(nil)).Elem(), DataBackfillPlanOperationDataBackfillRangeListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanOperationRedefineParamListInput)(nil)).Elem(), DataBackfillPlanOperationRedefineParamListArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanOperationRedefineParamListArrayInput)(nil)).Elem(), DataBackfillPlanOperationRedefineParamListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectArrayInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectAuthorizeSubjectInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectResourceInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CodePermissionsAuthorizePermissionObjectResourcePtrInput)(nil)).Elem(), CodePermissionsAuthorizePermissionObjectResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanDataBackfillRangeListInput)(nil)).Elem(), DataBackfillPlanDataBackfillRangeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanDataBackfillRangeListArrayInput)(nil)).Elem(), DataBackfillPlanDataBackfillRangeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanRedefineParamListInput)(nil)).Elem(), DataBackfillPlanRedefineParamListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataBackfillPlanRedefineParamListArrayInput)(nil)).Elem(), DataBackfillPlanRedefineParamListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DqRuleCompareRuleInput)(nil)).Elem(), DqRuleCompareRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DqRuleCompareRulePtrInput)(nil)).Elem(), DqRuleCompareRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DqRuleCompareRuleItemInput)(nil)).Elem(), DqRuleCompareRuleItemArgs{})
@@ -34254,6 +49722,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectDlcInfoPtrInput)(nil)).Elem(), ProjectDlcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectInput)(nil)).Elem(), ProjectProjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProjectProjectPtrInput)(nil)).Elem(), ProjectProjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRuleInput)(nil)).Elem(), QualityRuleCompareRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRulePtrInput)(nil)).Elem(), QualityRuleCompareRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRuleItemInput)(nil)).Elem(), QualityRuleCompareRuleItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRuleItemArrayInput)(nil)).Elem(), QualityRuleCompareRuleItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRuleItemValueListInput)(nil)).Elem(), QualityRuleCompareRuleItemValueListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleCompareRuleItemValueListArrayInput)(nil)).Elem(), QualityRuleCompareRuleItemValueListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigInput)(nil)).Elem(), QualityRuleFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigPtrInput)(nil)).Elem(), QualityRuleFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigArrayInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigArrayInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigFieldConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigValueConfigInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrInput)(nil)).Elem(), QualityRuleFieldConfigTableConfigFieldConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigWhereConfigInput)(nil)).Elem(), QualityRuleFieldConfigWhereConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigWhereConfigArrayInput)(nil)).Elem(), QualityRuleFieldConfigWhereConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigWhereConfigValueConfigInput)(nil)).Elem(), QualityRuleFieldConfigWhereConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleFieldConfigWhereConfigValueConfigPtrInput)(nil)).Elem(), QualityRuleFieldConfigWhereConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListPtrInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListTaskInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayInput)(nil)).Elem(), QualityRuleGroupRuleGroupExecStrategyBoListTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RerunTriggerWorkflowRunAsyncAdvancedParamInput)(nil)).Elem(), RerunTriggerWorkflowRunAsyncAdvancedParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RerunTriggerWorkflowRunAsyncAdvancedParamArrayInput)(nil)).Elem(), RerunTriggerWorkflowRunAsyncAdvancedParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SqlScriptScriptConfigInput)(nil)).Elem(), SqlScriptScriptConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SqlScriptScriptConfigPtrInput)(nil)).Elem(), SqlScriptScriptConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskRerunInstanceAsyncRedefineParamListInput)(nil)).Elem(), TaskRerunInstanceAsyncRedefineParamListArgs{})
@@ -34282,6 +49776,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput)(nil)).Elem(), TaskTaskSchedulerConfigurationUpstreamDependencyConfigListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyInput)(nil)).Elem(), TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyPtrInput)(nil)).Elem(), TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskBaseAttributeInput)(nil)).Elem(), TriggerTaskTriggerTaskBaseAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskBaseAttributePtrInput)(nil)).Elem(), TriggerTaskTriggerTaskBaseAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationPtrInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationPtrInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput)(nil)).Elem(), TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowGeneralTaskParamInput)(nil)).Elem(), TriggerWorkflowGeneralTaskParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowGeneralTaskParamArrayInput)(nil)).Elem(), TriggerWorkflowGeneralTaskParamArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowTriggerWorkflowSchedulerConfigurationInput)(nil)).Elem(), TriggerWorkflowTriggerWorkflowSchedulerConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayInput)(nil)).Elem(), TriggerWorkflowTriggerWorkflowSchedulerConfigurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowWorkflowParamInput)(nil)).Elem(), TriggerWorkflowWorkflowParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TriggerWorkflowWorkflowParamArrayInput)(nil)).Elem(), TriggerWorkflowWorkflowParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourceDevFileUploadInput)(nil)).Elem(), WeDataDataSourceDevFileUploadArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourceDevFileUploadPtrInput)(nil)).Elem(), WeDataDataSourceDevFileUploadArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourceListFilterInput)(nil)).Elem(), WeDataDataSourceListFilterArgs{})
@@ -34294,10 +49814,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourceProdFileUploadPtrInput)(nil)).Elem(), WeDataDataSourceProdFileUploadArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourcesItemInput)(nil)).Elem(), WeDataDataSourcesItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WeDataDataSourcesItemArrayInput)(nil)).Elem(), WeDataDataSourcesItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowPermissionsPermissionListInput)(nil)).Elem(), WorkflowPermissionsPermissionListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowPermissionsPermissionListArrayInput)(nil)).Elem(), WorkflowPermissionsPermissionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowWorkflowParamInput)(nil)).Elem(), WorkflowWorkflowParamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowWorkflowParamArrayInput)(nil)).Elem(), WorkflowWorkflowParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowWorkflowSchedulerConfigurationInput)(nil)).Elem(), WorkflowWorkflowSchedulerConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkflowWorkflowSchedulerConfigurationPtrInput)(nil)).Elem(), WorkflowWorkflowSchedulerConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCodeMaxPermissionDataInput)(nil)).Elem(), GetCodeMaxPermissionDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCodeMaxPermissionDataArrayInput)(nil)).Elem(), GetCodeMaxPermissionDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataBackfillInstancesDataInput)(nil)).Elem(), GetDataBackfillInstancesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataBackfillInstancesDataArrayInput)(nil)).Elem(), GetDataBackfillInstancesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataBackfillInstancesDataItemInput)(nil)).Elem(), GetDataBackfillInstancesDataItemArgs{})
@@ -34314,6 +49838,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTaskInstancesDataItemArrayInput)(nil)).Elem(), GetDownstreamTaskInstancesDataItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTasksDataInput)(nil)).Elem(), GetDownstreamTasksDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTasksDataArrayInput)(nil)).Elem(), GetDownstreamTasksDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTriggerTasksDataInput)(nil)).Elem(), GetDownstreamTriggerTasksDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTriggerTasksDataArrayInput)(nil)).Elem(), GetDownstreamTriggerTasksDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTriggerTasksDataItemInput)(nil)).Elem(), GetDownstreamTriggerTasksDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDownstreamTriggerTasksDataItemArrayInput)(nil)).Elem(), GetDownstreamTriggerTasksDataItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGetTableColumnsDataInput)(nil)).Elem(), GetGetTableColumnsDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGetTableColumnsDataArrayInput)(nil)).Elem(), GetGetTableColumnsDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGetTableDataInput)(nil)).Elem(), GetGetTableDataArgs{})
@@ -34411,6 +49939,21 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTasksDataArrayInput)(nil)).Elem(), GetOpsTasksDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTasksDataItemInput)(nil)).Elem(), GetOpsTasksDataItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTasksDataItemArrayInput)(nil)).Elem(), GetOpsTasksDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataInput)(nil)).Elem(), GetOpsTriggerWorkflowDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskInput)(nil)).Elem(), GetOpsTriggerWorkflowDataTriggerTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowDataTriggerTaskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskLinkInput)(nil)).Elem(), GetOpsTriggerWorkflowDataTriggerTaskLinkArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowDataTriggerTaskLinkArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowDataTriggerTaskLinkArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsDataInput)(nil)).Elem(), GetOpsTriggerWorkflowsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsDataArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsDataItemInput)(nil)).Elem(), GetOpsTriggerWorkflowsDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsDataItemArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowsDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigInput)(nil)).Elem(), GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsFilterInput)(nil)).Elem(), GetOpsTriggerWorkflowsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsFilterArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsOrderFieldInput)(nil)).Elem(), GetOpsTriggerWorkflowsOrderFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsTriggerWorkflowsOrderFieldArrayInput)(nil)).Elem(), GetOpsTriggerWorkflowsOrderFieldArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsUpstreamTasksDataInput)(nil)).Elem(), GetOpsUpstreamTasksDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsUpstreamTasksDataArrayInput)(nil)).Elem(), GetOpsUpstreamTasksDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOpsUpstreamTasksDataItemInput)(nil)).Elem(), GetOpsUpstreamTasksDataItemArgs{})
@@ -34423,6 +49966,45 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectRolesItemArrayInput)(nil)).Elem(), GetProjectRolesItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectsItemInput)(nil)).Elem(), GetProjectsItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProjectsItemArrayInput)(nil)).Elem(), GetProjectsItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrInput)(nil)).Elem(), GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsFilterInput)(nil)).Elem(), GetQualityRuleGroupExecResultsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsFilterArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsOrderFieldInput)(nil)).Elem(), GetQualityRuleGroupExecResultsOrderFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleGroupExecResultsOrderFieldArrayInput)(nil)).Elem(), GetQualityRuleGroupExecResultsOrderFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataInput)(nil)).Elem(), GetQualityRuleTemplatesDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataArrayInput)(nil)).Elem(), GetQualityRuleTemplatesDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataItemInput)(nil)).Elem(), GetQualityRuleTemplatesDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataItemArrayInput)(nil)).Elem(), GetQualityRuleTemplatesDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpressionInput)(nil)).Elem(), GetQualityRuleTemplatesDataItemResolvedSqlExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionInput)(nil)).Elem(), GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayInput)(nil)).Elem(), GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesFilterInput)(nil)).Elem(), GetQualityRuleTemplatesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesFilterArrayInput)(nil)).Elem(), GetQualityRuleTemplatesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesOrderFieldInput)(nil)).Elem(), GetQualityRuleTemplatesOrderFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetQualityRuleTemplatesOrderFieldArrayInput)(nil)).Elem(), GetQualityRuleTemplatesOrderFieldArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceFilesDataInput)(nil)).Elem(), GetResourceFilesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceFilesDataArrayInput)(nil)).Elem(), GetResourceFilesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceGroupMetricsDataInput)(nil)).Elem(), GetResourceGroupMetricsDataArgs{})
@@ -34487,14 +50069,69 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTasksDataArrayInput)(nil)).Elem(), GetTasksDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTenantRolesDataInput)(nil)).Elem(), GetTenantRolesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTenantRolesDataArrayInput)(nil)).Elem(), GetTenantRolesDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskCodeDataInput)(nil)).Elem(), GetTriggerTaskCodeDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskCodeDataArrayInput)(nil)).Elem(), GetTriggerTaskCodeDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskRunDataInput)(nil)).Elem(), GetTriggerTaskRunDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskRunDataArrayInput)(nil)).Elem(), GetTriggerTaskRunDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataInput)(nil)).Elem(), GetTriggerTaskVersionDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayInput)(nil)).Elem(), GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionsDataInput)(nil)).Elem(), GetTriggerTaskVersionsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionsDataArrayInput)(nil)).Elem(), GetTriggerTaskVersionsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionsDataItemInput)(nil)).Elem(), GetTriggerTaskVersionsDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerTaskVersionsDataItemArrayInput)(nil)).Elem(), GetTriggerTaskVersionsDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataInput)(nil)).Elem(), GetTriggerWorkflowRunDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataArrayInput)(nil)).Elem(), GetTriggerWorkflowRunDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataBizStateEnumInfoInput)(nil)).Elem(), GetTriggerWorkflowRunDataBizStateEnumInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataBizStateEnumInfoArrayInput)(nil)).Elem(), GetTriggerWorkflowRunDataBizStateEnumInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerTaskRunInput)(nil)).Elem(), GetTriggerWorkflowRunDataTriggerTaskRunArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerTaskRunArrayInput)(nil)).Elem(), GetTriggerWorkflowRunDataTriggerTaskRunArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunDataTriggerWorkflowRunInput)(nil)).Elem(), GetTriggerWorkflowRunDataTriggerWorkflowRunArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunFilterInput)(nil)).Elem(), GetTriggerWorkflowRunFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunFilterArrayInput)(nil)).Elem(), GetTriggerWorkflowRunFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunOrderFieldInput)(nil)).Elem(), GetTriggerWorkflowRunOrderFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunOrderFieldArrayInput)(nil)).Elem(), GetTriggerWorkflowRunOrderFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsDataInput)(nil)).Elem(), GetTriggerWorkflowRunsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsDataArrayInput)(nil)).Elem(), GetTriggerWorkflowRunsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsDataItemInput)(nil)).Elem(), GetTriggerWorkflowRunsDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsDataItemArrayInput)(nil)).Elem(), GetTriggerWorkflowRunsDataItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsFilterInput)(nil)).Elem(), GetTriggerWorkflowRunsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsFilterArrayInput)(nil)).Elem(), GetTriggerWorkflowRunsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsOrderFieldInput)(nil)).Elem(), GetTriggerWorkflowRunsOrderFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowRunsOrderFieldArrayInput)(nil)).Elem(), GetTriggerWorkflowRunsOrderFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowsDataInput)(nil)).Elem(), GetTriggerWorkflowsDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowsDataArrayInput)(nil)).Elem(), GetTriggerWorkflowsDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowsDataItemInput)(nil)).Elem(), GetTriggerWorkflowsDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTriggerWorkflowsDataItemArrayInput)(nil)).Elem(), GetTriggerWorkflowsDataItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTaskInstancesDataInput)(nil)).Elem(), GetUpstreamTaskInstancesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTaskInstancesDataArrayInput)(nil)).Elem(), GetUpstreamTaskInstancesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTaskInstancesDataItemInput)(nil)).Elem(), GetUpstreamTaskInstancesDataItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTaskInstancesDataItemArrayInput)(nil)).Elem(), GetUpstreamTaskInstancesDataItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTasksDataInput)(nil)).Elem(), GetUpstreamTasksDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTasksDataArrayInput)(nil)).Elem(), GetUpstreamTasksDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTriggerTasksDataInput)(nil)).Elem(), GetUpstreamTriggerTasksDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTriggerTasksDataArrayInput)(nil)).Elem(), GetUpstreamTriggerTasksDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTriggerTasksDataItemInput)(nil)).Elem(), GetUpstreamTriggerTasksDataItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpstreamTriggerTasksDataItemArrayInput)(nil)).Elem(), GetUpstreamTriggerTasksDataItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowFoldersDataInput)(nil)).Elem(), GetWorkflowFoldersDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowFoldersDataArrayInput)(nil)).Elem(), GetWorkflowFoldersDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowMaxPermissionDataInput)(nil)).Elem(), GetWorkflowMaxPermissionDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowMaxPermissionDataArrayInput)(nil)).Elem(), GetWorkflowMaxPermissionDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowsDataInput)(nil)).Elem(), GetWorkflowsDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWorkflowsDataArrayInput)(nil)).Elem(), GetWorkflowsDataArray{})
 	pulumi.RegisterOutputType(AddCalcEnginesToProjectOperationDlcInfoOutput{})
@@ -34503,10 +50140,16 @@ func init() {
 	pulumi.RegisterOutputType(CodeFileCodeFileConfigPtrOutput{})
 	pulumi.RegisterOutputType(CodeFileCodeFileConfigNotebookSessionInfoOutput{})
 	pulumi.RegisterOutputType(CodeFileCodeFileConfigNotebookSessionInfoPtrOutput{})
-	pulumi.RegisterOutputType(DataBackfillPlanOperationDataBackfillRangeListOutput{})
-	pulumi.RegisterOutputType(DataBackfillPlanOperationDataBackfillRangeListArrayOutput{})
-	pulumi.RegisterOutputType(DataBackfillPlanOperationRedefineParamListOutput{})
-	pulumi.RegisterOutputType(DataBackfillPlanOperationRedefineParamListArrayOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectArrayOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectAuthorizeSubjectArrayOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectResourceOutput{})
+	pulumi.RegisterOutputType(CodePermissionsAuthorizePermissionObjectResourcePtrOutput{})
+	pulumi.RegisterOutputType(DataBackfillPlanDataBackfillRangeListOutput{})
+	pulumi.RegisterOutputType(DataBackfillPlanDataBackfillRangeListArrayOutput{})
+	pulumi.RegisterOutputType(DataBackfillPlanRedefineParamListOutput{})
+	pulumi.RegisterOutputType(DataBackfillPlanRedefineParamListArrayOutput{})
 	pulumi.RegisterOutputType(DqRuleCompareRuleOutput{})
 	pulumi.RegisterOutputType(DqRuleCompareRulePtrOutput{})
 	pulumi.RegisterOutputType(DqRuleCompareRuleItemOutput{})
@@ -34637,6 +50280,32 @@ func init() {
 	pulumi.RegisterOutputType(ProjectDlcInfoPtrOutput{})
 	pulumi.RegisterOutputType(ProjectProjectOutput{})
 	pulumi.RegisterOutputType(ProjectProjectPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRuleOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRulePtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRuleItemOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRuleItemArrayOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRuleItemValueListOutput{})
+	pulumi.RegisterOutputType(QualityRuleCompareRuleItemValueListArrayOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigArrayOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigFieldConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigFieldConfigArrayOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigFieldConfigValueConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigTableConfigFieldConfigValueConfigPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigWhereConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigWhereConfigArrayOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigWhereConfigValueConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleFieldConfigWhereConfigValueConfigPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListGroupConfigPtrOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListTaskOutput{})
+	pulumi.RegisterOutputType(QualityRuleGroupRuleGroupExecStrategyBoListTaskArrayOutput{})
+	pulumi.RegisterOutputType(RerunTriggerWorkflowRunAsyncAdvancedParamOutput{})
+	pulumi.RegisterOutputType(RerunTriggerWorkflowRunAsyncAdvancedParamArrayOutput{})
 	pulumi.RegisterOutputType(SqlScriptScriptConfigOutput{})
 	pulumi.RegisterOutputType(SqlScriptScriptConfigPtrOutput{})
 	pulumi.RegisterOutputType(TaskRerunInstanceAsyncRedefineParamListOutput{})
@@ -34665,6 +50334,32 @@ func init() {
 	pulumi.RegisterOutputType(TaskTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput{})
 	pulumi.RegisterOutputType(TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyOutput{})
 	pulumi.RegisterOutputType(TaskTaskSchedulerConfigurationUpstreamDependencyConfigListDependencyStrategyPtrOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskBaseAttributeOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskBaseAttributePtrOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskExtConfigurationSystemListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput{})
+	pulumi.RegisterOutputType(TriggerTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowGeneralTaskParamOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowGeneralTaskParamArrayOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowTriggerWorkflowSchedulerConfigurationOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowTriggerWorkflowSchedulerConfigurationArrayOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowWorkflowParamOutput{})
+	pulumi.RegisterOutputType(TriggerWorkflowWorkflowParamArrayOutput{})
 	pulumi.RegisterOutputType(WeDataDataSourceDevFileUploadOutput{})
 	pulumi.RegisterOutputType(WeDataDataSourceDevFileUploadPtrOutput{})
 	pulumi.RegisterOutputType(WeDataDataSourceListFilterOutput{})
@@ -34677,10 +50372,14 @@ func init() {
 	pulumi.RegisterOutputType(WeDataDataSourceProdFileUploadPtrOutput{})
 	pulumi.RegisterOutputType(WeDataDataSourcesItemOutput{})
 	pulumi.RegisterOutputType(WeDataDataSourcesItemArrayOutput{})
+	pulumi.RegisterOutputType(WorkflowPermissionsPermissionListOutput{})
+	pulumi.RegisterOutputType(WorkflowPermissionsPermissionListArrayOutput{})
 	pulumi.RegisterOutputType(WorkflowWorkflowParamOutput{})
 	pulumi.RegisterOutputType(WorkflowWorkflowParamArrayOutput{})
 	pulumi.RegisterOutputType(WorkflowWorkflowSchedulerConfigurationOutput{})
 	pulumi.RegisterOutputType(WorkflowWorkflowSchedulerConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(GetCodeMaxPermissionDataOutput{})
+	pulumi.RegisterOutputType(GetCodeMaxPermissionDataArrayOutput{})
 	pulumi.RegisterOutputType(GetDataBackfillInstancesDataOutput{})
 	pulumi.RegisterOutputType(GetDataBackfillInstancesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetDataBackfillInstancesDataItemOutput{})
@@ -34697,6 +50396,10 @@ func init() {
 	pulumi.RegisterOutputType(GetDownstreamTaskInstancesDataItemArrayOutput{})
 	pulumi.RegisterOutputType(GetDownstreamTasksDataOutput{})
 	pulumi.RegisterOutputType(GetDownstreamTasksDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDownstreamTriggerTasksDataOutput{})
+	pulumi.RegisterOutputType(GetDownstreamTriggerTasksDataArrayOutput{})
+	pulumi.RegisterOutputType(GetDownstreamTriggerTasksDataItemOutput{})
+	pulumi.RegisterOutputType(GetDownstreamTriggerTasksDataItemArrayOutput{})
 	pulumi.RegisterOutputType(GetGetTableColumnsDataOutput{})
 	pulumi.RegisterOutputType(GetGetTableColumnsDataArrayOutput{})
 	pulumi.RegisterOutputType(GetGetTableDataOutput{})
@@ -34794,6 +50497,21 @@ func init() {
 	pulumi.RegisterOutputType(GetOpsTasksDataArrayOutput{})
 	pulumi.RegisterOutputType(GetOpsTasksDataItemOutput{})
 	pulumi.RegisterOutputType(GetOpsTasksDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataTriggerTaskOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataTriggerTaskArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataTriggerTaskLinkOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowDataTriggerTaskLinkArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsDataOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsDataItemOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsDataItemWorkflowTriggerConfigOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsFilterOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsOrderFieldOutput{})
+	pulumi.RegisterOutputType(GetOpsTriggerWorkflowsOrderFieldArrayOutput{})
 	pulumi.RegisterOutputType(GetOpsUpstreamTasksDataOutput{})
 	pulumi.RegisterOutputType(GetOpsUpstreamTasksDataArrayOutput{})
 	pulumi.RegisterOutputType(GetOpsUpstreamTasksDataItemOutput{})
@@ -34806,6 +50524,45 @@ func init() {
 	pulumi.RegisterOutputType(GetProjectRolesItemArrayOutput{})
 	pulumi.RegisterOutputType(GetProjectsItemOutput{})
 	pulumi.RegisterOutputType(GetProjectsItemArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultPtrOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListCompareResultItemValueArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigPtrOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigTableConfigFieldConfigValueConfigPtrOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsDataItemRuleExecResultVoListFieldConfigWhereConfigValueConfigPtrOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsFilterOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsOrderFieldOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleGroupExecResultsOrderFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataItemOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataItemResolvedSqlExpressionOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesDataItemResolvedSqlExpressionTableExpressionArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesFilterOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesOrderFieldOutput{})
+	pulumi.RegisterOutputType(GetQualityRuleTemplatesOrderFieldArrayOutput{})
 	pulumi.RegisterOutputType(GetResourceFilesDataOutput{})
 	pulumi.RegisterOutputType(GetResourceFilesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetResourceGroupMetricsDataOutput{})
@@ -34870,14 +50627,69 @@ func init() {
 	pulumi.RegisterOutputType(GetTasksDataArrayOutput{})
 	pulumi.RegisterOutputType(GetTenantRolesDataOutput{})
 	pulumi.RegisterOutputType(GetTenantRolesDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskCodeDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskCodeDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskRunDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskRunDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskBaseAttributeOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskExtConfigurationListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskConfigurationTaskSchedulingParameterListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskInListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationParamTaskOutListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationTaskOutputRegistryListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionDataTaskTriggerTaskSchedulerConfigurationUpstreamDependencyConfigListArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionsDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionsDataItemOutput{})
+	pulumi.RegisterOutputType(GetTriggerTaskVersionsDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataBizStateEnumInfoOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataBizStateEnumInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataTriggerTaskRunOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataTriggerTaskRunArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunDataTriggerWorkflowRunOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunFilterOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunOrderFieldOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunOrderFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsDataItemOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsDataItemArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsFilterOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsOrderFieldOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowRunsOrderFieldArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowsDataOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowsDataArrayOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowsDataItemOutput{})
+	pulumi.RegisterOutputType(GetTriggerWorkflowsDataItemArrayOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTaskInstancesDataOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTaskInstancesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTaskInstancesDataItemOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTaskInstancesDataItemArrayOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTasksDataOutput{})
 	pulumi.RegisterOutputType(GetUpstreamTasksDataArrayOutput{})
+	pulumi.RegisterOutputType(GetUpstreamTriggerTasksDataOutput{})
+	pulumi.RegisterOutputType(GetUpstreamTriggerTasksDataArrayOutput{})
+	pulumi.RegisterOutputType(GetUpstreamTriggerTasksDataItemOutput{})
+	pulumi.RegisterOutputType(GetUpstreamTriggerTasksDataItemArrayOutput{})
 	pulumi.RegisterOutputType(GetWorkflowFoldersDataOutput{})
 	pulumi.RegisterOutputType(GetWorkflowFoldersDataArrayOutput{})
+	pulumi.RegisterOutputType(GetWorkflowMaxPermissionDataOutput{})
+	pulumi.RegisterOutputType(GetWorkflowMaxPermissionDataArrayOutput{})
 	pulumi.RegisterOutputType(GetWorkflowsDataOutput{})
 	pulumi.RegisterOutputType(GetWorkflowsDataArrayOutput{})
 }

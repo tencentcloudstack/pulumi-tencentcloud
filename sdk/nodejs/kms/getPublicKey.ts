@@ -20,7 +20,7 @@ import * as utilities from "../utilities";
  *     isEnabled: true,
  *     pendingDeleteWindowInDays: 7,
  * });
- * const example = tencentcloud.Kms.getPublicKeyOutput({
+ * const example = tencentcloud.kms.getPublicKeyOutput({
  *     keyId: exampleKey.id,
  * });
  * ```
@@ -82,7 +82,7 @@ export interface GetPublicKeyResult {
  *     isEnabled: true,
  *     pendingDeleteWindowInDays: 7,
  * });
- * const example = tencentcloud.Kms.getPublicKeyOutput({
+ * const example = tencentcloud.kms.getPublicKeyOutput({
  *     keyId: exampleKey.id,
  * });
  * ```
@@ -106,5 +106,5 @@ export interface GetPublicKeyOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -21,6 +21,8 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** When creating a prepaid CVM instance and binding a data disk, you need to explicitly set `deleteWithInstance` to `false`.
  *
+ * > **NOTE:** When using dedicated resource pool packs, both `dedicatedResourcePackTenancy` and `dedicatedResourcePackIds` must be specified together. These parameters work with pre-purchased resource pool packs (resource `tencentcloudCvmResourcePoolPacks`).
+ *
  * ## Example Usage
  *
  * ### Create a general POSTPAID_BY_HOUR CVM instance
@@ -31,11 +33,11 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
- * const images = tencentcloud.Images.getInstance({
+ * const images = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "OpenCloudOS Server",
  * });
- * const types = tencentcloud.Instance.getTypes({
+ * const types = tencentcloud.instance.getTypes({
  *     filters: [{
  *         name: "instance-family",
  *         values: [
@@ -69,6 +71,7 @@ import * as utilities from "../utilities";
  *     instanceType: types.then(types => types.instanceTypes?.[0]?.instanceType),
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
+ *     kmsKeyId: "kms-xxxxxxxx",
  *     hostname: "user",
  *     projectId: 0,
  *     vpcId: vpc.id,
@@ -92,11 +95,11 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
- * const images = tencentcloud.Images.getInstance({
+ * const images = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "OpenCloudOS Server",
  * });
- * const types = tencentcloud.Instance.getTypes({
+ * const types = tencentcloud.instance.getTypes({
  *     filters: [{
  *         name: "instance-family",
  *         values: [
@@ -157,11 +160,11 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
- * const images = tencentcloud.Images.getInstance({
+ * const images = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "OpenCloudOS Server",
  * });
- * const types = tencentcloud.Instance.getTypes({
+ * const types = tencentcloud.instance.getTypes({
  *     filters: [{
  *         name: "instance-family",
  *         values: [
@@ -214,6 +217,77 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create a CVM instance using dedicated resource pool pack
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const images = tencentcloud.images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "OpenCloudOS Server",
+ * });
+ * const types = tencentcloud.instance.getTypes({
+ *     filters: [{
+ *         name: "instance-family",
+ *         values: [
+ *             "S1",
+ *             "S2",
+ *             "S3",
+ *             "S4",
+ *             "S5",
+ *         ],
+ *     }],
+ *     cpuCoreCount: 2,
+ *     excludeSoldOut: true,
+ * });
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     name: "vpc",
+ * });
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     name: "subnet",
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * // create resource pool pack (prerequisite)
+ * const example = new tencentcloud.cvm.ResourcePoolPack("example", {
+ *     zone: availabilityZone,
+ *     instanceType: types.then(types => types.instanceTypes?.[0]?.instanceType),
+ *     instanceCount: 10,
+ *     period: 1,
+ *     resourcePoolPackType: "Standard",
+ * });
+ * // create CVM instance using resource pool pack
+ * const exampleInstance = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example-with-pool-pack",
+ *     availabilityZone: availabilityZone,
+ *     imageId: images.then(images => images.images?.[0]?.imageId),
+ *     instanceType: types.then(types => types.instanceTypes?.[0]?.instanceType),
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dedicatedResourcePackTenancy: "ResourcePool",
+ *     dedicatedResourcePackIds: [exampleTencentcloudCvmResourcePoolPacks.dedicatedResourcePackId],
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_PREMIUM",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ *
  * ### Create CVM instance with placementGroupId
  *
  * ```typescript
@@ -245,7 +319,39 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
- * ### Create CVM instance with template
+ * ### Create CVM instance with disasterRecoverGroupIds
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-eb30mz89",
+ *     instanceType: "S5.MEDIUM4",
+ *     systemDiskSize: 50,
+ *     systemDiskName: "sys_disk_1",
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     disasterRecoverGroupIds: ["ps-ejt4brtz"],
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 100,
+ *         encrypt: false,
+ *         dataDiskName: "data_disk_1",
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ *
+ * ### field is a create-only parameter. Once the instance is created, this field will not be updated from the API.
+ *
+ * Create CVM instance with template
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -313,6 +419,39 @@ import * as utilities from "../utilities";
  *     runningFlag: false,
  *     stopType: "SOFT_FIRST",
  *     stoppedMode: "KEEP_CHARGING",
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 100,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create CVM instance with CPU topology configuration
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-eb30mz89",
+ *     instanceType: "S5.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     orderlySecurityGroups: ["sg-ma82yjwp"],
+ *     cpuTopology: {
+ *         coreCount: 2,
+ *         threadPerCore: 1,
+ *     },
  *     dataDisks: [{
  *         dataDiskType: "CLOUD_HSSD",
  *         dataDiskSize: 100,
@@ -393,6 +532,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly cpu: pulumi.Output<number>;
     /**
+     * CPU topology configuration. Only supported when creating instances.
+     */
+    declare public readonly cpuTopology: pulumi.Output<outputs.Instance.InstanceCpuTopology>;
+    /**
      * Create time of the instance.
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
@@ -404,6 +547,14 @@ export class Instance extends pulumi.CustomResource {
      * Exclusive cluster id.
      */
     declare public readonly dedicatedClusterId: pulumi.Output<string | undefined>;
+    /**
+     * List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `dedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `tencentcloudCvmResourcePoolPacks`.
+     */
+    declare public readonly dedicatedResourcePackIds: pulumi.Output<string[] | undefined>;
+    /**
+     * Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+     */
+    declare public readonly dedicatedResourcePackTenancy: pulumi.Output<string | undefined>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
@@ -421,6 +572,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly disableSecurityService: pulumi.Output<boolean | undefined>;
     /**
+     * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
+     */
+    declare public readonly disasterRecoverGroupIds: pulumi.Output<string[]>;
+    /**
      * Expired time of the instance.
      */
     declare public /*out*/ readonly expiredTime: pulumi.Output<string>;
@@ -429,9 +584,13 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly forceDelete: pulumi.Output<boolean | undefined>;
     /**
-     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `placementGroupId`, Default is false.
+     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placementGroupId` and `disasterRecoverGroupIds`. Default is false.
      */
     declare public readonly forceReplacePlacementGroupId: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    declare public readonly forceStop: pulumi.Output<boolean>;
     /**
      * The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `hostname` will cause the instance system to restart.
      */
@@ -456,6 +615,9 @@ export class Instance extends pulumi.CustomResource {
      * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
     declare public readonly instanceChargeTypePrepaidRenewFlag: pulumi.Output<string>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
     declare public readonly instanceName: pulumi.Output<string>;
     /**
      * Current status of the instance.
@@ -524,6 +686,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly osName: pulumi.Output<string>;
     /**
+     * The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `disasterRecoverGroupIds` or `placementGroupId` in update operations.
+     */
+    declare public readonly partitionNumber: pulumi.Output<number | undefined>;
+    /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
      */
     declare public readonly password: pulumi.Output<string | undefined>;
@@ -547,6 +713,10 @@ export class Instance extends pulumi.CustomResource {
      * The public IPv6 address to which the instance is bound.
      */
     declare public /*out*/ readonly publicIpv6Addresses: pulumi.Output<string[]>;
+    /**
+     * The rack ID of the instance resource pool to which the instance belongs.
+     */
+    declare public /*out*/ readonly rackId: pulumi.Output<string>;
     /**
      * Release elastic IP. Under EIP 2.0, only the first EIP under the primary network card is provided, and the EIP types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6. Default behavior is not released.
      */
@@ -582,9 +752,17 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly subnetId: pulumi.Output<string>;
     /**
+     * Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+     */
+    declare public readonly systemDiskEncrypt: pulumi.Output<boolean>;
+    /**
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
     declare public readonly systemDiskId: pulumi.Output<string>;
+    /**
+     * Custom KMS key ID for system disk encryption.
+     */
+    declare public readonly systemDiskKmsKeyId: pulumi.Output<string>;
     /**
      * Name of the system disk.
      */
@@ -647,16 +825,21 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["cdhHostId"] = state?.cdhHostId;
             resourceInputs["cdhInstanceType"] = state?.cdhInstanceType;
             resourceInputs["cpu"] = state?.cpu;
+            resourceInputs["cpuTopology"] = state?.cpuTopology;
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["dataDisks"] = state?.dataDisks;
             resourceInputs["dedicatedClusterId"] = state?.dedicatedClusterId;
+            resourceInputs["dedicatedResourcePackIds"] = state?.dedicatedResourcePackIds;
+            resourceInputs["dedicatedResourcePackTenancy"] = state?.dedicatedResourcePackTenancy;
             resourceInputs["disableApiTermination"] = state?.disableApiTermination;
             resourceInputs["disableAutomationService"] = state?.disableAutomationService;
             resourceInputs["disableMonitorService"] = state?.disableMonitorService;
             resourceInputs["disableSecurityService"] = state?.disableSecurityService;
+            resourceInputs["disasterRecoverGroupIds"] = state?.disasterRecoverGroupIds;
             resourceInputs["expiredTime"] = state?.expiredTime;
             resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["forceReplacePlacementGroupId"] = state?.forceReplacePlacementGroupId;
+            resourceInputs["forceStop"] = state?.forceStop;
             resourceInputs["hostname"] = state?.hostname;
             resourceInputs["hpcClusterId"] = state?.hpcClusterId;
             resourceInputs["imageId"] = state?.imageId;
@@ -680,12 +863,14 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["memory"] = state?.memory;
             resourceInputs["orderlySecurityGroups"] = state?.orderlySecurityGroups;
             resourceInputs["osName"] = state?.osName;
+            resourceInputs["partitionNumber"] = state?.partitionNumber;
             resourceInputs["password"] = state?.password;
             resourceInputs["placementGroupId"] = state?.placementGroupId;
             resourceInputs["privateIp"] = state?.privateIp;
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["publicIp"] = state?.publicIp;
             resourceInputs["publicIpv6Addresses"] = state?.publicIpv6Addresses;
+            resourceInputs["rackId"] = state?.rackId;
             resourceInputs["releaseAddress"] = state?.releaseAddress;
             resourceInputs["runningFlag"] = state?.runningFlag;
             resourceInputs["securityGroups"] = state?.securityGroups;
@@ -694,7 +879,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["stopType"] = state?.stopType;
             resourceInputs["stoppedMode"] = state?.stoppedMode;
             resourceInputs["subnetId"] = state?.subnetId;
+            resourceInputs["systemDiskEncrypt"] = state?.systemDiskEncrypt;
             resourceInputs["systemDiskId"] = state?.systemDiskId;
+            resourceInputs["systemDiskKmsKeyId"] = state?.systemDiskKmsKeyId;
             resourceInputs["systemDiskName"] = state?.systemDiskName;
             resourceInputs["systemDiskResizeOnline"] = state?.systemDiskResizeOnline;
             resourceInputs["systemDiskSize"] = state?.systemDiskSize;
@@ -714,14 +901,19 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["camRoleName"] = args?.camRoleName;
             resourceInputs["cdhHostId"] = args?.cdhHostId;
             resourceInputs["cdhInstanceType"] = args?.cdhInstanceType;
+            resourceInputs["cpuTopology"] = args?.cpuTopology;
             resourceInputs["dataDisks"] = args?.dataDisks;
             resourceInputs["dedicatedClusterId"] = args?.dedicatedClusterId;
+            resourceInputs["dedicatedResourcePackIds"] = args?.dedicatedResourcePackIds;
+            resourceInputs["dedicatedResourcePackTenancy"] = args?.dedicatedResourcePackTenancy;
             resourceInputs["disableApiTermination"] = args?.disableApiTermination;
             resourceInputs["disableAutomationService"] = args?.disableAutomationService;
             resourceInputs["disableMonitorService"] = args?.disableMonitorService;
             resourceInputs["disableSecurityService"] = args?.disableSecurityService;
+            resourceInputs["disasterRecoverGroupIds"] = args?.disasterRecoverGroupIds;
             resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["forceReplacePlacementGroupId"] = args?.forceReplacePlacementGroupId;
+            resourceInputs["forceStop"] = args?.forceStop;
             resourceInputs["hostname"] = args?.hostname;
             resourceInputs["hpcClusterId"] = args?.hpcClusterId;
             resourceInputs["imageId"] = args?.imageId;
@@ -741,6 +933,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["launchTemplateId"] = args?.launchTemplateId;
             resourceInputs["launchTemplateVersion"] = args?.launchTemplateVersion;
             resourceInputs["orderlySecurityGroups"] = args?.orderlySecurityGroups;
+            resourceInputs["partitionNumber"] = args?.partitionNumber;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["placementGroupId"] = args?.placementGroupId;
             resourceInputs["privateIp"] = args?.privateIp;
@@ -753,7 +946,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["stopType"] = args?.stopType;
             resourceInputs["stoppedMode"] = args?.stoppedMode;
             resourceInputs["subnetId"] = args?.subnetId;
+            resourceInputs["systemDiskEncrypt"] = args?.systemDiskEncrypt;
             resourceInputs["systemDiskId"] = args?.systemDiskId;
+            resourceInputs["systemDiskKmsKeyId"] = args?.systemDiskKmsKeyId;
             resourceInputs["systemDiskName"] = args?.systemDiskName;
             resourceInputs["systemDiskResizeOnline"] = args?.systemDiskResizeOnline;
             resourceInputs["systemDiskSize"] = args?.systemDiskSize;
@@ -772,6 +967,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["osName"] = undefined /*out*/;
             resourceInputs["publicIp"] = undefined /*out*/;
             resourceInputs["publicIpv6Addresses"] = undefined /*out*/;
+            resourceInputs["rackId"] = undefined /*out*/;
             resourceInputs["uuid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -788,268 +984,307 @@ export interface InstanceState {
     /**
      * Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
      */
-    allocatePublicIp?: pulumi.Input<boolean>;
+    allocatePublicIp?: pulumi.Input<boolean | undefined>;
     /**
      * Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * The available zone for the CVM instance.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Id of cdh instance. Note: it only works when instanceChargeType is set to `CDHPAID`.
      */
-    cdhHostId?: pulumi.Input<string>;
+    cdhHostId?: pulumi.Input<string | undefined>;
     /**
      * Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
      */
-    cdhInstanceType?: pulumi.Input<string>;
+    cdhInstanceType?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores of the instance.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
+    /**
+     * CPU topology configuration. Only supported when creating instances.
+     */
+    cpuTopology?: pulumi.Input<inputs.Instance.InstanceCpuTopology | undefined>;
     /**
      * Create time of the instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Settings for data disks.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[] | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
+    /**
+     * List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `dedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `tencentcloudCvmResourcePoolPacks`.
+     */
+    dedicatedResourcePackIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+     */
+    dedicatedResourcePackTenancy?: pulumi.Input<string | undefined>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableAutomationService?: pulumi.Input<boolean>;
+    disableAutomationService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableMonitorService?: pulumi.Input<boolean>;
+    disableMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableSecurityService?: pulumi.Input<boolean>;
+    disableSecurityService?: pulumi.Input<boolean | undefined>;
+    /**
+     * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
+     */
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Expired time of the instance.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
-     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `placementGroupId`, Default is false.
+     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placementGroupId` and `disasterRecoverGroupIds`. Default is false.
      */
-    forceReplacePlacementGroupId?: pulumi.Input<boolean>;
+    forceReplacePlacementGroupId?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    forceStop?: pulumi.Input<boolean | undefined>;
     /**
      * The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `hostname` will cause the instance system to restart.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * High-performance computing cluster ID. If the instance created is a high-performance computing instance, you need to specify the cluster in which the instance is placed, otherwise it cannot be specified.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * The image to use for the instance. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
-    instanceName?: pulumi.Input<string>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string | undefined>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Current status of the instance.
      */
-    instanceStatus?: pulumi.Input<string>;
+    instanceStatus?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.
      */
-    ipv4AddressType?: pulumi.Input<string>;
+    ipv4AddressType?: pulumi.Input<string | undefined>;
     /**
      * Specify the number of randomly generated IPv6 addresses for the Elastic Network Interface.
      */
-    ipv6AddressCount?: pulumi.Input<number>;
+    ipv6AddressCount?: pulumi.Input<number | undefined>;
     /**
      * IPv6 AddressType. Default value: WanIP. EIPv6: Elastic IPv6; HighQualityEIPv6: Premium IPv6, only China Hong Kong supports premium IPv6. To allocate IPv6 addresses to resources, please specify the Elastic IPv6 type.
      */
-    ipv6AddressType?: pulumi.Input<string>;
+    ipv6AddressType?: pulumi.Input<string | undefined>;
     /**
      * IPv6 address of the instance.
      */
-    ipv6Addresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipv6Addresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifications may lead to the reinstallation of the instance's operating system..
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    keyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      *
      * @deprecated Please use `keyIds` instead.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Instance launch template ID. This parameter allows you to create an instance using the preset parameters in the instance template.
      */
-    launchTemplateId?: pulumi.Input<string>;
+    launchTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The instance launch template version number. If given, a new instance launch template will be created based on the given version number.
      */
-    launchTemplateVersion?: pulumi.Input<number>;
+    launchTemplateVersion?: pulumi.Input<number | undefined>;
     /**
      * Instance memory capacity, unit in GB.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * A list of orderly security group IDs to associate with.
      */
-    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance os name.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
+    /**
+     * The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `disasterRecoverGroupIds` or `placementGroupId` in update operations.
+     */
+    partitionNumber?: pulumi.Input<number | undefined>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The ID of a placement group.
      */
-    placementGroupId?: pulumi.Input<string>;
+    placementGroupId?: pulumi.Input<string | undefined>;
     /**
      * The private IP to be assigned to this instance, must be in the provided subnet and available.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * The project the instance belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Public IP of the instance.
      */
-    publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string | undefined>;
     /**
      * The public IPv6 address to which the instance is bound.
      */
-    publicIpv6Addresses?: pulumi.Input<pulumi.Input<string>[]>;
+    publicIpv6Addresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The rack ID of the instance resource pool to which the instance belongs.
+     */
+    rackId?: pulumi.Input<string | undefined>;
     /**
      * Release elastic IP. Under EIP 2.0, only the first EIP under the primary network card is provided, and the EIP types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6. Default behavior is not released.
      */
-    releaseAddress?: pulumi.Input<boolean>;
+    releaseAddress?: pulumi.Input<boolean | undefined>;
     /**
      * Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
      */
-    runningFlag?: pulumi.Input<boolean>;
+    runningFlag?: pulumi.Input<boolean | undefined>;
     /**
      * It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
      *
      * @deprecated It will be deprecated. Use `orderlySecurityGroups` instead.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotInstanceType?: pulumi.Input<string>;
+    spotInstanceType?: pulumi.Input<string | undefined>;
     /**
      * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotMaxPrice?: pulumi.Input<string>;
+    spotMaxPrice?: pulumi.Input<string | undefined>;
     /**
      * Instance shutdown mode. Valid values: SOFT_FIRST: perform a soft shutdown first, and force shut down the instance if the soft shutdown fails; HARD: force shut down the instance directly; SOFT: soft shutdown only. Default value: SOFT.
      */
-    stopType?: pulumi.Input<string>;
+    stopType?: pulumi.Input<string | undefined>;
     /**
      * Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
      */
-    stoppedMode?: pulumi.Input<string>;
+    stoppedMode?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+     */
+    systemDiskEncrypt?: pulumi.Input<boolean | undefined>;
     /**
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
-    systemDiskId?: pulumi.Input<string>;
+    systemDiskId?: pulumi.Input<string | undefined>;
+    /**
+     * Custom KMS key ID for system disk encryption.
+     */
+    systemDiskKmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the system disk.
      */
-    systemDiskName?: pulumi.Input<string>;
+    systemDiskName?: pulumi.Input<string | undefined>;
     /**
      * Resize online.
      */
-    systemDiskResizeOnline?: pulumi.Input<boolean>;
+    systemDiskResizeOnline?: pulumi.Input<boolean | undefined>;
     /**
      * Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The user data to be injected into this instance. Must be base64 encoded and up to 16 KB. If `userDataReplaceOnChange` is set to `true`, updates to this field will trigger the destruction and recreation of the CVM instance.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded. If `userDataReplaceOnChange` is set to `true`, updates to this field will trigger the destruction and recreation of the CVM instance.
      */
-    userDataRaw?: pulumi.Input<string>;
+    userDataRaw?: pulumi.Input<string | undefined>;
     /**
      * When used in combination with `userData` or `userDataRaw` will trigger a destroy and recreate of the CVM instance when set to `true`. Default is `false`.
      */
-    userDataReplaceOnChange?: pulumi.Input<boolean>;
+    userDataReplaceOnChange?: pulumi.Input<boolean | undefined>;
     /**
      * Globally unique ID of the instance.
      */
-    uuid?: pulumi.Input<string>;
+    uuid?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -1059,226 +1294,261 @@ export interface InstanceArgs {
     /**
      * Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
      */
-    allocatePublicIp?: pulumi.Input<boolean>;
+    allocatePublicIp?: pulumi.Input<boolean | undefined>;
     /**
      * Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * The available zone for the CVM instance.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Id of cdh instance. Note: it only works when instanceChargeType is set to `CDHPAID`.
      */
-    cdhHostId?: pulumi.Input<string>;
+    cdhHostId?: pulumi.Input<string | undefined>;
     /**
      * Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
      */
-    cdhInstanceType?: pulumi.Input<string>;
+    cdhInstanceType?: pulumi.Input<string | undefined>;
+    /**
+     * CPU topology configuration. Only supported when creating instances.
+     */
+    cpuTopology?: pulumi.Input<inputs.Instance.InstanceCpuTopology | undefined>;
     /**
      * Settings for data disks.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[] | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
+    /**
+     * List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `dedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `tencentcloudCvmResourcePoolPacks`.
+     */
+    dedicatedResourcePackIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+     */
+    dedicatedResourcePackTenancy?: pulumi.Input<string | undefined>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for automation, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableAutomationService?: pulumi.Input<boolean>;
+    disableAutomationService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableMonitorService?: pulumi.Input<boolean>;
+    disableMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableSecurityService?: pulumi.Input<boolean>;
+    disableSecurityService?: pulumi.Input<boolean | undefined>;
+    /**
+     * Placement group ID list. Supports up to 3 group IDs. When set, `placementGroupId` will be ignored and this list will be used for CRUD operations.
+     */
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
-     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `placementGroupId`, Default is false.
+     * Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placementGroupId` and `disasterRecoverGroupIds`. Default is false.
      */
-    forceReplacePlacementGroupId?: pulumi.Input<boolean>;
+    forceReplacePlacementGroupId?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    forceStop?: pulumi.Input<boolean | undefined>;
     /**
      * The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `hostname` will cause the instance system to restart.
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * High-performance computing cluster ID. If the instance created is a high-performance computing instance, you need to specify the cluster in which the instance is placed, otherwise it cannot be specified.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * The image to use for the instance. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
-    instanceName?: pulumi.Input<string>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string | undefined>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.
      */
-    ipv4AddressType?: pulumi.Input<string>;
+    ipv4AddressType?: pulumi.Input<string | undefined>;
     /**
      * Specify the number of randomly generated IPv6 addresses for the Elastic Network Interface.
      */
-    ipv6AddressCount?: pulumi.Input<number>;
+    ipv6AddressCount?: pulumi.Input<number | undefined>;
     /**
      * IPv6 AddressType. Default value: WanIP. EIPv6: Elastic IPv6; HighQualityEIPv6: Premium IPv6, only China Hong Kong supports premium IPv6. To allocate IPv6 addresses to resources, please specify the Elastic IPv6 type.
      */
-    ipv6AddressType?: pulumi.Input<string>;
+    ipv6AddressType?: pulumi.Input<string | undefined>;
     /**
      * Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifications may lead to the reinstallation of the instance's operating system..
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    keyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      *
      * @deprecated Please use `keyIds` instead.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Instance launch template ID. This parameter allows you to create an instance using the preset parameters in the instance template.
      */
-    launchTemplateId?: pulumi.Input<string>;
+    launchTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The instance launch template version number. If given, a new instance launch template will be created based on the given version number.
      */
-    launchTemplateVersion?: pulumi.Input<number>;
+    launchTemplateVersion?: pulumi.Input<number | undefined>;
     /**
      * A list of orderly security group IDs to associate with.
      */
-    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `disasterRecoverGroupIds` or `placementGroupId` in update operations.
+     */
+    partitionNumber?: pulumi.Input<number | undefined>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The ID of a placement group.
      */
-    placementGroupId?: pulumi.Input<string>;
+    placementGroupId?: pulumi.Input<string | undefined>;
     /**
      * The private IP to be assigned to this instance, must be in the provided subnet and available.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * The project the instance belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Release elastic IP. Under EIP 2.0, only the first EIP under the primary network card is provided, and the EIP types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6. Default behavior is not released.
      */
-    releaseAddress?: pulumi.Input<boolean>;
+    releaseAddress?: pulumi.Input<boolean | undefined>;
     /**
      * Set instance to running or stop. Default value is true, the instance will shutdown when this flag is false.
      */
-    runningFlag?: pulumi.Input<boolean>;
+    runningFlag?: pulumi.Input<boolean | undefined>;
     /**
      * It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
      *
      * @deprecated It will be deprecated. Use `orderlySecurityGroups` instead.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotInstanceType?: pulumi.Input<string>;
+    spotInstanceType?: pulumi.Input<string | undefined>;
     /**
      * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotMaxPrice?: pulumi.Input<string>;
+    spotMaxPrice?: pulumi.Input<string | undefined>;
     /**
      * Instance shutdown mode. Valid values: SOFT_FIRST: perform a soft shutdown first, and force shut down the instance if the soft shutdown fails; HARD: force shut down the instance directly; SOFT: soft shutdown only. Default value: SOFT.
      */
-    stopType?: pulumi.Input<string>;
+    stopType?: pulumi.Input<string | undefined>;
     /**
      * Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
      */
-    stoppedMode?: pulumi.Input<string>;
+    stoppedMode?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+     */
+    systemDiskEncrypt?: pulumi.Input<boolean | undefined>;
     /**
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
-    systemDiskId?: pulumi.Input<string>;
+    systemDiskId?: pulumi.Input<string | undefined>;
+    /**
+     * Custom KMS key ID for system disk encryption.
+     */
+    systemDiskKmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the system disk.
      */
-    systemDiskName?: pulumi.Input<string>;
+    systemDiskName?: pulumi.Input<string | undefined>;
     /**
      * Resize online.
      */
-    systemDiskResizeOnline?: pulumi.Input<boolean>;
+    systemDiskResizeOnline?: pulumi.Input<boolean | undefined>;
     /**
      * Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * A mapping of tags to assign to the resource. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The user data to be injected into this instance. Must be base64 encoded and up to 16 KB. If `userDataReplaceOnChange` is set to `true`, updates to this field will trigger the destruction and recreation of the CVM instance.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded. If `userDataReplaceOnChange` is set to `true`, updates to this field will trigger the destruction and recreation of the CVM instance.
      */
-    userDataRaw?: pulumi.Input<string>;
+    userDataRaw?: pulumi.Input<string | undefined>;
     /**
      * When used in combination with `userData` or `userDataRaw` will trigger a destroy and recreate of the CVM instance when set to `true`. Default is `false`.
      */
-    userDataReplaceOnChange?: pulumi.Input<boolean>;
+    userDataReplaceOnChange?: pulumi.Input<boolean | undefined>;
     /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

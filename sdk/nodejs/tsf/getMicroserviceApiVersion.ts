@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const microserviceApiVersion = tencentcloud.Tsf.getMicroserviceApiVersion({
+ * const microserviceApiVersion = tencentcloud.tsf.getMicroserviceApiVersion({
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "",
  *     method: "get",
@@ -80,7 +80,7 @@ export interface GetMicroserviceApiVersionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const microserviceApiVersion = tencentcloud.Tsf.getMicroserviceApiVersion({
+ * const microserviceApiVersion = tencentcloud.tsf.getMicroserviceApiVersion({
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "",
  *     method: "get",
@@ -104,7 +104,7 @@ export interface GetMicroserviceApiVersionOutputArgs {
     /**
      * request method.
      */
-    method?: pulumi.Input<string>;
+    method?: pulumi.Input<string | undefined>;
     /**
      * Microservice ID.
      */
@@ -112,9 +112,9 @@ export interface GetMicroserviceApiVersionOutputArgs {
     /**
      * api path.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

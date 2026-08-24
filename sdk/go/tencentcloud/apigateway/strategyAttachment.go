@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			test, err := apigateway.NewIpStrategy(ctx, "test", &apigateway.IpStrategyArgs{
-//				ServiceId:    service.ID(),
+//				ServiceId:    service.ID().ToIDOutput().ToStringOutput(),
 //				StrategyName: pulumi.String("tf_test"),
 //				StrategyType: pulumi.String("BLACK"),
 //				StrategyData: pulumi.String("9.9.9.9"),
@@ -51,7 +51,7 @@ import (
 //				return err
 //			}
 //			api, err := apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
-//				ServiceId:           service.ID(),
+//				ServiceId:           service.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example"),
 //				ApiDesc:             pulumi.String("my hello api update"),
 //				AuthType:            pulumi.String("SECRET"),
@@ -91,7 +91,7 @@ import (
 //				return err
 //			}
 //			serviceServiceRelease, err := apigateway.NewServiceRelease(ctx, "service", &apigateway.ServiceReleaseArgs{
-//				ServiceId:       service.ID(),
+//				ServiceId:       service.ID().ToIDOutput().ToStringOutput(),
 //				EnvironmentName: pulumi.String("release"),
 //				ReleaseDesc:     pulumi.String("test service release"),
 //			})
@@ -102,7 +102,7 @@ import (
 //				ServiceId:       serviceServiceRelease.ServiceId,
 //				StrategyId:      test.StrategyId,
 //				EnvironmentName: pulumi.String("release"),
-//				BindApiId:       api.ID(),
+//				BindApiId:       api.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

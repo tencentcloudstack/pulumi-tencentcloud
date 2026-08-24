@@ -12,7 +12,12 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a waf clbDomain
+// Provides a resource to create a Waf clb domain
+//
+// > **NOTE:** There are two modes for the `flowMade` field:
+// ##### `Cleaning mode`: Business traffic is forwarded to the WAF cluster, which performs bypass detection and alerting, synchronizes requests for trusted status, and the gateway cluster intercepts or releases requests based on the status. (Recommended)
+// ##### `Mirror mode`: Mirror traffic to WAF cluster, WAF performs bypass detection and alarm, and does not return request trusted status.
+// The default value for creating resources in TF is mirror mode. If WAF needs to handle traffic, please set it to clean mode.
 //
 // ## Example Usage
 //
@@ -32,24 +37,25 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := waf.NewClbDomain(ctx, "example", &waf.ClbDomainArgs{
 //				InstanceId: pulumi.String("waf_2kxtlbky00b2v1fn"),
-//				Domain:     pulumi.String("test.com"),
+//				Domain:     pulumi.String("demo.com"),
 //				LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
 //					&waf.ClbDomainLoadBalancerSetArgs{
 //						LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
-//						LoadBalancerName: pulumi.String("keep-listener-clb"),
+//						LoadBalancerName: pulumi.String("example-clb"),
 //						ListenerId:       pulumi.String("lbl-nonkgvc2"),
-//						ListenerName:     pulumi.String("dsadasd"),
+//						ListenerName:     pulumi.String("example-listener"),
 //						Vip:              pulumi.String("106.55.220.8"),
 //						Vport:            pulumi.Int(80),
 //						Region:           pulumi.String("gz"),
 //						Protocol:         pulumi.String("HTTP"),
 //						Zone:             pulumi.String("ap-guangzhou-6"),
-//						NumericalVpcId:   pulumi.Int(5232945),
+//						NumericalVpcId:   pulumi.Int(-1),
 //						LoadBalancerType: pulumi.String("OPEN"),
 //					},
 //				},
 //				Region:  pulumi.String("gz"),
 //				AlbType: pulumi.String("clb"),
+//				Note:    pulumi.String("notes."),
 //			})
 //			if err != nil {
 //				return err
@@ -76,22 +82,22 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := waf.NewClbDomain(ctx, "example", &waf.ClbDomainArgs{
 //				InstanceId: pulumi.String("waf_2kxtlbky00b2v1fn"),
-//				Domain:     pulumi.String("test.com"),
+//				Domain:     pulumi.String("demo.com"),
 //				IsCdn:      pulumi.Int(3),
 //				Status:     pulumi.Int(1),
 //				Engine:     pulumi.Int(21),
 //				LoadBalancerSets: waf.ClbDomainLoadBalancerSetArray{
 //					&waf.ClbDomainLoadBalancerSetArgs{
 //						LoadBalancerId:   pulumi.String("lb-5dnrkgry"),
-//						LoadBalancerName: pulumi.String("keep-listener-clb"),
+//						LoadBalancerName: pulumi.String("example-clb"),
 //						ListenerId:       pulumi.String("lbl-nonkgvc2"),
-//						ListenerName:     pulumi.String("dsadasd"),
+//						ListenerName:     pulumi.String("example-listener"),
 //						Vip:              pulumi.String("106.55.220.8"),
 //						Vport:            pulumi.Int(80),
 //						Region:           pulumi.String("gz"),
 //						Protocol:         pulumi.String("HTTP"),
 //						Zone:             pulumi.String("ap-guangzhou-6"),
-//						NumericalVpcId:   pulumi.Int(5232945),
+//						NumericalVpcId:   pulumi.Int(-1),
 //						LoadBalancerType: pulumi.String("OPEN"),
 //					},
 //				},
@@ -131,7 +137,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := waf.NewClbDomain(ctx, "example", &waf.ClbDomainArgs{
 //				InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
-//				Domain:        pulumi.String("xxx.com"),
+//				Domain:        pulumi.String("demo.com"),
 //				IsCdn:         pulumi.Int(0),
 //				Status:        pulumi.Int(1),
 //				Engine:        pulumi.Int(12),
@@ -166,7 +172,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := waf.NewClbDomain(ctx, "example", &waf.ClbDomainArgs{
 //				InstanceId:    pulumi.String("waf_2kxtlbky00b2v1fn"),
-//				Domain:        pulumi.String("xxx.com"),
+//				Domain:        pulumi.String("demo.com"),
 //				IsCdn:         pulumi.Int(0),
 //				Status:        pulumi.Int(1),
 //				Engine:        pulumi.Int(12),
@@ -187,10 +193,10 @@ import (
 //
 // ## Import
 //
-// waf clb_domain can be imported using the id, e.g.
+// Waf clb domain can be imported using the instanceID#domain#domainId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+// $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#demo.com#waf-0FSehoRU
 // ```
 type ClbDomain struct {
 	pulumi.CustomResourceState
@@ -201,6 +207,8 @@ type ClbDomain struct {
 	ApiSafeStatus pulumi.IntPtrOutput `pulumi:"apiSafeStatus"`
 	// Whether to enable bot, 1 enable, 0 disable.
 	BotStatus pulumi.IntPtrOutput `pulumi:"botStatus"`
+	// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+	CloudType pulumi.StringOutput `pulumi:"cloudType"`
 	// Whether to enable access logs, 1 enable, 0 disable.
 	ClsStatus pulumi.IntPtrOutput `pulumi:"clsStatus"`
 	// Domain name.
@@ -219,6 +227,8 @@ type ClbDomain struct {
 	IsCdn pulumi.IntPtrOutput `pulumi:"isCdn"`
 	// List of bound LB.
 	LoadBalancerSets ClbDomainLoadBalancerSetArrayOutput `pulumi:"loadBalancerSets"`
+	// Domain name notes.
+	Note pulumi.StringPtrOutput `pulumi:"note"`
 	// Regions of LB bound by domain.
 	Region pulumi.StringOutput `pulumi:"region"`
 	// Binding status between waf and LB, 0:not bind, 1:binding.
@@ -270,6 +280,8 @@ type clbDomainState struct {
 	ApiSafeStatus *int `pulumi:"apiSafeStatus"`
 	// Whether to enable bot, 1 enable, 0 disable.
 	BotStatus *int `pulumi:"botStatus"`
+	// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+	CloudType *string `pulumi:"cloudType"`
 	// Whether to enable access logs, 1 enable, 0 disable.
 	ClsStatus *int `pulumi:"clsStatus"`
 	// Domain name.
@@ -288,6 +300,8 @@ type clbDomainState struct {
 	IsCdn *int `pulumi:"isCdn"`
 	// List of bound LB.
 	LoadBalancerSets []ClbDomainLoadBalancerSet `pulumi:"loadBalancerSets"`
+	// Domain name notes.
+	Note *string `pulumi:"note"`
 	// Regions of LB bound by domain.
 	Region *string `pulumi:"region"`
 	// Binding status between waf and LB, 0:not bind, 1:binding.
@@ -301,6 +315,8 @@ type ClbDomainState struct {
 	ApiSafeStatus pulumi.IntPtrInput
 	// Whether to enable bot, 1 enable, 0 disable.
 	BotStatus pulumi.IntPtrInput
+	// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+	CloudType pulumi.StringPtrInput
 	// Whether to enable access logs, 1 enable, 0 disable.
 	ClsStatus pulumi.IntPtrInput
 	// Domain name.
@@ -319,6 +335,8 @@ type ClbDomainState struct {
 	IsCdn pulumi.IntPtrInput
 	// List of bound LB.
 	LoadBalancerSets ClbDomainLoadBalancerSetArrayInput
+	// Domain name notes.
+	Note pulumi.StringPtrInput
 	// Regions of LB bound by domain.
 	Region pulumi.StringPtrInput
 	// Binding status between waf and LB, 0:not bind, 1:binding.
@@ -336,6 +354,8 @@ type clbDomainArgs struct {
 	ApiSafeStatus *int `pulumi:"apiSafeStatus"`
 	// Whether to enable bot, 1 enable, 0 disable.
 	BotStatus *int `pulumi:"botStatus"`
+	// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+	CloudType *string `pulumi:"cloudType"`
 	// Whether to enable access logs, 1 enable, 0 disable.
 	ClsStatus *int `pulumi:"clsStatus"`
 	// Domain name.
@@ -352,6 +372,8 @@ type clbDomainArgs struct {
 	IsCdn *int `pulumi:"isCdn"`
 	// List of bound LB.
 	LoadBalancerSets []ClbDomainLoadBalancerSet `pulumi:"loadBalancerSets"`
+	// Domain name notes.
+	Note *string `pulumi:"note"`
 	// Regions of LB bound by domain.
 	Region string `pulumi:"region"`
 	// Binding status between waf and LB, 0:not bind, 1:binding.
@@ -366,6 +388,8 @@ type ClbDomainArgs struct {
 	ApiSafeStatus pulumi.IntPtrInput
 	// Whether to enable bot, 1 enable, 0 disable.
 	BotStatus pulumi.IntPtrInput
+	// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+	CloudType pulumi.StringPtrInput
 	// Whether to enable access logs, 1 enable, 0 disable.
 	ClsStatus pulumi.IntPtrInput
 	// Domain name.
@@ -382,6 +406,8 @@ type ClbDomainArgs struct {
 	IsCdn pulumi.IntPtrInput
 	// List of bound LB.
 	LoadBalancerSets ClbDomainLoadBalancerSetArrayInput
+	// Domain name notes.
+	Note pulumi.StringPtrInput
 	// Regions of LB bound by domain.
 	Region pulumi.StringInput
 	// Binding status between waf and LB, 0:not bind, 1:binding.
@@ -490,6 +516,11 @@ func (o ClbDomainOutput) BotStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClbDomain) pulumi.IntPtrOutput { return v.BotStatus }).(pulumi.IntPtrOutput)
 }
 
+// Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+func (o ClbDomainOutput) CloudType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ClbDomain) pulumi.StringOutput { return v.CloudType }).(pulumi.StringOutput)
+}
+
 // Whether to enable access logs, 1 enable, 0 disable.
 func (o ClbDomainOutput) ClsStatus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClbDomain) pulumi.IntPtrOutput { return v.ClsStatus }).(pulumi.IntPtrOutput)
@@ -533,6 +564,11 @@ func (o ClbDomainOutput) IsCdn() pulumi.IntPtrOutput {
 // List of bound LB.
 func (o ClbDomainOutput) LoadBalancerSets() ClbDomainLoadBalancerSetArrayOutput {
 	return o.ApplyT(func(v *ClbDomain) ClbDomainLoadBalancerSetArrayOutput { return v.LoadBalancerSets }).(ClbDomainLoadBalancerSetArrayOutput)
+}
+
+// Domain name notes.
+func (o ClbDomainOutput) Note() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClbDomain) pulumi.StringPtrOutput { return v.Note }).(pulumi.StringPtrOutput)
 }
 
 // Regions of LB bound by domain.

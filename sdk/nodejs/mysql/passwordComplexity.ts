@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -151,11 +151,11 @@ export interface PasswordComplexityState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.length`, `validate_password.mixed_case_count`, `validate_password.number_count`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validatePasswordPolicy`, `validatePasswordLength` `validatePasswordMixedCaseCount`, `validatePasswordNumberCount`, `validatePasswordSpecialCharCount`.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.PasswordComplexityParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.PasswordComplexityParamList>[] | undefined>;
 }
 
 /**
@@ -169,5 +169,5 @@ export interface PasswordComplexityArgs {
     /**
      * List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.length`, `validate_password.mixed_case_count`, `validate_password.number_count`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validatePasswordPolicy`, `validatePasswordLength` `validatePasswordMixedCaseCount`, `validatePasswordNumberCount`, `validatePasswordSpecialCharCount`.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.PasswordComplexityParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.PasswordComplexityParamList>[] | undefined>;
 }

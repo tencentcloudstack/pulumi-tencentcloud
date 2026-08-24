@@ -205,43 +205,43 @@ export interface KeyState {
     /**
      * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Description of CMK. The maximum is 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isArchived?: pulumi.Input<boolean>;
+    isArchived?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key rotation, valid when keyUsage is `ENCRYPT_DECRYPT`. Default value is `false`.
      */
-    keyRotationEnabled?: pulumi.Input<boolean>;
+    keyRotationEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * State of CMK.
      */
-    keyState?: pulumi.Input<string>;
+    keyState?: pulumi.Input<string | undefined>;
     /**
      * Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
      */
-    keyUsage?: pulumi.Input<string>;
+    keyUsage?: pulumi.Input<string | undefined>;
     /**
      * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
-    pendingDeleteWindowInDays?: pulumi.Input<number>;
+    pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Tags of CMK.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -255,33 +255,33 @@ export interface KeyArgs {
     /**
      * Description of CMK. The maximum is 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isArchived?: pulumi.Input<boolean>;
+    isArchived?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key rotation, valid when keyUsage is `ENCRYPT_DECRYPT`. Default value is `false`.
      */
-    keyRotationEnabled?: pulumi.Input<boolean>;
+    keyRotationEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Usage of CMK. Available values include `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
      */
-    keyUsage?: pulumi.Input<string>;
+    keyUsage?: pulumi.Input<string | undefined>;
     /**
      * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
-    pendingDeleteWindowInDays?: pulumi.Input<number>;
+    pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Tags of CMK.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

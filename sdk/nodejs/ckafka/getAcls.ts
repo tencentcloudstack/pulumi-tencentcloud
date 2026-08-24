@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getAcls({
+ * const foo = tencentcloud.ckafka.getAcls({
  *     instanceId: "ckafka-f9ife4zz",
  *     resourceType: "TOPIC",
  *     resourceName: "topic-tf-test",
@@ -96,7 +96,7 @@ export interface GetAclsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getAcls({
+ * const foo = tencentcloud.ckafka.getAcls({
  *     instanceId: "ckafka-f9ife4zz",
  *     resourceType: "TOPIC",
  *     resourceName: "topic-tf-test",
@@ -122,7 +122,7 @@ export interface GetAclsOutputArgs {
     /**
      * Host substr used for querying.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Id of the ckafka instance.
      */
@@ -138,5 +138,5 @@ export interface GetAclsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

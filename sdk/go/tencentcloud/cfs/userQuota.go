@@ -12,45 +12,6 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cfs userQuota
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cfs"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cfs.NewUserQuota(ctx, "user_quota", &cfs.UserQuotaArgs{
-//				FileSystemId:      pulumi.String("cfs-4636029bc"),
-//				UserType:          pulumi.String("Uid"),
-//				UserId:            pulumi.String("2159973417"),
-//				CapacityHardLimit: pulumi.Int(10),
-//				FileHardLimit:     pulumi.Int(10000),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Import
-//
-// cfs user_quota can be imported using the id, e.g.
-//
-// ```sh
-// $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
-// ```
 type UserQuota struct {
 	pulumi.CustomResourceState
 

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logUrlStatistics = tencentcloud.Rum.getLogUrlStatistics({
+ * const logUrlStatistics = tencentcloud.rum.getLogUrlStatistics({
  *     startTime: 1625444040,
  *     type: "analysis",
  *     endTime: 1625454840,
@@ -187,7 +187,7 @@ export interface GetLogUrlStatisticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logUrlStatistics = tencentcloud.Rum.getLogUrlStatistics({
+ * const logUrlStatistics = tencentcloud.rum.getLogUrlStatistics({
  *     startTime: 1625444040,
  *     type: "analysis",
  *     endTime: 1625454840,
@@ -230,19 +230,19 @@ export interface GetLogUrlStatisticsOutputArgs {
     /**
      * The region where the data reporting takes place.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * The mobile phone brand used for data reporting.
      */
-    brand?: pulumi.Input<string>;
+    brand?: pulumi.Input<string | undefined>;
     /**
      * The browser type used for data reporting.
      */
-    browser?: pulumi.Input<string>;
+    browser?: pulumi.Input<string | undefined>;
     /**
      * The device used for data reporting.
      */
-    device?: pulumi.Input<string>;
+    device?: pulumi.Input<string | undefined>;
     /**
      * End time but is represented using a timestamp in seconds.
      */
@@ -250,51 +250,51 @@ export interface GetLogUrlStatisticsOutputArgs {
     /**
      * The browser engine used for data reporting.
      */
-    engine?: pulumi.Input<string>;
+    engine?: pulumi.Input<string | undefined>;
     /**
      * The code environment where the data reporting takes place.(`production`: production env, `development`: development env, `gray`: gray env, `pre`: pre env, `daily`: daily env, `local`: local env, `others`: others env).
      */
-    env?: pulumi.Input<string>;
+    env?: pulumi.Input<string | undefined>;
     /**
      * First Expansion parameter.
      */
-    extFirst?: pulumi.Input<string>;
+    extFirst?: pulumi.Input<string | undefined>;
     /**
      * Second Expansion parameter.
      */
-    extSecond?: pulumi.Input<string>;
+    extSecond?: pulumi.Input<string | undefined>;
     /**
      * Third Expansion parameter.
      */
-    extThird?: pulumi.Input<string>;
+    extThird?: pulumi.Input<string | undefined>;
     /**
      * The source page of the data reporting.
      */
-    from?: pulumi.Input<string>;
+    from?: pulumi.Input<string | undefined>;
     /**
      * Whether it is non-China region.`1`: yes; `0`: no.
      */
-    isAbroad?: pulumi.Input<string>;
+    isAbroad?: pulumi.Input<string | undefined>;
     /**
      * The internet service provider used for data reporting.
      */
-    isp?: pulumi.Input<string>;
+    isp?: pulumi.Input<string | undefined>;
     /**
      * Log level for data reporting(`1`: whitelist, `2`: normal, `4`: error, `8`: promise error, `16`: ajax request error, `32`: js resource load error, `64`: image resource load error, `128`: css resource load error, `256`: console.error, `512`: video resource load error, `1024`: request retcode error, `2048`: sdk self monitor error, `4096`: pv log, `8192`: event log).
      */
-    level?: pulumi.Input<string>;
+    level?: pulumi.Input<string | undefined>;
     /**
      * The network type used for data reporting.(`1`: Wifi, `2`: 2G, `3`: 3G, `4`: 4G, `5`: 5G, `6`: 6G, `100`: Unknown).
      */
-    netType?: pulumi.Input<string>;
+    netType?: pulumi.Input<string | undefined>;
     /**
      * The operating system used for data reporting.
      */
-    os?: pulumi.Input<string>;
+    os?: pulumi.Input<string | undefined>;
     /**
      * The platform where the data reporting takes place.(`1`: Android, `2`: IOS, `3`: Windows, `4`: Mac, `5`: Linux, `100`: Other).
      */
-    platform?: pulumi.Input<string>;
+    platform?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -302,7 +302,7 @@ export interface GetLogUrlStatisticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time but is represented using a timestamp in seconds.
      */
@@ -314,5 +314,5 @@ export interface GetLogUrlStatisticsOutputArgs {
     /**
      * The SDK version used for data reporting.
      */
-    versionNum?: pulumi.Input<string>;
+    versionNum?: pulumi.Input<string | undefined>;
 }

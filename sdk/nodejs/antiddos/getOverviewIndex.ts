@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewIndex = tencentcloud.Antiddos.getOverviewIndex({
+ * const overviewIndex = tencentcloud.antiddos.getOverviewIndex({
  *     startTime: "2023-11-20 12:32:12",
  *     endTime: "2023-11-21 12:32:12",
  * });
@@ -107,7 +107,7 @@ export interface GetOverviewIndexResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewIndex = tencentcloud.Antiddos.getOverviewIndex({
+ * const overviewIndex = tencentcloud.antiddos.getOverviewIndex({
  *     startTime: "2023-11-20 12:32:12",
  *     endTime: "2023-11-21 12:32:12",
  * });
@@ -133,7 +133,7 @@ export interface GetOverviewIndexOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * StartTime.
      */

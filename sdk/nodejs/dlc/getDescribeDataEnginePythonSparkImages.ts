@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEnginePythonSparkImages({
+ * const example = tencentcloud.dlc.getDescribeDataEnginePythonSparkImages({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetDescribeDataEnginePythonSparkImagesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEnginePythonSparkImages({
+ * const example = tencentcloud.dlc.getDescribeDataEnginePythonSparkImages({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetDescribeDataEnginePythonSparkImagesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

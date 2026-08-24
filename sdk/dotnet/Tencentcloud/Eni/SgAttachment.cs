@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -92,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// 
     /// ## Import
     /// 
-    /// vpc eni_sg_attachment can be imported using the id, e.g.
+    /// vpc EniSgAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id

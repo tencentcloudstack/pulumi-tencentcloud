@@ -11,10 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo BindSecurityTemplate
+    /// Provides a resource to create a TEO bind security template
     /// 
     /// &gt; **NOTE:** If the domain name you input has been bound to a policy template (including site-level protection policies), the default value is to replace the template currently bound to the domain name.
-    /// **NOTE:** The current resource can only bind/unbind the template and domain name belonging to the same site.
+    /// 
+    /// &gt; **NOTE:** The current resource can only bind/unbind the template and domain name belonging to the same site.
     /// 
     /// ## Example Usage
     /// 
@@ -26,12 +27,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var teoBindSecurityTemplate = new Tencentcloud.Teo.BindSecurityTemplate("teo_bind_security_template", new()
+    ///     var example = new Tencentcloud.Teo.BindSecurityTemplate("example", new()
     ///     {
+    ///         ZoneId = "zone-3skoch6ingbw",
+    ///         TemplateId = "temp-3s1pzyam2nxp",
+    ///         Entity = "tf.example.com",
     ///         Operate = "unbind-use-default",
-    ///         TemplateId = "temp-7dr7dm78",
-    ///         ZoneId = "zone-39quuimqg8r6",
-    ///         Entity = "aaa.makn.cn",
     ///     });
     /// 
     /// });
@@ -39,29 +40,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo application_proxy_rule can be imported using the zoneId#templateId#entity, e.g.
+    /// TEO bind security template can be imported using the zoneId#templateId#entity, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate teo_bind_security_template zone-39quuimqg8r6#temp-7dr7dm78#aaa.makn.cn
+    /// $ pulumi import tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate teo_bind_security_template zone-3skoch6ingbw#temp-3s1pzyam2nxp#tf.example.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate")]
     public partial class BindSecurityTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// List of domain names to bind to/unbind from a policy template.
+        /// The domain name to be bound to the policy template (or unbound from the policy template).
         /// </summary>
         [Output("entity")]
         public Output<string> Entity { get; private set; } = null!;
 
         /// <summary>
-        /// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+        /// Bind or unbind operation option. Valid values:
+        /// &lt;li&gt;`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.&lt;/li&gt;
+        /// &lt;li&gt;`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.&lt;/li&gt;
+        /// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `Operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
         /// </summary>
         [Output("operate")]
         public Output<string> Operate { get; private set; } = null!;
 
         /// <summary>
-        /// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `True`: Replace the currently bound template for the domain. `False`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+        /// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `True`. Supported values:
+        /// &lt;li&gt;`True`: replace the template currently bound to the domain name.&lt;/li&gt;
+        /// &lt;li&gt;`False`: do not replace the template currently bound to the domain name.&lt;/li&gt;
+        /// Note: When set to `False`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
         /// </summary>
         [Output("overWrite")]
         public Output<bool> OverWrite { get; private set; } = null!;
@@ -74,16 +81,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
         /// <summary>
         /// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;.
-        /// &lt;li&gt;To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.&lt;/li&gt;.
-        /// 
-        /// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;
+        /// &lt;li&gt;To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.&lt;/li&gt;
+        /// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
         /// </summary>
         [Output("templateId")]
         public Output<string> TemplateId { get; private set; } = null!;
 
         /// <summary>
-        /// Site ID of the policy template to be bound to or unbound from.
+        /// The site ID to which the policy template to be bound or unbound belongs.
         /// </summary>
         [Output("zoneId")]
         public Output<string> ZoneId { get; private set; } = null!;
@@ -136,35 +142,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class BindSecurityTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// List of domain names to bind to/unbind from a policy template.
+        /// The domain name to be bound to the policy template (or unbound from the policy template).
         /// </summary>
         [Input("entity", required: true)]
         public Input<string> Entity { get; set; } = null!;
 
         /// <summary>
-        /// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+        /// Bind or unbind operation option. Valid values:
+        /// &lt;li&gt;`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.&lt;/li&gt;
+        /// &lt;li&gt;`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.&lt;/li&gt;
+        /// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `Operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
         /// </summary>
         [Input("operate")]
         public Input<string>? Operate { get; set; }
 
         /// <summary>
-        /// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `True`: Replace the currently bound template for the domain. `False`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+        /// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `True`. Supported values:
+        /// &lt;li&gt;`True`: replace the template currently bound to the domain name.&lt;/li&gt;
+        /// &lt;li&gt;`False`: do not replace the template currently bound to the domain name.&lt;/li&gt;
+        /// Note: When set to `False`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
         /// </summary>
         [Input("overWrite")]
         public Input<bool>? OverWrite { get; set; }
 
         /// <summary>
         /// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;.
-        /// &lt;li&gt;To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.&lt;/li&gt;.
-        /// 
-        /// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;
+        /// &lt;li&gt;To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.&lt;/li&gt;
+        /// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
         /// </summary>
         [Input("templateId", required: true)]
         public Input<string> TemplateId { get; set; } = null!;
 
         /// <summary>
-        /// Site ID of the policy template to be bound to or unbound from.
+        /// The site ID to which the policy template to be bound or unbound belongs.
         /// </summary>
         [Input("zoneId", required: true)]
         public Input<string> ZoneId { get; set; } = null!;
@@ -178,19 +189,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class BindSecurityTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// List of domain names to bind to/unbind from a policy template.
+        /// The domain name to be bound to the policy template (or unbound from the policy template).
         /// </summary>
         [Input("entity")]
         public Input<string>? Entity { get; set; }
 
         /// <summary>
-        /// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+        /// Bind or unbind operation option. Valid values:
+        /// &lt;li&gt;`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.&lt;/li&gt;
+        /// &lt;li&gt;`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.&lt;/li&gt;
+        /// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `Operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
         /// </summary>
         [Input("operate")]
         public Input<string>? Operate { get; set; }
 
         /// <summary>
-        /// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `True`: Replace the currently bound template for the domain. `False`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+        /// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `True`. Supported values:
+        /// &lt;li&gt;`True`: replace the template currently bound to the domain name.&lt;/li&gt;
+        /// &lt;li&gt;`False`: do not replace the template currently bound to the domain name.&lt;/li&gt;
+        /// Note: When set to `False`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
         /// </summary>
         [Input("overWrite")]
         public Input<bool>? OverWrite { get; set; }
@@ -203,16 +220,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 
         /// <summary>
         /// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;.
-        /// &lt;li&gt;To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.&lt;/li&gt;.
-        /// 
-        /// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+        /// &lt;li&gt;To bind to a policy template, or unbind from it, specify the policy template ID.&lt;/li&gt;
+        /// &lt;li&gt;To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.&lt;/li&gt;
+        /// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
         /// </summary>
         [Input("templateId")]
         public Input<string>? TemplateId { get; set; }
 
         /// <summary>
-        /// Site ID of the policy template to be bound to or unbound from.
+        /// The site ID to which the policy template to be bound or unbound belongs.
         /// </summary>
         [Input("zoneId")]
         public Input<string>? ZoneId { get; set; }

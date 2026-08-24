@@ -62,12 +62,8 @@ type GetAddressQuotaResult struct {
 }
 
 func GetAddressQuotaOutput(ctx *pulumi.Context, args GetAddressQuotaOutputArgs, opts ...pulumi.InvokeOption) GetAddressQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAddressQuotaResultOutput, error) {
-			args := v.(GetAddressQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eip/getAddressQuota:getAddressQuota", args, GetAddressQuotaResultOutput{}, options).(GetAddressQuotaResultOutput), nil
-		}).(GetAddressQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eip/getAddressQuota:getAddressQuota", args, GetAddressQuotaResultOutput{}, options).(GetAddressQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getAddressQuota.

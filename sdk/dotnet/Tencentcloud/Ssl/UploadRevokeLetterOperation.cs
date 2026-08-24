@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Import
     /// 
-    /// ssl upload_revoke_letter can be imported using the id, e.g.
+    /// ssl UploadRevokeLetter can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id

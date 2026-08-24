@@ -58,10 +58,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     ///         ForwardIp = new Tencentcloud.PrivateDns.Inputs.ExtendEndPointForwardIpArgs
     ///         {
     ///             AccessType = "CCN",
-    ///             Host = "1.1.1.1",
+    ///             Hosts = new[]
+    ///             {
+    ///                 "1.1.1.1:8080",
+    ///                 "2.2.2.2:9090",
+    ///             },
     ///             Port = 8080,
-    ///             VpcId = "vpc-2qjckjg2",
-    ///             AccessGatewayId = "ccn-eo13f8ub",
+    ///             VpcId = "vpc-h70u60bi",
+    ///             AccessGatewayId = "ccn-4s3g3yg5",
     ///         },
     ///     });
     /// 

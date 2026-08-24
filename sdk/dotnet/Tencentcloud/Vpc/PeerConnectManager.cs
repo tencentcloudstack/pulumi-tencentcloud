@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -54,7 +53,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc peer_connect_manager can be imported using the id, e.g.
+    /// vpc PeerConnectManager can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id

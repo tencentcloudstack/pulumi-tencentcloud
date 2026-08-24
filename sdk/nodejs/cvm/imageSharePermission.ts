@@ -102,11 +102,11 @@ export interface ImageSharePermissionState {
     /**
      * List of account IDs with which an image is shared.
      */
-    accountIds?: pulumi.Input<pulumi.Input<string>[]>;
+    accountIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Image ID such as `img-gvbnzy6f`. You can only specify an image in the NORMAL state.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
 }
 
 /**

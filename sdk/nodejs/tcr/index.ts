@@ -90,15 +90,15 @@ export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
 utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
 
-export { ManageReplicationOperationArgs, ManageReplicationOperationState } from "./manageReplicationOperation";
-export type ManageReplicationOperation = import("./manageReplicationOperation").ManageReplicationOperation;
-export const ManageReplicationOperation: typeof import("./manageReplicationOperation").ManageReplicationOperation = null as any;
-utilities.lazyLoad(exports, ["ManageReplicationOperation"], () => require("./manageReplicationOperation"));
-
 export { NamespaceArgs, NamespaceState } from "./namespace";
 export type Namespace = import("./namespace").Namespace;
 export const Namespace: typeof import("./namespace").Namespace = null as any;
 utilities.lazyLoad(exports, ["Namespace"], () => require("./namespace"));
+
+export { ReplicationArgs, ReplicationState } from "./replication";
+export type Replication = import("./replication").Replication;
+export const Replication: typeof import("./replication").Replication = null as any;
+utilities.lazyLoad(exports, ["Replication"], () => require("./replication"));
 
 export { RepositoryArgs, RepositoryState } from "./repository";
 export type Repository = import("./repository").Repository;
@@ -150,10 +150,10 @@ const _module = {
                 return new ImmutableTagRule(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
-            case "tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation":
-                return new ManageReplicationOperation(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/namespace:Namespace":
                 return new Namespace(name, <any>undefined, { urn })
+            case "tencentcloud:Tcr/replication:Replication":
+                return new Replication(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/repository:Repository":
                 return new Repository(name, <any>undefined, { urn })
             case "tencentcloud:Tcr/serviceAccount:ServiceAccount":
@@ -178,8 +178,8 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/customizedDomain", _m
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/deleteImageOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/immutableTagRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/instance", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/manageReplicationOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/namespace", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/replication", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/repository", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/serviceAccount", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tcr/tagRetentionExecutionConfig", _module)

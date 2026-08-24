@@ -79,11 +79,11 @@ export interface DhcpAssociateAddressState {
     /**
      * Elastic public network `IP`. Must be `EIP` not bound to `DhcpIp`.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * `DhcpIp` unique `ID`, like: `dhcpip-9o233uri`. Must be a `DhcpIp` that is not bound to `EIP`.
      */
-    dhcpIpId?: pulumi.Input<string>;
+    dhcpIpId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getCheckSavepoint({
+ * const example = tencentcloud.oceanus.getCheckSavepoint({
  *     jobId: "cql-314rw6w0",
  *     serialId: "svp-52xkpymp",
  *     recordType: 1,
@@ -92,7 +92,7 @@ export interface GetCheckSavepointResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getCheckSavepoint({
+ * const example = tencentcloud.oceanus.getCheckSavepoint({
  *     jobId: "cql-314rw6w0",
  *     serialId: "svp-52xkpymp",
  *     recordType: 1,
@@ -128,7 +128,7 @@ export interface GetCheckSavepointOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Snapshot path, currently only supports COS path.
      */

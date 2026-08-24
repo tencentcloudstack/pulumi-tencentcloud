@@ -46,7 +46,7 @@ import (
 //				return err
 //			}
 //			_, err = cbs.NewDiskBackup(ctx, "example", &cbs.DiskBackupArgs{
-//				DiskId:         example.ID(),
+//				DiskId:         example.ID().ToIDOutput().ToStringOutput(),
 //				DiskBackupName: pulumi.String("tf-example"),
 //			})
 //			if err != nil {

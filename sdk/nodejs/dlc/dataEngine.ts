@@ -35,12 +35,16 @@ import * as utilities from "../utilities";
  *         executorNums: 1,
  *         executorSize: "medium",
  *     },
+ *     tags: [{
+ *         tagKey: "createBy",
+ *         tagValue: "Terraform",
+ *     }],
  * });
  * ```
  *
  * ## Import
  *
- * DLC data engine can be imported using the id, e.g.
+ * DLC data engine can be imported using the dataEngineName#dataEngineId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine example tf-example#DataEngine-d3gk8r5h
@@ -114,6 +118,10 @@ export class DataEngine extends pulumi.CustomResource {
      * The advanced configurations of clusters.
      */
     declare public readonly dataEngineConfigPairs: pulumi.Output<outputs.Dlc.DataEngineDataEngineConfigPair[] | undefined>;
+    /**
+     * Data engine ID.
+     */
+    declare public /*out*/ readonly dataEngineId: pulumi.Output<string>;
     /**
      * The name of the virtual cluster.
      */
@@ -191,6 +199,10 @@ export class DataEngine extends pulumi.CustomResource {
      */
     declare public readonly size: pulumi.Output<number | undefined>;
     /**
+     * Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+     */
+    declare public readonly tags: pulumi.Output<outputs.Dlc.DataEngineTag[]>;
+    /**
      * The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
      */
     declare public readonly timeSpan: pulumi.Output<number | undefined>;
@@ -226,6 +238,7 @@ export class DataEngine extends pulumi.CustomResource {
             resourceInputs["crontabResumeSuspend"] = state?.crontabResumeSuspend;
             resourceInputs["crontabResumeSuspendStrategy"] = state?.crontabResumeSuspendStrategy;
             resourceInputs["dataEngineConfigPairs"] = state?.dataEngineConfigPairs;
+            resourceInputs["dataEngineId"] = state?.dataEngineId;
             resourceInputs["dataEngineName"] = state?.dataEngineName;
             resourceInputs["defaultDataEngine"] = state?.defaultDataEngine;
             resourceInputs["elasticLimit"] = state?.elasticLimit;
@@ -245,6 +258,7 @@ export class DataEngine extends pulumi.CustomResource {
             resourceInputs["resourceType"] = state?.resourceType;
             resourceInputs["sessionResourceTemplate"] = state?.sessionResourceTemplate;
             resourceInputs["size"] = state?.size;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["timeSpan"] = state?.timeSpan;
             resourceInputs["timeUnit"] = state?.timeUnit;
             resourceInputs["tolerableQueueTime"] = state?.tolerableQueueTime;
@@ -294,9 +308,11 @@ export class DataEngine extends pulumi.CustomResource {
             resourceInputs["resourceType"] = args?.resourceType;
             resourceInputs["sessionResourceTemplate"] = args?.sessionResourceTemplate;
             resourceInputs["size"] = args?.size;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["timeSpan"] = args?.timeSpan;
             resourceInputs["timeUnit"] = args?.timeUnit;
             resourceInputs["tolerableQueueTime"] = args?.tolerableQueueTime;
+            resourceInputs["dataEngineId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DataEngine.__pulumiType, name, resourceInputs, opts);
@@ -310,131 +326,139 @@ export interface DataEngineState {
     /**
      * Automatic authorization.
      */
-    autoAuthorization?: pulumi.Input<boolean>;
+    autoAuthorization?: pulumi.Input<boolean | undefined>;
     /**
      * The auto-renewal status of the resource. For the postpaid mode, no renewal is required, and the value is fixed to `0`. For the prepaid mode, valid values are `0` (manual), `1` (auto), and `2` (no renewal). If this parameter is set to `0` for a key account in the prepaid mode, auto-renewal applies. It defaults to `0`.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to automatically start the clusters.
      */
-    autoResume?: pulumi.Input<boolean>;
+    autoResume?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to automatically suspend clusters. Valid values: `false` (default, no) and `true` (yes).
      */
-    autoSuspend?: pulumi.Input<boolean>;
+    autoSuspend?: pulumi.Input<boolean | undefined>;
     /**
      * The cluster auto-suspension time, which defaults to 10 min.
      */
-    autoSuspendTime?: pulumi.Input<number>;
+    autoSuspendTime?: pulumi.Input<number | undefined>;
     /**
      * The VPC CIDR block.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * The cluster type. Valid values: `sparkPrivate`, `prestoPrivate`, `prestoCu`, and `sparkCu`.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable scheduled start and suspension of clusters. Valid values: `0` (disable) and `1` (enable). Note: This policy and the auto-suspension policy are mutually exclusive.
      */
-    crontabResumeSuspend?: pulumi.Input<number>;
+    crontabResumeSuspend?: pulumi.Input<number | undefined>;
     /**
      * The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
      */
-    crontabResumeSuspendStrategy?: pulumi.Input<inputs.Dlc.DataEngineCrontabResumeSuspendStrategy>;
+    crontabResumeSuspendStrategy?: pulumi.Input<inputs.Dlc.DataEngineCrontabResumeSuspendStrategy | undefined>;
     /**
      * The advanced configurations of clusters.
      */
-    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineDataEngineConfigPair>[]>;
+    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineDataEngineConfigPair>[] | undefined>;
+    /**
+     * Data engine ID.
+     */
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * The name of the virtual cluster.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Whether it is the default virtual cluster.
      */
-    defaultDataEngine?: pulumi.Input<boolean>;
+    defaultDataEngine?: pulumi.Input<boolean | undefined>;
     /**
      * The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
      */
-    elasticLimit?: pulumi.Input<number>;
+    elasticLimit?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
      */
-    elasticSwitch?: pulumi.Input<boolean>;
+    elasticSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * The type of tasks to be executed by the engine, which defaults to SQL. Valid values: `SQL` and `BATCH`.
      */
-    engineExecType?: pulumi.Input<string>;
+    engineExecType?: pulumi.Input<string | undefined>;
     /**
      * Generation of the engine. SuperSQL means the supersql engine while Native means the standard engine. It is SuperSQL by default.
      */
-    engineGeneration?: pulumi.Input<string>;
+    engineGeneration?: pulumi.Input<string | undefined>;
     /**
      * Engine network ID.
      */
-    engineNetworkId?: pulumi.Input<string>;
+    engineNetworkId?: pulumi.Input<string | undefined>;
     /**
      * The engine type. Valid values: `spark` and `presto`.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
      * The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
      */
-    imageVersionName?: pulumi.Input<string>;
+    imageVersionName?: pulumi.Input<string | undefined>;
     /**
      * The primary cluster, which is specified when a failover cluster is created.
      */
-    mainClusterName?: pulumi.Input<string>;
+    mainClusterName?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of clusters.
      */
-    maxClusters?: pulumi.Input<number>;
+    maxClusters?: pulumi.Input<number | undefined>;
     /**
      * The max task concurrency of a cluster, which defaults to 5.
      */
-    maxConcurrency?: pulumi.Input<number>;
+    maxConcurrency?: pulumi.Input<number | undefined>;
     /**
      * The description.
      */
-    message?: pulumi.Input<string>;
+    message?: pulumi.Input<string | undefined>;
     /**
      * The minimum number of clusters.
      */
-    minClusters?: pulumi.Input<number>;
+    minClusters?: pulumi.Input<number | undefined>;
     /**
      * The billing mode. Valid values: `0` (shared engine), `1` (pay-as-you-go), and `2` (monthly subscription).
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * The pay mode. Valid value: `0` (postpaid, default) and `1` (prepaid) (currently not available).
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * The resource type. Valid values: `Standard_CU` (standard) and `Memory_CU` (memory).
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * The session resource configuration template for a Spark job cluster.
      */
-    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.DataEngineSessionResourceTemplate>;
+    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.DataEngineSessionResourceTemplate | undefined>;
     /**
      * Cluster size. Required when updating.
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
+    /**
+     * Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineTag>[] | undefined>;
     /**
      * The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The task queue time limit, which defaults to 0. When the actual queue time exceeds the value set here, scale-out may be triggered. Setting this parameter to 0 represents that scale-out may be triggered immediately after a task queues up.
      */
-    tolerableQueueTime?: pulumi.Input<number>;
+    tolerableQueueTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -444,11 +468,11 @@ export interface DataEngineArgs {
     /**
      * Automatic authorization.
      */
-    autoAuthorization?: pulumi.Input<boolean>;
+    autoAuthorization?: pulumi.Input<boolean | undefined>;
     /**
      * The auto-renewal status of the resource. For the postpaid mode, no renewal is required, and the value is fixed to `0`. For the prepaid mode, valid values are `0` (manual), `1` (auto), and `2` (no renewal). If this parameter is set to `0` for a key account in the prepaid mode, auto-renewal applies. It defaults to `0`.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to automatically start the clusters.
      */
@@ -456,15 +480,15 @@ export interface DataEngineArgs {
     /**
      * Whether to automatically suspend clusters. Valid values: `false` (default, no) and `true` (yes).
      */
-    autoSuspend?: pulumi.Input<boolean>;
+    autoSuspend?: pulumi.Input<boolean | undefined>;
     /**
      * The cluster auto-suspension time, which defaults to 10 min.
      */
-    autoSuspendTime?: pulumi.Input<number>;
+    autoSuspendTime?: pulumi.Input<number | undefined>;
     /**
      * The VPC CIDR block.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * The cluster type. Valid values: `sparkPrivate`, `prestoPrivate`, `prestoCu`, and `sparkCu`.
      */
@@ -472,15 +496,15 @@ export interface DataEngineArgs {
     /**
      * Whether to enable scheduled start and suspension of clusters. Valid values: `0` (disable) and `1` (enable). Note: This policy and the auto-suspension policy are mutually exclusive.
      */
-    crontabResumeSuspend?: pulumi.Input<number>;
+    crontabResumeSuspend?: pulumi.Input<number | undefined>;
     /**
      * The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
      */
-    crontabResumeSuspendStrategy?: pulumi.Input<inputs.Dlc.DataEngineCrontabResumeSuspendStrategy>;
+    crontabResumeSuspendStrategy?: pulumi.Input<inputs.Dlc.DataEngineCrontabResumeSuspendStrategy | undefined>;
     /**
      * The advanced configurations of clusters.
      */
-    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineDataEngineConfigPair>[]>;
+    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineDataEngineConfigPair>[] | undefined>;
     /**
      * The name of the virtual cluster.
      */
@@ -488,27 +512,27 @@ export interface DataEngineArgs {
     /**
      * Whether it is the default virtual cluster.
      */
-    defaultDataEngine?: pulumi.Input<boolean>;
+    defaultDataEngine?: pulumi.Input<boolean | undefined>;
     /**
      * The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
      */
-    elasticLimit?: pulumi.Input<number>;
+    elasticLimit?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
      */
-    elasticSwitch?: pulumi.Input<boolean>;
+    elasticSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * The type of tasks to be executed by the engine, which defaults to SQL. Valid values: `SQL` and `BATCH`.
      */
-    engineExecType?: pulumi.Input<string>;
+    engineExecType?: pulumi.Input<string | undefined>;
     /**
      * Generation of the engine. SuperSQL means the supersql engine while Native means the standard engine. It is SuperSQL by default.
      */
-    engineGeneration?: pulumi.Input<string>;
+    engineGeneration?: pulumi.Input<string | undefined>;
     /**
      * Engine network ID.
      */
-    engineNetworkId?: pulumi.Input<string>;
+    engineNetworkId?: pulumi.Input<string | undefined>;
     /**
      * The engine type. Valid values: `spark` and `presto`.
      */
@@ -516,27 +540,27 @@ export interface DataEngineArgs {
     /**
      * The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
      */
-    imageVersionName?: pulumi.Input<string>;
+    imageVersionName?: pulumi.Input<string | undefined>;
     /**
      * The primary cluster, which is specified when a failover cluster is created.
      */
-    mainClusterName?: pulumi.Input<string>;
+    mainClusterName?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of clusters.
      */
-    maxClusters?: pulumi.Input<number>;
+    maxClusters?: pulumi.Input<number | undefined>;
     /**
      * The max task concurrency of a cluster, which defaults to 5.
      */
-    maxConcurrency?: pulumi.Input<number>;
+    maxConcurrency?: pulumi.Input<number | undefined>;
     /**
      * The description.
      */
-    message?: pulumi.Input<string>;
+    message?: pulumi.Input<string | undefined>;
     /**
      * The minimum number of clusters.
      */
-    minClusters?: pulumi.Input<number>;
+    minClusters?: pulumi.Input<number | undefined>;
     /**
      * The billing mode. Valid values: `0` (shared engine), `1` (pay-as-you-go), and `2` (monthly subscription).
      */
@@ -544,29 +568,33 @@ export interface DataEngineArgs {
     /**
      * The pay mode. Valid value: `0` (postpaid, default) and `1` (prepaid) (currently not available).
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * The resource type. Valid values: `Standard_CU` (standard) and `Memory_CU` (memory).
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * The session resource configuration template for a Spark job cluster.
      */
-    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.DataEngineSessionResourceTemplate>;
+    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.DataEngineSessionResourceTemplate | undefined>;
     /**
      * Cluster size. Required when updating.
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
+    /**
+     * Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Dlc.DataEngineTag>[] | undefined>;
     /**
      * The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The task queue time limit, which defaults to 0. When the actual queue time exceeds the value set here, scale-out may be triggered. Setting this parameter to 0 represents that scale-out may be triggered immediately after a task queues up.
      */
-    tolerableQueueTime?: pulumi.Input<number>;
+    tolerableQueueTime?: pulumi.Input<number | undefined>;
 }

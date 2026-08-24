@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accountInfo = tencentcloud.Scf.getAccountInfo({});
+ * const accountInfo = tencentcloud.scf.getAccountInfo({});
  * ```
  */
 export function getAccountInfo(args?: GetAccountInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountInfoResult> {
@@ -63,7 +63,7 @@ export interface GetAccountInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accountInfo = tencentcloud.Scf.getAccountInfo({});
+ * const accountInfo = tencentcloud.scf.getAccountInfo({});
  * ```
  */
 export function getAccountInfoOutput(args?: GetAccountInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountInfoResult> {
@@ -81,5 +81,5 @@ export interface GetAccountInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

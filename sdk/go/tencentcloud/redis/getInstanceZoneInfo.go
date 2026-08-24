@@ -67,12 +67,8 @@ type GetInstanceZoneInfoResult struct {
 }
 
 func GetInstanceZoneInfoOutput(ctx *pulumi.Context, args GetInstanceZoneInfoOutputArgs, opts ...pulumi.InvokeOption) GetInstanceZoneInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceZoneInfoResultOutput, error) {
-			args := v.(GetInstanceZoneInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args, GetInstanceZoneInfoResultOutput{}, options).(GetInstanceZoneInfoResultOutput), nil
-		}).(GetInstanceZoneInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getInstanceZoneInfo:getInstanceZoneInfo", args, GetInstanceZoneInfoResultOutput{}, options).(GetInstanceZoneInfoResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceZoneInfo.

@@ -73,12 +73,8 @@ type GetDescribeHostUpdateRecordDetailResult struct {
 }
 
 func GetDescribeHostUpdateRecordDetailOutput(ctx *pulumi.Context, args GetDescribeHostUpdateRecordDetailOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostUpdateRecordDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostUpdateRecordDetailResultOutput, error) {
-			args := v.(GetDescribeHostUpdateRecordDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostUpdateRecordDetail:getDescribeHostUpdateRecordDetail", args, GetDescribeHostUpdateRecordDetailResultOutput{}, options).(GetDescribeHostUpdateRecordDetailResultOutput), nil
-		}).(GetDescribeHostUpdateRecordDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostUpdateRecordDetail:getDescribeHostUpdateRecordDetail", args, GetDescribeHostUpdateRecordDetailResultOutput{}, options).(GetDescribeHostUpdateRecordDetailResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostUpdateRecordDetail.

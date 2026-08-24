@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const password = config.get("password") || "Password@123";
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -122,11 +122,11 @@ export interface ClearInstanceOperationState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Redis instance password (password-free instances do not need to pass passwords, non-password-free instances must be transmitted).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -140,5 +140,5 @@ export interface ClearInstanceOperationArgs {
     /**
      * Redis instance password (password-free instances do not need to pass passwords, non-password-free instances must be transmitted).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }

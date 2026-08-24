@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const platformProducts = tencentcloud.Eb.getPlatformProducts({});
+ * const platformProducts = tencentcloud.eb.getPlatformProducts({});
  * ```
  */
 export function getPlatformProducts(args?: GetPlatformProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformProductsResult> {
@@ -59,7 +59,7 @@ export interface GetPlatformProductsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const platformProducts = tencentcloud.Eb.getPlatformProducts({});
+ * const platformProducts = tencentcloud.eb.getPlatformProducts({});
  * ```
  */
 export function getPlatformProductsOutput(args?: GetPlatformProductsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPlatformProductsResult> {
@@ -77,5 +77,5 @@ export interface GetPlatformProductsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

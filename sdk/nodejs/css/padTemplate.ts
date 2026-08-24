@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css pad_template can be imported using the id, e.g.
+ * css padTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
@@ -130,27 +130,27 @@ export interface PadTemplateState {
     /**
      * Description content.limit length 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Max pad duration.limit: 0 - 9999999 ms.
      */
-    maxDuration?: pulumi.Input<number>;
+    maxDuration?: pulumi.Input<number | undefined>;
     /**
      * Template namelimit 255 bytes.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
     /**
      * Pad content type.1: picture.2: video.default: 1.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * Pad content.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
     /**
      * Stop stream wait time.limit: 0 - 30000 ms.
      */
-    waitDuration?: pulumi.Input<number>;
+    waitDuration?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -160,11 +160,11 @@ export interface PadTemplateArgs {
     /**
      * Description content.limit length 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Max pad duration.limit: 0 - 9999999 ms.
      */
-    maxDuration?: pulumi.Input<number>;
+    maxDuration?: pulumi.Input<number | undefined>;
     /**
      * Template namelimit 255 bytes.
      */
@@ -172,7 +172,7 @@ export interface PadTemplateArgs {
     /**
      * Pad content type.1: picture.2: video.default: 1.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * Pad content.
      */
@@ -180,5 +180,5 @@ export interface PadTemplateArgs {
     /**
      * Stop stream wait time.limit: 0 - 30000 ms.
      */
-    waitDuration?: pulumi.Input<number>;
+    waitDuration?: pulumi.Input<number | undefined>;
 }

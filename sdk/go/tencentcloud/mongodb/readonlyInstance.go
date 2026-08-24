@@ -126,6 +126,7 @@ type ReadonlyInstance struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// Indicates the main instance ID of readonly instances.
 	FatherInstanceId pulumi.StringOutput `pulumi:"fatherInstanceId"`
@@ -250,6 +251,7 @@ type readonlyInstanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Indicates the main instance ID of readonly instances.
 	FatherInstanceId *string `pulumi:"fatherInstanceId"`
@@ -318,6 +320,7 @@ type ReadonlyInstanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringPtrInput
 	// Indicates the main instance ID of readonly instances.
 	FatherInstanceId pulumi.StringPtrInput
@@ -388,6 +391,7 @@ type readonlyInstanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion string `pulumi:"engineVersion"`
 	// Indicates the main instance ID of readonly instances.
 	FatherInstanceId string `pulumi:"fatherInstanceId"`
@@ -449,6 +453,7 @@ type ReadonlyInstanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringInput
 	// Indicates the main instance ID of readonly instances.
 	FatherInstanceId pulumi.StringInput
@@ -612,6 +617,7 @@ func (o ReadonlyInstanceOutput) CreateTime() pulumi.StringOutput {
 // - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 // - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 // - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 func (o ReadonlyInstanceOutput) EngineVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.EngineVersion }).(pulumi.StringOutput)
 }

@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// ci media_tts_template can be imported using the bucket#templateId, e.g.
+// ci mediaTtsTemplate can be imported using the bucket#templateId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8

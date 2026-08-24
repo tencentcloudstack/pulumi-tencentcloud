@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getForwardRules({});
+ * const example = tencentcloud.privatedns.getForwardRules({});
  * ```
  *
  * ### Query all private dns forward rules by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getForwardRules({
+ * const example = tencentcloud.privatedns.getForwardRules({
  *     filters: [
  *         {
  *             name: "RuleId",
@@ -105,7 +105,7 @@ export interface GetForwardRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getForwardRules({});
+ * const example = tencentcloud.privatedns.getForwardRules({});
  * ```
  *
  * ### Query all private dns forward rules by filters
@@ -114,7 +114,7 @@ export interface GetForwardRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getForwardRules({
+ * const example = tencentcloud.privatedns.getForwardRules({
  *     filters: [
  *         {
  *             name: "RuleId",
@@ -160,9 +160,9 @@ export interface GetForwardRulesOutputArgs {
     /**
      * Filter parameters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetForwardRulesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetForwardRulesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

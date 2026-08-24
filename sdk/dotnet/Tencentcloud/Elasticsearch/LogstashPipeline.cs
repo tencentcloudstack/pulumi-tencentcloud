@@ -55,7 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Import
     /// 
-    /// elasticsearch logstash_pipeline can be imported using the id, e.g.
+    /// elasticsearch LogstashPipeline can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
@@ -147,7 +147,7 @@ import * as utilities from "../utilities";
  *     outputDir: "output/",
  * });
  * const config = new tencentcloud.mps.EnableScheduleConfig("config", {
- *     scheduleId: example.id,
+ *     scheduleId: example.id.apply(x =>Number(x)),
  *     enabled: true,
  * });
  * ```
@@ -159,14 +159,14 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.mps.EnableScheduleConfig("config", {
- *     scheduleId: example.id,
+ *     scheduleId: Number(example.id),
  *     enabled: false,
  * });
  * ```
  *
  * ## Import
  *
- * mps enable_schedule_config can be imported using the id, e.g.
+ * mps enableScheduleConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
@@ -247,11 +247,11 @@ export interface EnableScheduleConfigState {
     /**
      * true: enable; false: disable.
      */
-    enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * The scheme ID.
      */
-    scheduleId?: pulumi.Input<number>;
+    scheduleId?: pulumi.Input<number | undefined>;
 }
 
 /**

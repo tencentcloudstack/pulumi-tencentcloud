@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Import
     /// 
-    /// dnspod domain_alias can be imported using the id, e.g.
+    /// dnspod DomainAlias can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id

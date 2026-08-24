@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// tsf application_public_config_release can be imported using the id, e.g.
+// tsf applicationPublicConfigRelease can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease application_public_config_release application_public_config_attachment_id

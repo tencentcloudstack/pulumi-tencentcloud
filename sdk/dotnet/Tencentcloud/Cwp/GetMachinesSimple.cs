@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     public static class GetMachinesSimple
     {
         /// <summary>
-        /// Use this data source to query detailed information of cwp MachinesSimple
+        /// Use this data source to query detailed information of CWP machines simple
         /// 
         /// ## Example Usage
         /// 
@@ -21,7 +21,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -115,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -144,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of cwp MachinesSimple
+        /// Use this data source to query detailed information of CWP machines simple
         /// 
         /// ## Example Usage
         /// 
@@ -152,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -176,7 +176,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -211,7 +211,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -246,7 +246,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -275,7 +275,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
             => global::Pulumi.Deployment.Instance.Invoke<GetMachinesSimpleResult>("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args ?? new GetMachinesSimpleInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of cwp MachinesSimple
+        /// Use this data source to query detailed information of CWP machines simple
         /// 
         /// ## Example Usage
         /// 
@@ -283,7 +283,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -307,7 +307,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -342,7 +342,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -377,7 +377,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {

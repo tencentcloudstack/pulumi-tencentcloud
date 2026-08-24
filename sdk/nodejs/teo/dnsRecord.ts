@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_dns_record can be imported using the id, e.g.
+ * teo teoDnsRecord can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord teo_dns_record {zoneId}#{recordId}
@@ -71,10 +71,9 @@ export class DnsRecord extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createdOn: pulumi.Output<string>;
     /**
-     * DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-     *
-     * - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-     * - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+     * DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+     * -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+     * -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
      */
     declare public readonly location: pulumi.Output<string>;
     /**
@@ -89,6 +88,10 @@ export class DnsRecord extends pulumi.CustomResource {
      * MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
      */
     declare public readonly priority: pulumi.Output<number>;
+    /**
+     * DNS record id.
+     */
+    declare public /*out*/ readonly recordId: pulumi.Output<string>;
     /**
      * DNS record resolution status, the following values:
      * - enable: has taken effect;
@@ -109,7 +112,7 @@ export class DnsRecord extends pulumi.CustomResource {
      * - NS: if you need to delegate the subdomain to another dns service provider for resolution, you need to add an ns record. the root domain cannot add ns records;
      * - CAA: specifies the ca that can issue certificates for this site;
      * - SRV: identifies a server using a service, commonly used in microsoft's directory management.
-     * Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+     *   Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
      */
     declare public readonly type: pulumi.Output<string>;
     /**
@@ -140,6 +143,7 @@ export class DnsRecord extends pulumi.CustomResource {
             resourceInputs["modifiedOn"] = state?.modifiedOn;
             resourceInputs["name"] = state?.name;
             resourceInputs["priority"] = state?.priority;
+            resourceInputs["recordId"] = state?.recordId;
             resourceInputs["status"] = state?.status;
             resourceInputs["ttl"] = state?.ttl;
             resourceInputs["type"] = state?.type;
@@ -167,6 +171,7 @@ export class DnsRecord extends pulumi.CustomResource {
             resourceInputs["zoneId"] = args?.zoneId;
             resourceInputs["createdOn"] = undefined /*out*/;
             resourceInputs["modifiedOn"] = undefined /*out*/;
+            resourceInputs["recordId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DnsRecord.__pulumiType, name, resourceInputs, opts);
@@ -180,40 +185,43 @@ export interface DnsRecordState {
     /**
      * DNS record content. fill in the corresponding content according to the type value. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Creation time.
      */
-    createdOn?: pulumi.Input<string>;
+    createdOn?: pulumi.Input<string | undefined>;
     /**
-     * DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-     *
-     * - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-     * - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+     * DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+     * -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+     * -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
      */
-    location?: pulumi.Input<string>;
+    location?: pulumi.Input<string | undefined>;
     /**
      * Modify time.
      */
-    modifiedOn?: pulumi.Input<string>;
+    modifiedOn?: pulumi.Input<string | undefined>;
     /**
      * DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
+    /**
+     * DNS record id.
+     */
+    recordId?: pulumi.Input<string | undefined>;
     /**
      * DNS record resolution status, the following values:
      * - enable: has taken effect;
      * - disable: has been disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Cache time. users can specify a value range of 60-86400. the smaller the value, the faster the modification records will take effect in all regions. default value: 300. unit: seconds.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
     /**
      * DNS record type. valid values are:
      * - A: points the domain name to an external ipv4 address, such as 8.8.8.8;
@@ -224,17 +232,17 @@ export interface DnsRecordState {
      * - NS: if you need to delegate the subdomain to another dns service provider for resolution, you need to add an ns record. the root domain cannot add ns records;
      * - CAA: specifies the ca that can issue certificates for this site;
      * - SRV: identifies a server using a service, commonly used in microsoft's directory management.
-     * Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+     *   Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * DNS record weight. users can specify a value range of -1 to 100. a value of 0 means no resolution. if not specified, the default is -1, which means no weight is set. weight configuration is only applicable when type (dns record type) is A, AAAA, or CNAME. note: for the same subdomain, different dns records with the same resolution route should either all have weights set or none have weights set.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -246,30 +254,29 @@ export interface DnsRecordArgs {
      */
     content: pulumi.Input<string>;
     /**
-     * DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-     *
-     * - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-     * - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+     * DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+     * -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+     * -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
      */
-    location?: pulumi.Input<string>;
+    location?: pulumi.Input<string | undefined>;
     /**
      * DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * DNS record resolution status, the following values:
      * - enable: has taken effect;
      * - disable: has been disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Cache time. users can specify a value range of 60-86400. the smaller the value, the faster the modification records will take effect in all regions. default value: 300. unit: seconds.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
     /**
      * DNS record type. valid values are:
      * - A: points the domain name to an external ipv4 address, such as 8.8.8.8;
@@ -280,13 +287,13 @@ export interface DnsRecordArgs {
      * - NS: if you need to delegate the subdomain to another dns service provider for resolution, you need to add an ns record. the root domain cannot add ns records;
      * - CAA: specifies the ca that can issue certificates for this site;
      * - SRV: identifies a server using a service, commonly used in microsoft's directory management.
-     * Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+     *   Different record types, such as SRV and CAA records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
      */
     type: pulumi.Input<string>;
     /**
      * DNS record weight. users can specify a value range of -1 to 100. a value of 0 means no resolution. if not specified, the default is -1, which means no weight is set. weight configuration is only applicable when type (dns record type) is A, AAAA, or CNAME. note: for the same subdomain, different dns records with the same resolution route should either all have weights set or none have weights set.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
     /**
      * Zone id.
      */

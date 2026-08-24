@@ -94,12 +94,8 @@ type GetInstanceCurrentOpResult struct {
 }
 
 func GetInstanceCurrentOpOutput(ctx *pulumi.Context, args GetInstanceCurrentOpOutputArgs, opts ...pulumi.InvokeOption) GetInstanceCurrentOpResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceCurrentOpResultOutput, error) {
-			args := v.(GetInstanceCurrentOpArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args, GetInstanceCurrentOpResultOutput{}, options).(GetInstanceCurrentOpResultOutput), nil
-		}).(GetInstanceCurrentOpResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args, GetInstanceCurrentOpResultOutput{}, options).(GetInstanceCurrentOpResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceCurrentOp.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const nacosServerInterfaces = tencentcloud.Tse.getNacosServerInterfaces({
+ * const nacosServerInterfaces = tencentcloud.tse.getNacosServerInterfaces({
  *     instanceId: "ins-xxxxxx",
  * });
  * ```
@@ -67,7 +67,7 @@ export interface GetNacosServerInterfacesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const nacosServerInterfaces = tencentcloud.Tse.getNacosServerInterfaces({
+ * const nacosServerInterfaces = tencentcloud.tse.getNacosServerInterfaces({
  *     instanceId: "ins-xxxxxx",
  * });
  * ```
@@ -88,9 +88,9 @@ export interface GetNacosServerInterfacesOutputArgs {
     /**
      * engine instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

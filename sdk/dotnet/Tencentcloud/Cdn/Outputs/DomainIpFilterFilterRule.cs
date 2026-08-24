@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
     public sealed class DomainIpFilterFilterRule
     {
         /// <summary>
-        /// Ip filter `Blacklist`/`Whitelist` type of filter rules.
+        /// Blacklist or whitelist, valid values: `Blacklist`, `Whitelist`.
         /// </summary>
         public readonly string FilterType;
         /// <summary>
@@ -23,11 +23,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Filters;
         /// <summary>
-        /// Content list for each `RuleType`: `*` for `All`, file ext like `Jpg` for `File`, `/dir/like/` for `Directory` and `/path/index.html` for `Path`.
+        /// Rule paths.
         /// </summary>
         public readonly ImmutableArray<string> RulePaths;
         /// <summary>
-        /// Ip filter rule type of filter rules, available: `All`, `File`, `Directory`, `Path`.
+        /// Rule type, valid values: `All`, `File`, `Directory`, `Path`.
         /// </summary>
         public readonly string RuleType;
 

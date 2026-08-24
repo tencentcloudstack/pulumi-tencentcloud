@@ -20,14 +20,14 @@ import * as utilities from "../utilities";
  *     name: "tf_example",
  * });
  * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("example", {
- *     deviceId: example.id,
+ *     deviceId: example.id.apply(x =>Number(x)),
  *     account: "root",
  * });
  * ```
  *
  * ## Import
  *
- * dasb device_account can be imported using the id, e.g.
+ * dasb deviceAccount can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11
@@ -108,11 +108,11 @@ export interface DeviceAccountState {
     /**
      * Device account.
      */
-    account?: pulumi.Input<string>;
+    account?: pulumi.Input<string | undefined>;
     /**
      * Device ID.
      */
-    deviceId?: pulumi.Input<number>;
+    deviceId?: pulumi.Input<number | undefined>;
 }
 
 /**

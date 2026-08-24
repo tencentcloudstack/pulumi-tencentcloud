@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "vpc",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -63,7 +63,7 @@ import * as utilities from "../utilities";
  * ENI can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Eni/instance:Instance  tencentcloud_eni.example eni-qka182br
+ *   $ pulumi import tencentcloud:Eni/instance:Instance example eni-qka182br
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -221,65 +221,65 @@ export interface InstanceState {
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Creation time of the ENI.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the ENI, maximum length 60.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
      */
-    ipv4Count?: pulumi.Input<number>;
+    ipv4Count?: pulumi.Input<number | undefined>;
     /**
      * An information list of IPv4s. Each element contains the following attributes:
      */
-    ipv4Infos?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4Info>[]>;
+    ipv4Infos?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4Info>[] | undefined>;
     /**
      * Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
      */
-    ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[]>;
+    ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[] | undefined>;
     /**
      * MAC address.
      */
-    mac?: pulumi.Input<string>;
+    mac?: pulumi.Input<string | undefined>;
     /**
      * Name of the ENI, maximum length 60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * List of security group IDs.
      */
-    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicates whether the IP is primary.
      */
-    primary?: pulumi.Input<boolean>;
+    primary?: pulumi.Input<boolean | undefined>;
     /**
      * It has been deprecated from version 1.82.15. Use `orderlySecurityGroups` instead. A set of security group IDs.
      *
      * @deprecated It has been deprecated from version 1.82.15. Use `orderlySecurityGroups` instead.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * State of the ENI.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * ID of the subnet within this vpc.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the ENI.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -289,29 +289,29 @@ export interface InstanceArgs {
     /**
      * Description of the ENI, maximum length 60.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The number of intranet IPv4s. When it is greater than 1, there is only one primary intranet IP. The others are auxiliary intranet IPs, which conflict with `ipv4s`.
      */
-    ipv4Count?: pulumi.Input<number>;
+    ipv4Count?: pulumi.Input<number | undefined>;
     /**
      * Applying for intranet IPv4s collection, conflict with `ipv4Count`. When there are multiple ipv4s, can only be one primary IP, and the maximum length of the array is 30. Each element contains the following attributes:
      */
-    ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[]>;
+    ipv4s?: pulumi.Input<pulumi.Input<inputs.Eni.InstanceIpv4>[] | undefined>;
     /**
      * Name of the ENI, maximum length 60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * List of security group IDs.
      */
-    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * It has been deprecated from version 1.82.15. Use `orderlySecurityGroups` instead. A set of security group IDs.
      *
      * @deprecated It has been deprecated from version 1.82.15. Use `orderlySecurityGroups` instead.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the subnet within this vpc.
      */
@@ -319,7 +319,7 @@ export interface InstanceArgs {
     /**
      * Tags of the ENI.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc.
      */

@@ -50,12 +50,8 @@ type LookupSearchResult struct {
 }
 
 func LookupSearchOutput(ctx *pulumi.Context, args LookupSearchOutputArgs, opts ...pulumi.InvokeOption) LookupSearchResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupSearchResultOutput, error) {
-			args := v.(LookupSearchArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getSearch:getSearch", args, LookupSearchResultOutput{}, options).(LookupSearchResultOutput), nil
-		}).(LookupSearchResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getSearch:getSearch", args, LookupSearchResultOutput{}, options).(LookupSearchResultOutput)
 }
 
 // A collection of arguments for invoking getSearch.

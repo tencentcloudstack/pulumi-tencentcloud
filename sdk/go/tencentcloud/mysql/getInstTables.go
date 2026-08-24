@@ -74,12 +74,8 @@ type GetInstTablesResult struct {
 }
 
 func GetInstTablesOutput(ctx *pulumi.Context, args GetInstTablesOutputArgs, opts ...pulumi.InvokeOption) GetInstTablesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstTablesResultOutput, error) {
-			args := v.(GetInstTablesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getInstTables:getInstTables", args, GetInstTablesResultOutput{}, options).(GetInstTablesResultOutput), nil
-		}).(GetInstTablesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getInstTables:getInstTables", args, GetInstTablesResultOutput{}, options).(GetInstTablesResultOutput)
 }
 
 // A collection of arguments for invoking getInstTables.

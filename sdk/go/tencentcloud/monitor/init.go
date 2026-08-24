@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AlarmPolicySetDefault{}
 	case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
 		r = &BindingReceiver{}
+	case "tencentcloud:Monitor/externalCluster:ExternalCluster":
+		r = &ExternalCluster{}
 	case "tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig":
 		r = &GrafanaDnsConfig{}
 	case "tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig":
@@ -51,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GrafanaVersionUpgrade{}
 	case "tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig":
 		r = &GrafanaWhitelistConfig{}
+	case "tencentcloud:Monitor/noticeContentTmpl:NoticeContentTmpl":
+		r = &NoticeContentTmpl{}
 	case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
 		r = &PolicyBindingObject{}
 	case "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup":
@@ -124,6 +128,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Monitor/externalCluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Monitor/grafanaDnsConfig",
 		&module{version},
 	)
@@ -175,6 +184,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Monitor/grafanaWhitelistConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Monitor/noticeContentTmpl",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

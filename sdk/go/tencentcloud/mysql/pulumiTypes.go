@@ -340,6 +340,112 @@ func (o AuditLogFileFilterPtrOutput) Users() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+type BackupBackupDbTableList struct {
+	// Database name.
+	Database string `pulumi:"database"`
+	// Table name. If specified, backup this table in the database. If not specified, backup the entire database.
+	Table *string `pulumi:"table"`
+}
+
+// BackupBackupDbTableListInput is an input type that accepts BackupBackupDbTableListArgs and BackupBackupDbTableListOutput values.
+// You can construct a concrete instance of `BackupBackupDbTableListInput` via:
+//
+//	BackupBackupDbTableListArgs{...}
+type BackupBackupDbTableListInput interface {
+	pulumi.Input
+
+	ToBackupBackupDbTableListOutput() BackupBackupDbTableListOutput
+	ToBackupBackupDbTableListOutputWithContext(context.Context) BackupBackupDbTableListOutput
+}
+
+type BackupBackupDbTableListArgs struct {
+	// Database name.
+	Database pulumi.StringInput `pulumi:"database"`
+	// Table name. If specified, backup this table in the database. If not specified, backup the entire database.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+}
+
+func (BackupBackupDbTableListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupBackupDbTableList)(nil)).Elem()
+}
+
+func (i BackupBackupDbTableListArgs) ToBackupBackupDbTableListOutput() BackupBackupDbTableListOutput {
+	return i.ToBackupBackupDbTableListOutputWithContext(context.Background())
+}
+
+func (i BackupBackupDbTableListArgs) ToBackupBackupDbTableListOutputWithContext(ctx context.Context) BackupBackupDbTableListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupBackupDbTableListOutput)
+}
+
+// BackupBackupDbTableListArrayInput is an input type that accepts BackupBackupDbTableListArray and BackupBackupDbTableListArrayOutput values.
+// You can construct a concrete instance of `BackupBackupDbTableListArrayInput` via:
+//
+//	BackupBackupDbTableListArray{ BackupBackupDbTableListArgs{...} }
+type BackupBackupDbTableListArrayInput interface {
+	pulumi.Input
+
+	ToBackupBackupDbTableListArrayOutput() BackupBackupDbTableListArrayOutput
+	ToBackupBackupDbTableListArrayOutputWithContext(context.Context) BackupBackupDbTableListArrayOutput
+}
+
+type BackupBackupDbTableListArray []BackupBackupDbTableListInput
+
+func (BackupBackupDbTableListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupBackupDbTableList)(nil)).Elem()
+}
+
+func (i BackupBackupDbTableListArray) ToBackupBackupDbTableListArrayOutput() BackupBackupDbTableListArrayOutput {
+	return i.ToBackupBackupDbTableListArrayOutputWithContext(context.Background())
+}
+
+func (i BackupBackupDbTableListArray) ToBackupBackupDbTableListArrayOutputWithContext(ctx context.Context) BackupBackupDbTableListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupBackupDbTableListArrayOutput)
+}
+
+type BackupBackupDbTableListOutput struct{ *pulumi.OutputState }
+
+func (BackupBackupDbTableListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupBackupDbTableList)(nil)).Elem()
+}
+
+func (o BackupBackupDbTableListOutput) ToBackupBackupDbTableListOutput() BackupBackupDbTableListOutput {
+	return o
+}
+
+func (o BackupBackupDbTableListOutput) ToBackupBackupDbTableListOutputWithContext(ctx context.Context) BackupBackupDbTableListOutput {
+	return o
+}
+
+// Database name.
+func (o BackupBackupDbTableListOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v BackupBackupDbTableList) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// Table name. If specified, backup this table in the database. If not specified, backup the entire database.
+func (o BackupBackupDbTableListOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupBackupDbTableList) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+type BackupBackupDbTableListArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupBackupDbTableListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupBackupDbTableList)(nil)).Elem()
+}
+
+func (o BackupBackupDbTableListArrayOutput) ToBackupBackupDbTableListArrayOutput() BackupBackupDbTableListArrayOutput {
+	return o
+}
+
+func (o BackupBackupDbTableListArrayOutput) ToBackupBackupDbTableListArrayOutputWithContext(ctx context.Context) BackupBackupDbTableListArrayOutput {
+	return o
+}
+
+func (o BackupBackupDbTableListArrayOutput) Index(i pulumi.IntInput) BackupBackupDbTableListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupBackupDbTableList {
+		return vs[0].([]BackupBackupDbTableList)[vs[1].(int)]
+	}).(BackupBackupDbTableListOutput)
+}
+
 type BackupDownloadRestrictionLimitVpc struct {
 	// Restrict downloads from regions. Currently only the current region is supported.
 	Region string `pulumi:"region"`
@@ -1428,6 +1534,229 @@ func (o PrivilegeTableArrayOutput) Index(i pulumi.IntInput) PrivilegeTableOutput
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivilegeTable {
 		return vs[0].([]PrivilegeTable)[vs[1].(int)]
 	}).(PrivilegeTableOutput)
+}
+
+type ProxyAddressConfigProxyAllocation struct {
+	// Proxy instance list.
+	ProxyInstances []ProxyAddressConfigProxyAllocationProxyInstance `pulumi:"proxyInstances"`
+	// Region, such as: ap-guangzhou.
+	Region string `pulumi:"region"`
+	// Availability zone, such as: ap-guangzhou-2.
+	Zone string `pulumi:"zone"`
+}
+
+// ProxyAddressConfigProxyAllocationInput is an input type that accepts ProxyAddressConfigProxyAllocationArgs and ProxyAddressConfigProxyAllocationOutput values.
+// You can construct a concrete instance of `ProxyAddressConfigProxyAllocationInput` via:
+//
+//	ProxyAddressConfigProxyAllocationArgs{...}
+type ProxyAddressConfigProxyAllocationInput interface {
+	pulumi.Input
+
+	ToProxyAddressConfigProxyAllocationOutput() ProxyAddressConfigProxyAllocationOutput
+	ToProxyAddressConfigProxyAllocationOutputWithContext(context.Context) ProxyAddressConfigProxyAllocationOutput
+}
+
+type ProxyAddressConfigProxyAllocationArgs struct {
+	// Proxy instance list.
+	ProxyInstances ProxyAddressConfigProxyAllocationProxyInstanceArrayInput `pulumi:"proxyInstances"`
+	// Region, such as: ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Availability zone, such as: ap-guangzhou-2.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (ProxyAddressConfigProxyAllocationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyAddressConfigProxyAllocation)(nil)).Elem()
+}
+
+func (i ProxyAddressConfigProxyAllocationArgs) ToProxyAddressConfigProxyAllocationOutput() ProxyAddressConfigProxyAllocationOutput {
+	return i.ToProxyAddressConfigProxyAllocationOutputWithContext(context.Background())
+}
+
+func (i ProxyAddressConfigProxyAllocationArgs) ToProxyAddressConfigProxyAllocationOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyAddressConfigProxyAllocationOutput)
+}
+
+// ProxyAddressConfigProxyAllocationArrayInput is an input type that accepts ProxyAddressConfigProxyAllocationArray and ProxyAddressConfigProxyAllocationArrayOutput values.
+// You can construct a concrete instance of `ProxyAddressConfigProxyAllocationArrayInput` via:
+//
+//	ProxyAddressConfigProxyAllocationArray{ ProxyAddressConfigProxyAllocationArgs{...} }
+type ProxyAddressConfigProxyAllocationArrayInput interface {
+	pulumi.Input
+
+	ToProxyAddressConfigProxyAllocationArrayOutput() ProxyAddressConfigProxyAllocationArrayOutput
+	ToProxyAddressConfigProxyAllocationArrayOutputWithContext(context.Context) ProxyAddressConfigProxyAllocationArrayOutput
+}
+
+type ProxyAddressConfigProxyAllocationArray []ProxyAddressConfigProxyAllocationInput
+
+func (ProxyAddressConfigProxyAllocationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyAddressConfigProxyAllocation)(nil)).Elem()
+}
+
+func (i ProxyAddressConfigProxyAllocationArray) ToProxyAddressConfigProxyAllocationArrayOutput() ProxyAddressConfigProxyAllocationArrayOutput {
+	return i.ToProxyAddressConfigProxyAllocationArrayOutputWithContext(context.Background())
+}
+
+func (i ProxyAddressConfigProxyAllocationArray) ToProxyAddressConfigProxyAllocationArrayOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyAddressConfigProxyAllocationArrayOutput)
+}
+
+type ProxyAddressConfigProxyAllocationOutput struct{ *pulumi.OutputState }
+
+func (ProxyAddressConfigProxyAllocationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyAddressConfigProxyAllocation)(nil)).Elem()
+}
+
+func (o ProxyAddressConfigProxyAllocationOutput) ToProxyAddressConfigProxyAllocationOutput() ProxyAddressConfigProxyAllocationOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationOutput) ToProxyAddressConfigProxyAllocationOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationOutput {
+	return o
+}
+
+// Proxy instance list.
+func (o ProxyAddressConfigProxyAllocationOutput) ProxyInstances() ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput {
+	return o.ApplyT(func(v ProxyAddressConfigProxyAllocation) []ProxyAddressConfigProxyAllocationProxyInstance {
+		return v.ProxyInstances
+	}).(ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput)
+}
+
+// Region, such as: ap-guangzhou.
+func (o ProxyAddressConfigProxyAllocationOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ProxyAddressConfigProxyAllocation) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Availability zone, such as: ap-guangzhou-2.
+func (o ProxyAddressConfigProxyAllocationOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v ProxyAddressConfigProxyAllocation) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type ProxyAddressConfigProxyAllocationArrayOutput struct{ *pulumi.OutputState }
+
+func (ProxyAddressConfigProxyAllocationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyAddressConfigProxyAllocation)(nil)).Elem()
+}
+
+func (o ProxyAddressConfigProxyAllocationArrayOutput) ToProxyAddressConfigProxyAllocationArrayOutput() ProxyAddressConfigProxyAllocationArrayOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationArrayOutput) ToProxyAddressConfigProxyAllocationArrayOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationArrayOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationArrayOutput) Index(i pulumi.IntInput) ProxyAddressConfigProxyAllocationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyAddressConfigProxyAllocation {
+		return vs[0].([]ProxyAddressConfigProxyAllocation)[vs[1].(int)]
+	}).(ProxyAddressConfigProxyAllocationOutput)
+}
+
+type ProxyAddressConfigProxyAllocationProxyInstance struct {
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Weight value.
+	Weight int `pulumi:"weight"`
+}
+
+// ProxyAddressConfigProxyAllocationProxyInstanceInput is an input type that accepts ProxyAddressConfigProxyAllocationProxyInstanceArgs and ProxyAddressConfigProxyAllocationProxyInstanceOutput values.
+// You can construct a concrete instance of `ProxyAddressConfigProxyAllocationProxyInstanceInput` via:
+//
+//	ProxyAddressConfigProxyAllocationProxyInstanceArgs{...}
+type ProxyAddressConfigProxyAllocationProxyInstanceInput interface {
+	pulumi.Input
+
+	ToProxyAddressConfigProxyAllocationProxyInstanceOutput() ProxyAddressConfigProxyAllocationProxyInstanceOutput
+	ToProxyAddressConfigProxyAllocationProxyInstanceOutputWithContext(context.Context) ProxyAddressConfigProxyAllocationProxyInstanceOutput
+}
+
+type ProxyAddressConfigProxyAllocationProxyInstanceArgs struct {
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Weight value.
+	Weight pulumi.IntInput `pulumi:"weight"`
+}
+
+func (ProxyAddressConfigProxyAllocationProxyInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyAddressConfigProxyAllocationProxyInstance)(nil)).Elem()
+}
+
+func (i ProxyAddressConfigProxyAllocationProxyInstanceArgs) ToProxyAddressConfigProxyAllocationProxyInstanceOutput() ProxyAddressConfigProxyAllocationProxyInstanceOutput {
+	return i.ToProxyAddressConfigProxyAllocationProxyInstanceOutputWithContext(context.Background())
+}
+
+func (i ProxyAddressConfigProxyAllocationProxyInstanceArgs) ToProxyAddressConfigProxyAllocationProxyInstanceOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationProxyInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyAddressConfigProxyAllocationProxyInstanceOutput)
+}
+
+// ProxyAddressConfigProxyAllocationProxyInstanceArrayInput is an input type that accepts ProxyAddressConfigProxyAllocationProxyInstanceArray and ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput values.
+// You can construct a concrete instance of `ProxyAddressConfigProxyAllocationProxyInstanceArrayInput` via:
+//
+//	ProxyAddressConfigProxyAllocationProxyInstanceArray{ ProxyAddressConfigProxyAllocationProxyInstanceArgs{...} }
+type ProxyAddressConfigProxyAllocationProxyInstanceArrayInput interface {
+	pulumi.Input
+
+	ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutput() ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput
+	ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutputWithContext(context.Context) ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput
+}
+
+type ProxyAddressConfigProxyAllocationProxyInstanceArray []ProxyAddressConfigProxyAllocationProxyInstanceInput
+
+func (ProxyAddressConfigProxyAllocationProxyInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyAddressConfigProxyAllocationProxyInstance)(nil)).Elem()
+}
+
+func (i ProxyAddressConfigProxyAllocationProxyInstanceArray) ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutput() ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput {
+	return i.ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i ProxyAddressConfigProxyAllocationProxyInstanceArray) ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput)
+}
+
+type ProxyAddressConfigProxyAllocationProxyInstanceOutput struct{ *pulumi.OutputState }
+
+func (ProxyAddressConfigProxyAllocationProxyInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ProxyAddressConfigProxyAllocationProxyInstance)(nil)).Elem()
+}
+
+func (o ProxyAddressConfigProxyAllocationProxyInstanceOutput) ToProxyAddressConfigProxyAllocationProxyInstanceOutput() ProxyAddressConfigProxyAllocationProxyInstanceOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationProxyInstanceOutput) ToProxyAddressConfigProxyAllocationProxyInstanceOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationProxyInstanceOutput {
+	return o
+}
+
+// Instance ID.
+func (o ProxyAddressConfigProxyAllocationProxyInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v ProxyAddressConfigProxyAllocationProxyInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Weight value.
+func (o ProxyAddressConfigProxyAllocationProxyInstanceOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v ProxyAddressConfigProxyAllocationProxyInstance) int { return v.Weight }).(pulumi.IntOutput)
+}
+
+type ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ProxyAddressConfigProxyAllocationProxyInstance)(nil)).Elem()
+}
+
+func (o ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput) ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutput() ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput) ToProxyAddressConfigProxyAllocationProxyInstanceArrayOutputWithContext(ctx context.Context) ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput {
+	return o
+}
+
+func (o ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput) Index(i pulumi.IntInput) ProxyAddressConfigProxyAllocationProxyInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ProxyAddressConfigProxyAllocationProxyInstance {
+		return vs[0].([]ProxyAddressConfigProxyAllocationProxyInstance)[vs[1].(int)]
+	}).(ProxyAddressConfigProxyAllocationProxyInstanceOutput)
 }
 
 type ProxyProxyNodeCustom struct {
@@ -6654,6 +6983,8 @@ func (o GetZoneConfigListSellArrayOutput) Index(i pulumi.IntInput) GetZoneConfig
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterInput)(nil)).Elem(), AuditLogFileFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterPtrInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupBackupDbTableListInput)(nil)).Elem(), BackupBackupDbTableListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupBackupDbTableListArrayInput)(nil)).Elem(), BackupBackupDbTableListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcArrayInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceClusterTopologyInput)(nil)).Elem(), InstanceClusterTopologyArgs{})
@@ -6672,6 +7003,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeDatabaseArrayInput)(nil)).Elem(), PrivilegeDatabaseArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeTableInput)(nil)).Elem(), PrivilegeTableArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivilegeTableArrayInput)(nil)).Elem(), PrivilegeTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyAddressConfigProxyAllocationInput)(nil)).Elem(), ProxyAddressConfigProxyAllocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyAddressConfigProxyAllocationArrayInput)(nil)).Elem(), ProxyAddressConfigProxyAllocationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyAddressConfigProxyAllocationProxyInstanceInput)(nil)).Elem(), ProxyAddressConfigProxyAllocationProxyInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ProxyAddressConfigProxyAllocationProxyInstanceArrayInput)(nil)).Elem(), ProxyAddressConfigProxyAllocationProxyInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyProxyNodeCustomInput)(nil)).Elem(), ProxyProxyNodeCustomArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyProxyNodeCustomArrayInput)(nil)).Elem(), ProxyProxyNodeCustomArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyInstanceClusterTopologyInput)(nil)).Elem(), ReadonlyInstanceClusterTopologyArgs{})
@@ -6744,6 +7079,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListSellArrayInput)(nil)).Elem(), GetZoneConfigListSellArray{})
 	pulumi.RegisterOutputType(AuditLogFileFilterOutput{})
 	pulumi.RegisterOutputType(AuditLogFileFilterPtrOutput{})
+	pulumi.RegisterOutputType(BackupBackupDbTableListOutput{})
+	pulumi.RegisterOutputType(BackupBackupDbTableListArrayOutput{})
 	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcOutput{})
 	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcArrayOutput{})
 	pulumi.RegisterOutputType(InstanceClusterTopologyOutput{})
@@ -6762,6 +7099,10 @@ func init() {
 	pulumi.RegisterOutputType(PrivilegeDatabaseArrayOutput{})
 	pulumi.RegisterOutputType(PrivilegeTableOutput{})
 	pulumi.RegisterOutputType(PrivilegeTableArrayOutput{})
+	pulumi.RegisterOutputType(ProxyAddressConfigProxyAllocationOutput{})
+	pulumi.RegisterOutputType(ProxyAddressConfigProxyAllocationArrayOutput{})
+	pulumi.RegisterOutputType(ProxyAddressConfigProxyAllocationProxyInstanceOutput{})
+	pulumi.RegisterOutputType(ProxyAddressConfigProxyAllocationProxyInstanceArrayOutput{})
 	pulumi.RegisterOutputType(ProxyProxyNodeCustomOutput{})
 	pulumi.RegisterOutputType(ProxyProxyNodeCustomArrayOutput{})
 	pulumi.RegisterOutputType(ReadonlyInstanceClusterTopologyOutput{})

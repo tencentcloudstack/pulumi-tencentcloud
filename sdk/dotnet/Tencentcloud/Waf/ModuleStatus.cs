@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf module_status can be imported using the id, e.g.
+    /// waf ModuleStatus can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com

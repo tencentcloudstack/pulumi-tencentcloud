@@ -102,11 +102,11 @@ export interface UserPermissionBoundaryAttachmentState {
     /**
      * Policy ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Sub account Uin.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
 }
 
 /**

@@ -77,12 +77,8 @@ type GetSendEmailStatusResult struct {
 }
 
 func GetSendEmailStatusOutput(ctx *pulumi.Context, args GetSendEmailStatusOutputArgs, opts ...pulumi.InvokeOption) GetSendEmailStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSendEmailStatusResultOutput, error) {
-			args := v.(GetSendEmailStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args, GetSendEmailStatusResultOutput{}, options).(GetSendEmailStatusResultOutput), nil
-		}).(GetSendEmailStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args, GetSendEmailStatusResultOutput{}, options).(GetSendEmailStatusResultOutput)
 }
 
 // A collection of arguments for invoking getSendEmailStatus.

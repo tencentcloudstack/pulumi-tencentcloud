@@ -82,12 +82,8 @@ type GetStandardEngineResourceGroupConfigInformationResult struct {
 }
 
 func GetStandardEngineResourceGroupConfigInformationOutput(ctx *pulumi.Context, args GetStandardEngineResourceGroupConfigInformationOutputArgs, opts ...pulumi.InvokeOption) GetStandardEngineResourceGroupConfigInformationResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStandardEngineResourceGroupConfigInformationResultOutput, error) {
-			args := v.(GetStandardEngineResourceGroupConfigInformationArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getStandardEngineResourceGroupConfigInformation:getStandardEngineResourceGroupConfigInformation", args, GetStandardEngineResourceGroupConfigInformationResultOutput{}, options).(GetStandardEngineResourceGroupConfigInformationResultOutput), nil
-		}).(GetStandardEngineResourceGroupConfigInformationResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getStandardEngineResourceGroupConfigInformation:getStandardEngineResourceGroupConfigInformation", args, GetStandardEngineResourceGroupConfigInformationResultOutput{}, options).(GetStandardEngineResourceGroupConfigInformationResultOutput)
 }
 
 // A collection of arguments for invoking getStandardEngineResourceGroupConfigInformation.

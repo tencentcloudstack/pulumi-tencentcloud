@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const layerVersions = tencentcloud.Scf.getLayerVersions({
+ * const layerVersions = tencentcloud.scf.getLayerVersions({
  *     layerName: "tf-test",
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetLayerVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const layerVersions = tencentcloud.Scf.getLayerVersions({
+ * const layerVersions = tencentcloud.scf.getLayerVersions({
  *     layerName: "tf-test",
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetLayerVersionsOutputArgs {
     /**
      * Compatible runtimes.
      */
-    compatibleRuntimes?: pulumi.Input<pulumi.Input<string>[]>;
+    compatibleRuntimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Layer name.
      */
@@ -104,5 +104,5 @@ export interface GetLayerVersionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

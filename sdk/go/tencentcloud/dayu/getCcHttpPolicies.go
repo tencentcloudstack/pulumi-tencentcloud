@@ -90,12 +90,8 @@ type GetCcHttpPoliciesResult struct {
 }
 
 func GetCcHttpPoliciesOutput(ctx *pulumi.Context, args GetCcHttpPoliciesOutputArgs, opts ...pulumi.InvokeOption) GetCcHttpPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCcHttpPoliciesResultOutput, error) {
-			args := v.(GetCcHttpPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dayu/getCcHttpPolicies:getCcHttpPolicies", args, GetCcHttpPoliciesResultOutput{}, options).(GetCcHttpPoliciesResultOutput), nil
-		}).(GetCcHttpPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dayu/getCcHttpPolicies:getCcHttpPolicies", args, GetCcHttpPoliciesResultOutput{}, options).(GetCcHttpPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getCcHttpPolicies.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const blackEmailAddress = tencentcloud.Ses.getBlackEmailAddress({
+ * const blackEmailAddress = tencentcloud.ses.getBlackEmailAddress({
  *     startDate: "2020-09-22",
  *     endDate: "2020-09-23",
  *     emailAddress: "xxx@mail.qcloud.com",
@@ -90,7 +90,7 @@ export interface GetBlackEmailAddressResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const blackEmailAddress = tencentcloud.Ses.getBlackEmailAddress({
+ * const blackEmailAddress = tencentcloud.ses.getBlackEmailAddress({
  *     startDate: "2020-09-22",
  *     endDate: "2020-09-23",
  *     emailAddress: "xxx@mail.qcloud.com",
@@ -116,7 +116,7 @@ export interface GetBlackEmailAddressOutputArgs {
     /**
      * You can specify an email address to query.
      */
-    emailAddress?: pulumi.Input<string>;
+    emailAddress?: pulumi.Input<string | undefined>;
     /**
      * End date in the format of `YYYY-MM-DD`.
      */
@@ -124,7 +124,7 @@ export interface GetBlackEmailAddressOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start date in the format of `YYYY-MM-DD`.
      */
@@ -132,5 +132,5 @@ export interface GetBlackEmailAddressOutputArgs {
     /**
      * You can specify a task ID to query.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
 }

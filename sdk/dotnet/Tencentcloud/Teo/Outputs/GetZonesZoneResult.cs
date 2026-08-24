@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string AliasZoneName;
         /// <summary>
-        /// The site access region. Values: `Global`: Global. `Mainland`: Chinese mainland. `Overseas`: Outside the Chinese mainland.
+        /// Applicable area. Values: `Mainland`: Chinese mainland; `Overseas`: Regions outside the Chinese mainland; `Global`: Global.
         /// </summary>
         public readonly string Area;
         /// <summary>
@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string ModifiedOn;
         /// <summary>
-        /// The list of name servers assigned by Tencent Cloud.
+        /// The DNS server address assigned to the user when connecting a site to EO via NS. You need to switch the NameServer of the domain name to this address.
         /// </summary>
         public readonly ImmutableArray<string> NameServers;
         /// <summary>
@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Ownership verification information. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetZonesZoneOwnershipVerificationResult OwnershipVerification;
+        public readonly ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationResult> OwnershipVerifications;
         /// <summary>
         /// Whether the site is disabled.
         /// </summary>
@@ -86,11 +86,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// The custom name server information.
         /// Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetZonesZoneVanityNameServersResult VanityNameServers;
+        public readonly ImmutableArray<Outputs.GetZonesZoneVanityNameServerResult> VanityNameServers;
         /// <summary>
         /// The custom name server IP information. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetZonesZoneVanityNameServersIpResult> VanityNameServersIps;
+        /// <summary>
+        /// Information list of the work mode of the version management configuration group. Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetZonesZoneWorkModeInfoResult> WorkModeInfos;
         /// <summary>
         /// Site ID.
         /// </summary>
@@ -124,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             ImmutableArray<string> originalNameServers,
 
-            Outputs.GetZonesZoneOwnershipVerificationResult ownershipVerification,
+            ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationResult> ownershipVerifications,
 
             bool paused,
 
@@ -136,9 +140,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             string type,
 
-            Outputs.GetZonesZoneVanityNameServersResult vanityNameServers,
+            ImmutableArray<Outputs.GetZonesZoneVanityNameServerResult> vanityNameServers,
 
             ImmutableArray<Outputs.GetZonesZoneVanityNameServersIpResult> vanityNameServersIps,
+
+            ImmutableArray<Outputs.GetZonesZoneWorkModeInfoResult> workModeInfos,
 
             string zoneId,
 
@@ -155,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             ModifiedOn = modifiedOn;
             NameServers = nameServers;
             OriginalNameServers = originalNameServers;
-            OwnershipVerification = ownershipVerification;
+            OwnershipVerifications = ownershipVerifications;
             Paused = paused;
             Resources = resources;
             Status = status;
@@ -163,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Type = type;
             VanityNameServers = vanityNameServers;
             VanityNameServersIps = vanityNameServersIps;
+            WorkModeInfos = workModeInfos;
             ZoneId = zoneId;
             ZoneName = zoneName;
         }

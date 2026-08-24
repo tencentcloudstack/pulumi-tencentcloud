@@ -61,7 +61,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem scaleRule can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
  * ```
@@ -159,19 +158,19 @@ export interface ScaleRuleState {
     /**
      * application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * .
      */
-    autoscaler?: pulumi.Input<inputs.Tem.ScaleRuleAutoscaler>;
+    autoscaler?: pulumi.Input<inputs.Tem.ScaleRuleAutoscaler | undefined>;
     /**
      * environment ID.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * application ID, which is combined by environment ID and application ID, like `en-o5edaepv#app-3j29aa2p`.
      */
-    workloadId?: pulumi.Input<string>;
+    workloadId?: pulumi.Input<string | undefined>;
 }
 
 /**

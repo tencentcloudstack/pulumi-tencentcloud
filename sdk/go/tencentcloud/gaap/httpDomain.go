@@ -42,13 +42,13 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  foo.ID(),
+//				ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("www.qq.com"),
 //			})
 //			if err != nil {
@@ -64,8 +64,12 @@ import (
 //
 // GAAP http domain can be imported using the id, e.g.
 //
+// > **NOTE:** The format of Gaap.HttpDomain id is `[listener-id]+[protocol]+[domain]`.
+//
 // ```sh
-// $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain  tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+//
+//	$ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain foo listener-11112222+HTTP+www.qq.com
+//
 // ```
 type HttpDomain struct {
 	pulumi.CustomResourceState

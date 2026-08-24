@@ -17,159 +17,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// ## Example Usage
     /// 
+    /// ### Use TKE default issuer and JwksUri
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///     var clusterCidr = config.Get("clusterCidr") ?? "172.16.0.0/16";
-    ///     var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    ///     var @default = Tencentcloud.Images.GetInstance.Invoke(new()
-    ///     {
-    ///         ImageTypes = new[]
-    ///         {
-    ///             "PUBLIC_IMAGE",
-    ///         },
-    ///         OsName = "centos",
-    ///     });
-    /// 
-    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    ///     {
-    ///         IsDefault = true,
-    ///         AvailabilityZone = availabilityZone,
-    ///     });
-    /// 
-    ///     var managedCluster = new Tencentcloud.Kubernetes.Cluster("managed_cluster", new()
-    ///     {
-    ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
-    ///         ClusterCidr = "10.31.0.0/16",
-    ///         ClusterMaxPodNum = 32,
-    ///         ClusterName = "keep",
-    ///         ClusterDesc = "test cluster desc",
-    ///         ClusterVersion = "1.20.6",
-    ///         ClusterMaxServiceNum = 32,
-    ///         WorkerConfigs = new[]
-    ///         {
-    ///             new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
-    ///             {
-    ///                 Count = 1,
-    ///                 AvailabilityZone = availabilityZone,
-    ///                 InstanceType = defaultInstanceType,
-    ///                 SystemDiskType = "CLOUD_SSD",
-    ///                 SystemDiskSize = 60,
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 100,
-    ///                 PublicIpAssigned = true,
-    ///                 SubnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId),
-    ///                 DataDisks = new[]
-    ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
-    ///                 },
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
-    ///                 UserData = "dGVzdA==",
-    ///                 Password = "ZZXXccvv1212",
-    ///             },
-    ///         },
-    ///         ClusterDeployType = "MANAGED_CLUSTER",
-    ///     });
-    /// 
     ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
-    ///         ClusterId = managedCluster.Id,
-    ///         JwksUri = managedCluster.Id.Apply(id =&gt; $"https://{id}.ccs.tencent-cloud.com/openid/v1/jwks"),
-    ///         Issuer = managedCluster.Id.Apply(id =&gt; $"https://{id}.ccs.tencent-cloud.com"),
+    ///         ClusterId = "cls-53c7589g",
+    ///         UseTkeDefault = true,
     ///         AutoCreateDiscoveryAnonymousAuth = true,
     ///     });
     /// 
     /// });
     /// ```
     /// 
-    /// ### Use the TKE default issuer and JwksUri
+    /// ### Use custom issuer and JwksUri
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///     var clusterCidr = config.Get("clusterCidr") ?? "172.16.0.0/16";
-    ///     var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    ///     var @default = Tencentcloud.Images.GetInstance.Invoke(new()
-    ///     {
-    ///         ImageTypes = new[]
-    ///         {
-    ///             "PUBLIC_IMAGE",
-    ///         },
-    ///         OsName = "centos",
-    ///     });
-    /// 
-    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    ///     {
-    ///         IsDefault = true,
-    ///         AvailabilityZone = availabilityZone,
-    ///     });
-    /// 
-    ///     var managedCluster = new Tencentcloud.Kubernetes.Cluster("managed_cluster", new()
-    ///     {
-    ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
-    ///         ClusterCidr = "10.31.0.0/16",
-    ///         ClusterMaxPodNum = 32,
-    ///         ClusterName = "keep",
-    ///         ClusterDesc = "test cluster desc",
-    ///         ClusterVersion = "1.20.6",
-    ///         ClusterMaxServiceNum = 32,
-    ///         WorkerConfigs = new[]
-    ///         {
-    ///             new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigArgs
-    ///             {
-    ///                 Count = 1,
-    ///                 AvailabilityZone = availabilityZone,
-    ///                 InstanceType = defaultInstanceType,
-    ///                 SystemDiskType = "CLOUD_SSD",
-    ///                 SystemDiskSize = 60,
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 100,
-    ///                 PublicIpAssigned = true,
-    ///                 SubnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId),
-    ///                 DataDisks = new[]
-    ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.ClusterWorkerConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
-    ///                 },
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
-    ///                 UserData = "dGVzdA==",
-    ///                 Password = "ZZXXccvv1212",
-    ///             },
-    ///         },
-    ///         ClusterDeployType = "MANAGED_CLUSTER",
-    ///     });
-    /// 
-    ///     // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
     ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
-    ///         ClusterId = managedCluster.Id,
-    ///         AutoCreateDiscoveryAnonymousAuth = true,
-    ///         UseTkeDefault = true,
+    ///         ClusterId = "cls-53c7589g",
+    ///         UseTkeDefault = false,
+    ///         JwksUri = "https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks",
+    ///         Issuer = "https://cls-53c7589g.ccs.tencent-cloud.com",
+    ///         AutoCreateDiscoveryAnonymousAuth = false,
     ///     });
     /// 
     /// });
@@ -181,14 +65,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var example = new Tencentcloud.Kubernetes.AuthAttachment("example", new()
     ///     {
-    ///         ClusterId = managedCluster.Id,
+    ///         ClusterId = "cls-oof3l9ks",
     ///         UseTkeDefault = true,
     ///         AutoCreateDiscoveryAnonymousAuth = true,
     ///         AutoCreateOidcConfig = true,
@@ -197,20 +80,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     ///     var oidcConfig = Tencentcloud.Cam.GetOidcConfig.Invoke(new()
     ///     {
-    ///         Name = managedCluster.Id,
+    ///         Name = example.ClusterId,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["identityKey"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityKey),
-    ///         ["identityUrl"] = oidcConfig.Apply(getOidcConfigResult =&gt; getOidcConfigResult.IdentityUrl),
     ///     };
     /// });
     /// ```
     /// 
     /// ## Import
     /// 
-    /// tke cluster authentication can be imported, e.g.
+    /// TKE cluster authentication can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
@@ -226,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<ImmutableArray<string>> AutoCreateClientIds { get; private set; } = null!;
 
         /// <summary>
-        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
         /// </summary>
         [Output("autoCreateDiscoveryAnonymousAuth")]
         public Output<bool?> AutoCreateDiscoveryAnonymousAuth { get; private set; } = null!;
@@ -250,34 +132,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Specify service-account-issuer. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-issuer. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Output("issuer")]
         public Output<string?> Issuer { get; private set; } = null!;
 
         /// <summary>
-        /// Specify service-account-jwks-uri. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-jwks-uri. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Output("jwksUri")]
         public Output<string?> JwksUri { get; private set; } = null!;
 
         /// <summary>
-        /// The default issuer of tke. If UseTkeDefault is set to `True`, this parameter will be set to the default value.
+        /// The default issuer of tke. If `UseTkeDefault` is set to `True`, this parameter will be set to the default value.
         /// </summary>
         [Output("tkeDefaultIssuer")]
         public Output<string> TkeDefaultIssuer { get; private set; } = null!;
 
         /// <summary>
-        /// The default JwksUri of tke. If UseTkeDefault is set to `True`, this parameter will be set to the default value.
+        /// The default JwksUri of tke. If `UseTkeDefault` is set to `True`, this parameter will be set to the default value.
         /// </summary>
         [Output("tkeDefaultJwksUri")]
         public Output<string> TkeDefaultJwksUri { get; private set; } = null!;
 
         /// <summary>
-        /// If set to `True`, the issuer and JwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// If set to `True`, the `Issuer` and `JwksUri` will be generated automatically by tke, please do not set `Issuer` and `JwksUri`.
         /// </summary>
         [Output("useTkeDefault")]
-        public Output<bool?> UseTkeDefault { get; private set; } = null!;
+        public Output<bool> UseTkeDefault { get; private set; } = null!;
 
 
         /// <summary>
@@ -339,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
 
         /// <summary>
-        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
         /// </summary>
         [Input("autoCreateDiscoveryAnonymousAuth")]
         public Input<bool>? AutoCreateDiscoveryAnonymousAuth { get; set; }
@@ -363,19 +245,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Specify service-account-issuer. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-issuer. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
         /// <summary>
-        /// Specify service-account-jwks-uri. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-jwks-uri. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Input("jwksUri")]
         public Input<string>? JwksUri { get; set; }
 
         /// <summary>
-        /// If set to `True`, the issuer and JwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// If set to `True`, the `Issuer` and `JwksUri` will be generated automatically by tke, please do not set `Issuer` and `JwksUri`.
         /// </summary>
         [Input("useTkeDefault")]
         public Input<bool>? UseTkeDefault { get; set; }
@@ -401,7 +283,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
 
         /// <summary>
-        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+        /// If set to `True`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
         /// </summary>
         [Input("autoCreateDiscoveryAnonymousAuth")]
         public Input<bool>? AutoCreateDiscoveryAnonymousAuth { get; set; }
@@ -425,31 +307,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Specify service-account-issuer. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-issuer. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Input("issuer")]
         public Input<string>? Issuer { get; set; }
 
         /// <summary>
-        /// Specify service-account-jwks-uri. If UseTkeDefault is set to `True`, please do not set this field.
+        /// Specify service-account-jwks-uri. If `UseTkeDefault` is set to `True`, please do not set this field.
         /// </summary>
         [Input("jwksUri")]
         public Input<string>? JwksUri { get; set; }
 
         /// <summary>
-        /// The default issuer of tke. If UseTkeDefault is set to `True`, this parameter will be set to the default value.
+        /// The default issuer of tke. If `UseTkeDefault` is set to `True`, this parameter will be set to the default value.
         /// </summary>
         [Input("tkeDefaultIssuer")]
         public Input<string>? TkeDefaultIssuer { get; set; }
 
         /// <summary>
-        /// The default JwksUri of tke. If UseTkeDefault is set to `True`, this parameter will be set to the default value.
+        /// The default JwksUri of tke. If `UseTkeDefault` is set to `True`, this parameter will be set to the default value.
         /// </summary>
         [Input("tkeDefaultJwksUri")]
         public Input<string>? TkeDefaultJwksUri { get; set; }
 
         /// <summary>
-        /// If set to `True`, the issuer and JwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+        /// If set to `True`, the `Issuer` and `JwksUri` will be generated automatically by tke, please do not set `Issuer` and `JwksUri`.
         /// </summary>
         [Input("useTkeDefault")]
         public Input<bool>? UseTkeDefault { get; set; }

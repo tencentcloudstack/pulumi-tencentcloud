@@ -29,8 +29,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BindDeviceAccountPassword{}
 	case "tencentcloud:Dasb/bindDeviceAccountPrivateKey:BindDeviceAccountPrivateKey":
 		r = &BindDeviceAccountPrivateKey{}
-	case "tencentcloud:Dasb/bindDeviceResource:BindDeviceResource":
-		r = &BindDeviceResource{}
 	case "tencentcloud:Dasb/cmdTemplate:CmdTemplate":
 		r = &CmdTemplate{}
 	case "tencentcloud:Dasb/device:Device":
@@ -82,11 +80,6 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dasb/bindDeviceAccountPrivateKey",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Dasb/bindDeviceResource",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

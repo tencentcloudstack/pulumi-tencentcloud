@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recoveryTime = tencentcloud.Postgresql.getRecoveryTime({
+ * const recoveryTime = tencentcloud.postgresql.getRecoveryTime({
  *     dbInstanceId: pgsqlId,
  * });
  * ```
@@ -68,7 +68,7 @@ export interface GetRecoveryTimeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recoveryTime = tencentcloud.Postgresql.getRecoveryTime({
+ * const recoveryTime = tencentcloud.postgresql.getRecoveryTime({
  *     dbInstanceId: pgsqlId,
  * });
  * ```
@@ -92,5 +92,5 @@ export interface GetRecoveryTimeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -67,12 +67,8 @@ type GetGroupAndStatisticsProxyResult struct {
 }
 
 func GetGroupAndStatisticsProxyOutput(ctx *pulumi.Context, args GetGroupAndStatisticsProxyOutputArgs, opts ...pulumi.InvokeOption) GetGroupAndStatisticsProxyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGroupAndStatisticsProxyResultOutput, error) {
-			args := v.(GetGroupAndStatisticsProxyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args, GetGroupAndStatisticsProxyResultOutput{}, options).(GetGroupAndStatisticsProxyResultOutput), nil
-		}).(GetGroupAndStatisticsProxyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args, GetGroupAndStatisticsProxyResultOutput{}, options).(GetGroupAndStatisticsProxyResultOutput)
 }
 
 // A collection of arguments for invoking getGroupAndStatisticsProxy.

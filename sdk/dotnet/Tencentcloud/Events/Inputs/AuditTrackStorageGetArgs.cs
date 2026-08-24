@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events.Inputs
         public Input<string> StorageRegion { get; set; } = null!;
 
         /// <summary>
-        /// Storage type (Valid values: cos, cls).
+        /// Storage type (Valid values: cos, cls, ckafka).
         /// </summary>
         [Input("storageType", required: true)]
         public Input<string> StorageType { get; set; } = null!;

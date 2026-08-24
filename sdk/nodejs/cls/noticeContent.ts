@@ -117,15 +117,15 @@ export interface NoticeContentState {
     /**
      * Notice content name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Template detailed configuration.
      */
-    noticeContents?: pulumi.Input<inputs.Cls.NoticeContentNoticeContents>;
+    noticeContents?: pulumi.Input<inputs.Cls.NoticeContentNoticeContents | undefined>;
     /**
      * Template content language. 0: Chinese 1: English.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -135,13 +135,13 @@ export interface NoticeContentArgs {
     /**
      * Notice content name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Template detailed configuration.
      */
-    noticeContents?: pulumi.Input<inputs.Cls.NoticeContentNoticeContents>;
+    noticeContents?: pulumi.Input<inputs.Cls.NoticeContentNoticeContents | undefined>;
     /**
      * Template content language. 0: Chinese 1: English.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }

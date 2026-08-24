@@ -67,12 +67,8 @@ type GetPullStreamTaskStatusResult struct {
 }
 
 func GetPullStreamTaskStatusOutput(ctx *pulumi.Context, args GetPullStreamTaskStatusOutputArgs, opts ...pulumi.InvokeOption) GetPullStreamTaskStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPullStreamTaskStatusResultOutput, error) {
-			args := v.(GetPullStreamTaskStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args, GetPullStreamTaskStatusResultOutput{}, options).(GetPullStreamTaskStatusResultOutput), nil
-		}).(GetPullStreamTaskStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args, GetPullStreamTaskStatusResultOutput{}, options).(GetPullStreamTaskStatusResultOutput)
 }
 
 // A collection of arguments for invoking getPullStreamTaskStatus.

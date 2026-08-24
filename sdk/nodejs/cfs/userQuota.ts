@@ -4,32 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a cfs userQuota
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const userQuota = new tencentcloud.cfs.UserQuota("user_quota", {
- *     fileSystemId: "cfs-4636029bc",
- *     userType: "Uid",
- *     userId: "2159973417",
- *     capacityHardLimit: 10,
- *     fileHardLimit: 10000,
- * });
- * ```
- *
- * ## Import
- *
- * cfs user_quota can be imported using the id, e.g.
- *
- * ```sh
- * $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
- * ```
- */
 export class UserQuota extends pulumi.CustomResource {
     /**
      * Get an existing UserQuota resource's state with the given name, ID, and optional extra
@@ -126,23 +100,23 @@ export interface UserQuotaState {
     /**
      * Capacity Limit(GB).
      */
-    capacityHardLimit?: pulumi.Input<number>;
+    capacityHardLimit?: pulumi.Input<number | undefined>;
     /**
      * File limit.
      */
-    fileHardLimit?: pulumi.Input<number>;
+    fileHardLimit?: pulumi.Input<number | undefined>;
     /**
      * File system ID.
      */
-    fileSystemId?: pulumi.Input<string>;
+    fileSystemId?: pulumi.Input<string | undefined>;
     /**
      * Info of UID/GID.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Quota type. Valid value: `Uid`, `Gid`.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -152,11 +126,11 @@ export interface UserQuotaArgs {
     /**
      * Capacity Limit(GB).
      */
-    capacityHardLimit?: pulumi.Input<number>;
+    capacityHardLimit?: pulumi.Input<number | undefined>;
     /**
      * File limit.
      */
-    fileHardLimit?: pulumi.Input<number>;
+    fileHardLimit?: pulumi.Input<number | undefined>;
     /**
      * File system ID.
      */

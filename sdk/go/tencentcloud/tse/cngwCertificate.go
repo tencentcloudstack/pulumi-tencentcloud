@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// tse cngw_certificate can be imported using the id, e.g.
+// tse cngwCertificate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id

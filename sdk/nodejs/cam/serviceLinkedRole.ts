@@ -118,19 +118,19 @@ export interface ServiceLinkedRoleState {
     /**
      * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
      */
-    customSuffix?: pulumi.Input<string>;
+    customSuffix?: pulumi.Input<string | undefined>;
     /**
      * role description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Authorization service, the Tencent Cloud service principal with this role attached.
      */
-    qcsServiceNames?: pulumi.Input<pulumi.Input<string>[]>;
+    qcsServiceNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -140,11 +140,11 @@ export interface ServiceLinkedRoleArgs {
     /**
      * The custom suffix, based on the string you provide, is combined with the prefix provided by the service to form the full role name. This field is not allowed to contain the character `_`.
      */
-    customSuffix?: pulumi.Input<string>;
+    customSuffix?: pulumi.Input<string | undefined>;
     /**
      * role description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Authorization service, the Tencent Cloud service principal with this role attached.
      */
@@ -152,5 +152,5 @@ export interface ServiceLinkedRoleArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

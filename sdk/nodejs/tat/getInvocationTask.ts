@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invocationTask = tencentcloud.Tat.getInvocationTask({
+ * const invocationTask = tencentcloud.tat.getInvocationTask({
  *     filters: [{
  *         name: "instance-id",
  *         values: ["ins-p4pq4gaq"],
@@ -83,7 +83,7 @@ export interface GetInvocationTaskResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invocationTask = tencentcloud.Tat.getInvocationTask({
+ * const invocationTask = tencentcloud.tat.getInvocationTask({
  *     filters: [{
  *         name: "instance-id",
  *         values: ["ins-p4pq4gaq"],
@@ -110,17 +110,17 @@ export interface GetInvocationTaskOutputArgs {
     /**
      * Filter conditions.invocation-id - String - Required: No - (Filter condition) Filter by the execution activity ID.invocation-task-id - String - Required: No - (Filter condition) Filter by the execution task ID.instance-id - String - Required: No - (Filter condition) Filter by the instance ID.command-id - String - Required: No - (Filter condition) Filter by the command ID.Up to 10 Filters are allowed for each request. Each filter can have up to five Filter.Values. InvocationTaskIds and Filters cannot be specified at the same time.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tat.GetInvocationTaskFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tat.GetInvocationTaskFilterArgs>[] | undefined>;
     /**
      * Whether to hide the output. Valid values:True (default): Hide the outputFalse: Show the output.
      */
-    hideOutput?: pulumi.Input<boolean>;
+    hideOutput?: pulumi.Input<boolean | undefined>;
     /**
      * List of execution task IDs. Up to 100 IDs are allowed for each request. InvocationTaskIds and Filters cannot be specified at the same time.
      */
-    invocationTaskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    invocationTaskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

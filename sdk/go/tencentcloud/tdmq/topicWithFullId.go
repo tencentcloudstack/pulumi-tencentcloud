@@ -41,7 +41,7 @@ import (
 //			exampleNamespace, err := tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 //				EnvironName: pulumi.String("tf_example"),
 //				MsgTtl:      pulumi.Int(300),
-//				ClusterId:   example.ID(),
+//				ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 //				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
 //					TimeInMinutes: pulumi.Int(60),
 //					SizeInMb:      pulumi.Int(10),
@@ -53,7 +53,7 @@ import (
 //			}
 //			_, err = tdmq.NewTopicWithFullId(ctx, "example", &tdmq.TopicWithFullIdArgs{
 //				EnvironId:       exampleNamespace.EnvironName,
-//				ClusterId:       example.ID(),
+//				ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
 //				TopicName:       pulumi.String("tf-example-topic"),
 //				Partitions:      pulumi.Int(6),
 //				PulsarTopicType: pulumi.Int(3),

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupSummaries = tencentcloud.Mysql.getBackupSummaries({
+ * const backupSummaries = tencentcloud.mysql.getBackupSummaries({
  *     product: "mysql",
  *     orderBy: "BackupVolume",
  *     orderDirection: "ASC",
@@ -80,7 +80,7 @@ export interface GetBackupSummariesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupSummaries = tencentcloud.Mysql.getBackupSummaries({
+ * const backupSummaries = tencentcloud.mysql.getBackupSummaries({
  *     product: "mysql",
  *     orderBy: "BackupVolume",
  *     orderDirection: "ASC",
@@ -104,11 +104,11 @@ export interface GetBackupSummariesOutputArgs {
     /**
      * Specify to sort by a certain item, the optional values include: BackupVolume: backup volume, DataBackupVolume: data backup volume, BinlogBackupVolume: log backup volume, AutoBackupVolume: automatic backup volume, ManualBackupVolume: manual backup volume. By default, they are sorted by BackupVolume.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Specify the sorting direction, optional values include: ASC: forward order, DESC: reverse order. The default is ASC.
      */
-    orderDirection?: pulumi.Input<string>;
+    orderDirection?: pulumi.Input<string | undefined>;
     /**
      * The type of cloud database product to be queried, currently only supports `mysql`.
      */
@@ -116,5 +116,5 @@ export interface GetBackupSummariesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

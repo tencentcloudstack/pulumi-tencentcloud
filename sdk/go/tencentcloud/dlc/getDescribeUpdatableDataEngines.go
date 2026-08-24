@@ -93,12 +93,8 @@ type GetDescribeUpdatableDataEnginesResult struct {
 }
 
 func GetDescribeUpdatableDataEnginesOutput(ctx *pulumi.Context, args GetDescribeUpdatableDataEnginesOutputArgs, opts ...pulumi.InvokeOption) GetDescribeUpdatableDataEnginesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeUpdatableDataEnginesResultOutput, error) {
-			args := v.(GetDescribeUpdatableDataEnginesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args, GetDescribeUpdatableDataEnginesResultOutput{}, options).(GetDescribeUpdatableDataEnginesResultOutput), nil
-		}).(GetDescribeUpdatableDataEnginesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUpdatableDataEngines:getDescribeUpdatableDataEngines", args, GetDescribeUpdatableDataEnginesResultOutput{}, options).(GetDescribeUpdatableDataEnginesResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeUpdatableDataEngines.

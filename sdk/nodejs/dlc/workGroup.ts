@@ -64,6 +64,10 @@ export class WorkGroup extends pulumi.CustomResource {
      */
     declare public readonly workGroupDescription: pulumi.Output<string | undefined>;
     /**
+     * Working group ID.
+     */
+    declare public /*out*/ readonly workGroupId: pulumi.Output<number>;
+    /**
      * Working group name.
      */
     declare public readonly workGroupName: pulumi.Output<string>;
@@ -83,6 +87,7 @@ export class WorkGroup extends pulumi.CustomResource {
             const state = argsOrState as WorkGroupState | undefined;
             resourceInputs["userIds"] = state?.userIds;
             resourceInputs["workGroupDescription"] = state?.workGroupDescription;
+            resourceInputs["workGroupId"] = state?.workGroupId;
             resourceInputs["workGroupName"] = state?.workGroupName;
         } else {
             const args = argsOrState as WorkGroupArgs | undefined;
@@ -92,6 +97,7 @@ export class WorkGroup extends pulumi.CustomResource {
             resourceInputs["workGroupDescription"] = args?.workGroupDescription;
             resourceInputs["workGroupName"] = args?.workGroupName;
             resourceInputs["userIds"] = undefined /*out*/;
+            resourceInputs["workGroupId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(WorkGroup.__pulumiType, name, resourceInputs, opts);
@@ -105,15 +111,19 @@ export interface WorkGroupState {
     /**
      * Collection of IDs of users to be bound to working groups.
      */
-    userIds?: pulumi.Input<pulumi.Input<string>[]>;
+    userIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Working group description.
      */
-    workGroupDescription?: pulumi.Input<string>;
+    workGroupDescription?: pulumi.Input<string | undefined>;
+    /**
+     * Working group ID.
+     */
+    workGroupId?: pulumi.Input<number | undefined>;
     /**
      * Working group name.
      */
-    workGroupName?: pulumi.Input<string>;
+    workGroupName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -123,7 +133,7 @@ export interface WorkGroupArgs {
     /**
      * Working group description.
      */
-    workGroupDescription?: pulumi.Input<string>;
+    workGroupDescription?: pulumi.Input<string | undefined>;
     /**
      * Working group name.
      */

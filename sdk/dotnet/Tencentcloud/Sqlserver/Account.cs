@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -83,9 +82,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     ///     var exampleAccount = new Tencentcloud.Sqlserver.Account("example", new()
     ///     {
     ///         InstanceId = example.Id,
-    ///         Name = "tf_example_account",
-    ///         Password = "Qwer@234",
-    ///         Remark = "test-remark",
+    ///         Name = "tf_example",
+    ///         Password = "Password@123",
+    ///         Remark = "remark.",
     ///     });
     /// 
     /// });
@@ -96,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// SQL Server account can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example_account
+    /// $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/account:Account")]

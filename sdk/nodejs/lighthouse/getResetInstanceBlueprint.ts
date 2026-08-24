@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resetInstanceBlueprint = tencentcloud.Lighthouse.getResetInstanceBlueprint({
+ * const resetInstanceBlueprint = tencentcloud.lighthouse.getResetInstanceBlueprint({
  *     instanceId: "lhins-123456",
  *     offset: 0,
  *     limit: 20,
@@ -86,7 +86,7 @@ export interface GetResetInstanceBlueprintResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resetInstanceBlueprint = tencentcloud.Lighthouse.getResetInstanceBlueprint({
+ * const resetInstanceBlueprint = tencentcloud.lighthouse.getResetInstanceBlueprint({
  *     instanceId: "lhins-123456",
  *     offset: 0,
  *     limit: 20,
@@ -111,7 +111,7 @@ export interface GetResetInstanceBlueprintOutputArgs {
     /**
      * Filter listblueprint-idFilter by image ID.Type: StringRequired: noblueprint-typeFilter by image type.Valid values: APP_OS: application image; PURE_OS: system image; PRIVATE: custom imageType: StringRequired: noplatform-typeFilter by image platform type.Valid values: LINUX_UNIX: Linux or Unix; WINDOWS: WindowsType: StringRequired: noblueprint-nameFilter by image name.Type: StringRequired: noblueprint-stateFilter by image status.Type: StringRequired: noEach request can contain up to 10 Filters and 5 Filter.Values. BlueprintIds and Filters cannot be specified at the same time.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetResetInstanceBlueprintFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetResetInstanceBlueprintFilterArgs>[] | undefined>;
     /**
      * Instance ID.
      */
@@ -119,13 +119,13 @@ export interface GetResetInstanceBlueprintOutputArgs {
     /**
      * Number of returned results. Default value is 20. Maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Offset. Default value is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeInstanceSlowQueries = tencentcloud.Cynosdb.getDescribeInstanceSlowQueries({
+ * const describeInstanceSlowQueries = tencentcloud.cynosdb.getDescribeInstanceSlowQueries({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     startTime: "2023-06-01 12:00:00",
  *     endTime: "2023-06-19 14:00:00",
@@ -83,7 +83,7 @@ export interface GetDescribeInstanceSlowQueriesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeInstanceSlowQueries = tencentcloud.Cynosdb.getDescribeInstanceSlowQueries({
+ * const describeInstanceSlowQueries = tencentcloud.cynosdb.getDescribeInstanceSlowQueries({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     startTime: "2023-06-01 12:00:00",
  *     endTime: "2023-06-19 14:00:00",
@@ -111,13 +111,13 @@ export interface GetDescribeInstanceSlowQueriesOutputArgs {
     /**
      * End time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

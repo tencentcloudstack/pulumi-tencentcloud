@@ -38,17 +38,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -66,8 +66,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -81,7 +81,7 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -91,7 +91,7 @@ import (
 //				return err
 //			}
 //			exampleDb, err := sqlserver.NewDb(ctx, "example", &sqlserver.DbArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf_example_db"),
 //				Charset:    pulumi.String("Chinese_PRC_BIN"),
 //				Remark:     pulumi.String("test-remark"),
@@ -101,7 +101,7 @@ import (
 //			}
 //			_, err = sqlserver.NewConfigDatabaseMdf(ctx, "example", &sqlserver.ConfigDatabaseMdfArgs{
 //				DbName:     exampleDb.Name,
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -114,7 +114,7 @@ import (
 //
 // ## Import
 //
-// sqlserver config_database_mdf can be imported using the id, e.g.
+// sqlserver configDatabaseMdf can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Sqlserver/configDatabaseMdf:ConfigDatabaseMdf example mssql-i9ma6oy7#tf_example_db

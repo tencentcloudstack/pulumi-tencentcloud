@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDataEngineNetwork({
+ * const example = tencentcloud.dlc.getDataEngineNetwork({
  *     sortBy: "create-time",
  *     sorting: "desc",
  *     filters: [{
@@ -84,7 +84,7 @@ export interface GetDataEngineNetworkResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDataEngineNetwork({
+ * const example = tencentcloud.dlc.getDataEngineNetwork({
  *     sortBy: "create-time",
  *     sorting: "desc",
  *     filters: [{
@@ -112,17 +112,17 @@ export interface GetDataEngineNetworkOutputArgs {
     /**
      * Filter conditions are optional, engine-network-id--engine network ID, engine-network-state--engine network status.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetDataEngineNetworkFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetDataEngineNetworkFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sort Field.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * Sort order, asc or desc.
      */
-    sorting?: pulumi.Input<string>;
+    sorting?: pulumi.Input<string | undefined>;
 }

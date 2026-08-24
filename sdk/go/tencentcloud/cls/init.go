@@ -35,24 +35,36 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConfigAttachment{}
 	case "tencentcloud:Cls/configExtra:ConfigExtra":
 		r = &ConfigExtra{}
+	case "tencentcloud:Cls/console:Console":
+		r = &Console{}
 	case "tencentcloud:Cls/cosRecharge:CosRecharge":
 		r = &CosRecharge{}
 	case "tencentcloud:Cls/cosShipper:CosShipper":
 		r = &CosShipper{}
+	case "tencentcloud:Cls/dashboard:Dashboard":
+		r = &Dashboard{}
 	case "tencentcloud:Cls/dataTransform:DataTransform":
 		r = &DataTransform{}
+	case "tencentcloud:Cls/dlcDeliver:DlcDeliver":
+		r = &DlcDeliver{}
 	case "tencentcloud:Cls/export:Export":
 		r = &Export{}
 	case "tencentcloud:Cls/index:Index":
 		r = &Index{}
+	case "tencentcloud:Cls/kafkaConsumer:KafkaConsumer":
+		r = &KafkaConsumer{}
 	case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
 		r = &KafkaRecharge{}
 	case "tencentcloud:Cls/logset:Logset":
 		r = &Logset{}
 	case "tencentcloud:Cls/machineGroup:MachineGroup":
 		r = &MachineGroup{}
+	case "tencentcloud:Cls/metricSubscribe:MetricSubscribe":
+		r = &MetricSubscribe{}
 	case "tencentcloud:Cls/noticeContent:NoticeContent":
 		r = &NoticeContent{}
+	case "tencentcloud:Cls/openServiceOperation:OpenServiceOperation":
+		r = &OpenServiceOperation{}
 	case "tencentcloud:Cls/scheduledSql:ScheduledSql":
 		r = &ScheduledSql{}
 	case "tencentcloud:Cls/topic:Topic":
@@ -109,6 +121,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/console",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/cosRecharge",
 		&module{version},
 	)
@@ -119,7 +136,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/dashboard",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/dataTransform",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/dlcDeliver",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -130,6 +157,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cls/index",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/kafkaConsumer",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -149,7 +181,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/metricSubscribe",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/noticeContent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/openServiceOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

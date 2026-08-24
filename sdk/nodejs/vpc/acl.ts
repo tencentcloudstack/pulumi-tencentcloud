@@ -135,27 +135,27 @@ export interface AclState {
     /**
      * Creation time of ACL.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of `action` is `ACCEPT` and `DROP`. The `cidrIp` must be an IP address network or segment. The `port` valid format is `80`, `80-90` or `ALL`. The available value of `protocol` is `TCP`, `UDP`, `ICMP` and `ALL`. When `protocol` is `ICMP` or `ALL`, the `port` must be `ALL`. The `description` content must be in uppercase.
      */
-    egresses?: pulumi.Input<pulumi.Input<string>[]>;
+    egresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of `action` is `ACCEPT` and `DROP`. The `cidrIp` must be an IP address network or segment. The `port` valid format is `80`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When `protocol` is `ICMP` or `ALL`, the 'port' must be `ALL`. The `description` content must be in uppercase.
      */
-    ingresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ingresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Name of the network ACL.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the vpc acl.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC instance.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -165,19 +165,19 @@ export interface AclArgs {
     /**
      * Egress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of `action` is `ACCEPT` and `DROP`. The `cidrIp` must be an IP address network or segment. The `port` valid format is `80`, `80-90` or `ALL`. The available value of `protocol` is `TCP`, `UDP`, `ICMP` and `ALL`. When `protocol` is `ICMP` or `ALL`, the `port` must be `ALL`. The `description` content must be in uppercase.
      */
-    egresses?: pulumi.Input<pulumi.Input<string>[]>;
+    egresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Ingress rules. A rule must match the following format: [action]#[cidrIp]#[port]#[protocol]#[description]. The available value of `action` is `ACCEPT` and `DROP`. The `cidrIp` must be an IP address network or segment. The `port` valid format is `80`, `80-90` or `ALL`. The available value of 'protocol' is `TCP`, `UDP`, `ICMP` and `ALL`. When `protocol` is `ICMP` or `ALL`, the 'port' must be `ALL`. The `description` content must be in uppercase.
      */
-    ingresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ingresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Name of the network ACL.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the vpc acl.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC instance.
      */

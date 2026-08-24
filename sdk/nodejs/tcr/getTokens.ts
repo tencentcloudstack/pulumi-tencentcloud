@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getTokens({
+ * const name = tencentcloud.tcr.getTokens({
  *     instanceId: "cls-satg5125",
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetTokensResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getTokens({
+ * const name = tencentcloud.tcr.getTokens({
  *     instanceId: "cls-satg5125",
  * });
  * ```
@@ -100,9 +100,9 @@ export interface GetTokensOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the TCR token to query.
      */
-    tokenId?: pulumi.Input<string>;
+    tokenId?: pulumi.Input<string | undefined>;
 }

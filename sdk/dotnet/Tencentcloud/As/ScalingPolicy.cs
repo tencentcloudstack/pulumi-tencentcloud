@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -108,7 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -181,6 +179,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// AS scaling policy can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:As/scalingPolicy:ScalingPolicy example asp-519acdug
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/scalingPolicy:ScalingPolicy")]

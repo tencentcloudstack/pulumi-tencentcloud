@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Import
     /// 
-    /// lighthouse disk_backup can be imported using the id, e.g.
+    /// lighthouse DiskBackup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Lighthouse/diskBackup:DiskBackup disk_backup disk_backup_id

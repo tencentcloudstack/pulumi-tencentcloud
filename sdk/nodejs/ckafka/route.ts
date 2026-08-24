@@ -170,47 +170,47 @@ export interface RouteState {
      * - 2: SSL (SSL encrypted communication without user information, supported by both older and community versions)
      * - 3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).
      */
-    accessType?: pulumi.Input<number>;
+    accessType?: pulumi.Input<number | undefined>;
     /**
      * Auth flag.
      */
-    authFlag?: pulumi.Input<number>;
+    authFlag?: pulumi.Input<number | undefined>;
     /**
      * Virtual IP list (1 to 1 broker nodes).
      */
-    brokerVipLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.RouteBrokerVipList>[]>;
+    brokerVipLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.RouteBrokerVipList>[] | undefined>;
     /**
      * Caller appid.
      */
-    callerAppid?: pulumi.Input<number>;
+    callerAppid?: pulumi.Input<number | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Ip.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Public network.
      */
-    publicNetwork?: pulumi.Input<number>;
+    publicNetwork?: pulumi.Input<number | undefined>;
     /**
      * Subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Virtual IP list.
      */
-    vipLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.RouteVipList>[]>;
+    vipLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.RouteVipList>[] | undefined>;
     /**
      * Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
      */
-    vipType?: pulumi.Input<number>;
+    vipType?: pulumi.Input<number | undefined>;
     /**
      * Vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -224,15 +224,15 @@ export interface RouteArgs {
      * - 2: SSL (SSL encrypted communication without user information, supported by both older and community versions)
      * - 3: SASL_SSL (SSL encrypted communication. When the data starts, authentication will be logged in through SASL. Only the community version supports it).
      */
-    accessType?: pulumi.Input<number>;
+    accessType?: pulumi.Input<number | undefined>;
     /**
      * Auth flag.
      */
-    authFlag?: pulumi.Input<number>;
+    authFlag?: pulumi.Input<number | undefined>;
     /**
      * Caller appid.
      */
-    callerAppid?: pulumi.Input<number>;
+    callerAppid?: pulumi.Input<number | undefined>;
     /**
      * Instance id.
      */
@@ -240,15 +240,15 @@ export interface RouteArgs {
     /**
      * Ip.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Public network.
      */
-    publicNetwork?: pulumi.Input<number>;
+    publicNetwork?: pulumi.Input<number | undefined>;
     /**
      * Subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
      */
@@ -256,5 +256,5 @@ export interface RouteArgs {
     /**
      * Vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

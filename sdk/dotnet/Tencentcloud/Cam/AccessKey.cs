@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -42,7 +41,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -64,7 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -97,6 +94,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Output("accessKey")]
         public Output<string> CamAccessKey { get; private set; } = null!;
 
+        /// <summary>
+        /// Encrypted secret, base64 encoded, if PgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw EncryptedSecret | base64 --decode | keybase pgp decrypt.
+        /// </summary>
         [Output("encryptedSecretAccessKey")]
         public Output<string> EncryptedSecretAccessKey { get; private set; } = null!;
 
@@ -219,6 +219,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("accessKey")]
         public Input<string>? CamAccessKey { get; set; }
 
+        /// <summary>
+        /// Encrypted secret, base64 encoded, if PgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw EncryptedSecret | base64 --decode | keybase pgp decrypt.
+        /// </summary>
         [Input("encryptedSecretAccessKey")]
         public Input<string>? EncryptedSecretAccessKey { get; set; }
 

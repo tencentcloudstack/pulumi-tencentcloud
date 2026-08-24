@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
+/**
+ * Provides a resource to create a CAM message receiver
+ *
+ * > **NOTE:** For security reasons, the CAM will return the `email` and `phoneNumber` parameter values in encrypted form. Please use the `ignoreChanges` function in Terraform's `lifecycle` to include these two parameters.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cam.MessageReceiver("example", {
+ *     name: "tf-example",
+ *     remark: "remark.",
+ *     countryCode: "86",
+ *     phoneNumber: "18123456789",
+ *     email: "demo@qq.com",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * CAM message receiver can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Cam/messageReceiver:MessageReceiver example tf-example
+ * ```
+ */
 export class MessageReceiver extends pulumi.CustomResource {
     /**
      * Get an existing MessageReceiver resource's state with the given name, ID, and optional extra
@@ -136,47 +164,47 @@ export interface MessageReceiverState {
     /**
      * The international area code for mobile phone numbers is 86 for domestic areas.
      */
-    countryCode?: pulumi.Input<string>;
+    countryCode?: pulumi.Input<string | undefined>;
     /**
      * Email address, for example: 57*****@qq.com.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Whether the email is verified.
      */
-    emailFlag?: pulumi.Input<number>;
+    emailFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether it is the primary contact person.
      */
-    isReceiverOwner?: pulumi.Input<number>;
+    isReceiverOwner?: pulumi.Input<number | undefined>;
     /**
      * Username of the message recipient.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether the mobile phone number is verified.
      */
-    phoneFlag?: pulumi.Input<number>;
+    phoneFlag?: pulumi.Input<number | undefined>;
     /**
      * Mobile phone number, for example: 132****2492.
      */
-    phoneNumber?: pulumi.Input<string>;
+    phoneNumber?: pulumi.Input<string | undefined>;
     /**
      * Recipient's notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * UID.
      */
-    uid?: pulumi.Input<number>;
+    uid?: pulumi.Input<number | undefined>;
     /**
      * Account uin.
      */
-    uin?: pulumi.Input<number>;
+    uin?: pulumi.Input<number | undefined>;
     /**
      * Whether WeChat is allowed to receive notifications.
      */
-    wechatFlag?: pulumi.Input<number>;
+    wechatFlag?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -194,7 +222,7 @@ export interface MessageReceiverArgs {
     /**
      * Username of the message recipient.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Mobile phone number, for example: 132****2492.
      */
@@ -202,5 +230,5 @@ export interface MessageReceiverArgs {
     /**
      * Recipient's notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

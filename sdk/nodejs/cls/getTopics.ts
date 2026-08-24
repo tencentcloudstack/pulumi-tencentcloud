@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cls.getTopics({});
+ * const example = tencentcloud.cls.getTopics({});
  * ```
  *
  * ### Query topics by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cls.getTopics({
+ * const example = tencentcloud.cls.getTopics({
  *     filters: [
  *         {
  *             key: "topicId",
@@ -115,7 +115,7 @@ export interface GetTopicsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cls.getTopics({});
+ * const example = tencentcloud.cls.getTopics({});
  * ```
  *
  * ### Query topics by filters
@@ -124,7 +124,7 @@ export interface GetTopicsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cls.getTopics({
+ * const example = tencentcloud.cls.getTopics({
  *     filters: [
  *         {
  *             key: "topicId",
@@ -166,11 +166,11 @@ export interface GetTopicsOutputArgs {
      * - 0 (default): Log topic.
      * - 1: Metric topic.
      */
-    bizType?: pulumi.Input<number>;
+    bizType?: pulumi.Input<number | undefined>;
     /**
      * <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cls.GetTopicsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cls.GetTopicsFilterArgs>[] | undefined>;
     /**
      * Match mode for `Filters` fields.
      * - 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
@@ -178,9 +178,9 @@ export interface GetTopicsOutputArgs {
      * - 2: Exact match for `logsetName`.
      * - 3: Exact match for `topicName` and `logsetName`.
      */
-    preciseSearch?: pulumi.Input<number>;
+    preciseSearch?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

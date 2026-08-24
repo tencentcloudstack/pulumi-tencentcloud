@@ -85,12 +85,8 @@ type GetDescribeHostClbInstanceListResult struct {
 }
 
 func GetDescribeHostClbInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostClbInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostClbInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostClbInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostClbInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args, GetDescribeHostClbInstanceListResultOutput{}, options).(GetDescribeHostClbInstanceListResultOutput), nil
-		}).(GetDescribeHostClbInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostClbInstanceList:getDescribeHostClbInstanceList", args, GetDescribeHostClbInstanceListResultOutput{}, options).(GetDescribeHostClbInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostClbInstanceList.

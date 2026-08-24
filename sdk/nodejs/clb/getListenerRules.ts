@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getListenerRules({
+ * const foo = tencentcloud.clb.getListenerRules({
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-mwr6vbtv",
  *     ruleId: "loc-inem40hz",
@@ -113,7 +113,7 @@ export interface GetListenerRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getListenerRules({
+ * const foo = tencentcloud.clb.getListenerRules({
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-mwr6vbtv",
  *     ruleId: "loc-inem40hz",
@@ -147,7 +147,7 @@ export interface GetListenerRulesOutputArgs {
     /**
      * Domain name of the forwarding rule to be queried.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener to be queried.
      */
@@ -155,17 +155,17 @@ export interface GetListenerRulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the forwarding rule to be queried.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Scheduling method of the forwarding rule of thr CLB listener, and available values include `WRR`, `IP HASH` and `LEAST_CONN`. The default is `WRR`.
      */
-    scheduler?: pulumi.Input<string>;
+    scheduler?: pulumi.Input<string | undefined>;
     /**
      * Url of the forwarding rule to be queried.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getTreeJobs({
+ * const example = tencentcloud.oceanus.getTreeJobs({
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetTreeJobsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getTreeJobs({
+ * const example = tencentcloud.oceanus.getTreeJobs({
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
@@ -95,13 +95,13 @@ export interface GetTreeJobsOutputArgs {
     /**
      * Filter rules.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetTreeJobsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetTreeJobsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

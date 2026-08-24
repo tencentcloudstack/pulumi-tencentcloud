@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const notices = tencentcloud.Monitor.getAlarmNotices({
+ * const notices = tencentcloud.monitor.getAlarmNotices({
  *     order: "DESC",
  *     ownerUid: 1,
  *     name: "",
@@ -121,7 +121,7 @@ export interface GetAlarmNoticesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const notices = tencentcloud.Monitor.getAlarmNotices({
+ * const notices = tencentcloud.monitor.getAlarmNotices({
  *     order: "DESC",
  *     ownerUid: 1,
  *     name: "",
@@ -154,33 +154,33 @@ export interface GetAlarmNoticesOutputArgs {
     /**
      * Receive group list.
      */
-    groupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    groupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Alarm notification template name Used for fuzzy search.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Receive group list.
      */
-    noticeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    noticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sort by update time ASC=forward order DESC=reverse order.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * The primary account uid is used to create a preset notification.
      */
-    ownerUid?: pulumi.Input<number>;
+    ownerUid?: pulumi.Input<number | undefined>;
     /**
      * To filter alarm notification templates according to recipients, you need to select the notification user type. USER=user GROUP=user group Leave blank = not filter by recipient.
      */
-    receiverType?: pulumi.Input<string>;
+    receiverType?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * List of recipients.
      */
-    userIds?: pulumi.Input<pulumi.Input<number>[]>;
+    userIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }

@@ -197,39 +197,39 @@ export interface InstanceState {
     /**
      * cluster password.
      */
-    adminPassword?: pulumi.Input<string>;
+    adminPassword?: pulumi.Input<string | undefined>;
     /**
      * instance billing mode.
      */
-    chargeProperties?: pulumi.Input<inputs.Cdwpg.InstanceChargeProperties>;
+    chargeProperties?: pulumi.Input<inputs.Cdwpg.InstanceChargeProperties | undefined>;
     /**
      * instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Version.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * resource information.
      */
-    resources?: pulumi.Input<pulumi.Input<inputs.Cdwpg.InstanceResource>[]>;
+    resources?: pulumi.Input<pulumi.Input<inputs.Cdwpg.InstanceResource>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * subnet.
      */
-    userSubnetId?: pulumi.Input<string>;
+    userSubnetId?: pulumi.Input<string | undefined>;
     /**
      * private network.
      */
-    userVpcId?: pulumi.Input<string>;
+    userVpcId?: pulumi.Input<string | undefined>;
     /**
      * Availability Zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -251,7 +251,7 @@ export interface InstanceArgs {
     /**
      * Version.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * resource information.
      */
@@ -259,7 +259,7 @@ export interface InstanceArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * subnet.
      */

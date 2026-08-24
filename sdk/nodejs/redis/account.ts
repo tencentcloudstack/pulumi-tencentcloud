@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -56,7 +56,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -209,27 +209,27 @@ export interface AccountState {
     /**
      * The account name.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * 1: Length 8-30 digits, it is recommended to use a password of more than 12 digits; 2: Cannot start with `/`; 3: Include at least two items: a.Lowercase letters `a-z`; b.Uppercase letters `A-Z` c.Numbers `0-9`;  d.`()`~!@#$%^&*-+=_|{}[]:;<>,.?/`.
      */
-    accountPassword?: pulumi.Input<string>;
+    accountPassword?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Read and write policy: Enter R and RW to indicate read-only, read-write, cannot be empty when modifying operations.
      */
-    privilege?: pulumi.Input<string>;
+    privilege?: pulumi.Input<string | undefined>;
     /**
      * Routing policy: Enter master or replication, which indicates the master node or slave node, cannot be empty when modifying operations.
      */
-    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -259,5 +259,5 @@ export interface AccountArgs {
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

@@ -115,27 +115,27 @@ export interface ReleaseFileState {
     /**
      * Release file hash.
      */
-    fileHash?: pulumi.Input<string>;
+    fileHash?: pulumi.Input<string | undefined>;
     /**
      * Release file unique key.
      */
-    fileKey?: pulumi.Input<string>;
+    fileKey?: pulumi.Input<string | undefined>;
     /**
      * Release file name.
      */
-    fileName?: pulumi.Input<string>;
+    fileName?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Release file id.
      */
-    releaseFileId?: pulumi.Input<number>;
+    releaseFileId?: pulumi.Input<number | undefined>;
     /**
      * Release File version.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }
 
 /**

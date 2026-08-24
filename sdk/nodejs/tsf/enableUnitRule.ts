@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf enable_unit_rule can be imported using the id, e.g.
+ * tsf enableUnitRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
@@ -102,11 +102,11 @@ export interface EnableUnitRuleState {
     /**
      * api ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * switch, on: `enabled`, off: `disabled`.
      */
-    switch?: pulumi.Input<string>;
+    switch?: pulumi.Input<string | undefined>;
 }
 
 /**

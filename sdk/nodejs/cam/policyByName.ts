@@ -78,6 +78,9 @@ export class PolicyByName extends pulumi.CustomResource {
      * Description of the CAM policy.
      */
     declare public readonly description: pulumi.Output<string | undefined>;
+    /**
+     * Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     */
     declare public readonly document: pulumi.Output<string>;
     /**
      * Name of CAM policy.
@@ -135,24 +138,27 @@ export interface PolicyByNameState {
     /**
      * Create time of the CAM policy.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the CAM policy.
      */
-    description?: pulumi.Input<string>;
-    document?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     */
+    document?: pulumi.Input<string | undefined>;
     /**
      * Name of CAM policy.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * The last update time of the CAM policy.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -162,10 +168,13 @@ export interface PolicyByNameArgs {
     /**
      * Description of the CAM policy.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     */
     document: pulumi.Input<string>;
     /**
      * Name of CAM policy.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

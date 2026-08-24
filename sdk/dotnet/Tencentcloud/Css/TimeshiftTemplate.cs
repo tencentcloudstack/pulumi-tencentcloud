@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css timeshift_template can be imported using the id, e.g.
+    /// css TimeshiftTemplate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId

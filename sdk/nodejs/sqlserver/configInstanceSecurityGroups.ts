@@ -4,32 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a sqlserver configInstanceSecurityGroups
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const configInstanceSecurityGroups = new tencentcloud.sqlserver.ConfigInstanceSecurityGroups("config_instance_security_groups", {
- *     instanceId: "mssql-qelbzgwf",
- *     securityGroupIdSets: [
- *         "sg-mayqdlt1",
- *         "sg-5aubsf8n",
- *     ],
- * });
- * ```
- *
- * ## Import
- *
- * sqlserver config_instance_security_groups can be imported using the id, e.g.
- *
- * ```sh
- * $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
- * ```
- */
 export class ConfigInstanceSecurityGroups extends pulumi.CustomResource {
     /**
      * Get an existing ConfigInstanceSecurityGroups resource's state with the given name, ID, and optional extra
@@ -105,11 +79,11 @@ export interface ConfigInstanceSecurityGroupsState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * A list of security group IDs to modify, an array of one or more security group IDs.
      */
-    securityGroupIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**

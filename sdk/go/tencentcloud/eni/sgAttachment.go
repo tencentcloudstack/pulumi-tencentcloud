@@ -40,17 +40,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -81,8 +81,8 @@ import (
 //			}
 //			example, err := eni.NewInstance(ctx, "example", &eni.InstanceArgs{
 //				Name:        pulumi.String("tf-example-eni"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Description: pulumi.String("eni desc."),
 //				Ipv4Count:   pulumi.Int(1),
 //			})
@@ -90,10 +90,10 @@ import (
 //				return err
 //			}
 //			_, err = eni.NewSgAttachment(ctx, "eni_sg_attachment", &eni.SgAttachmentArgs{
-//				NetworkInterfaceIds: example.ID(),
+//				NetworkInterfaceIds: example.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroupIds: pulumi.StringArray{
-//					example1.ID(),
-//					example2.ID(),
+//					example1.ID().ToIDOutput().ToStringOutput(),
+//					example2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -107,7 +107,7 @@ import (
 //
 // ## Import
 //
-// vpc eni_sg_attachment can be imported using the id, e.g.
+// vpc eniSgAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id

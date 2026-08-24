@@ -23,7 +23,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// </summary>
         public readonly string Domain;
         /// <summary>
-        /// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+        /// Whether to maintain a persistent connection (1: Yes, 0: No).
+        /// </summary>
+        public readonly int Keepalive;
+        /// <summary>
+        /// (**Deprecated**) Deprecated from version v1.82.94. -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
         /// </summary>
         public readonly int Status;
 
@@ -33,10 +37,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
 
             string domain,
 
+            int keepalive,
+
             int status)
         {
             CertId = certId;
             Domain = domain;
+            Keepalive = keepalive;
             Status = status;
         }
     }

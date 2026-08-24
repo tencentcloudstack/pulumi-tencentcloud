@@ -7,22 +7,29 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query postgresql instances
+ * Use this data source to query PostgreSQL instances
  *
  * ## Example Usage
+ *
+ * ### Query all postgresql instances
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Postgresql.getInstances({
- *     name: "test",
- * });
- * const project = tencentcloud.Postgresql.getInstances({
- *     projectId: 0,
- * });
- * const id = tencentcloud.Postgresql.getInstances({
- *     id: "postgres-h9t4fde1",
+ * const example = tencentcloud.postgresql.getInstances({});
+ * ```
+ *
+ * ### Query postgresql instances by filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.postgresql.getInstances({
+ *     id: "postgres-gngyhl9d",
+ *     name: "tf-example",
+ *     projectId: "1235143",
  * });
  * ```
  */
@@ -52,7 +59,7 @@ export interface GetInstancesArgs {
     /**
      * Project ID of the postgresql instance to be query.
      */
-    projectId?: number;
+    projectId?: string;
     /**
      * Used to save results.
      */
@@ -64,11 +71,17 @@ export interface GetInstancesArgs {
  */
 export interface GetInstancesResult {
     /**
+     * Instance details set.
+     */
+    readonly dbInstanceSets: outputs.Postgresql.GetInstancesDbInstanceSet[];
+    /**
      * ID of the postgresql instance.
      */
     readonly id?: string;
     /**
-     * A list of postgresql instances. Each element contains the following attributes.
+     * (**Deprecated**) It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead. A list of postgresql instances. Each element contains the following attributes.
+     *
+     * @deprecated It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead.
      */
     readonly instanceLists: outputs.Postgresql.GetInstancesInstanceList[];
     /**
@@ -78,26 +91,33 @@ export interface GetInstancesResult {
     /**
      * Project id, default value is 0.
      */
-    readonly projectId?: number;
+    readonly projectId?: string;
     readonly resultOutputFile?: string;
 }
 /**
- * Use this data source to query postgresql instances
+ * Use this data source to query PostgreSQL instances
  *
  * ## Example Usage
+ *
+ * ### Query all postgresql instances
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Postgresql.getInstances({
- *     name: "test",
- * });
- * const project = tencentcloud.Postgresql.getInstances({
- *     projectId: 0,
- * });
- * const id = tencentcloud.Postgresql.getInstances({
- *     id: "postgres-h9t4fde1",
+ * const example = tencentcloud.postgresql.getInstances({});
+ * ```
+ *
+ * ### Query postgresql instances by filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.postgresql.getInstances({
+ *     id: "postgres-gngyhl9d",
+ *     name: "tf-example",
+ *     projectId: "1235143",
  * });
  * ```
  */
@@ -119,17 +139,17 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the postgresql instance to be query.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the postgresql instance to be query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the postgresql instance to be query.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

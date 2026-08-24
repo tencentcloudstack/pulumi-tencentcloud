@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getDdosPolicies({
+ * const idTest = tencentcloud.dayu.getDdosPolicies({
  *     resourceType: testPolicy.resourceType,
  *     policyId: testPolicy.policyId,
  * });
@@ -76,7 +76,7 @@ export interface GetDdosPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getDdosPolicies({
+ * const idTest = tencentcloud.dayu.getDdosPolicies({
  *     resourceType: testPolicy.resourceType,
  *     policyId: testPolicy.policyId,
  * });
@@ -98,7 +98,7 @@ export interface GetDdosPoliciesOutputArgs {
     /**
      * ID of the DDoS policy to be query.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
@@ -106,5 +106,5 @@ export interface GetDdosPoliciesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

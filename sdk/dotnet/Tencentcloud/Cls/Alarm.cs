@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
-    /// ### Use single condition
+    /// ### Use single condition with AlarmNoticeIds
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -72,6 +72,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         {
     ///             Time = 1,
     ///             Type = "Period",
+    ///         },
+    ///         Classifications = 
+    ///         {
+    ///             { "env", "production" },
+    ///             { "service", "api-gateway" },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### are mutually exclusive. You can only use one of them.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleMonitorNotice = new Tencentcloud.Cls.Alarm("example_monitor_notice", new()
+    ///     {
+    ///         Name = "tf-example-monitor-notice",
+    ///         MonitorNotice = new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeArgs
+    ///         {
+    ///             Notices = new[]
+    ///             {
+    ///                 new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeNoticeArgs
+    ///                 {
+    ///                     NoticeId = "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+    ///                     ContentTmplId = "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678",
+    ///                     AlarmLevels = new[]
+    ///                     {
+    ///                         1,
+    ///                         2,
+    ///                     },
+    ///                 },
+    ///                 new Tencentcloud.Cls.Inputs.AlarmMonitorNoticeNoticeArgs
+    ///                 {
+    ///                     NoticeId = "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202",
+    ///                     ContentTmplId = "tmpl-6g8d9b0c-2345-6789-01bc-def123456789",
+    ///                     AlarmLevels = new[]
+    ///                     {
+    ///                         3,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         AlarmPeriod = 15,
+    ///         Condition = "$1.errorCounts &gt; 100",
+    ///         AlarmLevel = 1,
+    ///         MessageTemplate = "{{.Label}}",
+    ///         Status = true,
+    ///         TriggerCount = 1,
+    ///         AlarmTargets = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
+    ///             {
+    ///                 LogsetId = "e74efb8e-f647-48b2-a725-43f11b122081",
+    ///                 TopicId = "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+    ///                 Query = "status:&gt;500 | select count(*) as errorCounts",
+    ///                 StartTimeOffset = -15,
+    ///                 EndTimeOffset = 0,
+    ///                 Number = 1,
+    ///                 SyntaxRule = 1,
+    ///             },
+    ///         },
+    ///         Analyses = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
+    ///             {
+    ///                 Content = "__FILENAME__",
+    ///                 Name = "terraform",
+    ///                 Type = "field",
+    ///                 ConfigInfos = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
+    ///                     {
+    ///                         Key = "QueryIndex",
+    ///                         Value = "1",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
+    ///         {
+    ///             Time = 1,
+    ///             Type = "Period",
+    ///         },
+    ///         Classifications = 
+    ///         {
+    ///             { "env", "production" },
+    ///             { "service", "data-pipeline" },
     ///         },
     ///         Tags = 
     ///         {
@@ -151,6 +249,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///             Time = 1,
     ///             Type = "Period",
     ///         },
+    ///         Classifications = 
+    ///         {
+    ///             { "env", "staging" },
+    ///             { "service", "data-pipeline" },
+    ///         },
     ///         Tags = 
     ///         {
     ///             { "createdBy", "terraform" },
@@ -178,7 +281,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<int> AlarmLevel { get; private set; } = null!;
 
         /// <summary>
-        /// list of alarm notice id.
+        /// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
         /// </summary>
         [Output("alarmNoticeIds")]
         public Output<ImmutableArray<string>> AlarmNoticeIds { get; private set; } = null!;
@@ -208,6 +311,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<Outputs.AlarmCallBack> CallBack { get; private set; } = null!;
 
         /// <summary>
+        /// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+        /// </summary>
+        [Output("classifications")]
+        public Output<ImmutableDictionary<string, string>?> Classifications { get; private set; } = null!;
+
+        /// <summary>
         /// Trigger condition.
         /// </summary>
         [Output("condition")]
@@ -218,6 +327,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Output("messageTemplate")]
         public Output<string?> MessageTemplate { get; private set; } = null!;
+
+        /// <summary>
+        /// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+        /// </summary>
+        [Output("monitorNotice")]
+        public Output<Outputs.AlarmMonitorNotice?> MonitorNotice { get; private set; } = null!;
 
         /// <summary>
         /// monitor task execution time.
@@ -308,11 +423,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("alarmLevel")]
         public Input<int>? AlarmLevel { get; set; }
 
-        [Input("alarmNoticeIds", required: true)]
+        [Input("alarmNoticeIds")]
         private InputList<string>? _alarmNoticeIds;
 
         /// <summary>
-        /// list of alarm notice id.
+        /// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
         /// </summary>
         public InputList<string> AlarmNoticeIds
         {
@@ -356,6 +471,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("callBack")]
         public Input<Inputs.AlarmCallBackArgs>? CallBack { get; set; }
 
+        [Input("classifications")]
+        private InputMap<string>? _classifications;
+
+        /// <summary>
+        /// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+        /// </summary>
+        public InputMap<string> Classifications
+        {
+            get => _classifications ?? (_classifications = new InputMap<string>());
+            set => _classifications = value;
+        }
+
         /// <summary>
         /// Trigger condition.
         /// </summary>
@@ -367,6 +494,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Input("messageTemplate")]
         public Input<string>? MessageTemplate { get; set; }
+
+        /// <summary>
+        /// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+        /// </summary>
+        [Input("monitorNotice")]
+        public Input<Inputs.AlarmMonitorNoticeArgs>? MonitorNotice { get; set; }
 
         /// <summary>
         /// monitor task execution time.
@@ -434,7 +567,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputList<string>? _alarmNoticeIds;
 
         /// <summary>
-        /// list of alarm notice id.
+        /// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
         /// </summary>
         public InputList<string> AlarmNoticeIds
         {
@@ -478,6 +611,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("callBack")]
         public Input<Inputs.AlarmCallBackGetArgs>? CallBack { get; set; }
 
+        [Input("classifications")]
+        private InputMap<string>? _classifications;
+
+        /// <summary>
+        /// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+        /// </summary>
+        public InputMap<string> Classifications
+        {
+            get => _classifications ?? (_classifications = new InputMap<string>());
+            set => _classifications = value;
+        }
+
         /// <summary>
         /// Trigger condition.
         /// </summary>
@@ -489,6 +634,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Input("messageTemplate")]
         public Input<string>? MessageTemplate { get; set; }
+
+        /// <summary>
+        /// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+        /// </summary>
+        [Input("monitorNotice")]
+        public Input<Inputs.AlarmMonitorNoticeGetArgs>? MonitorNotice { get; set; }
 
         /// <summary>
         /// monitor task execution time.

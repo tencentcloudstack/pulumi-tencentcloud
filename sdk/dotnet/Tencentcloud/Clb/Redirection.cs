@@ -25,13 +25,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.Redirection("foo", new()
+    ///     var example = new Tencentcloud.Clb.Redirection("example", new()
     ///     {
-    ///         ClbId = "lb-p7olt9e5",
-    ///         SourceListenerId = "lbl-jc1dx6ju",
-    ///         TargetListenerId = "lbl-asj1hzuo",
-    ///         SourceRuleId = "loc-ft8fmngv",
-    ///         TargetRuleId = "loc-4xxr2cy7",
+    ///         ClbId = "lb-ab09jtd2",
+    ///         SourceListenerId = "lbl-qgtfowas",
+    ///         TargetListenerId = "lbl-lpwdkukk",
+    ///         SourceRuleId = "loc-liz99mtg",
+    ///         TargetRuleId = "loc-4f53xn52",
+    ///         RewriteCode = 307,
+    ///         TakeUrl = true,
+    ///         SourceDomian = "www.demo.com",
     ///     });
     /// 
     /// });
@@ -47,11 +50,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.Redirection("foo", new()
+    ///     var example = new Tencentcloud.Clb.Redirection("example", new()
     ///     {
-    ///         ClbId = "lb-p7olt9e5",
-    ///         TargetListenerId = "lbl-asj1hzuo",
-    ///         TargetRuleId = "loc-4xxr2cy7",
+    ///         ClbId = "lb-ab09jtd2",
+    ///         TargetListenerId = "lbl-l7550kum",
+    ///         TargetRuleId = "loc-op7uz010",
     ///         IsAutoRewrite = true,
     ///     });
     /// 
@@ -60,10 +63,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Import
     /// 
-    /// CLB redirection can be imported using the id, e.g.
+    /// CLB redirection can be imported using the sourceLocId#targetLocId#sourceListenerId#targetListenerId#clbId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+    /// $ pulumi import tencentcloud:Clb/redirection:Redirection example loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/redirection:Redirection")]
@@ -88,6 +91,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<bool?> IsAutoRewrite { get; private set; } = null!;
 
         /// <summary>
+        /// Redirection status codes, with possible values of `301`, `302`, `307`.
+        /// </summary>
+        [Output("rewriteCode")]
+        public Output<int> RewriteCode { get; private set; } = null!;
+
+        /// <summary>
+        /// The domain name for source forwarding must be the domain name corresponding to `SourceRuleId`, which is required when configuring `RewriteCode`. Only support `IsAutoRewrite` is `False`.
+        /// </summary>
+        [Output("sourceDomian")]
+        public Output<string> SourceDomian { get; private set; } = null!;
+
+        /// <summary>
         /// ID of source listener.
         /// </summary>
         [Output("sourceListenerId")]
@@ -98,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("sourceRuleId")]
         public Output<string> SourceRuleId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether the redirect carries a matching URL is required when configuring `RewriteCode`.
+        /// </summary>
+        [Output("takeUrl")]
+        public Output<bool> TakeUrl { get; private set; } = null!;
 
         /// <summary>
         /// ID of source listener.
@@ -177,6 +198,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? IsAutoRewrite { get; set; }
 
         /// <summary>
+        /// Redirection status codes, with possible values of `301`, `302`, `307`.
+        /// </summary>
+        [Input("rewriteCode")]
+        public Input<int>? RewriteCode { get; set; }
+
+        /// <summary>
+        /// The domain name for source forwarding must be the domain name corresponding to `SourceRuleId`, which is required when configuring `RewriteCode`. Only support `IsAutoRewrite` is `False`.
+        /// </summary>
+        [Input("sourceDomian")]
+        public Input<string>? SourceDomian { get; set; }
+
+        /// <summary>
         /// ID of source listener.
         /// </summary>
         [Input("sourceListenerId")]
@@ -187,6 +220,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("sourceRuleId")]
         public Input<string>? SourceRuleId { get; set; }
+
+        /// <summary>
+        /// Whether the redirect carries a matching URL is required when configuring `RewriteCode`.
+        /// </summary>
+        [Input("takeUrl")]
+        public Input<bool>? TakeUrl { get; set; }
 
         /// <summary>
         /// ID of source listener.
@@ -227,6 +266,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? IsAutoRewrite { get; set; }
 
         /// <summary>
+        /// Redirection status codes, with possible values of `301`, `302`, `307`.
+        /// </summary>
+        [Input("rewriteCode")]
+        public Input<int>? RewriteCode { get; set; }
+
+        /// <summary>
+        /// The domain name for source forwarding must be the domain name corresponding to `SourceRuleId`, which is required when configuring `RewriteCode`. Only support `IsAutoRewrite` is `False`.
+        /// </summary>
+        [Input("sourceDomian")]
+        public Input<string>? SourceDomian { get; set; }
+
+        /// <summary>
         /// ID of source listener.
         /// </summary>
         [Input("sourceListenerId")]
@@ -237,6 +288,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("sourceRuleId")]
         public Input<string>? SourceRuleId { get; set; }
+
+        /// <summary>
+        /// Whether the redirect carries a matching URL is required when configuring `RewriteCode`.
+        /// </summary>
+        [Input("takeUrl")]
+        public Input<bool>? TakeUrl { get; set; }
 
         /// <summary>
         /// ID of source listener.

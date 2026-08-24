@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -157,31 +157,31 @@ export interface ConnectionConfigState {
     /**
      * Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
      */
-    addBandwidth?: pulumi.Input<number>;
+    addBandwidth?: pulumi.Input<number | undefined>;
     /**
      * standard bandwidth. Refers to the bandwidth allocated by the system to each node when an instance is purchased.
      */
-    baseBandwidth?: pulumi.Input<number>;
+    baseBandwidth?: pulumi.Input<number | undefined>;
     /**
      * The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 * (the number of read replicas +3).
      */
-    clientLimit?: pulumi.Input<number>;
+    clientLimit?: pulumi.Input<number | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Additional bandwidth is capped.
      */
-    maxAddBandwidth?: pulumi.Input<number>;
+    maxAddBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Additional bandwidth sets the lower limit.
      */
-    minAddBandwidth?: pulumi.Input<number>;
+    minAddBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards * (number of primary nodes + number of read-only replica nodes), the number of shards of the standard architecture = 1, in Mb/s.
      */
-    totalBandwidth?: pulumi.Input<number>;
+    totalBandwidth?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -191,11 +191,11 @@ export interface ConnectionConfigArgs {
     /**
      * Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
      */
-    addBandwidth?: pulumi.Input<number>;
+    addBandwidth?: pulumi.Input<number | undefined>;
     /**
      * The total number of connections per shard.If read-only replicas are not enabled, the lower limit is 10,000 and the upper limit is 40,000.When you enable read-only replicas, the minimum limit is 10,000 and the upper limit is 10,000 * (the number of read replicas +3).
      */
-    clientLimit?: pulumi.Input<number>;
+    clientLimit?: pulumi.Input<number | undefined>;
     /**
      * The ID of instance.
      */

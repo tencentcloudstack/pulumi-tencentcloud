@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * lighthouse disk_attachment can be imported using the id, e.g.
+ * lighthouse diskAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
@@ -102,11 +102,11 @@ export interface DiskAttachmentState {
     /**
      * Disk id.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -78,8 +78,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * pts alert_channel can be imported using the project_id#notice_id, e.g.
- *
+ * pts alertChannel can be imported using the project_id#notice_id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
  * ```
@@ -201,39 +200,39 @@ export interface AlertChannelState {
     /**
      * AMP Consumer ID.
      */
-    ampConsumerId?: pulumi.Input<string>;
+    ampConsumerId?: pulumi.Input<string | undefined>;
     /**
      * App ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Creation time Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Notice ID.
      */
-    noticeId?: pulumi.Input<string>;
+    noticeId?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Status Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Sub-user ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    subAccountUin?: pulumi.Input<string>;
+    subAccountUin?: pulumi.Input<string | undefined>;
     /**
      * User ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
     /**
      * Update time Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -243,7 +242,7 @@ export interface AlertChannelArgs {
     /**
      * AMP Consumer ID.
      */
-    ampConsumerId?: pulumi.Input<string>;
+    ampConsumerId?: pulumi.Input<string | undefined>;
     /**
      * Notice ID.
      */

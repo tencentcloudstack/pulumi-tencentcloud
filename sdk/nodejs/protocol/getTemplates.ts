@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Protocol.getTemplates({
+ * const name = tencentcloud.protocol.getTemplates({
  *     name: "test",
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetTemplatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Protocol.getTemplates({
+ * const name = tencentcloud.protocol.getTemplates({
  *     name: "test",
  * });
  * ```
@@ -97,13 +97,13 @@ export interface GetTemplatesOutputArgs {
     /**
      * ID of the protocol template to query.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the protocol template to query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

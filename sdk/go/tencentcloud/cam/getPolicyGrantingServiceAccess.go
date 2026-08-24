@@ -78,12 +78,8 @@ type GetPolicyGrantingServiceAccessResult struct {
 }
 
 func GetPolicyGrantingServiceAccessOutput(ctx *pulumi.Context, args GetPolicyGrantingServiceAccessOutputArgs, opts ...pulumi.InvokeOption) GetPolicyGrantingServiceAccessResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPolicyGrantingServiceAccessResultOutput, error) {
-			args := v.(GetPolicyGrantingServiceAccessArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args, GetPolicyGrantingServiceAccessResultOutput{}, options).(GetPolicyGrantingServiceAccessResultOutput), nil
-		}).(GetPolicyGrantingServiceAccessResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getPolicyGrantingServiceAccess:getPolicyGrantingServiceAccess", args, GetPolicyGrantingServiceAccessResultOutput{}, options).(GetPolicyGrantingServiceAccessResultOutput)
 }
 
 // A collection of arguments for invoking getPolicyGrantingServiceAccess.

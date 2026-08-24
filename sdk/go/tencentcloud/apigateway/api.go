@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
-//				ServiceId:           example.ID(),
+//				ServiceId:           example.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf-example"),
 //				ApiDesc:             pulumi.String("desc."),
 //				AuthType:            pulumi.String("NONE"),

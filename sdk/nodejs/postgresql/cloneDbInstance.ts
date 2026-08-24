@@ -18,18 +18,22 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.postgresql.CloneDbInstance("example", {
- *     dbInstanceId: "postgres-evsqpyap",
- *     name: "tf-example-clone",
+ *     dbInstanceId: "postgres-ckwcgdf1",
+ *     name: "tf-example",
  *     specCode: "pg.it.medium4",
- *     storage: 200,
+ *     storage: 100,
  *     period: 1,
  *     autoRenewFlag: 0,
- *     vpcId: "vpc-a6zec4mf",
- *     subnetId: "subnet-b8hintyy",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     instanceChargeType: "POSTPAID_BY_HOUR",
- *     securityGroupIds: ["sg-8stavs03"],
+ *     securityGroupIds: [
+ *         "sg-rs32zv1r",
+ *         "sg-37tigqat",
+ *     ],
  *     projectId: 0,
- *     recoveryTargetTime: "2024-10-12 18:17:00",
+ *     recoveryTargetTime: "2026-07-10 01:00:06",
+ *     deletionProtection: true,
  *     dbNodeSets: [
  *         {
  *             role: "Primary",
@@ -37,13 +41,12 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             role: "Standby",
- *             zone: "ap-guangzhou-6",
+ *             zone: "ap-guangzhou-7",
  *         },
  *     ],
- *     tagLists: [{
- *         tagKey: "createBy",
- *         tagValue: "Terraform",
- *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
  * });
  * ```
  *
@@ -53,7 +56,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const baseBackups = tencentcloud.Postgresql.getBaseBackups({
+ * const baseBackups = tencentcloud.postgresql.getBaseBackups({
  *     filters: [{
  *         name: "db-instance-id",
  *         values: ["postgres-evsqpyap"],
@@ -74,6 +77,7 @@ import * as utilities from "../utilities";
  *     securityGroupIds: ["sg-8stavs03"],
  *     projectId: 0,
  *     backupSetId: baseBackups.then(baseBackups => baseBackups.baseBackupSets?.[0]?.id),
+ *     deletionProtection: true,
  *     dbNodeSets: [
  *         {
  *             role: "Primary",
@@ -84,10 +88,9 @@ import * as utilities from "../utilities";
  *             zone: "ap-guangzhou-6",
  *         },
  *     ],
- *     tagLists: [{
- *         tagKey: "createBy",
- *         tagValue: "Terraform",
- *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
  * });
  * ```
  *
@@ -110,6 +113,7 @@ import * as utilities from "../utilities";
  *     securityGroupIds: ["sg-8stavs03"],
  *     projectId: 0,
  *     recoveryTargetTime: "2024-10-12 18:17:00",
+ *     deletionProtection: true,
  *     dbNodeSets: [
  *         {
  *             role: "Primary",
@@ -122,10 +126,9 @@ import * as utilities from "../utilities";
  *             dedicatedClusterId: "cluster-262n63e8",
  *         },
  *     ],
- *     tagLists: [{
- *         tagKey: "createBy",
- *         tagValue: "Terraform",
- *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
  * });
  * ```
  */
@@ -166,6 +169,10 @@ export class CloneDbInstance extends pulumi.CustomResource {
      */
     declare public readonly autoRenewFlag: pulumi.Output<number>;
     /**
+     * Availability zone.
+     */
+    declare public /*out*/ readonly availabilityZone: pulumi.Output<string>;
+    /**
      * Basic backup set ID.
      */
     declare public readonly backupSetId: pulumi.Output<string | undefined>;
@@ -178,6 +185,10 @@ export class CloneDbInstance extends pulumi.CustomResource {
      * The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
      */
     declare public readonly dbNodeSets: pulumi.Output<outputs.Postgresql.CloneDbInstanceDbNodeSet[] | undefined>;
+    /**
+     * Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+     */
+    declare public readonly deletionProtection: pulumi.Output<boolean | undefined>;
     /**
      * Instance billing type, which currently supports:
      *
@@ -192,15 +203,35 @@ export class CloneDbInstance extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * ID of the cloned instance.
+     */
+    declare public /*out*/ readonly newDbInstanceId: pulumi.Output<string>;
+    /**
      * Purchase duration, in months.
      * - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
      * - Pay-as-you-go: Only supports `1`.
      */
     declare public readonly period: pulumi.Output<number>;
     /**
+     * IP for private access.
+     */
+    declare public /*out*/ readonly privateAccessIp: pulumi.Output<string>;
+    /**
+     * Port for private access.
+     */
+    declare public /*out*/ readonly privateAccessPort: pulumi.Output<number>;
+    /**
      * Project ID.
      */
     declare public readonly projectId: pulumi.Output<number | undefined>;
+    /**
+     * Host for public access.
+     */
+    declare public /*out*/ readonly publicAccessHost: pulumi.Output<string>;
+    /**
+     * Port for public access.
+     */
+    declare public /*out*/ readonly publicAccessPort: pulumi.Output<number>;
     /**
      * Restoration point in time.
      */
@@ -230,9 +261,15 @@ export class CloneDbInstance extends pulumi.CustomResource {
      */
     declare public readonly syncMode: pulumi.Output<string | undefined>;
     /**
-     * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     * It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     *
+     * @deprecated It has been deprecated from version 1.83.10. Use `tags` instead.
      */
     declare public readonly tagLists: pulumi.Output<outputs.Postgresql.CloneDbInstanceTagList[] | undefined>;
+    /**
+     * The available tags within this postgresql.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
      */
@@ -253,13 +290,20 @@ export class CloneDbInstance extends pulumi.CustomResource {
             const state = argsOrState as CloneDbInstanceState | undefined;
             resourceInputs["activityId"] = state?.activityId;
             resourceInputs["autoRenewFlag"] = state?.autoRenewFlag;
+            resourceInputs["availabilityZone"] = state?.availabilityZone;
             resourceInputs["backupSetId"] = state?.backupSetId;
             resourceInputs["dbInstanceId"] = state?.dbInstanceId;
             resourceInputs["dbNodeSets"] = state?.dbNodeSets;
+            resourceInputs["deletionProtection"] = state?.deletionProtection;
             resourceInputs["instanceChargeType"] = state?.instanceChargeType;
             resourceInputs["name"] = state?.name;
+            resourceInputs["newDbInstanceId"] = state?.newDbInstanceId;
             resourceInputs["period"] = state?.period;
+            resourceInputs["privateAccessIp"] = state?.privateAccessIp;
+            resourceInputs["privateAccessPort"] = state?.privateAccessPort;
             resourceInputs["projectId"] = state?.projectId;
+            resourceInputs["publicAccessHost"] = state?.publicAccessHost;
+            resourceInputs["publicAccessPort"] = state?.publicAccessPort;
             resourceInputs["recoveryTargetTime"] = state?.recoveryTargetTime;
             resourceInputs["securityGroupIds"] = state?.securityGroupIds;
             resourceInputs["specCode"] = state?.specCode;
@@ -267,6 +311,7 @@ export class CloneDbInstance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["syncMode"] = state?.syncMode;
             resourceInputs["tagLists"] = state?.tagLists;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["vpcId"] = state?.vpcId;
         } else {
             const args = argsOrState as CloneDbInstanceArgs | undefined;
@@ -296,6 +341,7 @@ export class CloneDbInstance extends pulumi.CustomResource {
             resourceInputs["backupSetId"] = args?.backupSetId;
             resourceInputs["dbInstanceId"] = args?.dbInstanceId;
             resourceInputs["dbNodeSets"] = args?.dbNodeSets;
+            resourceInputs["deletionProtection"] = args?.deletionProtection;
             resourceInputs["instanceChargeType"] = args?.instanceChargeType;
             resourceInputs["name"] = args?.name;
             resourceInputs["period"] = args?.period;
@@ -307,7 +353,14 @@ export class CloneDbInstance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["syncMode"] = args?.syncMode;
             resourceInputs["tagLists"] = args?.tagLists;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["vpcId"] = args?.vpcId;
+            resourceInputs["availabilityZone"] = undefined /*out*/;
+            resourceInputs["newDbInstanceId"] = undefined /*out*/;
+            resourceInputs["privateAccessIp"] = undefined /*out*/;
+            resourceInputs["privateAccessPort"] = undefined /*out*/;
+            resourceInputs["publicAccessHost"] = undefined /*out*/;
+            resourceInputs["publicAccessPort"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CloneDbInstance.__pulumiType, name, resourceInputs, opts);
@@ -321,24 +374,32 @@ export interface CloneDbInstanceState {
     /**
      * Campaign ID.
      */
-    activityId?: pulumi.Input<number>;
+    activityId?: pulumi.Input<number | undefined>;
     /**
      * Renewal Flag:
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
+    /**
+     * Availability zone.
+     */
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Basic backup set ID.
      */
-    backupSetId?: pulumi.Input<string>;
+    backupSetId?: pulumi.Input<string | undefined>;
     /**
      * ID of the original instance to be cloned.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
      * The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
      */
-    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceDbNodeSet>[]>;
+    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceDbNodeSet>[] | undefined>;
+    /**
+     * Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Instance billing type, which currently supports:
      *
@@ -347,41 +408,61 @@ export interface CloneDbInstanceState {
      *
      * Default value: PREPAID.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * ID of the cloned instance.
+     */
+    newDbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Purchase duration, in months.
      * - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
      * - Pay-as-you-go: Only supports `1`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
+    /**
+     * IP for private access.
+     */
+    privateAccessIp?: pulumi.Input<string | undefined>;
+    /**
+     * Port for private access.
+     */
+    privateAccessPort?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
+    /**
+     * Host for public access.
+     */
+    publicAccessHost?: pulumi.Input<string | undefined>;
+    /**
+     * Port for public access.
+     */
+    publicAccessPort?: pulumi.Input<number | undefined>;
     /**
      * Restoration point in time.
      */
-    recoveryTargetTime?: pulumi.Input<string>;
+    recoveryTargetTime?: pulumi.Input<string | undefined>;
     /**
      * Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
      */
-    specCode?: pulumi.Input<string>;
+    specCode?: pulumi.Input<string | undefined>;
     /**
      * Instance storage capacity in GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Primary-standby sync mode, which supports:
      * Semi-sync: Semi-sync
@@ -389,15 +470,21 @@ export interface CloneDbInstanceState {
      * Default value for the primary instance: Semi-sync
      * Default value for the read-only instance: Async.
      */
-    syncMode?: pulumi.Input<string>;
+    syncMode?: pulumi.Input<string | undefined>;
     /**
-     * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     * It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     *
+     * @deprecated It has been deprecated from version 1.83.10. Use `tags` instead.
      */
-    tagLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceTagList>[]>;
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceTagList>[] | undefined>;
+    /**
+     * The available tags within this postgresql.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -407,7 +494,7 @@ export interface CloneDbInstanceArgs {
     /**
      * Campaign ID.
      */
-    activityId?: pulumi.Input<number>;
+    activityId?: pulumi.Input<number | undefined>;
     /**
      * Renewal Flag:
      */
@@ -415,7 +502,7 @@ export interface CloneDbInstanceArgs {
     /**
      * Basic backup set ID.
      */
-    backupSetId?: pulumi.Input<string>;
+    backupSetId?: pulumi.Input<string | undefined>;
     /**
      * ID of the original instance to be cloned.
      */
@@ -424,7 +511,11 @@ export interface CloneDbInstanceArgs {
      * Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
      * The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
      */
-    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceDbNodeSet>[]>;
+    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceDbNodeSet>[] | undefined>;
+    /**
+     * Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Instance billing type, which currently supports:
      *
@@ -433,11 +524,11 @@ export interface CloneDbInstanceArgs {
      *
      * Default value: PREPAID.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase duration, in months.
      * - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
@@ -447,15 +538,15 @@ export interface CloneDbInstanceArgs {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Restoration point in time.
      */
-    recoveryTargetTime?: pulumi.Input<string>;
+    recoveryTargetTime?: pulumi.Input<string | undefined>;
     /**
      * Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
      */
@@ -475,11 +566,17 @@ export interface CloneDbInstanceArgs {
      * Default value for the primary instance: Semi-sync
      * Default value for the read-only instance: Async.
      */
-    syncMode?: pulumi.Input<string>;
+    syncMode?: pulumi.Input<string | undefined>;
     /**
-     * The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     * It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+     *
+     * @deprecated It has been deprecated from version 1.83.10. Use `tags` instead.
      */
-    tagLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceTagList>[]>;
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.CloneDbInstanceTagList>[] | undefined>;
+    /**
+     * The available tags within this postgresql.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
      */

@@ -64,6 +64,6 @@ export interface GetLogListOutputArgs {
     orderBy: pulumi.Input<string>;
     projectId: pulumi.Input<number>;
     query: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     startTime: pulumi.Input<string>;
 }

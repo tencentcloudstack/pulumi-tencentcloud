@@ -144,19 +144,19 @@ export interface PolicyVersionState {
     /**
      * Strategic text information.
      */
-    policyDocument?: pulumi.Input<string>;
+    policyDocument?: pulumi.Input<string | undefined>;
     /**
      * Strategy ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Strategic version detailsNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    policyVersions?: pulumi.Input<pulumi.Input<inputs.Cam.PolicyVersionPolicyVersion>[]>;
+    policyVersions?: pulumi.Input<pulumi.Input<inputs.Cam.PolicyVersionPolicyVersion>[] | undefined>;
     /**
      * Whether to set as a version of the current strategy.
      */
-    setAsDefault?: pulumi.Input<boolean>;
+    setAsDefault?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -174,7 +174,7 @@ export interface PolicyVersionArgs {
     /**
      * Strategic version detailsNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    policyVersions?: pulumi.Input<pulumi.Input<inputs.Cam.PolicyVersionPolicyVersion>[]>;
+    policyVersions?: pulumi.Input<pulumi.Input<inputs.Cam.PolicyVersionPolicyVersion>[] | undefined>;
     /**
      * Whether to set as a version of the current strategy.
      */

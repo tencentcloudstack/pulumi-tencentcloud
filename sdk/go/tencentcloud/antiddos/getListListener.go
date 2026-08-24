@@ -64,12 +64,8 @@ type GetListListenerResult struct {
 }
 
 func GetListListenerOutput(ctx *pulumi.Context, args GetListListenerOutputArgs, opts ...pulumi.InvokeOption) GetListListenerResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListListenerResultOutput, error) {
-			args := v.(GetListListenerArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getListListener:getListListener", args, GetListListenerResultOutput{}, options).(GetListListenerResultOutput), nil
-		}).(GetListListenerResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getListListener:getListListener", args, GetListListenerResultOutput{}, options).(GetListListenerResultOutput)
 }
 
 // A collection of arguments for invoking getListListener.

@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
         /// </summary>
         public readonly string CreateTime;
         /// <summary>
+        /// PostgreSQL kernel version number.
+        /// </summary>
+        public readonly string DbKernelVersion;
+        /// <summary>
+        /// PostgreSQL major version number.
+        /// </summary>
+        public readonly string DbMajorVersion;
+        /// <summary>
         /// Version of the postgresql database engine.
         /// </summary>
         public readonly string EngineVersion;
@@ -83,6 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
         /// </summary>
         public readonly int Storage;
         /// <summary>
+        /// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        public readonly string StorageType;
+        /// <summary>
         /// ID of subnet.
         /// </summary>
         public readonly string SubnetId;
@@ -106,6 +118,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
             string charset,
 
             string createTime,
+
+            string dbKernelVersion,
+
+            string dbMajorVersion,
 
             string engineVersion,
 
@@ -131,6 +147,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
 
             int storage,
 
+            string storageType,
+
             string subnetId,
 
             ImmutableDictionary<string, string> tags,
@@ -142,6 +160,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
             ChargeType = chargeType;
             Charset = charset;
             CreateTime = createTime;
+            DbKernelVersion = dbKernelVersion;
+            DbMajorVersion = dbMajorVersion;
             EngineVersion = engineVersion;
             Id = id;
             Memory = memory;
@@ -154,6 +174,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Outputs
             PublicAccessSwitch = publicAccessSwitch;
             RootUser = rootUser;
             Storage = storage;
+            StorageType = storageType;
             SubnetId = subnetId;
             Tags = tags;
             VpcId = vpcId;

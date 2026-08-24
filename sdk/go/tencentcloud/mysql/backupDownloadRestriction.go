@@ -55,7 +55,7 @@ import (
 //
 // ## Import
 //
-// mysql backup_download_restriction can be imported using the "BackupDownloadRestriction", as follows.
+// mysql backupDownloadRestriction can be imported using the "BackupDownloadRestriction", as follows.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction

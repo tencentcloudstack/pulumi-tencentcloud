@@ -71,12 +71,8 @@ type GetLayerVersionsResult struct {
 }
 
 func GetLayerVersionsOutput(ctx *pulumi.Context, args GetLayerVersionsOutputArgs, opts ...pulumi.InvokeOption) GetLayerVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLayerVersionsResultOutput, error) {
-			args := v.(GetLayerVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getLayerVersions:getLayerVersions", args, GetLayerVersionsResultOutput{}, options).(GetLayerVersionsResultOutput), nil
-		}).(GetLayerVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getLayerVersions:getLayerVersions", args, GetLayerVersionsResultOutput{}, options).(GetLayerVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getLayerVersions.

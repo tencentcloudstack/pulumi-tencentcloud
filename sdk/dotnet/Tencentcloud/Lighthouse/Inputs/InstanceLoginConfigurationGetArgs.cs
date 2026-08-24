@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
     public sealed class InstanceLoginConfigurationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// whether auto generate password. if false, need set password.
+        /// `YES` represents selecting to automatically generate a password, without specifying the Password field. `NO` represents selecting a custom password, in which case the Password field needs to be specified.
         /// </summary>
         [Input("autoGeneratePassword", required: true)]
         public Input<string> AutoGeneratePassword { get; set; } = null!;

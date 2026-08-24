@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         public Output<string> CreatedTime { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Output("forceStop")]
+        public Output<bool> ForceStop { get; private set; } = null!;
+
+        /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.
         /// </summary>
         [Output("keyName")]
@@ -137,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
     public sealed class PairArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
+
+        /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.
         /// </summary>
         [Input("keyName", required: true)]
@@ -179,6 +191,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         /// </summary>
         [Input("createdTime")]
         public Input<string>? CreatedTime { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
 
         /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.

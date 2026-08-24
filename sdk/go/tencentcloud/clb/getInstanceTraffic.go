@@ -67,12 +67,8 @@ type GetInstanceTrafficResult struct {
 }
 
 func GetInstanceTrafficOutput(ctx *pulumi.Context, args GetInstanceTrafficOutputArgs, opts ...pulumi.InvokeOption) GetInstanceTrafficResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceTrafficResultOutput, error) {
-			args := v.(GetInstanceTrafficArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args, GetInstanceTrafficResultOutput{}, options).(GetInstanceTrafficResultOutput), nil
-		}).(GetInstanceTrafficResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args, GetInstanceTrafficResultOutput{}, options).(GetInstanceTrafficResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceTraffic.

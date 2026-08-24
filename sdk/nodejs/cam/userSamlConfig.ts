@@ -122,19 +122,19 @@ export interface UserSamlConfigState {
     /**
      * auxiliary domain, like: `xxx.com`.
      */
-    auxiliaryDomain?: pulumi.Input<string>;
+    auxiliaryDomain?: pulumi.Input<string | undefined>;
     /**
      * The path used to save the saml Metadata file.
      */
-    metadataDocumentFile?: pulumi.Input<string>;
+    metadataDocumentFile?: pulumi.Input<string | undefined>;
     /**
      * SAML metadata document, xml format, support string content or file path.
      */
-    samlMetadataDocument?: pulumi.Input<string>;
+    samlMetadataDocument?: pulumi.Input<string | undefined>;
     /**
      * Status: `0`: not set, `11`: enabled, `2`: disabled.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -144,11 +144,11 @@ export interface UserSamlConfigArgs {
     /**
      * auxiliary domain, like: `xxx.com`.
      */
-    auxiliaryDomain?: pulumi.Input<string>;
+    auxiliaryDomain?: pulumi.Input<string | undefined>;
     /**
      * The path used to save the saml Metadata file.
      */
-    metadataDocumentFile?: pulumi.Input<string>;
+    metadataDocumentFile?: pulumi.Input<string | undefined>;
     /**
      * SAML metadata document, xml format, support string content or file path.
      */

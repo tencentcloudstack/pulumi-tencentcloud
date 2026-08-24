@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 {
     /// <summary>
-    /// Provides a resource to create a tke EncryptionProtection
+    /// Provides a resource to create a TKE encryption protection
     /// 
     /// ## Example Usage
     /// 
@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 

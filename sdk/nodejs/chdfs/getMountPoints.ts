@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountPoints = tencentcloud.Chdfs.getMountPoints({
+ * const mountPoints = tencentcloud.chdfs.getMountPoints({
  *     fileSystemId: "f14mpfy5lh4e",
  * });
  * ```
@@ -82,7 +82,7 @@ export interface GetMountPointsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountPoints = tencentcloud.Chdfs.getMountPoints({
+ * const mountPoints = tencentcloud.chdfs.getMountPoints({
  *     fileSystemId: "f14mpfy5lh4e",
  * });
  * ```
@@ -105,17 +105,17 @@ export interface GetMountPointsOutputArgs {
     /**
      * get mount points belongs to access group id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
      */
-    accessGroupId?: pulumi.Input<string>;
+    accessGroupId?: pulumi.Input<string | undefined>;
     /**
      * get mount points belongs to file system id, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
      */
-    fileSystemId?: pulumi.Input<string>;
+    fileSystemId?: pulumi.Input<string | undefined>;
     /**
      * get mount points belongs to owner uin, only can use one of the AccessGroupId,FileSystemId,OwnerUin parameters.
      */
-    ownerUin?: pulumi.Input<number>;
+    ownerUin?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

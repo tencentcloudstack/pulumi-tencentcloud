@@ -13,6 +13,2165 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type CompliancePackConfigRule struct {
+	// Compliance pack ID that this rule belongs to.
+	CompliancePackId *string `pulumi:"compliancePackId"`
+	// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult *string `pulumi:"complianceResult"`
+	// Config rule ID.
+	ConfigRuleId *string `pulumi:"configRuleId"`
+	// Rule description.
+	Description *string `pulumi:"description"`
+	// Rule identifier (managed rule name or custom rule cloud function ARN).
+	Identifier string `pulumi:"identifier"`
+	// Rule input parameters.
+	InputParameters []CompliancePackConfigRuleInputParameter `pulumi:"inputParameters"`
+	// Managed rule identifier (preset rule identity).
+	ManagedRuleIdentifier *string `pulumi:"managedRuleIdentifier"`
+	// Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel *int `pulumi:"riskLevel"`
+	// Rule name.
+	RuleName *string `pulumi:"ruleName"`
+	// Compliance pack status. Valid values: ACTIVE, UN_ACTIVE.
+	Status *string `pulumi:"status"`
+}
+
+// CompliancePackConfigRuleInput is an input type that accepts CompliancePackConfigRuleArgs and CompliancePackConfigRuleOutput values.
+// You can construct a concrete instance of `CompliancePackConfigRuleInput` via:
+//
+//	CompliancePackConfigRuleArgs{...}
+type CompliancePackConfigRuleInput interface {
+	pulumi.Input
+
+	ToCompliancePackConfigRuleOutput() CompliancePackConfigRuleOutput
+	ToCompliancePackConfigRuleOutputWithContext(context.Context) CompliancePackConfigRuleOutput
+}
+
+type CompliancePackConfigRuleArgs struct {
+	// Compliance pack ID that this rule belongs to.
+	CompliancePackId pulumi.StringPtrInput `pulumi:"compliancePackId"`
+	// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult pulumi.StringPtrInput `pulumi:"complianceResult"`
+	// Config rule ID.
+	ConfigRuleId pulumi.StringPtrInput `pulumi:"configRuleId"`
+	// Rule description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Rule identifier (managed rule name or custom rule cloud function ARN).
+	Identifier pulumi.StringInput `pulumi:"identifier"`
+	// Rule input parameters.
+	InputParameters CompliancePackConfigRuleInputParameterArrayInput `pulumi:"inputParameters"`
+	// Managed rule identifier (preset rule identity).
+	ManagedRuleIdentifier pulumi.StringPtrInput `pulumi:"managedRuleIdentifier"`
+	// Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel pulumi.IntPtrInput `pulumi:"riskLevel"`
+	// Rule name.
+	RuleName pulumi.StringPtrInput `pulumi:"ruleName"`
+	// Compliance pack status. Valid values: ACTIVE, UN_ACTIVE.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (CompliancePackConfigRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CompliancePackConfigRule)(nil)).Elem()
+}
+
+func (i CompliancePackConfigRuleArgs) ToCompliancePackConfigRuleOutput() CompliancePackConfigRuleOutput {
+	return i.ToCompliancePackConfigRuleOutputWithContext(context.Background())
+}
+
+func (i CompliancePackConfigRuleArgs) ToCompliancePackConfigRuleOutputWithContext(ctx context.Context) CompliancePackConfigRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CompliancePackConfigRuleOutput)
+}
+
+// CompliancePackConfigRuleArrayInput is an input type that accepts CompliancePackConfigRuleArray and CompliancePackConfigRuleArrayOutput values.
+// You can construct a concrete instance of `CompliancePackConfigRuleArrayInput` via:
+//
+//	CompliancePackConfigRuleArray{ CompliancePackConfigRuleArgs{...} }
+type CompliancePackConfigRuleArrayInput interface {
+	pulumi.Input
+
+	ToCompliancePackConfigRuleArrayOutput() CompliancePackConfigRuleArrayOutput
+	ToCompliancePackConfigRuleArrayOutputWithContext(context.Context) CompliancePackConfigRuleArrayOutput
+}
+
+type CompliancePackConfigRuleArray []CompliancePackConfigRuleInput
+
+func (CompliancePackConfigRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CompliancePackConfigRule)(nil)).Elem()
+}
+
+func (i CompliancePackConfigRuleArray) ToCompliancePackConfigRuleArrayOutput() CompliancePackConfigRuleArrayOutput {
+	return i.ToCompliancePackConfigRuleArrayOutputWithContext(context.Background())
+}
+
+func (i CompliancePackConfigRuleArray) ToCompliancePackConfigRuleArrayOutputWithContext(ctx context.Context) CompliancePackConfigRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CompliancePackConfigRuleArrayOutput)
+}
+
+type CompliancePackConfigRuleOutput struct{ *pulumi.OutputState }
+
+func (CompliancePackConfigRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CompliancePackConfigRule)(nil)).Elem()
+}
+
+func (o CompliancePackConfigRuleOutput) ToCompliancePackConfigRuleOutput() CompliancePackConfigRuleOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleOutput) ToCompliancePackConfigRuleOutputWithContext(ctx context.Context) CompliancePackConfigRuleOutput {
+	return o
+}
+
+// Compliance pack ID that this rule belongs to.
+func (o CompliancePackConfigRuleOutput) CompliancePackId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.CompliancePackId }).(pulumi.StringPtrOutput)
+}
+
+// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+func (o CompliancePackConfigRuleOutput) ComplianceResult() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.ComplianceResult }).(pulumi.StringPtrOutput)
+}
+
+// Config rule ID.
+func (o CompliancePackConfigRuleOutput) ConfigRuleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.ConfigRuleId }).(pulumi.StringPtrOutput)
+}
+
+// Rule description.
+func (o CompliancePackConfigRuleOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Rule identifier (managed rule name or custom rule cloud function ARN).
+func (o CompliancePackConfigRuleOutput) Identifier() pulumi.StringOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) string { return v.Identifier }).(pulumi.StringOutput)
+}
+
+// Rule input parameters.
+func (o CompliancePackConfigRuleOutput) InputParameters() CompliancePackConfigRuleInputParameterArrayOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) []CompliancePackConfigRuleInputParameter { return v.InputParameters }).(CompliancePackConfigRuleInputParameterArrayOutput)
+}
+
+// Managed rule identifier (preset rule identity).
+func (o CompliancePackConfigRuleOutput) ManagedRuleIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.ManagedRuleIdentifier }).(pulumi.StringPtrOutput)
+}
+
+// Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+func (o CompliancePackConfigRuleOutput) RiskLevel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *int { return v.RiskLevel }).(pulumi.IntPtrOutput)
+}
+
+// Rule name.
+func (o CompliancePackConfigRuleOutput) RuleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.RuleName }).(pulumi.StringPtrOutput)
+}
+
+// Compliance pack status. Valid values: ACTIVE, UN_ACTIVE.
+func (o CompliancePackConfigRuleOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRule) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type CompliancePackConfigRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (CompliancePackConfigRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CompliancePackConfigRule)(nil)).Elem()
+}
+
+func (o CompliancePackConfigRuleArrayOutput) ToCompliancePackConfigRuleArrayOutput() CompliancePackConfigRuleArrayOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleArrayOutput) ToCompliancePackConfigRuleArrayOutputWithContext(ctx context.Context) CompliancePackConfigRuleArrayOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleArrayOutput) Index(i pulumi.IntInput) CompliancePackConfigRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CompliancePackConfigRule {
+		return vs[0].([]CompliancePackConfigRule)[vs[1].(int)]
+	}).(CompliancePackConfigRuleOutput)
+}
+
+type CompliancePackConfigRuleInputParameter struct {
+	// Parameter key.
+	ParameterKey string `pulumi:"parameterKey"`
+	// Parameter type: Require or Optional.
+	Type *string `pulumi:"type"`
+	// Parameter value.
+	Value *string `pulumi:"value"`
+}
+
+// CompliancePackConfigRuleInputParameterInput is an input type that accepts CompliancePackConfigRuleInputParameterArgs and CompliancePackConfigRuleInputParameterOutput values.
+// You can construct a concrete instance of `CompliancePackConfigRuleInputParameterInput` via:
+//
+//	CompliancePackConfigRuleInputParameterArgs{...}
+type CompliancePackConfigRuleInputParameterInput interface {
+	pulumi.Input
+
+	ToCompliancePackConfigRuleInputParameterOutput() CompliancePackConfigRuleInputParameterOutput
+	ToCompliancePackConfigRuleInputParameterOutputWithContext(context.Context) CompliancePackConfigRuleInputParameterOutput
+}
+
+type CompliancePackConfigRuleInputParameterArgs struct {
+	// Parameter key.
+	ParameterKey pulumi.StringInput `pulumi:"parameterKey"`
+	// Parameter type: Require or Optional.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Parameter value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CompliancePackConfigRuleInputParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CompliancePackConfigRuleInputParameter)(nil)).Elem()
+}
+
+func (i CompliancePackConfigRuleInputParameterArgs) ToCompliancePackConfigRuleInputParameterOutput() CompliancePackConfigRuleInputParameterOutput {
+	return i.ToCompliancePackConfigRuleInputParameterOutputWithContext(context.Background())
+}
+
+func (i CompliancePackConfigRuleInputParameterArgs) ToCompliancePackConfigRuleInputParameterOutputWithContext(ctx context.Context) CompliancePackConfigRuleInputParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CompliancePackConfigRuleInputParameterOutput)
+}
+
+// CompliancePackConfigRuleInputParameterArrayInput is an input type that accepts CompliancePackConfigRuleInputParameterArray and CompliancePackConfigRuleInputParameterArrayOutput values.
+// You can construct a concrete instance of `CompliancePackConfigRuleInputParameterArrayInput` via:
+//
+//	CompliancePackConfigRuleInputParameterArray{ CompliancePackConfigRuleInputParameterArgs{...} }
+type CompliancePackConfigRuleInputParameterArrayInput interface {
+	pulumi.Input
+
+	ToCompliancePackConfigRuleInputParameterArrayOutput() CompliancePackConfigRuleInputParameterArrayOutput
+	ToCompliancePackConfigRuleInputParameterArrayOutputWithContext(context.Context) CompliancePackConfigRuleInputParameterArrayOutput
+}
+
+type CompliancePackConfigRuleInputParameterArray []CompliancePackConfigRuleInputParameterInput
+
+func (CompliancePackConfigRuleInputParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CompliancePackConfigRuleInputParameter)(nil)).Elem()
+}
+
+func (i CompliancePackConfigRuleInputParameterArray) ToCompliancePackConfigRuleInputParameterArrayOutput() CompliancePackConfigRuleInputParameterArrayOutput {
+	return i.ToCompliancePackConfigRuleInputParameterArrayOutputWithContext(context.Background())
+}
+
+func (i CompliancePackConfigRuleInputParameterArray) ToCompliancePackConfigRuleInputParameterArrayOutputWithContext(ctx context.Context) CompliancePackConfigRuleInputParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CompliancePackConfigRuleInputParameterArrayOutput)
+}
+
+type CompliancePackConfigRuleInputParameterOutput struct{ *pulumi.OutputState }
+
+func (CompliancePackConfigRuleInputParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CompliancePackConfigRuleInputParameter)(nil)).Elem()
+}
+
+func (o CompliancePackConfigRuleInputParameterOutput) ToCompliancePackConfigRuleInputParameterOutput() CompliancePackConfigRuleInputParameterOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleInputParameterOutput) ToCompliancePackConfigRuleInputParameterOutputWithContext(ctx context.Context) CompliancePackConfigRuleInputParameterOutput {
+	return o
+}
+
+// Parameter key.
+func (o CompliancePackConfigRuleInputParameterOutput) ParameterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v CompliancePackConfigRuleInputParameter) string { return v.ParameterKey }).(pulumi.StringOutput)
+}
+
+// Parameter type: Require or Optional.
+func (o CompliancePackConfigRuleInputParameterOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRuleInputParameter) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Parameter value.
+func (o CompliancePackConfigRuleInputParameterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CompliancePackConfigRuleInputParameter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CompliancePackConfigRuleInputParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (CompliancePackConfigRuleInputParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CompliancePackConfigRuleInputParameter)(nil)).Elem()
+}
+
+func (o CompliancePackConfigRuleInputParameterArrayOutput) ToCompliancePackConfigRuleInputParameterArrayOutput() CompliancePackConfigRuleInputParameterArrayOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleInputParameterArrayOutput) ToCompliancePackConfigRuleInputParameterArrayOutputWithContext(ctx context.Context) CompliancePackConfigRuleInputParameterArrayOutput {
+	return o
+}
+
+func (o CompliancePackConfigRuleInputParameterArrayOutput) Index(i pulumi.IntInput) CompliancePackConfigRuleInputParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CompliancePackConfigRuleInputParameter {
+		return vs[0].([]CompliancePackConfigRuleInputParameter)[vs[1].(int)]
+	}).(CompliancePackConfigRuleInputParameterOutput)
+}
+
+type RuleInputParameter struct {
+	// Parameter key.
+	ParameterKey string `pulumi:"parameterKey"`
+	// Parameter type: Require or Optional.
+	Type *string `pulumi:"type"`
+	// Parameter value.
+	Value *string `pulumi:"value"`
+}
+
+// RuleInputParameterInput is an input type that accepts RuleInputParameterArgs and RuleInputParameterOutput values.
+// You can construct a concrete instance of `RuleInputParameterInput` via:
+//
+//	RuleInputParameterArgs{...}
+type RuleInputParameterInput interface {
+	pulumi.Input
+
+	ToRuleInputParameterOutput() RuleInputParameterOutput
+	ToRuleInputParameterOutputWithContext(context.Context) RuleInputParameterOutput
+}
+
+type RuleInputParameterArgs struct {
+	// Parameter key.
+	ParameterKey pulumi.StringInput `pulumi:"parameterKey"`
+	// Parameter type: Require or Optional.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Parameter value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (RuleInputParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleInputParameter)(nil)).Elem()
+}
+
+func (i RuleInputParameterArgs) ToRuleInputParameterOutput() RuleInputParameterOutput {
+	return i.ToRuleInputParameterOutputWithContext(context.Background())
+}
+
+func (i RuleInputParameterArgs) ToRuleInputParameterOutputWithContext(ctx context.Context) RuleInputParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleInputParameterOutput)
+}
+
+// RuleInputParameterArrayInput is an input type that accepts RuleInputParameterArray and RuleInputParameterArrayOutput values.
+// You can construct a concrete instance of `RuleInputParameterArrayInput` via:
+//
+//	RuleInputParameterArray{ RuleInputParameterArgs{...} }
+type RuleInputParameterArrayInput interface {
+	pulumi.Input
+
+	ToRuleInputParameterArrayOutput() RuleInputParameterArrayOutput
+	ToRuleInputParameterArrayOutputWithContext(context.Context) RuleInputParameterArrayOutput
+}
+
+type RuleInputParameterArray []RuleInputParameterInput
+
+func (RuleInputParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleInputParameter)(nil)).Elem()
+}
+
+func (i RuleInputParameterArray) ToRuleInputParameterArrayOutput() RuleInputParameterArrayOutput {
+	return i.ToRuleInputParameterArrayOutputWithContext(context.Background())
+}
+
+func (i RuleInputParameterArray) ToRuleInputParameterArrayOutputWithContext(ctx context.Context) RuleInputParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleInputParameterArrayOutput)
+}
+
+type RuleInputParameterOutput struct{ *pulumi.OutputState }
+
+func (RuleInputParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleInputParameter)(nil)).Elem()
+}
+
+func (o RuleInputParameterOutput) ToRuleInputParameterOutput() RuleInputParameterOutput {
+	return o
+}
+
+func (o RuleInputParameterOutput) ToRuleInputParameterOutputWithContext(ctx context.Context) RuleInputParameterOutput {
+	return o
+}
+
+// Parameter key.
+func (o RuleInputParameterOutput) ParameterKey() pulumi.StringOutput {
+	return o.ApplyT(func(v RuleInputParameter) string { return v.ParameterKey }).(pulumi.StringOutput)
+}
+
+// Parameter type: Require or Optional.
+func (o RuleInputParameterOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RuleInputParameter) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// Parameter value.
+func (o RuleInputParameterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RuleInputParameter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type RuleInputParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (RuleInputParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleInputParameter)(nil)).Elem()
+}
+
+func (o RuleInputParameterArrayOutput) ToRuleInputParameterArrayOutput() RuleInputParameterArrayOutput {
+	return o
+}
+
+func (o RuleInputParameterArrayOutput) ToRuleInputParameterArrayOutputWithContext(ctx context.Context) RuleInputParameterArrayOutput {
+	return o
+}
+
+func (o RuleInputParameterArrayOutput) Index(i pulumi.IntInput) RuleInputParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RuleInputParameter {
+		return vs[0].([]RuleInputParameter)[vs[1].(int)]
+	}).(RuleInputParameterOutput)
+}
+
+type RuleTagsScope struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// RuleTagsScopeInput is an input type that accepts RuleTagsScopeArgs and RuleTagsScopeOutput values.
+// You can construct a concrete instance of `RuleTagsScopeInput` via:
+//
+//	RuleTagsScopeArgs{...}
+type RuleTagsScopeInput interface {
+	pulumi.Input
+
+	ToRuleTagsScopeOutput() RuleTagsScopeOutput
+	ToRuleTagsScopeOutputWithContext(context.Context) RuleTagsScopeOutput
+}
+
+type RuleTagsScopeArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (RuleTagsScopeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleTagsScope)(nil)).Elem()
+}
+
+func (i RuleTagsScopeArgs) ToRuleTagsScopeOutput() RuleTagsScopeOutput {
+	return i.ToRuleTagsScopeOutputWithContext(context.Background())
+}
+
+func (i RuleTagsScopeArgs) ToRuleTagsScopeOutputWithContext(ctx context.Context) RuleTagsScopeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleTagsScopeOutput)
+}
+
+// RuleTagsScopeArrayInput is an input type that accepts RuleTagsScopeArray and RuleTagsScopeArrayOutput values.
+// You can construct a concrete instance of `RuleTagsScopeArrayInput` via:
+//
+//	RuleTagsScopeArray{ RuleTagsScopeArgs{...} }
+type RuleTagsScopeArrayInput interface {
+	pulumi.Input
+
+	ToRuleTagsScopeArrayOutput() RuleTagsScopeArrayOutput
+	ToRuleTagsScopeArrayOutputWithContext(context.Context) RuleTagsScopeArrayOutput
+}
+
+type RuleTagsScopeArray []RuleTagsScopeInput
+
+func (RuleTagsScopeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleTagsScope)(nil)).Elem()
+}
+
+func (i RuleTagsScopeArray) ToRuleTagsScopeArrayOutput() RuleTagsScopeArrayOutput {
+	return i.ToRuleTagsScopeArrayOutputWithContext(context.Background())
+}
+
+func (i RuleTagsScopeArray) ToRuleTagsScopeArrayOutputWithContext(ctx context.Context) RuleTagsScopeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleTagsScopeArrayOutput)
+}
+
+type RuleTagsScopeOutput struct{ *pulumi.OutputState }
+
+func (RuleTagsScopeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleTagsScope)(nil)).Elem()
+}
+
+func (o RuleTagsScopeOutput) ToRuleTagsScopeOutput() RuleTagsScopeOutput {
+	return o
+}
+
+func (o RuleTagsScopeOutput) ToRuleTagsScopeOutputWithContext(ctx context.Context) RuleTagsScopeOutput {
+	return o
+}
+
+// Tag key.
+func (o RuleTagsScopeOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v RuleTagsScope) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o RuleTagsScopeOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v RuleTagsScope) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type RuleTagsScopeArrayOutput struct{ *pulumi.OutputState }
+
+func (RuleTagsScopeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleTagsScope)(nil)).Elem()
+}
+
+func (o RuleTagsScopeArrayOutput) ToRuleTagsScopeArrayOutput() RuleTagsScopeArrayOutput {
+	return o
+}
+
+func (o RuleTagsScopeArrayOutput) ToRuleTagsScopeArrayOutputWithContext(ctx context.Context) RuleTagsScopeArrayOutput {
+	return o
+}
+
+func (o RuleTagsScopeArrayOutput) Index(i pulumi.IntInput) RuleTagsScopeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RuleTagsScope {
+		return vs[0].([]RuleTagsScope)[vs[1].(int)]
+	}).(RuleTagsScopeOutput)
+}
+
+type RuleTriggerType struct {
+	// Maximum execution frequency (only for ScheduledNotification). e.g. TwentyFour_Hours.
+	MaximumExecutionFrequency *string `pulumi:"maximumExecutionFrequency"`
+	// Trigger message type. Valid values: ScheduledNotification, ConfigurationItemChangeNotification.
+	MessageType string `pulumi:"messageType"`
+}
+
+// RuleTriggerTypeInput is an input type that accepts RuleTriggerTypeArgs and RuleTriggerTypeOutput values.
+// You can construct a concrete instance of `RuleTriggerTypeInput` via:
+//
+//	RuleTriggerTypeArgs{...}
+type RuleTriggerTypeInput interface {
+	pulumi.Input
+
+	ToRuleTriggerTypeOutput() RuleTriggerTypeOutput
+	ToRuleTriggerTypeOutputWithContext(context.Context) RuleTriggerTypeOutput
+}
+
+type RuleTriggerTypeArgs struct {
+	// Maximum execution frequency (only for ScheduledNotification). e.g. TwentyFour_Hours.
+	MaximumExecutionFrequency pulumi.StringPtrInput `pulumi:"maximumExecutionFrequency"`
+	// Trigger message type. Valid values: ScheduledNotification, ConfigurationItemChangeNotification.
+	MessageType pulumi.StringInput `pulumi:"messageType"`
+}
+
+func (RuleTriggerTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleTriggerType)(nil)).Elem()
+}
+
+func (i RuleTriggerTypeArgs) ToRuleTriggerTypeOutput() RuleTriggerTypeOutput {
+	return i.ToRuleTriggerTypeOutputWithContext(context.Background())
+}
+
+func (i RuleTriggerTypeArgs) ToRuleTriggerTypeOutputWithContext(ctx context.Context) RuleTriggerTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleTriggerTypeOutput)
+}
+
+// RuleTriggerTypeArrayInput is an input type that accepts RuleTriggerTypeArray and RuleTriggerTypeArrayOutput values.
+// You can construct a concrete instance of `RuleTriggerTypeArrayInput` via:
+//
+//	RuleTriggerTypeArray{ RuleTriggerTypeArgs{...} }
+type RuleTriggerTypeArrayInput interface {
+	pulumi.Input
+
+	ToRuleTriggerTypeArrayOutput() RuleTriggerTypeArrayOutput
+	ToRuleTriggerTypeArrayOutputWithContext(context.Context) RuleTriggerTypeArrayOutput
+}
+
+type RuleTriggerTypeArray []RuleTriggerTypeInput
+
+func (RuleTriggerTypeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleTriggerType)(nil)).Elem()
+}
+
+func (i RuleTriggerTypeArray) ToRuleTriggerTypeArrayOutput() RuleTriggerTypeArrayOutput {
+	return i.ToRuleTriggerTypeArrayOutputWithContext(context.Background())
+}
+
+func (i RuleTriggerTypeArray) ToRuleTriggerTypeArrayOutputWithContext(ctx context.Context) RuleTriggerTypeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RuleTriggerTypeArrayOutput)
+}
+
+type RuleTriggerTypeOutput struct{ *pulumi.OutputState }
+
+func (RuleTriggerTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RuleTriggerType)(nil)).Elem()
+}
+
+func (o RuleTriggerTypeOutput) ToRuleTriggerTypeOutput() RuleTriggerTypeOutput {
+	return o
+}
+
+func (o RuleTriggerTypeOutput) ToRuleTriggerTypeOutputWithContext(ctx context.Context) RuleTriggerTypeOutput {
+	return o
+}
+
+// Maximum execution frequency (only for ScheduledNotification). e.g. TwentyFour_Hours.
+func (o RuleTriggerTypeOutput) MaximumExecutionFrequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RuleTriggerType) *string { return v.MaximumExecutionFrequency }).(pulumi.StringPtrOutput)
+}
+
+// Trigger message type. Valid values: ScheduledNotification, ConfigurationItemChangeNotification.
+func (o RuleTriggerTypeOutput) MessageType() pulumi.StringOutput {
+	return o.ApplyT(func(v RuleTriggerType) string { return v.MessageType }).(pulumi.StringOutput)
+}
+
+type RuleTriggerTypeArrayOutput struct{ *pulumi.OutputState }
+
+func (RuleTriggerTypeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RuleTriggerType)(nil)).Elem()
+}
+
+func (o RuleTriggerTypeArrayOutput) ToRuleTriggerTypeArrayOutput() RuleTriggerTypeArrayOutput {
+	return o
+}
+
+func (o RuleTriggerTypeArrayOutput) ToRuleTriggerTypeArrayOutputWithContext(ctx context.Context) RuleTriggerTypeArrayOutput {
+	return o
+}
+
+func (o RuleTriggerTypeArrayOutput) Index(i pulumi.IntInput) RuleTriggerTypeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RuleTriggerType {
+		return vs[0].([]RuleTriggerType)[vs[1].(int)]
+	}).(RuleTriggerTypeOutput)
+}
+
+type GetCompliancePacksCompliancePackList struct {
+	// Compliance pack ID.
+	CompliancePackId string `pulumi:"compliancePackId"`
+	// Compliance pack name for filtering.
+	CompliancePackName string `pulumi:"compliancePackName"`
+	// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult string `pulumi:"complianceResult"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Compliance pack description.
+	Description string `pulumi:"description"`
+	// List of non-compliant rule names.
+	NoCompliantNames []string `pulumi:"noCompliantNames"`
+	// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel int `pulumi:"riskLevel"`
+	// Number of rules in the compliance pack.
+	RuleCount int `pulumi:"ruleCount"`
+	// Compliance pack status for filtering. Valid values: ACTIVE, NO_ACTIVE.
+	Status string `pulumi:"status"`
+}
+
+// GetCompliancePacksCompliancePackListInput is an input type that accepts GetCompliancePacksCompliancePackListArgs and GetCompliancePacksCompliancePackListOutput values.
+// You can construct a concrete instance of `GetCompliancePacksCompliancePackListInput` via:
+//
+//	GetCompliancePacksCompliancePackListArgs{...}
+type GetCompliancePacksCompliancePackListInput interface {
+	pulumi.Input
+
+	ToGetCompliancePacksCompliancePackListOutput() GetCompliancePacksCompliancePackListOutput
+	ToGetCompliancePacksCompliancePackListOutputWithContext(context.Context) GetCompliancePacksCompliancePackListOutput
+}
+
+type GetCompliancePacksCompliancePackListArgs struct {
+	// Compliance pack ID.
+	CompliancePackId pulumi.StringInput `pulumi:"compliancePackId"`
+	// Compliance pack name for filtering.
+	CompliancePackName pulumi.StringInput `pulumi:"compliancePackName"`
+	// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult pulumi.StringInput `pulumi:"complianceResult"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Compliance pack description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// List of non-compliant rule names.
+	NoCompliantNames pulumi.StringArrayInput `pulumi:"noCompliantNames"`
+	// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel pulumi.IntInput `pulumi:"riskLevel"`
+	// Number of rules in the compliance pack.
+	RuleCount pulumi.IntInput `pulumi:"ruleCount"`
+	// Compliance pack status for filtering. Valid values: ACTIVE, NO_ACTIVE.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCompliancePacksCompliancePackListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCompliancePacksCompliancePackList)(nil)).Elem()
+}
+
+func (i GetCompliancePacksCompliancePackListArgs) ToGetCompliancePacksCompliancePackListOutput() GetCompliancePacksCompliancePackListOutput {
+	return i.ToGetCompliancePacksCompliancePackListOutputWithContext(context.Background())
+}
+
+func (i GetCompliancePacksCompliancePackListArgs) ToGetCompliancePacksCompliancePackListOutputWithContext(ctx context.Context) GetCompliancePacksCompliancePackListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCompliancePacksCompliancePackListOutput)
+}
+
+// GetCompliancePacksCompliancePackListArrayInput is an input type that accepts GetCompliancePacksCompliancePackListArray and GetCompliancePacksCompliancePackListArrayOutput values.
+// You can construct a concrete instance of `GetCompliancePacksCompliancePackListArrayInput` via:
+//
+//	GetCompliancePacksCompliancePackListArray{ GetCompliancePacksCompliancePackListArgs{...} }
+type GetCompliancePacksCompliancePackListArrayInput interface {
+	pulumi.Input
+
+	ToGetCompliancePacksCompliancePackListArrayOutput() GetCompliancePacksCompliancePackListArrayOutput
+	ToGetCompliancePacksCompliancePackListArrayOutputWithContext(context.Context) GetCompliancePacksCompliancePackListArrayOutput
+}
+
+type GetCompliancePacksCompliancePackListArray []GetCompliancePacksCompliancePackListInput
+
+func (GetCompliancePacksCompliancePackListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCompliancePacksCompliancePackList)(nil)).Elem()
+}
+
+func (i GetCompliancePacksCompliancePackListArray) ToGetCompliancePacksCompliancePackListArrayOutput() GetCompliancePacksCompliancePackListArrayOutput {
+	return i.ToGetCompliancePacksCompliancePackListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCompliancePacksCompliancePackListArray) ToGetCompliancePacksCompliancePackListArrayOutputWithContext(ctx context.Context) GetCompliancePacksCompliancePackListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCompliancePacksCompliancePackListArrayOutput)
+}
+
+type GetCompliancePacksCompliancePackListOutput struct{ *pulumi.OutputState }
+
+func (GetCompliancePacksCompliancePackListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCompliancePacksCompliancePackList)(nil)).Elem()
+}
+
+func (o GetCompliancePacksCompliancePackListOutput) ToGetCompliancePacksCompliancePackListOutput() GetCompliancePacksCompliancePackListOutput {
+	return o
+}
+
+func (o GetCompliancePacksCompliancePackListOutput) ToGetCompliancePacksCompliancePackListOutputWithContext(ctx context.Context) GetCompliancePacksCompliancePackListOutput {
+	return o
+}
+
+// Compliance pack ID.
+func (o GetCompliancePacksCompliancePackListOutput) CompliancePackId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.CompliancePackId }).(pulumi.StringOutput)
+}
+
+// Compliance pack name for filtering.
+func (o GetCompliancePacksCompliancePackListOutput) CompliancePackName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.CompliancePackName }).(pulumi.StringOutput)
+}
+
+// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+func (o GetCompliancePacksCompliancePackListOutput) ComplianceResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.ComplianceResult }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetCompliancePacksCompliancePackListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Compliance pack description.
+func (o GetCompliancePacksCompliancePackListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// List of non-compliant rule names.
+func (o GetCompliancePacksCompliancePackListOutput) NoCompliantNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) []string { return v.NoCompliantNames }).(pulumi.StringArrayOutput)
+}
+
+// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+func (o GetCompliancePacksCompliancePackListOutput) RiskLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) int { return v.RiskLevel }).(pulumi.IntOutput)
+}
+
+// Number of rules in the compliance pack.
+func (o GetCompliancePacksCompliancePackListOutput) RuleCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) int { return v.RuleCount }).(pulumi.IntOutput)
+}
+
+// Compliance pack status for filtering. Valid values: ACTIVE, NO_ACTIVE.
+func (o GetCompliancePacksCompliancePackListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCompliancePacksCompliancePackList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetCompliancePacksCompliancePackListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCompliancePacksCompliancePackListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCompliancePacksCompliancePackList)(nil)).Elem()
+}
+
+func (o GetCompliancePacksCompliancePackListArrayOutput) ToGetCompliancePacksCompliancePackListArrayOutput() GetCompliancePacksCompliancePackListArrayOutput {
+	return o
+}
+
+func (o GetCompliancePacksCompliancePackListArrayOutput) ToGetCompliancePacksCompliancePackListArrayOutputWithContext(ctx context.Context) GetCompliancePacksCompliancePackListArrayOutput {
+	return o
+}
+
+func (o GetCompliancePacksCompliancePackListArrayOutput) Index(i pulumi.IntInput) GetCompliancePacksCompliancePackListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCompliancePacksCompliancePackList {
+		return vs[0].([]GetCompliancePacksCompliancePackList)[vs[1].(int)]
+	}).(GetCompliancePacksCompliancePackListOutput)
+}
+
+type GetDiscoveredResourcesFilter struct {
+	// Filter field name. Valid values: resourceName, resourceId.
+	Name string `pulumi:"name"`
+	// Filter field values.
+	Values []string `pulumi:"values"`
+}
+
+// GetDiscoveredResourcesFilterInput is an input type that accepts GetDiscoveredResourcesFilterArgs and GetDiscoveredResourcesFilterOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesFilterInput` via:
+//
+//	GetDiscoveredResourcesFilterArgs{...}
+type GetDiscoveredResourcesFilterInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesFilterOutput() GetDiscoveredResourcesFilterOutput
+	ToGetDiscoveredResourcesFilterOutputWithContext(context.Context) GetDiscoveredResourcesFilterOutput
+}
+
+type GetDiscoveredResourcesFilterArgs struct {
+	// Filter field name. Valid values: resourceName, resourceId.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter field values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetDiscoveredResourcesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesFilter)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesFilterArgs) ToGetDiscoveredResourcesFilterOutput() GetDiscoveredResourcesFilterOutput {
+	return i.ToGetDiscoveredResourcesFilterOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesFilterArgs) ToGetDiscoveredResourcesFilterOutputWithContext(ctx context.Context) GetDiscoveredResourcesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesFilterOutput)
+}
+
+// GetDiscoveredResourcesFilterArrayInput is an input type that accepts GetDiscoveredResourcesFilterArray and GetDiscoveredResourcesFilterArrayOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesFilterArrayInput` via:
+//
+//	GetDiscoveredResourcesFilterArray{ GetDiscoveredResourcesFilterArgs{...} }
+type GetDiscoveredResourcesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesFilterArrayOutput() GetDiscoveredResourcesFilterArrayOutput
+	ToGetDiscoveredResourcesFilterArrayOutputWithContext(context.Context) GetDiscoveredResourcesFilterArrayOutput
+}
+
+type GetDiscoveredResourcesFilterArray []GetDiscoveredResourcesFilterInput
+
+func (GetDiscoveredResourcesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesFilter)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesFilterArray) ToGetDiscoveredResourcesFilterArrayOutput() GetDiscoveredResourcesFilterArrayOutput {
+	return i.ToGetDiscoveredResourcesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesFilterArray) ToGetDiscoveredResourcesFilterArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesFilterArrayOutput)
+}
+
+type GetDiscoveredResourcesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesFilter)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesFilterOutput) ToGetDiscoveredResourcesFilterOutput() GetDiscoveredResourcesFilterOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesFilterOutput) ToGetDiscoveredResourcesFilterOutputWithContext(ctx context.Context) GetDiscoveredResourcesFilterOutput {
+	return o
+}
+
+// Filter field name. Valid values: resourceName, resourceId.
+func (o GetDiscoveredResourcesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter field values.
+func (o GetDiscoveredResourcesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetDiscoveredResourcesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesFilter)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesFilterArrayOutput) ToGetDiscoveredResourcesFilterArrayOutput() GetDiscoveredResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesFilterArrayOutput) ToGetDiscoveredResourcesFilterArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesFilterArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesFilterArrayOutput) Index(i pulumi.IntInput) GetDiscoveredResourcesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiscoveredResourcesFilter {
+		return vs[0].([]GetDiscoveredResourcesFilter)[vs[1].(int)]
+	}).(GetDiscoveredResourcesFilterOutput)
+}
+
+type GetDiscoveredResourcesResourceList struct {
+	// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult string `pulumi:"complianceResult"`
+	// Resource creation time.
+	ResourceCreateTime string `pulumi:"resourceCreateTime"`
+	// Resource deletion mark. Valid values: 1 (deleted), 2 (not deleted).
+	ResourceDelete int `pulumi:"resourceDelete"`
+	// Resource ID.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource name.
+	ResourceName string `pulumi:"resourceName"`
+	// Resource region.
+	ResourceRegion string `pulumi:"resourceRegion"`
+	// Resource status.
+	ResourceStatus string `pulumi:"resourceStatus"`
+	// Resource type.
+	ResourceType string `pulumi:"resourceType"`
+	// Resource availability zone.
+	ResourceZone string `pulumi:"resourceZone"`
+	// Tag filter conditions.
+	Tags []GetDiscoveredResourcesResourceListTag `pulumi:"tags"`
+}
+
+// GetDiscoveredResourcesResourceListInput is an input type that accepts GetDiscoveredResourcesResourceListArgs and GetDiscoveredResourcesResourceListOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesResourceListInput` via:
+//
+//	GetDiscoveredResourcesResourceListArgs{...}
+type GetDiscoveredResourcesResourceListInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesResourceListOutput() GetDiscoveredResourcesResourceListOutput
+	ToGetDiscoveredResourcesResourceListOutputWithContext(context.Context) GetDiscoveredResourcesResourceListOutput
+}
+
+type GetDiscoveredResourcesResourceListArgs struct {
+	// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult pulumi.StringInput `pulumi:"complianceResult"`
+	// Resource creation time.
+	ResourceCreateTime pulumi.StringInput `pulumi:"resourceCreateTime"`
+	// Resource deletion mark. Valid values: 1 (deleted), 2 (not deleted).
+	ResourceDelete pulumi.IntInput `pulumi:"resourceDelete"`
+	// Resource ID.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource name.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// Resource region.
+	ResourceRegion pulumi.StringInput `pulumi:"resourceRegion"`
+	// Resource status.
+	ResourceStatus pulumi.StringInput `pulumi:"resourceStatus"`
+	// Resource type.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Resource availability zone.
+	ResourceZone pulumi.StringInput `pulumi:"resourceZone"`
+	// Tag filter conditions.
+	Tags GetDiscoveredResourcesResourceListTagArrayInput `pulumi:"tags"`
+}
+
+func (GetDiscoveredResourcesResourceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesResourceList)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesResourceListArgs) ToGetDiscoveredResourcesResourceListOutput() GetDiscoveredResourcesResourceListOutput {
+	return i.ToGetDiscoveredResourcesResourceListOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesResourceListArgs) ToGetDiscoveredResourcesResourceListOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesResourceListOutput)
+}
+
+// GetDiscoveredResourcesResourceListArrayInput is an input type that accepts GetDiscoveredResourcesResourceListArray and GetDiscoveredResourcesResourceListArrayOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesResourceListArrayInput` via:
+//
+//	GetDiscoveredResourcesResourceListArray{ GetDiscoveredResourcesResourceListArgs{...} }
+type GetDiscoveredResourcesResourceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesResourceListArrayOutput() GetDiscoveredResourcesResourceListArrayOutput
+	ToGetDiscoveredResourcesResourceListArrayOutputWithContext(context.Context) GetDiscoveredResourcesResourceListArrayOutput
+}
+
+type GetDiscoveredResourcesResourceListArray []GetDiscoveredResourcesResourceListInput
+
+func (GetDiscoveredResourcesResourceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesResourceList)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesResourceListArray) ToGetDiscoveredResourcesResourceListArrayOutput() GetDiscoveredResourcesResourceListArrayOutput {
+	return i.ToGetDiscoveredResourcesResourceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesResourceListArray) ToGetDiscoveredResourcesResourceListArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesResourceListArrayOutput)
+}
+
+type GetDiscoveredResourcesResourceListOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesResourceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesResourceList)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesResourceListOutput) ToGetDiscoveredResourcesResourceListOutput() GetDiscoveredResourcesResourceListOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListOutput) ToGetDiscoveredResourcesResourceListOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListOutput {
+	return o
+}
+
+// Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+func (o GetDiscoveredResourcesResourceListOutput) ComplianceResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ComplianceResult }).(pulumi.StringOutput)
+}
+
+// Resource creation time.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceCreateTime }).(pulumi.StringOutput)
+}
+
+// Resource deletion mark. Valid values: 1 (deleted), 2 (not deleted).
+func (o GetDiscoveredResourcesResourceListOutput) ResourceDelete() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) int { return v.ResourceDelete }).(pulumi.IntOutput)
+}
+
+// Resource ID.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource name.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceName }).(pulumi.StringOutput)
+}
+
+// Resource region.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceRegion }).(pulumi.StringOutput)
+}
+
+// Resource status.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceStatus }).(pulumi.StringOutput)
+}
+
+// Resource type.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Resource availability zone.
+func (o GetDiscoveredResourcesResourceListOutput) ResourceZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) string { return v.ResourceZone }).(pulumi.StringOutput)
+}
+
+// Tag filter conditions.
+func (o GetDiscoveredResourcesResourceListOutput) Tags() GetDiscoveredResourcesResourceListTagArrayOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceList) []GetDiscoveredResourcesResourceListTag { return v.Tags }).(GetDiscoveredResourcesResourceListTagArrayOutput)
+}
+
+type GetDiscoveredResourcesResourceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesResourceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesResourceList)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesResourceListArrayOutput) ToGetDiscoveredResourcesResourceListArrayOutput() GetDiscoveredResourcesResourceListArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListArrayOutput) ToGetDiscoveredResourcesResourceListArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListArrayOutput) Index(i pulumi.IntInput) GetDiscoveredResourcesResourceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiscoveredResourcesResourceList {
+		return vs[0].([]GetDiscoveredResourcesResourceList)[vs[1].(int)]
+	}).(GetDiscoveredResourcesResourceListOutput)
+}
+
+type GetDiscoveredResourcesResourceListTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetDiscoveredResourcesResourceListTagInput is an input type that accepts GetDiscoveredResourcesResourceListTagArgs and GetDiscoveredResourcesResourceListTagOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesResourceListTagInput` via:
+//
+//	GetDiscoveredResourcesResourceListTagArgs{...}
+type GetDiscoveredResourcesResourceListTagInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesResourceListTagOutput() GetDiscoveredResourcesResourceListTagOutput
+	ToGetDiscoveredResourcesResourceListTagOutputWithContext(context.Context) GetDiscoveredResourcesResourceListTagOutput
+}
+
+type GetDiscoveredResourcesResourceListTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetDiscoveredResourcesResourceListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesResourceListTag)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesResourceListTagArgs) ToGetDiscoveredResourcesResourceListTagOutput() GetDiscoveredResourcesResourceListTagOutput {
+	return i.ToGetDiscoveredResourcesResourceListTagOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesResourceListTagArgs) ToGetDiscoveredResourcesResourceListTagOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesResourceListTagOutput)
+}
+
+// GetDiscoveredResourcesResourceListTagArrayInput is an input type that accepts GetDiscoveredResourcesResourceListTagArray and GetDiscoveredResourcesResourceListTagArrayOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesResourceListTagArrayInput` via:
+//
+//	GetDiscoveredResourcesResourceListTagArray{ GetDiscoveredResourcesResourceListTagArgs{...} }
+type GetDiscoveredResourcesResourceListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesResourceListTagArrayOutput() GetDiscoveredResourcesResourceListTagArrayOutput
+	ToGetDiscoveredResourcesResourceListTagArrayOutputWithContext(context.Context) GetDiscoveredResourcesResourceListTagArrayOutput
+}
+
+type GetDiscoveredResourcesResourceListTagArray []GetDiscoveredResourcesResourceListTagInput
+
+func (GetDiscoveredResourcesResourceListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesResourceListTag)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesResourceListTagArray) ToGetDiscoveredResourcesResourceListTagArrayOutput() GetDiscoveredResourcesResourceListTagArrayOutput {
+	return i.ToGetDiscoveredResourcesResourceListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesResourceListTagArray) ToGetDiscoveredResourcesResourceListTagArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesResourceListTagArrayOutput)
+}
+
+type GetDiscoveredResourcesResourceListTagOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesResourceListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesResourceListTag)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesResourceListTagOutput) ToGetDiscoveredResourcesResourceListTagOutput() GetDiscoveredResourcesResourceListTagOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListTagOutput) ToGetDiscoveredResourcesResourceListTagOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetDiscoveredResourcesResourceListTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceListTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetDiscoveredResourcesResourceListTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesResourceListTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetDiscoveredResourcesResourceListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesResourceListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesResourceListTag)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesResourceListTagArrayOutput) ToGetDiscoveredResourcesResourceListTagArrayOutput() GetDiscoveredResourcesResourceListTagArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListTagArrayOutput) ToGetDiscoveredResourcesResourceListTagArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesResourceListTagArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesResourceListTagArrayOutput) Index(i pulumi.IntInput) GetDiscoveredResourcesResourceListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiscoveredResourcesResourceListTag {
+		return vs[0].([]GetDiscoveredResourcesResourceListTag)[vs[1].(int)]
+	}).(GetDiscoveredResourcesResourceListTagOutput)
+}
+
+type GetDiscoveredResourcesTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetDiscoveredResourcesTagInput is an input type that accepts GetDiscoveredResourcesTagArgs and GetDiscoveredResourcesTagOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesTagInput` via:
+//
+//	GetDiscoveredResourcesTagArgs{...}
+type GetDiscoveredResourcesTagInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesTagOutput() GetDiscoveredResourcesTagOutput
+	ToGetDiscoveredResourcesTagOutputWithContext(context.Context) GetDiscoveredResourcesTagOutput
+}
+
+type GetDiscoveredResourcesTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetDiscoveredResourcesTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesTag)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesTagArgs) ToGetDiscoveredResourcesTagOutput() GetDiscoveredResourcesTagOutput {
+	return i.ToGetDiscoveredResourcesTagOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesTagArgs) ToGetDiscoveredResourcesTagOutputWithContext(ctx context.Context) GetDiscoveredResourcesTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesTagOutput)
+}
+
+// GetDiscoveredResourcesTagArrayInput is an input type that accepts GetDiscoveredResourcesTagArray and GetDiscoveredResourcesTagArrayOutput values.
+// You can construct a concrete instance of `GetDiscoveredResourcesTagArrayInput` via:
+//
+//	GetDiscoveredResourcesTagArray{ GetDiscoveredResourcesTagArgs{...} }
+type GetDiscoveredResourcesTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDiscoveredResourcesTagArrayOutput() GetDiscoveredResourcesTagArrayOutput
+	ToGetDiscoveredResourcesTagArrayOutputWithContext(context.Context) GetDiscoveredResourcesTagArrayOutput
+}
+
+type GetDiscoveredResourcesTagArray []GetDiscoveredResourcesTagInput
+
+func (GetDiscoveredResourcesTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesTag)(nil)).Elem()
+}
+
+func (i GetDiscoveredResourcesTagArray) ToGetDiscoveredResourcesTagArrayOutput() GetDiscoveredResourcesTagArrayOutput {
+	return i.ToGetDiscoveredResourcesTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDiscoveredResourcesTagArray) ToGetDiscoveredResourcesTagArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDiscoveredResourcesTagArrayOutput)
+}
+
+type GetDiscoveredResourcesTagOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDiscoveredResourcesTag)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesTagOutput) ToGetDiscoveredResourcesTagOutput() GetDiscoveredResourcesTagOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesTagOutput) ToGetDiscoveredResourcesTagOutputWithContext(ctx context.Context) GetDiscoveredResourcesTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetDiscoveredResourcesTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetDiscoveredResourcesTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDiscoveredResourcesTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetDiscoveredResourcesTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDiscoveredResourcesTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDiscoveredResourcesTag)(nil)).Elem()
+}
+
+func (o GetDiscoveredResourcesTagArrayOutput) ToGetDiscoveredResourcesTagArrayOutput() GetDiscoveredResourcesTagArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesTagArrayOutput) ToGetDiscoveredResourcesTagArrayOutputWithContext(ctx context.Context) GetDiscoveredResourcesTagArrayOutput {
+	return o
+}
+
+func (o GetDiscoveredResourcesTagArrayOutput) Index(i pulumi.IntInput) GetDiscoveredResourcesTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDiscoveredResourcesTag {
+		return vs[0].([]GetDiscoveredResourcesTag)[vs[1].(int)]
+	}).(GetDiscoveredResourcesTagOutput)
+}
+
+type GetResourceTypesResourceTypeList struct {
+	// Product code (e.g. CAM).
+	Product string `pulumi:"product"`
+	// Product name.
+	ProductName string `pulumi:"productName"`
+	// Resource type identifier (e.g. QCS::CAM::Group).
+	ResourceType string `pulumi:"resourceType"`
+	// Resource type name.
+	ResourceTypeName string `pulumi:"resourceTypeName"`
+}
+
+// GetResourceTypesResourceTypeListInput is an input type that accepts GetResourceTypesResourceTypeListArgs and GetResourceTypesResourceTypeListOutput values.
+// You can construct a concrete instance of `GetResourceTypesResourceTypeListInput` via:
+//
+//	GetResourceTypesResourceTypeListArgs{...}
+type GetResourceTypesResourceTypeListInput interface {
+	pulumi.Input
+
+	ToGetResourceTypesResourceTypeListOutput() GetResourceTypesResourceTypeListOutput
+	ToGetResourceTypesResourceTypeListOutputWithContext(context.Context) GetResourceTypesResourceTypeListOutput
+}
+
+type GetResourceTypesResourceTypeListArgs struct {
+	// Product code (e.g. CAM).
+	Product pulumi.StringInput `pulumi:"product"`
+	// Product name.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// Resource type identifier (e.g. QCS::CAM::Group).
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Resource type name.
+	ResourceTypeName pulumi.StringInput `pulumi:"resourceTypeName"`
+}
+
+func (GetResourceTypesResourceTypeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourceTypesResourceTypeList)(nil)).Elem()
+}
+
+func (i GetResourceTypesResourceTypeListArgs) ToGetResourceTypesResourceTypeListOutput() GetResourceTypesResourceTypeListOutput {
+	return i.ToGetResourceTypesResourceTypeListOutputWithContext(context.Background())
+}
+
+func (i GetResourceTypesResourceTypeListArgs) ToGetResourceTypesResourceTypeListOutputWithContext(ctx context.Context) GetResourceTypesResourceTypeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourceTypesResourceTypeListOutput)
+}
+
+// GetResourceTypesResourceTypeListArrayInput is an input type that accepts GetResourceTypesResourceTypeListArray and GetResourceTypesResourceTypeListArrayOutput values.
+// You can construct a concrete instance of `GetResourceTypesResourceTypeListArrayInput` via:
+//
+//	GetResourceTypesResourceTypeListArray{ GetResourceTypesResourceTypeListArgs{...} }
+type GetResourceTypesResourceTypeListArrayInput interface {
+	pulumi.Input
+
+	ToGetResourceTypesResourceTypeListArrayOutput() GetResourceTypesResourceTypeListArrayOutput
+	ToGetResourceTypesResourceTypeListArrayOutputWithContext(context.Context) GetResourceTypesResourceTypeListArrayOutput
+}
+
+type GetResourceTypesResourceTypeListArray []GetResourceTypesResourceTypeListInput
+
+func (GetResourceTypesResourceTypeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourceTypesResourceTypeList)(nil)).Elem()
+}
+
+func (i GetResourceTypesResourceTypeListArray) ToGetResourceTypesResourceTypeListArrayOutput() GetResourceTypesResourceTypeListArrayOutput {
+	return i.ToGetResourceTypesResourceTypeListArrayOutputWithContext(context.Background())
+}
+
+func (i GetResourceTypesResourceTypeListArray) ToGetResourceTypesResourceTypeListArrayOutputWithContext(ctx context.Context) GetResourceTypesResourceTypeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetResourceTypesResourceTypeListArrayOutput)
+}
+
+type GetResourceTypesResourceTypeListOutput struct{ *pulumi.OutputState }
+
+func (GetResourceTypesResourceTypeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetResourceTypesResourceTypeList)(nil)).Elem()
+}
+
+func (o GetResourceTypesResourceTypeListOutput) ToGetResourceTypesResourceTypeListOutput() GetResourceTypesResourceTypeListOutput {
+	return o
+}
+
+func (o GetResourceTypesResourceTypeListOutput) ToGetResourceTypesResourceTypeListOutputWithContext(ctx context.Context) GetResourceTypesResourceTypeListOutput {
+	return o
+}
+
+// Product code (e.g. CAM).
+func (o GetResourceTypesResourceTypeListOutput) Product() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceTypesResourceTypeList) string { return v.Product }).(pulumi.StringOutput)
+}
+
+// Product name.
+func (o GetResourceTypesResourceTypeListOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceTypesResourceTypeList) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// Resource type identifier (e.g. QCS::CAM::Group).
+func (o GetResourceTypesResourceTypeListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceTypesResourceTypeList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Resource type name.
+func (o GetResourceTypesResourceTypeListOutput) ResourceTypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetResourceTypesResourceTypeList) string { return v.ResourceTypeName }).(pulumi.StringOutput)
+}
+
+type GetResourceTypesResourceTypeListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetResourceTypesResourceTypeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetResourceTypesResourceTypeList)(nil)).Elem()
+}
+
+func (o GetResourceTypesResourceTypeListArrayOutput) ToGetResourceTypesResourceTypeListArrayOutput() GetResourceTypesResourceTypeListArrayOutput {
+	return o
+}
+
+func (o GetResourceTypesResourceTypeListArrayOutput) ToGetResourceTypesResourceTypeListArrayOutputWithContext(ctx context.Context) GetResourceTypesResourceTypeListArrayOutput {
+	return o
+}
+
+func (o GetResourceTypesResourceTypeListArrayOutput) Index(i pulumi.IntInput) GetResourceTypesResourceTypeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetResourceTypesResourceTypeList {
+		return vs[0].([]GetResourceTypesResourceTypeList)[vs[1].(int)]
+	}).(GetResourceTypesResourceTypeListOutput)
+}
+
+type GetRuleEvaluationResultsResultList struct {
+	// Evaluation annotation detail.
+	Annotations []GetRuleEvaluationResultsResultListAnnotation `pulumi:"annotations"`
+	// Compliance pack ID.
+	CompliancePackId string `pulumi:"compliancePackId"`
+	// Compliance type list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceType string `pulumi:"complianceType"`
+	// Config rule ID.
+	ConfigRuleId string `pulumi:"configRuleId"`
+	// Evaluation invocation time.
+	ConfigRuleInvokedTime string `pulumi:"configRuleInvokedTime"`
+	// Config rule name.
+	ConfigRuleName string `pulumi:"configRuleName"`
+	// Rule invocation type.
+	InvokingEventMessageType string `pulumi:"invokingEventMessageType"`
+	// Resource ID.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource name.
+	ResourceName string `pulumi:"resourceName"`
+	// Resource region.
+	ResourceRegion string `pulumi:"resourceRegion"`
+	// Resource type list for filtering (e.g. QCS::CVM::Instance).
+	ResourceType string `pulumi:"resourceType"`
+	// Evaluation result recorded time.
+	ResultRecordedTime string `pulumi:"resultRecordedTime"`
+	// Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel int `pulumi:"riskLevel"`
+}
+
+// GetRuleEvaluationResultsResultListInput is an input type that accepts GetRuleEvaluationResultsResultListArgs and GetRuleEvaluationResultsResultListOutput values.
+// You can construct a concrete instance of `GetRuleEvaluationResultsResultListInput` via:
+//
+//	GetRuleEvaluationResultsResultListArgs{...}
+type GetRuleEvaluationResultsResultListInput interface {
+	pulumi.Input
+
+	ToGetRuleEvaluationResultsResultListOutput() GetRuleEvaluationResultsResultListOutput
+	ToGetRuleEvaluationResultsResultListOutputWithContext(context.Context) GetRuleEvaluationResultsResultListOutput
+}
+
+type GetRuleEvaluationResultsResultListArgs struct {
+	// Evaluation annotation detail.
+	Annotations GetRuleEvaluationResultsResultListAnnotationArrayInput `pulumi:"annotations"`
+	// Compliance pack ID.
+	CompliancePackId pulumi.StringInput `pulumi:"compliancePackId"`
+	// Compliance type list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceType pulumi.StringInput `pulumi:"complianceType"`
+	// Config rule ID.
+	ConfigRuleId pulumi.StringInput `pulumi:"configRuleId"`
+	// Evaluation invocation time.
+	ConfigRuleInvokedTime pulumi.StringInput `pulumi:"configRuleInvokedTime"`
+	// Config rule name.
+	ConfigRuleName pulumi.StringInput `pulumi:"configRuleName"`
+	// Rule invocation type.
+	InvokingEventMessageType pulumi.StringInput `pulumi:"invokingEventMessageType"`
+	// Resource ID.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource name.
+	ResourceName pulumi.StringInput `pulumi:"resourceName"`
+	// Resource region.
+	ResourceRegion pulumi.StringInput `pulumi:"resourceRegion"`
+	// Resource type list for filtering (e.g. QCS::CVM::Instance).
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Evaluation result recorded time.
+	ResultRecordedTime pulumi.StringInput `pulumi:"resultRecordedTime"`
+	// Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel pulumi.IntInput `pulumi:"riskLevel"`
+}
+
+func (GetRuleEvaluationResultsResultListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleEvaluationResultsResultList)(nil)).Elem()
+}
+
+func (i GetRuleEvaluationResultsResultListArgs) ToGetRuleEvaluationResultsResultListOutput() GetRuleEvaluationResultsResultListOutput {
+	return i.ToGetRuleEvaluationResultsResultListOutputWithContext(context.Background())
+}
+
+func (i GetRuleEvaluationResultsResultListArgs) ToGetRuleEvaluationResultsResultListOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleEvaluationResultsResultListOutput)
+}
+
+// GetRuleEvaluationResultsResultListArrayInput is an input type that accepts GetRuleEvaluationResultsResultListArray and GetRuleEvaluationResultsResultListArrayOutput values.
+// You can construct a concrete instance of `GetRuleEvaluationResultsResultListArrayInput` via:
+//
+//	GetRuleEvaluationResultsResultListArray{ GetRuleEvaluationResultsResultListArgs{...} }
+type GetRuleEvaluationResultsResultListArrayInput interface {
+	pulumi.Input
+
+	ToGetRuleEvaluationResultsResultListArrayOutput() GetRuleEvaluationResultsResultListArrayOutput
+	ToGetRuleEvaluationResultsResultListArrayOutputWithContext(context.Context) GetRuleEvaluationResultsResultListArrayOutput
+}
+
+type GetRuleEvaluationResultsResultListArray []GetRuleEvaluationResultsResultListInput
+
+func (GetRuleEvaluationResultsResultListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleEvaluationResultsResultList)(nil)).Elem()
+}
+
+func (i GetRuleEvaluationResultsResultListArray) ToGetRuleEvaluationResultsResultListArrayOutput() GetRuleEvaluationResultsResultListArrayOutput {
+	return i.ToGetRuleEvaluationResultsResultListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRuleEvaluationResultsResultListArray) ToGetRuleEvaluationResultsResultListArrayOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleEvaluationResultsResultListArrayOutput)
+}
+
+type GetRuleEvaluationResultsResultListOutput struct{ *pulumi.OutputState }
+
+func (GetRuleEvaluationResultsResultListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleEvaluationResultsResultList)(nil)).Elem()
+}
+
+func (o GetRuleEvaluationResultsResultListOutput) ToGetRuleEvaluationResultsResultListOutput() GetRuleEvaluationResultsResultListOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListOutput) ToGetRuleEvaluationResultsResultListOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListOutput {
+	return o
+}
+
+// Evaluation annotation detail.
+func (o GetRuleEvaluationResultsResultListOutput) Annotations() GetRuleEvaluationResultsResultListAnnotationArrayOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) []GetRuleEvaluationResultsResultListAnnotation {
+		return v.Annotations
+	}).(GetRuleEvaluationResultsResultListAnnotationArrayOutput)
+}
+
+// Compliance pack ID.
+func (o GetRuleEvaluationResultsResultListOutput) CompliancePackId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.CompliancePackId }).(pulumi.StringOutput)
+}
+
+// Compliance type list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+func (o GetRuleEvaluationResultsResultListOutput) ComplianceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ComplianceType }).(pulumi.StringOutput)
+}
+
+// Config rule ID.
+func (o GetRuleEvaluationResultsResultListOutput) ConfigRuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ConfigRuleId }).(pulumi.StringOutput)
+}
+
+// Evaluation invocation time.
+func (o GetRuleEvaluationResultsResultListOutput) ConfigRuleInvokedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ConfigRuleInvokedTime }).(pulumi.StringOutput)
+}
+
+// Config rule name.
+func (o GetRuleEvaluationResultsResultListOutput) ConfigRuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ConfigRuleName }).(pulumi.StringOutput)
+}
+
+// Rule invocation type.
+func (o GetRuleEvaluationResultsResultListOutput) InvokingEventMessageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.InvokingEventMessageType }).(pulumi.StringOutput)
+}
+
+// Resource ID.
+func (o GetRuleEvaluationResultsResultListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource name.
+func (o GetRuleEvaluationResultsResultListOutput) ResourceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ResourceName }).(pulumi.StringOutput)
+}
+
+// Resource region.
+func (o GetRuleEvaluationResultsResultListOutput) ResourceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ResourceRegion }).(pulumi.StringOutput)
+}
+
+// Resource type list for filtering (e.g. QCS::CVM::Instance).
+func (o GetRuleEvaluationResultsResultListOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Evaluation result recorded time.
+func (o GetRuleEvaluationResultsResultListOutput) ResultRecordedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) string { return v.ResultRecordedTime }).(pulumi.StringOutput)
+}
+
+// Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+func (o GetRuleEvaluationResultsResultListOutput) RiskLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultList) int { return v.RiskLevel }).(pulumi.IntOutput)
+}
+
+type GetRuleEvaluationResultsResultListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRuleEvaluationResultsResultListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleEvaluationResultsResultList)(nil)).Elem()
+}
+
+func (o GetRuleEvaluationResultsResultListArrayOutput) ToGetRuleEvaluationResultsResultListArrayOutput() GetRuleEvaluationResultsResultListArrayOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListArrayOutput) ToGetRuleEvaluationResultsResultListArrayOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListArrayOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListArrayOutput) Index(i pulumi.IntInput) GetRuleEvaluationResultsResultListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRuleEvaluationResultsResultList {
+		return vs[0].([]GetRuleEvaluationResultsResultList)[vs[1].(int)]
+	}).(GetRuleEvaluationResultsResultListOutput)
+}
+
+type GetRuleEvaluationResultsResultListAnnotation struct {
+	// Actual resource configuration (non-compliant configuration).
+	Configuration string `pulumi:"configuration"`
+	// Expected resource configuration (compliant configuration).
+	DesiredValue string `pulumi:"desiredValue"`
+	// Comparison operator between actual and expected configuration.
+	Operator string `pulumi:"operator"`
+	// JSON path of the current configuration in the resource attribute structure.
+	Property string `pulumi:"property"`
+}
+
+// GetRuleEvaluationResultsResultListAnnotationInput is an input type that accepts GetRuleEvaluationResultsResultListAnnotationArgs and GetRuleEvaluationResultsResultListAnnotationOutput values.
+// You can construct a concrete instance of `GetRuleEvaluationResultsResultListAnnotationInput` via:
+//
+//	GetRuleEvaluationResultsResultListAnnotationArgs{...}
+type GetRuleEvaluationResultsResultListAnnotationInput interface {
+	pulumi.Input
+
+	ToGetRuleEvaluationResultsResultListAnnotationOutput() GetRuleEvaluationResultsResultListAnnotationOutput
+	ToGetRuleEvaluationResultsResultListAnnotationOutputWithContext(context.Context) GetRuleEvaluationResultsResultListAnnotationOutput
+}
+
+type GetRuleEvaluationResultsResultListAnnotationArgs struct {
+	// Actual resource configuration (non-compliant configuration).
+	Configuration pulumi.StringInput `pulumi:"configuration"`
+	// Expected resource configuration (compliant configuration).
+	DesiredValue pulumi.StringInput `pulumi:"desiredValue"`
+	// Comparison operator between actual and expected configuration.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// JSON path of the current configuration in the resource attribute structure.
+	Property pulumi.StringInput `pulumi:"property"`
+}
+
+func (GetRuleEvaluationResultsResultListAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleEvaluationResultsResultListAnnotation)(nil)).Elem()
+}
+
+func (i GetRuleEvaluationResultsResultListAnnotationArgs) ToGetRuleEvaluationResultsResultListAnnotationOutput() GetRuleEvaluationResultsResultListAnnotationOutput {
+	return i.ToGetRuleEvaluationResultsResultListAnnotationOutputWithContext(context.Background())
+}
+
+func (i GetRuleEvaluationResultsResultListAnnotationArgs) ToGetRuleEvaluationResultsResultListAnnotationOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleEvaluationResultsResultListAnnotationOutput)
+}
+
+// GetRuleEvaluationResultsResultListAnnotationArrayInput is an input type that accepts GetRuleEvaluationResultsResultListAnnotationArray and GetRuleEvaluationResultsResultListAnnotationArrayOutput values.
+// You can construct a concrete instance of `GetRuleEvaluationResultsResultListAnnotationArrayInput` via:
+//
+//	GetRuleEvaluationResultsResultListAnnotationArray{ GetRuleEvaluationResultsResultListAnnotationArgs{...} }
+type GetRuleEvaluationResultsResultListAnnotationArrayInput interface {
+	pulumi.Input
+
+	ToGetRuleEvaluationResultsResultListAnnotationArrayOutput() GetRuleEvaluationResultsResultListAnnotationArrayOutput
+	ToGetRuleEvaluationResultsResultListAnnotationArrayOutputWithContext(context.Context) GetRuleEvaluationResultsResultListAnnotationArrayOutput
+}
+
+type GetRuleEvaluationResultsResultListAnnotationArray []GetRuleEvaluationResultsResultListAnnotationInput
+
+func (GetRuleEvaluationResultsResultListAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleEvaluationResultsResultListAnnotation)(nil)).Elem()
+}
+
+func (i GetRuleEvaluationResultsResultListAnnotationArray) ToGetRuleEvaluationResultsResultListAnnotationArrayOutput() GetRuleEvaluationResultsResultListAnnotationArrayOutput {
+	return i.ToGetRuleEvaluationResultsResultListAnnotationArrayOutputWithContext(context.Background())
+}
+
+func (i GetRuleEvaluationResultsResultListAnnotationArray) ToGetRuleEvaluationResultsResultListAnnotationArrayOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRuleEvaluationResultsResultListAnnotationArrayOutput)
+}
+
+type GetRuleEvaluationResultsResultListAnnotationOutput struct{ *pulumi.OutputState }
+
+func (GetRuleEvaluationResultsResultListAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRuleEvaluationResultsResultListAnnotation)(nil)).Elem()
+}
+
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) ToGetRuleEvaluationResultsResultListAnnotationOutput() GetRuleEvaluationResultsResultListAnnotationOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) ToGetRuleEvaluationResultsResultListAnnotationOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListAnnotationOutput {
+	return o
+}
+
+// Actual resource configuration (non-compliant configuration).
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) Configuration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultListAnnotation) string { return v.Configuration }).(pulumi.StringOutput)
+}
+
+// Expected resource configuration (compliant configuration).
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) DesiredValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultListAnnotation) string { return v.DesiredValue }).(pulumi.StringOutput)
+}
+
+// Comparison operator between actual and expected configuration.
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultListAnnotation) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// JSON path of the current configuration in the resource attribute structure.
+func (o GetRuleEvaluationResultsResultListAnnotationOutput) Property() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRuleEvaluationResultsResultListAnnotation) string { return v.Property }).(pulumi.StringOutput)
+}
+
+type GetRuleEvaluationResultsResultListAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRuleEvaluationResultsResultListAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRuleEvaluationResultsResultListAnnotation)(nil)).Elem()
+}
+
+func (o GetRuleEvaluationResultsResultListAnnotationArrayOutput) ToGetRuleEvaluationResultsResultListAnnotationArrayOutput() GetRuleEvaluationResultsResultListAnnotationArrayOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListAnnotationArrayOutput) ToGetRuleEvaluationResultsResultListAnnotationArrayOutputWithContext(ctx context.Context) GetRuleEvaluationResultsResultListAnnotationArrayOutput {
+	return o
+}
+
+func (o GetRuleEvaluationResultsResultListAnnotationArrayOutput) Index(i pulumi.IntInput) GetRuleEvaluationResultsResultListAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRuleEvaluationResultsResultListAnnotation {
+		return vs[0].([]GetRuleEvaluationResultsResultListAnnotation)[vs[1].(int)]
+	}).(GetRuleEvaluationResultsResultListAnnotationOutput)
+}
+
+type GetRulesRuleList struct {
+	// Compliance pack ID.
+	CompliancePackId string `pulumi:"compliancePackId"`
+	// Compliance pack name.
+	CompliancePackName string `pulumi:"compliancePackName"`
+	// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult string `pulumi:"complianceResult"`
+	// Config rule ID.
+	ConfigRuleId string `pulumi:"configRuleId"`
+	// Rule evaluation time.
+	ConfigRuleInvokedTime string `pulumi:"configRuleInvokedTime"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Rule description.
+	Description string `pulumi:"description"`
+	// Rule identifier.
+	Identifier string `pulumi:"identifier"`
+	// Rule type. Valid values: CUSTOMIZE (custom rule), SYSTEM (managed rule).
+	IdentifierType string `pulumi:"identifierType"`
+	// Rule label list.
+	Labels []string `pulumi:"labels"`
+	// Supported resource type list.
+	ResourceTypes []string `pulumi:"resourceTypes"`
+	// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel int `pulumi:"riskLevel"`
+	// Rule name for filtering.
+	RuleName string `pulumi:"ruleName"`
+	// Corresponding service function.
+	ServiceFunction string `pulumi:"serviceFunction"`
+	// Rule status. Valid values: ACTIVE, NO_ACTIVE.
+	Status string `pulumi:"status"`
+}
+
+// GetRulesRuleListInput is an input type that accepts GetRulesRuleListArgs and GetRulesRuleListOutput values.
+// You can construct a concrete instance of `GetRulesRuleListInput` via:
+//
+//	GetRulesRuleListArgs{...}
+type GetRulesRuleListInput interface {
+	pulumi.Input
+
+	ToGetRulesRuleListOutput() GetRulesRuleListOutput
+	ToGetRulesRuleListOutputWithContext(context.Context) GetRulesRuleListOutput
+}
+
+type GetRulesRuleListArgs struct {
+	// Compliance pack ID.
+	CompliancePackId pulumi.StringInput `pulumi:"compliancePackId"`
+	// Compliance pack name.
+	CompliancePackName pulumi.StringInput `pulumi:"compliancePackName"`
+	// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+	ComplianceResult pulumi.StringInput `pulumi:"complianceResult"`
+	// Config rule ID.
+	ConfigRuleId pulumi.StringInput `pulumi:"configRuleId"`
+	// Rule evaluation time.
+	ConfigRuleInvokedTime pulumi.StringInput `pulumi:"configRuleInvokedTime"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Rule description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Rule identifier.
+	Identifier pulumi.StringInput `pulumi:"identifier"`
+	// Rule type. Valid values: CUSTOMIZE (custom rule), SYSTEM (managed rule).
+	IdentifierType pulumi.StringInput `pulumi:"identifierType"`
+	// Rule label list.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	// Supported resource type list.
+	ResourceTypes pulumi.StringArrayInput `pulumi:"resourceTypes"`
+	// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel pulumi.IntInput `pulumi:"riskLevel"`
+	// Rule name for filtering.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Corresponding service function.
+	ServiceFunction pulumi.StringInput `pulumi:"serviceFunction"`
+	// Rule status. Valid values: ACTIVE, NO_ACTIVE.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetRulesRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRulesRuleList)(nil)).Elem()
+}
+
+func (i GetRulesRuleListArgs) ToGetRulesRuleListOutput() GetRulesRuleListOutput {
+	return i.ToGetRulesRuleListOutputWithContext(context.Background())
+}
+
+func (i GetRulesRuleListArgs) ToGetRulesRuleListOutputWithContext(ctx context.Context) GetRulesRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRulesRuleListOutput)
+}
+
+// GetRulesRuleListArrayInput is an input type that accepts GetRulesRuleListArray and GetRulesRuleListArrayOutput values.
+// You can construct a concrete instance of `GetRulesRuleListArrayInput` via:
+//
+//	GetRulesRuleListArray{ GetRulesRuleListArgs{...} }
+type GetRulesRuleListArrayInput interface {
+	pulumi.Input
+
+	ToGetRulesRuleListArrayOutput() GetRulesRuleListArrayOutput
+	ToGetRulesRuleListArrayOutputWithContext(context.Context) GetRulesRuleListArrayOutput
+}
+
+type GetRulesRuleListArray []GetRulesRuleListInput
+
+func (GetRulesRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRulesRuleList)(nil)).Elem()
+}
+
+func (i GetRulesRuleListArray) ToGetRulesRuleListArrayOutput() GetRulesRuleListArrayOutput {
+	return i.ToGetRulesRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRulesRuleListArray) ToGetRulesRuleListArrayOutputWithContext(ctx context.Context) GetRulesRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRulesRuleListArrayOutput)
+}
+
+type GetRulesRuleListOutput struct{ *pulumi.OutputState }
+
+func (GetRulesRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRulesRuleList)(nil)).Elem()
+}
+
+func (o GetRulesRuleListOutput) ToGetRulesRuleListOutput() GetRulesRuleListOutput {
+	return o
+}
+
+func (o GetRulesRuleListOutput) ToGetRulesRuleListOutputWithContext(ctx context.Context) GetRulesRuleListOutput {
+	return o
+}
+
+// Compliance pack ID.
+func (o GetRulesRuleListOutput) CompliancePackId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.CompliancePackId }).(pulumi.StringOutput)
+}
+
+// Compliance pack name.
+func (o GetRulesRuleListOutput) CompliancePackName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.CompliancePackName }).(pulumi.StringOutput)
+}
+
+// Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
+func (o GetRulesRuleListOutput) ComplianceResult() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.ComplianceResult }).(pulumi.StringOutput)
+}
+
+// Config rule ID.
+func (o GetRulesRuleListOutput) ConfigRuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.ConfigRuleId }).(pulumi.StringOutput)
+}
+
+// Rule evaluation time.
+func (o GetRulesRuleListOutput) ConfigRuleInvokedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.ConfigRuleInvokedTime }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetRulesRuleListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Rule description.
+func (o GetRulesRuleListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Rule identifier.
+func (o GetRulesRuleListOutput) Identifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.Identifier }).(pulumi.StringOutput)
+}
+
+// Rule type. Valid values: CUSTOMIZE (custom rule), SYSTEM (managed rule).
+func (o GetRulesRuleListOutput) IdentifierType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.IdentifierType }).(pulumi.StringOutput)
+}
+
+// Rule label list.
+func (o GetRulesRuleListOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRulesRuleList) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+// Supported resource type list.
+func (o GetRulesRuleListOutput) ResourceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetRulesRuleList) []string { return v.ResourceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Risk level list for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+func (o GetRulesRuleListOutput) RiskLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRulesRuleList) int { return v.RiskLevel }).(pulumi.IntOutput)
+}
+
+// Rule name for filtering.
+func (o GetRulesRuleListOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Corresponding service function.
+func (o GetRulesRuleListOutput) ServiceFunction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.ServiceFunction }).(pulumi.StringOutput)
+}
+
+// Rule status. Valid values: ACTIVE, NO_ACTIVE.
+func (o GetRulesRuleListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRulesRuleList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetRulesRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRulesRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRulesRuleList)(nil)).Elem()
+}
+
+func (o GetRulesRuleListArrayOutput) ToGetRulesRuleListArrayOutput() GetRulesRuleListArrayOutput {
+	return o
+}
+
+func (o GetRulesRuleListArrayOutput) ToGetRulesRuleListArrayOutputWithContext(ctx context.Context) GetRulesRuleListArrayOutput {
+	return o
+}
+
+func (o GetRulesRuleListArrayOutput) Index(i pulumi.IntInput) GetRulesRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRulesRuleList {
+		return vs[0].([]GetRulesRuleList)[vs[1].(int)]
+	}).(GetRulesRuleListOutput)
+}
+
+type GetSystemRulesRuleList struct {
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Rule description.
+	Description string `pulumi:"description"`
+	// Rule unique identifier.
+	Identifier string `pulumi:"identifier"`
+	// Rule type.
+	IdentifierType string `pulumi:"identifierType"`
+	// Rule label list.
+	Labels []string `pulumi:"labels"`
+	// Number of times this rule is referenced.
+	ReferenceCount int `pulumi:"referenceCount"`
+	// Supported resource type list.
+	ResourceTypes []string `pulumi:"resourceTypes"`
+	// Risk level for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel int `pulumi:"riskLevel"`
+	// Rule name.
+	RuleName string `pulumi:"ruleName"`
+	// Corresponding service function.
+	ServiceFunction string `pulumi:"serviceFunction"`
+	// Trigger type list.
+	TriggerTypes []string `pulumi:"triggerTypes"`
+	// Last update time.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetSystemRulesRuleListInput is an input type that accepts GetSystemRulesRuleListArgs and GetSystemRulesRuleListOutput values.
+// You can construct a concrete instance of `GetSystemRulesRuleListInput` via:
+//
+//	GetSystemRulesRuleListArgs{...}
+type GetSystemRulesRuleListInput interface {
+	pulumi.Input
+
+	ToGetSystemRulesRuleListOutput() GetSystemRulesRuleListOutput
+	ToGetSystemRulesRuleListOutputWithContext(context.Context) GetSystemRulesRuleListOutput
+}
+
+type GetSystemRulesRuleListArgs struct {
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Rule description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Rule unique identifier.
+	Identifier pulumi.StringInput `pulumi:"identifier"`
+	// Rule type.
+	IdentifierType pulumi.StringInput `pulumi:"identifierType"`
+	// Rule label list.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	// Number of times this rule is referenced.
+	ReferenceCount pulumi.IntInput `pulumi:"referenceCount"`
+	// Supported resource type list.
+	ResourceTypes pulumi.StringArrayInput `pulumi:"resourceTypes"`
+	// Risk level for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+	RiskLevel pulumi.IntInput `pulumi:"riskLevel"`
+	// Rule name.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Corresponding service function.
+	ServiceFunction pulumi.StringInput `pulumi:"serviceFunction"`
+	// Trigger type list.
+	TriggerTypes pulumi.StringArrayInput `pulumi:"triggerTypes"`
+	// Last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetSystemRulesRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSystemRulesRuleList)(nil)).Elem()
+}
+
+func (i GetSystemRulesRuleListArgs) ToGetSystemRulesRuleListOutput() GetSystemRulesRuleListOutput {
+	return i.ToGetSystemRulesRuleListOutputWithContext(context.Background())
+}
+
+func (i GetSystemRulesRuleListArgs) ToGetSystemRulesRuleListOutputWithContext(ctx context.Context) GetSystemRulesRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSystemRulesRuleListOutput)
+}
+
+// GetSystemRulesRuleListArrayInput is an input type that accepts GetSystemRulesRuleListArray and GetSystemRulesRuleListArrayOutput values.
+// You can construct a concrete instance of `GetSystemRulesRuleListArrayInput` via:
+//
+//	GetSystemRulesRuleListArray{ GetSystemRulesRuleListArgs{...} }
+type GetSystemRulesRuleListArrayInput interface {
+	pulumi.Input
+
+	ToGetSystemRulesRuleListArrayOutput() GetSystemRulesRuleListArrayOutput
+	ToGetSystemRulesRuleListArrayOutputWithContext(context.Context) GetSystemRulesRuleListArrayOutput
+}
+
+type GetSystemRulesRuleListArray []GetSystemRulesRuleListInput
+
+func (GetSystemRulesRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSystemRulesRuleList)(nil)).Elem()
+}
+
+func (i GetSystemRulesRuleListArray) ToGetSystemRulesRuleListArrayOutput() GetSystemRulesRuleListArrayOutput {
+	return i.ToGetSystemRulesRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i GetSystemRulesRuleListArray) ToGetSystemRulesRuleListArrayOutputWithContext(ctx context.Context) GetSystemRulesRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSystemRulesRuleListArrayOutput)
+}
+
+type GetSystemRulesRuleListOutput struct{ *pulumi.OutputState }
+
+func (GetSystemRulesRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSystemRulesRuleList)(nil)).Elem()
+}
+
+func (o GetSystemRulesRuleListOutput) ToGetSystemRulesRuleListOutput() GetSystemRulesRuleListOutput {
+	return o
+}
+
+func (o GetSystemRulesRuleListOutput) ToGetSystemRulesRuleListOutputWithContext(ctx context.Context) GetSystemRulesRuleListOutput {
+	return o
+}
+
+// Creation time.
+func (o GetSystemRulesRuleListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Rule description.
+func (o GetSystemRulesRuleListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Rule unique identifier.
+func (o GetSystemRulesRuleListOutput) Identifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.Identifier }).(pulumi.StringOutput)
+}
+
+// Rule type.
+func (o GetSystemRulesRuleListOutput) IdentifierType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.IdentifierType }).(pulumi.StringOutput)
+}
+
+// Rule label list.
+func (o GetSystemRulesRuleListOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+// Number of times this rule is referenced.
+func (o GetSystemRulesRuleListOutput) ReferenceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) int { return v.ReferenceCount }).(pulumi.IntOutput)
+}
+
+// Supported resource type list.
+func (o GetSystemRulesRuleListOutput) ResourceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) []string { return v.ResourceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Risk level for filtering. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+func (o GetSystemRulesRuleListOutput) RiskLevel() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) int { return v.RiskLevel }).(pulumi.IntOutput)
+}
+
+// Rule name.
+func (o GetSystemRulesRuleListOutput) RuleName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.RuleName }).(pulumi.StringOutput)
+}
+
+// Corresponding service function.
+func (o GetSystemRulesRuleListOutput) ServiceFunction() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.ServiceFunction }).(pulumi.StringOutput)
+}
+
+// Trigger type list.
+func (o GetSystemRulesRuleListOutput) TriggerTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) []string { return v.TriggerTypes }).(pulumi.StringArrayOutput)
+}
+
+// Last update time.
+func (o GetSystemRulesRuleListOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSystemRulesRuleList) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetSystemRulesRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSystemRulesRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSystemRulesRuleList)(nil)).Elem()
+}
+
+func (o GetSystemRulesRuleListArrayOutput) ToGetSystemRulesRuleListArrayOutput() GetSystemRulesRuleListArrayOutput {
+	return o
+}
+
+func (o GetSystemRulesRuleListArrayOutput) ToGetSystemRulesRuleListArrayOutputWithContext(ctx context.Context) GetSystemRulesRuleListArrayOutput {
+	return o
+}
+
+func (o GetSystemRulesRuleListArrayOutput) Index(i pulumi.IntInput) GetSystemRulesRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSystemRulesRuleList {
+		return vs[0].([]GetSystemRulesRuleList)[vs[1].(int)]
+	}).(GetSystemRulesRuleListOutput)
+}
+
 type AssumeRole struct {
 	// External role ID, which can be obtained by clicking the role name in the CAM console. It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:/-]*. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_EXTERNAL_ID`.
 	ExternalId *string `pulumi:"externalId"`
@@ -219,14 +2378,18 @@ func (o AssumeRoleWithSamlOutput) SessionName() pulumi.StringOutput {
 type AssumeRoleWithWebIdentity struct {
 	// Identity provider name. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID`, Default is OIDC.
 	ProviderId *string `pulumi:"providerId"`
-	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-	RoleArn string `pulumi:"roleArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+	RoleArn *string `pulumi:"roleArn"`
+	// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+	RoleArnFile *string `pulumi:"roleArnFile"`
 	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 	SessionDuration int `pulumi:"sessionDuration"`
 	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 	SessionName string `pulumi:"sessionName"`
-	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-	WebIdentityToken string `pulumi:"webIdentityToken"`
+	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityToken *string `pulumi:"webIdentityToken"`
+	// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityTokenFile *string `pulumi:"webIdentityTokenFile"`
 }
 
 // AssumeRoleWithWebIdentityInput is an input type that accepts AssumeRoleWithWebIdentityArgs and AssumeRoleWithWebIdentityOutput values.
@@ -243,14 +2406,18 @@ type AssumeRoleWithWebIdentityInput interface {
 type AssumeRoleWithWebIdentityArgs struct {
 	// Identity provider name. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID`, Default is OIDC.
 	ProviderId pulumi.StringPtrInput `pulumi:"providerId"`
-	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
+	// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+	RoleArnFile pulumi.StringPtrInput `pulumi:"roleArnFile"`
 	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
 	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 	SessionName pulumi.StringInput `pulumi:"sessionName"`
-	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-	WebIdentityToken pulumi.StringInput `pulumi:"webIdentityToken"`
+	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityToken pulumi.StringPtrInput `pulumi:"webIdentityToken"`
+	// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityTokenFile pulumi.StringPtrInput `pulumi:"webIdentityTokenFile"`
 }
 
 func (AssumeRoleWithWebIdentityArgs) ElementType() reflect.Type {
@@ -284,9 +2451,14 @@ func (o AssumeRoleWithWebIdentityOutput) ProviderId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AssumeRoleWithWebIdentity) *string { return v.ProviderId }).(pulumi.StringPtrOutput)
 }
 
-// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-func (o AssumeRoleWithWebIdentityOutput) RoleArn() pulumi.StringOutput {
-	return o.ApplyT(func(v AssumeRoleWithWebIdentity) string { return v.RoleArn }).(pulumi.StringOutput)
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+func (o AssumeRoleWithWebIdentityOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AssumeRoleWithWebIdentity) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
+// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+func (o AssumeRoleWithWebIdentityOutput) RoleArnFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AssumeRoleWithWebIdentity) *string { return v.RoleArnFile }).(pulumi.StringPtrOutput)
 }
 
 // The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
@@ -299,9 +2471,14 @@ func (o AssumeRoleWithWebIdentityOutput) SessionName() pulumi.StringOutput {
 	return o.ApplyT(func(v AssumeRoleWithWebIdentity) string { return v.SessionName }).(pulumi.StringOutput)
 }
 
-// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-func (o AssumeRoleWithWebIdentityOutput) WebIdentityToken() pulumi.StringOutput {
-	return o.ApplyT(func(v AssumeRoleWithWebIdentity) string { return v.WebIdentityToken }).(pulumi.StringOutput)
+// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+func (o AssumeRoleWithWebIdentityOutput) WebIdentityToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AssumeRoleWithWebIdentity) *string { return v.WebIdentityToken }).(pulumi.StringPtrOutput)
+}
+
+// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+func (o AssumeRoleWithWebIdentityOutput) WebIdentityTokenFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AssumeRoleWithWebIdentity) *string { return v.WebIdentityTokenFile }).(pulumi.StringPtrOutput)
 }
 
 type MfaCertification struct {
@@ -375,10 +2552,70 @@ func (o MfaCertificationOutput) TokenCode() pulumi.StringOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CompliancePackConfigRuleInput)(nil)).Elem(), CompliancePackConfigRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CompliancePackConfigRuleArrayInput)(nil)).Elem(), CompliancePackConfigRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CompliancePackConfigRuleInputParameterInput)(nil)).Elem(), CompliancePackConfigRuleInputParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CompliancePackConfigRuleInputParameterArrayInput)(nil)).Elem(), CompliancePackConfigRuleInputParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleInputParameterInput)(nil)).Elem(), RuleInputParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleInputParameterArrayInput)(nil)).Elem(), RuleInputParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleTagsScopeInput)(nil)).Elem(), RuleTagsScopeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleTagsScopeArrayInput)(nil)).Elem(), RuleTagsScopeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleTriggerTypeInput)(nil)).Elem(), RuleTriggerTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RuleTriggerTypeArrayInput)(nil)).Elem(), RuleTriggerTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCompliancePacksCompliancePackListInput)(nil)).Elem(), GetCompliancePacksCompliancePackListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCompliancePacksCompliancePackListArrayInput)(nil)).Elem(), GetCompliancePacksCompliancePackListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesFilterInput)(nil)).Elem(), GetDiscoveredResourcesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesFilterArrayInput)(nil)).Elem(), GetDiscoveredResourcesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesResourceListInput)(nil)).Elem(), GetDiscoveredResourcesResourceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesResourceListArrayInput)(nil)).Elem(), GetDiscoveredResourcesResourceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesResourceListTagInput)(nil)).Elem(), GetDiscoveredResourcesResourceListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesResourceListTagArrayInput)(nil)).Elem(), GetDiscoveredResourcesResourceListTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesTagInput)(nil)).Elem(), GetDiscoveredResourcesTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDiscoveredResourcesTagArrayInput)(nil)).Elem(), GetDiscoveredResourcesTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceTypesResourceTypeListInput)(nil)).Elem(), GetResourceTypesResourceTypeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceTypesResourceTypeListArrayInput)(nil)).Elem(), GetResourceTypesResourceTypeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEvaluationResultsResultListInput)(nil)).Elem(), GetRuleEvaluationResultsResultListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEvaluationResultsResultListArrayInput)(nil)).Elem(), GetRuleEvaluationResultsResultListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEvaluationResultsResultListAnnotationInput)(nil)).Elem(), GetRuleEvaluationResultsResultListAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRuleEvaluationResultsResultListAnnotationArrayInput)(nil)).Elem(), GetRuleEvaluationResultsResultListAnnotationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRulesRuleListInput)(nil)).Elem(), GetRulesRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRulesRuleListArrayInput)(nil)).Elem(), GetRulesRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSystemRulesRuleListInput)(nil)).Elem(), GetSystemRulesRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSystemRulesRuleListArrayInput)(nil)).Elem(), GetSystemRulesRuleListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AssumeRoleInput)(nil)).Elem(), AssumeRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AssumeRoleWithSamlInput)(nil)).Elem(), AssumeRoleWithSamlArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AssumeRoleWithWebIdentityInput)(nil)).Elem(), AssumeRoleWithWebIdentityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MfaCertificationInput)(nil)).Elem(), MfaCertificationArgs{})
+	pulumi.RegisterOutputType(CompliancePackConfigRuleOutput{})
+	pulumi.RegisterOutputType(CompliancePackConfigRuleArrayOutput{})
+	pulumi.RegisterOutputType(CompliancePackConfigRuleInputParameterOutput{})
+	pulumi.RegisterOutputType(CompliancePackConfigRuleInputParameterArrayOutput{})
+	pulumi.RegisterOutputType(RuleInputParameterOutput{})
+	pulumi.RegisterOutputType(RuleInputParameterArrayOutput{})
+	pulumi.RegisterOutputType(RuleTagsScopeOutput{})
+	pulumi.RegisterOutputType(RuleTagsScopeArrayOutput{})
+	pulumi.RegisterOutputType(RuleTriggerTypeOutput{})
+	pulumi.RegisterOutputType(RuleTriggerTypeArrayOutput{})
+	pulumi.RegisterOutputType(GetCompliancePacksCompliancePackListOutput{})
+	pulumi.RegisterOutputType(GetCompliancePacksCompliancePackListArrayOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesFilterOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesResourceListOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesResourceListArrayOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesResourceListTagOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesResourceListTagArrayOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesTagOutput{})
+	pulumi.RegisterOutputType(GetDiscoveredResourcesTagArrayOutput{})
+	pulumi.RegisterOutputType(GetResourceTypesResourceTypeListOutput{})
+	pulumi.RegisterOutputType(GetResourceTypesResourceTypeListArrayOutput{})
+	pulumi.RegisterOutputType(GetRuleEvaluationResultsResultListOutput{})
+	pulumi.RegisterOutputType(GetRuleEvaluationResultsResultListArrayOutput{})
+	pulumi.RegisterOutputType(GetRuleEvaluationResultsResultListAnnotationOutput{})
+	pulumi.RegisterOutputType(GetRuleEvaluationResultsResultListAnnotationArrayOutput{})
+	pulumi.RegisterOutputType(GetRulesRuleListOutput{})
+	pulumi.RegisterOutputType(GetRulesRuleListArrayOutput{})
+	pulumi.RegisterOutputType(GetSystemRulesRuleListOutput{})
+	pulumi.RegisterOutputType(GetSystemRulesRuleListArrayOutput{})
 	pulumi.RegisterOutputType(AssumeRoleOutput{})
 	pulumi.RegisterOutputType(AssumeRoleWithSamlOutput{})
 	pulumi.RegisterOutputType(AssumeRoleWithWebIdentityOutput{})

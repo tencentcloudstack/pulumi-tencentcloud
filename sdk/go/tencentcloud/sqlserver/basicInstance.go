@@ -38,17 +38,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -66,8 +66,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -81,11 +81,82 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
 //				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Example with custom timezone:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := sqlserver.NewBasicInstance(ctx, "example_timezone", &sqlserver.BasicInstanceArgs{
+//				Name:             pulumi.String("tf-example-utc"),
+//				AvailabilityZone: pulumi.Any(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            pulumi.Any(vpc.Id),
+//				SubnetId:         pulumi.Any(subnet.Id),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_PREMIUM"),
+//				TimeZone:         pulumi.String("UTC"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Example with disk encryption enabled:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := sqlserver.NewBasicInstance(ctx, "example_encrypted", &sqlserver.BasicInstanceArgs{
+//				Name:             pulumi.String("tf-example-encrypted"),
+//				AvailabilityZone: pulumi.Any(zones.Zones[4].Name),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            pulumi.Any(vpc.Id),
+//				SubnetId:         pulumi.Any(subnet.Id),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
+//				Cpu:              pulumi.Int(2),
+//				MachineType:      pulumi.String("CLOUD_SSD"),
+//				DiskEncryptFlag:  pulumi.Int(1),
+//				TimeZone:         pulumi.String("China Standard Time"),
 //			})
 //			if err != nil {
 //				return err
@@ -120,6 +191,8 @@ type BasicInstance struct {
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+	DiskEncryptFlag pulumi.IntOutput `pulumi:"diskEncryptFlag"`
 	// Internet address domain name.
 	DnsPodDomain pulumi.StringOutput `pulumi:"dnsPodDomain"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -152,6 +225,8 @@ type BasicInstance struct {
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// External port number.
 	TgwWanVport pulumi.IntOutput `pulumi:"tgwWanVport"`
+	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+	TimeZone pulumi.StringOutput `pulumi:"timeZone"`
 	// IP for private access.
 	Vip pulumi.StringOutput `pulumi:"vip"`
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -218,6 +293,8 @@ type basicInstanceState struct {
 	Cpu *int `pulumi:"cpu"`
 	// Create time of the SQL Server basic instance.
 	CreateTime *string `pulumi:"createTime"`
+	// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+	DiskEncryptFlag *int `pulumi:"diskEncryptFlag"`
 	// Internet address domain name.
 	DnsPodDomain *string `pulumi:"dnsPodDomain"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -250,6 +327,8 @@ type basicInstanceState struct {
 	Tags map[string]string `pulumi:"tags"`
 	// External port number.
 	TgwWanVport *int `pulumi:"tgwWanVport"`
+	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+	TimeZone *string `pulumi:"timeZone"`
 	// IP for private access.
 	Vip *string `pulumi:"vip"`
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -275,6 +354,8 @@ type BasicInstanceState struct {
 	Cpu pulumi.IntPtrInput
 	// Create time of the SQL Server basic instance.
 	CreateTime pulumi.StringPtrInput
+	// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+	DiskEncryptFlag pulumi.IntPtrInput
 	// Internet address domain name.
 	DnsPodDomain pulumi.StringPtrInput
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
@@ -307,6 +388,8 @@ type BasicInstanceState struct {
 	Tags pulumi.StringMapInput
 	// External port number.
 	TgwWanVport pulumi.IntPtrInput
+	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+	TimeZone pulumi.StringPtrInput
 	// IP for private access.
 	Vip pulumi.StringPtrInput
 	// An array of voucher IDs, currently only one can be used for a single order.
@@ -334,6 +417,8 @@ type basicInstanceArgs struct {
 	Collation *string `pulumi:"collation"`
 	// The CPU number of the SQL Server basic instance.
 	Cpu int `pulumi:"cpu"`
+	// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+	DiskEncryptFlag *int `pulumi:"diskEncryptFlag"`
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
@@ -360,6 +445,8 @@ type basicInstanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// The tags of the SQL Server basic instance.
 	Tags map[string]string `pulumi:"tags"`
+	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+	TimeZone *string `pulumi:"timeZone"`
 	// An array of voucher IDs, currently only one can be used for a single order.
 	VoucherIds []string `pulumi:"voucherIds"`
 	// ID of VPC.
@@ -380,6 +467,8 @@ type BasicInstanceArgs struct {
 	Collation pulumi.StringPtrInput
 	// The CPU number of the SQL Server basic instance.
 	Cpu pulumi.IntInput
+	// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+	DiskEncryptFlag pulumi.IntPtrInput
 	// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
 	EngineVersion pulumi.StringPtrInput
 	// The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
@@ -406,6 +495,8 @@ type BasicInstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// The tags of the SQL Server basic instance.
 	Tags pulumi.StringMapInput
+	// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+	TimeZone pulumi.StringPtrInput
 	// An array of voucher IDs, currently only one can be used for a single order.
 	VoucherIds pulumi.StringArrayInput
 	// ID of VPC.
@@ -534,6 +625,11 @@ func (o BasicInstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
+// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+func (o BasicInstanceOutput) DiskEncryptFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.IntOutput { return v.DiskEncryptFlag }).(pulumi.IntOutput)
+}
+
 // Internet address domain name.
 func (o BasicInstanceOutput) DnsPodDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.DnsPodDomain }).(pulumi.StringOutput)
@@ -612,6 +708,11 @@ func (o BasicInstanceOutput) Tags() pulumi.StringMapOutput {
 // External port number.
 func (o BasicInstanceOutput) TgwWanVport() pulumi.IntOutput {
 	return o.ApplyT(func(v *BasicInstance) pulumi.IntOutput { return v.TgwWanVport }).(pulumi.IntOutput)
+}
+
+// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+func (o BasicInstanceOutput) TimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *BasicInstance) pulumi.StringOutput { return v.TimeZone }).(pulumi.StringOutput)
 }
 
 // IP for private access.

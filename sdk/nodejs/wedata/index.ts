@@ -10,6 +10,11 @@ export type AddCalcEnginesToProjectOperation = import("./addCalcEnginesToProject
 export const AddCalcEnginesToProjectOperation: typeof import("./addCalcEnginesToProjectOperation").AddCalcEnginesToProjectOperation = null as any;
 utilities.lazyLoad(exports, ["AddCalcEnginesToProjectOperation"], () => require("./addCalcEnginesToProjectOperation"));
 
+export { AuthorizeDataSourceArgs, AuthorizeDataSourceState } from "./authorizeDataSource";
+export type AuthorizeDataSource = import("./authorizeDataSource").AuthorizeDataSource;
+export const AuthorizeDataSource: typeof import("./authorizeDataSource").AuthorizeDataSource = null as any;
+utilities.lazyLoad(exports, ["AuthorizeDataSource"], () => require("./authorizeDataSource"));
+
 export { CodeFileArgs, CodeFileState } from "./codeFile";
 export type CodeFile = import("./codeFile").CodeFile;
 export const CodeFile: typeof import("./codeFile").CodeFile = null as any;
@@ -20,10 +25,15 @@ export type CodeFolder = import("./codeFolder").CodeFolder;
 export const CodeFolder: typeof import("./codeFolder").CodeFolder = null as any;
 utilities.lazyLoad(exports, ["CodeFolder"], () => require("./codeFolder"));
 
-export { DataBackfillPlanOperationArgs, DataBackfillPlanOperationState } from "./dataBackfillPlanOperation";
-export type DataBackfillPlanOperation = import("./dataBackfillPlanOperation").DataBackfillPlanOperation;
-export const DataBackfillPlanOperation: typeof import("./dataBackfillPlanOperation").DataBackfillPlanOperation = null as any;
-utilities.lazyLoad(exports, ["DataBackfillPlanOperation"], () => require("./dataBackfillPlanOperation"));
+export { CodePermissionsArgs, CodePermissionsState } from "./codePermissions";
+export type CodePermissions = import("./codePermissions").CodePermissions;
+export const CodePermissions: typeof import("./codePermissions").CodePermissions = null as any;
+utilities.lazyLoad(exports, ["CodePermissions"], () => require("./codePermissions"));
+
+export { DataBackfillPlanArgs, DataBackfillPlanState } from "./dataBackfillPlan";
+export type DataBackfillPlan = import("./dataBackfillPlan").DataBackfillPlan;
+export const DataBackfillPlan: typeof import("./dataBackfillPlan").DataBackfillPlan = null as any;
+utilities.lazyLoad(exports, ["DataBackfillPlan"], () => require("./dataBackfillPlan"));
 
 export { DatasourceArgs, DatasourceState } from "./datasource";
 export type Datasource = import("./datasource").Datasource;
@@ -39,6 +49,11 @@ export { FunctionArgs, FunctionState } from "./function";
 export type Function = import("./function").Function;
 export const Function: typeof import("./function").Function = null as any;
 utilities.lazyLoad(exports, ["Function"], () => require("./function"));
+
+export { GetCodeMaxPermissionArgs, GetCodeMaxPermissionResult, GetCodeMaxPermissionOutputArgs } from "./getCodeMaxPermission";
+export const getCodeMaxPermission: typeof import("./getCodeMaxPermission").getCodeMaxPermission = null as any;
+export const getCodeMaxPermissionOutput: typeof import("./getCodeMaxPermission").getCodeMaxPermissionOutput = null as any;
+utilities.lazyLoad(exports, ["getCodeMaxPermission","getCodeMaxPermissionOutput"], () => require("./getCodeMaxPermission"));
 
 export { GetDataBackfillInstancesArgs, GetDataBackfillInstancesResult, GetDataBackfillInstancesOutputArgs } from "./getDataBackfillInstances";
 export const getDataBackfillInstances: typeof import("./getDataBackfillInstances").getDataBackfillInstances = null as any;
@@ -59,6 +74,11 @@ export { GetDownstreamTasksArgs, GetDownstreamTasksResult, GetDownstreamTasksOut
 export const getDownstreamTasks: typeof import("./getDownstreamTasks").getDownstreamTasks = null as any;
 export const getDownstreamTasksOutput: typeof import("./getDownstreamTasks").getDownstreamTasksOutput = null as any;
 utilities.lazyLoad(exports, ["getDownstreamTasks","getDownstreamTasksOutput"], () => require("./getDownstreamTasks"));
+
+export { GetDownstreamTriggerTasksArgs, GetDownstreamTriggerTasksResult, GetDownstreamTriggerTasksOutputArgs } from "./getDownstreamTriggerTasks";
+export const getDownstreamTriggerTasks: typeof import("./getDownstreamTriggerTasks").getDownstreamTriggerTasks = null as any;
+export const getDownstreamTriggerTasksOutput: typeof import("./getDownstreamTriggerTasks").getDownstreamTriggerTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getDownstreamTriggerTasks","getDownstreamTriggerTasksOutput"], () => require("./getDownstreamTriggerTasks"));
 
 export { GetGetTableArgs, GetGetTableResult, GetGetTableOutputArgs } from "./getGetTable";
 export const getGetTable: typeof import("./getGetTable").getGetTable = null as any;
@@ -140,6 +160,16 @@ export const getOpsTasks: typeof import("./getOpsTasks").getOpsTasks = null as a
 export const getOpsTasksOutput: typeof import("./getOpsTasks").getOpsTasksOutput = null as any;
 utilities.lazyLoad(exports, ["getOpsTasks","getOpsTasksOutput"], () => require("./getOpsTasks"));
 
+export { GetOpsTriggerWorkflowArgs, GetOpsTriggerWorkflowResult, GetOpsTriggerWorkflowOutputArgs } from "./getOpsTriggerWorkflow";
+export const getOpsTriggerWorkflow: typeof import("./getOpsTriggerWorkflow").getOpsTriggerWorkflow = null as any;
+export const getOpsTriggerWorkflowOutput: typeof import("./getOpsTriggerWorkflow").getOpsTriggerWorkflowOutput = null as any;
+utilities.lazyLoad(exports, ["getOpsTriggerWorkflow","getOpsTriggerWorkflowOutput"], () => require("./getOpsTriggerWorkflow"));
+
+export { GetOpsTriggerWorkflowsArgs, GetOpsTriggerWorkflowsResult, GetOpsTriggerWorkflowsOutputArgs } from "./getOpsTriggerWorkflows";
+export const getOpsTriggerWorkflows: typeof import("./getOpsTriggerWorkflows").getOpsTriggerWorkflows = null as any;
+export const getOpsTriggerWorkflowsOutput: typeof import("./getOpsTriggerWorkflows").getOpsTriggerWorkflowsOutput = null as any;
+utilities.lazyLoad(exports, ["getOpsTriggerWorkflows","getOpsTriggerWorkflowsOutput"], () => require("./getOpsTriggerWorkflows"));
+
 export { GetOpsUpstreamTasksArgs, GetOpsUpstreamTasksResult, GetOpsUpstreamTasksOutputArgs } from "./getOpsUpstreamTasks";
 export const getOpsUpstreamTasks: typeof import("./getOpsUpstreamTasks").getOpsUpstreamTasks = null as any;
 export const getOpsUpstreamTasksOutput: typeof import("./getOpsUpstreamTasks").getOpsUpstreamTasksOutput = null as any;
@@ -164,6 +194,16 @@ export { GetProjectsArgs, GetProjectsResult, GetProjectsOutputArgs } from "./get
 export const getProjects: typeof import("./getProjects").getProjects = null as any;
 export const getProjectsOutput: typeof import("./getProjects").getProjectsOutput = null as any;
 utilities.lazyLoad(exports, ["getProjects","getProjectsOutput"], () => require("./getProjects"));
+
+export { GetQualityRuleGroupExecResultsArgs, GetQualityRuleGroupExecResultsResult, GetQualityRuleGroupExecResultsOutputArgs } from "./getQualityRuleGroupExecResults";
+export const getQualityRuleGroupExecResults: typeof import("./getQualityRuleGroupExecResults").getQualityRuleGroupExecResults = null as any;
+export const getQualityRuleGroupExecResultsOutput: typeof import("./getQualityRuleGroupExecResults").getQualityRuleGroupExecResultsOutput = null as any;
+utilities.lazyLoad(exports, ["getQualityRuleGroupExecResults","getQualityRuleGroupExecResultsOutput"], () => require("./getQualityRuleGroupExecResults"));
+
+export { GetQualityRuleTemplatesArgs, GetQualityRuleTemplatesResult, GetQualityRuleTemplatesOutputArgs } from "./getQualityRuleTemplates";
+export const getQualityRuleTemplates: typeof import("./getQualityRuleTemplates").getQualityRuleTemplates = null as any;
+export const getQualityRuleTemplatesOutput: typeof import("./getQualityRuleTemplates").getQualityRuleTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getQualityRuleTemplates","getQualityRuleTemplatesOutput"], () => require("./getQualityRuleTemplates"));
 
 export { GetResourceFilesArgs, GetResourceFilesResult, GetResourceFilesOutputArgs } from "./getResourceFiles";
 export const getResourceFiles: typeof import("./getResourceFiles").getResourceFiles = null as any;
@@ -230,6 +270,41 @@ export const getTenantRoles: typeof import("./getTenantRoles").getTenantRoles = 
 export const getTenantRolesOutput: typeof import("./getTenantRoles").getTenantRolesOutput = null as any;
 utilities.lazyLoad(exports, ["getTenantRoles","getTenantRolesOutput"], () => require("./getTenantRoles"));
 
+export { GetTriggerTaskCodeArgs, GetTriggerTaskCodeResult, GetTriggerTaskCodeOutputArgs } from "./getTriggerTaskCode";
+export const getTriggerTaskCode: typeof import("./getTriggerTaskCode").getTriggerTaskCode = null as any;
+export const getTriggerTaskCodeOutput: typeof import("./getTriggerTaskCode").getTriggerTaskCodeOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerTaskCode","getTriggerTaskCodeOutput"], () => require("./getTriggerTaskCode"));
+
+export { GetTriggerTaskRunArgs, GetTriggerTaskRunResult, GetTriggerTaskRunOutputArgs } from "./getTriggerTaskRun";
+export const getTriggerTaskRun: typeof import("./getTriggerTaskRun").getTriggerTaskRun = null as any;
+export const getTriggerTaskRunOutput: typeof import("./getTriggerTaskRun").getTriggerTaskRunOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerTaskRun","getTriggerTaskRunOutput"], () => require("./getTriggerTaskRun"));
+
+export { GetTriggerTaskVersionArgs, GetTriggerTaskVersionResult, GetTriggerTaskVersionOutputArgs } from "./getTriggerTaskVersion";
+export const getTriggerTaskVersion: typeof import("./getTriggerTaskVersion").getTriggerTaskVersion = null as any;
+export const getTriggerTaskVersionOutput: typeof import("./getTriggerTaskVersion").getTriggerTaskVersionOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerTaskVersion","getTriggerTaskVersionOutput"], () => require("./getTriggerTaskVersion"));
+
+export { GetTriggerTaskVersionsArgs, GetTriggerTaskVersionsResult, GetTriggerTaskVersionsOutputArgs } from "./getTriggerTaskVersions";
+export const getTriggerTaskVersions: typeof import("./getTriggerTaskVersions").getTriggerTaskVersions = null as any;
+export const getTriggerTaskVersionsOutput: typeof import("./getTriggerTaskVersions").getTriggerTaskVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerTaskVersions","getTriggerTaskVersionsOutput"], () => require("./getTriggerTaskVersions"));
+
+export { GetTriggerWorkflowRunArgs, GetTriggerWorkflowRunResult, GetTriggerWorkflowRunOutputArgs } from "./getTriggerWorkflowRun";
+export const getTriggerWorkflowRun: typeof import("./getTriggerWorkflowRun").getTriggerWorkflowRun = null as any;
+export const getTriggerWorkflowRunOutput: typeof import("./getTriggerWorkflowRun").getTriggerWorkflowRunOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerWorkflowRun","getTriggerWorkflowRunOutput"], () => require("./getTriggerWorkflowRun"));
+
+export { GetTriggerWorkflowRunsArgs, GetTriggerWorkflowRunsResult, GetTriggerWorkflowRunsOutputArgs } from "./getTriggerWorkflowRuns";
+export const getTriggerWorkflowRuns: typeof import("./getTriggerWorkflowRuns").getTriggerWorkflowRuns = null as any;
+export const getTriggerWorkflowRunsOutput: typeof import("./getTriggerWorkflowRuns").getTriggerWorkflowRunsOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerWorkflowRuns","getTriggerWorkflowRunsOutput"], () => require("./getTriggerWorkflowRuns"));
+
+export { GetTriggerWorkflowsArgs, GetTriggerWorkflowsResult, GetTriggerWorkflowsOutputArgs } from "./getTriggerWorkflows";
+export const getTriggerWorkflows: typeof import("./getTriggerWorkflows").getTriggerWorkflows = null as any;
+export const getTriggerWorkflowsOutput: typeof import("./getTriggerWorkflows").getTriggerWorkflowsOutput = null as any;
+utilities.lazyLoad(exports, ["getTriggerWorkflows","getTriggerWorkflowsOutput"], () => require("./getTriggerWorkflows"));
+
 export { GetUpstreamTaskInstancesArgs, GetUpstreamTaskInstancesResult, GetUpstreamTaskInstancesOutputArgs } from "./getUpstreamTaskInstances";
 export const getUpstreamTaskInstances: typeof import("./getUpstreamTaskInstances").getUpstreamTaskInstances = null as any;
 export const getUpstreamTaskInstancesOutput: typeof import("./getUpstreamTaskInstances").getUpstreamTaskInstancesOutput = null as any;
@@ -240,10 +315,20 @@ export const getUpstreamTasks: typeof import("./getUpstreamTasks").getUpstreamTa
 export const getUpstreamTasksOutput: typeof import("./getUpstreamTasks").getUpstreamTasksOutput = null as any;
 utilities.lazyLoad(exports, ["getUpstreamTasks","getUpstreamTasksOutput"], () => require("./getUpstreamTasks"));
 
+export { GetUpstreamTriggerTasksArgs, GetUpstreamTriggerTasksResult, GetUpstreamTriggerTasksOutputArgs } from "./getUpstreamTriggerTasks";
+export const getUpstreamTriggerTasks: typeof import("./getUpstreamTriggerTasks").getUpstreamTriggerTasks = null as any;
+export const getUpstreamTriggerTasksOutput: typeof import("./getUpstreamTriggerTasks").getUpstreamTriggerTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getUpstreamTriggerTasks","getUpstreamTriggerTasksOutput"], () => require("./getUpstreamTriggerTasks"));
+
 export { GetWorkflowFoldersArgs, GetWorkflowFoldersResult, GetWorkflowFoldersOutputArgs } from "./getWorkflowFolders";
 export const getWorkflowFolders: typeof import("./getWorkflowFolders").getWorkflowFolders = null as any;
 export const getWorkflowFoldersOutput: typeof import("./getWorkflowFolders").getWorkflowFoldersOutput = null as any;
 utilities.lazyLoad(exports, ["getWorkflowFolders","getWorkflowFoldersOutput"], () => require("./getWorkflowFolders"));
+
+export { GetWorkflowMaxPermissionArgs, GetWorkflowMaxPermissionResult, GetWorkflowMaxPermissionOutputArgs } from "./getWorkflowMaxPermission";
+export const getWorkflowMaxPermission: typeof import("./getWorkflowMaxPermission").getWorkflowMaxPermission = null as any;
+export const getWorkflowMaxPermissionOutput: typeof import("./getWorkflowMaxPermission").getWorkflowMaxPermissionOutput = null as any;
+utilities.lazyLoad(exports, ["getWorkflowMaxPermission","getWorkflowMaxPermissionOutput"], () => require("./getWorkflowMaxPermission"));
 
 export { GetWorkflowsArgs, GetWorkflowsResult, GetWorkflowsOutputArgs } from "./getWorkflows";
 export const getWorkflows: typeof import("./getWorkflows").getWorkflows = null as any;
@@ -264,6 +349,11 @@ export { IntegrationTaskNodeArgs, IntegrationTaskNodeState } from "./integration
 export type IntegrationTaskNode = import("./integrationTaskNode").IntegrationTaskNode;
 export const IntegrationTaskNode: typeof import("./integrationTaskNode").IntegrationTaskNode = null as any;
 utilities.lazyLoad(exports, ["IntegrationTaskNode"], () => require("./integrationTaskNode"));
+
+export { KillTriggerWorkflowRunArgs, KillTriggerWorkflowRunState } from "./killTriggerWorkflowRun";
+export type KillTriggerWorkflowRun = import("./killTriggerWorkflowRun").KillTriggerWorkflowRun;
+export const KillTriggerWorkflowRun: typeof import("./killTriggerWorkflowRun").KillTriggerWorkflowRun = null as any;
+utilities.lazyLoad(exports, ["KillTriggerWorkflowRun"], () => require("./killTriggerWorkflowRun"));
 
 export { LineageAttachmentArgs, LineageAttachmentState } from "./lineageAttachment";
 export type LineageAttachment = import("./lineageAttachment").LineageAttachment;
@@ -299,6 +389,21 @@ export { ProjectMemberArgs, ProjectMemberState } from "./projectMember";
 export type ProjectMember = import("./projectMember").ProjectMember;
 export const ProjectMember: typeof import("./projectMember").ProjectMember = null as any;
 utilities.lazyLoad(exports, ["ProjectMember"], () => require("./projectMember"));
+
+export { QualityRuleArgs, QualityRuleState } from "./qualityRule";
+export type QualityRule = import("./qualityRule").QualityRule;
+export const QualityRule: typeof import("./qualityRule").QualityRule = null as any;
+utilities.lazyLoad(exports, ["QualityRule"], () => require("./qualityRule"));
+
+export { QualityRuleGroupArgs, QualityRuleGroupState } from "./qualityRuleGroup";
+export type QualityRuleGroup = import("./qualityRuleGroup").QualityRuleGroup;
+export const QualityRuleGroup: typeof import("./qualityRuleGroup").QualityRuleGroup = null as any;
+utilities.lazyLoad(exports, ["QualityRuleGroup"], () => require("./qualityRuleGroup"));
+
+export { RerunTriggerWorkflowRunAsyncArgs, RerunTriggerWorkflowRunAsyncState } from "./rerunTriggerWorkflowRunAsync";
+export type RerunTriggerWorkflowRunAsync = import("./rerunTriggerWorkflowRunAsync").RerunTriggerWorkflowRunAsync;
+export const RerunTriggerWorkflowRunAsync: typeof import("./rerunTriggerWorkflowRunAsync").RerunTriggerWorkflowRunAsync = null as any;
+utilities.lazyLoad(exports, ["RerunTriggerWorkflowRunAsync"], () => require("./rerunTriggerWorkflowRunAsync"));
 
 export { ResourceFileArgs, ResourceFileState } from "./resourceFile";
 export type ResourceFile = import("./resourceFile").ResourceFile;
@@ -350,6 +455,11 @@ export type SubmitTaskOperation = import("./submitTaskOperation").SubmitTaskOper
 export const SubmitTaskOperation: typeof import("./submitTaskOperation").SubmitTaskOperation = null as any;
 utilities.lazyLoad(exports, ["SubmitTaskOperation"], () => require("./submitTaskOperation"));
 
+export { SubmitTriggerTaskArgs, SubmitTriggerTaskState } from "./submitTriggerTask";
+export type SubmitTriggerTask = import("./submitTriggerTask").SubmitTriggerTask;
+export const SubmitTriggerTask: typeof import("./submitTriggerTask").SubmitTriggerTask = null as any;
+utilities.lazyLoad(exports, ["SubmitTriggerTask"], () => require("./submitTriggerTask"));
+
 export { TaskArgs, TaskState } from "./task";
 export type Task = import("./task").Task;
 export const Task: typeof import("./task").Task = null as any;
@@ -369,6 +479,16 @@ export { TaskSetSuccessInstanceAsyncArgs, TaskSetSuccessInstanceAsyncState } fro
 export type TaskSetSuccessInstanceAsync = import("./taskSetSuccessInstanceAsync").TaskSetSuccessInstanceAsync;
 export const TaskSetSuccessInstanceAsync: typeof import("./taskSetSuccessInstanceAsync").TaskSetSuccessInstanceAsync = null as any;
 utilities.lazyLoad(exports, ["TaskSetSuccessInstanceAsync"], () => require("./taskSetSuccessInstanceAsync"));
+
+export { TriggerTaskArgs, TriggerTaskState } from "./triggerTask";
+export type TriggerTask = import("./triggerTask").TriggerTask;
+export const TriggerTask: typeof import("./triggerTask").TriggerTask = null as any;
+utilities.lazyLoad(exports, ["TriggerTask"], () => require("./triggerTask"));
+
+export { TriggerWorkflowArgs, TriggerWorkflowState } from "./triggerWorkflow";
+export type TriggerWorkflow = import("./triggerWorkflow").TriggerWorkflow;
+export const TriggerWorkflow: typeof import("./triggerWorkflow").TriggerWorkflow = null as any;
+utilities.lazyLoad(exports, ["TriggerWorkflow"], () => require("./triggerWorkflow"));
 
 export { WeDataDataSourceArgs, WeDataDataSourceState } from "./weDataDataSource";
 export type WeDataDataSource = import("./weDataDataSource").WeDataDataSource;
@@ -395,6 +515,11 @@ export type WorkflowFolder = import("./workflowFolder").WorkflowFolder;
 export const WorkflowFolder: typeof import("./workflowFolder").WorkflowFolder = null as any;
 utilities.lazyLoad(exports, ["WorkflowFolder"], () => require("./workflowFolder"));
 
+export { WorkflowPermissionsArgs, WorkflowPermissionsState } from "./workflowPermissions";
+export type WorkflowPermissions = import("./workflowPermissions").WorkflowPermissions;
+export const WorkflowPermissions: typeof import("./workflowPermissions").WorkflowPermissions = null as any;
+utilities.lazyLoad(exports, ["WorkflowPermissions"], () => require("./workflowPermissions"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -402,12 +527,16 @@ const _module = {
         switch (type) {
             case "tencentcloud:Wedata/addCalcEnginesToProjectOperation:AddCalcEnginesToProjectOperation":
                 return new AddCalcEnginesToProjectOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/authorizeDataSource:AuthorizeDataSource":
+                return new AuthorizeDataSource(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/codeFile:CodeFile":
                 return new CodeFile(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/codeFolder:CodeFolder":
                 return new CodeFolder(name, <any>undefined, { urn })
-            case "tencentcloud:Wedata/dataBackfillPlanOperation:DataBackfillPlanOperation":
-                return new DataBackfillPlanOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/codePermissions:CodePermissions":
+                return new CodePermissions(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/dataBackfillPlan:DataBackfillPlan":
+                return new DataBackfillPlan(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/datasource:Datasource":
                 return new Datasource(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/dqRule:DqRule":
@@ -420,6 +549,8 @@ const _module = {
                 return new IntegrationRealtimeTask(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/integrationTaskNode:IntegrationTaskNode":
                 return new IntegrationTaskNode(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/killTriggerWorkflowRun:KillTriggerWorkflowRun":
+                return new KillTriggerWorkflowRun(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/lineageAttachment:LineageAttachment":
                 return new LineageAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/opsAlarmRule:OpsAlarmRule":
@@ -434,6 +565,12 @@ const _module = {
                 return new Project(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/projectMember:ProjectMember":
                 return new ProjectMember(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/qualityRule:QualityRule":
+                return new QualityRule(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/qualityRuleGroup:QualityRuleGroup":
+                return new QualityRuleGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/rerunTriggerWorkflowRunAsync:RerunTriggerWorkflowRunAsync":
+                return new RerunTriggerWorkflowRunAsync(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/resourceFile:ResourceFile":
                 return new ResourceFile(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/resourceFolder:ResourceFolder":
@@ -454,6 +591,8 @@ const _module = {
                 return new StopSqlScriptRunOperation(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/submitTaskOperation:SubmitTaskOperation":
                 return new SubmitTaskOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/submitTriggerTask:SubmitTriggerTask":
+                return new SubmitTriggerTask(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/task:Task":
                 return new Task(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/taskKillInstanceAsync:TaskKillInstanceAsync":
@@ -462,27 +601,36 @@ const _module = {
                 return new TaskRerunInstanceAsync(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/taskSetSuccessInstanceAsync:TaskSetSuccessInstanceAsync":
                 return new TaskSetSuccessInstanceAsync(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/triggerTask:TriggerTask":
+                return new TriggerTask(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/triggerWorkflow:TriggerWorkflow":
+                return new TriggerWorkflow(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/weDataDataSource:WeDataDataSource":
                 return new WeDataDataSource(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/workflow:Workflow":
                 return new Workflow(name, <any>undefined, { urn })
             case "tencentcloud:Wedata/workflowFolder:WorkflowFolder":
                 return new WorkflowFolder(name, <any>undefined, { urn })
+            case "tencentcloud:Wedata/workflowPermissions:WorkflowPermissions":
+                return new WorkflowPermissions(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/addCalcEnginesToProjectOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/authorizeDataSource", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/codeFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/codeFolder", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/dataBackfillPlanOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/codePermissions", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/dataBackfillPlan", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/datasource", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/dqRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/function", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/integrationOfflineTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/integrationRealtimeTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/integrationTaskNode", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/killTriggerWorkflowRun", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/lineageAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/opsAlarmRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/opsStopTaskAsync", _module)
@@ -490,6 +638,9 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/opsTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/opsTaskOwner", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/project", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/projectMember", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/qualityRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/qualityRuleGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/rerunTriggerWorkflowRunAsync", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/resourceFile", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/resourceFolder", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/resourceGroupToProjectAttachment", _module)
@@ -500,10 +651,14 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/sqlFolder", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/sqlScript", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/stopSqlScriptRunOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/submitTaskOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/submitTriggerTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/task", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/taskKillInstanceAsync", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/taskRerunInstanceAsync", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/taskSetSuccessInstanceAsync", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/triggerTask", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/triggerWorkflow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/weDataDataSource", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/workflow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/workflowFolder", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Wedata/workflowPermissions", _module)

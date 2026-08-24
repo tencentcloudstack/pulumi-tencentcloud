@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// rum project_status_config can be imported using the id, e.g.
+// rum projectStatusConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id

@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// organization org_manage_policy can be imported using the id, e.g.
+// organization orgManagePolicy can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Organization/orgManagePolicy:OrgManagePolicy org_manage_policy policy_id#type

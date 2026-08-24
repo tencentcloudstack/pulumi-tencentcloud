@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const _default = tencentcloud.Mysql.getBackupList({
+ * const _default = tencentcloud.mysql.getBackupList({
  *     mysqlId: "terraform-test-local-database",
  *     maxNumber: 10,
  *     resultOutputFile: "mytestpath",
@@ -74,7 +74,7 @@ export interface GetBackupListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const _default = tencentcloud.Mysql.getBackupList({
+ * const _default = tencentcloud.mysql.getBackupList({
  *     mysqlId: "terraform-test-local-database",
  *     maxNumber: 10,
  *     resultOutputFile: "mytestpath",
@@ -97,7 +97,7 @@ export interface GetBackupListOutputArgs {
     /**
      * The latest files to list, rang from 1 to 10000. And the default value is `10`.
      */
-    maxNumber?: pulumi.Input<number>;
+    maxNumber?: pulumi.Input<number | undefined>;
     /**
      * Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
      */
@@ -105,5 +105,5 @@ export interface GetBackupListOutputArgs {
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

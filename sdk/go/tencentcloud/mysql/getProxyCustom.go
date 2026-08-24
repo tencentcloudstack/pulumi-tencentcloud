@@ -38,12 +38,8 @@ type GetProxyCustomResult struct {
 }
 
 func GetProxyCustomOutput(ctx *pulumi.Context, args GetProxyCustomOutputArgs, opts ...pulumi.InvokeOption) GetProxyCustomResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxyCustomResultOutput, error) {
-			args := v.(GetProxyCustomArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args, GetProxyCustomResultOutput{}, options).(GetProxyCustomResultOutput), nil
-		}).(GetProxyCustomResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args, GetProxyCustomResultOutput{}, options).(GetProxyCustomResultOutput)
 }
 
 // A collection of arguments for invoking getProxyCustom.

@@ -104,15 +104,15 @@ export interface ObjectCopyOperationState {
     /**
      * Bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Object key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Source url. In the CDC scenario, the CDC source url is used.
      */
-    sourceUrl?: pulumi.Input<string>;
+    sourceUrl?: pulumi.Input<string | undefined>;
 }
 
 /**

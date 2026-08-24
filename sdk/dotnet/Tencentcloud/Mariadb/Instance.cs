@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
 {
     /// <summary>
-    /// Provides a resource to create a mariadb instance
+    /// Provides a resource to create a MariaDB instance(prepaid)
     /// 
     /// ## Example Usage
     /// 
@@ -23,26 +23,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var instance = new Tencentcloud.Mariadb.Instance("instance", new()
+    ///     var example = new Tencentcloud.Mariadb.Instance("example", new()
     ///     {
     ///         Zones = new[]
     ///         {
-    ///             "ap-guangzhou-3",
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-7",
     ///         },
+    ///         InstanceName = "tf-example",
     ///         NodeCount = 2,
     ///         Memory = 8,
-    ///         Storage = 10,
+    ///         Storage = 500,
     ///         Period = 1,
-    ///         VpcId = "vpc-ii1jfbhl",
-    ///         SubnetId = "subnet-3ku415by",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         DbVersionId = "8.0",
-    ///         InstanceName = "terraform-test",
     ///         AutoRenewFlag = 1,
-    ///         Ipv6Flag = 0,
-    ///         Tags = 
-    ///         {
-    ///             { "createby", "terrafrom-2" },
-    ///         },
     ///         InitParams = new[]
     ///         {
     ///             new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
@@ -66,8 +62,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///                 Value = "1",
     ///             },
     ///         },
-    ///         DcnRegion = "",
-    ///         DcnInstanceId = "",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terrafrom" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -75,10 +73,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Import
     /// 
-    /// mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
+    /// MariaDB instance(prepaid) can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+    /// $ pulumi import tencentcloud:Mariadb/instance:Instance example tdsql-4pzs5b67
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/instance:Instance")]

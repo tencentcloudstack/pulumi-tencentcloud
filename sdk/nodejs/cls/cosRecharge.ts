@@ -7,6 +7,10 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a cls cosRecharge
+ *
+ * > **NOTE:** This resource can not be deleted if you run `terraform destroy`.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -38,7 +42,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls cos_recharge can be imported using the id, e.g.
+ * cls cosRecharge can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id
@@ -173,39 +177,39 @@ export interface CosRechargeState {
     /**
      * cos bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * cos bucket region.
      */
-    bucketRegion?: pulumi.Input<string>;
+    bucketRegion?: pulumi.Input<string | undefined>;
     /**
      * supported gzip, lzop, snappy.
      */
-    compress?: pulumi.Input<string>;
+    compress?: pulumi.Input<string | undefined>;
     /**
      * extract rule info.
      */
-    extractRuleInfo?: pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfo>;
+    extractRuleInfo?: pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfo | undefined>;
     /**
      * log type.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * logset id.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * recharge name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * cos file prefix.
      */
-    prefix?: pulumi.Input<string>;
+    prefix?: pulumi.Input<string | undefined>;
     /**
      * topic id.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -223,11 +227,11 @@ export interface CosRechargeArgs {
     /**
      * supported gzip, lzop, snappy.
      */
-    compress?: pulumi.Input<string>;
+    compress?: pulumi.Input<string | undefined>;
     /**
      * extract rule info.
      */
-    extractRuleInfo?: pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfo>;
+    extractRuleInfo?: pulumi.Input<inputs.Cls.CosRechargeExtractRuleInfo | undefined>;
     /**
      * log type.
      */
@@ -239,7 +243,7 @@ export interface CosRechargeArgs {
     /**
      * recharge name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * cos file prefix.
      */

@@ -17,10 +17,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -260,47 +260,47 @@ export interface LifecycleHookState {
     /**
      * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
      */
-    defaultResult?: pulumi.Input<string>;
+    defaultResult?: pulumi.Input<string | undefined>;
     /**
      * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
      */
-    heartbeatTimeout?: pulumi.Input<number>;
+    heartbeatTimeout?: pulumi.Input<number | undefined>;
     /**
      * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
      */
-    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand>;
+    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand | undefined>;
     /**
      * The name of the lifecycle hook.
      */
-    lifecycleHookName?: pulumi.Input<string>;
+    lifecycleHookName?: pulumi.Input<string | undefined>;
     /**
      * The instance state to which you want to attach the lifecycle hook. Valid values: `INSTANCE_LAUNCHING` and `INSTANCE_TERMINATING`.
      */
-    lifecycleTransition?: pulumi.Input<string>;
+    lifecycleTransition?: pulumi.Input<string | undefined>;
     /**
      * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
      */
-    lifecycleTransitionType?: pulumi.Input<string>;
+    lifecycleTransitionType?: pulumi.Input<string | undefined>;
     /**
      * Contains additional information that you want to include any time AS sends a message to the notification target.
      */
-    notificationMetadata?: pulumi.Input<string>;
+    notificationMetadata?: pulumi.Input<string | undefined>;
     /**
      * For CMQ_QUEUE type, a name of queue must be set.
      */
-    notificationQueueName?: pulumi.Input<string>;
+    notificationQueueName?: pulumi.Input<string | undefined>;
     /**
      * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
      */
-    notificationTargetType?: pulumi.Input<string>;
+    notificationTargetType?: pulumi.Input<string | undefined>;
     /**
      * For CMQ_TOPIC type, a name of topic must be set.
      */
-    notificationTopicName?: pulumi.Input<string>;
+    notificationTopicName?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -310,15 +310,15 @@ export interface LifecycleHookArgs {
     /**
      * Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
      */
-    defaultResult?: pulumi.Input<string>;
+    defaultResult?: pulumi.Input<string | undefined>;
     /**
      * Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. Valid value ranges: (30~7200). and default value is `300`.
      */
-    heartbeatTimeout?: pulumi.Input<number>;
+    heartbeatTimeout?: pulumi.Input<number | undefined>;
     /**
      * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
      */
-    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand>;
+    lifecycleCommand?: pulumi.Input<inputs.As.LifecycleHookLifecycleCommand | undefined>;
     /**
      * The name of the lifecycle hook.
      */
@@ -330,23 +330,23 @@ export interface LifecycleHookArgs {
     /**
      * The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs.
      */
-    lifecycleTransitionType?: pulumi.Input<string>;
+    lifecycleTransitionType?: pulumi.Input<string | undefined>;
     /**
      * Contains additional information that you want to include any time AS sends a message to the notification target.
      */
-    notificationMetadata?: pulumi.Input<string>;
+    notificationMetadata?: pulumi.Input<string | undefined>;
     /**
      * For CMQ_QUEUE type, a name of queue must be set.
      */
-    notificationQueueName?: pulumi.Input<string>;
+    notificationQueueName?: pulumi.Input<string | undefined>;
     /**
      * Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
      */
-    notificationTargetType?: pulumi.Input<string>;
+    notificationTargetType?: pulumi.Input<string | undefined>;
     /**
      * For CMQ_TOPIC type, a name of topic must be set.
      */
-    notificationTopicName?: pulumi.Input<string>;
+    notificationTopicName?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */

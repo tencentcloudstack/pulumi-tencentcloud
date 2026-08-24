@@ -31,7 +31,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem environment can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
  * ```
@@ -132,23 +131,23 @@ export interface EnvironmentState {
     /**
      * environment description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * environment name.
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * subnet IDs.
      */
-    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * environment tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vpc ID.
      */
-    vpc?: pulumi.Input<string>;
+    vpc?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -158,7 +157,7 @@ export interface EnvironmentArgs {
     /**
      * environment description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * environment name.
      */
@@ -170,7 +169,7 @@ export interface EnvironmentArgs {
     /**
      * environment tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vpc ID.
      */

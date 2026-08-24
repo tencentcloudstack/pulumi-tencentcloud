@@ -46,7 +46,6 @@ import (
 // ## Import
 //
 // CLS logset can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Cls/logset:Logset example 698902ff-8b5a-4c65-824b-d8956f366351
 // ```

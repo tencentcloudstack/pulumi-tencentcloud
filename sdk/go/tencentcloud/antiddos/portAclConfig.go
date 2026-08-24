@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// antiddos port_acl_config can be imported using the id, e.g.
+// antiddos portAclConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}

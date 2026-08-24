@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc local_gateway can be imported using the id, e.g.
+ * vpc localGateway can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id
@@ -116,15 +116,15 @@ export interface LocalGatewayState {
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Local gateway name.
      */
-    localGatewayName?: pulumi.Input<string>;
+    localGatewayName?: pulumi.Input<string | undefined>;
     /**
      * VPC instance ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

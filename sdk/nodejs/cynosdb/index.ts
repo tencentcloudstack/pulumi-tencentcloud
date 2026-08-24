@@ -35,6 +35,11 @@ export type BinlogSaveDays = import("./binlogSaveDays").BinlogSaveDays;
 export const BinlogSaveDays: typeof import("./binlogSaveDays").BinlogSaveDays = null as any;
 utilities.lazyLoad(exports, ["BinlogSaveDays"], () => require("./binlogSaveDays"));
 
+export { ClsDeliveryArgs, ClsDeliveryState } from "./clsDelivery";
+export type ClsDelivery = import("./clsDelivery").ClsDelivery;
+export const ClsDelivery: typeof import("./clsDelivery").ClsDelivery = null as any;
+utilities.lazyLoad(exports, ["ClsDelivery"], () => require("./clsDelivery"));
+
 export { ClusterArgs, ClusterState } from "./cluster";
 export type Cluster = import("./cluster").Cluster;
 export const Cluster: typeof import("./cluster").Cluster = null as any;
@@ -64,6 +69,11 @@ export { ClusterTransparentEncryptArgs, ClusterTransparentEncryptState } from ".
 export type ClusterTransparentEncrypt = import("./clusterTransparentEncrypt").ClusterTransparentEncrypt;
 export const ClusterTransparentEncrypt: typeof import("./clusterTransparentEncrypt").ClusterTransparentEncrypt = null as any;
 utilities.lazyLoad(exports, ["ClusterTransparentEncrypt"], () => require("./clusterTransparentEncrypt"));
+
+export { ClusterV2Args, ClusterV2State } from "./clusterV2";
+export type ClusterV2 = import("./clusterV2").ClusterV2;
+export const ClusterV2: typeof import("./clusterV2").ClusterV2 = null as any;
+utilities.lazyLoad(exports, ["ClusterV2"], () => require("./clusterV2"));
 
 export { ExportInstanceErrorLogsArgs, ExportInstanceErrorLogsState } from "./exportInstanceErrorLogs";
 export type ExportInstanceErrorLogs = import("./exportInstanceErrorLogs").ExportInstanceErrorLogs;
@@ -205,6 +215,11 @@ export type IsolateInstance = import("./isolateInstance").IsolateInstance;
 export const IsolateInstance: typeof import("./isolateInstance").IsolateInstance = null as any;
 utilities.lazyLoad(exports, ["IsolateInstance"], () => require("./isolateInstance"));
 
+export { LibraDbInstanceArgs, LibraDbInstanceState } from "./libraDbInstance";
+export type LibraDbInstance = import("./libraDbInstance").LibraDbInstance;
+export const LibraDbInstance: typeof import("./libraDbInstance").LibraDbInstance = null as any;
+utilities.lazyLoad(exports, ["LibraDbInstance"], () => require("./libraDbInstance"));
+
 export { ParamTemplateArgs, ParamTemplateState } from "./paramTemplate";
 export type ParamTemplate = import("./paramTemplate").ParamTemplate;
 export const ParamTemplate: typeof import("./paramTemplate").ParamTemplate = null as any;
@@ -287,6 +302,8 @@ const _module = {
                 return new BackupConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays":
                 return new BinlogSaveDays(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clsDelivery:ClsDelivery":
+                return new ClsDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases":
@@ -299,6 +316,8 @@ const _module = {
                 return new ClusterSlaveZone(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt":
                 return new ClusterTransparentEncrypt(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/clusterV2:ClusterV2":
+                return new ClusterV2(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs":
                 return new ExportInstanceErrorLogs(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries":
@@ -307,6 +326,8 @@ const _module = {
                 return new InstanceParam(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/isolateInstance:IsolateInstance":
                 return new IsolateInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Cynosdb/libraDbInstance:LibraDbInstance":
+                return new LibraDbInstance(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/paramTemplate:ParamTemplate":
                 return new ParamTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Cynosdb/proxy:Proxy":
@@ -344,16 +365,19 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/auditLogFile", _m
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/auditService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/backupConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/binlogSaveDays", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clsDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterDatabases", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterPasswordComplexity", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterResourcePackagesAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterSlaveZone", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterTransparentEncrypt", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/clusterV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/exportInstanceErrorLogs", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/exportInstanceSlowQueries", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/instanceParam", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/isolateInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/libraDbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/paramTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/proxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cynosdb/proxyEndPoint", _module)

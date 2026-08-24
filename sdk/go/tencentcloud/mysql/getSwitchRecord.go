@@ -67,12 +67,8 @@ type GetSwitchRecordResult struct {
 }
 
 func GetSwitchRecordOutput(ctx *pulumi.Context, args GetSwitchRecordOutputArgs, opts ...pulumi.InvokeOption) GetSwitchRecordResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSwitchRecordResultOutput, error) {
-			args := v.(GetSwitchRecordArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args, GetSwitchRecordResultOutput{}, options).(GetSwitchRecordResultOutput), nil
-		}).(GetSwitchRecordResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args, GetSwitchRecordResultOutput{}, options).(GetSwitchRecordResultOutput)
 }
 
 // A collection of arguments for invoking getSwitchRecord.

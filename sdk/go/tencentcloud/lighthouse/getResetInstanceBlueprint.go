@@ -78,12 +78,8 @@ type GetResetInstanceBlueprintResult struct {
 }
 
 func GetResetInstanceBlueprintOutput(ctx *pulumi.Context, args GetResetInstanceBlueprintOutputArgs, opts ...pulumi.InvokeOption) GetResetInstanceBlueprintResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResetInstanceBlueprintResultOutput, error) {
-			args := v.(GetResetInstanceBlueprintArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args, GetResetInstanceBlueprintResultOutput{}, options).(GetResetInstanceBlueprintResultOutput), nil
-		}).(GetResetInstanceBlueprintResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args, GetResetInstanceBlueprintResultOutput{}, options).(GetResetInstanceBlueprintResultOutput)
 }
 
 // A collection of arguments for invoking getResetInstanceBlueprint.

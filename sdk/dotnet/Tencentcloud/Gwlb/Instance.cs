@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gwlb
     /// 
     /// ## Import
     /// 
-    /// gwlb gwlb_instance can be imported using the id, e.g.
+    /// gwlb GwlbInstance can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Gwlb/instance:Instance gwlb_instance gwlb_instance_id

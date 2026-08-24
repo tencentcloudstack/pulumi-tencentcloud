@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  * GAAP proxy can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/proxy:Proxy  tencentcloud_gaap_proxy.foo link-11112222
+ *   $ pulumi import tencentcloud:Gaap/proxy:Proxy foo link-11112222
  * ```
  */
 export class Proxy extends pulumi.CustomResource {
@@ -198,67 +198,67 @@ export interface ProxyState {
     /**
      * Access region of the GAAP proxy. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`, `Changsha`, `Xian`, `Wuhan`, `Fuzhou`, `Shenyang`, `Zhengzhou`, `Jinan`, `Hangzhou`, `Shijiazhuang`, `Hefei`.
      */
-    accessRegion?: pulumi.Input<string>;
+    accessRegion?: pulumi.Input<string | undefined>;
     /**
      * Maximum bandwidth of the GAAP proxy, unit is Mbps. Valid value: `10`, `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000` and `10000`. To set `2000`, `5000` or `10000`, you need to apply for a whitelist from Tencent Cloud.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Maximum concurrency of the GAAP proxy, unit is 10k. Valid value: `2`, `5`, `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`, `150`, `200`, `250` and `300`. To set `150`, `200`, `250` or `300`, you need to apply for a whitelist from Tencent Cloud.
      */
-    concurrent?: pulumi.Input<number>;
+    concurrent?: pulumi.Input<number | undefined>;
     /**
      * Creation time of the GAAP proxy.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Access domain of the GAAP proxy.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether GAAP proxy is enabled, default value is `true`.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Forwarding IP of the GAAP proxy.
      */
-    forwardIp?: pulumi.Input<string>;
+    forwardIp?: pulumi.Input<string | undefined>;
     /**
      * Access IP of the GAAP proxy.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the GAAP proxy, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Network type. `normal`: regular BGP, `cn2`: boutique BGP, `triple`: triple play.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the GAAP proxy, `0` means is default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Region of the GAAP realserver. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`.
      */
-    realserverRegion?: pulumi.Input<string>;
+    realserverRegion?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether GAAP proxy can scalable.
      */
-    scalable?: pulumi.Input<boolean>;
+    scalable?: pulumi.Input<boolean | undefined>;
     /**
      * Status of the GAAP proxy.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Supported protocols of the GAAP proxy.
      */
-    supportProtocols?: pulumi.Input<pulumi.Input<string>[]>;
+    supportProtocols?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tags of the GAAP proxy. Tags that do not exist are not created automatically.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -280,19 +280,19 @@ export interface ProxyArgs {
     /**
      * Indicates whether GAAP proxy is enabled, default value is `true`.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the GAAP proxy, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Network type. `normal`: regular BGP, `cn2`: boutique BGP, `triple`: triple play.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the GAAP proxy, `0` means is default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Region of the GAAP realserver. Valid value: `Hongkong`, `SoutheastAsia`, `Korea`, `Europe`, `NorthAmerica`, `Canada`, `WestIndia`, `Thailand`, `Virginia`, `Japan`, `Taipei`, `SL_AZURE_NorthUAE`, `SL_AZURE_EastAUS`, `SL_AZURE_NorthCentralUSA`, `SL_AZURE_SouthIndia`, `SL_AZURE_SouthBrazil`, `SL_AZURE_NorthZAF`, `SL_AZURE_SoutheastAsia`, `SL_AZURE_CentralFrance`, `SL_AZURE_SouthEngland`, `SL_AZURE_EastUS`, `SL_AZURE_WestUS`, `SL_AZURE_SouthCentralUSA`, `Jakarta`, `Beijing`, `Shanghai`, `Guangzhou`, `Chengdu`, `SL_AZURE_NorwayEast`, `Chongqing`, `Nanjing`, `SaoPaulo`, `SL_AZURE_JapanEast`.
      */
@@ -300,5 +300,5 @@ export interface ProxyArgs {
     /**
      * Tags of the GAAP proxy. Tags that do not exist are not created automatically.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -25,17 +25,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// {
     ///     var example = new Tencentcloud.Ckafka.Topic("example", new()
     ///     {
-    ///         InstanceId = "ckafka-bzmjpavn",
+    ///         InstanceId = "ckafka-bzmja3mb",
     ///         TopicName = "tf-example",
     ///         Note = "topic note",
-    ///         ReplicaNum = 4,
-    ///         PartitionNum = 2,
-    ///         EnableWhiteList = true,
-    ///         IpWhiteLists = new[]
-    ///         {
-    ///             "1.1.1.1",
-    ///             "2.2.2.2",
-    ///         },
+    ///         ReplicaNum = 2,
+    ///         PartitionNum = 3,
     ///         CleanUpPolicy = "delete",
     ///         SyncReplicaMinNum = 2,
     ///         UncleanLeaderElectionEnable = false,
@@ -52,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// ckafka topic can be imported using the instance_id#topic_name, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-f9ife4zz#tf-example
+    /// $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-bzmja3mb#tf-example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/topic:Topic")]
@@ -131,13 +125,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<int> PartitionNum { get; private set; } = null!;
 
         /// <summary>
-        /// The number of replica.
+        /// The number of replica. Maximum is 3.
         /// </summary>
         [Output("replicaNum")]
         public Output<int> ReplicaNum { get; private set; } = null!;
 
         /// <summary>
-        /// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+        /// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
         /// </summary>
         [Output("retention")]
         public Output<int?> Retention { get; private set; } = null!;
@@ -268,13 +262,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int> PartitionNum { get; set; } = null!;
 
         /// <summary>
-        /// The number of replica.
+        /// The number of replica. Maximum is 3.
         /// </summary>
         [Input("replicaNum", required: true)]
         public Input<int> ReplicaNum { get; set; } = null!;
 
         /// <summary>
-        /// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+        /// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
         /// </summary>
         [Input("retention")]
         public Input<int>? Retention { get; set; }
@@ -390,13 +384,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? PartitionNum { get; set; }
 
         /// <summary>
-        /// The number of replica.
+        /// The number of replica. Maximum is 3.
         /// </summary>
         [Input("replicaNum")]
         public Input<int>? ReplicaNum { get; set; }
 
         /// <summary>
-        /// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+        /// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
         /// </summary>
         [Input("retention")]
         public Input<int>? Retention { get; set; }

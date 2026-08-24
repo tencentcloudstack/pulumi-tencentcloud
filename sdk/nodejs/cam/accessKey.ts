@@ -15,8 +15,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
- * const example = new tencentcloud.cam.AccessKey("example", {targetUin: info.then(info => info.uin)});
+ * const info = tencentcloud.user.getInfo({});
+ * const example = new tencentcloud.cam.AccessKey("example", {targetUin: output(info.then(info => info.uin)).apply(x =>Number(x))});
  * ```
  *
  * ### Update access key
@@ -25,9 +25,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const example = new tencentcloud.cam.AccessKey("example", {
- *     targetUin: info.then(info => info.uin),
+ *     targetUin: output(info.then(info => info.uin)).apply(x =>Number(x)),
  *     status: "Inactive",
  * });
  * ```
@@ -38,9 +38,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const example = new tencentcloud.cam.AccessKey("example", {
- *     targetUin: info.then(info => info.uin),
+ *     targetUin: output(info.then(info => info.uin)).apply(x =>Number(x)),
  *     pgpKey: "keybase:some_person_that_exists",
  * });
  * ```
@@ -85,6 +85,9 @@ export class AccessKey extends pulumi.CustomResource {
      * Access_key is the access key identification, required when updating.
      */
     declare public readonly accessKey: pulumi.Output<string>;
+    /**
+     * Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
+     */
     declare public /*out*/ readonly encryptedSecretAccessKey: pulumi.Output<string>;
     /**
      * Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
@@ -151,28 +154,31 @@ export interface AccessKeyState {
     /**
      * Access_key is the access key identification, required when updating.
      */
-    accessKey?: pulumi.Input<string>;
-    encryptedSecretAccessKey?: pulumi.Input<string>;
+    accessKey?: pulumi.Input<string | undefined>;
+    /**
+     * Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
+     */
+    encryptedSecretAccessKey?: pulumi.Input<string | undefined>;
     /**
      * Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
      */
-    keyFingerprint?: pulumi.Input<string>;
+    keyFingerprint?: pulumi.Input<string | undefined>;
     /**
      * Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encryptedSecret output attribute. If providing a base-64 encoded PGP public key, make sure to provide the "raw" version and not the "armored" one (e.g. avoid passing the -a option to gpg --export).
      */
-    pgpKey?: pulumi.Input<string>;
+    pgpKey?: pulumi.Input<string | undefined>;
     /**
      * Access key (key is only visible when created, please keep it properly).
      */
-    secretAccessKey?: pulumi.Input<string>;
+    secretAccessKey?: pulumi.Input<string | undefined>;
     /**
      * Key status, activated (Active) or inactive (Inactive), required when updating.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Specify user Uin, if not filled, the access key is created for the current user by default.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -182,17 +188,17 @@ export interface AccessKeyArgs {
     /**
      * Access_key is the access key identification, required when updating.
      */
-    accessKey?: pulumi.Input<string>;
+    accessKey?: pulumi.Input<string | undefined>;
     /**
      * Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encryptedSecret output attribute. If providing a base-64 encoded PGP public key, make sure to provide the "raw" version and not the "armored" one (e.g. avoid passing the -a option to gpg --export).
      */
-    pgpKey?: pulumi.Input<string>;
+    pgpKey?: pulumi.Input<string | undefined>;
     /**
      * Key status, activated (Active) or inactive (Inactive), required when updating.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Specify user Uin, if not filled, the access key is created for the current user by default.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
 }

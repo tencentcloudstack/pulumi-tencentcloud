@@ -125,23 +125,23 @@ export interface EndPointState {
     /**
      * Endpoint name.
      */
-    endPointName?: pulumi.Input<string>;
+    endPointName?: pulumi.Input<string | undefined>;
     /**
      * Endpoint region, which should be consistent with the region of the endpoint service.
      */
-    endPointRegion?: pulumi.Input<string>;
+    endPointRegion?: pulumi.Input<string | undefined>;
     /**
      * Endpoint service ID (namely, VPC endpoint service ID).
      */
-    endPointServiceId?: pulumi.Input<string>;
+    endPointServiceId?: pulumi.Input<string | undefined>;
     /**
      * Vip list of endpoint.
      */
-    endPointVipSets?: pulumi.Input<pulumi.Input<string>[]>;
+    endPointVipSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of endpoint IP addresses.
      */
-    ipNum?: pulumi.Input<number>;
+    ipNum?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -163,5 +163,5 @@ export interface EndPointArgs {
     /**
      * Number of endpoint IP addresses.
      */
-    ipNum?: pulumi.Input<number>;
+    ipNum?: pulumi.Input<number | undefined>;
 }

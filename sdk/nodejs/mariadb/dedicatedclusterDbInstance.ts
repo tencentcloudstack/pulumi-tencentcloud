@@ -27,8 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb dedicatedcluster_db_instance can be imported using the id, e.g.
- *
+ * mariadb dedicatedclusterDbInstance can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
  * ```
@@ -168,47 +167,47 @@ export interface DedicatedclusterDbInstanceState {
     /**
      * dedicated cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * db engine version, default to 0.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * number of instance.
      */
-    goodsNum?: pulumi.Input<number>;
+    goodsNum?: pulumi.Input<number | undefined>;
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance memory.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * instance disk storage.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * subnet id, it&amp;#39;s required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -222,7 +221,7 @@ export interface DedicatedclusterDbInstanceArgs {
     /**
      * db engine version, default to 0.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * number of instance.
      */
@@ -230,7 +229,7 @@ export interface DedicatedclusterDbInstanceArgs {
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance memory.
      */
@@ -238,7 +237,7 @@ export interface DedicatedclusterDbInstanceArgs {
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * instance disk storage.
      */
@@ -246,17 +245,17 @@ export interface DedicatedclusterDbInstanceArgs {
     /**
      * subnet id, it&amp;#39;s required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

@@ -46,8 +46,7 @@ import (
 //
 // ## Import
 //
-// mariadb security_groups can be imported using the id, e.g.
-//
+// mariadb securityGroups can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
 // ```

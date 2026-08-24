@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gaap global_domain can be imported using the id, e.g.
+ * gaap globalDomain can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
@@ -124,23 +124,23 @@ export interface GlobalDomainState {
     /**
      * alias.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Domain name default entry.
      */
-    defaultValue?: pulumi.Input<string>;
+    defaultValue?: pulumi.Input<string | undefined>;
     /**
      * Domain Name Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Global domain statue. Available values: open and close, default is open.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -150,7 +150,7 @@ export interface GlobalDomainArgs {
     /**
      * alias.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Domain name default entry.
      */
@@ -162,9 +162,9 @@ export interface GlobalDomainArgs {
     /**
      * Global domain statue. Available values: open and close, default is open.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

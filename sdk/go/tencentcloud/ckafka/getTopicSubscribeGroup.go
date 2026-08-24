@@ -71,12 +71,8 @@ type GetTopicSubscribeGroupResult struct {
 }
 
 func GetTopicSubscribeGroupOutput(ctx *pulumi.Context, args GetTopicSubscribeGroupOutputArgs, opts ...pulumi.InvokeOption) GetTopicSubscribeGroupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTopicSubscribeGroupResultOutput, error) {
-			args := v.(GetTopicSubscribeGroupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args, GetTopicSubscribeGroupResultOutput{}, options).(GetTopicSubscribeGroupResultOutput), nil
-		}).(GetTopicSubscribeGroupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args, GetTopicSubscribeGroupResultOutput{}, options).(GetTopicSubscribeGroupResultOutput)
 }
 
 // A collection of arguments for invoking getTopicSubscribeGroup.

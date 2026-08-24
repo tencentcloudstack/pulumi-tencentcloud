@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of ssl describeHostWafInstanceList
+// Use this data source to query detailed information of SSL describe host waf instance list
 //
 // ## Example Usage
 //
@@ -28,7 +28,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ssl.GetDescribeHostWafInstanceList(ctx, &ssl.GetDescribeHostWafInstanceListArgs{
-//				CertificateId: "8u8DII0l",
+//				CertificateId: "GGQ0tJxn",
 //				ResourceType:  "waf",
 //			}, nil)
 //			if err != nil {
@@ -80,12 +80,8 @@ type GetDescribeHostWafInstanceListResult struct {
 }
 
 func GetDescribeHostWafInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostWafInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostWafInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostWafInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostWafInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args, GetDescribeHostWafInstanceListResultOutput{}, options).(GetDescribeHostWafInstanceListResultOutput), nil
-		}).(GetDescribeHostWafInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostWafInstanceList:getDescribeHostWafInstanceList", args, GetDescribeHostWafInstanceListResultOutput{}, options).(GetDescribeHostWafInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostWafInstanceList.

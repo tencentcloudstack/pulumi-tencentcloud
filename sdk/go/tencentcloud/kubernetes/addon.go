@@ -32,10 +32,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
-//				"global": map[string]interface{}{
-//					"imagePullSecretsCrs": []map[string]interface{}{
-//						map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]map[string][]map[string]string{
+//				"global": map[string][]map[string]string{
+//					"imagePullSecretsCrs": []map[string]string{
+//						{
 //							"name":            "tcr-h3ff76s9",
 //							"namespaces":      "*",
 //							"serviceAccounts": "*",
@@ -68,7 +68,6 @@ import (
 // ## Import
 //
 // kubernetes cluster app addons can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Kubernetes/addon:Addon example cls-k2o1ws9g#tcr
 // ```

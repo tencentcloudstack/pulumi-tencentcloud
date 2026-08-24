@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AssociationConfig{}
 	case "tencentcloud:Apm/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Apm/prometheusRule:PrometheusRule":
+		r = &PrometheusRule{}
 	case "tencentcloud:Apm/sampleConfig:SampleConfig":
 		r = &SampleConfig{}
 	default:
@@ -55,6 +57,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Apm/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Apm/prometheusRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

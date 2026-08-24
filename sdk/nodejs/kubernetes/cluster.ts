@@ -7,6 +7,19 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
+ * Provide a resource to create a kubernetes cluster.
+ *
+ * > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extraArgs`), you need to submit a ticket for application.
+ *
+ * > **NOTE:** We recommend this usage that uses the `tencentcloud.Kubernetes.Cluster` resource to create a cluster without any `workerConfig`, then adds nodes by the `tencentcloud.Kubernetes.NodePool` resource.
+ * It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+ *
+ * > **NOTE:** Executing `terraform destroy` to destroy the resource will default to deleting the node resource, If it is necessary to preserve node instance resources, Please set `instanceDeleteMode` to `retain`.
+ *
+ * > **NOTE:** If you want to set up addon for the tke cluster, it is recommended to use resource `tencentcloud.Kubernetes.Addon`.
+ *
+ * > **NOTE:** Please do not use this resource and resource `tencentcloud.Kubernetes.ClusterEndpoint` to operate cluster public network/intranet access at the same time.
+ *
  * ## Example Usage
  *
  * ### Create a basic cluster with two worker nodes
@@ -20,13 +33,13 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -34,7 +47,7 @@ import * as utilities from "../utilities";
  * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
  * const sgId = sg.id;
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -79,7 +92,7 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
@@ -87,7 +100,7 @@ import * as utilities from "../utilities";
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-np-sg"});
  * const sgId = sg.id;
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -174,7 +187,7 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
@@ -182,7 +195,7 @@ import * as utilities from "../utilities";
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-np-ep-sg"});
  * const sgId = sg.id;
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -277,13 +290,13 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -291,7 +304,7 @@ import * as utilities from "../utilities";
  * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
  * const sgId = sg.id;
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -673,7 +686,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
      */
-    declare public readonly clusterExtraArgs: pulumi.Output<outputs.Kubernetes.ClusterClusterExtraArgs | undefined>;
+    declare public readonly clusterExtraArgs: pulumi.Output<outputs.Kubernetes.ClusterClusterExtraArgs>;
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
@@ -731,7 +744,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     declare public readonly clusterOsType: pulumi.Output<string | undefined>;
     /**
-     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     * Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
      */
     declare public readonly clusterSubnetId: pulumi.Output<string | undefined>;
     /**
@@ -897,7 +910,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     declare public readonly unschedulable: pulumi.Output<number | undefined>;
     /**
-     * Indicates whether upgrade all instances when clusterVersion change. Default is false.
+     * Indicates whether upgrade all cluster instances. Default is false.
      */
     declare public readonly upgradeInstancesFollowCluster: pulumi.Output<boolean | undefined>;
     /**
@@ -1104,307 +1117,307 @@ export interface ClusterState {
     /**
      * If set to true, it will acquire the ClusterRole tke:admin. NOTE: this arguments cannot revoke to `false` after acquired.
      */
-    acquireClusterAdminRole?: pulumi.Input<boolean>;
+    acquireClusterAdminRole?: pulumi.Input<boolean | undefined>;
     /**
      * Specify cluster authentication configuration. Only available for managed cluster and `clusterVersion` >= 1.20.
      */
-    authOptions?: pulumi.Input<inputs.Kubernetes.ClusterAuthOptions>;
+    authOptions?: pulumi.Input<inputs.Kubernetes.ClusterAuthOptions | undefined>;
     /**
      * Whether the cluster level auto upgraded, valid for managed cluster.
      */
-    autoUpgradeClusterLevel?: pulumi.Input<boolean>;
+    autoUpgradeClusterLevel?: pulumi.Input<boolean | undefined>;
     /**
      * The number of basic pods. valid when enable_customized_pod_cidr=true.
      */
-    basePodNum?: pulumi.Input<number>;
+    basePodNum?: pulumi.Input<number | undefined>;
     /**
      * CDC ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * The certificate used for access.
      */
-    certificationAuthority?: pulumi.Input<string>;
+    certificationAuthority?: pulumi.Input<string | undefined>;
     /**
      * Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
      */
-    claimExpiredSeconds?: pulumi.Input<number>;
+    claimExpiredSeconds?: pulumi.Input<number | undefined>;
     /**
      * (**Deprecated**) This argument is deprecated because the TKE auto-scaling group was no longer available. Indicates whether to enable cluster node auto scaling. Default is false.
      *
      * @deprecated This argument is deprecated because the TKE auto-scaling group was no longer available.
      */
-    clusterAsEnabled?: pulumi.Input<boolean>;
+    clusterAsEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
-    clusterAudit?: pulumi.Input<inputs.Kubernetes.ClusterClusterAudit>;
+    clusterAudit?: pulumi.Input<inputs.Kubernetes.ClusterClusterAudit | undefined>;
     /**
      * A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
      */
-    clusterCidr?: pulumi.Input<string>;
+    clusterCidr?: pulumi.Input<string | undefined>;
     /**
      * Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
      */
-    clusterDeployType?: pulumi.Input<string>;
+    clusterDeployType?: pulumi.Input<string | undefined>;
     /**
      * Description of the cluster.
      */
-    clusterDesc?: pulumi.Input<string>;
+    clusterDesc?: pulumi.Input<string | undefined>;
     /**
      * External network address to access.
      */
-    clusterExternalEndpoint?: pulumi.Input<string>;
+    clusterExternalEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
      */
-    clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs>;
+    clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs | undefined>;
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    clusterInternet?: pulumi.Input<boolean>;
+    clusterInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
-    clusterInternetDomain?: pulumi.Input<string>;
+    clusterInternetDomain?: pulumi.Input<string | undefined>;
     /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
-    clusterInternetSecurityGroup?: pulumi.Input<string>;
+    clusterInternetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    clusterIntranet?: pulumi.Input<boolean>;
+    clusterIntranet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
-    clusterIntranetDomain?: pulumi.Input<string>;
+    clusterIntranetDomain?: pulumi.Input<string | undefined>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
-    clusterIntranetSubnetId?: pulumi.Input<string>;
+    clusterIntranetSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
      */
-    clusterIpvs?: pulumi.Input<boolean>;
+    clusterIpvs?: pulumi.Input<boolean | undefined>;
     /**
      * Specify cluster level, valid for managed cluster, use data source `tencentcloud.Kubernetes.getClusterLevels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
      */
-    clusterLevel?: pulumi.Input<string>;
+    clusterLevel?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of Pods per node in the cluster. Default is 256. The minimum value is 4. When its power unequal to 2, it will round upward to the closest power of 2.
      */
-    clusterMaxPodNum?: pulumi.Input<number>;
+    clusterMaxPodNum?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
      */
-    clusterMaxServiceNum?: pulumi.Input<number>;
+    clusterMaxServiceNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the cluster.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Number of nodes in the cluster.
      */
-    clusterNodeNum?: pulumi.Input<number>;
+    clusterNodeNum?: pulumi.Input<number | undefined>;
     /**
      * Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
      */
-    clusterOs?: pulumi.Input<string>;
+    clusterOs?: pulumi.Input<string | undefined>;
     /**
      * Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
      */
-    clusterOsType?: pulumi.Input<string>;
+    clusterOsType?: pulumi.Input<string | undefined>;
     /**
-     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     * Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
      */
-    clusterSubnetId?: pulumi.Input<string>;
+    clusterSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher. The default value is `docker` for versions below v1.24 and `containerd` for versions above v1.24.
      */
-    containerRuntime?: pulumi.Input<string>;
+    containerRuntime?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable DataPlaneV2 (replace kube-proxy with cilium). `dataPlaneV2` and `clusterIpvs` should not be set at the same time.
      */
-    dataPlaneV2?: pulumi.Input<boolean>;
+    dataPlaneV2?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether cluster deletion protection is enabled. Default is false.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * To prevent the installation of a specific Addon component, enter the corresponding AddonName.
      */
-    disableAddons?: pulumi.Input<pulumi.Input<string>[]>;
+    disableAddons?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Docker graph path. Default is `/var/lib/docker`.
      */
-    dockerGraphPath?: pulumi.Input<string>;
+    dockerGraphPath?: pulumi.Input<string | undefined>;
     /**
      * Domain name for access.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom mode of node podCIDR size. Default is false.
      */
-    enableCustomizedPodCidr?: pulumi.Input<boolean>;
+    enableCustomizedPodCidr?: pulumi.Input<boolean | undefined>;
     /**
      * Subnet Ids for cluster with VPC-CNI network mode. This field can only set when field `networkType` is 'VPC-CNI'. `eniSubnetIds` can not empty once be set.
      */
-    eniSubnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    eniSubnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specify cluster Event Persistence config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
-    eventPersistence?: pulumi.Input<inputs.Kubernetes.ClusterEventPersistence>;
+    eventPersistence?: pulumi.Input<inputs.Kubernetes.ClusterEventPersistence | undefined>;
     /**
      * Create tke cluster by existed instances.
      */
-    existInstances?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExistInstance>[]>;
+    existInstances?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExistInstance>[] | undefined>;
     /**
      * Information of the add-on to be installed. It is recommended to use resource `tencentcloud.Kubernetes.Addon` management cluster addon.
      */
-    extensionAddons?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExtensionAddon>[]>;
+    extensionAddons?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExtensionAddon>[] | undefined>;
     /**
      * Custom parameter information related to the node.
      */
-    extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    extraArgs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
      */
-    globeDesiredPodNum?: pulumi.Input<number>;
+    globeDesiredPodNum?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to ignore the cluster cidr conflict error. Default is false.
      */
-    ignoreClusterCidrConflict?: pulumi.Input<boolean>;
+    ignoreClusterCidrConflict?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
      */
-    ignoreServiceCidrConflict?: pulumi.Input<boolean>;
+    ignoreServiceCidrConflict?: pulumi.Input<boolean | undefined>;
     /**
      * The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
      */
-    instanceDeleteMode?: pulumi.Input<string>;
+    instanceDeleteMode?: pulumi.Input<string | undefined>;
     /**
      * In the VPC-CNI mode of the cluster, the dual stack cluster status defaults to false, indicating a non dual stack cluster.
      */
-    isDualStack?: pulumi.Input<boolean>;
+    isDualStack?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether non-static ip mode is enabled. Default is false.
      */
-    isNonStaticIpMode?: pulumi.Input<boolean>;
+    isNonStaticIpMode?: pulumi.Input<boolean | undefined>;
     /**
      * Kubernetes config.
      */
-    kubeConfig?: pulumi.Input<string>;
+    kubeConfig?: pulumi.Input<string | undefined>;
     /**
      * Kubernetes config of private network.
      */
-    kubeConfigIntranet?: pulumi.Input<string>;
+    kubeConfigIntranet?: pulumi.Input<string | undefined>;
     /**
      * Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
      */
-    kubeProxyMode?: pulumi.Input<string>;
+    kubeProxyMode?: pulumi.Input<string | undefined>;
     /**
      * Labels of tke cluster nodes.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Specify cluster log agent config.
      */
-    logAgent?: pulumi.Input<inputs.Kubernetes.ClusterLogAgent>;
+    logAgent?: pulumi.Input<inputs.Kubernetes.ClusterLogAgent | undefined>;
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
-    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
      */
-    masterConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterMasterConfig>[]>;
+    masterConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterMasterConfig>[] | undefined>;
     /**
      * Mount target. Default is not mounting.
      */
-    mountTarget?: pulumi.Input<string>;
+    mountTarget?: pulumi.Input<string | undefined>;
     /**
      * Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
      */
-    nodeNameType?: pulumi.Input<string>;
+    nodeNameType?: pulumi.Input<string | undefined>;
     /**
      * Global config effective for all node pools.
      */
-    nodePoolGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterNodePoolGlobalConfig>[]>;
+    nodePoolGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterNodePoolGlobalConfig>[] | undefined>;
     /**
      * Password of account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The Intranet address used for access.
      */
-    pgwEndpoint?: pulumi.Input<string>;
+    pgwEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
-    preStartUserScript?: pulumi.Input<string>;
+    preStartUserScript?: pulumi.Input<string | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
      */
-    resourceDeleteOptions?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterResourceDeleteOption>[]>;
+    resourceDeleteOptions?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterResourceDeleteOption>[] | undefined>;
     /**
      * Container Runtime version.
      */
-    runtimeVersion?: pulumi.Input<string>;
+    runtimeVersion?: pulumi.Input<string | undefined>;
     /**
      * Access policy.
      */
-    securityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    securityPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
      */
-    serviceCidr?: pulumi.Input<string>;
+    serviceCidr?: pulumi.Input<string | undefined>;
     /**
      * The tags of the cluster.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
-     * Indicates whether upgrade all instances when clusterVersion change. Default is false.
+     * Indicates whether upgrade all cluster instances. Default is false.
      */
-    upgradeInstancesFollowCluster?: pulumi.Input<boolean>;
+    upgradeInstancesFollowCluster?: pulumi.Input<boolean | undefined>;
     /**
      * User name of account.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
     /**
      * Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
      */
-    vpcCniType?: pulumi.Input<string>;
+    vpcCniType?: pulumi.Input<string | undefined>;
     /**
      * Vpc Id of the cluster.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
      */
-    workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[]>;
+    workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[] | undefined>;
     /**
      * An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
      */
-    workerInstancesLists?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerInstancesList>[]>;
+    workerInstancesLists?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerInstancesList>[] | undefined>;
 }
 
 /**
@@ -1414,249 +1427,249 @@ export interface ClusterArgs {
     /**
      * If set to true, it will acquire the ClusterRole tke:admin. NOTE: this arguments cannot revoke to `false` after acquired.
      */
-    acquireClusterAdminRole?: pulumi.Input<boolean>;
+    acquireClusterAdminRole?: pulumi.Input<boolean | undefined>;
     /**
      * Specify cluster authentication configuration. Only available for managed cluster and `clusterVersion` >= 1.20.
      */
-    authOptions?: pulumi.Input<inputs.Kubernetes.ClusterAuthOptions>;
+    authOptions?: pulumi.Input<inputs.Kubernetes.ClusterAuthOptions | undefined>;
     /**
      * Whether the cluster level auto upgraded, valid for managed cluster.
      */
-    autoUpgradeClusterLevel?: pulumi.Input<boolean>;
+    autoUpgradeClusterLevel?: pulumi.Input<boolean | undefined>;
     /**
      * The number of basic pods. valid when enable_customized_pod_cidr=true.
      */
-    basePodNum?: pulumi.Input<number>;
+    basePodNum?: pulumi.Input<number | undefined>;
     /**
      * CDC ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
      */
-    claimExpiredSeconds?: pulumi.Input<number>;
+    claimExpiredSeconds?: pulumi.Input<number | undefined>;
     /**
      * Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
-    clusterAudit?: pulumi.Input<inputs.Kubernetes.ClusterClusterAudit>;
+    clusterAudit?: pulumi.Input<inputs.Kubernetes.ClusterClusterAudit | undefined>;
     /**
      * A network address block of the cluster. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
      */
-    clusterCidr?: pulumi.Input<string>;
+    clusterCidr?: pulumi.Input<string | undefined>;
     /**
      * Deployment type of the cluster, the available values include: 'MANAGED_CLUSTER' and 'INDEPENDENT_CLUSTER'. Default is 'MANAGED_CLUSTER'.
      */
-    clusterDeployType?: pulumi.Input<string>;
+    clusterDeployType?: pulumi.Input<string | undefined>;
     /**
      * Description of the cluster.
      */
-    clusterDesc?: pulumi.Input<string>;
+    clusterDesc?: pulumi.Input<string | undefined>;
     /**
      * Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
      */
-    clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs>;
+    clusterExtraArgs?: pulumi.Input<inputs.Kubernetes.ClusterClusterExtraArgs | undefined>;
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    clusterInternet?: pulumi.Input<boolean>;
+    clusterInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
-    clusterInternetDomain?: pulumi.Input<string>;
+    clusterInternetDomain?: pulumi.Input<string | undefined>;
     /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
-    clusterInternetSecurityGroup?: pulumi.Input<string>;
+    clusterInternetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    clusterIntranet?: pulumi.Input<boolean>;
+    clusterIntranet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
-    clusterIntranetDomain?: pulumi.Input<string>;
+    clusterIntranetDomain?: pulumi.Input<string | undefined>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
-    clusterIntranetSubnetId?: pulumi.Input<string>;
+    clusterIntranetSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
      */
-    clusterIpvs?: pulumi.Input<boolean>;
+    clusterIpvs?: pulumi.Input<boolean | undefined>;
     /**
      * Specify cluster level, valid for managed cluster, use data source `tencentcloud.Kubernetes.getClusterLevels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
      */
-    clusterLevel?: pulumi.Input<string>;
+    clusterLevel?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of Pods per node in the cluster. Default is 256. The minimum value is 4. When its power unequal to 2, it will round upward to the closest power of 2.
      */
-    clusterMaxPodNum?: pulumi.Input<number>;
+    clusterMaxPodNum?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
      */
-    clusterMaxServiceNum?: pulumi.Input<number>;
+    clusterMaxServiceNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the cluster.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
      */
-    clusterOs?: pulumi.Input<string>;
+    clusterOs?: pulumi.Input<string | undefined>;
     /**
      * Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
      */
-    clusterOsType?: pulumi.Input<string>;
+    clusterOsType?: pulumi.Input<string | undefined>;
     /**
-     * Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+     * Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
      */
-    clusterSubnetId?: pulumi.Input<string>;
+    clusterSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Version of the cluster. Use `tencentcloud.Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * Runtime type of the cluster, the available values include: 'docker' and 'containerd'.The Kubernetes v1.24 has removed dockershim, so please use containerd in v1.24 or higher. The default value is `docker` for versions below v1.24 and `containerd` for versions above v1.24.
      */
-    containerRuntime?: pulumi.Input<string>;
+    containerRuntime?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable DataPlaneV2 (replace kube-proxy with cilium). `dataPlaneV2` and `clusterIpvs` should not be set at the same time.
      */
-    dataPlaneV2?: pulumi.Input<boolean>;
+    dataPlaneV2?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether cluster deletion protection is enabled. Default is false.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * To prevent the installation of a specific Addon component, enter the corresponding AddonName.
      */
-    disableAddons?: pulumi.Input<pulumi.Input<string>[]>;
+    disableAddons?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Docker graph path. Default is `/var/lib/docker`.
      */
-    dockerGraphPath?: pulumi.Input<string>;
+    dockerGraphPath?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom mode of node podCIDR size. Default is false.
      */
-    enableCustomizedPodCidr?: pulumi.Input<boolean>;
+    enableCustomizedPodCidr?: pulumi.Input<boolean | undefined>;
     /**
      * Subnet Ids for cluster with VPC-CNI network mode. This field can only set when field `networkType` is 'VPC-CNI'. `eniSubnetIds` can not empty once be set.
      */
-    eniSubnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    eniSubnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specify cluster Event Persistence config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
      */
-    eventPersistence?: pulumi.Input<inputs.Kubernetes.ClusterEventPersistence>;
+    eventPersistence?: pulumi.Input<inputs.Kubernetes.ClusterEventPersistence | undefined>;
     /**
      * Create tke cluster by existed instances.
      */
-    existInstances?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExistInstance>[]>;
+    existInstances?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExistInstance>[] | undefined>;
     /**
      * Information of the add-on to be installed. It is recommended to use resource `tencentcloud.Kubernetes.Addon` management cluster addon.
      */
-    extensionAddons?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExtensionAddon>[]>;
+    extensionAddons?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterExtensionAddon>[] | undefined>;
     /**
      * Custom parameter information related to the node.
      */
-    extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    extraArgs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it takes effect for all nodes.
      */
-    globeDesiredPodNum?: pulumi.Input<number>;
+    globeDesiredPodNum?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to ignore the cluster cidr conflict error. Default is false.
      */
-    ignoreClusterCidrConflict?: pulumi.Input<boolean>;
+    ignoreClusterCidrConflict?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
      */
-    ignoreServiceCidrConflict?: pulumi.Input<boolean>;
+    ignoreServiceCidrConflict?: pulumi.Input<boolean | undefined>;
     /**
      * The strategy for deleting cluster instances: terminate (destroy instances, only support pay as you go cloud host instances) retain (remove only, keep instances), Default is terminate.
      */
-    instanceDeleteMode?: pulumi.Input<string>;
+    instanceDeleteMode?: pulumi.Input<string | undefined>;
     /**
      * In the VPC-CNI mode of the cluster, the dual stack cluster status defaults to false, indicating a non dual stack cluster.
      */
-    isDualStack?: pulumi.Input<boolean>;
+    isDualStack?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether non-static ip mode is enabled. Default is false.
      */
-    isNonStaticIpMode?: pulumi.Input<boolean>;
+    isNonStaticIpMode?: pulumi.Input<boolean | undefined>;
     /**
      * Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
      */
-    kubeProxyMode?: pulumi.Input<string>;
+    kubeProxyMode?: pulumi.Input<string | undefined>;
     /**
      * Labels of tke cluster nodes.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Specify cluster log agent config.
      */
-    logAgent?: pulumi.Input<inputs.Kubernetes.ClusterLogAgent>;
+    logAgent?: pulumi.Input<inputs.Kubernetes.ClusterLogAgent | undefined>;
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
-    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
      */
-    masterConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterMasterConfig>[]>;
+    masterConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterMasterConfig>[] | undefined>;
     /**
      * Mount target. Default is not mounting.
      */
-    mountTarget?: pulumi.Input<string>;
+    mountTarget?: pulumi.Input<string | undefined>;
     /**
      * Cluster network type, the available values include: 'GR' and 'VPC-CNI' and 'CiliumOverlay'. Default is GR.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Node name type of Cluster, the available values include: 'lan-ip' and 'hostname', Default is 'lan-ip'.
      */
-    nodeNameType?: pulumi.Input<string>;
+    nodeNameType?: pulumi.Input<string | undefined>;
     /**
      * Global config effective for all node pools.
      */
-    nodePoolGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterNodePoolGlobalConfig>[]>;
+    nodePoolGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterNodePoolGlobalConfig>[] | undefined>;
     /**
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
-    preStartUserScript?: pulumi.Input<string>;
+    preStartUserScript?: pulumi.Input<string | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * The resource deletion policy when the cluster is deleted. Currently, CBS is supported (CBS is retained by default). Only valid when deleting cluster.
      */
-    resourceDeleteOptions?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterResourceDeleteOption>[]>;
+    resourceDeleteOptions?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterResourceDeleteOption>[] | undefined>;
     /**
      * Container Runtime version.
      */
-    runtimeVersion?: pulumi.Input<string>;
+    runtimeVersion?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the service. Different from vpc cidr and cidr of other clusters within this vpc. Must be in  10./192.168/172.[16-31] segments.
      */
-    serviceCidr?: pulumi.Input<string>;
+    serviceCidr?: pulumi.Input<string | undefined>;
     /**
      * The tags of the cluster.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
-     * Indicates whether upgrade all instances when clusterVersion change. Default is false.
+     * Indicates whether upgrade all cluster instances. Default is false.
      */
-    upgradeInstancesFollowCluster?: pulumi.Input<boolean>;
+    upgradeInstancesFollowCluster?: pulumi.Input<boolean | undefined>;
     /**
      * Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
      */
-    vpcCniType?: pulumi.Input<string>;
+    vpcCniType?: pulumi.Input<string | undefined>;
     /**
      * Vpc Id of the cluster.
      */
@@ -1664,5 +1677,5 @@ export interface ClusterArgs {
     /**
      * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
      */
-    workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[]>;
+    workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[] | undefined>;
 }

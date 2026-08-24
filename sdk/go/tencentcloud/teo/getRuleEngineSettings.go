@@ -62,12 +62,8 @@ type GetRuleEngineSettingsResult struct {
 }
 
 func GetRuleEngineSettingsOutput(ctx *pulumi.Context, args GetRuleEngineSettingsOutputArgs, opts ...pulumi.InvokeOption) GetRuleEngineSettingsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRuleEngineSettingsResultOutput, error) {
-			args := v.(GetRuleEngineSettingsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args, GetRuleEngineSettingsResultOutput{}, options).(GetRuleEngineSettingsResultOutput), nil
-		}).(GetRuleEngineSettingsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", args, GetRuleEngineSettingsResultOutput{}, options).(GetRuleEngineSettingsResultOutput)
 }
 
 // A collection of arguments for invoking getRuleEngineSettings.

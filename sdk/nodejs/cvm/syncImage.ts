@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -13,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PRIVATE_IMAGE"],
  *     imageNameRegex: "MyImage",
  * });
@@ -23,6 +25,8 @@ import * as utilities from "../utilities";
  *         "ap-guangzhou",
  *         "ap-shanghai",
  *     ],
+ *     encrypt: true,
+ *     kmsKeyId: "f063c18b-654b-11ef-9d9f-525400d3a886",
  * });
  * ```
  */
@@ -63,6 +67,10 @@ export class SyncImage extends pulumi.CustomResource {
      */
     declare public readonly dryRun: pulumi.Output<boolean | undefined>;
     /**
+     * Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+     */
+    declare public readonly encrypt: pulumi.Output<boolean | undefined>;
+    /**
      * Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
      */
     declare public readonly imageId: pulumi.Output<string>;
@@ -74,6 +82,14 @@ export class SyncImage extends pulumi.CustomResource {
      * Whether to return the ID of image created in the destination region.
      */
     declare public readonly imageSetRequired: pulumi.Output<boolean | undefined>;
+    /**
+     * ID of the image created in the destination region.
+     */
+    declare public /*out*/ readonly imageSets: pulumi.Output<outputs.Cvm.SyncImageImageSet[]>;
+    /**
+     * KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+     */
+    declare public readonly kmsKeyId: pulumi.Output<string | undefined>;
 
     /**
      * Create a SyncImage resource with the given unique name, arguments, and options.
@@ -90,9 +106,12 @@ export class SyncImage extends pulumi.CustomResource {
             const state = argsOrState as SyncImageState | undefined;
             resourceInputs["destinationRegions"] = state?.destinationRegions;
             resourceInputs["dryRun"] = state?.dryRun;
+            resourceInputs["encrypt"] = state?.encrypt;
             resourceInputs["imageId"] = state?.imageId;
             resourceInputs["imageName"] = state?.imageName;
             resourceInputs["imageSetRequired"] = state?.imageSetRequired;
+            resourceInputs["imageSets"] = state?.imageSets;
+            resourceInputs["kmsKeyId"] = state?.kmsKeyId;
         } else {
             const args = argsOrState as SyncImageArgs | undefined;
             if (args?.destinationRegions === undefined && !opts.urn) {
@@ -103,9 +122,12 @@ export class SyncImage extends pulumi.CustomResource {
             }
             resourceInputs["destinationRegions"] = args?.destinationRegions;
             resourceInputs["dryRun"] = args?.dryRun;
+            resourceInputs["encrypt"] = args?.encrypt;
             resourceInputs["imageId"] = args?.imageId;
             resourceInputs["imageName"] = args?.imageName;
             resourceInputs["imageSetRequired"] = args?.imageSetRequired;
+            resourceInputs["kmsKeyId"] = args?.kmsKeyId;
+            resourceInputs["imageSets"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SyncImage.__pulumiType, name, resourceInputs, opts);
@@ -119,23 +141,35 @@ export interface SyncImageState {
     /**
      * List of destination regions for synchronization. Limits: It must be a valid region. For a custom image, the destination region cannot be the source region. For a shared image, the destination region must be the source region, which indicates to create a copy of the image as a custom image in the same region.
      */
-    destinationRegions?: pulumi.Input<pulumi.Input<string>[]>;
+    destinationRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Checks whether image synchronization can be initiated.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+     */
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Destination image name.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Whether to return the ID of image created in the destination region.
      */
-    imageSetRequired?: pulumi.Input<boolean>;
+    imageSetRequired?: pulumi.Input<boolean | undefined>;
+    /**
+     * ID of the image created in the destination region.
+     */
+    imageSets?: pulumi.Input<pulumi.Input<inputs.Cvm.SyncImageImageSet>[] | undefined>;
+    /**
+     * KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+     */
+    kmsKeyId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -149,7 +183,11 @@ export interface SyncImageArgs {
     /**
      * Checks whether image synchronization can be initiated.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+     */
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
      */
@@ -157,9 +195,13 @@ export interface SyncImageArgs {
     /**
      * Destination image name.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Whether to return the ID of image created in the destination region.
      */
-    imageSetRequired?: pulumi.Input<boolean>;
+    imageSetRequired?: pulumi.Input<boolean | undefined>;
+    /**
+     * KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+     */
+    kmsKeyId?: pulumi.Input<string | undefined>;
 }

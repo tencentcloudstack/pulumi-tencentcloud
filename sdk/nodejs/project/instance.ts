@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a project
+ *
+ * > **NOTE:** Project can not be destroyed. If run `terraform destroy`, project will be set invisible.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -115,23 +119,23 @@ export interface InstanceState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Uin of creator.
      */
-    creatorUin?: pulumi.Input<number>;
+    creatorUin?: pulumi.Input<number | undefined>;
     /**
      * If disable project. 1 means disable, 0 means enable. Default 0.
      */
-    disable?: pulumi.Input<number>;
+    disable?: pulumi.Input<number | undefined>;
     /**
      * Description of project.
      */
-    info?: pulumi.Input<string>;
+    info?: pulumi.Input<string | undefined>;
     /**
      * Name of project.
      */
-    projectName?: pulumi.Input<string>;
+    projectName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -141,11 +145,11 @@ export interface InstanceArgs {
     /**
      * If disable project. 1 means disable, 0 means enable. Default 0.
      */
-    disable?: pulumi.Input<number>;
+    disable?: pulumi.Input<number | undefined>;
     /**
      * Description of project.
      */
-    info?: pulumi.Input<string>;
+    info?: pulumi.Input<string | undefined>;
     /**
      * Name of project.
      */

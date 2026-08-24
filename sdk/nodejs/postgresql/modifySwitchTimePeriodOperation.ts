@@ -94,11 +94,11 @@ export interface ModifySwitchTimePeriodOperationState {
     /**
      * The ID of the instance waiting for a switch.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Valid value: `0` (switch immediately).
      */
-    switchTag?: pulumi.Input<number>;
+    switchTag?: pulumi.Input<number | undefined>;
 }
 
 /**

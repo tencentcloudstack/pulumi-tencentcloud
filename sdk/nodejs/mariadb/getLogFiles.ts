@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logFiles = tencentcloud.Mariadb.getLogFiles({
+ * const logFiles = tencentcloud.mariadb.getLogFiles({
  *     instanceId: "tdsql-9vqvls95",
  *     type: 1,
  * });
@@ -81,7 +81,7 @@ export interface GetLogFilesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logFiles = tencentcloud.Mariadb.getLogFiles({
+ * const logFiles = tencentcloud.mariadb.getLogFiles({
  *     instanceId: "tdsql-9vqvls95",
  *     type: 1,
  * });
@@ -107,7 +107,7 @@ export interface GetLogFilesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Requested log type. Valid values: 1 (binlog), 2 (cold backup), 3 (errlog), 4 (slowlog).
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTasks = tencentcloud.Wedata.getTasks({
+ * const wedataTasks = tencentcloud.wedata.getTasks({
  *     projectId: "2905622749543821312",
  * });
  * ```
@@ -132,7 +132,7 @@ export interface GetTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTasks = tencentcloud.Wedata.getTasks({
+ * const wedataTasks = tencentcloud.wedata.getTasks({
  *     projectId: "2905622749543821312",
  * });
  * ```
@@ -162,23 +162,23 @@ export interface GetTasksOutputArgs {
     /**
      * Bundle id.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * Creation time range (yyyy-MM-dd HH:MM:ss). Two time values must be provided in the array.
      */
-    createTimes?: pulumi.Input<pulumi.Input<string>[]>;
+    createTimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Creator ID.
      */
-    createUserUin?: pulumi.Input<string>;
+    createUserUin?: pulumi.Input<string | undefined>;
     /**
      * Modification time range (yyyy-MM-dd HH:mm:ss). Two time values must be provided in the array.
      */
-    modifyTimes?: pulumi.Input<pulumi.Input<string>[]>;
+    modifyTimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Owner ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -186,7 +186,7 @@ export interface GetTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task Status:
      * * N: New
@@ -196,21 +196,21 @@ export interface GetTasksOutputArgs {
      * * T: Offlining
      * * INVALID: Invalid.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Submission status.
      */
-    submit?: pulumi.Input<boolean>;
+    submit?: pulumi.Input<boolean | undefined>;
     /**
      * Task name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
     /**
      * Task type.
      */
-    taskTypeId?: pulumi.Input<number>;
+    taskTypeId?: pulumi.Input<number | undefined>;
     /**
      * Workflow ID.
      */
-    workflowId?: pulumi.Input<string>;
+    workflowId?: pulumi.Input<string | undefined>;
 }

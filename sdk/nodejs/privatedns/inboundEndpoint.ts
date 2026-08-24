@@ -128,19 +128,19 @@ export interface InboundEndpointState {
     /**
      * Name.
      */
-    endpointName?: pulumi.Input<string>;
+    endpointName?: pulumi.Input<string | undefined>;
     /**
      * Region.
      */
-    endpointRegion?: pulumi.Input<string>;
+    endpointRegion?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */
-    endpointVpc?: pulumi.Input<string>;
+    endpointVpc?: pulumi.Input<string | undefined>;
     /**
      * Subnet information.
      */
-    subnetIps?: pulumi.Input<pulumi.Input<inputs.PrivateDns.InboundEndpointSubnetIp>[]>;
+    subnetIps?: pulumi.Input<pulumi.Input<inputs.PrivateDns.InboundEndpointSubnetIp>[] | undefined>;
 }
 
 /**

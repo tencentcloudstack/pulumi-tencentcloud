@@ -50,35 +50,37 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := redis.GetClusters(ctx, &redis.GetClustersArgs{
-// DedicatedClusterId: pulumi.StringRef("cluster-0astoh6a"),
-// RedisClusterIds: []string{
-// "crs-cdc-9nyfki8h",
-// },
-// ClusterName: pulumi.StringRef("crs-cdc-9nyfki8h"),
-// ProjectIds: interface{}{
-// 0,
-// 1,
-// },
-// Statuses: interface{}{
-// 0,
-// 1,
-// 2,
-// },
-// AutoRenewFlags: interface{}{
-// 0,
-// 1,
-// 2,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := redis.GetClusters(ctx, &redis.GetClustersArgs{
+//				DedicatedClusterId: pulumi.StringRef("cluster-0astoh6a"),
+//				RedisClusterIds: []string{
+//					"crs-cdc-9nyfki8h",
+//				},
+//				ClusterName: pulumi.StringRef("crs-cdc-9nyfki8h"),
+//				ProjectIds: []int{
+//					0,
+//					1,
+//				},
+//				Statuses: []int{
+//					0,
+//					1,
+//					2,
+//				},
+//				AutoRenewFlags: []int{
+//					0,
+//					1,
+//					2,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetClusters(ctx *pulumi.Context, args *GetClustersArgs, opts ...pulumi.InvokeOption) (*GetClustersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -128,12 +130,8 @@ type GetClustersResult struct {
 }
 
 func GetClustersOutput(ctx *pulumi.Context, args GetClustersOutputArgs, opts ...pulumi.InvokeOption) GetClustersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClustersResultOutput, error) {
-			args := v.(GetClustersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getClusters:getClusters", args, GetClustersResultOutput{}, options).(GetClustersResultOutput), nil
-		}).(GetClustersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getClusters:getClusters", args, GetClustersResultOutput{}, options).(GetClustersResultOutput)
 }
 
 // A collection of arguments for invoking getClusters.

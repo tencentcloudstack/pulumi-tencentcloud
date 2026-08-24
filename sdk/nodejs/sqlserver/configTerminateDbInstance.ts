@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver config_terminate_db_instance can be imported using the id, e.g.
+ * sqlserver configTerminateDbInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/configTerminateDbInstance:ConfigTerminateDbInstance example mssql-i9ma6oy7
@@ -131,7 +131,7 @@ export interface ConfigTerminateDbInstanceState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

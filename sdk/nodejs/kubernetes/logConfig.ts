@@ -5,7 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tke kubernetesLogConfig
+ * Provides a resource to create a TKE kubernetes log config
+ *
+ * > **NOTE:** The value of Field `logConfigName` must be identical to Value `metadata.name` in Field `logConfig`.
  *
  * ## Example Usage
  *
@@ -15,13 +17,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const gz = tencentcloud.Availability.getZonesByProduct({
+ * const gz = tencentcloud.availability.getZonesByProduct({
  *     name: "ap-guangzhou-3",
  *     product: "ckafka",
  * });
@@ -118,7 +120,7 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.ckafka.Instance("example", {
  *     instanceName: "ckafka-instance-postpaid",
- *     zoneId: zoneId,
+ *     zoneId: Number(zoneId),
  *     vpcId: firstVpcId,
  *     subnetId: firstSubnetId,
  *     msgRetentionTime: 1300,
@@ -229,11 +231,11 @@ export class LogConfig extends pulumi.CustomResource {
      */
     declare public readonly clusterType: pulumi.Output<string | undefined>;
     /**
-     * JSON expression of log collection configuration.
+     * JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
      */
     declare public readonly logConfig: pulumi.Output<string>;
     /**
-     * Log config name.
+     * Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
      */
     declare public readonly logConfigName: pulumi.Output<string>;
     /**
@@ -288,23 +290,23 @@ export interface LogConfigState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The current cluster type supports tke and eks, default is tke.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
-     * JSON expression of log collection configuration.
+     * JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
      */
-    logConfig?: pulumi.Input<string>;
+    logConfig?: pulumi.Input<string | undefined>;
     /**
-     * Log config name.
+     * Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
      */
-    logConfigName?: pulumi.Input<string>;
+    logConfigName?: pulumi.Input<string | undefined>;
     /**
      * CLS log set ID.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -318,17 +320,17 @@ export interface LogConfigArgs {
     /**
      * The current cluster type supports tke and eks, default is tke.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
-     * JSON expression of log collection configuration.
+     * JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
      */
     logConfig: pulumi.Input<string>;
     /**
-     * Log config name.
+     * Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
      */
     logConfigName: pulumi.Input<string>;
     /**
      * CLS log set ID.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
 }

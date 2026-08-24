@@ -140,27 +140,27 @@ export interface JwksAuthenticatorState {
     /**
      * JWKS endpoint.
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * Pass the key of JWT when connecting the device; Username - passed using the username field; Password - Pass using password field.
      */
-    from?: pulumi.Input<string>;
+    from?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * JWKS refresh interval. unit: s.
      */
-    refreshInterval?: pulumi.Input<number>;
+    refreshInterval?: pulumi.Input<number | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * JWKS text.
      */
-    text?: pulumi.Input<string>;
+    text?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -170,11 +170,11 @@ export interface JwksAuthenticatorArgs {
     /**
      * JWKS endpoint.
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * Pass the key of JWT when connecting the device; Username - passed using the username field; Password - Pass using password field.
      */
-    from?: pulumi.Input<string>;
+    from?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -182,13 +182,13 @@ export interface JwksAuthenticatorArgs {
     /**
      * JWKS refresh interval. unit: s.
      */
-    refreshInterval?: pulumi.Input<number>;
+    refreshInterval?: pulumi.Input<number | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * JWKS text.
      */
-    text?: pulumi.Input<string>;
+    text?: pulumi.Input<string | undefined>;
 }

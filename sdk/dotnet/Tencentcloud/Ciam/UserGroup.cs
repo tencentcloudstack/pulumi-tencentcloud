@@ -42,7 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// 
     /// ## Import
     /// 
-    /// ciam user_group can be imported using the id, e.g.
+    /// ciam UserGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId

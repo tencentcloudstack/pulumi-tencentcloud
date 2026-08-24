@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Import
     /// 
-    /// ci media_super_resolution_template can be imported using the bucket#templateId, e.g.
+    /// ci MediaSuperResolutionTemplate can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f

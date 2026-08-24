@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Import
     /// 
-    /// eb event_rule can be imported using the id, e.g.
+    /// eb EventRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id

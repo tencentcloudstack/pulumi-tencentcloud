@@ -69,12 +69,8 @@ type GetChcDeniedActionsResult struct {
 }
 
 func GetChcDeniedActionsOutput(ctx *pulumi.Context, args GetChcDeniedActionsOutputArgs, opts ...pulumi.InvokeOption) GetChcDeniedActionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetChcDeniedActionsResultOutput, error) {
-			args := v.(GetChcDeniedActionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args, GetChcDeniedActionsResultOutput{}, options).(GetChcDeniedActionsResultOutput), nil
-		}).(GetChcDeniedActionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args, GetChcDeniedActionsResultOutput{}, options).(GetChcDeniedActionsResultOutput)
 }
 
 // A collection of arguments for invoking getChcDeniedActions.

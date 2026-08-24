@@ -84,7 +84,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// 
     /// ## Import
     /// 
-    /// PrivateDns zone vpc attachment can be imported using the id, e.g.
+    /// PrivateDns zone vpc attachment can be imported using the zoneId#uniqVpcId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t

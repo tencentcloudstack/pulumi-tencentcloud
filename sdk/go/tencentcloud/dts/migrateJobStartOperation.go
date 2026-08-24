@@ -111,7 +111,7 @@ import (
 //				return err
 //			}
 //			exampleMigrateJob, err := dts.NewMigrateJob(ctx, "example", &dts.MigrateJobArgs{
-//				ServiceId:                 exampleMigrateService.ID(),
+//				ServiceId:                 exampleMigrateService.ID().ToIDOutput().ToStringOutput(),
 //				RunMode:                   pulumi.String("immediate"),
 //				AutoRetryTimeRangeMinutes: pulumi.Int(0),
 //				MigrateOption: &dts.MigrateJobMigrateOptionArgs{
@@ -142,7 +142,7 @@ import (
 //						&dts.MigrateJobSrcInfoInfoArgs{
 //							User:       pulumi.String("root"),
 //							Password:   pulumi.String("Password@123"),
-//							InstanceId: example.ID(),
+//							InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //						},
 //					},
 //				},
@@ -155,7 +155,7 @@ import (
 //						&dts.MigrateJobDstInfoInfoArgs{
 //							User:       pulumi.String("root"),
 //							Password:   pulumi.String("Password@123"),
-//							InstanceId: exampleCluster.ID(),
+//							InstanceId: exampleCluster.ID().ToIDOutput().ToStringOutput(),
 //						},
 //					},
 //				},
@@ -164,7 +164,7 @@ import (
 //				return err
 //			}
 //			_, err = dts.NewMigrateJobStartOperation(ctx, "example", &dts.MigrateJobStartOperationArgs{
-//				JobId: exampleMigrateJob.ID(),
+//				JobId: exampleMigrateJob.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

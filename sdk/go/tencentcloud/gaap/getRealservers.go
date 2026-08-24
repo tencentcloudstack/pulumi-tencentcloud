@@ -34,11 +34,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = fooRealserver.Ip.ApplyT(func(ip *string) (gaap.GetRealserversResult, error) {
-//				return gaap.GetRealserversResult(interface{}(gaap.GetRealservers(ctx, &gaap.GetRealserversArgs{
-//					Ip: pulumi.StringRef(pulumi.StringRef(ip)),
-//				}, nil))), nil
-//			}).(gaap.GetRealserversResultOutput)
+//			_ = gaap.GetRealserversOutput(ctx, gaap.GetRealserversOutputArgs{
+//				Ip: fooRealserver.Ip,
+//			}, nil)
 //			return nil
 //		})
 //	}
@@ -90,12 +88,8 @@ type GetRealserversResult struct {
 }
 
 func GetRealserversOutput(ctx *pulumi.Context, args GetRealserversOutputArgs, opts ...pulumi.InvokeOption) GetRealserversResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRealserversResultOutput, error) {
-			args := v.(GetRealserversArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getRealservers:getRealservers", args, GetRealserversResultOutput{}, options).(GetRealserversResultOutput), nil
-		}).(GetRealserversResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getRealservers:getRealservers", args, GetRealserversResultOutput{}, options).(GetRealserversResultOutput)
 }
 
 // A collection of arguments for invoking getRealservers.

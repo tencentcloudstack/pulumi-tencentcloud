@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+ * CAM-OIDC-SSO can be imported using the clientId or any string which can identifier resource, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
@@ -162,35 +162,35 @@ export interface OidcSsoState {
     /**
      * Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorizationEndpoint` field in the Openid-configuration provided by the Enterprise IdP.
      */
-    authorizationEndpoint?: pulumi.Input<string>;
+    authorizationEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Client ID, the client ID registered with the OpenID Connect identity provider.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * The signature public key requires base64_encode. Verify the public key signed by the OpenID Connect identity provider ID Token. For the security of your account, we recommend that you rotate the signed public key regularly.
      */
-    identityKey?: pulumi.Input<string>;
+    identityKey?: pulumi.Input<string | undefined>;
     /**
      * Identity provider URL. OpenID Connect identity provider identity.Corresponds to the value of the `issuer` field in the Openid-configuration provided by the Enterprise IdP.
      */
-    identityUrl?: pulumi.Input<string>;
+    identityUrl?: pulumi.Input<string | undefined>;
     /**
      * Map field names. Which field in the IdP's idToken maps to the user name of the subuser, usually the sub or name field.
      */
-    mappingFiled?: pulumi.Input<string>;
+    mappingFiled?: pulumi.Input<string | undefined>;
     /**
      * Authorize the request Forsonse mode. Authorization request return mode, formPost and frogment two optional modes, recommended to select formPost mode.
      */
-    responseMode?: pulumi.Input<string>;
+    responseMode?: pulumi.Input<string | undefined>;
     /**
      * Authorization requests The Response type, with a fixed value id_token.
      */
-    responseType?: pulumi.Input<string>;
+    responseType?: pulumi.Input<string | undefined>;
     /**
      * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
      */
-    scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    scopes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -228,5 +228,5 @@ export interface OidcSsoArgs {
     /**
      * Authorize the request Scope. openid; email; profile; Authorization request information scope. The default is required openid.
      */
-    scopes?: pulumi.Input<pulumi.Input<string>[]>;
+    scopes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

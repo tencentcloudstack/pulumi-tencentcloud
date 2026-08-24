@@ -77,7 +77,6 @@ import (
 // ## Import
 //
 // events audit track can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Events/auditTrack:AuditTrack example 24283
 // ```
@@ -90,7 +89,7 @@ type AuditTrack struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Tracking set status (0: Not enabled; 1: Enabled).
 	Status pulumi.IntOutput `pulumi:"status"`
-	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 	Storage AuditTrackStorageOutput `pulumi:"storage"`
 	// Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
 	TrackForAllMembers pulumi.IntPtrOutput `pulumi:"trackForAllMembers"`
@@ -143,7 +142,7 @@ type auditTrackState struct {
 	Name *string `pulumi:"name"`
 	// Tracking set status (0: Not enabled; 1: Enabled).
 	Status *int `pulumi:"status"`
-	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 	Storage *AuditTrackStorage `pulumi:"storage"`
 	// Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
 	TrackForAllMembers *int `pulumi:"trackForAllMembers"`
@@ -158,7 +157,7 @@ type AuditTrackState struct {
 	Name pulumi.StringPtrInput
 	// Tracking set status (0: Not enabled; 1: Enabled).
 	Status pulumi.IntPtrInput
-	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 	Storage AuditTrackStoragePtrInput
 	// Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
 	TrackForAllMembers pulumi.IntPtrInput
@@ -177,7 +176,7 @@ type auditTrackArgs struct {
 	Name *string `pulumi:"name"`
 	// Tracking set status (0: Not enabled; 1: Enabled).
 	Status int `pulumi:"status"`
-	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 	Storage AuditTrackStorage `pulumi:"storage"`
 	// Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
 	TrackForAllMembers *int `pulumi:"trackForAllMembers"`
@@ -191,7 +190,7 @@ type AuditTrackArgs struct {
 	Name pulumi.StringPtrInput
 	// Tracking set status (0: Not enabled; 1: Enabled).
 	Status pulumi.IntInput
-	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 	Storage AuditTrackStorageInput
 	// Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
 	TrackForAllMembers pulumi.IntPtrInput
@@ -299,7 +298,7 @@ func (o AuditTrackOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *AuditTrack) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
-// Storage type of shipped data. Valid values: `cos`, `cls`.
+// Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
 func (o AuditTrackOutput) Storage() AuditTrackStorageOutput {
 	return o.ApplyT(func(v *AuditTrack) AuditTrackStorageOutput { return v.Storage }).(AuditTrackStorageOutput)
 }

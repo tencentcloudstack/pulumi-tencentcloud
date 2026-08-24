@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_voice_separate_template can be imported using the id, e.g.
+ * ci mediaVoiceSeparateTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate media_voice_separate_template terraform-ci-xxxxxx#t1c95566664530460d9bc2b6265feb7c32
@@ -126,19 +126,19 @@ export interface MediaVoiceSeparateTemplateState {
     /**
      * audio configuration.
      */
-    audioConfig?: pulumi.Input<inputs.Ci.MediaVoiceSeparateTemplateAudioConfig>;
+    audioConfig?: pulumi.Input<inputs.Ci.MediaVoiceSeparateTemplateAudioConfig | undefined>;
     /**
      * Output audio IsAudio: output human voice, IsBackground: output background sound, AudioAndBackground: output vocal and background sound.
      */
-    audioMode?: pulumi.Input<string>;
+    audioMode?: pulumi.Input<string | undefined>;
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -160,5 +160,5 @@ export interface MediaVoiceSeparateTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

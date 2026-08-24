@@ -12,11 +12,13 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cynosdb cluster slave zone.
+// Provides a resource to create a CynosDB cluster slave zone.
+//
+// > **NOTE:** If you use resource `Cynosdb.ClusterSlaveZone` to configure `slaveZone` for `Cynosdb.Cluster`, then you cannot simultaneously set the `slaveZone` field of resource `Cynosdb.Cluster`.
 //
 // ## Example Usage
 //
-// ### Set a new slave zone for a cynosdb cluster.
+// ### Set a new slave zone for a cynosdb cluster
 //
 // ```go
 // package main
@@ -24,69 +26,27 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/security"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			gz3, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				AvailabilityZone: pulumi.StringRef(defaultAz),
-//				IsDefault:        pulumi.BoolRef(true),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			vpcId := gz3.InstanceLists[0].VpcId
-//			subnetId := gz3.InstanceLists[0].SubnetId
-//			cfg := config.New(ctx, "")
-//			fixedTags := map[string]interface{}{
-//				"fixedResource": "do_not_remove",
-//			}
-//			if param := cfg.GetObject("fixedTags"); param != nil {
-//				fixedTags = param
-//			}
-//			internal, err := security.GetGroups(ctx, &security.GetGroupsArgs{
-//				Name: pulumi.StringRef("default"),
-//				Tags: fixedTags,
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			sgId := internal.SecurityGroups[0].SecurityGroupId
-//			exclusive, err := security.GetGroups(ctx, &security.GetGroupsArgs{
-//				Name: pulumi.StringRef("test_preset_sg"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_ := exclusive.SecurityGroups[0].SecurityGroupId
-//			availabilityZone := "ap-guangzhou-4"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			newAvailabilityZone := "ap-guangzhou-6"
-//			if param := cfg.Get("newAvailabilityZone"); param != "" {
-//				newAvailabilityZone = param
-//			}
-//			myParamTemplate := "15765"
-//			if param := cfg.Get("myParamTemplate"); param != "" {
-//				myParamTemplate = param
-//			}
-//			instance, err := cynosdb.NewCluster(ctx, "instance", &cynosdb.ClusterArgs{
-//				AvailableZone:             pulumi.String(availabilityZone),
-//				VpcId:                     pulumi.String(vpcId),
-//				SubnetId:                  pulumi.String(subnetId),
+//			example, err := cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
+//				AvailableZone:             pulumi.String("ap-guangzhou-6"),
+//				VpcId:                     pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:                  pulumi.String("subnet-hhi88a58"),
+//				DbMode:                    pulumi.String("NORMAL"),
 //				DbType:                    pulumi.String("MYSQL"),
 //				DbVersion:                 pulumi.String("5.7"),
-//				StorageLimit:              pulumi.Int(1000),
-//				ClusterName:               pulumi.String("tf_test_cynosdb_cluster_slave_zone"),
-//				Password:                  pulumi.String("cynos@123"),
-//				InstanceMaintainDuration:  pulumi.Int(3600),
+//				Port:                      pulumi.Int(3306),
+//				ClusterName:               pulumi.String("tf-example"),
+//				Password:                  pulumi.String("CynosDB@123"),
+//				InstanceMaintainDuration:  pulumi.Int(7200),
 //				InstanceMaintainStartTime: pulumi.Int(10800),
+//				InstanceCpuCore:           pulumi.Int(2),
+//				InstanceMemorySize:        pulumi.Int(4),
+//				ForceDelete:               pulumi.Bool(true),
 //				InstanceMaintainWeekdays: pulumi.StringArray{
 //					pulumi.String("Fri"),
 //					pulumi.String("Mon"),
@@ -96,60 +56,26 @@ import (
 //					pulumi.String("Wed"),
 //					pulumi.String("Tue"),
 //				},
-//				InstanceCpuCore:    pulumi.Int(1),
-//				InstanceMemorySize: pulumi.Int(2),
 //				ParamItems: cynosdb.ClusterParamItemArray{
 //					&cynosdb.ClusterParamItemArgs{
 //						Name:         pulumi.String("character_set_server"),
-//						CurrentValue: pulumi.String("utf8"),
+//						CurrentValue: pulumi.String("utf8mb4"),
 //					},
 //					&cynosdb.ClusterParamItemArgs{
-//						Name:         pulumi.String("time_zone"),
-//						CurrentValue: pulumi.String("+09:00"),
+//						Name:         pulumi.String("lower_case_table_names"),
+//						CurrentValue: pulumi.String("0"),
 //					},
 //				},
-//				ForceDelete: pulumi.Bool(true),
-//				RwGroupSgs: pulumi.StringArray{
-//					pulumi.String(sgId),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terraform"),
 //				},
-//				RoGroupSgs: pulumi.StringArray{
-//					pulumi.String(sgId),
-//				},
-//				PrarmTemplateId: pulumi.String(myParamTemplate),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = cynosdb.NewClusterSlaveZone(ctx, "cluster_slave_zone", &cynosdb.ClusterSlaveZoneArgs{
-//				ClusterId: instance.ID(),
-//				SlaveZone: pulumi.String(newAvailabilityZone),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ### Update the slave zone with specified value.
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewClusterSlaveZone(ctx, "cluster_slave_zone", &cynosdb.ClusterSlaveZoneArgs{
-//				ClusterId: pulumi.Any(instance.Id),
-//				SlaveZone: pulumi.Any(availabilityZone),
+//			_, err = cynosdb.NewClusterSlaveZone(ctx, "example", &cynosdb.ClusterSlaveZoneArgs{
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
+//				SlaveZone: pulumi.String("ap-guangzhou-7"),
 //			})
 //			if err != nil {
 //				return err
@@ -162,10 +88,10 @@ import (
 //
 // ## Import
 //
-// cynosdb cluster_slave_zone can be imported using the id, e.g.
+// CynosDB cluster slave zone can be imported using the clusterId#slaveZone, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
+// $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone example cynosdbmysql-g76di9j5#ap-guangzhou-7
 // ```
 type ClusterSlaveZone struct {
 	pulumi.CustomResourceState

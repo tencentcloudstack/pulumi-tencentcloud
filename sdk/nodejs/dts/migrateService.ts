@@ -32,7 +32,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * DTS migrate service can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Dts/migrateService:MigrateService example dts-iy98oxba
  * ```
@@ -151,31 +150,31 @@ export interface MigrateServiceState {
     /**
      * destination database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
      */
-    dstDatabaseType?: pulumi.Input<string>;
+    dstDatabaseType?: pulumi.Input<string | undefined>;
     /**
      * destination region.
      */
-    dstRegion?: pulumi.Input<string>;
+    dstRegion?: pulumi.Input<string | undefined>;
     /**
      * instance class, optional value is small/medium/large/xlarge/2xlarge.
      */
-    instanceClass?: pulumi.Input<string>;
+    instanceClass?: pulumi.Input<string | undefined>;
     /**
      * job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * source database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
      */
-    srcDatabaseType?: pulumi.Input<string>;
+    srcDatabaseType?: pulumi.Input<string | undefined>;
     /**
      * source region.
      */
-    srcRegion?: pulumi.Input<string>;
+    srcRegion?: pulumi.Input<string | undefined>;
     /**
      * tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Dts.MigrateServiceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Dts.MigrateServiceTag>[] | undefined>;
 }
 
 /**
@@ -197,7 +196,7 @@ export interface MigrateServiceArgs {
     /**
      * job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * source database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
      */
@@ -209,5 +208,5 @@ export interface MigrateServiceArgs {
     /**
      * tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Dts.MigrateServiceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Dts.MigrateServiceTag>[] | undefined>;
 }

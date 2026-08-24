@@ -62,7 +62,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor grafanaInstance can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/grafanaInstance:GrafanaInstance foo grafanaInstance_id
     /// ```

@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -110,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Import
     /// 
-    /// as execute_scaling_policy can be imported using the id, e.g.
+    /// as ExecuteScalingPolicy can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:As/executeScalingPolicy:ExecuteScalingPolicy execute_scaling_policy execute_scaling_policy_id

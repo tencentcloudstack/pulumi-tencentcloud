@@ -77,12 +77,8 @@ type GetResourcePackageSaleSpecsResult struct {
 }
 
 func GetResourcePackageSaleSpecsOutput(ctx *pulumi.Context, args GetResourcePackageSaleSpecsOutputArgs, opts ...pulumi.InvokeOption) GetResourcePackageSaleSpecsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourcePackageSaleSpecsResultOutput, error) {
-			args := v.(GetResourcePackageSaleSpecsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args, GetResourcePackageSaleSpecsResultOutput{}, options).(GetResourcePackageSaleSpecsResultOutput), nil
-		}).(GetResourcePackageSaleSpecsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args, GetResourcePackageSaleSpecsResultOutput{}, options).(GetResourcePackageSaleSpecsResultOutput)
 }
 
 // A collection of arguments for invoking getResourcePackageSaleSpecs.

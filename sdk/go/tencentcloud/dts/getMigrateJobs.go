@@ -34,8 +34,8 @@ import (
 //				DstRegion:       "ap-guangzhou",
 //				InstanceClass:   "small",
 //				JobName:         "tf_test_migration_job",
-//				Tags: []map[string]interface{}{
-//					map[string]interface{}{
+//				Tags: []map[string]string{
+//					{
 //						"tagKey":   "aaa",
 //						"tagValue": "bbb",
 //					},
@@ -48,15 +48,13 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = migrateJob.ID().ApplyT(func(id string) (dts.GetMigrateJobsResult, error) {
-//				return dts.GetMigrateJobsResult(interface{}(dts.GetMigrateJobs(ctx, &dts.GetMigrateJobsArgs{
-//					JobId:   pulumi.StringRef(pulumi.StringRef(id)),
-//					JobName: pulumi.StringRef(pulumi.StringRef(pulumi.String(migrateJob.JobName))),
-//					Statuses: []string{
-//						"created",
-//					},
-//				}, nil))), nil
-//			}).(dts.GetMigrateJobsResultOutput)
+//			_ = dts.GetMigrateJobsOutput(ctx, dts.GetMigrateJobsOutputArgs{
+//				JobId:   migrateJob.ID().ToIDOutput().ToStringOutput(),
+//				JobName: migrateJob.JobName,
+//				Statuses: pulumi.StringArray{
+//					pulumi.String("created"),
+//				},
+//			}, nil)
 //			_, err = dts.GetMigrateJobs(ctx, &dts.GetMigrateJobsArgs{
 //				SrcRegion: pulumi.StringRef("ap-guangzhou"),
 //				SrcDatabaseTypes: []string{
@@ -155,12 +153,8 @@ type GetMigrateJobsResult struct {
 }
 
 func GetMigrateJobsOutput(ctx *pulumi.Context, args GetMigrateJobsOutputArgs, opts ...pulumi.InvokeOption) GetMigrateJobsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMigrateJobsResultOutput, error) {
-			args := v.(GetMigrateJobsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args, GetMigrateJobsResultOutput{}, options).(GetMigrateJobsResultOutput), nil
-		}).(GetMigrateJobsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args, GetMigrateJobsResultOutput{}, options).(GetMigrateJobsResultOutput)
 }
 
 // A collection of arguments for invoking getMigrateJobs.

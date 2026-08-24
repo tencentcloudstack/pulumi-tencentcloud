@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
@@ -21,6 +20,8 @@ import (
 //
 // import (
 //
+//	"encoding/json"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
 //
@@ -28,35 +29,140 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cls.NewAlarmNotice(ctx, "example", &cls.AlarmNoticeArgs{
-//				Name: pulumi.String("tf-example"),
-//				Type: pulumi.String("All"),
-//				NoticeReceivers: cls.AlarmNoticeNoticeReceiverArray{
-//					&cls.AlarmNoticeNoticeReceiverArgs{
-//						ReceiverType: pulumi.String("Uin"),
-//						ReceiverIds: pulumi.IntArray{
-//							pulumi.Int(100037718139),
+//			tmpJSON0, err := json.Marshal([]int{
+//				1,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			tmpJSON1, err := json.Marshal([]int{
+//				0,
+//				2,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json1 := string(tmpJSON1)
+//			tmpJSON2, err := json.Marshal(map[string]interface{}{
+//				"Children": []map[string]interface{}{
+//					map[string]interface{}{
+//						"Children": []map[string]string{
+//							{
+//								"Type":  "Compare",
+//								"Value": "In",
+//							},
+//							{
+//								"Type":  "Value",
+//								"Value": json0,
+//							},
 //						},
-//						ReceiverChannels: pulumi.StringArray{
-//							pulumi.String("Email"),
-//							pulumi.String("Sms"),
+//						"Type":  "Condition",
+//						"Value": "NotifyType",
+//					},
+//					map[string]interface{}{
+//						"Children": []map[string]string{
+//							{
+//								"Type":  "Compare",
+//								"Value": "In",
+//							},
+//							{
+//								"Type":  "Value",
+//								"Value": json1,
+//							},
 //						},
-//						NoticeContentId: pulumi.String("noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7"),
-//						StartTime:       pulumi.String("00:00:00"),
-//						EndTime:         pulumi.String("23:59:59"),
+//						"Type":  "Condition",
+//						"Value": "Level",
 //					},
 //				},
-//				WebCallbacks: cls.AlarmNoticeWebCallbackArray{
-//					&cls.AlarmNoticeWebCallbackArgs{
-//						CallbackType:    pulumi.String("Http"),
-//						Url:             pulumi.String("example.com"),
-//						Method:          pulumi.String("POST"),
-//						NoticeContentId: pulumi.String("noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7"),
-//						RemindType:      pulumi.Int(1),
+//				"Type":  "Operation",
+//				"Value": "AND",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json2 := string(tmpJSON2)
+//			_, err = cls.NewAlarmNotice(ctx, "example", &cls.AlarmNoticeArgs{
+//				Name:               pulumi.String("tf-example"),
+//				JumpDomain:         pulumi.String("https://console.cloud.tencent.com"),
+//				DeliverStatus:      pulumi.Int(2),
+//				AlarmShieldStatus:  pulumi.Int(2),
+//				CallbackPrioritize: pulumi.Bool(true),
+//				NoticeRules: cls.AlarmNoticeNoticeRuleArray{
+//					&cls.AlarmNoticeNoticeRuleArgs{
+//						Escalate: pulumi.Bool(true),
+//						Interval: pulumi.Int(10),
+//						Rule:     pulumi.String(json2),
+//						Type:     pulumi.Int(1),
+//						EscalateNotices: cls.AlarmNoticeNoticeRuleEscalateNoticeArray{
+//							&cls.AlarmNoticeNoticeRuleEscalateNoticeArgs{
+//								Escalate: pulumi.Bool(true),
+//								Interval: pulumi.Int(10),
+//								Type:     pulumi.Int(1),
+//								NoticeReceivers: cls.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray{
+//									&cls.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs{
+//										EndTime:         pulumi.String("23:59:59"),
+//										Index:           pulumi.Int(1),
+//										NoticeContentId: pulumi.String("Default-zh"),
+//										ReceiverChannels: pulumi.StringArray{
+//											pulumi.String("Phone"),
+//											pulumi.String("Sms"),
+//										},
+//										ReceiverIds: pulumi.IntArray{
+//											pulumi.Int(19284382),
+//										},
+//										ReceiverType: pulumi.String("Uin"),
+//										StartTime:    pulumi.String("00:00:00"),
+//									},
+//								},
+//							},
+//							&cls.AlarmNoticeNoticeRuleEscalateNoticeArgs{
+//								Escalate: pulumi.Bool(false),
+//								Interval: pulumi.Int(10),
+//								Type:     pulumi.Int(1),
+//								NoticeReceivers: cls.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray{
+//									&cls.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs{
+//										EndTime:         pulumi.String("23:59:59"),
+//										Index:           pulumi.Int(1),
+//										NoticeContentId: pulumi.String("Default-en"),
+//										ReceiverChannels: pulumi.StringArray{
+//											pulumi.String("Email"),
+//											pulumi.String("Phone"),
+//											pulumi.String("Sms"),
+//										},
+//										ReceiverIds: pulumi.IntArray{
+//											pulumi.Int(19284382),
+//										},
+//										ReceiverType: pulumi.String("Uin"),
+//										StartTime:    pulumi.String("00:00:00"),
+//									},
+//								},
+//							},
+//						},
+//						NoticeReceivers: cls.AlarmNoticeNoticeRuleNoticeReceiverArray{
+//							&cls.AlarmNoticeNoticeRuleNoticeReceiverArgs{
+//								EndTime:         pulumi.String("23:59:59"),
+//								Index:           pulumi.Int(1),
+//								NoticeContentId: pulumi.String("Default-en"),
+//								ReceiverChannels: pulumi.StringArray{
+//									pulumi.String("Sms"),
+//								},
+//								ReceiverIds: pulumi.IntArray{
+//									pulumi.Int(19284382),
+//								},
+//								ReceiverType: pulumi.String("Uin"),
+//								StartTime:    pulumi.String("00:00:00"),
+//							},
+//						},
 //					},
+//				},
+//				DeliverConfig: &cls.AlarmNoticeDeliverConfigArgs{
+//					Region:  pulumi.String("ap-guangzhou"),
+//					TopicId: pulumi.String("898016cf-7e17-426f-9167-9b56fcfc603e"),
+//					Scope:   pulumi.Int(0),
 //				},
 //				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("terraform"),
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -78,10 +184,22 @@ import (
 type AlarmNotice struct {
 	pulumi.CustomResourceState
 
+	// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+	AlarmShieldStatus pulumi.IntOutput `pulumi:"alarmShieldStatus"`
+	// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+	CallbackPrioritize pulumi.BoolPtrOutput `pulumi:"callbackPrioritize"`
+	// Deliver log configuration. Required when deliverStatus is 2.
+	DeliverConfig AlarmNoticeDeliverConfigPtrOutput `pulumi:"deliverConfig"`
+	// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+	DeliverStatus pulumi.IntOutput `pulumi:"deliverStatus"`
+	// Jump domain. Must start with http:// or https://, cannot end with /.
+	JumpDomain pulumi.StringPtrOutput `pulumi:"jumpDomain"`
 	// Alarm notice name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Notice receivers.
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayOutput `pulumi:"noticeReceivers"`
+	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+	NoticeRules AlarmNoticeNoticeRuleArrayOutput `pulumi:"noticeRules"`
 	// Tag description list.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
@@ -94,12 +212,9 @@ type AlarmNotice struct {
 func NewAlarmNotice(ctx *pulumi.Context,
 	name string, args *AlarmNoticeArgs, opts ...pulumi.ResourceOption) (*AlarmNotice, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &AlarmNoticeArgs{}
 	}
 
-	if args.Type == nil {
-		return nil, errors.New("invalid value for required argument 'Type'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlarmNotice
 	err := ctx.RegisterResource("tencentcloud:Cls/alarmNotice:AlarmNotice", name, args, &resource, opts...)
@@ -123,10 +238,22 @@ func GetAlarmNotice(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AlarmNotice resources.
 type alarmNoticeState struct {
+	// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+	AlarmShieldStatus *int `pulumi:"alarmShieldStatus"`
+	// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+	CallbackPrioritize *bool `pulumi:"callbackPrioritize"`
+	// Deliver log configuration. Required when deliverStatus is 2.
+	DeliverConfig *AlarmNoticeDeliverConfig `pulumi:"deliverConfig"`
+	// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+	DeliverStatus *int `pulumi:"deliverStatus"`
+	// Jump domain. Must start with http:// or https://, cannot end with /.
+	JumpDomain *string `pulumi:"jumpDomain"`
 	// Alarm notice name.
 	Name *string `pulumi:"name"`
 	// Notice receivers.
 	NoticeReceivers []AlarmNoticeNoticeReceiver `pulumi:"noticeReceivers"`
+	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+	NoticeRules []AlarmNoticeNoticeRule `pulumi:"noticeRules"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
@@ -136,10 +263,22 @@ type alarmNoticeState struct {
 }
 
 type AlarmNoticeState struct {
+	// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+	AlarmShieldStatus pulumi.IntPtrInput
+	// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+	CallbackPrioritize pulumi.BoolPtrInput
+	// Deliver log configuration. Required when deliverStatus is 2.
+	DeliverConfig AlarmNoticeDeliverConfigPtrInput
+	// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+	DeliverStatus pulumi.IntPtrInput
+	// Jump domain. Must start with http:// or https://, cannot end with /.
+	JumpDomain pulumi.StringPtrInput
 	// Alarm notice name.
 	Name pulumi.StringPtrInput
 	// Notice receivers.
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayInput
+	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+	NoticeRules AlarmNoticeNoticeRuleArrayInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
 	// Notice type. Value: Trigger, Recovery, All.
@@ -153,28 +292,52 @@ func (AlarmNoticeState) ElementType() reflect.Type {
 }
 
 type alarmNoticeArgs struct {
+	// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+	AlarmShieldStatus *int `pulumi:"alarmShieldStatus"`
+	// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+	CallbackPrioritize *bool `pulumi:"callbackPrioritize"`
+	// Deliver log configuration. Required when deliverStatus is 2.
+	DeliverConfig *AlarmNoticeDeliverConfig `pulumi:"deliverConfig"`
+	// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+	DeliverStatus *int `pulumi:"deliverStatus"`
+	// Jump domain. Must start with http:// or https://, cannot end with /.
+	JumpDomain *string `pulumi:"jumpDomain"`
 	// Alarm notice name.
 	Name *string `pulumi:"name"`
 	// Notice receivers.
 	NoticeReceivers []AlarmNoticeNoticeReceiver `pulumi:"noticeReceivers"`
+	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+	NoticeRules []AlarmNoticeNoticeRule `pulumi:"noticeRules"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
 	// Notice type. Value: Trigger, Recovery, All.
-	Type string `pulumi:"type"`
+	Type *string `pulumi:"type"`
 	// Callback info.
 	WebCallbacks []AlarmNoticeWebCallback `pulumi:"webCallbacks"`
 }
 
 // The set of arguments for constructing a AlarmNotice resource.
 type AlarmNoticeArgs struct {
+	// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+	AlarmShieldStatus pulumi.IntPtrInput
+	// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+	CallbackPrioritize pulumi.BoolPtrInput
+	// Deliver log configuration. Required when deliverStatus is 2.
+	DeliverConfig AlarmNoticeDeliverConfigPtrInput
+	// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+	DeliverStatus pulumi.IntPtrInput
+	// Jump domain. Must start with http:// or https://, cannot end with /.
+	JumpDomain pulumi.StringPtrInput
 	// Alarm notice name.
 	Name pulumi.StringPtrInput
 	// Notice receivers.
 	NoticeReceivers AlarmNoticeNoticeReceiverArrayInput
+	// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+	NoticeRules AlarmNoticeNoticeRuleArrayInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
 	// Notice type. Value: Trigger, Recovery, All.
-	Type pulumi.StringInput
+	Type pulumi.StringPtrInput
 	// Callback info.
 	WebCallbacks AlarmNoticeWebCallbackArrayInput
 }
@@ -266,6 +429,31 @@ func (o AlarmNoticeOutput) ToAlarmNoticeOutputWithContext(ctx context.Context) A
 	return o
 }
 
+// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+func (o AlarmNoticeOutput) AlarmShieldStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.IntOutput { return v.AlarmShieldStatus }).(pulumi.IntOutput)
+}
+
+// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+func (o AlarmNoticeOutput) CallbackPrioritize() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.BoolPtrOutput { return v.CallbackPrioritize }).(pulumi.BoolPtrOutput)
+}
+
+// Deliver log configuration. Required when deliverStatus is 2.
+func (o AlarmNoticeOutput) DeliverConfig() AlarmNoticeDeliverConfigPtrOutput {
+	return o.ApplyT(func(v *AlarmNotice) AlarmNoticeDeliverConfigPtrOutput { return v.DeliverConfig }).(AlarmNoticeDeliverConfigPtrOutput)
+}
+
+// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+func (o AlarmNoticeOutput) DeliverStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.IntOutput { return v.DeliverStatus }).(pulumi.IntOutput)
+}
+
+// Jump domain. Must start with http:// or https://, cannot end with /.
+func (o AlarmNoticeOutput) JumpDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlarmNotice) pulumi.StringPtrOutput { return v.JumpDomain }).(pulumi.StringPtrOutput)
+}
+
 // Alarm notice name.
 func (o AlarmNoticeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlarmNotice) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -274,6 +462,11 @@ func (o AlarmNoticeOutput) Name() pulumi.StringOutput {
 // Notice receivers.
 func (o AlarmNoticeOutput) NoticeReceivers() AlarmNoticeNoticeReceiverArrayOutput {
 	return o.ApplyT(func(v *AlarmNotice) AlarmNoticeNoticeReceiverArrayOutput { return v.NoticeReceivers }).(AlarmNoticeNoticeReceiverArrayOutput)
+}
+
+// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+func (o AlarmNoticeOutput) NoticeRules() AlarmNoticeNoticeRuleArrayOutput {
+	return o.ApplyT(func(v *AlarmNotice) AlarmNoticeNoticeRuleArrayOutput { return v.NoticeRules }).(AlarmNoticeNoticeRuleArrayOutput)
 }
 
 // Tag description list.

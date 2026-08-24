@@ -26,6 +26,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public Input<Inputs.DomainHttpsConfigForceRedirectArgs>? ForceRedirect { get; set; }
 
         /// <summary>
+        /// HSTS configuration.
+        /// </summary>
+        [Input("hsts")]
+        public Input<Inputs.DomainHttpsConfigHstsArgs>? Hsts { get; set; }
+
+        /// <summary>
         /// HTTP2 configuration switch. Valid values are `On` and `Off`. and default value is `Off`.
         /// </summary>
         [Input("http2Switch")]

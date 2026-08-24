@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -49,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         Name = "tf-redis-sg",
     ///     });
     /// 
-    ///     var example = new Tencentcloud.Index.SecurityGroupLiteRule("example", new()
+    ///     var example = new Tencentcloud.SecurityGroupLiteRule("example", new()
     ///     {
     ///         SecurityGroupId = securityGroup.Id,
     ///         Ingresses = new[]

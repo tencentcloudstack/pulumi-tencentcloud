@@ -126,23 +126,23 @@ export interface CustomerGatewayConfigurationDownloadState {
     /**
      * xml configuration.
      */
-    customerGatewayConfiguration?: pulumi.Input<string>;
+    customerGatewayConfiguration?: pulumi.Input<string | undefined>;
     /**
      * Customer Gateway Vendor Info.
      */
-    customerGatewayVendor?: pulumi.Input<inputs.Vpn.CustomerGatewayConfigurationDownloadCustomerGatewayVendor>;
+    customerGatewayVendor?: pulumi.Input<inputs.Vpn.CustomerGatewayConfigurationDownloadCustomerGatewayVendor | undefined>;
     /**
      * VPN connection access device physical interface name.
      */
-    interfaceName?: pulumi.Input<string>;
+    interfaceName?: pulumi.Input<string | undefined>;
     /**
      * VPN Connection Instance id.
      */
-    vpnConnectionId?: pulumi.Input<string>;
+    vpnConnectionId?: pulumi.Input<string | undefined>;
     /**
      * VPN Gateway Instance ID.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
 }
 
 /**

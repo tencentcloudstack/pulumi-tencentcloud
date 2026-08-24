@@ -40,6 +40,11 @@ export type ConfigExtra = import("./configExtra").ConfigExtra;
 export const ConfigExtra: typeof import("./configExtra").ConfigExtra = null as any;
 utilities.lazyLoad(exports, ["ConfigExtra"], () => require("./configExtra"));
 
+export { ConsoleArgs, ConsoleState } from "./console";
+export type Console = import("./console").Console;
+export const Console: typeof import("./console").Console = null as any;
+utilities.lazyLoad(exports, ["Console"], () => require("./console"));
+
 export { CosRechargeArgs, CosRechargeState } from "./cosRecharge";
 export type CosRecharge = import("./cosRecharge").CosRecharge;
 export const CosRecharge: typeof import("./cosRecharge").CosRecharge = null as any;
@@ -50,15 +55,30 @@ export type CosShipper = import("./cosShipper").CosShipper;
 export const CosShipper: typeof import("./cosShipper").CosShipper = null as any;
 utilities.lazyLoad(exports, ["CosShipper"], () => require("./cosShipper"));
 
+export { DashboardArgs, DashboardState } from "./dashboard";
+export type Dashboard = import("./dashboard").Dashboard;
+export const Dashboard: typeof import("./dashboard").Dashboard = null as any;
+utilities.lazyLoad(exports, ["Dashboard"], () => require("./dashboard"));
+
 export { DataTransformArgs, DataTransformState } from "./dataTransform";
 export type DataTransform = import("./dataTransform").DataTransform;
 export const DataTransform: typeof import("./dataTransform").DataTransform = null as any;
 utilities.lazyLoad(exports, ["DataTransform"], () => require("./dataTransform"));
 
+export { DlcDeliverArgs, DlcDeliverState } from "./dlcDeliver";
+export type DlcDeliver = import("./dlcDeliver").DlcDeliver;
+export const DlcDeliver: typeof import("./dlcDeliver").DlcDeliver = null as any;
+utilities.lazyLoad(exports, ["DlcDeliver"], () => require("./dlcDeliver"));
+
 export { ExportArgs, ExportState } from "./export";
 export type Export = import("./export").Export;
 export const Export: typeof import("./export").Export = null as any;
 utilities.lazyLoad(exports, ["Export"], () => require("./export"));
+
+export { GetAlarmNoticesArgs, GetAlarmNoticesResult, GetAlarmNoticesOutputArgs } from "./getAlarmNotices";
+export const getAlarmNotices: typeof import("./getAlarmNotices").getAlarmNotices = null as any;
+export const getAlarmNoticesOutput: typeof import("./getAlarmNotices").getAlarmNoticesOutput = null as any;
+utilities.lazyLoad(exports, ["getAlarmNotices","getAlarmNoticesOutput"], () => require("./getAlarmNotices"));
 
 export { GetLogsetsArgs, GetLogsetsResult, GetLogsetsOutputArgs } from "./getLogsets";
 export const getLogsets: typeof import("./getLogsets").getLogsets = null as any;
@@ -70,10 +90,20 @@ export const getMachineGroupConfigs: typeof import("./getMachineGroupConfigs").g
 export const getMachineGroupConfigsOutput: typeof import("./getMachineGroupConfigs").getMachineGroupConfigsOutput = null as any;
 utilities.lazyLoad(exports, ["getMachineGroupConfigs","getMachineGroupConfigsOutput"], () => require("./getMachineGroupConfigs"));
 
+export { GetMachineGroupsArgs, GetMachineGroupsResult, GetMachineGroupsOutputArgs } from "./getMachineGroups";
+export const getMachineGroups: typeof import("./getMachineGroups").getMachineGroups = null as any;
+export const getMachineGroupsOutput: typeof import("./getMachineGroups").getMachineGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getMachineGroups","getMachineGroupsOutput"], () => require("./getMachineGroups"));
+
 export { GetMachinesArgs, GetMachinesResult, GetMachinesOutputArgs } from "./getMachines";
 export const getMachines: typeof import("./getMachines").getMachines = null as any;
 export const getMachinesOutput: typeof import("./getMachines").getMachinesOutput = null as any;
 utilities.lazyLoad(exports, ["getMachines","getMachinesOutput"], () => require("./getMachines"));
+
+export { GetNoticeContentsArgs, GetNoticeContentsResult, GetNoticeContentsOutputArgs } from "./getNoticeContents";
+export const getNoticeContents: typeof import("./getNoticeContents").getNoticeContents = null as any;
+export const getNoticeContentsOutput: typeof import("./getNoticeContents").getNoticeContentsOutput = null as any;
+utilities.lazyLoad(exports, ["getNoticeContents","getNoticeContentsOutput"], () => require("./getNoticeContents"));
 
 export { GetShipperTasksArgs, GetShipperTasksResult, GetShipperTasksOutputArgs } from "./getShipperTasks";
 export const getShipperTasks: typeof import("./getShipperTasks").getShipperTasks = null as any;
@@ -90,6 +120,11 @@ export type Index = import("./index_").Index;
 export const Index: typeof import("./index_").Index = null as any;
 utilities.lazyLoad(exports, ["Index"], () => require("./index_"));
 
+export { KafkaConsumerArgs, KafkaConsumerState } from "./kafkaConsumer";
+export type KafkaConsumer = import("./kafkaConsumer").KafkaConsumer;
+export const KafkaConsumer: typeof import("./kafkaConsumer").KafkaConsumer = null as any;
+utilities.lazyLoad(exports, ["KafkaConsumer"], () => require("./kafkaConsumer"));
+
 export { KafkaRechargeArgs, KafkaRechargeState } from "./kafkaRecharge";
 export type KafkaRecharge = import("./kafkaRecharge").KafkaRecharge;
 export const KafkaRecharge: typeof import("./kafkaRecharge").KafkaRecharge = null as any;
@@ -105,10 +140,20 @@ export type MachineGroup = import("./machineGroup").MachineGroup;
 export const MachineGroup: typeof import("./machineGroup").MachineGroup = null as any;
 utilities.lazyLoad(exports, ["MachineGroup"], () => require("./machineGroup"));
 
+export { MetricSubscribeArgs, MetricSubscribeState } from "./metricSubscribe";
+export type MetricSubscribe = import("./metricSubscribe").MetricSubscribe;
+export const MetricSubscribe: typeof import("./metricSubscribe").MetricSubscribe = null as any;
+utilities.lazyLoad(exports, ["MetricSubscribe"], () => require("./metricSubscribe"));
+
 export { NoticeContentArgs, NoticeContentState } from "./noticeContent";
 export type NoticeContent = import("./noticeContent").NoticeContent;
 export const NoticeContent: typeof import("./noticeContent").NoticeContent = null as any;
 utilities.lazyLoad(exports, ["NoticeContent"], () => require("./noticeContent"));
+
+export { OpenServiceOperationArgs, OpenServiceOperationState } from "./openServiceOperation";
+export type OpenServiceOperation = import("./openServiceOperation").OpenServiceOperation;
+export const OpenServiceOperation: typeof import("./openServiceOperation").OpenServiceOperation = null as any;
+utilities.lazyLoad(exports, ["OpenServiceOperation"], () => require("./openServiceOperation"));
 
 export { ScheduledSqlArgs, ScheduledSqlState } from "./scheduledSql";
 export type ScheduledSql = import("./scheduledSql").ScheduledSql;
@@ -144,24 +189,36 @@ const _module = {
                 return new ConfigAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cls/configExtra:ConfigExtra":
                 return new ConfigExtra(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/console:Console":
+                return new Console(name, <any>undefined, { urn })
             case "tencentcloud:Cls/cosRecharge:CosRecharge":
                 return new CosRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/cosShipper:CosShipper":
                 return new CosShipper(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/dashboard:Dashboard":
+                return new Dashboard(name, <any>undefined, { urn })
             case "tencentcloud:Cls/dataTransform:DataTransform":
                 return new DataTransform(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/dlcDeliver:DlcDeliver":
+                return new DlcDeliver(name, <any>undefined, { urn })
             case "tencentcloud:Cls/export:Export":
                 return new Export(name, <any>undefined, { urn })
             case "tencentcloud:Cls/index:Index":
                 return new Index(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/kafkaConsumer:KafkaConsumer":
+                return new KafkaConsumer(name, <any>undefined, { urn })
             case "tencentcloud:Cls/kafkaRecharge:KafkaRecharge":
                 return new KafkaRecharge(name, <any>undefined, { urn })
             case "tencentcloud:Cls/logset:Logset":
                 return new Logset(name, <any>undefined, { urn })
             case "tencentcloud:Cls/machineGroup:MachineGroup":
                 return new MachineGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/metricSubscribe:MetricSubscribe":
+                return new MetricSubscribe(name, <any>undefined, { urn })
             case "tencentcloud:Cls/noticeContent:NoticeContent":
                 return new NoticeContent(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/openServiceOperation:OpenServiceOperation":
+                return new OpenServiceOperation(name, <any>undefined, { urn })
             case "tencentcloud:Cls/scheduledSql:ScheduledSql":
                 return new ScheduledSql(name, <any>undefined, { urn })
             case "tencentcloud:Cls/topic:Topic":
@@ -180,15 +237,21 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cloudProductLogTaskV2
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/config", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/configExtra", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/console", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dashboard", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dataTransform", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dlcDeliver", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/export", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/kafkaConsumer", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/kafkaRecharge", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/logset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/metricSubscribe", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/noticeContent", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/openServiceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/scheduledSql", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/webCallback", _module)

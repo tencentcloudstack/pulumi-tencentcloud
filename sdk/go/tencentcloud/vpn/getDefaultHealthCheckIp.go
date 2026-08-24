@@ -69,12 +69,8 @@ type GetDefaultHealthCheckIpResult struct {
 }
 
 func GetDefaultHealthCheckIpOutput(ctx *pulumi.Context, args GetDefaultHealthCheckIpOutputArgs, opts ...pulumi.InvokeOption) GetDefaultHealthCheckIpResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDefaultHealthCheckIpResultOutput, error) {
-			args := v.(GetDefaultHealthCheckIpArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args, GetDefaultHealthCheckIpResultOutput{}, options).(GetDefaultHealthCheckIpResultOutput), nil
-		}).(GetDefaultHealthCheckIpResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args, GetDefaultHealthCheckIpResultOutput{}, options).(GetDefaultHealthCheckIpResultOutput)
 }
 
 // A collection of arguments for invoking getDefaultHealthCheckIp.

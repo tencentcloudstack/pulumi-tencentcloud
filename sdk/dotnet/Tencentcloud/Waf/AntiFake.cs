@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf anti_fake can be imported using the id, e.g.
+    /// waf AntiFake can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com

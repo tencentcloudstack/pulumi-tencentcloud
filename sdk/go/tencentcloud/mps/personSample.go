@@ -56,7 +56,7 @@ import (
 //
 // ## Import
 //
-// mps person_sample can be imported using the id, e.g.
+// mps personSample can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id

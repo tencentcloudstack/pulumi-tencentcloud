@@ -21,7 +21,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -71,6 +71,141 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///         },
         ///     });
         /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Network and Performance Requirements
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var highNetwork = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 8,
+        ///         MemorySize = 16,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["instanceDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "typeName", instance.TypeName },
+        ///                 { "networkCard", instance.NetworkCard },
+        ///                 { "bandwidth", instance.InstanceBandwidth },
+        ///                 { "pps", instance.InstancePps },
+        ///                 { "cpuType", instance.CpuType },
+        ///                 { "frequency", instance.Frequency },
+        ///                 { "statusCategory", instance.StatusCategory },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query GPU Instances
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var gpuInstances = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         GpuCoreCount = 1,
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+        ///             {
+        ///                 Name = "zone",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-guangzhou-6",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["gpuDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "gpuCount", instance.GpuCount },
+        ///                 { "fpga", instance.Fpga },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Local Disk Support
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var localDisk = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["localDiskTypes"] = .Where(instance =&gt; instance.LocalDiskTypeList.Length &gt; 0).Select(instance =&gt; 
+        ///         {
+        ///             return instance.LocalDiskTypeList;
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query Price Information
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var withPricing = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 2,
+        ///         MemorySize = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["pricingInfo"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "price", instance.Price.Length &gt; 0 ? instance.Price[0] : null },
+        ///             };
+        ///         }).ToList(),
+        ///     };
         /// });
         /// ```
         /// </summary>
@@ -86,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -106,7 +241,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -136,6 +271,141 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///         },
         ///     });
         /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Network and Performance Requirements
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var highNetwork = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 8,
+        ///         MemorySize = 16,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["instanceDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "typeName", instance.TypeName },
+        ///                 { "networkCard", instance.NetworkCard },
+        ///                 { "bandwidth", instance.InstanceBandwidth },
+        ///                 { "pps", instance.InstancePps },
+        ///                 { "cpuType", instance.CpuType },
+        ///                 { "frequency", instance.Frequency },
+        ///                 { "statusCategory", instance.StatusCategory },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query GPU Instances
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var gpuInstances = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         GpuCoreCount = 1,
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+        ///             {
+        ///                 Name = "zone",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-guangzhou-6",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["gpuDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "gpuCount", instance.GpuCount },
+        ///                 { "fpga", instance.Fpga },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Local Disk Support
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var localDisk = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["localDiskTypes"] = .Where(instance =&gt; instance.LocalDiskTypeList.Length &gt; 0).Select(instance =&gt; 
+        ///         {
+        ///             return instance.LocalDiskTypeList;
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query Price Information
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var withPricing = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 2,
+        ///         MemorySize = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["pricingInfo"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "price", instance.Price.Length &gt; 0 ? instance.Price[0] : null },
+        ///             };
+        ///         }).ToList(),
+        ///     };
         /// });
         /// ```
         /// </summary>
@@ -151,7 +421,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -171,7 +441,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -201,6 +471,141 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///         },
         ///     });
         /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Network and Performance Requirements
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var highNetwork = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 8,
+        ///         MemorySize = 16,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["instanceDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "typeName", instance.TypeName },
+        ///                 { "networkCard", instance.NetworkCard },
+        ///                 { "bandwidth", instance.InstanceBandwidth },
+        ///                 { "pps", instance.InstancePps },
+        ///                 { "cpuType", instance.CpuType },
+        ///                 { "frequency", instance.Frequency },
+        ///                 { "statusCategory", instance.StatusCategory },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query GPU Instances
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var gpuInstances = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         GpuCoreCount = 1,
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+        ///             {
+        ///                 Name = "zone",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-guangzhou-6",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["gpuDetails"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "gpuCount", instance.GpuCount },
+        ///                 { "fpga", instance.Fpga },
+        ///             };
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query with Local Disk Support
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var localDisk = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["localDiskTypes"] = .Where(instance =&gt; instance.LocalDiskTypeList.Length &gt; 0).Select(instance =&gt; 
+        ///         {
+        ///             return instance.LocalDiskTypeList;
+        ///         }).ToList(),
+        ///     };
+        /// });
+        /// ```
+        /// 
+        /// ### Query Price Information
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var withPricing = Tencentcloud.Instance.GetTypes.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         CpuCoreCount = 2,
+        ///         MemorySize = 4,
+        ///     });
+        /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["pricingInfo"] = .Select(instance =&gt; 
+        ///         {
+        ///             return 
+        ///             {
+        ///                 { "type", instance.InstanceType },
+        ///                 { "price", instance.Price.Length &gt; 0 ? instance.Price[0] : null },
+        ///             };
+        ///         }).ToList(),
+        ///     };
         /// });
         /// ```
         /// </summary>

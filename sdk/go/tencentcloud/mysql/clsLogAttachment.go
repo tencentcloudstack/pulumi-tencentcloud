@@ -36,7 +36,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-mysql"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -44,10 +44,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				Name:             pulumi.String("subnet-mysql"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -74,11 +74,11 @@ import (
 //				InstanceName:     pulumi.String("tf-example-mysql"),
 //				MemSize:          pulumi.Int(4000),
 //				VolumeSize:       pulumi.Int(200),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"name": pulumi.String("test"),
@@ -93,7 +93,7 @@ import (
 //			}
 //			// attachment cls log
 //			_, err = mysql.NewClsLogAttachment(ctx, "example", &mysql.ClsLogAttachmentArgs{
-//				InstanceId:     example.ID(),
+//				InstanceId:     example.ID().ToIDOutput().ToStringOutput(),
 //				LogType:        pulumi.String("error"),
 //				CreateLogSet:   pulumi.Bool(true),
 //				CreateLogTopic: pulumi.Bool(true),

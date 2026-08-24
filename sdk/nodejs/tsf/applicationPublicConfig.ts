@@ -131,31 +131,31 @@ export interface ApplicationPublicConfigState {
     /**
      * Config Name.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Config type.
      */
-    configType?: pulumi.Input<string>;
+    configType?: pulumi.Input<string | undefined>;
     /**
      * config value, only yaml file allowed.
      */
-    configValue?: pulumi.Input<string>;
+    configValue?: pulumi.Input<string | undefined>;
     /**
      * config version.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * Config version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * the config value is encoded with base64 or not.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * datasource for auth.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -169,7 +169,7 @@ export interface ApplicationPublicConfigArgs {
     /**
      * Config type.
      */
-    configType?: pulumi.Input<string>;
+    configType?: pulumi.Input<string | undefined>;
     /**
      * config value, only yaml file allowed.
      */
@@ -181,13 +181,13 @@ export interface ApplicationPublicConfigArgs {
     /**
      * Config version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * the config value is encoded with base64 or not.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * datasource for auth.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

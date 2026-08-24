@@ -48,5 +48,5 @@ export function getVipInstanceOutput(args: GetVipInstanceOutputArgs, opts?: pulu
  */
 export interface GetVipInstanceOutputArgs {
     clusterId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

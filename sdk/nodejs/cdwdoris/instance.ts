@@ -7,11 +7,11 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cdwdoris instance
+ * Provides a resource to create a CDWDoris instance
  *
  * ## Example Usage
  *
- * ### Create a POSTPAID instance
+ * ### Create a POSTPAID instance(SSC)
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -45,26 +45,28 @@ import * as utilities from "../utilities";
  *     zone: availabilityZone,
  *     userVpcId: vpc.id,
  *     userSubnetId: subnet.id,
- *     productVersion: "2.1",
+ *     productVersion: "3.1",
  *     instanceName: "tf-example",
- *     dorisUserPwd: "Password@test",
+ *     dorisUserPwd: "Password@2026",
  *     haFlag: false,
+ *     haType: 0,
  *     caseSensitive: 0,
  *     enableMultiZones: false,
- *     workloadGroupStatus: "open",
+ *     isSsc: true,
+ *     workloadGroupStatus: "close",
  *     securityGroupIds: [example.id],
  *     chargeProperties: {
  *         chargeType: "POSTPAID_BY_HOUR",
  *     },
  *     feSpec: {
- *         specName: "S_4_16_P",
- *         count: 3,
+ *         specName: "S_8_32_H",
+ *         count: 5,
  *         diskSize: 200,
  *     },
  *     beSpec: {
- *         specName: "S_4_16_P",
+ *         specName: "S_8_32_H",
  *         count: 3,
- *         diskSize: 200,
+ *         diskSize: 400,
  *     },
  *     tags: [{
  *         tagKey: "createBy",
@@ -73,7 +75,7 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
- * ### Create a POSTPAID instance
+ * ### Create a PREPAID instance(Without SSC)
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -109,10 +111,12 @@ import * as utilities from "../utilities";
  *     userSubnetId: subnet.id,
  *     productVersion: "2.1",
  *     instanceName: "tf-example",
- *     dorisUserPwd: "Password@test",
+ *     dorisUserPwd: "Password@2026",
  *     haFlag: false,
+ *     haType: 0,
  *     caseSensitive: 0,
  *     enableMultiZones: false,
+ *     isSsc: false,
  *     workloadGroupStatus: "close",
  *     securityGroupIds: [example.id],
  *     chargeProperties: {
@@ -202,6 +206,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly instanceName: pulumi.Output<string>;
     /**
+     * Whether it is storage-compute separation. Default is false.
+     */
+    declare public readonly isSsc: pulumi.Output<boolean>;
+    /**
      * Product version number.
      */
     declare public readonly productVersion: pulumi.Output<string>;
@@ -256,6 +264,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["haFlag"] = state?.haFlag;
             resourceInputs["haType"] = state?.haType;
             resourceInputs["instanceName"] = state?.instanceName;
+            resourceInputs["isSsc"] = state?.isSsc;
             resourceInputs["productVersion"] = state?.productVersion;
             resourceInputs["securityGroupIds"] = state?.securityGroupIds;
             resourceInputs["tags"] = state?.tags;
@@ -308,6 +317,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["haFlag"] = args?.haFlag;
             resourceInputs["haType"] = args?.haType;
             resourceInputs["instanceName"] = args?.instanceName;
+            resourceInputs["isSsc"] = args?.isSsc;
             resourceInputs["productVersion"] = args?.productVersion;
             resourceInputs["securityGroupIds"] = args?.securityGroupIds;
             resourceInputs["tags"] = args?.tags;
@@ -331,71 +341,75 @@ export interface InstanceState {
     /**
      * BE specifications.
      */
-    beSpec?: pulumi.Input<inputs.Cdwdoris.InstanceBeSpec>;
+    beSpec?: pulumi.Input<inputs.Cdwdoris.InstanceBeSpec | undefined>;
     /**
      * Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
      */
-    caseSensitive?: pulumi.Input<number>;
+    caseSensitive?: pulumi.Input<number | undefined>;
     /**
      * Payment type.
      */
-    chargeProperties?: pulumi.Input<inputs.Cdwdoris.InstanceChargeProperties>;
+    chargeProperties?: pulumi.Input<inputs.Cdwdoris.InstanceChargeProperties | undefined>;
     /**
      * Database password.
      */
-    dorisUserPwd?: pulumi.Input<string>;
+    dorisUserPwd?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable multi-availability zone.
      */
-    enableMultiZones?: pulumi.Input<boolean>;
+    enableMultiZones?: pulumi.Input<boolean | undefined>;
     /**
      * FE specifications.
      */
-    feSpec?: pulumi.Input<inputs.Cdwdoris.InstanceFeSpec>;
+    feSpec?: pulumi.Input<inputs.Cdwdoris.InstanceFeSpec | undefined>;
     /**
      * Whether it is highly available.
      */
-    haFlag?: pulumi.Input<boolean>;
+    haFlag?: pulumi.Input<boolean | undefined>;
     /**
      * High availability type: 0 indicates non-high availability (only one FE, FeSpec.CreateInstanceSpec.Count=1), 1 indicates read high availability (at least 3 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=3, and it must be an odd number), 2 indicates read and write high availability (at least 5 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=5, and it must be an odd number).
      */
-    haType?: pulumi.Input<number>;
+    haType?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
+    /**
+     * Whether it is storage-compute separation. Default is false.
+     */
+    isSsc?: pulumi.Input<boolean | undefined>;
     /**
      * Product version number.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * Security Group Id list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag list.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.InstanceTag>[] | undefined>;
     /**
      * After the Multi-AZ is enabled, all user's Availability Zones and Subnets information are shown.
      */
-    userMultiZoneInfos?: pulumi.Input<inputs.Cdwdoris.InstanceUserMultiZoneInfos>;
+    userMultiZoneInfos?: pulumi.Input<inputs.Cdwdoris.InstanceUserMultiZoneInfos | undefined>;
     /**
      * User subnet ID.
      */
-    userSubnetId?: pulumi.Input<string>;
+    userSubnetId?: pulumi.Input<string | undefined>;
     /**
      * User VPCID.
      */
-    userVpcId?: pulumi.Input<string>;
+    userVpcId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable resource group. `open` - enable, `close` - disable.
      */
-    workloadGroupStatus?: pulumi.Input<string>;
+    workloadGroupStatus?: pulumi.Input<string | undefined>;
     /**
      * Availability zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -409,7 +423,7 @@ export interface InstanceArgs {
     /**
      * Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.
      */
-    caseSensitive?: pulumi.Input<number>;
+    caseSensitive?: pulumi.Input<number | undefined>;
     /**
      * Payment type.
      */
@@ -421,7 +435,7 @@ export interface InstanceArgs {
     /**
      * Whether to enable multi-availability zone.
      */
-    enableMultiZones?: pulumi.Input<boolean>;
+    enableMultiZones?: pulumi.Input<boolean | undefined>;
     /**
      * FE specifications.
      */
@@ -433,11 +447,15 @@ export interface InstanceArgs {
     /**
      * High availability type: 0 indicates non-high availability (only one FE, FeSpec.CreateInstanceSpec.Count=1), 1 indicates read high availability (at least 3 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=3, and it must be an odd number), 2 indicates read and write high availability (at least 5 FEs must be deployed, FeSpec.CreateInstanceSpec.Count>=5, and it must be an odd number).
      */
-    haType?: pulumi.Input<number>;
+    haType?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * Whether it is storage-compute separation. Default is false.
+     */
+    isSsc?: pulumi.Input<boolean | undefined>;
     /**
      * Product version number.
      */
@@ -445,15 +463,15 @@ export interface InstanceArgs {
     /**
      * Security Group Id list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag list.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.InstanceTag>[] | undefined>;
     /**
      * After the Multi-AZ is enabled, all user's Availability Zones and Subnets information are shown.
      */
-    userMultiZoneInfos?: pulumi.Input<inputs.Cdwdoris.InstanceUserMultiZoneInfos>;
+    userMultiZoneInfos?: pulumi.Input<inputs.Cdwdoris.InstanceUserMultiZoneInfos | undefined>;
     /**
      * User subnet ID.
      */

@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -98,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Import
     /// 
-    /// sqlserver config_instance_param can be imported using the id, e.g.
+    /// sqlserver ConfigInstanceParam can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Sqlserver/configInstanceParam:ConfigInstanceParam example config_instance_param

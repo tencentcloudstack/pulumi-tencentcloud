@@ -85,12 +85,8 @@ type GetCenterUsersResult struct {
 }
 
 func GetCenterUsersOutput(ctx *pulumi.Context, args GetCenterUsersOutputArgs, opts ...pulumi.InvokeOption) GetCenterUsersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCenterUsersResultOutput, error) {
-			args := v.(GetCenterUsersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Identity/getCenterUsers:getCenterUsers", args, GetCenterUsersResultOutput{}, options).(GetCenterUsersResultOutput), nil
-		}).(GetCenterUsersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Identity/getCenterUsers:getCenterUsers", args, GetCenterUsersResultOutput{}, options).(GetCenterUsersResultOutput)
 }
 
 // A collection of arguments for invoking getCenterUsers.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routeConflicts = tencentcloud.Vpc.getRouteConflicts({
+ * const routeConflicts = tencentcloud.vpc.getRouteConflicts({
  *     routeTableId: "rtb-6xypllqe",
  *     destinationCidrBlocks: ["172.18.111.0/24"],
  * });
@@ -76,7 +76,7 @@ export interface GetRouteConflictsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routeConflicts = tencentcloud.Vpc.getRouteConflicts({
+ * const routeConflicts = tencentcloud.vpc.getRouteConflicts({
  *     routeTableId: "rtb-6xypllqe",
  *     destinationCidrBlocks: ["172.18.111.0/24"],
  * });
@@ -102,7 +102,7 @@ export interface GetRouteConflictsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Routing table instance ID, for example:rtb-azd4dt1c.
      */

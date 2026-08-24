@@ -51,12 +51,8 @@ type LookupSubscribeResult struct {
 }
 
 func LookupSubscribeOutput(ctx *pulumi.Context, args LookupSubscribeOutputArgs, opts ...pulumi.InvokeOption) LookupSubscribeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupSubscribeResultOutput, error) {
-			args := v.(LookupSubscribeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcmq/getSubscribe:getSubscribe", args, LookupSubscribeResultOutput{}, options).(LookupSubscribeResultOutput), nil
-		}).(LookupSubscribeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcmq/getSubscribe:getSubscribe", args, LookupSubscribeResultOutput{}, options).(LookupSubscribeResultOutput)
 }
 
 // A collection of arguments for invoking getSubscribe.

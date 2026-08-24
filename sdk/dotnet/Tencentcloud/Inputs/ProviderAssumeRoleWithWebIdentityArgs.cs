@@ -20,10 +20,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Inputs
         public Input<string>? ProviderId { get; set; }
 
         /// <summary>
-        /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+        /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `RoleArn` or `RoleArnFile` is required.
         /// </summary>
-        [Input("roleArn", required: true)]
-        public Input<string> RoleArn { get; set; } = null!;
+        [Input("roleArn")]
+        public Input<string>? RoleArn { get; set; }
+
+        /// <summary>
+        /// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `RoleArn` or `RoleArnFile` is required.
+        /// </summary>
+        [Input("roleArnFile")]
+        public Input<string>? RoleArnFile { get; set; }
 
         /// <summary>
         /// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
@@ -38,10 +44,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Inputs
         public Input<string> SessionName { get; set; } = null!;
 
         /// <summary>
-        /// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+        /// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `WebIdentityToken` or `WebIdentityTokenFile` is required.
         /// </summary>
-        [Input("webIdentityToken", required: true)]
-        public Input<string> WebIdentityToken { get; set; } = null!;
+        [Input("webIdentityToken")]
+        public Input<string>? WebIdentityToken { get; set; }
+
+        /// <summary>
+        /// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `WebIdentityToken` or `WebIdentityTokenFile` is required.
+        /// </summary>
+        [Input("webIdentityTokenFile")]
+        public Input<string>? WebIdentityTokenFile { get; set; }
 
         public ProviderAssumeRoleWithWebIdentityArgs()
         {

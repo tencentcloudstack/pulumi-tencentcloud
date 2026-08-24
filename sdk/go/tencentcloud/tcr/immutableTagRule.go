@@ -39,7 +39,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf_example_ns"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -55,7 +55,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewImmutableTagRule(ctx, "example", &tcr.ImmutableTagRuleArgs{
-//				RegistryId:    example.ID(),
+//				RegistryId:    example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName: exampleNamespace.Name,
 //				Rule: &tcr.ImmutableTagRuleRuleArgs{
 //					RepositoryPattern:    pulumi.String("deprecated_repo"),
@@ -170,7 +170,7 @@ import (
 //
 // ## Import
 //
-// tcr immutable_tag_rule can be imported using the id, e.g.
+// tcr immutableTagRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id

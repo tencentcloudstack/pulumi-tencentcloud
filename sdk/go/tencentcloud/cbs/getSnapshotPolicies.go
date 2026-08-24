@@ -73,12 +73,8 @@ type GetSnapshotPoliciesResult struct {
 }
 
 func GetSnapshotPoliciesOutput(ctx *pulumi.Context, args GetSnapshotPoliciesOutputArgs, opts ...pulumi.InvokeOption) GetSnapshotPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSnapshotPoliciesResultOutput, error) {
-			args := v.(GetSnapshotPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args, GetSnapshotPoliciesResultOutput{}, options).(GetSnapshotPoliciesResultOutput), nil
-		}).(GetSnapshotPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args, GetSnapshotPoliciesResultOutput{}, options).(GetSnapshotPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getSnapshotPolicies.

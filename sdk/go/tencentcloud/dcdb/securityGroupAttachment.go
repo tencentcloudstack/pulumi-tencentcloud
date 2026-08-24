@@ -43,8 +43,7 @@ import (
 //
 // ## Import
 //
-// dcdb security_group_attachment can be imported using the id, e.g.
-//
+// dcdb securityGroupAttachment can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
 // ```

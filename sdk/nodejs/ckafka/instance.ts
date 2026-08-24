@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gz = tencentcloud.Availability.getZonesByProduct({
+ * const gz = tencentcloud.availability.getZonesByProduct({
  *     name: "ap-guangzhou-6",
  *     product: "ckafka",
  * });
@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  * // create ckafka
  * const example = new tencentcloud.ckafka.Instance("example", {
  *     instanceName: "tf-example",
- *     zoneId: gz.then(gz => gz.zones?.[0]?.id),
+ *     zoneId: output(gz.then(gz => gz.zones?.[0]?.id)).apply(x =>Number(x)),
  *     period: 1,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -58,6 +58,7 @@ import * as utilities from "../utilities";
  *     dynamicRetentionConfig: {
  *         enable: 1,
  *     },
+ *     deleteProtectionEnable: 1,
  * });
  * ```
  *
@@ -67,11 +68,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gz6 = tencentcloud.Availability.getZonesByProduct({
+ * const gz6 = tencentcloud.availability.getZonesByProduct({
  *     name: "ap-guangzhou-6",
  *     product: "ckafka",
  * });
- * const gz7 = tencentcloud.Availability.getZonesByProduct({
+ * const gz7 = tencentcloud.availability.getZonesByProduct({
  *     name: "ap-guangzhou-7",
  *     product: "ckafka",
  * });
@@ -91,11 +92,11 @@ import * as utilities from "../utilities";
  * // create ckafka
  * const example = new tencentcloud.ckafka.Instance("example", {
  *     instanceName: "tf-example",
- *     zoneId: gz6.then(gz6 => gz6.zones?.[0]?.id),
+ *     zoneId: output(gz6.then(gz6 => gz6.zones?.[0]?.id)).apply(x =>Number(x)),
  *     multiZoneFlag: true,
  *     zoneIds: [
- *         gz6.then(gz6 => gz6.zones?.[0]?.id),
- *         gz7.then(gz7 => gz7.zones?.[0]?.id),
+ *         output(gz6.then(gz6 => gz6.zones?.[0]?.id)).apply(x =>Number(x)),
+ *         output(gz7.then(gz7 => gz7.zones?.[0]?.id)).apply(x =>Number(x)),
  *     ],
  *     renewFlag: 0,
  *     vpcId: vpc.id,
@@ -169,11 +170,19 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly config: pulumi.Output<outputs.Ckafka.InstanceConfig | undefined>;
     /**
+     * Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+     */
+    declare public readonly customSslCertId: pulumi.Output<string | undefined>;
+    /**
+     * Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+     */
+    declare public readonly deleteProtectionEnable: pulumi.Output<number>;
+    /**
      * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
     declare public readonly diskSize: pulumi.Output<number>;
     /**
-     * Type of disk.
+     * Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
      */
     declare public readonly diskType: pulumi.Output<string>;
     /**
@@ -291,6 +300,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandWidth"] = state?.bandWidth;
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["config"] = state?.config;
+            resourceInputs["customSslCertId"] = state?.customSslCertId;
+            resourceInputs["deleteProtectionEnable"] = state?.deleteProtectionEnable;
             resourceInputs["diskSize"] = state?.diskSize;
             resourceInputs["diskType"] = state?.diskType;
             resourceInputs["dynamicRetentionConfig"] = state?.dynamicRetentionConfig;
@@ -327,6 +338,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandWidth"] = args?.bandWidth;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["config"] = args?.config;
+            resourceInputs["customSslCertId"] = args?.customSslCertId;
+            resourceInputs["deleteProtectionEnable"] = args?.deleteProtectionEnable;
             resourceInputs["diskSize"] = args?.diskSize;
             resourceInputs["diskType"] = args?.diskType;
             resourceInputs["dynamicRetentionConfig"] = args?.dynamicRetentionConfig;
@@ -365,121 +378,129 @@ export interface InstanceState {
     /**
      * Instance bandwidth in MBps.
      */
-    bandWidth?: pulumi.Input<number>;
+    bandWidth?: pulumi.Input<number | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Instance configuration.
      */
-    config?: pulumi.Input<inputs.Ckafka.InstanceConfig>;
+    config?: pulumi.Input<inputs.Ckafka.InstanceConfig | undefined>;
+    /**
+     * Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+     */
+    customSslCertId?: pulumi.Input<string | undefined>;
+    /**
+     * Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+     */
+    deleteProtectionEnable?: pulumi.Input<number | undefined>;
     /**
      * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
-     * Type of disk.
+     * Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Dynamic message retention policy configuration.
      */
-    dynamicRetentionConfig?: pulumi.Input<inputs.Ckafka.InstanceDynamicRetentionConfig>;
+    dynamicRetentionConfig?: pulumi.Input<inputs.Ckafka.InstanceDynamicRetentionConfig | undefined>;
     /**
      * Elastic bandwidth switch 0 not turned on 1 turned on (0 default). This takes effect only when the instance is created.
      */
-    elasticBandwidthSwitch?: pulumi.Input<number>;
+    elasticBandwidthSwitch?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
      */
-    instanceType?: pulumi.Input<number>;
+    instanceType?: pulumi.Input<number | undefined>;
     /**
      * Kafka version (0.10.2/1.1.1/2.4.1).
      */
-    kafkaVersion?: pulumi.Input<string>;
+    kafkaVersion?: pulumi.Input<string | undefined>;
     /**
      * The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
      */
-    maxMessageByte?: pulumi.Input<number>;
+    maxMessageByte?: pulumi.Input<number | undefined>;
     /**
      * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
-    msgRetentionTime?: pulumi.Input<number>;
+    msgRetentionTime?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
      */
-    multiZoneFlag?: pulumi.Input<boolean>;
+    multiZoneFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
-    partition?: pulumi.Input<number>;
+    partition?: pulumi.Input<number | undefined>;
     /**
      * Prepaid purchase time, such as 1, is one month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Bandwidth of the public network.
      */
-    publicNetwork?: pulumi.Input<number>;
+    publicNetwork?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.82.37. Modification of the rebalancing time after upgrade.
      *
      * @deprecated It has been deprecated from version 1.82.37.
      */
-    rebalanceTime?: pulumi.Input<number>;
+    rebalanceTime?: pulumi.Input<number | undefined>;
     /**
      * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Specifications type of instance. Allowed values are `profession`, `premium`. Default is `profession`.
      */
-    specificationsType?: pulumi.Input<string>;
+    specificationsType?: pulumi.Input<string | undefined>;
     /**
      * Subnet id, it will be basic network if not set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag set of instance.
      */
-    tagSet?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tagSet?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
      *
      * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[] | undefined>;
     /**
      * POSTPAID_BY_HOUR scale-down mode
      * - 1: stable transformation;
      * - 2: High-speed transformer.
      */
-    upgradeStrategy?: pulumi.Input<number>;
+    upgradeStrategy?: pulumi.Input<number | undefined>;
     /**
      * Vip of instance.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Vpc id, it will be basic network if not set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Type of instance.
      */
-    vport?: pulumi.Input<string>;
+    vport?: pulumi.Input<string | undefined>;
     /**
      * Available zone id.
      */
-    zoneId?: pulumi.Input<number>;
+    zoneId?: pulumi.Input<number | undefined>;
     /**
      * List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
      */
-    zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    zoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**
@@ -489,31 +510,39 @@ export interface InstanceArgs {
     /**
      * Instance bandwidth in MBps.
      */
-    bandWidth?: pulumi.Input<number>;
+    bandWidth?: pulumi.Input<number | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `PREPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Instance configuration.
      */
-    config?: pulumi.Input<inputs.Ckafka.InstanceConfig>;
+    config?: pulumi.Input<inputs.Ckafka.InstanceConfig | undefined>;
+    /**
+     * Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+     */
+    customSslCertId?: pulumi.Input<string | undefined>;
+    /**
+     * Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+     */
+    deleteProtectionEnable?: pulumi.Input<number | undefined>;
     /**
      * Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
-     * Type of disk.
+     * Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Dynamic message retention policy configuration.
      */
-    dynamicRetentionConfig?: pulumi.Input<inputs.Ckafka.InstanceDynamicRetentionConfig>;
+    dynamicRetentionConfig?: pulumi.Input<inputs.Ckafka.InstanceDynamicRetentionConfig | undefined>;
     /**
      * Elastic bandwidth switch 0 not turned on 1 turned on (0 default). This takes effect only when the instance is created.
      */
-    elasticBandwidthSwitch?: pulumi.Input<number>;
+    elasticBandwidthSwitch?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
@@ -521,73 +550,73 @@ export interface InstanceArgs {
     /**
      * Description of instance type. `profession`: 1, `standard`:  1(general), 2(standard), 3(advanced), 4(capacity), 5(specialized-1), 6(specialized-2), 7(specialized-3), 8(specialized-4), 9(exclusive).
      */
-    instanceType?: pulumi.Input<number>;
+    instanceType?: pulumi.Input<number | undefined>;
     /**
      * Kafka version (0.10.2/1.1.1/2.4.1).
      */
-    kafkaVersion?: pulumi.Input<string>;
+    kafkaVersion?: pulumi.Input<string | undefined>;
     /**
      * The size of a single message in bytes at the instance level. Value range: `1024 - 12*1024*1024 bytes (i.e., 1KB-12MB).
      */
-    maxMessageByte?: pulumi.Input<number>;
+    maxMessageByte?: pulumi.Input<number | undefined>;
     /**
      * The maximum retention time of instance logs, in minutes. the default is 10080 (7 days), the maximum is 30 days, and the default 0 is not filled, which means that the log retention time recovery policy is not enabled.
      */
-    msgRetentionTime?: pulumi.Input<number>;
+    msgRetentionTime?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether the instance is multi zones. NOTE: if set to `true`, `zoneIds` must set together.
      */
-    multiZoneFlag?: pulumi.Input<boolean>;
+    multiZoneFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Partition Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
      */
-    partition?: pulumi.Input<number>;
+    partition?: pulumi.Input<number | undefined>;
     /**
      * Prepaid purchase time, such as 1, is one month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Bandwidth of the public network.
      */
-    publicNetwork?: pulumi.Input<number>;
+    publicNetwork?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.82.37. Modification of the rebalancing time after upgrade.
      *
      * @deprecated It has been deprecated from version 1.82.37.
      */
-    rebalanceTime?: pulumi.Input<number>;
+    rebalanceTime?: pulumi.Input<number | undefined>;
     /**
      * Prepaid automatic renewal mark, 0 means the default state, the initial state, 1 means automatic renewal, 2 means clear no automatic renewal (user setting).
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Specifications type of instance. Allowed values are `profession`, `premium`. Default is `profession`.
      */
-    specificationsType?: pulumi.Input<string>;
+    specificationsType?: pulumi.Input<string | undefined>;
     /**
      * Subnet id, it will be basic network if not set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag set of instance.
      */
-    tagSet?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tagSet?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
      *
      * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[] | undefined>;
     /**
      * POSTPAID_BY_HOUR scale-down mode
      * - 1: stable transformation;
      * - 2: High-speed transformer.
      */
-    upgradeStrategy?: pulumi.Input<number>;
+    upgradeStrategy?: pulumi.Input<number | undefined>;
     /**
      * Vpc id, it will be basic network if not set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Available zone id.
      */
@@ -595,5 +624,5 @@ export interface InstanceArgs {
     /**
      * List of available zone id. NOTE: this argument must set together with `multiZoneFlag`.
      */
-    zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    zoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }

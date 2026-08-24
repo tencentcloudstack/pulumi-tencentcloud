@@ -79,7 +79,7 @@ export interface SignUpCfsServiceState {
     /**
      * Current status of the CFS service for this user. Valid values: creating (activating); created (activated).
      */
-    cfsServiceStatus?: pulumi.Input<string>;
+    cfsServiceStatus?: pulumi.Input<string | undefined>;
 }
 
 /**

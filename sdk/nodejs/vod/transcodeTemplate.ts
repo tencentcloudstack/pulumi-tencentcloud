@@ -69,7 +69,7 @@ export class TranscodeTemplate extends pulumi.CustomResource {
      * Whether to remove video data. Valid values:
      * - 0: retain
      * - 1: remove
-     * Default value: 0.
+     *   Default value: 0.
      */
     declare public readonly removeVideo: pulumi.Output<number | undefined>;
     /**
@@ -140,46 +140,46 @@ export interface TranscodeTemplateState {
     /**
      * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
      */
-    audioTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateAudioTemplate>;
+    audioTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateAudioTemplate | undefined>;
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
      */
-    container?: pulumi.Input<string>;
+    container?: pulumi.Input<string | undefined>;
     /**
      * Transcoding template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.
      */
-    removeAudio?: pulumi.Input<number>;
+    removeAudio?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove video data. Valid values:
      * - 0: retain
      * - 1: remove
-     * Default value: 0.
+     *   Default value: 0.
      */
-    removeVideo?: pulumi.Input<number>;
+    removeVideo?: pulumi.Input<number | undefined>;
     /**
      * The segment type. This parameter is valid only if `Container` is `hls`. Valid values: `ts`: TS segment; `fmp4`: fMP4 segment Default: `ts`.
      */
-    segmentType?: pulumi.Input<string>;
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * TESHD transcoding parameter.
      */
-    tehdConfig?: pulumi.Input<inputs.Vod.TranscodeTemplateTehdConfig>;
+    tehdConfig?: pulumi.Input<inputs.Vod.TranscodeTemplateTehdConfig | undefined>;
     /**
      * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
      */
-    videoTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateVideoTemplate>;
+    videoTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateVideoTemplate | undefined>;
 }
 
 /**
@@ -189,11 +189,11 @@ export interface TranscodeTemplateArgs {
     /**
      * Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
      */
-    audioTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateAudioTemplate>;
+    audioTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateAudioTemplate | undefined>;
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
      */
@@ -201,32 +201,32 @@ export interface TranscodeTemplateArgs {
     /**
      * Transcoding template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to remove audio data. Valid values:0: retain 1: remove Default value: 0.
      */
-    removeAudio?: pulumi.Input<number>;
+    removeAudio?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove video data. Valid values:
      * - 0: retain
      * - 1: remove
-     * Default value: 0.
+     *   Default value: 0.
      */
-    removeVideo?: pulumi.Input<number>;
+    removeVideo?: pulumi.Input<number | undefined>;
     /**
      * The segment type. This parameter is valid only if `Container` is `hls`. Valid values: `ts`: TS segment; `fmp4`: fMP4 segment Default: `ts`.
      */
-    segmentType?: pulumi.Input<string>;
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * TESHD transcoding parameter.
      */
-    tehdConfig?: pulumi.Input<inputs.Vod.TranscodeTemplateTehdConfig>;
+    tehdConfig?: pulumi.Input<inputs.Vod.TranscodeTemplateTehdConfig | undefined>;
     /**
      * Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
      */
-    videoTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateVideoTemplate>;
+    videoTemplate?: pulumi.Input<inputs.Vod.TranscodeTemplateVideoTemplate | undefined>;
 }

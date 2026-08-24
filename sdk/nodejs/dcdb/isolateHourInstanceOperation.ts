@@ -82,7 +82,7 @@ export interface IsolateHourInstanceOperationState {
     /**
      * Instance ID list.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

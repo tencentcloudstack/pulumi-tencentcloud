@@ -62,12 +62,8 @@ type GetFirewallRulesTemplateResult struct {
 }
 
 func GetFirewallRulesTemplateOutput(ctx *pulumi.Context, args GetFirewallRulesTemplateOutputArgs, opts ...pulumi.InvokeOption) GetFirewallRulesTemplateResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFirewallRulesTemplateResultOutput, error) {
-			args := v.(GetFirewallRulesTemplateArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args, GetFirewallRulesTemplateResultOutput{}, options).(GetFirewallRulesTemplateResultOutput), nil
-		}).(GetFirewallRulesTemplateResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args, GetFirewallRulesTemplateResultOutput{}, options).(GetFirewallRulesTemplateResultOutput)
 }
 
 // A collection of arguments for invoking getFirewallRulesTemplate.

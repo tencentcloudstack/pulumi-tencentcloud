@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
     public sealed class TrackStorage
     {
         /// <summary>
+        /// Whether to compress. `1`: compress, `2`: do not compress.
+        /// </summary>
+        public readonly int? Compress;
+        /// <summary>
         /// Designated to store user ID.
         /// </summary>
         public readonly string? StorageAccountId;
@@ -35,12 +39,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
         /// </summary>
         public readonly string StorageRegion;
         /// <summary>
-        /// Track Storage type, optional:- `Cos`- `Cls`.
+        /// Track Storage type, optional:- `Cos`- `Cls`- `Ckafka`.
         /// </summary>
         public readonly string StorageType;
 
         [OutputConstructor]
         private TrackStorage(
+            int? compress,
+
             string? storageAccountId,
 
             string? storageAppId,
@@ -53,6 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Outputs
 
             string storageType)
         {
+            Compress = compress;
             StorageAccountId = storageAccountId;
             StorageAppId = storageAppId;
             StorageName = storageName;

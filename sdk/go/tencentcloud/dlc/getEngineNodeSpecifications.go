@@ -69,12 +69,8 @@ type GetEngineNodeSpecificationsResult struct {
 }
 
 func GetEngineNodeSpecificationsOutput(ctx *pulumi.Context, args GetEngineNodeSpecificationsOutputArgs, opts ...pulumi.InvokeOption) GetEngineNodeSpecificationsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEngineNodeSpecificationsResultOutput, error) {
-			args := v.(GetEngineNodeSpecificationsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getEngineNodeSpecifications:getEngineNodeSpecifications", args, GetEngineNodeSpecificationsResultOutput{}, options).(GetEngineNodeSpecificationsResultOutput), nil
-		}).(GetEngineNodeSpecificationsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getEngineNodeSpecifications:getEngineNodeSpecifications", args, GetEngineNodeSpecificationsResultOutput{}, options).(GetEngineNodeSpecificationsResultOutput)
 }
 
 // A collection of arguments for invoking getEngineNodeSpecifications.

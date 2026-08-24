@@ -62,12 +62,8 @@ type GetTlsVersionsResult struct {
 }
 
 func GetTlsVersionsOutput(ctx *pulumi.Context, args GetTlsVersionsOutputArgs, opts ...pulumi.InvokeOption) GetTlsVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTlsVersionsResultOutput, error) {
-			args := v.(GetTlsVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getTlsVersions:getTlsVersions", args, GetTlsVersionsResultOutput{}, options).(GetTlsVersionsResultOutput), nil
-		}).(GetTlsVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getTlsVersions:getTlsVersions", args, GetTlsVersionsResultOutput{}, options).(GetTlsVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getTlsVersions.

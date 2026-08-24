@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl upload_revoke_letter can be imported using the id, e.g.
+ * ssl uploadRevokeLetter can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/uploadRevokeLetterOperation:UploadRevokeLetterOperation upload_revoke_letter upload_revoke_letter_id
@@ -105,11 +105,11 @@ export interface UploadRevokeLetterOperationState {
     /**
      * Certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * The format of the base64-encoded certificate confirmation letter file should be jpg, jpeg, png, or pdf, and the size should be between 1kb and 1.4M.
      */
-    revokeLetter?: pulumi.Input<string>;
+    revokeLetter?: pulumi.Input<string | undefined>;
 }
 
 /**

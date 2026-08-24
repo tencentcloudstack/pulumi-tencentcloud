@@ -72,12 +72,8 @@ type LookupGatewayAllGroupApisResult struct {
 }
 
 func LookupGatewayAllGroupApisOutput(ctx *pulumi.Context, args LookupGatewayAllGroupApisOutputArgs, opts ...pulumi.InvokeOption) LookupGatewayAllGroupApisResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGatewayAllGroupApisResultOutput, error) {
-			args := v.(LookupGatewayAllGroupApisArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args, LookupGatewayAllGroupApisResultOutput{}, options).(LookupGatewayAllGroupApisResultOutput), nil
-		}).(LookupGatewayAllGroupApisResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args, LookupGatewayAllGroupApisResultOutput{}, options).(LookupGatewayAllGroupApisResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayAllGroupApis.

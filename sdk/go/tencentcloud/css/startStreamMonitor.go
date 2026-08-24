@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// css start_stream_monitor can be imported using the id, e.g.
+// css startStreamMonitor can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id

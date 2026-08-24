@@ -89,12 +89,8 @@ type GetListenerStatisticsResult struct {
 }
 
 func GetListenerStatisticsOutput(ctx *pulumi.Context, args GetListenerStatisticsOutputArgs, opts ...pulumi.InvokeOption) GetListenerStatisticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListenerStatisticsResultOutput, error) {
-			args := v.(GetListenerStatisticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args, GetListenerStatisticsResultOutput{}, options).(GetListenerStatisticsResultOutput), nil
-		}).(GetListenerStatisticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args, GetListenerStatisticsResultOutput{}, options).(GetListenerStatisticsResultOutput)
 }
 
 // A collection of arguments for invoking getListenerStatistics.

@@ -116,27 +116,27 @@ export interface SyncInvokeFunctionState {
     /**
      * Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to event input parameter.
      */
-    event?: pulumi.Input<string>;
+    event?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Valid value: None (default) or Tail. If the value is Tail, log in the response will contain the corresponding function execution log (up to 4KB).
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Namespace. default is used if it's left empty.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Version or alias of the function. It defaults to $DEFAULT.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Traffic routing config in json format, e.g., {k:v}. Please note that both k and v must be strings. Up to 1024 bytes allowed.
      */
-    routingKey?: pulumi.Input<string>;
+    routingKey?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -146,7 +146,7 @@ export interface SyncInvokeFunctionArgs {
     /**
      * Function running parameter, which is in the JSON format. Maximum parameter size is 6 MB. This field corresponds to event input parameter.
      */
-    event?: pulumi.Input<string>;
+    event?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
@@ -154,17 +154,17 @@ export interface SyncInvokeFunctionArgs {
     /**
      * Valid value: None (default) or Tail. If the value is Tail, log in the response will contain the corresponding function execution log (up to 4KB).
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Namespace. default is used if it's left empty.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Version or alias of the function. It defaults to $DEFAULT.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Traffic routing config in json format, e.g., {k:v}. Please note that both k and v must be strings. Up to 1024 bytes allowed.
      */
-    routingKey?: pulumi.Input<string>;
+    routingKey?: pulumi.Input<string | undefined>;
 }

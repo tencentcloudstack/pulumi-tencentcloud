@@ -10,6 +10,11 @@ export type AccelerationDomain = import("./accelerationDomain").AccelerationDoma
 export const AccelerationDomain: typeof import("./accelerationDomain").AccelerationDomain = null as any;
 utilities.lazyLoad(exports, ["AccelerationDomain"], () => require("./accelerationDomain"));
 
+export { AliasDomainArgs, AliasDomainState } from "./aliasDomain";
+export type AliasDomain = import("./aliasDomain").AliasDomain;
+export const AliasDomain: typeof import("./aliasDomain").AliasDomain = null as any;
+utilities.lazyLoad(exports, ["AliasDomain"], () => require("./aliasDomain"));
+
 export { ApplicationProxyArgs, ApplicationProxyState } from "./applicationProxy";
 export type ApplicationProxy = import("./applicationProxy").ApplicationProxy;
 export const ApplicationProxy: typeof import("./applicationProxy").ApplicationProxy = null as any;
@@ -30,10 +35,35 @@ export type CertificateConfig = import("./certificateConfig").CertificateConfig;
 export const CertificateConfig: typeof import("./certificateConfig").CertificateConfig = null as any;
 utilities.lazyLoad(exports, ["CertificateConfig"], () => require("./certificateConfig"));
 
+export { CheckCnameStatusOperationArgs, CheckCnameStatusOperationState } from "./checkCnameStatusOperation";
+export type CheckCnameStatusOperation = import("./checkCnameStatusOperation").CheckCnameStatusOperation;
+export const CheckCnameStatusOperation: typeof import("./checkCnameStatusOperation").CheckCnameStatusOperation = null as any;
+utilities.lazyLoad(exports, ["CheckCnameStatusOperation"], () => require("./checkCnameStatusOperation"));
+
+export { ConfigGroupVersionArgs, ConfigGroupVersionState } from "./configGroupVersion";
+export type ConfigGroupVersion = import("./configGroupVersion").ConfigGroupVersion;
+export const ConfigGroupVersion: typeof import("./configGroupVersion").ConfigGroupVersion = null as any;
+utilities.lazyLoad(exports, ["ConfigGroupVersion"], () => require("./configGroupVersion"));
+
+export { ConfirmMultiPathGatewayOriginAclArgs, ConfirmMultiPathGatewayOriginAclState } from "./confirmMultiPathGatewayOriginAcl";
+export type ConfirmMultiPathGatewayOriginAcl = import("./confirmMultiPathGatewayOriginAcl").ConfirmMultiPathGatewayOriginAcl;
+export const ConfirmMultiPathGatewayOriginAcl: typeof import("./confirmMultiPathGatewayOriginAcl").ConfirmMultiPathGatewayOriginAcl = null as any;
+utilities.lazyLoad(exports, ["ConfirmMultiPathGatewayOriginAcl"], () => require("./confirmMultiPathGatewayOriginAcl"));
+
+export { ConfirmOriginAclUpdateOperationArgs, ConfirmOriginAclUpdateOperationState } from "./confirmOriginAclUpdateOperation";
+export type ConfirmOriginAclUpdateOperation = import("./confirmOriginAclUpdateOperation").ConfirmOriginAclUpdateOperation;
+export const ConfirmOriginAclUpdateOperation: typeof import("./confirmOriginAclUpdateOperation").ConfirmOriginAclUpdateOperation = null as any;
+utilities.lazyLoad(exports, ["ConfirmOriginAclUpdateOperation"], () => require("./confirmOriginAclUpdateOperation"));
+
 export { ContentIdentifierArgs, ContentIdentifierState } from "./contentIdentifier";
 export type ContentIdentifier = import("./contentIdentifier").ContentIdentifier;
 export const ContentIdentifier: typeof import("./contentIdentifier").ContentIdentifier = null as any;
 utilities.lazyLoad(exports, ["ContentIdentifier"], () => require("./contentIdentifier"));
+
+export { CreateClsIndexOperationArgs, CreateClsIndexOperationState } from "./createClsIndexOperation";
+export type CreateClsIndexOperation = import("./createClsIndexOperation").CreateClsIndexOperation;
+export const CreateClsIndexOperation: typeof import("./createClsIndexOperation").CreateClsIndexOperation = null as any;
+utilities.lazyLoad(exports, ["CreateClsIndexOperation"], () => require("./createClsIndexOperation"));
 
 export { CustomizeErrorPageArgs, CustomizeErrorPageState } from "./customizeErrorPage";
 export type CustomizeErrorPage = import("./customizeErrorPage").CustomizeErrorPage;
@@ -45,15 +75,45 @@ export type DdosProtectionConfig = import("./ddosProtectionConfig").DdosProtecti
 export const DdosProtectionConfig: typeof import("./ddosProtectionConfig").DdosProtectionConfig = null as any;
 utilities.lazyLoad(exports, ["DdosProtectionConfig"], () => require("./ddosProtectionConfig"));
 
+export { DeployConfigGroupVersionArgs, DeployConfigGroupVersionState } from "./deployConfigGroupVersion";
+export type DeployConfigGroupVersion = import("./deployConfigGroupVersion").DeployConfigGroupVersion;
+export const DeployConfigGroupVersion: typeof import("./deployConfigGroupVersion").DeployConfigGroupVersion = null as any;
+utilities.lazyLoad(exports, ["DeployConfigGroupVersion"], () => require("./deployConfigGroupVersion"));
+
 export { DnsRecordArgs, DnsRecordState } from "./dnsRecord";
 export type DnsRecord = import("./dnsRecord").DnsRecord;
 export const DnsRecord: typeof import("./dnsRecord").DnsRecord = null as any;
 utilities.lazyLoad(exports, ["DnsRecord"], () => require("./dnsRecord"));
 
+export { DomainSharedCnameAttachmentArgs, DomainSharedCnameAttachmentState } from "./domainSharedCnameAttachment";
+export type DomainSharedCnameAttachment = import("./domainSharedCnameAttachment").DomainSharedCnameAttachment;
+export const DomainSharedCnameAttachment: typeof import("./domainSharedCnameAttachment").DomainSharedCnameAttachment = null as any;
+utilities.lazyLoad(exports, ["DomainSharedCnameAttachment"], () => require("./domainSharedCnameAttachment"));
+
+export { EdgeKvArgs, EdgeKvState } from "./edgeKv";
+export type EdgeKv = import("./edgeKv").EdgeKv;
+export const EdgeKv: typeof import("./edgeKv").EdgeKv = null as any;
+utilities.lazyLoad(exports, ["EdgeKv"], () => require("./edgeKv"));
+
+export { EdgeKvNamespaceArgs, EdgeKvNamespaceState } from "./edgeKvNamespace";
+export type EdgeKvNamespace = import("./edgeKvNamespace").EdgeKvNamespace;
+export const EdgeKvNamespace: typeof import("./edgeKvNamespace").EdgeKvNamespace = null as any;
+utilities.lazyLoad(exports, ["EdgeKvNamespace"], () => require("./edgeKvNamespace"));
+
 export { FunctionArgs, FunctionState } from "./function";
 export type Function = import("./function").Function;
 export const Function: typeof import("./function").Function = null as any;
 utilities.lazyLoad(exports, ["Function"], () => require("./function"));
+
+export { FunctionComponentBindingArgs, FunctionComponentBindingState } from "./functionComponentBinding";
+export type FunctionComponentBinding = import("./functionComponentBinding").FunctionComponentBinding;
+export const FunctionComponentBinding: typeof import("./functionComponentBinding").FunctionComponentBinding = null as any;
+utilities.lazyLoad(exports, ["FunctionComponentBinding"], () => require("./functionComponentBinding"));
+
+export { FunctionReplicaArgs, FunctionReplicaState } from "./functionReplica";
+export type FunctionReplica = import("./functionReplica").FunctionReplica;
+export const FunctionReplica: typeof import("./functionReplica").FunctionReplica = null as any;
+utilities.lazyLoad(exports, ["FunctionReplica"], () => require("./functionReplica"));
 
 export { FunctionRuleArgs, FunctionRuleState } from "./functionRule";
 export type FunctionRule = import("./functionRule").FunctionRule;
@@ -70,6 +130,66 @@ export type FunctionRuntimeEnvironment = import("./functionRuntimeEnvironment").
 export const FunctionRuntimeEnvironment: typeof import("./functionRuntimeEnvironment").FunctionRuntimeEnvironment = null as any;
 utilities.lazyLoad(exports, ["FunctionRuntimeEnvironment"], () => require("./functionRuntimeEnvironment"));
 
+export { GetConfigGroupVersionDetailArgs, GetConfigGroupVersionDetailResult, GetConfigGroupVersionDetailOutputArgs } from "./getConfigGroupVersionDetail";
+export const getConfigGroupVersionDetail: typeof import("./getConfigGroupVersionDetail").getConfigGroupVersionDetail = null as any;
+export const getConfigGroupVersionDetailOutput: typeof import("./getConfigGroupVersionDetail").getConfigGroupVersionDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getConfigGroupVersionDetail","getConfigGroupVersionDetailOutput"], () => require("./getConfigGroupVersionDetail"));
+
+export { GetConfigGroupVersionsArgs, GetConfigGroupVersionsResult, GetConfigGroupVersionsOutputArgs } from "./getConfigGroupVersions";
+export const getConfigGroupVersions: typeof import("./getConfigGroupVersions").getConfigGroupVersions = null as any;
+export const getConfigGroupVersionsOutput: typeof import("./getConfigGroupVersions").getConfigGroupVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getConfigGroupVersions","getConfigGroupVersionsOutput"], () => require("./getConfigGroupVersions"));
+
+export { GetContentQuotaArgs, GetContentQuotaResult, GetContentQuotaOutputArgs } from "./getContentQuota";
+export const getContentQuota: typeof import("./getContentQuota").getContentQuota = null as any;
+export const getContentQuotaOutput: typeof import("./getContentQuota").getContentQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getContentQuota","getContentQuotaOutput"], () => require("./getContentQuota"));
+
+export { GetDefaultCertificateArgs, GetDefaultCertificateResult, GetDefaultCertificateOutputArgs } from "./getDefaultCertificate";
+export const getDefaultCertificate: typeof import("./getDefaultCertificate").getDefaultCertificate = null as any;
+export const getDefaultCertificateOutput: typeof import("./getDefaultCertificate").getDefaultCertificateOutput = null as any;
+utilities.lazyLoad(exports, ["getDefaultCertificate","getDefaultCertificateOutput"], () => require("./getDefaultCertificate"));
+
+export { GetDeployConfigVersionHistoryArgs, GetDeployConfigVersionHistoryResult, GetDeployConfigVersionHistoryOutputArgs } from "./getDeployConfigVersionHistory";
+export const getDeployConfigVersionHistory: typeof import("./getDeployConfigVersionHistory").getDeployConfigVersionHistory = null as any;
+export const getDeployConfigVersionHistoryOutput: typeof import("./getDeployConfigVersionHistory").getDeployConfigVersionHistoryOutput = null as any;
+utilities.lazyLoad(exports, ["getDeployConfigVersionHistory","getDeployConfigVersionHistoryOutput"], () => require("./getDeployConfigVersionHistory"));
+
+export { GetEdgeKvListArgs, GetEdgeKvListResult, GetEdgeKvListOutputArgs } from "./getEdgeKvList";
+export const getEdgeKvList: typeof import("./getEdgeKvList").getEdgeKvList = null as any;
+export const getEdgeKvListOutput: typeof import("./getEdgeKvList").getEdgeKvListOutput = null as any;
+utilities.lazyLoad(exports, ["getEdgeKvList","getEdgeKvListOutput"], () => require("./getEdgeKvList"));
+
+export { GetEnvironmentsArgs, GetEnvironmentsResult, GetEnvironmentsOutputArgs } from "./getEnvironments";
+export const getEnvironments: typeof import("./getEnvironments").getEnvironments = null as any;
+export const getEnvironmentsOutput: typeof import("./getEnvironments").getEnvironmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getEnvironments","getEnvironmentsOutput"], () => require("./getEnvironments"));
+
+export { GetExportZoneConfigArgs, GetExportZoneConfigResult, GetExportZoneConfigOutputArgs } from "./getExportZoneConfig";
+export const getExportZoneConfig: typeof import("./getExportZoneConfig").getExportZoneConfig = null as any;
+export const getExportZoneConfigOutput: typeof import("./getExportZoneConfig").getExportZoneConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getExportZoneConfig","getExportZoneConfigOutput"], () => require("./getExportZoneConfig"));
+
+export { GetIpRegionArgs, GetIpRegionResult, GetIpRegionOutputArgs } from "./getIpRegion";
+export const getIpRegion: typeof import("./getIpRegion").getIpRegion = null as any;
+export const getIpRegionOutput: typeof import("./getIpRegion").getIpRegionOutput = null as any;
+utilities.lazyLoad(exports, ["getIpRegion","getIpRegionOutput"], () => require("./getIpRegion"));
+
+export { GetMultiPathGatewayOriginAclArgs, GetMultiPathGatewayOriginAclResult, GetMultiPathGatewayOriginAclOutputArgs } from "./getMultiPathGatewayOriginAcl";
+export const getMultiPathGatewayOriginAcl: typeof import("./getMultiPathGatewayOriginAcl").getMultiPathGatewayOriginAcl = null as any;
+export const getMultiPathGatewayOriginAclOutput: typeof import("./getMultiPathGatewayOriginAcl").getMultiPathGatewayOriginAclOutput = null as any;
+utilities.lazyLoad(exports, ["getMultiPathGatewayOriginAcl","getMultiPathGatewayOriginAclOutput"], () => require("./getMultiPathGatewayOriginAcl"));
+
+export { GetMultiPathGatewayRegionArgs, GetMultiPathGatewayRegionResult, GetMultiPathGatewayRegionOutputArgs } from "./getMultiPathGatewayRegion";
+export const getMultiPathGatewayRegion: typeof import("./getMultiPathGatewayRegion").getMultiPathGatewayRegion = null as any;
+export const getMultiPathGatewayRegionOutput: typeof import("./getMultiPathGatewayRegion").getMultiPathGatewayRegionOutput = null as any;
+utilities.lazyLoad(exports, ["getMultiPathGatewayRegion","getMultiPathGatewayRegionOutput"], () => require("./getMultiPathGatewayRegion"));
+
+export { GetMultiPathGatewaysArgs, GetMultiPathGatewaysResult, GetMultiPathGatewaysOutputArgs } from "./getMultiPathGateways";
+export const getMultiPathGateways: typeof import("./getMultiPathGateways").getMultiPathGateways = null as any;
+export const getMultiPathGatewaysOutput: typeof import("./getMultiPathGateways").getMultiPathGatewaysOutput = null as any;
+utilities.lazyLoad(exports, ["getMultiPathGateways","getMultiPathGatewaysOutput"], () => require("./getMultiPathGateways"));
+
 export { GetOriginAclArgs, GetOriginAclResult, GetOriginAclOutputArgs } from "./getOriginAcl";
 export const getOriginAcl: typeof import("./getOriginAcl").getOriginAcl = null as any;
 export const getOriginAclOutput: typeof import("./getOriginAcl").getOriginAclOutput = null as any;
@@ -85,6 +205,16 @@ export const getRuleEngineSettings: typeof import("./getRuleEngineSettings").get
 export const getRuleEngineSettingsOutput: typeof import("./getRuleEngineSettings").getRuleEngineSettingsOutput = null as any;
 utilities.lazyLoad(exports, ["getRuleEngineSettings","getRuleEngineSettingsOutput"], () => require("./getRuleEngineSettings"));
 
+export { GetSecurityIpGroupContentArgs, GetSecurityIpGroupContentResult, GetSecurityIpGroupContentOutputArgs } from "./getSecurityIpGroupContent";
+export const getSecurityIpGroupContent: typeof import("./getSecurityIpGroupContent").getSecurityIpGroupContent = null as any;
+export const getSecurityIpGroupContentOutput: typeof import("./getSecurityIpGroupContent").getSecurityIpGroupContentOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityIpGroupContent","getSecurityIpGroupContentOutput"], () => require("./getSecurityIpGroupContent"));
+
+export { GetWebSecurityTemplatesArgs, GetWebSecurityTemplatesResult, GetWebSecurityTemplatesOutputArgs } from "./getWebSecurityTemplates";
+export const getWebSecurityTemplates: typeof import("./getWebSecurityTemplates").getWebSecurityTemplates = null as any;
+export const getWebSecurityTemplatesOutput: typeof import("./getWebSecurityTemplates").getWebSecurityTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getWebSecurityTemplates","getWebSecurityTemplatesOutput"], () => require("./getWebSecurityTemplates"));
+
 export { GetZoneAvailablePlansArgs, GetZoneAvailablePlansResult, GetZoneAvailablePlansOutputArgs } from "./getZoneAvailablePlans";
 export const getZoneAvailablePlans: typeof import("./getZoneAvailablePlans").getZoneAvailablePlans = null as any;
 export const getZoneAvailablePlansOutput: typeof import("./getZoneAvailablePlans").getZoneAvailablePlansOutput = null as any;
@@ -94,6 +224,21 @@ export { GetZonesArgs, GetZonesResult, GetZonesOutputArgs } from "./getZones";
 export const getZones: typeof import("./getZones").getZones = null as any;
 export const getZonesOutput: typeof import("./getZones").getZonesOutput = null as any;
 utilities.lazyLoad(exports, ["getZones","getZonesOutput"], () => require("./getZones"));
+
+export { IdentifyZoneOperationArgs, IdentifyZoneOperationState } from "./identifyZoneOperation";
+export type IdentifyZoneOperation = import("./identifyZoneOperation").IdentifyZoneOperation;
+export const IdentifyZoneOperation: typeof import("./identifyZoneOperation").IdentifyZoneOperation = null as any;
+utilities.lazyLoad(exports, ["IdentifyZoneOperation"], () => require("./identifyZoneOperation"));
+
+export { ImportZoneConfigOperationArgs, ImportZoneConfigOperationState } from "./importZoneConfigOperation";
+export type ImportZoneConfigOperation = import("./importZoneConfigOperation").ImportZoneConfigOperation;
+export const ImportZoneConfigOperation: typeof import("./importZoneConfigOperation").ImportZoneConfigOperation = null as any;
+utilities.lazyLoad(exports, ["ImportZoneConfigOperation"], () => require("./importZoneConfigOperation"));
+
+export { JustInTimeTranscodeTemplateArgs, JustInTimeTranscodeTemplateState } from "./justInTimeTranscodeTemplate";
+export type JustInTimeTranscodeTemplate = import("./justInTimeTranscodeTemplate").JustInTimeTranscodeTemplate;
+export const JustInTimeTranscodeTemplate: typeof import("./justInTimeTranscodeTemplate").JustInTimeTranscodeTemplate = null as any;
+utilities.lazyLoad(exports, ["JustInTimeTranscodeTemplate"], () => require("./justInTimeTranscodeTemplate"));
 
 export { L4ProxyArgs, L4ProxyState } from "./l4proxy";
 export type L4Proxy = import("./l4proxy").L4Proxy;
@@ -125,6 +270,26 @@ export type L7AccSetting = import("./l7accSetting").L7AccSetting;
 export const L7AccSetting: typeof import("./l7accSetting").L7AccSetting = null as any;
 utilities.lazyLoad(exports, ["L7AccSetting"], () => require("./l7accSetting"));
 
+export { LoadBalancerArgs, LoadBalancerState } from "./loadBalancer";
+export type LoadBalancer = import("./loadBalancer").LoadBalancer;
+export const LoadBalancer: typeof import("./loadBalancer").LoadBalancer = null as any;
+utilities.lazyLoad(exports, ["LoadBalancer"], () => require("./loadBalancer"));
+
+export { MultiPathGatewayArgs, MultiPathGatewayState } from "./multiPathGateway";
+export type MultiPathGateway = import("./multiPathGateway").MultiPathGateway;
+export const MultiPathGateway: typeof import("./multiPathGateway").MultiPathGateway = null as any;
+utilities.lazyLoad(exports, ["MultiPathGateway"], () => require("./multiPathGateway"));
+
+export { MultiPathGatewayLineArgs, MultiPathGatewayLineState } from "./multiPathGatewayLine";
+export type MultiPathGatewayLine = import("./multiPathGatewayLine").MultiPathGatewayLine;
+export const MultiPathGatewayLine: typeof import("./multiPathGatewayLine").MultiPathGatewayLine = null as any;
+utilities.lazyLoad(exports, ["MultiPathGatewayLine"], () => require("./multiPathGatewayLine"));
+
+export { MultiPathGatewaySecretKeyArgs, MultiPathGatewaySecretKeyState } from "./multiPathGatewaySecretKey";
+export type MultiPathGatewaySecretKey = import("./multiPathGatewaySecretKey").MultiPathGatewaySecretKey;
+export const MultiPathGatewaySecretKey: typeof import("./multiPathGatewaySecretKey").MultiPathGatewaySecretKey = null as any;
+utilities.lazyLoad(exports, ["MultiPathGatewaySecretKey"], () => require("./multiPathGatewaySecretKey"));
+
 export { OriginAclArgs, OriginAclState } from "./originAcl";
 export type OriginAcl = import("./originAcl").OriginAcl;
 export const OriginAcl: typeof import("./originAcl").OriginAcl = null as any;
@@ -145,6 +310,21 @@ export type Plan = import("./plan").Plan;
 export const Plan: typeof import("./plan").Plan = null as any;
 utilities.lazyLoad(exports, ["Plan"], () => require("./plan"));
 
+export { PrefetchOriginLimitArgs, PrefetchOriginLimitState } from "./prefetchOriginLimit";
+export type PrefetchOriginLimit = import("./prefetchOriginLimit").PrefetchOriginLimit;
+export const PrefetchOriginLimit: typeof import("./prefetchOriginLimit").PrefetchOriginLimit = null as any;
+utilities.lazyLoad(exports, ["PrefetchOriginLimit"], () => require("./prefetchOriginLimit"));
+
+export { PrefetchTaskOperationArgs, PrefetchTaskOperationState } from "./prefetchTaskOperation";
+export type PrefetchTaskOperation = import("./prefetchTaskOperation").PrefetchTaskOperation;
+export const PrefetchTaskOperation: typeof import("./prefetchTaskOperation").PrefetchTaskOperation = null as any;
+utilities.lazyLoad(exports, ["PrefetchTaskOperation"], () => require("./prefetchTaskOperation"));
+
+export { PurgeTaskArgs, PurgeTaskState } from "./purgeTask";
+export type PurgeTask = import("./purgeTask").PurgeTask;
+export const PurgeTask: typeof import("./purgeTask").PurgeTask = null as any;
+utilities.lazyLoad(exports, ["PurgeTask"], () => require("./purgeTask"));
+
 export { RealtimeLogDeliveryArgs, RealtimeLogDeliveryState } from "./realtimeLogDelivery";
 export type RealtimeLogDelivery = import("./realtimeLogDelivery").RealtimeLogDelivery;
 export const RealtimeLogDelivery: typeof import("./realtimeLogDelivery").RealtimeLogDelivery = null as any;
@@ -155,15 +335,45 @@ export type RuleEngine = import("./ruleEngine").RuleEngine;
 export const RuleEngine: typeof import("./ruleEngine").RuleEngine = null as any;
 utilities.lazyLoad(exports, ["RuleEngine"], () => require("./ruleEngine"));
 
+export { SecurityApiResourceArgs, SecurityApiResourceState } from "./securityApiResource";
+export type SecurityApiResource = import("./securityApiResource").SecurityApiResource;
+export const SecurityApiResource: typeof import("./securityApiResource").SecurityApiResource = null as any;
+utilities.lazyLoad(exports, ["SecurityApiResource"], () => require("./securityApiResource"));
+
+export { SecurityApiServiceArgs, SecurityApiServiceState } from "./securityApiService";
+export type SecurityApiService = import("./securityApiService").SecurityApiService;
+export const SecurityApiService: typeof import("./securityApiService").SecurityApiService = null as any;
+utilities.lazyLoad(exports, ["SecurityApiService"], () => require("./securityApiService"));
+
+export { SecurityClientAttesterArgs, SecurityClientAttesterState } from "./securityClientAttester";
+export type SecurityClientAttester = import("./securityClientAttester").SecurityClientAttester;
+export const SecurityClientAttester: typeof import("./securityClientAttester").SecurityClientAttester = null as any;
+utilities.lazyLoad(exports, ["SecurityClientAttester"], () => require("./securityClientAttester"));
+
 export { SecurityIpGroupArgs, SecurityIpGroupState } from "./securityIpGroup";
 export type SecurityIpGroup = import("./securityIpGroup").SecurityIpGroup;
 export const SecurityIpGroup: typeof import("./securityIpGroup").SecurityIpGroup = null as any;
 utilities.lazyLoad(exports, ["SecurityIpGroup"], () => require("./securityIpGroup"));
 
+export { SecurityJsInjectionRuleArgs, SecurityJsInjectionRuleState } from "./securityJsInjectionRule";
+export type SecurityJsInjectionRule = import("./securityJsInjectionRule").SecurityJsInjectionRule;
+export const SecurityJsInjectionRule: typeof import("./securityJsInjectionRule").SecurityJsInjectionRule = null as any;
+utilities.lazyLoad(exports, ["SecurityJsInjectionRule"], () => require("./securityJsInjectionRule"));
+
 export { SecurityPolicyConfigArgs, SecurityPolicyConfigState } from "./securityPolicyConfig";
 export type SecurityPolicyConfig = import("./securityPolicyConfig").SecurityPolicyConfig;
 export const SecurityPolicyConfig: typeof import("./securityPolicyConfig").SecurityPolicyConfig = null as any;
 utilities.lazyLoad(exports, ["SecurityPolicyConfig"], () => require("./securityPolicyConfig"));
+
+export { SharedCnameArgs, SharedCnameState } from "./sharedCname";
+export type SharedCname = import("./sharedCname").SharedCname;
+export const SharedCname: typeof import("./sharedCname").SharedCname = null as any;
+utilities.lazyLoad(exports, ["SharedCname"], () => require("./sharedCname"));
+
+export { WebSecurityTemplateArgs, WebSecurityTemplateState } from "./webSecurityTemplate";
+export type WebSecurityTemplate = import("./webSecurityTemplate").WebSecurityTemplate;
+export const WebSecurityTemplate: typeof import("./webSecurityTemplate").WebSecurityTemplate = null as any;
+utilities.lazyLoad(exports, ["WebSecurityTemplate"], () => require("./webSecurityTemplate"));
 
 export { ZoneArgs, ZoneState } from "./zone";
 export type Zone = import("./zone").Zone;
@@ -177,6 +387,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Teo/accelerationDomain:AccelerationDomain":
                 return new AccelerationDomain(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/aliasDomain:AliasDomain":
+                return new AliasDomain(name, <any>undefined, { urn })
             case "tencentcloud:Teo/applicationProxy:ApplicationProxy":
                 return new ApplicationProxy(name, <any>undefined, { urn })
             case "tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule":
@@ -185,22 +397,50 @@ const _module = {
                 return new BindSecurityTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Teo/certificateConfig:CertificateConfig":
                 return new CertificateConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/checkCnameStatusOperation:CheckCnameStatusOperation":
+                return new CheckCnameStatusOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/configGroupVersion:ConfigGroupVersion":
+                return new ConfigGroupVersion(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/confirmMultiPathGatewayOriginAcl:ConfirmMultiPathGatewayOriginAcl":
+                return new ConfirmMultiPathGatewayOriginAcl(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/confirmOriginAclUpdateOperation:ConfirmOriginAclUpdateOperation":
+                return new ConfirmOriginAclUpdateOperation(name, <any>undefined, { urn })
             case "tencentcloud:Teo/contentIdentifier:ContentIdentifier":
                 return new ContentIdentifier(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/createClsIndexOperation:CreateClsIndexOperation":
+                return new CreateClsIndexOperation(name, <any>undefined, { urn })
             case "tencentcloud:Teo/customizeErrorPage:CustomizeErrorPage":
                 return new CustomizeErrorPage(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ddosProtectionConfig:DdosProtectionConfig":
                 return new DdosProtectionConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/deployConfigGroupVersion:DeployConfigGroupVersion":
+                return new DeployConfigGroupVersion(name, <any>undefined, { urn })
             case "tencentcloud:Teo/dnsRecord:DnsRecord":
                 return new DnsRecord(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/domainSharedCnameAttachment:DomainSharedCnameAttachment":
+                return new DomainSharedCnameAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/edgeKv:EdgeKv":
+                return new EdgeKv(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/edgeKvNamespace:EdgeKvNamespace":
+                return new EdgeKvNamespace(name, <any>undefined, { urn })
             case "tencentcloud:Teo/function:Function":
                 return new Function(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/functionComponentBinding:FunctionComponentBinding":
+                return new FunctionComponentBinding(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/functionReplica:FunctionReplica":
+                return new FunctionReplica(name, <any>undefined, { urn })
             case "tencentcloud:Teo/functionRule:FunctionRule":
                 return new FunctionRule(name, <any>undefined, { urn })
             case "tencentcloud:Teo/functionRulePriority:FunctionRulePriority":
                 return new FunctionRulePriority(name, <any>undefined, { urn })
             case "tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment":
                 return new FunctionRuntimeEnvironment(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/identifyZoneOperation:IdentifyZoneOperation":
+                return new IdentifyZoneOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/importZoneConfigOperation:ImportZoneConfigOperation":
+                return new ImportZoneConfigOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/justInTimeTranscodeTemplate:JustInTimeTranscodeTemplate":
+                return new JustInTimeTranscodeTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Teo/l4Proxy:L4Proxy":
                 return new L4Proxy(name, <any>undefined, { urn })
             case "tencentcloud:Teo/l4ProxyRule:L4ProxyRule":
@@ -213,6 +453,14 @@ const _module = {
                 return new L7AccRuleV2(name, <any>undefined, { urn })
             case "tencentcloud:Teo/l7AccSetting:L7AccSetting":
                 return new L7AccSetting(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/loadBalancer:LoadBalancer":
+                return new LoadBalancer(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/multiPathGateway:MultiPathGateway":
+                return new MultiPathGateway(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/multiPathGatewayLine:MultiPathGatewayLine":
+                return new MultiPathGatewayLine(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/multiPathGatewaySecretKey:MultiPathGatewaySecretKey":
+                return new MultiPathGatewaySecretKey(name, <any>undefined, { urn })
             case "tencentcloud:Teo/originAcl:OriginAcl":
                 return new OriginAcl(name, <any>undefined, { urn })
             case "tencentcloud:Teo/originGroup:OriginGroup":
@@ -221,14 +469,32 @@ const _module = {
                 return new OwnershipVerify(name, <any>undefined, { urn })
             case "tencentcloud:Teo/plan:Plan":
                 return new Plan(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/prefetchOriginLimit:PrefetchOriginLimit":
+                return new PrefetchOriginLimit(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/prefetchTaskOperation:PrefetchTaskOperation":
+                return new PrefetchTaskOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/purgeTask:PurgeTask":
+                return new PurgeTask(name, <any>undefined, { urn })
             case "tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery":
                 return new RealtimeLogDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ruleEngine:RuleEngine":
                 return new RuleEngine(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/securityApiResource:SecurityApiResource":
+                return new SecurityApiResource(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/securityApiService:SecurityApiService":
+                return new SecurityApiService(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/securityClientAttester:SecurityClientAttester":
+                return new SecurityClientAttester(name, <any>undefined, { urn })
             case "tencentcloud:Teo/securityIpGroup:SecurityIpGroup":
                 return new SecurityIpGroup(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/securityJsInjectionRule:SecurityJsInjectionRule":
+                return new SecurityJsInjectionRule(name, <any>undefined, { urn })
             case "tencentcloud:Teo/securityPolicyConfig:SecurityPolicyConfig":
                 return new SecurityPolicyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/sharedCname:SharedCname":
+                return new SharedCname(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate":
+                return new WebSecurityTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Teo/zone:Zone":
                 return new Zone(name, <any>undefined, { urn })
             default:
@@ -237,30 +503,58 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/accelerationDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/aliasDomain", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxyRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/bindSecurityTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/certificateConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/checkCnameStatusOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/configGroupVersion", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/confirmMultiPathGatewayOriginAcl", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/confirmOriginAclUpdateOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/contentIdentifier", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/createClsIndexOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/customizeErrorPage", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ddosProtectionConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/deployConfigGroupVersion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/dnsRecord", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/domainSharedCnameAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/edgeKv", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/edgeKvNamespace", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/function", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionComponentBinding", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionReplica", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRulePriority", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/functionRuntimeEnvironment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/identifyZoneOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/importZoneConfigOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/justInTimeTranscodeTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l4Proxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l4ProxyRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l7AccRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l7AccRulePriorityOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l7AccRuleV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l7AccSetting", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/loadBalancer", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/multiPathGateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/multiPathGatewayLine", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/multiPathGatewaySecretKey", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/originAcl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/originGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ownershipVerify", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/plan", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/prefetchOriginLimit", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/prefetchTaskOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/purgeTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/realtimeLogDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ruleEngine", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityApiResource", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityApiService", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityClientAttester", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityIpGroup", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityJsInjectionRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/securityPolicyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/sharedCname", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/webSecurityTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/zone", _module)

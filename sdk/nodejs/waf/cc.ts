@@ -175,24 +175,24 @@ export class Cc extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * CC matching conditions JSON serialized string, example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}] 
+     * CC matching conditions JSON serialized string. Example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}].
      *
-     * Available key values: Method, Post, Referer, Cookie, User-Agent, CustomHeader, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore
+     * Supported key types: URL, Method, Post, Referer, Cookie, User-Agent, CustomHeader, IPLocation, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore.
      *
-     * Available match values:
-     * - When Key is Method: 0 (equal to), 3 (not equal to)
-     * - When Key is Post: 0 (equal to), 3 (not equal to)
-     * - When Key is Cookie: 0 (equal to), 2 (contains), 3 (not equal to), 7 (does not contain)
-     * - When Key is Referer: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is Cookie: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is User-Agent: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is CustomHeader: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is IPLocation: 13 (belongs to), 14 (does not belong to)
-     * - When Key is CaptchaRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaDeviceRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaScore: 15 (numerically equal to), 16 (numerically not equal to), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal to), 20 (numerically less than or equal to), 12 (exists), 5 (does not exist)
+     * Match operators by key type:
+     * - When Key is URL: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains)
+     * - When Key is Method: 0 (equal), 3 (not equal)
+     * - When Key is Post: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Cookie: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Referer: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is User-Agent: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is CustomHeader: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains), 4 (empty), 5 (not exists)
+     * - When Key is IPLocation: 13 (belongs to), 14 (not belongs to)
+     * - When Key is CaptchaRisk: 15 (numerically equal), 16 (numerically not equal), 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaDeviceRisk: 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaScore: 15 (numerically equal), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal), 20 (numerically less than or equal), 12 (exists), 5 (not exists)
      *
-     * The args parameter represents matching content and requires encodeflag to be set to true. When Key is Post, Cookie, or CustomHeader, use equals sign = to concatenate Key and Value separately, and encode both with Base64, similar to YWJj=YWJj. When Key is Referer or User-Agent, use equals sign = to concatenate Value, similar to =YWJj.
+     * Encoding rules: The args parameter requires encodeflag to be set to true. For Post, Cookie, or CustomHeader keys, Base64 encode both parameter name and value (remove trailing =), then concatenate with = sign (e.g., Base64(name)=Base64(value)). For Referer or User-Agent keys, Base64 encode the value (remove trailing =) and prefix with = sign (e.g., =Base64(value)).
      */
     declare public readonly optionsArr: pulumi.Output<string | undefined>;
     /**
@@ -325,100 +325,100 @@ export interface CcState {
     /**
      * Rule Action, 20 means observation, 21 means human-machine identification, 22 means interception, 23 means precise interception, 26 means precise human-machine identification, and 27 means JS verification.
      */
-    actionType?: pulumi.Input<string>;
+    actionType?: pulumi.Input<string | undefined>;
     /**
      * Advanced mode (whether to use session detection). 0(disabled) 1(enabled).
      */
-    advance?: pulumi.Input<string>;
+    advance?: pulumi.Input<string | undefined>;
     /**
      * Cel expression.
      */
-    celRule?: pulumi.Input<string>;
+    celRule?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * WAF edition. clb-waf means clb-waf, sparta-waf means saas-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Event ID.
      */
-    eventId?: pulumi.Input<string>;
+    eventId?: pulumi.Input<string | undefined>;
     /**
      * CC detection cycle.
      */
-    interval?: pulumi.Input<string>;
+    interval?: pulumi.Input<string | undefined>;
     /**
      * CC detection threshold.
      */
-    limit?: pulumi.Input<string>;
+    limit?: pulumi.Input<string | undefined>;
     /**
      * Frequency limiting method.
      */
-    limitMethod?: pulumi.Input<string>;
+    limitMethod?: pulumi.Input<string | undefined>;
     /**
      * Logical operator of configuration mode, and/or.
      */
-    logicalOp?: pulumi.Input<string>;
+    logicalOp?: pulumi.Input<string | undefined>;
     /**
      * Match method, 0(equal), 1(prefix), 2(contains), 3(not equal), 6(suffix), 7(not contains).
      */
-    matchFunc?: pulumi.Input<number>;
+    matchFunc?: pulumi.Input<number | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
-     * CC matching conditions JSON serialized string, example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}] 
+     * CC matching conditions JSON serialized string. Example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}].
      *
-     * Available key values: Method, Post, Referer, Cookie, User-Agent, CustomHeader, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore
+     * Supported key types: URL, Method, Post, Referer, Cookie, User-Agent, CustomHeader, IPLocation, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore.
      *
-     * Available match values:
-     * - When Key is Method: 0 (equal to), 3 (not equal to)
-     * - When Key is Post: 0 (equal to), 3 (not equal to)
-     * - When Key is Cookie: 0 (equal to), 2 (contains), 3 (not equal to), 7 (does not contain)
-     * - When Key is Referer: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is Cookie: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is User-Agent: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is CustomHeader: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is IPLocation: 13 (belongs to), 14 (does not belong to)
-     * - When Key is CaptchaRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaDeviceRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaScore: 15 (numerically equal to), 16 (numerically not equal to), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal to), 20 (numerically less than or equal to), 12 (exists), 5 (does not exist)
+     * Match operators by key type:
+     * - When Key is URL: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains)
+     * - When Key is Method: 0 (equal), 3 (not equal)
+     * - When Key is Post: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Cookie: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Referer: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is User-Agent: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is CustomHeader: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains), 4 (empty), 5 (not exists)
+     * - When Key is IPLocation: 13 (belongs to), 14 (not belongs to)
+     * - When Key is CaptchaRisk: 15 (numerically equal), 16 (numerically not equal), 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaDeviceRisk: 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaScore: 15 (numerically equal), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal), 20 (numerically less than or equal), 12 (exists), 5 (not exists)
      *
-     * The args parameter represents matching content and requires encodeflag to be set to true. When Key is Post, Cookie, or CustomHeader, use equals sign = to concatenate Key and Value separately, and encode both with Base64, similar to YWJj=YWJj. When Key is Referer or User-Agent, use equals sign = to concatenate Value, similar to =YWJj.
+     * Encoding rules: The args parameter requires encodeflag to be set to true. For Post, Cookie, or CustomHeader keys, Base64 encode both parameter name and value (remove trailing =), then concatenate with = sign (e.g., Base64(name)=Base64(value)). For Referer or User-Agent keys, Base64 encode the value (remove trailing =) and prefix with = sign (e.g., =Base64(value)).
      */
-    optionsArr?: pulumi.Input<string>;
+    optionsArr?: pulumi.Input<string | undefined>;
     /**
      * Rule Priority.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Session ID that needs to be enabled for the rule.
      */
-    sessionApplieds?: pulumi.Input<pulumi.Input<number>[]>;
+    sessionApplieds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Rule Status, 0 rule close, 1 rule open.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Operate Type.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * Detection URL.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
     /**
      * Action ValidTime, minute unit. Min: 60, Max: 604800.
      */
-    validTime?: pulumi.Input<number>;
+    validTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -436,7 +436,7 @@ export interface CcArgs {
     /**
      * Cel expression.
      */
-    celRule?: pulumi.Input<string>;
+    celRule?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
@@ -448,7 +448,7 @@ export interface CcArgs {
     /**
      * Event ID.
      */
-    eventId?: pulumi.Input<string>;
+    eventId?: pulumi.Input<string | undefined>;
     /**
      * CC detection cycle.
      */
@@ -460,11 +460,11 @@ export interface CcArgs {
     /**
      * Frequency limiting method.
      */
-    limitMethod?: pulumi.Input<string>;
+    limitMethod?: pulumi.Input<string | undefined>;
     /**
      * Logical operator of configuration mode, and/or.
      */
-    logicalOp?: pulumi.Input<string>;
+    logicalOp?: pulumi.Input<string | undefined>;
     /**
      * Match method, 0(equal), 1(prefix), 2(contains), 3(not equal), 6(suffix), 7(not contains).
      */
@@ -472,28 +472,28 @@ export interface CcArgs {
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
-     * CC matching conditions JSON serialized string, example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}] 
+     * CC matching conditions JSON serialized string. Example: [{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}].
      *
-     * Available key values: Method, Post, Referer, Cookie, User-Agent, CustomHeader, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore
+     * Supported key types: URL, Method, Post, Referer, Cookie, User-Agent, CustomHeader, IPLocation, CaptchaRisk, CaptchaDeviceRisk, CaptchaScore.
      *
-     * Available match values:
-     * - When Key is Method: 0 (equal to), 3 (not equal to)
-     * - When Key is Post: 0 (equal to), 3 (not equal to)
-     * - When Key is Cookie: 0 (equal to), 2 (contains), 3 (not equal to), 7 (does not contain)
-     * - When Key is Referer: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is Cookie: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is User-Agent: 0 (equal to), 3 (not equal to), 1 (prefix match), 6 (suffix match), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is CustomHeader: 0 (equal to), 3 (not equal to), 2 (contains), 7 (does not contain), 12 (exists), 5 (does not exist), 4 (content is empty)
-     * - When Key is IPLocation: 13 (belongs to), 14 (does not belong to)
-     * - When Key is CaptchaRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaDeviceRisk: 0 (equal to), 3 (not equal to), 13 (belongs to), 14 (does not belong to), 12 (exists), 5 (does not exist)
-     * - When Key is CaptchaScore: 15 (numerically equal to), 16 (numerically not equal to), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal to), 20 (numerically less than or equal to), 12 (exists), 5 (does not exist)
+     * Match operators by key type:
+     * - When Key is URL: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains)
+     * - When Key is Method: 0 (equal), 3 (not equal)
+     * - When Key is Post: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Cookie: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains)
+     * - When Key is Referer: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is User-Agent: 0 (equal), 3 (not equal), 1 (prefix), 6 (suffix), 2 (contains), 7 (not contains), 12 (exists), 5 (not exists), 4 (empty)
+     * - When Key is CustomHeader: 0 (equal), 3 (not equal), 2 (contains), 7 (not contains), 4 (empty), 5 (not exists)
+     * - When Key is IPLocation: 13 (belongs to), 14 (not belongs to)
+     * - When Key is CaptchaRisk: 15 (numerically equal), 16 (numerically not equal), 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaDeviceRisk: 13 (belongs to), 14 (not belongs to), 12 (exists), 5 (not exists)
+     * - When Key is CaptchaScore: 15 (numerically equal), 17 (numerically greater than), 18 (numerically less than), 19 (numerically greater than or equal), 20 (numerically less than or equal), 12 (exists), 5 (not exists)
      *
-     * The args parameter represents matching content and requires encodeflag to be set to true. When Key is Post, Cookie, or CustomHeader, use equals sign = to concatenate Key and Value separately, and encode both with Base64, similar to YWJj=YWJj. When Key is Referer or User-Agent, use equals sign = to concatenate Value, similar to =YWJj.
+     * Encoding rules: The args parameter requires encodeflag to be set to true. For Post, Cookie, or CustomHeader keys, Base64 encode both parameter name and value (remove trailing =), then concatenate with = sign (e.g., Base64(name)=Base64(value)). For Referer or User-Agent keys, Base64 encode the value (remove trailing =) and prefix with = sign (e.g., =Base64(value)).
      */
-    optionsArr?: pulumi.Input<string>;
+    optionsArr?: pulumi.Input<string | undefined>;
     /**
      * Rule Priority.
      */
@@ -501,7 +501,7 @@ export interface CcArgs {
     /**
      * Session ID that needs to be enabled for the rule.
      */
-    sessionApplieds?: pulumi.Input<pulumi.Input<number>[]>;
+    sessionApplieds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Rule Status, 0 rule close, 1 rule open.
      */
@@ -509,7 +509,7 @@ export interface CcArgs {
     /**
      * Operate Type.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * Detection URL.
      */

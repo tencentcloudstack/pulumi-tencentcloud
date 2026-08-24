@@ -131,15 +131,15 @@ export interface OrgShareUnitMemberV2State {
     /**
      * Shared unit region.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Shared member list.
      */
-    members?: pulumi.Input<pulumi.Input<inputs.Organization.OrgShareUnitMemberV2Member>[]>;
+    members?: pulumi.Input<pulumi.Input<inputs.Organization.OrgShareUnitMemberV2Member>[] | undefined>;
     /**
      * Shared unit ID.
      */
-    unitId?: pulumi.Input<string>;
+    unitId?: pulumi.Input<string | undefined>;
 }
 
 /**

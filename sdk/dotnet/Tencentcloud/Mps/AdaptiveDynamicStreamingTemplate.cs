@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
 {
     /// <summary>
-    /// Provides a resource to create a mps AdaptiveDynamicStreamingTemplate
+    /// Provides a resource to create a MPS adaptive dynamic streaming template
     /// 
     /// ## Example Usage
     /// 
@@ -23,13 +23,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var adaptiveDynamicStreamingTemplate = new Tencentcloud.Mps.AdaptiveDynamicStreamingTemplate("adaptive_dynamic_streaming_template", new()
+    ///     var example = new Tencentcloud.Mps.AdaptiveDynamicStreamingTemplate("example", new()
     ///     {
+    ///         Name = "tf-example",
     ///         Comment = "terrraform test",
     ///         DisableHigherVideoBitrate = 0,
     ///         DisableHigherVideoResolution = 1,
     ///         Format = "HLS",
-    ///         Name = "terrraform-test",
+    ///         PureAudio = 0,
+    ///         SegmentType = "ts-segment",
     ///         StreamInfos = new[]
     ///         {
     ///             new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
@@ -88,10 +90,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps adaptive_dynamic_streaming_template can be imported using the id, e.g.
+    /// MPS adaptive dynamic streaming template can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
+    /// $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate example 1636009
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate")]
@@ -126,6 +128,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+        /// When the value is 1.
+        /// 1. StreamInfos.N.RemoveVideo=1
+        /// 2. StreamInfos.N.RemoveAudio=0
+        /// 3. StreamInfos.N.Video.Codec=copy
+        /// When the value is 0.
+        /// 1. StreamInfos.N.Video.Codec cannot be copy.
+        /// 2. StreamInfos.N.Video.Fps cannot be null.
+        /// Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+        /// </summary>
+        [Output("pureAudio")]
+        public Output<int> PureAudio { get; private set; } = null!;
+
+        /// <summary>
+        /// Segment type. Valid values: 
+        /// ts-segment: HLS+TS segment
+        /// ts-byterange: HLS+TS byte range
+        /// mp4-segment: HLS+MP4 segment
+        /// mp4-byterange: HLS/DASH+MP4 byte range
+        /// ts-packed-audio: HLS+TS+Packed Audio segment
+        /// mp4-packed-audio: HLS+MP4+Packed Audio segment
+        /// ts-ts-segment: HLS+TS+TS segment
+        /// ts-ts-byterange: HLS+TS+TS byte range
+        /// mp4-mp4-segment: HLS+MP4+MP4 segment
+        /// mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+        /// ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+        /// mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+        /// Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+        /// </summary>
+        [Output("segmentType")]
+        public Output<string> SegmentType { get; private set; } = null!;
 
         /// <summary>
         /// Convert adaptive code stream to output sub-stream parameter information, and output up to 10 sub-streams.Note: The frame rate of each sub-stream must be consistent; if not, the frame rate of the first sub-stream is used as the output frame rate.
@@ -210,6 +245,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+        /// When the value is 1.
+        /// 1. StreamInfos.N.RemoveVideo=1
+        /// 2. StreamInfos.N.RemoveAudio=0
+        /// 3. StreamInfos.N.Video.Codec=copy
+        /// When the value is 0.
+        /// 1. StreamInfos.N.Video.Codec cannot be copy.
+        /// 2. StreamInfos.N.Video.Fps cannot be null.
+        /// Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+        /// </summary>
+        [Input("pureAudio")]
+        public Input<int>? PureAudio { get; set; }
+
+        /// <summary>
+        /// Segment type. Valid values: 
+        /// ts-segment: HLS+TS segment
+        /// ts-byterange: HLS+TS byte range
+        /// mp4-segment: HLS+MP4 segment
+        /// mp4-byterange: HLS/DASH+MP4 byte range
+        /// ts-packed-audio: HLS+TS+Packed Audio segment
+        /// mp4-packed-audio: HLS+MP4+Packed Audio segment
+        /// ts-ts-segment: HLS+TS+TS segment
+        /// ts-ts-byterange: HLS+TS+TS byte range
+        /// mp4-mp4-segment: HLS+MP4+MP4 segment
+        /// mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+        /// ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+        /// mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+        /// Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+        /// </summary>
+        [Input("segmentType")]
+        public Input<string>? SegmentType { get; set; }
+
         [Input("streamInfos", required: true)]
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs>? _streamInfos;
 
@@ -259,6 +327,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+        /// When the value is 1.
+        /// 1. StreamInfos.N.RemoveVideo=1
+        /// 2. StreamInfos.N.RemoveAudio=0
+        /// 3. StreamInfos.N.Video.Codec=copy
+        /// When the value is 0.
+        /// 1. StreamInfos.N.Video.Codec cannot be copy.
+        /// 2. StreamInfos.N.Video.Fps cannot be null.
+        /// Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+        /// </summary>
+        [Input("pureAudio")]
+        public Input<int>? PureAudio { get; set; }
+
+        /// <summary>
+        /// Segment type. Valid values: 
+        /// ts-segment: HLS+TS segment
+        /// ts-byterange: HLS+TS byte range
+        /// mp4-segment: HLS+MP4 segment
+        /// mp4-byterange: HLS/DASH+MP4 byte range
+        /// ts-packed-audio: HLS+TS+Packed Audio segment
+        /// mp4-packed-audio: HLS+MP4+Packed Audio segment
+        /// ts-ts-segment: HLS+TS+TS segment
+        /// ts-ts-byterange: HLS+TS+TS byte range
+        /// mp4-mp4-segment: HLS+MP4+MP4 segment
+        /// mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+        /// ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+        /// mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+        /// Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+        /// </summary>
+        [Input("segmentType")]
+        public Input<string>? SegmentType { get; set; }
 
         [Input("streamInfos")]
         private InputList<Inputs.AdaptiveDynamicStreamingTemplateStreamInfoGetArgs>? _streamInfos;

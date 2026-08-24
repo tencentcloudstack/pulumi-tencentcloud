@@ -94,11 +94,11 @@ export interface UpdateDataEngineConfigOperationState {
     /**
      * Engine configuration command, supports UpdateSparkSQLLakefsPath (update native table configuration), UpdateSparkSQLResultPath (update result path configuration).
      */
-    dataEngineConfigCommand?: pulumi.Input<string>;
+    dataEngineConfigCommand?: pulumi.Input<string | undefined>;
     /**
      * Engine unique id.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
 }
 
 /**

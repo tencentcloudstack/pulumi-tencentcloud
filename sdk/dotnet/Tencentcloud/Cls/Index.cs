@@ -49,11 +49,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         },
     ///     });
     /// 
-    ///     var tokenizerValue = "@&amp;?|#()='\",;:&lt;&gt;[]{}";
+    ///     var tokenizerValue = @"@&amp;?|#()='\\\"",;:&lt;&gt;[]{}/ \
+    /// \\t\\r\\\\
+    /// ";
     /// 
     ///     var exampleIndex = new Tencentcloud.Cls.Index("example", new()
     ///     {
-    ///         TopicId = exampleTopic.Id,
+    ///         TopicId = "abc97756-e620-47a4-aa2b-08561e79f086",
     ///         Rule = new Tencentcloud.Cls.Inputs.IndexRuleArgs
     ///         {
     ///             FullText = new Tencentcloud.Cls.Inputs.IndexRuleFullTextArgs
@@ -69,24 +71,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///                 {
     ///                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
     ///                     {
-    ///                         Key = "hello",
+    ///                         Key = "key1",
     ///                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
     ///                         {
     ///                             ContainZH = true,
     ///                             SqlFlag = true,
     ///                             Tokenizer = tokenizerValue,
     ///                             Type = "text",
+    ///                             Alias = "alias1",
     ///                         },
     ///                     },
     ///                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
     ///                     {
-    ///                         Key = "world",
+    ///                         Key = "key2",
     ///                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
     ///                         {
     ///                             ContainZH = true,
     ///                             SqlFlag = true,
     ///                             Tokenizer = tokenizerValue,
-    ///                             Type = "text",
+    ///                             Type = "json",
+    ///                             Alias = "alias2",
+    ///                             ChildNodes = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeArgs
+    ///                                 {
+    ///                                     Key = "key3",
+    ///                                     Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueArgs
+    ///                                     {
+    ///                                         ContainZH = true,
+    ///                                         SqlFlag = true,
+    ///                                         Tokenizer = tokenizerValue,
+    ///                                         Type = "json",
+    ///                                         Alias = "alias3",
+    ///                                         ChildNodes = new[]
+    ///                                         {
+    ///                                             new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs
+    ///                                             {
+    ///                                                 Key = "key4",
+    ///                                                 Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs
+    ///                                                 {
+    ///                                                     ContainZH = true,
+    ///                                                     SqlFlag = true,
+    ///                                                     Tokenizer = tokenizerValue,
+    ///                                                     Type = "text",
+    ///                                                     Alias = "alias4",
+    ///                                                 },
+    ///                                             },
+    ///                                             new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs
+    ///                                             {
+    ///                                                 Key = "key5",
+    ///                                                 Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs
+    ///                                                 {
+    ///                                                     ContainZH = true,
+    ///                                                     SqlFlag = true,
+    ///                                                     Tokenizer = tokenizerValue,
+    ///                                                     Type = "text",
+    ///                                                     Alias = "name5",
+    ///                                                 },
+    ///                                             },
+    ///                                         },
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeArgs
+    ///                                 {
+    ///                                     Key = "key6",
+    ///                                     Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueChildNodeValueArgs
+    ///                                     {
+    ///                                         ContainZH = true,
+    ///                                         SqlFlag = true,
+    ///                                         Tokenizer = tokenizerValue,
+    ///                                         Type = "text",
+    ///                                         Alias = "name6",
+    ///                                     },
+    ///                                 },
+    ///                             },
     ///                         },
     ///                     },
     ///                 },

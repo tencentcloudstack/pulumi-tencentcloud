@@ -136,19 +136,19 @@ export interface TagRetentionExecutionConfigState {
     /**
      * Whether to simulate execution, the default value is false, that is, non-simulation execution.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * execution id.
      */
-    executionId?: pulumi.Input<number>;
+    executionId?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * retention id.
      */
-    retentionId?: pulumi.Input<number>;
+    retentionId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -158,7 +158,7 @@ export interface TagRetentionExecutionConfigArgs {
     /**
      * Whether to simulate execution, the default value is false, that is, non-simulation execution.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * instance id.
      */

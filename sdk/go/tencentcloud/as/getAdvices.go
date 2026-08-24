@@ -69,12 +69,8 @@ type GetAdvicesResult struct {
 }
 
 func GetAdvicesOutput(ctx *pulumi.Context, args GetAdvicesOutputArgs, opts ...pulumi.InvokeOption) GetAdvicesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAdvicesResultOutput, error) {
-			args := v.(GetAdvicesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getAdvices:getAdvices", args, GetAdvicesResultOutput{}, options).(GetAdvicesResultOutput), nil
-		}).(GetAdvicesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getAdvices:getAdvices", args, GetAdvicesResultOutput{}, options).(GetAdvicesResultOutput)
 }
 
 // A collection of arguments for invoking getAdvices.

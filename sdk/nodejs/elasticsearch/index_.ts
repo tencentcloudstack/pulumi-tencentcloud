@@ -119,19 +119,19 @@ export interface IndexState {
     /**
      * Create index metadata JSON, such as mappings, settings.
      */
-    indexMetaJson?: pulumi.Input<string>;
+    indexMetaJson?: pulumi.Input<string | undefined>;
     /**
      * index name to create.
      */
-    indexName?: pulumi.Input<string>;
+    indexName?: pulumi.Input<string | undefined>;
     /**
      * type of the index to be created. auto: autonomous index. normal: indicates a common index.
      */
-    indexType?: pulumi.Input<string>;
+    indexType?: pulumi.Input<string | undefined>;
     /**
      * es instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -141,7 +141,7 @@ export interface IndexArgs {
     /**
      * Create index metadata JSON, such as mappings, settings.
      */
-    indexMetaJson?: pulumi.Input<string>;
+    indexMetaJson?: pulumi.Input<string | undefined>;
     /**
      * index name to create.
      */

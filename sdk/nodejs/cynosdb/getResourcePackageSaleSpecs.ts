@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcePackageSaleSpecs = tencentcloud.Cynosdb.getResourcePackageSaleSpecs({
+ * const resourcePackageSaleSpecs = tencentcloud.cynosdb.getResourcePackageSaleSpecs({
  *     instanceType: "cynosdb-serverless",
  *     packageRegion: "china",
  *     packageType: "CCU",
@@ -86,7 +86,7 @@ export interface GetResourcePackageSaleSpecsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcePackageSaleSpecs = tencentcloud.Cynosdb.getResourcePackageSaleSpecs({
+ * const resourcePackageSaleSpecs = tencentcloud.cynosdb.getResourcePackageSaleSpecs({
  *     instanceType: "cynosdb-serverless",
  *     packageRegion: "china",
  *     packageType: "CCU",
@@ -122,5 +122,5 @@ export interface GetResourcePackageSaleSpecsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

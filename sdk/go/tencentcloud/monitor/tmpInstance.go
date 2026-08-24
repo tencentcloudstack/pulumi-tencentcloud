@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a monitor tmpInstance
+// Provides a resource to create a monitor (Cloud Monitor) tmpInstance
 //
 // ## Example Usage
 //
@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -53,11 +53,12 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewTmpInstance(ctx, "example", &monitor.TmpInstanceArgs{
-//				InstanceName:      pulumi.String("tf-tmp-instance"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
-//				DataRetentionTime: pulumi.Int(30),
-//				Zone:              pulumi.String(availabilityZone),
+//				InstanceName:                 pulumi.String("tf-tmp-instance"),
+//				VpcId:                        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                     subnet2.ID().ToIDOutput().ToStringOutput(),
+//				DataRetentionTime:            pulumi.Int(30),
+//				Zone:                         pulumi.String(availabilityZone),
+//				LongTermStorageRetentionTime: pulumi.Int(90),
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
 //				},
@@ -74,7 +75,6 @@ import (
 // ## Import
 //
 // monitor tmpInstance can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance example prom-1uvo0tjm
 // ```
@@ -89,6 +89,8 @@ type TmpInstance struct {
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Instance IPv4 address.
 	Ipv4Address pulumi.StringOutput `pulumi:"ipv4Address"`
+	// Long-term storage retention time(in days). Value range: 60-730.
+	LongTermStorageRetentionTime pulumi.IntOutput `pulumi:"longTermStorageRetentionTime"`
 	// Proxy address.
 	ProxyAddress pulumi.StringOutput `pulumi:"proxyAddress"`
 	// Prometheus remote write address.
@@ -156,6 +158,8 @@ type tmpInstanceState struct {
 	InstanceName *string `pulumi:"instanceName"`
 	// Instance IPv4 address.
 	Ipv4Address *string `pulumi:"ipv4Address"`
+	// Long-term storage retention time(in days). Value range: 60-730.
+	LongTermStorageRetentionTime *int `pulumi:"longTermStorageRetentionTime"`
 	// Proxy address.
 	ProxyAddress *string `pulumi:"proxyAddress"`
 	// Prometheus remote write address.
@@ -179,6 +183,8 @@ type TmpInstanceState struct {
 	InstanceName pulumi.StringPtrInput
 	// Instance IPv4 address.
 	Ipv4Address pulumi.StringPtrInput
+	// Long-term storage retention time(in days). Value range: 60-730.
+	LongTermStorageRetentionTime pulumi.IntPtrInput
 	// Proxy address.
 	ProxyAddress pulumi.StringPtrInput
 	// Prometheus remote write address.
@@ -202,6 +208,8 @@ type tmpInstanceArgs struct {
 	DataRetentionTime int `pulumi:"dataRetentionTime"`
 	// Instance name.
 	InstanceName string `pulumi:"instanceName"`
+	// Long-term storage retention time(in days). Value range: 60-730.
+	LongTermStorageRetentionTime *int `pulumi:"longTermStorageRetentionTime"`
 	// Subnet Id.
 	SubnetId string `pulumi:"subnetId"`
 	// Tag description list.
@@ -218,6 +226,8 @@ type TmpInstanceArgs struct {
 	DataRetentionTime pulumi.IntInput
 	// Instance name.
 	InstanceName pulumi.StringInput
+	// Long-term storage retention time(in days). Value range: 60-730.
+	LongTermStorageRetentionTime pulumi.IntPtrInput
 	// Subnet Id.
 	SubnetId pulumi.StringInput
 	// Tag description list.
@@ -333,6 +343,11 @@ func (o TmpInstanceOutput) InstanceName() pulumi.StringOutput {
 // Instance IPv4 address.
 func (o TmpInstanceOutput) Ipv4Address() pulumi.StringOutput {
 	return o.ApplyT(func(v *TmpInstance) pulumi.StringOutput { return v.Ipv4Address }).(pulumi.StringOutput)
+}
+
+// Long-term storage retention time(in days). Value range: 60-730.
+func (o TmpInstanceOutput) LongTermStorageRetentionTime() pulumi.IntOutput {
+	return o.ApplyT(func(v *TmpInstance) pulumi.IntOutput { return v.LongTermStorageRetentionTime }).(pulumi.IntOutput)
 }
 
 // Proxy address.

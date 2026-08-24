@@ -111,7 +111,6 @@ import (
 // ## Import
 //
 // tcm mesh can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
 // ```

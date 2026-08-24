@@ -97,7 +97,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * pts scenario can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
  * ```
@@ -285,83 +284,83 @@ export interface ScenarioState {
     /**
      * App ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Scene creation time.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * cron job ID.
      */
-    cronId?: pulumi.Input<string>;
+    cronId?: pulumi.Input<string | undefined>;
     /**
      * Test data set.
      */
-    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioDataset>[]>;
+    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioDataset>[] | undefined>;
     /**
      * Pts Scenario Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name resolution configuration.
      */
-    domainNameConfig?: pulumi.Input<inputs.Pts.ScenarioDomainNameConfig>;
+    domainNameConfig?: pulumi.Input<inputs.Pts.ScenarioDomainNameConfig | undefined>;
     /**
      * deprecated.
      */
-    extensions?: pulumi.Input<pulumi.Input<string>[]>;
+    extensions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Pressure allocation.
      */
-    load?: pulumi.Input<inputs.Pts.ScenarioLoad>;
+    load?: pulumi.Input<inputs.Pts.ScenarioLoad | undefined>;
     /**
      * Pts Scenario name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * SLA strategy.
      */
-    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioPlugin>[]>;
+    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioPlugin>[] | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Protocol file path.
      */
-    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioProtocol>[]>;
+    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioProtocol>[] | undefined>;
     /**
      * Request file path.
      */
-    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioRequestFile>[]>;
+    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioRequestFile>[] | undefined>;
     /**
      * SLA strategy.
      */
-    slaPolicy?: pulumi.Input<inputs.Pts.ScenarioSlaPolicy>;
+    slaPolicy?: pulumi.Input<inputs.Pts.ScenarioSlaPolicy | undefined>;
     /**
      * Scene statu Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Sub-user ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    subAccountUin?: pulumi.Input<string>;
+    subAccountUin?: pulumi.Input<string | undefined>;
     /**
      * Test script file information.
      */
-    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioTestScript>[]>;
+    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioTestScript>[] | undefined>;
     /**
      * Pressure test engine type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * User ID Note: this field may return null, indicating that a valid value cannot be obtained.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
     /**
      * Scene modification time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -371,35 +370,35 @@ export interface ScenarioArgs {
     /**
      * cron job ID.
      */
-    cronId?: pulumi.Input<string>;
+    cronId?: pulumi.Input<string | undefined>;
     /**
      * Test data set.
      */
-    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioDataset>[]>;
+    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioDataset>[] | undefined>;
     /**
      * Pts Scenario Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name resolution configuration.
      */
-    domainNameConfig?: pulumi.Input<inputs.Pts.ScenarioDomainNameConfig>;
+    domainNameConfig?: pulumi.Input<inputs.Pts.ScenarioDomainNameConfig | undefined>;
     /**
      * deprecated.
      */
-    extensions?: pulumi.Input<pulumi.Input<string>[]>;
+    extensions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Pressure allocation.
      */
-    load?: pulumi.Input<inputs.Pts.ScenarioLoad>;
+    load?: pulumi.Input<inputs.Pts.ScenarioLoad | undefined>;
     /**
      * Pts Scenario name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * SLA strategy.
      */
-    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioPlugin>[]>;
+    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioPlugin>[] | undefined>;
     /**
      * Project id.
      */
@@ -407,19 +406,19 @@ export interface ScenarioArgs {
     /**
      * Protocol file path.
      */
-    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioProtocol>[]>;
+    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioProtocol>[] | undefined>;
     /**
      * Request file path.
      */
-    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioRequestFile>[]>;
+    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioRequestFile>[] | undefined>;
     /**
      * SLA strategy.
      */
-    slaPolicy?: pulumi.Input<inputs.Pts.ScenarioSlaPolicy>;
+    slaPolicy?: pulumi.Input<inputs.Pts.ScenarioSlaPolicy | undefined>;
     /**
      * Test script file information.
      */
-    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioTestScript>[]>;
+    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.ScenarioTestScript>[] | undefined>;
     /**
      * Pressure test engine type.
      */

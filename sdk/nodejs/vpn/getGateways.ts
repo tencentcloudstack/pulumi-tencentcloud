@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Vpn.getGateways({
+ * const foo = tencentcloud.vpn.getGateways({
  *     name: "main",
  *     id: "vpngw-8ccsnclt",
  *     publicIpAddress: "1.1.1.1",
@@ -118,7 +118,7 @@ export interface GetGatewaysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Vpn.getGateways({
+ * const foo = tencentcloud.vpn.getGateways({
  *     name: "main",
  *     id: "vpngw-8ccsnclt",
  *     publicIpAddress: "1.1.1.1",
@@ -151,29 +151,29 @@ export interface GetGatewaysOutputArgs {
     /**
      * ID of the VPN gateway.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the VPN gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Public ip address of the VPN gateway.
      */
-    publicIpAddress?: pulumi.Input<string>;
+    publicIpAddress?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPN gateway to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Zone of the VPN gateway.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }

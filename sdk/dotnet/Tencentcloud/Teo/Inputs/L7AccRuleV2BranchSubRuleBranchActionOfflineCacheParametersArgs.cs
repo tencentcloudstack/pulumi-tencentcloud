@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleV2BranchSubRuleBranchActionOfflineCacheParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable offline caching. values: on: enable; Off: disable.
+        /// Whether to enable offline caching. values: on: enable; off: disable.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

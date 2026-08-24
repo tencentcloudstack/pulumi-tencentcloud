@@ -12,6 +12,7 @@ import { Provider } from "./provider";
 // Export sub-modules:
 import * as accept from "./accept";
 import * as address from "./address";
+import * as advisor from "./advisor";
 import * as antiddos from "./antiddos";
 import * as apigateway from "./apigateway";
 import * as apm from "./apm";
@@ -20,12 +21,14 @@ import * as audit from "./audit";
 import * as audits from "./audits";
 import * as availability from "./availability";
 import * as batch from "./batch";
+import * as bh from "./bh";
 import * as bi from "./bi";
 import * as billing from "./billing";
 import * as cam from "./cam";
 import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
+import * as cdb from "./cdb";
 import * as cdc from "./cdc";
 import * as cdh from "./cdh";
 import * as cdn from "./cdn";
@@ -42,6 +45,8 @@ import * as clb from "./clb";
 import * as clickhouse from "./clickhouse";
 import * as cls from "./cls";
 import * as config from "./config";
+import * as configservice from "./configservice";
+import * as controlcenter from "./controlcenter";
 import * as cos from "./cos";
 import * as csip from "./csip";
 import * as css from "./css";
@@ -51,6 +56,7 @@ import * as cynosdb from "./cynosdb";
 import * as dasb from "./dasb";
 import * as dayu from "./dayu";
 import * as dbbrain from "./dbbrain";
+import * as dbdc from "./dbdc";
 import * as dc from "./dc";
 import * as dcdb from "./dcdb";
 import * as dcx from "./dcx";
@@ -69,7 +75,9 @@ import * as emr from "./emr";
 import * as eni from "./eni";
 import * as enis from "./enis";
 import * as events from "./events";
+import * as ga2 from "./ga2";
 import * as gaap from "./gaap";
+import * as gs from "./gs";
 import * as gwlb from "./gwlb";
 import * as ha from "./ha";
 import * as identity from "./identity";
@@ -80,6 +88,7 @@ import * as instance from "./instance";
 import * as instances from "./instances";
 import * as invite from "./invite";
 import * as ipv6 from "./ipv6";
+import * as keewidb from "./keewidb";
 import * as key from "./key";
 import * as kms from "./kms";
 import * as kubernetes from "./kubernetes";
@@ -96,14 +105,17 @@ import * as oceanus from "./oceanus";
 import * as open from "./open";
 import * as organization from "./organization";
 import * as placement from "./placement";
+import * as postgres from "./postgres";
 import * as postgresql from "./postgresql";
 import * as privatedns from "./privatedns";
+import * as products from "./products";
 import * as project from "./project";
 import * as projects from "./projects";
 import * as protocol from "./protocol";
 import * as provision from "./provision";
 import * as pts from "./pts";
 import * as redis from "./redis";
+import * as regions from "./regions";
 import * as reject from "./reject";
 import * as reserve from "./reserve";
 import * as reserved from "./reserved";
@@ -123,6 +135,7 @@ import * as sts from "./sts";
 import * as subdomain from "./subdomain";
 import * as subnet from "./subnet";
 import * as subscribe from "./subscribe";
+import * as system from "./system";
 import * as tag from "./tag";
 import * as tat from "./tat";
 import * as tcaplus from "./tcaplus";
@@ -140,15 +153,19 @@ import * as tse from "./tse";
 import * as tsf from "./tsf";
 import * as types from "./types";
 import * as user from "./user";
+import * as vcube from "./vcube";
+import * as vdb from "./vdb";
 import * as vod from "./vod";
 import * as vpc from "./vpc";
 import * as vpn from "./vpn";
 import * as waf from "./waf";
 import * as wedata from "./wedata";
+import * as zones from "./zones";
 
 export {
     accept,
     address,
+    advisor,
     antiddos,
     apigateway,
     apm,
@@ -157,12 +174,14 @@ export {
     audits,
     availability,
     batch,
+    bh,
     bi,
     billing,
     cam,
     cat,
     cbs,
     ccn,
+    cdb,
     cdc,
     cdh,
     cdn,
@@ -179,6 +198,8 @@ export {
     clickhouse,
     cls,
     config,
+    configservice,
+    controlcenter,
     cos,
     csip,
     css,
@@ -188,6 +209,7 @@ export {
     dasb,
     dayu,
     dbbrain,
+    dbdc,
     dc,
     dcdb,
     dcx,
@@ -206,7 +228,9 @@ export {
     eni,
     enis,
     events,
+    ga2,
     gaap,
+    gs,
     gwlb,
     ha,
     identity,
@@ -217,6 +241,7 @@ export {
     instances,
     invite,
     ipv6,
+    keewidb,
     key,
     kms,
     kubernetes,
@@ -233,14 +258,17 @@ export {
     open,
     organization,
     placement,
+    postgres,
     postgresql,
     privatedns,
+    products,
     project,
     projects,
     protocol,
     provision,
     pts,
     redis,
+    regions,
     reject,
     reserve,
     reserved,
@@ -260,6 +288,7 @@ export {
     subdomain,
     subnet,
     subscribe,
+    system,
     tag,
     tat,
     tcaplus,
@@ -277,11 +306,14 @@ export {
     tsf,
     types,
     user,
+    vcube,
+    vdb,
     vod,
     vpc,
     vpn,
     waf,
     wedata,
+    zones,
 };
 pulumi.runtime.registerResourcePackage("tencentcloud", {
     version: utilities.getVersion(),

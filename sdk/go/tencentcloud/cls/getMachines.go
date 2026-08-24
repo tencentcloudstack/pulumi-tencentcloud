@@ -45,7 +45,7 @@ import (
 //				return err
 //			}
 //			_ = cls.GetMachinesOutput(ctx, cls.GetMachinesOutputArgs{
-//				GroupId: group.ID(),
+//				GroupId: group.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -81,12 +81,8 @@ type GetMachinesResult struct {
 }
 
 func GetMachinesOutput(ctx *pulumi.Context, args GetMachinesOutputArgs, opts ...pulumi.InvokeOption) GetMachinesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMachinesResultOutput, error) {
-			args := v.(GetMachinesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cls/getMachines:getMachines", args, GetMachinesResultOutput{}, options).(GetMachinesResultOutput), nil
-		}).(GetMachinesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cls/getMachines:getMachines", args, GetMachinesResultOutput{}, options).(GetMachinesResultOutput)
 }
 
 // A collection of arguments for invoking getMachines.

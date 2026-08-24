@@ -14,6 +14,8 @@ import (
 
 // Use this resource to create tcr instance.
 //
+// > **NOTE:**If `securityPolicy` needs to be configured, `openPublicOperation` needs to be set to true
+//
 // ## Example Usage
 //
 // ### Create a basic tcr instance.
@@ -98,7 +100,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			cfg := config.New(ctx, "")
-//			tcrRegionMap := map[string]interface{}{
+//			tcrRegionMap := map[string]int{
 //				"ap-bangkok":       23,
 //				"ap-beijing":       8,
 //				"ap-chengdu":       16,
@@ -142,18 +144,56 @@ import (
 //
 // ```
 //
+// ### Create instance with COS bucket configuration.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcr"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
+//				Name:                pulumi.String("tf-example-tcr"),
+//				InstanceType:        pulumi.String("standard"),
+//				EnableCosMaz:        pulumi.Bool(true),
+//				EnableCosVersioning: pulumi.Bool(true),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // tcr instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+// $ pulumi import tencentcloud:Tcr/instance:Instance example tcr-4detlt3v
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrOutput `pulumi:"deleteBucket"`
+	// Whether to enable Instance Deletion Protection.
+	DeletionProtection pulumi.BoolOutput `pulumi:"deletionProtection"`
+	// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+	EnableCosMaz pulumi.BoolOutput `pulumi:"enableCosMaz"`
+	// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+	EnableCosVersioning pulumi.BoolOutput `pulumi:"enableCosVersioning"`
 	// Instance expiration time (prepaid).
 	ExpiredAt pulumi.StringOutput `pulumi:"expiredAt"`
 	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
@@ -219,6 +259,12 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket *bool `pulumi:"deleteBucket"`
+	// Whether to enable Instance Deletion Protection.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+	EnableCosMaz *bool `pulumi:"enableCosMaz"`
+	// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+	EnableCosVersioning *bool `pulumi:"enableCosVersioning"`
 	// Instance expiration time (prepaid).
 	ExpiredAt *string `pulumi:"expiredAt"`
 	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
@@ -252,6 +298,12 @@ type instanceState struct {
 type InstanceState struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrInput
+	// Whether to enable Instance Deletion Protection.
+	DeletionProtection pulumi.BoolPtrInput
+	// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+	EnableCosMaz pulumi.BoolPtrInput
+	// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+	EnableCosVersioning pulumi.BoolPtrInput
 	// Instance expiration time (prepaid).
 	ExpiredAt pulumi.StringPtrInput
 	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
@@ -289,6 +341,12 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket *bool `pulumi:"deleteBucket"`
+	// Whether to enable Instance Deletion Protection.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
+	// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+	EnableCosMaz *bool `pulumi:"enableCosMaz"`
+	// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+	EnableCosVersioning *bool `pulumi:"enableCosVersioning"`
 	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
@@ -313,6 +371,12 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// Indicate to delete the COS bucket which is auto-created with the instance or not.
 	DeleteBucket pulumi.BoolPtrInput
+	// Whether to enable Instance Deletion Protection.
+	DeletionProtection pulumi.BoolPtrInput
+	// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+	EnableCosMaz pulumi.BoolPtrInput
+	// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+	EnableCosVersioning pulumi.BoolPtrInput
 	// Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
 	// Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
@@ -423,6 +487,21 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 // Indicate to delete the COS bucket which is auto-created with the instance or not.
 func (o InstanceOutput) DeleteBucket() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DeleteBucket }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable Instance Deletion Protection.
+func (o InstanceOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Whether to enable COS bucket multi-AZ feature. Default is `false`.
+func (o InstanceOutput) EnableCosMaz() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.EnableCosMaz }).(pulumi.BoolOutput)
+}
+
+// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+func (o InstanceOutput) EnableCosVersioning() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.EnableCosVersioning }).(pulumi.BoolOutput)
 }
 
 // Instance expiration time (prepaid).

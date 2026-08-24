@@ -62,12 +62,8 @@ type GetSaleInfoResult struct {
 }
 
 func GetSaleInfoOutput(ctx *pulumi.Context, args GetSaleInfoOutputArgs, opts ...pulumi.InvokeOption) GetSaleInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSaleInfoResultOutput, error) {
-			args := v.(GetSaleInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getSaleInfo:getSaleInfo", args, GetSaleInfoResultOutput{}, options).(GetSaleInfoResultOutput), nil
-		}).(GetSaleInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getSaleInfo:getSaleInfo", args, GetSaleInfoResultOutput{}, options).(GetSaleInfoResultOutput)
 }
 
 // A collection of arguments for invoking getSaleInfo.

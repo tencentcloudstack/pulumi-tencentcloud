@@ -70,12 +70,8 @@ type GetDataEngineSessionParametersResult struct {
 }
 
 func GetDataEngineSessionParametersOutput(ctx *pulumi.Context, args GetDataEngineSessionParametersOutputArgs, opts ...pulumi.InvokeOption) GetDataEngineSessionParametersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataEngineSessionParametersResultOutput, error) {
-			args := v.(GetDataEngineSessionParametersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDataEngineSessionParameters:getDataEngineSessionParameters", args, GetDataEngineSessionParametersResultOutput{}, options).(GetDataEngineSessionParametersResultOutput), nil
-		}).(GetDataEngineSessionParametersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDataEngineSessionParameters:getDataEngineSessionParameters", args, GetDataEngineSessionParametersResultOutput{}, options).(GetDataEngineSessionParametersResultOutput)
 }
 
 // A collection of arguments for invoking getDataEngineSessionParameters.

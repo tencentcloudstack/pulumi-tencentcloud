@@ -45,6 +45,35 @@ import (
 //
 // ```
 //
+// ### Create partition placement group
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/placement"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := placement.NewGroup(ctx, "bar", &placement.GroupArgs{
+//				Name:           pulumi.String("test-partition"),
+//				Type:           pulumi.String("HOST"),
+//				Strategy:       pulumi.String("PARTITION"),
+//				PartitionCount: pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // Placement group can be imported using the id, e.g.
@@ -65,6 +94,10 @@ type Group struct {
 	CvmQuotaTotal pulumi.IntOutput `pulumi:"cvmQuotaTotal"`
 	// Name of the placement group, 1-60 characters in length.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+	PartitionCount pulumi.IntOutput `pulumi:"partitionCount"`
+	// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+	Strategy pulumi.StringOutput `pulumi:"strategy"`
 	// Tags of the placement group.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
@@ -114,6 +147,10 @@ type groupState struct {
 	CvmQuotaTotal *int `pulumi:"cvmQuotaTotal"`
 	// Name of the placement group, 1-60 characters in length.
 	Name *string `pulumi:"name"`
+	// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+	PartitionCount *int `pulumi:"partitionCount"`
+	// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+	Strategy *string `pulumi:"strategy"`
 	// Tags of the placement group.
 	Tags map[string]string `pulumi:"tags"`
 	// Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
@@ -131,6 +168,10 @@ type GroupState struct {
 	CvmQuotaTotal pulumi.IntPtrInput
 	// Name of the placement group, 1-60 characters in length.
 	Name pulumi.StringPtrInput
+	// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+	PartitionCount pulumi.IntPtrInput
+	// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+	Strategy pulumi.StringPtrInput
 	// Tags of the placement group.
 	Tags pulumi.StringMapInput
 	// Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
@@ -146,6 +187,10 @@ type groupArgs struct {
 	Affinity *int `pulumi:"affinity"`
 	// Name of the placement group, 1-60 characters in length.
 	Name *string `pulumi:"name"`
+	// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+	PartitionCount *int `pulumi:"partitionCount"`
+	// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+	Strategy *string `pulumi:"strategy"`
 	// Tags of the placement group.
 	Tags map[string]string `pulumi:"tags"`
 	// Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
@@ -158,6 +203,10 @@ type GroupArgs struct {
 	Affinity pulumi.IntPtrInput
 	// Name of the placement group, 1-60 characters in length.
 	Name pulumi.StringPtrInput
+	// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+	PartitionCount pulumi.IntPtrInput
+	// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+	Strategy pulumi.StringPtrInput
 	// Tags of the placement group.
 	Tags pulumi.StringMapInput
 	// Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
@@ -274,6 +323,16 @@ func (o GroupOutput) CvmQuotaTotal() pulumi.IntOutput {
 // Name of the placement group, 1-60 characters in length.
 func (o GroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Group) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+func (o GroupOutput) PartitionCount() pulumi.IntOutput {
+	return o.ApplyT(func(v *Group) pulumi.IntOutput { return v.PartitionCount }).(pulumi.IntOutput)
+}
+
+// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+func (o GroupOutput) Strategy() pulumi.StringOutput {
+	return o.ApplyT(func(v *Group) pulumi.StringOutput { return v.Strategy }).(pulumi.StringOutput)
 }
 
 // Tags of the placement group.

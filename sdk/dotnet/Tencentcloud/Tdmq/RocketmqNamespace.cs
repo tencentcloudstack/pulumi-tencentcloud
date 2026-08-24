@@ -42,7 +42,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// ## Import
     /// 
     /// tdmqRocketmq namespace can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace namespace namespace_id
     /// ```

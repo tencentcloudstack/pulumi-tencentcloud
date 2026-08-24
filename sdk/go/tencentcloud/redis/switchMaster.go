@@ -41,22 +41,22 @@ import (
 //				return err
 //			}
 //			cfg := config.New(ctx, "")
-//			replicaZoneIds := []float64{
+//			replicaZoneIds := []int{
 //				100004,
 //				100006,
 //			}
 //			if param := cfg.GetObject("replicaZoneIds"); param != nil {
 //				replicaZoneIds = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -96,23 +96,23 @@ import (
 //				ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
 //				Name:             pulumi.String("tf_example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			example := redis.GetInstanceZoneInfoOutput(ctx, redis.GetInstanceZoneInfoOutputArgs{
-//				InstanceId: exampleInstance.ID(),
+//				InstanceId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_, err = redis.NewSwitchMaster(ctx, "example", &redis.SwitchMasterArgs{
-//				InstanceId: exampleInstance.ID(),
-//				GroupId: pulumi.Int(example.ApplyT(func(example redis.GetInstanceZoneInfoResult) (*int, error) {
-//					return &example.ReplicaGroups[1].GroupId, nil
-//				}).(pulumi.IntPtrOutput)),
+//				InstanceId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
+//				GroupId: example.ApplyT(func(example redis.GetInstanceZoneInfoResult) (*int, error) {
+//					return example.ReplicaGroups[1].GroupId, nil
+//				}).(pulumi.IntPtrOutput),
 //			})
 //			if err != nil {
 //				return err

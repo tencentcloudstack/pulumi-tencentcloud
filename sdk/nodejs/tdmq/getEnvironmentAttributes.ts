@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *     clusterId: exampleInstance.id,
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getEnvironmentAttributesOutput({
+ * const example = tencentcloud.tdmq.getEnvironmentAttributesOutput({
  *     environmentId: exampleNamespace.environName,
  *     clusterId: exampleInstance.id,
  * });
@@ -121,7 +121,7 @@ export interface GetEnvironmentAttributesResult {
  *     clusterId: exampleInstance.id,
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getEnvironmentAttributesOutput({
+ * const example = tencentcloud.tdmq.getEnvironmentAttributesOutput({
  *     environmentId: exampleNamespace.environName,
  *     clusterId: exampleInstance.id,
  * });
@@ -143,7 +143,7 @@ export interface GetEnvironmentAttributesOutputArgs {
     /**
      * ID of the Pulsar cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Environment (namespace) name.
      */
@@ -151,5 +151,5 @@ export interface GetEnvironmentAttributesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

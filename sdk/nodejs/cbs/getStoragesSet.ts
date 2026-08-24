@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cbs.getStoragesSet({
+ * const example = tencentcloud.cbs.getStoragesSet({
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
@@ -173,7 +173,7 @@ export interface GetStoragesSetResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cbs.getStoragesSet({
+ * const example = tencentcloud.cbs.getStoragesSet({
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
@@ -207,61 +207,61 @@ export interface GetStoragesSetOutputArgs {
     /**
      * The available zone that the CBS instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
      */
-    chargeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    chargeTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * List filter by attached instance public or private IPs.
      */
-    instanceIps?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List filter by attached instance name.
      */
-    instanceNames?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by whether the disk is portable (Boolean `true` or `false`).
      */
-    portable?: pulumi.Input<boolean>;
+    portable?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the project with which the CBS is associated.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the CBS to be queried.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CBS to be queried.
      */
-    storageName?: pulumi.Input<string>;
+    storageName?: pulumi.Input<string | undefined>;
     /**
      * List filter by disk state (`UNATTACHED` | `ATTACHING` | `ATTACHED` | `DETACHING` | `EXPANDING` | `ROLLBACKING` | `TORECYCLE`).
      */
-    storageStates?: pulumi.Input<pulumi.Input<string>[]>;
+    storageStates?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by cloud disk media type (`CLOUD_BASIC`: HDD cloud disk | `CLOUD_PREMIUM`: Premium Cloud Storage | `CLOUD_SSD`: SSD cloud disk).
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * Filter by cloud disk type (`SYSTEM_DISK`: system disk | `DATA_DISK`: data disk).
      */
-    storageUsage?: pulumi.Input<string>;
+    storageUsage?: pulumi.Input<string | undefined>;
     /**
      * List filter by tag keys.
      */
-    tagKeys?: pulumi.Input<pulumi.Input<string>[]>;
+    tagKeys?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List filter by tag values.
      */
-    tagValues?: pulumi.Input<pulumi.Input<string>[]>;
+    tagValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

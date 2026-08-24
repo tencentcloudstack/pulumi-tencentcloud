@@ -79,13 +79,13 @@ export interface GetApiAppsOutputArgs {
     /**
      * Api app ID.
      */
-    apiAppId?: pulumi.Input<string>;
+    apiAppId?: pulumi.Input<string | undefined>;
     /**
      * Api app name.
      */
-    apiAppName?: pulumi.Input<string>;
+    apiAppName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

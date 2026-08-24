@@ -88,11 +88,11 @@ export interface RestartInstanceState {
     /**
      * instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * expected restart time.
      */
-    restartTime?: pulumi.Input<string>;
+    restartTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -106,5 +106,5 @@ export interface RestartInstanceArgs {
     /**
      * expected restart time.
      */
-    restartTime?: pulumi.Input<string>;
+    restartTime?: pulumi.Input<string | undefined>;
 }

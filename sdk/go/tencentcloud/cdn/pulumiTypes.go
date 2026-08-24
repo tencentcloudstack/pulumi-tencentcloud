@@ -1154,6 +1154,277 @@ func (o DomainAuthenticationTypeDPtrOutput) TimeParam() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type DomainAutoGuard struct {
+	// AutoGuard filter rules.
+	FilterRules []DomainAutoGuardFilterRule `pulumi:"filterRules"`
+	// AutoGuard switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainAutoGuardInput is an input type that accepts DomainAutoGuardArgs and DomainAutoGuardOutput values.
+// You can construct a concrete instance of `DomainAutoGuardInput` via:
+//
+//	DomainAutoGuardArgs{...}
+type DomainAutoGuardInput interface {
+	pulumi.Input
+
+	ToDomainAutoGuardOutput() DomainAutoGuardOutput
+	ToDomainAutoGuardOutputWithContext(context.Context) DomainAutoGuardOutput
+}
+
+type DomainAutoGuardArgs struct {
+	// AutoGuard filter rules.
+	FilterRules DomainAutoGuardFilterRuleArrayInput `pulumi:"filterRules"`
+	// AutoGuard switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainAutoGuardArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAutoGuard)(nil)).Elem()
+}
+
+func (i DomainAutoGuardArgs) ToDomainAutoGuardOutput() DomainAutoGuardOutput {
+	return i.ToDomainAutoGuardOutputWithContext(context.Background())
+}
+
+func (i DomainAutoGuardArgs) ToDomainAutoGuardOutputWithContext(ctx context.Context) DomainAutoGuardOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAutoGuardOutput)
+}
+
+func (i DomainAutoGuardArgs) ToDomainAutoGuardPtrOutput() DomainAutoGuardPtrOutput {
+	return i.ToDomainAutoGuardPtrOutputWithContext(context.Background())
+}
+
+func (i DomainAutoGuardArgs) ToDomainAutoGuardPtrOutputWithContext(ctx context.Context) DomainAutoGuardPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAutoGuardOutput).ToDomainAutoGuardPtrOutputWithContext(ctx)
+}
+
+// DomainAutoGuardPtrInput is an input type that accepts DomainAutoGuardArgs, DomainAutoGuardPtr and DomainAutoGuardPtrOutput values.
+// You can construct a concrete instance of `DomainAutoGuardPtrInput` via:
+//
+//	        DomainAutoGuardArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainAutoGuardPtrInput interface {
+	pulumi.Input
+
+	ToDomainAutoGuardPtrOutput() DomainAutoGuardPtrOutput
+	ToDomainAutoGuardPtrOutputWithContext(context.Context) DomainAutoGuardPtrOutput
+}
+
+type domainAutoGuardPtrType DomainAutoGuardArgs
+
+func DomainAutoGuardPtr(v *DomainAutoGuardArgs) DomainAutoGuardPtrInput {
+	return (*domainAutoGuardPtrType)(v)
+}
+
+func (*domainAutoGuardPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAutoGuard)(nil)).Elem()
+}
+
+func (i *domainAutoGuardPtrType) ToDomainAutoGuardPtrOutput() DomainAutoGuardPtrOutput {
+	return i.ToDomainAutoGuardPtrOutputWithContext(context.Background())
+}
+
+func (i *domainAutoGuardPtrType) ToDomainAutoGuardPtrOutputWithContext(ctx context.Context) DomainAutoGuardPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAutoGuardPtrOutput)
+}
+
+type DomainAutoGuardOutput struct{ *pulumi.OutputState }
+
+func (DomainAutoGuardOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAutoGuard)(nil)).Elem()
+}
+
+func (o DomainAutoGuardOutput) ToDomainAutoGuardOutput() DomainAutoGuardOutput {
+	return o
+}
+
+func (o DomainAutoGuardOutput) ToDomainAutoGuardOutputWithContext(ctx context.Context) DomainAutoGuardOutput {
+	return o
+}
+
+func (o DomainAutoGuardOutput) ToDomainAutoGuardPtrOutput() DomainAutoGuardPtrOutput {
+	return o.ToDomainAutoGuardPtrOutputWithContext(context.Background())
+}
+
+func (o DomainAutoGuardOutput) ToDomainAutoGuardPtrOutputWithContext(ctx context.Context) DomainAutoGuardPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainAutoGuard) *DomainAutoGuard {
+		return &v
+	}).(DomainAutoGuardPtrOutput)
+}
+
+// AutoGuard filter rules.
+func (o DomainAutoGuardOutput) FilterRules() DomainAutoGuardFilterRuleArrayOutput {
+	return o.ApplyT(func(v DomainAutoGuard) []DomainAutoGuardFilterRule { return v.FilterRules }).(DomainAutoGuardFilterRuleArrayOutput)
+}
+
+// AutoGuard switch, valid values are `on` and `off`.
+func (o DomainAutoGuardOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainAutoGuard) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainAutoGuardPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainAutoGuardPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainAutoGuard)(nil)).Elem()
+}
+
+func (o DomainAutoGuardPtrOutput) ToDomainAutoGuardPtrOutput() DomainAutoGuardPtrOutput {
+	return o
+}
+
+func (o DomainAutoGuardPtrOutput) ToDomainAutoGuardPtrOutputWithContext(ctx context.Context) DomainAutoGuardPtrOutput {
+	return o
+}
+
+func (o DomainAutoGuardPtrOutput) Elem() DomainAutoGuardOutput {
+	return o.ApplyT(func(v *DomainAutoGuard) DomainAutoGuard {
+		if v != nil {
+			return *v
+		}
+		var ret DomainAutoGuard
+		return ret
+	}).(DomainAutoGuardOutput)
+}
+
+// AutoGuard filter rules.
+func (o DomainAutoGuardPtrOutput) FilterRules() DomainAutoGuardFilterRuleArrayOutput {
+	return o.ApplyT(func(v *DomainAutoGuard) []DomainAutoGuardFilterRule {
+		if v == nil {
+			return nil
+		}
+		return v.FilterRules
+	}).(DomainAutoGuardFilterRuleArrayOutput)
+}
+
+// AutoGuard switch, valid values are `on` and `off`.
+func (o DomainAutoGuardPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainAutoGuard) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainAutoGuardFilterRule struct {
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+	FilterType *string `pulumi:"filterType"`
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
+	RuleType *string `pulumi:"ruleType"`
+}
+
+// DomainAutoGuardFilterRuleInput is an input type that accepts DomainAutoGuardFilterRuleArgs and DomainAutoGuardFilterRuleOutput values.
+// You can construct a concrete instance of `DomainAutoGuardFilterRuleInput` via:
+//
+//	DomainAutoGuardFilterRuleArgs{...}
+type DomainAutoGuardFilterRuleInput interface {
+	pulumi.Input
+
+	ToDomainAutoGuardFilterRuleOutput() DomainAutoGuardFilterRuleOutput
+	ToDomainAutoGuardFilterRuleOutputWithContext(context.Context) DomainAutoGuardFilterRuleOutput
+}
+
+type DomainAutoGuardFilterRuleArgs struct {
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+	FilterType pulumi.StringPtrInput `pulumi:"filterType"`
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+}
+
+func (DomainAutoGuardFilterRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAutoGuardFilterRule)(nil)).Elem()
+}
+
+func (i DomainAutoGuardFilterRuleArgs) ToDomainAutoGuardFilterRuleOutput() DomainAutoGuardFilterRuleOutput {
+	return i.ToDomainAutoGuardFilterRuleOutputWithContext(context.Background())
+}
+
+func (i DomainAutoGuardFilterRuleArgs) ToDomainAutoGuardFilterRuleOutputWithContext(ctx context.Context) DomainAutoGuardFilterRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAutoGuardFilterRuleOutput)
+}
+
+// DomainAutoGuardFilterRuleArrayInput is an input type that accepts DomainAutoGuardFilterRuleArray and DomainAutoGuardFilterRuleArrayOutput values.
+// You can construct a concrete instance of `DomainAutoGuardFilterRuleArrayInput` via:
+//
+//	DomainAutoGuardFilterRuleArray{ DomainAutoGuardFilterRuleArgs{...} }
+type DomainAutoGuardFilterRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainAutoGuardFilterRuleArrayOutput() DomainAutoGuardFilterRuleArrayOutput
+	ToDomainAutoGuardFilterRuleArrayOutputWithContext(context.Context) DomainAutoGuardFilterRuleArrayOutput
+}
+
+type DomainAutoGuardFilterRuleArray []DomainAutoGuardFilterRuleInput
+
+func (DomainAutoGuardFilterRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainAutoGuardFilterRule)(nil)).Elem()
+}
+
+func (i DomainAutoGuardFilterRuleArray) ToDomainAutoGuardFilterRuleArrayOutput() DomainAutoGuardFilterRuleArrayOutput {
+	return i.ToDomainAutoGuardFilterRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainAutoGuardFilterRuleArray) ToDomainAutoGuardFilterRuleArrayOutputWithContext(ctx context.Context) DomainAutoGuardFilterRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainAutoGuardFilterRuleArrayOutput)
+}
+
+type DomainAutoGuardFilterRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainAutoGuardFilterRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainAutoGuardFilterRule)(nil)).Elem()
+}
+
+func (o DomainAutoGuardFilterRuleOutput) ToDomainAutoGuardFilterRuleOutput() DomainAutoGuardFilterRuleOutput {
+	return o
+}
+
+func (o DomainAutoGuardFilterRuleOutput) ToDomainAutoGuardFilterRuleOutputWithContext(ctx context.Context) DomainAutoGuardFilterRuleOutput {
+	return o
+}
+
+// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+func (o DomainAutoGuardFilterRuleOutput) FilterType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAutoGuardFilterRule) *string { return v.FilterType }).(pulumi.StringPtrOutput)
+}
+
+// Rule paths.
+func (o DomainAutoGuardFilterRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainAutoGuardFilterRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+}
+
+// Rule type, valid values: `all`, `file`, `directory`, `path`.
+func (o DomainAutoGuardFilterRuleOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainAutoGuardFilterRule) *string { return v.RuleType }).(pulumi.StringPtrOutput)
+}
+
+type DomainAutoGuardFilterRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainAutoGuardFilterRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainAutoGuardFilterRule)(nil)).Elem()
+}
+
+func (o DomainAutoGuardFilterRuleArrayOutput) ToDomainAutoGuardFilterRuleArrayOutput() DomainAutoGuardFilterRuleArrayOutput {
+	return o
+}
+
+func (o DomainAutoGuardFilterRuleArrayOutput) ToDomainAutoGuardFilterRuleArrayOutputWithContext(ctx context.Context) DomainAutoGuardFilterRuleArrayOutput {
+	return o
+}
+
+func (o DomainAutoGuardFilterRuleArrayOutput) Index(i pulumi.IntInput) DomainAutoGuardFilterRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainAutoGuardFilterRule {
+		return vs[0].([]DomainAutoGuardFilterRule)[vs[1].(int)]
+	}).(DomainAutoGuardFilterRuleOutput)
+}
+
 type DomainAwsPrivateAccess struct {
 	// Access ID.
 	AccessKey *string `pulumi:"accessKey"`
@@ -3394,11 +3665,430 @@ func (o DomainErrorPagePageRuleArrayOutput) Index(i pulumi.IntInput) DomainError
 	}).(DomainErrorPagePageRuleOutput)
 }
 
+type DomainGeoBlocker struct {
+	// GeoBlocker block rules.
+	BlockRules []DomainGeoBlockerBlockRule `pulumi:"blockRules"`
+	// GeoBlocker switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainGeoBlockerInput is an input type that accepts DomainGeoBlockerArgs and DomainGeoBlockerOutput values.
+// You can construct a concrete instance of `DomainGeoBlockerInput` via:
+//
+//	DomainGeoBlockerArgs{...}
+type DomainGeoBlockerInput interface {
+	pulumi.Input
+
+	ToDomainGeoBlockerOutput() DomainGeoBlockerOutput
+	ToDomainGeoBlockerOutputWithContext(context.Context) DomainGeoBlockerOutput
+}
+
+type DomainGeoBlockerArgs struct {
+	// GeoBlocker block rules.
+	BlockRules DomainGeoBlockerBlockRuleArrayInput `pulumi:"blockRules"`
+	// GeoBlocker switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainGeoBlockerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainGeoBlocker)(nil)).Elem()
+}
+
+func (i DomainGeoBlockerArgs) ToDomainGeoBlockerOutput() DomainGeoBlockerOutput {
+	return i.ToDomainGeoBlockerOutputWithContext(context.Background())
+}
+
+func (i DomainGeoBlockerArgs) ToDomainGeoBlockerOutputWithContext(ctx context.Context) DomainGeoBlockerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainGeoBlockerOutput)
+}
+
+func (i DomainGeoBlockerArgs) ToDomainGeoBlockerPtrOutput() DomainGeoBlockerPtrOutput {
+	return i.ToDomainGeoBlockerPtrOutputWithContext(context.Background())
+}
+
+func (i DomainGeoBlockerArgs) ToDomainGeoBlockerPtrOutputWithContext(ctx context.Context) DomainGeoBlockerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainGeoBlockerOutput).ToDomainGeoBlockerPtrOutputWithContext(ctx)
+}
+
+// DomainGeoBlockerPtrInput is an input type that accepts DomainGeoBlockerArgs, DomainGeoBlockerPtr and DomainGeoBlockerPtrOutput values.
+// You can construct a concrete instance of `DomainGeoBlockerPtrInput` via:
+//
+//	        DomainGeoBlockerArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainGeoBlockerPtrInput interface {
+	pulumi.Input
+
+	ToDomainGeoBlockerPtrOutput() DomainGeoBlockerPtrOutput
+	ToDomainGeoBlockerPtrOutputWithContext(context.Context) DomainGeoBlockerPtrOutput
+}
+
+type domainGeoBlockerPtrType DomainGeoBlockerArgs
+
+func DomainGeoBlockerPtr(v *DomainGeoBlockerArgs) DomainGeoBlockerPtrInput {
+	return (*domainGeoBlockerPtrType)(v)
+}
+
+func (*domainGeoBlockerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainGeoBlocker)(nil)).Elem()
+}
+
+func (i *domainGeoBlockerPtrType) ToDomainGeoBlockerPtrOutput() DomainGeoBlockerPtrOutput {
+	return i.ToDomainGeoBlockerPtrOutputWithContext(context.Background())
+}
+
+func (i *domainGeoBlockerPtrType) ToDomainGeoBlockerPtrOutputWithContext(ctx context.Context) DomainGeoBlockerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainGeoBlockerPtrOutput)
+}
+
+type DomainGeoBlockerOutput struct{ *pulumi.OutputState }
+
+func (DomainGeoBlockerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainGeoBlocker)(nil)).Elem()
+}
+
+func (o DomainGeoBlockerOutput) ToDomainGeoBlockerOutput() DomainGeoBlockerOutput {
+	return o
+}
+
+func (o DomainGeoBlockerOutput) ToDomainGeoBlockerOutputWithContext(ctx context.Context) DomainGeoBlockerOutput {
+	return o
+}
+
+func (o DomainGeoBlockerOutput) ToDomainGeoBlockerPtrOutput() DomainGeoBlockerPtrOutput {
+	return o.ToDomainGeoBlockerPtrOutputWithContext(context.Background())
+}
+
+func (o DomainGeoBlockerOutput) ToDomainGeoBlockerPtrOutputWithContext(ctx context.Context) DomainGeoBlockerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainGeoBlocker) *DomainGeoBlocker {
+		return &v
+	}).(DomainGeoBlockerPtrOutput)
+}
+
+// GeoBlocker block rules.
+func (o DomainGeoBlockerOutput) BlockRules() DomainGeoBlockerBlockRuleArrayOutput {
+	return o.ApplyT(func(v DomainGeoBlocker) []DomainGeoBlockerBlockRule { return v.BlockRules }).(DomainGeoBlockerBlockRuleArrayOutput)
+}
+
+// GeoBlocker switch, valid values are `on` and `off`.
+func (o DomainGeoBlockerOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainGeoBlocker) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainGeoBlockerPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainGeoBlockerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainGeoBlocker)(nil)).Elem()
+}
+
+func (o DomainGeoBlockerPtrOutput) ToDomainGeoBlockerPtrOutput() DomainGeoBlockerPtrOutput {
+	return o
+}
+
+func (o DomainGeoBlockerPtrOutput) ToDomainGeoBlockerPtrOutputWithContext(ctx context.Context) DomainGeoBlockerPtrOutput {
+	return o
+}
+
+func (o DomainGeoBlockerPtrOutput) Elem() DomainGeoBlockerOutput {
+	return o.ApplyT(func(v *DomainGeoBlocker) DomainGeoBlocker {
+		if v != nil {
+			return *v
+		}
+		var ret DomainGeoBlocker
+		return ret
+	}).(DomainGeoBlockerOutput)
+}
+
+// GeoBlocker block rules.
+func (o DomainGeoBlockerPtrOutput) BlockRules() DomainGeoBlockerBlockRuleArrayOutput {
+	return o.ApplyT(func(v *DomainGeoBlocker) []DomainGeoBlockerBlockRule {
+		if v == nil {
+			return nil
+		}
+		return v.BlockRules
+	}).(DomainGeoBlockerBlockRuleArrayOutput)
+}
+
+// GeoBlocker switch, valid values are `on` and `off`.
+func (o DomainGeoBlockerPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainGeoBlocker) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainGeoBlockerBlockRule struct {
+	// Rule type. `whitelist`: whitelist; `blacklist`: blacklist.
+	BlockType *string `pulumi:"blockType"`
+	// Effective districts, e.g. `CN-HK`, `CN-BJ`, etc.
+	Districts []string `pulumi:"districts"`
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule effective type. `all`: all; `directory`: directory.
+	RuleType *string `pulumi:"ruleType"`
+}
+
+// DomainGeoBlockerBlockRuleInput is an input type that accepts DomainGeoBlockerBlockRuleArgs and DomainGeoBlockerBlockRuleOutput values.
+// You can construct a concrete instance of `DomainGeoBlockerBlockRuleInput` via:
+//
+//	DomainGeoBlockerBlockRuleArgs{...}
+type DomainGeoBlockerBlockRuleInput interface {
+	pulumi.Input
+
+	ToDomainGeoBlockerBlockRuleOutput() DomainGeoBlockerBlockRuleOutput
+	ToDomainGeoBlockerBlockRuleOutputWithContext(context.Context) DomainGeoBlockerBlockRuleOutput
+}
+
+type DomainGeoBlockerBlockRuleArgs struct {
+	// Rule type. `whitelist`: whitelist; `blacklist`: blacklist.
+	BlockType pulumi.StringPtrInput `pulumi:"blockType"`
+	// Effective districts, e.g. `CN-HK`, `CN-BJ`, etc.
+	Districts pulumi.StringArrayInput `pulumi:"districts"`
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule effective type. `all`: all; `directory`: directory.
+	RuleType pulumi.StringPtrInput `pulumi:"ruleType"`
+}
+
+func (DomainGeoBlockerBlockRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainGeoBlockerBlockRule)(nil)).Elem()
+}
+
+func (i DomainGeoBlockerBlockRuleArgs) ToDomainGeoBlockerBlockRuleOutput() DomainGeoBlockerBlockRuleOutput {
+	return i.ToDomainGeoBlockerBlockRuleOutputWithContext(context.Background())
+}
+
+func (i DomainGeoBlockerBlockRuleArgs) ToDomainGeoBlockerBlockRuleOutputWithContext(ctx context.Context) DomainGeoBlockerBlockRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainGeoBlockerBlockRuleOutput)
+}
+
+// DomainGeoBlockerBlockRuleArrayInput is an input type that accepts DomainGeoBlockerBlockRuleArray and DomainGeoBlockerBlockRuleArrayOutput values.
+// You can construct a concrete instance of `DomainGeoBlockerBlockRuleArrayInput` via:
+//
+//	DomainGeoBlockerBlockRuleArray{ DomainGeoBlockerBlockRuleArgs{...} }
+type DomainGeoBlockerBlockRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainGeoBlockerBlockRuleArrayOutput() DomainGeoBlockerBlockRuleArrayOutput
+	ToDomainGeoBlockerBlockRuleArrayOutputWithContext(context.Context) DomainGeoBlockerBlockRuleArrayOutput
+}
+
+type DomainGeoBlockerBlockRuleArray []DomainGeoBlockerBlockRuleInput
+
+func (DomainGeoBlockerBlockRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainGeoBlockerBlockRule)(nil)).Elem()
+}
+
+func (i DomainGeoBlockerBlockRuleArray) ToDomainGeoBlockerBlockRuleArrayOutput() DomainGeoBlockerBlockRuleArrayOutput {
+	return i.ToDomainGeoBlockerBlockRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainGeoBlockerBlockRuleArray) ToDomainGeoBlockerBlockRuleArrayOutputWithContext(ctx context.Context) DomainGeoBlockerBlockRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainGeoBlockerBlockRuleArrayOutput)
+}
+
+type DomainGeoBlockerBlockRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainGeoBlockerBlockRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainGeoBlockerBlockRule)(nil)).Elem()
+}
+
+func (o DomainGeoBlockerBlockRuleOutput) ToDomainGeoBlockerBlockRuleOutput() DomainGeoBlockerBlockRuleOutput {
+	return o
+}
+
+func (o DomainGeoBlockerBlockRuleOutput) ToDomainGeoBlockerBlockRuleOutputWithContext(ctx context.Context) DomainGeoBlockerBlockRuleOutput {
+	return o
+}
+
+// Rule type. `whitelist`: whitelist; `blacklist`: blacklist.
+func (o DomainGeoBlockerBlockRuleOutput) BlockType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainGeoBlockerBlockRule) *string { return v.BlockType }).(pulumi.StringPtrOutput)
+}
+
+// Effective districts, e.g. `CN-HK`, `CN-BJ`, etc.
+func (o DomainGeoBlockerBlockRuleOutput) Districts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainGeoBlockerBlockRule) []string { return v.Districts }).(pulumi.StringArrayOutput)
+}
+
+// Rule paths.
+func (o DomainGeoBlockerBlockRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainGeoBlockerBlockRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+}
+
+// Rule effective type. `all`: all; `directory`: directory.
+func (o DomainGeoBlockerBlockRuleOutput) RuleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainGeoBlockerBlockRule) *string { return v.RuleType }).(pulumi.StringPtrOutput)
+}
+
+type DomainGeoBlockerBlockRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainGeoBlockerBlockRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainGeoBlockerBlockRule)(nil)).Elem()
+}
+
+func (o DomainGeoBlockerBlockRuleArrayOutput) ToDomainGeoBlockerBlockRuleArrayOutput() DomainGeoBlockerBlockRuleArrayOutput {
+	return o
+}
+
+func (o DomainGeoBlockerBlockRuleArrayOutput) ToDomainGeoBlockerBlockRuleArrayOutputWithContext(ctx context.Context) DomainGeoBlockerBlockRuleArrayOutput {
+	return o
+}
+
+func (o DomainGeoBlockerBlockRuleArrayOutput) Index(i pulumi.IntInput) DomainGeoBlockerBlockRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainGeoBlockerBlockRule {
+		return vs[0].([]DomainGeoBlockerBlockRule)[vs[1].(int)]
+	}).(DomainGeoBlockerBlockRuleOutput)
+}
+
+type DomainHttpsBilling struct {
+	// HTTPS service configuration switch, possible values are: on: Enabled (default setting), will incur charges; off: Disabled, will block HTTPS requests.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainHttpsBillingInput is an input type that accepts DomainHttpsBillingArgs and DomainHttpsBillingOutput values.
+// You can construct a concrete instance of `DomainHttpsBillingInput` via:
+//
+//	DomainHttpsBillingArgs{...}
+type DomainHttpsBillingInput interface {
+	pulumi.Input
+
+	ToDomainHttpsBillingOutput() DomainHttpsBillingOutput
+	ToDomainHttpsBillingOutputWithContext(context.Context) DomainHttpsBillingOutput
+}
+
+type DomainHttpsBillingArgs struct {
+	// HTTPS service configuration switch, possible values are: on: Enabled (default setting), will incur charges; off: Disabled, will block HTTPS requests.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainHttpsBillingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsBilling)(nil)).Elem()
+}
+
+func (i DomainHttpsBillingArgs) ToDomainHttpsBillingOutput() DomainHttpsBillingOutput {
+	return i.ToDomainHttpsBillingOutputWithContext(context.Background())
+}
+
+func (i DomainHttpsBillingArgs) ToDomainHttpsBillingOutputWithContext(ctx context.Context) DomainHttpsBillingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsBillingOutput)
+}
+
+func (i DomainHttpsBillingArgs) ToDomainHttpsBillingPtrOutput() DomainHttpsBillingPtrOutput {
+	return i.ToDomainHttpsBillingPtrOutputWithContext(context.Background())
+}
+
+func (i DomainHttpsBillingArgs) ToDomainHttpsBillingPtrOutputWithContext(ctx context.Context) DomainHttpsBillingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsBillingOutput).ToDomainHttpsBillingPtrOutputWithContext(ctx)
+}
+
+// DomainHttpsBillingPtrInput is an input type that accepts DomainHttpsBillingArgs, DomainHttpsBillingPtr and DomainHttpsBillingPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsBillingPtrInput` via:
+//
+//	        DomainHttpsBillingArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainHttpsBillingPtrInput interface {
+	pulumi.Input
+
+	ToDomainHttpsBillingPtrOutput() DomainHttpsBillingPtrOutput
+	ToDomainHttpsBillingPtrOutputWithContext(context.Context) DomainHttpsBillingPtrOutput
+}
+
+type domainHttpsBillingPtrType DomainHttpsBillingArgs
+
+func DomainHttpsBillingPtr(v *DomainHttpsBillingArgs) DomainHttpsBillingPtrInput {
+	return (*domainHttpsBillingPtrType)(v)
+}
+
+func (*domainHttpsBillingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsBilling)(nil)).Elem()
+}
+
+func (i *domainHttpsBillingPtrType) ToDomainHttpsBillingPtrOutput() DomainHttpsBillingPtrOutput {
+	return i.ToDomainHttpsBillingPtrOutputWithContext(context.Background())
+}
+
+func (i *domainHttpsBillingPtrType) ToDomainHttpsBillingPtrOutputWithContext(ctx context.Context) DomainHttpsBillingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsBillingPtrOutput)
+}
+
+type DomainHttpsBillingOutput struct{ *pulumi.OutputState }
+
+func (DomainHttpsBillingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsBilling)(nil)).Elem()
+}
+
+func (o DomainHttpsBillingOutput) ToDomainHttpsBillingOutput() DomainHttpsBillingOutput {
+	return o
+}
+
+func (o DomainHttpsBillingOutput) ToDomainHttpsBillingOutputWithContext(ctx context.Context) DomainHttpsBillingOutput {
+	return o
+}
+
+func (o DomainHttpsBillingOutput) ToDomainHttpsBillingPtrOutput() DomainHttpsBillingPtrOutput {
+	return o.ToDomainHttpsBillingPtrOutputWithContext(context.Background())
+}
+
+func (o DomainHttpsBillingOutput) ToDomainHttpsBillingPtrOutputWithContext(ctx context.Context) DomainHttpsBillingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsBilling) *DomainHttpsBilling {
+		return &v
+	}).(DomainHttpsBillingPtrOutput)
+}
+
+// HTTPS service configuration switch, possible values are: on: Enabled (default setting), will incur charges; off: Disabled, will block HTTPS requests.
+func (o DomainHttpsBillingOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainHttpsBilling) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainHttpsBillingPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainHttpsBillingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsBilling)(nil)).Elem()
+}
+
+func (o DomainHttpsBillingPtrOutput) ToDomainHttpsBillingPtrOutput() DomainHttpsBillingPtrOutput {
+	return o
+}
+
+func (o DomainHttpsBillingPtrOutput) ToDomainHttpsBillingPtrOutputWithContext(ctx context.Context) DomainHttpsBillingPtrOutput {
+	return o
+}
+
+func (o DomainHttpsBillingPtrOutput) Elem() DomainHttpsBillingOutput {
+	return o.ApplyT(func(v *DomainHttpsBilling) DomainHttpsBilling {
+		if v != nil {
+			return *v
+		}
+		var ret DomainHttpsBilling
+		return ret
+	}).(DomainHttpsBillingOutput)
+}
+
+// HTTPS service configuration switch, possible values are: on: Enabled (default setting), will incur charges; off: Disabled, will block HTTPS requests.
+func (o DomainHttpsBillingPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsBilling) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
 type DomainHttpsConfig struct {
 	// Client certificate configuration information.
 	ClientCertificateConfig *DomainHttpsConfigClientCertificateConfig `pulumi:"clientCertificateConfig"`
 	// Configuration of forced HTTP or HTTPS redirects.
 	ForceRedirect *DomainHttpsConfigForceRedirect `pulumi:"forceRedirect"`
+	// HSTS configuration.
+	Hsts *DomainHttpsConfigHsts `pulumi:"hsts"`
 	// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
 	Http2Switch *string `pulumi:"http2Switch"`
 	// HTTPS configuration switch. Valid values are `on` and `off`.
@@ -3431,6 +4121,8 @@ type DomainHttpsConfigArgs struct {
 	ClientCertificateConfig DomainHttpsConfigClientCertificateConfigPtrInput `pulumi:"clientCertificateConfig"`
 	// Configuration of forced HTTP or HTTPS redirects.
 	ForceRedirect DomainHttpsConfigForceRedirectPtrInput `pulumi:"forceRedirect"`
+	// HSTS configuration.
+	Hsts DomainHttpsConfigHstsPtrInput `pulumi:"hsts"`
 	// HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
 	Http2Switch pulumi.StringPtrInput `pulumi:"http2Switch"`
 	// HTTPS configuration switch. Valid values are `on` and `off`.
@@ -3534,6 +4226,11 @@ func (o DomainHttpsConfigOutput) ForceRedirect() DomainHttpsConfigForceRedirectP
 	return o.ApplyT(func(v DomainHttpsConfig) *DomainHttpsConfigForceRedirect { return v.ForceRedirect }).(DomainHttpsConfigForceRedirectPtrOutput)
 }
 
+// HSTS configuration.
+func (o DomainHttpsConfigOutput) Hsts() DomainHttpsConfigHstsPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfig) *DomainHttpsConfigHsts { return v.Hsts }).(DomainHttpsConfigHstsPtrOutput)
+}
+
 // HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
 func (o DomainHttpsConfigOutput) Http2Switch() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainHttpsConfig) *string { return v.Http2Switch }).(pulumi.StringPtrOutput)
@@ -3611,6 +4308,16 @@ func (o DomainHttpsConfigPtrOutput) ForceRedirect() DomainHttpsConfigForceRedire
 		}
 		return v.ForceRedirect
 	}).(DomainHttpsConfigForceRedirectPtrOutput)
+}
+
+// HSTS configuration.
+func (o DomainHttpsConfigPtrOutput) Hsts() DomainHttpsConfigHstsPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfig) *DomainHttpsConfigHsts {
+		if v == nil {
+			return nil
+		}
+		return v.Hsts
+	}).(DomainHttpsConfigHstsPtrOutput)
 }
 
 // HTTP2 configuration switch. Valid values are `on` and `off`. and default value is `off`.
@@ -4068,6 +4775,181 @@ func (o DomainHttpsConfigForceRedirectPtrOutput) Switch() pulumi.StringPtrOutput
 			return nil
 		}
 		return v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainHttpsConfigHsts struct {
+	// Whether to include sub domains, values `on` and `off`.
+	IncludeSubDomains *string `pulumi:"includeSubDomains"`
+	// MaxAge value.
+	MaxAge *int `pulumi:"maxAge"`
+	// HSTS configuration switch. Valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainHttpsConfigHstsInput is an input type that accepts DomainHttpsConfigHstsArgs and DomainHttpsConfigHstsOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigHstsInput` via:
+//
+//	DomainHttpsConfigHstsArgs{...}
+type DomainHttpsConfigHstsInput interface {
+	pulumi.Input
+
+	ToDomainHttpsConfigHstsOutput() DomainHttpsConfigHstsOutput
+	ToDomainHttpsConfigHstsOutputWithContext(context.Context) DomainHttpsConfigHstsOutput
+}
+
+type DomainHttpsConfigHstsArgs struct {
+	// Whether to include sub domains, values `on` and `off`.
+	IncludeSubDomains pulumi.StringPtrInput `pulumi:"includeSubDomains"`
+	// MaxAge value.
+	MaxAge pulumi.IntPtrInput `pulumi:"maxAge"`
+	// HSTS configuration switch. Valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainHttpsConfigHstsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigHsts)(nil)).Elem()
+}
+
+func (i DomainHttpsConfigHstsArgs) ToDomainHttpsConfigHstsOutput() DomainHttpsConfigHstsOutput {
+	return i.ToDomainHttpsConfigHstsOutputWithContext(context.Background())
+}
+
+func (i DomainHttpsConfigHstsArgs) ToDomainHttpsConfigHstsOutputWithContext(ctx context.Context) DomainHttpsConfigHstsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigHstsOutput)
+}
+
+func (i DomainHttpsConfigHstsArgs) ToDomainHttpsConfigHstsPtrOutput() DomainHttpsConfigHstsPtrOutput {
+	return i.ToDomainHttpsConfigHstsPtrOutputWithContext(context.Background())
+}
+
+func (i DomainHttpsConfigHstsArgs) ToDomainHttpsConfigHstsPtrOutputWithContext(ctx context.Context) DomainHttpsConfigHstsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigHstsOutput).ToDomainHttpsConfigHstsPtrOutputWithContext(ctx)
+}
+
+// DomainHttpsConfigHstsPtrInput is an input type that accepts DomainHttpsConfigHstsArgs, DomainHttpsConfigHstsPtr and DomainHttpsConfigHstsPtrOutput values.
+// You can construct a concrete instance of `DomainHttpsConfigHstsPtrInput` via:
+//
+//	        DomainHttpsConfigHstsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainHttpsConfigHstsPtrInput interface {
+	pulumi.Input
+
+	ToDomainHttpsConfigHstsPtrOutput() DomainHttpsConfigHstsPtrOutput
+	ToDomainHttpsConfigHstsPtrOutputWithContext(context.Context) DomainHttpsConfigHstsPtrOutput
+}
+
+type domainHttpsConfigHstsPtrType DomainHttpsConfigHstsArgs
+
+func DomainHttpsConfigHstsPtr(v *DomainHttpsConfigHstsArgs) DomainHttpsConfigHstsPtrInput {
+	return (*domainHttpsConfigHstsPtrType)(v)
+}
+
+func (*domainHttpsConfigHstsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigHsts)(nil)).Elem()
+}
+
+func (i *domainHttpsConfigHstsPtrType) ToDomainHttpsConfigHstsPtrOutput() DomainHttpsConfigHstsPtrOutput {
+	return i.ToDomainHttpsConfigHstsPtrOutputWithContext(context.Background())
+}
+
+func (i *domainHttpsConfigHstsPtrType) ToDomainHttpsConfigHstsPtrOutputWithContext(ctx context.Context) DomainHttpsConfigHstsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainHttpsConfigHstsPtrOutput)
+}
+
+type DomainHttpsConfigHstsOutput struct{ *pulumi.OutputState }
+
+func (DomainHttpsConfigHstsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainHttpsConfigHsts)(nil)).Elem()
+}
+
+func (o DomainHttpsConfigHstsOutput) ToDomainHttpsConfigHstsOutput() DomainHttpsConfigHstsOutput {
+	return o
+}
+
+func (o DomainHttpsConfigHstsOutput) ToDomainHttpsConfigHstsOutputWithContext(ctx context.Context) DomainHttpsConfigHstsOutput {
+	return o
+}
+
+func (o DomainHttpsConfigHstsOutput) ToDomainHttpsConfigHstsPtrOutput() DomainHttpsConfigHstsPtrOutput {
+	return o.ToDomainHttpsConfigHstsPtrOutputWithContext(context.Background())
+}
+
+func (o DomainHttpsConfigHstsOutput) ToDomainHttpsConfigHstsPtrOutputWithContext(ctx context.Context) DomainHttpsConfigHstsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainHttpsConfigHsts) *DomainHttpsConfigHsts {
+		return &v
+	}).(DomainHttpsConfigHstsPtrOutput)
+}
+
+// Whether to include sub domains, values `on` and `off`.
+func (o DomainHttpsConfigHstsOutput) IncludeSubDomains() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigHsts) *string { return v.IncludeSubDomains }).(pulumi.StringPtrOutput)
+}
+
+// MaxAge value.
+func (o DomainHttpsConfigHstsOutput) MaxAge() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DomainHttpsConfigHsts) *int { return v.MaxAge }).(pulumi.IntPtrOutput)
+}
+
+// HSTS configuration switch. Valid values are `on` and `off`.
+func (o DomainHttpsConfigHstsOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainHttpsConfigHsts) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainHttpsConfigHstsPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainHttpsConfigHstsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainHttpsConfigHsts)(nil)).Elem()
+}
+
+func (o DomainHttpsConfigHstsPtrOutput) ToDomainHttpsConfigHstsPtrOutput() DomainHttpsConfigHstsPtrOutput {
+	return o
+}
+
+func (o DomainHttpsConfigHstsPtrOutput) ToDomainHttpsConfigHstsPtrOutputWithContext(ctx context.Context) DomainHttpsConfigHstsPtrOutput {
+	return o
+}
+
+func (o DomainHttpsConfigHstsPtrOutput) Elem() DomainHttpsConfigHstsOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigHsts) DomainHttpsConfigHsts {
+		if v != nil {
+			return *v
+		}
+		var ret DomainHttpsConfigHsts
+		return ret
+	}).(DomainHttpsConfigHstsOutput)
+}
+
+// Whether to include sub domains, values `on` and `off`.
+func (o DomainHttpsConfigHstsPtrOutput) IncludeSubDomains() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigHsts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IncludeSubDomains
+	}).(pulumi.StringPtrOutput)
+}
+
+// MaxAge value.
+func (o DomainHttpsConfigHstsPtrOutput) MaxAge() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigHsts) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxAge
+	}).(pulumi.IntPtrOutput)
+}
+
+// HSTS configuration switch. Valid values are `on` and `off`.
+func (o DomainHttpsConfigHstsPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainHttpsConfigHsts) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -4730,13 +5612,13 @@ func (o DomainIpFilterPtrOutput) Switch() pulumi.StringPtrOutput {
 }
 
 type DomainIpFilterFilterRule struct {
-	// Ip filter `blacklist`/`whitelist` type of filter rules.
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
 	FilterType string `pulumi:"filterType"`
 	// Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
 	Filters []string `pulumi:"filters"`
-	// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	// Rule paths.
 	RulePaths []string `pulumi:"rulePaths"`
-	// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
 	RuleType string `pulumi:"ruleType"`
 }
 
@@ -4752,13 +5634,13 @@ type DomainIpFilterFilterRuleInput interface {
 }
 
 type DomainIpFilterFilterRuleArgs struct {
-	// Ip filter `blacklist`/`whitelist` type of filter rules.
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
 	FilterType pulumi.StringInput `pulumi:"filterType"`
 	// Ip filter rule list, supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
 	Filters pulumi.StringArrayInput `pulumi:"filters"`
-	// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+	// Rule paths.
 	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
-	// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
 	RuleType pulumi.StringInput `pulumi:"ruleType"`
 }
 
@@ -4813,7 +5695,7 @@ func (o DomainIpFilterFilterRuleOutput) ToDomainIpFilterFilterRuleOutputWithCont
 	return o
 }
 
-// Ip filter `blacklist`/`whitelist` type of filter rules.
+// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
 func (o DomainIpFilterFilterRuleOutput) FilterType() pulumi.StringOutput {
 	return o.ApplyT(func(v DomainIpFilterFilterRule) string { return v.FilterType }).(pulumi.StringOutput)
 }
@@ -4823,12 +5705,12 @@ func (o DomainIpFilterFilterRuleOutput) Filters() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DomainIpFilterFilterRule) []string { return v.Filters }).(pulumi.StringArrayOutput)
 }
 
-// Content list for each `ruleType`: `*` for `all`, file ext like `jpg` for `file`, `/dir/like/` for `directory` and `/path/index.html` for `path`.
+// Rule paths.
 func (o DomainIpFilterFilterRuleOutput) RulePaths() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v DomainIpFilterFilterRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
 }
 
-// Ip filter rule type of filter rules, available: `all`, `file`, `directory`, `path`.
+// Rule type, valid values: `all`, `file`, `directory`, `path`.
 func (o DomainIpFilterFilterRuleOutput) RuleType() pulumi.StringOutput {
 	return o.ApplyT(func(v DomainIpFilterFilterRule) string { return v.RuleType }).(pulumi.StringOutput)
 }
@@ -5575,6 +6457,143 @@ func (o DomainOriginPtrOutput) ServerName() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.ServerName
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainOriginCombine struct {
+	// Configuration switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainOriginCombineInput is an input type that accepts DomainOriginCombineArgs and DomainOriginCombineOutput values.
+// You can construct a concrete instance of `DomainOriginCombineInput` via:
+//
+//	DomainOriginCombineArgs{...}
+type DomainOriginCombineInput interface {
+	pulumi.Input
+
+	ToDomainOriginCombineOutput() DomainOriginCombineOutput
+	ToDomainOriginCombineOutputWithContext(context.Context) DomainOriginCombineOutput
+}
+
+type DomainOriginCombineArgs struct {
+	// Configuration switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainOriginCombineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginCombine)(nil)).Elem()
+}
+
+func (i DomainOriginCombineArgs) ToDomainOriginCombineOutput() DomainOriginCombineOutput {
+	return i.ToDomainOriginCombineOutputWithContext(context.Background())
+}
+
+func (i DomainOriginCombineArgs) ToDomainOriginCombineOutputWithContext(ctx context.Context) DomainOriginCombineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginCombineOutput)
+}
+
+func (i DomainOriginCombineArgs) ToDomainOriginCombinePtrOutput() DomainOriginCombinePtrOutput {
+	return i.ToDomainOriginCombinePtrOutputWithContext(context.Background())
+}
+
+func (i DomainOriginCombineArgs) ToDomainOriginCombinePtrOutputWithContext(ctx context.Context) DomainOriginCombinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginCombineOutput).ToDomainOriginCombinePtrOutputWithContext(ctx)
+}
+
+// DomainOriginCombinePtrInput is an input type that accepts DomainOriginCombineArgs, DomainOriginCombinePtr and DomainOriginCombinePtrOutput values.
+// You can construct a concrete instance of `DomainOriginCombinePtrInput` via:
+//
+//	        DomainOriginCombineArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainOriginCombinePtrInput interface {
+	pulumi.Input
+
+	ToDomainOriginCombinePtrOutput() DomainOriginCombinePtrOutput
+	ToDomainOriginCombinePtrOutputWithContext(context.Context) DomainOriginCombinePtrOutput
+}
+
+type domainOriginCombinePtrType DomainOriginCombineArgs
+
+func DomainOriginCombinePtr(v *DomainOriginCombineArgs) DomainOriginCombinePtrInput {
+	return (*domainOriginCombinePtrType)(v)
+}
+
+func (*domainOriginCombinePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginCombine)(nil)).Elem()
+}
+
+func (i *domainOriginCombinePtrType) ToDomainOriginCombinePtrOutput() DomainOriginCombinePtrOutput {
+	return i.ToDomainOriginCombinePtrOutputWithContext(context.Background())
+}
+
+func (i *domainOriginCombinePtrType) ToDomainOriginCombinePtrOutputWithContext(ctx context.Context) DomainOriginCombinePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginCombinePtrOutput)
+}
+
+type DomainOriginCombineOutput struct{ *pulumi.OutputState }
+
+func (DomainOriginCombineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginCombine)(nil)).Elem()
+}
+
+func (o DomainOriginCombineOutput) ToDomainOriginCombineOutput() DomainOriginCombineOutput {
+	return o
+}
+
+func (o DomainOriginCombineOutput) ToDomainOriginCombineOutputWithContext(ctx context.Context) DomainOriginCombineOutput {
+	return o
+}
+
+func (o DomainOriginCombineOutput) ToDomainOriginCombinePtrOutput() DomainOriginCombinePtrOutput {
+	return o.ToDomainOriginCombinePtrOutputWithContext(context.Background())
+}
+
+func (o DomainOriginCombineOutput) ToDomainOriginCombinePtrOutputWithContext(ctx context.Context) DomainOriginCombinePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainOriginCombine) *DomainOriginCombine {
+		return &v
+	}).(DomainOriginCombinePtrOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainOriginCombineOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainOriginCombine) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainOriginCombinePtrOutput struct{ *pulumi.OutputState }
+
+func (DomainOriginCombinePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainOriginCombine)(nil)).Elem()
+}
+
+func (o DomainOriginCombinePtrOutput) ToDomainOriginCombinePtrOutput() DomainOriginCombinePtrOutput {
+	return o
+}
+
+func (o DomainOriginCombinePtrOutput) ToDomainOriginCombinePtrOutputWithContext(ctx context.Context) DomainOriginCombinePtrOutput {
+	return o
+}
+
+func (o DomainOriginCombinePtrOutput) Elem() DomainOriginCombineOutput {
+	return o.ApplyT(func(v *DomainOriginCombine) DomainOriginCombine {
+		if v != nil {
+			return *v
+		}
+		var ret DomainOriginCombine
+		return ret
+	}).(DomainOriginCombineOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainOriginCombinePtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainOriginCombine) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -6595,6 +7614,277 @@ func (o DomainQnPrivateAccessPtrOutput) Switch() pulumi.StringPtrOutput {
 		}
 		return &v.Switch
 	}).(pulumi.StringPtrOutput)
+}
+
+type DomainRangeOriginPull struct {
+	// Path-based range origin pull rules.
+	RangeRules []DomainRangeOriginPullRangeRule `pulumi:"rangeRules"`
+	// Rule switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainRangeOriginPullInput is an input type that accepts DomainRangeOriginPullArgs and DomainRangeOriginPullOutput values.
+// You can construct a concrete instance of `DomainRangeOriginPullInput` via:
+//
+//	DomainRangeOriginPullArgs{...}
+type DomainRangeOriginPullInput interface {
+	pulumi.Input
+
+	ToDomainRangeOriginPullOutput() DomainRangeOriginPullOutput
+	ToDomainRangeOriginPullOutputWithContext(context.Context) DomainRangeOriginPullOutput
+}
+
+type DomainRangeOriginPullArgs struct {
+	// Path-based range origin pull rules.
+	RangeRules DomainRangeOriginPullRangeRuleArrayInput `pulumi:"rangeRules"`
+	// Rule switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainRangeOriginPullArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRangeOriginPull)(nil)).Elem()
+}
+
+func (i DomainRangeOriginPullArgs) ToDomainRangeOriginPullOutput() DomainRangeOriginPullOutput {
+	return i.ToDomainRangeOriginPullOutputWithContext(context.Background())
+}
+
+func (i DomainRangeOriginPullArgs) ToDomainRangeOriginPullOutputWithContext(ctx context.Context) DomainRangeOriginPullOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRangeOriginPullOutput)
+}
+
+func (i DomainRangeOriginPullArgs) ToDomainRangeOriginPullPtrOutput() DomainRangeOriginPullPtrOutput {
+	return i.ToDomainRangeOriginPullPtrOutputWithContext(context.Background())
+}
+
+func (i DomainRangeOriginPullArgs) ToDomainRangeOriginPullPtrOutputWithContext(ctx context.Context) DomainRangeOriginPullPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRangeOriginPullOutput).ToDomainRangeOriginPullPtrOutputWithContext(ctx)
+}
+
+// DomainRangeOriginPullPtrInput is an input type that accepts DomainRangeOriginPullArgs, DomainRangeOriginPullPtr and DomainRangeOriginPullPtrOutput values.
+// You can construct a concrete instance of `DomainRangeOriginPullPtrInput` via:
+//
+//	        DomainRangeOriginPullArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainRangeOriginPullPtrInput interface {
+	pulumi.Input
+
+	ToDomainRangeOriginPullPtrOutput() DomainRangeOriginPullPtrOutput
+	ToDomainRangeOriginPullPtrOutputWithContext(context.Context) DomainRangeOriginPullPtrOutput
+}
+
+type domainRangeOriginPullPtrType DomainRangeOriginPullArgs
+
+func DomainRangeOriginPullPtr(v *DomainRangeOriginPullArgs) DomainRangeOriginPullPtrInput {
+	return (*domainRangeOriginPullPtrType)(v)
+}
+
+func (*domainRangeOriginPullPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainRangeOriginPull)(nil)).Elem()
+}
+
+func (i *domainRangeOriginPullPtrType) ToDomainRangeOriginPullPtrOutput() DomainRangeOriginPullPtrOutput {
+	return i.ToDomainRangeOriginPullPtrOutputWithContext(context.Background())
+}
+
+func (i *domainRangeOriginPullPtrType) ToDomainRangeOriginPullPtrOutputWithContext(ctx context.Context) DomainRangeOriginPullPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRangeOriginPullPtrOutput)
+}
+
+type DomainRangeOriginPullOutput struct{ *pulumi.OutputState }
+
+func (DomainRangeOriginPullOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRangeOriginPull)(nil)).Elem()
+}
+
+func (o DomainRangeOriginPullOutput) ToDomainRangeOriginPullOutput() DomainRangeOriginPullOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullOutput) ToDomainRangeOriginPullOutputWithContext(ctx context.Context) DomainRangeOriginPullOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullOutput) ToDomainRangeOriginPullPtrOutput() DomainRangeOriginPullPtrOutput {
+	return o.ToDomainRangeOriginPullPtrOutputWithContext(context.Background())
+}
+
+func (o DomainRangeOriginPullOutput) ToDomainRangeOriginPullPtrOutputWithContext(ctx context.Context) DomainRangeOriginPullPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainRangeOriginPull) *DomainRangeOriginPull {
+		return &v
+	}).(DomainRangeOriginPullPtrOutput)
+}
+
+// Path-based range origin pull rules.
+func (o DomainRangeOriginPullOutput) RangeRules() DomainRangeOriginPullRangeRuleArrayOutput {
+	return o.ApplyT(func(v DomainRangeOriginPull) []DomainRangeOriginPullRangeRule { return v.RangeRules }).(DomainRangeOriginPullRangeRuleArrayOutput)
+}
+
+// Rule switch, valid values are `on` and `off`.
+func (o DomainRangeOriginPullOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRangeOriginPull) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainRangeOriginPullPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainRangeOriginPullPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainRangeOriginPull)(nil)).Elem()
+}
+
+func (o DomainRangeOriginPullPtrOutput) ToDomainRangeOriginPullPtrOutput() DomainRangeOriginPullPtrOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullPtrOutput) ToDomainRangeOriginPullPtrOutputWithContext(ctx context.Context) DomainRangeOriginPullPtrOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullPtrOutput) Elem() DomainRangeOriginPullOutput {
+	return o.ApplyT(func(v *DomainRangeOriginPull) DomainRangeOriginPull {
+		if v != nil {
+			return *v
+		}
+		var ret DomainRangeOriginPull
+		return ret
+	}).(DomainRangeOriginPullOutput)
+}
+
+// Path-based range origin pull rules.
+func (o DomainRangeOriginPullPtrOutput) RangeRules() DomainRangeOriginPullRangeRuleArrayOutput {
+	return o.ApplyT(func(v *DomainRangeOriginPull) []DomainRangeOriginPullRangeRule {
+		if v == nil {
+			return nil
+		}
+		return v.RangeRules
+	}).(DomainRangeOriginPullRangeRuleArrayOutput)
+}
+
+// Rule switch, valid values are `on` and `off`.
+func (o DomainRangeOriginPullPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainRangeOriginPull) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainRangeOriginPullRangeRule struct {
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type, valid values: `file`, `directory`, `path`.
+	RuleType string `pulumi:"ruleType"`
+	// Rule switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainRangeOriginPullRangeRuleInput is an input type that accepts DomainRangeOriginPullRangeRuleArgs and DomainRangeOriginPullRangeRuleOutput values.
+// You can construct a concrete instance of `DomainRangeOriginPullRangeRuleInput` via:
+//
+//	DomainRangeOriginPullRangeRuleArgs{...}
+type DomainRangeOriginPullRangeRuleInput interface {
+	pulumi.Input
+
+	ToDomainRangeOriginPullRangeRuleOutput() DomainRangeOriginPullRangeRuleOutput
+	ToDomainRangeOriginPullRangeRuleOutputWithContext(context.Context) DomainRangeOriginPullRangeRuleOutput
+}
+
+type DomainRangeOriginPullRangeRuleArgs struct {
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type, valid values: `file`, `directory`, `path`.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
+	// Rule switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainRangeOriginPullRangeRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRangeOriginPullRangeRule)(nil)).Elem()
+}
+
+func (i DomainRangeOriginPullRangeRuleArgs) ToDomainRangeOriginPullRangeRuleOutput() DomainRangeOriginPullRangeRuleOutput {
+	return i.ToDomainRangeOriginPullRangeRuleOutputWithContext(context.Background())
+}
+
+func (i DomainRangeOriginPullRangeRuleArgs) ToDomainRangeOriginPullRangeRuleOutputWithContext(ctx context.Context) DomainRangeOriginPullRangeRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRangeOriginPullRangeRuleOutput)
+}
+
+// DomainRangeOriginPullRangeRuleArrayInput is an input type that accepts DomainRangeOriginPullRangeRuleArray and DomainRangeOriginPullRangeRuleArrayOutput values.
+// You can construct a concrete instance of `DomainRangeOriginPullRangeRuleArrayInput` via:
+//
+//	DomainRangeOriginPullRangeRuleArray{ DomainRangeOriginPullRangeRuleArgs{...} }
+type DomainRangeOriginPullRangeRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainRangeOriginPullRangeRuleArrayOutput() DomainRangeOriginPullRangeRuleArrayOutput
+	ToDomainRangeOriginPullRangeRuleArrayOutputWithContext(context.Context) DomainRangeOriginPullRangeRuleArrayOutput
+}
+
+type DomainRangeOriginPullRangeRuleArray []DomainRangeOriginPullRangeRuleInput
+
+func (DomainRangeOriginPullRangeRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRangeOriginPullRangeRule)(nil)).Elem()
+}
+
+func (i DomainRangeOriginPullRangeRuleArray) ToDomainRangeOriginPullRangeRuleArrayOutput() DomainRangeOriginPullRangeRuleArrayOutput {
+	return i.ToDomainRangeOriginPullRangeRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainRangeOriginPullRangeRuleArray) ToDomainRangeOriginPullRangeRuleArrayOutputWithContext(ctx context.Context) DomainRangeOriginPullRangeRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainRangeOriginPullRangeRuleArrayOutput)
+}
+
+type DomainRangeOriginPullRangeRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainRangeOriginPullRangeRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainRangeOriginPullRangeRule)(nil)).Elem()
+}
+
+func (o DomainRangeOriginPullRangeRuleOutput) ToDomainRangeOriginPullRangeRuleOutput() DomainRangeOriginPullRangeRuleOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullRangeRuleOutput) ToDomainRangeOriginPullRangeRuleOutputWithContext(ctx context.Context) DomainRangeOriginPullRangeRuleOutput {
+	return o
+}
+
+// Rule paths.
+func (o DomainRangeOriginPullRangeRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainRangeOriginPullRangeRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+}
+
+// Rule type, valid values: `file`, `directory`, `path`.
+func (o DomainRangeOriginPullRangeRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRangeOriginPullRangeRule) string { return v.RuleType }).(pulumi.StringOutput)
+}
+
+// Rule switch, valid values are `on` and `off`.
+func (o DomainRangeOriginPullRangeRuleOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainRangeOriginPullRangeRule) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainRangeOriginPullRangeRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainRangeOriginPullRangeRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainRangeOriginPullRangeRule)(nil)).Elem()
+}
+
+func (o DomainRangeOriginPullRangeRuleArrayOutput) ToDomainRangeOriginPullRangeRuleArrayOutput() DomainRangeOriginPullRangeRuleArrayOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullRangeRuleArrayOutput) ToDomainRangeOriginPullRangeRuleArrayOutputWithContext(ctx context.Context) DomainRangeOriginPullRangeRuleArrayOutput {
+	return o
+}
+
+func (o DomainRangeOriginPullRangeRuleArrayOutput) Index(i pulumi.IntInput) DomainRangeOriginPullRangeRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainRangeOriginPullRangeRule {
+		return vs[0].([]DomainRangeOriginPullRangeRule)[vs[1].(int)]
+	}).(DomainRangeOriginPullRangeRuleOutput)
 }
 
 type DomainReferer struct {
@@ -7922,6 +9212,575 @@ func (o DomainStatusCodeCacheCacheRuleArrayOutput) Index(i pulumi.IntInput) Doma
 	}).(DomainStatusCodeCacheCacheRuleOutput)
 }
 
+type DomainUrlRedirect struct {
+	// URL redirect rule list, maximum 10 rules.
+	PathRules []DomainUrlRedirectPathRule `pulumi:"pathRules"`
+	// Configuration switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainUrlRedirectInput is an input type that accepts DomainUrlRedirectArgs and DomainUrlRedirectOutput values.
+// You can construct a concrete instance of `DomainUrlRedirectInput` via:
+//
+//	DomainUrlRedirectArgs{...}
+type DomainUrlRedirectInput interface {
+	pulumi.Input
+
+	ToDomainUrlRedirectOutput() DomainUrlRedirectOutput
+	ToDomainUrlRedirectOutputWithContext(context.Context) DomainUrlRedirectOutput
+}
+
+type DomainUrlRedirectArgs struct {
+	// URL redirect rule list, maximum 10 rules.
+	PathRules DomainUrlRedirectPathRuleArrayInput `pulumi:"pathRules"`
+	// Configuration switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainUrlRedirectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUrlRedirect)(nil)).Elem()
+}
+
+func (i DomainUrlRedirectArgs) ToDomainUrlRedirectOutput() DomainUrlRedirectOutput {
+	return i.ToDomainUrlRedirectOutputWithContext(context.Background())
+}
+
+func (i DomainUrlRedirectArgs) ToDomainUrlRedirectOutputWithContext(ctx context.Context) DomainUrlRedirectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUrlRedirectOutput)
+}
+
+func (i DomainUrlRedirectArgs) ToDomainUrlRedirectPtrOutput() DomainUrlRedirectPtrOutput {
+	return i.ToDomainUrlRedirectPtrOutputWithContext(context.Background())
+}
+
+func (i DomainUrlRedirectArgs) ToDomainUrlRedirectPtrOutputWithContext(ctx context.Context) DomainUrlRedirectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUrlRedirectOutput).ToDomainUrlRedirectPtrOutputWithContext(ctx)
+}
+
+// DomainUrlRedirectPtrInput is an input type that accepts DomainUrlRedirectArgs, DomainUrlRedirectPtr and DomainUrlRedirectPtrOutput values.
+// You can construct a concrete instance of `DomainUrlRedirectPtrInput` via:
+//
+//	        DomainUrlRedirectArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainUrlRedirectPtrInput interface {
+	pulumi.Input
+
+	ToDomainUrlRedirectPtrOutput() DomainUrlRedirectPtrOutput
+	ToDomainUrlRedirectPtrOutputWithContext(context.Context) DomainUrlRedirectPtrOutput
+}
+
+type domainUrlRedirectPtrType DomainUrlRedirectArgs
+
+func DomainUrlRedirectPtr(v *DomainUrlRedirectArgs) DomainUrlRedirectPtrInput {
+	return (*domainUrlRedirectPtrType)(v)
+}
+
+func (*domainUrlRedirectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainUrlRedirect)(nil)).Elem()
+}
+
+func (i *domainUrlRedirectPtrType) ToDomainUrlRedirectPtrOutput() DomainUrlRedirectPtrOutput {
+	return i.ToDomainUrlRedirectPtrOutputWithContext(context.Background())
+}
+
+func (i *domainUrlRedirectPtrType) ToDomainUrlRedirectPtrOutputWithContext(ctx context.Context) DomainUrlRedirectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUrlRedirectPtrOutput)
+}
+
+type DomainUrlRedirectOutput struct{ *pulumi.OutputState }
+
+func (DomainUrlRedirectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUrlRedirect)(nil)).Elem()
+}
+
+func (o DomainUrlRedirectOutput) ToDomainUrlRedirectOutput() DomainUrlRedirectOutput {
+	return o
+}
+
+func (o DomainUrlRedirectOutput) ToDomainUrlRedirectOutputWithContext(ctx context.Context) DomainUrlRedirectOutput {
+	return o
+}
+
+func (o DomainUrlRedirectOutput) ToDomainUrlRedirectPtrOutput() DomainUrlRedirectPtrOutput {
+	return o.ToDomainUrlRedirectPtrOutputWithContext(context.Background())
+}
+
+func (o DomainUrlRedirectOutput) ToDomainUrlRedirectPtrOutputWithContext(ctx context.Context) DomainUrlRedirectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainUrlRedirect) *DomainUrlRedirect {
+		return &v
+	}).(DomainUrlRedirectPtrOutput)
+}
+
+// URL redirect rule list, maximum 10 rules.
+func (o DomainUrlRedirectOutput) PathRules() DomainUrlRedirectPathRuleArrayOutput {
+	return o.ApplyT(func(v DomainUrlRedirect) []DomainUrlRedirectPathRule { return v.PathRules }).(DomainUrlRedirectPathRuleArrayOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainUrlRedirectOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUrlRedirect) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainUrlRedirectPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainUrlRedirectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainUrlRedirect)(nil)).Elem()
+}
+
+func (o DomainUrlRedirectPtrOutput) ToDomainUrlRedirectPtrOutput() DomainUrlRedirectPtrOutput {
+	return o
+}
+
+func (o DomainUrlRedirectPtrOutput) ToDomainUrlRedirectPtrOutputWithContext(ctx context.Context) DomainUrlRedirectPtrOutput {
+	return o
+}
+
+func (o DomainUrlRedirectPtrOutput) Elem() DomainUrlRedirectOutput {
+	return o.ApplyT(func(v *DomainUrlRedirect) DomainUrlRedirect {
+		if v != nil {
+			return *v
+		}
+		var ret DomainUrlRedirect
+		return ret
+	}).(DomainUrlRedirectOutput)
+}
+
+// URL redirect rule list, maximum 10 rules.
+func (o DomainUrlRedirectPtrOutput) PathRules() DomainUrlRedirectPathRuleArrayOutput {
+	return o.ApplyT(func(v *DomainUrlRedirect) []DomainUrlRedirectPathRule {
+		if v == nil {
+			return nil
+		}
+		return v.PathRules
+	}).(DomainUrlRedirectPathRuleArrayOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainUrlRedirectPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainUrlRedirect) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainUrlRedirectPathRule struct {
+	// Whether to use full path match.
+	FullMatch *bool `pulumi:"fullMatch"`
+	// URL path to match, supports wildcard `*`, max length 1024.
+	Pattern string `pulumi:"pattern"`
+	// Target host, must start with `http://` or `https://`.
+	RedirectHost *string `pulumi:"redirectHost"`
+	// Redirect status code, valid values: `301`, `302`.
+	RedirectStatusCode int `pulumi:"redirectStatusCode"`
+	// Target URL, must start with `/`, max length 1024.
+	RedirectUrl string `pulumi:"redirectUrl"`
+}
+
+// DomainUrlRedirectPathRuleInput is an input type that accepts DomainUrlRedirectPathRuleArgs and DomainUrlRedirectPathRuleOutput values.
+// You can construct a concrete instance of `DomainUrlRedirectPathRuleInput` via:
+//
+//	DomainUrlRedirectPathRuleArgs{...}
+type DomainUrlRedirectPathRuleInput interface {
+	pulumi.Input
+
+	ToDomainUrlRedirectPathRuleOutput() DomainUrlRedirectPathRuleOutput
+	ToDomainUrlRedirectPathRuleOutputWithContext(context.Context) DomainUrlRedirectPathRuleOutput
+}
+
+type DomainUrlRedirectPathRuleArgs struct {
+	// Whether to use full path match.
+	FullMatch pulumi.BoolPtrInput `pulumi:"fullMatch"`
+	// URL path to match, supports wildcard `*`, max length 1024.
+	Pattern pulumi.StringInput `pulumi:"pattern"`
+	// Target host, must start with `http://` or `https://`.
+	RedirectHost pulumi.StringPtrInput `pulumi:"redirectHost"`
+	// Redirect status code, valid values: `301`, `302`.
+	RedirectStatusCode pulumi.IntInput `pulumi:"redirectStatusCode"`
+	// Target URL, must start with `/`, max length 1024.
+	RedirectUrl pulumi.StringInput `pulumi:"redirectUrl"`
+}
+
+func (DomainUrlRedirectPathRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUrlRedirectPathRule)(nil)).Elem()
+}
+
+func (i DomainUrlRedirectPathRuleArgs) ToDomainUrlRedirectPathRuleOutput() DomainUrlRedirectPathRuleOutput {
+	return i.ToDomainUrlRedirectPathRuleOutputWithContext(context.Background())
+}
+
+func (i DomainUrlRedirectPathRuleArgs) ToDomainUrlRedirectPathRuleOutputWithContext(ctx context.Context) DomainUrlRedirectPathRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUrlRedirectPathRuleOutput)
+}
+
+// DomainUrlRedirectPathRuleArrayInput is an input type that accepts DomainUrlRedirectPathRuleArray and DomainUrlRedirectPathRuleArrayOutput values.
+// You can construct a concrete instance of `DomainUrlRedirectPathRuleArrayInput` via:
+//
+//	DomainUrlRedirectPathRuleArray{ DomainUrlRedirectPathRuleArgs{...} }
+type DomainUrlRedirectPathRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainUrlRedirectPathRuleArrayOutput() DomainUrlRedirectPathRuleArrayOutput
+	ToDomainUrlRedirectPathRuleArrayOutputWithContext(context.Context) DomainUrlRedirectPathRuleArrayOutput
+}
+
+type DomainUrlRedirectPathRuleArray []DomainUrlRedirectPathRuleInput
+
+func (DomainUrlRedirectPathRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainUrlRedirectPathRule)(nil)).Elem()
+}
+
+func (i DomainUrlRedirectPathRuleArray) ToDomainUrlRedirectPathRuleArrayOutput() DomainUrlRedirectPathRuleArrayOutput {
+	return i.ToDomainUrlRedirectPathRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainUrlRedirectPathRuleArray) ToDomainUrlRedirectPathRuleArrayOutputWithContext(ctx context.Context) DomainUrlRedirectPathRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUrlRedirectPathRuleArrayOutput)
+}
+
+type DomainUrlRedirectPathRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainUrlRedirectPathRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUrlRedirectPathRule)(nil)).Elem()
+}
+
+func (o DomainUrlRedirectPathRuleOutput) ToDomainUrlRedirectPathRuleOutput() DomainUrlRedirectPathRuleOutput {
+	return o
+}
+
+func (o DomainUrlRedirectPathRuleOutput) ToDomainUrlRedirectPathRuleOutputWithContext(ctx context.Context) DomainUrlRedirectPathRuleOutput {
+	return o
+}
+
+// Whether to use full path match.
+func (o DomainUrlRedirectPathRuleOutput) FullMatch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DomainUrlRedirectPathRule) *bool { return v.FullMatch }).(pulumi.BoolPtrOutput)
+}
+
+// URL path to match, supports wildcard `*`, max length 1024.
+func (o DomainUrlRedirectPathRuleOutput) Pattern() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUrlRedirectPathRule) string { return v.Pattern }).(pulumi.StringOutput)
+}
+
+// Target host, must start with `http://` or `https://`.
+func (o DomainUrlRedirectPathRuleOutput) RedirectHost() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainUrlRedirectPathRule) *string { return v.RedirectHost }).(pulumi.StringPtrOutput)
+}
+
+// Redirect status code, valid values: `301`, `302`.
+func (o DomainUrlRedirectPathRuleOutput) RedirectStatusCode() pulumi.IntOutput {
+	return o.ApplyT(func(v DomainUrlRedirectPathRule) int { return v.RedirectStatusCode }).(pulumi.IntOutput)
+}
+
+// Target URL, must start with `/`, max length 1024.
+func (o DomainUrlRedirectPathRuleOutput) RedirectUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUrlRedirectPathRule) string { return v.RedirectUrl }).(pulumi.StringOutput)
+}
+
+type DomainUrlRedirectPathRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainUrlRedirectPathRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainUrlRedirectPathRule)(nil)).Elem()
+}
+
+func (o DomainUrlRedirectPathRuleArrayOutput) ToDomainUrlRedirectPathRuleArrayOutput() DomainUrlRedirectPathRuleArrayOutput {
+	return o
+}
+
+func (o DomainUrlRedirectPathRuleArrayOutput) ToDomainUrlRedirectPathRuleArrayOutputWithContext(ctx context.Context) DomainUrlRedirectPathRuleArrayOutput {
+	return o
+}
+
+func (o DomainUrlRedirectPathRuleArrayOutput) Index(i pulumi.IntInput) DomainUrlRedirectPathRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainUrlRedirectPathRule {
+		return vs[0].([]DomainUrlRedirectPathRule)[vs[1].(int)]
+	}).(DomainUrlRedirectPathRuleOutput)
+}
+
+type DomainUserAgentFilter struct {
+	// UA blacklist/whitelist effect rule list.
+	FilterRules []DomainUserAgentFilterFilterRule `pulumi:"filterRules"`
+	// Configuration switch, valid values are `on` and `off`.
+	Switch string `pulumi:"switch"`
+}
+
+// DomainUserAgentFilterInput is an input type that accepts DomainUserAgentFilterArgs and DomainUserAgentFilterOutput values.
+// You can construct a concrete instance of `DomainUserAgentFilterInput` via:
+//
+//	DomainUserAgentFilterArgs{...}
+type DomainUserAgentFilterInput interface {
+	pulumi.Input
+
+	ToDomainUserAgentFilterOutput() DomainUserAgentFilterOutput
+	ToDomainUserAgentFilterOutputWithContext(context.Context) DomainUserAgentFilterOutput
+}
+
+type DomainUserAgentFilterArgs struct {
+	// UA blacklist/whitelist effect rule list.
+	FilterRules DomainUserAgentFilterFilterRuleArrayInput `pulumi:"filterRules"`
+	// Configuration switch, valid values are `on` and `off`.
+	Switch pulumi.StringInput `pulumi:"switch"`
+}
+
+func (DomainUserAgentFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUserAgentFilter)(nil)).Elem()
+}
+
+func (i DomainUserAgentFilterArgs) ToDomainUserAgentFilterOutput() DomainUserAgentFilterOutput {
+	return i.ToDomainUserAgentFilterOutputWithContext(context.Background())
+}
+
+func (i DomainUserAgentFilterArgs) ToDomainUserAgentFilterOutputWithContext(ctx context.Context) DomainUserAgentFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUserAgentFilterOutput)
+}
+
+func (i DomainUserAgentFilterArgs) ToDomainUserAgentFilterPtrOutput() DomainUserAgentFilterPtrOutput {
+	return i.ToDomainUserAgentFilterPtrOutputWithContext(context.Background())
+}
+
+func (i DomainUserAgentFilterArgs) ToDomainUserAgentFilterPtrOutputWithContext(ctx context.Context) DomainUserAgentFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUserAgentFilterOutput).ToDomainUserAgentFilterPtrOutputWithContext(ctx)
+}
+
+// DomainUserAgentFilterPtrInput is an input type that accepts DomainUserAgentFilterArgs, DomainUserAgentFilterPtr and DomainUserAgentFilterPtrOutput values.
+// You can construct a concrete instance of `DomainUserAgentFilterPtrInput` via:
+//
+//	        DomainUserAgentFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type DomainUserAgentFilterPtrInput interface {
+	pulumi.Input
+
+	ToDomainUserAgentFilterPtrOutput() DomainUserAgentFilterPtrOutput
+	ToDomainUserAgentFilterPtrOutputWithContext(context.Context) DomainUserAgentFilterPtrOutput
+}
+
+type domainUserAgentFilterPtrType DomainUserAgentFilterArgs
+
+func DomainUserAgentFilterPtr(v *DomainUserAgentFilterArgs) DomainUserAgentFilterPtrInput {
+	return (*domainUserAgentFilterPtrType)(v)
+}
+
+func (*domainUserAgentFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainUserAgentFilter)(nil)).Elem()
+}
+
+func (i *domainUserAgentFilterPtrType) ToDomainUserAgentFilterPtrOutput() DomainUserAgentFilterPtrOutput {
+	return i.ToDomainUserAgentFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *domainUserAgentFilterPtrType) ToDomainUserAgentFilterPtrOutputWithContext(ctx context.Context) DomainUserAgentFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUserAgentFilterPtrOutput)
+}
+
+type DomainUserAgentFilterOutput struct{ *pulumi.OutputState }
+
+func (DomainUserAgentFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUserAgentFilter)(nil)).Elem()
+}
+
+func (o DomainUserAgentFilterOutput) ToDomainUserAgentFilterOutput() DomainUserAgentFilterOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterOutput) ToDomainUserAgentFilterOutputWithContext(ctx context.Context) DomainUserAgentFilterOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterOutput) ToDomainUserAgentFilterPtrOutput() DomainUserAgentFilterPtrOutput {
+	return o.ToDomainUserAgentFilterPtrOutputWithContext(context.Background())
+}
+
+func (o DomainUserAgentFilterOutput) ToDomainUserAgentFilterPtrOutputWithContext(ctx context.Context) DomainUserAgentFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DomainUserAgentFilter) *DomainUserAgentFilter {
+		return &v
+	}).(DomainUserAgentFilterPtrOutput)
+}
+
+// UA blacklist/whitelist effect rule list.
+func (o DomainUserAgentFilterOutput) FilterRules() DomainUserAgentFilterFilterRuleArrayOutput {
+	return o.ApplyT(func(v DomainUserAgentFilter) []DomainUserAgentFilterFilterRule { return v.FilterRules }).(DomainUserAgentFilterFilterRuleArrayOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainUserAgentFilterOutput) Switch() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUserAgentFilter) string { return v.Switch }).(pulumi.StringOutput)
+}
+
+type DomainUserAgentFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (DomainUserAgentFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DomainUserAgentFilter)(nil)).Elem()
+}
+
+func (o DomainUserAgentFilterPtrOutput) ToDomainUserAgentFilterPtrOutput() DomainUserAgentFilterPtrOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterPtrOutput) ToDomainUserAgentFilterPtrOutputWithContext(ctx context.Context) DomainUserAgentFilterPtrOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterPtrOutput) Elem() DomainUserAgentFilterOutput {
+	return o.ApplyT(func(v *DomainUserAgentFilter) DomainUserAgentFilter {
+		if v != nil {
+			return *v
+		}
+		var ret DomainUserAgentFilter
+		return ret
+	}).(DomainUserAgentFilterOutput)
+}
+
+// UA blacklist/whitelist effect rule list.
+func (o DomainUserAgentFilterPtrOutput) FilterRules() DomainUserAgentFilterFilterRuleArrayOutput {
+	return o.ApplyT(func(v *DomainUserAgentFilter) []DomainUserAgentFilterFilterRule {
+		if v == nil {
+			return nil
+		}
+		return v.FilterRules
+	}).(DomainUserAgentFilterFilterRuleArrayOutput)
+}
+
+// Configuration switch, valid values are `on` and `off`.
+func (o DomainUserAgentFilterPtrOutput) Switch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DomainUserAgentFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Switch
+	}).(pulumi.StringPtrOutput)
+}
+
+type DomainUserAgentFilterFilterRule struct {
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+	FilterType string `pulumi:"filterType"`
+	// Rule paths.
+	RulePaths []string `pulumi:"rulePaths"`
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
+	RuleType string `pulumi:"ruleType"`
+	// UserAgent list.
+	UserAgents []string `pulumi:"userAgents"`
+}
+
+// DomainUserAgentFilterFilterRuleInput is an input type that accepts DomainUserAgentFilterFilterRuleArgs and DomainUserAgentFilterFilterRuleOutput values.
+// You can construct a concrete instance of `DomainUserAgentFilterFilterRuleInput` via:
+//
+//	DomainUserAgentFilterFilterRuleArgs{...}
+type DomainUserAgentFilterFilterRuleInput interface {
+	pulumi.Input
+
+	ToDomainUserAgentFilterFilterRuleOutput() DomainUserAgentFilterFilterRuleOutput
+	ToDomainUserAgentFilterFilterRuleOutputWithContext(context.Context) DomainUserAgentFilterFilterRuleOutput
+}
+
+type DomainUserAgentFilterFilterRuleArgs struct {
+	// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+	FilterType pulumi.StringInput `pulumi:"filterType"`
+	// Rule paths.
+	RulePaths pulumi.StringArrayInput `pulumi:"rulePaths"`
+	// Rule type, valid values: `all`, `file`, `directory`, `path`.
+	RuleType pulumi.StringInput `pulumi:"ruleType"`
+	// UserAgent list.
+	UserAgents pulumi.StringArrayInput `pulumi:"userAgents"`
+}
+
+func (DomainUserAgentFilterFilterRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUserAgentFilterFilterRule)(nil)).Elem()
+}
+
+func (i DomainUserAgentFilterFilterRuleArgs) ToDomainUserAgentFilterFilterRuleOutput() DomainUserAgentFilterFilterRuleOutput {
+	return i.ToDomainUserAgentFilterFilterRuleOutputWithContext(context.Background())
+}
+
+func (i DomainUserAgentFilterFilterRuleArgs) ToDomainUserAgentFilterFilterRuleOutputWithContext(ctx context.Context) DomainUserAgentFilterFilterRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUserAgentFilterFilterRuleOutput)
+}
+
+// DomainUserAgentFilterFilterRuleArrayInput is an input type that accepts DomainUserAgentFilterFilterRuleArray and DomainUserAgentFilterFilterRuleArrayOutput values.
+// You can construct a concrete instance of `DomainUserAgentFilterFilterRuleArrayInput` via:
+//
+//	DomainUserAgentFilterFilterRuleArray{ DomainUserAgentFilterFilterRuleArgs{...} }
+type DomainUserAgentFilterFilterRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainUserAgentFilterFilterRuleArrayOutput() DomainUserAgentFilterFilterRuleArrayOutput
+	ToDomainUserAgentFilterFilterRuleArrayOutputWithContext(context.Context) DomainUserAgentFilterFilterRuleArrayOutput
+}
+
+type DomainUserAgentFilterFilterRuleArray []DomainUserAgentFilterFilterRuleInput
+
+func (DomainUserAgentFilterFilterRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainUserAgentFilterFilterRule)(nil)).Elem()
+}
+
+func (i DomainUserAgentFilterFilterRuleArray) ToDomainUserAgentFilterFilterRuleArrayOutput() DomainUserAgentFilterFilterRuleArrayOutput {
+	return i.ToDomainUserAgentFilterFilterRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainUserAgentFilterFilterRuleArray) ToDomainUserAgentFilterFilterRuleArrayOutputWithContext(ctx context.Context) DomainUserAgentFilterFilterRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainUserAgentFilterFilterRuleArrayOutput)
+}
+
+type DomainUserAgentFilterFilterRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainUserAgentFilterFilterRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainUserAgentFilterFilterRule)(nil)).Elem()
+}
+
+func (o DomainUserAgentFilterFilterRuleOutput) ToDomainUserAgentFilterFilterRuleOutput() DomainUserAgentFilterFilterRuleOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterFilterRuleOutput) ToDomainUserAgentFilterFilterRuleOutputWithContext(ctx context.Context) DomainUserAgentFilterFilterRuleOutput {
+	return o
+}
+
+// Blacklist or whitelist, valid values: `blacklist`, `whitelist`.
+func (o DomainUserAgentFilterFilterRuleOutput) FilterType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUserAgentFilterFilterRule) string { return v.FilterType }).(pulumi.StringOutput)
+}
+
+// Rule paths.
+func (o DomainUserAgentFilterFilterRuleOutput) RulePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainUserAgentFilterFilterRule) []string { return v.RulePaths }).(pulumi.StringArrayOutput)
+}
+
+// Rule type, valid values: `all`, `file`, `directory`, `path`.
+func (o DomainUserAgentFilterFilterRuleOutput) RuleType() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainUserAgentFilterFilterRule) string { return v.RuleType }).(pulumi.StringOutput)
+}
+
+// UserAgent list.
+func (o DomainUserAgentFilterFilterRuleOutput) UserAgents() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DomainUserAgentFilterFilterRule) []string { return v.UserAgents }).(pulumi.StringArrayOutput)
+}
+
+type DomainUserAgentFilterFilterRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainUserAgentFilterFilterRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainUserAgentFilterFilterRule)(nil)).Elem()
+}
+
+func (o DomainUserAgentFilterFilterRuleArrayOutput) ToDomainUserAgentFilterFilterRuleArrayOutput() DomainUserAgentFilterFilterRuleArrayOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterFilterRuleArrayOutput) ToDomainUserAgentFilterFilterRuleArrayOutputWithContext(ctx context.Context) DomainUserAgentFilterFilterRuleArrayOutput {
+	return o
+}
+
+func (o DomainUserAgentFilterFilterRuleArrayOutput) Index(i pulumi.IntInput) DomainUserAgentFilterFilterRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainUserAgentFilterFilterRule {
+		return vs[0].([]DomainUserAgentFilterFilterRule)[vs[1].(int)]
+	}).(DomainUserAgentFilterFilterRuleOutput)
+}
+
 type UrlPurgePurgeHistory struct {
 	// Purge task create time.
 	CreateTime *string `pulumi:"createTime"`
@@ -9170,6 +11029,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeCPtrInput)(nil)).Elem(), DomainAuthenticationTypeCArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeDInput)(nil)).Elem(), DomainAuthenticationTypeDArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAuthenticationTypeDPtrInput)(nil)).Elem(), DomainAuthenticationTypeDArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAutoGuardInput)(nil)).Elem(), DomainAutoGuardArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAutoGuardPtrInput)(nil)).Elem(), DomainAutoGuardArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAutoGuardFilterRuleInput)(nil)).Elem(), DomainAutoGuardFilterRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainAutoGuardFilterRuleArrayInput)(nil)).Elem(), DomainAutoGuardFilterRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAwsPrivateAccessInput)(nil)).Elem(), DomainAwsPrivateAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAwsPrivateAccessPtrInput)(nil)).Elem(), DomainAwsPrivateAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainBandWidthAlertInput)(nil)).Elem(), DomainBandWidthAlertArgs{})
@@ -9195,12 +11058,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePtrInput)(nil)).Elem(), DomainErrorPageArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePageRuleInput)(nil)).Elem(), DomainErrorPagePageRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainErrorPagePageRuleArrayInput)(nil)).Elem(), DomainErrorPagePageRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainGeoBlockerInput)(nil)).Elem(), DomainGeoBlockerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainGeoBlockerPtrInput)(nil)).Elem(), DomainGeoBlockerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainGeoBlockerBlockRuleInput)(nil)).Elem(), DomainGeoBlockerBlockRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainGeoBlockerBlockRuleArrayInput)(nil)).Elem(), DomainGeoBlockerBlockRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsBillingInput)(nil)).Elem(), DomainHttpsBillingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsBillingPtrInput)(nil)).Elem(), DomainHttpsBillingArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigInput)(nil)).Elem(), DomainHttpsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigPtrInput)(nil)).Elem(), DomainHttpsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigClientCertificateConfigInput)(nil)).Elem(), DomainHttpsConfigClientCertificateConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigClientCertificateConfigPtrInput)(nil)).Elem(), DomainHttpsConfigClientCertificateConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigForceRedirectInput)(nil)).Elem(), DomainHttpsConfigForceRedirectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigForceRedirectPtrInput)(nil)).Elem(), DomainHttpsConfigForceRedirectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigHstsInput)(nil)).Elem(), DomainHttpsConfigHstsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigHstsPtrInput)(nil)).Elem(), DomainHttpsConfigHstsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigServerCertificateConfigInput)(nil)).Elem(), DomainHttpsConfigServerCertificateConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHttpsConfigServerCertificateConfigPtrInput)(nil)).Elem(), DomainHttpsConfigServerCertificateConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainHwPrivateAccessInput)(nil)).Elem(), DomainHwPrivateAccessArgs{})
@@ -9217,6 +11088,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainMaxAgeMaxAgeRuleArrayInput)(nil)).Elem(), DomainMaxAgeMaxAgeRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginInput)(nil)).Elem(), DomainOriginArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPtrInput)(nil)).Elem(), DomainOriginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginCombineInput)(nil)).Elem(), DomainOriginCombineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginCombinePtrInput)(nil)).Elem(), DomainOriginCombineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationPtrInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullTimeoutInput)(nil)).Elem(), DomainOriginPullTimeoutArgs{})
@@ -9229,6 +11102,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainPostMaxSizeArrayInput)(nil)).Elem(), DomainPostMaxSizeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainQnPrivateAccessInput)(nil)).Elem(), DomainQnPrivateAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainQnPrivateAccessPtrInput)(nil)).Elem(), DomainQnPrivateAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRangeOriginPullInput)(nil)).Elem(), DomainRangeOriginPullArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRangeOriginPullPtrInput)(nil)).Elem(), DomainRangeOriginPullArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRangeOriginPullRangeRuleInput)(nil)).Elem(), DomainRangeOriginPullRangeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainRangeOriginPullRangeRuleArrayInput)(nil)).Elem(), DomainRangeOriginPullRangeRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererInput)(nil)).Elem(), DomainRefererArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererPtrInput)(nil)).Elem(), DomainRefererArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainRefererRefererRuleInput)(nil)).Elem(), DomainRefererRefererRuleArgs{})
@@ -9247,6 +11124,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCachePtrInput)(nil)).Elem(), DomainStatusCodeCacheArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCacheCacheRuleInput)(nil)).Elem(), DomainStatusCodeCacheCacheRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainStatusCodeCacheCacheRuleArrayInput)(nil)).Elem(), DomainStatusCodeCacheCacheRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUrlRedirectInput)(nil)).Elem(), DomainUrlRedirectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUrlRedirectPtrInput)(nil)).Elem(), DomainUrlRedirectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUrlRedirectPathRuleInput)(nil)).Elem(), DomainUrlRedirectPathRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUrlRedirectPathRuleArrayInput)(nil)).Elem(), DomainUrlRedirectPathRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUserAgentFilterInput)(nil)).Elem(), DomainUserAgentFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUserAgentFilterPtrInput)(nil)).Elem(), DomainUserAgentFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUserAgentFilterFilterRuleInput)(nil)).Elem(), DomainUserAgentFilterFilterRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainUserAgentFilterFilterRuleArrayInput)(nil)).Elem(), DomainUserAgentFilterFilterRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UrlPurgePurgeHistoryInput)(nil)).Elem(), UrlPurgePurgeHistoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UrlPurgePurgeHistoryArrayInput)(nil)).Elem(), UrlPurgePurgeHistoryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UrlPushPushHistoryInput)(nil)).Elem(), UrlPushPushHistoryArgs{})
@@ -9273,6 +11158,10 @@ func init() {
 	pulumi.RegisterOutputType(DomainAuthenticationTypeCPtrOutput{})
 	pulumi.RegisterOutputType(DomainAuthenticationTypeDOutput{})
 	pulumi.RegisterOutputType(DomainAuthenticationTypeDPtrOutput{})
+	pulumi.RegisterOutputType(DomainAutoGuardOutput{})
+	pulumi.RegisterOutputType(DomainAutoGuardPtrOutput{})
+	pulumi.RegisterOutputType(DomainAutoGuardFilterRuleOutput{})
+	pulumi.RegisterOutputType(DomainAutoGuardFilterRuleArrayOutput{})
 	pulumi.RegisterOutputType(DomainAwsPrivateAccessOutput{})
 	pulumi.RegisterOutputType(DomainAwsPrivateAccessPtrOutput{})
 	pulumi.RegisterOutputType(DomainBandWidthAlertOutput{})
@@ -9298,12 +11187,20 @@ func init() {
 	pulumi.RegisterOutputType(DomainErrorPagePtrOutput{})
 	pulumi.RegisterOutputType(DomainErrorPagePageRuleOutput{})
 	pulumi.RegisterOutputType(DomainErrorPagePageRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainGeoBlockerOutput{})
+	pulumi.RegisterOutputType(DomainGeoBlockerPtrOutput{})
+	pulumi.RegisterOutputType(DomainGeoBlockerBlockRuleOutput{})
+	pulumi.RegisterOutputType(DomainGeoBlockerBlockRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainHttpsBillingOutput{})
+	pulumi.RegisterOutputType(DomainHttpsBillingPtrOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigPtrOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigClientCertificateConfigOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigClientCertificateConfigPtrOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigForceRedirectOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigForceRedirectPtrOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigHstsOutput{})
+	pulumi.RegisterOutputType(DomainHttpsConfigHstsPtrOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigServerCertificateConfigOutput{})
 	pulumi.RegisterOutputType(DomainHttpsConfigServerCertificateConfigPtrOutput{})
 	pulumi.RegisterOutputType(DomainHwPrivateAccessOutput{})
@@ -9320,6 +11217,8 @@ func init() {
 	pulumi.RegisterOutputType(DomainMaxAgeMaxAgeRuleArrayOutput{})
 	pulumi.RegisterOutputType(DomainOriginOutput{})
 	pulumi.RegisterOutputType(DomainOriginPtrOutput{})
+	pulumi.RegisterOutputType(DomainOriginCombineOutput{})
+	pulumi.RegisterOutputType(DomainOriginCombinePtrOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullOptimizationOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullOptimizationPtrOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullTimeoutOutput{})
@@ -9332,6 +11231,10 @@ func init() {
 	pulumi.RegisterOutputType(DomainPostMaxSizeArrayOutput{})
 	pulumi.RegisterOutputType(DomainQnPrivateAccessOutput{})
 	pulumi.RegisterOutputType(DomainQnPrivateAccessPtrOutput{})
+	pulumi.RegisterOutputType(DomainRangeOriginPullOutput{})
+	pulumi.RegisterOutputType(DomainRangeOriginPullPtrOutput{})
+	pulumi.RegisterOutputType(DomainRangeOriginPullRangeRuleOutput{})
+	pulumi.RegisterOutputType(DomainRangeOriginPullRangeRuleArrayOutput{})
 	pulumi.RegisterOutputType(DomainRefererOutput{})
 	pulumi.RegisterOutputType(DomainRefererPtrOutput{})
 	pulumi.RegisterOutputType(DomainRefererRefererRuleOutput{})
@@ -9350,6 +11253,14 @@ func init() {
 	pulumi.RegisterOutputType(DomainStatusCodeCachePtrOutput{})
 	pulumi.RegisterOutputType(DomainStatusCodeCacheCacheRuleOutput{})
 	pulumi.RegisterOutputType(DomainStatusCodeCacheCacheRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainUrlRedirectOutput{})
+	pulumi.RegisterOutputType(DomainUrlRedirectPtrOutput{})
+	pulumi.RegisterOutputType(DomainUrlRedirectPathRuleOutput{})
+	pulumi.RegisterOutputType(DomainUrlRedirectPathRuleArrayOutput{})
+	pulumi.RegisterOutputType(DomainUserAgentFilterOutput{})
+	pulumi.RegisterOutputType(DomainUserAgentFilterPtrOutput{})
+	pulumi.RegisterOutputType(DomainUserAgentFilterFilterRuleOutput{})
+	pulumi.RegisterOutputType(DomainUserAgentFilterFilterRuleArrayOutput{})
 	pulumi.RegisterOutputType(UrlPurgePurgeHistoryOutput{})
 	pulumi.RegisterOutputType(UrlPurgePurgeHistoryArrayOutput{})
 	pulumi.RegisterOutputType(UrlPushPushHistoryOutput{})

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asScalingPolicies = tencentcloud.As.getScalingPolicies({
+ * const asScalingPolicies = tencentcloud.as.getScalingPolicies({
  *     scalingPolicyId: "asg-mvyghxu7",
  *     resultOutputFile: "mytestpath",
  * });
@@ -86,7 +86,7 @@ export interface GetScalingPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asScalingPolicies = tencentcloud.As.getScalingPolicies({
+ * const asScalingPolicies = tencentcloud.as.getScalingPolicies({
  *     scalingPolicyId: "asg-mvyghxu7",
  *     resultOutputFile: "mytestpath",
  * });
@@ -110,17 +110,17 @@ export interface GetScalingPoliciesOutputArgs {
     /**
      * Scaling policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Scaling group ID.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * Scaling policy ID.
      */
-    scalingPolicyId?: pulumi.Input<string>;
+    scalingPolicyId?: pulumi.Input<string | undefined>;
 }

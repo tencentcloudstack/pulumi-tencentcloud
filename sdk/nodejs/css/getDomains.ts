@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domains = tencentcloud.Css.getDomains({
+ * const domains = tencentcloud.css.getDomains({
  *     domainType: 0,
  *     playType: 1,
  *     isDelayLive: 0,
@@ -99,7 +99,7 @@ export interface GetDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domains = tencentcloud.Css.getDomains({
+ * const domains = tencentcloud.css.getDomains({
  *     domainType: 0,
  *     playType: 1,
  *     isDelayLive: 0,
@@ -126,25 +126,25 @@ export interface GetDomainsOutputArgs {
     /**
      * domain name prefix.
      */
-    domainPrefix?: pulumi.Input<string>;
+    domainPrefix?: pulumi.Input<string | undefined>;
     /**
      * domain name status filter. 0-disable, 1-enable.
      */
-    domainStatus?: pulumi.Input<number>;
+    domainStatus?: pulumi.Input<number | undefined>;
     /**
      * Domain name type filtering. 0-push, 1-play.
      */
-    domainType?: pulumi.Input<number>;
+    domainType?: pulumi.Input<number | undefined>;
     /**
      * 0 normal live broadcast 1 slow live broadcast default 0.
      */
-    isDelayLive?: pulumi.Input<number>;
+    isDelayLive?: pulumi.Input<number | undefined>;
     /**
      * Playing area, this parameter is meaningful only when DomainType=1. 1: Domestic.2: Global.3: Overseas.
      */
-    playType?: pulumi.Input<number>;
+    playType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

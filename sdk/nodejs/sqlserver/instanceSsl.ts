@@ -79,11 +79,11 @@ export interface InstanceSslState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Operation type. enable: turn on SSL; disable: turn off SSL; renew: update the certificate validity period.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**

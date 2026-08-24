@@ -62,12 +62,8 @@ type GetGrafanaPluginOverviewsResult struct {
 }
 
 func GetGrafanaPluginOverviewsOutput(ctx *pulumi.Context, args GetGrafanaPluginOverviewsOutputArgs, opts ...pulumi.InvokeOption) GetGrafanaPluginOverviewsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGrafanaPluginOverviewsResultOutput, error) {
-			args := v.(GetGrafanaPluginOverviewsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args, GetGrafanaPluginOverviewsResultOutput{}, options).(GetGrafanaPluginOverviewsResultOutput), nil
-		}).(GetGrafanaPluginOverviewsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args, GetGrafanaPluginOverviewsResultOutput{}, options).(GetGrafanaPluginOverviewsResultOutput)
 }
 
 // A collection of arguments for invoking getGrafanaPluginOverviews.

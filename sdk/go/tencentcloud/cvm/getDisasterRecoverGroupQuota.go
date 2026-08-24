@@ -70,12 +70,8 @@ type GetDisasterRecoverGroupQuotaResult struct {
 }
 
 func GetDisasterRecoverGroupQuotaOutput(ctx *pulumi.Context, args GetDisasterRecoverGroupQuotaOutputArgs, opts ...pulumi.InvokeOption) GetDisasterRecoverGroupQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDisasterRecoverGroupQuotaResultOutput, error) {
-			args := v.(GetDisasterRecoverGroupQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args, GetDisasterRecoverGroupQuotaResultOutput{}, options).(GetDisasterRecoverGroupQuotaResultOutput), nil
-		}).(GetDisasterRecoverGroupQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", args, GetDisasterRecoverGroupQuotaResultOutput{}, options).(GetDisasterRecoverGroupQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getDisasterRecoverGroupQuota.

@@ -100,12 +100,8 @@ type LookupRocketmqTopicResult struct {
 }
 
 func LookupRocketmqTopicOutput(ctx *pulumi.Context, args LookupRocketmqTopicOutputArgs, opts ...pulumi.InvokeOption) LookupRocketmqTopicResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRocketmqTopicResultOutput, error) {
-			args := v.(LookupRocketmqTopicArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqTopic:getRocketmqTopic", args, LookupRocketmqTopicResultOutput{}, options).(LookupRocketmqTopicResultOutput), nil
-		}).(LookupRocketmqTopicResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqTopic:getRocketmqTopic", args, LookupRocketmqTopicResultOutput{}, options).(LookupRocketmqTopicResultOutput)
 }
 
 // A collection of arguments for invoking getRocketmqTopic.

@@ -42,10 +42,10 @@ import (
 //				return err
 //			}
 //			_ = ccn.GetBandwidthLimitsOutput(ctx, ccn.GetBandwidthLimitsOutputArgs{
-//				CcnId: main.ID(),
+//				CcnId: main.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_, err = ccn.NewBandwidthLimit(ctx, "limit1", &ccn.BandwidthLimitArgs{
-//				CcnId:          main.ID(),
+//				CcnId:          main.ID().ToIDOutput().ToStringOutput(),
 //				Region:         pulumi.String(otherRegion1),
 //				BandwidthLimit: pulumi.Int(500),
 //			})
@@ -86,12 +86,8 @@ type GetBandwidthLimitsResult struct {
 }
 
 func GetBandwidthLimitsOutput(ctx *pulumi.Context, args GetBandwidthLimitsOutputArgs, opts ...pulumi.InvokeOption) GetBandwidthLimitsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBandwidthLimitsResultOutput, error) {
-			args := v.(GetBandwidthLimitsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args, GetBandwidthLimitsResultOutput{}, options).(GetBandwidthLimitsResultOutput), nil
-		}).(GetBandwidthLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args, GetBandwidthLimitsResultOutput{}, options).(GetBandwidthLimitsResultOutput)
 }
 
 // A collection of arguments for invoking getBandwidthLimits.

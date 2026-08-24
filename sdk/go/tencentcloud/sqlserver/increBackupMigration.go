@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// sqlserver incre_backup_migration can be imported using the id, e.g.
+// sqlserver increBackupMigration can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id

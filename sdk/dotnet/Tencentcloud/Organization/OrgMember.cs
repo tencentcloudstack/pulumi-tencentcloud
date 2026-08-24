@@ -44,9 +44,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// ## Import
     /// 
     /// Organization member can be imported using the id, e.g.
-    /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Organization/orgMember:OrgMember example id=100043985088
+    /// $ pulumi import tencentcloud:Organization/orgMember:OrgMember example 100043985088
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgMember:OrgMember")]
@@ -69,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// </summary>
         [Output("isAllowQuit")]
         public Output<string> IsAllowQuit { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+        /// </summary>
+        [Output("isModifyNickName")]
+        public Output<int?> IsModifyNickName { get; private set; } = null!;
 
         /// <summary>
         /// Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
@@ -208,6 +213,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public Input<bool>? ForceDeleteAccount { get; set; }
 
         /// <summary>
+        /// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+        /// </summary>
+        [Input("isModifyNickName")]
+        public Input<int>? IsModifyNickName { get; set; }
+
+        /// <summary>
         /// Member name.
         /// </summary>
         [Input("name")]
@@ -292,6 +303,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// </summary>
         [Input("isAllowQuit")]
         public Input<string>? IsAllowQuit { get; set; }
+
+        /// <summary>
+        /// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+        /// </summary>
+        [Input("isModifyNickName")]
+        public Input<int>? IsModifyNickName { get; set; }
 
         /// <summary>
         /// Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.

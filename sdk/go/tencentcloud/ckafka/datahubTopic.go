@@ -30,14 +30,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			user, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+//			user2, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			invokeFormat, err := std.Format(ctx, &std.FormatArgs{
 //				Input: "%s-tf",
 //				Args: []*string{
-//					user.AppId,
+//					user2.AppId,
 //				},
 //			}, nil)
 //			if err != nil {
@@ -63,7 +63,7 @@ import (
 //
 // ## Import
 //
-// ckafka datahub_topic can be imported using the id, e.g.
+// ckafka datahubTopic can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name

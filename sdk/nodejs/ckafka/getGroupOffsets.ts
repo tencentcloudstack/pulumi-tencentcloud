@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupOffsets = tencentcloud.Ckafka.getGroupOffsets({
+ * const groupOffsets = tencentcloud.ckafka.getGroupOffsets({
  *     instanceId: "ckafka-xxxxxx",
  *     group: "xxxxxx",
  * });
@@ -85,7 +85,7 @@ export interface GetGroupOffsetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupOffsets = tencentcloud.Ckafka.getGroupOffsets({
+ * const groupOffsets = tencentcloud.ckafka.getGroupOffsets({
  *     instanceId: "ckafka-xxxxxx",
  *     group: "xxxxxx",
  * });
@@ -117,13 +117,13 @@ export interface GetGroupOffsetsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * fuzzy match topicName.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * An array of topic names subscribed by the group, if there is no such array, it means all topic information under the specified group.
      */
-    topics?: pulumi.Input<pulumi.Input<string>[]>;
+    topics?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

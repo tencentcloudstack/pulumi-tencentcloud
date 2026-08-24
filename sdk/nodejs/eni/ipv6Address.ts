@@ -138,15 +138,15 @@ export interface Ipv6AddressState {
     /**
      * The number of automatically assigned IPv6 addresses and the total number of private IP addresses cannot exceed the quota. This should be combined with the input parameter `ipv6Addresses` for quota calculation. At least one of them, either this or 'Ipv6Addresses', must be provided.
      */
-    ipv6AddressCount?: pulumi.Input<number>;
+    ipv6AddressCount?: pulumi.Input<number | undefined>;
     /**
      * The specified `IPv6` address list, up to 10 can be specified at a time. Combined with the input parameter `Ipv6AddressCount` to calculate the quota. Mandatory one with Ipv6AddressCount.
      */
-    ipv6Addresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv6AddressIpv6Address>[]>;
+    ipv6Addresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv6AddressIpv6Address>[] | undefined>;
     /**
      * ENI instance `ID`, in the form of `eni-m6dyj72l`.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,11 +156,11 @@ export interface Ipv6AddressArgs {
     /**
      * The number of automatically assigned IPv6 addresses and the total number of private IP addresses cannot exceed the quota. This should be combined with the input parameter `ipv6Addresses` for quota calculation. At least one of them, either this or 'Ipv6Addresses', must be provided.
      */
-    ipv6AddressCount?: pulumi.Input<number>;
+    ipv6AddressCount?: pulumi.Input<number | undefined>;
     /**
      * The specified `IPv6` address list, up to 10 can be specified at a time. Combined with the input parameter `Ipv6AddressCount` to calculate the quota. Mandatory one with Ipv6AddressCount.
      */
-    ipv6Addresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv6AddressIpv6Address>[]>;
+    ipv6Addresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv6AddressIpv6Address>[] | undefined>;
     /**
      * ENI instance `ID`, in the form of `eni-m6dyj72l`.
      */

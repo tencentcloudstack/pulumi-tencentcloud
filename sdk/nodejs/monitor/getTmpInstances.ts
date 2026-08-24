@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tmpInstances = tencentcloud.Monitor.getTmpInstances({
+ * const tmpInstances = tencentcloud.monitor.getTmpInstances({
  *     instanceIds: ["prom-xxxxxx"],
  * });
  * ```
@@ -135,7 +135,7 @@ export interface GetTmpInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tmpInstances = tencentcloud.Monitor.getTmpInstances({
+ * const tmpInstances = tencentcloud.monitor.getTmpInstances({
  *     instanceIds: ["prom-xxxxxx"],
  * });
  * ```
@@ -164,15 +164,15 @@ export interface GetTmpInstancesOutputArgs {
      * - 2: Prepaid;
      * - 3: Postpaid by hour.
      */
-    instanceChargeType?: pulumi.Input<number>;
+    instanceChargeType?: pulumi.Input<number | undefined>;
     /**
      * Query according to one or more instance IDs. The instance ID is like: prom-xxxx. The maximum number of instances requested is 100.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter according to instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Filter according to instance status.
      * - 1: Creating;
@@ -184,21 +184,21 @@ export interface GetTmpInstancesOutputArgs {
      * - 8: Suspension of service due to arrears;
      * - 9: Service has been suspended due to arrears.
      */
-    instanceStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    instanceStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Filter according to ipv4 address.
      */
-    ipv4Addresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipv4Addresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter according to tag Key-Value pair. The tag-key is replaced with a specific label key.
      */
-    tagFilters?: pulumi.Input<pulumi.Input<inputs.Monitor.GetTmpInstancesTagFilterArgs>[]>;
+    tagFilters?: pulumi.Input<pulumi.Input<inputs.Monitor.GetTmpInstancesTagFilterArgs>[] | undefined>;
     /**
      * Filter according to availability area. The availability area is shaped like: ap-Guangzhou-1.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

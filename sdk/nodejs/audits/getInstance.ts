@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const audits = tencentcloud.Audits.getInstance({
+ * const audits = tencentcloud.audits.getInstance({
  *     name: "test",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const audits = tencentcloud.Audits.getInstance({
+ * const audits = tencentcloud.audits.getInstance({
  *     name: "test",
  * });
  * ```
@@ -91,9 +91,9 @@ export interface GetInstanceOutputArgs {
     /**
      * Name of the audits.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

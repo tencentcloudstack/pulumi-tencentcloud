@@ -11,11 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
 {
     /// <summary>
-    /// Provides a resource to create a cdwdoris instance
+    /// Provides a resource to create a CDWDoris instance
     /// 
     /// ## Example Usage
     /// 
-    /// ### Create a POSTPAID instance
+    /// ### Create a POSTPAID instance(SSC)
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -61,13 +61,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     ///         Zone = availabilityZone,
     ///         UserVpcId = vpc.Id,
     ///         UserSubnetId = subnet.Id,
-    ///         ProductVersion = "2.1",
+    ///         ProductVersion = "3.1",
     ///         InstanceName = "tf-example",
-    ///         DorisUserPwd = "Password@test",
+    ///         DorisUserPwd = "Password@2026",
     ///         HaFlag = false,
+    ///         HaType = 0,
     ///         CaseSensitive = 0,
     ///         EnableMultiZones = false,
-    ///         WorkloadGroupStatus = "open",
+    ///         IsSsc = true,
+    ///         WorkloadGroupStatus = "close",
     ///         SecurityGroupIds = new[]
     ///         {
     ///             example.Id,
@@ -78,15 +80,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     ///         },
     ///         FeSpec = new Tencentcloud.Cdwdoris.Inputs.InstanceFeSpecArgs
     ///         {
-    ///             SpecName = "S_4_16_P",
-    ///             Count = 3,
+    ///             SpecName = "S_8_32_H",
+    ///             Count = 5,
     ///             DiskSize = 200,
     ///         },
     ///         BeSpec = new Tencentcloud.Cdwdoris.Inputs.InstanceBeSpecArgs
     ///         {
-    ///             SpecName = "S_4_16_P",
+    ///             SpecName = "S_8_32_H",
     ///             Count = 3,
-    ///             DiskSize = 200,
+    ///             DiskSize = 400,
     ///         },
     ///         Tags = new[]
     ///         {
@@ -101,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     /// });
     /// ```
     /// 
-    /// ### Create a POSTPAID instance
+    /// ### Create a PREPAID instance(Without SSC)
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -149,10 +151,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     ///         UserSubnetId = subnet.Id,
     ///         ProductVersion = "2.1",
     ///         InstanceName = "tf-example",
-    ///         DorisUserPwd = "Password@test",
+    ///         DorisUserPwd = "Password@2026",
     ///         HaFlag = false,
+    ///         HaType = 0,
     ///         CaseSensitive = 0,
     ///         EnableMultiZones = false,
+    ///         IsSsc = false,
     ///         WorkloadGroupStatus = "close",
     ///         SecurityGroupIds = new[]
     ///         {
@@ -245,6 +249,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether it is storage-compute separation. Default is false.
+        /// </summary>
+        [Output("isSsc")]
+        public Output<bool> IsSsc { get; private set; } = null!;
 
         /// <summary>
         /// Product version number.
@@ -410,6 +420,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         public Input<string> InstanceName { get; set; } = null!;
 
         /// <summary>
+        /// Whether it is storage-compute separation. Default is false.
+        /// </summary>
+        [Input("isSsc")]
+        public Input<bool>? IsSsc { get; set; }
+
+        /// <summary>
         /// Product version number.
         /// </summary>
         [Input("productVersion", required: true)]
@@ -540,6 +556,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Whether it is storage-compute separation. Default is false.
+        /// </summary>
+        [Input("isSsc")]
+        public Input<bool>? IsSsc { get; set; }
 
         /// <summary>
         /// Product version number.

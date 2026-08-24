@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbFeatures = tencentcloud.Mysql.getDbFeatures({
+ * const dbFeatures = tencentcloud.mysql.getDbFeatures({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetDbFeaturesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbFeatures = tencentcloud.Mysql.getDbFeatures({
+ * const dbFeatures = tencentcloud.mysql.getDbFeatures({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -120,5 +120,5 @@ export interface GetDbFeaturesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

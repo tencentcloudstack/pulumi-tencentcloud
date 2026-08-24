@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationFileConfig = tencentcloud.Tsf.getApplicationFileConfig({
+ * const applicationFileConfig = tencentcloud.tsf.getApplicationFileConfig({
  *     configId: "dcfg-f-4y4ekzqv",
  *     configName: "file-log1",
  *     applicationId: "application-2vzk6n3v",
@@ -106,7 +106,7 @@ export interface GetApplicationFileConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationFileConfig = tencentcloud.Tsf.getApplicationFileConfig({
+ * const applicationFileConfig = tencentcloud.tsf.getApplicationFileConfig({
  *     configId: "dcfg-f-4y4ekzqv",
  *     configName: "file-log1",
  *     applicationId: "application-2vzk6n3v",
@@ -134,25 +134,25 @@ export interface GetApplicationFileConfigOutputArgs {
     /**
      * Application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Configuration ID.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * List of configuration item ID.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Configuration item name.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Configuration item version.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

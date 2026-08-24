@@ -117,12 +117,8 @@ type GetServiceNodeInfosResult struct {
 }
 
 func GetServiceNodeInfosOutput(ctx *pulumi.Context, args GetServiceNodeInfosOutputArgs, opts ...pulumi.InvokeOption) GetServiceNodeInfosResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetServiceNodeInfosResultOutput, error) {
-			args := v.(GetServiceNodeInfosArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Emr/getServiceNodeInfos:getServiceNodeInfos", args, GetServiceNodeInfosResultOutput{}, options).(GetServiceNodeInfosResultOutput), nil
-		}).(GetServiceNodeInfosResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Emr/getServiceNodeInfos:getServiceNodeInfos", args, GetServiceNodeInfosResultOutput{}, options).(GetServiceNodeInfosResultOutput)
 }
 
 // A collection of arguments for invoking getServiceNodeInfos.

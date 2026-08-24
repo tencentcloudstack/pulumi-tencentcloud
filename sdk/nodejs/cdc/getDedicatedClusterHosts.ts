@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hosts = tencentcloud.Cdc.getDedicatedClusterHosts({
+ * const hosts = tencentcloud.cdc.getDedicatedClusterHosts({
  *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetDedicatedClusterHostsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hosts = tencentcloud.Cdc.getDedicatedClusterHosts({
+ * const hosts = tencentcloud.cdc.getDedicatedClusterHosts({
  *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetDedicatedClusterHostsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

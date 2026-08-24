@@ -55,6 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
         /// </summary>
         public readonly ImmutableArray<string> Procedures;
         /// <summary>
+        /// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
+        public readonly string? SchemaMode;
+        /// <summary>
         /// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly string? SchemaName;
@@ -105,6 +109,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
 
             ImmutableArray<string> procedures,
 
+            string? schemaMode,
+
             string? schemaName,
 
             string? tableMode,
@@ -129,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
             NewSchemaName = newSchemaName;
             ProcedureMode = procedureMode;
             Procedures = procedures;
+            SchemaMode = schemaMode;
             SchemaName = schemaName;
             TableMode = tableMode;
             Tables = tables;

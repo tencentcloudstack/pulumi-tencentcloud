@@ -102,15 +102,15 @@ export interface GroupState {
     /**
      * Create time of the CAM group.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Name of CAM group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Description of the CAM group.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -120,9 +120,9 @@ export interface GroupArgs {
     /**
      * Name of CAM group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Description of the CAM group.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

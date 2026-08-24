@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const errorLog = tencentcloud.Mysql.getErrorLog({
+ * const errorLog = tencentcloud.mysql.getErrorLog({
  *     instanceId: "cdb-fitq5t9h",
  *     startTime: 1683538307,
  *     endTime: 1686043908,
@@ -94,7 +94,7 @@ export interface GetErrorLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const errorLog = tencentcloud.Mysql.getErrorLog({
+ * const errorLog = tencentcloud.mysql.getErrorLog({
  *     instanceId: "cdb-fitq5t9h",
  *     startTime: 1683538307,
  *     endTime: 1686043908,
@@ -126,7 +126,7 @@ export interface GetErrorLogOutputArgs {
     /**
      * Only valid when the instance is the master instance or disaster recovery instance, the optional value: slave, which means to pull the log of the slave machine.
      */
-    instType?: pulumi.Input<string>;
+    instType?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
@@ -134,11 +134,11 @@ export interface GetErrorLogOutputArgs {
     /**
      * A list of keywords to match, up to 15 keywords are supported.
      */
-    keyWords?: pulumi.Input<pulumi.Input<string>[]>;
+    keyWords?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start timestamp. For example 1585142640.
      */

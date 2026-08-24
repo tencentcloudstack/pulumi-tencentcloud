@@ -37,6 +37,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
     /// });
     /// ```
     /// 
+    /// ### Create partition placement group
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var bar = new Tencentcloud.Placement.Group("bar", new()
+    ///     {
+    ///         Name = "test-partition",
+    ///         Type = "HOST",
+    ///         Strategy = "PARTITION",
+    ///         PartitionCount = 5,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Placement group can be imported using the id, e.g.
@@ -77,6 +98,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Partition count of the placement group. Valid values: 2~30. Only valid when `Strategy` is set to `PARTITION`.
+        /// </summary>
+        [Output("partitionCount")]
+        public Output<int> PartitionCount { get; private set; } = null!;
+
+        /// <summary>
+        /// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `PartitionCount` must be set. This field cannot be modified after creation.
+        /// </summary>
+        [Output("strategy")]
+        public Output<string> Strategy { get; private set; } = null!;
 
         /// <summary>
         /// Tags of the placement group.
@@ -149,6 +182,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Partition count of the placement group. Valid values: 2~30. Only valid when `Strategy` is set to `PARTITION`.
+        /// </summary>
+        [Input("partitionCount")]
+        public Input<int>? PartitionCount { get; set; }
+
+        /// <summary>
+        /// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `PartitionCount` must be set. This field cannot be modified after creation.
+        /// </summary>
+        [Input("strategy")]
+        public Input<string>? Strategy { get; set; }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
@@ -204,6 +249,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Partition count of the placement group. Valid values: 2~30. Only valid when `Strategy` is set to `PARTITION`.
+        /// </summary>
+        [Input("partitionCount")]
+        public Input<int>? PartitionCount { get; set; }
+
+        /// <summary>
+        /// Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `PartitionCount` must be set. This field cannot be modified after creation.
+        /// </summary>
+        [Input("strategy")]
+        public Input<string>? Strategy { get; set; }
 
         [Input("tags")]
         private InputMap<string>? _tags;

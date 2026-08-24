@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceSlowLog = tencentcloud.Mongodb.getInstanceSlowLog({
+ * const instanceSlowLog = tencentcloud.mongodb.getInstanceSlowLog({
  *     instanceId: "cmgo-9d0p6umb",
  *     startTime: "2019-06-01 10:00:00",
  *     endTime: "2019-06-02 12:00:00",
@@ -92,7 +92,7 @@ export interface GetInstanceSlowLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceSlowLog = tencentcloud.Mongodb.getInstanceSlowLog({
+ * const instanceSlowLog = tencentcloud.mongodb.getInstanceSlowLog({
  *     instanceId: "cmgo-9d0p6umb",
  *     startTime: "2019-06-01 10:00:00",
  *     endTime: "2019-06-02 12:00:00",
@@ -124,7 +124,7 @@ export interface GetInstanceSlowLogOutputArgs {
     /**
      * Slow log return format. By default, the original slow log format is returned,and versions 4.4 and above can be set to json.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
@@ -132,7 +132,7 @@ export interface GetInstanceSlowLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Slow log execution time threshold, return slow logs whose execution time exceeds this threshold,the unit is milliseconds (ms), and the minimum is 100 milliseconds.
      */

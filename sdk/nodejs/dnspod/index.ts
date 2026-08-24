@@ -35,6 +35,11 @@ export const getDomainAnalytics: typeof import("./getDomainAnalytics").getDomain
 export const getDomainAnalyticsOutput: typeof import("./getDomainAnalytics").getDomainAnalyticsOutput = null as any;
 utilities.lazyLoad(exports, ["getDomainAnalytics","getDomainAnalyticsOutput"], () => require("./getDomainAnalytics"));
 
+export { GetDomainInstancesArgs, GetDomainInstancesResult, GetDomainInstancesOutputArgs } from "./getDomainInstances";
+export const getDomainInstances: typeof import("./getDomainInstances").getDomainInstances = null as any;
+export const getDomainInstancesOutput: typeof import("./getDomainInstances").getDomainInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getDomainInstances","getDomainInstancesOutput"], () => require("./getDomainInstances"));
+
 export { GetDomainListArgs, GetDomainListResult, GetDomainListOutputArgs } from "./getDomainList";
 export const getDomainList: typeof import("./getDomainList").getDomainList = null as any;
 export const getDomainListOutput: typeof import("./getDomainList").getDomainListOutput = null as any;
@@ -70,6 +75,11 @@ export const getRecords: typeof import("./getRecords").getRecords = null as any;
 export const getRecordsOutput: typeof import("./getRecords").getRecordsOutput = null as any;
 utilities.lazyLoad(exports, ["getRecords","getRecordsOutput"], () => require("./getRecords"));
 
+export { LineGroupArgs, LineGroupState } from "./lineGroup";
+export type LineGroup = import("./lineGroup").LineGroup;
+export const LineGroup: typeof import("./lineGroup").LineGroup = null as any;
+utilities.lazyLoad(exports, ["LineGroup"], () => require("./lineGroup"));
+
 export { ModifyDomainOwnerOperationArgs, ModifyDomainOwnerOperationState } from "./modifyDomainOwnerOperation";
 export type ModifyDomainOwnerOperation = import("./modifyDomainOwnerOperation").ModifyDomainOwnerOperation;
 export const ModifyDomainOwnerOperation: typeof import("./modifyDomainOwnerOperation").ModifyDomainOwnerOperation = null as any;
@@ -79,6 +89,16 @@ export { ModifyRecordGroupOperationArgs, ModifyRecordGroupOperationState } from 
 export type ModifyRecordGroupOperation = import("./modifyRecordGroupOperation").ModifyRecordGroupOperation;
 export const ModifyRecordGroupOperation: typeof import("./modifyRecordGroupOperation").ModifyRecordGroupOperation = null as any;
 utilities.lazyLoad(exports, ["ModifyRecordGroupOperation"], () => require("./modifyRecordGroupOperation"));
+
+export { PackageDomainArgs, PackageDomainState } from "./packageDomain";
+export type PackageDomain = import("./packageDomain").PackageDomain;
+export const PackageDomain: typeof import("./packageDomain").PackageDomain = null as any;
+utilities.lazyLoad(exports, ["PackageDomain"], () => require("./packageDomain"));
+
+export { PackageOrderArgs, PackageOrderState } from "./packageOrder";
+export type PackageOrder = import("./packageOrder").PackageOrder;
+export const PackageOrder: typeof import("./packageOrder").PackageOrder = null as any;
+utilities.lazyLoad(exports, ["PackageOrder"], () => require("./packageOrder"));
 
 export { RecordArgs, RecordState } from "./record";
 export type Record = import("./record").Record;
@@ -110,10 +130,16 @@ const _module = {
                 return new DomainLock(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation":
                 return new DownloadSnapshotOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/lineGroup:LineGroup":
+                return new LineGroup(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation":
                 return new ModifyDomainOwnerOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation":
                 return new ModifyRecordGroupOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/packageDomain:PackageDomain":
+                return new PackageDomain(name, <any>undefined, { urn })
+            case "tencentcloud:Dnspod/packageOrder:PackageOrder":
+                return new PackageOrder(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/record:Record":
                 return new Record(name, <any>undefined, { urn })
             case "tencentcloud:Dnspod/recordGroup:RecordGroup":
@@ -130,8 +156,11 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainAlias", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/domainLock", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/downloadSnapshotOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/lineGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/modifyDomainOwnerOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/modifyRecordGroupOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/packageDomain", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/packageOrder", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/record", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/recordGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dnspod/snapshotConfig", _module)

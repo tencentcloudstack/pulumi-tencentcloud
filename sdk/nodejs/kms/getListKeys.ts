@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getListKeys({
+ * const example = tencentcloud.kms.getListKeys({
  *     role: 1,
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetListKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getListKeys({
+ * const example = tencentcloud.kms.getListKeys({
  *     role: 1,
  * });
  * ```
@@ -95,13 +95,13 @@ export interface GetListKeysOutputArgs {
     /**
      * HSM cluster ID (only valid for KMS exclusive/managed service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter based on the creator role. The default value is 0, which indicates the cmk created by the user himself, and 1, which indicates the cmk automatically created by authorizing other cloud products.
      */
-    role?: pulumi.Input<number>;
+    role?: pulumi.Input<number | undefined>;
 }

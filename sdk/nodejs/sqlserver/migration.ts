@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -257,31 +257,31 @@ export interface MigrationState {
     /**
      * Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).
      */
-    migrateDbSets?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationMigrateDbSet>[]>;
+    migrateDbSets?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationMigrateDbSet>[] | undefined>;
     /**
      * Name of the migration task.
      */
-    migrateName?: pulumi.Input<string>;
+    migrateName?: pulumi.Input<string | undefined>;
     /**
      * Migration type (1 structure migration 2 data migration 3 incremental synchronization).
      */
-    migrateType?: pulumi.Input<number>;
+    migrateType?: pulumi.Input<number | undefined>;
     /**
      * Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.
      */
-    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationRenameRestore>[]>;
+    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationRenameRestore>[] | undefined>;
     /**
      * Migration source.
      */
-    source?: pulumi.Input<inputs.Sqlserver.MigrationSource>;
+    source?: pulumi.Input<inputs.Sqlserver.MigrationSource | undefined>;
     /**
      * Type of migration source 1 TencentDB for SQLServer 2 Cloud server self-built SQLServer database 4 SQLServer backup and restore 5 SQLServer backup and restore (COS mode).
      */
-    sourceType?: pulumi.Input<number>;
+    sourceType?: pulumi.Input<number | undefined>;
     /**
      * Migration target.
      */
-    target?: pulumi.Input<inputs.Sqlserver.MigrationTarget>;
+    target?: pulumi.Input<inputs.Sqlserver.MigrationTarget | undefined>;
 }
 
 /**
@@ -291,7 +291,7 @@ export interface MigrationArgs {
     /**
      * Migrate DB objects. Offline migration is not used (SourceType=4 or SourceType=5).
      */
-    migrateDbSets?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationMigrateDbSet>[]>;
+    migrateDbSets?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationMigrateDbSet>[] | undefined>;
     /**
      * Name of the migration task.
      */
@@ -303,7 +303,7 @@ export interface MigrationArgs {
     /**
      * Restore and rename the database in ReNameRestoreDatabase. If it is not filled in, the restored database will be named by default and all databases will be restored. Valid if SourceType=5.
      */
-    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationRenameRestore>[]>;
+    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.MigrationRenameRestore>[] | undefined>;
     /**
      * Migration source.
      */

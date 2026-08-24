@@ -90,12 +90,8 @@ type GetAlarmConditionsTemplateResult struct {
 }
 
 func GetAlarmConditionsTemplateOutput(ctx *pulumi.Context, args GetAlarmConditionsTemplateOutputArgs, opts ...pulumi.InvokeOption) GetAlarmConditionsTemplateResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmConditionsTemplateResultOutput, error) {
-			args := v.(GetAlarmConditionsTemplateArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args, GetAlarmConditionsTemplateResultOutput{}, options).(GetAlarmConditionsTemplateResultOutput), nil
-		}).(GetAlarmConditionsTemplateResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args, GetAlarmConditionsTemplateResultOutput{}, options).(GetAlarmConditionsTemplateResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmConditionsTemplate.

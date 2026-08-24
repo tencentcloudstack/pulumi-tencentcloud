@@ -13,8 +13,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// <summary>
     /// Provides a resource to create a Trocket rocketmq instance
     /// 
-    /// &gt; **NOTE:** It only supports create postpaid rocketmq 5.x instance.
-    /// 
     /// ## Example Usage
     /// 
     /// ### Create Basic Instance
@@ -126,6 +124,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// });
     /// ```
     /// 
+    /// ### Create Instance with Billing and Deployment Params
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         Name = "vpc",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         Name = "subnet",
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create rocketmq instance with billing and deployment params
+    ///     var example = new Tencentcloud.Trocket.RocketmqInstance("example", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         InstanceType = "PRO",
+    ///         SkuCode = "pro_4k",
+    ///         Remark = "remark",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         PayMode = 1,
+    ///         RenewFlag = 1,
+    ///         TimeSpan = 12,
+    ///         MaxTopicNum = 1000,
+    ///         ZoneIds = new[]
+    ///         {
+    ///             100006,
+    ///             100007,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Trocket rocketmq instance can be imported using the id, e.g.
@@ -138,40 +191,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     public partial class RocketmqInstance : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Public network bandwidth. `Bandwidth` must be greater than zero when `EnablePublic` equal true.
+        /// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
         /// </summary>
         [Output("bandwidth")]
         public Output<int> Bandwidth { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable the public network. Must set `Bandwidth` when `EnablePublic` equal true.
+        /// Whether to enable public network access, default false. When set to true, `Bandwidth` must be set to a positive integer.
         /// </summary>
         [Output("enablePublic")]
         public Output<bool> EnablePublic { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+        /// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
         /// </summary>
         [Output("instanceType")]
         public Output<string> InstanceType { get; private set; } = null!;
 
         /// <summary>
-        /// Public network access whitelist.
+        /// Public network access whitelist. If left empty, all IP access is denied.
         /// </summary>
         [Output("ipRules")]
         public Output<ImmutableArray<Outputs.RocketmqInstanceIpRule>> IpRules { get; private set; } = null!;
 
         /// <summary>
-        /// Message retention time in hours.
+        /// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+        /// </summary>
+        [Output("maxTopicNum")]
+        public Output<int?> MaxTopicNum { get; private set; } = null!;
+
+        /// <summary>
+        /// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Output("messageRetention")]
         public Output<int> MessageRetention { get; private set; } = null!;
 
         /// <summary>
-        /// Instance name.
+        /// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+        /// </summary>
+        [Output("payMode")]
+        public Output<int> PayMode { get; private set; } = null!;
 
         /// <summary>
         /// Public network access address.
@@ -180,28 +245,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Output<string> PublicEndPoint { get; private set; } = null!;
 
         /// <summary>
-        /// Remark.
+        /// Remark information.
         /// </summary>
         [Output("remark")]
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+        /// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+        /// </summary>
+        [Output("renewFlag")]
+        public Output<int> RenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Output("skuCode")]
         public Output<string> SkuCode { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet id.
+        /// Subnet ID that the instance binds to.
         /// </summary>
         [Output("subnetId")]
         public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
-        /// Tag description list.
+        /// Tag list.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+        /// </summary>
+        [Output("timeSpan")]
+        public Output<int?> TimeSpan { get; private set; } = null!;
 
         /// <summary>
         /// VPC access address.
@@ -210,10 +287,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Output<string> VpcEndPoint { get; private set; } = null!;
 
         /// <summary>
-        /// VPC id.
+        /// VPC ID that the instance binds to.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+        /// </summary>
+        [Output("zoneIds")]
+        public Output<ImmutableArray<int>> ZoneIds { get; private set; } = null!;
 
 
         /// <summary>
@@ -263,19 +346,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     public sealed class RocketmqInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Public network bandwidth. `Bandwidth` must be greater than zero when `EnablePublic` equal true.
+        /// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
-        /// Whether to enable the public network. Must set `Bandwidth` when `EnablePublic` equal true.
+        /// Whether to enable public network access, default false. When set to true, `Bandwidth` must be set to a positive integer.
         /// </summary>
         [Input("enablePublic")]
         public Input<bool>? EnablePublic { get; set; }
 
         /// <summary>
-        /// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+        /// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
         /// </summary>
         [Input("instanceType", required: true)]
         public Input<string> InstanceType { get; set; } = null!;
@@ -284,7 +367,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         private InputList<Inputs.RocketmqInstanceIpRuleArgs>? _ipRules;
 
         /// <summary>
-        /// Public network access whitelist.
+        /// Public network access whitelist. If left empty, all IP access is denied.
         /// </summary>
         public InputList<Inputs.RocketmqInstanceIpRuleArgs> IpRules
         {
@@ -293,31 +376,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
 
         /// <summary>
-        /// Message retention time in hours.
+        /// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+        /// </summary>
+        [Input("maxTopicNum")]
+        public Input<int>? MaxTopicNum { get; set; }
+
+        /// <summary>
+        /// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Input("messageRetention")]
         public Input<int>? MessageRetention { get; set; }
 
         /// <summary>
-        /// Instance name.
+        /// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Remark.
+        /// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+        /// </summary>
+        [Input("payMode")]
+        public Input<int>? PayMode { get; set; }
+
+        /// <summary>
+        /// Remark information.
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+        /// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+        /// </summary>
+        [Input("renewFlag")]
+        public Input<int>? RenewFlag { get; set; }
+
+        /// <summary>
+        /// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Input("skuCode", required: true)]
         public Input<string> SkuCode { get; set; } = null!;
 
         /// <summary>
-        /// Subnet id.
+        /// Subnet ID that the instance binds to.
         /// </summary>
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
@@ -326,7 +427,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// Tag list.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -335,10 +436,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
 
         /// <summary>
-        /// VPC id.
+        /// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+        /// </summary>
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
+
+        /// <summary>
+        /// VPC ID that the instance binds to.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
+
+        [Input("zoneIds")]
+        private InputList<int>? _zoneIds;
+
+        /// <summary>
+        /// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+        /// </summary>
+        public InputList<int> ZoneIds
+        {
+            get => _zoneIds ?? (_zoneIds = new InputList<int>());
+            set => _zoneIds = value;
+        }
 
         public RocketmqInstanceArgs()
         {
@@ -349,19 +468,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     public sealed class RocketmqInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Public network bandwidth. `Bandwidth` must be greater than zero when `EnablePublic` equal true.
+        /// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
         /// </summary>
         [Input("bandwidth")]
         public Input<int>? Bandwidth { get; set; }
 
         /// <summary>
-        /// Whether to enable the public network. Must set `Bandwidth` when `EnablePublic` equal true.
+        /// Whether to enable public network access, default false. When set to true, `Bandwidth` must be set to a positive integer.
         /// </summary>
         [Input("enablePublic")]
         public Input<bool>? EnablePublic { get; set; }
 
         /// <summary>
-        /// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+        /// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
         /// </summary>
         [Input("instanceType")]
         public Input<string>? InstanceType { get; set; }
@@ -370,7 +489,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         private InputList<Inputs.RocketmqInstanceIpRuleGetArgs>? _ipRules;
 
         /// <summary>
-        /// Public network access whitelist.
+        /// Public network access whitelist. If left empty, all IP access is denied.
         /// </summary>
         public InputList<Inputs.RocketmqInstanceIpRuleGetArgs> IpRules
         {
@@ -379,16 +498,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
 
         /// <summary>
-        /// Message retention time in hours.
+        /// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+        /// </summary>
+        [Input("maxTopicNum")]
+        public Input<int>? MaxTopicNum { get; set; }
+
+        /// <summary>
+        /// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Input("messageRetention")]
         public Input<int>? MessageRetention { get; set; }
 
         /// <summary>
-        /// Instance name.
+        /// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+        /// </summary>
+        [Input("payMode")]
+        public Input<int>? PayMode { get; set; }
 
         /// <summary>
         /// Public network access address.
@@ -397,19 +528,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Input<string>? PublicEndPoint { get; set; }
 
         /// <summary>
-        /// Remark.
+        /// Remark information.
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+        /// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+        /// </summary>
+        [Input("renewFlag")]
+        public Input<int>? RenewFlag { get; set; }
+
+        /// <summary>
+        /// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
         /// </summary>
         [Input("skuCode")]
         public Input<string>? SkuCode { get; set; }
 
         /// <summary>
-        /// Subnet id.
+        /// Subnet ID that the instance binds to.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -418,7 +555,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// Tag list.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -427,16 +564,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
 
         /// <summary>
+        /// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+        /// </summary>
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
+
+        /// <summary>
         /// VPC access address.
         /// </summary>
         [Input("vpcEndPoint")]
         public Input<string>? VpcEndPoint { get; set; }
 
         /// <summary>
-        /// VPC id.
+        /// VPC ID that the instance binds to.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        [Input("zoneIds")]
+        private InputList<int>? _zoneIds;
+
+        /// <summary>
+        /// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+        /// </summary>
+        public InputList<int> ZoneIds
+        {
+            get => _zoneIds ?? (_zoneIds = new InputList<int>());
+            set => _zoneIds = value;
+        }
 
         public RocketmqInstanceState()
         {

@@ -80,12 +80,8 @@ type GetSnapshotFilesResult struct {
 }
 
 func GetSnapshotFilesOutput(ctx *pulumi.Context, args GetSnapshotFilesOutputArgs, opts ...pulumi.InvokeOption) GetSnapshotFilesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSnapshotFilesResultOutput, error) {
-			args := v.(GetSnapshotFilesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args, GetSnapshotFilesResultOutput{}, options).(GetSnapshotFilesResultOutput), nil
-		}).(GetSnapshotFilesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", args, GetSnapshotFilesResultOutput{}, options).(GetSnapshotFilesResultOutput)
 }
 
 // A collection of arguments for invoking getSnapshotFiles.

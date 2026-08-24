@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *     cosObjectName: "code.zip",
  *     cosBucketRegion: "ap-guangzhou",
  * });
- * const foo = tencentcloud.Scf.getFunctionsOutput({
+ * const foo = tencentcloud.scf.getFunctionsOutput({
  *     name: fooFunction.name,
  * });
  * ```
@@ -113,7 +113,7 @@ export interface GetFunctionsResult {
  *     cosObjectName: "code.zip",
  *     cosBucketRegion: "ap-guangzhou",
  * });
- * const foo = tencentcloud.Scf.getFunctionsOutput({
+ * const foo = tencentcloud.scf.getFunctionsOutput({
  *     name: fooFunction.name,
  * });
  * ```
@@ -137,21 +137,21 @@ export interface GetFunctionsOutputArgs {
     /**
      * Description of the SCF function to be queried.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF function to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Namespace of the SCF function to be queried.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the SCF function to be queried, can use up to 10 tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

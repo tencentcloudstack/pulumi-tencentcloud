@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationPublicConfig = tencentcloud.Tsf.getApplicationPublicConfig({
+ * const applicationPublicConfig = tencentcloud.tsf.getApplicationPublicConfig({
  *     configId: "dcfg-p-evjrbgly",
  *     configName: "dsadsa",
  *     configVersion: "123",
@@ -96,7 +96,7 @@ export interface GetApplicationPublicConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationPublicConfig = tencentcloud.Tsf.getApplicationPublicConfig({
+ * const applicationPublicConfig = tencentcloud.tsf.getApplicationPublicConfig({
  *     configId: "dcfg-p-evjrbgly",
  *     configName: "dsadsa",
  *     configVersion: "123",
@@ -122,21 +122,21 @@ export interface GetApplicationPublicConfigOutputArgs {
     /**
      * Config ID. Query all items if not passed, high priority.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Config ID list. Query all items if not passed, low priority.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Config name. Exact query. Query all items if not passed.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Config version. Exact query. Query all items if not passed.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

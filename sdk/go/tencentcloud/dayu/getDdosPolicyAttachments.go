@@ -90,12 +90,8 @@ type GetDdosPolicyAttachmentsResult struct {
 }
 
 func GetDdosPolicyAttachmentsOutput(ctx *pulumi.Context, args GetDdosPolicyAttachmentsOutputArgs, opts ...pulumi.InvokeOption) GetDdosPolicyAttachmentsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDdosPolicyAttachmentsResultOutput, error) {
-			args := v.(GetDdosPolicyAttachmentsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args, GetDdosPolicyAttachmentsResultOutput{}, options).(GetDdosPolicyAttachmentsResultOutput), nil
-		}).(GetDdosPolicyAttachmentsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dayu/getDdosPolicyAttachments:getDdosPolicyAttachments", args, GetDdosPolicyAttachmentsResultOutput{}, options).(GetDdosPolicyAttachmentsResultOutput)
 }
 
 // A collection of arguments for invoking getDdosPolicyAttachments.

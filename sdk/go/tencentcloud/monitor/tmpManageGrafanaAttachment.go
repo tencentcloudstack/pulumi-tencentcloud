@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -54,8 +54,8 @@ import (
 //			}
 //			foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
 //				InstanceName:      pulumi.String("tf-tmp-instance"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataRetentionTime: pulumi.Int(30),
 //				Zone:              pulumi.String(availabilityZone),
 //				Tags: pulumi.StringMap{
@@ -67,9 +67,9 @@ import (
 //			}
 //			fooGrafanaInstance, err := monitor.NewGrafanaInstance(ctx, "foo", &monitor.GrafanaInstanceArgs{
 //				InstanceName: pulumi.String("tf-grafana"),
-//				VpcId:        vpc.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				GrafanaInitPassword: pulumi.String("1234567890"),
 //				EnableInternet:      pulumi.Bool(false),
@@ -82,8 +82,8 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewTmpManageGrafanaAttachment(ctx, "foo", &monitor.TmpManageGrafanaAttachmentArgs{
-//				GrafanaId:  fooGrafanaInstance.ID(),
-//				InstanceId: foo.ID(),
+//				GrafanaId:  fooGrafanaInstance.ID().ToIDOutput().ToStringOutput(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -96,7 +96,7 @@ import (
 //
 // ## Import
 //
-// monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
+// monitor tmpManageGrafanaAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx

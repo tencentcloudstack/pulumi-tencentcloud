@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // get user info
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const appId = info.then(info => info.appId);
  * // create cos
  * const example = new tencentcloud.cos.Bucket("example", {
@@ -181,35 +181,35 @@ export interface BucketInventoryState {
     /**
      * Bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Information about the inventory result destination.
      */
-    destination?: pulumi.Input<inputs.Cos.BucketInventoryDestination>;
+    destination?: pulumi.Input<inputs.Cos.BucketInventoryDestination | undefined>;
     /**
      * Filters objects prefixed with the specified value to analyze.
      */
-    filter?: pulumi.Input<inputs.Cos.BucketInventoryFilter>;
+    filter?: pulumi.Input<inputs.Cos.BucketInventoryFilter | undefined>;
     /**
      * Whether to include object versions in the inventory. All or No.
      */
-    includedObjectVersions?: pulumi.Input<string>;
+    includedObjectVersions?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the inventory. true or false.
      */
-    isEnabled?: pulumi.Input<string>;
+    isEnabled?: pulumi.Input<string | undefined>;
     /**
      * Inventory Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Analysis items to include in the inventory result	.
      */
-    optionalFields?: pulumi.Input<inputs.Cos.BucketInventoryOptionalFields>;
+    optionalFields?: pulumi.Input<inputs.Cos.BucketInventoryOptionalFields | undefined>;
     /**
      * Inventory job cycle.
      */
-    schedule?: pulumi.Input<inputs.Cos.BucketInventorySchedule>;
+    schedule?: pulumi.Input<inputs.Cos.BucketInventorySchedule | undefined>;
 }
 
 /**
@@ -227,7 +227,7 @@ export interface BucketInventoryArgs {
     /**
      * Filters objects prefixed with the specified value to analyze.
      */
-    filter?: pulumi.Input<inputs.Cos.BucketInventoryFilter>;
+    filter?: pulumi.Input<inputs.Cos.BucketInventoryFilter | undefined>;
     /**
      * Whether to include object versions in the inventory. All or No.
      */
@@ -239,11 +239,11 @@ export interface BucketInventoryArgs {
     /**
      * Inventory Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Analysis items to include in the inventory result	.
      */
-    optionalFields?: pulumi.Input<inputs.Cos.BucketInventoryOptionalFields>;
+    optionalFields?: pulumi.Input<inputs.Cos.BucketInventoryOptionalFields | undefined>;
     /**
      * Inventory job cycle.
      */

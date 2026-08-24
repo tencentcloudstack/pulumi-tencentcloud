@@ -37,17 +37,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-mysql"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-mysql"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -56,8 +56,8 @@ import (
 //			}
 //			_, err = mysql.NewRoInstanceIp(ctx, "example", &mysql.RoInstanceIpArgs{
 //				InstanceId:   pulumi.String("cdbro-bdlvcfpj"),
-//				UniqSubnetId: subnet.ID(),
-//				UniqVpcId:    vpc.ID(),
+//				UniqSubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
+//				UniqVpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

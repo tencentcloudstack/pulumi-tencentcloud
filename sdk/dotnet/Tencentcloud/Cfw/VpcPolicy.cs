@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
 {
     /// <summary>
-    /// Provides a resource to create a cfw VpcPolicy
+    /// Provides a resource to create a CFW vpc policy
     /// 
     /// ## Example Usage
     /// 
@@ -42,10 +42,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Import
     /// 
-    /// cfw vpc_policy can be imported using the id, e.g.
+    /// CFW vpc policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
+    /// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy example 11321
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/vpcPolicy:VpcPolicy")]
@@ -98,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Output("internalUuid")]
         public Output<int> InternalUuid { get; private set; } = null!;
+
+        /// <summary>
+        /// Execution order.
+        /// </summary>
+        [Output("orderIndex")]
+        public Output<int> OrderIndex { get; private set; } = null!;
 
         /// <summary>
         /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
@@ -315,6 +321,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Input("internalUuid")]
         public Input<int>? InternalUuid { get; set; }
+
+        /// <summary>
+        /// Execution order.
+        /// </summary>
+        [Input("orderIndex")]
+        public Input<int>? OrderIndex { get; set; }
 
         /// <summary>
         /// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.

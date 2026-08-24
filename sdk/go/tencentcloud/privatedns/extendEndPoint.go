@@ -67,11 +67,14 @@ import (
 //				EndPointName:   pulumi.String("tf-example"),
 //				EndPointRegion: pulumi.String("ap-jakarta"),
 //				ForwardIp: &privatedns.ExtendEndPointForwardIpArgs{
-//					AccessType:      pulumi.String("CCN"),
-//					Host:            pulumi.String("1.1.1.1"),
+//					AccessType: pulumi.String("CCN"),
+//					Hosts: pulumi.StringArray{
+//						pulumi.String("1.1.1.1:8080"),
+//						pulumi.String("2.2.2.2:9090"),
+//					},
 //					Port:            pulumi.Int(8080),
-//					VpcId:           pulumi.String("vpc-2qjckjg2"),
-//					AccessGatewayId: pulumi.String("ccn-eo13f8ub"),
+//					VpcId:           pulumi.String("vpc-h70u60bi"),
+//					AccessGatewayId: pulumi.String("ccn-4s3g3yg5"),
 //				},
 //			})
 //			if err != nil {

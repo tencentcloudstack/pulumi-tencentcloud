@@ -33,7 +33,7 @@ import (
 //				PublicIpAddress: pulumi.StringRef("1.1.1.1"),
 //				Zone:            pulumi.StringRef("ap-guangzhou-3"),
 //				VpcId:           pulumi.StringRef("vpc-dk8zmwuf"),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"test": "tf",
 //				},
 //			}, nil)
@@ -93,12 +93,8 @@ type GetGatewaysResult struct {
 }
 
 func GetGatewaysOutput(ctx *pulumi.Context, args GetGatewaysOutputArgs, opts ...pulumi.InvokeOption) GetGatewaysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewaysResultOutput, error) {
-			args := v.(GetGatewaysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getGateways:getGateways", args, GetGatewaysResultOutput{}, options).(GetGatewaysResultOutput), nil
-		}).(GetGatewaysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getGateways:getGateways", args, GetGatewaysResultOutput{}, options).(GetGatewaysResultOutput)
 }
 
 // A collection of arguments for invoking getGateways.

@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -91,7 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Import
     /// 
-    /// sqlserver renew_db_instance can be imported using the id, e.g.
+    /// sqlserver RenewDbInstance can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance example mssql-i9ma6oy7#1

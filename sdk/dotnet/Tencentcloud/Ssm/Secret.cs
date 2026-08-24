@@ -47,7 +47,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -115,7 +114,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// ## Import
     /// 
     /// SSM secret can be imported using the secretName, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssm/secret:Secret foo test
     /// ```

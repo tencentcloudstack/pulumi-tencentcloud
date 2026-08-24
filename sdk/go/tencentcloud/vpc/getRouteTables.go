@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query vpc route tables information.
+// Use this data source to query VPC route tables information.
 //
 // ## Example Usage
 //
@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			routeTable, err := route.NewTable(ctx, "route_table", &route.TableArgs{
-//				VpcId: foo.ID(),
+//				VpcId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Name:  pulumi.String("ci-temp-test-rt"),
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -52,20 +52,18 @@ import (
 //				return err
 //			}
 //			_ = vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
-//				RouteTableId: routeTable.ID(),
+//				RouteTableId: routeTable.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_ = vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
 //				Name: routeTable.Name,
 //			}, nil)
 //			_ = vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
-//				VpcId:           foo.ID(),
+//				VpcId:           foo.ID().ToIDOutput().ToStringOutput(),
 //				AssociationMain: pulumi.Bool(true),
 //			}, nil)
-//			_ = routeTable.Tags.ApplyT(func(tags map[string]string) (vpc.GetRouteTablesResult, error) {
-//				return vpc.GetRouteTablesResult(interface{}(vpc.GetRouteTables(ctx, &vpc.GetRouteTablesArgs{
-//					Tags: tags,
-//				}, nil))), nil
-//			}).(vpc.GetRouteTablesResultOutput)
+//			_ = vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
+//				Tags: routeTable.Tags,
+//			}, nil)
 //			return nil
 //		})
 //	}
@@ -119,12 +117,8 @@ type GetRouteTablesResult struct {
 }
 
 func GetRouteTablesOutput(ctx *pulumi.Context, args GetRouteTablesOutputArgs, opts ...pulumi.InvokeOption) GetRouteTablesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRouteTablesResultOutput, error) {
-			args := v.(GetRouteTablesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getRouteTables:getRouteTables", args, GetRouteTablesResultOutput{}, options).(GetRouteTablesResultOutput), nil
-		}).(GetRouteTablesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getRouteTables:getRouteTables", args, GetRouteTablesResultOutput{}, options).(GetRouteTablesResultOutput)
 }
 
 // A collection of arguments for invoking getRouteTables.

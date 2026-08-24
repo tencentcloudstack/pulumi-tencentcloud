@@ -16,7 +16,7 @@ import (
 //
 // ## Import
 //
-// tdmq rabbitmq_user can be imported using the id, e.g.
+// tdmq rabbitmqUser can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user

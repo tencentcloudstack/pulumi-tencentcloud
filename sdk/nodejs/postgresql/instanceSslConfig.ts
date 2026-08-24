@@ -131,19 +131,19 @@ export interface InstanceSslConfigState {
     /**
      * Cloud root certificate download link.
      */
-    caUrl?: pulumi.Input<string>;
+    caUrl?: pulumi.Input<string | undefined>;
     /**
      * The unique connection address protected by SSL certificate, which can be set as the internal and external IP address if it is the primary instance; If it is a read-only instance, it can be set as the instance IP or read-only group IP. This parameter is mandatory when enabling SSL or modifying SSL protected connection addresses; When SSL is turned off, this parameter will be ignored.
      */
-    connectAddress?: pulumi.Input<string>;
+    connectAddress?: pulumi.Input<string | undefined>;
     /**
      * Postgres instance ID.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Enable or disable SSL. true: enable; false: disable.
      */
-    sslEnabled?: pulumi.Input<boolean>;
+    sslEnabled?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -153,7 +153,7 @@ export interface InstanceSslConfigArgs {
     /**
      * The unique connection address protected by SSL certificate, which can be set as the internal and external IP address if it is the primary instance; If it is a read-only instance, it can be set as the instance IP or read-only group IP. This parameter is mandatory when enabling SSL or modifying SSL protected connection addresses; When SSL is turned off, this parameter will be ignored.
      */
-    connectAddress?: pulumi.Input<string>;
+    connectAddress?: pulumi.Input<string | undefined>;
     /**
      * Postgres instance ID.
      */

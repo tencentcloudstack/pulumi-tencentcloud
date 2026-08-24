@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Import
     /// 
-    /// ci media_video_process_template can be imported using the bucket#templateId, e.g.
+    /// ci MediaVideoProcessTemplate can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52

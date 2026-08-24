@@ -94,11 +94,11 @@ export interface StorageSetAttachmentState {
     /**
      * ID of the CVM instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * ID of the mounted CBS.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
 }
 
 /**

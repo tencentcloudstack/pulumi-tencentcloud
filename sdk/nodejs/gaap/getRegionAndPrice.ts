@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const regionAndPrice = tencentcloud.Gaap.getRegionAndPrice({});
+ * const regionAndPrice = tencentcloud.gaap.getRegionAndPrice({});
  * ```
  */
 export function getRegionAndPrice(args?: GetRegionAndPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionAndPriceResult> {
@@ -79,7 +79,7 @@ export interface GetRegionAndPriceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const regionAndPrice = tencentcloud.Gaap.getRegionAndPrice({});
+ * const regionAndPrice = tencentcloud.gaap.getRegionAndPrice({});
  * ```
  */
 export function getRegionAndPriceOutput(args?: GetRegionAndPriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionAndPriceResult> {
@@ -99,13 +99,13 @@ export interface GetRegionAndPriceOutputArgs {
     /**
      * IP version. Available values: IPv4, IPv6. Default is IPv4.
      */
-    ipAddressVersion?: pulumi.Input<string>;
+    ipAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * Type of channel package. `Thunder` represents standard channel group, `Accelerator` represents game accelerator channel, and `CrossBorder` represents cross-border channel.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver general_cloud_instance can be imported using the id, e.g.
+ * sqlserver generalCloudInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
@@ -309,113 +309,113 @@ export interface GeneralCloudInstanceState {
     /**
      * Automatic renewal flag: 0-normal renewal 1-automatic renewal, the default is 1 automatic renewal. Valid only when purchasing a prepaid instance. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * System character set collation, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * Cpu, unit: CORE.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * sqlserver version, currently all supported versions are: 2008R2 (SQL Server 2008 R2 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 201202 (SQL Server 2012 Standard), 2014SP2 (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise), 201702 (SQL Server 2017 Standard), 2019 (SQL Server 2019 Enterprise), 201902 (SQL Server 2019 Standard). Each region supports different versions for sale, and the version information that can be sold in each region can be pulled through the DescribeProductConfig interface. If left blank, the default version is 2008R2.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Disk encryption identification, 0-not encrypted, 1-encrypted.
      */
-    diskEncryptFlag?: pulumi.Input<number>;
+    diskEncryptFlag?: pulumi.Input<number | undefined>;
     /**
      * Internet address domain name.
      */
-    dnsPodDomain?: pulumi.Input<string>;
+    dnsPodDomain?: pulumi.Input<string | undefined>;
     /**
      * The standby node availability area is empty by default. When MultiNodes = true, the primary node and standby node availability areas cannot all be the same. The minimum number of standby availability areas set is 2, and the maximum number is no more than 5.
      */
-    drZones?: pulumi.Input<pulumi.Input<string>[]>;
+    drZones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * It has been deprecated from version 1.81.2. Upgrade the high-availability architecture of sqlserver, upgrade from mirror disaster recovery to always on cluster disaster recovery, only support 2017 and above and support always on high-availability instances, do not support downgrading to mirror disaster recovery, CLUSTER-upgrade to always on capacity Disaster, if not filled, the high-availability architecture will not be modified.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    haType?: pulumi.Input<string>;
+    haType?: pulumi.Input<string | undefined>;
     /**
      * Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Memory, unit: GB.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Whether it is a multi-node architecture instance, the default value is false. When MultiNodes = true, the parameter MultiZones must be true.
      */
-    multiNodes?: pulumi.Input<boolean>;
+    multiNodes?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to deploy across availability zones, the default value is false.
      */
-    multiZones?: pulumi.Input<boolean>;
+    multiZones?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period, the default value is 1, which means one month. The value cannot exceed 48. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * A collection of tags bound to the new instance.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.GeneralCloudInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.GeneralCloudInstanceResourceTag>[] | undefined>;
     /**
      * Security group list, fill in the security group ID in the form of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Maintainable time window configuration, duration, unit: hour.
      */
-    span?: pulumi.Input<number>;
+    span?: pulumi.Input<number | undefined>;
     /**
      * Maintainable time window configuration, daily maintainable start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * instance disk storage, unit: GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * External port number.
      */
-    tgwWanVport?: pulumi.Input<number>;
+    tgwWanVport?: pulumi.Input<number | undefined>;
     /**
      * System time zone, default: China Standard Time.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
      */
-    weeklies?: pulumi.Input<pulumi.Input<number>[]>;
+    weeklies?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the DescribeZones API.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -425,11 +425,11 @@ export interface GeneralCloudInstanceArgs {
     /**
      * Automatic renewal flag: 0-normal renewal 1-automatic renewal, the default is 1 automatic renewal. Valid only when purchasing a prepaid instance. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * System character set collation, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * Cpu, unit: CORE.
      */
@@ -437,25 +437,25 @@ export interface GeneralCloudInstanceArgs {
     /**
      * sqlserver version, currently all supported versions are: 2008R2 (SQL Server 2008 R2 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 201202 (SQL Server 2012 Standard), 2014SP2 (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise), 201702 (SQL Server 2017 Standard), 2019 (SQL Server 2019 Enterprise), 201902 (SQL Server 2019 Standard). Each region supports different versions for sale, and the version information that can be sold in each region can be pulled through the DescribeProductConfig interface. If left blank, the default version is 2008R2.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Disk encryption identification, 0-not encrypted, 1-encrypted.
      */
-    diskEncryptFlag?: pulumi.Input<number>;
+    diskEncryptFlag?: pulumi.Input<number | undefined>;
     /**
      * The standby node availability area is empty by default. When MultiNodes = true, the primary node and standby node availability areas cannot all be the same. The minimum number of standby availability areas set is 2, and the maximum number is no more than 5.
      */
-    drZones?: pulumi.Input<pulumi.Input<string>[]>;
+    drZones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * It has been deprecated from version 1.81.2. Upgrade the high-availability architecture of sqlserver, upgrade from mirror disaster recovery to always on cluster disaster recovery, only support 2017 and above and support always on high-availability instances, do not support downgrading to mirror disaster recovery, CLUSTER-upgrade to always on capacity Disaster, if not filled, the high-availability architecture will not be modified.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    haType?: pulumi.Input<string>;
+    haType?: pulumi.Input<string | undefined>;
     /**
      * Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
      */
@@ -467,39 +467,39 @@ export interface GeneralCloudInstanceArgs {
     /**
      * Whether it is a multi-node architecture instance, the default value is false. When MultiNodes = true, the parameter MultiZones must be true.
      */
-    multiNodes?: pulumi.Input<boolean>;
+    multiNodes?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to deploy across availability zones, the default value is false.
      */
-    multiZones?: pulumi.Input<boolean>;
+    multiZones?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period, the default value is 1, which means one month. The value cannot exceed 48. Valid only when the 'instance_charge_type' parameter value is 'PREPAID'.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * A collection of tags bound to the new instance.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.GeneralCloudInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.GeneralCloudInstanceResourceTag>[] | undefined>;
     /**
      * Security group list, fill in the security group ID in the form of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Maintainable time window configuration, duration, unit: hour.
      */
-    span?: pulumi.Input<number>;
+    span?: pulumi.Input<number | undefined>;
     /**
      * Maintainable time window configuration, daily maintainable start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * instance disk storage, unit: GB.
      */
@@ -507,19 +507,19 @@ export interface GeneralCloudInstanceArgs {
     /**
      * VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * System time zone, default: China Standard Time.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
      */
-    weeklies?: pulumi.Input<pulumi.Input<number>[]>;
+    weeklies?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the DescribeZones API.
      */

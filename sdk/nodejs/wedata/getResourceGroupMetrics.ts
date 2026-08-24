@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getResourceGroupMetrics({
+ * const example = tencentcloud.wedata.getResourceGroupMetrics({
  *     resourceGroupId: "20250909193110713075",
  * });
  * ```
@@ -94,7 +94,7 @@ export interface GetResourceGroupMetricsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getResourceGroupMetrics({
+ * const example = tencentcloud.wedata.getResourceGroupMetrics({
  *     resourceGroupId: "20250909193110713075",
  * });
  * ```
@@ -118,11 +118,11 @@ export interface GetResourceGroupMetricsOutputArgs {
     /**
      * Usage trend end time (milliseconds), default to current time.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Metric collection granularity, unit in minutes, default 1 minute.
      */
-    granularity?: pulumi.Input<number>;
+    granularity?: pulumi.Input<number | undefined>;
     /**
      * Metric dimension.
      *
@@ -130,7 +130,7 @@ export interface GetResourceGroupMetricsOutputArgs {
      * - task --- Task metrics
      * - system --- System metrics.
      */
-    metricType?: pulumi.Input<string>;
+    metricType?: pulumi.Input<string | undefined>;
     /**
      * Execution resource group ID.
      */
@@ -138,9 +138,9 @@ export interface GetResourceGroupMetricsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Usage trend start time (milliseconds), default to the last hour.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
 }

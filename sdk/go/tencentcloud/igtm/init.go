@@ -27,6 +27,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Instance{}
 	case "tencentcloud:Igtm/monitor:Monitor":
 		r = &Monitor{}
+	case "tencentcloud:Igtm/packageInstance:PackageInstance":
+		r = &PackageInstance{}
+	case "tencentcloud:Igtm/packageTask:PackageTask":
+		r = &PackageTask{}
 	case "tencentcloud:Igtm/strategy:Strategy":
 		r = &Strategy{}
 	default:
@@ -55,6 +59,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Igtm/monitor",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Igtm/packageInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Igtm/packageTask",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const record = tencentcloud.Dnspod.getRecords({
+ * const record = tencentcloud.dnspod.getRecords({
  *     domain: "example.com",
  *     subdomain: "www",
  * });
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const record = tencentcloud.Dnspod.getRecords({
+ * const record = tencentcloud.dnspod.getRecords({
  *     domain: "example.com",
  *     subdomain: "www",
  *     limit: 100,
@@ -156,7 +156,7 @@ export interface GetRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const record = tencentcloud.Dnspod.getRecords({
+ * const record = tencentcloud.dnspod.getRecords({
  *     domain: "example.com",
  *     subdomain: "www",
  * });
@@ -169,7 +169,7 @@ export interface GetRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const record = tencentcloud.Dnspod.getRecords({
+ * const record = tencentcloud.dnspod.getRecords({
  *     domain: "example.com",
  *     subdomain: "www",
  *     limit: 100,
@@ -207,53 +207,53 @@ export interface GetRecordsOutputArgs {
     /**
      * The domain for which DNS records are to be obtained.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The ID of the domain for which DNS records are to be obtained. If DomainId is passed in, the system will omit the parameter domain.
      */
-    domainId?: pulumi.Input<string>;
+    domainId?: pulumi.Input<string | undefined>;
     /**
      * The group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * The keyword for searching for DNS records. Host headers and record values are supported.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * The limit. It defaults to 100 and can be up to 3,000.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * The offset. Default value: 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * The split zone name.
      */
-    recordLine?: pulumi.Input<string>;
+    recordLine?: pulumi.Input<string | undefined>;
     /**
      * The split zone ID. If `recordLineId` is passed in, the system will omit the parameter `recordLine`.
      */
-    recordLineId?: pulumi.Input<string>;
+    recordLineId?: pulumi.Input<string | undefined>;
     /**
      * The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
      */
-    recordType?: pulumi.Input<string>;
+    recordType?: pulumi.Input<string | undefined>;
     /**
      * Used for store query result as JSON.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The sorting field. Available values: name, line, type, value, weight, mx, and ttl,updated_on.
      */
-    sortField?: pulumi.Input<string>;
+    sortField?: pulumi.Input<string | undefined>;
     /**
      * The sorting type. Valid values: ASC (ascending, default), DESC (descending).
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
      */
-    subdomain?: pulumi.Input<string>;
+    subdomain?: pulumi.Input<string | undefined>;
 }

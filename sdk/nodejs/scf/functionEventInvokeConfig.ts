@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf function_event_invoke_config can be imported using the id, e.g.
+ * scf functionEventInvokeConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace
@@ -116,15 +116,15 @@ export interface FunctionEventInvokeConfigState {
     /**
      * Async retry configuration information.
      */
-    asyncTriggerConfig?: pulumi.Input<inputs.Scf.FunctionEventInvokeConfigAsyncTriggerConfig>;
+    asyncTriggerConfig?: pulumi.Input<inputs.Scf.FunctionEventInvokeConfigAsyncTriggerConfig | undefined>;
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -142,5 +142,5 @@ export interface FunctionEventInvokeConfigArgs {
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }

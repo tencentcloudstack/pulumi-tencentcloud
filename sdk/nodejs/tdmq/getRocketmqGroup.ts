@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqGroupOutput({
+ * const example = tencentcloud.tdmq.getRocketmqGroupOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     namespaceId: exampleRocketmqNamespace.namespaceName,
  *     filterGroup: exampleRocketmqGroup.groupName,
@@ -126,7 +126,7 @@ export interface GetRocketmqGroupResult {
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqGroupOutput({
+ * const example = tencentcloud.tdmq.getRocketmqGroupOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     namespaceId: exampleRocketmqNamespace.namespaceName,
  *     filterGroup: exampleRocketmqGroup.groupName,
@@ -156,15 +156,15 @@ export interface GetRocketmqGroupOutputArgs {
     /**
      * Consumer group query by consumer group name. Fuzzy query is supported.
      */
-    filterGroup?: pulumi.Input<string>;
+    filterGroup?: pulumi.Input<string | undefined>;
     /**
      * Subscription group name. After it is specified, the information of only this subscription group will be returned.
      */
-    filterOneGroup?: pulumi.Input<string>;
+    filterOneGroup?: pulumi.Input<string | undefined>;
     /**
      * Topic name, which can be used to query all subscription groups under the topic.
      */
-    filterTopic?: pulumi.Input<string>;
+    filterTopic?: pulumi.Input<string | undefined>;
     /**
      * Namespace.
      */
@@ -172,5 +172,5 @@ export interface GetRocketmqGroupOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

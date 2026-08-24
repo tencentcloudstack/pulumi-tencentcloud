@@ -24,36 +24,38 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := monitor.GetAlarmPolicy(ctx, &monitor.GetAlarmPolicyArgs{
-// Module: "monitor",
-// PolicyName: pulumi.StringRef("terraform"),
-// MonitorTypes: []string{
-// "MT_QCE",
-// },
-// Namespaces: []string{
-// "cvm_device",
-// },
-// ProjectIds: interface{}{
-// 0,
-// },
-// NoticeIds: []string{
-// "notice-f2svbu3w",
-// },
-// RuleTypes: []string{
-// "STATIC",
-// },
-// Enables: interface{}{
-// 1,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.GetAlarmPolicy(ctx, &monitor.GetAlarmPolicyArgs{
+//				Module:     "monitor",
+//				PolicyName: pulumi.StringRef("terraform"),
+//				MonitorTypes: []string{
+//					"MT_QCE",
+//				},
+//				Namespaces: []string{
+//					"cvm_device",
+//				},
+//				ProjectIds: []int{
+//					0,
+//				},
+//				NoticeIds: []string{
+//					"notice-f2svbu3w",
+//				},
+//				RuleTypes: []string{
+//					"STATIC",
+//				},
+//				Enables: []int{
+//					1,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupAlarmPolicy(ctx *pulumi.Context, args *LookupAlarmPolicyArgs, opts ...pulumi.InvokeOption) (*LookupAlarmPolicyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -156,12 +158,8 @@ type LookupAlarmPolicyResult struct {
 }
 
 func LookupAlarmPolicyOutput(ctx *pulumi.Context, args LookupAlarmPolicyOutputArgs, opts ...pulumi.InvokeOption) LookupAlarmPolicyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupAlarmPolicyResultOutput, error) {
-			args := v.(LookupAlarmPolicyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args, LookupAlarmPolicyResultOutput{}, options).(LookupAlarmPolicyResultOutput), nil
-		}).(LookupAlarmPolicyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args, LookupAlarmPolicyResultOutput{}, options).(LookupAlarmPolicyResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmPolicy.

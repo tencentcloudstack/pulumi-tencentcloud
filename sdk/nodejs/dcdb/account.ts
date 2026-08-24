@@ -27,7 +27,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * dcdb account can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/account:Account account account_id
  * ```
@@ -145,31 +144,31 @@ export interface AccountState {
     /**
      * description for account.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * db host.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * max user connections.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
     /**
      * password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * whether the account is readonly. 0 means not a readonly account.
      */
-    readOnly?: pulumi.Input<number>;
+    readOnly?: pulumi.Input<number | undefined>;
     /**
      * account name.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -179,7 +178,7 @@ export interface AccountArgs {
     /**
      * description for account.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * db host.
      */
@@ -191,7 +190,7 @@ export interface AccountArgs {
     /**
      * max user connections.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
     /**
      * password.
      */
@@ -199,7 +198,7 @@ export interface AccountArgs {
     /**
      * whether the account is readonly. 0 means not a readonly account.
      */
-    readOnly?: pulumi.Input<number>;
+    readOnly?: pulumi.Input<number | undefined>;
     /**
      * account name.
      */

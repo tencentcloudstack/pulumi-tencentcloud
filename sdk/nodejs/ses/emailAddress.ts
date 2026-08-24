@@ -36,8 +36,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ses email_address can be imported using the id, e.g.
- *
+ * ses emailAddress can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress example demo@iac-terraform.cloud
  * ```
@@ -122,15 +121,15 @@ export interface EmailAddressState {
     /**
      * Your sender address(You can create up to 10 sender addresses for each domain).
      */
-    emailAddress?: pulumi.Input<string>;
+    emailAddress?: pulumi.Input<string | undefined>;
     /**
      * Sender name.
      */
-    emailSenderName?: pulumi.Input<string>;
+    emailSenderName?: pulumi.Input<string | undefined>;
     /**
      * Password for SMTP, Length limit 64.
      */
-    smtpPassword?: pulumi.Input<string>;
+    smtpPassword?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -144,9 +143,9 @@ export interface EmailAddressArgs {
     /**
      * Sender name.
      */
-    emailSenderName?: pulumi.Input<string>;
+    emailSenderName?: pulumi.Input<string | undefined>;
     /**
      * Password for SMTP, Length limit 64.
      */
-    smtpPassword?: pulumi.Input<string>;
+    smtpPassword?: pulumi.Input<string | undefined>;
 }

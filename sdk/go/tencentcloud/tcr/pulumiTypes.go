@@ -512,481 +512,6 @@ func (o InstanceSecurityPolicyArrayOutput) Index(i pulumi.IntInput) InstanceSecu
 	}).(InstanceSecurityPolicyOutput)
 }
 
-type ManageReplicationOperationPeerReplicationOption struct {
-	// whether to enable cross-master account instance synchronization.
-	EnablePeerReplication bool `pulumi:"enablePeerReplication"`
-	// access permanent token of the instance to be synchronized.
-	PeerRegistryToken string `pulumi:"peerRegistryToken"`
-	// uin of the instance to be synchronized.
-	PeerRegistryUin string `pulumi:"peerRegistryUin"`
-}
-
-// ManageReplicationOperationPeerReplicationOptionInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs and ManageReplicationOperationPeerReplicationOptionOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionInput` via:
-//
-//	ManageReplicationOperationPeerReplicationOptionArgs{...}
-type ManageReplicationOperationPeerReplicationOptionInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput
-	ToManageReplicationOperationPeerReplicationOptionOutputWithContext(context.Context) ManageReplicationOperationPeerReplicationOptionOutput
-}
-
-type ManageReplicationOperationPeerReplicationOptionArgs struct {
-	// whether to enable cross-master account instance synchronization.
-	EnablePeerReplication pulumi.BoolInput `pulumi:"enablePeerReplication"`
-	// access permanent token of the instance to be synchronized.
-	PeerRegistryToken pulumi.StringInput `pulumi:"peerRegistryToken"`
-	// uin of the instance to be synchronized.
-	PeerRegistryUin pulumi.StringInput `pulumi:"peerRegistryUin"`
-}
-
-func (ManageReplicationOperationPeerReplicationOptionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
-}
-
-func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput {
-	return i.ToManageReplicationOperationPeerReplicationOptionOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionOutput)
-}
-
-func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return i.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionOutput).ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx)
-}
-
-// ManageReplicationOperationPeerReplicationOptionPtrInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs, ManageReplicationOperationPeerReplicationOptionPtr and ManageReplicationOperationPeerReplicationOptionPtrOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionPtrInput` via:
-//
-//	        ManageReplicationOperationPeerReplicationOptionArgs{...}
-//
-//	or:
-//
-//	        nil
-type ManageReplicationOperationPeerReplicationOptionPtrInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput
-	ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput
-}
-
-type manageReplicationOperationPeerReplicationOptionPtrType ManageReplicationOperationPeerReplicationOptionArgs
-
-func ManageReplicationOperationPeerReplicationOptionPtr(v *ManageReplicationOperationPeerReplicationOptionArgs) ManageReplicationOperationPeerReplicationOptionPtrInput {
-	return (*manageReplicationOperationPeerReplicationOptionPtrType)(v)
-}
-
-func (*manageReplicationOperationPeerReplicationOptionPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
-}
-
-func (i *manageReplicationOperationPeerReplicationOptionPtrType) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return i.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
-}
-
-func (i *manageReplicationOperationPeerReplicationOptionPtrType) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationPeerReplicationOptionPtrOutput)
-}
-
-type ManageReplicationOperationPeerReplicationOptionOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationPeerReplicationOptionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionOutput() ManageReplicationOperationPeerReplicationOptionOutput {
-	return o
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionOutput {
-	return o
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return o.ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(context.Background())
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManageReplicationOperationPeerReplicationOption) *ManageReplicationOperationPeerReplicationOption {
-		return &v
-	}).(ManageReplicationOperationPeerReplicationOptionPtrOutput)
-}
-
-// whether to enable cross-master account instance synchronization.
-func (o ManageReplicationOperationPeerReplicationOptionOutput) EnablePeerReplication() pulumi.BoolOutput {
-	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) bool { return v.EnablePeerReplication }).(pulumi.BoolOutput)
-}
-
-// access permanent token of the instance to be synchronized.
-func (o ManageReplicationOperationPeerReplicationOptionOutput) PeerRegistryToken() pulumi.StringOutput {
-	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) string { return v.PeerRegistryToken }).(pulumi.StringOutput)
-}
-
-// uin of the instance to be synchronized.
-func (o ManageReplicationOperationPeerReplicationOptionOutput) PeerRegistryUin() pulumi.StringOutput {
-	return o.ApplyT(func(v ManageReplicationOperationPeerReplicationOption) string { return v.PeerRegistryUin }).(pulumi.StringOutput)
-}
-
-type ManageReplicationOperationPeerReplicationOptionPtrOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationPeerReplicationOptionPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ManageReplicationOperationPeerReplicationOption)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutput() ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return o
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) ToManageReplicationOperationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ManageReplicationOperationPeerReplicationOptionPtrOutput {
-	return o
-}
-
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) Elem() ManageReplicationOperationPeerReplicationOptionOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) ManageReplicationOperationPeerReplicationOption {
-		if v != nil {
-			return *v
-		}
-		var ret ManageReplicationOperationPeerReplicationOption
-		return ret
-	}).(ManageReplicationOperationPeerReplicationOptionOutput)
-}
-
-// whether to enable cross-master account instance synchronization.
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) EnablePeerReplication() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *bool {
-		if v == nil {
-			return nil
-		}
-		return &v.EnablePeerReplication
-	}).(pulumi.BoolPtrOutput)
-}
-
-// access permanent token of the instance to be synchronized.
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) PeerRegistryToken() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.PeerRegistryToken
-	}).(pulumi.StringPtrOutput)
-}
-
-// uin of the instance to be synchronized.
-func (o ManageReplicationOperationPeerReplicationOptionPtrOutput) PeerRegistryUin() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationPeerReplicationOption) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.PeerRegistryUin
-	}).(pulumi.StringPtrOutput)
-}
-
-type ManageReplicationOperationRule struct {
-	// target namespace.
-	DestNamespace string `pulumi:"destNamespace"`
-	// sync filters.
-	Filters []ManageReplicationOperationRuleFilter `pulumi:"filters"`
-	// synchronization rule names.
-	Name string `pulumi:"name"`
-	// whether to cover.
-	Override bool `pulumi:"override"`
-}
-
-// ManageReplicationOperationRuleInput is an input type that accepts ManageReplicationOperationRuleArgs and ManageReplicationOperationRuleOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationRuleInput` via:
-//
-//	ManageReplicationOperationRuleArgs{...}
-type ManageReplicationOperationRuleInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput
-	ToManageReplicationOperationRuleOutputWithContext(context.Context) ManageReplicationOperationRuleOutput
-}
-
-type ManageReplicationOperationRuleArgs struct {
-	// target namespace.
-	DestNamespace pulumi.StringInput `pulumi:"destNamespace"`
-	// sync filters.
-	Filters ManageReplicationOperationRuleFilterArrayInput `pulumi:"filters"`
-	// synchronization rule names.
-	Name pulumi.StringInput `pulumi:"name"`
-	// whether to cover.
-	Override pulumi.BoolInput `pulumi:"override"`
-}
-
-func (ManageReplicationOperationRuleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationRule)(nil)).Elem()
-}
-
-func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput {
-	return i.ToManageReplicationOperationRuleOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRuleOutputWithContext(ctx context.Context) ManageReplicationOperationRuleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleOutput)
-}
-
-func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
-	return i.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleOutput).ToManageReplicationOperationRulePtrOutputWithContext(ctx)
-}
-
-// ManageReplicationOperationRulePtrInput is an input type that accepts ManageReplicationOperationRuleArgs, ManageReplicationOperationRulePtr and ManageReplicationOperationRulePtrOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationRulePtrInput` via:
-//
-//	        ManageReplicationOperationRuleArgs{...}
-//
-//	or:
-//
-//	        nil
-type ManageReplicationOperationRulePtrInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput
-	ToManageReplicationOperationRulePtrOutputWithContext(context.Context) ManageReplicationOperationRulePtrOutput
-}
-
-type manageReplicationOperationRulePtrType ManageReplicationOperationRuleArgs
-
-func ManageReplicationOperationRulePtr(v *ManageReplicationOperationRuleArgs) ManageReplicationOperationRulePtrInput {
-	return (*manageReplicationOperationRulePtrType)(v)
-}
-
-func (*manageReplicationOperationRulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ManageReplicationOperationRule)(nil)).Elem()
-}
-
-func (i *manageReplicationOperationRulePtrType) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
-	return i.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
-}
-
-func (i *manageReplicationOperationRulePtrType) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRulePtrOutput)
-}
-
-type ManageReplicationOperationRuleOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationRuleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationRule)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRuleOutput() ManageReplicationOperationRuleOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRuleOutputWithContext(ctx context.Context) ManageReplicationOperationRuleOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
-	return o.ToManageReplicationOperationRulePtrOutputWithContext(context.Background())
-}
-
-func (o ManageReplicationOperationRuleOutput) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ManageReplicationOperationRule) *ManageReplicationOperationRule {
-		return &v
-	}).(ManageReplicationOperationRulePtrOutput)
-}
-
-// target namespace.
-func (o ManageReplicationOperationRuleOutput) DestNamespace() pulumi.StringOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRule) string { return v.DestNamespace }).(pulumi.StringOutput)
-}
-
-// sync filters.
-func (o ManageReplicationOperationRuleOutput) Filters() ManageReplicationOperationRuleFilterArrayOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRule) []ManageReplicationOperationRuleFilter { return v.Filters }).(ManageReplicationOperationRuleFilterArrayOutput)
-}
-
-// synchronization rule names.
-func (o ManageReplicationOperationRuleOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRule) string { return v.Name }).(pulumi.StringOutput)
-}
-
-// whether to cover.
-func (o ManageReplicationOperationRuleOutput) Override() pulumi.BoolOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRule) bool { return v.Override }).(pulumi.BoolOutput)
-}
-
-type ManageReplicationOperationRulePtrOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationRulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ManageReplicationOperationRule)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationRulePtrOutput) ToManageReplicationOperationRulePtrOutput() ManageReplicationOperationRulePtrOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRulePtrOutput) ToManageReplicationOperationRulePtrOutputWithContext(ctx context.Context) ManageReplicationOperationRulePtrOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRulePtrOutput) Elem() ManageReplicationOperationRuleOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationRule) ManageReplicationOperationRule {
-		if v != nil {
-			return *v
-		}
-		var ret ManageReplicationOperationRule
-		return ret
-	}).(ManageReplicationOperationRuleOutput)
-}
-
-// target namespace.
-func (o ManageReplicationOperationRulePtrOutput) DestNamespace() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationRule) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.DestNamespace
-	}).(pulumi.StringPtrOutput)
-}
-
-// sync filters.
-func (o ManageReplicationOperationRulePtrOutput) Filters() ManageReplicationOperationRuleFilterArrayOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationRule) []ManageReplicationOperationRuleFilter {
-		if v == nil {
-			return nil
-		}
-		return v.Filters
-	}).(ManageReplicationOperationRuleFilterArrayOutput)
-}
-
-// synchronization rule names.
-func (o ManageReplicationOperationRulePtrOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationRule) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Name
-	}).(pulumi.StringPtrOutput)
-}
-
-// whether to cover.
-func (o ManageReplicationOperationRulePtrOutput) Override() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ManageReplicationOperationRule) *bool {
-		if v == nil {
-			return nil
-		}
-		return &v.Override
-	}).(pulumi.BoolPtrOutput)
-}
-
-type ManageReplicationOperationRuleFilter struct {
-	// type (name, tag, and resource).
-	Type string `pulumi:"type"`
-	// empty by default.
-	Value *string `pulumi:"value"`
-}
-
-// ManageReplicationOperationRuleFilterInput is an input type that accepts ManageReplicationOperationRuleFilterArgs and ManageReplicationOperationRuleFilterOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationRuleFilterInput` via:
-//
-//	ManageReplicationOperationRuleFilterArgs{...}
-type ManageReplicationOperationRuleFilterInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput
-	ToManageReplicationOperationRuleFilterOutputWithContext(context.Context) ManageReplicationOperationRuleFilterOutput
-}
-
-type ManageReplicationOperationRuleFilterArgs struct {
-	// type (name, tag, and resource).
-	Type pulumi.StringInput `pulumi:"type"`
-	// empty by default.
-	Value pulumi.StringPtrInput `pulumi:"value"`
-}
-
-func (ManageReplicationOperationRuleFilterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationRuleFilter)(nil)).Elem()
-}
-
-func (i ManageReplicationOperationRuleFilterArgs) ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput {
-	return i.ToManageReplicationOperationRuleFilterOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationRuleFilterArgs) ToManageReplicationOperationRuleFilterOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleFilterOutput)
-}
-
-// ManageReplicationOperationRuleFilterArrayInput is an input type that accepts ManageReplicationOperationRuleFilterArray and ManageReplicationOperationRuleFilterArrayOutput values.
-// You can construct a concrete instance of `ManageReplicationOperationRuleFilterArrayInput` via:
-//
-//	ManageReplicationOperationRuleFilterArray{ ManageReplicationOperationRuleFilterArgs{...} }
-type ManageReplicationOperationRuleFilterArrayInput interface {
-	pulumi.Input
-
-	ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput
-	ToManageReplicationOperationRuleFilterArrayOutputWithContext(context.Context) ManageReplicationOperationRuleFilterArrayOutput
-}
-
-type ManageReplicationOperationRuleFilterArray []ManageReplicationOperationRuleFilterInput
-
-func (ManageReplicationOperationRuleFilterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ManageReplicationOperationRuleFilter)(nil)).Elem()
-}
-
-func (i ManageReplicationOperationRuleFilterArray) ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput {
-	return i.ToManageReplicationOperationRuleFilterArrayOutputWithContext(context.Background())
-}
-
-func (i ManageReplicationOperationRuleFilterArray) ToManageReplicationOperationRuleFilterArrayOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ManageReplicationOperationRuleFilterArrayOutput)
-}
-
-type ManageReplicationOperationRuleFilterOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationRuleFilterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ManageReplicationOperationRuleFilter)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationRuleFilterOutput) ToManageReplicationOperationRuleFilterOutput() ManageReplicationOperationRuleFilterOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRuleFilterOutput) ToManageReplicationOperationRuleFilterOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterOutput {
-	return o
-}
-
-// type (name, tag, and resource).
-func (o ManageReplicationOperationRuleFilterOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRuleFilter) string { return v.Type }).(pulumi.StringOutput)
-}
-
-// empty by default.
-func (o ManageReplicationOperationRuleFilterOutput) Value() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ManageReplicationOperationRuleFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
-}
-
-type ManageReplicationOperationRuleFilterArrayOutput struct{ *pulumi.OutputState }
-
-func (ManageReplicationOperationRuleFilterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ManageReplicationOperationRuleFilter)(nil)).Elem()
-}
-
-func (o ManageReplicationOperationRuleFilterArrayOutput) ToManageReplicationOperationRuleFilterArrayOutput() ManageReplicationOperationRuleFilterArrayOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRuleFilterArrayOutput) ToManageReplicationOperationRuleFilterArrayOutputWithContext(ctx context.Context) ManageReplicationOperationRuleFilterArrayOutput {
-	return o
-}
-
-func (o ManageReplicationOperationRuleFilterArrayOutput) Index(i pulumi.IntInput) ManageReplicationOperationRuleFilterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ManageReplicationOperationRuleFilter {
-		return vs[0].([]ManageReplicationOperationRuleFilter)[vs[1].(int)]
-	}).(ManageReplicationOperationRuleFilterOutput)
-}
-
 type NamespaceCveWhitelistItem struct {
 	// Vulnerability Whitelist ID.
 	CveId *string `pulumi:"cveId"`
@@ -1082,6 +607,500 @@ func (o NamespaceCveWhitelistItemArrayOutput) Index(i pulumi.IntInput) Namespace
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NamespaceCveWhitelistItem {
 		return vs[0].([]NamespaceCveWhitelistItem)[vs[1].(int)]
 	}).(NamespaceCveWhitelistItemOutput)
+}
+
+type ReplicationPeerReplicationOption struct {
+	// Whether to enable cross-account synchronization.
+	EnablePeerReplication bool `pulumi:"enablePeerReplication"`
+	// Permanent access Token for the destination instance.
+	PeerRegistryToken string `pulumi:"peerRegistryToken"`
+	// UIN of the destination instance.
+	PeerRegistryUin string `pulumi:"peerRegistryUin"`
+}
+
+// ReplicationPeerReplicationOptionInput is an input type that accepts ReplicationPeerReplicationOptionArgs and ReplicationPeerReplicationOptionOutput values.
+// You can construct a concrete instance of `ReplicationPeerReplicationOptionInput` via:
+//
+//	ReplicationPeerReplicationOptionArgs{...}
+type ReplicationPeerReplicationOptionInput interface {
+	pulumi.Input
+
+	ToReplicationPeerReplicationOptionOutput() ReplicationPeerReplicationOptionOutput
+	ToReplicationPeerReplicationOptionOutputWithContext(context.Context) ReplicationPeerReplicationOptionOutput
+}
+
+type ReplicationPeerReplicationOptionArgs struct {
+	// Whether to enable cross-account synchronization.
+	EnablePeerReplication pulumi.BoolInput `pulumi:"enablePeerReplication"`
+	// Permanent access Token for the destination instance.
+	PeerRegistryToken pulumi.StringInput `pulumi:"peerRegistryToken"`
+	// UIN of the destination instance.
+	PeerRegistryUin pulumi.StringInput `pulumi:"peerRegistryUin"`
+}
+
+func (ReplicationPeerReplicationOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationPeerReplicationOption)(nil)).Elem()
+}
+
+func (i ReplicationPeerReplicationOptionArgs) ToReplicationPeerReplicationOptionOutput() ReplicationPeerReplicationOptionOutput {
+	return i.ToReplicationPeerReplicationOptionOutputWithContext(context.Background())
+}
+
+func (i ReplicationPeerReplicationOptionArgs) ToReplicationPeerReplicationOptionOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationPeerReplicationOptionOutput)
+}
+
+func (i ReplicationPeerReplicationOptionArgs) ToReplicationPeerReplicationOptionPtrOutput() ReplicationPeerReplicationOptionPtrOutput {
+	return i.ToReplicationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (i ReplicationPeerReplicationOptionArgs) ToReplicationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationPeerReplicationOptionOutput).ToReplicationPeerReplicationOptionPtrOutputWithContext(ctx)
+}
+
+// ReplicationPeerReplicationOptionPtrInput is an input type that accepts ReplicationPeerReplicationOptionArgs, ReplicationPeerReplicationOptionPtr and ReplicationPeerReplicationOptionPtrOutput values.
+// You can construct a concrete instance of `ReplicationPeerReplicationOptionPtrInput` via:
+//
+//	        ReplicationPeerReplicationOptionArgs{...}
+//
+//	or:
+//
+//	        nil
+type ReplicationPeerReplicationOptionPtrInput interface {
+	pulumi.Input
+
+	ToReplicationPeerReplicationOptionPtrOutput() ReplicationPeerReplicationOptionPtrOutput
+	ToReplicationPeerReplicationOptionPtrOutputWithContext(context.Context) ReplicationPeerReplicationOptionPtrOutput
+}
+
+type replicationPeerReplicationOptionPtrType ReplicationPeerReplicationOptionArgs
+
+func ReplicationPeerReplicationOptionPtr(v *ReplicationPeerReplicationOptionArgs) ReplicationPeerReplicationOptionPtrInput {
+	return (*replicationPeerReplicationOptionPtrType)(v)
+}
+
+func (*replicationPeerReplicationOptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplicationPeerReplicationOption)(nil)).Elem()
+}
+
+func (i *replicationPeerReplicationOptionPtrType) ToReplicationPeerReplicationOptionPtrOutput() ReplicationPeerReplicationOptionPtrOutput {
+	return i.ToReplicationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (i *replicationPeerReplicationOptionPtrType) ToReplicationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationPeerReplicationOptionPtrOutput)
+}
+
+type ReplicationPeerReplicationOptionOutput struct{ *pulumi.OutputState }
+
+func (ReplicationPeerReplicationOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationPeerReplicationOption)(nil)).Elem()
+}
+
+func (o ReplicationPeerReplicationOptionOutput) ToReplicationPeerReplicationOptionOutput() ReplicationPeerReplicationOptionOutput {
+	return o
+}
+
+func (o ReplicationPeerReplicationOptionOutput) ToReplicationPeerReplicationOptionOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionOutput {
+	return o
+}
+
+func (o ReplicationPeerReplicationOptionOutput) ToReplicationPeerReplicationOptionPtrOutput() ReplicationPeerReplicationOptionPtrOutput {
+	return o.ToReplicationPeerReplicationOptionPtrOutputWithContext(context.Background())
+}
+
+func (o ReplicationPeerReplicationOptionOutput) ToReplicationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ReplicationPeerReplicationOption) *ReplicationPeerReplicationOption {
+		return &v
+	}).(ReplicationPeerReplicationOptionPtrOutput)
+}
+
+// Whether to enable cross-account synchronization.
+func (o ReplicationPeerReplicationOptionOutput) EnablePeerReplication() pulumi.BoolOutput {
+	return o.ApplyT(func(v ReplicationPeerReplicationOption) bool { return v.EnablePeerReplication }).(pulumi.BoolOutput)
+}
+
+// Permanent access Token for the destination instance.
+func (o ReplicationPeerReplicationOptionOutput) PeerRegistryToken() pulumi.StringOutput {
+	return o.ApplyT(func(v ReplicationPeerReplicationOption) string { return v.PeerRegistryToken }).(pulumi.StringOutput)
+}
+
+// UIN of the destination instance.
+func (o ReplicationPeerReplicationOptionOutput) PeerRegistryUin() pulumi.StringOutput {
+	return o.ApplyT(func(v ReplicationPeerReplicationOption) string { return v.PeerRegistryUin }).(pulumi.StringOutput)
+}
+
+type ReplicationPeerReplicationOptionPtrOutput struct{ *pulumi.OutputState }
+
+func (ReplicationPeerReplicationOptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplicationPeerReplicationOption)(nil)).Elem()
+}
+
+func (o ReplicationPeerReplicationOptionPtrOutput) ToReplicationPeerReplicationOptionPtrOutput() ReplicationPeerReplicationOptionPtrOutput {
+	return o
+}
+
+func (o ReplicationPeerReplicationOptionPtrOutput) ToReplicationPeerReplicationOptionPtrOutputWithContext(ctx context.Context) ReplicationPeerReplicationOptionPtrOutput {
+	return o
+}
+
+func (o ReplicationPeerReplicationOptionPtrOutput) Elem() ReplicationPeerReplicationOptionOutput {
+	return o.ApplyT(func(v *ReplicationPeerReplicationOption) ReplicationPeerReplicationOption {
+		if v != nil {
+			return *v
+		}
+		var ret ReplicationPeerReplicationOption
+		return ret
+	}).(ReplicationPeerReplicationOptionOutput)
+}
+
+// Whether to enable cross-account synchronization.
+func (o ReplicationPeerReplicationOptionPtrOutput) EnablePeerReplication() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ReplicationPeerReplicationOption) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.EnablePeerReplication
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Permanent access Token for the destination instance.
+func (o ReplicationPeerReplicationOptionPtrOutput) PeerRegistryToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplicationPeerReplicationOption) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PeerRegistryToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// UIN of the destination instance.
+func (o ReplicationPeerReplicationOptionPtrOutput) PeerRegistryUin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplicationPeerReplicationOption) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PeerRegistryUin
+	}).(pulumi.StringPtrOutput)
+}
+
+type ReplicationRule struct {
+	// Whether synchronous deletion event.
+	Deletion *bool `pulumi:"deletion"`
+	// Destination namespace.
+	DestNamespace string `pulumi:"destNamespace"`
+	// Synchronization filters.
+	Filters []ReplicationRuleFilter `pulumi:"filters"`
+	// Name of synchronization rule.
+	Name string `pulumi:"name"`
+	// Whether to override.
+	Override bool `pulumi:"override"`
+}
+
+// ReplicationRuleInput is an input type that accepts ReplicationRuleArgs and ReplicationRuleOutput values.
+// You can construct a concrete instance of `ReplicationRuleInput` via:
+//
+//	ReplicationRuleArgs{...}
+type ReplicationRuleInput interface {
+	pulumi.Input
+
+	ToReplicationRuleOutput() ReplicationRuleOutput
+	ToReplicationRuleOutputWithContext(context.Context) ReplicationRuleOutput
+}
+
+type ReplicationRuleArgs struct {
+	// Whether synchronous deletion event.
+	Deletion pulumi.BoolPtrInput `pulumi:"deletion"`
+	// Destination namespace.
+	DestNamespace pulumi.StringInput `pulumi:"destNamespace"`
+	// Synchronization filters.
+	Filters ReplicationRuleFilterArrayInput `pulumi:"filters"`
+	// Name of synchronization rule.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Whether to override.
+	Override pulumi.BoolInput `pulumi:"override"`
+}
+
+func (ReplicationRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationRule)(nil)).Elem()
+}
+
+func (i ReplicationRuleArgs) ToReplicationRuleOutput() ReplicationRuleOutput {
+	return i.ToReplicationRuleOutputWithContext(context.Background())
+}
+
+func (i ReplicationRuleArgs) ToReplicationRuleOutputWithContext(ctx context.Context) ReplicationRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationRuleOutput)
+}
+
+func (i ReplicationRuleArgs) ToReplicationRulePtrOutput() ReplicationRulePtrOutput {
+	return i.ToReplicationRulePtrOutputWithContext(context.Background())
+}
+
+func (i ReplicationRuleArgs) ToReplicationRulePtrOutputWithContext(ctx context.Context) ReplicationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationRuleOutput).ToReplicationRulePtrOutputWithContext(ctx)
+}
+
+// ReplicationRulePtrInput is an input type that accepts ReplicationRuleArgs, ReplicationRulePtr and ReplicationRulePtrOutput values.
+// You can construct a concrete instance of `ReplicationRulePtrInput` via:
+//
+//	        ReplicationRuleArgs{...}
+//
+//	or:
+//
+//	        nil
+type ReplicationRulePtrInput interface {
+	pulumi.Input
+
+	ToReplicationRulePtrOutput() ReplicationRulePtrOutput
+	ToReplicationRulePtrOutputWithContext(context.Context) ReplicationRulePtrOutput
+}
+
+type replicationRulePtrType ReplicationRuleArgs
+
+func ReplicationRulePtr(v *ReplicationRuleArgs) ReplicationRulePtrInput {
+	return (*replicationRulePtrType)(v)
+}
+
+func (*replicationRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplicationRule)(nil)).Elem()
+}
+
+func (i *replicationRulePtrType) ToReplicationRulePtrOutput() ReplicationRulePtrOutput {
+	return i.ToReplicationRulePtrOutputWithContext(context.Background())
+}
+
+func (i *replicationRulePtrType) ToReplicationRulePtrOutputWithContext(ctx context.Context) ReplicationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationRulePtrOutput)
+}
+
+type ReplicationRuleOutput struct{ *pulumi.OutputState }
+
+func (ReplicationRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationRule)(nil)).Elem()
+}
+
+func (o ReplicationRuleOutput) ToReplicationRuleOutput() ReplicationRuleOutput {
+	return o
+}
+
+func (o ReplicationRuleOutput) ToReplicationRuleOutputWithContext(ctx context.Context) ReplicationRuleOutput {
+	return o
+}
+
+func (o ReplicationRuleOutput) ToReplicationRulePtrOutput() ReplicationRulePtrOutput {
+	return o.ToReplicationRulePtrOutputWithContext(context.Background())
+}
+
+func (o ReplicationRuleOutput) ToReplicationRulePtrOutputWithContext(ctx context.Context) ReplicationRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ReplicationRule) *ReplicationRule {
+		return &v
+	}).(ReplicationRulePtrOutput)
+}
+
+// Whether synchronous deletion event.
+func (o ReplicationRuleOutput) Deletion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ReplicationRule) *bool { return v.Deletion }).(pulumi.BoolPtrOutput)
+}
+
+// Destination namespace.
+func (o ReplicationRuleOutput) DestNamespace() pulumi.StringOutput {
+	return o.ApplyT(func(v ReplicationRule) string { return v.DestNamespace }).(pulumi.StringOutput)
+}
+
+// Synchronization filters.
+func (o ReplicationRuleOutput) Filters() ReplicationRuleFilterArrayOutput {
+	return o.ApplyT(func(v ReplicationRule) []ReplicationRuleFilter { return v.Filters }).(ReplicationRuleFilterArrayOutput)
+}
+
+// Name of synchronization rule.
+func (o ReplicationRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ReplicationRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Whether to override.
+func (o ReplicationRuleOutput) Override() pulumi.BoolOutput {
+	return o.ApplyT(func(v ReplicationRule) bool { return v.Override }).(pulumi.BoolOutput)
+}
+
+type ReplicationRulePtrOutput struct{ *pulumi.OutputState }
+
+func (ReplicationRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ReplicationRule)(nil)).Elem()
+}
+
+func (o ReplicationRulePtrOutput) ToReplicationRulePtrOutput() ReplicationRulePtrOutput {
+	return o
+}
+
+func (o ReplicationRulePtrOutput) ToReplicationRulePtrOutputWithContext(ctx context.Context) ReplicationRulePtrOutput {
+	return o
+}
+
+func (o ReplicationRulePtrOutput) Elem() ReplicationRuleOutput {
+	return o.ApplyT(func(v *ReplicationRule) ReplicationRule {
+		if v != nil {
+			return *v
+		}
+		var ret ReplicationRule
+		return ret
+	}).(ReplicationRuleOutput)
+}
+
+// Whether synchronous deletion event.
+func (o ReplicationRulePtrOutput) Deletion() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ReplicationRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Deletion
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Destination namespace.
+func (o ReplicationRulePtrOutput) DestNamespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplicationRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DestNamespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// Synchronization filters.
+func (o ReplicationRulePtrOutput) Filters() ReplicationRuleFilterArrayOutput {
+	return o.ApplyT(func(v *ReplicationRule) []ReplicationRuleFilter {
+		if v == nil {
+			return nil
+		}
+		return v.Filters
+	}).(ReplicationRuleFilterArrayOutput)
+}
+
+// Name of synchronization rule.
+func (o ReplicationRulePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ReplicationRule) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to override.
+func (o ReplicationRulePtrOutput) Override() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ReplicationRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Override
+	}).(pulumi.BoolPtrOutput)
+}
+
+type ReplicationRuleFilter struct {
+	// Type (`name`, `tag` and `resource`).
+	Type string `pulumi:"type"`
+	// It is left blank by default. If the type is `resource` it supports `image`, `chart`, and an empty string. If the type is `name` it supports Namespace name/**, Namespace name/Repository name.
+	Value *string `pulumi:"value"`
+}
+
+// ReplicationRuleFilterInput is an input type that accepts ReplicationRuleFilterArgs and ReplicationRuleFilterOutput values.
+// You can construct a concrete instance of `ReplicationRuleFilterInput` via:
+//
+//	ReplicationRuleFilterArgs{...}
+type ReplicationRuleFilterInput interface {
+	pulumi.Input
+
+	ToReplicationRuleFilterOutput() ReplicationRuleFilterOutput
+	ToReplicationRuleFilterOutputWithContext(context.Context) ReplicationRuleFilterOutput
+}
+
+type ReplicationRuleFilterArgs struct {
+	// Type (`name`, `tag` and `resource`).
+	Type pulumi.StringInput `pulumi:"type"`
+	// It is left blank by default. If the type is `resource` it supports `image`, `chart`, and an empty string. If the type is `name` it supports Namespace name/**, Namespace name/Repository name.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ReplicationRuleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationRuleFilter)(nil)).Elem()
+}
+
+func (i ReplicationRuleFilterArgs) ToReplicationRuleFilterOutput() ReplicationRuleFilterOutput {
+	return i.ToReplicationRuleFilterOutputWithContext(context.Background())
+}
+
+func (i ReplicationRuleFilterArgs) ToReplicationRuleFilterOutputWithContext(ctx context.Context) ReplicationRuleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationRuleFilterOutput)
+}
+
+// ReplicationRuleFilterArrayInput is an input type that accepts ReplicationRuleFilterArray and ReplicationRuleFilterArrayOutput values.
+// You can construct a concrete instance of `ReplicationRuleFilterArrayInput` via:
+//
+//	ReplicationRuleFilterArray{ ReplicationRuleFilterArgs{...} }
+type ReplicationRuleFilterArrayInput interface {
+	pulumi.Input
+
+	ToReplicationRuleFilterArrayOutput() ReplicationRuleFilterArrayOutput
+	ToReplicationRuleFilterArrayOutputWithContext(context.Context) ReplicationRuleFilterArrayOutput
+}
+
+type ReplicationRuleFilterArray []ReplicationRuleFilterInput
+
+func (ReplicationRuleFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReplicationRuleFilter)(nil)).Elem()
+}
+
+func (i ReplicationRuleFilterArray) ToReplicationRuleFilterArrayOutput() ReplicationRuleFilterArrayOutput {
+	return i.ToReplicationRuleFilterArrayOutputWithContext(context.Background())
+}
+
+func (i ReplicationRuleFilterArray) ToReplicationRuleFilterArrayOutputWithContext(ctx context.Context) ReplicationRuleFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplicationRuleFilterArrayOutput)
+}
+
+type ReplicationRuleFilterOutput struct{ *pulumi.OutputState }
+
+func (ReplicationRuleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplicationRuleFilter)(nil)).Elem()
+}
+
+func (o ReplicationRuleFilterOutput) ToReplicationRuleFilterOutput() ReplicationRuleFilterOutput {
+	return o
+}
+
+func (o ReplicationRuleFilterOutput) ToReplicationRuleFilterOutputWithContext(ctx context.Context) ReplicationRuleFilterOutput {
+	return o
+}
+
+// Type (`name`, `tag` and `resource`).
+func (o ReplicationRuleFilterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ReplicationRuleFilter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// It is left blank by default. If the type is `resource` it supports `image`, `chart`, and an empty string. If the type is `name` it supports Namespace name/**, Namespace name/Repository name.
+func (o ReplicationRuleFilterOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplicationRuleFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ReplicationRuleFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (ReplicationRuleFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReplicationRuleFilter)(nil)).Elem()
+}
+
+func (o ReplicationRuleFilterArrayOutput) ToReplicationRuleFilterArrayOutput() ReplicationRuleFilterArrayOutput {
+	return o
+}
+
+func (o ReplicationRuleFilterArrayOutput) ToReplicationRuleFilterArrayOutputWithContext(ctx context.Context) ReplicationRuleFilterArrayOutput {
+	return o
+}
+
+func (o ReplicationRuleFilterArrayOutput) Index(i pulumi.IntInput) ReplicationRuleFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReplicationRuleFilter {
+		return vs[0].([]ReplicationRuleFilter)[vs[1].(int)]
+	}).(ReplicationRuleFilterOutput)
 }
 
 type ServiceAccountPermission struct {
@@ -1188,6 +1207,595 @@ func (o ServiceAccountPermissionArrayOutput) Index(i pulumi.IntInput) ServiceAcc
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ServiceAccountPermission {
 		return vs[0].([]ServiceAccountPermission)[vs[1].(int)]
 	}).(ServiceAccountPermissionOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItem struct {
+	// Warehouse filter.
+	RepositoryFilter *TagRetentionRuleAdvancedRuleItemRepositoryFilter `pulumi:"repositoryFilter"`
+	// Version retention rules.
+	RetentionPolicy *TagRetentionRuleAdvancedRuleItemRetentionPolicy `pulumi:"retentionPolicy"`
+	// Tag filter.
+	TagFilter *TagRetentionRuleAdvancedRuleItemTagFilter `pulumi:"tagFilter"`
+}
+
+// TagRetentionRuleAdvancedRuleItemInput is an input type that accepts TagRetentionRuleAdvancedRuleItemArgs and TagRetentionRuleAdvancedRuleItemOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemInput` via:
+//
+//	TagRetentionRuleAdvancedRuleItemArgs{...}
+type TagRetentionRuleAdvancedRuleItemInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemOutput() TagRetentionRuleAdvancedRuleItemOutput
+	ToTagRetentionRuleAdvancedRuleItemOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemOutput
+}
+
+type TagRetentionRuleAdvancedRuleItemArgs struct {
+	// Warehouse filter.
+	RepositoryFilter TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput `pulumi:"repositoryFilter"`
+	// Version retention rules.
+	RetentionPolicy TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput `pulumi:"retentionPolicy"`
+	// Tag filter.
+	TagFilter TagRetentionRuleAdvancedRuleItemTagFilterPtrInput `pulumi:"tagFilter"`
+}
+
+func (TagRetentionRuleAdvancedRuleItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItem)(nil)).Elem()
+}
+
+func (i TagRetentionRuleAdvancedRuleItemArgs) ToTagRetentionRuleAdvancedRuleItemOutput() TagRetentionRuleAdvancedRuleItemOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemArgs) ToTagRetentionRuleAdvancedRuleItemOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemOutput)
+}
+
+// TagRetentionRuleAdvancedRuleItemArrayInput is an input type that accepts TagRetentionRuleAdvancedRuleItemArray and TagRetentionRuleAdvancedRuleItemArrayOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemArrayInput` via:
+//
+//	TagRetentionRuleAdvancedRuleItemArray{ TagRetentionRuleAdvancedRuleItemArgs{...} }
+type TagRetentionRuleAdvancedRuleItemArrayInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemArrayOutput() TagRetentionRuleAdvancedRuleItemArrayOutput
+	ToTagRetentionRuleAdvancedRuleItemArrayOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemArrayOutput
+}
+
+type TagRetentionRuleAdvancedRuleItemArray []TagRetentionRuleAdvancedRuleItemInput
+
+func (TagRetentionRuleAdvancedRuleItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TagRetentionRuleAdvancedRuleItem)(nil)).Elem()
+}
+
+func (i TagRetentionRuleAdvancedRuleItemArray) ToTagRetentionRuleAdvancedRuleItemArrayOutput() TagRetentionRuleAdvancedRuleItemArrayOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemArrayOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemArray) ToTagRetentionRuleAdvancedRuleItemArrayOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemArrayOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItem)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemOutput) ToTagRetentionRuleAdvancedRuleItemOutput() TagRetentionRuleAdvancedRuleItemOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemOutput) ToTagRetentionRuleAdvancedRuleItemOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemOutput {
+	return o
+}
+
+// Warehouse filter.
+func (o TagRetentionRuleAdvancedRuleItemOutput) RepositoryFilter() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItem) *TagRetentionRuleAdvancedRuleItemRepositoryFilter {
+		return v.RepositoryFilter
+	}).(TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput)
+}
+
+// Version retention rules.
+func (o TagRetentionRuleAdvancedRuleItemOutput) RetentionPolicy() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItem) *TagRetentionRuleAdvancedRuleItemRetentionPolicy {
+		return v.RetentionPolicy
+	}).(TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput)
+}
+
+// Tag filter.
+func (o TagRetentionRuleAdvancedRuleItemOutput) TagFilter() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItem) *TagRetentionRuleAdvancedRuleItemTagFilter {
+		return v.TagFilter
+	}).(TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemArrayOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TagRetentionRuleAdvancedRuleItem)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemArrayOutput) ToTagRetentionRuleAdvancedRuleItemArrayOutput() TagRetentionRuleAdvancedRuleItemArrayOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemArrayOutput) ToTagRetentionRuleAdvancedRuleItemArrayOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemArrayOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemArrayOutput) Index(i pulumi.IntInput) TagRetentionRuleAdvancedRuleItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TagRetentionRuleAdvancedRuleItem {
+		return vs[0].([]TagRetentionRuleAdvancedRuleItem)[vs[1].(int)]
+	}).(TagRetentionRuleAdvancedRuleItemOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRepositoryFilter struct {
+	// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+	Decoration *string `pulumi:"decoration"`
+	// Filter expression.
+	Pattern *string `pulumi:"pattern"`
+}
+
+// TagRetentionRuleAdvancedRuleItemRepositoryFilterInput is an input type that accepts TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs and TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemRepositoryFilterInput` via:
+//
+//	TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs{...}
+type TagRetentionRuleAdvancedRuleItemRepositoryFilterInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput
+	ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput
+}
+
+type TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs struct {
+	// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+	Decoration pulumi.StringPtrInput `pulumi:"decoration"`
+	// Filter expression.
+	Pattern pulumi.StringPtrInput `pulumi:"pattern"`
+}
+
+func (TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRepositoryFilter)(nil)).Elem()
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput)
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput).ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(ctx)
+}
+
+// TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput is an input type that accepts TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs, TagRetentionRuleAdvancedRuleItemRepositoryFilterPtr and TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput` via:
+//
+//	        TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput
+	ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput
+}
+
+type tagRetentionRuleAdvancedRuleItemRepositoryFilterPtrType TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs
+
+func TagRetentionRuleAdvancedRuleItemRepositoryFilterPtr(v *TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput {
+	return (*tagRetentionRuleAdvancedRuleItemRepositoryFilterPtrType)(v)
+}
+
+func (*tagRetentionRuleAdvancedRuleItemRepositoryFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemRepositoryFilter)(nil)).Elem()
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemRepositoryFilterPtrType) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemRepositoryFilterPtrType) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRepositoryFilter)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return o.ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(context.Background())
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TagRetentionRuleAdvancedRuleItemRepositoryFilter) *TagRetentionRuleAdvancedRuleItemRepositoryFilter {
+		return &v
+	}).(TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput)
+}
+
+// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) Decoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemRepositoryFilter) *string { return v.Decoration }).(pulumi.StringPtrOutput)
+}
+
+// Filter expression.
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput) Pattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemRepositoryFilter) *string { return v.Pattern }).(pulumi.StringPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemRepositoryFilter)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput() TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) ToTagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) Elem() TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRepositoryFilter) TagRetentionRuleAdvancedRuleItemRepositoryFilter {
+		if v != nil {
+			return *v
+		}
+		var ret TagRetentionRuleAdvancedRuleItemRepositoryFilter
+		return ret
+	}).(TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput)
+}
+
+// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) Decoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRepositoryFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Decoration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter expression.
+func (o TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput) Pattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRepositoryFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Pattern
+	}).(pulumi.StringPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRetentionPolicy struct {
+	// Supported strategies, with possible values: latestPushedK (retain the latest K pushed versions), nDaysSinceLastPush (retain versions pushed within the last n days).
+	Key string `pulumi:"key"`
+	// Corresponding values under the rule settings.
+	Value int `pulumi:"value"`
+}
+
+// TagRetentionRuleAdvancedRuleItemRetentionPolicyInput is an input type that accepts TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs and TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemRetentionPolicyInput` via:
+//
+//	TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs{...}
+type TagRetentionRuleAdvancedRuleItemRetentionPolicyInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput
+	ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput
+}
+
+type TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs struct {
+	// Supported strategies, with possible values: latestPushedK (retain the latest K pushed versions), nDaysSinceLastPush (retain versions pushed within the last n days).
+	Key pulumi.StringInput `pulumi:"key"`
+	// Corresponding values under the rule settings.
+	Value pulumi.IntInput `pulumi:"value"`
+}
+
+func (TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRetentionPolicy)(nil)).Elem()
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput)
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput).ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(ctx)
+}
+
+// TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput is an input type that accepts TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs, TagRetentionRuleAdvancedRuleItemRetentionPolicyPtr and TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput` via:
+//
+//	        TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput
+	ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput
+}
+
+type tagRetentionRuleAdvancedRuleItemRetentionPolicyPtrType TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs
+
+func TagRetentionRuleAdvancedRuleItemRetentionPolicyPtr(v *TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput {
+	return (*tagRetentionRuleAdvancedRuleItemRetentionPolicyPtrType)(v)
+}
+
+func (*tagRetentionRuleAdvancedRuleItemRetentionPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemRetentionPolicy)(nil)).Elem()
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemRetentionPolicyPtrType) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemRetentionPolicyPtrType) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRetentionPolicy)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return o.ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TagRetentionRuleAdvancedRuleItemRetentionPolicy) *TagRetentionRuleAdvancedRuleItemRetentionPolicy {
+		return &v
+	}).(TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput)
+}
+
+// Supported strategies, with possible values: latestPushedK (retain the latest K pushed versions), nDaysSinceLastPush (retain versions pushed within the last n days).
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemRetentionPolicy) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Corresponding values under the rule settings.
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemRetentionPolicy) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemRetentionPolicy)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput() TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) ToTagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) Elem() TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRetentionPolicy) TagRetentionRuleAdvancedRuleItemRetentionPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret TagRetentionRuleAdvancedRuleItemRetentionPolicy
+		return ret
+	}).(TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput)
+}
+
+// Supported strategies, with possible values: latestPushedK (retain the latest K pushed versions), nDaysSinceLastPush (retain versions pushed within the last n days).
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRetentionPolicy) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// Corresponding values under the rule settings.
+func (o TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemRetentionPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemTagFilter struct {
+	// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+	Decoration *string `pulumi:"decoration"`
+	// Filter expression.
+	Pattern *string `pulumi:"pattern"`
+}
+
+// TagRetentionRuleAdvancedRuleItemTagFilterInput is an input type that accepts TagRetentionRuleAdvancedRuleItemTagFilterArgs and TagRetentionRuleAdvancedRuleItemTagFilterOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemTagFilterInput` via:
+//
+//	TagRetentionRuleAdvancedRuleItemTagFilterArgs{...}
+type TagRetentionRuleAdvancedRuleItemTagFilterInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemTagFilterOutput() TagRetentionRuleAdvancedRuleItemTagFilterOutput
+	ToTagRetentionRuleAdvancedRuleItemTagFilterOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemTagFilterOutput
+}
+
+type TagRetentionRuleAdvancedRuleItemTagFilterArgs struct {
+	// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+	Decoration pulumi.StringPtrInput `pulumi:"decoration"`
+	// Filter expression.
+	Pattern pulumi.StringPtrInput `pulumi:"pattern"`
+}
+
+func (TagRetentionRuleAdvancedRuleItemTagFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemTagFilter)(nil)).Elem()
+}
+
+func (i TagRetentionRuleAdvancedRuleItemTagFilterArgs) ToTagRetentionRuleAdvancedRuleItemTagFilterOutput() TagRetentionRuleAdvancedRuleItemTagFilterOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemTagFilterOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemTagFilterArgs) ToTagRetentionRuleAdvancedRuleItemTagFilterOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemTagFilterOutput)
+}
+
+func (i TagRetentionRuleAdvancedRuleItemTagFilterArgs) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutput() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(context.Background())
+}
+
+func (i TagRetentionRuleAdvancedRuleItemTagFilterArgs) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemTagFilterOutput).ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(ctx)
+}
+
+// TagRetentionRuleAdvancedRuleItemTagFilterPtrInput is an input type that accepts TagRetentionRuleAdvancedRuleItemTagFilterArgs, TagRetentionRuleAdvancedRuleItemTagFilterPtr and TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput values.
+// You can construct a concrete instance of `TagRetentionRuleAdvancedRuleItemTagFilterPtrInput` via:
+//
+//	        TagRetentionRuleAdvancedRuleItemTagFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type TagRetentionRuleAdvancedRuleItemTagFilterPtrInput interface {
+	pulumi.Input
+
+	ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutput() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput
+	ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(context.Context) TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput
+}
+
+type tagRetentionRuleAdvancedRuleItemTagFilterPtrType TagRetentionRuleAdvancedRuleItemTagFilterArgs
+
+func TagRetentionRuleAdvancedRuleItemTagFilterPtr(v *TagRetentionRuleAdvancedRuleItemTagFilterArgs) TagRetentionRuleAdvancedRuleItemTagFilterPtrInput {
+	return (*tagRetentionRuleAdvancedRuleItemTagFilterPtrType)(v)
+}
+
+func (*tagRetentionRuleAdvancedRuleItemTagFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemTagFilter)(nil)).Elem()
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemTagFilterPtrType) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutput() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return i.ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *tagRetentionRuleAdvancedRuleItemTagFilterPtrType) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemTagFilterOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemTagFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemTagFilter)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterOutput() TagRetentionRuleAdvancedRuleItemTagFilterOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutput() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return o.ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(context.Background())
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TagRetentionRuleAdvancedRuleItemTagFilter) *TagRetentionRuleAdvancedRuleItemTagFilter {
+		return &v
+	}).(TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput)
+}
+
+// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) Decoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemTagFilter) *string { return v.Decoration }).(pulumi.StringPtrOutput)
+}
+
+// Filter expression.
+func (o TagRetentionRuleAdvancedRuleItemTagFilterOutput) Pattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TagRetentionRuleAdvancedRuleItemTagFilter) *string { return v.Pattern }).(pulumi.StringPtrOutput)
+}
+
+type TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TagRetentionRuleAdvancedRuleItemTagFilter)(nil)).Elem()
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutput() TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) ToTagRetentionRuleAdvancedRuleItemTagFilterPtrOutputWithContext(ctx context.Context) TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput {
+	return o
+}
+
+func (o TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) Elem() TagRetentionRuleAdvancedRuleItemTagFilterOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemTagFilter) TagRetentionRuleAdvancedRuleItemTagFilter {
+		if v != nil {
+			return *v
+		}
+		var ret TagRetentionRuleAdvancedRuleItemTagFilter
+		return ret
+	}).(TagRetentionRuleAdvancedRuleItemTagFilterOutput)
+}
+
+// Filter rule types: In tag filtering, the available options are matches (match) and excludes (exclude). In repository filtering, the available options are repoMatches (repository match) and repoExcludes (repository exclude).
+func (o TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) Decoration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemTagFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Decoration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Filter expression.
+func (o TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput) Pattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TagRetentionRuleAdvancedRuleItemTagFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Pattern
+	}).(pulumi.StringPtrOutput)
 }
 
 type TagRetentionRuleRetentionRule struct {
@@ -3406,16 +4014,24 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceReplicationArrayInput)(nil)).Elem(), InstanceReplicationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyInput)(nil)).Elem(), InstanceSecurityPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSecurityPolicyArrayInput)(nil)).Elem(), InstanceSecurityPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationPeerReplicationOptionInput)(nil)).Elem(), ManageReplicationOperationPeerReplicationOptionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationPeerReplicationOptionPtrInput)(nil)).Elem(), ManageReplicationOperationPeerReplicationOptionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleInput)(nil)).Elem(), ManageReplicationOperationRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRulePtrInput)(nil)).Elem(), ManageReplicationOperationRuleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleFilterInput)(nil)).Elem(), ManageReplicationOperationRuleFilterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ManageReplicationOperationRuleFilterArrayInput)(nil)).Elem(), ManageReplicationOperationRuleFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemInput)(nil)).Elem(), NamespaceCveWhitelistItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceCveWhitelistItemArrayInput)(nil)).Elem(), NamespaceCveWhitelistItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationPeerReplicationOptionInput)(nil)).Elem(), ReplicationPeerReplicationOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationPeerReplicationOptionPtrInput)(nil)).Elem(), ReplicationPeerReplicationOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationRuleInput)(nil)).Elem(), ReplicationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationRulePtrInput)(nil)).Elem(), ReplicationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationRuleFilterInput)(nil)).Elem(), ReplicationRuleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplicationRuleFilterArrayInput)(nil)).Elem(), ReplicationRuleFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceAccountPermissionInput)(nil)).Elem(), ServiceAccountPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceAccountPermissionArrayInput)(nil)).Elem(), ServiceAccountPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemArrayInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRepositoryFilterInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRetentionPolicyInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemTagFilterInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemTagFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleAdvancedRuleItemTagFilterPtrInput)(nil)).Elem(), TagRetentionRuleAdvancedRuleItemTagFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRuleInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TagRetentionRuleRetentionRulePtrInput)(nil)).Elem(), TagRetentionRuleRetentionRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebhookTriggerTriggerInput)(nil)).Elem(), WebhookTriggerTriggerArgs{})
@@ -3452,16 +4068,24 @@ func init() {
 	pulumi.RegisterOutputType(InstanceReplicationArrayOutput{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyOutput{})
 	pulumi.RegisterOutputType(InstanceSecurityPolicyArrayOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationPeerReplicationOptionOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationPeerReplicationOptionPtrOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationRuleOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationRulePtrOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationRuleFilterOutput{})
-	pulumi.RegisterOutputType(ManageReplicationOperationRuleFilterArrayOutput{})
 	pulumi.RegisterOutputType(NamespaceCveWhitelistItemOutput{})
 	pulumi.RegisterOutputType(NamespaceCveWhitelistItemArrayOutput{})
+	pulumi.RegisterOutputType(ReplicationPeerReplicationOptionOutput{})
+	pulumi.RegisterOutputType(ReplicationPeerReplicationOptionPtrOutput{})
+	pulumi.RegisterOutputType(ReplicationRuleOutput{})
+	pulumi.RegisterOutputType(ReplicationRulePtrOutput{})
+	pulumi.RegisterOutputType(ReplicationRuleFilterOutput{})
+	pulumi.RegisterOutputType(ReplicationRuleFilterArrayOutput{})
 	pulumi.RegisterOutputType(ServiceAccountPermissionOutput{})
 	pulumi.RegisterOutputType(ServiceAccountPermissionArrayOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemArrayOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemRepositoryFilterOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemRepositoryFilterPtrOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemRetentionPolicyOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemRetentionPolicyPtrOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemTagFilterOutput{})
+	pulumi.RegisterOutputType(TagRetentionRuleAdvancedRuleItemTagFilterPtrOutput{})
 	pulumi.RegisterOutputType(TagRetentionRuleRetentionRuleOutput{})
 	pulumi.RegisterOutputType(TagRetentionRuleRetentionRulePtrOutput{})
 	pulumi.RegisterOutputType(WebhookTriggerTriggerOutput{})

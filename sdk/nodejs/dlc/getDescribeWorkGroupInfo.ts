@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeWorkGroupInfo({
+ * const example = tencentcloud.dlc.getDescribeWorkGroupInfo({
  *     workGroupId: 70220,
  *     type: "User",
  *     sortBy: "create-time",
@@ -100,7 +100,7 @@ export interface GetDescribeWorkGroupInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeWorkGroupInfo({
+ * const example = tencentcloud.dlc.getDescribeWorkGroupInfo({
  *     workGroupId: 70220,
  *     type: "User",
  *     sortBy: "create-time",
@@ -128,25 +128,25 @@ export interface GetDescribeWorkGroupInfoOutputArgs {
     /**
      * Filter criteria that are queriedWhen the type is User, the fuzzy search is supported as the key is user-name.When the type is DataAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;data-name: fuzzy search of the database and table.When the type is EngineAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;engine-name: fuzzy search of the database and table.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetDescribeWorkGroupInfoFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetDescribeWorkGroupInfoFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sort fields.When the type is User, create-time and user-name are supported.When the type is DataAuth, create-time is supported.When the type is EngineAuth, create-time is supported.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting methods: desc means in order; asc means in reverse order; it is asc by default.
      */
-    sorting?: pulumi.Input<string>;
+    sorting?: pulumi.Input<string | undefined>;
     /**
      * Types of queried information. User: user information; DataAuth: data permissions; EngineAuth: engine permissions.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Working group ID.
      */
-    workGroupId?: pulumi.Input<number>;
+    workGroupId?: pulumi.Input<number | undefined>;
 }

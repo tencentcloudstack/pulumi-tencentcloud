@@ -57,9 +57,9 @@ import (
 //			}
 //			// create cam group membership
 //			_, err = cam.NewGroupMembership(ctx, "example", &cam.GroupMembershipArgs{
-//				GroupId: exampleGroup.ID(),
+//				GroupId: exampleGroup.ID().ToIDOutput().ToStringOutput(),
 //				UserNames: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenersByTargets = tencentcloud.Clb.getListenersByTargets({
+ * const listenersByTargets = tencentcloud.clb.getListenersByTargets({
  *     backends: [{
  *         vpcId: "vpc-4owdpnwr",
  *         privateIp: "106.52.160.211",
@@ -69,7 +69,7 @@ export interface GetListenersByTargetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenersByTargets = tencentcloud.Clb.getListenersByTargets({
+ * const listenersByTargets = tencentcloud.clb.getListenersByTargets({
  *     backends: [{
  *         vpcId: "vpc-4owdpnwr",
  *         privateIp: "106.52.160.211",
@@ -96,5 +96,5 @@ export interface GetListenersByTargetsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -84,12 +84,8 @@ type GetHbaseInstancesResult struct {
 }
 
 func GetHbaseInstancesOutput(ctx *pulumi.Context, args GetHbaseInstancesOutputArgs, opts ...pulumi.InvokeOption) GetHbaseInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetHbaseInstancesResultOutput, error) {
-			args := v.(GetHbaseInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Serverless/getHbaseInstances:getHbaseInstances", args, GetHbaseInstancesResultOutput{}, options).(GetHbaseInstancesResultOutput), nil
-		}).(GetHbaseInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Serverless/getHbaseInstances:getHbaseInstances", args, GetHbaseInstancesResultOutput{}, options).(GetHbaseInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getHbaseInstances.

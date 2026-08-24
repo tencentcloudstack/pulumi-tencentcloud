@@ -89,12 +89,8 @@ type GetSqlScriptRunsResult struct {
 }
 
 func GetSqlScriptRunsOutput(ctx *pulumi.Context, args GetSqlScriptRunsOutputArgs, opts ...pulumi.InvokeOption) GetSqlScriptRunsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSqlScriptRunsResultOutput, error) {
-			args := v.(GetSqlScriptRunsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getSqlScriptRuns:getSqlScriptRuns", args, GetSqlScriptRunsResultOutput{}, options).(GetSqlScriptRunsResultOutput), nil
-		}).(GetSqlScriptRunsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getSqlScriptRuns:getSqlScriptRuns", args, GetSqlScriptRunsResultOutput{}, options).(GetSqlScriptRunsResultOutput)
 }
 
 // A collection of arguments for invoking getSqlScriptRuns.

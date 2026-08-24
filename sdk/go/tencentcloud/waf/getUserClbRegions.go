@@ -64,12 +64,8 @@ type GetUserClbRegionsResult struct {
 }
 
 func GetUserClbRegionsOutput(ctx *pulumi.Context, args GetUserClbRegionsOutputArgs, opts ...pulumi.InvokeOption) GetUserClbRegionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUserClbRegionsResultOutput, error) {
-			args := v.(GetUserClbRegionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args, GetUserClbRegionsResultOutput{}, options).(GetUserClbRegionsResultOutput), nil
-		}).(GetUserClbRegionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args, GetUserClbRegionsResultOutput{}, options).(GetUserClbRegionsResultOutput)
 }
 
 // A collection of arguments for invoking getUserClbRegions.

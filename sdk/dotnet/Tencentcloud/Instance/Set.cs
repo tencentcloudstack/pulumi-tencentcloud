@@ -106,6 +106,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Output("instanceIds")]
         public Output<ImmutableArray<string>> InstanceIds { get; private set; } = null!;
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Output("instanceName")]
         public Output<string?> InstanceName { get; private set; } = null!;
 
@@ -346,6 +349,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("instanceCount")]
         public Input<int>? InstanceCount { get; set; }
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 
@@ -571,6 +577,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             set => _instanceIds = value;
         }
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 

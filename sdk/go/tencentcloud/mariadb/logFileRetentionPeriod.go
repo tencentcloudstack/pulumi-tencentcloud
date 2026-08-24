@@ -43,8 +43,7 @@ import (
 //
 // ## Import
 //
-// mariadb log_file_retention_period can be imported using the id, e.g.
-//
+// mariadb logFileRetentionPeriod can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
 // ```

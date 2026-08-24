@@ -61,13 +61,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// WAF log post cls flow can be imported using the id, e.g.
     /// 
-    /// If log_type is 1
+    /// If LogType is 1
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/logPostClsFlow:LogPostClsFlow example 111462#1
     /// ```
     /// 
-    /// If log_type is 2
+    /// If LogType is 2
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/logPostClsFlow:LogPostClsFlow example 111467#2

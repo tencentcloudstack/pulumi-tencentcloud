@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTrafficPackage = tencentcloud.Lighthouse.getInstanceTrafficPackage({});
+ * const instanceTrafficPackage = tencentcloud.lighthouse.getInstanceTrafficPackage({});
  * ```
  */
 export function getInstanceTrafficPackage(args?: GetInstanceTrafficPackageArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTrafficPackageResult> {
@@ -77,7 +77,7 @@ export interface GetInstanceTrafficPackageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTrafficPackage = tencentcloud.Lighthouse.getInstanceTrafficPackage({});
+ * const instanceTrafficPackage = tencentcloud.lighthouse.getInstanceTrafficPackage({});
  * ```
  */
 export function getInstanceTrafficPackageOutput(args?: GetInstanceTrafficPackageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceTrafficPackageResult> {
@@ -98,17 +98,17 @@ export interface GetInstanceTrafficPackageOutputArgs {
     /**
      * Instance ID list.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of returned results. Default value is 20. Maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Offset. Default value is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

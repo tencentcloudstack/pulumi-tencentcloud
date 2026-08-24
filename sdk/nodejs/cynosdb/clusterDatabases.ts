@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb cluster_databases can be imported using the id, e.g.
+ * cynosdb clusterDatabases can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id
@@ -142,27 +142,27 @@ export interface ClusterDatabasesState {
     /**
      * Character Set Type.
      */
-    characterSet?: pulumi.Input<string>;
+    characterSet?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Sort Rules.
      */
-    collateRule?: pulumi.Input<string>;
+    collateRule?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Authorize user host permissions.
      */
-    userHostPrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterDatabasesUserHostPrivilege>[]>;
+    userHostPrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterDatabasesUserHostPrivilege>[] | undefined>;
 }
 
 /**
@@ -188,9 +188,9 @@ export interface ClusterDatabasesArgs {
     /**
      * Remarks.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Authorize user host permissions.
      */
-    userHostPrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterDatabasesUserHostPrivilege>[]>;
+    userHostPrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ClusterDatabasesUserHostPrivilege>[] | undefined>;
 }

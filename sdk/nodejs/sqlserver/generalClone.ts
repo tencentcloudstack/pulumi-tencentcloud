@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -69,7 +69,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver general_communication can be imported using the id, e.g.
+ * sqlserver generalCommunication can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/generalClone:GeneralClone example mssql-si2823jyl#tf_example_db#tf_example_db_clone
@@ -159,15 +159,15 @@ export interface GeneralCloneState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * New database name. In offline migration, OldName will be used if NewName is left empty (OldName and NewName cannot be both empty). In database cloning, OldName and NewName must be both specified and cannot have the same value.
      */
-    newName?: pulumi.Input<string>;
+    newName?: pulumi.Input<string | undefined>;
     /**
      * Database name. If the OldName database does not exist, a failure will be returned. It can be left empty in offline migration tasks.
      */
-    oldName?: pulumi.Input<string>;
+    oldName?: pulumi.Input<string | undefined>;
 }
 
 /**

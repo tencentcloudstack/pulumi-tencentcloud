@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const layers = tencentcloud.Scf.getLayers({});
+ * const layers = tencentcloud.scf.getLayers({});
  * ```
  */
 export function getLayers(args?: GetLayersArgs, opts?: pulumi.InvokeOptions): Promise<GetLayersResult> {
@@ -71,7 +71,7 @@ export interface GetLayersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const layers = tencentcloud.Scf.getLayers({});
+ * const layers = tencentcloud.scf.getLayers({});
  * ```
  */
 export function getLayersOutput(args?: GetLayersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLayersResult> {
@@ -91,13 +91,13 @@ export interface GetLayersOutputArgs {
     /**
      * Compatible runtimes.
      */
-    compatibleRuntime?: pulumi.Input<string>;
+    compatibleRuntime?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query key, which fuzzily matches the name.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
 }

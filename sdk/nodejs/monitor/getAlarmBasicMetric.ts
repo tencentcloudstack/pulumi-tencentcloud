@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMetric = tencentcloud.Monitor.getAlarmBasicMetric({
+ * const alarmMetric = tencentcloud.monitor.getAlarmBasicMetric({
  *     namespace: "qce/cvm",
  *     metricName: "WanOuttraffic",
  *     dimensions: ["uuid"],
@@ -45,7 +45,7 @@ export interface GetAlarmBasicMetricArgs {
      */
     metricName?: string;
     /**
-     * The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843 ).
+     * The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843).
      */
     namespace: string;
     /**
@@ -89,7 +89,7 @@ export interface GetAlarmBasicMetricResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMetric = tencentcloud.Monitor.getAlarmBasicMetric({
+ * const alarmMetric = tencentcloud.monitor.getAlarmBasicMetric({
  *     namespace: "qce/cvm",
  *     metricName: "WanOuttraffic",
  *     dimensions: ["uuid"],
@@ -113,17 +113,17 @@ export interface GetAlarmBasicMetricOutputArgs {
     /**
      * Optional parameters, filtered by dimension.
      */
-    dimensions?: pulumi.Input<pulumi.Input<string>[]>;
+    dimensions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicator names are different for each cloud product. To obtain indicator names, please go to the monitoring indicator documents of each product, such as the indicator names of cloud servers, which can be found in Cloud Server Monitoring Indicators.
      */
-    metricName?: pulumi.Input<string>;
+    metricName?: pulumi.Input<string | undefined>;
     /**
-     * The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843 ).
+     * The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843).
      */
     namespace: pulumi.Input<string>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

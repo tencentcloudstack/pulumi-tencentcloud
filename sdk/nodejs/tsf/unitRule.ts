@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf unit_rule can be imported using the id, e.g.
+ * tsf unitRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
@@ -139,27 +139,27 @@ export interface UnitRuleState {
     /**
      * rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway entity ID.
      */
-    gatewayInstanceId?: pulumi.Input<string>;
+    gatewayInstanceId?: pulumi.Input<string | undefined>;
     /**
      * rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * usage status: enabled/disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * list of rule items.
      */
-    unitRuleItemLists?: pulumi.Input<pulumi.Input<inputs.Tsf.UnitRuleUnitRuleItemList>[]>;
+    unitRuleItemLists?: pulumi.Input<pulumi.Input<inputs.Tsf.UnitRuleUnitRuleItemList>[] | undefined>;
 }
 
 /**
@@ -169,7 +169,7 @@ export interface UnitRuleArgs {
     /**
      * rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway entity ID.
      */
@@ -177,9 +177,9 @@ export interface UnitRuleArgs {
     /**
      * rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * list of rule items.
      */
-    unitRuleItemLists?: pulumi.Input<pulumi.Input<inputs.Tsf.UnitRuleUnitRuleItemList>[]>;
+    unitRuleItemLists?: pulumi.Input<pulumi.Input<inputs.Tsf.UnitRuleUnitRuleItemList>[] | undefined>;
 }

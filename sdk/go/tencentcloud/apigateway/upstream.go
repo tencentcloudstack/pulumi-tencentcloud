@@ -41,7 +41,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			images, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//			images2, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
@@ -65,17 +65,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[3].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -85,14 +85,14 @@ import (
 //			example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
 //				InstanceName:     pulumi.String("tf_example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[3].Name),
-//				ImageId:          pulumi.String(images.Images[0].ImageId),
+//				ImageId:          pulumi.String(images2.Images[0].ImageId),
 //				InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
 //				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
 //				SystemDiskSize:   pulumi.Int(50),
 //				Hostname:         pulumi.String("terraform"),
 //				ProjectId:        pulumi.Int(0),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataDisks: instance.InstanceDataDiskArray{
 //					&instance.InstanceDataDiskArgs{
 //						DataDiskType: pulumi.String("CLOUD_PREMIUM"),
@@ -110,7 +110,7 @@ import (
 //			_, err = apigateway.NewUpstream(ctx, "example", &apigateway.UpstreamArgs{
 //				Scheme:              pulumi.String("HTTP"),
 //				Algorithm:           pulumi.String("ROUND-ROBIN"),
-//				UniqVpcId:           vpc.ID(),
+//				UniqVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //				UpstreamName:        pulumi.String("tf_example"),
 //				UpstreamDescription: pulumi.String("desc."),
 //				UpstreamType:        pulumi.String("IP_PORT"),
@@ -120,7 +120,7 @@ import (
 //						Host:         pulumi.String("1.1.1.1"),
 //						Port:         pulumi.Int(9090),
 //						Weight:       pulumi.Int(10),
-//						VmInstanceId: example.ID(),
+//						VmInstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //						Tags: pulumi.StringArray{
 //							pulumi.String("tags"),
 //						},

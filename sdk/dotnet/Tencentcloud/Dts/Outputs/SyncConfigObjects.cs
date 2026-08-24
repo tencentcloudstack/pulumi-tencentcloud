@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
         /// </summary>
         public readonly string? Mode;
         /// <summary>
-        /// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        /// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly Outputs.SyncConfigObjectsOnlineDdl? OnlineDdl;
 

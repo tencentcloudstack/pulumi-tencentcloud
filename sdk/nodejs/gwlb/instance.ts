@@ -42,7 +42,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gwlb gwlb_instance can be imported using the id, e.g.
+ * gwlb gwlbInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gwlb/instance:Instance gwlb_instance gwlb_instance_id
@@ -189,55 +189,55 @@ export interface InstanceState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to turn on the deletion protection function.
      */
-    deleteProtect?: pulumi.Input<boolean>;
+    deleteProtect?: pulumi.Input<boolean | undefined>;
     /**
      * Time when the Gateway Load Balancer instance was isolated.
      */
-    isolatedTime?: pulumi.Input<string>;
+    isolatedTime?: pulumi.Input<string | undefined>;
     /**
      * 0: means not quarantined, 1: means quarantined.
      */
-    isolation?: pulumi.Input<number>;
+    isolation?: pulumi.Input<number | undefined>;
     /**
      * GWLB instance billing type, which currently supports POSTPAID_BY_HOUR only. The default is POSTPAID_BY_HOUR.
      */
-    lbChargeType?: pulumi.Input<string>;
+    lbChargeType?: pulumi.Input<string | undefined>;
     /**
      * GWLB instance name. It supports input of 1 to 60 characters. If not filled in, it will be generated automatically by default.
      */
-    loadBalancerName?: pulumi.Input<string>;
+    loadBalancerName?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the configuration modification protection function.
      */
-    operateProtect?: pulumi.Input<boolean>;
+    operateProtect?: pulumi.Input<boolean | undefined>;
     /**
      * Gateway Load Balancer instance status. 0: Creating, 1: Running normally, 3: Removing.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Subnet ID of the VPC to which the backend target device of the GWLB belongs.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * While the GWLB is purchased, it is tagged, with a maximum of 20 tag key-value pairs.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Gwlb.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Gwlb.InstanceTag>[] | undefined>;
     /**
      * Unique ID of the associated target group.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
     /**
      * Gateway Load Balancer provides virtual IP services.
      */
-    vips?: pulumi.Input<pulumi.Input<string>[]>;
+    vips?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the VPC to which the backend target device of the GWLB belongs, such as vpc-12345678. It can be obtained through the DescribeVpcEx interface. If left blank, it defaults to DefaultVPC. This parameter is required when a private network CLB instance is created.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -247,11 +247,11 @@ export interface InstanceArgs {
     /**
      * GWLB instance billing type, which currently supports POSTPAID_BY_HOUR only. The default is POSTPAID_BY_HOUR.
      */
-    lbChargeType?: pulumi.Input<string>;
+    lbChargeType?: pulumi.Input<string | undefined>;
     /**
      * GWLB instance name. It supports input of 1 to 60 characters. If not filled in, it will be generated automatically by default.
      */
-    loadBalancerName?: pulumi.Input<string>;
+    loadBalancerName?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID of the VPC to which the backend target device of the GWLB belongs.
      */
@@ -259,7 +259,7 @@ export interface InstanceArgs {
     /**
      * While the GWLB is purchased, it is tagged, with a maximum of 20 tag key-value pairs.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Gwlb.InstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Gwlb.InstanceTag>[] | undefined>;
     /**
      * ID of the VPC to which the backend target device of the GWLB belongs, such as vpc-12345678. It can be obtained through the DescribeVpcEx interface. If left blank, it defaults to DefaultVPC. This parameter is required when a private network CLB instance is created.
      */

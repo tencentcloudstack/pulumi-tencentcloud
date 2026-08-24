@@ -14,19 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionChallengeActionParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Client authentication method ID. This field is required when Name is InterstitialChallenge/InlineChallenge.
+        /// Client authentication method ID.
         /// </summary>
         [Input("attesterId")]
         public Input<string>? AttesterId { get; set; }
 
         /// <summary>
-        /// The specific challenge action to be executed safely. The possible values are: &lt;li&gt; InterstitialChallenge: interstitial challenge; &lt;/li&gt;&lt;li&gt; InlineChallenge: embedded challenge; &lt;/li&gt;&lt;li&gt; JSChallenge: JavaScript challenge; &lt;/li&gt;&lt;li&gt; ManagedChallenge: managed challenge. &lt;/li&gt;.
+        /// The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
         /// </summary>
         [Input("challengeOption", required: true)]
         public Input<string> ChallengeOption { get; set; } = null!;
 
         /// <summary>
-        /// The time interval for repeating the challenge. When Name is InterstitialChallenge/InlineChallenge, this field is required. The default value is 300s. Supported units are: &lt;li&gt;s: seconds, value range 1 to 60; &lt;/li&gt;&lt;li&gt;m: minutes, value range 1 to 60; &lt;/li&gt;&lt;li&gt;h: hours, value range 1 to 24. &lt;/li&gt;.
+        /// The time interval for repeating the challenge.
         /// </summary>
         [Input("interval")]
         public Input<string>? Interval { get; set; }

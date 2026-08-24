@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a teo teoFunctionRule
+ * Provides a resource to create a TEO function rule
  *
  * ## Example Usage
  *
@@ -15,57 +15,36 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const teoFunctionRule = new tencentcloud.teo.FunctionRule("teo_function_rule", {
- *     functionId: "ef-txx7fnua",
- *     remark: "aaa",
- *     zoneId: "zone-2qtuhspy7cr6",
- *     functionRuleConditions: [
- *         {
- *             ruleConditions: [
- *                 {
- *                     ignoreCase: false,
- *                     name: null,
- *                     operator: "equal",
- *                     target: "host",
- *                     values: ["aaa.makn.cn"],
- *                 },
- *                 {
- *                     ignoreCase: false,
- *                     name: null,
- *                     operator: "equal",
- *                     target: "extension",
- *                     values: [".txt"],
- *                 },
- *             ],
- *         },
- *         {
- *             ruleConditions: [
- *                 {
- *                     ignoreCase: false,
- *                     name: null,
- *                     operator: "notequal",
- *                     target: "host",
- *                     values: ["aaa.makn.cn"],
- *                 },
- *                 {
- *                     ignoreCase: false,
- *                     name: null,
- *                     operator: "equal",
- *                     target: "extension",
- *                     values: [".png"],
- *                 },
- *             ],
- *         },
- *     ],
+ * const example = new tencentcloud.teo.FunctionRule("example", {
+ *     functionId: "ef-m01xn26e",
+ *     remark: "remark.",
+ *     triggerType: "direct",
+ *     zoneId: "zone-3fkff38fyw8s",
+ *     functionRuleConditions: [{
+ *         ruleConditions: [
+ *             {
+ *                 ignoreCase: false,
+ *                 operator: "equal",
+ *                 target: "host",
+ *                 values: ["test.makn.cn"],
+ *             },
+ *             {
+ *                 ignoreCase: false,
+ *                 operator: "equal",
+ *                 target: "url",
+ *                 values: ["/path"],
+ *             },
+ *         ],
+ *     }],
  * });
  * ```
  *
  * ## Import
  *
- * teo teo_function_rule can be imported using the id, e.g.
+ * teo teoFunctionRule can be imported using the zoneId#functionId#ruleId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Teo/functionRule:FunctionRule teo_function_rule zone_id#function_id#rule_id
+ * $ pulumi import tencentcloud:Teo/functionRule:FunctionRule example zone-3fkff38fyw8s#ef-m01xn26e#rule-yuvufj6h
  * ```
  */
 export class FunctionRule extends pulumi.CustomResource {
@@ -121,6 +100,10 @@ export class FunctionRule extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly ruleId: pulumi.Output<string>;
     /**
+     * Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+     */
+    declare public readonly triggerType: pulumi.Output<string>;
+    /**
      * ID of the site.
      */
     declare public readonly zoneId: pulumi.Output<string>;
@@ -144,6 +127,7 @@ export class FunctionRule extends pulumi.CustomResource {
             resourceInputs["priority"] = state?.priority;
             resourceInputs["remark"] = state?.remark;
             resourceInputs["ruleId"] = state?.ruleId;
+            resourceInputs["triggerType"] = state?.triggerType;
             resourceInputs["zoneId"] = state?.zoneId;
         } else {
             const args = argsOrState as FunctionRuleArgs | undefined;
@@ -159,6 +143,7 @@ export class FunctionRule extends pulumi.CustomResource {
             resourceInputs["functionId"] = args?.functionId;
             resourceInputs["functionRuleConditions"] = args?.functionRuleConditions;
             resourceInputs["remark"] = args?.remark;
+            resourceInputs["triggerType"] = args?.triggerType;
             resourceInputs["zoneId"] = args?.zoneId;
             resourceInputs["functionName"] = undefined /*out*/;
             resourceInputs["priority"] = undefined /*out*/;
@@ -176,31 +161,35 @@ export interface FunctionRuleState {
     /**
      * ID of the Function.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * The name of the function.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * The list of rule conditions, where the conditions are connected by an "OR" relationship.
      */
-    functionRuleConditions?: pulumi.Input<pulumi.Input<inputs.Teo.FunctionRuleFunctionRuleCondition>[]>;
+    functionRuleConditions?: pulumi.Input<pulumi.Input<inputs.Teo.FunctionRuleFunctionRuleCondition>[] | undefined>;
     /**
      * The priority of the function trigger rule. A higher numerical value indicates a higher priority.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Rule description, maximum support of 60 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * ID of the Function Rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
+    /**
+     * Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+     */
+    triggerType?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -218,7 +207,11 @@ export interface FunctionRuleArgs {
     /**
      * Rule description, maximum support of 60 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
+    /**
+     * Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+     */
+    triggerType?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */

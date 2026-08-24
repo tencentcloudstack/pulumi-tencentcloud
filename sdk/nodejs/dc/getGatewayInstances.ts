@@ -27,10 +27,10 @@ import * as utilities from "../utilities";
  *     gatewayType: "NORMAL",
  * });
  * //You need to sleep for a few seconds because there is a cache on the server
- * const nameSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+ * const nameSelect = tencentcloud.dc.getGatewayInstancesOutput({
  *     name: ccnMain.name,
  * });
- * const idSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+ * const idSelect = tencentcloud.dc.getGatewayInstancesOutput({
  *     dcgId: ccnMain.id,
  * });
  * ```
@@ -106,10 +106,10 @@ export interface GetGatewayInstancesResult {
  *     gatewayType: "NORMAL",
  * });
  * //You need to sleep for a few seconds because there is a cache on the server
- * const nameSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+ * const nameSelect = tencentcloud.dc.getGatewayInstancesOutput({
  *     name: ccnMain.name,
  * });
- * const idSelect = tencentcloud.Dc.getGatewayInstancesOutput({
+ * const idSelect = tencentcloud.dc.getGatewayInstancesOutput({
  *     dcgId: ccnMain.id,
  * });
  * ```
@@ -131,13 +131,13 @@ export interface GetGatewayInstancesOutputArgs {
     /**
      * ID of the DCG to be queried.
      */
-    dcgId?: pulumi.Input<string>;
+    dcgId?: pulumi.Input<string | undefined>;
     /**
      * Name of the DCG to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

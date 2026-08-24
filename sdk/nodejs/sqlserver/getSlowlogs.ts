@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getSlowlogs({
+ * const example = tencentcloud.sqlserver.getSlowlogs({
  *     instanceId: "mssql-qelbzgwf",
  *     startTime: "2023-08-01 00:00:00",
  *     endTime: "2023-08-07 00:00:00",
@@ -86,7 +86,7 @@ export interface GetSlowlogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getSlowlogs({
+ * const example = tencentcloud.sqlserver.getSlowlogs({
  *     instanceId: "mssql-qelbzgwf",
  *     startTime: "2023-08-01 00:00:00",
  *     endTime: "2023-08-07 00:00:00",
@@ -118,7 +118,7 @@ export interface GetSlowlogsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query start time.
      */

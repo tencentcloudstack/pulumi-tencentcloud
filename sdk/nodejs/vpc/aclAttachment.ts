@@ -90,11 +90,11 @@ export interface AclAttachmentState {
     /**
      * ID of the attached ACL.
      */
-    aclId?: pulumi.Input<string>;
+    aclId?: pulumi.Input<string | undefined>;
     /**
      * The Subnet instance ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }
 
 /**

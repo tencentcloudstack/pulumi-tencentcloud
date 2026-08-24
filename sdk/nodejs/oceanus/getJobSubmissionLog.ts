@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getJobSubmissionLog({
+ * const example = tencentcloud.oceanus.getJobSubmissionLog({
  *     jobId: "cql-314rw6w0",
  *     startTime: 1696130964345,
  *     endTime: 1698118169241,
@@ -125,7 +125,7 @@ export interface GetJobSubmissionLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getJobSubmissionLog({
+ * const example = tencentcloud.oceanus.getJobSubmissionLog({
  *     jobId: "cql-314rw6w0",
  *     startTime: 1696130964345,
  *     endTime: 1698118169241,
@@ -155,7 +155,7 @@ export interface GetJobSubmissionLogOutputArgs {
     /**
      * Cursor, default empty, first request does not need to pass in.
      */
-    cursor?: pulumi.Input<string>;
+    cursor?: pulumi.Input<string | undefined>;
     /**
      * End time, unix timestamp, in milliseconds.
      */
@@ -167,19 +167,19 @@ export interface GetJobSubmissionLogOutputArgs {
     /**
      * Keyword, default empty.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Sorting method, default asc, asc: ascending, desc: descending.
      */
-    orderType?: pulumi.Input<string>;
+    orderType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Job instance ID.
      */
-    runningOrderId?: pulumi.Input<number>;
+    runningOrderId?: pulumi.Input<number | undefined>;
     /**
      * Start time, unix timestamp, in milliseconds.
      */

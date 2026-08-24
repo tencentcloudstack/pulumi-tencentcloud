@@ -32,7 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -40,9 +40,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -60,8 +60,8 @@ import (
 //				SystemDiskSize:          pulumi.Int(100),
 //				Hostname:                pulumi.String("example"),
 //				ProjectId:               pulumi.Int(0),
-//				VpcId:                   vpc.ID(),
-//				SubnetId:                subnet.ID(),
+//				VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
 //				AllocatePublicIp:        pulumi.Bool(true),
 //				InternetMaxBandwidthOut: pulumi.Int(10),
 //				DataDisks: instance.InstanceDataDiskArray{
@@ -79,7 +79,7 @@ import (
 //				return err
 //			}
 //			_, err = eip.NewAddressTransform(ctx, "example", &eip.AddressTransformArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

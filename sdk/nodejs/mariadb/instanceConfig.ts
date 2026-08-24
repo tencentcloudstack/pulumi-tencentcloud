@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb instance_config can be imported using the id, e.g.
+ * mariadb instanceConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
@@ -109,15 +109,15 @@ export interface InstanceConfigState {
     /**
      * External network status, 0-closed; 1- Opening; Default not enabled.
      */
-    extranetAccess?: pulumi.Input<number>;
+    extranetAccess?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * RS proximity mode, 0- no strategy, 1- access to the nearest available zone.
      */
-    rsAccessStrategy?: pulumi.Input<number>;
+    rsAccessStrategy?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -127,7 +127,7 @@ export interface InstanceConfigArgs {
     /**
      * External network status, 0-closed; 1- Opening; Default not enabled.
      */
-    extranetAccess?: pulumi.Input<number>;
+    extranetAccess?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
@@ -135,5 +135,5 @@ export interface InstanceConfigArgs {
     /**
      * RS proximity mode, 0- no strategy, 1- access to the nearest available zone.
      */
-    rsAccessStrategy?: pulumi.Input<number>;
+    rsAccessStrategy?: pulumi.Input<number | undefined>;
 }

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ciam user_store can be imported using the id, e.g.
+ * ciam userStore can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
@@ -106,15 +106,15 @@ export interface UserStoreState {
     /**
      * User Store Description.
      */
-    userPoolDesc?: pulumi.Input<string>;
+    userPoolDesc?: pulumi.Input<string | undefined>;
     /**
      * User Store Logo.
      */
-    userPoolLogo?: pulumi.Input<string>;
+    userPoolLogo?: pulumi.Input<string | undefined>;
     /**
      * User Store Name.
      */
-    userPoolName?: pulumi.Input<string>;
+    userPoolName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,11 +124,11 @@ export interface UserStoreArgs {
     /**
      * User Store Description.
      */
-    userPoolDesc?: pulumi.Input<string>;
+    userPoolDesc?: pulumi.Input<string | undefined>;
     /**
      * User Store Logo.
      */
-    userPoolLogo?: pulumi.Input<string>;
+    userPoolLogo?: pulumi.Input<string | undefined>;
     /**
      * User Store Name.
      */

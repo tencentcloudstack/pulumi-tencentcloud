@@ -75,12 +75,8 @@ type GetResourcesByTagResult struct {
 }
 
 func GetResourcesByTagOutput(ctx *pulumi.Context, args GetResourcesByTagOutputArgs, opts ...pulumi.InvokeOption) GetResourcesByTagResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourcesByTagResultOutput, error) {
-			args := v.(GetResourcesByTagArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args, GetResourcesByTagResultOutput{}, options).(GetResourcesByTagResultOutput), nil
-		}).(GetResourcesByTagResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args, GetResourcesByTagResultOutput{}, options).(GetResourcesByTagResultOutput)
 }
 
 // A collection of arguments for invoking getResourcesByTag.

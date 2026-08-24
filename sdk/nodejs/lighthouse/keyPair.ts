@@ -14,11 +14,12 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const keyPair = new tencentcloud.lighthouse.KeyPair("key_pair", {keyName: "key_name_test"});
+ * export const privateKey = keyPair.privateKey;
  * ```
  *
  * ## Import
  *
- * lighthouse key_pair can be imported using the id, e.g.
+ * lighthouse keyPair can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
@@ -108,19 +109,19 @@ export interface KeyPairState {
     /**
      * Creation time. Expressed according to the ISO8601 standard, and using UTC time. Format: YYYY-MM-DDThh:mm:ssZ.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * Key pair name, which can contain up to 25 digits, letters, and underscores.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Key to private key.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * Public key content of the key pair, which is in the OpenSSH RSA format.
      */
-    publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -134,5 +135,5 @@ export interface KeyPairArgs {
     /**
      * Public key content of the key pair, which is in the OpenSSH RSA format.
      */
-    publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string | undefined>;
 }

@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
     /// <summary>
     /// Provides a resource to manage CDH instance.
     /// 
+    /// &gt; **NOTE:** CHD instance not supported delete, please contact the work order for processing
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -23,15 +25,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///     var foo = new Tencentcloud.Cdh.Instance("foo", new()
+    ///     var example = new Tencentcloud.Cdh.Instance("example", new()
     ///     {
-    ///         AvailabilityZone = availabilityZone,
+    ///         AvailabilityZone = "ap-guangzhou-6",
     ///         HostType = "HC20",
     ///         ChargeType = "PREPAID",
     ///         PrepaidPeriod = 1,
-    ///         HostName = "test",
+    ///         HostName = "tf-example",
     ///         PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
     ///     });
     /// 
@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
     /// CDH instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+    /// $ pulumi import tencentcloud:Cdh/instance:Instance example host-d6s7i5q4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdh/instance:Instance")]

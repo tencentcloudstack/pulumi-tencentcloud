@@ -105,6 +105,11 @@ export type LiveTranscodeTemplate = import("./liveTranscodeTemplate").LiveTransc
 export const LiveTranscodeTemplate: typeof import("./liveTranscodeTemplate").LiveTranscodeTemplate = null as any;
 utilities.lazyLoad(exports, ["LiveTranscodeTemplate"], () => require("./liveTranscodeTemplate"));
 
+export { OriginStreamInfoArgs, OriginStreamInfoState } from "./originStreamInfo";
+export type OriginStreamInfo = import("./originStreamInfo").OriginStreamInfo;
+export const OriginStreamInfo: typeof import("./originStreamInfo").OriginStreamInfo = null as any;
+utilities.lazyLoad(exports, ["OriginStreamInfo"], () => require("./originStreamInfo"));
+
 export { PadRuleAttachmentArgs, PadRuleAttachmentState } from "./padRuleAttachment";
 export type PadRuleAttachment = import("./padRuleAttachment").PadRuleAttachment;
 export const PadRuleAttachment: typeof import("./padRuleAttachment").PadRuleAttachment = null as any;
@@ -213,6 +218,8 @@ const _module = {
                 return new LiveTranscodeRuleAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate":
                 return new LiveTranscodeTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Css/originStreamInfo:OriginStreamInfo":
+                return new OriginStreamInfo(name, <any>undefined, { urn })
             case "tencentcloud:Css/padRuleAttachment:PadRuleAttachment":
                 return new PadRuleAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Css/padTemplate:PadTemplate":
@@ -261,6 +268,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Css/domainReferer", _modu
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/enableOptimalSwitching", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/liveTranscodeRuleAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/liveTranscodeTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Css/originStreamInfo", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/padRuleAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/padTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Css/playAuthKeyConfig", _module)

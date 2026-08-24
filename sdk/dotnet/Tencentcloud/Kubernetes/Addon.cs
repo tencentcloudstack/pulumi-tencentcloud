@@ -57,7 +57,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// ## Import
     /// 
     /// kubernetes cluster app addons can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Kubernetes/addon:Addon example cls-k2o1ws9g#tcr
     /// ```

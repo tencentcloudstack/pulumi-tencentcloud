@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_role_configuration_permission_custom_policy_attachment can be imported using the id, e.g.
+ * organization identityCenterRoleConfigurationPermissionCustomPolicyAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerRoleConfigurationPermissionCustomPolicyAttachment:CenterRoleConfigurationPermissionCustomPolicyAttachment identity_center_role_configuration_permission_custom_policy_attachment ${zoneId}#${roleConfigurationId}#${rolePolicyName}
@@ -148,27 +148,27 @@ export interface CenterRoleConfigurationPermissionCustomPolicyAttachmentState {
     /**
      * Role policy add time.
      */
-    addTime?: pulumi.Input<string>;
+    addTime?: pulumi.Input<string | undefined>;
     /**
      * Permission configuration ID.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Role policy document.
      */
-    rolePolicyDocument?: pulumi.Input<string>;
+    rolePolicyDocument?: pulumi.Input<string | undefined>;
     /**
      * Role policy name.
      */
-    rolePolicyName?: pulumi.Input<string>;
+    rolePolicyName?: pulumi.Input<string | undefined>;
     /**
      * Role policy type.
      */
-    rolePolicyType?: pulumi.Input<string>;
+    rolePolicyType?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

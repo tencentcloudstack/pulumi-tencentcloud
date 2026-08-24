@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupTables = tencentcloud.Clickhouse.getBackupTables({
+ * const backupTables = tencentcloud.clickhouse.getBackupTables({
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetBackupTablesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupTables = tencentcloud.Clickhouse.getBackupTables({
+ * const backupTables = tencentcloud.clickhouse.getBackupTables({
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetBackupTablesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

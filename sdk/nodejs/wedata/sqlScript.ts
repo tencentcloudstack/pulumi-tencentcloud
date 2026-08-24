@@ -153,35 +153,35 @@ export interface SqlScriptState {
     /**
      * Permission scope: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path, /aaa/bbb/ccc, root directory is empty string or /.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * The full path of the node, /aaa/bbb/ccc.ipynb, consists of the names of each node.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Data exploration script configuration.
      */
-    scriptConfig?: pulumi.Input<inputs.Wedata.SqlScriptScriptConfig>;
+    scriptConfig?: pulumi.Input<inputs.Wedata.SqlScriptScriptConfig | undefined>;
     /**
      * Script content, if there is a value.
      */
-    scriptContent?: pulumi.Input<string>;
+    scriptContent?: pulumi.Input<string | undefined>;
     /**
      * Script ID.
      */
-    scriptId?: pulumi.Input<string>;
+    scriptId?: pulumi.Input<string | undefined>;
     /**
      * Script name.
      */
-    scriptName?: pulumi.Input<string>;
+    scriptName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -191,11 +191,11 @@ export interface SqlScriptArgs {
     /**
      * Permission scope: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path, /aaa/bbb/ccc, root directory is empty string or /.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -203,11 +203,11 @@ export interface SqlScriptArgs {
     /**
      * Data exploration script configuration.
      */
-    scriptConfig?: pulumi.Input<inputs.Wedata.SqlScriptScriptConfig>;
+    scriptConfig?: pulumi.Input<inputs.Wedata.SqlScriptScriptConfig | undefined>;
     /**
      * Script content, if there is a value.
      */
-    scriptContent?: pulumi.Input<string>;
+    scriptContent?: pulumi.Input<string | undefined>;
     /**
      * Script name.
      */

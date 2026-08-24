@@ -106,23 +106,23 @@ export interface ValidateTxtValueOperationState {
     /**
      * The domain name for which TXT records need to be added.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The subdomain to add Zone domain.
      */
-    domainZone?: pulumi.Input<string>;
+    domainZone?: pulumi.Input<string | undefined>;
     /**
      * Record types need to be added.
      */
-    recordType?: pulumi.Input<string>;
+    recordType?: pulumi.Input<string | undefined>;
     /**
      * Host records that need to be added to TXT records.
      */
-    subdomain?: pulumi.Input<string>;
+    subdomain?: pulumi.Input<string | undefined>;
     /**
      * The record value of the TXT record needs to be added.
      */
-    value?: pulumi.Input<string>;
+    value?: pulumi.Input<string | undefined>;
 }
 
 /**

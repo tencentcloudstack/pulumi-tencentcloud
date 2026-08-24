@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -53,6 +53,47 @@ import * as utilities from "../utilities";
  *     tags: {
  *         test: "test",
  *     },
+ * });
+ * ```
+ *
+ * ### Example with custom timezone:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleTimezone = new tencentcloud.sqlserver.BasicInstance("example_timezone", {
+ *     name: "tf-example-utc",
+ *     availabilityZone: zones.zones[4].name,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_PREMIUM",
+ *     timeZone: "UTC",
+ * });
+ * ```
+ *
+ * ### Example with disk encryption enabled:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleEncrypted = new tencentcloud.sqlserver.BasicInstance("example_encrypted", {
+ *     name: "tf-example-encrypted",
+ *     availabilityZone: zones.zones[4].name,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_SSD",
+ *     diskEncryptFlag: 1,
+ *     timeZone: "China Standard Time",
  * });
  * ```
  *
@@ -121,6 +162,10 @@ export class BasicInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
     /**
+     * Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+     */
+    declare public readonly diskEncryptFlag: pulumi.Output<number>;
+    /**
      * Internet address domain name.
      */
     declare public /*out*/ readonly dnsPodDomain: pulumi.Output<string>;
@@ -185,6 +230,10 @@ export class BasicInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly tgwWanVport: pulumi.Output<number>;
     /**
+     * System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+     */
+    declare public readonly timeZone: pulumi.Output<string>;
+    /**
      * IP for private access.
      */
     declare public /*out*/ readonly vip: pulumi.Output<string>;
@@ -221,6 +270,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["collation"] = state?.collation;
             resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["diskEncryptFlag"] = state?.diskEncryptFlag;
             resourceInputs["dnsPodDomain"] = state?.dnsPodDomain;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["machineType"] = state?.machineType;
@@ -237,6 +287,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["tgwWanVport"] = state?.tgwWanVport;
+            resourceInputs["timeZone"] = state?.timeZone;
             resourceInputs["vip"] = state?.vip;
             resourceInputs["voucherIds"] = state?.voucherIds;
             resourceInputs["vpcId"] = state?.vpcId;
@@ -261,6 +312,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["collation"] = args?.collation;
             resourceInputs["cpu"] = args?.cpu;
+            resourceInputs["diskEncryptFlag"] = args?.diskEncryptFlag;
             resourceInputs["engineVersion"] = args?.engineVersion;
             resourceInputs["machineType"] = args?.machineType;
             resourceInputs["maintenanceStartTime"] = args?.maintenanceStartTime;
@@ -274,6 +326,7 @@ export class BasicInstance extends pulumi.CustomResource {
             resourceInputs["storage"] = args?.storage;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["tags"] = args?.tags;
+            resourceInputs["timeZone"] = args?.timeZone;
             resourceInputs["voucherIds"] = args?.voucherIds;
             resourceInputs["vpcId"] = args?.vpcId;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -295,111 +348,119 @@ export interface BasicInstanceState {
     /**
      * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * System character set sorting rule, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * The CPU number of the SQL Server basic instance.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Create time of the SQL Server basic instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
+    /**
+     * Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+     */
+    diskEncryptFlag?: pulumi.Input<number | undefined>;
     /**
      * Internet address domain name.
      */
-    dnsPodDomain?: pulumi.Input<string>;
+    dnsPodDomain?: pulumi.Input<string | undefined>;
     /**
      * Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Start time of the maintenance in one day, format like `HH:mm`.
      */
-    maintenanceStartTime?: pulumi.Input<string>;
+    maintenanceStartTime?: pulumi.Input<string | undefined>;
     /**
      * The timespan of maintenance in one day, unit is hour.
      */
-    maintenanceTimeSpan?: pulumi.Input<number>;
+    maintenanceTimeSpan?: pulumi.Input<number | undefined>;
     /**
      * A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.
      */
-    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
+    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Name of the SQL Server basic instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Status of the SQL Server basic instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server basic instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * External port number.
      */
-    tgwWanVport?: pulumi.Input<number>;
+    tgwWanVport?: pulumi.Input<number | undefined>;
+    /**
+     * System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+     */
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * IP for private access.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Port for private access.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -409,31 +470,35 @@ export interface BasicInstanceArgs {
     /**
      * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal, the default is 1 automatic renewal. Only valid when purchasing a prepaid instance.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server basic instance. For now, only `POSTPAID_BY_HOUR` is valid.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * System character set sorting rule, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * The CPU number of the SQL Server basic instance.
      */
     cpu: pulumi.Input<number>;
     /**
+     * Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+     */
+    diskEncryptFlag?: pulumi.Input<number | undefined>;
+    /**
      * Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
      */
@@ -441,15 +506,15 @@ export interface BasicInstanceArgs {
     /**
      * Start time of the maintenance in one day, format like `HH:mm`.
      */
-    maintenanceStartTime?: pulumi.Input<string>;
+    maintenanceStartTime?: pulumi.Input<string | undefined>;
     /**
      * The timespan of maintenance in one day, unit is hour.
      */
-    maintenanceTimeSpan?: pulumi.Input<number>;
+    maintenanceTimeSpan?: pulumi.Input<number | undefined>;
     /**
      * A list of integer indicates weekly maintenance. For example, [1,7] presents do weekly maintenance on every Monday and Sunday.
      */
-    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
+    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
@@ -457,19 +522,19 @@ export interface BasicInstanceArgs {
     /**
      * Name of the SQL Server basic instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period, the default value is 1, which means one month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
@@ -477,17 +542,21 @@ export interface BasicInstanceArgs {
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server basic instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+     */
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

@@ -73,12 +73,8 @@ type LookupUnitRulesResult struct {
 }
 
 func LookupUnitRulesOutput(ctx *pulumi.Context, args LookupUnitRulesOutputArgs, opts ...pulumi.InvokeOption) LookupUnitRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupUnitRulesResultOutput, error) {
-			args := v.(LookupUnitRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getUnitRules:getUnitRules", args, LookupUnitRulesResultOutput{}, options).(LookupUnitRulesResultOutput), nil
-		}).(LookupUnitRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getUnitRules:getUnitRules", args, LookupUnitRulesResultOutput{}, options).(LookupUnitRulesResultOutput)
 }
 
 // A collection of arguments for invoking getUnitRules.

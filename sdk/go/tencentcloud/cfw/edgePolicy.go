@@ -66,7 +66,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]string{
 //				"Key":   "test",
 //				"Value": "dddd",
 //			})
@@ -112,6 +112,8 @@ type EdgePolicy struct {
 	Direction pulumi.IntOutput `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
+	// Execution order.
+	OrderIndex pulumi.IntOutput `pulumi:"orderIndex"`
 	// Parameter template id.
 	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -194,6 +196,8 @@ type edgePolicyState struct {
 	Direction *int `pulumi:"direction"`
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable *string `pulumi:"enable"`
+	// Execution order.
+	OrderIndex *int `pulumi:"orderIndex"`
 	// Parameter template id.
 	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -223,6 +227,8 @@ type EdgePolicyState struct {
 	Direction pulumi.IntPtrInput
 	// Rule status, true means enabled, false means disabled. Default is true.
 	Enable pulumi.StringPtrInput
+	// Execution order.
+	OrderIndex pulumi.IntPtrInput
 	// Parameter template id.
 	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -404,6 +410,11 @@ func (o EdgePolicyOutput) Direction() pulumi.IntOutput {
 // Rule status, true means enabled, false means disabled. Default is true.
 func (o EdgePolicyOutput) Enable() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EdgePolicy) pulumi.StringPtrOutput { return v.Enable }).(pulumi.StringPtrOutput)
+}
+
+// Execution order.
+func (o EdgePolicyOutput) OrderIndex() pulumi.IntOutput {
+	return o.ApplyT(func(v *EdgePolicy) pulumi.IntOutput { return v.OrderIndex }).(pulumi.IntOutput)
 }
 
 // Parameter template id.

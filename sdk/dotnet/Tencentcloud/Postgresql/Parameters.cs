@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 {
     /// <summary>
-    /// Use this resource to create postgresql parameter.
+    /// Use this resource to create PostgreSQL parameters.
     /// 
     /// ## Example Usage
     /// 
@@ -19,57 +19,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var defaultAz = config.Get("defaultAz") ?? "ap-guangzhou-3";
-    ///     var gz3 = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
     ///     {
-    ///         AvailabilityZone = defaultAz,
-    ///         IsDefault = true,
-    ///     });
-    /// 
-    ///     var vpcId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
-    /// 
-    ///     var subnetId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
-    /// 
-    ///     var zone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
-    ///     {
-    ///         Product = "postgres",
-    ///     });
-    /// 
-    ///     var test = new Tencentcloud.Postgresql.Instance("test", new()
-    ///     {
-    ///         Name = "tf_postsql_postpaid",
-    ///         AvailabilityZone = defaultAz,
+    ///         Name = "tf-example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
     ///         ChargeType = "POSTPAID_BY_HOUR",
-    ///         Period = 1,
-    ///         VpcId = vpcId,
-    ///         SubnetId = subnetId,
-    ///         EngineVersion = "13.3",
-    ///         RootPassword = "t1qaA2k1wgvfa3?ZZZ",
-    ///         SecurityGroups = new[]
-    ///         {
-    ///             "sg-5275dorp",
-    ///         },
-    ///         Charset = "LATIN1",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         DbMajorVersion = "17",
+    ///         EngineVersion = "17.4",
+    ///         DbKernelVersion = "v17.4_r1.4",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
     ///         ProjectId = 0,
-    ///         Memory = 2,
-    ///         Storage = 20,
+    ///         Memory = 4,
+    ///         Cpu = 2,
+    ///         Storage = 50,
+    ///         Tags = 
+    ///         {
+    ///             { "CreateBy", "Terraform" },
+    ///         },
     ///     });
     /// 
-    ///     var postgresqlParameters = new Tencentcloud.Postgresql.Parameters("postgresql_parameters", new()
+    ///     var exampleParameters = new Tencentcloud.Postgresql.Parameters("example", new()
     ///     {
-    ///         DbInstanceId = test.Id,
+    ///         DbInstanceId = example.Id,
     ///         ParamLists = new[]
     ///         {
     ///             new Tencentcloud.Postgresql.Inputs.ParametersParamListArgs
     ///             {
-    ///                 ExpectedValue = "off",
     ///                 Name = "check_function_bodies",
+    ///                 ExpectedValue = "off",
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.ParametersParamListArgs
+    ///             {
+    ///                 Name = "max_standby_archive_delay",
+    ///                 ExpectedValue = "35000",
     ///             },
     ///         },
     ///     });
@@ -79,10 +69,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Import
     /// 
-    /// postgresql parameters can be imported, e.g.
+    /// PostgreSQL parameters can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Postgresql/parameters:Parameters example pgrogrp-lckioi2a
+    /// $ pulumi import tencentcloud:Postgresql/parameters:Parameters example postgres-ckwcgdf1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/parameters:Parameters")]

@@ -37,7 +37,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -45,8 +45,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -59,15 +59,15 @@ import (
 //			example, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
 //				ClbName:     pulumi.String("tf-example"),
 //				NetworkType: pulumi.String("INTERNAL"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			// create clb listener
 //			exampleListener, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
-//				ClbId:        example.ID(),
+//				ClbId:        example.ID().ToIDOutput().ToStringOutput(),
 //				ListenerName: pulumi.String("tf-example"),
 //				Port:         pulumi.Int(8080),
 //				Protocol:     pulumi.String("HTTP"),
@@ -77,7 +77,7 @@ import (
 //			}
 //			// create clb listener rule
 //			exampleListenerRule, err := clb.NewListenerRule(ctx, "example", &clb.ListenerRuleArgs{
-//				ClbId:             example.ID(),
+//				ClbId:             example.ID().ToIDOutput().ToStringOutput(),
 //				ListenerId:        exampleListener.ListenerId,
 //				Domain:            pulumi.String("example.com"),
 //				Url:               pulumi.String("/"),
@@ -91,15 +91,15 @@ import (
 //			// create clb target group
 //			exampleTargetGroup, err := clb.NewTargetGroup(ctx, "example", &clb.TargetGroupArgs{
 //				TargetGroupName: pulumi.String("tf-example"),
-//				VpcId:           vpc.ID(),
+//				VpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			// create clb target group attachment
 //			_, err = clb.NewTargetGroupAttachment(ctx, "example", &clb.TargetGroupAttachmentArgs{
-//				ClbId:         example.ID(),
-//				TargetGroupId: exampleTargetGroup.ID(),
+//				ClbId:         example.ID().ToIDOutput().ToStringOutput(),
+//				TargetGroupId: exampleTargetGroup.ID().ToIDOutput().ToStringOutput(),
 //				ListenerId:    exampleListener.ListenerId,
 //				RuleId:        exampleListenerRule.RuleId,
 //			})

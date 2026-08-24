@@ -59,7 +59,7 @@ import (
 //
 // ## Import
 //
-// ci media_watermark_template can be imported using the id, e.g.
+// ci mediaWatermarkTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id

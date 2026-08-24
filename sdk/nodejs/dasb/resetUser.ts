@@ -82,7 +82,7 @@ export interface ResetUserState {
     /**
      * User Id.
      */
-    userId?: pulumi.Input<number>;
+    userId?: pulumi.Input<number | undefined>;
 }
 
 /**

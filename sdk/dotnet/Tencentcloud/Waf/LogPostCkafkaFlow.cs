@@ -84,13 +84,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// WAF log post ckafka flow can be imported using the id, e.g.
     /// 
-    /// If log_type is 1
+    /// If LogType is 1
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/logPostCkafkaFlow:LogPostCkafkaFlow example 100536#1
     /// ```
     /// 
-    /// If log_type is 2
+    /// If LogType is 2
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/logPostCkafkaFlow:LogPostCkafkaFlow example 100541#2

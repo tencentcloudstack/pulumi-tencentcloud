@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata wedata_workflow can be imported using the id, e.g.
+ * wedata wedataWorkflow can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/workflow:Workflow wedata_workflow wedata_workflow_id
@@ -163,47 +163,47 @@ export interface WorkflowState {
     /**
      * Bundle Id.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * Bundle Information.
      */
-    bundleInfo?: pulumi.Input<string>;
+    bundleInfo?: pulumi.Input<string | undefined>;
     /**
      * Workflow Owner ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Workflow description.
      */
-    workflowDesc?: pulumi.Input<string>;
+    workflowDesc?: pulumi.Input<string | undefined>;
     /**
      * Workflow id.
      */
-    workflowId?: pulumi.Input<string>;
+    workflowId?: pulumi.Input<string | undefined>;
     /**
      * Workflow name.
      */
-    workflowName?: pulumi.Input<string>;
+    workflowName?: pulumi.Input<string | undefined>;
     /**
      * workflow parameter.
      */
-    workflowParams?: pulumi.Input<pulumi.Input<inputs.Wedata.WorkflowWorkflowParam>[]>;
+    workflowParams?: pulumi.Input<pulumi.Input<inputs.Wedata.WorkflowWorkflowParam>[] | undefined>;
     /**
      * Unified dispatch information.
      */
-    workflowSchedulerConfiguration?: pulumi.Input<inputs.Wedata.WorkflowWorkflowSchedulerConfiguration>;
+    workflowSchedulerConfiguration?: pulumi.Input<inputs.Wedata.WorkflowWorkflowSchedulerConfiguration | undefined>;
     /**
      * Workflow type, value example: cycle cycle workflow;manual manual workflow, passed in cycle by default.
      */
-    workflowType?: pulumi.Input<string>;
+    workflowType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -213,15 +213,15 @@ export interface WorkflowArgs {
     /**
      * Bundle Id.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * Bundle Information.
      */
-    bundleInfo?: pulumi.Input<string>;
+    bundleInfo?: pulumi.Input<string | undefined>;
     /**
      * Workflow Owner ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path.
      */
@@ -233,7 +233,7 @@ export interface WorkflowArgs {
     /**
      * Workflow description.
      */
-    workflowDesc?: pulumi.Input<string>;
+    workflowDesc?: pulumi.Input<string | undefined>;
     /**
      * Workflow name.
      */
@@ -241,13 +241,13 @@ export interface WorkflowArgs {
     /**
      * workflow parameter.
      */
-    workflowParams?: pulumi.Input<pulumi.Input<inputs.Wedata.WorkflowWorkflowParam>[]>;
+    workflowParams?: pulumi.Input<pulumi.Input<inputs.Wedata.WorkflowWorkflowParam>[] | undefined>;
     /**
      * Unified dispatch information.
      */
-    workflowSchedulerConfiguration?: pulumi.Input<inputs.Wedata.WorkflowWorkflowSchedulerConfiguration>;
+    workflowSchedulerConfiguration?: pulumi.Input<inputs.Wedata.WorkflowWorkflowSchedulerConfiguration | undefined>;
     /**
      * Workflow type, value example: cycle cycle workflow;manual manual workflow, passed in cycle by default.
      */
-    workflowType?: pulumi.Input<string>;
+    workflowType?: pulumi.Input<string | undefined>;
 }

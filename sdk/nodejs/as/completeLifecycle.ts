@@ -13,14 +13,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
- * const instanceTypes = zones.then(zones => tencentcloud.Instance.getTypes({
+ * const instanceTypes = zones.then(zones => tencentcloud.instance.getTypes({
  *     filters: [
  *         {
  *             name: "zone",
@@ -179,19 +179,19 @@ export interface CompleteLifecycleState {
     /**
      * Instance ID. Either InstanceId or LifecycleActionToken must be specified.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Result of the lifecycle action. Value range: `CONTINUE`, `ABANDON`.
      */
-    lifecycleActionResult?: pulumi.Input<string>;
+    lifecycleActionResult?: pulumi.Input<string | undefined>;
     /**
      * Either InstanceId or LifecycleActionToken must be specified.
      */
-    lifecycleActionToken?: pulumi.Input<string>;
+    lifecycleActionToken?: pulumi.Input<string | undefined>;
     /**
      * Lifecycle hook ID.
      */
-    lifecycleHookId?: pulumi.Input<string>;
+    lifecycleHookId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -201,7 +201,7 @@ export interface CompleteLifecycleArgs {
     /**
      * Instance ID. Either InstanceId or LifecycleActionToken must be specified.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Result of the lifecycle action. Value range: `CONTINUE`, `ABANDON`.
      */
@@ -209,7 +209,7 @@ export interface CompleteLifecycleArgs {
     /**
      * Either InstanceId or LifecycleActionToken must be specified.
      */
-    lifecycleActionToken?: pulumi.Input<string>;
+    lifecycleActionToken?: pulumi.Input<string | undefined>;
     /**
      * Lifecycle hook ID.
      */

@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// eb event_bus can be imported using the id, e.g.
+// eb eventBus can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cam.getRoleDetail({
+ * const example = tencentcloud.cam.getRoleDetail({
  *     roleId: "4611686018441060141",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cam.getRoleDetail({
+ * const example = tencentcloud.cam.getRoleDetail({
  *     roleName: "tf-example",
  * });
  * ```
@@ -88,7 +88,7 @@ export interface GetRoleDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cam.getRoleDetail({
+ * const example = tencentcloud.cam.getRoleDetail({
  *     roleId: "4611686018441060141",
  * });
  * ```
@@ -99,7 +99,7 @@ export interface GetRoleDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cam.getRoleDetail({
+ * const example = tencentcloud.cam.getRoleDetail({
  *     roleName: "tf-example",
  * });
  * ```
@@ -121,13 +121,13 @@ export interface GetRoleDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Role ID, used to specify role. Input either `RoleId` or `RoleName`.
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
     /**
      * Role name, used to specify role. Input either `RoleId` or `RoleName`.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }

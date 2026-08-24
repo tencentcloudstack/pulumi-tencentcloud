@@ -84,12 +84,8 @@ type GetClusterNodePoolsResult struct {
 }
 
 func GetClusterNodePoolsOutput(ctx *pulumi.Context, args GetClusterNodePoolsOutputArgs, opts ...pulumi.InvokeOption) GetClusterNodePoolsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterNodePoolsResultOutput, error) {
-			args := v.(GetClusterNodePoolsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args, GetClusterNodePoolsResultOutput{}, options).(GetClusterNodePoolsResultOutput), nil
-		}).(GetClusterNodePoolsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args, GetClusterNodePoolsResultOutput{}, options).(GetClusterNodePoolsResultOutput)
 }
 
 // A collection of arguments for invoking getClusterNodePools.

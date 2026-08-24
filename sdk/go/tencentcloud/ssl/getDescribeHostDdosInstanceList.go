@@ -80,12 +80,8 @@ type GetDescribeHostDdosInstanceListResult struct {
 }
 
 func GetDescribeHostDdosInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostDdosInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostDdosInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostDdosInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostDdosInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostDdosInstanceList:getDescribeHostDdosInstanceList", args, GetDescribeHostDdosInstanceListResultOutput{}, options).(GetDescribeHostDdosInstanceListResultOutput), nil
-		}).(GetDescribeHostDdosInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostDdosInstanceList:getDescribeHostDdosInstanceList", args, GetDescribeHostDdosInstanceListResultOutput{}, options).(GetDescribeHostDdosInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostDdosInstanceList.

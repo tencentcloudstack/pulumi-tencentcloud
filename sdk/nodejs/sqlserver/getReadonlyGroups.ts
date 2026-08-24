@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getDbs({
+ * const example = tencentcloud.sqlserver.getDbs({
  *     instanceId: "mssql-ds1xhnt9",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetReadonlyGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getDbs({
+ * const example = tencentcloud.sqlserver.getDbs({
  *     instanceId: "mssql-ds1xhnt9",
  * });
  * ```
@@ -91,9 +91,9 @@ export interface GetReadonlyGroupsOutputArgs {
     /**
      * Master SQL Server instance ID.
      */
-    masterInstanceId?: pulumi.Input<string>;
+    masterInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

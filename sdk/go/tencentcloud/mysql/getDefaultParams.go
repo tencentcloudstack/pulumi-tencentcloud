@@ -67,12 +67,8 @@ type GetDefaultParamsResult struct {
 }
 
 func GetDefaultParamsOutput(ctx *pulumi.Context, args GetDefaultParamsOutputArgs, opts ...pulumi.InvokeOption) GetDefaultParamsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDefaultParamsResultOutput, error) {
-			args := v.(GetDefaultParamsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args, GetDefaultParamsResultOutput{}, options).(GetDefaultParamsResultOutput), nil
-		}).(GetDefaultParamsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getDefaultParams:getDefaultParams", args, GetDefaultParamsResultOutput{}, options).(GetDefaultParamsResultOutput)
 }
 
 // A collection of arguments for invoking getDefaultParams.

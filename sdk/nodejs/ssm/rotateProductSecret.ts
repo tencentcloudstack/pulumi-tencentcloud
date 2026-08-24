@@ -82,7 +82,7 @@ export interface RotateProductSecretState {
     /**
      * Secret name.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
 }
 
 /**

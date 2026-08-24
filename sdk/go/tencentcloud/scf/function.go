@@ -13,6 +13,8 @@ import (
 
 // Provide a resource to create a SCF function.
 //
+// > **NOTE:** The use of `trigger` is no longer recommended; `Scf.Trigger` is recommended instead.
+//
 // ## Example Usage
 //
 // ```go
@@ -27,12 +29,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := scf.NewFunction(ctx, "foo", &scf.FunctionArgs{
+//			_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
 //				Name:            pulumi.String("ci-test-function"),
 //				Handler:         pulumi.String("main.do_it"),
 //				Runtime:         pulumi.String("Python3.6"),
 //				CosBucketName:   pulumi.String("scf-code-1234567890"),
-//				CosObjectName:   pulumi.String("code.zip"),
+//				CosObjectName:   pulumi.String("/path/to/code.zip"),
 //				CosBucketRegion: pulumi.String("ap-guangzhou"),
 //			})
 //			if err != nil {
@@ -58,7 +60,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := scf.NewFunction(ctx, "foo", &scf.FunctionArgs{
+//			_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
 //				Name:            pulumi.String("ci-test-function"),
 //				Handler:         pulumi.String("first.do_it_first"),
 //				Runtime:         pulumi.String("Python3.6"),
@@ -97,7 +99,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := scf.NewFunction(ctx, "foo", &scf.FunctionArgs{
+//			_, err := scf.NewFunction(ctx, "example", &scf.FunctionArgs{
 //				Name:    pulumi.String("ci-test-function"),
 //				Handler: pulumi.String("main.do_it"),
 //				Runtime: pulumi.String("Python3.6"),
@@ -139,7 +141,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			tmpJSON0, err := json.Marshal(map[string]interface{}{
 //				"AuthType": "NONE",
-//				"NetConfig": map[string]interface{}{
+//				"NetConfig": map[string]bool{
 //					"EnableIntranet": true,
 //					"EnableExtranet": false,
 //				},
@@ -148,7 +150,7 @@ import (
 //				return err
 //			}
 //			json0 := string(tmpJSON0)
-//			_, err = scf.NewFunction(ctx, "foo", &scf.FunctionArgs{
+//			_, err = scf.NewFunction(ctx, "example", &scf.FunctionArgs{
 //				Name:            pulumi.String("ci-test-function"),
 //				Handler:         pulumi.String("first.do_it_first"),
 //				Runtime:         pulumi.String("Python3.6"),
@@ -186,10 +188,10 @@ import (
 //
 // SCF function can be imported, e.g.
 //
-// -> __NOTE:__ function id is `<function namespace>+<function name>`
+// > **NOTE:** function id is `<function namespace>+<function name>`
 //
 // ```sh
-// $ pulumi import tencentcloud:Scf/function:Function test default+test
+// $ pulumi import tencentcloud:Scf/function:Function example default+test
 // ```
 type Function struct {
 	pulumi.CustomResourceState
@@ -242,6 +244,8 @@ type Function struct {
 	ImageConfigs FunctionImageConfigArrayOutput `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency pulumi.BoolOutput `pulumi:"installDependency"`
+	// Instance concurrency configuration for the function.
+	InstanceConcurrencyConfig FunctionInstanceConcurrencyConfigPtrOutput `pulumi:"instanceConcurrencyConfig"`
 	// Intranet access configuration.
 	IntranetConfig FunctionIntranetConfigOutput `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
@@ -360,6 +364,8 @@ type functionState struct {
 	ImageConfigs []FunctionImageConfig `pulumi:"imageConfigs"`
 	// Whether to automatically install dependencies.
 	InstallDependency *bool `pulumi:"installDependency"`
+	// Instance concurrency configuration for the function.
+	InstanceConcurrencyConfig *FunctionInstanceConcurrencyConfig `pulumi:"instanceConcurrencyConfig"`
 	// Intranet access configuration.
 	IntranetConfig *FunctionIntranetConfig `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
@@ -449,6 +455,8 @@ type FunctionState struct {
 	ImageConfigs FunctionImageConfigArrayInput
 	// Whether to automatically install dependencies.
 	InstallDependency pulumi.BoolPtrInput
+	// Instance concurrency configuration for the function.
+	InstanceConcurrencyConfig FunctionInstanceConcurrencyConfigPtrInput
 	// Intranet access configuration.
 	IntranetConfig FunctionIntranetConfigPtrInput
 	// Enable L5 for SCF function, default is `false`.
@@ -524,6 +532,8 @@ type functionArgs struct {
 	Handler *string `pulumi:"handler"`
 	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs []FunctionImageConfig `pulumi:"imageConfigs"`
+	// Instance concurrency configuration for the function.
+	InstanceConcurrencyConfig *FunctionInstanceConcurrencyConfig `pulumi:"instanceConcurrencyConfig"`
 	// Intranet access configuration.
 	IntranetConfig *FunctionIntranetConfig `pulumi:"intranetConfig"`
 	// Enable L5 for SCF function, default is `false`.
@@ -586,6 +596,8 @@ type FunctionArgs struct {
 	Handler pulumi.StringPtrInput
 	// Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
 	ImageConfigs FunctionImageConfigArrayInput
+	// Instance concurrency configuration for the function.
+	InstanceConcurrencyConfig FunctionInstanceConcurrencyConfigPtrInput
 	// Intranet access configuration.
 	IntranetConfig FunctionIntranetConfigPtrInput
 	// Enable L5 for SCF function, default is `false`.
@@ -821,6 +833,11 @@ func (o FunctionOutput) ImageConfigs() FunctionImageConfigArrayOutput {
 // Whether to automatically install dependencies.
 func (o FunctionOutput) InstallDependency() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Function) pulumi.BoolOutput { return v.InstallDependency }).(pulumi.BoolOutput)
+}
+
+// Instance concurrency configuration for the function.
+func (o FunctionOutput) InstanceConcurrencyConfig() FunctionInstanceConcurrencyConfigPtrOutput {
+	return o.ApplyT(func(v *Function) FunctionInstanceConcurrencyConfigPtrOutput { return v.InstanceConcurrencyConfig }).(FunctionInstanceConcurrencyConfigPtrOutput)
 }
 
 // Intranet access configuration.

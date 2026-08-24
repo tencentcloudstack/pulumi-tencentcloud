@@ -14,16 +14,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.ckafka.Topic("example", {
- *     instanceId: "ckafka-bzmjpavn",
+ *     instanceId: "ckafka-bzmja3mb",
  *     topicName: "tf-example",
  *     note: "topic note",
- *     replicaNum: 4,
- *     partitionNum: 2,
- *     enableWhiteList: true,
- *     ipWhiteLists: [
- *         "1.1.1.1",
- *         "2.2.2.2",
- *     ],
+ *     replicaNum: 2,
+ *     partitionNum: 3,
  *     cleanUpPolicy: "delete",
  *     syncReplicaMinNum: 2,
  *     uncleanLeaderElectionEnable: false,
@@ -38,7 +33,7 @@ import * as utilities from "../utilities";
  * ckafka topic can be imported using the instance_id#topic_name, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-f9ife4zz#tf-example
+ * $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-bzmja3mb#tf-example
  * ```
  */
 export class Topic extends pulumi.CustomResource {
@@ -118,11 +113,11 @@ export class Topic extends pulumi.CustomResource {
      */
     declare public readonly partitionNum: pulumi.Output<number>;
     /**
-     * The number of replica.
+     * The number of replica. Maximum is 3.
      */
     declare public readonly replicaNum: pulumi.Output<number>;
     /**
-     * Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+     * Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
      */
     declare public readonly retention: pulumi.Output<number | undefined>;
     /**
@@ -142,7 +137,7 @@ export class Topic extends pulumi.CustomResource {
      */
     declare public readonly topicName: pulumi.Output<string>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
      */
     declare public readonly uncleanLeaderElectionEnable: pulumi.Output<boolean | undefined>;
 
@@ -224,79 +219,79 @@ export interface TopicState {
     /**
      * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
      */
-    cleanUpPolicy?: pulumi.Input<string>;
+    cleanUpPolicy?: pulumi.Input<string | undefined>;
     /**
      * Create time of the CKafka topic.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to open the ip whitelist, `true`: open, `false`: close.
      */
-    enableWhiteList?: pulumi.Input<boolean>;
+    enableWhiteList?: pulumi.Input<boolean | undefined>;
     /**
      * Data backup cos bucket: the bucket address that is dumped to cos.
      */
-    forwardCosBucket?: pulumi.Input<string>;
+    forwardCosBucket?: pulumi.Input<string | undefined>;
     /**
      * Periodic frequency of data backup to cos.
      */
-    forwardInterval?: pulumi.Input<number>;
+    forwardInterval?: pulumi.Input<number | undefined>;
     /**
      * Data backup cos status. Valid values: `0`, `1`. `1`: do not open data backup, `0`: open data backup.
      */
-    forwardStatus?: pulumi.Input<number>;
+    forwardStatus?: pulumi.Input<number | undefined>;
     /**
      * Ckafka instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Ip whitelist, quota limit, required when enableWhileList=true.
      */
-    ipWhiteLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipWhiteLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
      */
-    maxMessageBytes?: pulumi.Input<number>;
+    maxMessageBytes?: pulumi.Input<number | undefined>;
     /**
      * Message storage location.
      */
-    messageStorageLocation?: pulumi.Input<string>;
+    messageStorageLocation?: pulumi.Input<string | undefined>;
     /**
      * The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * The number of partition.
      */
-    partitionNum?: pulumi.Input<number>;
+    partitionNum?: pulumi.Input<number | undefined>;
     /**
-     * The number of replica.
+     * The number of replica. Maximum is 3.
      */
-    replicaNum?: pulumi.Input<number>;
+    replicaNum?: pulumi.Input<number | undefined>;
     /**
-     * Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+     * Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
      */
-    retention?: pulumi.Input<number>;
+    retention?: pulumi.Input<number | undefined>;
     /**
      * Segment scrolling time, in ms, the current minimum is 3600000ms.
      */
-    segment?: pulumi.Input<number>;
+    segment?: pulumi.Input<number | undefined>;
     /**
      * Number of bytes rolled by shard.
      */
-    segmentBytes?: pulumi.Input<number>;
+    segmentBytes?: pulumi.Input<number | undefined>;
     /**
      * Min number of sync replicas, Default is `1`.
      */
-    syncReplicaMinNum?: pulumi.Input<number>;
+    syncReplicaMinNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
      */
-    uncleanLeaderElectionEnable?: pulumi.Input<boolean>;
+    uncleanLeaderElectionEnable?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -306,11 +301,11 @@ export interface TopicArgs {
     /**
      * Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
      */
-    cleanUpPolicy?: pulumi.Input<string>;
+    cleanUpPolicy?: pulumi.Input<string | undefined>;
     /**
      * Whether to open the ip whitelist, `true`: open, `false`: close.
      */
-    enableWhiteList?: pulumi.Input<boolean>;
+    enableWhiteList?: pulumi.Input<boolean | undefined>;
     /**
      * Ckafka instance ID.
      */
@@ -318,41 +313,41 @@ export interface TopicArgs {
     /**
      * Ip whitelist, quota limit, required when enableWhileList=true.
      */
-    ipWhiteLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipWhiteLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Max message bytes. min: 1024 Byte(1KB), max: 8388608 Byte(8MB).
      */
-    maxMessageBytes?: pulumi.Input<number>;
+    maxMessageBytes?: pulumi.Input<number | undefined>;
     /**
      * The subject note. It must start with a letter, and the remaining part can contain letters, numbers and dashes (-).
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * The number of partition.
      */
     partitionNum: pulumi.Input<number>;
     /**
-     * The number of replica.
+     * The number of replica. Maximum is 3.
      */
     replicaNum: pulumi.Input<number>;
     /**
-     * Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+     * Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
      */
-    retention?: pulumi.Input<number>;
+    retention?: pulumi.Input<number | undefined>;
     /**
      * Segment scrolling time, in ms, the current minimum is 3600000ms.
      */
-    segment?: pulumi.Input<number>;
+    segment?: pulumi.Input<number | undefined>;
     /**
      * Min number of sync replicas, Default is `1`.
      */
-    syncReplicaMinNum?: pulumi.Input<number>;
+    syncReplicaMinNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-).
      */
     topicName: pulumi.Input<string>;
     /**
-     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, `true: `allowed, `false`: not allowed.
+     * Whether to allow unsynchronized replicas to be selected as leader, default is `false`, ` true:  `allowed, `false`: not allowed.
      */
-    uncleanLeaderElectionEnable?: pulumi.Input<boolean>;
+    uncleanLeaderElectionEnable?: pulumi.Input<boolean | undefined>;
 }

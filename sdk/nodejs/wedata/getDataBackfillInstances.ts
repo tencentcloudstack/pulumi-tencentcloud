@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDataBackfillInstances = tencentcloud.Wedata.getDataBackfillInstances({
+ * const wedataDataBackfillInstances = tencentcloud.wedata.getDataBackfillInstances({
  *     projectId: "1859317240494305280",
  *     dataBackfillPlanId: "deb71ea1-f708-47ab-8eb6-491ce5b9c011",
  *     taskId: "20231011152006462",
@@ -80,7 +80,7 @@ export interface GetDataBackfillInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDataBackfillInstances = tencentcloud.Wedata.getDataBackfillInstances({
+ * const wedataDataBackfillInstances = tencentcloud.wedata.getDataBackfillInstances({
  *     projectId: "1859317240494305280",
  *     dataBackfillPlanId: "deb71ea1-f708-47ab-8eb6-491ce5b9c011",
  *     taskId: "20231011152006462",
@@ -112,7 +112,7 @@ export interface GetDataBackfillInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */

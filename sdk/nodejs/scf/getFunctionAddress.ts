@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionAddress = tencentcloud.Scf.getFunctionAddress({
+ * const functionAddress = tencentcloud.scf.getFunctionAddress({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$LATEST",
@@ -82,7 +82,7 @@ export interface GetFunctionAddressResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionAddress = tencentcloud.Scf.getFunctionAddress({
+ * const functionAddress = tencentcloud.scf.getFunctionAddress({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$LATEST",
@@ -110,13 +110,13 @@ export interface GetFunctionAddressOutputArgs {
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Function version.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -94,11 +94,11 @@ export interface MigrateJobResumeOperationState {
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * resume mode: 1.clearData-Clear target data; 2.overwrite-The task is executed in overwrite mode; 3.normal-No extra action. Note that clearData and overwrite are valid only for redis links, normal is valid only for non-Redis links.
      */
-    resumeOption?: pulumi.Input<string>;
+    resumeOption?: pulumi.Input<string | undefined>;
 }
 
 /**

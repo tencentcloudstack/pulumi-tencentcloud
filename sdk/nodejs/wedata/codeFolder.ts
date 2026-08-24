@@ -136,31 +136,31 @@ export interface CodeFolderState {
     /**
      * Permission range: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Folder ID.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Folder name.
      */
-    folderName?: pulumi.Input<string>;
+    folderName?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path, for example /aaa/bbb/ccc, path header must start with a slash, root directory pass /.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Node path.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Type. folder, script.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**

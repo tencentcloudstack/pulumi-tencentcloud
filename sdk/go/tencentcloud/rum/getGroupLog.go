@@ -87,12 +87,8 @@ type GetGroupLogResult struct {
 }
 
 func GetGroupLogOutput(ctx *pulumi.Context, args GetGroupLogOutputArgs, opts ...pulumi.InvokeOption) GetGroupLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGroupLogResultOutput, error) {
-			args := v.(GetGroupLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getGroupLog:getGroupLog", args, GetGroupLogResultOutput{}, options).(GetGroupLogResultOutput), nil
-		}).(GetGroupLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getGroupLog:getGroupLog", args, GetGroupLogResultOutput{}, options).(GetGroupLogResultOutput)
 }
 
 // A collection of arguments for invoking getGroupLog.

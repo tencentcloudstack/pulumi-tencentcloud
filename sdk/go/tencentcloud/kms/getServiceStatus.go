@@ -90,12 +90,8 @@ type GetServiceStatusResult struct {
 }
 
 func GetServiceStatusOutput(ctx *pulumi.Context, args GetServiceStatusOutputArgs, opts ...pulumi.InvokeOption) GetServiceStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetServiceStatusResultOutput, error) {
-			args := v.(GetServiceStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getServiceStatus:getServiceStatus", args, GetServiceStatusResultOutput{}, options).(GetServiceStatusResultOutput), nil
-		}).(GetServiceStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getServiceStatus:getServiceStatus", args, GetServiceStatusResultOutput{}, options).(GetServiceStatusResultOutput)
 }
 
 // A collection of arguments for invoking getServiceStatus.

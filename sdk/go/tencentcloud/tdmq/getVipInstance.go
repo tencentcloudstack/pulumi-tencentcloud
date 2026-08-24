@@ -38,12 +38,8 @@ type GetVipInstanceResult struct {
 }
 
 func GetVipInstanceOutput(ctx *pulumi.Context, args GetVipInstanceOutputArgs, opts ...pulumi.InvokeOption) GetVipInstanceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetVipInstanceResultOutput, error) {
-			args := v.(GetVipInstanceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getVipInstance:getVipInstance", args, GetVipInstanceResultOutput{}, options).(GetVipInstanceResultOutput), nil
-		}).(GetVipInstanceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getVipInstance:getVipInstance", args, GetVipInstanceResultOutput{}, options).(GetVipInstanceResultOutput)
 }
 
 // A collection of arguments for invoking getVipInstance.

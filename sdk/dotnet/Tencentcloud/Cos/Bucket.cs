@@ -25,7 +25,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -49,7 +48,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -79,7 +77,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -120,7 +117,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -147,7 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -231,7 +226,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -282,7 +276,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -333,7 +326,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -346,13 +338,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///     {
     ///         CosBucket = appId.Apply(appId =&gt; $"bucket-with-cors-{appId}"),
     ///         Acl = "public-read-write",
+    ///         CorsResponseVary = "true",
     ///         CorsRules = new[]
     ///         {
     ///             new Tencentcloud.Cos.Inputs.BucketCorsRuleArgs
     ///             {
     ///                 AllowedOrigins = new[]
     ///                 {
-    ///                     "http://*.abc.com",
+    ///                     "http://*.example.com",
     ///                 },
     ///                 AllowedMethods = new[]
     ///                 {
@@ -381,7 +374,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -421,7 +413,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -472,7 +463,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -515,7 +505,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -554,7 +543,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -591,10 +579,192 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///         {
     ///             new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
     ///             {
-    ///                 Id = "test-rep1",
+    ///                 Id = "rule1",
     ///                 Status = "Enabled",
-    ///                 Prefix = "dist",
+    ///                 Priority = 1,
+    ///                 Prefix = "/prefix",
+    ///                 Filter = new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterArgs
+    ///                 {
+    ///                     And = new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndArgs
+    ///                     {
+    ///                         Tags = new[]
+    ///                         {
+    ///                             new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndTagArgs
+    ///                             {
+    ///                                 Key = "tagKey1",
+    ///                                 Value = "tagValue1",
+    ///                             },
+    ///                             new Tencentcloud.Cos.Inputs.BucketReplicaRuleFilterAndTagArgs
+    ///                             {
+    ///                                 Key = "tagKey2",
+    ///                                 Value = "tagValue2",
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
     ///                 DestinationBucket = bucketReplicate.CosBucket.Apply(bucket =&gt; $"qcs::cos:{region}::{bucket}"),
+    ///                 DestinationStorageClass = "Standard",
+    ///                 DestinationEncryptionKmsKeyId = "4f14a617-7c7d-11ef-9a62-525400d3a886",
+    ///                 DeleteMarkerReplication = new Tencentcloud.Cos.Inputs.BucketReplicaRuleDeleteMarkerReplicationArgs
+    ///                 {
+    ///                     Status = "Disabled",
+    ///                 },
+    ///                 SourceSelectionCriteria = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaArgs
+    ///                 {
+    ///                     SseKmsEncryptedObjects = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs
+    ///                     {
+    ///                         Status = "Enabled",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Cos.Inputs.BucketReplicaRuleArgs
+    ///             {
+    ///                 Id = "rule2",
+    ///                 Status = "Enabled",
+    ///                 Priority = 2,
+    ///                 DestinationBucket = bucketReplicate.CosBucket.Apply(bucket =&gt; $"qcs::cos:{region}::{bucket}"),
+    ///                 DestinationStorageClass = "Standard",
+    ///                 DestinationEncryptionKmsKeyId = "4f14a617-7c7d-11ef-9a62-525400d3a886",
+    ///                 DeleteMarkerReplication = new Tencentcloud.Cos.Inputs.BucketReplicaRuleDeleteMarkerReplicationArgs
+    ///                 {
+    ///                     Status = "Enabled",
+    ///                 },
+    ///                 SourceSelectionCriteria = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaArgs
+    ///                 {
+    ///                     SseKmsEncryptedObjects = new Tencentcloud.Cos.Inputs.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs
+    ///                     {
+    ///                         Status = "Enabled",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Using intelligent tiering, Only enable intelligent tiering
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var example = new Tencentcloud.Cos.Bucket("example", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"bucket-intelligent-tiering-{appId}"),
+    ///         Acl = "private",
+    ///         EnableIntelligentTiering = true,
+    ///         IntelligentTieringDays = 30,
+    ///         IntelligentTieringRequestFrequent = 1,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Using intelligent tiering and configure the intelligent tiered storage archiving and deep archiving rules list.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var example = new Tencentcloud.Cos.Bucket("example", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"bucket-intelligent-tiering-{appId}"),
+    ///         Acl = "private",
+    ///         EnableIntelligentTiering = true,
+    ///         IntelligentTieringDays = 30,
+    ///         IntelligentTieringRequestFrequent = 1,
+    ///         IntelligentTieringArchivingRuleLists = new[]
+    ///         {
+    ///             new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListArgs
+    ///             {
+    ///                 RuleId = "rule1",
+    ///                 Status = "Enabled",
+    ///                 Tierings = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+    ///                     {
+    ///                         AccessTier = "ARCHIVE_ACCESS",
+    ///                         Days = 91,
+    ///                     },
+    ///                     new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+    ///                     {
+    ///                         AccessTier = "DEEP_ARCHIVE_ACCESS",
+    ///                         Days = 180,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListArgs
+    ///             {
+    ///                 RuleId = "rule2",
+    ///                 Status = "Enabled",
+    ///                 Filter = new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListFilterArgs
+    ///                 {
+    ///                     Prefix = "/prefix",
+    ///                     Tags = new[]
+    ///                     {
+    ///                         new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListFilterTagArgs
+    ///                         {
+    ///                             Key = "tagKey",
+    ///                             Value = "tagValue",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///                 Tierings = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cos.Inputs.BucketIntelligentTieringArchivingRuleListTieringArgs
+    ///                     {
+    ///                         AccessTier = "ARCHIVE_ACCESS",
+    ///                         Days = 91,
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Using object lock config
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var appId = info.Apply(getInfoResult =&gt; getInfoResult.AppId);
+    /// 
+    ///     var example = new Tencentcloud.Cos.Bucket("example", new()
+    ///     {
+    ///         CosBucket = appId.Apply(appId =&gt; $"bucket-intelligent-tiering-{appId}"),
+    ///         Acl = "private",
+    ///         ObjectLockConfiguration = new Tencentcloud.Cos.Inputs.BucketObjectLockConfigurationArgs
+    ///         {
+    ///             Enabled = true,
+    ///             Rule = new Tencentcloud.Cos.Inputs.BucketObjectLockConfigurationRuleArgs
+    ///             {
+    ///                 Days = 30,
     ///             },
     ///         },
     ///     });
@@ -608,7 +778,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -675,6 +844,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public Output<bool> ChdfsOfs { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `True`, `False`.
+        /// </summary>
+        [Output("corsResponseVary")]
+        public Output<string> CorsResponseVary { get; private set; } = null!;
+
+        /// <summary>
         /// A rule of Cross-Origin Resource Sharing (documented below).
         /// </summary>
         [Output("corsRules")]
@@ -703,6 +878,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Output("forceClean")]
         public Output<bool?> ForceClean { get; private set; } = null!;
+
+        /// <summary>
+        /// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `EnableIntelligentTiering` is true can configure this argument.
+        /// </summary>
+        [Output("intelligentTieringArchivingRuleLists")]
+        public Output<ImmutableArray<Outputs.BucketIntelligentTieringArchivingRuleList>> IntelligentTieringArchivingRuleLists { get; private set; } = null!;
 
         /// <summary>
         /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
@@ -738,19 +919,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `LogTargetBucket`/`LogPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `LogEnable` is `True`.
         /// </summary>
         [Output("logPrefix")]
-        public Output<string> LogPrefix { get; private set; } = null!;
+        public Output<string?> LogPrefix { get; private set; } = null!;
 
         /// <summary>
         /// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `LogTargetBucket`/`LogPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `LogEnable` is `True`. User must have full access on this bucket.
         /// </summary>
         [Output("logTargetBucket")]
-        public Output<string> LogTargetBucket { get; private set; } = null!;
+        public Output<string?> LogTargetBucket { get; private set; } = null!;
 
         /// <summary>
         /// Indicates whether to create a bucket of multi available zone.
         /// </summary>
         [Output("multiAz")]
         public Output<bool?> MultiAz { get; private set; } = null!;
+
+        /// <summary>
+        /// Object locking configuration. Once enabled, this feature cannot be disabled.
+        /// </summary>
+        [Output("objectLockConfiguration")]
+        public Output<Outputs.BucketObjectLockConfiguration> ObjectLockConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// Bucket Origin Domain settings.
@@ -877,6 +1064,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         [Input("chdfsOfs")]
         public Input<bool>? ChdfsOfs { get; set; }
 
+        /// <summary>
+        /// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `True`, `False`.
+        /// </summary>
+        [Input("corsResponseVary")]
+        public Input<string>? CorsResponseVary { get; set; }
+
         [Input("corsRules")]
         private InputList<Inputs.BucketCorsRuleArgs>? _corsRules;
 
@@ -906,6 +1099,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("forceClean")]
         public Input<bool>? ForceClean { get; set; }
+
+        [Input("intelligentTieringArchivingRuleLists")]
+        private InputList<Inputs.BucketIntelligentTieringArchivingRuleListArgs>? _intelligentTieringArchivingRuleLists;
+
+        /// <summary>
+        /// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `EnableIntelligentTiering` is true can configure this argument.
+        /// </summary>
+        public InputList<Inputs.BucketIntelligentTieringArchivingRuleListArgs> IntelligentTieringArchivingRuleLists
+        {
+            get => _intelligentTieringArchivingRuleLists ?? (_intelligentTieringArchivingRuleLists = new InputList<Inputs.BucketIntelligentTieringArchivingRuleListArgs>());
+            set => _intelligentTieringArchivingRuleLists = value;
+        }
 
         /// <summary>
         /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
@@ -960,6 +1165,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("multiAz")]
         public Input<bool>? MultiAz { get; set; }
+
+        /// <summary>
+        /// Object locking configuration. Once enabled, this feature cannot be disabled.
+        /// </summary>
+        [Input("objectLockConfiguration")]
+        public Input<Inputs.BucketObjectLockConfigurationArgs>? ObjectLockConfiguration { get; set; }
 
         [Input("originDomainRules")]
         private InputList<Inputs.BucketOriginDomainRuleArgs>? _originDomainRules;
@@ -1071,6 +1282,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         [Input("chdfsOfs")]
         public Input<bool>? ChdfsOfs { get; set; }
 
+        /// <summary>
+        /// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `True`, `False`.
+        /// </summary>
+        [Input("corsResponseVary")]
+        public Input<string>? CorsResponseVary { get; set; }
+
         [Input("corsRules")]
         private InputList<Inputs.BucketCorsRuleGetArgs>? _corsRules;
 
@@ -1106,6 +1323,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("forceClean")]
         public Input<bool>? ForceClean { get; set; }
+
+        [Input("intelligentTieringArchivingRuleLists")]
+        private InputList<Inputs.BucketIntelligentTieringArchivingRuleListGetArgs>? _intelligentTieringArchivingRuleLists;
+
+        /// <summary>
+        /// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `EnableIntelligentTiering` is true can configure this argument.
+        /// </summary>
+        public InputList<Inputs.BucketIntelligentTieringArchivingRuleListGetArgs> IntelligentTieringArchivingRuleLists
+        {
+            get => _intelligentTieringArchivingRuleLists ?? (_intelligentTieringArchivingRuleLists = new InputList<Inputs.BucketIntelligentTieringArchivingRuleListGetArgs>());
+            set => _intelligentTieringArchivingRuleLists = value;
+        }
 
         /// <summary>
         /// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
@@ -1160,6 +1389,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         /// </summary>
         [Input("multiAz")]
         public Input<bool>? MultiAz { get; set; }
+
+        /// <summary>
+        /// Object locking configuration. Once enabled, this feature cannot be disabled.
+        /// </summary>
+        [Input("objectLockConfiguration")]
+        public Input<Inputs.BucketObjectLockConfigurationGetArgs>? ObjectLockConfiguration { get; set; }
 
         [Input("originDomainRules")]
         private InputList<Inputs.BucketOriginDomainRuleGetArgs>? _originDomainRules;

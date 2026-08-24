@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const usedIpAddress = tencentcloud.Vpc.getUsedIpAddress({
+ * const usedIpAddress = tencentcloud.vpc.getUsedIpAddress({
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetUsedIpAddressResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const usedIpAddress = tencentcloud.Vpc.getUsedIpAddress({
+ * const usedIpAddress = tencentcloud.vpc.getUsedIpAddress({
  *     vpcId: "vpc-4owdpnwr",
  * });
  * ```
@@ -106,15 +106,15 @@ export interface GetUsedIpAddressOutputArgs {
     /**
      * IPs to query.
      */
-    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC instance ID.
      */

@@ -38,17 +38,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -66,8 +66,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -81,7 +81,7 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -94,8 +94,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -109,7 +109,7 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -119,7 +119,7 @@ import (
 //				return err
 //			}
 //			src, err := sqlserver.NewDb(ctx, "src", &sqlserver.DbArgs{
-//				InstanceId: srcExample.ID(),
+//				InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf_example_db_src"),
 //				Charset:    pulumi.String("Chinese_PRC_BIN"),
 //				Remark:     pulumi.String("testACC-remark"),
@@ -128,7 +128,7 @@ import (
 //				return err
 //			}
 //			dst, err := sqlserver.NewDb(ctx, "dst", &sqlserver.DbArgs{
-//				InstanceId: dstExample.ID(),
+//				InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf_example_db_dst"),
 //				Charset:    pulumi.String("Chinese_PRC_BIN"),
 //				Remark:     pulumi.String("testACC-remark"),
@@ -137,7 +137,7 @@ import (
 //				return err
 //			}
 //			srcAccount, err := sqlserver.NewAccount(ctx, "src", &sqlserver.AccountArgs{
-//				InstanceId: srcExample.ID(),
+//				InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf_example_src_account"),
 //				Password:   pulumi.String("Qwer@234"),
 //				IsAdmin:    pulumi.Bool(true),
@@ -146,7 +146,7 @@ import (
 //				return err
 //			}
 //			dstAccount, err := sqlserver.NewAccount(ctx, "dst", &sqlserver.AccountArgs{
-//				InstanceId: dstExample.ID(),
+//				InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf_example_dst_account"),
 //				Password:   pulumi.String("Qwer@234"),
 //				IsAdmin:    pulumi.Bool(true),
@@ -155,7 +155,7 @@ import (
 //				return err
 //			}
 //			_, err = sqlserver.NewAccountDbAttachment(ctx, "src", &sqlserver.AccountDbAttachmentArgs{
-//				InstanceId:  srcExample.ID(),
+//				InstanceId:  srcExample.ID().ToIDOutput().ToStringOutput(),
 //				AccountName: srcAccount.Name,
 //				DbName:      src.Name,
 //				Privilege:   pulumi.String("ReadWrite"),
@@ -164,7 +164,7 @@ import (
 //				return err
 //			}
 //			_, err = sqlserver.NewAccountDbAttachment(ctx, "dst", &sqlserver.AccountDbAttachmentArgs{
-//				InstanceId:  dstExample.ID(),
+//				InstanceId:  dstExample.ID().ToIDOutput().ToStringOutput(),
 //				AccountName: dstAccount.Name,
 //				DbName:      dst.Name,
 //				Privilege:   pulumi.String("ReadWrite"),
@@ -177,12 +177,12 @@ import (
 //				MigrateType: pulumi.Int(1),
 //				SourceType:  pulumi.Int(1),
 //				Source: &sqlserver.MigrationSourceArgs{
-//					InstanceId: srcExample.ID(),
+//					InstanceId: srcExample.ID().ToIDOutput().ToStringOutput(),
 //					UserName:   srcAccount.Name,
 //					Password:   srcAccount.Password,
 //				},
 //				Target: &sqlserver.MigrationTargetArgs{
-//					InstanceId: dstExample.ID(),
+//					InstanceId: dstExample.ID().ToIDOutput().ToStringOutput(),
 //					UserName:   dstAccount.Name,
 //					Password:   dstAccount.Password,
 //				},

@@ -68,12 +68,8 @@ type GetAccessPointsResult struct {
 }
 
 func GetAccessPointsOutput(ctx *pulumi.Context, args GetAccessPointsOutputArgs, opts ...pulumi.InvokeOption) GetAccessPointsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccessPointsResultOutput, error) {
-			args := v.(GetAccessPointsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getAccessPoints:getAccessPoints", args, GetAccessPointsResultOutput{}, options).(GetAccessPointsResultOutput), nil
-		}).(GetAccessPointsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getAccessPoints:getAccessPoints", args, GetAccessPointsResultOutput{}, options).(GetAccessPointsResultOutput)
 }
 
 // A collection of arguments for invoking getAccessPoints.

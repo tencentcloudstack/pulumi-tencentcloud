@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Domains.getInstance({});
+ * const foo = tencentcloud.domains.getInstance({});
  * ```
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
@@ -71,7 +71,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Domains.getInstance({});
+ * const foo = tencentcloud.domains.getInstance({});
  * ```
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
@@ -91,13 +91,13 @@ export interface GetInstanceOutputArgs {
     /**
      * Specify data limit in range [1, 100]. Default: 20.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Specify data offset. Default: 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used for save response as file locally.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

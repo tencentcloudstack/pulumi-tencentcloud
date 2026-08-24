@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyDetail = tencentcloud.Gaap.getProxyDetail({
+ * const proxyDetail = tencentcloud.gaap.getProxyDetail({
  *     proxyId: "link-m9t4yho9",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetProxyDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyDetail = tencentcloud.Gaap.getProxyDetail({
+ * const proxyDetail = tencentcloud.gaap.getProxyDetail({
  *     proxyId: "link-m9t4yho9",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetProxyDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

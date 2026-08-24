@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewDdosEventList = tencentcloud.Antiddos.getOverviewDdosEventList({
+ * const overviewDdosEventList = tencentcloud.antiddos.getOverviewDdosEventList({
  *     startTime: "2023-11-20 00:00:00",
  *     endTime: "2023-11-21 00:00:00",
  *     attackStatus: "end",
@@ -89,7 +89,7 @@ export interface GetOverviewDdosEventListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewDdosEventList = tencentcloud.Antiddos.getOverviewDdosEventList({
+ * const overviewDdosEventList = tencentcloud.antiddos.getOverviewDdosEventList({
  *     startTime: "2023-11-20 00:00:00",
  *     endTime: "2023-11-21 00:00:00",
  *     attackStatus: "end",
@@ -113,7 +113,7 @@ export interface GetOverviewDdosEventListOutputArgs {
     /**
      * filter event by attack status, start: attacking; end: attack end.
      */
-    attackStatus?: pulumi.Input<string>;
+    attackStatus?: pulumi.Input<string | undefined>;
     /**
      * EndTime.
      */
@@ -121,7 +121,7 @@ export interface GetOverviewDdosEventListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * StartTime.
      */

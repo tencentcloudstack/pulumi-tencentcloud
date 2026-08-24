@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql restart_db_instances_operation can be imported using the id, e.g.
+ * mysql restartDbInstancesOperation can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/restartDbInstancesOperation:RestartDbInstancesOperation restart_db_instances_operation restart_db_instances_operation_id
@@ -137,11 +137,11 @@ export interface RestartDbInstancesOperationState {
     /**
      * An array of instance ID in the format: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**

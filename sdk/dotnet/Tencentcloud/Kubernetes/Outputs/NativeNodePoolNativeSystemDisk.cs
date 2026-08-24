@@ -22,15 +22,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
         /// </summary>
         public readonly string DiskType;
+        /// <summary>
+        /// Encrypt System Drive. Allow value: `ENCRYPT`.
+        /// </summary>
+        public readonly string? Encrypt;
+        /// <summary>
+        /// Kms key ID.
+        /// </summary>
+        public readonly string? KmsKeyId;
 
         [OutputConstructor]
         private NativeNodePoolNativeSystemDisk(
             int diskSize,
 
-            string diskType)
+            string diskType,
+
+            string? encrypt,
+
+            string? kmsKeyId)
         {
             DiskSize = diskSize;
             DiskType = diskType;
+            Encrypt = encrypt;
+            KmsKeyId = kmsKeyId;
         }
     }
 }

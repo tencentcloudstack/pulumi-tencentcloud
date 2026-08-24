@@ -2346,7 +2346,7 @@ func (o GetBackupUploadSizeCosUploadBackupFileSetArrayOutput) Index(i pulumi.Int
 type GetBackupsList struct {
 	// Database name list of the backup.
 	DbLists []string `pulumi:"dbLists"`
-	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	// End time of the backup.
 	EndTime string `pulumi:"endTime"`
 	// File name of the backup.
 	FileName string `pulumi:"fileName"`
@@ -2360,7 +2360,7 @@ type GetBackupsList struct {
 	IntranetUrl string `pulumi:"intranetUrl"`
 	// The size of backup file. Unit is KB.
 	Size int `pulumi:"size"`
-	// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	// Start time of the backup.
 	StartTime string `pulumi:"startTime"`
 	// Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
 	Status int `pulumi:"status"`
@@ -2384,7 +2384,7 @@ type GetBackupsListInput interface {
 type GetBackupsListArgs struct {
 	// Database name list of the backup.
 	DbLists pulumi.StringArrayInput `pulumi:"dbLists"`
-	// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	// End time of the backup.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
 	// File name of the backup.
 	FileName pulumi.StringInput `pulumi:"fileName"`
@@ -2398,7 +2398,7 @@ type GetBackupsListArgs struct {
 	IntranetUrl pulumi.StringInput `pulumi:"intranetUrl"`
 	// The size of backup file. Unit is KB.
 	Size pulumi.IntInput `pulumi:"size"`
-	// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+	// Start time of the backup.
 	StartTime pulumi.StringInput `pulumi:"startTime"`
 	// Status of the backup. `1` for creating, `2` for successfully created, 3 for failed.
 	Status pulumi.IntInput `pulumi:"status"`
@@ -2464,7 +2464,7 @@ func (o GetBackupsListOutput) DbLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetBackupsList) []string { return v.DbLists }).(pulumi.StringArrayOutput)
 }
 
-// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+// End time of the backup.
 func (o GetBackupsListOutput) EndTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBackupsList) string { return v.EndTime }).(pulumi.StringOutput)
 }
@@ -2499,7 +2499,7 @@ func (o GetBackupsListOutput) Size() pulumi.IntOutput {
 	return o.ApplyT(func(v GetBackupsList) int { return v.Size }).(pulumi.IntOutput)
 }
 
-// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+// Start time of the backup.
 func (o GetBackupsListOutput) StartTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetBackupsList) string { return v.StartTime }).(pulumi.StringOutput)
 }

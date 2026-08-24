@@ -67,12 +67,8 @@ type GetLogsetsResult struct {
 }
 
 func GetLogsetsOutput(ctx *pulumi.Context, args GetLogsetsOutputArgs, opts ...pulumi.InvokeOption) GetLogsetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogsetsResultOutput, error) {
-			args := v.(GetLogsetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cls/getLogsets:getLogsets", args, GetLogsetsResultOutput{}, options).(GetLogsetsResultOutput), nil
-		}).(GetLogsetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cls/getLogsets:getLogsets", args, GetLogsetsResultOutput{}, options).(GetLogsetsResultOutput)
 }
 
 // A collection of arguments for invoking getLogsets.

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_sso_cam_config can be imported using the id, e.g.
+ * monitor grafanaSsoCamConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
@@ -102,11 +102,11 @@ export interface GrafanaSsoCamConfigState {
     /**
      * Whether to enable the CAM authorization: `true` for enabling; `false` for disabling.
      */
-    enableSsoCamCheck?: pulumi.Input<boolean>;
+    enableSsoCamCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

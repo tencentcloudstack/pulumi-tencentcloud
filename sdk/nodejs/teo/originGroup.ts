@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a teo originGroup
+ * Provides a resource to create a TEO originGroup
  *
  * > **NOTE:** Please note that `tencentcloud.Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
  *
@@ -38,15 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo origin_group can be imported using the zone_id#originGroup_id, e.g.
- *
- * `
- *
- * ```sh
- * $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
- * ```
- *
- * `
+ * teo originGroup can be imported using the zone_id#originGroup_id, e.g.
  */
 export class OriginGroup extends pulumi.CustomResource {
     /**
@@ -170,41 +162,41 @@ export interface OriginGroupState {
     /**
      * Origin site group creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
      */
-    hostHeader?: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string | undefined>;
     /**
      * OriginGroup Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * OriginGroup ID.
      */
-    originGroupId?: pulumi.Input<string>;
+    originGroupId?: pulumi.Input<string | undefined>;
     /**
      * Origin site records.
      */
-    records?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupRecord>[]>;
+    records?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupRecord>[] | undefined>;
     /**
      * List of referenced instances of the origin site group.
      */
-    references?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupReference>[]>;
+    references?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupReference>[] | undefined>;
     /**
      * Type of the origin site. Valid values:
      * - `GENERAL`: Universal origin site group, only supports adding IP/domain name origin sites, which can be referenced by domain name service, rule engine, four-layer proxy, general load balancing, and HTTP-specific load balancing.
      * - `HTTP`: The HTTP-specific origin site group, supports adding IP/domain name and object storage origin site as the origin site, it cannot be referenced by the four-layer proxy, it can only be added to the acceleration domain name, rule engine-modify origin site, and HTTP-specific load balancing reference.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Origin site group update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Site ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -214,11 +206,11 @@ export interface OriginGroupArgs {
     /**
      * Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
      */
-    hostHeader?: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string | undefined>;
     /**
      * OriginGroup Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Origin site records.
      */

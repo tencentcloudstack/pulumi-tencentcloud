@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// antiddos ddos_black_white_ip can be imported using the id, e.g.
+// antiddos ddosBlackWhiteIp can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}

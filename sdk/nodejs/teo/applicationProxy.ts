@@ -168,63 +168,63 @@ export interface ApplicationProxyState {
     /**
      * - `0`: Disable acceleration.- `1`: Enable acceleration.
      */
-    accelerateType?: pulumi.Input<number>;
+    accelerateType?: pulumi.Input<number | undefined>;
     /**
      * Acceleration area. Valid values: `mainland`, `overseas`.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Application proxy block status. Valid values: `banned`, `banning`, `recover`, `recovering`.
      */
-    banStatus?: pulumi.Input<string>;
+    banStatus?: pulumi.Input<string | undefined>;
     /**
      * When `ProxyType` is hostname, this field is the ID of the subdomain.
      */
-    hostId?: pulumi.Input<string>;
+    hostId?: pulumi.Input<string | undefined>;
     /**
      * IPv6 access configuration.
      */
-    ipv6?: pulumi.Input<inputs.Teo.ApplicationProxyIpv6>;
+    ipv6?: pulumi.Input<inputs.Teo.ApplicationProxyIpv6 | undefined>;
     /**
      * Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
      */
-    platType?: pulumi.Input<string>;
+    platType?: pulumi.Input<string | undefined>;
     /**
      * Proxy ID.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * When `ProxyType` is hostname, `ProxyName` is the domain or subdomain name.When `ProxyType` is instance, `ProxyName` is the name of proxy application.
      */
-    proxyName?: pulumi.Input<string>;
+    proxyName?: pulumi.Input<string | undefined>;
     /**
      * Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
      */
-    proxyType?: pulumi.Input<string>;
+    proxyType?: pulumi.Input<string | undefined>;
     /**
      * Scheduling information.
      */
-    scheduleValues?: pulumi.Input<pulumi.Input<string>[]>;
+    scheduleValues?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * - `0`: Disable security protection.- `1`: Enable security protection.
      */
-    securityType?: pulumi.Input<number>;
+    securityType?: pulumi.Input<number | undefined>;
     /**
      * Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
      */
-    sessionPersistTime?: pulumi.Input<number>;
+    sessionPersistTime?: pulumi.Input<number | undefined>;
     /**
      * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Last modification date.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Site ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -238,7 +238,7 @@ export interface ApplicationProxyArgs {
     /**
      * IPv6 access configuration.
      */
-    ipv6?: pulumi.Input<inputs.Teo.ApplicationProxyIpv6>;
+    ipv6?: pulumi.Input<inputs.Teo.ApplicationProxyIpv6 | undefined>;
     /**
      * Scheduling mode.- `ip`: Anycast IP.- `domain`: CNAME.
      */
@@ -250,7 +250,7 @@ export interface ApplicationProxyArgs {
     /**
      * Layer 4 proxy mode. Valid values:- `hostname`: subdomain mode.- `instance`: instance mode.
      */
-    proxyType?: pulumi.Input<string>;
+    proxyType?: pulumi.Input<string | undefined>;
     /**
      * - `0`: Disable security protection.- `1`: Enable security protection.
      */
@@ -258,11 +258,11 @@ export interface ApplicationProxyArgs {
     /**
      * Session persistence duration. Value range: 30-3600 (in seconds), default value is 600.
      */
-    sessionPersistTime?: pulumi.Input<number>;
+    sessionPersistTime?: pulumi.Input<number | undefined>;
     /**
      * Status of this application proxy. Valid values to set is `online` and `offline`.- `online`: Enable.- `offline`: Disable.- `progress`: Deploying.- `stopping`: Deactivating.- `fail`: Deploy or deactivate failed.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Site ID.
      */

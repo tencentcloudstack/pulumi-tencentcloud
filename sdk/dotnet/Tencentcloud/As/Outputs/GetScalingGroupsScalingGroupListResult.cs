@@ -31,9 +31,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
         /// </summary>
         public readonly int DesiredCapacity;
         /// <summary>
-        /// A list of application clb ids.
+        /// A list of application clb.
         /// </summary>
-        public readonly ImmutableArray<Outputs.GetScalingGroupsScalingGroupListForwardBalancerIdResult> ForwardBalancerIds;
+        public readonly ImmutableArray<Outputs.GetScalingGroupsScalingGroupListForwardLoadBalancerResult> ForwardLoadBalancers;
         /// <summary>
         /// Number of instance.
         /// </summary>
@@ -105,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
 
             int desiredCapacity,
 
-            ImmutableArray<Outputs.GetScalingGroupsScalingGroupListForwardBalancerIdResult> forwardBalancerIds,
+            ImmutableArray<Outputs.GetScalingGroupsScalingGroupListForwardLoadBalancerResult> forwardLoadBalancers,
 
             int instanceCount,
 
@@ -141,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
             CreateTime = createTime;
             DefaultCooldown = defaultCooldown;
             DesiredCapacity = desiredCapacity;
-            ForwardBalancerIds = forwardBalancerIds;
+            ForwardLoadBalancers = forwardLoadBalancers;
             InstanceCount = instanceCount;
             LoadBalancerIds = loadBalancerIds;
             MaxSize = maxSize;

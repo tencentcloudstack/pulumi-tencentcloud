@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css domain_referer can be imported using the id, e.g.
+ * css domainReferer can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
@@ -132,23 +132,23 @@ export interface DomainRefererState {
     /**
      * Allow blank referers, 0: not allowed, 1: allowed.
      */
-    allowEmpty?: pulumi.Input<number>;
+    allowEmpty?: pulumi.Input<number | undefined>;
     /**
      * Domain Name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the referer blacklist authentication of the current domain name,`0`: off, `1`: on.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * The list of referers to; separate.
      */
-    rules?: pulumi.Input<string>;
+    rules?: pulumi.Input<string | undefined>;
     /**
      * List type: 0: blacklist, 1: whitelist.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**

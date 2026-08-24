@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getJobEvents({
+ * const example = tencentcloud.oceanus.getJobEvents({
  *     jobId: "cql-6w8eab6f",
  *     startTimestamp: 1630932161,
  *     endTimestamp: 1631232466,
@@ -101,7 +101,7 @@ export interface GetJobEventsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getJobEvents({
+ * const example = tencentcloud.oceanus.getJobEvents({
  *     jobId: "cql-6w8eab6f",
  *     startTimestamp: 1630932161,
  *     endTimestamp: 1631232466,
@@ -140,7 +140,7 @@ export interface GetJobEventsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter condition:Start Unix timestamp (seconds).
      */
@@ -148,7 +148,7 @@ export interface GetJobEventsOutputArgs {
     /**
      * Event types. If not passed, data of all types will be returned.
      */
-    types?: pulumi.Input<pulumi.Input<string>[]>;
+    types?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Workspace SerialId.
      */

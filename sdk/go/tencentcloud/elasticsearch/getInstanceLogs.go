@@ -88,12 +88,8 @@ type GetInstanceLogsResult struct {
 }
 
 func GetInstanceLogsOutput(ctx *pulumi.Context, args GetInstanceLogsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceLogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceLogsResultOutput, error) {
-			args := v.(GetInstanceLogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args, GetInstanceLogsResultOutput{}, options).(GetInstanceLogsResultOutput), nil
-		}).(GetInstanceLogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstanceLogs:getInstanceLogs", args, GetInstanceLogsResultOutput{}, options).(GetInstanceLogsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceLogs.

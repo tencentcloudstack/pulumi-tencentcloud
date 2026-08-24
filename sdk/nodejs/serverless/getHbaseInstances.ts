@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const serverlessHbaseInstances = tencentcloud.Serverless.getHbaseInstances({
+ * const serverlessHbaseInstances = tencentcloud.serverless.getHbaseInstances({
  *     displayStrategy: "clusterList",
  * });
  * ```
@@ -39,7 +39,7 @@ export interface GetHbaseInstancesArgs {
      * Sort by OrderField in ascending or descending order. Value range:
      * * 0: indicates the descending order;
      * * 1: indicates the ascending order;
-     * The default value is 0.
+     *   The default value is 0.
      */
     asc?: number;
     /**
@@ -92,7 +92,7 @@ export interface GetHbaseInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const serverlessHbaseInstances = tencentcloud.Serverless.getHbaseInstances({
+ * const serverlessHbaseInstances = tencentcloud.serverless.getHbaseInstances({
  *     displayStrategy: "clusterList",
  * });
  * ```
@@ -116,9 +116,9 @@ export interface GetHbaseInstancesOutputArgs {
      * Sort by OrderField in ascending or descending order. Value range:
      * * 0: indicates the descending order;
      * * 1: indicates the ascending order;
-     * The default value is 0.
+     *   The default value is 0.
      */
-    asc?: pulumi.Input<number>;
+    asc?: pulumi.Input<number | undefined>;
     /**
      * Cluster filtering policy. Value range:
      * * clusterList: Query the list of clusters except the destroyed cluster;
@@ -128,16 +128,16 @@ export interface GetHbaseInstancesOutputArgs {
     /**
      * Custom query.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Serverless.GetHbaseInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Serverless.GetHbaseInstancesFilterArgs>[] | undefined>;
     /**
      * Sorting field. Value range:
      * * clusterId: Sorting by instance ID;
      * * addTime: sorted by instance creation time;
      * * status: sorted by the status code of the instance.
      */
-    orderField?: pulumi.Input<string>;
+    orderField?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -17,25 +17,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all policies
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     // query by policy_id
-        ///     var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
-        ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///     });
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke();
         /// 
-        ///     // query by policy_id and name
-        ///     var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
+        /// });
+        /// ```
+        /// 
+        /// ### Query policies by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke(new()
         ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///         Name = "tf-auto-test",
+        ///         Name = "tf-example",
+        ///         PolicyId = "236215899",
+        ///         Type = 1,
+        ///         CreateMode = 2,
         ///     });
         /// 
         /// });
@@ -49,25 +61,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all policies
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     // query by policy_id
-        ///     var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
-        ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///     });
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke();
         /// 
-        ///     // query by policy_id and name
-        ///     var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
+        /// });
+        /// ```
+        /// 
+        /// ### Query policies by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke(new()
         ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///         Name = "tf-auto-test",
+        ///         Name = "tf-example",
+        ///         PolicyId = "236215899",
+        ///         Type = 1,
+        ///         CreateMode = 2,
         ///     });
         /// 
         /// });
@@ -81,25 +105,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all policies
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     // query by policy_id
-        ///     var foo = Tencentcloud.Cam.GetPolicies.Invoke(new()
-        ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///     });
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke();
         /// 
-        ///     // query by policy_id and name
-        ///     var bar = Tencentcloud.Cam.GetPolicies.Invoke(new()
+        /// });
+        /// ```
+        /// 
+        /// ### Query policies by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cam.GetPolicies.Invoke(new()
         ///     {
-        ///         PolicyId = fooTencentcloudCamPolicy.Id,
-        ///         Name = "tf-auto-test",
+        ///         Name = "tf-example",
+        ///         PolicyId = "236215899",
+        ///         Type = 1,
+        ///         CreateMode = 2,
         ///     });
         /// 
         /// });
@@ -125,6 +161,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public string? Description { get; set; }
 
         /// <summary>
+        /// Match by strategy name.
+        /// </summary>
+        [Input("keyWord")]
+        public string? KeyWord { get; set; }
+
+        /// <summary>
         /// Name of the CAM policy to be queried.
         /// </summary>
         [Input("name")]
@@ -141,6 +183,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
+
+        /// <summary>
+        /// Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+        /// </summary>
+        [Input("scope")]
+        public string? Scope { get; set; }
 
         /// <summary>
         /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
@@ -169,6 +217,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Match by strategy name.
+        /// </summary>
+        [Input("keyWord")]
+        public Input<string>? KeyWord { get; set; }
+
+        /// <summary>
         /// Name of the CAM policy to be queried.
         /// </summary>
         [Input("name")]
@@ -185,6 +239,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
+
+        /// <summary>
+        /// Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+        /// </summary>
+        [Input("scope")]
+        public Input<string>? Scope { get; set; }
 
         /// <summary>
         /// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
@@ -214,6 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        public readonly string? KeyWord;
         /// <summary>
         /// Name of CAM policy.
         /// </summary>
@@ -227,6 +288,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         public readonly ImmutableArray<Outputs.GetPoliciesPolicyListResult> PolicyLists;
         public readonly string? ResultOutputFile;
+        public readonly string? Scope;
         /// <summary>
         /// Type of the policy strategy. `1` means customer strategy and `2` means preset strategy.
         /// </summary>
@@ -240,6 +302,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 
             string id,
 
+            string? keyWord,
+
             string? name,
 
             string? policyId,
@@ -248,15 +312,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 
             string? resultOutputFile,
 
+            string? scope,
+
             int? type)
         {
             CreateMode = createMode;
             Description = description;
             Id = id;
+            KeyWord = keyWord;
             Name = name;
             PolicyId = policyId;
             PolicyLists = policyLists;
             ResultOutputFile = resultOutputFile;
+            Scope = scope;
             Type = type;
         }
     }

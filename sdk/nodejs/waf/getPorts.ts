@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({});
+ * const example = tencentcloud.waf.getPorts({});
  * ```
  *
  * ### Or
@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({
+ * const example = tencentcloud.waf.getPorts({
  *     edition: "clb-waf",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  * });
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({
+ * const example = tencentcloud.waf.getPorts({
  *     edition: "sparta-waf",
  *     instanceId: "waf_2ka80zly0702e8j3",
  * });
@@ -97,7 +97,7 @@ export interface GetPortsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({});
+ * const example = tencentcloud.waf.getPorts({});
  * ```
  *
  * ### Or
@@ -106,7 +106,7 @@ export interface GetPortsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({
+ * const example = tencentcloud.waf.getPorts({
  *     edition: "clb-waf",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  * });
@@ -118,7 +118,7 @@ export interface GetPortsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPorts({
+ * const example = tencentcloud.waf.getPorts({
  *     edition: "sparta-waf",
  *     instanceId: "waf_2ka80zly0702e8j3",
  * });
@@ -141,13 +141,13 @@ export interface GetPortsOutputArgs {
     /**
      * Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Instance unique ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

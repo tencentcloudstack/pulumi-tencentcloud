@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Nat.getGateways({
+ * const foo = tencentcloud.nat.getGateways({
  *     name: "main",
  *     vpcId: "vpc-xfqag",
  *     id: "nat-xfaq1",
@@ -86,7 +86,7 @@ export interface GetGatewaysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Nat.getGateways({
+ * const foo = tencentcloud.nat.getGateways({
  *     name: "main",
  *     vpcId: "vpc-xfqag",
  *     id: "nat-xfaq1",
@@ -111,17 +111,17 @@ export interface GetGatewaysOutputArgs {
     /**
      * ID of the NAT gateway.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the NAT gateway.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

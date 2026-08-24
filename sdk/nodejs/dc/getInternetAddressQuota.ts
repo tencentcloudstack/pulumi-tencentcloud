@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internetAddressQuota = tencentcloud.Dc.getInternetAddressQuota({});
+ * const internetAddressQuota = tencentcloud.dc.getInternetAddressQuota({});
  * ```
  */
 export function getInternetAddressQuota(args?: GetInternetAddressQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetAddressQuotaResult> {
@@ -73,7 +73,7 @@ export interface GetInternetAddressQuotaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internetAddressQuota = tencentcloud.Dc.getInternetAddressQuota({});
+ * const internetAddressQuota = tencentcloud.dc.getInternetAddressQuota({});
  * ```
  */
 export function getInternetAddressQuotaOutput(args?: GetInternetAddressQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInternetAddressQuotaResult> {
@@ -91,5 +91,5 @@ export interface GetInternetAddressQuotaOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

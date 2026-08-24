@@ -49,6 +49,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
 
+        /// <summary>
+        /// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+        /// </summary>
         [Output("keyId")]
         public Output<string?> KeyId { get; private set; } = null!;
 
@@ -125,6 +128,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        /// <summary>
+        /// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+        /// </summary>
         [Input("keyId")]
         public Input<string>? KeyId { get; set; }
 
@@ -148,6 +154,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        /// <summary>
+        /// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+        /// </summary>
         [Input("keyId")]
         public Input<string>? KeyId { get; set; }
 

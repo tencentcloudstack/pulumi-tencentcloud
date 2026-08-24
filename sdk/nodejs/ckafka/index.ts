@@ -125,6 +125,11 @@ export const getUsers: typeof import("./getUsers").getUsers = null as any;
 export const getUsersOutput: typeof import("./getUsers").getUsersOutput = null as any;
 utilities.lazyLoad(exports, ["getUsers","getUsersOutput"], () => require("./getUsers"));
 
+export { GetVersionArgs, GetVersionResult, GetVersionOutputArgs } from "./getVersion";
+export const getVersion: typeof import("./getVersion").getVersion = null as any;
+export const getVersionOutput: typeof import("./getVersion").getVersionOutput = null as any;
+utilities.lazyLoad(exports, ["getVersion","getVersionOutput"], () => require("./getVersion"));
+
 export { GetZoneArgs, GetZoneResult, GetZoneOutputArgs } from "./getZone";
 export const getZone: typeof import("./getZone").getZone = null as any;
 export const getZoneOutput: typeof import("./getZone").getZoneOutput = null as any;

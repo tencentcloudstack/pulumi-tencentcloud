@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tdmq professional_cluster can be imported using the id, e.g.
+ * tdmq professionalCluster can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
@@ -194,39 +194,39 @@ export interface ProfessionalClusterState {
     /**
      * Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
      */
-    productName?: pulumi.Input<string>;
+    productName?: pulumi.Input<string | undefined>;
     /**
      * Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Purchase duration, value range: 1~50. Default: 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Label of VPC network.
      */
-    vpc?: pulumi.Input<inputs.Tdmq.ProfessionalClusterVpc>;
+    vpc?: pulumi.Input<inputs.Tdmq.ProfessionalClusterVpc | undefined>;
     /**
      * Multi-AZ deployment select three Availability Zones, like: [200002,200003,200004]. Single availability zone deployment selects an availability zone, like [200002].
      */
-    zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    zoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**
@@ -240,7 +240,7 @@ export interface ProfessionalClusterArgs {
     /**
      * Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
      */
@@ -256,15 +256,15 @@ export interface ProfessionalClusterArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Purchase duration, value range: 1~50. Default: 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Label of VPC network.
      */
-    vpc?: pulumi.Input<inputs.Tdmq.ProfessionalClusterVpc>;
+    vpc?: pulumi.Input<inputs.Tdmq.ProfessionalClusterVpc | undefined>;
     /**
      * Multi-AZ deployment select three Availability Zones, like: [200002,200003,200004]. Single availability zone deployment selects an availability zone, like [200002].
      */

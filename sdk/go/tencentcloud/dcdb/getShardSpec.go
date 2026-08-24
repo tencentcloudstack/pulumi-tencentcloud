@@ -62,12 +62,8 @@ type GetShardSpecResult struct {
 }
 
 func GetShardSpecOutput(ctx *pulumi.Context, args GetShardSpecOutputArgs, opts ...pulumi.InvokeOption) GetShardSpecResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetShardSpecResultOutput, error) {
-			args := v.(GetShardSpecArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dcdb/getShardSpec:getShardSpec", args, GetShardSpecResultOutput{}, options).(GetShardSpecResultOutput), nil
-		}).(GetShardSpecResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dcdb/getShardSpec:getShardSpec", args, GetShardSpecResultOutput{}, options).(GetShardSpecResultOutput)
 }
 
 // A collection of arguments for invoking getShardSpec.

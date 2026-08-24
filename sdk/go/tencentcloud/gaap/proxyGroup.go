@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// gaap proxy_group can be imported using the id, e.g.
+// gaap proxyGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id

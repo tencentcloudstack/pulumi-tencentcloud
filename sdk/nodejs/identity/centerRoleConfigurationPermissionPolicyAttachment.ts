@@ -16,13 +16,13 @@ import * as utilities from "../utilities";
  * const identityCenterRoleConfigurationPermissionPolicyAttachment = new tencentcloud.identity.CenterRoleConfigurationPermissionPolicyAttachment("identity_center_role_configuration_permission_policy_attachment", {
  *     zoneId: "z-xxxxxx",
  *     roleConfigurationId: "rc-xxxxxx",
- *     rolePolicyId: xxxxxx,
+ *     rolePolicyId: Number(xxxxxx),
  * });
  * ```
  *
  * ## Import
  *
- * organization identity_center_role_configuration_permission_policy_attachment can be imported using the id, e.g.
+ * organization identityCenterRoleConfigurationPermissionPolicyAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerRoleConfigurationPermissionPolicyAttachment:CenterRoleConfigurationPermissionPolicyAttachment identity_center_role_configuration_permission_policy_attachment ${zoneId}#${roleConfigurationId}#${rolePolicyIdString}
@@ -136,31 +136,31 @@ export interface CenterRoleConfigurationPermissionPolicyAttachmentState {
     /**
      * Role policy add time.
      */
-    addTime?: pulumi.Input<string>;
+    addTime?: pulumi.Input<string | undefined>;
     /**
      * Permission configuration ID.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Role policy document.
      */
-    rolePolicyDocument?: pulumi.Input<string>;
+    rolePolicyDocument?: pulumi.Input<string | undefined>;
     /**
      * Role policy id.
      */
-    rolePolicyId?: pulumi.Input<number>;
+    rolePolicyId?: pulumi.Input<number | undefined>;
     /**
      * Role policy name.
      */
-    rolePolicyName?: pulumi.Input<string>;
+    rolePolicyName?: pulumi.Input<string | undefined>;
     /**
      * Role policy type.
      */
-    rolePolicyType?: pulumi.Input<string>;
+    rolePolicyType?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -178,7 +178,7 @@ export interface CenterRoleConfigurationPermissionPolicyAttachmentArgs {
     /**
      * Role policy name.
      */
-    rolePolicyName?: pulumi.Input<string>;
+    rolePolicyName?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

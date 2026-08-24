@@ -42,15 +42,15 @@ import (
 //			if param := cfg.Get("exampleClusterCidr"); param != "" {
 //				exampleClusterCidr = param
 //			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			vpcId := vpc.InstanceLists[0].VpcId
-//			subnetId := vpc.InstanceLists[0].SubnetId
+//			vpcId := vpc2.InstanceLists[0].VpcId
+//			subnetId := vpc2.InstanceLists[0].SubnetId
 //			sg, err := security.GetGroups(ctx, &security.GetGroupsArgs{
 //				Name: pulumi.StringRef("default"),
 //			}, nil)
@@ -72,7 +72,7 @@ import (
 //				return err
 //			}
 //			_, err = kubernetes.NewServerlessNodePool(ctx, "example", &kubernetes.ServerlessNodePoolArgs{
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				Name:      pulumi.String("tf_example_serverless_node_pool"),
 //				ServerlessNodes: kubernetes.ServerlessNodePoolServerlessNodeArray{
 //					&kubernetes.ServerlessNodePoolServerlessNodeArgs{
@@ -161,10 +161,10 @@ import (
 //
 // ## Import
 //
-// serverless node pool can be imported, e.g.
+// serverless node pool can be imported using the clusterId#nodePoolId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+// $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool example cls-62ch3v24#np-5avod190
 // ```
 type ServerlessNodePool struct {
 	pulumi.CustomResourceState

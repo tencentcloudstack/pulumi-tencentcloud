@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const command = tencentcloud.Tat.getCommand({
+ * const command = tencentcloud.tat.getCommand({
  *     commandType: "SHELL",
  *     createdBy: "TAT",
  * });
@@ -98,7 +98,7 @@ export interface GetCommandResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const command = tencentcloud.Tat.getCommand({
+ * const command = tencentcloud.tat.getCommand({
  *     commandType: "SHELL",
  *     createdBy: "TAT",
  * });
@@ -123,21 +123,21 @@ export interface GetCommandOutputArgs {
     /**
      * Command ID.
      */
-    commandId?: pulumi.Input<string>;
+    commandId?: pulumi.Input<string | undefined>;
     /**
      * Command name.
      */
-    commandName?: pulumi.Input<string>;
+    commandName?: pulumi.Input<string | undefined>;
     /**
      * Command type, Value is `SHELL` or `POWERSHELL`.
      */
-    commandType?: pulumi.Input<string>;
+    commandType?: pulumi.Input<string | undefined>;
     /**
      * Command creator. `TAT` indicates a public command and `USER` indicates a personal command.
      */
-    createdBy?: pulumi.Input<string>;
+    createdBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

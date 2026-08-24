@@ -70,12 +70,8 @@ type GetDescribeDataEngineEventsResult struct {
 }
 
 func GetDescribeDataEngineEventsOutput(ctx *pulumi.Context, args GetDescribeDataEngineEventsOutputArgs, opts ...pulumi.InvokeOption) GetDescribeDataEngineEventsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeDataEngineEventsResultOutput, error) {
-			args := v.(GetDescribeDataEngineEventsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args, GetDescribeDataEngineEventsResultOutput{}, options).(GetDescribeDataEngineEventsResultOutput), nil
-		}).(GetDescribeDataEngineEventsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args, GetDescribeDataEngineEventsResultOutput{}, options).(GetDescribeDataEngineEventsResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeDataEngineEvents.

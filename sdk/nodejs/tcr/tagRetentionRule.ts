@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tcr tag retention rule.
+ * Provides a resource to create a TCR tag retention rule.
  *
  * ## Example Usage
  *
@@ -18,33 +18,45 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.tcr.Instance("example", {
- *     name: "tf-example-tcr",
- *     instanceType: "basic",
+ *     name: "tf-example",
+ *     instanceType: "standard",
  *     deleteBucket: true,
  *     tags: {
- *         createdBy: "terraform",
+ *         createdBy: "Terraform",
  *     },
  * });
  * const exampleNamespace = new tencentcloud.tcr.Namespace("example", {
  *     instanceId: example.id,
- *     name: "tf_example_ns_retention",
- *     isPublic: true,
- *     isAutoScan: true,
- *     isPreventVul: true,
+ *     name: "tf_example",
  *     severity: "medium",
- *     cveWhitelistItems: [{
- *         cveId: "cve-xxxxx",
- *     }],
  * });
- * const myRule = new tencentcloud.tcr.TagRetentionRule("my_rule", {
+ * const exampleTagRetentionRule = new tencentcloud.tcr.TagRetentionRule("example", {
  *     registryId: example.id,
  *     namespaceName: exampleNamespace.name,
- *     retentionRule: {
- *         key: "nDaysSinceLastPush",
- *         value: 2,
- *     },
+ *     advancedRuleItems: [{
+ *         repositoryFilter: {
+ *             decoration: "repoMatches",
+ *             pattern: "**",
+ *         },
+ *         retentionPolicy: {
+ *             key: "nDaysSinceLastPush",
+ *             value: 2,
+ *         },
+ *         tagFilter: {
+ *             decoration: "matches",
+ *             pattern: "**",
+ *         },
+ *     }],
  *     cronSetting: "daily",
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * TCR tag retention rule can be imported using the registryId#namespaceName#retentionId, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Tcr/tagRetentionRule:TagRetentionRule example tcr-s1jud21h#tf_example#3
  * ```
  */
 export class TagRetentionRule extends pulumi.CustomResource {
@@ -75,6 +87,10 @@ export class TagRetentionRule extends pulumi.CustomResource {
         return obj['__pulumiType'] === TagRetentionRule.__pulumiType;
     }
 
+    /**
+     * The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+     */
+    declare public readonly advancedRuleItems: pulumi.Output<outputs.Tcr.TagRetentionRuleAdvancedRuleItem[]>;
     /**
      * Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
      */
@@ -113,6 +129,7 @@ export class TagRetentionRule extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TagRetentionRuleState | undefined;
+            resourceInputs["advancedRuleItems"] = state?.advancedRuleItems;
             resourceInputs["cronSetting"] = state?.cronSetting;
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["namespaceName"] = state?.namespaceName;
@@ -130,9 +147,7 @@ export class TagRetentionRule extends pulumi.CustomResource {
             if (args?.registryId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'registryId'");
             }
-            if (args?.retentionRule === undefined && !opts.urn) {
-                throw new Error("Missing required property 'retentionRule'");
-            }
+            resourceInputs["advancedRuleItems"] = args?.advancedRuleItems;
             resourceInputs["cronSetting"] = args?.cronSetting;
             resourceInputs["disabled"] = args?.disabled;
             resourceInputs["namespaceName"] = args?.namespaceName;
@@ -150,29 +165,33 @@ export class TagRetentionRule extends pulumi.CustomResource {
  */
 export interface TagRetentionRuleState {
     /**
+     * The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+     */
+    advancedRuleItems?: pulumi.Input<pulumi.Input<inputs.Tcr.TagRetentionRuleAdvancedRuleItem>[] | undefined>;
+    /**
      * Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
      */
-    cronSetting?: pulumi.Input<string>;
+    cronSetting?: pulumi.Input<string | undefined>;
     /**
      * Whether to disable the rule, with the default value of false.
      */
-    disabled?: pulumi.Input<boolean>;
+    disabled?: pulumi.Input<boolean | undefined>;
     /**
      * The Name of the namespace.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * The main instance ID.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the retention task.
      */
-    retentionId?: pulumi.Input<number>;
+    retentionId?: pulumi.Input<number | undefined>;
     /**
      * Retention Policy.
      */
-    retentionRule?: pulumi.Input<inputs.Tcr.TagRetentionRuleRetentionRule>;
+    retentionRule?: pulumi.Input<inputs.Tcr.TagRetentionRuleRetentionRule | undefined>;
 }
 
 /**
@@ -180,13 +199,17 @@ export interface TagRetentionRuleState {
  */
 export interface TagRetentionRuleArgs {
     /**
+     * The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+     */
+    advancedRuleItems?: pulumi.Input<pulumi.Input<inputs.Tcr.TagRetentionRuleAdvancedRuleItem>[] | undefined>;
+    /**
      * Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
      */
     cronSetting: pulumi.Input<string>;
     /**
      * Whether to disable the rule, with the default value of false.
      */
-    disabled?: pulumi.Input<boolean>;
+    disabled?: pulumi.Input<boolean | undefined>;
     /**
      * The Name of the namespace.
      */
@@ -198,5 +221,5 @@ export interface TagRetentionRuleArgs {
     /**
      * Retention Policy.
      */
-    retentionRule: pulumi.Input<inputs.Tcr.TagRetentionRuleRetentionRule>;
+    retentionRule?: pulumi.Input<inputs.Tcr.TagRetentionRuleRetentionRule | undefined>;
 }

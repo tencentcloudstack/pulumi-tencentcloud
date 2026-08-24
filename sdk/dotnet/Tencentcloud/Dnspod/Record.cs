@@ -34,6 +34,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     ///         SubDomain = "demo",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["updatedOn"] = demo.UpdatedOn,
+    ///     };
     /// });
     /// ```
     /// 
@@ -65,6 +69,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Output("mx")]
         public Output<int?> Mx { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of the record.
+        /// </summary>
+        [Output("recordId")]
+        public Output<string> RecordId { get; private set; } = null!;
 
         /// <summary>
         /// The record line.
@@ -101,6 +111,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Output("ttl")]
         public Output<int?> Ttl { get; private set; } = null!;
+
+        /// <summary>
+        /// Last update time of the record.
+        /// </summary>
+        [Output("updatedOn")]
+        public Output<string> UpdatedOn { get; private set; } = null!;
 
         /// <summary>
         /// The record value.
@@ -248,6 +264,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Input<int>? Mx { get; set; }
 
         /// <summary>
+        /// ID of the record.
+        /// </summary>
+        [Input("recordId")]
+        public Input<string>? RecordId { get; set; }
+
+        /// <summary>
         /// The record line.
         /// </summary>
         [Input("recordLine")]
@@ -282,6 +304,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Input("ttl")]
         public Input<int>? Ttl { get; set; }
+
+        /// <summary>
+        /// Last update time of the record.
+        /// </summary>
+        [Input("updatedOn")]
+        public Input<string>? UpdatedOn { get; set; }
 
         /// <summary>
         /// The record value.

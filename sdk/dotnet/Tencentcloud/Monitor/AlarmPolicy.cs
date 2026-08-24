@@ -362,6 +362,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ### alarm policy with hierarchical notices
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var foo = new Tencentcloud.Monitor.AlarmPolicy("foo", new()
+    ///     {
+    ///         PolicyName = "tf-policy",
+    ///         MonitorType = "MT_QCE",
+    ///         Enable = 1,
+    ///         ProjectId = 0,
+    ///         Namespace = "cvm_device",
+    ///         Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///         {
+    ///             IsUnionRule = 1,
+    ///             Rules = new[]
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                 {
+    ///                     MetricName = "CpuUsage",
+    ///                     Period = 60,
+    ///                     Operator = "ge",
+    ///                     Value = "89.9",
+    ///                     ContinuePeriod = 1,
+    ///                     NoticeFrequency = 3600,
+    ///                     IsPowerNotice = 0,
+    ///                 },
+    ///             },
+    ///         },
+    ///         EventConditions = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///             {
+    ///                 MetricName = "ping_unreachable",
+    ///             },
+    ///         },
+    ///         NoticeIds = new[]
+    ///         {
+    ///             fooTencentcloudMonitorAlarmNotice.Id,
+    ///         },
+    ///         HierarchicalNotices = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyHierarchicalNoticeArgs
+    ///             {
+    ///                 NoticeId = fooTencentcloudMonitorAlarmNotice.Id,
+    ///                 Classifications = new[]
+    ///                 {
+    ///                     "Remind",
+    ///                     "Serious",
+    ///                 },
+    ///             },
+    ///         },
+    ///         NoticeContentTmplBindInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyNoticeContentTmplBindInfoArgs
+    ///             {
+    ///                 ContentTmplId = "tmpl-xxxx",
+    ///                 NoticeId = fooTencentcloudMonitorAlarmNotice.Id,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// Alarm policy instance can be imported, e.g.
@@ -416,6 +486,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Output<ImmutableArray<string>> GroupBies { get; private set; } = null!;
 
         /// <summary>
+        /// Alarm hierarchical notice rules configuration.
+        /// </summary>
+        [Output("hierarchicalNotices")]
+        public Output<ImmutableArray<Outputs.AlarmPolicyHierarchicalNotice>> HierarchicalNotices { get; private set; } = null!;
+
+        /// <summary>
         /// The type of monitor.
         /// </summary>
         [Output("monitorType")]
@@ -426,6 +502,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Output("namespace")]
         public Output<string> Namespace { get; private set; } = null!;
+
+        /// <summary>
+        /// Notice content template binding info.
+        /// </summary>
+        [Output("noticeContentTmplBindInfos")]
+        public Output<ImmutableArray<Outputs.AlarmPolicyNoticeContentTmplBindInfo>> NoticeContentTmplBindInfos { get; private set; } = null!;
 
         /// <summary>
         /// List of notification rule IDs.
@@ -564,6 +646,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
             set => _groupBies = value;
         }
 
+        [Input("hierarchicalNotices")]
+        private InputList<Inputs.AlarmPolicyHierarchicalNoticeArgs>? _hierarchicalNotices;
+
+        /// <summary>
+        /// Alarm hierarchical notice rules configuration.
+        /// </summary>
+        public InputList<Inputs.AlarmPolicyHierarchicalNoticeArgs> HierarchicalNotices
+        {
+            get => _hierarchicalNotices ?? (_hierarchicalNotices = new InputList<Inputs.AlarmPolicyHierarchicalNoticeArgs>());
+            set => _hierarchicalNotices = value;
+        }
+
         /// <summary>
         /// The type of monitor.
         /// </summary>
@@ -575,6 +669,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Input("namespace", required: true)]
         public Input<string> Namespace { get; set; } = null!;
+
+        [Input("noticeContentTmplBindInfos")]
+        private InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoArgs>? _noticeContentTmplBindInfos;
+
+        /// <summary>
+        /// Notice content template binding info.
+        /// </summary>
+        public InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoArgs> NoticeContentTmplBindInfos
+        {
+            get => _noticeContentTmplBindInfos ?? (_noticeContentTmplBindInfos = new InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoArgs>());
+            set => _noticeContentTmplBindInfos = value;
+        }
 
         [Input("noticeIds")]
         private InputList<string>? _noticeIds;
@@ -692,6 +798,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
             set => _groupBies = value;
         }
 
+        [Input("hierarchicalNotices")]
+        private InputList<Inputs.AlarmPolicyHierarchicalNoticeGetArgs>? _hierarchicalNotices;
+
+        /// <summary>
+        /// Alarm hierarchical notice rules configuration.
+        /// </summary>
+        public InputList<Inputs.AlarmPolicyHierarchicalNoticeGetArgs> HierarchicalNotices
+        {
+            get => _hierarchicalNotices ?? (_hierarchicalNotices = new InputList<Inputs.AlarmPolicyHierarchicalNoticeGetArgs>());
+            set => _hierarchicalNotices = value;
+        }
+
         /// <summary>
         /// The type of monitor.
         /// </summary>
@@ -703,6 +821,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Input("namespace")]
         public Input<string>? Namespace { get; set; }
+
+        [Input("noticeContentTmplBindInfos")]
+        private InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoGetArgs>? _noticeContentTmplBindInfos;
+
+        /// <summary>
+        /// Notice content template binding info.
+        /// </summary>
+        public InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoGetArgs> NoticeContentTmplBindInfos
+        {
+            get => _noticeContentTmplBindInfos ?? (_noticeContentTmplBindInfos = new InputList<Inputs.AlarmPolicyNoticeContentTmplBindInfoGetArgs>());
+            set => _noticeContentTmplBindInfos = value;
+        }
 
         [Input("noticeIds")]
         private InputList<string>? _noticeIds;

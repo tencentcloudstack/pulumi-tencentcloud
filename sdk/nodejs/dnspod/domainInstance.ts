@@ -17,6 +17,9 @@ import * as utilities from "../utilities";
  *     domain: "hello.com",
  *     remark: "this is demo",
  * });
+ * export const domainStatus = foo.status;
+ * export const recordCount = foo.recordCount;
+ * export const domainGrade = foo.grade;
  * ```
  *
  * ## Import
@@ -68,6 +71,10 @@ export class DomainInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly domainId: pulumi.Output<number>;
     /**
+     * The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+     */
+    declare public /*out*/ readonly grade: pulumi.Output<string>;
+    /**
      * The Group Id of Domain.
      */
     declare public readonly groupId: pulumi.Output<number | undefined>;
@@ -75,6 +82,10 @@ export class DomainInstance extends pulumi.CustomResource {
      * Whether to Mark the Domain.
      */
     declare public readonly isMark: pulumi.Output<string>;
+    /**
+     * Number of DNS records under this domain.
+     */
+    declare public /*out*/ readonly recordCount: pulumi.Output<number>;
     /**
      * The remark of Domain.
      */
@@ -87,6 +98,10 @@ export class DomainInstance extends pulumi.CustomResource {
      * The status of Domain.
      */
     declare public readonly status: pulumi.Output<string | undefined>;
+    /**
+     * Last modification time of the domain.
+     */
+    declare public /*out*/ readonly updatedOn: pulumi.Output<string>;
 
     /**
      * Create a DomainInstance resource with the given unique name, arguments, and options.
@@ -104,11 +119,14 @@ export class DomainInstance extends pulumi.CustomResource {
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["domain"] = state?.domain;
             resourceInputs["domainId"] = state?.domainId;
+            resourceInputs["grade"] = state?.grade;
             resourceInputs["groupId"] = state?.groupId;
             resourceInputs["isMark"] = state?.isMark;
+            resourceInputs["recordCount"] = state?.recordCount;
             resourceInputs["remark"] = state?.remark;
             resourceInputs["slaveDns"] = state?.slaveDns;
             resourceInputs["status"] = state?.status;
+            resourceInputs["updatedOn"] = state?.updatedOn;
         } else {
             const args = argsOrState as DomainInstanceArgs | undefined;
             if (args?.domain === undefined && !opts.urn) {
@@ -121,7 +139,10 @@ export class DomainInstance extends pulumi.CustomResource {
             resourceInputs["status"] = args?.status;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["domainId"] = undefined /*out*/;
+            resourceInputs["grade"] = undefined /*out*/;
+            resourceInputs["recordCount"] = undefined /*out*/;
             resourceInputs["slaveDns"] = undefined /*out*/;
+            resourceInputs["updatedOn"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DomainInstance.__pulumiType, name, resourceInputs, opts);
@@ -135,35 +156,47 @@ export interface DomainInstanceState {
     /**
      * Create time of the domain.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of the domain.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
+    /**
+     * The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+     */
+    grade?: pulumi.Input<string | undefined>;
     /**
      * The Group Id of Domain.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * Whether to Mark the Domain.
      */
-    isMark?: pulumi.Input<string>;
+    isMark?: pulumi.Input<string | undefined>;
+    /**
+     * Number of DNS records under this domain.
+     */
+    recordCount?: pulumi.Input<number | undefined>;
     /**
      * The remark of Domain.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Is secondary DNS enabled.
      */
-    slaveDns?: pulumi.Input<string>;
+    slaveDns?: pulumi.Input<string | undefined>;
     /**
      * The status of Domain.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
+    /**
+     * Last modification time of the domain.
+     */
+    updatedOn?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -177,17 +210,17 @@ export interface DomainInstanceArgs {
     /**
      * The Group Id of Domain.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * Whether to Mark the Domain.
      */
-    isMark?: pulumi.Input<string>;
+    isMark?: pulumi.Input<string | undefined>;
     /**
      * The remark of Domain.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The status of Domain.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

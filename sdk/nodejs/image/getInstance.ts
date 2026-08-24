@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({});
+ * const example = tencentcloud.image.getInstance({});
  * ```
  *
  * ### Query image by filter
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     filters: [{
  *         name: "image-type",
  *         values: ["PUBLIC_IMAGE"],
@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     osName: "centos",
  * });
  * ```
@@ -56,7 +56,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     imageNameRegex: "^Windows\\s.*$",
  * });
  * ```
@@ -131,7 +131,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({});
+ * const example = tencentcloud.image.getInstance({});
  * ```
  *
  * ### Query image by filter
@@ -140,7 +140,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     filters: [{
  *         name: "image-type",
  *         values: ["PUBLIC_IMAGE"],
@@ -154,7 +154,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     osName: "centos",
  * });
  * ```
@@ -165,7 +165,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getInstance({
+ * const example = tencentcloud.image.getInstance({
  *     imageNameRegex: "^Windows\\s.*$",
  * });
  * ```
@@ -188,17 +188,17 @@ export interface GetInstanceOutputArgs {
     /**
      * One or more name/value pairs to filter.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Image.GetInstanceFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Image.GetInstanceFilterArgs>[] | undefined>;
     /**
      * A regex string to apply to the image list returned by TencentCloud. **NOTE**: it is not wildcard, should look like `imageNameRegex = "^CentOS\s+6\.8\s+64\w*"`.
      */
-    imageNameRegex?: pulumi.Input<string>;
+    imageNameRegex?: pulumi.Input<string | undefined>;
     /**
      * A string to apply with fuzzy match to the osName attribute on the image list returned by TencentCloud. **NOTE**: when osName is provided, highest priority is applied in this field instead of `imageNameRegex`.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -82,12 +82,8 @@ type GetClusterParamLogsResult struct {
 }
 
 func GetClusterParamLogsOutput(ctx *pulumi.Context, args GetClusterParamLogsOutputArgs, opts ...pulumi.InvokeOption) GetClusterParamLogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterParamLogsResultOutput, error) {
-			args := v.(GetClusterParamLogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args, GetClusterParamLogsResultOutput{}, options).(GetClusterParamLogsResultOutput), nil
-		}).(GetClusterParamLogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args, GetClusterParamLogsResultOutput{}, options).(GetClusterParamLogsResultOutput)
 }
 
 // A collection of arguments for invoking getClusterParamLogs.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const taskStatus = tencentcloud.Ckafka.getTaskStatus({
+ * const taskStatus = tencentcloud.ckafka.getTaskStatus({
  *     flowId: 123456,
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetTaskStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const taskStatus = tencentcloud.Ckafka.getTaskStatus({
+ * const taskStatus = tencentcloud.ckafka.getTaskStatus({
  *     flowId: 123456,
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetTaskStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -22,8 +22,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// <summary>
         /// Certificate ID, which originates from the SSL side. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
         /// </summary>
-        [Input("certId", required: true)]
-        public Input<string> CertId { get; set; } = null!;
+        [Input("certId")]
+        public Input<string>? CertId { get; set; }
 
         /// <summary>
         /// Time when the certificate is deployed.
@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("signAlgo")]
         public Input<string>? SignAlgo { get; set; }
+
+        /// <summary>
+        /// Certificate status.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         /// <summary>
         /// Type of the certificate. Values: `Default`: Default certificate `Upload`: Specified certificate `Managed`: Tencent Cloud-managed certificate.

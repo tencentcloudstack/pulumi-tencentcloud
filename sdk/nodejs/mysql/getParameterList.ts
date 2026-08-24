@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getParameterList({
+ * const mysql = tencentcloud.mysql.getParameterList({
  *     mysqlId: "terraform-test-local-database",
  *     engineVersion: "5.5",
  *     resultOutputFile: "mytestpath",
@@ -75,7 +75,7 @@ export interface GetParameterListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getParameterList({
+ * const mysql = tencentcloud.mysql.getParameterList({
  *     mysqlId: "terraform-test-local-database",
  *     engineVersion: "5.5",
  *     resultOutputFile: "mytestpath",
@@ -99,13 +99,13 @@ export interface GetParameterListOutputArgs {
     /**
      * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    mysqlId?: pulumi.Input<string>;
+    mysqlId?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

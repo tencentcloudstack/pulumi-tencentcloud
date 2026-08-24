@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     public sealed class SyncJobTag
     {
         /// <summary>
-        /// tag key.
+        /// Tag key.
         /// </summary>
         public readonly string? TagKey;
         /// <summary>
-        /// tag value.
+        /// Tag value.
         /// </summary>
         public readonly string? TagValue;
 

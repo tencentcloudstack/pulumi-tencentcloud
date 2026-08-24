@@ -10,6 +10,41 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 {
+    /// <summary>
+    /// Provides a resource to create a CAM message receiver
+    /// 
+    /// &gt; **NOTE:** For security reasons, the CAM will return the `Email` and `PhoneNumber` parameter values in encrypted form. Please use the `IgnoreChanges` function in Terraform's `Lifecycle` to include these two parameters.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cam.MessageReceiver("example", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         Remark = "remark.",
+    ///         CountryCode = "86",
+    ///         PhoneNumber = "18123456789",
+    ///         Email = "demo@qq.com",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// CAM message receiver can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Cam/messageReceiver:MessageReceiver example tf-example
+    /// ```
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/messageReceiver:MessageReceiver")]
     public partial class MessageReceiver : global::Pulumi.CustomResource
     {

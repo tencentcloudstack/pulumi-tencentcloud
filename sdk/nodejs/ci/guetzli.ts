@@ -102,11 +102,11 @@ export interface GuetzliState {
     /**
      * The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Whether Guetzli is set, options: on/off.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**

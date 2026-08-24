@@ -169,6 +169,112 @@ func (o NamespaceRetentionPolicyPtrOutput) TimeInMinutes() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type NamespaceTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// NamespaceTagInput is an input type that accepts NamespaceTagArgs and NamespaceTagOutput values.
+// You can construct a concrete instance of `NamespaceTagInput` via:
+//
+//	NamespaceTagArgs{...}
+type NamespaceTagInput interface {
+	pulumi.Input
+
+	ToNamespaceTagOutput() NamespaceTagOutput
+	ToNamespaceTagOutputWithContext(context.Context) NamespaceTagOutput
+}
+
+type NamespaceTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (NamespaceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceTag)(nil)).Elem()
+}
+
+func (i NamespaceTagArgs) ToNamespaceTagOutput() NamespaceTagOutput {
+	return i.ToNamespaceTagOutputWithContext(context.Background())
+}
+
+func (i NamespaceTagArgs) ToNamespaceTagOutputWithContext(ctx context.Context) NamespaceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceTagOutput)
+}
+
+// NamespaceTagArrayInput is an input type that accepts NamespaceTagArray and NamespaceTagArrayOutput values.
+// You can construct a concrete instance of `NamespaceTagArrayInput` via:
+//
+//	NamespaceTagArray{ NamespaceTagArgs{...} }
+type NamespaceTagArrayInput interface {
+	pulumi.Input
+
+	ToNamespaceTagArrayOutput() NamespaceTagArrayOutput
+	ToNamespaceTagArrayOutputWithContext(context.Context) NamespaceTagArrayOutput
+}
+
+type NamespaceTagArray []NamespaceTagInput
+
+func (NamespaceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NamespaceTag)(nil)).Elem()
+}
+
+func (i NamespaceTagArray) ToNamespaceTagArrayOutput() NamespaceTagArrayOutput {
+	return i.ToNamespaceTagArrayOutputWithContext(context.Background())
+}
+
+func (i NamespaceTagArray) ToNamespaceTagArrayOutputWithContext(ctx context.Context) NamespaceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NamespaceTagArrayOutput)
+}
+
+type NamespaceTagOutput struct{ *pulumi.OutputState }
+
+func (NamespaceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NamespaceTag)(nil)).Elem()
+}
+
+func (o NamespaceTagOutput) ToNamespaceTagOutput() NamespaceTagOutput {
+	return o
+}
+
+func (o NamespaceTagOutput) ToNamespaceTagOutputWithContext(ctx context.Context) NamespaceTagOutput {
+	return o
+}
+
+// Tag key.
+func (o NamespaceTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v NamespaceTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o NamespaceTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v NamespaceTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type NamespaceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (NamespaceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NamespaceTag)(nil)).Elem()
+}
+
+func (o NamespaceTagArrayOutput) ToNamespaceTagArrayOutput() NamespaceTagArrayOutput {
+	return o
+}
+
+func (o NamespaceTagArrayOutput) ToNamespaceTagArrayOutputWithContext(ctx context.Context) NamespaceTagArrayOutput {
+	return o
+}
+
+func (o NamespaceTagArrayOutput) Index(i pulumi.IntInput) NamespaceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NamespaceTag {
+		return vs[0].([]NamespaceTag)[vs[1].(int)]
+	}).(NamespaceTagOutput)
+}
+
 type ProfessionalClusterVpc struct {
 	// Id of Subnet.
 	SubnetId string `pulumi:"subnetId"`
@@ -323,6 +429,112 @@ func (o ProfessionalClusterVpcPtrOutput) VpcId() pulumi.StringPtrOutput {
 		}
 		return &v.VpcId
 	}).(pulumi.StringPtrOutput)
+}
+
+type RabbitmqVipInstanceResourceTag struct {
+	// The key of tag.
+	TagKey string `pulumi:"tagKey"`
+	// The value of tag.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// RabbitmqVipInstanceResourceTagInput is an input type that accepts RabbitmqVipInstanceResourceTagArgs and RabbitmqVipInstanceResourceTagOutput values.
+// You can construct a concrete instance of `RabbitmqVipInstanceResourceTagInput` via:
+//
+//	RabbitmqVipInstanceResourceTagArgs{...}
+type RabbitmqVipInstanceResourceTagInput interface {
+	pulumi.Input
+
+	ToRabbitmqVipInstanceResourceTagOutput() RabbitmqVipInstanceResourceTagOutput
+	ToRabbitmqVipInstanceResourceTagOutputWithContext(context.Context) RabbitmqVipInstanceResourceTagOutput
+}
+
+type RabbitmqVipInstanceResourceTagArgs struct {
+	// The key of tag.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// The value of tag.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (RabbitmqVipInstanceResourceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RabbitmqVipInstanceResourceTag)(nil)).Elem()
+}
+
+func (i RabbitmqVipInstanceResourceTagArgs) ToRabbitmqVipInstanceResourceTagOutput() RabbitmqVipInstanceResourceTagOutput {
+	return i.ToRabbitmqVipInstanceResourceTagOutputWithContext(context.Background())
+}
+
+func (i RabbitmqVipInstanceResourceTagArgs) ToRabbitmqVipInstanceResourceTagOutputWithContext(ctx context.Context) RabbitmqVipInstanceResourceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RabbitmqVipInstanceResourceTagOutput)
+}
+
+// RabbitmqVipInstanceResourceTagArrayInput is an input type that accepts RabbitmqVipInstanceResourceTagArray and RabbitmqVipInstanceResourceTagArrayOutput values.
+// You can construct a concrete instance of `RabbitmqVipInstanceResourceTagArrayInput` via:
+//
+//	RabbitmqVipInstanceResourceTagArray{ RabbitmqVipInstanceResourceTagArgs{...} }
+type RabbitmqVipInstanceResourceTagArrayInput interface {
+	pulumi.Input
+
+	ToRabbitmqVipInstanceResourceTagArrayOutput() RabbitmqVipInstanceResourceTagArrayOutput
+	ToRabbitmqVipInstanceResourceTagArrayOutputWithContext(context.Context) RabbitmqVipInstanceResourceTagArrayOutput
+}
+
+type RabbitmqVipInstanceResourceTagArray []RabbitmqVipInstanceResourceTagInput
+
+func (RabbitmqVipInstanceResourceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RabbitmqVipInstanceResourceTag)(nil)).Elem()
+}
+
+func (i RabbitmqVipInstanceResourceTagArray) ToRabbitmqVipInstanceResourceTagArrayOutput() RabbitmqVipInstanceResourceTagArrayOutput {
+	return i.ToRabbitmqVipInstanceResourceTagArrayOutputWithContext(context.Background())
+}
+
+func (i RabbitmqVipInstanceResourceTagArray) ToRabbitmqVipInstanceResourceTagArrayOutputWithContext(ctx context.Context) RabbitmqVipInstanceResourceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RabbitmqVipInstanceResourceTagArrayOutput)
+}
+
+type RabbitmqVipInstanceResourceTagOutput struct{ *pulumi.OutputState }
+
+func (RabbitmqVipInstanceResourceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RabbitmqVipInstanceResourceTag)(nil)).Elem()
+}
+
+func (o RabbitmqVipInstanceResourceTagOutput) ToRabbitmqVipInstanceResourceTagOutput() RabbitmqVipInstanceResourceTagOutput {
+	return o
+}
+
+func (o RabbitmqVipInstanceResourceTagOutput) ToRabbitmqVipInstanceResourceTagOutputWithContext(ctx context.Context) RabbitmqVipInstanceResourceTagOutput {
+	return o
+}
+
+// The key of tag.
+func (o RabbitmqVipInstanceResourceTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v RabbitmqVipInstanceResourceTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// The value of tag.
+func (o RabbitmqVipInstanceResourceTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v RabbitmqVipInstanceResourceTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type RabbitmqVipInstanceResourceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (RabbitmqVipInstanceResourceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RabbitmqVipInstanceResourceTag)(nil)).Elem()
+}
+
+func (o RabbitmqVipInstanceResourceTagArrayOutput) ToRabbitmqVipInstanceResourceTagArrayOutput() RabbitmqVipInstanceResourceTagArrayOutput {
+	return o
+}
+
+func (o RabbitmqVipInstanceResourceTagArrayOutput) ToRabbitmqVipInstanceResourceTagArrayOutputWithContext(ctx context.Context) RabbitmqVipInstanceResourceTagArrayOutput {
+	return o
+}
+
+func (o RabbitmqVipInstanceResourceTagArrayOutput) Index(i pulumi.IntInput) RabbitmqVipInstanceResourceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RabbitmqVipInstanceResourceTag {
+		return vs[0].([]RabbitmqVipInstanceResourceTag)[vs[1].(int)]
+	}).(RabbitmqVipInstanceResourceTagOutput)
 }
 
 type RabbitmqVipInstanceVpc struct {
@@ -824,6 +1036,112 @@ func (o RocketmqVipInstanceVpcInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
 		}
 		return &v.VpcId
 	}).(pulumi.StringPtrOutput)
+}
+
+type TopicTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// TopicTagInput is an input type that accepts TopicTagArgs and TopicTagOutput values.
+// You can construct a concrete instance of `TopicTagInput` via:
+//
+//	TopicTagArgs{...}
+type TopicTagInput interface {
+	pulumi.Input
+
+	ToTopicTagOutput() TopicTagOutput
+	ToTopicTagOutputWithContext(context.Context) TopicTagOutput
+}
+
+type TopicTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (TopicTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicTag)(nil)).Elem()
+}
+
+func (i TopicTagArgs) ToTopicTagOutput() TopicTagOutput {
+	return i.ToTopicTagOutputWithContext(context.Background())
+}
+
+func (i TopicTagArgs) ToTopicTagOutputWithContext(ctx context.Context) TopicTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicTagOutput)
+}
+
+// TopicTagArrayInput is an input type that accepts TopicTagArray and TopicTagArrayOutput values.
+// You can construct a concrete instance of `TopicTagArrayInput` via:
+//
+//	TopicTagArray{ TopicTagArgs{...} }
+type TopicTagArrayInput interface {
+	pulumi.Input
+
+	ToTopicTagArrayOutput() TopicTagArrayOutput
+	ToTopicTagArrayOutputWithContext(context.Context) TopicTagArrayOutput
+}
+
+type TopicTagArray []TopicTagInput
+
+func (TopicTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TopicTag)(nil)).Elem()
+}
+
+func (i TopicTagArray) ToTopicTagArrayOutput() TopicTagArrayOutput {
+	return i.ToTopicTagArrayOutputWithContext(context.Background())
+}
+
+func (i TopicTagArray) ToTopicTagArrayOutputWithContext(ctx context.Context) TopicTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicTagArrayOutput)
+}
+
+type TopicTagOutput struct{ *pulumi.OutputState }
+
+func (TopicTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicTag)(nil)).Elem()
+}
+
+func (o TopicTagOutput) ToTopicTagOutput() TopicTagOutput {
+	return o
+}
+
+func (o TopicTagOutput) ToTopicTagOutputWithContext(ctx context.Context) TopicTagOutput {
+	return o
+}
+
+// Tag key.
+func (o TopicTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TopicTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o TopicTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TopicTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type TopicTagArrayOutput struct{ *pulumi.OutputState }
+
+func (TopicTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TopicTag)(nil)).Elem()
+}
+
+func (o TopicTagArrayOutput) ToTopicTagArrayOutput() TopicTagArrayOutput {
+	return o
+}
+
+func (o TopicTagArrayOutput) ToTopicTagArrayOutputWithContext(ctx context.Context) TopicTagArrayOutput {
+	return o
+}
+
+func (o TopicTagArrayOutput) Index(i pulumi.IntInput) TopicTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TopicTag {
+		return vs[0].([]TopicTag)[vs[1].(int)]
+	}).(TopicTagOutput)
 }
 
 type GetProInstanceDetailClusterInfo struct {
@@ -4924,8 +5242,12 @@ func (o GetVipInstanceInstanceConfigTopicDistributionArrayOutput) Index(i pulumi
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceRetentionPolicyInput)(nil)).Elem(), NamespaceRetentionPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceRetentionPolicyPtrInput)(nil)).Elem(), NamespaceRetentionPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceTagInput)(nil)).Elem(), NamespaceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NamespaceTagArrayInput)(nil)).Elem(), NamespaceTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProfessionalClusterVpcInput)(nil)).Elem(), ProfessionalClusterVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProfessionalClusterVpcPtrInput)(nil)).Elem(), ProfessionalClusterVpcArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RabbitmqVipInstanceResourceTagInput)(nil)).Elem(), RabbitmqVipInstanceResourceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RabbitmqVipInstanceResourceTagArrayInput)(nil)).Elem(), RabbitmqVipInstanceResourceTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RabbitmqVipInstanceVpcInput)(nil)).Elem(), RabbitmqVipInstanceVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RabbitmqVipInstanceVpcArrayInput)(nil)).Elem(), RabbitmqVipInstanceVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqClusterVpcInput)(nil)).Elem(), RocketmqClusterVpcArgs{})
@@ -4934,6 +5256,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceIpRuleArrayInput)(nil)).Elem(), RocketmqVipInstanceIpRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RocketmqVipInstanceVpcInfoPtrInput)(nil)).Elem(), RocketmqVipInstanceVpcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicTagInput)(nil)).Elem(), TopicTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicTagArrayInput)(nil)).Elem(), TopicTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoArrayInput)(nil)).Elem(), GetProInstanceDetailClusterInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProInstanceDetailClusterInfoNodeDistributionInput)(nil)).Elem(), GetProInstanceDetailClusterInfoNodeDistributionArgs{})
@@ -4992,8 +5316,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVipInstanceInstanceConfigTopicDistributionArrayInput)(nil)).Elem(), GetVipInstanceInstanceConfigTopicDistributionArray{})
 	pulumi.RegisterOutputType(NamespaceRetentionPolicyOutput{})
 	pulumi.RegisterOutputType(NamespaceRetentionPolicyPtrOutput{})
+	pulumi.RegisterOutputType(NamespaceTagOutput{})
+	pulumi.RegisterOutputType(NamespaceTagArrayOutput{})
 	pulumi.RegisterOutputType(ProfessionalClusterVpcOutput{})
 	pulumi.RegisterOutputType(ProfessionalClusterVpcPtrOutput{})
+	pulumi.RegisterOutputType(RabbitmqVipInstanceResourceTagOutput{})
+	pulumi.RegisterOutputType(RabbitmqVipInstanceResourceTagArrayOutput{})
 	pulumi.RegisterOutputType(RabbitmqVipInstanceVpcOutput{})
 	pulumi.RegisterOutputType(RabbitmqVipInstanceVpcArrayOutput{})
 	pulumi.RegisterOutputType(RocketmqClusterVpcOutput{})
@@ -5002,6 +5330,8 @@ func init() {
 	pulumi.RegisterOutputType(RocketmqVipInstanceIpRuleArrayOutput{})
 	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoOutput{})
 	pulumi.RegisterOutputType(RocketmqVipInstanceVpcInfoPtrOutput{})
+	pulumi.RegisterOutputType(TopicTagOutput{})
+	pulumi.RegisterOutputType(TopicTagArrayOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetProInstanceDetailClusterInfoNodeDistributionOutput{})

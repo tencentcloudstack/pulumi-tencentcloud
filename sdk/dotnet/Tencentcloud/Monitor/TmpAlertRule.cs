@@ -101,7 +101,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor tmpAlertRule can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
     /// ```

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const databases = tencentcloud.Mysql.getDatabases({
+ * const databases = tencentcloud.mysql.getDatabases({
  *     instanceId: "cdb-c1nl9rpv",
  *     databaseRegexp: "",
  * });
@@ -89,7 +89,7 @@ export interface GetDatabasesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const databases = tencentcloud.Mysql.getDatabases({
+ * const databases = tencentcloud.mysql.getDatabases({
  *     instanceId: "cdb-c1nl9rpv",
  *     databaseRegexp: "",
  * });
@@ -113,7 +113,7 @@ export interface GetDatabasesOutputArgs {
     /**
      * Regular expression to match database library names.
      */
-    databaseRegexp?: pulumi.Input<string>;
+    databaseRegexp?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
@@ -121,13 +121,13 @@ export interface GetDatabasesOutputArgs {
     /**
      * The number of single requests, the default value is 20, the minimum value is 1, and the maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Page offset.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

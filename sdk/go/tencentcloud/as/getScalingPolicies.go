@@ -76,12 +76,8 @@ type GetScalingPoliciesResult struct {
 }
 
 func GetScalingPoliciesOutput(ctx *pulumi.Context, args GetScalingPoliciesOutputArgs, opts ...pulumi.InvokeOption) GetScalingPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetScalingPoliciesResultOutput, error) {
-			args := v.(GetScalingPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getScalingPolicies:getScalingPolicies", args, GetScalingPoliciesResultOutput{}, options).(GetScalingPoliciesResultOutput), nil
-		}).(GetScalingPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getScalingPolicies:getScalingPolicies", args, GetScalingPoliciesResultOutput{}, options).(GetScalingPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getScalingPolicies.

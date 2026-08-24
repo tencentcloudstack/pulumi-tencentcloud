@@ -33,7 +33,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := clb.NewCustomizedConfigV2(ctx, "example", &clb.CustomizedConfigV2Args{
-//				ConfigContent: pulumi.String("client_max_body_size 224M;\nclient_body_timeout 60s;"),
+//				ConfigContent: pulumi.String("client_max_body_size 224M;\r\nclient_body_timeout 60s;"),
 //				ConfigName:    pulumi.String("tf-example"),
 //				ConfigType:    pulumi.String("SERVER"),
 //			})
@@ -79,7 +79,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := clb.NewCustomizedConfigV2(ctx, "example", &clb.CustomizedConfigV2Args{
-//				ConfigContent: pulumi.String("client_max_body_size 224M;\nclient_body_timeout 60s;"),
+//				ConfigContent: pulumi.String("client_max_body_size 224M;\r\nclient_body_timeout 60s;"),
 //				ConfigName:    pulumi.String("tf-example"),
 //				ConfigType:    pulumi.String("LOCATION"),
 //			})

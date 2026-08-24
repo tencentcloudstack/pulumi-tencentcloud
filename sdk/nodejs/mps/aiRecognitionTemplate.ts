@@ -46,7 +46,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps ai_recognition_template can be imported using the id, e.g.
+ * mps aiRecognitionTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
@@ -151,31 +151,31 @@ export interface AiRecognitionTemplateState {
     /**
      * Asr full text recognition control parameters.
      */
-    asrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrFullTextConfigure>;
+    asrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrFullTextConfigure | undefined>;
     /**
      * Asr word recognition control parameters.
      */
-    asrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrWordsConfigure>;
+    asrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrWordsConfigure | undefined>;
     /**
      * Ai recognition template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Face recognition control parameters.
      */
-    faceConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateFaceConfigure>;
+    faceConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateFaceConfigure | undefined>;
     /**
      * Ai recognition template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Ocr full text control parameters.
      */
-    ocrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrFullTextConfigure>;
+    ocrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrFullTextConfigure | undefined>;
     /**
      * Ocr words recognition control parameters.
      */
-    ocrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrWordsConfigure>;
+    ocrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrWordsConfigure | undefined>;
 }
 
 /**
@@ -185,29 +185,29 @@ export interface AiRecognitionTemplateArgs {
     /**
      * Asr full text recognition control parameters.
      */
-    asrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrFullTextConfigure>;
+    asrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrFullTextConfigure | undefined>;
     /**
      * Asr word recognition control parameters.
      */
-    asrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrWordsConfigure>;
+    asrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateAsrWordsConfigure | undefined>;
     /**
      * Ai recognition template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Face recognition control parameters.
      */
-    faceConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateFaceConfigure>;
+    faceConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateFaceConfigure | undefined>;
     /**
      * Ai recognition template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Ocr full text control parameters.
      */
-    ocrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrFullTextConfigure>;
+    ocrFullTextConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrFullTextConfigure | undefined>;
     /**
      * Ocr words recognition control parameters.
      */
-    ocrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrWordsConfigure>;
+    ocrWordsConfigure?: pulumi.Input<inputs.Mps.AiRecognitionTemplateOcrWordsConfigure | undefined>;
 }

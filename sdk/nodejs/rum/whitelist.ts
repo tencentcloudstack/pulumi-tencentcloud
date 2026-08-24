@@ -23,7 +23,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * rum whitelist can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
  * ```
@@ -142,35 +141,35 @@ export interface WhitelistState {
     /**
      * Business identifier.
      */
-    aid?: pulumi.Input<string>;
+    aid?: pulumi.Input<string | undefined>;
     /**
      * Creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Creator ID.
      */
-    createUser?: pulumi.Input<string>;
+    createUser?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, such as taw-123.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * End time.
      */
-    ttl?: pulumi.Input<string>;
+    ttl?: pulumi.Input<string | undefined>;
     /**
      * uin: business identifier.
      */
-    whitelistUin?: pulumi.Input<string>;
+    whitelistUin?: pulumi.Input<string | undefined>;
     /**
      * Auto-Increment allowlist ID.
      */
-    wid?: pulumi.Input<string>;
+    wid?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,7 +179,7 @@ export interface WhitelistArgs {
     /**
      * Business identifier.
      */
-    aid?: pulumi.Input<string>;
+    aid?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, such as taw-123.
      */

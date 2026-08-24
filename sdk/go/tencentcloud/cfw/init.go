@@ -25,16 +25,28 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AddressTemplate{}
 	case "tencentcloud:Cfw/blockIgnore:BlockIgnore":
 		r = &BlockIgnore{}
+	case "tencentcloud:Cfw/clusterFwBypassConfig:ClusterFwBypassConfig":
+		r = &ClusterFwBypassConfig{}
+	case "tencentcloud:Cfw/clusterNatFwSwitch:ClusterNatFwSwitch":
+		r = &ClusterNatFwSwitch{}
+	case "tencentcloud:Cfw/clusterVpcFwSwitch:ClusterVpcFwSwitch":
+		r = &ClusterVpcFwSwitch{}
 	case "tencentcloud:Cfw/edgeFirewallSwitch:EdgeFirewallSwitch":
 		r = &EdgeFirewallSwitch{}
 	case "tencentcloud:Cfw/edgePolicy:EdgePolicy":
 		r = &EdgePolicy{}
+	case "tencentcloud:Cfw/edgePolicyOrderConfig:EdgePolicyOrderConfig":
+		r = &EdgePolicyOrderConfig{}
+	case "tencentcloud:Cfw/ipsModeSwitch:IpsModeSwitch":
+		r = &IpsModeSwitch{}
 	case "tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch":
 		r = &NatFirewallSwitch{}
 	case "tencentcloud:Cfw/natInstance:NatInstance":
 		r = &NatInstance{}
 	case "tencentcloud:Cfw/natPolicy:NatPolicy":
 		r = &NatPolicy{}
+	case "tencentcloud:Cfw/natPolicyOrderConfig:NatPolicyOrderConfig":
+		r = &NatPolicyOrderConfig{}
 	case "tencentcloud:Cfw/syncAsset:SyncAsset":
 		r = &SyncAsset{}
 	case "tencentcloud:Cfw/syncRoute:SyncRoute":
@@ -45,6 +57,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &VpcInstance{}
 	case "tencentcloud:Cfw/vpcPolicy:VpcPolicy":
 		r = &VpcPolicy{}
+	case "tencentcloud:Cfw/vpcPolicyOrderConfig:VpcPolicyOrderConfig":
+		r = &VpcPolicyOrderConfig{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -70,12 +84,37 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cfw/clusterFwBypassConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/clusterNatFwSwitch",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/clusterVpcFwSwitch",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cfw/edgeFirewallSwitch",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cfw/edgePolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/edgePolicyOrderConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/ipsModeSwitch",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -91,6 +130,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cfw/natPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/natPolicyOrderConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -116,6 +160,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cfw/vpcPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cfw/vpcPolicyOrderConfig",
 		&module{version},
 	)
 }

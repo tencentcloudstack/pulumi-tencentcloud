@@ -201,63 +201,63 @@ export interface ExtraConfigState {
     /**
      * direct connect tunnel bandwidth.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * be enabled BFD.
      */
-    bfdEnable?: pulumi.Input<number>;
+    bfdEnable?: pulumi.Input<number | undefined>;
     /**
      * BFD config info.
      */
-    bfdInfo?: pulumi.Input<inputs.Dcx.ExtraConfigBfdInfo>;
+    bfdInfo?: pulumi.Input<inputs.Dcx.ExtraConfigBfdInfo | undefined>;
     /**
      * idc BGP, Asn, AuthKey.
      */
-    bgpPeer?: pulumi.Input<inputs.Dcx.ExtraConfigBgpPeer>;
+    bgpPeer?: pulumi.Input<inputs.Dcx.ExtraConfigBgpPeer | undefined>;
     /**
      * direct connect tunnel user idc connect ip.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel id.
      */
-    directConnectTunnelId?: pulumi.Input<string>;
+    directConnectTunnelId?: pulumi.Input<string | undefined>;
     /**
      * BGP community attribute.
      */
-    enableBgpCommunity?: pulumi.Input<boolean>;
+    enableBgpCommunity?: pulumi.Input<boolean | undefined>;
     /**
      * 0: disable IPv61: enable IPv6.
      */
-    ipv6Enable?: pulumi.Input<number>;
+    ipv6Enable?: pulumi.Input<number | undefined>;
     /**
      * direct connect tunnel support jumbo frame1: enable direct connect tunnel jumbo frame0: disable direct connect tunnel jumbo frame.
      */
-    jumboEnable?: pulumi.Input<number>;
+    jumboEnable?: pulumi.Input<number | undefined>;
     /**
      * be enabled NQA.
      */
-    nqaEnable?: pulumi.Input<number>;
+    nqaEnable?: pulumi.Input<number | undefined>;
     /**
      * NQA config info.
      */
-    nqaInfo?: pulumi.Input<inputs.Dcx.ExtraConfigNqaInfo>;
+    nqaInfo?: pulumi.Input<inputs.Dcx.ExtraConfigNqaInfo | undefined>;
     /**
      * user filter network prefixes.
      */
-    routeFilterPrefixes?: pulumi.Input<inputs.Dcx.ExtraConfigRouteFilterPrefixes>;
+    routeFilterPrefixes?: pulumi.Input<inputs.Dcx.ExtraConfigRouteFilterPrefixes | undefined>;
     /**
      * direct connect tunnel tencent cloud connect ip.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel tencent cloud backup connect ip.
      */
-    tencentBackupAddress?: pulumi.Input<string>;
+    tencentBackupAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel vlan id.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -267,23 +267,23 @@ export interface ExtraConfigArgs {
     /**
      * direct connect tunnel bandwidth.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * be enabled BFD.
      */
-    bfdEnable?: pulumi.Input<number>;
+    bfdEnable?: pulumi.Input<number | undefined>;
     /**
      * BFD config info.
      */
-    bfdInfo?: pulumi.Input<inputs.Dcx.ExtraConfigBfdInfo>;
+    bfdInfo?: pulumi.Input<inputs.Dcx.ExtraConfigBfdInfo | undefined>;
     /**
      * idc BGP, Asn, AuthKey.
      */
-    bgpPeer?: pulumi.Input<inputs.Dcx.ExtraConfigBgpPeer>;
+    bgpPeer?: pulumi.Input<inputs.Dcx.ExtraConfigBgpPeer | undefined>;
     /**
      * direct connect tunnel user idc connect ip.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel id.
      */
@@ -291,37 +291,37 @@ export interface ExtraConfigArgs {
     /**
      * BGP community attribute.
      */
-    enableBgpCommunity?: pulumi.Input<boolean>;
+    enableBgpCommunity?: pulumi.Input<boolean | undefined>;
     /**
      * 0: disable IPv61: enable IPv6.
      */
-    ipv6Enable?: pulumi.Input<number>;
+    ipv6Enable?: pulumi.Input<number | undefined>;
     /**
      * direct connect tunnel support jumbo frame1: enable direct connect tunnel jumbo frame0: disable direct connect tunnel jumbo frame.
      */
-    jumboEnable?: pulumi.Input<number>;
+    jumboEnable?: pulumi.Input<number | undefined>;
     /**
      * be enabled NQA.
      */
-    nqaEnable?: pulumi.Input<number>;
+    nqaEnable?: pulumi.Input<number | undefined>;
     /**
      * NQA config info.
      */
-    nqaInfo?: pulumi.Input<inputs.Dcx.ExtraConfigNqaInfo>;
+    nqaInfo?: pulumi.Input<inputs.Dcx.ExtraConfigNqaInfo | undefined>;
     /**
      * user filter network prefixes.
      */
-    routeFilterPrefixes?: pulumi.Input<inputs.Dcx.ExtraConfigRouteFilterPrefixes>;
+    routeFilterPrefixes?: pulumi.Input<inputs.Dcx.ExtraConfigRouteFilterPrefixes | undefined>;
     /**
      * direct connect tunnel tencent cloud connect ip.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel tencent cloud backup connect ip.
      */
-    tencentBackupAddress?: pulumi.Input<string>;
+    tencentBackupAddress?: pulumi.Input<string | undefined>;
     /**
      * direct connect tunnel vlan id.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
 }

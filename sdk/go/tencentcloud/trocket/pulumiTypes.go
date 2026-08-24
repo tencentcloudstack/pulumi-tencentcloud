@@ -14,11 +14,11 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type RocketmqInstanceIpRule struct {
-	// Whether to allow release or not.
+	// Whether to allow access from this IP.
 	Allow bool `pulumi:"allow"`
-	// IP.
+	// IP address.
 	Ip string `pulumi:"ip"`
-	// Remark.
+	// Remark information.
 	Remark string `pulumi:"remark"`
 }
 
@@ -34,11 +34,11 @@ type RocketmqInstanceIpRuleInput interface {
 }
 
 type RocketmqInstanceIpRuleArgs struct {
-	// Whether to allow release or not.
+	// Whether to allow access from this IP.
 	Allow pulumi.BoolInput `pulumi:"allow"`
-	// IP.
+	// IP address.
 	Ip pulumi.StringInput `pulumi:"ip"`
-	// Remark.
+	// Remark information.
 	Remark pulumi.StringInput `pulumi:"remark"`
 }
 
@@ -93,17 +93,17 @@ func (o RocketmqInstanceIpRuleOutput) ToRocketmqInstanceIpRuleOutputWithContext(
 	return o
 }
 
-// Whether to allow release or not.
+// Whether to allow access from this IP.
 func (o RocketmqInstanceIpRuleOutput) Allow() pulumi.BoolOutput {
 	return o.ApplyT(func(v RocketmqInstanceIpRule) bool { return v.Allow }).(pulumi.BoolOutput)
 }
 
-// IP.
+// IP address.
 func (o RocketmqInstanceIpRuleOutput) Ip() pulumi.StringOutput {
 	return o.ApplyT(func(v RocketmqInstanceIpRule) string { return v.Ip }).(pulumi.StringOutput)
 }
 
-// Remark.
+// Remark information.
 func (o RocketmqInstanceIpRuleOutput) Remark() pulumi.StringOutput {
 	return o.ApplyT(func(v RocketmqInstanceIpRule) string { return v.Remark }).(pulumi.StringOutput)
 }

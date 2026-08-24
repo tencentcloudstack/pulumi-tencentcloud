@@ -69,12 +69,8 @@ type GetInstanceBlueprintResult struct {
 }
 
 func GetInstanceBlueprintOutput(ctx *pulumi.Context, args GetInstanceBlueprintOutputArgs, opts ...pulumi.InvokeOption) GetInstanceBlueprintResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceBlueprintResultOutput, error) {
-			args := v.(GetInstanceBlueprintArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args, GetInstanceBlueprintResultOutput{}, options).(GetInstanceBlueprintResultOutput), nil
-		}).(GetInstanceBlueprintResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args, GetInstanceBlueprintResultOutput{}, options).(GetInstanceBlueprintResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceBlueprint.

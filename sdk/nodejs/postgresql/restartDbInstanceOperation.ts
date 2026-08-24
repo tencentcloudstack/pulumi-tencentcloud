@@ -82,7 +82,7 @@ export interface RestartDbInstanceOperationState {
     /**
      * dbInstance ID.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

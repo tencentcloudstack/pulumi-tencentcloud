@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Trocket.getRocketmqInstances({});
+ * const example = tencentcloud.trocket.getRocketmqInstances({});
  * ```
  *
  * ### Query instances by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Trocket.getRocketmqInstances({
+ * const example = tencentcloud.trocket.getRocketmqInstances({
  *     filters: [
  *         {
  *             name: "InstanceId",
@@ -99,7 +99,7 @@ export interface GetRocketmqInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Trocket.getRocketmqInstances({});
+ * const example = tencentcloud.trocket.getRocketmqInstances({});
  * ```
  *
  * ### Query instances by filters
@@ -108,7 +108,7 @@ export interface GetRocketmqInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Trocket.getRocketmqInstances({
+ * const example = tencentcloud.trocket.getRocketmqInstances({
  *     filters: [
  *         {
  *             name: "InstanceId",
@@ -143,13 +143,13 @@ export interface GetRocketmqInstancesOutputArgs {
     /**
      * Filter query criteria list.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Trocket.GetRocketmqInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Trocket.GetRocketmqInstancesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag filters.
      */
-    tagFilters?: pulumi.Input<pulumi.Input<inputs.Trocket.GetRocketmqInstancesTagFilterArgs>[]>;
+    tagFilters?: pulumi.Input<pulumi.Input<inputs.Trocket.GetRocketmqInstancesTagFilterArgs>[] | undefined>;
 }

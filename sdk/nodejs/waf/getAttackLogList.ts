@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.waf.getAttackLogList({
  *     domain: "domain.com",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.waf.getAttackLogList({
  *     domain: "all",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
@@ -129,7 +129,7 @@ export interface GetAttackLogListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.waf.getAttackLogList({
  *     domain: "domain.com",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
@@ -146,7 +146,7 @@ export interface GetAttackLogListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.waf.getAttackLogList({
  *     domain: "all",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
@@ -186,11 +186,11 @@ export interface GetAttackLogListOutputArgs {
     /**
      * Number of pages, starting from 0 by default.
      */
-    page?: pulumi.Input<number>;
+    page?: pulumi.Input<number | undefined>;
     /**
      * Number of queries, default to 10, maximum of 100.
      */
-    queryCount?: pulumi.Input<number>;
+    queryCount?: pulumi.Input<number | undefined>;
     /**
      * Lucene grammar.
      */
@@ -198,11 +198,11 @@ export interface GetAttackLogListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Default desc, support desc, asc.
      */
-    sort?: pulumi.Input<string>;
+    sort?: pulumi.Input<string | undefined>;
     /**
      * Begin time.
      */

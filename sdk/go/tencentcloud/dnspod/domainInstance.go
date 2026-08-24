@@ -28,13 +28,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dnspod.NewDomainInstance(ctx, "foo", &dnspod.DomainInstanceArgs{
+//			foo, err := dnspod.NewDomainInstance(ctx, "foo", &dnspod.DomainInstanceArgs{
 //				Domain: pulumi.String("hello.com"),
 //				Remark: pulumi.String("this is demo"),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("domainStatus", foo.Status)
+//			ctx.Export("recordCount", foo.RecordCount)
+//			ctx.Export("domainGrade", foo.Grade)
 //			return nil
 //		})
 //	}
@@ -57,16 +60,22 @@ type DomainInstance struct {
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// ID of the domain.
 	DomainId pulumi.IntOutput `pulumi:"domainId"`
+	// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+	Grade pulumi.StringOutput `pulumi:"grade"`
 	// The Group Id of Domain.
 	GroupId pulumi.IntPtrOutput `pulumi:"groupId"`
 	// Whether to Mark the Domain.
 	IsMark pulumi.StringOutput `pulumi:"isMark"`
+	// Number of DNS records under this domain.
+	RecordCount pulumi.IntOutput `pulumi:"recordCount"`
 	// The remark of Domain.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// Is secondary DNS enabled.
 	SlaveDns pulumi.StringOutput `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
+	// Last modification time of the domain.
+	UpdatedOn pulumi.StringOutput `pulumi:"updatedOn"`
 }
 
 // NewDomainInstance registers a new resource with the given unique name, arguments, and options.
@@ -108,16 +117,22 @@ type domainInstanceState struct {
 	Domain *string `pulumi:"domain"`
 	// ID of the domain.
 	DomainId *int `pulumi:"domainId"`
+	// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+	Grade *string `pulumi:"grade"`
 	// The Group Id of Domain.
 	GroupId *int `pulumi:"groupId"`
 	// Whether to Mark the Domain.
 	IsMark *string `pulumi:"isMark"`
+	// Number of DNS records under this domain.
+	RecordCount *int `pulumi:"recordCount"`
 	// The remark of Domain.
 	Remark *string `pulumi:"remark"`
 	// Is secondary DNS enabled.
 	SlaveDns *string `pulumi:"slaveDns"`
 	// The status of Domain.
 	Status *string `pulumi:"status"`
+	// Last modification time of the domain.
+	UpdatedOn *string `pulumi:"updatedOn"`
 }
 
 type DomainInstanceState struct {
@@ -127,16 +142,22 @@ type DomainInstanceState struct {
 	Domain pulumi.StringPtrInput
 	// ID of the domain.
 	DomainId pulumi.IntPtrInput
+	// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+	Grade pulumi.StringPtrInput
 	// The Group Id of Domain.
 	GroupId pulumi.IntPtrInput
 	// Whether to Mark the Domain.
 	IsMark pulumi.StringPtrInput
+	// Number of DNS records under this domain.
+	RecordCount pulumi.IntPtrInput
 	// The remark of Domain.
 	Remark pulumi.StringPtrInput
 	// Is secondary DNS enabled.
 	SlaveDns pulumi.StringPtrInput
 	// The status of Domain.
 	Status pulumi.StringPtrInput
+	// Last modification time of the domain.
+	UpdatedOn pulumi.StringPtrInput
 }
 
 func (DomainInstanceState) ElementType() reflect.Type {
@@ -272,6 +293,11 @@ func (o DomainInstanceOutput) DomainId() pulumi.IntOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.IntOutput { return v.DomainId }).(pulumi.IntOutput)
 }
 
+// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+func (o DomainInstanceOutput) Grade() pulumi.StringOutput {
+	return o.ApplyT(func(v *DomainInstance) pulumi.StringOutput { return v.Grade }).(pulumi.StringOutput)
+}
+
 // The Group Id of Domain.
 func (o DomainInstanceOutput) GroupId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.IntPtrOutput { return v.GroupId }).(pulumi.IntPtrOutput)
@@ -280,6 +306,11 @@ func (o DomainInstanceOutput) GroupId() pulumi.IntPtrOutput {
 // Whether to Mark the Domain.
 func (o DomainInstanceOutput) IsMark() pulumi.StringOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.StringOutput { return v.IsMark }).(pulumi.StringOutput)
+}
+
+// Number of DNS records under this domain.
+func (o DomainInstanceOutput) RecordCount() pulumi.IntOutput {
+	return o.ApplyT(func(v *DomainInstance) pulumi.IntOutput { return v.RecordCount }).(pulumi.IntOutput)
 }
 
 // The remark of Domain.
@@ -295,6 +326,11 @@ func (o DomainInstanceOutput) SlaveDns() pulumi.StringOutput {
 // The status of Domain.
 func (o DomainInstanceOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainInstance) pulumi.StringPtrOutput { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+// Last modification time of the domain.
+func (o DomainInstanceOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v *DomainInstance) pulumi.StringOutput { return v.UpdatedOn }).(pulumi.StringOutput)
 }
 
 type DomainInstanceArrayOutput struct{ *pulumi.OutputState }

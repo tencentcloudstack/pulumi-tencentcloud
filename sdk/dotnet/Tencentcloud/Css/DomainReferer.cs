@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css domain_referer can be imported using the id, e.g.
+    /// css DomainReferer can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName

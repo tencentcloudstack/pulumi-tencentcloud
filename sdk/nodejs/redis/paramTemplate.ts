@@ -50,8 +50,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * redis param_template can be imported using the id, e.g.
- *
+ * redis paramTemplate can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate example crs-cfg-oyyon8f6
  * ```
@@ -149,27 +148,27 @@ export interface ParamTemplateState {
     /**
      * Parameter template description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Parameter template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Readonly full parameter list details.
      */
-    paramDetails?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamDetail>[]>;
+    paramDetails?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamDetail>[] | undefined>;
     /**
      * Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.
      */
-    paramsOverrides?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamsOverride>[]>;
+    paramsOverrides?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamsOverride>[] | undefined>;
     /**
      * Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If `templateId` is specified, this parameter can be left blank; otherwise, it is required.
      */
-    productType?: pulumi.Input<number>;
+    productType?: pulumi.Input<number | undefined>;
     /**
      * Specify which existed template import from.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -179,21 +178,21 @@ export interface ParamTemplateArgs {
     /**
      * Parameter template description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Parameter template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Specify override parameter list, NOTE: Do not remove override params once set, removing will not take effects to current value.
      */
-    paramsOverrides?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamsOverride>[]>;
+    paramsOverrides?: pulumi.Input<pulumi.Input<inputs.Redis.ParamTemplateParamsOverride>[] | undefined>;
     /**
      * Specify product type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture). If `templateId` is specified, this parameter can be left blank; otherwise, it is required.
      */
-    productType?: pulumi.Input<number>;
+    productType?: pulumi.Input<number | undefined>;
     /**
      * Specify which existed template import from.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
 }

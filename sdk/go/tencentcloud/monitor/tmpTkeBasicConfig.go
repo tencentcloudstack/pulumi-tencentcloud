@@ -108,7 +108,7 @@ import (
 //				ClusterDesc:                  pulumi.String("example for tke cluster"),
 //				ClusterMaxServiceNum:         pulumi.Int(32),
 //				ClusterInternet:              pulumi.Bool(false),
-//				ClusterInternetSecurityGroup: pulumi.String(sgId),
+//				ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
 //				ClusterVersion:               pulumi.String("1.22.5"),
 //				ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
 //				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
@@ -188,11 +188,11 @@ import (
 //			}
 //			// tmp tke bind
 //			fooTmpTkeClusterAgent, err := monitor.NewTmpTkeClusterAgent(ctx, "foo", &monitor.TmpTkeClusterAgentArgs{
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Agents: &monitor.TmpTkeClusterAgentAgentsArgs{
 //					Region:         pulumi.String(zone),
 //					ClusterType:    pulumi.String(clusterType),
-//					ClusterId:      example.ID(),
+//					ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 //					EnableExternal: pulumi.Bool(false),
 //				},
 //			})
@@ -200,9 +200,9 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewTmpTkeBasicConfig(ctx, "tmp_tke_basic_config", &monitor.TmpTkeBasicConfigArgs{
-//				InstanceId:  foo.ID(),
+//				InstanceId:  foo.ID().ToIDOutput().ToStringOutput(),
 //				ClusterType: pulumi.String(clusterType),
-//				ClusterId:   example.ID(),
+//				ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("kube-system/kube-state-metrics"),
 //				MetricsNames: pulumi.StringArray{
 //					pulumi.String("kube_job_status_succeeded"),

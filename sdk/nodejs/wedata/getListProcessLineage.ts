@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListProcessLineage({
+ * const example = tencentcloud.wedata.getListProcessLineage({
  *     processId: "20241107221758402",
  *     processType: "SCHEDULE_TASK",
  *     platform: "WEDATA",
@@ -97,7 +97,7 @@ export interface GetListProcessLineageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListProcessLineage({
+ * const example = tencentcloud.wedata.getListProcessLineage({
  *     processId: "20241107221758402",
  *     processType: "SCHEDULE_TASK",
  *     platform: "WEDATA",
@@ -133,5 +133,5 @@ export interface GetListProcessLineageOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

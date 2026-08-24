@@ -73,10 +73,10 @@ export function getSearchOutput(args: GetSearchOutputArgs, opts?: pulumi.InvokeO
 export interface GetSearchOutputArgs {
     endTime: pulumi.Input<number>;
     eventBusId: pulumi.Input<string>;
-    filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetSearchFilterArgs>[]>;
-    groupField?: pulumi.Input<string>;
-    orderBy?: pulumi.Input<string>;
-    orderFields?: pulumi.Input<pulumi.Input<string>[]>;
-    resultOutputFile?: pulumi.Input<string>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetSearchFilterArgs>[] | undefined>;
+    groupField?: pulumi.Input<string | undefined>;
+    orderBy?: pulumi.Input<string | undefined>;
+    orderFields?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     startTime: pulumi.Input<number>;
 }

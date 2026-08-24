@@ -40,10 +40,13 @@ import * as utilities from "../utilities";
  *     endPointRegion: "ap-jakarta",
  *     forwardIp: {
  *         accessType: "CCN",
- *         host: "1.1.1.1",
+ *         hosts: [
+ *             "1.1.1.1:8080",
+ *             "2.2.2.2:9090",
+ *         ],
  *         port: 8080,
- *         vpcId: "vpc-2qjckjg2",
- *         accessGatewayId: "ccn-eo13f8ub",
+ *         vpcId: "vpc-h70u60bi",
+ *         accessGatewayId: "ccn-4s3g3yg5",
  *     },
  * });
  * ```
@@ -137,15 +140,15 @@ export interface ExtendEndPointState {
     /**
      * Outbound endpoint name.
      */
-    endPointName?: pulumi.Input<string>;
+    endPointName?: pulumi.Input<string | undefined>;
     /**
      * The region of the outbound endpoint must be consistent with the region of the forwarding target VIP.
      */
-    endPointRegion?: pulumi.Input<string>;
+    endPointRegion?: pulumi.Input<string | undefined>;
     /**
      * Forwarding target.
      */
-    forwardIp?: pulumi.Input<inputs.PrivateDns.ExtendEndPointForwardIp>;
+    forwardIp?: pulumi.Input<inputs.PrivateDns.ExtendEndPointForwardIp | undefined>;
 }
 
 /**
@@ -163,5 +166,5 @@ export interface ExtendEndPointArgs {
     /**
      * Forwarding target.
      */
-    forwardIp?: pulumi.Input<inputs.PrivateDns.ExtendEndPointForwardIp>;
+    forwardIp?: pulumi.Input<inputs.PrivateDns.ExtendEndPointForwardIp | undefined>;
 }

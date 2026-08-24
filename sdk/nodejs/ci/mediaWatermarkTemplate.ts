@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_watermark_template can be imported using the id, e.g.
+ * ci mediaWatermarkTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
@@ -126,15 +126,15 @@ export interface MediaWatermarkTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    watermark?: pulumi.Input<inputs.Ci.MediaWatermarkTemplateWatermark>;
+    watermark?: pulumi.Input<inputs.Ci.MediaWatermarkTemplateWatermark | undefined>;
 }
 
 /**
@@ -148,7 +148,7 @@ export interface MediaWatermarkTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */

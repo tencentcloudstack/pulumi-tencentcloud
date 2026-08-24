@@ -19,6 +19,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
         [Input("fwDeploy", required: true)]
         public Input<Inputs.VpcInstanceVpcFwInstanceFwDeployGetArgs> FwDeploy { get; set; } = null!;
 
+        [Input("fwGateways")]
+        private InputList<Inputs.VpcInstanceVpcFwInstanceFwGatewayGetArgs>? _fwGateways;
+        public InputList<Inputs.VpcInstanceVpcFwInstanceFwGatewayGetArgs> FwGateways
+        {
+            get => _fwGateways ?? (_fwGateways = new InputList<Inputs.VpcInstanceVpcFwInstanceFwGatewayGetArgs>());
+            set => _fwGateways = value;
+        }
+
         /// <summary>
         /// Firewall instance ID (passed in editing scenario).
         /// </summary>

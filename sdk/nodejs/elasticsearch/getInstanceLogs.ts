@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const elasticsearchInstanceLogs = tencentcloud.Elasticsearch.getInstanceLogs({
+ * const elasticsearchInstanceLogs = tencentcloud.elasticsearch.getInstanceLogs({
  *     instanceId: "es-xxxxxx",
  * });
  * ```
@@ -102,7 +102,7 @@ export interface GetInstanceLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const elasticsearchInstanceLogs = tencentcloud.Elasticsearch.getInstanceLogs({
+ * const elasticsearchInstanceLogs = tencentcloud.elasticsearch.getInstanceLogs({
  *     instanceId: "es-xxxxxx",
  * });
  * ```
@@ -127,7 +127,7 @@ export interface GetInstanceLogsOutputArgs {
     /**
      * End time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
@@ -139,23 +139,23 @@ export interface GetInstanceLogsOutputArgs {
      * - 3: Index slow log
      * - 4: GC log.
      */
-    logType?: pulumi.Input<number>;
+    logType?: pulumi.Input<number | undefined>;
     /**
      * Order type. Time sort method. Default is 0, valid values:
      * - 0: descending;
      * - 1: ascending order.
      */
-    orderByType?: pulumi.Input<number>;
+    orderByType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search key. Support LUCENE syntax, such as level:WARN, ip:1.1.1.1, message:test-index, etc.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Start time. The format is YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

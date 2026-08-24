@@ -14,6 +14,8 @@ import (
 
 // Provide a resource to create a VPC subnet.
 //
+// > **NOTE:** In accordance with VPC business requirements, the default value for `isMulticast` has been updated to `false`(previously `true`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `isMulticast` field to `true`.
+//
 // ## Example Usage
 //
 // ## Import
@@ -38,8 +40,8 @@ type Instance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolOutput `pulumi:"isDefault"`
-	// Indicates whether multicast is enabled. The default value is 'true'.
-	IsMulticast pulumi.BoolPtrOutput `pulumi:"isMulticast"`
+	// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
+	IsMulticast pulumi.BoolOutput `pulumi:"isMulticast"`
 	// The name of subnet to be created.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// ID of a routing table to which the subnet should be associated.
@@ -101,7 +103,7 @@ type instanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault *bool `pulumi:"isDefault"`
-	// Indicates whether multicast is enabled. The default value is 'true'.
+	// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast *bool `pulumi:"isMulticast"`
 	// The name of subnet to be created.
 	Name *string `pulumi:"name"`
@@ -126,7 +128,7 @@ type InstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolPtrInput
-	// Indicates whether multicast is enabled. The default value is 'true'.
+	// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast pulumi.BoolPtrInput
 	// The name of subnet to be created.
 	Name pulumi.StringPtrInput
@@ -149,7 +151,7 @@ type instanceArgs struct {
 	CdcId *string `pulumi:"cdcId"`
 	// A network address block of the subnet.
 	CidrBlock string `pulumi:"cidrBlock"`
-	// Indicates whether multicast is enabled. The default value is 'true'.
+	// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast *bool `pulumi:"isMulticast"`
 	// The name of subnet to be created.
 	Name *string `pulumi:"name"`
@@ -169,7 +171,7 @@ type InstanceArgs struct {
 	CdcId pulumi.StringPtrInput
 	// A network address block of the subnet.
 	CidrBlock pulumi.StringInput
-	// Indicates whether multicast is enabled. The default value is 'true'.
+	// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast pulumi.BoolPtrInput
 	// The name of subnet to be created.
 	Name pulumi.StringPtrInput
@@ -298,9 +300,9 @@ func (o InstanceOutput) IsDefault() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.IsDefault }).(pulumi.BoolOutput)
 }
 
-// Indicates whether multicast is enabled. The default value is 'true'.
-func (o InstanceOutput) IsMulticast() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.IsMulticast }).(pulumi.BoolPtrOutput)
+// Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
+func (o InstanceOutput) IsMulticast() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.IsMulticast }).(pulumi.BoolOutput)
 }
 
 // The name of subnet to be created.

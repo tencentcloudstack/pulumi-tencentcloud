@@ -20,11 +20,11 @@ import * as utilities from "../utilities";
  *     name: "tf_example",
  * });
  * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("example", {
- *     deviceId: example.id,
+ *     deviceId: example.id.apply(x =>Number(x)),
  *     account: "root",
  * });
  * const exampleBindDeviceAccountPrivateKey = new tencentcloud.dasb.BindDeviceAccountPrivateKey("example", {
- *     deviceAccountId: exampleDeviceAccount.id,
+ *     deviceAccountId: exampleDeviceAccount.id.apply(x =>Number(x)),
  *     privateKey: "MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh",
  *     privateKeyPassword: "TerraformPassword",
  * });
@@ -111,15 +111,15 @@ export interface BindDeviceAccountPrivateKeyState {
     /**
      * Host account ID.
      */
-    deviceAccountId?: pulumi.Input<number>;
+    deviceAccountId?: pulumi.Input<number | undefined>;
     /**
      * Host account private key, the latest length is 128 bytes, the maximum length is 8192 bytes.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * Host account private key password, maximum length 256 bytes.
      */
-    privateKeyPassword?: pulumi.Input<string>;
+    privateKeyPassword?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -137,5 +137,5 @@ export interface BindDeviceAccountPrivateKeyArgs {
     /**
      * Host account private key password, maximum length 256 bytes.
      */
-    privateKeyPassword?: pulumi.Input<string>;
+    privateKeyPassword?: pulumi.Input<string | undefined>;
 }

@@ -23,7 +23,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -85,12 +84,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     ///         Type = "ckafka",
     ///         ConnectionDescription = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionArgs
     ///         {
-    ///             ResourceDescription = Output.Tuple(uin, uin, ckafkaId).Apply(values =&gt;
+    ///             ResourceDescription = Output.Tuple(uin, ckafkaId).Apply(values =&gt;
     ///             {
     ///                 var uin = values.Item1;
-    ///                 var uin1 = values.Item2;
-    ///                 var ckafkaId = values.Item3;
-    ///                 return $"qcs::ckafka:ap-guangzhou:uin/{uin}:ckafkaId/uin/{uin1}/{ckafkaId}";
+    ///                 var ckafkaId = values.Item2;
+    ///                 return $"qcs::ckafka:ap-guangzhou:uin/{uin}:ckafkaId/uin/{uin}/{ckafkaId}";
     ///             }),
     ///             CkafkaParams = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionCkafkaParamsArgs
     ///             {
@@ -109,7 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -173,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Import
     /// 
-    /// eb event_connector can be imported using the id, e.g.
+    /// eb EventConnector can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId

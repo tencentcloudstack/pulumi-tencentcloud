@@ -84,8 +84,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Import
     /// 
-    /// tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
-    /// 
+    /// tcm AccessLogConfig can be imported using the mesh_id(mesh_name), e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
     /// ```

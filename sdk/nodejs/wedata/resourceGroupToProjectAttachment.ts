@@ -102,11 +102,11 @@ export interface ResourceGroupToProjectAttachmentState {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Resource group ID.
      */
-    resourceGroupId?: pulumi.Input<string>;
+    resourceGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

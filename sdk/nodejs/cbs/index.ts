@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { CopySnapshotCrossRegionArgs, CopySnapshotCrossRegionState } from "./copySnapshotCrossRegion";
+export type CopySnapshotCrossRegion = import("./copySnapshotCrossRegion").CopySnapshotCrossRegion;
+export const CopySnapshotCrossRegion: typeof import("./copySnapshotCrossRegion").CopySnapshotCrossRegion = null as any;
+utilities.lazyLoad(exports, ["CopySnapshotCrossRegion"], () => require("./copySnapshotCrossRegion"));
+
 export { DiskBackupArgs, DiskBackupState } from "./diskBackup";
 export type DiskBackup = import("./diskBackup").DiskBackup;
 export const DiskBackup: typeof import("./diskBackup").DiskBackup = null as any;
@@ -80,6 +85,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cbs/copySnapshotCrossRegion:CopySnapshotCrossRegion":
+                return new CopySnapshotCrossRegion(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/diskBackup:DiskBackup":
                 return new DiskBackup(name, <any>undefined, { urn })
             case "tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation":
@@ -105,6 +112,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/copySnapshotCrossRegion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/diskBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/diskBackupRollbackOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cbs/snapshot", _module)

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const auditLogs = tencentcloud.Cynosdb.getAuditLogs({
+ * const auditLogs = tencentcloud.cynosdb.getAuditLogs({
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2023-06-18 10:00:00",
  *     endTime: "2023-06-18 10:00:02",
@@ -107,7 +107,7 @@ export interface GetAuditLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const auditLogs = tencentcloud.Cynosdb.getAuditLogs({
+ * const auditLogs = tencentcloud.cynosdb.getAuditLogs({
  *     instanceId: "cynosdbmysql-ins-afqx1hy0",
  *     startTime: "2023-06-18 10:00:00",
  *     endTime: "2023-06-18 10:00:02",
@@ -147,7 +147,7 @@ export interface GetAuditLogsOutputArgs {
     /**
      * Filter conditions. You can filter logs according to the set filtering criteria.
      */
-    filter?: pulumi.Input<inputs.Cynosdb.GetAuditLogsFilterArgs>;
+    filter?: pulumi.Input<inputs.Cynosdb.GetAuditLogsFilterArgs | undefined>;
     /**
      * Instance ID.
      */
@@ -155,15 +155,15 @@ export interface GetAuditLogsOutputArgs {
     /**
      * Sort by. The supported values include: ASC - ascending order, DESC - descending order.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort fields. The supported values include: timestamp - timestamp; &amp;#39;effectRows&amp;#39; - affects the number of rows; &amp;#39;execTime&amp;#39; - Execution time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, format: 2017-07-12 10:29:20.
      */

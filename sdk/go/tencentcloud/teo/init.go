@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Teo/accelerationDomain:AccelerationDomain":
 		r = &AccelerationDomain{}
+	case "tencentcloud:Teo/aliasDomain:AliasDomain":
+		r = &AliasDomain{}
 	case "tencentcloud:Teo/applicationProxy:ApplicationProxy":
 		r = &ApplicationProxy{}
 	case "tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule":
@@ -31,22 +33,50 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BindSecurityTemplate{}
 	case "tencentcloud:Teo/certificateConfig:CertificateConfig":
 		r = &CertificateConfig{}
+	case "tencentcloud:Teo/checkCnameStatusOperation:CheckCnameStatusOperation":
+		r = &CheckCnameStatusOperation{}
+	case "tencentcloud:Teo/configGroupVersion:ConfigGroupVersion":
+		r = &ConfigGroupVersion{}
+	case "tencentcloud:Teo/confirmMultiPathGatewayOriginAcl:ConfirmMultiPathGatewayOriginAcl":
+		r = &ConfirmMultiPathGatewayOriginAcl{}
+	case "tencentcloud:Teo/confirmOriginAclUpdateOperation:ConfirmOriginAclUpdateOperation":
+		r = &ConfirmOriginAclUpdateOperation{}
 	case "tencentcloud:Teo/contentIdentifier:ContentIdentifier":
 		r = &ContentIdentifier{}
+	case "tencentcloud:Teo/createClsIndexOperation:CreateClsIndexOperation":
+		r = &CreateClsIndexOperation{}
 	case "tencentcloud:Teo/customizeErrorPage:CustomizeErrorPage":
 		r = &CustomizeErrorPage{}
 	case "tencentcloud:Teo/ddosProtectionConfig:DdosProtectionConfig":
 		r = &DdosProtectionConfig{}
+	case "tencentcloud:Teo/deployConfigGroupVersion:DeployConfigGroupVersion":
+		r = &DeployConfigGroupVersion{}
 	case "tencentcloud:Teo/dnsRecord:DnsRecord":
 		r = &DnsRecord{}
+	case "tencentcloud:Teo/domainSharedCnameAttachment:DomainSharedCnameAttachment":
+		r = &DomainSharedCnameAttachment{}
+	case "tencentcloud:Teo/edgeKv:EdgeKv":
+		r = &EdgeKv{}
+	case "tencentcloud:Teo/edgeKvNamespace:EdgeKvNamespace":
+		r = &EdgeKvNamespace{}
 	case "tencentcloud:Teo/function:Function":
 		r = &Function{}
+	case "tencentcloud:Teo/functionComponentBinding:FunctionComponentBinding":
+		r = &FunctionComponentBinding{}
+	case "tencentcloud:Teo/functionReplica:FunctionReplica":
+		r = &FunctionReplica{}
 	case "tencentcloud:Teo/functionRule:FunctionRule":
 		r = &FunctionRule{}
 	case "tencentcloud:Teo/functionRulePriority:FunctionRulePriority":
 		r = &FunctionRulePriority{}
 	case "tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment":
 		r = &FunctionRuntimeEnvironment{}
+	case "tencentcloud:Teo/identifyZoneOperation:IdentifyZoneOperation":
+		r = &IdentifyZoneOperation{}
+	case "tencentcloud:Teo/importZoneConfigOperation:ImportZoneConfigOperation":
+		r = &ImportZoneConfigOperation{}
+	case "tencentcloud:Teo/justInTimeTranscodeTemplate:JustInTimeTranscodeTemplate":
+		r = &JustInTimeTranscodeTemplate{}
 	case "tencentcloud:Teo/l4Proxy:L4Proxy":
 		r = &L4Proxy{}
 	case "tencentcloud:Teo/l4ProxyRule:L4ProxyRule":
@@ -59,6 +89,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &L7AccRuleV2{}
 	case "tencentcloud:Teo/l7AccSetting:L7AccSetting":
 		r = &L7AccSetting{}
+	case "tencentcloud:Teo/loadBalancer:LoadBalancer":
+		r = &LoadBalancer{}
+	case "tencentcloud:Teo/multiPathGateway:MultiPathGateway":
+		r = &MultiPathGateway{}
+	case "tencentcloud:Teo/multiPathGatewayLine:MultiPathGatewayLine":
+		r = &MultiPathGatewayLine{}
+	case "tencentcloud:Teo/multiPathGatewaySecretKey:MultiPathGatewaySecretKey":
+		r = &MultiPathGatewaySecretKey{}
 	case "tencentcloud:Teo/originAcl:OriginAcl":
 		r = &OriginAcl{}
 	case "tencentcloud:Teo/originGroup:OriginGroup":
@@ -67,14 +105,32 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OwnershipVerify{}
 	case "tencentcloud:Teo/plan:Plan":
 		r = &Plan{}
+	case "tencentcloud:Teo/prefetchOriginLimit:PrefetchOriginLimit":
+		r = &PrefetchOriginLimit{}
+	case "tencentcloud:Teo/prefetchTaskOperation:PrefetchTaskOperation":
+		r = &PrefetchTaskOperation{}
+	case "tencentcloud:Teo/purgeTask:PurgeTask":
+		r = &PurgeTask{}
 	case "tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery":
 		r = &RealtimeLogDelivery{}
 	case "tencentcloud:Teo/ruleEngine:RuleEngine":
 		r = &RuleEngine{}
+	case "tencentcloud:Teo/securityApiResource:SecurityApiResource":
+		r = &SecurityApiResource{}
+	case "tencentcloud:Teo/securityApiService:SecurityApiService":
+		r = &SecurityApiService{}
+	case "tencentcloud:Teo/securityClientAttester:SecurityClientAttester":
+		r = &SecurityClientAttester{}
 	case "tencentcloud:Teo/securityIpGroup:SecurityIpGroup":
 		r = &SecurityIpGroup{}
+	case "tencentcloud:Teo/securityJsInjectionRule:SecurityJsInjectionRule":
+		r = &SecurityJsInjectionRule{}
 	case "tencentcloud:Teo/securityPolicyConfig:SecurityPolicyConfig":
 		r = &SecurityPolicyConfig{}
+	case "tencentcloud:Teo/sharedCname:SharedCname":
+		r = &SharedCname{}
+	case "tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate":
+		r = &WebSecurityTemplate{}
 	case "tencentcloud:Teo/zone:Zone":
 		r = &Zone{}
 	default:
@@ -93,6 +149,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/accelerationDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/aliasDomain",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -117,7 +178,32 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/checkCnameStatusOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/configGroupVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/confirmMultiPathGatewayOriginAcl",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/confirmOriginAclUpdateOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/contentIdentifier",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/createClsIndexOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -132,12 +218,42 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/deployConfigGroupVersion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/dnsRecord",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/domainSharedCnameAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/edgeKv",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/edgeKvNamespace",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/function",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/functionComponentBinding",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/functionReplica",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -153,6 +269,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/functionRuntimeEnvironment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/identifyZoneOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/importZoneConfigOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/justInTimeTranscodeTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -187,6 +318,26 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/loadBalancer",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/multiPathGateway",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/multiPathGatewayLine",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/multiPathGatewaySecretKey",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/originAcl",
 		&module{version},
 	)
@@ -207,6 +358,21 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/prefetchOriginLimit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/prefetchTaskOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/purgeTask",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/realtimeLogDelivery",
 		&module{version},
 	)
@@ -217,12 +383,42 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/securityApiResource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/securityApiService",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/securityClientAttester",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/securityIpGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Teo/securityJsInjectionRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Teo/securityPolicyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/sharedCname",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/webSecurityTemplate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

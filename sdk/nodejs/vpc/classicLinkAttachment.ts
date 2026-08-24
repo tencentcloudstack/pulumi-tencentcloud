@@ -79,11 +79,11 @@ export interface ClassicLinkAttachmentState {
     /**
      * CVM instance ID. It only support set one instance now.
      */
-    instanceIds?: pulumi.Input<string>;
+    instanceIds?: pulumi.Input<string | undefined>;
     /**
      * VPC instance ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

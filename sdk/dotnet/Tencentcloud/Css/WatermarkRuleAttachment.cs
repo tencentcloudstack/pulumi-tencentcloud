@@ -64,7 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css watermark_rule_attachment can be imported using the id, e.g.
+    /// css WatermarkRuleAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id

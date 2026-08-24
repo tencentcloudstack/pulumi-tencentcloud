@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -54,9 +54,9 @@ import (
 //			}
 //			foo, err := monitor.NewGrafanaInstance(ctx, "foo", &monitor.GrafanaInstanceArgs{
 //				InstanceName: pulumi.String("test-grafana"),
-//				VpcId:        vpc.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				GrafanaInitPassword: pulumi.String("1234567890"),
 //				EnableInternet:      pulumi.Bool(false),
@@ -124,7 +124,7 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewGrafanaNotificationChannel(ctx, "grafanaNotificationChannel", &monitor.GrafanaNotificationChannelArgs{
-//				InstanceId:  foo.ID(),
+//				InstanceId:  foo.ID().ToIDOutput().ToStringOutput(),
 //				ChannelName: pulumi.String("tf-channel"),
 //				OrgId:       pulumi.Int(1),
 //				Receivers: pulumi.StringArray{

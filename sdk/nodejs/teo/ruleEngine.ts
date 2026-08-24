@@ -123,8 +123,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo rule_engine can be imported using the id#rule_id, e.g.
- *
+ * teo ruleEngine can be imported using the id#rule_id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
  * ```
@@ -240,31 +239,31 @@ export interface RuleEngineState {
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * The rule name (1 to 255 characters).
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Rule priority, the larger the value, the higher the priority, the minimum is 1.
      */
-    rulePriority?: pulumi.Input<number>;
+    rulePriority?: pulumi.Input<number | undefined>;
     /**
      * Rule items list.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRule>[] | undefined>;
     /**
      * Rule status. Values:
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * rule tag list.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -286,7 +285,7 @@ export interface RuleEngineArgs {
     /**
      * rule tag list.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the site.
      */

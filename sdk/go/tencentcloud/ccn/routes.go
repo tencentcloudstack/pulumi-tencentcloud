@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// vpc ccn_routes can be imported using the id, e.g.
+// vpc ccnRoutes can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s

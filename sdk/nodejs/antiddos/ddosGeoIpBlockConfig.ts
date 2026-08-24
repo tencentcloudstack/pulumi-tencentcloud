@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos ddos_geo_ip_block_config can be imported using the id, e.g.
+ * antiddos ddosGeoIpBlockConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ddosGeoIpBlockConfig:DdosGeoIpBlockConfig ddos_geo_ip_block_config ${instanceId}#${configId}
@@ -108,11 +108,11 @@ export interface DdosGeoIpBlockConfigState {
     /**
      * DDoS region blocking configuration, configuration ID cannot be empty when filling in parameters.
      */
-    ddosGeoIpBlockConfig?: pulumi.Input<inputs.Antiddos.DdosGeoIpBlockConfigDdosGeoIpBlockConfig>;
+    ddosGeoIpBlockConfig?: pulumi.Input<inputs.Antiddos.DdosGeoIpBlockConfigDdosGeoIpBlockConfig | undefined>;
     /**
      * InstanceId.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

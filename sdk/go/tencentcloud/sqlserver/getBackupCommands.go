@@ -78,12 +78,8 @@ type GetBackupCommandsResult struct {
 }
 
 func GetBackupCommandsOutput(ctx *pulumi.Context, args GetBackupCommandsOutputArgs, opts ...pulumi.InvokeOption) GetBackupCommandsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupCommandsResultOutput, error) {
-			args := v.(GetBackupCommandsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args, GetBackupCommandsResultOutput{}, options).(GetBackupCommandsResultOutput), nil
-		}).(GetBackupCommandsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getBackupCommands:getBackupCommands", args, GetBackupCommandsResultOutput{}, options).(GetBackupCommandsResultOutput)
 }
 
 // A collection of arguments for invoking getBackupCommands.

@@ -168,31 +168,31 @@ export interface SubscriptionState {
     /**
      * Whether to automatically create a dead letter topic and a retry letter topic. true: yes; false: no(default value).
      */
-    autoCreatePolicyTopic?: pulumi.Input<boolean>;
+    autoCreatePolicyTopic?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to automatically delete a dead letter topic and a retry letter topic. Setting is only allowed when `autoCreatePolicyTopic` is true. Default is false.
      */
-    autoDeletePolicyTopic?: pulumi.Input<boolean>;
+    autoDeletePolicyTopic?: pulumi.Input<boolean | undefined>;
     /**
      * Pulsar cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Environment (namespace) name.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Subscriber name, which can contain up to 128 characters.
      */
-    subscriptionName?: pulumi.Input<string>;
+    subscriptionName?: pulumi.Input<string | undefined>;
     /**
      * Topic name.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -202,11 +202,11 @@ export interface SubscriptionArgs {
     /**
      * Whether to automatically create a dead letter topic and a retry letter topic. true: yes; false: no(default value).
      */
-    autoCreatePolicyTopic?: pulumi.Input<boolean>;
+    autoCreatePolicyTopic?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to automatically delete a dead letter topic and a retry letter topic. Setting is only allowed when `autoCreatePolicyTopic` is true. Default is false.
      */
-    autoDeletePolicyTopic?: pulumi.Input<boolean>;
+    autoDeletePolicyTopic?: pulumi.Input<boolean | undefined>;
     /**
      * Pulsar cluster ID.
      */
@@ -218,7 +218,7 @@ export interface SubscriptionArgs {
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Subscriber name, which can contain up to 128 characters.
      */

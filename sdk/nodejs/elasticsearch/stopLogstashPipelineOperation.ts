@@ -94,11 +94,11 @@ export interface StopLogstashPipelineOperationState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Pipeline id.
      */
-    pipelineId?: pulumi.Input<string>;
+    pipelineId?: pulumi.Input<string | undefined>;
 }
 
 /**

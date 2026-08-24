@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? Origin;
         /// <summary>
-        /// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are: Http: use http protocol; Https: use https protocol; Follow: follow the protocol.
+        /// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are: http: use http protocol; https: use https protocol; follow: follow the protocol.
         /// </summary>
         public readonly string? OriginProtocol;
         /// <summary>

@@ -11,6 +11,19 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 {
     /// <summary>
+    /// Provide a resource to create a kubernetes cluster.
+    /// 
+    /// &gt; **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `ExtraArgs`), you need to submit a ticket for application.
+    /// 
+    /// &gt; **NOTE:** We recommend this usage that uses the `tencentcloud.Kubernetes.Cluster` resource to create a cluster without any `WorkerConfig`, then adds nodes by the `tencentcloud.Kubernetes.NodePool` resource.
+    /// It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `TencentcloudKubernetesAttachment`. The reason is that `WorkerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+    /// 
+    /// &gt; **NOTE:** Executing `terraform destroy` to destroy the resource will default to deleting the node resource, If it is necessary to preserve node instance resources, Please set `InstanceDeleteMode` to `Retain`.
+    /// 
+    /// &gt; **NOTE:** If you want to set up addon for the tke cluster, it is recommended to use resource `tencentcloud.Kubernetes.Addon`.
+    /// 
+    /// &gt; **NOTE:** Please do not use this resource and resource `tencentcloud.Kubernetes.ClusterEndpoint` to operate cluster public network/intranet access at the same time.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a basic cluster with two worker nodes
@@ -19,7 +32,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -67,7 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     ///     var imageId = @default.Apply(@default =&gt; @default.Apply(getInstanceResult =&gt; getInstanceResult.ImageId));
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = sg.Id,
     ///         Ingresses = new[]
@@ -112,7 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -145,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///         AvailabilityZone = availabilityZoneSecond,
     ///     });
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = sg.Id,
     ///         Ingresses = new[]
@@ -253,7 +264,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -286,7 +296,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///         AvailabilityZone = availabilityZoneSecond,
     ///     });
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = sg.Id,
     ///         Ingresses = new[]
@@ -408,7 +418,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -456,7 +465,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     ///     var imageId = @default.Apply(@default =&gt; @default.Apply(getInstanceResult =&gt; getInstanceResult.ImageId));
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = sg.Id,
     ///         Ingresses = new[]
@@ -952,7 +961,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
         /// </summary>
         [Output("clusterExtraArgs")]
-        public Output<Outputs.ClusterClusterExtraArgs?> ClusterExtraArgs { get; private set; } = null!;
+        public Output<Outputs.ClusterClusterExtraArgs> ClusterExtraArgs { get; private set; } = null!;
 
         /// <summary>
         /// Open internet access or not. If this field is set 'true', the field below `WorkerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
@@ -1039,7 +1048,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> ClusterOsType { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
         /// </summary>
         [Output("clusterSubnetId")]
         public Output<string?> ClusterSubnetId { get; private set; } = null!;
@@ -1285,7 +1294,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<int?> Unschedulable { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether upgrade all instances when ClusterVersion change. Default is false.
+        /// Indicates whether upgrade all cluster instances. Default is false.
         /// </summary>
         [Output("upgradeInstancesFollowCluster")]
         public Output<bool?> UpgradeInstancesFollowCluster { get; private set; } = null!;
@@ -1517,7 +1526,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterOsType { get; set; }
 
         /// <summary>
-        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
         /// </summary>
         [Input("clusterSubnetId")]
         public Input<string>? ClusterSubnetId { get; set; }
@@ -1794,7 +1803,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<int>? Unschedulable { get; set; }
 
         /// <summary>
-        /// Indicates whether upgrade all instances when ClusterVersion change. Default is false.
+        /// Indicates whether upgrade all cluster instances. Default is false.
         /// </summary>
         [Input("upgradeInstancesFollowCluster")]
         public Input<bool>? UpgradeInstancesFollowCluster { get; set; }
@@ -2000,7 +2009,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterOsType { get; set; }
 
         /// <summary>
-        /// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+        /// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
         /// </summary>
         [Input("clusterSubnetId")]
         public Input<string>? ClusterSubnetId { get; set; }
@@ -2339,7 +2348,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<int>? Unschedulable { get; set; }
 
         /// <summary>
-        /// Indicates whether upgrade all instances when ClusterVersion change. Default is false.
+        /// Indicates whether upgrade all cluster instances. Default is false.
         /// </summary>
         [Input("upgradeInstancesFollowCluster")]
         public Input<bool>? UpgradeInstancesFollowCluster { get; set; }

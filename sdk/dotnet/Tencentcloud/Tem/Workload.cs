@@ -42,7 +42,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// ## Import
     /// 
     /// tem workload can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
     /// ```

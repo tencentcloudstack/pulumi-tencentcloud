@@ -103,12 +103,8 @@ type GetInstanceListResult struct {
 }
 
 func GetInstanceListOutput(ctx *pulumi.Context, args GetInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceListResultOutput, error) {
-			args := v.(GetInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getInstanceList:getInstanceList", args, GetInstanceListResultOutput{}, options).(GetInstanceListResultOutput), nil
-		}).(GetInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getInstanceList:getInstanceList", args, GetInstanceListResultOutput{}, options).(GetInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceList.

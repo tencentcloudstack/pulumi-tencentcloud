@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf api_rate_limit_rule can be imported using the id, e.g.
+ * tsf apiRateLimitRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
@@ -151,43 +151,43 @@ export interface ApiRateLimitRuleState {
     /**
      * Api Id.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * creation time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * qps value.
      */
-    maxQps?: pulumi.Input<number>;
+    maxQps?: pulumi.Input<number | undefined>;
     /**
      * Rule content.
      */
-    ruleContent?: pulumi.Input<string>;
+    ruleContent?: pulumi.Input<string | undefined>;
     /**
      * rule Id.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Current limit name.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Tsf Rule ID.
      */
-    tsfRuleId?: pulumi.Input<string>;
+    tsfRuleId?: pulumi.Input<string | undefined>;
     /**
      * update time.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
     /**
      * Enabled/disabled, enabled/disabled, if not passed, it is enabled by default.
      */
-    usableStatus?: pulumi.Input<string>;
+    usableStatus?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -205,5 +205,5 @@ export interface ApiRateLimitRuleArgs {
     /**
      * Enabled/disabled, enabled/disabled, if not passed, it is enabled by default.
      */
-    usableStatus?: pulumi.Input<string>;
+    usableStatus?: pulumi.Input<string | undefined>;
 }

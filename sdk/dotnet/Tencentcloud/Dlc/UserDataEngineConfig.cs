@@ -48,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Import
     /// 
-    /// dlc user_data_engine_config can be imported using the id, e.g.
+    /// dlc UserDataEngineConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id

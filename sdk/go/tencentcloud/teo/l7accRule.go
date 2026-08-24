@@ -37,7 +37,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("1"),
 //						},
-//						RuleName: pulumi.String("网站加速"),
+//						RuleName: pulumi.String("Web Acceleration"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -114,7 +114,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("2"),
 //						},
-//						RuleName: pulumi.String("音视频直播"),
+//						RuleName: pulumi.String("Live Video Streaming"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -180,7 +180,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("3"),
 //						},
-//						RuleName: pulumi.String("大文件下载"),
+//						RuleName: pulumi.String("Large File Download"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -244,7 +244,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("4"),
 //						},
-//						RuleName: pulumi.String("音视频点播"),
+//						RuleName: pulumi.String("Video On Demand"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -308,7 +308,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("5"),
 //						},
-//						RuleName: pulumi.String("API 加速"),
+//						RuleName: pulumi.String("API Acceleration"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -335,7 +335,7 @@ import (
 //						Descriptions: pulumi.StringArray{
 //							pulumi.String("6"),
 //						},
-//						RuleName: pulumi.String("WordPress 建站"),
+//						RuleName: pulumi.String("WordPress Site"),
 //						Branches: teo.L7AccRuleRuleBranchArray{
 //							&teo.L7AccRuleRuleBranchArgs{
 //								Condition: pulumi.String("${http.request.host} in ['aaa.makn.cn']"),
@@ -435,14 +435,6 @@ import (
 // ## Import
 //
 // TEO l7 acc rule can be imported using the zone_id, e.g.
-//
-// `
-//
-// ```sh
-// $ pulumi import tencentcloud:Teo/l7AccRule:L7AccRule example zone-36bjhygh1bxe
-// ```
-//
-// `
 type L7AccRule struct {
 	pulumi.CustomResourceState
 

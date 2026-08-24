@@ -11,43 +11,87 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
 {
     /// <summary>
-    /// Use this resource to create TcaplusDB cluster.
+    /// Provides a resource to create a TcaplusDB cluster.
     /// 
-    /// &gt; **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+    /// &gt; **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai`, `ap-hongkong`, `na-siliconvalley`, `ap-singapore`, `ap-seoul`, `ap-tokyo`, `eu-frankfurt`, `and na-ashburn`.
     /// 
     /// ## Example Usage
     /// 
-    /// ### Create a new tcaplus cluster instance
+    /// ### Create a tcaplus cluster instance with ClusterType is 1
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    ///     {
-    ///         IsDefault = true,
-    ///         AvailabilityZone = availabilityZone,
-    ///     });
-    /// 
-    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
-    /// 
-    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
-    /// 
     ///     var example = new Tencentcloud.Tcaplus.Cluster("example", new()
     ///     {
-    ///         IdlType = "PROTO",
-    ///         ClusterName = "tf_example_tcaplus_cluster",
-    ///         VpcId = vpcId,
-    ///         SubnetId = subnetId,
-    ///         Password = "your_pw_123111",
+    ///         IdlType = "MIX",
+    ///         ClusterName = "tf_example",
+    ///         VpcId = "vpc-jll1dzwr",
+    ///         SubnetId = "subnet-ef14ogeu",
+    ///         Password = "Password@2026",
     ///         OldPasswordExpireLast = 3600,
+    ///         ClusterType = 1,
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.ClusterResourceTagArgs
+    ///             {
+    ///                 TagKey = "createBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create a tcaplus cluster instance with ClusterType is 2
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    ///     {
+    ///         IdlType = "MIX",
+    ///         ClusterName = "tf_example",
+    ///         VpcId = "vpc-qtzga3pm",
+    ///         SubnetId = "subnet-c063n9el",
+    ///         Password = "Password@2026",
+    ///         OldPasswordExpireLast = 3600,
+    ///         ClusterType = 2,
+    ///         ServerLists = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.ClusterServerListArgs
+    ///             {
+    ///                 MachineType = "T1",
+    ///                 MachineNum = 4,
+    ///             },
+    ///         },
+    ///         ProxyLists = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.ClusterProxyListArgs
+    ///             {
+    ///                 MachineType = "T1",
+    ///                 MachineNum = 2,
+    ///             },
+    ///         },
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.ClusterResourceTagArgs
+    ///             {
+    ///                 TagKey = "createBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -55,38 +99,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// 
     /// ## Import
     /// 
-    /// tcaplus cluster can be imported using the id, e.g.
+    /// TcaplusDB cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
+    /// $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example 35402666774
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/cluster:Cluster")]
     public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Output("apiAccessId")]
         public Output<string> ApiAccessId { get; private set; } = null!;
 
         /// <summary>
-        /// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Output("apiAccessIp")]
         public Output<string> ApiAccessIp { get; private set; } = null!;
 
         /// <summary>
-        /// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Output("apiAccessPort")]
         public Output<int> ApiAccessPort { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+        /// Cluster ID.
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
         /// </summary>
         [Output("clusterName")]
         public Output<string> ClusterName { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster type: `1` shared, `2` dedicated.
+        /// </summary>
+        [Output("clusterType")]
+        public Output<int> ClusterType { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the TcaplusDB cluster.
@@ -95,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+        /// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
         /// </summary>
         [Output("idlType")]
         public Output<string> IdlType { get; private set; } = null!;
@@ -119,7 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Output<string> OldPasswordExpireTime { get; private set; } = null!;
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
         /// </summary>
         [Output("password")]
         public Output<string> Password { get; private set; } = null!;
@@ -131,13 +187,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Output<string> PasswordStatus { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet id of the TcaplusDB cluster.
+        /// Dedicated cluster occupied proxy machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        [Output("proxyLists")]
+        public Output<ImmutableArray<Outputs.ClusterProxyList>> ProxyLists { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+        /// </summary>
+        [Output("resourceTags")]
+        public Output<ImmutableArray<Outputs.ClusterResourceTag>> ResourceTags { get; private set; } = null!;
+
+        /// <summary>
+        /// Dedicated cluster occupied svr machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        [Output("serverLists")]
+        public Output<ImmutableArray<Outputs.ClusterServerList>> ServerLists { get; private set; } = null!;
+
+        /// <summary>
+        /// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
         /// </summary>
         [Output("subnetId")]
         public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
-        /// VPC id of the TcaplusDB cluster.
+        /// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
         /// </summary>
         [Output("vpcId")]
         public Output<string> VpcId { get; private set; } = null!;
@@ -194,13 +268,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+        /// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
         /// </summary>
         [Input("clusterName", required: true)]
         public Input<string> ClusterName { get; set; } = null!;
 
         /// <summary>
-        /// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+        /// Cluster type: `1` shared, `2` dedicated.
+        /// </summary>
+        [Input("clusterType")]
+        public Input<int>? ClusterType { get; set; }
+
+        /// <summary>
+        /// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
         /// </summary>
         [Input("idlType", required: true)]
         public Input<string> IdlType { get; set; } = null!;
@@ -215,7 +295,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         private Input<string>? _password;
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
         /// </summary>
         public Input<string>? Password
         {
@@ -227,14 +307,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
             }
         }
 
+        [Input("proxyLists")]
+        private InputList<Inputs.ClusterProxyListArgs>? _proxyLists;
+
         /// <summary>
-        /// Subnet id of the TcaplusDB cluster.
+        /// Dedicated cluster occupied proxy machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        public InputList<Inputs.ClusterProxyListArgs> ProxyLists
+        {
+            get => _proxyLists ?? (_proxyLists = new InputList<Inputs.ClusterProxyListArgs>());
+            set => _proxyLists = value;
+        }
+
+        [Input("resourceTags")]
+        private InputList<Inputs.ClusterResourceTagArgs>? _resourceTags;
+
+        /// <summary>
+        /// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+        /// </summary>
+        public InputList<Inputs.ClusterResourceTagArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.ClusterResourceTagArgs>());
+            set => _resourceTags = value;
+        }
+
+        [Input("serverLists")]
+        private InputList<Inputs.ClusterServerListArgs>? _serverLists;
+
+        /// <summary>
+        /// Dedicated cluster occupied svr machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        public InputList<Inputs.ClusterServerListArgs> ServerLists
+        {
+            get => _serverLists ?? (_serverLists = new InputList<Inputs.ClusterServerListArgs>());
+            set => _serverLists = value;
+        }
+
+        /// <summary>
+        /// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
         /// </summary>
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
 
         /// <summary>
-        /// VPC id of the TcaplusDB cluster.
+        /// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
         /// </summary>
         [Input("vpcId", required: true)]
         public Input<string> VpcId { get; set; } = null!;
@@ -248,28 +364,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Input("apiAccessId")]
         public Input<string>? ApiAccessId { get; set; }
 
         /// <summary>
-        /// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Input("apiAccessIp")]
         public Input<string>? ApiAccessIp { get; set; }
 
         /// <summary>
-        /// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+        /// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
         /// </summary>
         [Input("apiAccessPort")]
         public Input<int>? ApiAccessPort { get; set; }
 
         /// <summary>
-        /// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+        /// Cluster ID.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
+        /// <summary>
+        /// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
         /// </summary>
         [Input("clusterName")]
         public Input<string>? ClusterName { get; set; }
+
+        /// <summary>
+        /// Cluster type: `1` shared, `2` dedicated.
+        /// </summary>
+        [Input("clusterType")]
+        public Input<int>? ClusterType { get; set; }
 
         /// <summary>
         /// Create time of the TcaplusDB cluster.
@@ -278,7 +406,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+        /// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
         /// </summary>
         [Input("idlType")]
         public Input<string>? IdlType { get; set; }
@@ -305,7 +433,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         private Input<string>? _password;
 
         /// <summary>
-        /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+        /// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
         /// </summary>
         public Input<string>? Password
         {
@@ -323,14 +451,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         [Input("passwordStatus")]
         public Input<string>? PasswordStatus { get; set; }
 
+        [Input("proxyLists")]
+        private InputList<Inputs.ClusterProxyListGetArgs>? _proxyLists;
+
         /// <summary>
-        /// Subnet id of the TcaplusDB cluster.
+        /// Dedicated cluster occupied proxy machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        public InputList<Inputs.ClusterProxyListGetArgs> ProxyLists
+        {
+            get => _proxyLists ?? (_proxyLists = new InputList<Inputs.ClusterProxyListGetArgs>());
+            set => _proxyLists = value;
+        }
+
+        [Input("resourceTags")]
+        private InputList<Inputs.ClusterResourceTagGetArgs>? _resourceTags;
+
+        /// <summary>
+        /// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+        /// </summary>
+        public InputList<Inputs.ClusterResourceTagGetArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.ClusterResourceTagGetArgs>());
+            set => _resourceTags = value;
+        }
+
+        [Input("serverLists")]
+        private InputList<Inputs.ClusterServerListGetArgs>? _serverLists;
+
+        /// <summary>
+        /// Dedicated cluster occupied svr machines. Only valid when `ClusterType` is `2` (dedicated cluster). For creation, each element exposes `MachineType` and `MachineNum`.
+        /// </summary>
+        public InputList<Inputs.ClusterServerListGetArgs> ServerLists
+        {
+            get => _serverLists ?? (_serverLists = new InputList<Inputs.ClusterServerListGetArgs>());
+            set => _serverLists = value;
+        }
+
+        /// <summary>
+        /// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
 
         /// <summary>
-        /// VPC id of the TcaplusDB cluster.
+        /// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }

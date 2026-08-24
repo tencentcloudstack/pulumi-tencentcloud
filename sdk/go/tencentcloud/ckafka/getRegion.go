@@ -62,12 +62,8 @@ type LookupRegionResult struct {
 }
 
 func LookupRegionOutput(ctx *pulumi.Context, args LookupRegionOutputArgs, opts ...pulumi.InvokeOption) LookupRegionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRegionResultOutput, error) {
-			args := v.(LookupRegionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getRegion:getRegion", args, LookupRegionResultOutput{}, options).(LookupRegionResultOutput), nil
-		}).(LookupRegionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getRegion:getRegion", args, LookupRegionResultOutput{}, options).(LookupRegionResultOutput)
 }
 
 // A collection of arguments for invoking getRegion.

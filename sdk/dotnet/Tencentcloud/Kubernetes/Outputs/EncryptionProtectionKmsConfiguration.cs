@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class EncryptionProtectionKmsConfiguration
     {
         /// <summary>
-        /// kms id.
+        /// Custom key: If no KeyId is specified, a default key will be generated (TKE-KMS).
         /// </summary>
         public readonly string? KeyId;
         /// <summary>
-        /// kms region.
+        /// Generate keys with default settings or customize key region information.
         /// </summary>
         public readonly string? KmsRegion;
 

@@ -76,12 +76,8 @@ type GetBucketMultipartUploadsResult struct {
 }
 
 func GetBucketMultipartUploadsOutput(ctx *pulumi.Context, args GetBucketMultipartUploadsOutputArgs, opts ...pulumi.InvokeOption) GetBucketMultipartUploadsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBucketMultipartUploadsResultOutput, error) {
-			args := v.(GetBucketMultipartUploadsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args, GetBucketMultipartUploadsResultOutput{}, options).(GetBucketMultipartUploadsResultOutput), nil
-		}).(GetBucketMultipartUploadsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cos/getBucketMultipartUploads:getBucketMultipartUploads", args, GetBucketMultipartUploadsResultOutput{}, options).(GetBucketMultipartUploadsResultOutput)
 }
 
 // A collection of arguments for invoking getBucketMultipartUploads.

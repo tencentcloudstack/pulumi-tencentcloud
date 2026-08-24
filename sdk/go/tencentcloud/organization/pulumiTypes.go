@@ -459,6 +459,8 @@ type GetMembersItem struct {
 	MemberUin int `pulumi:"memberUin"`
 	// Permission name.
 	Name string `pulumi:"name"`
+	// Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.
+	NickName string `pulumi:"nickName"`
 	// Node IDNote: This field may return null, indicating that no valid values can be obtained.
 	NodeId int `pulumi:"nodeId"`
 	// Node nameNote: This field may return null, indicating that no valid values can be obtained.
@@ -507,6 +509,8 @@ type GetMembersItemArgs struct {
 	MemberUin pulumi.IntInput `pulumi:"memberUin"`
 	// Permission name.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.
+	NickName pulumi.StringInput `pulumi:"nickName"`
 	// Node IDNote: This field may return null, indicating that no valid values can be obtained.
 	NodeId pulumi.IntInput `pulumi:"nodeId"`
 	// Node nameNote: This field may return null, indicating that no valid values can be obtained.
@@ -610,6 +614,11 @@ func (o GetMembersItemOutput) MemberUin() pulumi.IntOutput {
 // Permission name.
 func (o GetMembersItemOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetMembersItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMembersItemOutput) NickName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMembersItem) string { return v.NickName }).(pulumi.StringOutput)
 }
 
 // Node IDNote: This field may return null, indicating that no valid values can be obtained.
@@ -2076,6 +2085,112 @@ func (o GetOrgShareUnitMembersItemArrayOutput) Index(i pulumi.IntInput) GetOrgSh
 	}).(GetOrgShareUnitMembersItemOutput)
 }
 
+type GetOrgShareUnitNodesItem struct {
+	// Create time.
+	CreateTime string `pulumi:"createTime"`
+	// Department ID.
+	ShareNodeId int `pulumi:"shareNodeId"`
+}
+
+// GetOrgShareUnitNodesItemInput is an input type that accepts GetOrgShareUnitNodesItemArgs and GetOrgShareUnitNodesItemOutput values.
+// You can construct a concrete instance of `GetOrgShareUnitNodesItemInput` via:
+//
+//	GetOrgShareUnitNodesItemArgs{...}
+type GetOrgShareUnitNodesItemInput interface {
+	pulumi.Input
+
+	ToGetOrgShareUnitNodesItemOutput() GetOrgShareUnitNodesItemOutput
+	ToGetOrgShareUnitNodesItemOutputWithContext(context.Context) GetOrgShareUnitNodesItemOutput
+}
+
+type GetOrgShareUnitNodesItemArgs struct {
+	// Create time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Department ID.
+	ShareNodeId pulumi.IntInput `pulumi:"shareNodeId"`
+}
+
+func (GetOrgShareUnitNodesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgShareUnitNodesItem)(nil)).Elem()
+}
+
+func (i GetOrgShareUnitNodesItemArgs) ToGetOrgShareUnitNodesItemOutput() GetOrgShareUnitNodesItemOutput {
+	return i.ToGetOrgShareUnitNodesItemOutputWithContext(context.Background())
+}
+
+func (i GetOrgShareUnitNodesItemArgs) ToGetOrgShareUnitNodesItemOutputWithContext(ctx context.Context) GetOrgShareUnitNodesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgShareUnitNodesItemOutput)
+}
+
+// GetOrgShareUnitNodesItemArrayInput is an input type that accepts GetOrgShareUnitNodesItemArray and GetOrgShareUnitNodesItemArrayOutput values.
+// You can construct a concrete instance of `GetOrgShareUnitNodesItemArrayInput` via:
+//
+//	GetOrgShareUnitNodesItemArray{ GetOrgShareUnitNodesItemArgs{...} }
+type GetOrgShareUnitNodesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetOrgShareUnitNodesItemArrayOutput() GetOrgShareUnitNodesItemArrayOutput
+	ToGetOrgShareUnitNodesItemArrayOutputWithContext(context.Context) GetOrgShareUnitNodesItemArrayOutput
+}
+
+type GetOrgShareUnitNodesItemArray []GetOrgShareUnitNodesItemInput
+
+func (GetOrgShareUnitNodesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgShareUnitNodesItem)(nil)).Elem()
+}
+
+func (i GetOrgShareUnitNodesItemArray) ToGetOrgShareUnitNodesItemArrayOutput() GetOrgShareUnitNodesItemArrayOutput {
+	return i.ToGetOrgShareUnitNodesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetOrgShareUnitNodesItemArray) ToGetOrgShareUnitNodesItemArrayOutputWithContext(ctx context.Context) GetOrgShareUnitNodesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetOrgShareUnitNodesItemArrayOutput)
+}
+
+type GetOrgShareUnitNodesItemOutput struct{ *pulumi.OutputState }
+
+func (GetOrgShareUnitNodesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetOrgShareUnitNodesItem)(nil)).Elem()
+}
+
+func (o GetOrgShareUnitNodesItemOutput) ToGetOrgShareUnitNodesItemOutput() GetOrgShareUnitNodesItemOutput {
+	return o
+}
+
+func (o GetOrgShareUnitNodesItemOutput) ToGetOrgShareUnitNodesItemOutputWithContext(ctx context.Context) GetOrgShareUnitNodesItemOutput {
+	return o
+}
+
+// Create time.
+func (o GetOrgShareUnitNodesItemOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetOrgShareUnitNodesItem) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Department ID.
+func (o GetOrgShareUnitNodesItemOutput) ShareNodeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetOrgShareUnitNodesItem) int { return v.ShareNodeId }).(pulumi.IntOutput)
+}
+
+type GetOrgShareUnitNodesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetOrgShareUnitNodesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetOrgShareUnitNodesItem)(nil)).Elem()
+}
+
+func (o GetOrgShareUnitNodesItemArrayOutput) ToGetOrgShareUnitNodesItemArrayOutput() GetOrgShareUnitNodesItemArrayOutput {
+	return o
+}
+
+func (o GetOrgShareUnitNodesItemArrayOutput) ToGetOrgShareUnitNodesItemArrayOutputWithContext(ctx context.Context) GetOrgShareUnitNodesItemArrayOutput {
+	return o
+}
+
+func (o GetOrgShareUnitNodesItemArrayOutput) Index(i pulumi.IntInput) GetOrgShareUnitNodesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgShareUnitNodesItem {
+		return vs[0].([]GetOrgShareUnitNodesItem)[vs[1].(int)]
+	}).(GetOrgShareUnitNodesItemOutput)
+}
+
 type GetOrgShareUnitResourcesItem struct {
 	// Creation time.
 	CreateTime string `pulumi:"createTime"`
@@ -2403,6 +2518,139 @@ func (o GetOrgShareUnitsItemArrayOutput) Index(i pulumi.IntInput) GetOrgShareUni
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetOrgShareUnitsItem {
 		return vs[0].([]GetOrgShareUnitsItem)[vs[1].(int)]
 	}).(GetOrgShareUnitsItemOutput)
+}
+
+type GetPermissionPoliciesInRoleConfigurationRolePolicy struct {
+	// Time when the permission policy was added to the role configuration.
+	AddTime string `pulumi:"addTime"`
+	// Custom policy content. Only returned for custom policies.
+	RolePolicyDocument string `pulumi:"rolePolicyDocument"`
+	// Policy ID.
+	RolePolicyId int `pulumi:"rolePolicyId"`
+	// Permission policy name.
+	RolePolicyName string `pulumi:"rolePolicyName"`
+	// Permission policy type. Valid values: `System`: System policy, reuses CAM system policies. `Custom`: Custom policy, written according to CAM permission policy syntax and structure.
+	RolePolicyType string `pulumi:"rolePolicyType"`
+}
+
+// GetPermissionPoliciesInRoleConfigurationRolePolicyInput is an input type that accepts GetPermissionPoliciesInRoleConfigurationRolePolicyArgs and GetPermissionPoliciesInRoleConfigurationRolePolicyOutput values.
+// You can construct a concrete instance of `GetPermissionPoliciesInRoleConfigurationRolePolicyInput` via:
+//
+//	GetPermissionPoliciesInRoleConfigurationRolePolicyArgs{...}
+type GetPermissionPoliciesInRoleConfigurationRolePolicyInput interface {
+	pulumi.Input
+
+	ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyOutput
+	ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutputWithContext(context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyOutput
+}
+
+type GetPermissionPoliciesInRoleConfigurationRolePolicyArgs struct {
+	// Time when the permission policy was added to the role configuration.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Custom policy content. Only returned for custom policies.
+	RolePolicyDocument pulumi.StringInput `pulumi:"rolePolicyDocument"`
+	// Policy ID.
+	RolePolicyId pulumi.IntInput `pulumi:"rolePolicyId"`
+	// Permission policy name.
+	RolePolicyName pulumi.StringInput `pulumi:"rolePolicyName"`
+	// Permission policy type. Valid values: `System`: System policy, reuses CAM system policies. `Custom`: Custom policy, written according to CAM permission policy syntax and structure.
+	RolePolicyType pulumi.StringInput `pulumi:"rolePolicyType"`
+}
+
+func (GetPermissionPoliciesInRoleConfigurationRolePolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPermissionPoliciesInRoleConfigurationRolePolicy)(nil)).Elem()
+}
+
+func (i GetPermissionPoliciesInRoleConfigurationRolePolicyArgs) ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyOutput {
+	return i.ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutputWithContext(context.Background())
+}
+
+func (i GetPermissionPoliciesInRoleConfigurationRolePolicyArgs) ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutputWithContext(ctx context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPermissionPoliciesInRoleConfigurationRolePolicyOutput)
+}
+
+// GetPermissionPoliciesInRoleConfigurationRolePolicyArrayInput is an input type that accepts GetPermissionPoliciesInRoleConfigurationRolePolicyArray and GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput values.
+// You can construct a concrete instance of `GetPermissionPoliciesInRoleConfigurationRolePolicyArrayInput` via:
+//
+//	GetPermissionPoliciesInRoleConfigurationRolePolicyArray{ GetPermissionPoliciesInRoleConfigurationRolePolicyArgs{...} }
+type GetPermissionPoliciesInRoleConfigurationRolePolicyArrayInput interface {
+	pulumi.Input
+
+	ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput
+	ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutputWithContext(context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput
+}
+
+type GetPermissionPoliciesInRoleConfigurationRolePolicyArray []GetPermissionPoliciesInRoleConfigurationRolePolicyInput
+
+func (GetPermissionPoliciesInRoleConfigurationRolePolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPermissionPoliciesInRoleConfigurationRolePolicy)(nil)).Elem()
+}
+
+func (i GetPermissionPoliciesInRoleConfigurationRolePolicyArray) ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput {
+	return i.ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutputWithContext(context.Background())
+}
+
+func (i GetPermissionPoliciesInRoleConfigurationRolePolicyArray) ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutputWithContext(ctx context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput)
+}
+
+type GetPermissionPoliciesInRoleConfigurationRolePolicyOutput struct{ *pulumi.OutputState }
+
+func (GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPermissionPoliciesInRoleConfigurationRolePolicy)(nil)).Elem()
+}
+
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyOutput {
+	return o
+}
+
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) ToGetPermissionPoliciesInRoleConfigurationRolePolicyOutputWithContext(ctx context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyOutput {
+	return o
+}
+
+// Time when the permission policy was added to the role configuration.
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPermissionPoliciesInRoleConfigurationRolePolicy) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Custom policy content. Only returned for custom policies.
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) RolePolicyDocument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPermissionPoliciesInRoleConfigurationRolePolicy) string { return v.RolePolicyDocument }).(pulumi.StringOutput)
+}
+
+// Policy ID.
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) RolePolicyId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPermissionPoliciesInRoleConfigurationRolePolicy) int { return v.RolePolicyId }).(pulumi.IntOutput)
+}
+
+// Permission policy name.
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) RolePolicyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPermissionPoliciesInRoleConfigurationRolePolicy) string { return v.RolePolicyName }).(pulumi.StringOutput)
+}
+
+// Permission policy type. Valid values: `System`: System policy, reuses CAM system policies. `Custom`: Custom policy, written according to CAM permission policy syntax and structure.
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyOutput) RolePolicyType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPermissionPoliciesInRoleConfigurationRolePolicy) string { return v.RolePolicyType }).(pulumi.StringOutput)
+}
+
+type GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPermissionPoliciesInRoleConfigurationRolePolicy)(nil)).Elem()
+}
+
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput) ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput() GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput {
+	return o
+}
+
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput) ToGetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutputWithContext(ctx context.Context) GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput {
+	return o
+}
+
+func (o GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput) Index(i pulumi.IntInput) GetPermissionPoliciesInRoleConfigurationRolePolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPermissionPoliciesInRoleConfigurationRolePolicy {
+		return vs[0].([]GetPermissionPoliciesInRoleConfigurationRolePolicy)[vs[1].(int)]
+	}).(GetPermissionPoliciesInRoleConfigurationRolePolicyOutput)
 }
 
 type GetResourceToShareMemberItem struct {
@@ -2799,10 +3047,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareAreaItemArrayInput)(nil)).Elem(), GetOrgShareAreaItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitMembersItemInput)(nil)).Elem(), GetOrgShareUnitMembersItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitMembersItemArrayInput)(nil)).Elem(), GetOrgShareUnitMembersItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitNodesItemInput)(nil)).Elem(), GetOrgShareUnitNodesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitNodesItemArrayInput)(nil)).Elem(), GetOrgShareUnitNodesItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitResourcesItemInput)(nil)).Elem(), GetOrgShareUnitResourcesItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitResourcesItemArrayInput)(nil)).Elem(), GetOrgShareUnitResourcesItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitsItemInput)(nil)).Elem(), GetOrgShareUnitsItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareUnitsItemArrayInput)(nil)).Elem(), GetOrgShareUnitsItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionPoliciesInRoleConfigurationRolePolicyInput)(nil)).Elem(), GetPermissionPoliciesInRoleConfigurationRolePolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPermissionPoliciesInRoleConfigurationRolePolicyArrayInput)(nil)).Elem(), GetPermissionPoliciesInRoleConfigurationRolePolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceToShareMemberItemInput)(nil)).Elem(), GetResourceToShareMemberItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetResourceToShareMemberItemArrayInput)(nil)).Elem(), GetResourceToShareMemberItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesItemInput)(nil)).Elem(), GetServicesItemArgs{})
@@ -2841,10 +3093,14 @@ func init() {
 	pulumi.RegisterOutputType(GetOrgShareAreaItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitMembersItemOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitMembersItemArrayOutput{})
+	pulumi.RegisterOutputType(GetOrgShareUnitNodesItemOutput{})
+	pulumi.RegisterOutputType(GetOrgShareUnitNodesItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitResourcesItemOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitResourcesItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitsItemOutput{})
 	pulumi.RegisterOutputType(GetOrgShareUnitsItemArrayOutput{})
+	pulumi.RegisterOutputType(GetPermissionPoliciesInRoleConfigurationRolePolicyOutput{})
+	pulumi.RegisterOutputType(GetPermissionPoliciesInRoleConfigurationRolePolicyArrayOutput{})
 	pulumi.RegisterOutputType(GetResourceToShareMemberItemOutput{})
 	pulumi.RegisterOutputType(GetResourceToShareMemberItemArrayOutput{})
 	pulumi.RegisterOutputType(GetServicesItemOutput{})

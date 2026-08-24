@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tenantCcn = tencentcloud.Ccn.getTenantInstances({
+ * const tenantCcn = tencentcloud.ccn.getTenantInstances({
  *     ccnIds: ["ccn-39lqkygf"],
  *     isSecurityLocks: ["true"],
  * });
@@ -74,7 +74,7 @@ export interface GetTenantInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tenantCcn = tencentcloud.Ccn.getTenantInstances({
+ * const tenantCcn = tencentcloud.ccn.getTenantInstances({
  *     ccnIds: ["ccn-39lqkygf"],
  *     isSecurityLocks: ["true"],
  * });
@@ -98,17 +98,17 @@ export interface GetTenantInstancesOutputArgs {
     /**
      * filter by ccn ids, like: ['ccn-12345678'].
      */
-    ccnIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ccnIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * filter by locked, like ['true'].
      */
-    isSecurityLocks?: pulumi.Input<pulumi.Input<string>[]>;
+    isSecurityLocks?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * filter by ccn ids, like: ['12345678'].
      */
-    userAccountIds?: pulumi.Input<pulumi.Input<string>[]>;
+    userAccountIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

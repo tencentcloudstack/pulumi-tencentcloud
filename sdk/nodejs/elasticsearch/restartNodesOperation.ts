@@ -112,23 +112,23 @@ export interface RestartNodesOperationState {
     /**
      * Whether to force a restart.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Node status, used in blue-green mode; off-line node blue-green is risky.
      */
-    isOffline?: pulumi.Input<boolean>;
+    isOffline?: pulumi.Input<boolean | undefined>;
     /**
      * List of node names.
      */
-    nodeNames?: pulumi.Input<pulumi.Input<string>[]>;
+    nodeNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Optional restart mode in-place,blue-green, which means restart and blue-green restart, respectively. The default is in-place.
      */
-    restartMode?: pulumi.Input<string>;
+    restartMode?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface RestartNodesOperationArgs {
     /**
      * Whether to force a restart.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Instance id.
      */
@@ -146,7 +146,7 @@ export interface RestartNodesOperationArgs {
     /**
      * Node status, used in blue-green mode; off-line node blue-green is risky.
      */
-    isOffline?: pulumi.Input<boolean>;
+    isOffline?: pulumi.Input<boolean | undefined>;
     /**
      * List of node names.
      */
@@ -154,5 +154,5 @@ export interface RestartNodesOperationArgs {
     /**
      * Optional restart mode in-place,blue-green, which means restart and blue-green restart, respectively. The default is in-place.
      */
-    restartMode?: pulumi.Input<string>;
+    restartMode?: pulumi.Input<string | undefined>;
 }

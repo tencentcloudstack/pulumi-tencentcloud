@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dasb user_group can be imported using the id, e.g.
+ * dasb userGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
@@ -105,11 +105,11 @@ export interface UserGroupState {
     /**
      * ID of the department to which the user group belongs, such as: 1.2.3.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * User group name, maximum length 32 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -119,9 +119,9 @@ export interface UserGroupArgs {
     /**
      * ID of the department to which the user group belongs, such as: 1.2.3.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * User group name, maximum length 32 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

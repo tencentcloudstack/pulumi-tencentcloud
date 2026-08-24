@@ -106,12 +106,8 @@ type GetFindDomainsResult struct {
 }
 
 func GetFindDomainsOutput(ctx *pulumi.Context, args GetFindDomainsOutputArgs, opts ...pulumi.InvokeOption) GetFindDomainsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFindDomainsResultOutput, error) {
-			args := v.(GetFindDomainsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getFindDomains:getFindDomains", args, GetFindDomainsResultOutput{}, options).(GetFindDomainsResultOutput), nil
-		}).(GetFindDomainsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getFindDomains:getFindDomains", args, GetFindDomainsResultOutput{}, options).(GetFindDomainsResultOutput)
 }
 
 // A collection of arguments for invoking getFindDomains.

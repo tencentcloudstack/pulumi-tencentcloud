@@ -67,12 +67,8 @@ type GetDedicatedClusterHostsResult struct {
 }
 
 func GetDedicatedClusterHostsOutput(ctx *pulumi.Context, args GetDedicatedClusterHostsOutputArgs, opts ...pulumi.InvokeOption) GetDedicatedClusterHostsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDedicatedClusterHostsResultOutput, error) {
-			args := v.(GetDedicatedClusterHostsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterHosts:getDedicatedClusterHosts", args, GetDedicatedClusterHostsResultOutput{}, options).(GetDedicatedClusterHostsResultOutput), nil
-		}).(GetDedicatedClusterHostsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterHosts:getDedicatedClusterHosts", args, GetDedicatedClusterHostsResultOutput{}, options).(GetDedicatedClusterHostsResultOutput)
 }
 
 // A collection of arguments for invoking getDedicatedClusterHosts.

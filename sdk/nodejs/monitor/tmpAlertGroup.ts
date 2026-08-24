@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a monitor tmpAlertGroup
+ * Provides a resource to create a monitor tmp alert group
  *
  * ## Example Usage
  *
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor tmp_alert_group can be imported using the id, e.g.
+ * monitor tmp alert group can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
@@ -167,31 +167,31 @@ export interface TmpAlertGroupState {
     /**
      * Tencent cloud notification template id list.
      */
-    ampReceivers?: pulumi.Input<pulumi.Input<string>[]>;
+    ampReceivers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User custom notification template, such as webhook, alertmanager.
      */
-    customReceiver?: pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiver>;
+    customReceiver?: pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiver | undefined>;
     /**
      * Alarm group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Unique alert group name.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Alert message send interval, default 1 hour.
      */
-    repeatInterval?: pulumi.Input<string>;
+    repeatInterval?: pulumi.Input<string | undefined>;
     /**
      * A list of alert rules.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupRule>[] | undefined>;
 }
 
 /**
@@ -201,25 +201,25 @@ export interface TmpAlertGroupArgs {
     /**
      * Tencent cloud notification template id list.
      */
-    ampReceivers?: pulumi.Input<pulumi.Input<string>[]>;
+    ampReceivers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User custom notification template, such as webhook, alertmanager.
      */
-    customReceiver?: pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiver>;
+    customReceiver?: pulumi.Input<inputs.Monitor.TmpAlertGroupCustomReceiver | undefined>;
     /**
      * Unique alert group name.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Alert message send interval, default 1 hour.
      */
-    repeatInterval?: pulumi.Input<string>;
+    repeatInterval?: pulumi.Input<string | undefined>;
     /**
      * A list of alert rules.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertGroupRule>[] | undefined>;
 }

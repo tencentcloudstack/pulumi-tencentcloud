@@ -45,8 +45,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tcm tracing_config can be imported using the mesh_id, e.g.
- *
+ * tcm tracingConfig can be imported using the mesh_id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
  * ```
@@ -141,23 +140,23 @@ export interface TracingConfigState {
     /**
      * APM config.
      */
-    apm?: pulumi.Input<inputs.Tcm.TracingConfigApm>;
+    apm?: pulumi.Input<inputs.Tcm.TracingConfigApm | undefined>;
     /**
      * Whether enable tracing.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Mesh ID.
      */
-    meshId?: pulumi.Input<string>;
+    meshId?: pulumi.Input<string | undefined>;
     /**
      * Tracing sampling, 0.0-1.0.
      */
-    sampling?: pulumi.Input<number>;
+    sampling?: pulumi.Input<number | undefined>;
     /**
      * Third party zipkin config.
      */
-    zipkin?: pulumi.Input<inputs.Tcm.TracingConfigZipkin>;
+    zipkin?: pulumi.Input<inputs.Tcm.TracingConfigZipkin | undefined>;
 }
 
 /**
@@ -167,11 +166,11 @@ export interface TracingConfigArgs {
     /**
      * APM config.
      */
-    apm?: pulumi.Input<inputs.Tcm.TracingConfigApm>;
+    apm?: pulumi.Input<inputs.Tcm.TracingConfigApm | undefined>;
     /**
      * Whether enable tracing.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Mesh ID.
      */
@@ -179,9 +178,9 @@ export interface TracingConfigArgs {
     /**
      * Tracing sampling, 0.0-1.0.
      */
-    sampling?: pulumi.Input<number>;
+    sampling?: pulumi.Input<number | undefined>;
     /**
      * Third party zipkin config.
      */
-    zipkin?: pulumi.Input<inputs.Tcm.TracingConfigZipkin>;
+    zipkin?: pulumi.Input<inputs.Tcm.TracingConfigZipkin | undefined>;
 }

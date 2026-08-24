@@ -80,12 +80,8 @@ type GetAccountAllGrantPrivilegesResult struct {
 }
 
 func GetAccountAllGrantPrivilegesOutput(ctx *pulumi.Context, args GetAccountAllGrantPrivilegesOutputArgs, opts ...pulumi.InvokeOption) GetAccountAllGrantPrivilegesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountAllGrantPrivilegesResultOutput, error) {
-			args := v.(GetAccountAllGrantPrivilegesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args, GetAccountAllGrantPrivilegesResultOutput{}, options).(GetAccountAllGrantPrivilegesResultOutput), nil
-		}).(GetAccountAllGrantPrivilegesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args, GetAccountAllGrantPrivilegesResultOutput{}, options).(GetAccountAllGrantPrivilegesResultOutput)
 }
 
 // A collection of arguments for invoking getAccountAllGrantPrivileges.

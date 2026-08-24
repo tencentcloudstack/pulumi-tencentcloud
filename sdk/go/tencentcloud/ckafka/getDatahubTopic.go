@@ -71,12 +71,8 @@ type LookupDatahubTopicResult struct {
 }
 
 func LookupDatahubTopicOutput(ctx *pulumi.Context, args LookupDatahubTopicOutputArgs, opts ...pulumi.InvokeOption) LookupDatahubTopicResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupDatahubTopicResultOutput, error) {
-			args := v.(LookupDatahubTopicArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args, LookupDatahubTopicResultOutput{}, options).(LookupDatahubTopicResultOutput), nil
-		}).(LookupDatahubTopicResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getDatahubTopic:getDatahubTopic", args, LookupDatahubTopicResultOutput{}, options).(LookupDatahubTopicResultOutput)
 }
 
 // A collection of arguments for invoking getDatahubTopic.

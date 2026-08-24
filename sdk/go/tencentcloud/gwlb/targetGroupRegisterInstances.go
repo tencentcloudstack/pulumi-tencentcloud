@@ -38,17 +38,17 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -56,8 +56,8 @@ import (
 //				return err
 //			}
 //			_, err = gwlb.NewInstance(ctx, "gwlb_instance", &gwlb.InstanceArgs{
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				LoadBalancerName: pulumi.String("tf-test"),
 //				LbChargeType:     pulumi.String("POSTPAID_BY_HOUR"),
 //				Tags: gwlb.InstanceTagArray{
@@ -72,7 +72,7 @@ import (
 //			}
 //			gwlbTargetGroup, err := gwlb.NewTargetGroup(ctx, "gwlb_target_group", &gwlb.TargetGroupArgs{
 //				TargetGroupName: pulumi.String("tf-test"),
-//				VpcId:           vpc.ID(),
+//				VpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Port:            pulumi.Int(6081),
 //				HealthCheck: &gwlb.TargetGroupHealthCheckArgs{
 //					HealthSwitch: pulumi.Bool(true),
@@ -102,8 +102,8 @@ import (
 //				ImageId:                 pulumi.String(_default.Images[0].ImageId),
 //				InstanceType:            pulumi.String("S5.MEDIUM2"),
 //				SystemDiskSize:          pulumi.Int(100),
-//				SubnetId:                subnet.ID(),
-//				VpcId:                   vpc.ID(),
+//				SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
+//				VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Hostname:                pulumi.String("tf-test"),
 //				DisableSecurityService:  pulumi.Bool(true),
 //				AllocatePublicIp:        pulumi.Bool(true),
@@ -114,7 +114,7 @@ import (
 //				return err
 //			}
 //			_, err = gwlb.NewTargetGroupRegisterInstances(ctx, "gwlb_target_group_register_instances", &gwlb.TargetGroupRegisterInstancesArgs{
-//				TargetGroupId: gwlbTargetGroup.ID(),
+//				TargetGroupId: gwlbTargetGroup.ID().ToIDOutput().ToStringOutput(),
 //				TargetGroupInstances: gwlb.TargetGroupRegisterInstancesTargetGroupInstanceArray{
 //					&gwlb.TargetGroupRegisterInstancesTargetGroupInstanceArgs{
 //						BindIp: foo.PrivateIp,
@@ -134,7 +134,7 @@ import (
 //
 // ## Import
 //
-// gwlb gwlb_target_group_register_instances can be imported using the id, e.g.
+// gwlb gwlbTargetGroupRegisterInstances can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gwlb/targetGroupRegisterInstances:TargetGroupRegisterInstances gwlb_target_group_register_instances gwlb_target_group_register_instances_id

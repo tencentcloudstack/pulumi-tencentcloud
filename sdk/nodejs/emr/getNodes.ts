@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myEmrNodes = tencentcloud.Emr.getNodes({
+ * const myEmrNodes = tencentcloud.emr.getNodes({
  *     nodeFlag: "master",
  *     instanceId: "emr-rnzqrleq",
  * });
@@ -109,7 +109,7 @@ export interface GetNodesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myEmrNodes = tencentcloud.Emr.getNodes({
+ * const myEmrNodes = tencentcloud.emr.getNodes({
  *     nodeFlag: "master",
  *     instanceId: "emr-rnzqrleq",
  * });
@@ -134,7 +134,7 @@ export interface GetNodesOutputArgs {
     /**
      * Resource type: Support all/host/pod, default is all.
      */
-    hardwareResourceType?: pulumi.Input<string>;
+    hardwareResourceType?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID, the instance ID is as follows: emr-xxxxxxxx.
      */
@@ -142,7 +142,7 @@ export interface GetNodesOutputArgs {
     /**
      * The number returned per page, the default value is 100, and the maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Node ID, the value is:
      * - all: Means to get all type nodes, except cdb information.
@@ -161,9 +161,9 @@ export interface GetNodesOutputArgs {
     /**
      * Page number, with a default value of 0, represents the first page.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

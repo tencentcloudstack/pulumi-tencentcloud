@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// scf reserved_concurrency_config can be imported using the id, e.g.
+// scf reservedConcurrencyConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id

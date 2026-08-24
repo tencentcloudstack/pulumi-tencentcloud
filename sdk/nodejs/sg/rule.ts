@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw sg_rule can be imported using the id, e.g.
+ * cfw sgRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sg/rule:Rule sg_rule rule_id
@@ -111,11 +111,11 @@ export interface RuleState {
     /**
      * Creates rule data.
      */
-    data?: pulumi.Input<inputs.Sg.RuleData>;
+    data?: pulumi.Input<inputs.Sg.RuleData | undefined>;
     /**
      * Rule status. `0` is off, `1` is on. This parameter is not required or is 1 when creating.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -129,5 +129,5 @@ export interface RuleArgs {
     /**
      * Rule status. `0` is off, `1` is on. This parameter is not required or is 1 when creating.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
 }

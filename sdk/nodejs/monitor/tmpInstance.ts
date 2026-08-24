@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a monitor tmpInstance
+ * Provides a resource to create a monitor (Cloud Monitor) tmpInstance
  *
  * ## Example Usage
  *
@@ -31,6 +31,7 @@ import * as utilities from "../utilities";
  *     subnetId: subnet.id,
  *     dataRetentionTime: 30,
  *     zone: availabilityZone,
+ *     longTermStorageRetentionTime: 90,
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -40,7 +41,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor tmpInstance can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance example prom-1uvo0tjm
  * ```
@@ -90,6 +90,10 @@ export class TmpInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly ipv4Address: pulumi.Output<string>;
     /**
+     * Long-term storage retention time(in days). Value range: 60-730.
+     */
+    declare public readonly longTermStorageRetentionTime: pulumi.Output<number>;
+    /**
      * Proxy address.
      */
     declare public /*out*/ readonly proxyAddress: pulumi.Output<string>;
@@ -131,6 +135,7 @@ export class TmpInstance extends pulumi.CustomResource {
             resourceInputs["dataRetentionTime"] = state?.dataRetentionTime;
             resourceInputs["instanceName"] = state?.instanceName;
             resourceInputs["ipv4Address"] = state?.ipv4Address;
+            resourceInputs["longTermStorageRetentionTime"] = state?.longTermStorageRetentionTime;
             resourceInputs["proxyAddress"] = state?.proxyAddress;
             resourceInputs["remoteWrite"] = state?.remoteWrite;
             resourceInputs["subnetId"] = state?.subnetId;
@@ -156,6 +161,7 @@ export class TmpInstance extends pulumi.CustomResource {
             }
             resourceInputs["dataRetentionTime"] = args?.dataRetentionTime;
             resourceInputs["instanceName"] = args?.instanceName;
+            resourceInputs["longTermStorageRetentionTime"] = args?.longTermStorageRetentionTime;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["vpcId"] = args?.vpcId;
@@ -177,43 +183,47 @@ export interface TmpInstanceState {
     /**
      * Prometheus HTTP API root address.
      */
-    apiRootPath?: pulumi.Input<string>;
+    apiRootPath?: pulumi.Input<string | undefined>;
     /**
      * Data retention time(in days). Value range: 15, 30, 45, 90, 180, 365, 730.
      */
-    dataRetentionTime?: pulumi.Input<number>;
+    dataRetentionTime?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance IPv4 address.
      */
-    ipv4Address?: pulumi.Input<string>;
+    ipv4Address?: pulumi.Input<string | undefined>;
+    /**
+     * Long-term storage retention time(in days). Value range: 60-730.
+     */
+    longTermStorageRetentionTime?: pulumi.Input<number | undefined>;
     /**
      * Proxy address.
      */
-    proxyAddress?: pulumi.Input<string>;
+    proxyAddress?: pulumi.Input<string | undefined>;
     /**
      * Prometheus remote write address.
      */
-    remoteWrite?: pulumi.Input<string>;
+    remoteWrite?: pulumi.Input<string | undefined>;
     /**
      * Subnet Id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Vpc Id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Available zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -229,13 +239,17 @@ export interface TmpInstanceArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
+     * Long-term storage retention time(in days). Value range: 60-730.
+     */
+    longTermStorageRetentionTime?: pulumi.Input<number | undefined>;
+    /**
      * Subnet Id.
      */
     subnetId: pulumi.Input<string>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Vpc Id.
      */

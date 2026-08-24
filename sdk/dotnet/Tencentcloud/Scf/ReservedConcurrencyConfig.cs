@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Import
     /// 
-    /// scf reserved_concurrency_config can be imported using the id, e.g.
+    /// scf ReservedConcurrencyConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id

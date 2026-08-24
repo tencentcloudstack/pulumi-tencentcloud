@@ -69,12 +69,8 @@ type GetCrossRegionZoneResult struct {
 }
 
 func GetCrossRegionZoneOutput(ctx *pulumi.Context, args GetCrossRegionZoneOutputArgs, opts ...pulumi.InvokeOption) GetCrossRegionZoneResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCrossRegionZoneResultOutput, error) {
-			args := v.(GetCrossRegionZoneArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args, GetCrossRegionZoneResultOutput{}, options).(GetCrossRegionZoneResultOutput), nil
-		}).(GetCrossRegionZoneResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args, GetCrossRegionZoneResultOutput{}, options).(GetCrossRegionZoneResultOutput)
 }
 
 // A collection of arguments for invoking getCrossRegionZone.

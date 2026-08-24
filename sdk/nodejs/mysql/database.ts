@@ -112,15 +112,15 @@ export interface DatabaseState {
     /**
      * Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
      */
-    characterSetName?: pulumi.Input<string>;
+    characterSetName?: pulumi.Input<string | undefined>;
     /**
      * Name of Database.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

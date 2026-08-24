@@ -61,8 +61,8 @@ export class WeDataDataSource extends pulumi.CustomResource {
     /**
      * Data source configuration information, stored in JSON KV format, with different KV storage information for each data source type.
      *
-     * > deployType: 
-     * CONNSTR_PUBLICDB(Public network instance) 
+     * > deployType:
+     * CONNSTR_PUBLICDB(Public network instance)
      * CONNSTR_CVMDB(Self-built instance)
      * INSTANCE(Cloud instance)
      *
@@ -172,7 +172,7 @@ export class WeDataDataSource extends pulumi.CustomResource {
      *     "type": "COS"
      * }
      *
-     * ```.```
+     * ```.``````
      */
     declare public readonly prodConProperties: pulumi.Output<string>;
     /**
@@ -302,32 +302,32 @@ export interface WeDataDataSourceState {
     /**
      * Data source ID.
      */
-    dataSourceId?: pulumi.Input<number>;
+    dataSourceId?: pulumi.Input<number | undefined>;
     /**
      * Data source description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Development environment data source configuration information, required if the project is in standard mode.
      */
-    devConProperties?: pulumi.Input<string>;
+    devConProperties?: pulumi.Input<string | undefined>;
     /**
      * Development environment data source file upload.
      */
-    devFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceDevFileUpload>;
+    devFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceDevFileUpload | undefined>;
     /**
      * Data source display name, for visual viewing.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * Data source name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Data source configuration information, stored in JSON KV format, with different KV storage information for each data source type.
      *
-     * > deployType: 
-     * CONNSTR_PUBLICDB(Public network instance) 
+     * > deployType:
+     * CONNSTR_PUBLICDB(Public network instance)
      * CONNSTR_CVMDB(Self-built instance)
      * INSTANCE(Cloud instance)
      *
@@ -437,17 +437,17 @@ export interface WeDataDataSourceState {
      *     "type": "COS"
      * }
      *
-     * ```.```
+     * ```.``````
      */
-    prodConProperties?: pulumi.Input<string>;
+    prodConProperties?: pulumi.Input<string | undefined>;
     /**
      * Production environment data source file upload.
      */
-    prodFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceProdFileUpload>;
+    prodFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceProdFileUpload | undefined>;
     /**
      * Data source project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Data source type: enumeration values.
      *
@@ -508,7 +508,7 @@ export interface WeDataDataSourceState {
      * - TDENGINE
      * - TDSQLC.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -518,28 +518,28 @@ export interface WeDataDataSourceArgs {
     /**
      * Data source description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Development environment data source configuration information, required if the project is in standard mode.
      */
-    devConProperties?: pulumi.Input<string>;
+    devConProperties?: pulumi.Input<string | undefined>;
     /**
      * Development environment data source file upload.
      */
-    devFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceDevFileUpload>;
+    devFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceDevFileUpload | undefined>;
     /**
      * Data source display name, for visual viewing.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * Data source name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Data source configuration information, stored in JSON KV format, with different KV storage information for each data source type.
      *
-     * > deployType: 
-     * CONNSTR_PUBLICDB(Public network instance) 
+     * > deployType:
+     * CONNSTR_PUBLICDB(Public network instance)
      * CONNSTR_CVMDB(Self-built instance)
      * INSTANCE(Cloud instance)
      *
@@ -649,13 +649,13 @@ export interface WeDataDataSourceArgs {
      *     "type": "COS"
      * }
      *
-     * ```.```
+     * ```.``````
      */
     prodConProperties: pulumi.Input<string>;
     /**
      * Production environment data source file upload.
      */
-    prodFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceProdFileUpload>;
+    prodFileUpload?: pulumi.Input<inputs.Wedata.WeDataDataSourceProdFileUpload | undefined>;
     /**
      * Data source project ID.
      */

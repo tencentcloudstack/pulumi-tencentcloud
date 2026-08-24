@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyInstanceBundle = tencentcloud.Lighthouse.getModifyInstanceBundle({
+ * const modifyInstanceBundle = tencentcloud.lighthouse.getModifyInstanceBundle({
  *     instanceId: "lhins-xxxxxx",
  *     filters: [{
  *         name: "bundle-id",
@@ -43,7 +43,7 @@ export interface GetModifyInstanceBundleArgs {
      * - `support-platform-type`: filter by system type, valid values: `LINUX_UNIX`, `WINDOWS`.
      * - `bundle-type`: filter according to package type, valid values: `GENERAL_BUNDLE`, `STORAGE_BUNDLE`, `ENTERPRISE_BUNDLE`, `EXCLUSIVE_BUNDLE`, `BEFAST_BUNDLE`.
      * - `bundle-state`: filter according to package status, valid values: `ONLINE`, `OFFLINE`.
-     * NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
+     *   NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
      */
     filters?: inputs.Lighthouse.GetModifyInstanceBundleFilter[];
     /**
@@ -81,7 +81,7 @@ export interface GetModifyInstanceBundleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyInstanceBundle = tencentcloud.Lighthouse.getModifyInstanceBundle({
+ * const modifyInstanceBundle = tencentcloud.lighthouse.getModifyInstanceBundle({
  *     instanceId: "lhins-xxxxxx",
  *     filters: [{
  *         name: "bundle-id",
@@ -109,9 +109,9 @@ export interface GetModifyInstanceBundleOutputArgs {
      * - `support-platform-type`: filter by system type, valid values: `LINUX_UNIX`, `WINDOWS`.
      * - `bundle-type`: filter according to package type, valid values: `GENERAL_BUNDLE`, `STORAGE_BUNDLE`, `ENTERPRISE_BUNDLE`, `EXCLUSIVE_BUNDLE`, `BEFAST_BUNDLE`.
      * - `bundle-state`: filter according to package status, valid values: `ONLINE`, `OFFLINE`.
-     * NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
+     *   NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetModifyInstanceBundleFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetModifyInstanceBundleFilterArgs>[] | undefined>;
     /**
      * Instance ID.
      */
@@ -119,5 +119,5 @@ export interface GetModifyInstanceBundleOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

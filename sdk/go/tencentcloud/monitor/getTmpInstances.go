@@ -111,12 +111,8 @@ type GetTmpInstancesResult struct {
 }
 
 func GetTmpInstancesOutput(ctx *pulumi.Context, args GetTmpInstancesOutputArgs, opts ...pulumi.InvokeOption) GetTmpInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTmpInstancesResultOutput, error) {
-			args := v.(GetTmpInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getTmpInstances:getTmpInstances", args, GetTmpInstancesResultOutput{}, options).(GetTmpInstancesResultOutput), nil
-		}).(GetTmpInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getTmpInstances:getTmpInstances", args, GetTmpInstancesResultOutput{}, options).(GetTmpInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getTmpInstances.

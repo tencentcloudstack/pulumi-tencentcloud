@@ -22,7 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -121,7 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -190,6 +188,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
+        /// <summary>
+        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Output("document")]
         public Output<string> Document { get; private set; } = null!;
 
@@ -282,6 +283,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Input("document", required: true)]
         public Input<string> Document { get; set; } = null!;
 
@@ -335,6 +339,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
 

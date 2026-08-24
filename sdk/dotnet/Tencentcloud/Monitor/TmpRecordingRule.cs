@@ -71,7 +71,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor recordingRule can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
     /// ```

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarms = tencentcloud.Monitor.getAlarmBasicAlarms({
+ * const alarms = tencentcloud.monitor.getAlarmBasicAlarms({
  *     module: "monitor",
  *     startTime: 1696990903,
  *     endTime: 1697098903,
@@ -135,7 +135,7 @@ export interface GetAlarmBasicAlarmsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarms = tencentcloud.Monitor.getAlarmBasicAlarms({
+ * const alarms = tencentcloud.monitor.getAlarmBasicAlarms({
  *     module: "monitor",
  *     startTime: 1696990903,
  *     endTime: 1697098903,
@@ -172,19 +172,19 @@ export interface GetAlarmBasicAlarmsOutputArgs {
     /**
      * Filter based on alarm status.
      */
-    alarmStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    alarmStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * End time, default to current timestamp.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Filter based on instance group ID.
      */
-    instanceGroupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    instanceGroupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Filter by indicator name.
      */
-    metricNames?: pulumi.Input<pulumi.Input<string>[]>;
+    metricNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Interface module name, current value monitor.
      */
@@ -192,25 +192,25 @@ export interface GetAlarmBasicAlarmsOutputArgs {
     /**
      * Filter based on alarm objects.
      */
-    objLike?: pulumi.Input<string>;
+    objLike?: pulumi.Input<string | undefined>;
     /**
      * Sort by occurrence time, taking ASC or DESC values.
      */
-    occurTimeOrder?: pulumi.Input<string>;
+    occurTimeOrder?: pulumi.Input<string | undefined>;
     /**
      * Filter based on project ID.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, default to one day is timestamp.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
     /**
      * Filter based on policy type.
      */
-    viewNames?: pulumi.Input<pulumi.Input<string>[]>;
+    viewNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

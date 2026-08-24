@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf web_shell can be imported using the id, e.g.
+    /// waf WebShell can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com

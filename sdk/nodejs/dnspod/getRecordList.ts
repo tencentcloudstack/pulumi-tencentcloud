@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordList = tencentcloud.Dnspod.getRecordList({
+ * const recordList = tencentcloud.dnspod.getRecordList({
  *     domain: "iac-tf.cloud",
  *     recordTypes: [
  *         "A",
@@ -250,7 +250,7 @@ export interface GetRecordListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordList = tencentcloud.Dnspod.getRecordList({
+ * const recordList = tencentcloud.dnspod.getRecordList({
  *     domain: "iac-tf.cloud",
  *     recordTypes: [
  *         "A",
@@ -320,97 +320,97 @@ export interface GetRecordListOutputArgs {
     /**
      * The domain ID to which the resolution record belongs. If DomainId is provided, the system will ignore the Domain parameter. You can find all Domain and DomainId through the DescribeDomainList interface.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
     /**
      * Filter @ type NS records. Default is false.
      */
-    filterAtNs?: pulumi.Input<boolean>;
+    filterAtNs?: pulumi.Input<boolean | undefined>;
     /**
      * When retrieving resolution records under certain groups, pass this group ID. You can obtain the GroupId field through the DescribeRecordGroupList interface.
      */
-    groupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    groupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether to perform an exact search based on the SubDomain parameter.
      */
-    isExactSubDomain?: pulumi.Input<boolean>;
+    isExactSubDomain?: pulumi.Input<boolean | undefined>;
     /**
      * Search for resolution records by keyword, currently supporting searching host headers and record values.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * The starting point of the resolution record MX priority query interval.
      */
-    mxBegin?: pulumi.Input<number>;
+    mxBegin?: pulumi.Input<number | undefined>;
     /**
      * The endpoint of the resolution record MX priority query interval.
      */
-    mxEnd?: pulumi.Input<number>;
+    mxEnd?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Retrieve resolution records for certain line IDs. You can view the allowed line information for the current domain through the DescribeRecordLineList interface.
      */
-    recordLines?: pulumi.Input<pulumi.Input<string>[]>;
+    recordLines?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Get the resolution record based on the resolution record status. The possible values are ENABLE and DISABLE. ENABLE: Normal DISABLE: Paused.
      */
-    recordStatuses?: pulumi.Input<pulumi.Input<string>[]>;
+    recordStatuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Retrieve certain types of resolution records, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, SPF, etc.
      */
-    recordTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    recordTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Get the resolution record based on the resolution record value.
      */
-    recordValue?: pulumi.Input<string>;
+    recordValue?: pulumi.Input<string | undefined>;
     /**
      * Get the resolution record based on the resolution record remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field, supporting NAME, LINE, TYPE, VALUE, WEIGHT, MX, TTL, UPDATED_ON fields. NAME: The host header of the resolution record LINE: The resolution record line TYPE: The resolution record type VALUE: The resolution record value WEIGHT: The weight MX: MX priority TTL: The resolution record cache time UPDATED_ON: The resolution record update time.
      */
-    sortField?: pulumi.Input<string>;
+    sortField?: pulumi.Input<string | undefined>;
     /**
      * Sorting method, ascending: ASC, descending: DESC. The default value is ASC.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * Retrieve resolution records based on the host header of the resolution record. Fuzzy matching is used by default. You can set the IsExactSubdomain parameter to true for precise searching.
      */
-    subDomain?: pulumi.Input<string>;
+    subDomain?: pulumi.Input<string | undefined>;
     /**
      * Sub domains.
      */
-    subDomains?: pulumi.Input<pulumi.Input<string>[]>;
+    subDomains?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The starting point of the resolution record TTL query interval.
      */
-    ttlBegin?: pulumi.Input<number>;
+    ttlBegin?: pulumi.Input<number | undefined>;
     /**
      * The endpoint of the resolution record TTL query interval.
      */
-    ttlEnd?: pulumi.Input<number>;
+    ttlEnd?: pulumi.Input<number | undefined>;
     /**
      * The starting point of the resolution record update time query interval.
      */
-    updatedAtBegin?: pulumi.Input<string>;
+    updatedAtBegin?: pulumi.Input<string | undefined>;
     /**
      * The endpoint of the resolution record update time query interval.
      */
-    updatedAtEnd?: pulumi.Input<string>;
+    updatedAtEnd?: pulumi.Input<string | undefined>;
     /**
      * The starting point of the resolution record weight query interval.
      */
-    weightBegin?: pulumi.Input<number>;
+    weightBegin?: pulumi.Input<number | undefined>;
     /**
      * The endpoint of the resolution record weight query interval.
      */
-    weightEnd?: pulumi.Input<number>;
+    weightEnd?: pulumi.Input<number | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceByCertId = tencentcloud.Clb.getInstanceByCertId({
+ * const instanceByCertId = tencentcloud.clb.getInstanceByCertId({
  *     certIds: ["3a6B5y8v"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetInstanceByCertIdResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceByCertId = tencentcloud.Clb.getInstanceByCertId({
+ * const instanceByCertId = tencentcloud.clb.getInstanceByCertId({
  *     certIds: ["3a6B5y8v"],
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetInstanceByCertIdOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

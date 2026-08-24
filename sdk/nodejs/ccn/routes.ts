@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc ccn_routes can be imported using the id, e.g.
+ * vpc ccnRoutes can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
@@ -112,15 +112,15 @@ export interface RoutesState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * CCN Route Id List.
      */
-    routeId?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string | undefined>;
     /**
      * `on`: Enable, `off`: Disable.
      */
-    switch?: pulumi.Input<string>;
+    switch?: pulumi.Input<string | undefined>;
 }
 
 /**

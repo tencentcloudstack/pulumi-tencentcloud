@@ -82,12 +82,8 @@ type GetListLineageResult struct {
 }
 
 func GetListLineageOutput(ctx *pulumi.Context, args GetListLineageOutputArgs, opts ...pulumi.InvokeOption) GetListLineageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListLineageResultOutput, error) {
-			args := v.(GetListLineageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListLineage:getListLineage", args, GetListLineageResultOutput{}, options).(GetListLineageResultOutput), nil
-		}).(GetListLineageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListLineage:getListLineage", args, GetListLineageResultOutput{}, options).(GetListLineageResultOutput)
 }
 
 // A collection of arguments for invoking getListLineage.

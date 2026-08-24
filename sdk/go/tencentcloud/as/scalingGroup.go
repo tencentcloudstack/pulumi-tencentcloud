@@ -51,15 +51,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
@@ -85,12 +85,12 @@ import (
 //			}
 //			_, err = as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(1),
 //				MinSize:          pulumi.Int(0),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				HealthCheckType:              pulumi.String("CLB"),
 //				ReplaceLoadBalancerUnhealthy: pulumi.Bool(true),
@@ -134,7 +134,7 @@ import (
 //				return err
 //			}
 //			exampleListener, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
-//				ClbId:        example.ID(),
+//				ClbId:        example.ID().ToIDOutput().ToStringOutput(),
 //				ListenerName: pulumi.String("listener-example"),
 //				Port:         pulumi.Int(80),
 //				Protocol:     pulumi.String("HTTP"),
@@ -144,7 +144,7 @@ import (
 //			}
 //			exampleListenerRule, err := clb.NewListenerRule(ctx, "example", &clb.ListenerRuleArgs{
 //				ListenerId: exampleListener.ListenerId,
-//				ClbId:      example.ID(),
+//				ClbId:      example.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("foo.net"),
 //				Url:        pulumi.String("/bar"),
 //			})
@@ -168,11 +168,12 @@ import (
 //				ReplaceLoadBalancerUnhealthy:      pulumi.Bool(false),
 //				ReplaceMode:                       pulumi.String("RECREATE"),
 //				DesiredCapacitySyncWithMaxMinSize: pulumi.Bool(false),
+//				PriorityScaleInUnhealthy:          pulumi.Bool(true),
 //				TerminationPolicies:               pulumi.String("NEWEST_INSTANCE"),
 //				RetryPolicy:                       pulumi.String("INCREMENTAL_INTERVALS"),
 //				ForwardBalancerIds: as.ScalingGroupForwardBalancerIdArray{
 //					&as.ScalingGroupForwardBalancerIdArgs{
-//						LoadBalancerId: example.ID(),
+//						LoadBalancerId: example.ID().ToIDOutput().ToStringOutput(),
 //						ListenerId:     exampleListener.ListenerId,
 //						RuleId:         exampleListenerRule.RuleId,
 //						TargetAttributes: as.ScalingGroupForwardBalancerIdTargetAttributeArray{
@@ -198,7 +199,7 @@ import (
 //
 // ## Import
 //
-// AutoScaling Groups can be imported using the id, e.g.
+// Auto scaling Group can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup example asg-n32ymck2
@@ -206,6 +207,10 @@ import (
 type ScalingGroup struct {
 	pulumi.CustomResourceState
 
+	// ID of a scaling group.
+	AutoScalingGroupId pulumi.StringOutput `pulumi:"autoScalingGroupId"`
+	// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+	ConcurrentScaleOutForDesiredCapacity pulumi.BoolOutput `pulumi:"concurrentScaleOutForDesiredCapacity"`
 	// An available ID for a launch configuration.
 	ConfigurationId pulumi.StringOutput `pulumi:"configurationId"`
 	// The time when the AS group was created.
@@ -215,11 +220,15 @@ type ScalingGroup struct {
 	// Desired volume of CVM instances, which is between `maxSize` and `minSize`.
 	DesiredCapacity pulumi.IntOutput `pulumi:"desiredCapacity"`
 	// The expected number of instances is synchronized with the maximum and minimum values. The default value is `False`. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.
-	DesiredCapacitySyncWithMaxMinSize pulumi.BoolPtrOutput `pulumi:"desiredCapacitySyncWithMaxMinSize"`
+	DesiredCapacitySyncWithMaxMinSize pulumi.BoolOutput `pulumi:"desiredCapacitySyncWithMaxMinSize"`
 	// List of application load balancers, which can't be specified with `loadBalancerIds` together.
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayOutput `pulumi:"forwardBalancerIds"`
 	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 	HealthCheckType pulumi.StringOutput `pulumi:"healthCheckType"`
+	// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+	// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+	// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+	InstanceAllocationPolicy pulumi.StringOutput `pulumi:"instanceAllocationPolicy"`
 	// Instance number of a scaling group.
 	InstanceCount pulumi.IntOutput `pulumi:"instanceCount"`
 	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
@@ -230,22 +239,24 @@ type ScalingGroup struct {
 	MaxSize pulumi.IntOutput `pulumi:"maxSize"`
 	// Minimum number of CVM instances. Valid value ranges: (0~2000).
 	MinSize pulumi.IntOutput `pulumi:"minSize"`
-	// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
-	MultiZoneSubnetPolicy pulumi.StringPtrOutput `pulumi:"multiZoneSubnetPolicy"`
+	// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
+	MultiZoneSubnetPolicy pulumi.StringOutput `pulumi:"multiZoneSubnetPolicy"`
+	// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+	PriorityScaleInUnhealthy pulumi.BoolOutput `pulumi:"priorityScaleInUnhealthy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
-	ReplaceLoadBalancerUnhealthy pulumi.BoolPtrOutput `pulumi:"replaceLoadBalancerUnhealthy"`
+	ReplaceLoadBalancerUnhealthy pulumi.BoolOutput `pulumi:"replaceLoadBalancerUnhealthy"`
 	// Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.
-	ReplaceMode pulumi.StringPtrOutput `pulumi:"replaceMode"`
+	ReplaceMode pulumi.StringOutput `pulumi:"replaceMode"`
 	// Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
-	ReplaceMonitorUnhealthy pulumi.BoolPtrOutput `pulumi:"replaceMonitorUnhealthy"`
+	ReplaceMonitorUnhealthy pulumi.BoolOutput `pulumi:"replaceMonitorUnhealthy"`
 	// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
 	RetryPolicy pulumi.StringPtrOutput `pulumi:"retryPolicy"`
 	// Name of a scaling group.
 	ScalingGroupName pulumi.StringOutput `pulumi:"scalingGroupName"`
 	// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
-	ScalingMode pulumi.StringPtrOutput `pulumi:"scalingMode"`
+	ScalingMode pulumi.StringOutput `pulumi:"scalingMode"`
 	// Current status of a scaling group.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// ID list of subnet, and for VPC it is required.
@@ -305,6 +316,10 @@ func GetScalingGroup(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ScalingGroup resources.
 type scalingGroupState struct {
+	// ID of a scaling group.
+	AutoScalingGroupId *string `pulumi:"autoScalingGroupId"`
+	// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+	ConcurrentScaleOutForDesiredCapacity *bool `pulumi:"concurrentScaleOutForDesiredCapacity"`
 	// An available ID for a launch configuration.
 	ConfigurationId *string `pulumi:"configurationId"`
 	// The time when the AS group was created.
@@ -319,6 +334,10 @@ type scalingGroupState struct {
 	ForwardBalancerIds []ScalingGroupForwardBalancerId `pulumi:"forwardBalancerIds"`
 	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
+	// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+	// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+	// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+	InstanceAllocationPolicy *string `pulumi:"instanceAllocationPolicy"`
 	// Instance number of a scaling group.
 	InstanceCount *int `pulumi:"instanceCount"`
 	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
@@ -329,8 +348,10 @@ type scalingGroupState struct {
 	MaxSize *int `pulumi:"maxSize"`
 	// Minimum number of CVM instances. Valid value ranges: (0~2000).
 	MinSize *int `pulumi:"minSize"`
-	// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+	// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
 	MultiZoneSubnetPolicy *string `pulumi:"multiZoneSubnetPolicy"`
+	// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+	PriorityScaleInUnhealthy *bool `pulumi:"priorityScaleInUnhealthy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId *int `pulumi:"projectId"`
 	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
@@ -360,6 +381,10 @@ type scalingGroupState struct {
 }
 
 type ScalingGroupState struct {
+	// ID of a scaling group.
+	AutoScalingGroupId pulumi.StringPtrInput
+	// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+	ConcurrentScaleOutForDesiredCapacity pulumi.BoolPtrInput
 	// An available ID for a launch configuration.
 	ConfigurationId pulumi.StringPtrInput
 	// The time when the AS group was created.
@@ -374,6 +399,10 @@ type ScalingGroupState struct {
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayInput
 	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 	HealthCheckType pulumi.StringPtrInput
+	// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+	// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+	// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+	InstanceAllocationPolicy pulumi.StringPtrInput
 	// Instance number of a scaling group.
 	InstanceCount pulumi.IntPtrInput
 	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
@@ -384,8 +413,10 @@ type ScalingGroupState struct {
 	MaxSize pulumi.IntPtrInput
 	// Minimum number of CVM instances. Valid value ranges: (0~2000).
 	MinSize pulumi.IntPtrInput
-	// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+	// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
 	MultiZoneSubnetPolicy pulumi.StringPtrInput
+	// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+	PriorityScaleInUnhealthy pulumi.BoolPtrInput
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrInput
 	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
@@ -419,6 +450,8 @@ func (ScalingGroupState) ElementType() reflect.Type {
 }
 
 type scalingGroupArgs struct {
+	// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+	ConcurrentScaleOutForDesiredCapacity *bool `pulumi:"concurrentScaleOutForDesiredCapacity"`
 	// An available ID for a launch configuration.
 	ConfigurationId string `pulumi:"configurationId"`
 	// Default cooldown time in second, and default value is `300`.
@@ -431,6 +464,10 @@ type scalingGroupArgs struct {
 	ForwardBalancerIds []ScalingGroupForwardBalancerId `pulumi:"forwardBalancerIds"`
 	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 	HealthCheckType *string `pulumi:"healthCheckType"`
+	// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+	// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+	// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+	InstanceAllocationPolicy *string `pulumi:"instanceAllocationPolicy"`
 	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
 	LbHealthCheckGracePeriod *int `pulumi:"lbHealthCheckGracePeriod"`
 	// ID list of traditional load balancers.
@@ -439,8 +476,10 @@ type scalingGroupArgs struct {
 	MaxSize int `pulumi:"maxSize"`
 	// Minimum number of CVM instances. Valid value ranges: (0~2000).
 	MinSize int `pulumi:"minSize"`
-	// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+	// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
 	MultiZoneSubnetPolicy *string `pulumi:"multiZoneSubnetPolicy"`
+	// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+	PriorityScaleInUnhealthy *bool `pulumi:"priorityScaleInUnhealthy"`
 	// Specifies to which project the scaling group belongs.
 	ProjectId *int `pulumi:"projectId"`
 	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
@@ -469,6 +508,8 @@ type scalingGroupArgs struct {
 
 // The set of arguments for constructing a ScalingGroup resource.
 type ScalingGroupArgs struct {
+	// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+	ConcurrentScaleOutForDesiredCapacity pulumi.BoolPtrInput
 	// An available ID for a launch configuration.
 	ConfigurationId pulumi.StringInput
 	// Default cooldown time in second, and default value is `300`.
@@ -481,6 +522,10 @@ type ScalingGroupArgs struct {
 	ForwardBalancerIds ScalingGroupForwardBalancerIdArrayInput
 	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 	HealthCheckType pulumi.StringPtrInput
+	// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+	// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+	// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+	InstanceAllocationPolicy pulumi.StringPtrInput
 	// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.<br>Valid range: 0-7200, in seconds. Default value: `0`.
 	LbHealthCheckGracePeriod pulumi.IntPtrInput
 	// ID list of traditional load balancers.
@@ -489,8 +534,10 @@ type ScalingGroupArgs struct {
 	MaxSize pulumi.IntInput
 	// Minimum number of CVM instances. Valid value ranges: (0~2000).
 	MinSize pulumi.IntInput
-	// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+	// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
 	MultiZoneSubnetPolicy pulumi.StringPtrInput
+	// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+	PriorityScaleInUnhealthy pulumi.BoolPtrInput
 	// Specifies to which project the scaling group belongs.
 	ProjectId pulumi.IntPtrInput
 	// Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
@@ -604,6 +651,16 @@ func (o ScalingGroupOutput) ToScalingGroupOutputWithContext(ctx context.Context)
 	return o
 }
 
+// ID of a scaling group.
+func (o ScalingGroupOutput) AutoScalingGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.AutoScalingGroupId }).(pulumi.StringOutput)
+}
+
+// The concurrent expansion function that matches the expected number cannot be set when `instanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `scalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+func (o ScalingGroupOutput) ConcurrentScaleOutForDesiredCapacity() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolOutput { return v.ConcurrentScaleOutForDesiredCapacity }).(pulumi.BoolOutput)
+}
+
 // An available ID for a launch configuration.
 func (o ScalingGroupOutput) ConfigurationId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.ConfigurationId }).(pulumi.StringOutput)
@@ -625,8 +682,8 @@ func (o ScalingGroupOutput) DesiredCapacity() pulumi.IntOutput {
 }
 
 // The expected number of instances is synchronized with the maximum and minimum values. The default value is `False`. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.
-func (o ScalingGroupOutput) DesiredCapacitySyncWithMaxMinSize() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolPtrOutput { return v.DesiredCapacitySyncWithMaxMinSize }).(pulumi.BoolPtrOutput)
+func (o ScalingGroupOutput) DesiredCapacitySyncWithMaxMinSize() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolOutput { return v.DesiredCapacitySyncWithMaxMinSize }).(pulumi.BoolOutput)
 }
 
 // List of application load balancers, which can't be specified with `loadBalancerIds` together.
@@ -637,6 +694,13 @@ func (o ScalingGroupOutput) ForwardBalancerIds() ScalingGroupForwardBalancerIdAr
 // Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).<br>If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
 func (o ScalingGroupOutput) HealthCheckType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.HealthCheckType }).(pulumi.StringOutput)
+}
+
+// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+func (o ScalingGroupOutput) InstanceAllocationPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.InstanceAllocationPolicy }).(pulumi.StringOutput)
 }
 
 // Instance number of a scaling group.
@@ -664,9 +728,14 @@ func (o ScalingGroupOutput) MinSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *ScalingGroup) pulumi.IntOutput { return v.MinSize }).(pulumi.IntOutput)
 }
 
-// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
-func (o ScalingGroupOutput) MultiZoneSubnetPolicy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.StringPtrOutput { return v.MultiZoneSubnetPolicy }).(pulumi.StringPtrOutput)
+// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
+func (o ScalingGroupOutput) MultiZoneSubnetPolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.MultiZoneSubnetPolicy }).(pulumi.StringOutput)
+}
+
+// Whether to enable priority for unhealthy instances during scale-in operations. If set to `true`, unhealthy instances will be removed first when scaling in.
+func (o ScalingGroupOutput) PriorityScaleInUnhealthy() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolOutput { return v.PriorityScaleInUnhealthy }).(pulumi.BoolOutput)
 }
 
 // Specifies to which project the scaling group belongs.
@@ -675,18 +744,18 @@ func (o ScalingGroupOutput) ProjectId() pulumi.IntPtrOutput {
 }
 
 // Enable unhealthy instance replacement. If set to `true`, AS will replace instances that are found unhealthy in the CLB health check.
-func (o ScalingGroupOutput) ReplaceLoadBalancerUnhealthy() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolPtrOutput { return v.ReplaceLoadBalancerUnhealthy }).(pulumi.BoolPtrOutput)
+func (o ScalingGroupOutput) ReplaceLoadBalancerUnhealthy() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolOutput { return v.ReplaceLoadBalancerUnhealthy }).(pulumi.BoolOutput)
 }
 
 // Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.
-func (o ScalingGroupOutput) ReplaceMode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.StringPtrOutput { return v.ReplaceMode }).(pulumi.StringPtrOutput)
+func (o ScalingGroupOutput) ReplaceMode() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.ReplaceMode }).(pulumi.StringOutput)
 }
 
 // Enables unhealthy instance replacement. If set to `true`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
-func (o ScalingGroupOutput) ReplaceMonitorUnhealthy() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolPtrOutput { return v.ReplaceMonitorUnhealthy }).(pulumi.BoolPtrOutput)
+func (o ScalingGroupOutput) ReplaceMonitorUnhealthy() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.BoolOutput { return v.ReplaceMonitorUnhealthy }).(pulumi.BoolOutput)
 }
 
 // Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
@@ -700,8 +769,8 @@ func (o ScalingGroupOutput) ScalingGroupName() pulumi.StringOutput {
 }
 
 // Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
-func (o ScalingGroupOutput) ScalingMode() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ScalingGroup) pulumi.StringPtrOutput { return v.ScalingMode }).(pulumi.StringPtrOutput)
+func (o ScalingGroupOutput) ScalingMode() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScalingGroup) pulumi.StringOutput { return v.ScalingMode }).(pulumi.StringOutput)
 }
 
 // Current status of a scaling group.

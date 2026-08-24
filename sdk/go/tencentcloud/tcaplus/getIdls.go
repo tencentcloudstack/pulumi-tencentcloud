@@ -67,12 +67,8 @@ type GetIdlsResult struct {
 }
 
 func GetIdlsOutput(ctx *pulumi.Context, args GetIdlsOutputArgs, opts ...pulumi.InvokeOption) GetIdlsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetIdlsResultOutput, error) {
-			args := v.(GetIdlsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcaplus/getIdls:getIdls", args, GetIdlsResultOutput{}, options).(GetIdlsResultOutput), nil
-		}).(GetIdlsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcaplus/getIdls:getIdls", args, GetIdlsResultOutput{}, options).(GetIdlsResultOutput)
 }
 
 // A collection of arguments for invoking getIdls.

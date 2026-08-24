@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getTaskResult({
+ * const example = tencentcloud.dlc.getTaskResult({
  *     taskId: "fdd9c5fa21ca11eca6fb5254006c64af",
  * });
  * ```
@@ -85,7 +85,7 @@ export interface GetTaskResultResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getTaskResult({
+ * const example = tencentcloud.dlc.getTaskResult({
  *     taskId: "fdd9c5fa21ca11eca6fb5254006c64af",
  * });
  * ```
@@ -108,19 +108,19 @@ export interface GetTaskResultOutputArgs {
     /**
      * Whether to convert the data type.
      */
-    isTransformDataType?: pulumi.Input<boolean>;
+    isTransformDataType?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum number of returned rows. Value range: 0-1,000. Default value: 1,000.
      */
-    maxResults?: pulumi.Input<number>;
+    maxResults?: pulumi.Input<number | undefined>;
     /**
      * The pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. The data with a volume set by the `MaxResults` field is returned each time.
      */
-    nextToken?: pulumi.Input<string>;
+    nextToken?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Unique task ID.
      */

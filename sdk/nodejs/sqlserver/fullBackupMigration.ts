@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -65,7 +65,7 @@ import * as utilities from "../utilities";
  *     backupName: "tf_example_backup",
  *     strategy: 0,
  * });
- * const example = tencentcloud.Sqlserver.getBackupsOutput({
+ * const example = tencentcloud.sqlserver.getBackupsOutput({
  *     instanceId: exampleDb.instanceId,
  *     backupName: exampleGeneralBackup.backupName,
  *     startTime: "2023-07-25 00:00:00",
@@ -82,7 +82,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver full_backup_migration can be imported using the id, e.g.
+ * sqlserver fullBackupMigration can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration example mssql-si2823jyl#mssql-backup-migration-cg0ffgqt
@@ -193,27 +193,27 @@ export interface FullBackupMigrationState {
     /**
      * If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
      */
-    backupFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    backupFiles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup import task ID.
      */
-    backupMigrationId?: pulumi.Input<string>;
+    backupMigrationId?: pulumi.Input<string | undefined>;
     /**
      * ID of imported target instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Task name.
      */
-    migrationName?: pulumi.Input<string>;
+    migrationName?: pulumi.Input<string | undefined>;
     /**
      * Migration task restoration type. FULL: full backup restoration, FULL_LOG: full backup and transaction log restoration, FULL_DIFF: full backup and differential backup restoration.
      */
-    recoveryType?: pulumi.Input<string>;
+    recoveryType?: pulumi.Input<string | undefined>;
     /**
      * Backup upload type. COS_URL: the backup is stored in users Cloud Object Storage, with URL provided. COS_UPLOAD: the backup is stored in the applications Cloud Object Storage and needs to be uploaded by the user.
      */
-    uploadType?: pulumi.Input<string>;
+    uploadType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -223,7 +223,7 @@ export interface FullBackupMigrationArgs {
     /**
      * If the UploadType is COS_URL, fill in the URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
      */
-    backupFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    backupFiles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of imported target instance.
      */

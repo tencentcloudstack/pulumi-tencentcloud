@@ -49,7 +49,7 @@ import * as utilities from "../utilities";
  *         "X-TEST": "test",
  *     },
  * });
- * const foo = tencentcloud.Gaap.getDomainErrorPagesOutput({
+ * const foo = tencentcloud.gaap.getDomainErrorPagesOutput({
  *     listenerId: fooDomainErrorPage.listenerId,
  *     domain: fooDomainErrorPage.domain,
  * });
@@ -153,7 +153,7 @@ export interface GetDomainErrorPagesResult {
  *         "X-TEST": "test",
  *     },
  * });
- * const foo = tencentcloud.Gaap.getDomainErrorPagesOutput({
+ * const foo = tencentcloud.gaap.getDomainErrorPagesOutput({
  *     listenerId: fooDomainErrorPage.listenerId,
  *     domain: fooDomainErrorPage.domain,
  * });
@@ -180,7 +180,7 @@ export interface GetDomainErrorPagesOutputArgs {
     /**
      * List of the error page info ID to be queried.
      */
-    ids?: pulumi.Input<pulumi.Input<string>[]>;
+    ids?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the layer7 listener to be queried.
      */
@@ -188,5 +188,5 @@ export interface GetDomainErrorPagesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

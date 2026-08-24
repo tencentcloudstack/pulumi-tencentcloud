@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myEmr = tencentcloud.Emr.getInstance({
+ * const myEmr = tencentcloud.emr.getInstance({
  *     displayStrategy: "clusterList",
  * });
  * const userManager = new tencentcloud.emr.UserManager("user_manager", {
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * emr user_manager can be imported using the id, e.g.
+ * emr userManager can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
@@ -149,35 +149,35 @@ export interface UserManagerState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Download keytab url.
      */
-    downloadKeytabUrl?: pulumi.Input<string>;
+    downloadKeytabUrl?: pulumi.Input<string | undefined>;
     /**
      * Cluster string ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * PassWord.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * If support download keytab.
      */
-    supportDownloadKeytab?: pulumi.Input<boolean>;
+    supportDownloadKeytab?: pulumi.Input<boolean | undefined>;
     /**
      * User group membership.
      */
-    userGroup?: pulumi.Input<string>;
+    userGroup?: pulumi.Input<string | undefined>;
     /**
      * Username.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
     /**
      * User type.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
 }
 
 /**

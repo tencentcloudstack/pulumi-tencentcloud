@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const paramTemplates = tencentcloud.Cynosdb.getParamTemplates({});
+ * const paramTemplates = tencentcloud.cynosdb.getParamTemplates({});
  * ```
  */
 export function getParamTemplates(args?: GetParamTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetParamTemplatesResult> {
@@ -125,7 +125,7 @@ export interface GetParamTemplatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const paramTemplates = tencentcloud.Cynosdb.getParamTemplates({});
+ * const paramTemplates = tencentcloud.cynosdb.getParamTemplates({});
  * ```
  */
 export function getParamTemplatesOutput(args?: GetParamTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParamTemplatesResult> {
@@ -154,49 +154,49 @@ export interface GetParamTemplatesOutputArgs {
     /**
      * Database mode, optional values: NORMAL, SERVERLESS.
      */
-    dbModes?: pulumi.Input<pulumi.Input<string>[]>;
+    dbModes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Engine types.
      */
-    engineTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    engineTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Database engine version number.
      */
-    engineVersions?: pulumi.Input<pulumi.Input<string>[]>;
+    engineVersions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Query limit.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Page offset.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * The sort field for the returned results.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sort by (asc, desc).
      */
-    orderDirection?: pulumi.Input<string>;
+    orderDirection?: pulumi.Input<string | undefined>;
     /**
      * The product type corresponding to the query template.
      */
-    products?: pulumi.Input<pulumi.Input<string>[]>;
+    products?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The id list of templates.
      */
-    templateIds?: pulumi.Input<pulumi.Input<number>[]>;
+    templateIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * The name list of templates.
      */
-    templateNames?: pulumi.Input<pulumi.Input<string>[]>;
+    templateNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Template types.
      */
-    templateTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    templateTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

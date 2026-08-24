@@ -87,7 +87,7 @@ export class EndPointService extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly serviceOwner: pulumi.Output<string>;
     /**
-     * Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+     * Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
      */
     declare public readonly serviceType: pulumi.Output<string>;
     /**
@@ -159,43 +159,43 @@ export interface EndPointServiceState {
     /**
      * Whether to automatically accept.
      */
-    autoAcceptFlag?: pulumi.Input<boolean>;
+    autoAcceptFlag?: pulumi.Input<boolean | undefined>;
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Create Time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Count of end point.
      */
-    endPointCount?: pulumi.Input<number>;
+    endPointCount?: pulumi.Input<number | undefined>;
     /**
      * Name of end point service.
      */
-    endPointServiceName?: pulumi.Input<string>;
+    endPointServiceName?: pulumi.Input<string | undefined>;
     /**
      * Id of service instance, like lb-xxx.
      */
-    serviceInstanceId?: pulumi.Input<string>;
+    serviceInstanceId?: pulumi.Input<string | undefined>;
     /**
      * APPID.
      */
-    serviceOwner?: pulumi.Input<string>;
+    serviceOwner?: pulumi.Input<string | undefined>;
     /**
-     * Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+     * Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * VIP of backend service.
      */
-    serviceVip?: pulumi.Input<string>;
+    serviceVip?: pulumi.Input<string | undefined>;
     /**
      * ID of vpc instance.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -215,9 +215,9 @@ export interface EndPointServiceArgs {
      */
     serviceInstanceId: pulumi.Input<string>;
     /**
-     * Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+     * Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * ID of vpc instance.
      */

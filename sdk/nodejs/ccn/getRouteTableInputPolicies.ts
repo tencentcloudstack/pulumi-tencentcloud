@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ccn.getRouteTableInputPolicies({
+ * const example = tencentcloud.ccn.getRouteTableInputPolicies({
  *     ccnId: "ccn-06jek8tf",
  *     routeTableId: "ccnrtb-4jv5ltb9",
  * });
@@ -79,7 +79,7 @@ export interface GetRouteTableInputPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ccn.getRouteTableInputPolicies({
+ * const example = tencentcloud.ccn.getRouteTableInputPolicies({
  *     ccnId: "ccn-06jek8tf",
  *     routeTableId: "ccnrtb-4jv5ltb9",
  * });
@@ -106,11 +106,11 @@ export interface GetRouteTableInputPoliciesOutputArgs {
     /**
      * Policy version.
      */
-    policyVersion?: pulumi.Input<number>;
+    policyVersion?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * CCN Route table ID.
      */

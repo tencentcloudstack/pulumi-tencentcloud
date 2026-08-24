@@ -3770,7 +3770,9 @@ type SyncConfigObjects struct {
 	Databases []SyncConfigObjectsDatabase `pulumi:"databases"`
 	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
 	Mode *string `pulumi:"mode"`
-	// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version 1.83.20.
 	OnlineDdl *SyncConfigObjectsOnlineDdl `pulumi:"onlineDdl"`
 }
 
@@ -3792,7 +3794,9 @@ type SyncConfigObjectsArgs struct {
 	Databases SyncConfigObjectsDatabaseArrayInput `pulumi:"databases"`
 	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
 	Mode pulumi.StringPtrInput `pulumi:"mode"`
-	// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version 1.83.20.
 	OnlineDdl SyncConfigObjectsOnlineDdlPtrInput `pulumi:"onlineDdl"`
 }
 
@@ -3888,7 +3892,9 @@ func (o SyncConfigObjectsOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjects) *string { return v.Mode }).(pulumi.StringPtrOutput)
 }
 
-// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version 1.83.20.
 func (o SyncConfigObjectsOutput) OnlineDdl() SyncConfigObjectsOnlineDdlPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjects) *SyncConfigObjectsOnlineDdl { return v.OnlineDdl }).(SyncConfigObjectsOnlineDdlPtrOutput)
 }
@@ -3947,7 +3953,9 @@ func (o SyncConfigObjectsPtrOutput) Mode() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version 1.83.20.
 func (o SyncConfigObjectsPtrOutput) OnlineDdl() SyncConfigObjectsOnlineDdlPtrOutput {
 	return o.ApplyT(func(v *SyncConfigObjects) *SyncConfigObjectsOnlineDdl {
 		if v == nil {
@@ -3978,6 +3986,8 @@ type SyncConfigObjectsDatabase struct {
 	ProcedureMode *string `pulumi:"procedureMode"`
 	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
 	Procedures []string `pulumi:"procedures"`
+	// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaMode *string `pulumi:"schemaMode"`
 	// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
 	SchemaName *string `pulumi:"schemaName"`
 	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
@@ -4026,6 +4036,8 @@ type SyncConfigObjectsDatabaseArgs struct {
 	ProcedureMode pulumi.StringPtrInput `pulumi:"procedureMode"`
 	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
 	Procedures pulumi.StringArrayInput `pulumi:"procedures"`
+	// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaMode pulumi.StringPtrInput `pulumi:"schemaMode"`
 	// Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
 	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
 	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
@@ -4143,6 +4155,11 @@ func (o SyncConfigObjectsDatabaseOutput) Procedures() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SyncConfigObjectsDatabase) []string { return v.Procedures }).(pulumi.StringArrayOutput)
 }
 
+// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseOutput) SchemaMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.SchemaMode }).(pulumi.StringPtrOutput)
+}
+
 // Migrated or synchronized schemaNote: This field may return null, indicating that no valid value can be obtained.
 func (o SyncConfigObjectsDatabaseOutput) SchemaName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjectsDatabase) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
@@ -4199,12 +4216,20 @@ func (o SyncConfigObjectsDatabaseArrayOutput) Index(i pulumi.IntInput) SyncConfi
 }
 
 type SyncConfigObjectsDatabaseTable struct {
+	// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnMode *string `pulumi:"columnMode"`
+	// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Columns []SyncConfigObjectsDatabaseTableColumn `pulumi:"columns"`
 	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
 	FilterCondition *string `pulumi:"filterCondition"`
 	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
 	NewTableName *string `pulumi:"newTableName"`
+	// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+	TableEditMode *string `pulumi:"tableEditMode"`
 	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
 	TableName *string `pulumi:"tableName"`
+	// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpTables []string `pulumi:"tmpTables"`
 }
 
 // SyncConfigObjectsDatabaseTableInput is an input type that accepts SyncConfigObjectsDatabaseTableArgs and SyncConfigObjectsDatabaseTableOutput values.
@@ -4219,12 +4244,20 @@ type SyncConfigObjectsDatabaseTableInput interface {
 }
 
 type SyncConfigObjectsDatabaseTableArgs struct {
+	// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnMode pulumi.StringPtrInput `pulumi:"columnMode"`
+	// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Columns SyncConfigObjectsDatabaseTableColumnArrayInput `pulumi:"columns"`
 	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
 	FilterCondition pulumi.StringPtrInput `pulumi:"filterCondition"`
 	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
 	NewTableName pulumi.StringPtrInput `pulumi:"newTableName"`
+	// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+	TableEditMode pulumi.StringPtrInput `pulumi:"tableEditMode"`
 	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
 	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpTables pulumi.StringArrayInput `pulumi:"tmpTables"`
 }
 
 func (SyncConfigObjectsDatabaseTableArgs) ElementType() reflect.Type {
@@ -4278,6 +4311,16 @@ func (o SyncConfigObjectsDatabaseTableOutput) ToSyncConfigObjectsDatabaseTableOu
 	return o
 }
 
+// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) ColumnMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.ColumnMode }).(pulumi.StringPtrOutput)
+}
+
+// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) Columns() SyncConfigObjectsDatabaseTableColumnArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) []SyncConfigObjectsDatabaseTableColumn { return v.Columns }).(SyncConfigObjectsDatabaseTableColumnArrayOutput)
+}
+
 // Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SyncConfigObjectsDatabaseTableOutput) FilterCondition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.FilterCondition }).(pulumi.StringPtrOutput)
@@ -4288,9 +4331,19 @@ func (o SyncConfigObjectsDatabaseTableOutput) NewTableName() pulumi.StringPtrOut
 	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.NewTableName }).(pulumi.StringPtrOutput)
 }
 
+// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) TableEditMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.TableEditMode }).(pulumi.StringPtrOutput)
+}
+
 // Table name. Note: This field may return null, indicating that no valid value can be obtained.
 func (o SyncConfigObjectsDatabaseTableOutput) TableName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableOutput) TmpTables() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTable) []string { return v.TmpTables }).(pulumi.StringArrayOutput)
 }
 
 type SyncConfigObjectsDatabaseTableArrayOutput struct{ *pulumi.OutputState }
@@ -4311,6 +4364,112 @@ func (o SyncConfigObjectsDatabaseTableArrayOutput) Index(i pulumi.IntInput) Sync
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigObjectsDatabaseTable {
 		return vs[0].([]SyncConfigObjectsDatabaseTable)[vs[1].(int)]
 	}).(SyncConfigObjectsDatabaseTableOutput)
+}
+
+type SyncConfigObjectsDatabaseTableColumn struct {
+	// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnName *string `pulumi:"columnName"`
+	// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewColumnName *string `pulumi:"newColumnName"`
+}
+
+// SyncConfigObjectsDatabaseTableColumnInput is an input type that accepts SyncConfigObjectsDatabaseTableColumnArgs and SyncConfigObjectsDatabaseTableColumnOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseTableColumnInput` via:
+//
+//	SyncConfigObjectsDatabaseTableColumnArgs{...}
+type SyncConfigObjectsDatabaseTableColumnInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseTableColumnOutput() SyncConfigObjectsDatabaseTableColumnOutput
+	ToSyncConfigObjectsDatabaseTableColumnOutputWithContext(context.Context) SyncConfigObjectsDatabaseTableColumnOutput
+}
+
+type SyncConfigObjectsDatabaseTableColumnArgs struct {
+	// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewColumnName pulumi.StringPtrInput `pulumi:"newColumnName"`
+}
+
+func (SyncConfigObjectsDatabaseTableColumnArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseTableColumnArgs) ToSyncConfigObjectsDatabaseTableColumnOutput() SyncConfigObjectsDatabaseTableColumnOutput {
+	return i.ToSyncConfigObjectsDatabaseTableColumnOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseTableColumnArgs) ToSyncConfigObjectsDatabaseTableColumnOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableColumnOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseTableColumnOutput)
+}
+
+// SyncConfigObjectsDatabaseTableColumnArrayInput is an input type that accepts SyncConfigObjectsDatabaseTableColumnArray and SyncConfigObjectsDatabaseTableColumnArrayOutput values.
+// You can construct a concrete instance of `SyncConfigObjectsDatabaseTableColumnArrayInput` via:
+//
+//	SyncConfigObjectsDatabaseTableColumnArray{ SyncConfigObjectsDatabaseTableColumnArgs{...} }
+type SyncConfigObjectsDatabaseTableColumnArrayInput interface {
+	pulumi.Input
+
+	ToSyncConfigObjectsDatabaseTableColumnArrayOutput() SyncConfigObjectsDatabaseTableColumnArrayOutput
+	ToSyncConfigObjectsDatabaseTableColumnArrayOutputWithContext(context.Context) SyncConfigObjectsDatabaseTableColumnArrayOutput
+}
+
+type SyncConfigObjectsDatabaseTableColumnArray []SyncConfigObjectsDatabaseTableColumnInput
+
+func (SyncConfigObjectsDatabaseTableColumnArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (i SyncConfigObjectsDatabaseTableColumnArray) ToSyncConfigObjectsDatabaseTableColumnArrayOutput() SyncConfigObjectsDatabaseTableColumnArrayOutput {
+	return i.ToSyncConfigObjectsDatabaseTableColumnArrayOutputWithContext(context.Background())
+}
+
+func (i SyncConfigObjectsDatabaseTableColumnArray) ToSyncConfigObjectsDatabaseTableColumnArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableColumnArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncConfigObjectsDatabaseTableColumnArrayOutput)
+}
+
+type SyncConfigObjectsDatabaseTableColumnOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseTableColumnOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncConfigObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseTableColumnOutput) ToSyncConfigObjectsDatabaseTableColumnOutput() SyncConfigObjectsDatabaseTableColumnOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableColumnOutput) ToSyncConfigObjectsDatabaseTableColumnOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableColumnOutput {
+	return o
+}
+
+// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableColumnOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTableColumn) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncConfigObjectsDatabaseTableColumnOutput) NewColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncConfigObjectsDatabaseTableColumn) *string { return v.NewColumnName }).(pulumi.StringPtrOutput)
+}
+
+type SyncConfigObjectsDatabaseTableColumnArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncConfigObjectsDatabaseTableColumnArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncConfigObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (o SyncConfigObjectsDatabaseTableColumnArrayOutput) ToSyncConfigObjectsDatabaseTableColumnArrayOutput() SyncConfigObjectsDatabaseTableColumnArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableColumnArrayOutput) ToSyncConfigObjectsDatabaseTableColumnArrayOutputWithContext(ctx context.Context) SyncConfigObjectsDatabaseTableColumnArrayOutput {
+	return o
+}
+
+func (o SyncConfigObjectsDatabaseTableColumnArrayOutput) Index(i pulumi.IntInput) SyncConfigObjectsDatabaseTableColumnOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncConfigObjectsDatabaseTableColumn {
+		return vs[0].([]SyncConfigObjectsDatabaseTableColumn)[vs[1].(int)]
+	}).(SyncConfigObjectsDatabaseTableColumnOutput)
 }
 
 type SyncConfigObjectsDatabaseView struct {
@@ -4420,7 +4579,9 @@ func (o SyncConfigObjectsDatabaseViewArrayOutput) Index(i pulumi.IntInput) SyncC
 }
 
 type SyncConfigObjectsOnlineDdl struct {
-	// status.
+	// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
+	//
+	// Deprecated: It has been deprecated from version 1.83.20.
 	Status *string `pulumi:"status"`
 }
 
@@ -4436,7 +4597,9 @@ type SyncConfigObjectsOnlineDdlInput interface {
 }
 
 type SyncConfigObjectsOnlineDdlArgs struct {
-	// status.
+	// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
+	//
+	// Deprecated: It has been deprecated from version 1.83.20.
 	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
@@ -4517,7 +4680,9 @@ func (o SyncConfigObjectsOnlineDdlOutput) ToSyncConfigObjectsOnlineDdlPtrOutputW
 	}).(SyncConfigObjectsOnlineDdlPtrOutput)
 }
 
-// status.
+// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
+//
+// Deprecated: It has been deprecated from version 1.83.20.
 func (o SyncConfigObjectsOnlineDdlOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncConfigObjectsOnlineDdl) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -4546,7 +4711,9 @@ func (o SyncConfigObjectsOnlineDdlPtrOutput) Elem() SyncConfigObjectsOnlineDdlOu
 	}).(SyncConfigObjectsOnlineDdlOutput)
 }
 
-// status.
+// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
+//
+// Deprecated: It has been deprecated from version 1.83.20.
 func (o SyncConfigObjectsOnlineDdlPtrOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SyncConfigObjectsOnlineDdl) *string {
 		if v == nil {
@@ -6055,9 +6222,9 @@ func (o SyncConfigSrcInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
 }
 
 type SyncJobTag struct {
-	// tag key.
+	// Tag key.
 	TagKey *string `pulumi:"tagKey"`
-	// tag value.
+	// Tag value.
 	TagValue *string `pulumi:"tagValue"`
 }
 
@@ -6073,9 +6240,9 @@ type SyncJobTagInput interface {
 }
 
 type SyncJobTagArgs struct {
-	// tag key.
+	// Tag key.
 	TagKey pulumi.StringPtrInput `pulumi:"tagKey"`
-	// tag value.
+	// Tag value.
 	TagValue pulumi.StringPtrInput `pulumi:"tagValue"`
 }
 
@@ -6130,12 +6297,12 @@ func (o SyncJobTagOutput) ToSyncJobTagOutputWithContext(ctx context.Context) Syn
 	return o
 }
 
-// tag key.
+// Tag key.
 func (o SyncJobTagOutput) TagKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncJobTag) *string { return v.TagKey }).(pulumi.StringPtrOutput)
 }
 
-// tag value.
+// Tag value.
 func (o SyncJobTagOutput) TagValue() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SyncJobTag) *string { return v.TagValue }).(pulumi.StringPtrOutput)
 }
@@ -12953,6 +13120,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableColumnInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableColumnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseTableColumnArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseTableColumnArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseViewInput)(nil)).Elem(), SyncConfigObjectsDatabaseViewArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsDatabaseViewArrayInput)(nil)).Elem(), SyncConfigObjectsDatabaseViewArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigObjectsOnlineDdlInput)(nil)).Elem(), SyncConfigObjectsOnlineDdlArgs{})
@@ -13105,6 +13274,8 @@ func init() {
 	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseArrayOutput{})
 	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableOutput{})
 	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableArrayOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableColumnOutput{})
+	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseTableColumnArrayOutput{})
 	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseViewOutput{})
 	pulumi.RegisterOutputType(SyncConfigObjectsDatabaseViewArrayOutput{})
 	pulumi.RegisterOutputType(SyncConfigObjectsOnlineDdlOutput{})

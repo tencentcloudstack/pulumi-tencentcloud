@@ -76,12 +76,8 @@ type GetAlarmMetricResult struct {
 }
 
 func GetAlarmMetricOutput(ctx *pulumi.Context, args GetAlarmMetricOutputArgs, opts ...pulumi.InvokeOption) GetAlarmMetricResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmMetricResultOutput, error) {
-			args := v.(GetAlarmMetricArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args, GetAlarmMetricResultOutput{}, options).(GetAlarmMetricResultOutput), nil
-		}).(GetAlarmMetricResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args, GetAlarmMetricResultOutput{}, options).(GetAlarmMetricResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmMetric.

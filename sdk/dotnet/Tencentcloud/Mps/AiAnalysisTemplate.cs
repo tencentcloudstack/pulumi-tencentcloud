@@ -49,7 +49,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps ai_analysis_template can be imported using the id, e.g.
+    /// mps AiAnalysisTemplate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id

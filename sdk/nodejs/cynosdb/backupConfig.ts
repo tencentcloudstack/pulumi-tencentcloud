@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cynosdb backupConfig
+ * Provides a resource to create a CynosDB backup config
  *
  * ## Example Usage
  *
@@ -17,10 +17,48 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.cynosdb.BackupConfig("foo", {
+ * const example = new tencentcloud.cynosdb.Cluster("example", {
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     dbMode: "NORMAL",
+ *     dbType: "MYSQL",
+ *     dbVersion: "5.7",
+ *     port: 3306,
+ *     clusterName: "tf-example",
+ *     password: "cynosDB@123",
+ *     instanceMaintainDuration: 7200,
+ *     instanceMaintainStartTime: 10800,
+ *     instanceCpuCore: 2,
+ *     instanceMemorySize: 4,
+ *     forceDelete: true,
+ *     instanceMaintainWeekdays: [
+ *         "Fri",
+ *         "Mon",
+ *         "Sat",
+ *         "Sun",
+ *         "Thu",
+ *         "Wed",
+ *         "Tue",
+ *     ],
+ *     paramItems: [
+ *         {
+ *             name: "character_set_server",
+ *             currentValue: "utf8mb4",
+ *         },
+ *         {
+ *             name: "lower_case_table_names",
+ *             currentValue: "1",
+ *         },
+ *     ],
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ * });
+ * const exampleBackupConfig = new tencentcloud.cynosdb.BackupConfig("example", {
+ *     clusterId: example.id,
  *     backupTimeBeg: 7200,
  *     backupTimeEnd: 21600,
- *     clusterId: "cynosdbmysql-bws8h88b",
  *     reserveDuration: 604800,
  *     logicBackupConfig: {
  *         logicBackupEnable: "ON",
@@ -28,7 +66,7 @@ import * as utilities from "../utilities";
  *         logicBackupTimeEnd: 21600,
  *         logicCrossRegions: ["ap-shanghai"],
  *         logicCrossRegionsEnable: "ON",
- *         logicReserveDuration: 259200,
+ *         logicReserveDuration: 604800,
  *     },
  * });
  * ```
@@ -39,10 +77,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.cynosdb.BackupConfig("foo", {
+ * const example = new tencentcloud.cynosdb.BackupConfig("example", {
+ *     clusterId: exampleTencentcloudCynosdbCluster.id,
  *     backupTimeBeg: 7200,
  *     backupTimeEnd: 21600,
- *     clusterId: "cynosdbmysql-bws8h88b",
  *     reserveDuration: 604800,
  *     logicBackupConfig: {
  *         logicBackupEnable: "OFF",
@@ -50,12 +88,32 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Enable secondary snapshot backup configuration
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cynosdb.BackupConfig("example", {
+ *     clusterId: exampleTencentcloudCynosdbCluster.id,
+ *     backupTimeBeg: 7200,
+ *     backupTimeEnd: 21600,
+ *     reserveDuration: 604800,
+ *     snapshotSecondaryBackupConfig: {
+ *         backupTimeBeg: 7200,
+ *         backupTimeEnd: 21600,
+ *         reserveDuration: 604800,
+ *         backupTriggerStrategy: "periodically",
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
- * cynosdb backup_config can be imported using the id, e.g.
+ * CynosDB backup config can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig foo cynosdbmysql-bws8h88b
+ * $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig example cynosdbmysql-bws8h88b
  * ```
  */
 export class BackupConfig extends pulumi.CustomResource {
@@ -109,11 +167,15 @@ export class BackupConfig extends pulumi.CustomResource {
     /**
      * Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
      */
-    declare public readonly logicBackupConfig: pulumi.Output<outputs.Cynosdb.BackupConfigLogicBackupConfig | undefined>;
+    declare public readonly logicBackupConfig: pulumi.Output<outputs.Cynosdb.BackupConfigLogicBackupConfig>;
     /**
      * Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
      */
     declare public readonly reserveDuration: pulumi.Output<number>;
+    /**
+     * Secondary snapshot backup configuration.
+     */
+    declare public readonly snapshotSecondaryBackupConfig: pulumi.Output<outputs.Cynosdb.BackupConfigSnapshotSecondaryBackupConfig>;
 
     /**
      * Create a BackupConfig resource with the given unique name, arguments, and options.
@@ -135,6 +197,7 @@ export class BackupConfig extends pulumi.CustomResource {
             resourceInputs["clusterId"] = state?.clusterId;
             resourceInputs["logicBackupConfig"] = state?.logicBackupConfig;
             resourceInputs["reserveDuration"] = state?.reserveDuration;
+            resourceInputs["snapshotSecondaryBackupConfig"] = state?.snapshotSecondaryBackupConfig;
         } else {
             const args = argsOrState as BackupConfigArgs | undefined;
             if (args?.backupTimeBeg === undefined && !opts.urn) {
@@ -154,6 +217,7 @@ export class BackupConfig extends pulumi.CustomResource {
             resourceInputs["clusterId"] = args?.clusterId;
             resourceInputs["logicBackupConfig"] = args?.logicBackupConfig;
             resourceInputs["reserveDuration"] = args?.reserveDuration;
+            resourceInputs["snapshotSecondaryBackupConfig"] = args?.snapshotSecondaryBackupConfig;
             resourceInputs["backupFreqs"] = undefined /*out*/;
             resourceInputs["backupType"] = undefined /*out*/;
         }
@@ -169,31 +233,35 @@ export interface BackupConfigState {
     /**
      * Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
      */
-    backupFreqs?: pulumi.Input<pulumi.Input<string>[]>;
+    backupFreqs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
      */
-    backupTimeBeg?: pulumi.Input<number>;
+    backupTimeBeg?: pulumi.Input<number | undefined>;
     /**
      * Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
      */
-    backupTimeEnd?: pulumi.Input<number>;
+    backupTimeEnd?: pulumi.Input<number | undefined>;
     /**
      * Backup mode. logic: logic backup; snapshot: snapshot backup. This parameter cannot be modified currently and doesn't need to be entered.
      */
-    backupType?: pulumi.Input<string>;
+    backupType?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
      */
-    logicBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigLogicBackupConfig>;
+    logicBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigLogicBackupConfig | undefined>;
     /**
      * Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
      */
-    reserveDuration?: pulumi.Input<number>;
+    reserveDuration?: pulumi.Input<number | undefined>;
+    /**
+     * Secondary snapshot backup configuration.
+     */
+    snapshotSecondaryBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigSnapshotSecondaryBackupConfig | undefined>;
 }
 
 /**
@@ -215,9 +283,13 @@ export interface BackupConfigArgs {
     /**
      * Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
      */
-    logicBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigLogicBackupConfig>;
+    logicBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigLogicBackupConfig | undefined>;
     /**
      * Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
      */
     reserveDuration: pulumi.Input<number>;
+    /**
+     * Secondary snapshot backup configuration.
+     */
+    snapshotSecondaryBackupConfig?: pulumi.Input<inputs.Cynosdb.BackupConfigSnapshotSecondaryBackupConfig | undefined>;
 }

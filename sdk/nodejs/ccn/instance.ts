@@ -23,6 +23,7 @@ import * as utilities from "../utilities";
  *     qos: "AG",
  *     chargeType: "PREPAID",
  *     bandwidthLimitType: "INTER_REGION_LIMIT",
+ *     instanceMeteringType: "BANDWIDTH",
  *     routeEcmpFlag: true,
  *     routeOverlapFlag: true,
  *     tags: {
@@ -123,6 +124,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly instanceCount: pulumi.Output<number>;
     /**
+     * Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+     */
+    declare public readonly instanceMeteringType: pulumi.Output<string>;
+    /**
      * Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
      */
     declare public readonly name: pulumi.Output<string>;
@@ -165,6 +170,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["description"] = state?.description;
             resourceInputs["instanceCount"] = state?.instanceCount;
+            resourceInputs["instanceMeteringType"] = state?.instanceMeteringType;
             resourceInputs["name"] = state?.name;
             resourceInputs["qos"] = state?.qos;
             resourceInputs["routeEcmpFlag"] = state?.routeEcmpFlag;
@@ -176,6 +182,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["bandwidthLimitType"] = args?.bandwidthLimitType;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["description"] = args?.description;
+            resourceInputs["instanceMeteringType"] = args?.instanceMeteringType;
             resourceInputs["name"] = args?.name;
             resourceInputs["qos"] = args?.qos;
             resourceInputs["routeEcmpFlag"] = args?.routeEcmpFlag;
@@ -197,47 +204,51 @@ export interface InstanceState {
     /**
      * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
      */
-    bandwidthLimitType?: pulumi.Input<string>;
+    bandwidthLimitType?: pulumi.Input<string | undefined>;
     /**
      * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Creation time of resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of CCN, and maximum length does not exceed 100 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Number of attached instances.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
+    /**
+     * Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+     */
+    instanceMeteringType?: pulumi.Input<string | undefined>;
     /**
      * Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
      */
-    qos?: pulumi.Input<string>;
+    qos?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled. Default is false.
      */
-    routeEcmpFlag?: pulumi.Input<boolean>;
+    routeEcmpFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable the routing overlap function. `true`: enabled, `false`: disabled. Default is true, cannot set to false.
      */
-    routeOverlapFlag?: pulumi.Input<boolean>;
+    routeOverlapFlag?: pulumi.Input<boolean | undefined>;
     /**
      * States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Instance tag.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -247,33 +258,37 @@ export interface InstanceArgs {
     /**
      * The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
      */
-    bandwidthLimitType?: pulumi.Input<string>;
+    bandwidthLimitType?: pulumi.Input<string | undefined>;
     /**
      * Billing mode. Valid values: `PREPAID`, `POSTPAID`. `PREPAID` means prepaid, which means annual and monthly subscription, `POSTPAID` means post-payment, which means billing by volume. The default is `POSTPAID`. The prepaid model only supports inter-regional speed limit, and the post-paid model supports inter-regional speed limit and regional export speed limit.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Description of CCN, and maximum length does not exceed 100 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+     */
+    instanceMeteringType?: pulumi.Input<string | undefined>;
     /**
      * Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
      */
-    qos?: pulumi.Input<string>;
+    qos?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled. Default is false.
      */
-    routeEcmpFlag?: pulumi.Input<boolean>;
+    routeEcmpFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable the routing overlap function. `true`: enabled, `false`: disabled. Default is true, cannot set to false.
      */
-    routeOverlapFlag?: pulumi.Input<boolean>;
+    routeOverlapFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Instance tag.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

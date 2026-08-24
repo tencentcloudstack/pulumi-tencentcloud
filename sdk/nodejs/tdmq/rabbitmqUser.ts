@@ -9,7 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tdmq rabbitmq_user can be imported using the id, e.g.
+ * tdmq rabbitmqUser can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
@@ -125,31 +125,31 @@ export interface RabbitmqUserState {
     /**
      * Describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of channels for this user, if not filled in, there is no limit.
      */
-    maxChannels?: pulumi.Input<number>;
+    maxChannels?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of connections for this user, if not filled in, there is no limit.
      */
-    maxConnections?: pulumi.Input<number>;
+    maxConnections?: pulumi.Input<number | undefined>;
     /**
      * Password, used when logging in.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * User tag, used to determine the permission range for changing user access to RabbitMQ Management. Management: regular console user, monitoring: management console user, other values: non console user.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Username, used when logging in.
      */
-    user?: pulumi.Input<string>;
+    user?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -159,7 +159,7 @@ export interface RabbitmqUserArgs {
     /**
      * Describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID.
      */
@@ -167,11 +167,11 @@ export interface RabbitmqUserArgs {
     /**
      * The maximum number of channels for this user, if not filled in, there is no limit.
      */
-    maxChannels?: pulumi.Input<number>;
+    maxChannels?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of connections for this user, if not filled in, there is no limit.
      */
-    maxConnections?: pulumi.Input<number>;
+    maxConnections?: pulumi.Input<number | undefined>;
     /**
      * Password, used when logging in.
      */
@@ -179,7 +179,7 @@ export interface RabbitmqUserArgs {
     /**
      * User tag, used to determine the permission range for changing user access to RabbitMQ Management. Management: regular console user, monitoring: management console user, other values: non console user.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Username, used when logging in.
      */

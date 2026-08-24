@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ckafka acl_rule can be imported using the id, e.g.
+ * ckafka aclRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id
@@ -153,31 +153,31 @@ export interface AclRuleState {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether the preset ACL rule is applied to the newly added topic.
      */
-    isApplied?: pulumi.Input<number>;
+    isApplied?: pulumi.Input<number | undefined>;
     /**
      * A value representing the prefix that the prefix matches.
      */
-    pattern?: pulumi.Input<string>;
+    pattern?: pulumi.Input<string | undefined>;
     /**
      * Match type, currently supports prefix matching and preset strategy, enumeration value list{PREFIXED/PRESET}.
      */
-    patternType?: pulumi.Input<string>;
+    patternType?: pulumi.Input<string | undefined>;
     /**
      * Acl resource type, currently only supports Topic, enumeration value list{Topic}.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * List of configured ACL rules.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.AclRuleRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Ckafka.AclRuleRuleList>[] | undefined>;
     /**
      * rule name.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -191,11 +191,11 @@ export interface AclRuleArgs {
     /**
      * Whether the preset ACL rule is applied to the newly added topic.
      */
-    isApplied?: pulumi.Input<number>;
+    isApplied?: pulumi.Input<number | undefined>;
     /**
      * A value representing the prefix that the prefix matches.
      */
-    pattern?: pulumi.Input<string>;
+    pattern?: pulumi.Input<string | undefined>;
     /**
      * Match type, currently supports prefix matching and preset strategy, enumeration value list{PREFIXED/PRESET}.
      */

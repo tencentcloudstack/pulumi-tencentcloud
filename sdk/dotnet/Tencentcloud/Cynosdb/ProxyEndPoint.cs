@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     /// <summary>
-    /// Provides a resource to create a cynosdb ProxyEndPoint
+    /// Provides a resource to create a CynosDB proxy end point
     /// 
     /// ## Example Usage
     /// 
@@ -23,17 +23,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
-    ///         ClusterId = "cynosdbmysql-bws8h88b",
-    ///         UniqueVpcId = "vpc-4owdpnwr",
-    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         ClusterId = "cynosdbmysql-phxwek8d",
+    ///         UniqueVpcId = "vpc-i5yyodl9",
+    ///         UniqueSubnetId = "subnet-5rrirqyc",
+    ///         OpenConnectionPool = "no",
+    ///         RwType = "READONLY",
     ///         InstanceWeights = new[]
     ///         {
     ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                 Weight = 1,
+    ///                 InstanceId = "cynosdbmysql-ins-239owfiu",
+    ///                 Weight = 2,
     ///             },
     ///         },
     ///     });
@@ -49,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",
@@ -79,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",
@@ -112,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",
@@ -141,7 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",
@@ -174,7 +176,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",
@@ -206,7 +208,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxy_end_point", new()
+    ///     var example = new Tencentcloud.Cynosdb.ProxyEndPoint("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         UniqueVpcId = "vpc-4owdpnwr",

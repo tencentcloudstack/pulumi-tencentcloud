@@ -38,14 +38,14 @@ import (
 //				return err
 //			}
 //			fooSecurityPolicy, err := gaap.NewSecurityPolicy(ctx, "foo", &gaap.SecurityPolicyArgs{
-//				ProxyId: fooProxy.ID(),
+//				ProxyId: fooProxy.ID().ToIDOutput().ToStringOutput(),
 //				Action:  pulumi.String("ACCEPT"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_ = gaap.GetSecurityPoliciesOutput(ctx, gaap.GetSecurityPoliciesOutputArgs{
-//				Id: fooSecurityPolicy.ID(),
+//				Id: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -83,12 +83,8 @@ type GetSecurityPoliciesResult struct {
 }
 
 func GetSecurityPoliciesOutput(ctx *pulumi.Context, args GetSecurityPoliciesOutputArgs, opts ...pulumi.InvokeOption) GetSecurityPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityPoliciesResultOutput, error) {
-			args := v.(GetSecurityPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getSecurityPolicies:getSecurityPolicies", args, GetSecurityPoliciesResultOutput{}, options).(GetSecurityPoliciesResultOutput), nil
-		}).(GetSecurityPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getSecurityPolicies:getSecurityPolicies", args, GetSecurityPoliciesResultOutput{}, options).(GetSecurityPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityPolicies.

@@ -135,6 +135,8 @@ type DrInstance struct {
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringOutput `pulumi:"firstSlaveZone"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
@@ -236,6 +238,8 @@ type drInstanceState struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Zone information about first slave instance.
 	FirstSlaveZone *string `pulumi:"firstSlaveZone"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
@@ -293,6 +297,8 @@ type DrInstanceState struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringPtrInput
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
@@ -354,6 +360,8 @@ type drInstanceArgs struct {
 	Cpu *int `pulumi:"cpu"`
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Zone information about first slave instance.
 	FirstSlaveZone *string `pulumi:"firstSlaveZone"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
@@ -410,6 +418,8 @@ type DrInstanceArgs struct {
 	Cpu pulumi.IntPtrInput
 	// Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Zone information about first slave instance.
 	FirstSlaveZone pulumi.StringPtrInput
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
@@ -564,6 +574,11 @@ func (o DrInstanceOutput) Cpu() pulumi.IntOutput {
 // Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
 func (o DrInstanceOutput) DeviceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *DrInstance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
+}
+
+// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+func (o DrInstanceOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v *DrInstance) pulumi.StringOutput { return v.DiskType }).(pulumi.StringOutput)
 }
 
 // Zone information about first slave instance.

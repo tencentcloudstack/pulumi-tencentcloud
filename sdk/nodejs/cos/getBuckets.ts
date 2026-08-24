@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cos.getBuckets({});
+ * const example = tencentcloud.cos.getBuckets({});
  * ```
  *
  * ### Query cos buckets by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cos.getBuckets({
+ * const example = tencentcloud.cos.getBuckets({
  *     bucketPrefix: "tf-example-prefix",
  *     tags: {
  *         createBy: "Terraform",
@@ -92,7 +92,7 @@ export interface GetBucketsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cos.getBuckets({});
+ * const example = tencentcloud.cos.getBuckets({});
  * ```
  *
  * ### Query cos buckets by filters
@@ -101,7 +101,7 @@ export interface GetBucketsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cos.getBuckets({
+ * const example = tencentcloud.cos.getBuckets({
  *     bucketPrefix: "tf-example-prefix",
  *     tags: {
  *         createBy: "Terraform",
@@ -126,13 +126,13 @@ export interface GetBucketsOutputArgs {
     /**
      * A prefix string to filter results by bucket name.
      */
-    bucketPrefix?: pulumi.Input<string>;
+    bucketPrefix?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags to filter bucket.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

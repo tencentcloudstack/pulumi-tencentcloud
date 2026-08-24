@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const price = tencentcloud.Dcdb.getPrice({
+ * const price = tencentcloud.dcdb.getPrice({
  *     instanceCount: 1,
  *     zone: defaultAz,
  *     period: 1,
@@ -124,7 +124,7 @@ export interface GetPriceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const price = tencentcloud.Dcdb.getPrice({
+ * const price = tencentcloud.dcdb.getPrice({
  *     instanceCount: 1,
  *     zone: defaultAz,
  *     period: 1,
@@ -160,7 +160,7 @@ export interface GetPriceOutputArgs {
     /**
      * Price unit. Valid values: `pent` (cent), `microPent` (microcent).
      */
-    amountUnit?: pulumi.Input<string>;
+    amountUnit?: pulumi.Input<string | undefined>;
     /**
      * The count of instances wants to buy.
      */
@@ -168,7 +168,7 @@ export interface GetPriceOutputArgs {
     /**
      * Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
      */
-    paymode?: pulumi.Input<string>;
+    paymode?: pulumi.Input<string | undefined>;
     /**
      * Purchase period in months.
      */
@@ -176,7 +176,7 @@ export interface GetPriceOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Number of instance shards.
      */

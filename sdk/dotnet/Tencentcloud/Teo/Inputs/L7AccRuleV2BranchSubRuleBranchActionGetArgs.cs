@@ -20,6 +20,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionAccessUrlRedirectParametersGetArgs>? AccessUrlRedirectParameters { get; set; }
 
         /// <summary>
+        /// Advanced origin routing optimization configuration parameter. This parameter is required when Name is set to AdvancedOriginRouting.
+        /// </summary>
+        [Input("advancedOriginRoutingParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionAdvancedOriginRoutingParametersGetArgs>? AdvancedOriginRoutingParameters { get; set; }
+
+        /// <summary>
         /// Token authentication configuration parameter. this parameter is required when name is authentication.
         /// </summary>
         [Input("authenticationParameters")]
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("compressionParameters")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionCompressionParametersGetArgs>? CompressionParameters { get; set; }
+
+        /// <summary>
+        /// Content compression configuration parameters. This parameter is required when the `Name` parameter is set to `ContentCompression`. This parameter uses a whitelist function; please contact Tencent Cloud engineers if needed.
+        /// </summary>
+        [Input("contentCompressionParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionContentCompressionParametersGetArgs>? ContentCompressionParameters { get; set; }
 
         /// <summary>
         /// Custom error page configuration parameters. this parameter is required when name is errorpage.
@@ -163,7 +175,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// - `ModifyResponseHeader`: Modify HTTP node response header;
         /// - `ModifyRequestHeader`: Modify HTTP node request header;
         /// - `ResponseSpeedLimit`: Single connection download speed limit.
-        /// - `SetContentIdentifierParameters`: Set content identifier.
+        /// - `SetContentIdentifier`: Set content identifier.
+        /// - `Vary`: Vary feature configuration.
+        /// - `ContentCompression`: Content compression configuration.
+        /// - `OriginAuthentication`: Origin authentication configuration.
+        /// - `AdvancedOriginRouting`: Advanced origin routing optimization.
+        /// - `Shield`: Origin offload (Shield).
+        /// - `SiteFailover`: Origin site failover.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -179,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("offlineCacheParameters")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionOfflineCacheParametersGetArgs>? OfflineCacheParameters { get; set; }
+
+        /// <summary>
+        /// Origin authentication configuration parameter. This parameter is required when Name is set to OriginAuthentication. This is a whitelist feature; please contact Tencent Cloud engineers if needed.
+        /// </summary>
+        [Input("originAuthenticationParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionOriginAuthenticationParametersGetArgs>? OriginAuthenticationParameters { get; set; }
 
         /// <summary>
         /// Back-to-origin HTTPS configuration parameter. This parameter is required when the Name value is `OriginPullProtocol`.
@@ -215,6 +239,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("setContentIdentifierParameters")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionSetContentIdentifierParametersGetArgs>? SetContentIdentifierParameters { get; set; }
+
+        /// <summary>
+        /// Origin offload (Shield) configuration parameter. This parameter is required when Name is set to Shield.
+        /// </summary>
+        [Input("shieldParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionShieldParametersGetArgs>? ShieldParameters { get; set; }
+
+        /// <summary>
+        /// Origin site failover configuration parameter. This parameter is required when Name is set to SiteFailover.
+        /// </summary>
+        [Input("siteFailoverParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionSiteFailoverParametersGetArgs>? SiteFailoverParameters { get; set; }
 
         /// <summary>
         /// Smart acceleration configuration parameter. this parameter is required when name is smartrouting.
@@ -257,6 +293,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("upstreamUrlRewriteParameters")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionUpstreamUrlRewriteParametersGetArgs>? UpstreamUrlRewriteParameters { get; set; }
+
+        /// <summary>
+        /// Vary configuration parameter. This parameter is required when Name is set to Vary.
+        /// </summary>
+        [Input("varyParameters")]
+        public Input<Inputs.L7AccRuleV2BranchSubRuleBranchActionVaryParametersGetArgs>? VaryParameters { get; set; }
 
         /// <summary>
         /// The websocket configuration parameter. this parameter is required when name is websocket.

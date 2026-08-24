@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const requestStatus = tencentcloud.Scf.getRequestStatus({
+ * const requestStatus = tencentcloud.scf.getRequestStatus({
  *     functionName: "keep-1676351130",
  *     functionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  *     namespace: "default",
@@ -98,7 +98,7 @@ export interface GetRequestStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const requestStatus = tencentcloud.Scf.getRequestStatus({
+ * const requestStatus = tencentcloud.scf.getRequestStatus({
  *     functionName: "keep-1676351130",
  *     functionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  *     namespace: "default",
@@ -124,7 +124,7 @@ export interface GetRequestStatusOutputArgs {
     /**
      * End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
@@ -136,13 +136,13 @@ export interface GetRequestStatusOutputArgs {
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time of the query, for example `2017-05-16 20:00:00`. If it's left empty, it defaults to 15 minutes before the current time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getRecords({
+ * const example = tencentcloud.privatedns.getRecords({
  *     zoneId: "zone-kumt5wos",
  * });
  * ```
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getRecords({
+ * const example = tencentcloud.privatedns.getRecords({
  *     zoneId: "zone-kumt5wos",
  *     filters: [{
  *         name: "RecordType",
@@ -90,7 +90,7 @@ export interface GetRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getRecords({
+ * const example = tencentcloud.privatedns.getRecords({
  *     zoneId: "zone-kumt5wos",
  * });
  * ```
@@ -101,7 +101,7 @@ export interface GetRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getRecords({
+ * const example = tencentcloud.privatedns.getRecords({
  *     zoneId: "zone-kumt5wos",
  *     filters: [{
  *         name: "RecordType",
@@ -126,11 +126,11 @@ export interface GetRecordsOutputArgs {
     /**
      * Filter parameters (Value and RecordType filtering are supported).
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetRecordsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetRecordsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Private zone id: zone-xxxxxx.
      */

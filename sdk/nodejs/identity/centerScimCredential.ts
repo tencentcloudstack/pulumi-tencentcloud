@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_scim_credential can be imported using the id, e.g.
+ * organization identityCenterScimCredential can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerScimCredential:CenterScimCredential identity_center_scim_credential ${zone_id}#${credential_id}
@@ -128,31 +128,31 @@ export interface CenterScimCredentialState {
     /**
      * SCIM create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * SCIM key ID. scimcred-prefix and followed by 12 random digits/lowercase letters.
      */
-    credentialId?: pulumi.Input<string>;
+    credentialId?: pulumi.Input<string | undefined>;
     /**
      * SCIM key.
      */
-    credentialSecret?: pulumi.Input<string>;
+    credentialSecret?: pulumi.Input<string | undefined>;
     /**
      * SCIM credential type.
      */
-    credentialType?: pulumi.Input<string>;
+    credentialType?: pulumi.Input<string | undefined>;
     /**
      * SCIM expire time.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * SCIM key status, Enabled-On, Disabled-Closed.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Space ID. z-prefix starts with 12 random digits/lowercase letters.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

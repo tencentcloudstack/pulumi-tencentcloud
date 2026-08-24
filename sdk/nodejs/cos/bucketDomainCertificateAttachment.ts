@@ -13,13 +13,15 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Use certId
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const customOriginDomain = config.get("customOriginDomain") || "tf.example.com";
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const appId = info.then(info => info.appId);
  * const example = new tencentcloud.cos.Bucket("example", {
  *     bucket: appId.then(appId => `private-bucket-${appId}`),
@@ -39,20 +41,40 @@ import * as utilities from "../utilities";
  *             certType: "CustomCert",
  *             customCert: {
  *                 certId: "JG65alUy",
+ *             },
+ *         },
+ *     },
+ * });
+ * ```
+ *
+ * ### Use cert and key
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cos.BucketDomainCertificateAttachment("example", {
+ *     bucket: exampleTencentcloudCosBucket.id,
+ *     domainCertificate: {
+ *         domain: customOriginDomain,
+ *         certificate: {
+ *             certType: "CustomCert",
+ *             customCert: {
  *                 cert: `-----BEGIN CERTIFICATE-----
- * MIIGQjCCBSqgAwIBAgIQfTllN2vZr7vcoGF3ZTHwxjANBgkqhkiG9w0BAQsFADBA
- * ...
- * ...
- * ...
- * 9YSJrdvskqI3v/3SkVezzNiWQMuMTg==
+ * MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+ * ***
+ * ***
+ * ***
+ * ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+ * gJE=
  * -----END CERTIFICATE-----
  * `,
  *                 privateKey: `-----BEGIN RSA PRIVATE KEY-----
- * MIIEpQIBAAKCAQEAsmwAXXVh6N4fd281K0671jYBrSV2v/5+TCeewsNx6ys3kC8o
- * ...
- * ...
- * ...
- * MgbOv6byAafSQWU+5+KFfK3Nj7eezx6yfQQM0Kxl4ZPm1w3Fb6gIFBc=
+ * MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+ * ***
+ * ***
+ * ***
+ * Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
  * -----END RSA PRIVATE KEY-----
  * `,
  *             },
@@ -136,11 +158,11 @@ export interface BucketDomainCertificateAttachmentState {
     /**
      * Bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The certificate of specified doamin.
      */
-    domainCertificate?: pulumi.Input<inputs.Cos.BucketDomainCertificateAttachmentDomainCertificate>;
+    domainCertificate?: pulumi.Input<inputs.Cos.BucketDomainCertificateAttachmentDomainCertificate | undefined>;
 }
 
 /**

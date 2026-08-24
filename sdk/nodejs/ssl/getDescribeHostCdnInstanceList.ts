@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostCdnInstanceList = tencentcloud.Ssl.getDescribeHostCdnInstanceList({
+ * const describeHostCdnInstanceList = tencentcloud.ssl.getDescribeHostCdnInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "cdn",
  * });
@@ -109,7 +109,7 @@ export interface GetDescribeHostCdnInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostCdnInstanceList = tencentcloud.Ssl.getDescribeHostCdnInstanceList({
+ * const describeHostCdnInstanceList = tencentcloud.ssl.getDescribeHostCdnInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "cdn",
  * });
@@ -135,7 +135,7 @@ export interface GetDescribeHostCdnInstanceListOutputArgs {
     /**
      * Whether.
      */
-    asyncCache?: pulumi.Input<number>;
+    asyncCache?: pulumi.Input<number | undefined>;
     /**
      * Certificate ID to be deployed.
      */
@@ -143,15 +143,15 @@ export interface GetDescribeHostCdnInstanceListOutputArgs {
     /**
      * List of filtering parameters; Filterkey: domainmatch.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostCdnInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostCdnInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Original certificate ID.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Deploy resource type.
      */
@@ -159,5 +159,5 @@ export interface GetDescribeHostCdnInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

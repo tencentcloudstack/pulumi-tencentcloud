@@ -129,17 +129,17 @@ export interface GroupMembershipState {
     /**
      * ID of CAM group.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
      */
-    userIds?: pulumi.Input<pulumi.Input<string>[]>;
+    userIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User name set as ID of the CAM group members.
      */
-    userNames?: pulumi.Input<pulumi.Input<string>[]>;
+    userNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -155,9 +155,9 @@ export interface GroupMembershipArgs {
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
      */
-    userIds?: pulumi.Input<pulumi.Input<string>[]>;
+    userIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User name set as ID of the CAM group members.
      */
-    userNames?: pulumi.Input<pulumi.Input<string>[]>;
+    userNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

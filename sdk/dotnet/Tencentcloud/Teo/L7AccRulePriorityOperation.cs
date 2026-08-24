@@ -30,7 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///         {
     ///             "1",
     ///         },
-    ///         RuleName = "网站加速1",
+    ///         RuleName = "Web Acceleration 1",
     ///         Status = "enable",
     ///         Branches = new[]
     ///         {
@@ -135,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///         {
     ///             "2",
     ///         },
-    ///         RuleName = "网站加速2",
+    ///         RuleName = "Web Acceleration 2",
     ///         Status = "enable",
     ///         Branches = new[]
     ///         {

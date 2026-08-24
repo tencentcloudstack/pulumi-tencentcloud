@@ -68,12 +68,8 @@ type GetInstanceParamRecordResult struct {
 }
 
 func GetInstanceParamRecordOutput(ctx *pulumi.Context, args GetInstanceParamRecordOutputArgs, opts ...pulumi.InvokeOption) GetInstanceParamRecordResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceParamRecordResultOutput, error) {
-			args := v.(GetInstanceParamRecordArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args, GetInstanceParamRecordResultOutput{}, options).(GetInstanceParamRecordResultOutput), nil
-		}).(GetInstanceParamRecordResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", args, GetInstanceParamRecordResultOutput{}, options).(GetInstanceParamRecordResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceParamRecord.

@@ -16,11 +16,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by user_id
- * const foo = tencentcloud.Cam.getUserPolicyAttachments({
+ * const foo = tencentcloud.cam.getUserPolicyAttachments({
  *     userId: fooTencentcloudCamUser.id,
  * });
  * // query by user_id and policy_id
- * const bar = tencentcloud.Cam.getUserPolicyAttachments({
+ * const bar = tencentcloud.cam.getUserPolicyAttachments({
  *     userId: fooTencentcloudCamUser.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -117,11 +117,11 @@ export interface GetUserPolicyAttachmentsResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by user_id
- * const foo = tencentcloud.Cam.getUserPolicyAttachments({
+ * const foo = tencentcloud.cam.getUserPolicyAttachments({
  *     userId: fooTencentcloudCamUser.id,
  * });
  * // query by user_id and policy_id
- * const bar = tencentcloud.Cam.getUserPolicyAttachments({
+ * const bar = tencentcloud.cam.getUserPolicyAttachments({
  *     userId: fooTencentcloudCamUser.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -147,27 +147,27 @@ export interface GetUserPolicyAttachmentsOutputArgs {
     /**
      * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * ID of CAM policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
      *
      * @deprecated It has been deprecated from version 1.59.6. Use `userName` instead.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Name of the attached CAM user as unique key to be queried.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }

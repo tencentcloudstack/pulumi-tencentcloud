@@ -23,6 +23,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mps"
 //
@@ -112,7 +114,7 @@ import (
 //				return err
 //			}
 //			_, err = mps.NewEnableWorkflowConfig(ctx, "config", &mps.EnableWorkflowConfigArgs{
-//				WorkflowId: example.ID(),
+//				WorkflowId: example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Enabled:    pulumi.Bool(true),
 //			})
 //			if err != nil {
@@ -153,7 +155,7 @@ import (
 //
 // ## Import
 //
-// mps enable_workflow_config can be imported using the id, e.g.
+// mps enableWorkflowConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id

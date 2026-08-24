@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmInstances = tencentcloud.Vpc.getCvmInstances({
+ * const cvmInstances = tencentcloud.vpc.getCvmInstances({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-lh4nqig9"],
@@ -69,7 +69,7 @@ export interface GetCvmInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmInstances = tencentcloud.Vpc.getCvmInstances({
+ * const cvmInstances = tencentcloud.vpc.getCvmInstances({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-lh4nqig9"],
@@ -96,5 +96,5 @@ export interface GetCvmInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

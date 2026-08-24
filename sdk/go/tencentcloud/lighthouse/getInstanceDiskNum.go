@@ -69,12 +69,8 @@ type GetInstanceDiskNumResult struct {
 }
 
 func GetInstanceDiskNumOutput(ctx *pulumi.Context, args GetInstanceDiskNumOutputArgs, opts ...pulumi.InvokeOption) GetInstanceDiskNumResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceDiskNumResultOutput, error) {
-			args := v.(GetInstanceDiskNumArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", args, GetInstanceDiskNumResultOutput{}, options).(GetInstanceDiskNumResultOutput), nil
-		}).(GetInstanceDiskNumResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", args, GetInstanceDiskNumResultOutput{}, options).(GetInstanceDiskNumResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceDiskNum.

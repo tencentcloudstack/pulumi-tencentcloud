@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// ci media_snapshot_template can be imported using the bucket#templateId, e.g.
+// ci mediaSnapshotTemplate can be imported using the bucket#templateId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaSnapshotTemplate:MediaSnapshotTemplate media_snapshot_template terraform-ci-xxxxxx#t18210645f96564eaf80e86b1f58c20152

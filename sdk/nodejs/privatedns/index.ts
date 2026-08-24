@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
+
 export { EndPointArgs, EndPointState } from "./endPoint";
 export type EndPoint = import("./endPoint").EndPoint;
 export const EndPoint: typeof import("./endPoint").EndPoint = null as any;
@@ -65,6 +70,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:PrivateDns/account:Account":
+                return new Account(name, <any>undefined, { urn })
             case "tencentcloud:PrivateDns/endPoint:EndPoint":
                 return new EndPoint(name, <any>undefined, { urn })
             case "tencentcloud:PrivateDns/extendEndPoint:ExtendEndPoint":
@@ -84,6 +91,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/endPoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/extendEndPoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "PrivateDns/forwardRule", _module)

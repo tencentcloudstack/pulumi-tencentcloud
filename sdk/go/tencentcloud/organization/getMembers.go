@@ -15,6 +15,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Query all members
+//
 // ```go
 // package main
 //
@@ -28,6 +30,33 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := organization.GetMembers(ctx, &organization.GetMembersArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Query members by filter
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := organization.GetMembers(ctx, &organization.GetMembersArgs{
+//				Lang:      pulumi.StringRef("en"),
+//				SearchKey: pulumi.StringRef("tf-example"),
+//			}, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -74,12 +103,8 @@ type GetMembersResult struct {
 }
 
 func GetMembersOutput(ctx *pulumi.Context, args GetMembersOutputArgs, opts ...pulumi.InvokeOption) GetMembersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMembersResultOutput, error) {
-			args := v.(GetMembersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getMembers:getMembers", args, GetMembersResultOutput{}, options).(GetMembersResultOutput), nil
-		}).(GetMembersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getMembers:getMembers", args, GetMembersResultOutput{}, options).(GetMembersResultOutput)
 }
 
 // A collection of arguments for invoking getMembers.

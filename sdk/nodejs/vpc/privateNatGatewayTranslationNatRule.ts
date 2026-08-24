@@ -11,13 +11,42 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** This resource must exclusive in one share unit, do not declare additional translation nat rules resources of this nat gateway elsewhere.
  *
+ * > **NOTE:** Append-only convention for typed lists: The provider preserves the API's authoritative order in state (rules are currently ordered by creation time at the backend, and may gain user-defined ordering semantics in the future). To keep plans clean and avoid spurious churn, **add new rules ONLY at the end of each typed list, and do NOT reorder or insert rules in the middle of an existing list**. Inserting in the middle, removing from the middle, or reordering will produce a connected `~` plan and may trigger uniqueness errors at apply time (e.g. `MODIFY` on slot N attempts to rename rule A's IP to rule B's still-existing IP). When that happens, the SDK error message points at the offending IP — fix the HCL by appending instead of inserting.
+ *
  * ## Example Usage
+ *
+ * ### Recommended typed list usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.vpc.PrivateNatGatewayTranslationNatRule("example", {
+ *     natGatewayId: "intranat-r46f6pxl",
+ *     localNetworkLayerRules: [{
+ *         translationIp: "2.2.2.2",
+ *         originalIp: "1.1.1.1",
+ *         description: "LOCAL three-layer rule.",
+ *     }],
+ *     localTransportLayerRules: [{
+ *         translationIp: "3.3.3.3",
+ *         description: "LOCAL four-layer rule.",
+ *     }],
+ *     peerNetworkLayerRules: [{
+ *         translationIp: "5.5.5.5",
+ *         originalIp: "4.4.4.4",
+ *         description: "PEER three-layer rule.",
+ *     }],
+ * });
+ * ```
+ *
+ * ### Deprecated translationNatRules usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleDeprecated = new tencentcloud.vpc.PrivateNatGatewayTranslationNatRule("example_deprecated", {
  *     natGatewayId: "intranat-r46f6pxl",
  *     translationNatRules: [
  *         {
@@ -74,11 +103,25 @@ export class PrivateNatGatewayTranslationNatRule extends pulumi.CustomResource {
     }
 
     /**
+     * Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
+     */
+    declare public readonly localNetworkLayerRules: pulumi.Output<outputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule[]>;
+    /**
+     * Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `translationIp` (unique within this bucket). `originalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+     */
+    declare public readonly localTransportLayerRules: pulumi.Output<outputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule[]>;
+    /**
      * Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
      */
     declare public readonly natGatewayId: pulumi.Output<string>;
     /**
-     * Translation rule object array.
+     * Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
+     */
+    declare public readonly peerNetworkLayerRules: pulumi.Output<outputs.Vpc.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule[]>;
+    /**
+     * It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `localNetworkLayerRules`, `localTransportLayerRules`, and `peerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
+     *
+     * @deprecated It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields.
      */
     declare public readonly translationNatRules: pulumi.Output<outputs.Vpc.PrivateNatGatewayTranslationNatRuleTranslationNatRule[]>;
 
@@ -95,17 +138,20 @@ export class PrivateNatGatewayTranslationNatRule extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PrivateNatGatewayTranslationNatRuleState | undefined;
+            resourceInputs["localNetworkLayerRules"] = state?.localNetworkLayerRules;
+            resourceInputs["localTransportLayerRules"] = state?.localTransportLayerRules;
             resourceInputs["natGatewayId"] = state?.natGatewayId;
+            resourceInputs["peerNetworkLayerRules"] = state?.peerNetworkLayerRules;
             resourceInputs["translationNatRules"] = state?.translationNatRules;
         } else {
             const args = argsOrState as PrivateNatGatewayTranslationNatRuleArgs | undefined;
             if (args?.natGatewayId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'natGatewayId'");
             }
-            if (args?.translationNatRules === undefined && !opts.urn) {
-                throw new Error("Missing required property 'translationNatRules'");
-            }
+            resourceInputs["localNetworkLayerRules"] = args?.localNetworkLayerRules;
+            resourceInputs["localTransportLayerRules"] = args?.localTransportLayerRules;
             resourceInputs["natGatewayId"] = args?.natGatewayId;
+            resourceInputs["peerNetworkLayerRules"] = args?.peerNetworkLayerRules;
             resourceInputs["translationNatRules"] = args?.translationNatRules;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -118,13 +164,27 @@ export class PrivateNatGatewayTranslationNatRule extends pulumi.CustomResource {
  */
 export interface PrivateNatGatewayTranslationNatRuleState {
     /**
+     * Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
+     */
+    localNetworkLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule>[] | undefined>;
+    /**
+     * Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `translationIp` (unique within this bucket). `originalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+     */
+    localTransportLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule>[] | undefined>;
+    /**
      * Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
      */
-    natGatewayId?: pulumi.Input<string>;
+    natGatewayId?: pulumi.Input<string | undefined>;
     /**
-     * Translation rule object array.
+     * Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
      */
-    translationNatRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleTranslationNatRule>[]>;
+    peerNetworkLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule>[] | undefined>;
+    /**
+     * It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `localNetworkLayerRules`, `localTransportLayerRules`, and `peerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
+     *
+     * @deprecated It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields.
+     */
+    translationNatRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleTranslationNatRule>[] | undefined>;
 }
 
 /**
@@ -132,11 +192,25 @@ export interface PrivateNatGatewayTranslationNatRuleState {
  */
 export interface PrivateNatGatewayTranslationNatRuleArgs {
     /**
+     * Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
+     */
+    localNetworkLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule>[] | undefined>;
+    /**
+     * Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `translationIp` (unique within this bucket). `originalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+     */
+    localTransportLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule>[] | undefined>;
+    /**
      * Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
      */
     natGatewayId: pulumi.Input<string>;
     /**
-     * Translation rule object array.
+     * Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `originalIp` (unique within this bucket). Editing `description` or `translationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `originalIp` is treated as deleting the old rule and creating a new one.
      */
-    translationNatRules: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleTranslationNatRule>[]>;
+    peerNetworkLayerRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule>[] | undefined>;
+    /**
+     * It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `localNetworkLayerRules`, `localTransportLayerRules`, and `peerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
+     *
+     * @deprecated It has been deprecated from version 1.82.98, please use localNetworkLayerRules / localTransportLayerRules / peerNetworkLayerRules instead. Cannot be used together with the new fields.
+     */
+    translationNatRules?: pulumi.Input<pulumi.Input<inputs.Vpc.PrivateNatGatewayTranslationNatRuleTranslationNatRule>[] | undefined>;
 }

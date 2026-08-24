@@ -49,15 +49,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
@@ -83,19 +83,19 @@ import (
 //			}
 //			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(1),
 //				MinSize:          pulumi.Int(0),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = as.NewScalingGroupStatus(ctx, "scaling_group_status", &as.ScalingGroupStatusArgs{
-//				AutoScalingGroupId: exampleScalingGroup.ID(),
+//				AutoScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
 //				Enable:             pulumi.Bool(false),
 //			})
 //			if err != nil {
@@ -136,7 +136,7 @@ import (
 //
 // ## Import
 //
-// as scaling_group_status can be imported using the id, e.g.
+// as scalingGroupStatus can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id

@@ -86,12 +86,8 @@ type GetOpsAlarmMessagesResult struct {
 }
 
 func GetOpsAlarmMessagesOutput(ctx *pulumi.Context, args GetOpsAlarmMessagesOutputArgs, opts ...pulumi.InvokeOption) GetOpsAlarmMessagesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOpsAlarmMessagesResultOutput, error) {
-			args := v.(GetOpsAlarmMessagesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getOpsAlarmMessages:getOpsAlarmMessages", args, GetOpsAlarmMessagesResultOutput{}, options).(GetOpsAlarmMessagesResultOutput), nil
-		}).(GetOpsAlarmMessagesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getOpsAlarmMessages:getOpsAlarmMessages", args, GetOpsAlarmMessagesResultOutput{}, options).(GetOpsAlarmMessagesResultOutput)
 }
 
 // A collection of arguments for invoking getOpsAlarmMessages.

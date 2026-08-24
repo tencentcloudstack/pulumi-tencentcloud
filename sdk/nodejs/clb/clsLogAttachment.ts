@@ -117,15 +117,15 @@ export interface ClsLogAttachmentState {
     /**
      * CLB instance ID.
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * Logset ID of the Cloud Log Service (CLS).<li>When adding or updating a log topic, call the [DescribeLogsets](https://intl.cloud.tencent.com/document/product/614/58624?from_cn_redirect=1) API to obtain the logset ID.</li><li>When deleting a log topic, set this parameter to null.</li>.
      */
-    logSetId?: pulumi.Input<string>;
+    logSetId?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID of the CLS.<li>When adding or updating a log topic, call the [DescribeTopics](https://intl.cloud.tencent.com/document/product/614/56454?from_cn_redirect=1) API to obtain the log topic ID.</li><li>When deleting a log topic, set this parameter to null.</li>.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
 }
 
 /**

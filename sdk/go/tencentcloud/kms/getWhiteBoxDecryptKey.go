@@ -67,12 +67,8 @@ type GetWhiteBoxDecryptKeyResult struct {
 }
 
 func GetWhiteBoxDecryptKeyOutput(ctx *pulumi.Context, args GetWhiteBoxDecryptKeyOutputArgs, opts ...pulumi.InvokeOption) GetWhiteBoxDecryptKeyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWhiteBoxDecryptKeyResultOutput, error) {
-			args := v.(GetWhiteBoxDecryptKeyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args, GetWhiteBoxDecryptKeyResultOutput{}, options).(GetWhiteBoxDecryptKeyResultOutput), nil
-		}).(GetWhiteBoxDecryptKeyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", args, GetWhiteBoxDecryptKeyResultOutput{}, options).(GetWhiteBoxDecryptKeyResultOutput)
 }
 
 // A collection of arguments for invoking getWhiteBoxDecryptKey.

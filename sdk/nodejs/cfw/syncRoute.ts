@@ -91,11 +91,11 @@ export interface SyncRouteState {
     /**
      * Firewall type; nat: nat firewall; ew: inter-vpc firewall.
      */
-    fwType?: pulumi.Input<string>;
+    fwType?: pulumi.Input<string | undefined>;
     /**
      * Synchronization operation type: Route, synchronize firewall routing.
      */
-    syncType?: pulumi.Input<string>;
+    syncType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -105,7 +105,7 @@ export interface SyncRouteArgs {
     /**
      * Firewall type; nat: nat firewall; ew: inter-vpc firewall.
      */
-    fwType?: pulumi.Input<string>;
+    fwType?: pulumi.Input<string | undefined>;
     /**
      * Synchronization operation type: Route, synchronize firewall routing.
      */

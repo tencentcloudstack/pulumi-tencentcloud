@@ -24,48 +24,50 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// logBackups, err := postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
-// MinFinishTime: pulumi.StringRef("%s"),
-// MaxFinishTime: pulumi.StringRef("%s"),
-// Filters: []postgresql.GetLogBackupsFilter{
-// {
-// Name: pulumi.StringRef("db-instance-id"),
-// Values: interface{}{
-// pgsqlId,
-// },
-// },
-// },
-// OrderBy: pulumi.StringRef("StartTime"),
-// OrderByType: pulumi.StringRef("desc"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// _, err = postgresql.GetBackupDownloadUrls(ctx, &postgresql.GetBackupDownloadUrlsArgs{
-// DbInstanceId: pgsqlId,
-// BackupType: "LogBackup",
-// BackupId: logBackups.LogBackupSets[0].Id,
-// UrlExpireTime: pulumi.IntRef(12),
-// BackupDownloadRestriction: postgresql.GetBackupDownloadUrlsBackupDownloadRestriction{
-// RestrictionType: pulumi.StringRef("NONE"),
-// VpcRestrictionEffect: pulumi.StringRef("ALLOW"),
-// VpcIdSets: interface{}{
-// vpcId,
-// },
-// IpRestrictionEffect: pulumi.StringRef("ALLOW"),
-// IpSets: []string{
-// "0.0.0.0",
-// },
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logBackups, err := postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
+//				MinFinishTime: pulumi.StringRef("%s"),
+//				MaxFinishTime: pulumi.StringRef("%s"),
+//				Filters: []postgresql.GetLogBackupsFilter{
+//					{
+//						Name: pulumi.StringRef("db-instance-id"),
+//						Values: pulumi.StringArray{
+//							pgsqlId,
+//						},
+//					},
+//				},
+//				OrderBy:     pulumi.StringRef("StartTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = postgresql.GetBackupDownloadUrls(ctx, &postgresql.GetBackupDownloadUrlsArgs{
+//				DbInstanceId:  pgsqlId,
+//				BackupType:    "LogBackup",
+//				BackupId:      logBackups.LogBackupSets[0].Id,
+//				UrlExpireTime: pulumi.IntRef(12),
+//				BackupDownloadRestriction: postgresql.GetBackupDownloadUrlsBackupDownloadRestriction{
+//					RestrictionType:      pulumi.StringRef("NONE"),
+//					VpcRestrictionEffect: pulumi.StringRef("ALLOW"),
+//					VpcIdSets: pulumi.StringArray{
+//						vpcId,
+//					},
+//					IpRestrictionEffect: pulumi.StringRef("ALLOW"),
+//					IpSets: []string{
+//						"0.0.0.0",
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBackupDownloadUrls(ctx *pulumi.Context, args *GetBackupDownloadUrlsArgs, opts ...pulumi.InvokeOption) (*GetBackupDownloadUrlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -108,12 +110,8 @@ type GetBackupDownloadUrlsResult struct {
 }
 
 func GetBackupDownloadUrlsOutput(ctx *pulumi.Context, args GetBackupDownloadUrlsOutputArgs, opts ...pulumi.InvokeOption) GetBackupDownloadUrlsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupDownloadUrlsResultOutput, error) {
-			args := v.(GetBackupDownloadUrlsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args, GetBackupDownloadUrlsResultOutput{}, options).(GetBackupDownloadUrlsResultOutput), nil
-		}).(GetBackupDownloadUrlsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args, GetBackupDownloadUrlsResultOutput{}, options).(GetBackupDownloadUrlsResultOutput)
 }
 
 // A collection of arguments for invoking getBackupDownloadUrls.

@@ -43,11 +43,11 @@ import * as utilities from "../utilities";
  *     responseSuccessExample: "success",
  *     responseFailExample: "fail",
  * });
- * const id = tencentcloud.ApiGateway.getApisOutput({
+ * const id = tencentcloud.apigateway.getApisOutput({
  *     serviceId: service.id,
  *     apiId: api.id,
  * });
- * const name = tencentcloud.ApiGateway.getApisOutput({
+ * const name = tencentcloud.apigateway.getApisOutput({
  *     serviceId: service.id,
  *     apiName: api.apiName,
  * });
@@ -145,11 +145,11 @@ export interface GetApisResult {
  *     responseSuccessExample: "success",
  *     responseFailExample: "fail",
  * });
- * const id = tencentcloud.ApiGateway.getApisOutput({
+ * const id = tencentcloud.apigateway.getApisOutput({
  *     serviceId: service.id,
  *     apiId: api.id,
  * });
- * const name = tencentcloud.ApiGateway.getApisOutput({
+ * const name = tencentcloud.apigateway.getApisOutput({
  *     serviceId: service.id,
  *     apiName: api.apiName,
  * });
@@ -172,15 +172,15 @@ export interface GetApisOutputArgs {
     /**
      * Created API ID.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * Custom API name.
      */
-    apiName?: pulumi.Input<string>;
+    apiName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Service ID for query.
      */

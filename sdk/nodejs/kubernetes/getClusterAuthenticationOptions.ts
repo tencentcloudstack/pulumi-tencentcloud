@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterAuthenticationOptions = tencentcloud.Kubernetes.getClusterAuthenticationOptions({
+ * const clusterAuthenticationOptions = tencentcloud.kubernetes.getClusterAuthenticationOptions({
  *     clusterId: "cls-kzilgv5m",
  * });
  * ```
@@ -74,7 +74,7 @@ export interface GetClusterAuthenticationOptionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterAuthenticationOptions = tencentcloud.Kubernetes.getClusterAuthenticationOptions({
+ * const clusterAuthenticationOptions = tencentcloud.kubernetes.getClusterAuthenticationOptions({
  *     clusterId: "cls-kzilgv5m",
  * });
  * ```
@@ -98,5 +98,5 @@ export interface GetClusterAuthenticationOptionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

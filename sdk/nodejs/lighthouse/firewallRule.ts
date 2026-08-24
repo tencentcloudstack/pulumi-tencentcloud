@@ -40,7 +40,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * lighthouse firewall_rule can be imported using the id, e.g.
+ * lighthouse firewallRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
@@ -121,11 +121,11 @@ export interface FirewallRuleState {
     /**
      * Firewall rule list.
      */
-    firewallRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallRuleFirewallRule>[]>;
+    firewallRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallRuleFirewallRule>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

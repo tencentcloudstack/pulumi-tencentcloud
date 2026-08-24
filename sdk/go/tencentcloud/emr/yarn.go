@@ -49,7 +49,7 @@ import (
 //
 // ## Import
 //
-// emr emr_yarn can be imported using the id, e.g.
+// emr emrYarn can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Emr/yarn:Yarn emr_yarn emr_instance_id

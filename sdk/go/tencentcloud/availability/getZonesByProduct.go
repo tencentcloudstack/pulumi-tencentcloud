@@ -74,12 +74,8 @@ type GetZonesByProductResult struct {
 }
 
 func GetZonesByProductOutput(ctx *pulumi.Context, args GetZonesByProductOutputArgs, opts ...pulumi.InvokeOption) GetZonesByProductResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZonesByProductResultOutput, error) {
-			args := v.(GetZonesByProductArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args, GetZonesByProductResultOutput{}, options).(GetZonesByProductResultOutput), nil
-		}).(GetZonesByProductResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args, GetZonesByProductResultOutput{}, options).(GetZonesByProductResultOutput)
 }
 
 // A collection of arguments for invoking getZonesByProduct.

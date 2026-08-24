@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_realtime_log_delivery can be imported using the id, e.g.
+    /// teo TeoRealtimeLogDelivery can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery teo_realtime_log_delivery zoneId#taskId
@@ -170,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> TaskName { get; private set; } = null!;
 
         /// <summary>
-        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address.
+        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address; `LogAnalysis`: push to EdgeOne log analysis.
         /// </summary>
         [Output("taskType")]
         public Output<string> TaskType { get; private set; } = null!;
@@ -331,7 +331,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> TaskName { get; set; } = null!;
 
         /// <summary>
-        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address.
+        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address; `LogAnalysis`: push to EdgeOne log analysis.
         /// </summary>
         [Input("taskType", required: true)]
         public Input<string> TaskType { get; set; } = null!;
@@ -459,7 +459,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? TaskName { get; set; }
 
         /// <summary>
-        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address.
+        /// The real-time log delivery task type. The possible values are: `Cls`: push to Tencent Cloud CLS; `CustomEndpoint`: push to a custom HTTP(S) address; `S3`: push to an AWS S3 compatible storage bucket address; `LogAnalysis`: push to EdgeOne log analysis.
         /// </summary>
         [Input("taskType")]
         public Input<string>? TaskType { get; set; }

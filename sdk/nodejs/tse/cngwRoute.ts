@@ -236,61 +236,61 @@ export interface CngwRouteState {
     /**
      * destination port for Layer 4 matching.
      */
-    destinationPorts?: pulumi.Input<pulumi.Input<number>[]>;
+    destinationPorts?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
      *
      * @deprecated This field has been deprecated and will be deleted in subsequent versions.
      */
-    forceHttps?: pulumi.Input<boolean>;
+    forceHttps?: pulumi.Input<boolean | undefined>;
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * the headers of route.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteHeader>[] | undefined>;
     /**
      * host list.
      */
-    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * https redirection status code.
      */
-    httpsRedirectStatusCode?: pulumi.Input<number>;
+    httpsRedirectStatusCode?: pulumi.Input<number | undefined>;
     /**
      * route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
      */
-    methods?: pulumi.Input<pulumi.Input<string>[]>;
+    methods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * path list.
      */
-    paths?: pulumi.Input<pulumi.Input<string>[]>;
+    paths?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * whether to keep the host when forwarding to the backend.
      */
-    preserveHost?: pulumi.Input<boolean>;
+    preserveHost?: pulumi.Input<boolean | undefined>;
     /**
      * the protocol list of route.Reference value:`https`,`http`.
      */
-    protocols?: pulumi.Input<pulumi.Input<string>[]>;
+    protocols?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * the id of the route, unique in the instance.
      */
-    routeId?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string | undefined>;
     /**
      * the name of the route, unique in the instance.
      */
-    routeName?: pulumi.Input<string>;
+    routeName?: pulumi.Input<string | undefined>;
     /**
      * ID of the service which the route belongs to.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * whether to strip path when forwarding to the backend.
      */
-    stripPath?: pulumi.Input<boolean>;
+    stripPath?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -300,13 +300,13 @@ export interface CngwRouteArgs {
     /**
      * destination port for Layer 4 matching.
      */
-    destinationPorts?: pulumi.Input<pulumi.Input<number>[]>;
+    destinationPorts?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * This field has been deprecated and will be deleted in subsequent versions. whether to enable forced HTTPS, no longer use.
      *
      * @deprecated This field has been deprecated and will be deleted in subsequent versions.
      */
-    forceHttps?: pulumi.Input<boolean>;
+    forceHttps?: pulumi.Input<boolean | undefined>;
     /**
      * gateway ID.
      */
@@ -314,35 +314,35 @@ export interface CngwRouteArgs {
     /**
      * the headers of route.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Tse.CngwRouteHeader>[] | undefined>;
     /**
      * host list.
      */
-    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * https redirection status code.
      */
-    httpsRedirectStatusCode?: pulumi.Input<number>;
+    httpsRedirectStatusCode?: pulumi.Input<number | undefined>;
     /**
      * route methods. Reference value:`GET`,`POST`,`DELETE`,`PUT`,`OPTIONS`,`PATCH`,`HEAD`,`ANY`,`TRACE`,`COPY`,`MOVE`,`PROPFIND`,`PROPPATCH`,`MKCOL`,`LOCK`,`UNLOCK`.
      */
-    methods?: pulumi.Input<pulumi.Input<string>[]>;
+    methods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * path list.
      */
-    paths?: pulumi.Input<pulumi.Input<string>[]>;
+    paths?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * whether to keep the host when forwarding to the backend.
      */
-    preserveHost?: pulumi.Input<boolean>;
+    preserveHost?: pulumi.Input<boolean | undefined>;
     /**
      * the protocol list of route.Reference value:`https`,`http`.
      */
-    protocols?: pulumi.Input<pulumi.Input<string>[]>;
+    protocols?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * the name of the route, unique in the instance.
      */
-    routeName?: pulumi.Input<string>;
+    routeName?: pulumi.Input<string | undefined>;
     /**
      * ID of the service which the route belongs to.
      */
@@ -350,5 +350,5 @@ export interface CngwRouteArgs {
     /**
      * whether to strip path when forwarding to the backend.
      */
-    stripPath?: pulumi.Input<boolean>;
+    stripPath?: pulumi.Input<boolean | undefined>;
 }

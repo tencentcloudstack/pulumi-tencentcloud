@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogs = tencentcloud.Dbbrain.getSlowLogs({
+ * const slowLogs = tencentcloud.dbbrain.getSlowLogs({
  *     product: "mysql",
  *     instanceId: "%s",
  *     md5: "4961208426639258265",
@@ -124,7 +124,7 @@ export interface GetSlowLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogs = tencentcloud.Dbbrain.getSlowLogs({
+ * const slowLogs = tencentcloud.dbbrain.getSlowLogs({
  *     product: "mysql",
  *     instanceId: "%s",
  *     md5: "4961208426639258265",
@@ -157,7 +157,7 @@ export interface GetSlowLogsOutputArgs {
     /**
      * database list.
      */
-    dbs?: pulumi.Input<pulumi.Input<string>[]>;
+    dbs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The deadline, such as 2019-09-11 10:13:14, the interval between the deadline and the start time is less than 7 days.
      */
@@ -169,11 +169,11 @@ export interface GetSlowLogsOutputArgs {
     /**
      * ip.
      */
-    ips?: pulumi.Input<pulumi.Input<string>[]>;
+    ips?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * keywords.
      */
-    keys?: pulumi.Input<pulumi.Input<string>[]>;
+    keys?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * md5 value of sql template.
      */
@@ -185,7 +185,7 @@ export interface GetSlowLogsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, such as 2019-09-10 12:13:14.
      */
@@ -193,9 +193,9 @@ export interface GetSlowLogsOutputArgs {
     /**
      * Time-consuming interval, the left and right boundaries of the time-consuming interval correspond to the 0th element and the first element of the array respectively.
      */
-    times?: pulumi.Input<pulumi.Input<number>[]>;
+    times?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * user.
      */
-    users?: pulumi.Input<pulumi.Input<string>[]>;
+    users?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

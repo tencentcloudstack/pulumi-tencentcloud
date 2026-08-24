@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterResources = tencentcloud.Clb.getClusterResources({
+ * const clusterResources = tencentcloud.clb.getClusterResources({
  *     filters: [{
  *         name: "idle",
  *         values: ["True"],
@@ -70,7 +70,7 @@ export interface GetClusterResourcesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterResources = tencentcloud.Clb.getClusterResources({
+ * const clusterResources = tencentcloud.clb.getClusterResources({
  *     filters: [{
  *         name: "idle",
  *         values: ["True"],
@@ -94,9 +94,9 @@ export interface GetClusterResourcesOutputArgs {
     /**
      * Filter conditions to query cluster. cluster-id - String - Required: No - (Filter condition) Filter by cluster ID, such as tgw-12345678. vip - String - Required: No - (Filter condition) Filter by loadbalancer vip, such as 192.168.0.1. loadblancer-id - String - Required: No - (Filter condition) Filter by loadblancer ID, such as lbl-12345678. idle - String - Required: No - (Filter condition) Filter by Whether load balancing is idle, such as True, False.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetClusterResourcesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetClusterResourcesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

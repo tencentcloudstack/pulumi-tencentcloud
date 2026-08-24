@@ -75,12 +75,8 @@ type GetListSchemaResult struct {
 }
 
 func GetListSchemaOutput(ctx *pulumi.Context, args GetListSchemaOutputArgs, opts ...pulumi.InvokeOption) GetListSchemaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListSchemaResultOutput, error) {
-			args := v.(GetListSchemaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListSchema:getListSchema", args, GetListSchemaResultOutput{}, options).(GetListSchemaResultOutput), nil
-		}).(GetListSchemaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListSchema:getListSchema", args, GetListSchemaResultOutput{}, options).(GetListSchemaResultOutput)
 }
 
 // A collection of arguments for invoking getListSchema.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstances = tencentcloud.Mariadb.getDbInstances({
+ * const dbInstances = tencentcloud.mariadb.getDbInstances({
  *     instanceIds: ["tdsql-ijxtqk5p"],
  *     projectIds: [0],
  *     vpcId: "5556791",
@@ -100,7 +100,7 @@ export interface GetDbInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstances = tencentcloud.Mariadb.getDbInstances({
+ * const dbInstances = tencentcloud.mariadb.getDbInstances({
  *     instanceIds: ["tdsql-ijxtqk5p"],
  *     projectIds: [0],
  *     vpcId: "5556791",
@@ -128,25 +128,25 @@ export interface GetDbInstancesOutputArgs {
     /**
      * instance ids.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * project ids.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * instance name or vip.
      */
-    searchName?: pulumi.Input<string>;
+    searchName?: pulumi.Input<string | undefined>;
     /**
      * subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

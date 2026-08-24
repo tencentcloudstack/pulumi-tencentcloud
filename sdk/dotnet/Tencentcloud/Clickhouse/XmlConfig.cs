@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Import
     /// 
-    /// clickhouse xml_config can be imported using the id, e.g.
+    /// clickhouse XmlConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml

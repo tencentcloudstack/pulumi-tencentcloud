@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * trocket rocketmq_role can be imported using the id, e.g.
+ * trocket rocketmqRole can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
@@ -170,39 +170,39 @@ export interface RocketmqRoleState {
     /**
      * Access key.
      */
-    accessKey?: pulumi.Input<string>;
+    accessKey?: pulumi.Input<string | undefined>;
     /**
      * Created time.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Modified time.
      */
-    modifiedTime?: pulumi.Input<number>;
+    modifiedTime?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable consumption permission.
      */
-    permRead?: pulumi.Input<boolean>;
+    permRead?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable production permission.
      */
-    permWrite?: pulumi.Input<boolean>;
+    permWrite?: pulumi.Input<boolean | undefined>;
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Name of role.
      */
-    role?: pulumi.Input<string>;
+    role?: pulumi.Input<string | undefined>;
     /**
      * Secret key.
      */
-    secretKey?: pulumi.Input<string>;
+    secretKey?: pulumi.Input<string | undefined>;
 }
 
 /**

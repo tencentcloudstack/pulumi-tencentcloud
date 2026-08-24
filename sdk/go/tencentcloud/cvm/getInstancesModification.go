@@ -72,12 +72,8 @@ type GetInstancesModificationResult struct {
 }
 
 func GetInstancesModificationOutput(ctx *pulumi.Context, args GetInstancesModificationOutputArgs, opts ...pulumi.InvokeOption) GetInstancesModificationResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesModificationResultOutput, error) {
-			args := v.(GetInstancesModificationArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args, GetInstancesModificationResultOutput{}, options).(GetInstancesModificationResultOutput), nil
-		}).(GetInstancesModificationResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args, GetInstancesModificationResultOutput{}, options).(GetInstancesModificationResultOutput)
 }
 
 // A collection of arguments for invoking getInstancesModification.

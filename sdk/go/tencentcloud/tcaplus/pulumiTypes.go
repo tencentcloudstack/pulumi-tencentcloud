@@ -13,6 +13,324 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ClusterProxyList struct {
+	// Machine quantity.
+	MachineNum *int `pulumi:"machineNum"`
+	// Machine type.
+	MachineType *string `pulumi:"machineType"`
+}
+
+// ClusterProxyListInput is an input type that accepts ClusterProxyListArgs and ClusterProxyListOutput values.
+// You can construct a concrete instance of `ClusterProxyListInput` via:
+//
+//	ClusterProxyListArgs{...}
+type ClusterProxyListInput interface {
+	pulumi.Input
+
+	ToClusterProxyListOutput() ClusterProxyListOutput
+	ToClusterProxyListOutputWithContext(context.Context) ClusterProxyListOutput
+}
+
+type ClusterProxyListArgs struct {
+	// Machine quantity.
+	MachineNum pulumi.IntPtrInput `pulumi:"machineNum"`
+	// Machine type.
+	MachineType pulumi.StringPtrInput `pulumi:"machineType"`
+}
+
+func (ClusterProxyListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterProxyList)(nil)).Elem()
+}
+
+func (i ClusterProxyListArgs) ToClusterProxyListOutput() ClusterProxyListOutput {
+	return i.ToClusterProxyListOutputWithContext(context.Background())
+}
+
+func (i ClusterProxyListArgs) ToClusterProxyListOutputWithContext(ctx context.Context) ClusterProxyListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterProxyListOutput)
+}
+
+// ClusterProxyListArrayInput is an input type that accepts ClusterProxyListArray and ClusterProxyListArrayOutput values.
+// You can construct a concrete instance of `ClusterProxyListArrayInput` via:
+//
+//	ClusterProxyListArray{ ClusterProxyListArgs{...} }
+type ClusterProxyListArrayInput interface {
+	pulumi.Input
+
+	ToClusterProxyListArrayOutput() ClusterProxyListArrayOutput
+	ToClusterProxyListArrayOutputWithContext(context.Context) ClusterProxyListArrayOutput
+}
+
+type ClusterProxyListArray []ClusterProxyListInput
+
+func (ClusterProxyListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterProxyList)(nil)).Elem()
+}
+
+func (i ClusterProxyListArray) ToClusterProxyListArrayOutput() ClusterProxyListArrayOutput {
+	return i.ToClusterProxyListArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterProxyListArray) ToClusterProxyListArrayOutputWithContext(ctx context.Context) ClusterProxyListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterProxyListArrayOutput)
+}
+
+type ClusterProxyListOutput struct{ *pulumi.OutputState }
+
+func (ClusterProxyListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterProxyList)(nil)).Elem()
+}
+
+func (o ClusterProxyListOutput) ToClusterProxyListOutput() ClusterProxyListOutput {
+	return o
+}
+
+func (o ClusterProxyListOutput) ToClusterProxyListOutputWithContext(ctx context.Context) ClusterProxyListOutput {
+	return o
+}
+
+// Machine quantity.
+func (o ClusterProxyListOutput) MachineNum() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterProxyList) *int { return v.MachineNum }).(pulumi.IntPtrOutput)
+}
+
+// Machine type.
+func (o ClusterProxyListOutput) MachineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterProxyList) *string { return v.MachineType }).(pulumi.StringPtrOutput)
+}
+
+type ClusterProxyListArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterProxyListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterProxyList)(nil)).Elem()
+}
+
+func (o ClusterProxyListArrayOutput) ToClusterProxyListArrayOutput() ClusterProxyListArrayOutput {
+	return o
+}
+
+func (o ClusterProxyListArrayOutput) ToClusterProxyListArrayOutputWithContext(ctx context.Context) ClusterProxyListArrayOutput {
+	return o
+}
+
+func (o ClusterProxyListArrayOutput) Index(i pulumi.IntInput) ClusterProxyListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterProxyList {
+		return vs[0].([]ClusterProxyList)[vs[1].(int)]
+	}).(ClusterProxyListOutput)
+}
+
+type ClusterResourceTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue *string `pulumi:"tagValue"`
+}
+
+// ClusterResourceTagInput is an input type that accepts ClusterResourceTagArgs and ClusterResourceTagOutput values.
+// You can construct a concrete instance of `ClusterResourceTagInput` via:
+//
+//	ClusterResourceTagArgs{...}
+type ClusterResourceTagInput interface {
+	pulumi.Input
+
+	ToClusterResourceTagOutput() ClusterResourceTagOutput
+	ToClusterResourceTagOutputWithContext(context.Context) ClusterResourceTagOutput
+}
+
+type ClusterResourceTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringPtrInput `pulumi:"tagValue"`
+}
+
+func (ClusterResourceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceTag)(nil)).Elem()
+}
+
+func (i ClusterResourceTagArgs) ToClusterResourceTagOutput() ClusterResourceTagOutput {
+	return i.ToClusterResourceTagOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceTagArgs) ToClusterResourceTagOutputWithContext(ctx context.Context) ClusterResourceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceTagOutput)
+}
+
+// ClusterResourceTagArrayInput is an input type that accepts ClusterResourceTagArray and ClusterResourceTagArrayOutput values.
+// You can construct a concrete instance of `ClusterResourceTagArrayInput` via:
+//
+//	ClusterResourceTagArray{ ClusterResourceTagArgs{...} }
+type ClusterResourceTagArrayInput interface {
+	pulumi.Input
+
+	ToClusterResourceTagArrayOutput() ClusterResourceTagArrayOutput
+	ToClusterResourceTagArrayOutputWithContext(context.Context) ClusterResourceTagArrayOutput
+}
+
+type ClusterResourceTagArray []ClusterResourceTagInput
+
+func (ClusterResourceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceTag)(nil)).Elem()
+}
+
+func (i ClusterResourceTagArray) ToClusterResourceTagArrayOutput() ClusterResourceTagArrayOutput {
+	return i.ToClusterResourceTagArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterResourceTagArray) ToClusterResourceTagArrayOutputWithContext(ctx context.Context) ClusterResourceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterResourceTagArrayOutput)
+}
+
+type ClusterResourceTagOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterResourceTag)(nil)).Elem()
+}
+
+func (o ClusterResourceTagOutput) ToClusterResourceTagOutput() ClusterResourceTagOutput {
+	return o
+}
+
+func (o ClusterResourceTagOutput) ToClusterResourceTagOutputWithContext(ctx context.Context) ClusterResourceTagOutput {
+	return o
+}
+
+// Tag key.
+func (o ClusterResourceTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterResourceTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o ClusterResourceTagOutput) TagValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterResourceTag) *string { return v.TagValue }).(pulumi.StringPtrOutput)
+}
+
+type ClusterResourceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterResourceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterResourceTag)(nil)).Elem()
+}
+
+func (o ClusterResourceTagArrayOutput) ToClusterResourceTagArrayOutput() ClusterResourceTagArrayOutput {
+	return o
+}
+
+func (o ClusterResourceTagArrayOutput) ToClusterResourceTagArrayOutputWithContext(ctx context.Context) ClusterResourceTagArrayOutput {
+	return o
+}
+
+func (o ClusterResourceTagArrayOutput) Index(i pulumi.IntInput) ClusterResourceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterResourceTag {
+		return vs[0].([]ClusterResourceTag)[vs[1].(int)]
+	}).(ClusterResourceTagOutput)
+}
+
+type ClusterServerList struct {
+	// Machine quantity.
+	MachineNum *int `pulumi:"machineNum"`
+	// Machine type.
+	MachineType *string `pulumi:"machineType"`
+}
+
+// ClusterServerListInput is an input type that accepts ClusterServerListArgs and ClusterServerListOutput values.
+// You can construct a concrete instance of `ClusterServerListInput` via:
+//
+//	ClusterServerListArgs{...}
+type ClusterServerListInput interface {
+	pulumi.Input
+
+	ToClusterServerListOutput() ClusterServerListOutput
+	ToClusterServerListOutputWithContext(context.Context) ClusterServerListOutput
+}
+
+type ClusterServerListArgs struct {
+	// Machine quantity.
+	MachineNum pulumi.IntPtrInput `pulumi:"machineNum"`
+	// Machine type.
+	MachineType pulumi.StringPtrInput `pulumi:"machineType"`
+}
+
+func (ClusterServerListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterServerList)(nil)).Elem()
+}
+
+func (i ClusterServerListArgs) ToClusterServerListOutput() ClusterServerListOutput {
+	return i.ToClusterServerListOutputWithContext(context.Background())
+}
+
+func (i ClusterServerListArgs) ToClusterServerListOutputWithContext(ctx context.Context) ClusterServerListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterServerListOutput)
+}
+
+// ClusterServerListArrayInput is an input type that accepts ClusterServerListArray and ClusterServerListArrayOutput values.
+// You can construct a concrete instance of `ClusterServerListArrayInput` via:
+//
+//	ClusterServerListArray{ ClusterServerListArgs{...} }
+type ClusterServerListArrayInput interface {
+	pulumi.Input
+
+	ToClusterServerListArrayOutput() ClusterServerListArrayOutput
+	ToClusterServerListArrayOutputWithContext(context.Context) ClusterServerListArrayOutput
+}
+
+type ClusterServerListArray []ClusterServerListInput
+
+func (ClusterServerListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterServerList)(nil)).Elem()
+}
+
+func (i ClusterServerListArray) ToClusterServerListArrayOutput() ClusterServerListArrayOutput {
+	return i.ToClusterServerListArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterServerListArray) ToClusterServerListArrayOutputWithContext(ctx context.Context) ClusterServerListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterServerListArrayOutput)
+}
+
+type ClusterServerListOutput struct{ *pulumi.OutputState }
+
+func (ClusterServerListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterServerList)(nil)).Elem()
+}
+
+func (o ClusterServerListOutput) ToClusterServerListOutput() ClusterServerListOutput {
+	return o
+}
+
+func (o ClusterServerListOutput) ToClusterServerListOutputWithContext(ctx context.Context) ClusterServerListOutput {
+	return o
+}
+
+// Machine quantity.
+func (o ClusterServerListOutput) MachineNum() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterServerList) *int { return v.MachineNum }).(pulumi.IntPtrOutput)
+}
+
+// Machine type.
+func (o ClusterServerListOutput) MachineType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterServerList) *string { return v.MachineType }).(pulumi.StringPtrOutput)
+}
+
+type ClusterServerListArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterServerListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterServerList)(nil)).Elem()
+}
+
+func (o ClusterServerListArrayOutput) ToClusterServerListArrayOutput() ClusterServerListArrayOutput {
+	return o
+}
+
+func (o ClusterServerListArrayOutput) ToClusterServerListArrayOutputWithContext(ctx context.Context) ClusterServerListArrayOutput {
+	return o
+}
+
+func (o ClusterServerListArrayOutput) Index(i pulumi.IntInput) ClusterServerListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterServerList {
+		return vs[0].([]ClusterServerList)[vs[1].(int)]
+	}).(ClusterServerListOutput)
+}
+
 type IdlTableInfo struct {
 	// Error messages for creating IDL file.
 	Error *string `pulumi:"error"`
@@ -162,6 +480,112 @@ func (o IdlTableInfoArrayOutput) Index(i pulumi.IntInput) IdlTableInfoOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IdlTableInfo {
 		return vs[0].([]IdlTableInfo)[vs[1].(int)]
 	}).(IdlTableInfoOutput)
+}
+
+type TablegroupResourceTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// TablegroupResourceTagInput is an input type that accepts TablegroupResourceTagArgs and TablegroupResourceTagOutput values.
+// You can construct a concrete instance of `TablegroupResourceTagInput` via:
+//
+//	TablegroupResourceTagArgs{...}
+type TablegroupResourceTagInput interface {
+	pulumi.Input
+
+	ToTablegroupResourceTagOutput() TablegroupResourceTagOutput
+	ToTablegroupResourceTagOutputWithContext(context.Context) TablegroupResourceTagOutput
+}
+
+type TablegroupResourceTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (TablegroupResourceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TablegroupResourceTag)(nil)).Elem()
+}
+
+func (i TablegroupResourceTagArgs) ToTablegroupResourceTagOutput() TablegroupResourceTagOutput {
+	return i.ToTablegroupResourceTagOutputWithContext(context.Background())
+}
+
+func (i TablegroupResourceTagArgs) ToTablegroupResourceTagOutputWithContext(ctx context.Context) TablegroupResourceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablegroupResourceTagOutput)
+}
+
+// TablegroupResourceTagArrayInput is an input type that accepts TablegroupResourceTagArray and TablegroupResourceTagArrayOutput values.
+// You can construct a concrete instance of `TablegroupResourceTagArrayInput` via:
+//
+//	TablegroupResourceTagArray{ TablegroupResourceTagArgs{...} }
+type TablegroupResourceTagArrayInput interface {
+	pulumi.Input
+
+	ToTablegroupResourceTagArrayOutput() TablegroupResourceTagArrayOutput
+	ToTablegroupResourceTagArrayOutputWithContext(context.Context) TablegroupResourceTagArrayOutput
+}
+
+type TablegroupResourceTagArray []TablegroupResourceTagInput
+
+func (TablegroupResourceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TablegroupResourceTag)(nil)).Elem()
+}
+
+func (i TablegroupResourceTagArray) ToTablegroupResourceTagArrayOutput() TablegroupResourceTagArrayOutput {
+	return i.ToTablegroupResourceTagArrayOutputWithContext(context.Background())
+}
+
+func (i TablegroupResourceTagArray) ToTablegroupResourceTagArrayOutputWithContext(ctx context.Context) TablegroupResourceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TablegroupResourceTagArrayOutput)
+}
+
+type TablegroupResourceTagOutput struct{ *pulumi.OutputState }
+
+func (TablegroupResourceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TablegroupResourceTag)(nil)).Elem()
+}
+
+func (o TablegroupResourceTagOutput) ToTablegroupResourceTagOutput() TablegroupResourceTagOutput {
+	return o
+}
+
+func (o TablegroupResourceTagOutput) ToTablegroupResourceTagOutputWithContext(ctx context.Context) TablegroupResourceTagOutput {
+	return o
+}
+
+// Tag key.
+func (o TablegroupResourceTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v TablegroupResourceTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o TablegroupResourceTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v TablegroupResourceTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type TablegroupResourceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (TablegroupResourceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TablegroupResourceTag)(nil)).Elem()
+}
+
+func (o TablegroupResourceTagArrayOutput) ToTablegroupResourceTagArrayOutput() TablegroupResourceTagArrayOutput {
+	return o
+}
+
+func (o TablegroupResourceTagArrayOutput) ToTablegroupResourceTagArrayOutputWithContext(ctx context.Context) TablegroupResourceTagArrayOutput {
+	return o
+}
+
+func (o TablegroupResourceTagArrayOutput) Index(i pulumi.IntInput) TablegroupResourceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TablegroupResourceTag {
+		return vs[0].([]TablegroupResourceTag)[vs[1].(int)]
+	}).(TablegroupResourceTagOutput)
 }
 
 type GetClustersList struct {
@@ -814,8 +1238,16 @@ func (o GetTablesListArrayOutput) Index(i pulumi.IntInput) GetTablesListOutput {
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterProxyListInput)(nil)).Elem(), ClusterProxyListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterProxyListArrayInput)(nil)).Elem(), ClusterProxyListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceTagInput)(nil)).Elem(), ClusterResourceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceTagArrayInput)(nil)).Elem(), ClusterResourceTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterServerListInput)(nil)).Elem(), ClusterServerListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterServerListArrayInput)(nil)).Elem(), ClusterServerListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IdlTableInfoInput)(nil)).Elem(), IdlTableInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IdlTableInfoArrayInput)(nil)).Elem(), IdlTableInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablegroupResourceTagInput)(nil)).Elem(), TablegroupResourceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TablegroupResourceTagArrayInput)(nil)).Elem(), TablegroupResourceTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListInput)(nil)).Elem(), GetClustersListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListArrayInput)(nil)).Elem(), GetClustersListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetIdlsListInput)(nil)).Elem(), GetIdlsListArgs{})
@@ -824,8 +1256,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTablegroupsListArrayInput)(nil)).Elem(), GetTablegroupsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTablesListInput)(nil)).Elem(), GetTablesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTablesListArrayInput)(nil)).Elem(), GetTablesListArray{})
+	pulumi.RegisterOutputType(ClusterProxyListOutput{})
+	pulumi.RegisterOutputType(ClusterProxyListArrayOutput{})
+	pulumi.RegisterOutputType(ClusterResourceTagOutput{})
+	pulumi.RegisterOutputType(ClusterResourceTagArrayOutput{})
+	pulumi.RegisterOutputType(ClusterServerListOutput{})
+	pulumi.RegisterOutputType(ClusterServerListArrayOutput{})
 	pulumi.RegisterOutputType(IdlTableInfoOutput{})
 	pulumi.RegisterOutputType(IdlTableInfoArrayOutput{})
+	pulumi.RegisterOutputType(TablegroupResourceTagOutput{})
+	pulumi.RegisterOutputType(TablegroupResourceTagArrayOutput{})
 	pulumi.RegisterOutputType(GetClustersListOutput{})
 	pulumi.RegisterOutputType(GetClustersListArrayOutput{})
 	pulumi.RegisterOutputType(GetIdlsListOutput{})

@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_tse_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_tse_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -68,8 +68,8 @@ import (
 //					Specification: pulumi.String("1c2g"),
 //				},
 //				VpcConfig: &tse.CngwGatewayVpcConfigArgs{
-//					SubnetId: subnet.ID(),
-//					VpcId:    vpc.ID(),
+//					SubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
+//					VpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
@@ -80,9 +80,9 @@ import (
 //			}
 //			_, err = tse.NewCngwGroup(ctx, "cngw_group", &tse.CngwGroupArgs{
 //				Description: pulumi.String("terraform desc"),
-//				GatewayId:   cngwGateway.ID(),
+//				GatewayId:   cngwGateway.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("terraform-group"),
-//				SubnetId:    subnet.ID(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				NodeConfig: &tse.CngwGroupNodeConfigArgs{
 //					Number:        pulumi.Int(2),
 //					Specification: pulumi.String("1c2g"),

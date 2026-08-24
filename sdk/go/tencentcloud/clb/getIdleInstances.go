@@ -67,12 +67,8 @@ type GetIdleInstancesResult struct {
 }
 
 func GetIdleInstancesOutput(ctx *pulumi.Context, args GetIdleInstancesOutputArgs, opts ...pulumi.InvokeOption) GetIdleInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetIdleInstancesResultOutput, error) {
-			args := v.(GetIdleInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getIdleInstances:getIdleInstances", args, GetIdleInstancesResultOutput{}, options).(GetIdleInstancesResultOutput), nil
-		}).(GetIdleInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getIdleInstances:getIdleInstances", args, GetIdleInstancesResultOutput{}, options).(GetIdleInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getIdleInstances.

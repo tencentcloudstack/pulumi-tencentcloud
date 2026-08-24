@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterParams = tencentcloud.Cynosdb.getClusterParams({
+ * const clusterParams = tencentcloud.cynosdb.getClusterParams({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     paramName: "innodb_checksum_algorithm",
  * });
@@ -76,7 +76,7 @@ export interface GetClusterParamsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterParams = tencentcloud.Cynosdb.getClusterParams({
+ * const clusterParams = tencentcloud.cynosdb.getClusterParams({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     paramName: "innodb_checksum_algorithm",
  * });
@@ -102,9 +102,9 @@ export interface GetClusterParamsOutputArgs {
     /**
      * Parameter name.
      */
-    paramName?: pulumi.Input<string>;
+    paramName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

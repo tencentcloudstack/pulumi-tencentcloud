@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmRules = tencentcloud.Wedata.getOpsAlarmRules({
+ * const wedataOpsAlarmRules = tencentcloud.wedata.getOpsAlarmRules({
  *     projectId: "1859317240494305280",
  * });
  * ```
@@ -132,7 +132,7 @@ export interface GetOpsAlarmRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmRules = tencentcloud.Wedata.getOpsAlarmRules({
+ * const wedataOpsAlarmRules = tencentcloud.wedata.getOpsAlarmRules({
  *     projectId: "1859317240494305280",
  * });
  * ```
@@ -163,35 +163,35 @@ export interface GetOpsAlarmRulesOutputArgs {
     /**
      * Alarm level: 1. Normal, 2. Major, 3. Urgent.
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
      * Query the alarm rules configured for the corresponding alarm recipient.
      */
-    alarmRecipientId?: pulumi.Input<string>;
+    alarmRecipientId?: pulumi.Input<string | undefined>;
     /**
      * Alarm Rule Monitoring Types: failure: failure alarm; overtime: timeout alarm; success: success alarm; backTrackingOrRerunSuccess: backTrackingOrRerunSuccess: backTrackingOrRerunFailure: backTrackingOrRerunFailure. Project Fluctuation Alarms: projectFailureInstanceUpwardFluctuationAlarm: alarm if the upward fluctuation rate of failed instances exceeds the threshold. projectSuccessInstanceDownwardFluctuationAlarm: alarm if the downward fluctuation rate of successful instances exceeds the threshold. Offline Integration Task Reconciliation Alarms: reconciliationFailure: offline reconciliation task failure alarm; reconciliationOvertime: offline reconciliation task timeout alarm; reconciliationMismatch: alarm if the number of inconsistent entries in a data reconciliation task exceeds the threshold. Example value: ["failure"].
      */
-    alarmType?: pulumi.Input<string>;
+    alarmType?: pulumi.Input<string | undefined>;
     /**
      * The start time of the alarm rule creation time range, in the format of 2025-08-17 00:00:00.
      */
-    createTimeFrom?: pulumi.Input<string>;
+    createTimeFrom?: pulumi.Input<string | undefined>;
     /**
      * The end time of the alarm rule creation time range, in the format of "2025-08-26 23:59:59".
      */
-    createTimeTo?: pulumi.Input<string>;
+    createTimeTo?: pulumi.Input<string | undefined>;
     /**
      * Alarm rule creator filtering.
      */
-    createUserUin?: pulumi.Input<string>;
+    createUserUin?: pulumi.Input<string | undefined>;
     /**
      * Query the corresponding alarm rule based on the alarm rule ID/rule name.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Monitoring object type, Task dimension monitoring: can be configured according to task/workflow/project: 1.Task, 2.Workflow, 3.Project (default is 1.Task) Project dimension monitoring: Project overall task fluctuation alarm, 7: Project fluctuation monitoring alarm.
      */
-    monitorObjectType?: pulumi.Input<number>;
+    monitorObjectType?: pulumi.Input<number | undefined>;
     /**
      * Project id.
      */
@@ -199,17 +199,17 @@ export interface GetOpsAlarmRulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query alarm rules based on task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Last updated time filter alarm rules, format such as "2025-08-26 00:00:00".
      */
-    updateTimeFrom?: pulumi.Input<string>;
+    updateTimeFrom?: pulumi.Input<string | undefined>;
     /**
      * Last updated time filter alarm rule format such as: "2025-08-26 23:59:59".
      */
-    updateTimeTo?: pulumi.Input<string>;
+    updateTimeTo?: pulumi.Input<string | undefined>;
 }

@@ -94,11 +94,11 @@ export interface SyncJobResizeOperationState {
     /**
      * Synchronization instance id (i.e. identifies a synchronization job).
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * Task specification.
      */
-    newInstanceClass?: pulumi.Input<string>;
+    newInstanceClass?: pulumi.Input<string | undefined>;
 }
 
 /**

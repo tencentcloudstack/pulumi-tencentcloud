@@ -77,12 +77,8 @@ type GetTaskResultResult struct {
 }
 
 func GetTaskResultOutput(ctx *pulumi.Context, args GetTaskResultOutputArgs, opts ...pulumi.InvokeOption) GetTaskResultResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTaskResultResultOutput, error) {
-			args := v.(GetTaskResultArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getTaskResult:getTaskResult", args, GetTaskResultResultOutput{}, options).(GetTaskResultResultOutput), nil
-		}).(GetTaskResultResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getTaskResult:getTaskResult", args, GetTaskResultResultOutput{}, options).(GetTaskResultResultOutput)
 }
 
 // A collection of arguments for invoking getTaskResult.

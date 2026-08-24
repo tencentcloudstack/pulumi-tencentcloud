@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     sortBy: "PhysicalFileSize",
  *     product: "mysql",
@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     sortBy: "PhysicalFileSize",
  *     product: "mysql",
@@ -107,7 +107,7 @@ export interface GetTopSpaceTablesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     sortBy: "PhysicalFileSize",
  *     product: "mysql",
@@ -120,7 +120,7 @@ export interface GetTopSpaceTablesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     sortBy: "PhysicalFileSize",
  *     product: "mysql",
@@ -149,17 +149,17 @@ export interface GetTopSpaceTablesOutputArgs {
     /**
      * The number of Top tables returned, the maximum value is 100, and the default is 20.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL, the default is mysql.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The sorting field used to filter the Top table. The optional fields include DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, and PhysicalFileSize (only supported by ApsaraDB for MySQL instances). The default for ApsaraDB for MySQL instances is PhysicalFileSize, and the default for other product instances is TotalLength.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
 }

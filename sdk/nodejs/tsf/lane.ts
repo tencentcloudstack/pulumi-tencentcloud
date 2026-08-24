@@ -145,39 +145,39 @@ export interface LaneState {
     /**
      * creation time.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Whether to enter the application.
      */
-    entrance?: pulumi.Input<boolean>;
+    entrance?: pulumi.Input<boolean | undefined>;
     /**
      * Swimlane Deployment Group Information.
      */
-    laneGroupLists?: pulumi.Input<pulumi.Input<inputs.Tsf.LaneLaneGroupList>[]>;
+    laneGroupLists?: pulumi.Input<pulumi.Input<inputs.Tsf.LaneLaneGroupList>[] | undefined>;
     /**
      * Lane id.
      */
-    laneId?: pulumi.Input<string>;
+    laneId?: pulumi.Input<string | undefined>;
     /**
      * Lane name.
      */
-    laneName?: pulumi.Input<string>;
+    laneName?: pulumi.Input<string | undefined>;
     /**
      * A list of namespaces to which the swimlane has associated deployment groups.
      */
-    namespaceIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    namespaceIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Lane Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -195,7 +195,7 @@ export interface LaneArgs {
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Lane Remarks.
      */

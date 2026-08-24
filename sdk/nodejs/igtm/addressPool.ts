@@ -139,23 +139,23 @@ export interface AddressPoolState {
     /**
      * Address list.
      */
-    addressSets?: pulumi.Input<pulumi.Input<inputs.Igtm.AddressPoolAddressSet>[]>;
+    addressSets?: pulumi.Input<pulumi.Input<inputs.Igtm.AddressPoolAddressSet>[] | undefined>;
     /**
      * Monitor ID.
      */
-    monitorId?: pulumi.Input<number>;
+    monitorId?: pulumi.Input<number | undefined>;
     /**
      * Address pool ID.
      */
-    poolId?: pulumi.Input<number>;
+    poolId?: pulumi.Input<number | undefined>;
     /**
      * Address pool name, duplicates are not allowed.
      */
-    poolName?: pulumi.Input<string>;
+    poolName?: pulumi.Input<string | undefined>;
     /**
      * Traffic strategy: WEIGHT for load balancing, ALL for resolving all healthy addresses.
      */
-    trafficStrategy?: pulumi.Input<string>;
+    trafficStrategy?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -169,7 +169,7 @@ export interface AddressPoolArgs {
     /**
      * Monitor ID.
      */
-    monitorId?: pulumi.Input<number>;
+    monitorId?: pulumi.Input<number | undefined>;
     /**
      * Address pool name, duplicates are not allowed.
      */

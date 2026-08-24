@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Enis.getInstance({
+ * const name = tencentcloud.enis.getInstance({
  *     name: "test eni",
  * });
  * ```
@@ -133,7 +133,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Enis.getInstance({
+ * const name = tencentcloud.enis.getInstance({
  *     name: "test eni",
  * });
  * ```
@@ -162,41 +162,41 @@ export interface GetInstanceOutputArgs {
     /**
      * Description of the ENI. Conflict with `ids`.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of the ENIs to be queried. Conflict with `vpcId`,`subnetId`,`instanceId`,`securityGroup`,`name`,`ipv4` and `tags`.
      */
-    ids?: pulumi.Input<pulumi.Input<string>[]>;
+    ids?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the instance which bind the ENI. Conflict with `ids`.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Intranet IP of the ENI. Conflict with `ids`.
      */
-    ipv4?: pulumi.Input<string>;
+    ipv4?: pulumi.Input<string | undefined>;
     /**
      * Name of the ENI to be queried. Conflict with `ids`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * A set of security group IDs which bind the ENI. Conflict with `ids`.
      */
-    securityGroup?: pulumi.Input<string>;
+    securityGroup?: pulumi.Input<string | undefined>;
     /**
      * ID of the subnet within this vpc to be queried. Conflict with `ids`.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the ENI. Conflict with `ids`.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc to be queried. Conflict with `ids`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

@@ -33,7 +33,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_video_process_template can be imported using the bucket#templateId, e.g.
+ * ci mediaVideoProcessTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
@@ -123,19 +123,19 @@ export interface MediaVideoProcessTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * color enhancement.
      */
-    colorEnhance?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateColorEnhance>;
+    colorEnhance?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateColorEnhance | undefined>;
     /**
      * detail enhancement, ColorEnhance and MsSharpen cannot both be empty.
      */
-    msSharpen?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateMsSharpen>;
+    msSharpen?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateMsSharpen | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -149,13 +149,13 @@ export interface MediaVideoProcessTemplateArgs {
     /**
      * color enhancement.
      */
-    colorEnhance?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateColorEnhance>;
+    colorEnhance?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateColorEnhance | undefined>;
     /**
      * detail enhancement, ColorEnhance and MsSharpen cannot both be empty.
      */
-    msSharpen?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateMsSharpen>;
+    msSharpen?: pulumi.Input<inputs.Ci.MediaVideoProcessTemplateMsSharpen | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

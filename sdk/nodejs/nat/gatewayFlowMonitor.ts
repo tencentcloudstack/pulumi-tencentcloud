@@ -108,15 +108,15 @@ export interface GatewayFlowMonitorState {
     /**
      * Bandwidth of flow monitor.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable flow monitor.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * ID of Gateway.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
 }
 
 /**

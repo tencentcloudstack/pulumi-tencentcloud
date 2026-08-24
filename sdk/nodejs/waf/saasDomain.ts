@@ -183,7 +183,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf saas_domain can be imported using the id, e.g.
+ * waf saasDomain can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24
@@ -459,139 +459,139 @@ export interface SaasDomainState {
     /**
      * Whether to enable active health detection, 0 represents disable and 1 represents enable.
      */
-    activeCheck?: pulumi.Input<number>;
+    activeCheck?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable api safe, 1 enable, 0 disable.
      */
-    apiSafeStatus?: pulumi.Input<number>;
+    apiSafeStatus?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable bot, 1 enable, 0 disable.
      */
-    botStatus?: pulumi.Input<number>;
+    botStatus?: pulumi.Input<number | undefined>;
     /**
      * Certificate content, When CertType=1, this parameter needs to be filled.
      */
-    cert?: pulumi.Input<string>;
+    cert?: pulumi.Input<string | undefined>;
     /**
      * Certificate type, 0 represents no certificate, CertType=1 represents self owned certificate, and 2 represents managed certificate.
      */
-    certType?: pulumi.Input<number>;
+    certType?: pulumi.Input<number | undefined>;
     /**
      * Encryption Suite Template, 0:default  1:Universal template 2:Security template 3:Custom template.
      */
-    cipherTemplate?: pulumi.Input<number>;
+    cipherTemplate?: pulumi.Input<number | undefined>;
     /**
      * Encryption Suite Information.
      */
-    ciphers?: pulumi.Input<pulumi.Input<number>[]>;
+    ciphers?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether to enable access logs, 1 enable, 0 disable.
      */
-    clsStatus?: pulumi.Input<number>;
+    clsStatus?: pulumi.Input<number | undefined>;
     /**
      * Domain names that require defense.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Domain id.
      */
-    domainId?: pulumi.Input<string>;
+    domainId?: pulumi.Input<string | undefined>;
     /**
      * Whether redirect to https, 1 will redirect and 0 will not.
      */
-    httpsRewrite?: pulumi.Input<number>;
+    httpsRewrite?: pulumi.Input<number | undefined>;
     /**
      * Upstream port for https, When listen ports has https port and UpstreamScheme is HTTP, the current field needs to be filled.
      */
-    httpsUpstreamPort?: pulumi.Input<string>;
+    httpsUpstreamPort?: pulumi.Input<string | undefined>;
     /**
      * Unique ID of Instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * When is_cdn=3, this parameter needs to be filled in to indicate a custom header.
      */
-    ipHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    ipHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether a proxy has been enabled before WAF, 0 no deployment, 1 deployment and use first IP in X-Forwarded-For as client IP, 2 deployment and use remoteAddr as client IP, 3 deployment and use values of custom headers as client IP.
      */
-    isCdn?: pulumi.Input<number>;
+    isCdn?: pulumi.Input<number | undefined>;
     /**
      * Whether enable HTTP2, Enabling HTTP2 requires HTTPS support, 1 means enabled, 0 does not.
      */
-    isHttp2?: pulumi.Input<number>;
+    isHttp2?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable keep-alive, 0 disable, 1 enable.
      */
-    isKeepAlive?: pulumi.Input<string>;
+    isKeepAlive?: pulumi.Input<string | undefined>;
     /**
      * Is WebSocket support enabled. 1 means enabled, 0 does not.
      */
-    isWebsocket?: pulumi.Input<number>;
+    isWebsocket?: pulumi.Input<number | undefined>;
     /**
      * Load balancing strategy, where 0 represents polling and 1 represents IP hash and 2 weighted round robin.
      */
-    loadBalance?: pulumi.Input<string>;
+    loadBalance?: pulumi.Input<string | undefined>;
     /**
      * This field needs to be set for multiple ports in the upstream server.
      */
-    ports?: pulumi.Input<pulumi.Input<inputs.Waf.SaasDomainPort>[]>;
+    ports?: pulumi.Input<pulumi.Input<inputs.Waf.SaasDomainPort>[] | undefined>;
     /**
      * Certificate key, When CertType=1, this parameter needs to be filled.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * 300s.
      */
-    proxyReadTimeout?: pulumi.Input<number>;
+    proxyReadTimeout?: pulumi.Input<number | undefined>;
     /**
      * 300s.
      */
-    proxySendTimeout?: pulumi.Input<number>;
+    proxySendTimeout?: pulumi.Input<number | undefined>;
     /**
      * When SniType=3, this parameter needs to be filled in to represent a custom host.
      */
-    sniHost?: pulumi.Input<string>;
+    sniHost?: pulumi.Input<string | undefined>;
     /**
      * Sni type fo upstream, 0:disable SNI; 1:enable SNI and SNI equal original request host; 2:and SNI equal upstream host 3:enable SNI and equal customize host.
      */
-    sniType?: pulumi.Input<number>;
+    sniType?: pulumi.Input<number | undefined>;
     /**
      * Upstream IP List, When UpstreamType=0, this parameter needs to be filled.
      */
-    srcLists?: pulumi.Input<pulumi.Input<string>[]>;
+    srcLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Certificate ID, When CertType=2, this parameter needs to be filled.
      */
-    sslId?: pulumi.Input<string>;
+    sslId?: pulumi.Input<string | undefined>;
     /**
      * WAF switch status, 1: turn on WAF switch; 0: turn off WAF switch.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Version of TLS Protocol.
      */
-    tlsVersion?: pulumi.Input<number>;
+    tlsVersion?: pulumi.Input<number | undefined>;
     /**
      * Upstream domain, When UpstreamType=1, this parameter needs to be filled.
      */
-    upstreamDomain?: pulumi.Input<string>;
+    upstreamDomain?: pulumi.Input<string | undefined>;
     /**
      * Upstream scheme for https, http or https.
      */
-    upstreamScheme?: pulumi.Input<string>;
+    upstreamScheme?: pulumi.Input<string | undefined>;
     /**
      * Upstream type, 0 represents IP, 1 represents domain name.
      */
-    upstreamType?: pulumi.Input<number>;
+    upstreamType?: pulumi.Input<number | undefined>;
     /**
      * Weight of each upstream.
      */
-    weights?: pulumi.Input<pulumi.Input<number>[]>;
+    weights?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * 0:disable xff reset; 1:enable xff reset.
      */
-    xffReset?: pulumi.Input<number>;
+    xffReset?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -601,35 +601,35 @@ export interface SaasDomainArgs {
     /**
      * Whether to enable active health detection, 0 represents disable and 1 represents enable.
      */
-    activeCheck?: pulumi.Input<number>;
+    activeCheck?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable api safe, 1 enable, 0 disable.
      */
-    apiSafeStatus?: pulumi.Input<number>;
+    apiSafeStatus?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable bot, 1 enable, 0 disable.
      */
-    botStatus?: pulumi.Input<number>;
+    botStatus?: pulumi.Input<number | undefined>;
     /**
      * Certificate content, When CertType=1, this parameter needs to be filled.
      */
-    cert?: pulumi.Input<string>;
+    cert?: pulumi.Input<string | undefined>;
     /**
      * Certificate type, 0 represents no certificate, CertType=1 represents self owned certificate, and 2 represents managed certificate.
      */
-    certType?: pulumi.Input<number>;
+    certType?: pulumi.Input<number | undefined>;
     /**
      * Encryption Suite Template, 0:default  1:Universal template 2:Security template 3:Custom template.
      */
-    cipherTemplate?: pulumi.Input<number>;
+    cipherTemplate?: pulumi.Input<number | undefined>;
     /**
      * Encryption Suite Information.
      */
-    ciphers?: pulumi.Input<pulumi.Input<number>[]>;
+    ciphers?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether to enable access logs, 1 enable, 0 disable.
      */
-    clsStatus?: pulumi.Input<number>;
+    clsStatus?: pulumi.Input<number | undefined>;
     /**
      * Domain names that require defense.
      */
@@ -637,11 +637,11 @@ export interface SaasDomainArgs {
     /**
      * Whether redirect to https, 1 will redirect and 0 will not.
      */
-    httpsRewrite?: pulumi.Input<number>;
+    httpsRewrite?: pulumi.Input<number | undefined>;
     /**
      * Upstream port for https, When listen ports has https port and UpstreamScheme is HTTP, the current field needs to be filled.
      */
-    httpsUpstreamPort?: pulumi.Input<string>;
+    httpsUpstreamPort?: pulumi.Input<string | undefined>;
     /**
      * Unique ID of Instance.
      */
@@ -649,27 +649,27 @@ export interface SaasDomainArgs {
     /**
      * When is_cdn=3, this parameter needs to be filled in to indicate a custom header.
      */
-    ipHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    ipHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether a proxy has been enabled before WAF, 0 no deployment, 1 deployment and use first IP in X-Forwarded-For as client IP, 2 deployment and use remoteAddr as client IP, 3 deployment and use values of custom headers as client IP.
      */
-    isCdn?: pulumi.Input<number>;
+    isCdn?: pulumi.Input<number | undefined>;
     /**
      * Whether enable HTTP2, Enabling HTTP2 requires HTTPS support, 1 means enabled, 0 does not.
      */
-    isHttp2?: pulumi.Input<number>;
+    isHttp2?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable keep-alive, 0 disable, 1 enable.
      */
-    isKeepAlive?: pulumi.Input<string>;
+    isKeepAlive?: pulumi.Input<string | undefined>;
     /**
      * Is WebSocket support enabled. 1 means enabled, 0 does not.
      */
-    isWebsocket?: pulumi.Input<number>;
+    isWebsocket?: pulumi.Input<number | undefined>;
     /**
      * Load balancing strategy, where 0 represents polling and 1 represents IP hash and 2 weighted round robin.
      */
-    loadBalance?: pulumi.Input<string>;
+    loadBalance?: pulumi.Input<string | undefined>;
     /**
      * This field needs to be set for multiple ports in the upstream server.
      */
@@ -677,57 +677,57 @@ export interface SaasDomainArgs {
     /**
      * Certificate key, When CertType=1, this parameter needs to be filled.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * 300s.
      */
-    proxyReadTimeout?: pulumi.Input<number>;
+    proxyReadTimeout?: pulumi.Input<number | undefined>;
     /**
      * 300s.
      */
-    proxySendTimeout?: pulumi.Input<number>;
+    proxySendTimeout?: pulumi.Input<number | undefined>;
     /**
      * When SniType=3, this parameter needs to be filled in to represent a custom host.
      */
-    sniHost?: pulumi.Input<string>;
+    sniHost?: pulumi.Input<string | undefined>;
     /**
      * Sni type fo upstream, 0:disable SNI; 1:enable SNI and SNI equal original request host; 2:and SNI equal upstream host 3:enable SNI and equal customize host.
      */
-    sniType?: pulumi.Input<number>;
+    sniType?: pulumi.Input<number | undefined>;
     /**
      * Upstream IP List, When UpstreamType=0, this parameter needs to be filled.
      */
-    srcLists?: pulumi.Input<pulumi.Input<string>[]>;
+    srcLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Certificate ID, When CertType=2, this parameter needs to be filled.
      */
-    sslId?: pulumi.Input<string>;
+    sslId?: pulumi.Input<string | undefined>;
     /**
      * WAF switch status, 1: turn on WAF switch; 0: turn off WAF switch.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Version of TLS Protocol.
      */
-    tlsVersion?: pulumi.Input<number>;
+    tlsVersion?: pulumi.Input<number | undefined>;
     /**
      * Upstream domain, When UpstreamType=1, this parameter needs to be filled.
      */
-    upstreamDomain?: pulumi.Input<string>;
+    upstreamDomain?: pulumi.Input<string | undefined>;
     /**
      * Upstream scheme for https, http or https.
      */
-    upstreamScheme?: pulumi.Input<string>;
+    upstreamScheme?: pulumi.Input<string | undefined>;
     /**
      * Upstream type, 0 represents IP, 1 represents domain name.
      */
-    upstreamType?: pulumi.Input<number>;
+    upstreamType?: pulumi.Input<number | undefined>;
     /**
      * Weight of each upstream.
      */
-    weights?: pulumi.Input<pulumi.Input<number>[]>;
+    weights?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * 0:disable xff reset; 1:enable xff reset.
      */
-    xffReset?: pulumi.Input<number>;
+    xffReset?: pulumi.Input<number | undefined>;
 }

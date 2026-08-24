@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyAndStatisticsListeners = tencentcloud.Gaap.getProxyAndStatisticsListeners({
+ * const proxyAndStatisticsListeners = tencentcloud.gaap.getProxyAndStatisticsListeners({
  *     projectId: 0,
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetProxyAndStatisticsListenersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyAndStatisticsListeners = tencentcloud.Gaap.getProxyAndStatisticsListeners({
+ * const proxyAndStatisticsListeners = tencentcloud.gaap.getProxyAndStatisticsListeners({
  *     projectId: 0,
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetProxyAndStatisticsListenersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

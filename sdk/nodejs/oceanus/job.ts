@@ -143,39 +143,39 @@ export interface JobState {
     /**
      * When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.
      */
-    clusterType?: pulumi.Input<number>;
+    clusterType?: pulumi.Input<number | undefined>;
     /**
      * Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.
      */
-    cuMem?: pulumi.Input<number>;
+    cuMem?: pulumi.Input<number | undefined>;
     /**
      * The Flink version that the job runs.
      */
-    flinkVersion?: pulumi.Input<string>;
+    flinkVersion?: pulumi.Input<string | undefined>;
     /**
      * The folder ID to which the job name belongs. The root directory is root.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * The type of the job. 1 indicates SQL job, and 2 indicates JAR job.
      */
-    jobType?: pulumi.Input<number>;
+    jobType?: pulumi.Input<number | undefined>;
     /**
      * The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The remark information of the job. It can be set arbitrarily.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -185,7 +185,7 @@ export interface JobArgs {
     /**
      * When ClusterType=2, it is required to specify the ID of the exclusive cluster to which the job is submitted.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The type of the cluster. 1 indicates shared cluster, and 2 indicates exclusive cluster.
      */
@@ -193,15 +193,15 @@ export interface JobArgs {
     /**
      * Set the memory specification of each CU, in GB. It supports 2, 4, 8, and 16 (which needs to apply for the whitelist before use). The default is 4, that is, 1 CU corresponds to 4 GB of running memory.
      */
-    cuMem?: pulumi.Input<number>;
+    cuMem?: pulumi.Input<number | undefined>;
     /**
      * The Flink version that the job runs.
      */
-    flinkVersion?: pulumi.Input<string>;
+    flinkVersion?: pulumi.Input<string | undefined>;
     /**
      * The folder ID to which the job name belongs. The root directory is root.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * The type of the job. 1 indicates SQL job, and 2 indicates JAR job.
      */
@@ -209,13 +209,13 @@ export interface JobArgs {
     /**
      * The name of the job. It can be composed of Chinese, English, numbers, hyphens (-), underscores (_), and periods (.), and the length cannot exceed 50 characters. Note that the job name cannot be the same as an existing job.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The remark information of the job. It can be set arbitrarily.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

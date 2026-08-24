@@ -82,7 +82,7 @@ export interface AssetSyncJobOperationState {
     /**
      * Synchronize asset categories, 1- Host assets, 2- Database assets.
      */
-    category?: pulumi.Input<number>;
+    category?: pulumi.Input<number | undefined>;
 }
 
 /**

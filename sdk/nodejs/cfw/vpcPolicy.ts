@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cfw vpcPolicy
+ * Provides a resource to create a CFW vpc policy
  *
  * ## Example Usage
  *
@@ -31,10 +31,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw vpc_policy can be imported using the id, e.g.
+ * CFW vpc policy can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
+ * $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy example 11321
  * ```
  */
 export class VpcPolicy extends pulumi.CustomResource {
@@ -98,6 +98,10 @@ export class VpcPolicy extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly internalUuid: pulumi.Output<number>;
     /**
+     * Execution order.
+     */
+    declare public /*out*/ readonly orderIndex: pulumi.Output<number>;
+    /**
      * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
      */
     declare public /*out*/ readonly paramTemplateId: pulumi.Output<string>;
@@ -151,6 +155,7 @@ export class VpcPolicy extends pulumi.CustomResource {
             resourceInputs["fwGroupId"] = state?.fwGroupId;
             resourceInputs["fwGroupName"] = state?.fwGroupName;
             resourceInputs["internalUuid"] = state?.internalUuid;
+            resourceInputs["orderIndex"] = state?.orderIndex;
             resourceInputs["paramTemplateId"] = state?.paramTemplateId;
             resourceInputs["paramTemplateName"] = state?.paramTemplateName;
             resourceInputs["port"] = state?.port;
@@ -198,6 +203,7 @@ export class VpcPolicy extends pulumi.CustomResource {
             resourceInputs["betaLists"] = undefined /*out*/;
             resourceInputs["fwGroupName"] = undefined /*out*/;
             resourceInputs["internalUuid"] = undefined /*out*/;
+            resourceInputs["orderIndex"] = undefined /*out*/;
             resourceInputs["paramTemplateId"] = undefined /*out*/;
             resourceInputs["paramTemplateName"] = undefined /*out*/;
             resourceInputs["uuid"] = undefined /*out*/;
@@ -214,67 +220,71 @@ export interface VpcPolicyState {
     /**
      * Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    betaLists?: pulumi.Input<pulumi.Input<inputs.Cfw.VpcPolicyBetaList>[]>;
+    betaLists?: pulumi.Input<pulumi.Input<inputs.Cfw.VpcPolicyBetaList>[] | undefined>;
     /**
      * Describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Access purpose example: net:IP/CIDR(192.168.0.2) domain:domain rule, for example*.qq.com.
      */
-    destContent?: pulumi.Input<string>;
+    destContent?: pulumi.Input<string | undefined>;
     /**
      * Access purpose type, the type can be: net, template.
      */
-    destType?: pulumi.Input<string>;
+    destType?: pulumi.Input<string | undefined>;
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Firewall instance ID where the rule takes effect. Default is ALL.
      */
-    fwGroupId?: pulumi.Input<string>;
+    fwGroupId?: pulumi.Input<string | undefined>;
     /**
      * Firewall name.
      */
-    fwGroupName?: pulumi.Input<string>;
+    fwGroupName?: pulumi.Input<string | undefined>;
     /**
      * Uuid used internally, this field is generally not used.
      */
-    internalUuid?: pulumi.Input<number>;
+    internalUuid?: pulumi.Input<number | undefined>;
+    /**
+     * Execution order.
+     */
+    orderIndex?: pulumi.Input<number | undefined>;
     /**
      * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    paramTemplateId?: pulumi.Input<string>;
+    paramTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    paramTemplateName?: pulumi.Input<string>;
+    paramTemplateName?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol, optional value:TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * How traffic set in the access control policy passes through the cloud firewall. Value: accept:accept, drop:drop, log:log.
      */
-    ruleAction?: pulumi.Input<string>;
+    ruleAction?: pulumi.Input<string | undefined>;
     /**
      * Access source examplnet:IP/CIDR(192.168.0.2).
      */
-    sourceContent?: pulumi.Input<string>;
+    sourceContent?: pulumi.Input<string | undefined>;
     /**
      * Access source type, the type can be: net, template.
      */
-    sourceType?: pulumi.Input<string>;
+    sourceType?: pulumi.Input<string | undefined>;
     /**
      * The unique id corresponding to the rule.
      */
-    uuid?: pulumi.Input<number>;
+    uuid?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -296,11 +306,11 @@ export interface VpcPolicyArgs {
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Firewall instance ID where the rule takes effect. Default is ALL.
      */
-    fwGroupId?: pulumi.Input<string>;
+    fwGroupId?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports; 80: port 80.
      */

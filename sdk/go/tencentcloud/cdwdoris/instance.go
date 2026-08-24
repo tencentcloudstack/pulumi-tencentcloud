@@ -12,11 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cdwdoris instance
+// Provides a resource to create a CDWDoris instance
 //
 // ## Example Usage
 //
-// ### Create a POSTPAID instance
+// ### Create a POSTPAID instance(SSC)
 //
 // ```go
 // package main
@@ -40,7 +40,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -48,10 +48,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -72,30 +72,32 @@ import (
 //			// create POSTPAID instance
 //			_, err = cdwdoris.NewInstance(ctx, "example", &cdwdoris.InstanceArgs{
 //				Zone:                pulumi.String(availabilityZone),
-//				UserVpcId:           vpc.ID(),
-//				UserSubnetId:        subnet.ID(),
-//				ProductVersion:      pulumi.String("2.1"),
+//				UserVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
+//				UserSubnetId:        subnet2.ID().ToIDOutput().ToStringOutput(),
+//				ProductVersion:      pulumi.String("3.1"),
 //				InstanceName:        pulumi.String("tf-example"),
-//				DorisUserPwd:        pulumi.String("Password@test"),
+//				DorisUserPwd:        pulumi.String("Password@2026"),
 //				HaFlag:              pulumi.Bool(false),
+//				HaType:              pulumi.Int(0),
 //				CaseSensitive:       pulumi.Int(0),
 //				EnableMultiZones:    pulumi.Bool(false),
-//				WorkloadGroupStatus: pulumi.String("open"),
+//				IsSsc:               pulumi.Bool(true),
+//				WorkloadGroupStatus: pulumi.String("close"),
 //				SecurityGroupIds: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				ChargeProperties: &cdwdoris.InstanceChargePropertiesArgs{
 //					ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
 //				},
 //				FeSpec: &cdwdoris.InstanceFeSpecArgs{
-//					SpecName: pulumi.String("S_4_16_P"),
-//					Count:    pulumi.Int(3),
+//					SpecName: pulumi.String("S_8_32_H"),
+//					Count:    pulumi.Int(5),
 //					DiskSize: pulumi.Int(200),
 //				},
 //				BeSpec: &cdwdoris.InstanceBeSpecArgs{
-//					SpecName: pulumi.String("S_4_16_P"),
+//					SpecName: pulumi.String("S_8_32_H"),
 //					Count:    pulumi.Int(3),
-//					DiskSize: pulumi.Int(200),
+//					DiskSize: pulumi.Int(400),
 //				},
 //				Tags: cdwdoris.InstanceTagArray{
 //					&cdwdoris.InstanceTagArgs{
@@ -113,7 +115,7 @@ import (
 //
 // ```
 //
-// ### Create a POSTPAID instance
+// ### Create a PREPAID instance(Without SSC)
 //
 // ```go
 // package main
@@ -137,7 +139,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -145,10 +147,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -169,17 +171,19 @@ import (
 //			// create PREPAID instance
 //			_, err = cdwdoris.NewInstance(ctx, "example", &cdwdoris.InstanceArgs{
 //				Zone:                pulumi.String(availabilityZone),
-//				UserVpcId:           vpc.ID(),
-//				UserSubnetId:        subnet.ID(),
+//				UserVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
+//				UserSubnetId:        subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProductVersion:      pulumi.String("2.1"),
 //				InstanceName:        pulumi.String("tf-example"),
-//				DorisUserPwd:        pulumi.String("Password@test"),
+//				DorisUserPwd:        pulumi.String("Password@2026"),
 //				HaFlag:              pulumi.Bool(false),
+//				HaType:              pulumi.Int(0),
 //				CaseSensitive:       pulumi.Int(0),
 //				EnableMultiZones:    pulumi.Bool(false),
+//				IsSsc:               pulumi.Bool(false),
 //				WorkloadGroupStatus: pulumi.String("close"),
 //				SecurityGroupIds: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				ChargeProperties: &cdwdoris.InstanceChargePropertiesArgs{
 //					ChargeType: pulumi.String("PREPAID"),
@@ -232,6 +236,8 @@ type Instance struct {
 	HaType pulumi.IntPtrOutput `pulumi:"haType"`
 	// Instance name.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
+	// Whether it is storage-compute separation. Default is false.
+	IsSsc pulumi.BoolOutput `pulumi:"isSsc"`
 	// Product version number.
 	ProductVersion pulumi.StringOutput `pulumi:"productVersion"`
 	// Security Group Id list.
@@ -338,6 +344,8 @@ type instanceState struct {
 	HaType *int `pulumi:"haType"`
 	// Instance name.
 	InstanceName *string `pulumi:"instanceName"`
+	// Whether it is storage-compute separation. Default is false.
+	IsSsc *bool `pulumi:"isSsc"`
 	// Product version number.
 	ProductVersion *string `pulumi:"productVersion"`
 	// Security Group Id list.
@@ -375,6 +383,8 @@ type InstanceState struct {
 	HaType pulumi.IntPtrInput
 	// Instance name.
 	InstanceName pulumi.StringPtrInput
+	// Whether it is storage-compute separation. Default is false.
+	IsSsc pulumi.BoolPtrInput
 	// Product version number.
 	ProductVersion pulumi.StringPtrInput
 	// Security Group Id list.
@@ -416,6 +426,8 @@ type instanceArgs struct {
 	HaType *int `pulumi:"haType"`
 	// Instance name.
 	InstanceName string `pulumi:"instanceName"`
+	// Whether it is storage-compute separation. Default is false.
+	IsSsc *bool `pulumi:"isSsc"`
 	// Product version number.
 	ProductVersion string `pulumi:"productVersion"`
 	// Security Group Id list.
@@ -454,6 +466,8 @@ type InstanceArgs struct {
 	HaType pulumi.IntPtrInput
 	// Instance name.
 	InstanceName pulumi.StringInput
+	// Whether it is storage-compute separation. Default is false.
+	IsSsc pulumi.BoolPtrInput
 	// Product version number.
 	ProductVersion pulumi.StringInput
 	// Security Group Id list.
@@ -602,6 +616,11 @@ func (o InstanceOutput) HaType() pulumi.IntPtrOutput {
 // Instance name.
 func (o InstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Whether it is storage-compute separation. Default is false.
+func (o InstanceOutput) IsSsc() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.IsSsc }).(pulumi.BoolOutput)
 }
 
 // Product version number.

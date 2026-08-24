@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmQuota = tencentcloud.Emr.getCvmQuota({
+ * const cvmQuota = tencentcloud.emr.getCvmQuota({
  *     clusterId: "emr-0ze36vnp",
  *     zoneId: 100003,
  * });
@@ -81,7 +81,7 @@ export interface GetCvmQuotaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmQuota = tencentcloud.Emr.getCvmQuota({
+ * const cvmQuota = tencentcloud.emr.getCvmQuota({
  *     clusterId: "emr-0ze36vnp",
  *     zoneId: 100003,
  * });
@@ -107,9 +107,9 @@ export interface GetCvmQuotaOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */
-    zoneId?: pulumi.Input<number>;
+    zoneId?: pulumi.Input<number | undefined>;
 }

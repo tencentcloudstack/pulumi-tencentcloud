@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a mps transcodeTemplate
+ * Provides a resource to create a MPS transcode template
  *
  * ## Example Usage
  *
@@ -15,9 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const transcodeTemplate = new tencentcloud.mps.TranscodeTemplate("transcode_template", {
+ * const example = new tencentcloud.mps.TranscodeTemplate("example", {
  *     container: "mp4",
- *     name: "tf_transcode_template",
+ *     name: "tf-example",
  *     removeAudio: 0,
  *     removeVideo: 0,
  *     audioTemplate: {
@@ -42,10 +42,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps transcode_template can be imported using the id, e.g.
+ * MPS transcode template can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+ * $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate example 1638607
  * ```
  */
 export class TranscodeTemplate extends pulumi.CustomResource {
@@ -162,39 +162,39 @@ export interface TranscodeTemplateState {
     /**
      * Audio stream configuration parameters, when RemoveAudio is 0, this field is required.
      */
-    audioTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateAudioTemplate>;
+    audioTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateAudioTemplate | undefined>;
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Encapsulation format, optional values: mp4, flv, hls, mp3, flac, ogg, m4a. Among them, mp3, flac, ogg, m4a are pure audio files.
      */
-    container?: pulumi.Input<string>;
+    container?: pulumi.Input<string | undefined>;
     /**
      * Audio and video enhancement configuration.
      */
-    enhanceConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateEnhanceConfig>;
+    enhanceConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateEnhanceConfig | undefined>;
     /**
      * Transcoding template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to remove audio data, value:0: reserved.1: remove.Default: 0.
      */
-    removeAudio?: pulumi.Input<number>;
+    removeAudio?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove video data, value:0: reserved.1: remove.Default: 0.
      */
-    removeVideo?: pulumi.Input<number>;
+    removeVideo?: pulumi.Input<number | undefined>;
     /**
      * Ultra-fast HD transcoding parameters.
      */
-    tehdConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateTehdConfig>;
+    tehdConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateTehdConfig | undefined>;
     /**
      * Video stream configuration parameters, when RemoveVideo is 0, this field is required.
      */
-    videoTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateVideoTemplate>;
+    videoTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateVideoTemplate | undefined>;
 }
 
 /**
@@ -204,11 +204,11 @@ export interface TranscodeTemplateArgs {
     /**
      * Audio stream configuration parameters, when RemoveAudio is 0, this field is required.
      */
-    audioTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateAudioTemplate>;
+    audioTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateAudioTemplate | undefined>;
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Encapsulation format, optional values: mp4, flv, hls, mp3, flac, ogg, m4a. Among them, mp3, flac, ogg, m4a are pure audio files.
      */
@@ -216,25 +216,25 @@ export interface TranscodeTemplateArgs {
     /**
      * Audio and video enhancement configuration.
      */
-    enhanceConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateEnhanceConfig>;
+    enhanceConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateEnhanceConfig | undefined>;
     /**
      * Transcoding template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to remove audio data, value:0: reserved.1: remove.Default: 0.
      */
-    removeAudio?: pulumi.Input<number>;
+    removeAudio?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove video data, value:0: reserved.1: remove.Default: 0.
      */
-    removeVideo?: pulumi.Input<number>;
+    removeVideo?: pulumi.Input<number | undefined>;
     /**
      * Ultra-fast HD transcoding parameters.
      */
-    tehdConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateTehdConfig>;
+    tehdConfig?: pulumi.Input<inputs.Mps.TranscodeTemplateTehdConfig | undefined>;
     /**
      * Video stream configuration parameters, when RemoveVideo is 0, this field is required.
      */
-    videoTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateVideoTemplate>;
+    videoTemplate?: pulumi.Input<inputs.Mps.TranscodeTemplateVideoTemplate | undefined>;
 }

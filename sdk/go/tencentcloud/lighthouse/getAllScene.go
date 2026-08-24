@@ -74,12 +74,8 @@ type GetAllSceneResult struct {
 }
 
 func GetAllSceneOutput(ctx *pulumi.Context, args GetAllSceneOutputArgs, opts ...pulumi.InvokeOption) GetAllSceneResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAllSceneResultOutput, error) {
-			args := v.(GetAllSceneArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getAllScene:getAllScene", args, GetAllSceneResultOutput{}, options).(GetAllSceneResultOutput), nil
-		}).(GetAllSceneResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getAllScene:getAllScene", args, GetAllSceneResultOutput{}, options).(GetAllSceneResultOutput)
 }
 
 // A collection of arguments for invoking getAllScene.

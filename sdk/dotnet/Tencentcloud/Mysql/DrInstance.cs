@@ -144,6 +144,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<string> DeviceType { get; private set; } = null!;
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Output("diskType")]
+        public Output<string> DiskType { get; private set; } = null!;
+
+        /// <summary>
         /// Zone information about first slave instance.
         /// </summary>
         [Output("firstSlaveZone")]
@@ -341,6 +347,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
+
+        /// <summary>
         /// Zone information about first slave instance.
         /// </summary>
         [Input("firstSlaveZone")]
@@ -503,6 +515,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("deviceType")]
         public Input<string>? DeviceType { get; set; }
+
+        /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
 
         /// <summary>
         /// Zone information about first slave instance.

@@ -16,7 +16,8 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.teo.OriginAcl("example", {
- *     zoneId: "zone-39quuimqg8r6",
+ *     zoneId: "zone-3fkff38fyw8s",
+ *     originAclFamily: "gaz",
  *     l7Hosts: [
  *         "example1.com",
  *         "example2.com",
@@ -33,15 +34,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * TEO origin acl can be imported using the zone_id, e.g.
- *
- * `
- *
- * ```sh
- * $ pulumi import tencentcloud:Teo/originAcl:OriginAcl example zone-39quuimqg8r6
- * ```
- *
- * `
+ * TEO origin acl can be imported using the id, e.g.
  */
 export class OriginAcl extends pulumi.CustomResource {
     /**
@@ -80,6 +73,10 @@ export class OriginAcl extends pulumi.CustomResource {
      */
     declare public readonly l7Hosts: pulumi.Output<string[]>;
     /**
+     * Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+     */
+    declare public readonly originAclFamily: pulumi.Output<string>;
+    /**
      * Specifies the site ID.
      */
     declare public readonly zoneId: pulumi.Output<string>;
@@ -99,6 +96,7 @@ export class OriginAcl extends pulumi.CustomResource {
             const state = argsOrState as OriginAclState | undefined;
             resourceInputs["l4ProxyIds"] = state?.l4ProxyIds;
             resourceInputs["l7Hosts"] = state?.l7Hosts;
+            resourceInputs["originAclFamily"] = state?.originAclFamily;
             resourceInputs["zoneId"] = state?.zoneId;
         } else {
             const args = argsOrState as OriginAclArgs | undefined;
@@ -107,6 +105,7 @@ export class OriginAcl extends pulumi.CustomResource {
             }
             resourceInputs["l4ProxyIds"] = args?.l4ProxyIds;
             resourceInputs["l7Hosts"] = args?.l7Hosts;
+            resourceInputs["originAclFamily"] = args?.originAclFamily;
             resourceInputs["zoneId"] = args?.zoneId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -121,15 +120,19 @@ export interface OriginAclState {
     /**
      * he list of L4 proxy Instances that require enabling origin ACLs. This list must be empty when the request parameter L4EnableMode is set to 'all'.
      */
-    l4ProxyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    l4ProxyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
      */
-    l7Hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    l7Hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+     */
+    originAclFamily?: pulumi.Input<string | undefined>;
     /**
      * Specifies the site ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -139,11 +142,15 @@ export interface OriginAclArgs {
     /**
      * he list of L4 proxy Instances that require enabling origin ACLs. This list must be empty when the request parameter L4EnableMode is set to 'all'.
      */
-    l4ProxyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    l4ProxyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
      */
-    l7Hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    l7Hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+     */
+    originAclFamily?: pulumi.Input<string | undefined>;
     /**
      * Specifies the site ID.
      */

@@ -117,27 +117,27 @@ export interface UpdatePluginsOperationState {
     /**
      * Whether to force a restart. Default is false.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to reinstall, default value false.
      */
-    forceUpdate?: pulumi.Input<boolean>;
+    forceUpdate?: pulumi.Input<boolean | undefined>;
     /**
      * List of plugins that need to be installed.
      */
-    installPluginLists?: pulumi.Input<pulumi.Input<string>[]>;
+    installPluginLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Plugin type. 0: system plugin.
      */
-    pluginType?: pulumi.Input<number>;
+    pluginType?: pulumi.Input<number | undefined>;
     /**
      * List of plugins that need to be uninstalled.
      */
-    removePluginLists?: pulumi.Input<pulumi.Input<string>[]>;
+    removePluginLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -147,15 +147,15 @@ export interface UpdatePluginsOperationArgs {
     /**
      * Whether to force a restart. Default is false.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to reinstall, default value false.
      */
-    forceUpdate?: pulumi.Input<boolean>;
+    forceUpdate?: pulumi.Input<boolean | undefined>;
     /**
      * List of plugins that need to be installed.
      */
-    installPluginLists?: pulumi.Input<pulumi.Input<string>[]>;
+    installPluginLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */
@@ -163,9 +163,9 @@ export interface UpdatePluginsOperationArgs {
     /**
      * Plugin type. 0: system plugin.
      */
-    pluginType?: pulumi.Input<number>;
+    pluginType?: pulumi.Input<number | undefined>;
     /**
      * List of plugins that need to be uninstalled.
      */
-    removePluginLists?: pulumi.Input<pulumi.Input<string>[]>;
+    removePluginLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

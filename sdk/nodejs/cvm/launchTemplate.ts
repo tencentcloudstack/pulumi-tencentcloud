@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cvm launch template
+ * Provides a resource to create a CVM launch template
  *
  * ## Example Usage
  *
@@ -15,17 +15,51 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myFavoriteImage = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
- *     imageNameRegex: "Final",
+ *     imageNameRegex: "CentOS 8.2",
  * });
- * const demo = new tencentcloud.cvm.LaunchTemplate("demo", {
- *     launchTemplateName: "test",
+ * const exampleLaunchTemplate = new tencentcloud.cvm.LaunchTemplate("example", {
+ *     launchTemplateName: "tf-example",
  *     placement: {
  *         zone: "ap-guangzhou-6",
  *         projectId: 0,
  *     },
- *     imageId: myFavoriteImage.then(myFavoriteImage => myFavoriteImage.images?.[0]?.imageId),
+ *     imageId: example.then(example => example.images?.[0]?.imageId),
+ *     launchTemplateVersionDescription: "CentOS 8.2",
+ *     instanceType: "S5.SMALL1",
+ *     instanceChargeType: "POSTPAID_BY_HOUR",
+ *     systemDisk: {
+ *         diskSize: 50,
+ *         diskType: "CLOUD_PREMIUM",
+ *     },
+ *     dataDisks: [{
+ *         diskSize: 200,
+ *         diskType: "CLOUD_PREMIUM",
+ *     }],
+ *     virtualPrivateCloud: {
+ *         subnetId: "subnet-5l1ya4my",
+ *         vpcId: "vpc-0m6078eb",
+ *     },
+ *     internetAccessible: {
+ *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
+ *         publicIpAssigned: false,
+ *     },
+ *     instanceCount: 1,
+ *     instanceName: "instanceName",
+ *     hostName: "root",
+ *     securityGroupIds: ["sg-4z20n68d"],
+ *     enhancedService: {
+ *         automationService: {
+ *             enabled: true,
+ *         },
+ *         monitorService: {
+ *             enabled: true,
+ *         },
+ *         securityService: {
+ *             enabled: true,
+ *         },
+ *     },
  * });
  * ```
  */
@@ -263,115 +297,115 @@ export interface LaunchTemplateState {
     /**
      * Timed task.
      */
-    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateActionTimer>;
+    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateActionTimer | undefined>;
     /**
      * The role name of CAM.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * A string to used guarantee request idempotency.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * Data disk configuration information of the instance.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateDataDisk>[] | undefined>;
     /**
      * Instance destruction protection flag.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * The ID of disaster recover group.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to preflight only this request, true or false.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Enhanced service. If this parameter is not specified, cloud monitoring and cloud security services will be enabled by default in public images.
      */
-    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateEnhancedService>;
+    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateEnhancedService | undefined>;
     /**
      * The host name of CVM.
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * The ID of HPC cluster.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * The configuration of charge prepaid.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceChargePrepaid | undefined>;
     /**
      * The charge type of instance. Default value: POSTPAID_BY_HOUR.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances purchased.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * The marketplace options of instance.
      */
-    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceMarketOptions>;
+    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceMarketOptions | undefined>;
     /**
      * The name of instance. If you do not specify an instance display name, 'Unnamed' is displayed by default.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance. If this parameter is not specified, the system will dynamically specify the default model according to the resource sales in the current region.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * The information settings of public network bandwidth. If you do not specify this parameter, the default Internet bandwidth is 0 Mbps.
      */
-    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateInternetAccessible>;
+    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateInternetAccessible | undefined>;
     /**
      * The name of launch template.
      */
-    launchTemplateName?: pulumi.Input<string>;
+    launchTemplateName?: pulumi.Input<string | undefined>;
     /**
      * Instance launch template version description.
      */
-    launchTemplateVersionDescription?: pulumi.Input<string>;
+    launchTemplateVersionDescription?: pulumi.Input<string | undefined>;
     /**
      * The login settings of instance. By default, passwords are randomly generated and notified to users via internal messages.
      */
-    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateLoginSettings>;
+    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateLoginSettings | undefined>;
     /**
      * The location of instance.
      */
-    placement?: pulumi.Input<inputs.Cvm.LaunchTemplatePlacement>;
+    placement?: pulumi.Input<inputs.Cvm.LaunchTemplatePlacement | undefined>;
     /**
      * The security group ID of instance. If this parameter is not specified, the default security group is bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * System disk configuration information of the instance. If this parameter is not specified, it is assigned according to the system default.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateSystemDisk | undefined>;
     /**
      * Tag description list.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateTagSpecification>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The data of users.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The configuration information of VPC. If this parameter is not specified, the basic network is used by default.
      */
-    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVirtualPrivateCloud>;
+    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVirtualPrivateCloud | undefined>;
 }
 
 /**
@@ -381,43 +415,43 @@ export interface LaunchTemplateArgs {
     /**
      * Timed task.
      */
-    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateActionTimer>;
+    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateActionTimer | undefined>;
     /**
      * The role name of CAM.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * A string to used guarantee request idempotency.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * Data disk configuration information of the instance.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateDataDisk>[] | undefined>;
     /**
      * Instance destruction protection flag.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * The ID of disaster recover group.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to preflight only this request, true or false.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Enhanced service. If this parameter is not specified, cloud monitoring and cloud security services will be enabled by default in public images.
      */
-    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateEnhancedService>;
+    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateEnhancedService | undefined>;
     /**
      * The host name of CVM.
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * The ID of HPC cluster.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
@@ -425,31 +459,31 @@ export interface LaunchTemplateArgs {
     /**
      * The configuration of charge prepaid.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceChargePrepaid | undefined>;
     /**
      * The charge type of instance. Default value: POSTPAID_BY_HOUR.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances purchased.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * The marketplace options of instance.
      */
-    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceMarketOptions>;
+    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateInstanceMarketOptions | undefined>;
     /**
      * The name of instance. If you do not specify an instance display name, 'Unnamed' is displayed by default.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance. If this parameter is not specified, the system will dynamically specify the default model according to the resource sales in the current region.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * The information settings of public network bandwidth. If you do not specify this parameter, the default Internet bandwidth is 0 Mbps.
      */
-    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateInternetAccessible>;
+    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateInternetAccessible | undefined>;
     /**
      * The name of launch template.
      */
@@ -457,11 +491,11 @@ export interface LaunchTemplateArgs {
     /**
      * Instance launch template version description.
      */
-    launchTemplateVersionDescription?: pulumi.Input<string>;
+    launchTemplateVersionDescription?: pulumi.Input<string | undefined>;
     /**
      * The login settings of instance. By default, passwords are randomly generated and notified to users via internal messages.
      */
-    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateLoginSettings>;
+    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateLoginSettings | undefined>;
     /**
      * The location of instance.
      */
@@ -469,25 +503,25 @@ export interface LaunchTemplateArgs {
     /**
      * The security group ID of instance. If this parameter is not specified, the default security group is bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * System disk configuration information of the instance. If this parameter is not specified, it is assigned according to the system default.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateSystemDisk | undefined>;
     /**
      * Tag description list.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateTagSpecification>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The data of users.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The configuration information of VPC. If this parameter is not specified, the basic network is used by default.
      */
-    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVirtualPrivateCloud>;
+    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVirtualPrivateCloud | undefined>;
 }

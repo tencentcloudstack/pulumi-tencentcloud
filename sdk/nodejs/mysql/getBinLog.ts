@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const binLog = tencentcloud.Mysql.getBinLog({
+ * const binLog = tencentcloud.mysql.getBinLog({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetBinLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const binLog = tencentcloud.Mysql.getBinLog({
+ * const binLog = tencentcloud.mysql.getBinLog({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetBinLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

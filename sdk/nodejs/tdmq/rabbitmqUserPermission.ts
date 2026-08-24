@@ -54,7 +54,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tdmq rabbitmq_user_permission can be imported using the id, e.g.
+ * tdmq rabbitmqUserPermission can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rabbitmqUserPermission:RabbitmqUserPermission example amqp-xxxxxxxx#user#vhost
@@ -171,27 +171,27 @@ export interface RabbitmqUserPermissionState {
     /**
      * Configure permission regexp, controls which resources can be declared.
      */
-    configRegexp?: pulumi.Input<string>;
+    configRegexp?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Read permission regexp, controls which resources can be read.
      */
-    readRegexp?: pulumi.Input<string>;
+    readRegexp?: pulumi.Input<string | undefined>;
     /**
      * Username.
      */
-    user?: pulumi.Input<string>;
+    user?: pulumi.Input<string | undefined>;
     /**
      * VirtualHost name.
      */
-    virtualHost?: pulumi.Input<string>;
+    virtualHost?: pulumi.Input<string | undefined>;
     /**
      * Write permission regexp, controls which resources can be written.
      */
-    writeRegexp?: pulumi.Input<string>;
+    writeRegexp?: pulumi.Input<string | undefined>;
 }
 
 /**

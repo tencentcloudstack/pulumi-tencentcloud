@@ -81,11 +81,11 @@ export interface RenewHostState {
     /**
      * Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify attributes such as the purchase duration of the Subscription instance and whether to set automatic renewal. If the payment mode of the specified instance is prepaid, this parameter must be passed.
      */
-    hostChargePrepaid?: pulumi.Input<inputs.Cvm.RenewHostHostChargePrepaid>;
+    hostChargePrepaid?: pulumi.Input<inputs.Cvm.RenewHostHostChargePrepaid | undefined>;
     /**
      * CDH instance ID.
      */
-    hostId?: pulumi.Input<string>;
+    hostId?: pulumi.Input<string | undefined>;
 }
 
 /**

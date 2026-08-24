@@ -387,7 +387,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         /// </summary>
         [Output("autoRenewFlag")]
-        public Output<int?> AutoRenewFlag { get; private set; } = null!;
+        public Output<int> AutoRenewFlag { get; private set; } = null!;
 
         /// <summary>
         /// Whether to use voucher, `1` for enabled.
@@ -402,7 +402,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// Specify DB backup plan.
+        /// This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
         /// </summary>
         [Output("backupPlan")]
         public Output<Outputs.InstanceBackupPlan> BackupPlan { get; private set; } = null!;
@@ -459,7 +459,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Whether to enable instance deletion protection. Default: false.
         /// </summary>
         [Output("deleteProtection")]
-        public Output<bool?> DeleteProtection { get; private set; } = null!;
+        public Output<bool> DeleteProtection { get; private set; } = null!;
 
         /// <summary>
         /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
@@ -582,6 +582,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> Storage { get; private set; } = null!;
 
         /// <summary>
+        /// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+        /// </summary>
+        [Output("storageType")]
+        public Output<string> StorageType { get; private set; } = null!;
+
+        /// <summary>
         /// ID of subnet.
         /// </summary>
         [Output("subnetId")]
@@ -687,7 +693,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
-        /// Specify DB backup plan.
+        /// This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
         /// </summary>
         [Input("backupPlan")]
         public Input<Inputs.InstanceBackupPlanArgs>? BackupPlan { get; set; }
@@ -859,6 +865,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int> Storage { get; set; } = null!;
 
         /// <summary>
+        /// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+        /// </summary>
+        [Input("storageType")]
+        public Input<string>? StorageType { get; set; }
+
+        /// <summary>
         /// ID of subnet.
         /// </summary>
         [Input("subnetId", required: true)]
@@ -927,7 +939,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// Specify DB backup plan.
+        /// This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
         /// </summary>
         [Input("backupPlan")]
         public Input<Inputs.InstanceBackupPlanGetArgs>? BackupPlan { get; set; }
@@ -1127,6 +1139,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("storage")]
         public Input<int>? Storage { get; set; }
+
+        /// <summary>
+        /// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+        /// </summary>
+        [Input("storageType")]
+        public Input<string>? StorageType { get; set; }
 
         /// <summary>
         /// ID of subnet.

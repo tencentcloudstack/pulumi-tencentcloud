@@ -91,11 +91,11 @@ export interface UpgradeMultiZoneOperationState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * After you upgrade Multi-AZ, whether the nearby access feature is supported.true: Supports nearby access.The upgrade process, which requires upgrading both the proxy version and the Redis kernel minor version, involves data migration and can take several hours.false: No need to support nearby access.Upgrading Multi-AZ only involves managing metadata migration, with no service impact, and the upgrade process typically completes within 3 minutes.
      */
-    upgradeProxyAndRedisServer?: pulumi.Input<boolean>;
+    upgradeProxyAndRedisServer?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -109,5 +109,5 @@ export interface UpgradeMultiZoneOperationArgs {
     /**
      * After you upgrade Multi-AZ, whether the nearby access feature is supported.true: Supports nearby access.The upgrade process, which requires upgrading both the proxy version and the Redis kernel minor version, involves data migration and can take several hours.false: No need to support nearby access.Upgrading Multi-AZ only involves managing metadata migration, with no service impact, and the upgrade process typically completes within 3 minutes.
      */
-    upgradeProxyAndRedisServer?: pulumi.Input<boolean>;
+    upgradeProxyAndRedisServer?: pulumi.Input<boolean | undefined>;
 }

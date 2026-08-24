@@ -76,7 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor grafana ssoAccount can be imported using the instance_id#user_id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
     /// ```

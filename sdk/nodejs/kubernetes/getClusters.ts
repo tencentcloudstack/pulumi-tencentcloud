@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Kubernetes.getClusters({
+ * const name = tencentcloud.kubernetes.getClusters({
  *     clusterName: "terraform",
  * });
- * const id = tencentcloud.Kubernetes.getClusters({
+ * const id = tencentcloud.kubernetes.getClusters({
  *     clusterId: "cls-godovr32",
  * });
  * ```
@@ -97,10 +97,10 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Kubernetes.getClusters({
+ * const name = tencentcloud.kubernetes.getClusters({
  *     clusterName: "terraform",
  * });
- * const id = tencentcloud.Kubernetes.getClusters({
+ * const id = tencentcloud.kubernetes.getClusters({
  *     clusterId: "cls-godovr32",
  * });
  * ```
@@ -124,21 +124,21 @@ export interface GetClustersOutputArgs {
     /**
      * ID of the cluster. Conflict with cluster_name, can not be set at the same time.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Name of the cluster. Conflict with cluster_id, can not be set at the same time.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
      */
-    kubeConfigFilePrefix?: pulumi.Input<string>;
+    kubeConfigFilePrefix?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the cluster.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

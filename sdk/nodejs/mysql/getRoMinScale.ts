@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const roMinScale = tencentcloud.Mysql.getRoMinScale({
+ * const roMinScale = tencentcloud.mysql.getRoMinScale({
  *     masterInstanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetRoMinScaleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const roMinScale = tencentcloud.Mysql.getRoMinScale({
+ * const roMinScale = tencentcloud.mysql.getRoMinScale({
  *     masterInstanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -97,13 +97,13 @@ export interface GetRoMinScaleOutputArgs {
     /**
      * The primary instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the RoInstanceId parameter cannot be empty at the same time. Note that when the input parameter contains RoInstanceId, the return value is the minimum specification when the read-only instance is upgraded; when the input parameter only contains MasterInstanceId, the return value is the minimum specification when the read-only instance is purchased.
      */
-    masterInstanceId?: pulumi.Input<string>;
+    masterInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The read-only instance ID, in the format: cdbro-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the MasterInstanceId parameter cannot be empty at the same time.
      */
-    roInstanceId?: pulumi.Input<string>;
+    roInstanceId?: pulumi.Input<string | undefined>;
 }

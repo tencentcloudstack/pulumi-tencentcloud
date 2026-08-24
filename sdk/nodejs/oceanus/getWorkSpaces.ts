@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getWorkSpaces({
+ * const example = tencentcloud.oceanus.getWorkSpaces({
  *     orderType: 1,
  *     filters: [{
  *         name: "WorkSpaceName",
@@ -77,7 +77,7 @@ export interface GetWorkSpacesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getWorkSpaces({
+ * const example = tencentcloud.oceanus.getWorkSpaces({
  *     orderType: 1,
  *     filters: [{
  *         name: "WorkSpaceName",
@@ -103,13 +103,13 @@ export interface GetWorkSpacesOutputArgs {
     /**
      * Filter rules.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetWorkSpacesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetWorkSpacesFilterArgs>[] | undefined>;
     /**
      * 1:sort by creation time in descending order (default); 2:sort by creation time in ascending order; 3:sort by status in descending order; 4:sort by status in ascending order; default is 0.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

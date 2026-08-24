@@ -21,6 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Mongodb/auditLogFile:AuditLogFile":
+		r = &AuditLogFile{}
+	case "tencentcloud:Mongodb/auditService:AuditService":
+		r = &AuditService{}
 	case "tencentcloud:Mongodb/instance:Instance":
 		r = &Instance{}
 	case "tencentcloud:Mongodb/instanceAccount:InstanceAccount":
@@ -33,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InstanceBackupRule{}
 	case "tencentcloud:Mongodb/instanceParams:InstanceParams":
 		r = &InstanceParams{}
+	case "tencentcloud:Mongodb/instanceSrvConnection:InstanceSrvConnection":
+		r = &InstanceSrvConnection{}
 	case "tencentcloud:Mongodb/instanceSsl:InstanceSsl":
 		r = &InstanceSsl{}
 	case "tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceTransparentDataEncryption":
@@ -56,6 +62,16 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/auditLogFile",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/auditService",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mongodb/instance",
@@ -84,6 +100,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mongodb/instanceParams",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mongodb/instanceSrvConnection",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

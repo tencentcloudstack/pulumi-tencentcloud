@@ -104,12 +104,8 @@ type GetPairsResult struct {
 }
 
 func GetPairsOutput(ctx *pulumi.Context, args GetPairsOutputArgs, opts ...pulumi.InvokeOption) GetPairsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPairsResultOutput, error) {
-			args := v.(GetPairsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Key/getPairs:getPairs", args, GetPairsResultOutput{}, options).(GetPairsResultOutput), nil
-		}).(GetPairsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Key/getPairs:getPairs", args, GetPairsResultOutput{}, options).(GetPairsResultOutput)
 }
 
 // A collection of arguments for invoking getPairs.

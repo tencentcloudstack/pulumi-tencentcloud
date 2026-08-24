@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Import
     /// 
-    /// scf function_version can be imported using the id, e.g.
+    /// scf FunctionVersion can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion

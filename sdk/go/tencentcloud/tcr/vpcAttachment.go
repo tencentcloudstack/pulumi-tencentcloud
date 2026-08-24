@@ -32,15 +32,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			vpcId := vpc.InstanceLists[0].VpcId
-//			subnetId := vpc.InstanceLists[0].SubnetId
+//			vpcId := vpc2.InstanceLists[0].VpcId
+//			subnetId := vpc2.InstanceLists[0].SubnetId
 //			example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
 //				Name:         pulumi.String("tf-example-tcr"),
 //				InstanceType: pulumi.String("basic"),
@@ -60,7 +60,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewVpcAttachment(ctx, "foo", &tcr.VpcAttachmentArgs{
-//				InstanceId: pulumi.String(tcrId),
+//				InstanceId: tcrId.ToIDOutput().ToStringOutput(),
 //				VpcId:      pulumi.String(vpcId),
 //				SubnetId:   pulumi.String(subnetId),
 //			})

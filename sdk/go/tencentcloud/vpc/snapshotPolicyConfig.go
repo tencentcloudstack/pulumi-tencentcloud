@@ -62,7 +62,7 @@ import (
 //				return err
 //			}
 //			_, err = vpc.NewSnapshotPolicyConfig(ctx, "config", &vpc.SnapshotPolicyConfigArgs{
-//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID().ToIDOutput().ToStringOutput(),
 //				Enable:           pulumi.Bool(false),
 //			})
 //			if err != nil {
@@ -76,7 +76,7 @@ import (
 //
 // ## Import
 //
-// vpc snapshot_policy_config can be imported using the id, e.g.
+// vpc snapshotPolicyConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id

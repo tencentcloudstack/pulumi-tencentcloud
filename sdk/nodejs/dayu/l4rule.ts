@@ -225,71 +225,71 @@ export interface L4RuleState {
     /**
      * The destination port of the L4 rule.
      */
-    dPort?: pulumi.Input<number>;
+    dPort?: pulumi.Input<number | undefined>;
     /**
      * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
      */
-    healthCheckHealthNum?: pulumi.Input<number>;
+    healthCheckHealthNum?: pulumi.Input<number | undefined>;
     /**
      * Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
      */
-    healthCheckInterval?: pulumi.Input<number>;
+    healthCheckInterval?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
      */
-    healthCheckSwitch?: pulumi.Input<boolean>;
+    healthCheckSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * HTTP Status Code. The default is 26 and value range is 2-60.
      */
-    healthCheckTimeout?: pulumi.Input<number>;
+    healthCheckTimeout?: pulumi.Input<number | undefined>;
     /**
      * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
      */
-    healthCheckUnhealthNum?: pulumi.Input<number>;
+    healthCheckUnhealthNum?: pulumi.Input<number | undefined>;
     /**
      * LB type of the rule. Valid values: `1`, `2`. `1` for weight cycling and `2` for IP hash.
      */
-    lbType?: pulumi.Input<number>;
+    lbType?: pulumi.Input<number | undefined>;
     /**
      * Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the layer 4 rule works for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the layer 4 rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * The source port of the L4 rule.
      */
-    sPort?: pulumi.Input<number>;
+    sPort?: pulumi.Input<number | undefined>;
     /**
      * Indicate that the session will keep or not, and default value is `false`.
      */
-    sessionSwitch?: pulumi.Input<boolean>;
+    sessionSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
      */
-    sessionTime?: pulumi.Input<number>;
+    sessionTime?: pulumi.Input<number | undefined>;
     /**
      * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
      */
-    sourceLists?: pulumi.Input<pulumi.Input<inputs.Dayu.L4RuleSourceList>[]>;
+    sourceLists?: pulumi.Input<pulumi.Input<inputs.Dayu.L4RuleSourceList>[] | undefined>;
     /**
      * Source type, `1` for source of host, `2` for source of IP.
      */
-    sourceType?: pulumi.Input<number>;
+    sourceType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -303,27 +303,27 @@ export interface L4RuleArgs {
     /**
      * Health threshold of health check, and the default is 3. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is 2-10.
      */
-    healthCheckHealthNum?: pulumi.Input<number>;
+    healthCheckHealthNum?: pulumi.Input<number | undefined>;
     /**
      * Interval time of health check. The value range is 10-60 sec, and the default is 15 sec.
      */
-    healthCheckInterval?: pulumi.Input<number>;
+    healthCheckInterval?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether health check is enabled. The default is `false`. Only valid when source list has more than one source item.
      */
-    healthCheckSwitch?: pulumi.Input<boolean>;
+    healthCheckSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * HTTP Status Code. The default is 26 and value range is 2-60.
      */
-    healthCheckTimeout?: pulumi.Input<number>;
+    healthCheckTimeout?: pulumi.Input<number | undefined>;
     /**
      * Unhealthy threshold of health check, and the default is 3. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is 2-10.
      */
-    healthCheckUnhealthNum?: pulumi.Input<number>;
+    healthCheckUnhealthNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the rule. When the `resourceType` is `net`, this field should be set with valid domain.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the rule. Valid values: `http`, `https`. When `sourceType` is 1(host source), the value of this field can only set with `tcp`.
      */
@@ -343,11 +343,11 @@ export interface L4RuleArgs {
     /**
      * Indicate that the session will keep or not, and default value is `false`.
      */
-    sessionSwitch?: pulumi.Input<boolean>;
+    sessionSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
      */
-    sessionTime?: pulumi.Input<number>;
+    sessionTime?: pulumi.Input<number | undefined>;
     /**
      * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 20.
      */

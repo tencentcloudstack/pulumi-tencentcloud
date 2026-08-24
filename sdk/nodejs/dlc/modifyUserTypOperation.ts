@@ -94,11 +94,11 @@ export interface ModifyUserTypOperationState {
     /**
      * User ID.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Types that users modify. ADMIN: administrators; COMMON: general users.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
 }
 
 /**

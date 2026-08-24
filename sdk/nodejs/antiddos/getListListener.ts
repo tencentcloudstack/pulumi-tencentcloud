@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listListener = tencentcloud.Antiddos.getListListener({});
+ * const listListener = tencentcloud.antiddos.getListListener({});
  * ```
  */
 export function getListListener(args?: GetListListenerArgs, opts?: pulumi.InvokeOptions): Promise<GetListListenerResult> {
@@ -63,7 +63,7 @@ export interface GetListListenerResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listListener = tencentcloud.Antiddos.getListListener({});
+ * const listListener = tencentcloud.antiddos.getListListener({});
  * ```
  */
 export function getListListenerOutput(args?: GetListListenerOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListListenerResult> {
@@ -81,5 +81,5 @@ export interface GetListListenerOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

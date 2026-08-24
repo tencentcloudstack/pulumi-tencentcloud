@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos ddos_black_white_ip can be imported using the id, e.g.
+ * antiddos ddosBlackWhiteIp can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
@@ -122,19 +122,19 @@ export interface DdosBlackWhiteIpState {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * ip list.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * ip mask.
      */
-    mask?: pulumi.Input<number>;
+    mask?: pulumi.Input<number | undefined>;
     /**
      * ip type, black: black ip list, white: white ip list.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**

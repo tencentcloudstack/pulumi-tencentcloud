@@ -83,13 +83,13 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the DC to be queried.
      */
-    dcId?: pulumi.Input<string>;
+    dcId?: pulumi.Input<string | undefined>;
     /**
      * Name of the DC to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

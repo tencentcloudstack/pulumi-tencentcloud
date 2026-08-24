@@ -38,7 +38,7 @@ import (
 //				return err
 //			}
 //			_ = kms.GetPublicKeyOutput(ctx, kms.GetPublicKeyOutputArgs{
-//				KeyId: exampleKey.ID(),
+//				KeyId: exampleKey.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -76,12 +76,8 @@ type GetPublicKeyResult struct {
 }
 
 func GetPublicKeyOutput(ctx *pulumi.Context, args GetPublicKeyOutputArgs, opts ...pulumi.InvokeOption) GetPublicKeyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPublicKeyResultOutput, error) {
-			args := v.(GetPublicKeyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getPublicKey:getPublicKey", args, GetPublicKeyResultOutput{}, options).(GetPublicKeyResultOutput), nil
-		}).(GetPublicKeyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getPublicKey:getPublicKey", args, GetPublicKeyResultOutput{}, options).(GetPublicKeyResultOutput)
 }
 
 // A collection of arguments for invoking getPublicKey.

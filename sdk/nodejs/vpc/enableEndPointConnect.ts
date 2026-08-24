@@ -104,15 +104,15 @@ export interface EnableEndPointConnectState {
     /**
      * Whether to accept endpoint connection requests. `true`: Accept automatically. `false`: Do not automatically accept.
      */
-    acceptFlag?: pulumi.Input<boolean>;
+    acceptFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Endpoint ID.
      */
-    endPointIds?: pulumi.Input<pulumi.Input<string>[]>;
+    endPointIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Endpoint service ID.
      */
-    endPointServiceId?: pulumi.Input<string>;
+    endPointServiceId?: pulumi.Input<string | undefined>;
 }
 
 /**

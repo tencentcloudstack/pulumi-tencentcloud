@@ -62,12 +62,8 @@ type GetCustomerGatewayVendorsResult struct {
 }
 
 func GetCustomerGatewayVendorsOutput(ctx *pulumi.Context, args GetCustomerGatewayVendorsOutputArgs, opts ...pulumi.InvokeOption) GetCustomerGatewayVendorsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCustomerGatewayVendorsResultOutput, error) {
-			args := v.(GetCustomerGatewayVendorsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args, GetCustomerGatewayVendorsResultOutput{}, options).(GetCustomerGatewayVendorsResultOutput), nil
-		}).(GetCustomerGatewayVendorsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args, GetCustomerGatewayVendorsResultOutput{}, options).(GetCustomerGatewayVendorsResultOutput)
 }
 
 // A collection of arguments for invoking getCustomerGatewayVendors.

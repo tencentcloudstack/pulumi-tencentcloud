@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mesh = tencentcloud.Tcm.getMesh({
+ * const mesh = tencentcloud.tcm.getMesh({
  *     meshIds: ["mesh-xxxxxx"],
  *     meshNames: ["KEEP_MASH"],
  *     tags: ["key"],
@@ -91,7 +91,7 @@ export interface GetMeshResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mesh = tencentcloud.Tcm.getMesh({
+ * const mesh = tencentcloud.tcm.getMesh({
  *     meshIds: ["mesh-xxxxxx"],
  *     meshNames: ["KEEP_MASH"],
  *     tags: ["key"],
@@ -118,21 +118,21 @@ export interface GetMeshOutputArgs {
     /**
      * Mesh name.
      */
-    meshClusters?: pulumi.Input<pulumi.Input<string>[]>;
+    meshClusters?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Mesh instance Id.
      */
-    meshIds?: pulumi.Input<pulumi.Input<string>[]>;
+    meshIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Display name.
      */
-    meshNames?: pulumi.Input<pulumi.Input<string>[]>;
+    meshNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * tag key.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

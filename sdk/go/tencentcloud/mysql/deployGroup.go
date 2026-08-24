@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// mysql deploy_group can be imported using the id, e.g.
+// mysql deployGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id

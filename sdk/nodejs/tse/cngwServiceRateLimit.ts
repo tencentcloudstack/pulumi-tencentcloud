@@ -88,7 +88,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_service_rate_limit can be imported using the id, e.g.
+ * tse cngwServiceRateLimit can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwServiceRateLimit:CngwServiceRateLimit cngw_service_rate_limit gatewayId#name
@@ -175,15 +175,15 @@ export interface CngwServiceRateLimitState {
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * rate limit configuration.
      */
-    limitDetail?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetail>;
+    limitDetail?: pulumi.Input<inputs.Tse.CngwServiceRateLimitLimitDetail | undefined>;
     /**
      * service name or service ID.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -201,5 +201,5 @@ export interface CngwServiceRateLimitArgs {
     /**
      * service name or service ID.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

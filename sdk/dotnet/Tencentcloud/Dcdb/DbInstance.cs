@@ -10,87 +10,11 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
 {
-    /// <summary>
-    /// Provides a resource to create a dcdb DbInstance
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var dbInstance = new Tencentcloud.Dcdb.DbInstance("db_instance", new()
-    ///     {
-    ///         InstanceName = "test_dcdb_db_instance",
-    ///         Zones = new[]
-    ///         {
-    ///             "ap-guangzhou-5",
-    ///         },
-    ///         Period = 1,
-    ///         ShardMemory = 2,
-    ///         ShardStorage = 10,
-    ///         ShardNodeCount = 2,
-    ///         ShardCount = 2,
-    ///         VpcId = vpcId,
-    ///         SubnetId = subnetId,
-    ///         DbVersionId = "8.0",
-    ///         ResourceTags = new[]
-    ///         {
-    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceResourceTagArgs
-    ///             {
-    ///                 TagKey = "aaa",
-    ///                 TagValue = "bbb",
-    ///             },
-    ///         },
-    ///         InitParams = new[]
-    ///         {
-    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///             {
-    ///                 Param = "character_set_server",
-    ///                 Value = "utf8mb4",
-    ///             },
-    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///             {
-    ///                 Param = "lower_case_table_names",
-    ///                 Value = "1",
-    ///             },
-    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///             {
-    ///                 Param = "sync_mode",
-    ///                 Value = "2",
-    ///             },
-    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///             {
-    ///                 Param = "innodb_page_size",
-    ///                 Value = "16384",
-    ///             },
-    ///         },
-    ///         SecurityGroupIds = new[]
-    ///         {
-    ///             sgId,
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// dcdb db_instance can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/dbInstance:DbInstance")]
     public partial class DbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
+        /// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int?> AutoRenewFlag { get; private set; } = null!;
@@ -102,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<bool?> AutoVoucher { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;amp;quot;&amp;amp;quot;8.0.18 - MySQL 8.0.18;&amp;amp;quot;&amp;amp;quot;10.1.9 - Mariadb 10.1.9;&amp;amp;quot;&amp;amp;quot;5.7.17 - Percona 5.7.17&amp;amp;quot;&amp;amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;amp;quot;.
+        /// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
         /// </summary>
         [Output("dbVersionId")]
         public Output<string?> DbVersionId { get; private set; } = null!;
@@ -126,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<bool?> ExtranetAccess { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;parameter list. The optional values of this interface are:&amp;amp;quot;&amp;amp;quot;character_set_server (character set, must be passed),&amp;amp;quot;&amp;amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;amp;quot;&amp;amp;quot;innodb_page_size (innodb data page, default 16K),&amp;amp;quot;&amp;amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;amp;quot;.
+        /// parameter list. The optional values of this interface are:  CharacterSetServer (character set, must be passed),  LowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  InnodbPageSize (innodb data page, default 16K),  SyncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
         /// </summary>
         [Output("initParams")]
         public Output<ImmutableArray<Outputs.DbInstanceInitParam>> InitParams { get; private set; } = null!;
@@ -174,19 +98,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<int> ShardCount { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
         /// </summary>
         [Output("shardMemory")]
         public Output<int> ShardMemory { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Output("shardNodeCount")]
         public Output<int> ShardNodeCount { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Output("shardStorage")]
         public Output<int> ShardStorage { get; private set; } = null!;
@@ -228,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Output<int> Vport { get; private set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;amp;quot;&amp;amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;amp;quot;.
+        /// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
         /// </summary>
         [Output("zones")]
         public Output<ImmutableArray<string>> Zones { get; private set; } = null!;
@@ -281,7 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     public sealed class DbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
+        /// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -293,7 +217,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<bool>? AutoVoucher { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;amp;quot;&amp;amp;quot;8.0.18 - MySQL 8.0.18;&amp;amp;quot;&amp;amp;quot;10.1.9 - Mariadb 10.1.9;&amp;amp;quot;&amp;amp;quot;5.7.17 - Percona 5.7.17&amp;amp;quot;&amp;amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;amp;quot;.
+        /// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
         /// </summary>
         [Input("dbVersionId")]
         public Input<string>? DbVersionId { get; set; }
@@ -320,7 +244,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<Inputs.DbInstanceInitParamArgs>? _initParams;
 
         /// <summary>
-        /// &amp;amp;quot;parameter list. The optional values of this interface are:&amp;amp;quot;&amp;amp;quot;character_set_server (character set, must be passed),&amp;amp;quot;&amp;amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;amp;quot;&amp;amp;quot;innodb_page_size (innodb data page, default 16K),&amp;amp;quot;&amp;amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;amp;quot;.
+        /// parameter list. The optional values of this interface are:  CharacterSetServer (character set, must be passed),  LowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  InnodbPageSize (innodb data page, default 16K),  SyncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
         /// </summary>
         public InputList<Inputs.DbInstanceInitParamArgs> InitParams
         {
@@ -383,19 +307,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<int> ShardCount { get; set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
         /// </summary>
         [Input("shardMemory", required: true)]
         public Input<int> ShardMemory { get; set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Input("shardNodeCount", required: true)]
         public Input<int> ShardNodeCount { get; set; } = null!;
 
         /// <summary>
-        /// &amp;amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Input("shardStorage", required: true)]
         public Input<int> ShardStorage { get; set; } = null!;
@@ -440,7 +364,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<string>? _zones;
 
         /// <summary>
-        /// &amp;amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;amp;quot;&amp;amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;amp;quot;.
+        /// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
         /// </summary>
         public InputList<string> Zones
         {
@@ -457,7 +381,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     public sealed class DbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
+        /// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
@@ -469,7 +393,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<bool>? AutoVoucher { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;amp;quot;&amp;amp;quot;8.0.18 - MySQL 8.0.18;&amp;amp;quot;&amp;amp;quot;10.1.9 - Mariadb 10.1.9;&amp;amp;quot;&amp;amp;quot;5.7.17 - Percona 5.7.17&amp;amp;quot;&amp;amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;amp;quot;.
+        /// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
         /// </summary>
         [Input("dbVersionId")]
         public Input<string>? DbVersionId { get; set; }
@@ -496,7 +420,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<Inputs.DbInstanceInitParamGetArgs>? _initParams;
 
         /// <summary>
-        /// &amp;amp;quot;parameter list. The optional values of this interface are:&amp;amp;quot;&amp;amp;quot;character_set_server (character set, must be passed),&amp;amp;quot;&amp;amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;amp;quot;&amp;amp;quot;innodb_page_size (innodb data page, default 16K),&amp;amp;quot;&amp;amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;amp;quot;.
+        /// parameter list. The optional values of this interface are:  CharacterSetServer (character set, must be passed),  LowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  InnodbPageSize (innodb data page, default 16K),  SyncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
         /// </summary>
         public InputList<Inputs.DbInstanceInitParamGetArgs> InitParams
         {
@@ -559,19 +483,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public Input<int>? ShardCount { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
         /// </summary>
         [Input("shardMemory")]
         public Input<int>? ShardMemory { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Input("shardNodeCount")]
         public Input<int>? ShardNodeCount { get; set; }
 
         /// <summary>
-        /// &amp;amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;amp;quot;&amp;amp;quot;Query the instance specification to obtain.&amp;amp;quot;.
+        /// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
         /// </summary>
         [Input("shardStorage")]
         public Input<int>? ShardStorage { get; set; }
@@ -622,7 +546,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         private InputList<string>? _zones;
 
         /// <summary>
-        /// &amp;amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;amp;quot;&amp;amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;amp;quot;.
+        /// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
         /// </summary>
         public InputList<string> Zones
         {

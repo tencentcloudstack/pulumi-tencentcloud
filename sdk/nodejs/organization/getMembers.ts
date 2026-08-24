@@ -11,11 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all members
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const members = tencentcloud.Organization.getMembers({});
+ * const example = tencentcloud.organization.getMembers({});
+ * ```
+ *
+ * ### Query members by filter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.organization.getMembers({
+ *     lang: "en",
+ *     searchKey: "tf-example",
+ * });
  * ```
  */
 export function getMembers(args?: GetMembersArgs, opts?: pulumi.InvokeOptions): Promise<GetMembersResult> {
@@ -79,11 +93,25 @@ export interface GetMembersResult {
  *
  * ## Example Usage
  *
+ * ### Query all members
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const members = tencentcloud.Organization.getMembers({});
+ * const example = tencentcloud.organization.getMembers({});
+ * ```
+ *
+ * ### Query members by filter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.organization.getMembers({
+ *     lang: "en",
+ *     searchKey: "tf-example",
+ * });
  * ```
  */
 export function getMembersOutput(args?: GetMembersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMembersResult> {
@@ -105,21 +133,21 @@ export interface GetMembersOutputArgs {
     /**
      * Entity name.
      */
-    authName?: pulumi.Input<string>;
+    authName?: pulumi.Input<string | undefined>;
     /**
      * Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
      */
-    lang?: pulumi.Input<string>;
+    lang?: pulumi.Input<string | undefined>;
     /**
      * Abbreviation of the trusted service, which is required during querying the trusted service admin.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search by member name or ID.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
 }

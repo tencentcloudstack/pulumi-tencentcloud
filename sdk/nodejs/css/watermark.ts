@@ -26,7 +26,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * css watermark can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
  * ```
@@ -136,31 +135,31 @@ export interface WatermarkState {
     /**
      * height of the picture.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * watermark url.
      */
-    pictureUrl?: pulumi.Input<string>;
+    pictureUrl?: pulumi.Input<string | undefined>;
     /**
      * status. 0: not used, 1: used.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * watermark name.
      */
-    watermarkName?: pulumi.Input<string>;
+    watermarkName?: pulumi.Input<string | undefined>;
     /**
      * width of the picture.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
     /**
      * x position of the picture.
      */
-    xPosition?: pulumi.Input<number>;
+    xPosition?: pulumi.Input<number | undefined>;
     /**
      * y position of the picture.
      */
-    yPosition?: pulumi.Input<number>;
+    yPosition?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -170,7 +169,7 @@ export interface WatermarkArgs {
     /**
      * height of the picture.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * watermark url.
      */
@@ -182,13 +181,13 @@ export interface WatermarkArgs {
     /**
      * width of the picture.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
     /**
      * x position of the picture.
      */
-    xPosition?: pulumi.Input<number>;
+    xPosition?: pulumi.Input<number | undefined>;
     /**
      * y position of the picture.
      */
-    yPosition?: pulumi.Input<number>;
+    yPosition?: pulumi.Input<number | undefined>;
 }

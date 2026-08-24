@@ -77,12 +77,8 @@ type GetRecordLineListResult struct {
 }
 
 func GetRecordLineListOutput(ctx *pulumi.Context, args GetRecordLineListOutputArgs, opts ...pulumi.InvokeOption) GetRecordLineListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRecordLineListResultOutput, error) {
-			args := v.(GetRecordLineListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args, GetRecordLineListResultOutput{}, options).(GetRecordLineListResultOutput), nil
-		}).(GetRecordLineListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args, GetRecordLineListResultOutput{}, options).(GetRecordLineListResultOutput)
 }
 
 // A collection of arguments for invoking getRecordLineList.

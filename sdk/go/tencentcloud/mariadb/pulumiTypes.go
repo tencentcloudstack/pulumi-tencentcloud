@@ -859,6 +859,112 @@ func (o AccountPrivilegesViewPrivilegeArrayOutput) Index(i pulumi.IntInput) Acco
 	}).(AccountPrivilegesViewPrivilegeOutput)
 }
 
+type HourDbInstanceInitParam struct {
+	// parameter name.
+	Param string `pulumi:"param"`
+	// parameter value.
+	Value string `pulumi:"value"`
+}
+
+// HourDbInstanceInitParamInput is an input type that accepts HourDbInstanceInitParamArgs and HourDbInstanceInitParamOutput values.
+// You can construct a concrete instance of `HourDbInstanceInitParamInput` via:
+//
+//	HourDbInstanceInitParamArgs{...}
+type HourDbInstanceInitParamInput interface {
+	pulumi.Input
+
+	ToHourDbInstanceInitParamOutput() HourDbInstanceInitParamOutput
+	ToHourDbInstanceInitParamOutputWithContext(context.Context) HourDbInstanceInitParamOutput
+}
+
+type HourDbInstanceInitParamArgs struct {
+	// parameter name.
+	Param pulumi.StringInput `pulumi:"param"`
+	// parameter value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (HourDbInstanceInitParamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*HourDbInstanceInitParam)(nil)).Elem()
+}
+
+func (i HourDbInstanceInitParamArgs) ToHourDbInstanceInitParamOutput() HourDbInstanceInitParamOutput {
+	return i.ToHourDbInstanceInitParamOutputWithContext(context.Background())
+}
+
+func (i HourDbInstanceInitParamArgs) ToHourDbInstanceInitParamOutputWithContext(ctx context.Context) HourDbInstanceInitParamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HourDbInstanceInitParamOutput)
+}
+
+// HourDbInstanceInitParamArrayInput is an input type that accepts HourDbInstanceInitParamArray and HourDbInstanceInitParamArrayOutput values.
+// You can construct a concrete instance of `HourDbInstanceInitParamArrayInput` via:
+//
+//	HourDbInstanceInitParamArray{ HourDbInstanceInitParamArgs{...} }
+type HourDbInstanceInitParamArrayInput interface {
+	pulumi.Input
+
+	ToHourDbInstanceInitParamArrayOutput() HourDbInstanceInitParamArrayOutput
+	ToHourDbInstanceInitParamArrayOutputWithContext(context.Context) HourDbInstanceInitParamArrayOutput
+}
+
+type HourDbInstanceInitParamArray []HourDbInstanceInitParamInput
+
+func (HourDbInstanceInitParamArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HourDbInstanceInitParam)(nil)).Elem()
+}
+
+func (i HourDbInstanceInitParamArray) ToHourDbInstanceInitParamArrayOutput() HourDbInstanceInitParamArrayOutput {
+	return i.ToHourDbInstanceInitParamArrayOutputWithContext(context.Background())
+}
+
+func (i HourDbInstanceInitParamArray) ToHourDbInstanceInitParamArrayOutputWithContext(ctx context.Context) HourDbInstanceInitParamArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HourDbInstanceInitParamArrayOutput)
+}
+
+type HourDbInstanceInitParamOutput struct{ *pulumi.OutputState }
+
+func (HourDbInstanceInitParamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*HourDbInstanceInitParam)(nil)).Elem()
+}
+
+func (o HourDbInstanceInitParamOutput) ToHourDbInstanceInitParamOutput() HourDbInstanceInitParamOutput {
+	return o
+}
+
+func (o HourDbInstanceInitParamOutput) ToHourDbInstanceInitParamOutputWithContext(ctx context.Context) HourDbInstanceInitParamOutput {
+	return o
+}
+
+// parameter name.
+func (o HourDbInstanceInitParamOutput) Param() pulumi.StringOutput {
+	return o.ApplyT(func(v HourDbInstanceInitParam) string { return v.Param }).(pulumi.StringOutput)
+}
+
+// parameter value.
+func (o HourDbInstanceInitParamOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v HourDbInstanceInitParam) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type HourDbInstanceInitParamArrayOutput struct{ *pulumi.OutputState }
+
+func (HourDbInstanceInitParamArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HourDbInstanceInitParam)(nil)).Elem()
+}
+
+func (o HourDbInstanceInitParamArrayOutput) ToHourDbInstanceInitParamArrayOutput() HourDbInstanceInitParamArrayOutput {
+	return o
+}
+
+func (o HourDbInstanceInitParamArrayOutput) ToHourDbInstanceInitParamArrayOutputWithContext(ctx context.Context) HourDbInstanceInitParamArrayOutput {
+	return o
+}
+
+func (o HourDbInstanceInitParamArrayOutput) Index(i pulumi.IntInput) HourDbInstanceInitParamOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HourDbInstanceInitParam {
+		return vs[0].([]HourDbInstanceInitParam)[vs[1].(int)]
+	}).(HourDbInstanceInitParamOutput)
+}
+
 type InstanceInitParam struct {
 	// parameter name.
 	Param string `pulumi:"param"`
@@ -5001,6 +5107,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesTablePrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesTablePrivilegeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesViewPrivilegeInput)(nil)).Elem(), AccountPrivilegesViewPrivilegeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesViewPrivilegeArrayInput)(nil)).Elem(), AccountPrivilegesViewPrivilegeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HourDbInstanceInitParamInput)(nil)).Elem(), HourDbInstanceInitParamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HourDbInstanceInitParamArrayInput)(nil)).Elem(), HourDbInstanceInitParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInitParamInput)(nil)).Elem(), InstanceInitParamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceInitParamArrayInput)(nil)).Elem(), InstanceInitParamArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParametersParamInput)(nil)).Elem(), ParametersParamArgs{})
@@ -5077,6 +5185,8 @@ func init() {
 	pulumi.RegisterOutputType(AccountPrivilegesTablePrivilegeArrayOutput{})
 	pulumi.RegisterOutputType(AccountPrivilegesViewPrivilegeOutput{})
 	pulumi.RegisterOutputType(AccountPrivilegesViewPrivilegeArrayOutput{})
+	pulumi.RegisterOutputType(HourDbInstanceInitParamOutput{})
+	pulumi.RegisterOutputType(HourDbInstanceInitParamArrayOutput{})
 	pulumi.RegisterOutputType(InstanceInitParamOutput{})
 	pulumi.RegisterOutputType(InstanceInitParamArrayOutput{})
 	pulumi.RegisterOutputType(ParametersParamOutput{})

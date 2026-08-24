@@ -57,7 +57,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls scheduled_sql can be imported using the id, e.g.
+ * cls scheduledSql can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
@@ -228,55 +228,55 @@ export interface ScheduledSqlState {
     /**
      * scheduled slq dst resource.
      */
-    dstResource?: pulumi.Input<inputs.Cls.ScheduledSqlDstResource>;
+    dstResource?: pulumi.Input<inputs.Cls.ScheduledSqlDstResource | undefined>;
     /**
      * task enable flag.
      */
-    enableFlag?: pulumi.Input<number>;
+    enableFlag?: pulumi.Input<number | undefined>;
     /**
      * task name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * process delay.
      */
-    processDelay?: pulumi.Input<number>;
+    processDelay?: pulumi.Input<number | undefined>;
     /**
      * process end timestamp.
      */
-    processEndTime?: pulumi.Input<number>;
+    processEndTime?: pulumi.Input<number | undefined>;
     /**
      * process period.
      */
-    processPeriod?: pulumi.Input<number>;
+    processPeriod?: pulumi.Input<number | undefined>;
     /**
      * process start timestamp.
      */
-    processStartTime?: pulumi.Input<number>;
+    processStartTime?: pulumi.Input<number | undefined>;
     /**
      * process time window.
      */
-    processTimeWindow?: pulumi.Input<string>;
+    processTimeWindow?: pulumi.Input<string | undefined>;
     /**
      * process type.
      */
-    processType?: pulumi.Input<number>;
+    processType?: pulumi.Input<number | undefined>;
     /**
      * scheduled sql content.
      */
-    scheduledSqlContent?: pulumi.Input<string>;
+    scheduledSqlContent?: pulumi.Input<string | undefined>;
     /**
      * src topic id.
      */
-    srcTopicId?: pulumi.Input<string>;
+    srcTopicId?: pulumi.Input<string | undefined>;
     /**
      * src topic region.
      */
-    srcTopicRegion?: pulumi.Input<string>;
+    srcTopicRegion?: pulumi.Input<string | undefined>;
     /**
      * syntax rule.
      */
-    syntaxRule?: pulumi.Input<number>;
+    syntaxRule?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -294,7 +294,7 @@ export interface ScheduledSqlArgs {
     /**
      * task name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * process delay.
      */
@@ -302,7 +302,7 @@ export interface ScheduledSqlArgs {
     /**
      * process end timestamp.
      */
-    processEndTime?: pulumi.Input<number>;
+    processEndTime?: pulumi.Input<number | undefined>;
     /**
      * process period.
      */
@@ -334,5 +334,5 @@ export interface ScheduledSqlArgs {
     /**
      * syntax rule.
      */
-    syntaxRule?: pulumi.Input<number>;
+    syntaxRule?: pulumi.Input<number | undefined>;
 }

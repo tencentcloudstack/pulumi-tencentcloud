@@ -39,13 +39,13 @@ import (
 //			if param := cfg.Get("region"); param != "" {
 //				region = param
 //			}
-//			mysql, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+//			mysql2, err := mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
 //				InstanceName: pulumi.StringRef("instance_name"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			mysqlId := mysql.InstanceLists[0].MysqlId
+//			mysqlId := mysql2.InstanceLists[0].MysqlId
 //			_, err = dbbrain.NewSqlFilter(ctx, "sql_filter", &dbbrain.SqlFilterArgs{
 //				InstanceId: pulumi.String(mysqlId),
 //				SessionToken: &dbbrain.SqlFilterSessionTokenArgs{

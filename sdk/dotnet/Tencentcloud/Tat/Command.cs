@@ -54,7 +54,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// ## Import
     /// 
     /// tat command can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tat/command:Command example cmd-6fydo27j
     /// ```

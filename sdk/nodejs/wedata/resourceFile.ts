@@ -153,37 +153,37 @@ export interface ResourceFileState {
     /**
      * cos bucket name, which can be obtained from the GetResourceCosPath interface.
      */
-    bucketName?: pulumi.Input<string>;
+    bucketName?: pulumi.Input<string | undefined>;
     /**
      * bundle client ID.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * bundle client information.
      */
-    bundleInfo?: pulumi.Input<string>;
+    bundleInfo?: pulumi.Input<string | undefined>;
     /**
      * The cos bucket area corresponding to the BucketName bucket.
      */
-    cosRegion?: pulumi.Input<string>;
+    cosRegion?: pulumi.Input<string | undefined>;
     /**
      * The path to upload resource files in the project, example value: /wedata/qxxxm/, root directory, please use/.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * You can only choose one of the two methods of uploading a file and manually filling. If both are provided, the order of values is file> manual filling value
      * -the manual filling value must be the existing cos path, /datastudio/resource/is a fixed prefix, projectId is the project ID, and a specific value needs to be passed in, parentFolderPath is the parent folder path, name is the file name, and examples of manual filling value values are: /datastudio/resource/projectId/parentFolderPath/name
      * .
      */
-    resourceFile?: pulumi.Input<string>;
+    resourceFile?: pulumi.Input<string | undefined>;
     /**
      * The resource file name should be consistent with the uploaded file name as much as possible.
      */
-    resourceName?: pulumi.Input<string>;
+    resourceName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -197,11 +197,11 @@ export interface ResourceFileArgs {
     /**
      * bundle client ID.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * bundle client information.
      */
-    bundleInfo?: pulumi.Input<string>;
+    bundleInfo?: pulumi.Input<string | undefined>;
     /**
      * The cos bucket area corresponding to the BucketName bucket.
      */

@@ -74,7 +74,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls config_extra can be imported using the id, e.g.
+ * cls configExtra can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id
@@ -260,71 +260,71 @@ export interface ConfigExtraState {
     /**
      * Collection configuration flag.
      */
-    configFlag?: pulumi.Input<string>;
+    configFlag?: pulumi.Input<string | undefined>;
     /**
      * Container file path info.
      */
-    containerFile?: pulumi.Input<inputs.Cls.ConfigExtraContainerFile>;
+    containerFile?: pulumi.Input<inputs.Cls.ConfigExtraContainerFile | undefined>;
     /**
      * Container stdout info.
      */
-    containerStdout?: pulumi.Input<inputs.Cls.ConfigExtraContainerStdout>;
+    containerStdout?: pulumi.Input<inputs.Cls.ConfigExtraContainerStdout | undefined>;
     /**
      * Collection path blocklist.
      */
-    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtraExcludePath>[]>;
+    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtraExcludePath>[] | undefined>;
     /**
      * Extraction rule. If ExtractRule is set, LogType must be set.
      */
-    extractRule?: pulumi.Input<inputs.Cls.ConfigExtraExtractRule>;
+    extractRule?: pulumi.Input<inputs.Cls.ConfigExtraExtractRule | undefined>;
     /**
      * Binding group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Binding group ids.
      */
-    groupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    groupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node file config info.
      */
-    hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
+    hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile | undefined>;
     /**
      * Log format.
      */
-    logFormat?: pulumi.Input<string>;
+    logFormat?: pulumi.Input<string | undefined>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Logset Id.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * Logset Name.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
     /**
      * Collection configuration name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID (TopicId) of collection configuration.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
     /**
      * Topic Name.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
      * Type. Valid values: container_stdout; container_file; host_file.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Custom collection rule, which is a serialized JSON string.
      */
-    userDefineRule?: pulumi.Input<string>;
+    userDefineRule?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -338,35 +338,35 @@ export interface ConfigExtraArgs {
     /**
      * Container file path info.
      */
-    containerFile?: pulumi.Input<inputs.Cls.ConfigExtraContainerFile>;
+    containerFile?: pulumi.Input<inputs.Cls.ConfigExtraContainerFile | undefined>;
     /**
      * Container stdout info.
      */
-    containerStdout?: pulumi.Input<inputs.Cls.ConfigExtraContainerStdout>;
+    containerStdout?: pulumi.Input<inputs.Cls.ConfigExtraContainerStdout | undefined>;
     /**
      * Collection path blocklist.
      */
-    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtraExcludePath>[]>;
+    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExtraExcludePath>[] | undefined>;
     /**
      * Extraction rule. If ExtractRule is set, LogType must be set.
      */
-    extractRule?: pulumi.Input<inputs.Cls.ConfigExtraExtractRule>;
+    extractRule?: pulumi.Input<inputs.Cls.ConfigExtraExtractRule | undefined>;
     /**
      * Binding group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Binding group ids.
      */
-    groupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    groupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node file config info.
      */
-    hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile>;
+    hostFile?: pulumi.Input<inputs.Cls.ConfigExtraHostFile | undefined>;
     /**
      * Log format.
      */
-    logFormat?: pulumi.Input<string>;
+    logFormat?: pulumi.Input<string | undefined>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
@@ -382,7 +382,7 @@ export interface ConfigExtraArgs {
     /**
      * Collection configuration name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID (TopicId) of collection configuration.
      */
@@ -398,5 +398,5 @@ export interface ConfigExtraArgs {
     /**
      * Custom collection rule, which is a serialized JSON string.
      */
-    userDefineRule?: pulumi.Input<string>;
+    userDefineRule?: pulumi.Input<string | undefined>;
 }

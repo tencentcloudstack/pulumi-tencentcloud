@@ -24,6 +24,7 @@ import (
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
+	sdkSchema "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	pftfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
@@ -43,6 +44,33 @@ const (
 //go:embed cmd/pulumi-resource-tencentcloud/bridge-metadata.json
 var metadata []byte
 
+// removeDeprecatedDlcDescribeDataEngineUiURL strips the deprecated "ui_u_r_l"
+// attribute from the tencentcloud_dlc_describe_data_engine data source.
+//
+// The upstream provider declares both the deprecated "ui_u_r_l" and its
+// replacement "ui_url" on the same nested object. Both survive schema
+// generation as distinct properties, and the Python codegen snake-cases the
+// two names onto the same __init__ parameter, producing
+// "SyntaxError: duplicate argument 'ui_url'" and breaking compilation of the
+// entire Python SDK. The deprecated attribute is redundant (upstream marks it
+// "Use ui_url instead") and is removed at the source until the upstream field
+// is dropped.
+func removeDeprecatedDlcDescribeDataEngineUIURL(p *sdkSchema.Provider) {
+	ds, ok := p.DataSourcesMap["tencentcloud_dlc_describe_data_engine"]
+	if !ok {
+		return
+	}
+	dataEngine, ok := ds.Schema["data_engine"]
+	if !ok {
+		return
+	}
+	elem, ok := dataEngine.Elem.(*sdkSchema.Resource)
+	if !ok {
+		return
+	}
+	delete(elem.Schema, "ui_u_r_l")
+}
+
 // Provider returns additional overlaid schema and metadata associated with the provider.
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform providers:
@@ -52,6 +80,10 @@ func Provider() tfbridge.ProviderInfo {
 	//   mirroring the upstream muxed main.go.
 	ctx := context.Background()
 	sdkProvider := tencentcloud.Provider()
+	removeDeprecatedDlcDescribeDataEngineUIURL(sdkProvider)
+	// pfProvider is the Plugin Framework implementation for migrated resources;
+	// it takes the SDKv2 provider as input to share configuration and meta,
+	// mirroring the upstream muxed main.go.
 	pfProvider := framework.NewProvider(sdkProvider)
 	p := pftfbridge.MuxShimWithPF(ctx, shimv2.NewProvider(sdkProvider), pfProvider)
 
@@ -104,6 +136,15 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/mime": "^2.0.0",
 			},
 			PackageName: "@tencentcloud_iac/pulumi",
+			// The nodejs codegen lowercases module directory names
+			// (getChildMod -> strings.ToLower). The "Config" module (cloud
+			// audit / config service resources) would collide with the
+			// reserved provider "config" module directory, tripping a
+			// "duplicate file: config/index.ts" assertion. Map it to a
+			// distinct directory name to avoid the case-folding collision.
+			ModuleToPackage: map[string]string{
+				"Config": "configservice",
+			},
 		},
 		Python: &tfbridge.PythonInfo{
 			Requires: map[string]string{
@@ -125,6 +166,15 @@ func Provider() tfbridge.ProviderInfo {
 				"Pulumi": "3.*",
 			},
 			RootNamespace: "TencentCloudIAC.PulumiPackage",
+			// The "Config" module (cloud audit resources) generates the
+			// child namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Config,
+			// which collides with the provider's static Config class in the
+			// parent namespace (C# forbids a type and a child namespace sharing
+			// a name in the same scope; error CS0101). Map the module to a
+			// distinct namespace.
+			Namespaces: map[string]string{
+				"Config": "ConfigService",
+			},
 		},
 	}
 

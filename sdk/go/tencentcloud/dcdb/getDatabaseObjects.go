@@ -50,12 +50,8 @@ type GetDatabaseObjectsResult struct {
 }
 
 func GetDatabaseObjectsOutput(ctx *pulumi.Context, args GetDatabaseObjectsOutputArgs, opts ...pulumi.InvokeOption) GetDatabaseObjectsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDatabaseObjectsResultOutput, error) {
-			args := v.(GetDatabaseObjectsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args, GetDatabaseObjectsResultOutput{}, options).(GetDatabaseObjectsResultOutput), nil
-		}).(GetDatabaseObjectsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args, GetDatabaseObjectsResultOutput{}, options).(GetDatabaseObjectsResultOutput)
 }
 
 // A collection of arguments for invoking getDatabaseObjects.

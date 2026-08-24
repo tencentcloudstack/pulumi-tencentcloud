@@ -46,12 +46,8 @@ type GetReplicationInstanceCreateTasksResult struct {
 }
 
 func GetReplicationInstanceCreateTasksOutput(ctx *pulumi.Context, args GetReplicationInstanceCreateTasksOutputArgs, opts ...pulumi.InvokeOption) GetReplicationInstanceCreateTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetReplicationInstanceCreateTasksResultOutput, error) {
-			args := v.(GetReplicationInstanceCreateTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args, GetReplicationInstanceCreateTasksResultOutput{}, options).(GetReplicationInstanceCreateTasksResultOutput), nil
-		}).(GetReplicationInstanceCreateTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", args, GetReplicationInstanceCreateTasksResultOutput{}, options).(GetReplicationInstanceCreateTasksResultOutput)
 }
 
 // A collection of arguments for invoking getReplicationInstanceCreateTasks.

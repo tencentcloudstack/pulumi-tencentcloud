@@ -14,6 +14,8 @@ import (
 
 // Provide a resource to create a CynosDB cluster.
 //
+// > **NOTE:** Compared to Resource `Cynosdb.Cluster`, Resource `Cynosdb.ClusterV2` places greater emphasis on optimizing security group configurations for read-only groups and read-only instances, making them more precise and efficient. `rwGroupSg` represents the read-write instance security group, `roGroupSg` represents the read-only group security group, and `singleRoGroupSg` represents the read-only instance security group. notably, to configure `roGroupSg`, “openRoGroup`must be set`true`first. If you need to configure`roGroupSg`or`singleRoGroupSg`security group, please use Resource`Cynosdb.ClusterV2`.
+//
 // > **NOTE:** params `instanceCount` and `instanceInitInfos` only choose one. If neither parameter is set, the CynosDB cluster is created with parameter `instanceCount` set to `2` by default(one RW instance + one Ro instance). If you only need to create a master instance, explicitly set the `instanceCount` field to `1`, or configure the RW instance information in the `instanceInitInfos` field.
 //
 // ## Example Usage
@@ -42,7 +44,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -50,10 +52,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -75,8 +77,8 @@ import (
 //			// create cynosdb cluster
 //			_, err = cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
 //				AvailableZone:             pulumi.String(availabilityZone),
-//				VpcId:                     vpc.ID(),
-//				SubnetId:                  subnet.ID(),
+//				VpcId:                     vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                  subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMode:                    pulumi.String("NORMAL"),
 //				DbType:                    pulumi.String("MYSQL"),
 //				DbVersion:                 pulumi.String("5.7"),
@@ -108,10 +110,7 @@ import (
 //					},
 //				},
 //				RwGroupSgs: pulumi.StringArray{
-//					example.ID(),
-//				},
-//				RoGroupSgs: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				InstanceInitInfos: cynosdb.ClusterInstanceInitInfoArray{
 //					&cynosdb.ClusterInstanceInitInfoArgs{
@@ -129,6 +128,9 @@ import (
 //						DeviceType:    pulumi.String("exclusive"),
 //					},
 //				},
+//				SyncWay:         pulumi.String("async"),
+//				SemiSyncTimeout: pulumi.Int(10000),
+//				CynosVersion:    pulumi.String("2.1.14.001"),
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("terraform"),
 //				},
@@ -142,7 +144,9 @@ import (
 //
 // ```
 //
-// ### Create a multiple availability zone SERVERLESS CynosDB cluster
+// ### API.
+//
+// # Create a multiple availability zone SERVERLESS CynosDB cluster
 //
 // ```go
 // package main
@@ -170,7 +174,7 @@ import (
 //				slaveZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -178,10 +182,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -220,8 +224,8 @@ import (
 //			_, err = cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
 //				AvailableZone:             pulumi.String(availabilityZone),
 //				SlaveZone:                 pulumi.String(slaveZone),
-//				VpcId:                     vpc.ID(),
-//				SubnetId:                  subnet.ID(),
+//				VpcId:                     vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                  subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMode:                    pulumi.String("SERVERLESS"),
 //				DbType:                    pulumi.String("MYSQL"),
 //				DbVersion:                 pulumi.String("8.0"),
@@ -234,6 +238,8 @@ import (
 //				MaxCpu:                    pulumi.Float64(4),
 //				ParamTemplateId:           exampleParamTemplate.TemplateId,
 //				ForceDelete:               pulumi.Bool(false),
+//				SyncWay:                   pulumi.String("async"),
+//				SemiSyncTimeout:           pulumi.Int(10000),
 //				InstanceMaintainWeekdays: pulumi.StringArray{
 //					pulumi.String("Fri"),
 //					pulumi.String("Mon"),
@@ -244,10 +250,7 @@ import (
 //					pulumi.String("Tue"),
 //				},
 //				RwGroupSgs: pulumi.StringArray{
-//					example.ID(),
-//				},
-//				RoGroupSgs: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("terraform"),
@@ -290,7 +293,7 @@ type Cluster struct {
 	ClusterStatus pulumi.StringOutput `pulumi:"clusterStatus"`
 	// Creation time of the CynosDB cluster.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// Kernel version, you can enter it when modifying.
+	// Kernel minor version, like `3.1.16.002`.
 	CynosVersion pulumi.StringOutput `pulumi:"cynosVersion"`
 	// Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
 	DbMode pulumi.StringOutput `pulumi:"dbMode"`
@@ -316,7 +319,7 @@ type Cluster struct {
 	InstanceMaintainWeekdays pulumi.StringArrayOutput `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrOutput `pulumi:"instanceMemorySize"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Status of the instance.
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
@@ -360,12 +363,14 @@ type Cluster struct {
 	RwGroupInstances ClusterRwGroupInstanceArrayOutput `pulumi:"rwGroupInstances"`
 	// IDs of security group for `rwGroup`.
 	RwGroupSgs pulumi.StringArrayOutput `pulumi:"rwGroupSgs"`
+	// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+	SemiSyncTimeout pulumi.IntOutput `pulumi:"semiSyncTimeout"`
 	// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
 	ServerlessStatus pulumi.StringOutput `pulumi:"serverlessStatus"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag pulumi.StringPtrOutput `pulumi:"serverlessStatusFlag"`
 	// Multi zone Addresses of the CynosDB Cluster.
-	SlaveZone pulumi.StringPtrOutput `pulumi:"slaveZone"`
+	SlaveZone pulumi.StringOutput `pulumi:"slaveZone"`
 	// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
 	StorageLimit pulumi.IntPtrOutput `pulumi:"storageLimit"`
 	// Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
@@ -374,6 +379,8 @@ type Cluster struct {
 	StorageUsed pulumi.IntOutput `pulumi:"storageUsed"`
 	// ID of the subnet within this VPC.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
+	// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+	SyncWay pulumi.StringOutput `pulumi:"syncWay"`
 	// The tags of the CynosDB cluster.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// ID of the VPC.
@@ -456,7 +463,7 @@ type clusterState struct {
 	ClusterStatus *string `pulumi:"clusterStatus"`
 	// Creation time of the CynosDB cluster.
 	CreateTime *string `pulumi:"createTime"`
-	// Kernel version, you can enter it when modifying.
+	// Kernel minor version, like `3.1.16.002`.
 	CynosVersion *string `pulumi:"cynosVersion"`
 	// Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
 	DbMode *string `pulumi:"dbMode"`
@@ -482,7 +489,7 @@ type clusterState struct {
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName *string `pulumi:"instanceName"`
 	// Status of the instance.
 	InstanceStatus *string `pulumi:"instanceStatus"`
@@ -526,6 +533,8 @@ type clusterState struct {
 	RwGroupInstances []ClusterRwGroupInstance `pulumi:"rwGroupInstances"`
 	// IDs of security group for `rwGroup`.
 	RwGroupSgs []string `pulumi:"rwGroupSgs"`
+	// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+	SemiSyncTimeout *int `pulumi:"semiSyncTimeout"`
 	// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
 	ServerlessStatus *string `pulumi:"serverlessStatus"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
@@ -540,6 +549,8 @@ type clusterState struct {
 	StorageUsed *int `pulumi:"storageUsed"`
 	// ID of the subnet within this VPC.
 	SubnetId *string `pulumi:"subnetId"`
+	// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+	SyncWay *string `pulumi:"syncWay"`
 	// The tags of the CynosDB cluster.
 	Tags map[string]string `pulumi:"tags"`
 	// ID of the VPC.
@@ -565,7 +576,7 @@ type ClusterState struct {
 	ClusterStatus pulumi.StringPtrInput
 	// Creation time of the CynosDB cluster.
 	CreateTime pulumi.StringPtrInput
-	// Kernel version, you can enter it when modifying.
+	// Kernel minor version, like `3.1.16.002`.
 	CynosVersion pulumi.StringPtrInput
 	// Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
 	DbMode pulumi.StringPtrInput
@@ -591,7 +602,7 @@ type ClusterState struct {
 	InstanceMaintainWeekdays pulumi.StringArrayInput
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrInput
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName pulumi.StringPtrInput
 	// Status of the instance.
 	InstanceStatus pulumi.StringPtrInput
@@ -635,6 +646,8 @@ type ClusterState struct {
 	RwGroupInstances ClusterRwGroupInstanceArrayInput
 	// IDs of security group for `rwGroup`.
 	RwGroupSgs pulumi.StringArrayInput
+	// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+	SemiSyncTimeout pulumi.IntPtrInput
 	// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
 	ServerlessStatus pulumi.StringPtrInput
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
@@ -649,6 +662,8 @@ type ClusterState struct {
 	StorageUsed pulumi.IntPtrInput
 	// ID of the subnet within this VPC.
 	SubnetId pulumi.StringPtrInput
+	// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+	SyncWay pulumi.StringPtrInput
 	// The tags of the CynosDB cluster.
 	Tags pulumi.StringMapInput
 	// ID of the VPC.
@@ -672,7 +687,7 @@ type clusterArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Name of CynosDB cluster.
 	ClusterName string `pulumi:"clusterName"`
-	// Kernel version, you can enter it when modifying.
+	// Kernel minor version, like `3.1.16.002`.
 	CynosVersion *string `pulumi:"cynosVersion"`
 	// Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
 	DbMode *string `pulumi:"dbMode"`
@@ -696,6 +711,8 @@ type clusterArgs struct {
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
+	// Name of instance. Only supported when modifying.
+	InstanceName *string `pulumi:"instanceName"`
 	// Maximum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MaxCpu *float64 `pulumi:"maxCpu"`
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
@@ -722,6 +739,8 @@ type clusterArgs struct {
 	RoGroupSgs []string `pulumi:"roGroupSgs"`
 	// IDs of security group for `rwGroup`.
 	RwGroupSgs []string `pulumi:"rwGroupSgs"`
+	// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+	SemiSyncTimeout *int `pulumi:"semiSyncTimeout"`
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag *string `pulumi:"serverlessStatusFlag"`
 	// Multi zone Addresses of the CynosDB Cluster.
@@ -732,6 +751,8 @@ type clusterArgs struct {
 	StoragePayMode *int `pulumi:"storagePayMode"`
 	// ID of the subnet within this VPC.
 	SubnetId string `pulumi:"subnetId"`
+	// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+	SyncWay *string `pulumi:"syncWay"`
 	// The tags of the CynosDB cluster.
 	Tags map[string]string `pulumi:"tags"`
 	// ID of the VPC.
@@ -752,7 +773,7 @@ type ClusterArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Name of CynosDB cluster.
 	ClusterName pulumi.StringInput
-	// Kernel version, you can enter it when modifying.
+	// Kernel minor version, like `3.1.16.002`.
 	CynosVersion pulumi.StringPtrInput
 	// Specify DB mode, only available when `dbType` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
 	DbMode pulumi.StringPtrInput
@@ -776,6 +797,8 @@ type ClusterArgs struct {
 	InstanceMaintainWeekdays pulumi.StringArrayInput
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrInput
+	// Name of instance. Only supported when modifying.
+	InstanceName pulumi.StringPtrInput
 	// Maximum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
 	MaxCpu pulumi.Float64PtrInput
 	// Minimum CPU core count, required while `dbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
@@ -802,6 +825,8 @@ type ClusterArgs struct {
 	RoGroupSgs pulumi.StringArrayInput
 	// IDs of security group for `rwGroup`.
 	RwGroupSgs pulumi.StringArrayInput
+	// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+	SemiSyncTimeout pulumi.IntPtrInput
 	// Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
 	ServerlessStatusFlag pulumi.StringPtrInput
 	// Multi zone Addresses of the CynosDB Cluster.
@@ -812,6 +837,8 @@ type ClusterArgs struct {
 	StoragePayMode pulumi.IntPtrInput
 	// ID of the subnet within this VPC.
 	SubnetId pulumi.StringInput
+	// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+	SyncWay pulumi.StringPtrInput
 	// The tags of the CynosDB cluster.
 	Tags pulumi.StringMapInput
 	// ID of the VPC.
@@ -950,7 +977,7 @@ func (o ClusterOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// Kernel version, you can enter it when modifying.
+// Kernel minor version, like `3.1.16.002`.
 func (o ClusterOutput) CynosVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CynosVersion }).(pulumi.StringOutput)
 }
@@ -1015,7 +1042,7 @@ func (o ClusterOutput) InstanceMemorySize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.InstanceMemorySize }).(pulumi.IntPtrOutput)
 }
 
-// Name of instance.
+// Name of instance. Only supported when modifying.
 func (o ClusterOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }
@@ -1122,6 +1149,11 @@ func (o ClusterOutput) RwGroupSgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringArrayOutput { return v.RwGroupSgs }).(pulumi.StringArrayOutput)
 }
 
+// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+func (o ClusterOutput) SemiSyncTimeout() pulumi.IntOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.SemiSyncTimeout }).(pulumi.IntOutput)
+}
+
 // Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverlessStatusFlag`.
 func (o ClusterOutput) ServerlessStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ServerlessStatus }).(pulumi.StringOutput)
@@ -1133,8 +1165,8 @@ func (o ClusterOutput) ServerlessStatusFlag() pulumi.StringPtrOutput {
 }
 
 // Multi zone Addresses of the CynosDB Cluster.
-func (o ClusterOutput) SlaveZone() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.SlaveZone }).(pulumi.StringPtrOutput)
+func (o ClusterOutput) SlaveZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.SlaveZone }).(pulumi.StringOutput)
 }
 
 // Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If dbType is `MYSQL` and chargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when chargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
@@ -1155,6 +1187,11 @@ func (o ClusterOutput) StorageUsed() pulumi.IntOutput {
 // ID of the subnet within this VPC.
 func (o ClusterOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Synchronization way. Valid values: `async`, `semisync`, `sync`.
+func (o ClusterOutput) SyncWay() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.SyncWay }).(pulumi.StringOutput)
 }
 
 // The tags of the CynosDB cluster.

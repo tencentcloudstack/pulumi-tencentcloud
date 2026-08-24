@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * export = async () => {
- *     const info = await tencentcloud.User.getInfo({});
+ *     const info = await tencentcloud.user.getInfo({});
  *     const uin = info.ownerUin;
  *     const example = new tencentcloud.cam.Role("example", {
  *         name: "tf-example",
@@ -79,7 +79,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const saml_provider = config.get("saml-provider") || "example";
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const uin = info.then(info => info.uin);
  * const samlProvider = saml_provider;
  * const example = new tencentcloud.cam.Role("example", {
@@ -154,6 +154,9 @@ export class Role extends pulumi.CustomResource {
      * Description of the CAM role.
      */
     declare public readonly description: pulumi.Output<string | undefined>;
+    /**
+     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+     */
     declare public readonly document: pulumi.Output<string>;
     /**
      * Name of CAM role.
@@ -225,36 +228,39 @@ export interface RoleState {
     /**
      * Indicates whether the CAM role can login or not.
      */
-    consoleLogin?: pulumi.Input<boolean>;
+    consoleLogin?: pulumi.Input<boolean | undefined>;
     /**
      * Create time of the CAM role.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the CAM role.
      */
-    description?: pulumi.Input<string>;
-    document?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+     */
+    document?: pulumi.Input<string | undefined>;
     /**
      * Name of CAM role.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * RoleArn Information for Roles.
      */
-    roleArn?: pulumi.Input<string>;
+    roleArn?: pulumi.Input<string | undefined>;
     /**
      * The maximum validity period of the temporary key for creating a role.
      */
-    sessionDuration?: pulumi.Input<number>;
+    sessionDuration?: pulumi.Input<number | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The last update time of the CAM role.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -264,22 +270,25 @@ export interface RoleArgs {
     /**
      * Indicates whether the CAM role can login or not.
      */
-    consoleLogin?: pulumi.Input<boolean>;
+    consoleLogin?: pulumi.Input<boolean | undefined>;
     /**
      * Description of the CAM role.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+     */
     document: pulumi.Input<string>;
     /**
      * Name of CAM role.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The maximum validity period of the temporary key for creating a role.
      */
-    sessionDuration?: pulumi.Input<number>;
+    sessionDuration?: pulumi.Input<number | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListCatalog({});
+ * const example = tencentcloud.wedata.getListCatalog({});
  * ```
  */
 export function getListCatalog(args?: GetListCatalogArgs, opts?: pulumi.InvokeOptions): Promise<GetListCatalogResult> {
@@ -65,7 +65,7 @@ export interface GetListCatalogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListCatalog({});
+ * const example = tencentcloud.wedata.getListCatalog({});
  * ```
  */
 export function getListCatalogOutput(args?: GetListCatalogOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListCatalogResult> {
@@ -84,9 +84,9 @@ export interface GetListCatalogOutputArgs {
     /**
      * Parent catalog ID.
      */
-    parentCatalogId?: pulumi.Input<string>;
+    parentCatalogId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

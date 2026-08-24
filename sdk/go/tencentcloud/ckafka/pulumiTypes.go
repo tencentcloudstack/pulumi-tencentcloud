@@ -43818,6 +43818,112 @@ func (o GetUsersUserListArrayOutput) Index(i pulumi.IntInput) GetUsersUserListOu
 	}).(GetUsersUserListOutput)
 }
 
+type GetVersionLatestBrokerVersion struct {
+	// Broker version.
+	BrokerVersion string `pulumi:"brokerVersion"`
+	// Kafka version.
+	KafkaVersion string `pulumi:"kafkaVersion"`
+}
+
+// GetVersionLatestBrokerVersionInput is an input type that accepts GetVersionLatestBrokerVersionArgs and GetVersionLatestBrokerVersionOutput values.
+// You can construct a concrete instance of `GetVersionLatestBrokerVersionInput` via:
+//
+//	GetVersionLatestBrokerVersionArgs{...}
+type GetVersionLatestBrokerVersionInput interface {
+	pulumi.Input
+
+	ToGetVersionLatestBrokerVersionOutput() GetVersionLatestBrokerVersionOutput
+	ToGetVersionLatestBrokerVersionOutputWithContext(context.Context) GetVersionLatestBrokerVersionOutput
+}
+
+type GetVersionLatestBrokerVersionArgs struct {
+	// Broker version.
+	BrokerVersion pulumi.StringInput `pulumi:"brokerVersion"`
+	// Kafka version.
+	KafkaVersion pulumi.StringInput `pulumi:"kafkaVersion"`
+}
+
+func (GetVersionLatestBrokerVersionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVersionLatestBrokerVersion)(nil)).Elem()
+}
+
+func (i GetVersionLatestBrokerVersionArgs) ToGetVersionLatestBrokerVersionOutput() GetVersionLatestBrokerVersionOutput {
+	return i.ToGetVersionLatestBrokerVersionOutputWithContext(context.Background())
+}
+
+func (i GetVersionLatestBrokerVersionArgs) ToGetVersionLatestBrokerVersionOutputWithContext(ctx context.Context) GetVersionLatestBrokerVersionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVersionLatestBrokerVersionOutput)
+}
+
+// GetVersionLatestBrokerVersionArrayInput is an input type that accepts GetVersionLatestBrokerVersionArray and GetVersionLatestBrokerVersionArrayOutput values.
+// You can construct a concrete instance of `GetVersionLatestBrokerVersionArrayInput` via:
+//
+//	GetVersionLatestBrokerVersionArray{ GetVersionLatestBrokerVersionArgs{...} }
+type GetVersionLatestBrokerVersionArrayInput interface {
+	pulumi.Input
+
+	ToGetVersionLatestBrokerVersionArrayOutput() GetVersionLatestBrokerVersionArrayOutput
+	ToGetVersionLatestBrokerVersionArrayOutputWithContext(context.Context) GetVersionLatestBrokerVersionArrayOutput
+}
+
+type GetVersionLatestBrokerVersionArray []GetVersionLatestBrokerVersionInput
+
+func (GetVersionLatestBrokerVersionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVersionLatestBrokerVersion)(nil)).Elem()
+}
+
+func (i GetVersionLatestBrokerVersionArray) ToGetVersionLatestBrokerVersionArrayOutput() GetVersionLatestBrokerVersionArrayOutput {
+	return i.ToGetVersionLatestBrokerVersionArrayOutputWithContext(context.Background())
+}
+
+func (i GetVersionLatestBrokerVersionArray) ToGetVersionLatestBrokerVersionArrayOutputWithContext(ctx context.Context) GetVersionLatestBrokerVersionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetVersionLatestBrokerVersionArrayOutput)
+}
+
+type GetVersionLatestBrokerVersionOutput struct{ *pulumi.OutputState }
+
+func (GetVersionLatestBrokerVersionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetVersionLatestBrokerVersion)(nil)).Elem()
+}
+
+func (o GetVersionLatestBrokerVersionOutput) ToGetVersionLatestBrokerVersionOutput() GetVersionLatestBrokerVersionOutput {
+	return o
+}
+
+func (o GetVersionLatestBrokerVersionOutput) ToGetVersionLatestBrokerVersionOutputWithContext(ctx context.Context) GetVersionLatestBrokerVersionOutput {
+	return o
+}
+
+// Broker version.
+func (o GetVersionLatestBrokerVersionOutput) BrokerVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVersionLatestBrokerVersion) string { return v.BrokerVersion }).(pulumi.StringOutput)
+}
+
+// Kafka version.
+func (o GetVersionLatestBrokerVersionOutput) KafkaVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVersionLatestBrokerVersion) string { return v.KafkaVersion }).(pulumi.StringOutput)
+}
+
+type GetVersionLatestBrokerVersionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetVersionLatestBrokerVersionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetVersionLatestBrokerVersion)(nil)).Elem()
+}
+
+func (o GetVersionLatestBrokerVersionArrayOutput) ToGetVersionLatestBrokerVersionArrayOutput() GetVersionLatestBrokerVersionArrayOutput {
+	return o
+}
+
+func (o GetVersionLatestBrokerVersionArrayOutput) ToGetVersionLatestBrokerVersionArrayOutputWithContext(ctx context.Context) GetVersionLatestBrokerVersionArrayOutput {
+	return o
+}
+
+func (o GetVersionLatestBrokerVersionArrayOutput) Index(i pulumi.IntInput) GetVersionLatestBrokerVersionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVersionLatestBrokerVersion {
+		return vs[0].([]GetVersionLatestBrokerVersion)[vs[1].(int)]
+	}).(GetVersionLatestBrokerVersionOutput)
+}
+
 type GetZoneResult struct {
 	// User exclusive cluster information.
 	ClusterInfos []GetZoneResultClusterInfo `pulumi:"clusterInfos"`
@@ -45121,6 +45227,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicsInstanceListArrayInput)(nil)).Elem(), GetTopicsInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListInput)(nil)).Elem(), GetUsersUserListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsersUserListArrayInput)(nil)).Elem(), GetUsersUserListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVersionLatestBrokerVersionInput)(nil)).Elem(), GetVersionLatestBrokerVersionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetVersionLatestBrokerVersionArrayInput)(nil)).Elem(), GetVersionLatestBrokerVersionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneResultInput)(nil)).Elem(), GetZoneResultArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneResultArrayInput)(nil)).Elem(), GetZoneResultArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneResultClusterInfoInput)(nil)).Elem(), GetZoneResultClusterInfoArgs{})
@@ -45574,6 +45682,8 @@ func init() {
 	pulumi.RegisterOutputType(GetTopicsInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetUsersUserListOutput{})
 	pulumi.RegisterOutputType(GetUsersUserListArrayOutput{})
+	pulumi.RegisterOutputType(GetVersionLatestBrokerVersionOutput{})
+	pulumi.RegisterOutputType(GetVersionLatestBrokerVersionArrayOutput{})
 	pulumi.RegisterOutputType(GetZoneResultOutput{})
 	pulumi.RegisterOutputType(GetZoneResultArrayOutput{})
 	pulumi.RegisterOutputType(GetZoneResultClusterInfoOutput{})

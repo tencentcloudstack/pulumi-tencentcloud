@@ -151,35 +151,35 @@ export interface GroupState {
     /**
      * Deployment Group Notes.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * The application ID to which the group belongs.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Group description.
      */
-    groupDesc?: pulumi.Input<string>;
+    groupDesc?: pulumi.Input<string | undefined>;
     /**
      * Group name field, length 1~60, beginning with a letter or underscore, can contain alphanumeric underscore.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Deployment Group Resource Type.
      */
-    groupResourceType?: pulumi.Input<string>;
+    groupResourceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the namespace to which the group belongs.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -189,7 +189,7 @@ export interface GroupArgs {
     /**
      * Deployment Group Notes.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * The application ID to which the group belongs.
      */
@@ -201,7 +201,7 @@ export interface GroupArgs {
     /**
      * Group description.
      */
-    groupDesc?: pulumi.Input<string>;
+    groupDesc?: pulumi.Input<string | undefined>;
     /**
      * Group name field, length 1~60, beginning with a letter or underscore, can contain alphanumeric underscore.
      */
@@ -213,5 +213,5 @@ export interface GroupArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

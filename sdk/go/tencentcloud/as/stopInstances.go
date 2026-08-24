@@ -30,125 +30,127 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// Product: "as",
-// }, nil);
-// if err != nil {
-// return err
-// }
-// image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
-// ImageTypes: []string{
-// "PUBLIC_IMAGE",
-// },
-// OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
-// Filters: []instance.GetTypesFilter{
-// {
-// Name: "zone",
-// Values: interface{}{
-// zones.Zones[0].Name,
-// },
-// },
-// {
-// Name: "instance-family",
-// Values: []string{
-// "S5",
-// },
-// },
-// },
-// CpuCoreCount: pulumi.IntRef(2),
-// ExcludeSoldOut: pulumi.BoolRef(true),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
-// Name: pulumi.String("vpc-example"),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// })
-// if err != nil {
-// return err
-// }
-// subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-// VpcId: vpc.ID(),
-// Name: pulumi.String("subnet-example"),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// })
-// if err != nil {
-// return err
-// }
-// example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
-// ConfigurationName: pulumi.String("tf-example"),
-// ImageId: pulumi.String(image.Images[0].ImageId),
-// InstanceTypes: pulumi.StringArray{
-// pulumi.String("SA1.SMALL1"),
-// pulumi.String("SA2.SMALL1"),
-// pulumi.String("SA2.SMALL2"),
-// pulumi.String("SA2.SMALL4"),
-// },
-// InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
-// InstanceName: pulumi.String("test-ins-name"),
-// },
-// })
-// if err != nil {
-// return err
-// }
-// exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
-// ScalingGroupName: pulumi.String("tf-example"),
-// ConfigurationId: example.ID(),
-// MaxSize: pulumi.Int(1),
-// MinSize: pulumi.Int(0),
-// VpcId: vpc.ID(),
-// SubnetIds: pulumi.StringArray{
-// subnet.ID(),
-// },
-// })
-// if err != nil {
-// return err
-// }
-// exampleInstance, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
-// InstanceName: pulumi.String("tf_example"),
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// ImageId: pulumi.String(image.Images[0].ImageId),
-// InstanceType: pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-// SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// SystemDiskSize: pulumi.Int(50),
-// Hostname: pulumi.String("user"),
-// ProjectId: pulumi.Int(0),
-// VpcId: vpc.ID(),
-// SubnetId: subnet.ID(),
-// })
-// if err != nil {
-// return err
-// }
-// // Attachment Instance
-// attachment, err := as.NewAttachment(ctx, "attachment", &as.AttachmentArgs{
-// ScalingGroupId: exampleScalingGroup.ID(),
-// InstanceIds: pulumi.StringArray{
-// exampleInstance.ID(),
-// },
-// })
-// if err != nil {
-// return err
-// }
-// _, err = as.NewStopInstances(ctx, "stop_instances", &as.StopInstancesArgs{
-// AutoScalingGroupId: exampleScalingGroup.ID(),
-// InstanceIds: attachment.InstanceIds,
-// StoppedMode: pulumi.String("STOP_CHARGING"),
-// })
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "as",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				OsName: pulumi.StringRef("TencentOS Server 3.2 (Final)"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "zone",
+//						Values: pulumi.StringArray{
+//							zones.Zones[0].Name,
+//						},
+//					},
+//					{
+//						Name: "instance-family",
+//						Values: []string{
+//							"S5",
+//						},
+//					},
+//				},
+//				CpuCoreCount:   pulumi.IntRef(2),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				Name:      pulumi.String("vpc-example"),
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				Name:             pulumi.String("subnet-example"),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			example, err := as.NewScalingConfig(ctx, "example", &as.ScalingConfigArgs{
+//				ConfigurationName: pulumi.String("tf-example"),
+//				ImageId:           pulumi.String(image.Images[0].ImageId),
+//				InstanceTypes: pulumi.StringArray{
+//					pulumi.String("SA1.SMALL1"),
+//					pulumi.String("SA2.SMALL1"),
+//					pulumi.String("SA2.SMALL2"),
+//					pulumi.String("SA2.SMALL4"),
+//				},
+//				InstanceNameSettings: &as.ScalingConfigInstanceNameSettingsArgs{
+//					InstanceName: pulumi.String("test-ins-name"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
+//				ScalingGroupName: pulumi.String("tf-example"),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
+//				MaxSize:          pulumi.Int(1),
+//				MinSize:          pulumi.Int(0),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf_example"),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				ImageId:          pulumi.String(image.Images[0].ImageId),
+//				InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
+//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:   pulumi.Int(50),
+//				Hostname:         pulumi.String("user"),
+//				ProjectId:        pulumi.Int(0),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Attachment Instance
+//			attachment, err := as.NewAttachment(ctx, "attachment", &as.AttachmentArgs{
+//				ScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+//				InstanceIds: pulumi.StringArray{
+//					exampleInstance.ID().ToIDOutput().ToStringOutput(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = as.NewStopInstances(ctx, "stop_instances", &as.StopInstancesArgs{
+//				AutoScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
+//				InstanceIds:        attachment.InstanceIds,
+//				StoppedMode:        pulumi.String("STOP_CHARGING"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type StopInstances struct {
 	pulumi.CustomResourceState

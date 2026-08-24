@@ -67,12 +67,8 @@ type LookupDeliveryConfigByGroupIdResult struct {
 }
 
 func LookupDeliveryConfigByGroupIdOutput(ctx *pulumi.Context, args LookupDeliveryConfigByGroupIdOutputArgs, opts ...pulumi.InvokeOption) LookupDeliveryConfigByGroupIdResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupDeliveryConfigByGroupIdResultOutput, error) {
-			args := v.(LookupDeliveryConfigByGroupIdArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args, LookupDeliveryConfigByGroupIdResultOutput{}, options).(LookupDeliveryConfigByGroupIdResultOutput), nil
-		}).(LookupDeliveryConfigByGroupIdResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args, LookupDeliveryConfigByGroupIdResultOutput{}, options).(LookupDeliveryConfigByGroupIdResultOutput)
 }
 
 // A collection of arguments for invoking getDeliveryConfigByGroupId.

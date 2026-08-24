@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * rum instance_status_config can be imported using the id, e.g.
+ * rum instanceStatusConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
@@ -108,15 +108,15 @@ export interface InstanceStatusConfigState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance status (`1`=creating, `2`=running, `3`=abnormal, `4`=restarting, `5`=stopping, `6`=stopped, `7`=deleted).
      */
-    instanceStatus?: pulumi.Input<number>;
+    instanceStatus?: pulumi.Input<number | undefined>;
     /**
      * `resume`, `stop`.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
 }
 
 /**

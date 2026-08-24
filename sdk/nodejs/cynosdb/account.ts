@@ -9,26 +9,48 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### If host is %
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.cynosdb.Account("account", {
- *     clusterId: "cynosdbmysql-bws8h88b",
- *     accountName: "terraform_test",
- *     accountPassword: "Password@1234",
+ * const example = new tencentcloud.cynosdb.Account("example", {
+ *     clusterId: "cynosdbmysql-ddciqx2l",
+ *     accountName: "tf_example",
+ *     accountPassword: "Password@123",
  *     host: "%",
- *     description: "terraform test",
- *     maxUserConnections: 2,
+ *     description: "remark.",
+ *     maxUserConnections: 10,
+ * });
+ * ```
+ *
+ * ### If host is ip
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cynosdb.Account("example", {
+ *     clusterId: "cynosdbmysql-ddciqx2l",
+ *     accountName: "tf_example",
+ *     accountPassword: "Password@123",
+ *     host: "1.1.1.1",
+ *     description: "remark.",
+ *     maxUserConnections: 0,
  * });
  * ```
  *
  * ## Import
  *
- * cynosdb account can be imported using the id, e.g.
+ * cynosdb account can be imported using the clusterId#accountName#host, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+ * $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#%
+ *
+ * or
+ *
+ * $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#1.1.1.1
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -138,27 +160,27 @@ export interface AccountState {
     /**
      * Account name, including alphanumeric _, Start with a letter, end with a letter or number, length 1-16.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * Password, with a length range of 8 to 64 characters.
      */
-    accountPassword?: pulumi.Input<string>;
+    accountPassword?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * main engine.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of user connections cannot be greater than 10240.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -180,7 +202,7 @@ export interface AccountArgs {
     /**
      * describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * main engine.
      */
@@ -188,5 +210,5 @@ export interface AccountArgs {
     /**
      * The maximum number of user connections cannot be greater than 10240.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
 }

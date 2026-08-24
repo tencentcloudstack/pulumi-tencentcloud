@@ -71,12 +71,8 @@ type GetReceiversResult struct {
 }
 
 func GetReceiversOutput(ctx *pulumi.Context, args GetReceiversOutputArgs, opts ...pulumi.InvokeOption) GetReceiversResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetReceiversResultOutput, error) {
-			args := v.(GetReceiversArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getReceivers:getReceivers", args, GetReceiversResultOutput{}, options).(GetReceiversResultOutput), nil
-		}).(GetReceiversResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getReceivers:getReceivers", args, GetReceiversResultOutput{}, options).(GetReceiversResultOutput)
 }
 
 // A collection of arguments for invoking getReceivers.

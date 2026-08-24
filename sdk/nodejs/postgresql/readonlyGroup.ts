@@ -243,55 +243,55 @@ export interface ReadonlyGroupState {
     /**
      * Create time of the postgresql instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Primary instance ID.
      */
-    masterDbInstanceId?: pulumi.Input<string>;
+    masterDbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Delay threshold in ms.
      */
-    maxReplayLag?: pulumi.Input<number>;
+    maxReplayLag?: pulumi.Input<number | undefined>;
     /**
      * Delayed log size threshold in MB.
      */
-    maxReplayLatency?: pulumi.Input<number>;
+    maxReplayLatency?: pulumi.Input<number | undefined>;
     /**
      * The minimum number of read-only replicas that must be retained in an RO group.
      */
-    minDelayEliminateReserve?: pulumi.Input<number>;
+    minDelayEliminateReserve?: pulumi.Input<number | undefined>;
     /**
      * RO group name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * List of db instance net info.
      */
-    netInfoLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.ReadonlyGroupNetInfoList>[]>;
+    netInfoLists?: pulumi.Input<pulumi.Input<inputs.Postgresql.ReadonlyGroupNetInfoList>[] | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
-    replayLagEliminate?: pulumi.Input<number>;
+    replayLagEliminate?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: 0 (no), 1 (yes).
      */
-    replayLatencyEliminate?: pulumi.Input<number>;
+    replayLatencyEliminate?: pulumi.Input<number | undefined>;
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * VPC subnet ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -317,7 +317,7 @@ export interface ReadonlyGroupArgs {
     /**
      * RO group name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -333,7 +333,7 @@ export interface ReadonlyGroupArgs {
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * VPC subnet ID.
      */

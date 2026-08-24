@@ -66,12 +66,8 @@ type GetEmailIdentitiesResult struct {
 }
 
 func GetEmailIdentitiesOutput(ctx *pulumi.Context, args GetEmailIdentitiesOutputArgs, opts ...pulumi.InvokeOption) GetEmailIdentitiesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEmailIdentitiesResultOutput, error) {
-			args := v.(GetEmailIdentitiesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args, GetEmailIdentitiesResultOutput{}, options).(GetEmailIdentitiesResultOutput), nil
-		}).(GetEmailIdentitiesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getEmailIdentities:getEmailIdentities", args, GetEmailIdentitiesResultOutput{}, options).(GetEmailIdentitiesResultOutput)
 }
 
 // A collection of arguments for invoking getEmailIdentities.

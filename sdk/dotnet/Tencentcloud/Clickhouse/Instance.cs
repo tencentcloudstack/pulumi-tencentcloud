@@ -22,7 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// using System.Linq;
     /// using Pulumi;
     /// using Std = Pulumi.Std;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -127,7 +126,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// using System.Linq;
     /// using Pulumi;
     /// using Std = Pulumi.Std;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 

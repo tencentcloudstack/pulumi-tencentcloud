@@ -74,12 +74,8 @@ type GetBackupUploadSizeResult struct {
 }
 
 func GetBackupUploadSizeOutput(ctx *pulumi.Context, args GetBackupUploadSizeOutputArgs, opts ...pulumi.InvokeOption) GetBackupUploadSizeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupUploadSizeResultOutput, error) {
-			args := v.(GetBackupUploadSizeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args, GetBackupUploadSizeResultOutput{}, options).(GetBackupUploadSizeResultOutput), nil
-		}).(GetBackupUploadSizeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args, GetBackupUploadSizeResultOutput{}, options).(GetBackupUploadSizeResultOutput)
 }
 
 // A collection of arguments for invoking getBackupUploadSize.

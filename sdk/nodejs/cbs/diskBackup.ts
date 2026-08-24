@@ -113,11 +113,11 @@ export interface DiskBackupState {
     /**
      * Backup point name.
      */
-    diskBackupName?: pulumi.Input<string>;
+    diskBackupName?: pulumi.Input<string | undefined>;
     /**
      * ID of the original cloud disk of the backup point, which can be queried through the DescribeDisks API.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -127,7 +127,7 @@ export interface DiskBackupArgs {
     /**
      * Backup point name.
      */
-    diskBackupName?: pulumi.Input<string>;
+    diskBackupName?: pulumi.Input<string | undefined>;
     /**
      * ID of the original cloud disk of the backup point, which can be queried through the DescribeDisks API.
      */

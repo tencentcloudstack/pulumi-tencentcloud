@@ -64,12 +64,8 @@ type GetAccountInfoResult struct {
 }
 
 func GetAccountInfoOutput(ctx *pulumi.Context, args GetAccountInfoOutputArgs, opts ...pulumi.InvokeOption) GetAccountInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountInfoResultOutput, error) {
-			args := v.(GetAccountInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getAccountInfo:getAccountInfo", args, GetAccountInfoResultOutput{}, options).(GetAccountInfoResultOutput), nil
-		}).(GetAccountInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getAccountInfo:getAccountInfo", args, GetAccountInfoResultOutput{}, options).(GetAccountInfoResultOutput)
 }
 
 // A collection of arguments for invoking getAccountInfo.

@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Basic Usage
+//
 // ```go
 // package main
 //
@@ -48,10 +50,53 @@ import (
 //
 // ```
 //
+// ### Enable Version Control Mode
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewZone(ctx, "zone_with_version_control", &teo.ZoneArgs{
+//				ZoneName:      pulumi.String("tf-teo-version.com"),
+//				Type:          pulumi.String("partial"),
+//				Area:          pulumi.String("overseas"),
+//				AliasZoneName: pulumi.String("teo-version-test"),
+//				Paused:        pulumi.Bool(false),
+//				PlanId:        pulumi.String("edgeone-2kfv1h391n6w"),
+//				WorkModeInfos: teo.ZoneWorkModeInfoArray{
+//					&teo.ZoneWorkModeInfoArgs{
+//						ConfigGroupType: pulumi.String("l7_acceleration"),
+//						WorkMode:        pulumi.String("immediate_effect"),
+//					},
+//					&teo.ZoneWorkModeInfoArgs{
+//						ConfigGroupType: pulumi.String("edge_functions"),
+//						WorkMode:        pulumi.String("immediate_effect"),
+//					},
+//				},
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // teo zone can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
 // ```
@@ -77,8 +122,12 @@ type Zone struct {
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Tag description list.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
-	// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+	// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 	Type pulumi.StringOutput `pulumi:"type"`
+	// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+	WorkModeInfos ZoneWorkModeInfoArrayOutput `pulumi:"workModeInfos"`
+	// Site ID.
+	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringOutput `pulumi:"zoneName"`
 }
@@ -144,8 +193,12 @@ type zoneState struct {
 	Status *string `pulumi:"status"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
-	// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+	// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 	Type *string `pulumi:"type"`
+	// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+	WorkModeInfos []ZoneWorkModeInfo `pulumi:"workModeInfos"`
+	// Site ID.
+	ZoneId *string `pulumi:"zoneId"`
 	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName *string `pulumi:"zoneName"`
 }
@@ -170,8 +223,12 @@ type ZoneState struct {
 	Status pulumi.StringPtrInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
-	// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+	// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 	Type pulumi.StringPtrInput
+	// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+	WorkModeInfos ZoneWorkModeInfoArrayInput
+	// Site ID.
+	ZoneId pulumi.StringPtrInput
 	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringPtrInput
 }
@@ -194,8 +251,10 @@ type zoneArgs struct {
 	PlanId string `pulumi:"planId"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
-	// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+	// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 	Type string `pulumi:"type"`
+	// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+	WorkModeInfos []ZoneWorkModeInfo `pulumi:"workModeInfos"`
 	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName string `pulumi:"zoneName"`
 }
@@ -215,8 +274,10 @@ type ZoneArgs struct {
 	PlanId pulumi.StringInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
-	// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+	// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 	Type pulumi.StringInput
+	// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+	WorkModeInfos ZoneWorkModeInfoArrayInput
 	// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
 	ZoneName pulumi.StringInput
 }
@@ -351,9 +412,19 @@ func (o ZoneOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
-// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
 func (o ZoneOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
+}
+
+// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+func (o ZoneOutput) WorkModeInfos() ZoneWorkModeInfoArrayOutput {
+	return o.ApplyT(func(v *Zone) ZoneWorkModeInfoArrayOutput { return v.WorkModeInfos }).(ZoneWorkModeInfoArrayOutput)
+}
+
+// Site ID.
+func (o ZoneOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Zone) pulumi.StringOutput { return v.ZoneId }).(pulumi.StringOutput)
 }
 
 // Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.

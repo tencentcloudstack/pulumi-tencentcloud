@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Organization.getResourceToShareMember({
+ * const example = tencentcloud.organization.getResourceToShareMember({
  *     area: "ap-guangzhou",
  *     searchKey: "tf-example",
  *     type: "CVM",
@@ -90,7 +90,7 @@ export interface GetResourceToShareMemberResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Organization.getResourceToShareMember({
+ * const example = tencentcloud.organization.getResourceToShareMember({
  *     area: "ap-guangzhou",
  *     searchKey: "tf-example",
  *     type: "CVM",
@@ -123,17 +123,17 @@ export interface GetResourceToShareMemberOutputArgs {
     /**
      * Business resource ID. Maximum 50.
      */
-    productResourceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    productResourceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search keywords, support business resource ID search.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Resource Type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

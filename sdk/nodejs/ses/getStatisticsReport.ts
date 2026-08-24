@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const statisticsReport = tencentcloud.Ses.getStatisticsReport({
+ * const statisticsReport = tencentcloud.ses.getStatisticsReport({
  *     startDate: "2020-10-01",
  *     endDate: "2023-09-05",
  *     domain: "iac-tf.cloud",
@@ -91,7 +91,7 @@ export interface GetStatisticsReportResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const statisticsReport = tencentcloud.Ses.getStatisticsReport({
+ * const statisticsReport = tencentcloud.ses.getStatisticsReport({
  *     startDate: "2020-10-01",
  *     endDate: "2023-09-05",
  *     domain: "iac-tf.cloud",
@@ -117,7 +117,7 @@ export interface GetStatisticsReportOutputArgs {
     /**
      * Sender domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * End date.
      */
@@ -125,11 +125,11 @@ export interface GetStatisticsReportOutputArgs {
     /**
      * Recipient address type, for example, gmail.com.
      */
-    receivingMailboxType?: pulumi.Input<string>;
+    receivingMailboxType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start date.
      */

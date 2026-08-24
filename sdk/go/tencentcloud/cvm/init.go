@@ -49,6 +49,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RenewHost{}
 	case "tencentcloud:Cvm/renewInstance:RenewInstance":
 		r = &RenewInstance{}
+	case "tencentcloud:Cvm/repairTaskControlOperation:RepairTaskControlOperation":
+		r = &RepairTaskControlOperation{}
+	case "tencentcloud:Cvm/resourcePoolPack:ResourcePoolPack":
+		r = &ResourcePoolPack{}
 	case "tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment":
 		r = &SecurityGroupAttachment{}
 	case "tencentcloud:Cvm/syncImage:SyncImage":
@@ -134,6 +138,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cvm/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/repairTaskControlOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cvm/resourcePoolPack",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

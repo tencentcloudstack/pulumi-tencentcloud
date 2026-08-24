@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf web_shell can be imported using the id, e.g.
+ * waf webShell can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
@@ -102,11 +102,11 @@ export interface WebShellState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Webshell status, 1: open; 0: closed; 2: log.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**

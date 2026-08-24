@@ -11,13 +11,16 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
 {
     /// <summary>
+    /// Provides a mysql policy resource to create a backup policy.
+    /// 
+    /// &gt; **NOTE:** This attribute `BackupModel` only support 'physical' in Terraform TencentCloud provider version 1.16.2
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 

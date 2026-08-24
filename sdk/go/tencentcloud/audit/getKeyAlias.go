@@ -67,12 +67,8 @@ type GetKeyAliasResult struct {
 }
 
 func GetKeyAliasOutput(ctx *pulumi.Context, args GetKeyAliasOutputArgs, opts ...pulumi.InvokeOption) GetKeyAliasResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetKeyAliasResultOutput, error) {
-			args := v.(GetKeyAliasArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Audit/getKeyAlias:getKeyAlias", args, GetKeyAliasResultOutput{}, options).(GetKeyAliasResultOutput), nil
-		}).(GetKeyAliasResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Audit/getKeyAlias:getKeyAlias", args, GetKeyAliasResultOutput{}, options).(GetKeyAliasResultOutput)
 }
 
 // A collection of arguments for invoking getKeyAlias.

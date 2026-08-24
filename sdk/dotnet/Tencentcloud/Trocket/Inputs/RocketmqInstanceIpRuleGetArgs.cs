@@ -14,19 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket.Inputs
     public sealed class RocketmqInstanceIpRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to allow release or not.
+        /// Whether to allow access from this IP.
         /// </summary>
         [Input("allow", required: true)]
         public Input<bool> Allow { get; set; } = null!;
 
         /// <summary>
-        /// IP.
+        /// IP address.
         /// </summary>
         [Input("ip", required: true)]
         public Input<string> Ip { get; set; } = null!;
 
         /// <summary>
-        /// Remark.
+        /// Remark information.
         /// </summary>
         [Input("remark", required: true)]
         public Input<string> Remark { get; set; } = null!;

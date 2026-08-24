@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeIndexList = tencentcloud.Elasticsearch.getDescribeIndexList({
+ * const describeIndexList = tencentcloud.elasticsearch.getDescribeIndexList({
  *     indexType: "normal",
  *     instanceId: "es-nni6pm4s",
  * });
@@ -115,7 +115,7 @@ export interface GetDescribeIndexListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeIndexList = tencentcloud.Elasticsearch.getDescribeIndexList({
+ * const describeIndexList = tencentcloud.elasticsearch.getDescribeIndexList({
  *     indexType: "normal",
  *     instanceId: "es-nni6pm4s",
  * });
@@ -143,11 +143,11 @@ export interface GetDescribeIndexListOutputArgs {
     /**
      * Index name. If you fill in the blanks, get all indexes.
      */
-    indexName?: pulumi.Input<string>;
+    indexName?: pulumi.Input<string | undefined>;
     /**
      * Index status list.
      */
-    indexStatusLists?: pulumi.Input<pulumi.Input<string>[]>;
+    indexStatusLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Index type. `auto`: Autonomous index; `normal`: General index.
      */
@@ -155,25 +155,25 @@ export interface GetDescribeIndexListOutputArgs {
     /**
      * ES cluster id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Sort order, which supports asc and desc. The default is desc data format asc,desc.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort field. Support index name: IndexName, index storage: IndexStorage, index creation time: IndexCreateTime.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Cluster access password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Cluster access user name.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

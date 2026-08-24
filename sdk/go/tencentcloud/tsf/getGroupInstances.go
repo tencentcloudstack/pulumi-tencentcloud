@@ -80,12 +80,8 @@ type LookupGroupInstancesResult struct {
 }
 
 func LookupGroupInstancesOutput(ctx *pulumi.Context, args LookupGroupInstancesOutputArgs, opts ...pulumi.InvokeOption) LookupGroupInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGroupInstancesResultOutput, error) {
-			args := v.(LookupGroupInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args, LookupGroupInstancesResultOutput{}, options).(LookupGroupInstancesResultOutput), nil
-		}).(LookupGroupInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args, LookupGroupInstancesResultOutput{}, options).(LookupGroupInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getGroupInstances.

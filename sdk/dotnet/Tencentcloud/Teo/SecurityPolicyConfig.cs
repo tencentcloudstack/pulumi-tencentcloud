@@ -334,6 +334,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                     },
     ///                 },
     ///             },
+    ///             BotManagementLite = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteArgs
+    ///             {
+    ///                 CaptchaPageChallenge = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs
+    ///                 {
+    ///                     Enabled = "on",
+    ///                 },
+    ///                 AiCrawlerDetection = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs
+    ///                 {
+    ///                     Enabled = "on",
+    ///                     Action = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs
+    ///                     {
+    ///                         Name = "Deny",
+    ///                         DenyActionParameters = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs
+    ///                         {
+    ///                             BlockIp = "on",
+    ///                             BlockIpDuration = "120s",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
     ///         },
     ///     });
     /// 
@@ -824,6 +844,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string?> Host { get; private set; } = null!;
 
         /// <summary>
+        /// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+        /// </summary>
+        [Output("securityConfig")]
+        public Output<Outputs.SecurityPolicyConfigSecurityConfig> SecurityConfig { get; private set; } = null!;
+
+        /// <summary>
         /// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
         /// </summary>
         [Output("securityPolicy")]
@@ -901,6 +927,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? Host { get; set; }
 
         /// <summary>
+        /// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+        /// </summary>
+        [Input("securityConfig")]
+        public Input<Inputs.SecurityPolicyConfigSecurityConfigArgs>? SecurityConfig { get; set; }
+
+        /// <summary>
         /// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
         /// </summary>
         [Input("securityPolicy")]
@@ -937,6 +969,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
+
+        /// <summary>
+        /// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+        /// </summary>
+        [Input("securityConfig")]
+        public Input<Inputs.SecurityPolicyConfigSecurityConfigGetArgs>? SecurityConfig { get; set; }
 
         /// <summary>
         /// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.

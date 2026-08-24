@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstances = tencentcloud.Wedata.getTaskInstances({
+ * const wedataTaskInstances = tencentcloud.wedata.getTaskInstances({
  *     projectId: "1859317240494305280",
  * });
  * ```
@@ -174,7 +174,7 @@ export interface GetTaskInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstances = tencentcloud.Wedata.getTaskInstances({
+ * const wedataTaskInstances = tencentcloud.wedata.getTaskInstances({
  *     projectId: "1859317240494305280",
  * });
  * ```
@@ -212,39 +212,39 @@ export interface GetTaskInstancesOutputArgs {
     /**
      * Task cycle type * ONEOFF_CYCLE: One-time * YEAR_CYCLE: Year * MONTH_CYCLE: Month * WEEK_CYCLE: Week * DAY_CYCLE: Day * HOUR_CYCLE: Hour * MINUTE_CYCLE: Minute * CRONTAB_CYCLE: Crontab expression type.
      */
-    cycleType?: pulumi.Input<string>;
+    cycleType?: pulumi.Input<string | undefined>;
     /**
      * Executor resource group ID.
      */
-    executorGroupId?: pulumi.Input<string>;
+    executorGroupId?: pulumi.Input<string | undefined>;
     /**
      * Task folder ID.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Instance status - WAIT_EVENT: Waiting for event - WAIT_UPSTREAM: Waiting for upstream - WAIT_RUN: Waiting to run - RUNNING: Running - SKIP_RUNNING: Skipped running - FAILED_RETRY: Failed retry - EXPIRED: Failed - COMPLETED: Success.
      */
-    instanceState?: pulumi.Input<string>;
+    instanceState?: pulumi.Input<string | undefined>;
     /**
      * Instance type - 0: Backfill type - 1: Periodic instance - 2: Non-periodic instance.
      */
-    instanceType?: pulumi.Input<number>;
+    instanceType?: pulumi.Input<number | undefined>;
     /**
      * Task name or Task ID. Supports fuzzy search filtering. Multiple values separated by commas.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Instance last update time filter condition.Start time, format yyyy-MM-dd HH:mm:ss.
      */
-    lastUpdateTimeFrom?: pulumi.Input<string>;
+    lastUpdateTimeFrom?: pulumi.Input<string | undefined>;
     /**
      * Instance last update time filter condition.End time, format yyyy-MM-dd HH:mm:ss.
      */
-    lastUpdateTimeTo?: pulumi.Input<string>;
+    lastUpdateTimeTo?: pulumi.Input<string | undefined>;
     /**
      * Task owner ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -252,41 +252,41 @@ export interface GetTaskInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Instance scheduled time filter condition Start time, format yyyy-MM-dd HH:mm:ss.
      */
-    scheduleTimeFrom?: pulumi.Input<string>;
+    scheduleTimeFrom?: pulumi.Input<string | undefined>;
     /**
      * Instance scheduled time filter condition End time, format yyyy-MM-dd HH:mm:ss.
      */
-    scheduleTimeTo?: pulumi.Input<string>;
+    scheduleTimeTo?: pulumi.Input<string | undefined>;
     /**
      * Result sorting field- SCHEDULE_DATE: Sort by scheduled time- START_TIME: Sort by execution start time- END_TIME: Sort by execution end time- COST_TIME: Sort by execution duration.
      */
-    sortColumn?: pulumi.Input<string>;
+    sortColumn?: pulumi.Input<string | undefined>;
     /**
      * Sorting order: - ASC; - DESC.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * Instance execution start time filter condition Start time, format yyyy-MM-dd HH:mm:ss.
      */
-    startTimeFrom?: pulumi.Input<string>;
+    startTimeFrom?: pulumi.Input<string | undefined>;
     /**
      * Instance execution start time filter condition.End time, format yyyy-MM-dd HH:mm:ss.
      */
-    startTimeTo?: pulumi.Input<string>;
+    startTimeTo?: pulumi.Input<string | undefined>;
     /**
      * Task type ID.
      */
-    taskTypeId?: pulumi.Input<number>;
+    taskTypeId?: pulumi.Input<number | undefined>;
     /**
      * Time zone. The time zone of the input time string, default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * Task workflow ID.
      */
-    workflowId?: pulumi.Input<string>;
+    workflowId?: pulumi.Input<string | undefined>;
 }

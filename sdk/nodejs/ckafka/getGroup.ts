@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const group = tencentcloud.Ckafka.getGroup({
+ * const group = tencentcloud.ckafka.getGroup({
  *     instanceId: "ckafka-xxxxxxx",
  *     searchWord: "xxxxxx",
  * });
@@ -73,7 +73,7 @@ export interface GetGroupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const group = tencentcloud.Ckafka.getGroup({
+ * const group = tencentcloud.ckafka.getGroup({
  *     instanceId: "ckafka-xxxxxxx",
  *     searchWord: "xxxxxx",
  * });
@@ -99,9 +99,9 @@ export interface GetGroupOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search for the keyword.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

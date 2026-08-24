@@ -15,15 +15,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket.Outputs
     public sealed class RocketmqInstanceIpRule
     {
         /// <summary>
-        /// Whether to allow release or not.
+        /// Whether to allow access from this IP.
         /// </summary>
         public readonly bool Allow;
         /// <summary>
-        /// IP.
+        /// IP address.
         /// </summary>
         public readonly string Ip;
         /// <summary>
-        /// Remark.
+        /// Remark information.
         /// </summary>
         public readonly string Remark;
 

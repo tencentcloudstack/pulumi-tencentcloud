@@ -72,12 +72,8 @@ type GetAccountSummaryResult struct {
 }
 
 func GetAccountSummaryOutput(ctx *pulumi.Context, args GetAccountSummaryOutputArgs, opts ...pulumi.InvokeOption) GetAccountSummaryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountSummaryResultOutput, error) {
-			args := v.(GetAccountSummaryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getAccountSummary:getAccountSummary", args, GetAccountSummaryResultOutput{}, options).(GetAccountSummaryResultOutput), nil
-		}).(GetAccountSummaryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getAccountSummary:getAccountSummary", args, GetAccountSummaryResultOutput{}, options).(GetAccountSummaryResultOutput)
 }
 
 // A collection of arguments for invoking getAccountSummary.

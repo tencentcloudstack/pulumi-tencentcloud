@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleId = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleId = tencentcloud.sqlserver.getBasicInstances({
  *     id: "mssql-3l3fgqn7",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleProject = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleProject = tencentcloud.sqlserver.getBasicInstances({
  *     projectId: 0,
  * });
  * ```
@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleVpc = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleVpc = tencentcloud.sqlserver.getBasicInstances({
  *     vpcId: "vpc-409mvdvv",
  *     subnetId: "subnet-nf9n81ps",
  * });
@@ -129,7 +129,7 @@ export interface GetBasicInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleId = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleId = tencentcloud.sqlserver.getBasicInstances({
  *     id: "mssql-3l3fgqn7",
  * });
  * ```
@@ -140,7 +140,7 @@ export interface GetBasicInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleProject = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleProject = tencentcloud.sqlserver.getBasicInstances({
  *     projectId: 0,
  * });
  * ```
@@ -151,7 +151,7 @@ export interface GetBasicInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleVpc = tencentcloud.Sqlserver.getBasicInstances({
+ * const exampleVpc = tencentcloud.sqlserver.getBasicInstances({
  *     vpcId: "vpc-409mvdvv",
  *     subnetId: "subnet-nf9n81ps",
  * });
@@ -177,25 +177,25 @@ export interface GetBasicInstancesOutputArgs {
     /**
      * ID of the SQL Server basic instance to be query.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the SQL Server basic instance to be query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the SQL Server basic instance to be query.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID of the SQL Server basic instance to be query.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Vpc ID of the SQL Server basic instance to be query.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

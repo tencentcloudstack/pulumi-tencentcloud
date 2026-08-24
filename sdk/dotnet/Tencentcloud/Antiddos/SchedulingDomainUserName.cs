@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Import
     /// 
-    /// antiddos scheduling_domain_user_name can be imported using the id, e.g.
+    /// antiddos SchedulingDomainUserName can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}

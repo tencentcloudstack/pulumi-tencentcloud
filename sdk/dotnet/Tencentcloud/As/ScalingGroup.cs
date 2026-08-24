@@ -23,7 +23,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -150,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         ReplaceLoadBalancerUnhealthy = false,
     ///         ReplaceMode = "RECREATE",
     ///         DesiredCapacitySyncWithMaxMinSize = false,
+    ///         PriorityScaleInUnhealthy = true,
     ///         TerminationPolicies = "NEWEST_INSTANCE",
     ///         RetryPolicy = "INCREMENTAL_INTERVALS",
     ///         ForwardBalancerIds = new[]
@@ -180,7 +180,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Import
     /// 
-    /// AutoScaling Groups can be imported using the id, e.g.
+    /// Auto scaling Group can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:As/scalingGroup:ScalingGroup example asg-n32ymck2
@@ -189,6 +189,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     [TencentcloudResourceType("tencentcloud:As/scalingGroup:ScalingGroup")]
     public partial class ScalingGroup : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// ID of a scaling group.
+        /// </summary>
+        [Output("autoScalingGroupId")]
+        public Output<string> AutoScalingGroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// The concurrent expansion function that matches the expected number cannot be set when `InstanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `ScalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+        /// </summary>
+        [Output("concurrentScaleOutForDesiredCapacity")]
+        public Output<bool> ConcurrentScaleOutForDesiredCapacity { get; private set; } = null!;
+
         /// <summary>
         /// An available ID for a launch configuration.
         /// </summary>
@@ -217,7 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// The expected number of instances is synchronized with the maximum and minimum values. The default value is `False`. This parameter is effective only in the scenario where the expected number is not passed in when modifying the scaling group interface. True: When modifying the maximum or minimum value, if there is a conflict with the current expected number, the expected number is adjusted synchronously. For example, when modifying, if the minimum value 2 is passed in and the current expected number is 1, the expected number is adjusted synchronously to 2; False: When modifying the maximum or minimum value, if there is a conflict with the current expected number, an error message is displayed indicating that the modification is not allowed.
         /// </summary>
         [Output("desiredCapacitySyncWithMaxMinSize")]
-        public Output<bool?> DesiredCapacitySyncWithMaxMinSize { get; private set; } = null!;
+        public Output<bool> DesiredCapacitySyncWithMaxMinSize { get; private set; } = null!;
 
         /// <summary>
         /// List of application load balancers, which can't be specified with `LoadBalancerIds` together.
@@ -230,6 +242,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Output("healthCheckType")]
         public Output<string> HealthCheckType { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+        /// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+        /// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+        /// </summary>
+        [Output("instanceAllocationPolicy")]
+        public Output<string> InstanceAllocationPolicy { get; private set; } = null!;
 
         /// <summary>
         /// Instance number of a scaling group.
@@ -262,10 +282,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<int> MinSize { get; private set; } = null!;
 
         /// <summary>
-        /// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+        /// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
         /// </summary>
         [Output("multiZoneSubnetPolicy")]
-        public Output<string?> MultiZoneSubnetPolicy { get; private set; } = null!;
+        public Output<string> MultiZoneSubnetPolicy { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable priority for unhealthy instances during scale-in operations. If set to `True`, unhealthy instances will be removed first when scaling in.
+        /// </summary>
+        [Output("priorityScaleInUnhealthy")]
+        public Output<bool> PriorityScaleInUnhealthy { get; private set; } = null!;
 
         /// <summary>
         /// Specifies to which project the scaling group belongs.
@@ -277,19 +303,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// Enable unhealthy instance replacement. If set to `True`, AS will replace instances that are found unhealthy in the CLB health check.
         /// </summary>
         [Output("replaceLoadBalancerUnhealthy")]
-        public Output<bool?> ReplaceLoadBalancerUnhealthy { get; private set; } = null!;
+        public Output<bool> ReplaceLoadBalancerUnhealthy { get; private set; } = null!;
 
         /// <summary>
         /// Replace mode of unhealthy replacement service. Valid values: RECREATE: Rebuild an instance to replace the original unhealthy instance. RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration. Default value: RECREATE. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         [Output("replaceMode")]
-        public Output<string?> ReplaceMode { get; private set; } = null!;
+        public Output<string> ReplaceMode { get; private set; } = null!;
 
         /// <summary>
         /// Enables unhealthy instance replacement. If set to `True`, AS will replace instances that are flagged as unhealthy by Cloud Monitor.
         /// </summary>
         [Output("replaceMonitorUnhealthy")]
-        public Output<bool?> ReplaceMonitorUnhealthy { get; private set; } = null!;
+        public Output<bool> ReplaceMonitorUnhealthy { get; private set; } = null!;
 
         /// <summary>
         /// Available values for retry policies. Valid values: IMMEDIATE_RETRY and INCREMENTAL_INTERVALS.
@@ -307,7 +333,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// Indicates scaling mode which creates and terminates instances (classic method), or method first tries to start stopped instances (wake up stopped) to perform scaling operations. Available values: `CLASSIC_SCALING`, `WAKE_UP_STOPPED_SCALING`. Default: `CLASSIC_SCALING`.
         /// </summary>
         [Output("scalingMode")]
-        public Output<string?> ScalingMode { get; private set; } = null!;
+        public Output<string> ScalingMode { get; private set; } = null!;
 
         /// <summary>
         /// Current status of a scaling group.
@@ -393,6 +419,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     public sealed class ScalingGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The concurrent expansion function that matches the expected number cannot be set when `InstanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `ScalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+        /// </summary>
+        [Input("concurrentScaleOutForDesiredCapacity")]
+        public Input<bool>? ConcurrentScaleOutForDesiredCapacity { get; set; }
+
+        /// <summary>
         /// An available ID for a launch configuration.
         /// </summary>
         [Input("configurationId", required: true)]
@@ -435,6 +467,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? HealthCheckType { get; set; }
 
         /// <summary>
+        /// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+        /// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+        /// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+        /// </summary>
+        [Input("instanceAllocationPolicy")]
+        public Input<string>? InstanceAllocationPolicy { get; set; }
+
+        /// <summary>
         /// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.&lt;br&gt;Valid range: 0-7200, in seconds. Default value: `0`.
         /// </summary>
         [Input("lbHealthCheckGracePeriod")]
@@ -465,10 +505,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<int> MinSize { get; set; } = null!;
 
         /// <summary>
-        /// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+        /// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
         /// </summary>
         [Input("multiZoneSubnetPolicy")]
         public Input<string>? MultiZoneSubnetPolicy { get; set; }
+
+        /// <summary>
+        /// Whether to enable priority for unhealthy instances during scale-in operations. If set to `True`, unhealthy instances will be removed first when scaling in.
+        /// </summary>
+        [Input("priorityScaleInUnhealthy")]
+        public Input<bool>? PriorityScaleInUnhealthy { get; set; }
 
         /// <summary>
         /// Specifies to which project the scaling group belongs.
@@ -569,6 +615,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     public sealed class ScalingGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// ID of a scaling group.
+        /// </summary>
+        [Input("autoScalingGroupId")]
+        public Input<string>? AutoScalingGroupId { get; set; }
+
+        /// <summary>
+        /// The concurrent expansion function that matches the expected number cannot be set when `InstanceAllocationPolicy` is in bidding `SPOT_MIXED` mode, nor can it be set when `ScalingMode` is in expansion priority boot mode(`WAKE_UP_STOPPED_SCALING`). At present, only two matching expected expansion activities are supported concurrently, and other types of activities such as specified quantity expansion and contraction are not supported. The default value is False, indicating that it is not turned on.
+        /// </summary>
+        [Input("concurrentScaleOutForDesiredCapacity")]
+        public Input<bool>? ConcurrentScaleOutForDesiredCapacity { get; set; }
+
+        /// <summary>
         /// An available ID for a launch configuration.
         /// </summary>
         [Input("configurationId")]
@@ -617,6 +675,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<string>? HealthCheckType { get; set; }
 
         /// <summary>
+        /// Instance allocation strategy, with values including `LAUNCH_CONFIGURATION` and `SPOT_MIXED`, defaults to `LAUNCH_CONFIGURATION`.
+        /// `LAUNCH_CONFIGURATION`: Represents the traditional startup configuration mode;
+        /// `SPOT_MIXED`: Representing the bidding mixed mode. At present, only hybrid mode is supported when the startup configuration is set to pay by volume mode. In hybrid mode, the scaling group will expand according to the set pay by volume or bidding models. When using hybrid mode, the billing type of the associated startup configuration cannot be modified.
+        /// </summary>
+        [Input("instanceAllocationPolicy")]
+        public Input<string>? InstanceAllocationPolicy { get; set; }
+
+        /// <summary>
         /// Instance number of a scaling group.
         /// </summary>
         [Input("instanceCount")]
@@ -653,10 +719,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<int>? MinSize { get; set; }
 
         /// <summary>
-        /// Multi zone or subnet strategy, Valid values: PRIORITY and EQUALITY.
+        /// Multi zone or subnet strategy, Valid values: `PRIORITY` and `EQUALITY`.
         /// </summary>
         [Input("multiZoneSubnetPolicy")]
         public Input<string>? MultiZoneSubnetPolicy { get; set; }
+
+        /// <summary>
+        /// Whether to enable priority for unhealthy instances during scale-in operations. If set to `True`, unhealthy instances will be removed first when scaling in.
+        /// </summary>
+        [Input("priorityScaleInUnhealthy")]
+        public Input<bool>? PriorityScaleInUnhealthy { get; set; }
 
         /// <summary>
         /// Specifies to which project the scaling group belongs.

@@ -126,15 +126,15 @@ export interface ExtraTemplateState {
     /**
      * The address information can contain remarks and be presented by the IP, CIDR block or IP address range.
      */
-    addressesExtras?: pulumi.Input<pulumi.Input<inputs.Address.ExtraTemplateAddressesExtra>[]>;
+    addressesExtras?: pulumi.Input<pulumi.Input<inputs.Address.ExtraTemplateAddressesExtra>[] | undefined>;
     /**
      * IP address template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the Addresses.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -148,9 +148,9 @@ export interface ExtraTemplateArgs {
     /**
      * IP address template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the Addresses.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

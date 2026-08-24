@@ -204,43 +204,43 @@ export interface OwaspWhiteRuleState {
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * If the JobDateTime field is not set, this field is used. 0 means permanent, other values indicate the cutoff time for scheduled effect (unit: seconds).
      */
-    expireTime?: pulumi.Input<number>;
+    expireTime?: pulumi.Input<number | undefined>;
     /**
      * ID list of allowlisted rules.
      */
-    ids?: pulumi.Input<pulumi.Input<number>[]>;
+    ids?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Scheduled task configuration.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.OwaspWhiteRuleJobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.OwaspWhiteRuleJobDateTime | undefined>;
     /**
      * Rule execution mode: TimedJob indicates scheduled execution. CronJob indicates periodic execution.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<number>;
+    ruleId?: pulumi.Input<number | undefined>;
     /**
      * Rule status. valid values: 0 (disabled), 1 (enabled). enabled by default.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Rule-Based matching policy list.
      */
-    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.OwaspWhiteRuleStrategy>[]>;
+    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.OwaspWhiteRuleStrategy>[] | undefined>;
     /**
      * Allowlist type. valid values: 0 (allowlisting by specific rule ID), 1 (allowlisting by rule type).
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -270,11 +270,11 @@ export interface OwaspWhiteRuleArgs {
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule status. valid values: 0 (disabled), 1 (enabled). enabled by default.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Rule-Based matching policy list.
      */

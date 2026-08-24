@@ -11,9 +11,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of postgresql dbInstanceVersions
+// Use this data source to query detailed information of PostgreSQL db instance versions
 //
 // ## Example Usage
+//
+// ### Query all versions
 //
 // ```go
 // package main
@@ -36,6 +38,32 @@ import (
 //	}
 //
 // ```
+//
+// ### Query versions by storage type
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := postgresql.GetDbInstanceVersions(ctx, &postgresql.GetDbInstanceVersionsArgs{
+//				StorageType: pulumi.StringRef("CLOUD_HSSD"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetDbInstanceVersions(ctx *pulumi.Context, args *GetDbInstanceVersionsArgs, opts ...pulumi.InvokeOption) (*GetDbInstanceVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstanceVersionsResult
@@ -50,6 +78,8 @@ func GetDbInstanceVersions(ctx *pulumi.Context, args *GetDbInstanceVersionsArgs,
 type GetDbInstanceVersionsArgs struct {
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType *string `pulumi:"storageType"`
 }
 
 // A collection of values returned by getDbInstanceVersions.
@@ -57,23 +87,22 @@ type GetDbInstanceVersionsResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id               string  `pulumi:"id"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	StorageType      *string `pulumi:"storageType"`
 	// List of database versions.
 	VersionSets []GetDbInstanceVersionsVersionSet `pulumi:"versionSets"`
 }
 
 func GetDbInstanceVersionsOutput(ctx *pulumi.Context, args GetDbInstanceVersionsOutputArgs, opts ...pulumi.InvokeOption) GetDbInstanceVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbInstanceVersionsResultOutput, error) {
-			args := v.(GetDbInstanceVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args, GetDbInstanceVersionsResultOutput{}, options).(GetDbInstanceVersionsResultOutput), nil
-		}).(GetDbInstanceVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args, GetDbInstanceVersionsResultOutput{}, options).(GetDbInstanceVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getDbInstanceVersions.
 type GetDbInstanceVersionsOutputArgs struct {
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType pulumi.StringPtrInput `pulumi:"storageType"`
 }
 
 func (GetDbInstanceVersionsOutputArgs) ElementType() reflect.Type {
@@ -102,6 +131,10 @@ func (o GetDbInstanceVersionsResultOutput) Id() pulumi.StringOutput {
 
 func (o GetDbInstanceVersionsResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetDbInstanceVersionsResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+func (o GetDbInstanceVersionsResultOutput) StorageType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDbInstanceVersionsResult) *string { return v.StorageType }).(pulumi.StringPtrOutput)
 }
 
 // List of database versions.

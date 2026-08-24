@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -44,7 +44,7 @@ import (
 //				VpcSets: privatedns.ZoneVpcSetArray{
 //					&privatedns.ZoneVpcSetArgs{
 //						Region:    pulumi.String("ap-guangzhou"),
-//						UniqVpcId: vpc.ID(),
+//						UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //					},
 //				},
 //				DnsForwardStatus:   pulumi.String("DISABLED"),
@@ -58,7 +58,7 @@ import (
 //			}
 //			// create private dns record
 //			_, err = privatedns.NewRecord(ctx, "example", &privatedns.RecordArgs{
-//				ZoneId:      example.ID(),
+//				ZoneId:      example.ID().ToIDOutput().ToStringOutput(),
 //				RecordType:  pulumi.String("A"),
 //				RecordValue: pulumi.String("192.168.1.2"),
 //				SubDomain:   pulumi.String("www"),

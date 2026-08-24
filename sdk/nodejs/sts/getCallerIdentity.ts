@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const callerIdentity = tencentcloud.Sts.getCallerIdentity({});
+ * const callerIdentity = tencentcloud.sts.getCallerIdentity({});
  * ```
  */
 export function getCallerIdentity(args?: GetCallerIdentityArgs, opts?: pulumi.InvokeOptions): Promise<GetCallerIdentityResult> {
@@ -73,7 +73,7 @@ export interface GetCallerIdentityResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const callerIdentity = tencentcloud.Sts.getCallerIdentity({});
+ * const callerIdentity = tencentcloud.sts.getCallerIdentity({});
  * ```
  */
 export function getCallerIdentityOutput(args?: GetCallerIdentityOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCallerIdentityResult> {
@@ -91,5 +91,5 @@ export interface GetCallerIdentityOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * kms white_box_key can be imported using the id, e.g.
+ * kms whiteBoxKey can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810
@@ -125,23 +125,23 @@ export interface WhiteBoxKeyState {
     /**
      * All algorithm types for creating keys, supported values: AES_256, SM4.
      */
-    algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * As an alias for the key to be easier to identify and easier to understand, it cannot be empty and is a combination of 1-60 alphanumeric characters - _. The first character must be a letter or number. Alias are not repeatable.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Description of the key, up to 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the key. Enabled or Disabled. Default is Enabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The tags of Key.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -159,13 +159,13 @@ export interface WhiteBoxKeyArgs {
     /**
      * Description of the key, up to 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the key. Enabled or Disabled. Default is Enabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The tags of Key.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver instance_tde can be imported using the id, e.g.
+ * sqlserver instanceTde can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/instanceTde:InstanceTde example mssql-farjz9tz
@@ -149,15 +149,15 @@ export interface InstanceTdeState {
     /**
      * Certificate attribution. self- means to use the account's own certificate, others- means to refer to the certificate of other accounts, and the default is self.
      */
-    certificateAttribution?: pulumi.Input<string>;
+    certificateAttribution?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Other referenced main account IDs, required when CertificateAttribute is others.
      */
-    quoteUin?: pulumi.Input<string>;
+    quoteUin?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -175,5 +175,5 @@ export interface InstanceTdeArgs {
     /**
      * Other referenced main account IDs, required when CertificateAttribute is others.
      */
-    quoteUin?: pulumi.Input<string>;
+    quoteUin?: pulumi.Input<string | undefined>;
 }

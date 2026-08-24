@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
@@ -191,31 +191,31 @@ export interface IdlState {
     /**
      * ID of the TcaplusDB cluster to which the table group belongs.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * IDL file content of the TcaplusDB table.
      */
-    fileContent?: pulumi.Input<string>;
+    fileContent?: pulumi.Input<string | undefined>;
     /**
      * File ext type of the IDL file. If `fileType` is `PROTO`, `fileExtType` must be 'proto'; If `fileType` is `TDR`, `fileExtType` must be 'xml'.
      */
-    fileExtType?: pulumi.Input<string>;
+    fileExtType?: pulumi.Input<string | undefined>;
     /**
      * Name of the IDL file.
      */
-    fileName?: pulumi.Input<string>;
+    fileName?: pulumi.Input<string | undefined>;
     /**
      * Type of the IDL file. Valid values are PROTO and TDR.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Table info of the IDL.
      */
-    tableInfos?: pulumi.Input<pulumi.Input<inputs.Tcaplus.IdlTableInfo>[]>;
+    tableInfos?: pulumi.Input<pulumi.Input<inputs.Tcaplus.IdlTableInfo>[] | undefined>;
     /**
      * ID of the table group to which the IDL file belongs.
      */
-    tablegroupId?: pulumi.Input<string>;
+    tablegroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

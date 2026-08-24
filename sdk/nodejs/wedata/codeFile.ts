@@ -150,35 +150,35 @@ export interface CodeFileState {
     /**
      * Permission range: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Code file configuration.
      */
-    codeFileConfig?: pulumi.Input<inputs.Wedata.CodeFileCodeFileConfig>;
+    codeFileConfig?: pulumi.Input<inputs.Wedata.CodeFileCodeFileConfig | undefined>;
     /**
      * Code file content.
      */
-    codeFileContent?: pulumi.Input<string>;
+    codeFileContent?: pulumi.Input<string | undefined>;
     /**
      * Code file ID.
      */
-    codeFileId?: pulumi.Input<string>;
+    codeFileId?: pulumi.Input<string | undefined>;
     /**
      * Code file name.
      */
-    codeFileName?: pulumi.Input<string>;
+    codeFileName?: pulumi.Input<string | undefined>;
     /**
      * Parent folder path, for example /aaa/bbb/ccc, path header must start with a slash, root directory pass /.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * The full path of the node, /aaa/bbb/ccc.ipynb, consists of the names of each node.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -188,11 +188,11 @@ export interface CodeFileArgs {
     /**
      * Code file configuration.
      */
-    codeFileConfig?: pulumi.Input<inputs.Wedata.CodeFileCodeFileConfig>;
+    codeFileConfig?: pulumi.Input<inputs.Wedata.CodeFileCodeFileConfig | undefined>;
     /**
      * Code file content.
      */
-    codeFileContent?: pulumi.Input<string>;
+    codeFileContent?: pulumi.Input<string | undefined>;
     /**
      * Code file name.
      */

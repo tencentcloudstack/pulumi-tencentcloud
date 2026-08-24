@@ -72,12 +72,8 @@ type GetListenersByTargetsResult struct {
 }
 
 func GetListenersByTargetsOutput(ctx *pulumi.Context, args GetListenersByTargetsOutputArgs, opts ...pulumi.InvokeOption) GetListenersByTargetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListenersByTargetsResultOutput, error) {
-			args := v.(GetListenersByTargetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args, GetListenersByTargetsResultOutput{}, options).(GetListenersByTargetsResultOutput), nil
-		}).(GetListenersByTargetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args, GetListenersByTargetsResultOutput{}, options).(GetListenersByTargetsResultOutput)
 }
 
 // A collection of arguments for invoking getListenersByTargets.

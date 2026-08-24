@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -55,7 +55,7 @@ import * as utilities from "../utilities";
  *         max_connections: "1000",
  *     },
  * });
- * const example = tencentcloud.Mysql.getRollbackRangeTimeOutput({
+ * const example = tencentcloud.mysql.getRollbackRangeTimeOutput({
  *     instanceIds: [exampleInstance.id],
  * });
  * const exampleRenewDbInstanceOperation = new tencentcloud.mysql.RenewDbInstanceOperation("example", {
@@ -158,23 +158,23 @@ export interface RenewDbInstanceOperationState {
     /**
      * Instance expiration time.
      */
-    deadlineTime?: pulumi.Input<string>;
+    deadlineTime?: pulumi.Input<string | undefined>;
     /**
      * Deal id.
      */
-    dealId?: pulumi.Input<string>;
+    dealId?: pulumi.Input<string | undefined>;
     /**
      * The instance ID to be renewed, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, you can use [Query Instance List](https://cloud.tencent.com/document/api/236/ 15872).
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * If you need to renew the Pay-As-You-Go instance to a Subscription instance, the value of this input parameter needs to be specified as `PREPAID`.
      */
-    modifyPayType?: pulumi.Input<string>;
+    modifyPayType?: pulumi.Input<string | undefined>;
     /**
      * Renewal duration, unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -188,7 +188,7 @@ export interface RenewDbInstanceOperationArgs {
     /**
      * If you need to renew the Pay-As-You-Go instance to a Subscription instance, the value of this input parameter needs to be specified as `PREPAID`.
      */
-    modifyPayType?: pulumi.Input<string>;
+    modifyPayType?: pulumi.Input<string | undefined>;
     /**
      * Renewal duration, unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
      */

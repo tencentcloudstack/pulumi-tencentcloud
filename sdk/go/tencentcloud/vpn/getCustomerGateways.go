@@ -57,7 +57,7 @@ import (
 //				Name:            pulumi.StringRef("tf-example"),
 //				Id:              pulumi.StringRef("cgw-r1g6c8fr"),
 //				PublicIpAddress: pulumi.StringRef("1.1.1.1"),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"createBy": "Terraform",
 //				},
 //			}, nil)
@@ -109,12 +109,8 @@ type GetCustomerGatewaysResult struct {
 }
 
 func GetCustomerGatewaysOutput(ctx *pulumi.Context, args GetCustomerGatewaysOutputArgs, opts ...pulumi.InvokeOption) GetCustomerGatewaysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCustomerGatewaysResultOutput, error) {
-			args := v.(GetCustomerGatewaysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args, GetCustomerGatewaysResultOutput{}, options).(GetCustomerGatewaysResultOutput), nil
-		}).(GetCustomerGatewaysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args, GetCustomerGatewaysResultOutput{}, options).(GetCustomerGatewaysResultOutput)
 }
 
 // A collection of arguments for invoking getCustomerGateways.

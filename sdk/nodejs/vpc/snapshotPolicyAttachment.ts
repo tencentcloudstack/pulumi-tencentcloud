@@ -58,7 +58,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc snapshot_policy_attachment can be imported using the id, e.g.
+ * vpc snapshotPolicyAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id
@@ -139,11 +139,11 @@ export interface SnapshotPolicyAttachmentState {
     /**
      * Associated instance information.
      */
-    instances?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyAttachmentInstance>[]>;
+    instances?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyAttachmentInstance>[] | undefined>;
     /**
      * Snapshot policy Id.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
 }
 
 /**

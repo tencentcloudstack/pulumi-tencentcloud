@@ -135,12 +135,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// CBS snapshot policy attachment can be imported using the id, e.g.
     /// 
-    /// If use storage_id
+    /// If use StorageId
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-fesgc43m#asp-8abupspr
     /// ```
-    /// If use storage_ids
+    /// 
+    /// If use StorageIds
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-ghylus9y,disk-0tm61hla#asp-ng87uf4t

@@ -46,7 +46,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf ip_access_control can be imported using the id, e.g.
+ * waf ipAccessControl can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf
@@ -145,19 +145,19 @@ export interface IpAccessControlState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Waf edition. clb-waf means clb-waf, sparta-waf means saas-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Waf instance Id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Ip parameter list.
      */
-    items?: pulumi.Input<pulumi.Input<inputs.Waf.IpAccessControlItem>[]>;
+    items?: pulumi.Input<pulumi.Input<inputs.Waf.IpAccessControlItem>[] | undefined>;
 }
 
 /**

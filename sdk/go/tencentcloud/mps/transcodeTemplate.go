@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a mps transcodeTemplate
+// Provides a resource to create a MPS transcode template
 //
 // ## Example Usage
 //
@@ -28,9 +28,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mps.NewTranscodeTemplate(ctx, "transcode_template", &mps.TranscodeTemplateArgs{
+//			_, err := mps.NewTranscodeTemplate(ctx, "example", &mps.TranscodeTemplateArgs{
 //				Container:   pulumi.String("mp4"),
-//				Name:        pulumi.String("tf_transcode_template"),
+//				Name:        pulumi.String("tf-example"),
 //				RemoveAudio: pulumi.Int(0),
 //				RemoveVideo: pulumi.Int(0),
 //				AudioTemplate: &mps.TranscodeTemplateAudioTemplateArgs{
@@ -62,10 +62,10 @@ import (
 //
 // ## Import
 //
-// mps transcode_template can be imported using the id, e.g.
+// MPS transcode template can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+// $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate example 1638607
 // ```
 type TranscodeTemplate struct {
 	pulumi.CustomResourceState

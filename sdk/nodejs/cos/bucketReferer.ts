@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cos bucket_referer can be imported using the id, e.g.
+ * cos bucketReferer can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
@@ -134,23 +134,23 @@ export interface BucketRefererState {
     /**
      * Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * A list of domain names in the blocklist/allowlist.
      */
-    domainLists?: pulumi.Input<pulumi.Input<string>[]>;
+    domainLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to allow access with an empty referer. Enumerated values: `Allow`, `Deny` (default).
      */
-    emptyReferConfiguration?: pulumi.Input<string>;
+    emptyReferConfiguration?: pulumi.Input<string | undefined>;
     /**
      * Hotlink protection type. Enumerated values: `Black-List`, `White-List`.
      */
-    refererType?: pulumi.Input<string>;
+    refererType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable hotlink protection. Enumerated values: `Enabled`, `Disabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -168,7 +168,7 @@ export interface BucketRefererArgs {
     /**
      * Whether to allow access with an empty referer. Enumerated values: `Allow`, `Deny` (default).
      */
-    emptyReferConfiguration?: pulumi.Input<string>;
+    emptyReferConfiguration?: pulumi.Input<string | undefined>;
     /**
      * Hotlink protection type. Enumerated values: `Black-List`, `White-List`.
      */

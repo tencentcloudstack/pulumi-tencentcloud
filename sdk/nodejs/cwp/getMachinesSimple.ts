@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of cwp machinesSimple
+ * Use this data source to query detailed information of CWP machines simple
  *
  * ## Example Usage
  *
@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [0],
@@ -49,7 +49,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [0],
@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "ALL",
  *     machineRegion: "all-regions",
  *     filters: [{
@@ -137,7 +137,7 @@ export interface GetMachinesSimpleResult {
     readonly resultOutputFile?: string;
 }
 /**
- * Use this data source to query detailed information of cwp machinesSimple
+ * Use this data source to query detailed information of CWP machines simple
  *
  * ## Example Usage
  *
@@ -145,7 +145,7 @@ export interface GetMachinesSimpleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [
@@ -161,7 +161,7 @@ export interface GetMachinesSimpleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [0],
@@ -179,7 +179,7 @@ export interface GetMachinesSimpleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [0],
@@ -197,7 +197,7 @@ export interface GetMachinesSimpleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "ALL",
  *     machineRegion: "all-regions",
  *     filters: [{
@@ -226,7 +226,7 @@ export interface GetMachinesSimpleOutputArgs {
     /**
      * filter list.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cwp.GetMachinesSimpleFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cwp.GetMachinesSimpleFilterArgs>[] | undefined>;
     /**
      * The area where the machine belongs,Such as: ap-guangzhou, ap-shanghai, all-regions: All server region types.
      */
@@ -238,9 +238,9 @@ export interface GetMachinesSimpleOutputArgs {
     /**
      * Project id list.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

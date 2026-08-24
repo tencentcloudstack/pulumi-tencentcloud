@@ -45,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SyncInvokeFunction{}
 	case "tencentcloud:Scf/terminateAsyncEvent:TerminateAsyncEvent":
 		r = &TerminateAsyncEvent{}
+	case "tencentcloud:Scf/trigger:Trigger":
+		r = &Trigger{}
 	case "tencentcloud:Scf/triggerConfig:TriggerConfig":
 		r = &TriggerConfig{}
 	default:
@@ -118,6 +120,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Scf/terminateAsyncEvent",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Scf/trigger",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

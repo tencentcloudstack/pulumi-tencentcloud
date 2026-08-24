@@ -156,31 +156,31 @@ export interface SampleConfigState {
     /**
      * Business system ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * API name.
      */
-    operationName?: pulumi.Input<string>;
+    operationName?: pulumi.Input<string | undefined>;
     /**
      * 0: exact match (default); 1: prefix match; 2: suffix match.
      */
-    operationType?: pulumi.Input<number>;
+    operationType?: pulumi.Input<number | undefined>;
     /**
      * Sampling rule name.
      */
-    sampleName?: pulumi.Input<string>;
+    sampleName?: pulumi.Input<string | undefined>;
     /**
      * Sampling rate.
      */
-    sampleRate?: pulumi.Input<number>;
+    sampleRate?: pulumi.Input<number | undefined>;
     /**
      * Application name.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
     /**
      * Sampling tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Apm.SampleConfigTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Apm.SampleConfigTag>[] | undefined>;
 }
 
 /**
@@ -194,11 +194,11 @@ export interface SampleConfigArgs {
     /**
      * API name.
      */
-    operationName?: pulumi.Input<string>;
+    operationName?: pulumi.Input<string | undefined>;
     /**
      * 0: exact match (default); 1: prefix match; 2: suffix match.
      */
-    operationType?: pulumi.Input<number>;
+    operationType?: pulumi.Input<number | undefined>;
     /**
      * Sampling rule name.
      */
@@ -214,5 +214,5 @@ export interface SampleConfigArgs {
     /**
      * Sampling tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Apm.SampleConfigTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Apm.SampleConfigTag>[] | undefined>;
 }

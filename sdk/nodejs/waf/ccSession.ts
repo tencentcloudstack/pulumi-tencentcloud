@@ -23,12 +23,13 @@ import * as utilities from "../utilities";
  *     endOffset: "-1",
  *     edition: "sparta-waf",
  *     sessionName: "terraformDemo",
+ *     key: "sessionId",
  * });
  * ```
  *
  * ## Import
  *
- * waf cc_session can be imported using the id, e.g.
+ * waf ccSession can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
@@ -83,6 +84,10 @@ export class CcSession extends pulumi.CustomResource {
      */
     declare public readonly endOffset: pulumi.Output<string>;
     /**
+     * Precise-match session key, configured when Category is precise matching.
+     */
+    declare public readonly key: pulumi.Output<string>;
+    /**
      * Session identifier.
      */
     declare public readonly keyOrStartMat: pulumi.Output<string>;
@@ -121,6 +126,7 @@ export class CcSession extends pulumi.CustomResource {
             resourceInputs["edition"] = state?.edition;
             resourceInputs["endMat"] = state?.endMat;
             resourceInputs["endOffset"] = state?.endOffset;
+            resourceInputs["key"] = state?.key;
             resourceInputs["keyOrStartMat"] = state?.keyOrStartMat;
             resourceInputs["sessionId"] = state?.sessionId;
             resourceInputs["sessionName"] = state?.sessionName;
@@ -160,6 +166,7 @@ export class CcSession extends pulumi.CustomResource {
             resourceInputs["edition"] = args?.edition;
             resourceInputs["endMat"] = args?.endMat;
             resourceInputs["endOffset"] = args?.endOffset;
+            resourceInputs["key"] = args?.key;
             resourceInputs["keyOrStartMat"] = args?.keyOrStartMat;
             resourceInputs["sessionName"] = args?.sessionName;
             resourceInputs["source"] = args?.source;
@@ -178,43 +185,47 @@ export interface CcSessionState {
     /**
      * Session match pattern, Optional patterns are match, location.
      */
-    category?: pulumi.Input<string>;
+    category?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Waf edition. clb-waf means clb-waf, sparta-waf means saas-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Session end identifier, when Category is match.
      */
-    endMat?: pulumi.Input<string>;
+    endMat?: pulumi.Input<string | undefined>;
     /**
      * End offset position, when Category is location.
      */
-    endOffset?: pulumi.Input<string>;
+    endOffset?: pulumi.Input<string | undefined>;
+    /**
+     * Precise-match session key, configured when Category is precise matching.
+     */
+    key?: pulumi.Input<string | undefined>;
     /**
      * Session identifier.
      */
-    keyOrStartMat?: pulumi.Input<string>;
+    keyOrStartMat?: pulumi.Input<string | undefined>;
     /**
      * Session ID.
      */
-    sessionId?: pulumi.Input<number>;
+    sessionId?: pulumi.Input<number | undefined>;
     /**
      * Session Name.
      */
-    sessionName?: pulumi.Input<string>;
+    sessionName?: pulumi.Input<string | undefined>;
     /**
      * Session matching position, Optional locations are get, post, header, cookie.
      */
-    source?: pulumi.Input<string>;
+    source?: pulumi.Input<string | undefined>;
     /**
      * Starting offset position, when Category is location.
      */
-    startOffset?: pulumi.Input<string>;
+    startOffset?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -241,6 +252,10 @@ export interface CcSessionArgs {
      * End offset position, when Category is location.
      */
     endOffset: pulumi.Input<string>;
+    /**
+     * Precise-match session key, configured when Category is precise matching.
+     */
+    key?: pulumi.Input<string | undefined>;
     /**
      * Session identifier.
      */

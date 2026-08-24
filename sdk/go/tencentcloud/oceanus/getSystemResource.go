@@ -88,12 +88,8 @@ type GetSystemResourceResult struct {
 }
 
 func GetSystemResourceOutput(ctx *pulumi.Context, args GetSystemResourceOutputArgs, opts ...pulumi.InvokeOption) GetSystemResourceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSystemResourceResultOutput, error) {
-			args := v.(GetSystemResourceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getSystemResource:getSystemResource", args, GetSystemResourceResultOutput{}, options).(GetSystemResourceResultOutput), nil
-		}).(GetSystemResourceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getSystemResource:getSystemResource", args, GetSystemResourceResultOutput{}, options).(GetSystemResourceResultOutput)
 }
 
 // A collection of arguments for invoking getSystemResource.

@@ -11,7 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 {
     /// <summary>
-    /// Provides a resource to create a tke KubernetesLogConfig
+    /// Provides a resource to create a TKE kubernetes log config
+    /// 
+    /// &gt; **NOTE:** The value of Field `LogConfigName` must be identical to Value `metadata.name` in Field `LogConfig`.
     /// 
     /// ## Example Usage
     /// 
@@ -22,7 +24,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -280,13 +281,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> ClusterType { get; private set; } = null!;
 
         /// <summary>
-        /// JSON expression of log collection configuration.
+        /// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
         /// </summary>
         [Output("logConfig")]
         public Output<string> KubernetesLogConfig { get; private set; } = null!;
 
         /// <summary>
-        /// Log config name.
+        /// Log config name. Must be identical to Value `metadata.name` in Field `LogConfig`.
         /// </summary>
         [Output("logConfigName")]
         public Output<string> LogConfigName { get; private set; } = null!;
@@ -357,13 +358,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterType { get; set; }
 
         /// <summary>
-        /// JSON expression of log collection configuration.
+        /// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
         /// </summary>
         [Input("logConfig", required: true)]
         public Input<string> KubernetesLogConfig { get; set; } = null!;
 
         /// <summary>
-        /// Log config name.
+        /// Log config name. Must be identical to Value `metadata.name` in Field `LogConfig`.
         /// </summary>
         [Input("logConfigName", required: true)]
         public Input<string> LogConfigName { get; set; } = null!;
@@ -395,13 +396,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterType { get; set; }
 
         /// <summary>
-        /// JSON expression of log collection configuration.
+        /// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
         /// </summary>
         [Input("logConfig")]
         public Input<string>? KubernetesLogConfig { get; set; }
 
         /// <summary>
-        /// Log config name.
+        /// Log config name. Must be identical to Value `metadata.name` in Field `LogConfig`.
         /// </summary>
         [Input("logConfigName")]
         public Input<string>? LogConfigName { get; set; }

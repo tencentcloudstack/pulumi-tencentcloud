@@ -303,47 +303,47 @@ export interface LogstashState {
     /**
      * whether to use voucher auto, 1 when use, else 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Period when charged by months or years(unit depends on TimeUnit).
      */
-    chargePeriod?: pulumi.Input<number>;
+    chargePeriod?: pulumi.Input<number | undefined>;
     /**
      * Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Deployment mode, 0: single availability zone, 1: multiple availability zones.
      */
-    deployMode?: pulumi.Input<number>;
+    deployMode?: pulumi.Input<number | undefined>;
     /**
      * node disk size (unit GB).
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
      * Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Instance name (compose of 1-50 letter, number, - or _).
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * License type. oss: open source version; xpack:xpack version; default: xpack.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * Instance version(6.8.13, 7.10.1).
      */
-    logstashVersion?: pulumi.Input<string>;
+    logstashVersion?: pulumi.Input<string | undefined>;
     /**
      * Details of availability zones when deploying multiple availability zones.
      */
-    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.LogstashMultiZoneInfo>[]>;
+    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.LogstashMultiZoneInfo>[] | undefined>;
     /**
      * Node num(range 2-50).
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Node type. Valid values:
      * - LOGSTASH.S1.SMALL2: 1 core 2G;
@@ -354,39 +354,39 @@ export interface LogstashState {
      * - LOGSTASH.S1.4XLARGE32:16 core 32G;
      * - LOGSTASH.S1.4XLARGE64:16 core 64G.
      */
-    nodeType?: pulumi.Input<string>;
+    nodeType?: pulumi.Input<string | undefined>;
     /**
      * operation time by tencent clound.
      */
-    operationDuration?: pulumi.Input<inputs.Elasticsearch.LogstashOperationDuration>;
+    operationDuration?: pulumi.Input<inputs.Elasticsearch.LogstashOperationDuration | undefined>;
     /**
      * Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.
      */
-    renewFlag?: pulumi.Input<string>;
+    renewFlag?: pulumi.Input<string | undefined>;
     /**
      * Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * charge time unit(set when ChargeType is PREPAID, default value: ms).
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * Voucher list(only can use one voucher by now).
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * VPC id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Available zone. Create multi zone instance, parameter zone need input '-', details input to multi_zone_infos.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -396,27 +396,27 @@ export interface LogstashArgs {
     /**
      * whether to use voucher auto, 1 when use, else 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Period when charged by months or years(unit depends on TimeUnit).
      */
-    chargePeriod?: pulumi.Input<number>;
+    chargePeriod?: pulumi.Input<number | undefined>;
     /**
      * Charge type. PREPAID: charged by months or years; POSTPAID_BY_HOUR: charged by hours; default vaule: POSTPAID_BY_HOUR.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Deployment mode, 0: single availability zone, 1: multiple availability zones.
      */
-    deployMode?: pulumi.Input<number>;
+    deployMode?: pulumi.Input<number | undefined>;
     /**
      * node disk size (unit GB).
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
      * Disk type. CLOUD_SSD: SSD cloud disk; CLOUD_PREMIUM: high hard energy cloud disk; default: CLOUD_SSD.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Instance name (compose of 1-50 letter, number, - or _).
      */
@@ -424,7 +424,7 @@ export interface LogstashArgs {
     /**
      * License type. oss: open source version; xpack:xpack version; default: xpack.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * Instance version(6.8.13, 7.10.1).
      */
@@ -432,11 +432,11 @@ export interface LogstashArgs {
     /**
      * Details of availability zones when deploying multiple availability zones.
      */
-    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.LogstashMultiZoneInfo>[]>;
+    multiZoneInfos?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.LogstashMultiZoneInfo>[] | undefined>;
     /**
      * Node num(range 2-50).
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Node type. Valid values:
      * - LOGSTASH.S1.SMALL2: 1 core 2G;
@@ -447,15 +447,15 @@ export interface LogstashArgs {
      * - LOGSTASH.S1.4XLARGE32:16 core 32G;
      * - LOGSTASH.S1.4XLARGE64:16 core 64G.
      */
-    nodeType?: pulumi.Input<string>;
+    nodeType?: pulumi.Input<string | undefined>;
     /**
      * operation time by tencent clound.
      */
-    operationDuration?: pulumi.Input<inputs.Elasticsearch.LogstashOperationDuration>;
+    operationDuration?: pulumi.Input<inputs.Elasticsearch.LogstashOperationDuration | undefined>;
     /**
      * Automatic renewal flag. RENEW_FLAG_AUTO: auto renewal; RENEW_FLAG_MANUAL: do not renew automatically, users renew manually. It needs to be set when ChargeType is PREPAID. If this parameter is not passed, ordinary users will not renew automatically by default, and SVIP users will renew automatically.
      */
-    renewFlag?: pulumi.Input<string>;
+    renewFlag?: pulumi.Input<string | undefined>;
     /**
      * Subnet id. Create multi zone instance, parameter subnetId need input '-', details input to multi_zone_infos.
      */
@@ -463,15 +463,15 @@ export interface LogstashArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * charge time unit(set when ChargeType is PREPAID, default value: ms).
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * Voucher list(only can use one voucher by now).
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * VPC id.
      */

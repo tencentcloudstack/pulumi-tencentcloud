@@ -91,7 +91,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * eb eb_transform can be imported using the id, e.g.
+ * eb ebTransform can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
@@ -181,15 +181,15 @@ export interface EventTransformState {
     /**
      * event bus Id.
      */
-    eventBusId?: pulumi.Input<string>;
+    eventBusId?: pulumi.Input<string | undefined>;
     /**
      * ruleId.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * A list of transformation rules, currently only one.
      */
-    transformations?: pulumi.Input<pulumi.Input<inputs.Eb.EventTransformTransformation>[]>;
+    transformations?: pulumi.Input<pulumi.Input<inputs.Eb.EventTransformTransformation>[] | undefined>;
 }
 
 /**

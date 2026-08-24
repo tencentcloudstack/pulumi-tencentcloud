@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc local_gateway can be imported using the id, e.g.
+    /// vpc LocalGateway can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id

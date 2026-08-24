@@ -68,7 +68,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css stream_monitor can be imported using the id, e.g.
+    /// css StreamMonitor can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id

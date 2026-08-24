@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tag
+ * Provides a resource to create a Tag
  *
  * ## Example Usage
  *
@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tag can be imported using the id, e.g.
+ * Tag can be imported using the tagKey#tagValue, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tag/instance:Instance example tagKey#tagValue
@@ -102,11 +102,11 @@ export interface InstanceState {
     /**
      * Tag key.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
     /**
      * Tag value.
      */
-    tagValue?: pulumi.Input<string>;
+    tagValue?: pulumi.Input<string | undefined>;
 }
 
 /**

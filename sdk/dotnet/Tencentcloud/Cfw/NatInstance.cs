@@ -118,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public Output<ImmutableArray<string>> NatGwLists { get; private set; } = null!;
 
         /// <summary>
+        /// Nat instance ID.
+        /// </summary>
+        [Output("natInstanceId")]
+        public Output<string> NatInstanceId { get; private set; } = null!;
+
+        /// <summary>
         /// New mode passing parameters are added, at least one of NewModeItems and NatGwList is passed.
         /// </summary>
         [Output("newModeItems")]
@@ -273,6 +279,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
             get => _natGwLists ?? (_natGwLists = new InputList<string>());
             set => _natGwLists = value;
         }
+
+        /// <summary>
+        /// Nat instance ID.
+        /// </summary>
+        [Input("natInstanceId")]
+        public Input<string>? NatInstanceId { get; set; }
 
         /// <summary>
         /// New mode passing parameters are added, at least one of NewModeItems and NatGwList is passed.

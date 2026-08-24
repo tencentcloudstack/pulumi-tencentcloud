@@ -29,7 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -37,14 +37,14 @@ import (
 //				return err
 //			}
 //			routeTable, err := route.NewTable(ctx, "route_table", &route.TableArgs{
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:  pulumi.String("tf-example"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = vpc.NewNotifyRoutes(ctx, "example", &vpc.NotifyRoutesArgs{
-//				RouteTableId: routeTable.ID(),
+//				RouteTableId: routeTable.ID().ToIDOutput().ToStringOutput(),
 //				RouteItemIds: pulumi.String("rti-i8bap903"),
 //			})
 //			if err != nil {
@@ -58,7 +58,7 @@ import (
 //
 // ## Import
 //
-// vpc notify_routes can be imported using the id, e.g.
+// vpc notifyRoutes can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/notifyRoutes:NotifyRoutes notify_routes route_table_id#route_item_id

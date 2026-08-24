@@ -84,12 +84,8 @@ type LookupRocketmqRoleResult struct {
 }
 
 func LookupRocketmqRoleOutput(ctx *pulumi.Context, args LookupRocketmqRoleOutputArgs, opts ...pulumi.InvokeOption) LookupRocketmqRoleResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRocketmqRoleResultOutput, error) {
-			args := v.(LookupRocketmqRoleArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args, LookupRocketmqRoleResultOutput{}, options).(LookupRocketmqRoleResultOutput), nil
-		}).(LookupRocketmqRoleResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args, LookupRocketmqRoleResultOutput{}, options).(LookupRocketmqRoleResultOutput)
 }
 
 // A collection of arguments for invoking getRocketmqRole.

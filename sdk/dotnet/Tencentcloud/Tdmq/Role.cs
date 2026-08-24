@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Output("roleName")]
         public Output<string> RoleName { get; private set; } = null!;
 
+        /// <summary>
+        /// Role token. This field is returned by the API and used for authentication.
+        /// </summary>
+        [Output("token")]
+        public Output<string> Token { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Role resource with the given unique name, arguments, and options.
@@ -88,6 +94,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "token",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -154,6 +164,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("roleName")]
         public Input<string>? RoleName { get; set; }
+
+        [Input("token")]
+        private Input<string>? _token;
+
+        /// <summary>
+        /// Role token. This field is returned by the API and used for authentication.
+        /// </summary>
+        public Input<string>? Token
+        {
+            get => _token;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public RoleState()
         {

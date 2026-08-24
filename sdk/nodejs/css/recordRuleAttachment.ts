@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css record_rule can be imported using the id, e.g.
+ * css recordRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
@@ -116,19 +116,19 @@ export interface RecordRuleAttachmentState {
     /**
      * The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Streaming domain name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Stream name. Note: If this parameter is set to a non empty string, the rule will only work on this streaming.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * Template ID.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface RecordRuleAttachmentArgs {
     /**
      * The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Streaming domain name.
      */
@@ -146,7 +146,7 @@ export interface RecordRuleAttachmentArgs {
     /**
      * Stream name. Note: If this parameter is set to a non empty string, the rule will only work on this streaming.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * Template ID.
      */

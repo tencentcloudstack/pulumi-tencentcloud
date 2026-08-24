@@ -187,63 +187,63 @@ export interface UserState {
     /**
      * Indicate whether the CAM user can login to the web console or not.
      */
-    consoleLogin?: pulumi.Input<boolean>;
+    consoleLogin?: pulumi.Input<boolean | undefined>;
     /**
      * Country code of the phone number, for example: '86'.
      */
-    countryCode?: pulumi.Input<string>;
+    countryCode?: pulumi.Input<string | undefined>;
     /**
      * Email of the CAM user.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the CAM user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the CAM user need to reset the password when first logins.
      */
-    needResetPassword?: pulumi.Input<boolean>;
+    needResetPassword?: pulumi.Input<boolean | undefined>;
     /**
      * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Phone number of the CAM user.
      */
-    phoneNum?: pulumi.Input<string>;
+    phoneNum?: pulumi.Input<string | undefined>;
     /**
      * Remark of the CAM user.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Secret ID of the CAM user.
      */
-    secretId?: pulumi.Input<string>;
+    secretId?: pulumi.Input<string | undefined>;
     /**
      * Secret key of the CAM user.
      */
-    secretKey?: pulumi.Input<string>;
+    secretKey?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the CAM user.
      */
-    uid?: pulumi.Input<number>;
+    uid?: pulumi.Input<number | undefined>;
     /**
      * Uin of the CAM User.
      */
-    uin?: pulumi.Input<number>;
+    uin?: pulumi.Input<number | undefined>;
     /**
      * Indicate whether to generate the API secret key or not.
      */
-    useApi?: pulumi.Input<boolean>;
+    useApi?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -253,45 +253,45 @@ export interface UserArgs {
     /**
      * Indicate whether the CAM user can login to the web console or not.
      */
-    consoleLogin?: pulumi.Input<boolean>;
+    consoleLogin?: pulumi.Input<boolean | undefined>;
     /**
      * Country code of the phone number, for example: '86'.
      */
-    countryCode?: pulumi.Input<string>;
+    countryCode?: pulumi.Input<string | undefined>;
     /**
      * Email of the CAM user.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to force deletes the CAM user. If set false, the API secret key will be checked and failed when exists; otherwise the user will be deleted directly. Default is false.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the CAM user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the CAM user need to reset the password when first logins.
      */
-    needResetPassword?: pulumi.Input<boolean>;
+    needResetPassword?: pulumi.Input<boolean | undefined>;
     /**
      * The password of the CAM user. Password should be at least 8 characters and no more than 32 characters, includes uppercase letters, lowercase letters, numbers and special characters. Only required when `consoleLogin` is true. If not set, a random password will be automatically generated.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Phone number of the CAM user.
      */
-    phoneNum?: pulumi.Input<string>;
+    phoneNum?: pulumi.Input<string | undefined>;
     /**
      * Remark of the CAM user.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Indicate whether to generate the API secret key or not.
      */
-    useApi?: pulumi.Input<boolean>;
+    useApi?: pulumi.Input<boolean | undefined>;
 }

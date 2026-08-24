@@ -13,6 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// <summary>
     /// Provide a resource to create a Mongodb instance.
     /// 
+    /// &gt; **NOTE:** If `AvailabilityZoneList` needs to be changed, attention should be paid to cascading modifications of `AvailableZone` or `HiddenZone`.
+    /// 
+    /// &gt; **NOTE:** The `Cpu` parameter takes effect only when the configuration is changed. Changing the `Cpu` triggers the `ModifyDBInstanceSpec` API to adjust the CPU specification of the running MongoDB instance in-place. The supported CPU specifications can be obtained through the `DescribeSpecInfo` API.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -23,18 +27,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var mongodb = new Tencentcloud.Mongodb.Instance("mongodb", new()
+    ///     var example = new Tencentcloud.Mongodb.Instance("example", new()
     ///     {
-    ///         InstanceName = "mongodb",
+    ///         InstanceName = "tf-example",
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         EngineVersion = "MONGO_36_WT",
+    ///         EngineVersion = "MONGO_40_WT",
     ///         MachineType = "HIO10G",
-    ///         AvailableZone = "ap-guangzhou-2",
-    ///         VpcId = "vpc-xxxxxx",
-    ///         SubnetId = "subnet-xxxxxx",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         ProjectId = 0,
-    ///         Password = "password1234",
+    ///         Password = "Password@123",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Update the CPU specification of the MongoDB instance.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mongodb.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_40_WT",
+    ///         MachineType = "HIO10G",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         ProjectId = 0,
+    ///         Password = "Password@123",
+    ///         Cpu = 2,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Or
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mongodb.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_40_WT",
+    ///         MachineType = "HIO10G",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         AvailabilityZoneLists = new[]
+    ///         {
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-3",
+    ///             "ap-guangzhou-4",
+    ///         },
+    ///         HiddenZone = "ap-guangzhou-4",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         ProjectId = 0,
+    ///         Password = "Password@123",
     ///     });
     /// 
     /// });
@@ -45,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// Mongodb instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+    /// $ pulumi import tencentcloud:Mongodb/instance:Instance example cmgo-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instance:Instance")]
@@ -85,6 +151,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string?> ChargeType { get; private set; } = null!;
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Output("createTime")]
@@ -98,6 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Output("engineVersion")]
         public Output<string> EngineVersion { get; private set; } = null!;
@@ -330,6 +403,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
         /// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
         /// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -337,6 +416,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion", required: true)]
         public Input<string> EngineVersion { get; set; } = null!;
@@ -530,6 +610,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Input("createTime")]
@@ -543,6 +629,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }

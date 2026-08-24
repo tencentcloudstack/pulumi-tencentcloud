@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Reserved.getInstances({
+ * const instances = tencentcloud.reserved.getInstances({
  *     availabilityZone: "na-siliconvalley-1",
  *     instanceType: "S2.MEDIUM8",
  * });
@@ -89,7 +89,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Reserved.getInstances({
+ * const instances = tencentcloud.reserved.getInstances({
  *     availabilityZone: "na-siliconvalley-1",
  *     instanceType: "S2.MEDIUM8",
  * });
@@ -113,17 +113,17 @@ export interface GetInstancesOutputArgs {
     /**
      * The available zone that the reserved instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * The type of reserved instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the reserved instance to be query.
      */
-    reservedInstanceId?: pulumi.Input<string>;
+    reservedInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

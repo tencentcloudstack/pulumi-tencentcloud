@@ -2537,11 +2537,11 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput) 
 
 type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert struct {
 	// Public key of certificate.
-	Cert string `pulumi:"cert"`
+	Cert *string `pulumi:"cert"`
 	// ID of certificate.
 	CertId *string `pulumi:"certId"`
 	// Private key of certificate.
-	PrivateKey string `pulumi:"privateKey"`
+	PrivateKey *string `pulumi:"privateKey"`
 }
 
 // BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput is an input type that accepts BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs and BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput values.
@@ -2557,11 +2557,11 @@ type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInpu
 
 type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs struct {
 	// Public key of certificate.
-	Cert pulumi.StringInput `pulumi:"cert"`
+	Cert pulumi.StringPtrInput `pulumi:"cert"`
 	// ID of certificate.
 	CertId pulumi.StringPtrInput `pulumi:"certId"`
 	// Private key of certificate.
-	PrivateKey pulumi.StringInput `pulumi:"privateKey"`
+	PrivateKey pulumi.StringPtrInput `pulumi:"privateKey"`
 }
 
 func (BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs) ElementType() reflect.Type {
@@ -2642,8 +2642,8 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertO
 }
 
 // Public key of certificate.
-func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) Cert() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) string { return v.Cert }).(pulumi.StringOutput)
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) Cert() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) *string { return v.Cert }).(pulumi.StringPtrOutput)
 }
 
 // ID of certificate.
@@ -2654,10 +2654,10 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertO
 }
 
 // Private key of certificate.
-func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) PrivateKey() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) string {
+func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput) PrivateKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert) *string {
 		return v.PrivateKey
-	}).(pulumi.StringOutput)
+	}).(pulumi.StringPtrOutput)
 }
 
 type BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput struct{ *pulumi.OutputState }
@@ -2690,7 +2690,7 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertP
 		if v == nil {
 			return nil
 		}
-		return &v.Cert
+		return v.Cert
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -2710,8 +2710,791 @@ func (o BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertP
 		if v == nil {
 			return nil
 		}
-		return &v.PrivateKey
+		return v.PrivateKey
 	}).(pulumi.StringPtrOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleList struct {
+	// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+	Filter *BucketIntelligentTieringArchivingRuleListFilter `pulumi:"filter"`
+	// The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.
+	RuleId string `pulumi:"ruleId"`
+	// Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is `default`, only `Enabled` is supported.
+	Status string `pulumi:"status"`
+	// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+	Tierings []BucketIntelligentTieringArchivingRuleListTiering `pulumi:"tierings"`
+}
+
+// BucketIntelligentTieringArchivingRuleListInput is an input type that accepts BucketIntelligentTieringArchivingRuleListArgs and BucketIntelligentTieringArchivingRuleListOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListArgs{...}
+type BucketIntelligentTieringArchivingRuleListInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListOutput() BucketIntelligentTieringArchivingRuleListOutput
+	ToBucketIntelligentTieringArchivingRuleListOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListArgs struct {
+	// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+	Filter BucketIntelligentTieringArchivingRuleListFilterPtrInput `pulumi:"filter"`
+	// The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is `default`, only `Enabled` is supported.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+	Tierings BucketIntelligentTieringArchivingRuleListTieringArrayInput `pulumi:"tierings"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleList)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListArgs) ToBucketIntelligentTieringArchivingRuleListOutput() BucketIntelligentTieringArchivingRuleListOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListArgs) ToBucketIntelligentTieringArchivingRuleListOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListOutput)
+}
+
+// BucketIntelligentTieringArchivingRuleListArrayInput is an input type that accepts BucketIntelligentTieringArchivingRuleListArray and BucketIntelligentTieringArchivingRuleListArrayOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListArrayInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListArray{ BucketIntelligentTieringArchivingRuleListArgs{...} }
+type BucketIntelligentTieringArchivingRuleListArrayInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListArrayOutput() BucketIntelligentTieringArchivingRuleListArrayOutput
+	ToBucketIntelligentTieringArchivingRuleListArrayOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListArrayOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListArray []BucketIntelligentTieringArchivingRuleListInput
+
+func (BucketIntelligentTieringArchivingRuleListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleList)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListArray) ToBucketIntelligentTieringArchivingRuleListArrayOutput() BucketIntelligentTieringArchivingRuleListArrayOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListArrayOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListArray) ToBucketIntelligentTieringArchivingRuleListArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleList)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListOutput) ToBucketIntelligentTieringArchivingRuleListOutput() BucketIntelligentTieringArchivingRuleListOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListOutput) ToBucketIntelligentTieringArchivingRuleListOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListOutput {
+	return o
+}
+
+// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+func (o BucketIntelligentTieringArchivingRuleListOutput) Filter() BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleList) *BucketIntelligentTieringArchivingRuleListFilter {
+		return v.Filter
+	}).(BucketIntelligentTieringArchivingRuleListFilterPtrOutput)
+}
+
+// The name of the intelligent tiering rule name list task, with the ID set to a non-default string, indicates that this rule is a conversion rule for archive and deep archive tiers.
+func (o BucketIntelligentTieringArchivingRuleListOutput) RuleId() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleList) string { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Indicates whether the intelligent tiering rule is enabled. Possible values: Enabled, Disabled. When the ID is `default`, only `Enabled` is supported.
+func (o BucketIntelligentTieringArchivingRuleListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Specifies configuration information related to data transformation in the intelligent tiered storage configuration.
+func (o BucketIntelligentTieringArchivingRuleListOutput) Tierings() BucketIntelligentTieringArchivingRuleListTieringArrayOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleList) []BucketIntelligentTieringArchivingRuleListTiering {
+		return v.Tierings
+	}).(BucketIntelligentTieringArchivingRuleListTieringArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleList)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListArrayOutput) ToBucketIntelligentTieringArchivingRuleListArrayOutput() BucketIntelligentTieringArchivingRuleListArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListArrayOutput) ToBucketIntelligentTieringArchivingRuleListArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListArrayOutput) Index(i pulumi.IntInput) BucketIntelligentTieringArchivingRuleListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketIntelligentTieringArchivingRuleList {
+		return vs[0].([]BucketIntelligentTieringArchivingRuleList)[vs[1].(int)]
+	}).(BucketIntelligentTieringArchivingRuleListOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilter struct {
+	// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+	And *BucketIntelligentTieringArchivingRuleListFilterAnd `pulumi:"and"`
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix *string `pulumi:"prefix"`
+	// When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.
+	Tags []BucketIntelligentTieringArchivingRuleListFilterTag `pulumi:"tags"`
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterArgs and BucketIntelligentTieringArchivingRuleListFilterOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterArgs{...}
+type BucketIntelligentTieringArchivingRuleListFilterInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterOutput() BucketIntelligentTieringArchivingRuleListFilterOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterArgs struct {
+	// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+	And BucketIntelligentTieringArchivingRuleListFilterAndPtrInput `pulumi:"and"`
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.
+	Tags BucketIntelligentTieringArchivingRuleListFilterTagArrayInput `pulumi:"tags"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilter)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterArgs) ToBucketIntelligentTieringArchivingRuleListFilterOutput() BucketIntelligentTieringArchivingRuleListFilterOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterArgs) ToBucketIntelligentTieringArchivingRuleListFilterOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterOutput)
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterArgs) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutput() BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterArgs) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterOutput).ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(ctx)
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterPtrInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterArgs, BucketIntelligentTieringArchivingRuleListFilterPtr and BucketIntelligentTieringArchivingRuleListFilterPtrOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterPtrInput` via:
+//
+//	        BucketIntelligentTieringArchivingRuleListFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketIntelligentTieringArchivingRuleListFilterPtrInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterPtrOutput() BucketIntelligentTieringArchivingRuleListFilterPtrOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterPtrOutput
+}
+
+type bucketIntelligentTieringArchivingRuleListFilterPtrType BucketIntelligentTieringArchivingRuleListFilterArgs
+
+func BucketIntelligentTieringArchivingRuleListFilterPtr(v *BucketIntelligentTieringArchivingRuleListFilterArgs) BucketIntelligentTieringArchivingRuleListFilterPtrInput {
+	return (*bucketIntelligentTieringArchivingRuleListFilterPtrType)(v)
+}
+
+func (*bucketIntelligentTieringArchivingRuleListFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketIntelligentTieringArchivingRuleListFilter)(nil)).Elem()
+}
+
+func (i *bucketIntelligentTieringArchivingRuleListFilterPtrType) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutput() BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketIntelligentTieringArchivingRuleListFilterPtrType) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterPtrOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilter)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) ToBucketIntelligentTieringArchivingRuleListFilterOutput() BucketIntelligentTieringArchivingRuleListFilterOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) ToBucketIntelligentTieringArchivingRuleListFilterOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutput() BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return o.ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(context.Background())
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketIntelligentTieringArchivingRuleListFilter) *BucketIntelligentTieringArchivingRuleListFilter {
+		return &v
+	}).(BucketIntelligentTieringArchivingRuleListFilterPtrOutput)
+}
+
+// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) And() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilter) *BucketIntelligentTieringArchivingRuleListFilterAnd {
+		return v.And
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilter) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.
+func (o BucketIntelligentTieringArchivingRuleListFilterOutput) Tags() BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilter) []BucketIntelligentTieringArchivingRuleListFilterTag {
+		return v.Tags
+	}).(BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketIntelligentTieringArchivingRuleListFilter)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutput() BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) ToBucketIntelligentTieringArchivingRuleListFilterPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterPtrOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) Elem() BucketIntelligentTieringArchivingRuleListFilterOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilter) BucketIntelligentTieringArchivingRuleListFilter {
+		if v != nil {
+			return *v
+		}
+		var ret BucketIntelligentTieringArchivingRuleListFilter
+		return ret
+	}).(BucketIntelligentTieringArchivingRuleListFilterOutput)
+}
+
+// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) And() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilter) *BucketIntelligentTieringArchivingRuleListFilterAnd {
+		if v == nil {
+			return nil
+		}
+		return v.And
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects for analysis, you can use object tags (multiple tags are supported) as filtering criteria.
+func (o BucketIntelligentTieringArchivingRuleListFilterPtrOutput) Tags() BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilter) []BucketIntelligentTieringArchivingRuleListFilterTag {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAnd struct {
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix *string `pulumi:"prefix"`
+	// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+	Tags []BucketIntelligentTieringArchivingRuleListFilterAndTag `pulumi:"tags"`
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterAndInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterAndArgs and BucketIntelligentTieringArchivingRuleListFilterAndOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterAndInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterAndArgs{...}
+type BucketIntelligentTieringArchivingRuleListFilterAndInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterAndOutput() BucketIntelligentTieringArchivingRuleListFilterAndOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterAndOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterAndOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndArgs struct {
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+	Tags BucketIntelligentTieringArchivingRuleListFilterAndTagArrayInput `pulumi:"tags"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAnd)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndOutput() BucketIntelligentTieringArchivingRuleListFilterAndOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterAndOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterAndOutput)
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutput() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterAndOutput).ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(ctx)
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterAndPtrInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterAndArgs, BucketIntelligentTieringArchivingRuleListFilterAndPtr and BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterAndPtrInput` via:
+//
+//	        BucketIntelligentTieringArchivingRuleListFilterAndArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketIntelligentTieringArchivingRuleListFilterAndPtrInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutput() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput
+}
+
+type bucketIntelligentTieringArchivingRuleListFilterAndPtrType BucketIntelligentTieringArchivingRuleListFilterAndArgs
+
+func BucketIntelligentTieringArchivingRuleListFilterAndPtr(v *BucketIntelligentTieringArchivingRuleListFilterAndArgs) BucketIntelligentTieringArchivingRuleListFilterAndPtrInput {
+	return (*bucketIntelligentTieringArchivingRuleListFilterAndPtrType)(v)
+}
+
+func (*bucketIntelligentTieringArchivingRuleListFilterAndPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketIntelligentTieringArchivingRuleListFilterAnd)(nil)).Elem()
+}
+
+func (i *bucketIntelligentTieringArchivingRuleListFilterAndPtrType) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutput() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketIntelligentTieringArchivingRuleListFilterAndPtrType) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAnd)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndOutput() BucketIntelligentTieringArchivingRuleListFilterAndOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutput() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o.ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketIntelligentTieringArchivingRuleListFilterAnd) *BucketIntelligentTieringArchivingRuleListFilterAnd {
+		return &v
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterAnd) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndOutput) Tags() BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterAnd) []BucketIntelligentTieringArchivingRuleListFilterAndTag {
+		return v.Tags
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketIntelligentTieringArchivingRuleListFilterAnd)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutput() BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndPtrOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) Elem() BucketIntelligentTieringArchivingRuleListFilterAndOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilterAnd) BucketIntelligentTieringArchivingRuleListFilterAnd {
+		if v != nil {
+			return *v
+		}
+		var ret BucketIntelligentTieringArchivingRuleListFilterAnd
+		return ret
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilterAnd) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput) Tags() BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return o.ApplyT(func(v *BucketIntelligentTieringArchivingRuleListFilterAnd) []BucketIntelligentTieringArchivingRuleListFilterAndTag {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterAndTagInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterAndTagArgs and BucketIntelligentTieringArchivingRuleListFilterAndTagOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterAndTagInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterAndTagArgs{...}
+type BucketIntelligentTieringArchivingRuleListFilterAndTagInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndTag)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndTagArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndTagArgs) ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterAndTagOutput)
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterAndTagArrayInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterAndTagArray and BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterAndTagArrayInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterAndTagArray{ BucketIntelligentTieringArchivingRuleListFilterAndTagArgs{...} }
+type BucketIntelligentTieringArchivingRuleListFilterAndTagArrayInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndTagArray []BucketIntelligentTieringArchivingRuleListFilterAndTagInput
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListFilterAndTag)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndTagArray) ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterAndTagArray) ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndTagOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndTag)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndTagOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagOutput {
+	return o
+}
+
+// Tag key.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterAndTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterAndTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListFilterAndTag)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput) ToBucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput) Index(i pulumi.IntInput) BucketIntelligentTieringArchivingRuleListFilterAndTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketIntelligentTieringArchivingRuleListFilterAndTag {
+		return vs[0].([]BucketIntelligentTieringArchivingRuleListFilterAndTag)[vs[1].(int)]
+	}).(BucketIntelligentTieringArchivingRuleListFilterAndTagOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterTagInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterTagArgs and BucketIntelligentTieringArchivingRuleListFilterTagOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterTagInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterTagArgs{...}
+type BucketIntelligentTieringArchivingRuleListFilterTagInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterTagOutput() BucketIntelligentTieringArchivingRuleListFilterTagOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterTagOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterTagOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListFilterTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterTag)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterTagArgs) ToBucketIntelligentTieringArchivingRuleListFilterTagOutput() BucketIntelligentTieringArchivingRuleListFilterTagOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterTagOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterTagArgs) ToBucketIntelligentTieringArchivingRuleListFilterTagOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterTagOutput)
+}
+
+// BucketIntelligentTieringArchivingRuleListFilterTagArrayInput is an input type that accepts BucketIntelligentTieringArchivingRuleListFilterTagArray and BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListFilterTagArrayInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListFilterTagArray{ BucketIntelligentTieringArchivingRuleListFilterTagArgs{...} }
+type BucketIntelligentTieringArchivingRuleListFilterTagArrayInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput
+	ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterTagArray []BucketIntelligentTieringArchivingRuleListFilterTagInput
+
+func (BucketIntelligentTieringArchivingRuleListFilterTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListFilterTag)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterTagArray) ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListFilterTagArray) ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterTagOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterTag)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterTagOutput) ToBucketIntelligentTieringArchivingRuleListFilterTagOutput() BucketIntelligentTieringArchivingRuleListFilterTagOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterTagOutput) ToBucketIntelligentTieringArchivingRuleListFilterTagOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterTagOutput {
+	return o
+}
+
+// Tag key.
+func (o BucketIntelligentTieringArchivingRuleListFilterTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o BucketIntelligentTieringArchivingRuleListFilterTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListFilterTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListFilterTag)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput) ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutput() BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput) ToBucketIntelligentTieringArchivingRuleListFilterTagArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput) Index(i pulumi.IntInput) BucketIntelligentTieringArchivingRuleListFilterTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketIntelligentTieringArchivingRuleListFilterTag {
+		return vs[0].([]BucketIntelligentTieringArchivingRuleListFilterTag)[vs[1].(int)]
+	}).(BucketIntelligentTieringArchivingRuleListFilterTagOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListTiering struct {
+	// When `ruleId` is not `default`, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
+	AccessTier string `pulumi:"accessTier"`
+	// When the `ruleId` is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.
+	Days int `pulumi:"days"`
+}
+
+// BucketIntelligentTieringArchivingRuleListTieringInput is an input type that accepts BucketIntelligentTieringArchivingRuleListTieringArgs and BucketIntelligentTieringArchivingRuleListTieringOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListTieringInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListTieringArgs{...}
+type BucketIntelligentTieringArchivingRuleListTieringInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListTieringOutput() BucketIntelligentTieringArchivingRuleListTieringOutput
+	ToBucketIntelligentTieringArchivingRuleListTieringOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListTieringOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListTieringArgs struct {
+	// When `ruleId` is not `default`, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
+	AccessTier pulumi.StringInput `pulumi:"accessTier"`
+	// When the `ruleId` is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.
+	Days pulumi.IntInput `pulumi:"days"`
+}
+
+func (BucketIntelligentTieringArchivingRuleListTieringArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListTiering)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListTieringArgs) ToBucketIntelligentTieringArchivingRuleListTieringOutput() BucketIntelligentTieringArchivingRuleListTieringOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListTieringOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListTieringArgs) ToBucketIntelligentTieringArchivingRuleListTieringOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListTieringOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListTieringOutput)
+}
+
+// BucketIntelligentTieringArchivingRuleListTieringArrayInput is an input type that accepts BucketIntelligentTieringArchivingRuleListTieringArray and BucketIntelligentTieringArchivingRuleListTieringArrayOutput values.
+// You can construct a concrete instance of `BucketIntelligentTieringArchivingRuleListTieringArrayInput` via:
+//
+//	BucketIntelligentTieringArchivingRuleListTieringArray{ BucketIntelligentTieringArchivingRuleListTieringArgs{...} }
+type BucketIntelligentTieringArchivingRuleListTieringArrayInput interface {
+	pulumi.Input
+
+	ToBucketIntelligentTieringArchivingRuleListTieringArrayOutput() BucketIntelligentTieringArchivingRuleListTieringArrayOutput
+	ToBucketIntelligentTieringArchivingRuleListTieringArrayOutputWithContext(context.Context) BucketIntelligentTieringArchivingRuleListTieringArrayOutput
+}
+
+type BucketIntelligentTieringArchivingRuleListTieringArray []BucketIntelligentTieringArchivingRuleListTieringInput
+
+func (BucketIntelligentTieringArchivingRuleListTieringArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListTiering)(nil)).Elem()
+}
+
+func (i BucketIntelligentTieringArchivingRuleListTieringArray) ToBucketIntelligentTieringArchivingRuleListTieringArrayOutput() BucketIntelligentTieringArchivingRuleListTieringArrayOutput {
+	return i.ToBucketIntelligentTieringArchivingRuleListTieringArrayOutputWithContext(context.Background())
+}
+
+func (i BucketIntelligentTieringArchivingRuleListTieringArray) ToBucketIntelligentTieringArchivingRuleListTieringArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListTieringArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketIntelligentTieringArchivingRuleListTieringArrayOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListTieringOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListTieringOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListTiering)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListTieringOutput) ToBucketIntelligentTieringArchivingRuleListTieringOutput() BucketIntelligentTieringArchivingRuleListTieringOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListTieringOutput) ToBucketIntelligentTieringArchivingRuleListTieringOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListTieringOutput {
+	return o
+}
+
+// When `ruleId` is not `default`, this parameter is used to specify the archiving or deep archiving tier.  The possible value are: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
+func (o BucketIntelligentTieringArchivingRuleListTieringOutput) AccessTier() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListTiering) string { return v.AccessTier }).(pulumi.StringOutput)
+}
+
+// When the `ruleId` is not set to default, this specifies the number of days after which data is transitioned to the archive or deep archive tier in the intelligent tiering storage configuration. The archive tier (ARCHIVE_ACCESS) supports a range of 91 to 730 days. The deep archive tier (DEEP_ARCHIVE_ACCESS) supports a range of 180 to 730 days. Within the same rule, the number of days for the deep archive tier must be greater than the number of days for the archive tier.
+func (o BucketIntelligentTieringArchivingRuleListTieringOutput) Days() pulumi.IntOutput {
+	return o.ApplyT(func(v BucketIntelligentTieringArchivingRuleListTiering) int { return v.Days }).(pulumi.IntOutput)
+}
+
+type BucketIntelligentTieringArchivingRuleListTieringArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketIntelligentTieringArchivingRuleListTieringArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketIntelligentTieringArchivingRuleListTiering)(nil)).Elem()
+}
+
+func (o BucketIntelligentTieringArchivingRuleListTieringArrayOutput) ToBucketIntelligentTieringArchivingRuleListTieringArrayOutput() BucketIntelligentTieringArchivingRuleListTieringArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListTieringArrayOutput) ToBucketIntelligentTieringArchivingRuleListTieringArrayOutputWithContext(ctx context.Context) BucketIntelligentTieringArchivingRuleListTieringArrayOutput {
+	return o
+}
+
+func (o BucketIntelligentTieringArchivingRuleListTieringArrayOutput) Index(i pulumi.IntInput) BucketIntelligentTieringArchivingRuleListTieringOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketIntelligentTieringArchivingRuleListTiering {
+		return vs[0].([]BucketIntelligentTieringArchivingRuleListTiering)[vs[1].(int)]
+	}).(BucketIntelligentTieringArchivingRuleListTieringOutput)
 }
 
 type BucketInventoryDestination struct {
@@ -4473,6 +5256,299 @@ func (o BucketLifecycleRuleTransitionArrayOutput) Index(i pulumi.IntInput) Bucke
 	}).(BucketLifecycleRuleTransitionOutput)
 }
 
+type BucketObjectLockConfiguration struct {
+	// Enable object lock configuration.
+	Enabled bool `pulumi:"enabled"`
+	// Object locking configuration.
+	Rule *BucketObjectLockConfigurationRule `pulumi:"rule"`
+}
+
+// BucketObjectLockConfigurationInput is an input type that accepts BucketObjectLockConfigurationArgs and BucketObjectLockConfigurationOutput values.
+// You can construct a concrete instance of `BucketObjectLockConfigurationInput` via:
+//
+//	BucketObjectLockConfigurationArgs{...}
+type BucketObjectLockConfigurationInput interface {
+	pulumi.Input
+
+	ToBucketObjectLockConfigurationOutput() BucketObjectLockConfigurationOutput
+	ToBucketObjectLockConfigurationOutputWithContext(context.Context) BucketObjectLockConfigurationOutput
+}
+
+type BucketObjectLockConfigurationArgs struct {
+	// Enable object lock configuration.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Object locking configuration.
+	Rule BucketObjectLockConfigurationRulePtrInput `pulumi:"rule"`
+}
+
+func (BucketObjectLockConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketObjectLockConfiguration)(nil)).Elem()
+}
+
+func (i BucketObjectLockConfigurationArgs) ToBucketObjectLockConfigurationOutput() BucketObjectLockConfigurationOutput {
+	return i.ToBucketObjectLockConfigurationOutputWithContext(context.Background())
+}
+
+func (i BucketObjectLockConfigurationArgs) ToBucketObjectLockConfigurationOutputWithContext(ctx context.Context) BucketObjectLockConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationOutput)
+}
+
+func (i BucketObjectLockConfigurationArgs) ToBucketObjectLockConfigurationPtrOutput() BucketObjectLockConfigurationPtrOutput {
+	return i.ToBucketObjectLockConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i BucketObjectLockConfigurationArgs) ToBucketObjectLockConfigurationPtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationOutput).ToBucketObjectLockConfigurationPtrOutputWithContext(ctx)
+}
+
+// BucketObjectLockConfigurationPtrInput is an input type that accepts BucketObjectLockConfigurationArgs, BucketObjectLockConfigurationPtr and BucketObjectLockConfigurationPtrOutput values.
+// You can construct a concrete instance of `BucketObjectLockConfigurationPtrInput` via:
+//
+//	        BucketObjectLockConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketObjectLockConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToBucketObjectLockConfigurationPtrOutput() BucketObjectLockConfigurationPtrOutput
+	ToBucketObjectLockConfigurationPtrOutputWithContext(context.Context) BucketObjectLockConfigurationPtrOutput
+}
+
+type bucketObjectLockConfigurationPtrType BucketObjectLockConfigurationArgs
+
+func BucketObjectLockConfigurationPtr(v *BucketObjectLockConfigurationArgs) BucketObjectLockConfigurationPtrInput {
+	return (*bucketObjectLockConfigurationPtrType)(v)
+}
+
+func (*bucketObjectLockConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketObjectLockConfiguration)(nil)).Elem()
+}
+
+func (i *bucketObjectLockConfigurationPtrType) ToBucketObjectLockConfigurationPtrOutput() BucketObjectLockConfigurationPtrOutput {
+	return i.ToBucketObjectLockConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketObjectLockConfigurationPtrType) ToBucketObjectLockConfigurationPtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationPtrOutput)
+}
+
+type BucketObjectLockConfigurationOutput struct{ *pulumi.OutputState }
+
+func (BucketObjectLockConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketObjectLockConfiguration)(nil)).Elem()
+}
+
+func (o BucketObjectLockConfigurationOutput) ToBucketObjectLockConfigurationOutput() BucketObjectLockConfigurationOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationOutput) ToBucketObjectLockConfigurationOutputWithContext(ctx context.Context) BucketObjectLockConfigurationOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationOutput) ToBucketObjectLockConfigurationPtrOutput() BucketObjectLockConfigurationPtrOutput {
+	return o.ToBucketObjectLockConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o BucketObjectLockConfigurationOutput) ToBucketObjectLockConfigurationPtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketObjectLockConfiguration) *BucketObjectLockConfiguration {
+		return &v
+	}).(BucketObjectLockConfigurationPtrOutput)
+}
+
+// Enable object lock configuration.
+func (o BucketObjectLockConfigurationOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v BucketObjectLockConfiguration) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Object locking configuration.
+func (o BucketObjectLockConfigurationOutput) Rule() BucketObjectLockConfigurationRulePtrOutput {
+	return o.ApplyT(func(v BucketObjectLockConfiguration) *BucketObjectLockConfigurationRule { return v.Rule }).(BucketObjectLockConfigurationRulePtrOutput)
+}
+
+type BucketObjectLockConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketObjectLockConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketObjectLockConfiguration)(nil)).Elem()
+}
+
+func (o BucketObjectLockConfigurationPtrOutput) ToBucketObjectLockConfigurationPtrOutput() BucketObjectLockConfigurationPtrOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationPtrOutput) ToBucketObjectLockConfigurationPtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationPtrOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationPtrOutput) Elem() BucketObjectLockConfigurationOutput {
+	return o.ApplyT(func(v *BucketObjectLockConfiguration) BucketObjectLockConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret BucketObjectLockConfiguration
+		return ret
+	}).(BucketObjectLockConfigurationOutput)
+}
+
+// Enable object lock configuration.
+func (o BucketObjectLockConfigurationPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BucketObjectLockConfiguration) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Object locking configuration.
+func (o BucketObjectLockConfigurationPtrOutput) Rule() BucketObjectLockConfigurationRulePtrOutput {
+	return o.ApplyT(func(v *BucketObjectLockConfiguration) *BucketObjectLockConfigurationRule {
+		if v == nil {
+			return nil
+		}
+		return v.Rule
+	}).(BucketObjectLockConfigurationRulePtrOutput)
+}
+
+type BucketObjectLockConfigurationRule struct {
+	// Object lock default duration (range: 1-36500).
+	Days int `pulumi:"days"`
+}
+
+// BucketObjectLockConfigurationRuleInput is an input type that accepts BucketObjectLockConfigurationRuleArgs and BucketObjectLockConfigurationRuleOutput values.
+// You can construct a concrete instance of `BucketObjectLockConfigurationRuleInput` via:
+//
+//	BucketObjectLockConfigurationRuleArgs{...}
+type BucketObjectLockConfigurationRuleInput interface {
+	pulumi.Input
+
+	ToBucketObjectLockConfigurationRuleOutput() BucketObjectLockConfigurationRuleOutput
+	ToBucketObjectLockConfigurationRuleOutputWithContext(context.Context) BucketObjectLockConfigurationRuleOutput
+}
+
+type BucketObjectLockConfigurationRuleArgs struct {
+	// Object lock default duration (range: 1-36500).
+	Days pulumi.IntInput `pulumi:"days"`
+}
+
+func (BucketObjectLockConfigurationRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketObjectLockConfigurationRule)(nil)).Elem()
+}
+
+func (i BucketObjectLockConfigurationRuleArgs) ToBucketObjectLockConfigurationRuleOutput() BucketObjectLockConfigurationRuleOutput {
+	return i.ToBucketObjectLockConfigurationRuleOutputWithContext(context.Background())
+}
+
+func (i BucketObjectLockConfigurationRuleArgs) ToBucketObjectLockConfigurationRuleOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationRuleOutput)
+}
+
+func (i BucketObjectLockConfigurationRuleArgs) ToBucketObjectLockConfigurationRulePtrOutput() BucketObjectLockConfigurationRulePtrOutput {
+	return i.ToBucketObjectLockConfigurationRulePtrOutputWithContext(context.Background())
+}
+
+func (i BucketObjectLockConfigurationRuleArgs) ToBucketObjectLockConfigurationRulePtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationRuleOutput).ToBucketObjectLockConfigurationRulePtrOutputWithContext(ctx)
+}
+
+// BucketObjectLockConfigurationRulePtrInput is an input type that accepts BucketObjectLockConfigurationRuleArgs, BucketObjectLockConfigurationRulePtr and BucketObjectLockConfigurationRulePtrOutput values.
+// You can construct a concrete instance of `BucketObjectLockConfigurationRulePtrInput` via:
+//
+//	        BucketObjectLockConfigurationRuleArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketObjectLockConfigurationRulePtrInput interface {
+	pulumi.Input
+
+	ToBucketObjectLockConfigurationRulePtrOutput() BucketObjectLockConfigurationRulePtrOutput
+	ToBucketObjectLockConfigurationRulePtrOutputWithContext(context.Context) BucketObjectLockConfigurationRulePtrOutput
+}
+
+type bucketObjectLockConfigurationRulePtrType BucketObjectLockConfigurationRuleArgs
+
+func BucketObjectLockConfigurationRulePtr(v *BucketObjectLockConfigurationRuleArgs) BucketObjectLockConfigurationRulePtrInput {
+	return (*bucketObjectLockConfigurationRulePtrType)(v)
+}
+
+func (*bucketObjectLockConfigurationRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketObjectLockConfigurationRule)(nil)).Elem()
+}
+
+func (i *bucketObjectLockConfigurationRulePtrType) ToBucketObjectLockConfigurationRulePtrOutput() BucketObjectLockConfigurationRulePtrOutput {
+	return i.ToBucketObjectLockConfigurationRulePtrOutputWithContext(context.Background())
+}
+
+func (i *bucketObjectLockConfigurationRulePtrType) ToBucketObjectLockConfigurationRulePtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketObjectLockConfigurationRulePtrOutput)
+}
+
+type BucketObjectLockConfigurationRuleOutput struct{ *pulumi.OutputState }
+
+func (BucketObjectLockConfigurationRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketObjectLockConfigurationRule)(nil)).Elem()
+}
+
+func (o BucketObjectLockConfigurationRuleOutput) ToBucketObjectLockConfigurationRuleOutput() BucketObjectLockConfigurationRuleOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationRuleOutput) ToBucketObjectLockConfigurationRuleOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRuleOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationRuleOutput) ToBucketObjectLockConfigurationRulePtrOutput() BucketObjectLockConfigurationRulePtrOutput {
+	return o.ToBucketObjectLockConfigurationRulePtrOutputWithContext(context.Background())
+}
+
+func (o BucketObjectLockConfigurationRuleOutput) ToBucketObjectLockConfigurationRulePtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketObjectLockConfigurationRule) *BucketObjectLockConfigurationRule {
+		return &v
+	}).(BucketObjectLockConfigurationRulePtrOutput)
+}
+
+// Object lock default duration (range: 1-36500).
+func (o BucketObjectLockConfigurationRuleOutput) Days() pulumi.IntOutput {
+	return o.ApplyT(func(v BucketObjectLockConfigurationRule) int { return v.Days }).(pulumi.IntOutput)
+}
+
+type BucketObjectLockConfigurationRulePtrOutput struct{ *pulumi.OutputState }
+
+func (BucketObjectLockConfigurationRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketObjectLockConfigurationRule)(nil)).Elem()
+}
+
+func (o BucketObjectLockConfigurationRulePtrOutput) ToBucketObjectLockConfigurationRulePtrOutput() BucketObjectLockConfigurationRulePtrOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationRulePtrOutput) ToBucketObjectLockConfigurationRulePtrOutputWithContext(ctx context.Context) BucketObjectLockConfigurationRulePtrOutput {
+	return o
+}
+
+func (o BucketObjectLockConfigurationRulePtrOutput) Elem() BucketObjectLockConfigurationRuleOutput {
+	return o.ApplyT(func(v *BucketObjectLockConfigurationRule) BucketObjectLockConfigurationRule {
+		if v != nil {
+			return *v
+		}
+		var ret BucketObjectLockConfigurationRule
+		return ret
+	}).(BucketObjectLockConfigurationRuleOutput)
+}
+
+// Object lock default duration (range: 1-36500).
+func (o BucketObjectLockConfigurationRulePtrOutput) Days() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BucketObjectLockConfigurationRule) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Days
+	}).(pulumi.IntPtrOutput)
+}
+
 type BucketOriginDomainRule struct {
 	// Specify domain host.
 	Domain string `pulumi:"domain"`
@@ -4782,16 +5858,26 @@ func (o BucketOriginPullRuleArrayOutput) Index(i pulumi.IntInput) BucketOriginPu
 }
 
 type BucketReplicaRule struct {
+	// Synchronized deletion marker.
+	DeleteMarkerReplication *BucketReplicaRuleDeleteMarkerReplication `pulumi:"deleteMarkerReplication"`
 	// Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
 	DestinationBucket string `pulumi:"destinationBucket"`
-	// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+	// This field must be included when `source_selection_criteria.sse_kms_encrypted_objects.status` is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.
+	DestinationEncryptionKmsKeyId *string `pulumi:"destinationEncryptionKmsKeyId"`
+	// Storage class of destination, available values: `Standard`, `Intelligent_Tiering`, `Standard_IA`. default is following current class of destination.
 	DestinationStorageClass *string `pulumi:"destinationStorageClass"`
+	// Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.
+	Filter *BucketReplicaRuleFilter `pulumi:"filter"`
 	// Name of a specific rule.
 	Id *string `pulumi:"id"`
 	// Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
 	Prefix *string `pulumi:"prefix"`
+	// Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.
+	Priority *int `pulumi:"priority"`
+	// This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.
+	SourceSelectionCriteria *BucketReplicaRuleSourceSelectionCriteria `pulumi:"sourceSelectionCriteria"`
 	// Status identifier, available values: `Enabled`, `Disabled`.
-	Status string `pulumi:"status"`
+	Status *string `pulumi:"status"`
 }
 
 // BucketReplicaRuleInput is an input type that accepts BucketReplicaRuleArgs and BucketReplicaRuleOutput values.
@@ -4806,16 +5892,26 @@ type BucketReplicaRuleInput interface {
 }
 
 type BucketReplicaRuleArgs struct {
+	// Synchronized deletion marker.
+	DeleteMarkerReplication BucketReplicaRuleDeleteMarkerReplicationPtrInput `pulumi:"deleteMarkerReplication"`
 	// Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
 	DestinationBucket pulumi.StringInput `pulumi:"destinationBucket"`
-	// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+	// This field must be included when `source_selection_criteria.sse_kms_encrypted_objects.status` is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.
+	DestinationEncryptionKmsKeyId pulumi.StringPtrInput `pulumi:"destinationEncryptionKmsKeyId"`
+	// Storage class of destination, available values: `Standard`, `Intelligent_Tiering`, `Standard_IA`. default is following current class of destination.
 	DestinationStorageClass pulumi.StringPtrInput `pulumi:"destinationStorageClass"`
+	// Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.
+	Filter BucketReplicaRuleFilterPtrInput `pulumi:"filter"`
 	// Name of a specific rule.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Prefix matching policy. Policies cannot overlap; otherwise, an error will be returned. To match the root directory, leave this parameter empty.
 	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.
+	SourceSelectionCriteria BucketReplicaRuleSourceSelectionCriteriaPtrInput `pulumi:"sourceSelectionCriteria"`
 	// Status identifier, available values: `Enabled`, `Disabled`.
-	Status pulumi.StringInput `pulumi:"status"`
+	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (BucketReplicaRuleArgs) ElementType() reflect.Type {
@@ -4869,14 +5965,29 @@ func (o BucketReplicaRuleOutput) ToBucketReplicaRuleOutputWithContext(ctx contex
 	return o
 }
 
+// Synchronized deletion marker.
+func (o BucketReplicaRuleOutput) DeleteMarkerReplication() BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *BucketReplicaRuleDeleteMarkerReplication { return v.DeleteMarkerReplication }).(BucketReplicaRuleDeleteMarkerReplicationPtrOutput)
+}
+
 // Destination bucket identifier, format: `qcs::cos:<region>::<bucketname-appid>`. NOTE: destination bucket must enable versioning.
 func (o BucketReplicaRuleOutput) DestinationBucket() pulumi.StringOutput {
 	return o.ApplyT(func(v BucketReplicaRule) string { return v.DestinationBucket }).(pulumi.StringOutput)
 }
 
-// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+// This field must be included when `source_selection_criteria.sse_kms_encrypted_objects.status` is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.
+func (o BucketReplicaRuleOutput) DestinationEncryptionKmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *string { return v.DestinationEncryptionKmsKeyId }).(pulumi.StringPtrOutput)
+}
+
+// Storage class of destination, available values: `Standard`, `Intelligent_Tiering`, `Standard_IA`. default is following current class of destination.
 func (o BucketReplicaRuleOutput) DestinationStorageClass() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketReplicaRule) *string { return v.DestinationStorageClass }).(pulumi.StringPtrOutput)
+}
+
+// Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.
+func (o BucketReplicaRuleOutput) Filter() BucketReplicaRuleFilterPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *BucketReplicaRuleFilter { return v.Filter }).(BucketReplicaRuleFilterPtrOutput)
 }
 
 // Name of a specific rule.
@@ -4889,9 +6000,19 @@ func (o BucketReplicaRuleOutput) Prefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketReplicaRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
 }
 
+// Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.
+func (o BucketReplicaRuleOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+// This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.
+func (o BucketReplicaRuleOutput) SourceSelectionCriteria() BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *BucketReplicaRuleSourceSelectionCriteria { return v.SourceSelectionCriteria }).(BucketReplicaRuleSourceSelectionCriteriaPtrOutput)
+}
+
 // Status identifier, available values: `Enabled`, `Disabled`.
-func (o BucketReplicaRuleOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v BucketReplicaRule) string { return v.Status }).(pulumi.StringOutput)
+func (o BucketReplicaRuleOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRule) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
 type BucketReplicaRuleArrayOutput struct{ *pulumi.OutputState }
@@ -4912,6 +6033,837 @@ func (o BucketReplicaRuleArrayOutput) Index(i pulumi.IntInput) BucketReplicaRule
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketReplicaRule {
 		return vs[0].([]BucketReplicaRule)[vs[1].(int)]
 	}).(BucketReplicaRuleOutput)
+}
+
+type BucketReplicaRuleDeleteMarkerReplication struct {
+	// Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.
+	Status *string `pulumi:"status"`
+}
+
+// BucketReplicaRuleDeleteMarkerReplicationInput is an input type that accepts BucketReplicaRuleDeleteMarkerReplicationArgs and BucketReplicaRuleDeleteMarkerReplicationOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleDeleteMarkerReplicationInput` via:
+//
+//	BucketReplicaRuleDeleteMarkerReplicationArgs{...}
+type BucketReplicaRuleDeleteMarkerReplicationInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleDeleteMarkerReplicationOutput() BucketReplicaRuleDeleteMarkerReplicationOutput
+	ToBucketReplicaRuleDeleteMarkerReplicationOutputWithContext(context.Context) BucketReplicaRuleDeleteMarkerReplicationOutput
+}
+
+type BucketReplicaRuleDeleteMarkerReplicationArgs struct {
+	// Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (BucketReplicaRuleDeleteMarkerReplicationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleDeleteMarkerReplication)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleDeleteMarkerReplicationArgs) ToBucketReplicaRuleDeleteMarkerReplicationOutput() BucketReplicaRuleDeleteMarkerReplicationOutput {
+	return i.ToBucketReplicaRuleDeleteMarkerReplicationOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleDeleteMarkerReplicationArgs) ToBucketReplicaRuleDeleteMarkerReplicationOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleDeleteMarkerReplicationOutput)
+}
+
+func (i BucketReplicaRuleDeleteMarkerReplicationArgs) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutput() BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return i.ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleDeleteMarkerReplicationArgs) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleDeleteMarkerReplicationOutput).ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(ctx)
+}
+
+// BucketReplicaRuleDeleteMarkerReplicationPtrInput is an input type that accepts BucketReplicaRuleDeleteMarkerReplicationArgs, BucketReplicaRuleDeleteMarkerReplicationPtr and BucketReplicaRuleDeleteMarkerReplicationPtrOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleDeleteMarkerReplicationPtrInput` via:
+//
+//	        BucketReplicaRuleDeleteMarkerReplicationArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketReplicaRuleDeleteMarkerReplicationPtrInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleDeleteMarkerReplicationPtrOutput() BucketReplicaRuleDeleteMarkerReplicationPtrOutput
+	ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(context.Context) BucketReplicaRuleDeleteMarkerReplicationPtrOutput
+}
+
+type bucketReplicaRuleDeleteMarkerReplicationPtrType BucketReplicaRuleDeleteMarkerReplicationArgs
+
+func BucketReplicaRuleDeleteMarkerReplicationPtr(v *BucketReplicaRuleDeleteMarkerReplicationArgs) BucketReplicaRuleDeleteMarkerReplicationPtrInput {
+	return (*bucketReplicaRuleDeleteMarkerReplicationPtrType)(v)
+}
+
+func (*bucketReplicaRuleDeleteMarkerReplicationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleDeleteMarkerReplication)(nil)).Elem()
+}
+
+func (i *bucketReplicaRuleDeleteMarkerReplicationPtrType) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutput() BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return i.ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketReplicaRuleDeleteMarkerReplicationPtrType) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleDeleteMarkerReplicationPtrOutput)
+}
+
+type BucketReplicaRuleDeleteMarkerReplicationOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleDeleteMarkerReplicationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleDeleteMarkerReplication)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationOutput) ToBucketReplicaRuleDeleteMarkerReplicationOutput() BucketReplicaRuleDeleteMarkerReplicationOutput {
+	return o
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationOutput) ToBucketReplicaRuleDeleteMarkerReplicationOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationOutput {
+	return o
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationOutput) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutput() BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return o.ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(context.Background())
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationOutput) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketReplicaRuleDeleteMarkerReplication) *BucketReplicaRuleDeleteMarkerReplication {
+		return &v
+	}).(BucketReplicaRuleDeleteMarkerReplicationPtrOutput)
+}
+
+// Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.
+func (o BucketReplicaRuleDeleteMarkerReplicationOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleDeleteMarkerReplication) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type BucketReplicaRuleDeleteMarkerReplicationPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleDeleteMarkerReplicationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleDeleteMarkerReplication)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationPtrOutput) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutput() BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationPtrOutput) ToBucketReplicaRuleDeleteMarkerReplicationPtrOutputWithContext(ctx context.Context) BucketReplicaRuleDeleteMarkerReplicationPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleDeleteMarkerReplicationPtrOutput) Elem() BucketReplicaRuleDeleteMarkerReplicationOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleDeleteMarkerReplication) BucketReplicaRuleDeleteMarkerReplication {
+		if v != nil {
+			return *v
+		}
+		var ret BucketReplicaRuleDeleteMarkerReplication
+		return ret
+	}).(BucketReplicaRuleDeleteMarkerReplicationOutput)
+}
+
+// Whether to synchronously delete the tag, supports Disabled or Enabled. The default value is Enabled, meaning the tag will be deleted synchronously.
+func (o BucketReplicaRuleDeleteMarkerReplicationPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleDeleteMarkerReplication) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Status
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketReplicaRuleFilter struct {
+	// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+	And *BucketReplicaRuleFilterAnd `pulumi:"and"`
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix *string `pulumi:"prefix"`
+}
+
+// BucketReplicaRuleFilterInput is an input type that accepts BucketReplicaRuleFilterArgs and BucketReplicaRuleFilterOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterInput` via:
+//
+//	BucketReplicaRuleFilterArgs{...}
+type BucketReplicaRuleFilterInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterOutput() BucketReplicaRuleFilterOutput
+	ToBucketReplicaRuleFilterOutputWithContext(context.Context) BucketReplicaRuleFilterOutput
+}
+
+type BucketReplicaRuleFilterArgs struct {
+	// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+	And BucketReplicaRuleFilterAndPtrInput `pulumi:"and"`
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+}
+
+func (BucketReplicaRuleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilter)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleFilterArgs) ToBucketReplicaRuleFilterOutput() BucketReplicaRuleFilterOutput {
+	return i.ToBucketReplicaRuleFilterOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterArgs) ToBucketReplicaRuleFilterOutputWithContext(ctx context.Context) BucketReplicaRuleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterOutput)
+}
+
+func (i BucketReplicaRuleFilterArgs) ToBucketReplicaRuleFilterPtrOutput() BucketReplicaRuleFilterPtrOutput {
+	return i.ToBucketReplicaRuleFilterPtrOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterArgs) ToBucketReplicaRuleFilterPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterOutput).ToBucketReplicaRuleFilterPtrOutputWithContext(ctx)
+}
+
+// BucketReplicaRuleFilterPtrInput is an input type that accepts BucketReplicaRuleFilterArgs, BucketReplicaRuleFilterPtr and BucketReplicaRuleFilterPtrOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterPtrInput` via:
+//
+//	        BucketReplicaRuleFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketReplicaRuleFilterPtrInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterPtrOutput() BucketReplicaRuleFilterPtrOutput
+	ToBucketReplicaRuleFilterPtrOutputWithContext(context.Context) BucketReplicaRuleFilterPtrOutput
+}
+
+type bucketReplicaRuleFilterPtrType BucketReplicaRuleFilterArgs
+
+func BucketReplicaRuleFilterPtr(v *BucketReplicaRuleFilterArgs) BucketReplicaRuleFilterPtrInput {
+	return (*bucketReplicaRuleFilterPtrType)(v)
+}
+
+func (*bucketReplicaRuleFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleFilter)(nil)).Elem()
+}
+
+func (i *bucketReplicaRuleFilterPtrType) ToBucketReplicaRuleFilterPtrOutput() BucketReplicaRuleFilterPtrOutput {
+	return i.ToBucketReplicaRuleFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketReplicaRuleFilterPtrType) ToBucketReplicaRuleFilterPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterPtrOutput)
+}
+
+type BucketReplicaRuleFilterOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilter)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterOutput) ToBucketReplicaRuleFilterOutput() BucketReplicaRuleFilterOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterOutput) ToBucketReplicaRuleFilterOutputWithContext(ctx context.Context) BucketReplicaRuleFilterOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterOutput) ToBucketReplicaRuleFilterPtrOutput() BucketReplicaRuleFilterPtrOutput {
+	return o.ToBucketReplicaRuleFilterPtrOutputWithContext(context.Background())
+}
+
+func (o BucketReplicaRuleFilterOutput) ToBucketReplicaRuleFilterPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketReplicaRuleFilter) *BucketReplicaRuleFilter {
+		return &v
+	}).(BucketReplicaRuleFilterPtrOutput)
+}
+
+// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+func (o BucketReplicaRuleFilterOutput) And() BucketReplicaRuleFilterAndPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilter) *BucketReplicaRuleFilterAnd { return v.And }).(BucketReplicaRuleFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketReplicaRuleFilterOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilter) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+type BucketReplicaRuleFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleFilter)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterPtrOutput) ToBucketReplicaRuleFilterPtrOutput() BucketReplicaRuleFilterPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterPtrOutput) ToBucketReplicaRuleFilterPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterPtrOutput) Elem() BucketReplicaRuleFilterOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilter) BucketReplicaRuleFilter {
+		if v != nil {
+			return *v
+		}
+		var ret BucketReplicaRuleFilter
+		return ret
+	}).(BucketReplicaRuleFilterOutput)
+}
+
+// When filtering objects to be copied, if both prefix and object tag conditions are required simultaneously, or if multiple object tag conditions are needed, they must be enclosed in an `And` statement.
+func (o BucketReplicaRuleFilterPtrOutput) And() BucketReplicaRuleFilterAndPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilter) *BucketReplicaRuleFilterAnd {
+		if v == nil {
+			return nil
+		}
+		return v.And
+	}).(BucketReplicaRuleFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketReplicaRuleFilterPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilter) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+type BucketReplicaRuleFilterAnd struct {
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix *string `pulumi:"prefix"`
+	// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+	Tags []BucketReplicaRuleFilterAndTag `pulumi:"tags"`
+}
+
+// BucketReplicaRuleFilterAndInput is an input type that accepts BucketReplicaRuleFilterAndArgs and BucketReplicaRuleFilterAndOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterAndInput` via:
+//
+//	BucketReplicaRuleFilterAndArgs{...}
+type BucketReplicaRuleFilterAndInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterAndOutput() BucketReplicaRuleFilterAndOutput
+	ToBucketReplicaRuleFilterAndOutputWithContext(context.Context) BucketReplicaRuleFilterAndOutput
+}
+
+type BucketReplicaRuleFilterAndArgs struct {
+	// Filter objects by prefix; you can specify at most one prefix.
+	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+	Tags BucketReplicaRuleFilterAndTagArrayInput `pulumi:"tags"`
+}
+
+func (BucketReplicaRuleFilterAndArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilterAnd)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleFilterAndArgs) ToBucketReplicaRuleFilterAndOutput() BucketReplicaRuleFilterAndOutput {
+	return i.ToBucketReplicaRuleFilterAndOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterAndArgs) ToBucketReplicaRuleFilterAndOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterAndOutput)
+}
+
+func (i BucketReplicaRuleFilterAndArgs) ToBucketReplicaRuleFilterAndPtrOutput() BucketReplicaRuleFilterAndPtrOutput {
+	return i.ToBucketReplicaRuleFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterAndArgs) ToBucketReplicaRuleFilterAndPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterAndOutput).ToBucketReplicaRuleFilterAndPtrOutputWithContext(ctx)
+}
+
+// BucketReplicaRuleFilterAndPtrInput is an input type that accepts BucketReplicaRuleFilterAndArgs, BucketReplicaRuleFilterAndPtr and BucketReplicaRuleFilterAndPtrOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterAndPtrInput` via:
+//
+//	        BucketReplicaRuleFilterAndArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketReplicaRuleFilterAndPtrInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterAndPtrOutput() BucketReplicaRuleFilterAndPtrOutput
+	ToBucketReplicaRuleFilterAndPtrOutputWithContext(context.Context) BucketReplicaRuleFilterAndPtrOutput
+}
+
+type bucketReplicaRuleFilterAndPtrType BucketReplicaRuleFilterAndArgs
+
+func BucketReplicaRuleFilterAndPtr(v *BucketReplicaRuleFilterAndArgs) BucketReplicaRuleFilterAndPtrInput {
+	return (*bucketReplicaRuleFilterAndPtrType)(v)
+}
+
+func (*bucketReplicaRuleFilterAndPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleFilterAnd)(nil)).Elem()
+}
+
+func (i *bucketReplicaRuleFilterAndPtrType) ToBucketReplicaRuleFilterAndPtrOutput() BucketReplicaRuleFilterAndPtrOutput {
+	return i.ToBucketReplicaRuleFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketReplicaRuleFilterAndPtrType) ToBucketReplicaRuleFilterAndPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterAndPtrOutput)
+}
+
+type BucketReplicaRuleFilterAndOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterAndOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilterAnd)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterAndOutput) ToBucketReplicaRuleFilterAndOutput() BucketReplicaRuleFilterAndOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndOutput) ToBucketReplicaRuleFilterAndOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndOutput) ToBucketReplicaRuleFilterAndPtrOutput() BucketReplicaRuleFilterAndPtrOutput {
+	return o.ToBucketReplicaRuleFilterAndPtrOutputWithContext(context.Background())
+}
+
+func (o BucketReplicaRuleFilterAndOutput) ToBucketReplicaRuleFilterAndPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketReplicaRuleFilterAnd) *BucketReplicaRuleFilterAnd {
+		return &v
+	}).(BucketReplicaRuleFilterAndPtrOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketReplicaRuleFilterAndOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilterAnd) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+func (o BucketReplicaRuleFilterAndOutput) Tags() BucketReplicaRuleFilterAndTagArrayOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilterAnd) []BucketReplicaRuleFilterAndTag { return v.Tags }).(BucketReplicaRuleFilterAndTagArrayOutput)
+}
+
+type BucketReplicaRuleFilterAndPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterAndPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleFilterAnd)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterAndPtrOutput) ToBucketReplicaRuleFilterAndPtrOutput() BucketReplicaRuleFilterAndPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndPtrOutput) ToBucketReplicaRuleFilterAndPtrOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndPtrOutput) Elem() BucketReplicaRuleFilterAndOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilterAnd) BucketReplicaRuleFilterAnd {
+		if v != nil {
+			return *v
+		}
+		var ret BucketReplicaRuleFilterAnd
+		return ret
+	}).(BucketReplicaRuleFilterAndOutput)
+}
+
+// Filter objects by prefix; you can specify at most one prefix.
+func (o BucketReplicaRuleFilterAndPtrOutput) Prefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilterAnd) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Prefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// When filtering objects to be copied, you can use object tags (multiple tags are supported) as filtering criteria, with a maximum of 10 tags allowed. After adding tags as filtering criteria, the `delete_marker_replication.status` option must be set to false.
+func (o BucketReplicaRuleFilterAndPtrOutput) Tags() BucketReplicaRuleFilterAndTagArrayOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleFilterAnd) []BucketReplicaRuleFilterAndTag {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(BucketReplicaRuleFilterAndTagArrayOutput)
+}
+
+type BucketReplicaRuleFilterAndTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// BucketReplicaRuleFilterAndTagInput is an input type that accepts BucketReplicaRuleFilterAndTagArgs and BucketReplicaRuleFilterAndTagOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterAndTagInput` via:
+//
+//	BucketReplicaRuleFilterAndTagArgs{...}
+type BucketReplicaRuleFilterAndTagInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterAndTagOutput() BucketReplicaRuleFilterAndTagOutput
+	ToBucketReplicaRuleFilterAndTagOutputWithContext(context.Context) BucketReplicaRuleFilterAndTagOutput
+}
+
+type BucketReplicaRuleFilterAndTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (BucketReplicaRuleFilterAndTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilterAndTag)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleFilterAndTagArgs) ToBucketReplicaRuleFilterAndTagOutput() BucketReplicaRuleFilterAndTagOutput {
+	return i.ToBucketReplicaRuleFilterAndTagOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterAndTagArgs) ToBucketReplicaRuleFilterAndTagOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterAndTagOutput)
+}
+
+// BucketReplicaRuleFilterAndTagArrayInput is an input type that accepts BucketReplicaRuleFilterAndTagArray and BucketReplicaRuleFilterAndTagArrayOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleFilterAndTagArrayInput` via:
+//
+//	BucketReplicaRuleFilterAndTagArray{ BucketReplicaRuleFilterAndTagArgs{...} }
+type BucketReplicaRuleFilterAndTagArrayInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleFilterAndTagArrayOutput() BucketReplicaRuleFilterAndTagArrayOutput
+	ToBucketReplicaRuleFilterAndTagArrayOutputWithContext(context.Context) BucketReplicaRuleFilterAndTagArrayOutput
+}
+
+type BucketReplicaRuleFilterAndTagArray []BucketReplicaRuleFilterAndTagInput
+
+func (BucketReplicaRuleFilterAndTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketReplicaRuleFilterAndTag)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleFilterAndTagArray) ToBucketReplicaRuleFilterAndTagArrayOutput() BucketReplicaRuleFilterAndTagArrayOutput {
+	return i.ToBucketReplicaRuleFilterAndTagArrayOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleFilterAndTagArray) ToBucketReplicaRuleFilterAndTagArrayOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleFilterAndTagArrayOutput)
+}
+
+type BucketReplicaRuleFilterAndTagOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterAndTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleFilterAndTag)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterAndTagOutput) ToBucketReplicaRuleFilterAndTagOutput() BucketReplicaRuleFilterAndTagOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndTagOutput) ToBucketReplicaRuleFilterAndTagOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndTagOutput {
+	return o
+}
+
+// Tag key.
+func (o BucketReplicaRuleFilterAndTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilterAndTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o BucketReplicaRuleFilterAndTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v BucketReplicaRuleFilterAndTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type BucketReplicaRuleFilterAndTagArrayOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleFilterAndTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BucketReplicaRuleFilterAndTag)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleFilterAndTagArrayOutput) ToBucketReplicaRuleFilterAndTagArrayOutput() BucketReplicaRuleFilterAndTagArrayOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndTagArrayOutput) ToBucketReplicaRuleFilterAndTagArrayOutputWithContext(ctx context.Context) BucketReplicaRuleFilterAndTagArrayOutput {
+	return o
+}
+
+func (o BucketReplicaRuleFilterAndTagArrayOutput) Index(i pulumi.IntInput) BucketReplicaRuleFilterAndTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BucketReplicaRuleFilterAndTag {
+		return vs[0].([]BucketReplicaRuleFilterAndTag)[vs[1].(int)]
+	}).(BucketReplicaRuleFilterAndTagOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteria struct {
+	// Choose whether to copy the KMS-encrypted objects.
+	SseKmsEncryptedObjects *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects `pulumi:"sseKmsEncryptedObjects"`
+}
+
+// BucketReplicaRuleSourceSelectionCriteriaInput is an input type that accepts BucketReplicaRuleSourceSelectionCriteriaArgs and BucketReplicaRuleSourceSelectionCriteriaOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleSourceSelectionCriteriaInput` via:
+//
+//	BucketReplicaRuleSourceSelectionCriteriaArgs{...}
+type BucketReplicaRuleSourceSelectionCriteriaInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleSourceSelectionCriteriaOutput() BucketReplicaRuleSourceSelectionCriteriaOutput
+	ToBucketReplicaRuleSourceSelectionCriteriaOutputWithContext(context.Context) BucketReplicaRuleSourceSelectionCriteriaOutput
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaArgs struct {
+	// Choose whether to copy the KMS-encrypted objects.
+	SseKmsEncryptedObjects BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput `pulumi:"sseKmsEncryptedObjects"`
+}
+
+func (BucketReplicaRuleSourceSelectionCriteriaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteria)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaArgs) ToBucketReplicaRuleSourceSelectionCriteriaOutput() BucketReplicaRuleSourceSelectionCriteriaOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaArgs) ToBucketReplicaRuleSourceSelectionCriteriaOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaOutput)
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaArgs) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutput() BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaArgs) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaOutput).ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(ctx)
+}
+
+// BucketReplicaRuleSourceSelectionCriteriaPtrInput is an input type that accepts BucketReplicaRuleSourceSelectionCriteriaArgs, BucketReplicaRuleSourceSelectionCriteriaPtr and BucketReplicaRuleSourceSelectionCriteriaPtrOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleSourceSelectionCriteriaPtrInput` via:
+//
+//	        BucketReplicaRuleSourceSelectionCriteriaArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketReplicaRuleSourceSelectionCriteriaPtrInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleSourceSelectionCriteriaPtrOutput() BucketReplicaRuleSourceSelectionCriteriaPtrOutput
+	ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(context.Context) BucketReplicaRuleSourceSelectionCriteriaPtrOutput
+}
+
+type bucketReplicaRuleSourceSelectionCriteriaPtrType BucketReplicaRuleSourceSelectionCriteriaArgs
+
+func BucketReplicaRuleSourceSelectionCriteriaPtr(v *BucketReplicaRuleSourceSelectionCriteriaArgs) BucketReplicaRuleSourceSelectionCriteriaPtrInput {
+	return (*bucketReplicaRuleSourceSelectionCriteriaPtrType)(v)
+}
+
+func (*bucketReplicaRuleSourceSelectionCriteriaPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleSourceSelectionCriteria)(nil)).Elem()
+}
+
+func (i *bucketReplicaRuleSourceSelectionCriteriaPtrType) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutput() BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketReplicaRuleSourceSelectionCriteriaPtrType) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaPtrOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleSourceSelectionCriteriaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteria)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaOutput) ToBucketReplicaRuleSourceSelectionCriteriaOutput() BucketReplicaRuleSourceSelectionCriteriaOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaOutput) ToBucketReplicaRuleSourceSelectionCriteriaOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaOutput) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutput() BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return o.ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(context.Background())
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaOutput) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketReplicaRuleSourceSelectionCriteria) *BucketReplicaRuleSourceSelectionCriteria {
+		return &v
+	}).(BucketReplicaRuleSourceSelectionCriteriaPtrOutput)
+}
+
+// Choose whether to copy the KMS-encrypted objects.
+func (o BucketReplicaRuleSourceSelectionCriteriaOutput) SseKmsEncryptedObjects() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleSourceSelectionCriteria) *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects {
+		return v.SseKmsEncryptedObjects
+	}).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleSourceSelectionCriteriaPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleSourceSelectionCriteria)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaPtrOutput) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutput() BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaPtrOutput) ToBucketReplicaRuleSourceSelectionCriteriaPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaPtrOutput) Elem() BucketReplicaRuleSourceSelectionCriteriaOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleSourceSelectionCriteria) BucketReplicaRuleSourceSelectionCriteria {
+		if v != nil {
+			return *v
+		}
+		var ret BucketReplicaRuleSourceSelectionCriteria
+		return ret
+	}).(BucketReplicaRuleSourceSelectionCriteriaOutput)
+}
+
+// Choose whether to copy the KMS-encrypted objects.
+func (o BucketReplicaRuleSourceSelectionCriteriaPtrOutput) SseKmsEncryptedObjects() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleSourceSelectionCriteria) *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects {
+		if v == nil {
+			return nil
+		}
+		return v.SseKmsEncryptedObjects
+	}).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects struct {
+	// Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.
+	Status *string `pulumi:"status"`
+}
+
+// BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsInput is an input type that accepts BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs and BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsInput` via:
+//
+//	BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{...}
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput
+	ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutputWithContext(context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs struct {
+	// Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects)(nil)).Elem()
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput)
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput).ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(ctx)
+}
+
+// BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput is an input type that accepts BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs, BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtr and BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput values.
+// You can construct a concrete instance of `BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput` via:
+//
+//	        BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{...}
+//
+//	or:
+//
+//	        nil
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput interface {
+	pulumi.Input
+
+	ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput
+	ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput
+}
+
+type bucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrType BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs
+
+func BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtr(v *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput {
+	return (*bucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrType)(v)
+}
+
+func (*bucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects)(nil)).Elem()
+}
+
+func (i *bucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrType) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return i.ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i *bucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrType) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o.ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(context.Background())
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects) *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects {
+		return &v
+	}).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput)
+}
+
+// Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput struct{ *pulumi.OutputState }
+
+func (BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects)(nil)).Elem()
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput) ToBucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutputWithContext(ctx context.Context) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput {
+	return o
+}
+
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput) Elem() BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects) BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects {
+		if v != nil {
+			return *v
+		}
+		var ret BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects
+		return ret
+	}).(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput)
+}
+
+// Choose whether to copy KMS encrypted objects; supported values are Enabled and Disabled.
+func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjects) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Status
+	}).(pulumi.StringPtrOutput)
 }
 
 type BucketWebsite struct {
@@ -7811,9 +9763,9 @@ type GetBucketsBucketListOriginDomainRule struct {
 	// Specify domain host.
 	Domain string `pulumi:"domain"`
 	// Domain status, default: `ENABLED`.
-	Status *string `pulumi:"status"`
+	Status string `pulumi:"status"`
 	// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
-	Type *string `pulumi:"type"`
+	Type string `pulumi:"type"`
 }
 
 // GetBucketsBucketListOriginDomainRuleInput is an input type that accepts GetBucketsBucketListOriginDomainRuleArgs and GetBucketsBucketListOriginDomainRuleOutput values.
@@ -7831,9 +9783,9 @@ type GetBucketsBucketListOriginDomainRuleArgs struct {
 	// Specify domain host.
 	Domain pulumi.StringInput `pulumi:"domain"`
 	// Domain status, default: `ENABLED`.
-	Status pulumi.StringPtrInput `pulumi:"status"`
+	Status pulumi.StringInput `pulumi:"status"`
 	// Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
-	Type pulumi.StringPtrInput `pulumi:"type"`
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (GetBucketsBucketListOriginDomainRuleArgs) ElementType() reflect.Type {
@@ -7893,13 +9845,13 @@ func (o GetBucketsBucketListOriginDomainRuleOutput) Domain() pulumi.StringOutput
 }
 
 // Domain status, default: `ENABLED`.
-func (o GetBucketsBucketListOriginDomainRuleOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) *string { return v.Status }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginDomainRuleOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) string { return v.Status }).(pulumi.StringOutput)
 }
 
 // Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
-func (o GetBucketsBucketListOriginDomainRuleOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) *string { return v.Type }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginDomainRuleOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginDomainRule) string { return v.Type }).(pulumi.StringOutput)
 }
 
 type GetBucketsBucketListOriginDomainRuleArrayOutput struct{ *pulumi.OutputState }
@@ -7923,24 +9875,26 @@ func (o GetBucketsBucketListOriginDomainRuleArrayOutput) Index(i pulumi.IntInput
 }
 
 type GetBucketsBucketListOriginPullRule struct {
+	// Back to source mode. Allow value: Proxy, Mirror, Redirect.
+	BackToSourceMode string `pulumi:"backToSourceMode"`
 	// Specifies the custom headers that you can add for COS to access your origin server.
 	CustomHttpHeaders map[string]string `pulumi:"customHttpHeaders"`
 	// Specifies the pass through headers when accessing the origin server.
 	FollowHttpHeaders []string `pulumi:"followHttpHeaders"`
 	// Specifies whether to pass through COS request query string when accessing the origin server.
-	FollowQueryString *bool `pulumi:"followQueryString"`
+	FollowQueryString bool `pulumi:"followQueryString"`
 	// Specifies whether to follow 3XX redirect to another origin server to pull data from.
-	FollowRedirection *bool `pulumi:"followRedirection"`
+	FollowRedirection bool `pulumi:"followRedirection"`
 	// Allows only a domain name or IP address. You can optionally append a port number to the address.
 	Host string `pulumi:"host"`
 	// Triggers the origin-pull rule when the requested file name matches this prefix.
-	Prefix *string `pulumi:"prefix"`
+	Prefix string `pulumi:"prefix"`
 	// Priority of origin-pull rules, do not set the same value for multiple rules.
 	Priority int `pulumi:"priority"`
 	// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
-	Protocol *string `pulumi:"protocol"`
+	Protocol string `pulumi:"protocol"`
 	// If `true`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
-	SyncBackToSource *bool `pulumi:"syncBackToSource"`
+	SyncBackToSource bool `pulumi:"syncBackToSource"`
 }
 
 // GetBucketsBucketListOriginPullRuleInput is an input type that accepts GetBucketsBucketListOriginPullRuleArgs and GetBucketsBucketListOriginPullRuleOutput values.
@@ -7955,24 +9909,26 @@ type GetBucketsBucketListOriginPullRuleInput interface {
 }
 
 type GetBucketsBucketListOriginPullRuleArgs struct {
+	// Back to source mode. Allow value: Proxy, Mirror, Redirect.
+	BackToSourceMode pulumi.StringInput `pulumi:"backToSourceMode"`
 	// Specifies the custom headers that you can add for COS to access your origin server.
 	CustomHttpHeaders pulumi.StringMapInput `pulumi:"customHttpHeaders"`
 	// Specifies the pass through headers when accessing the origin server.
 	FollowHttpHeaders pulumi.StringArrayInput `pulumi:"followHttpHeaders"`
 	// Specifies whether to pass through COS request query string when accessing the origin server.
-	FollowQueryString pulumi.BoolPtrInput `pulumi:"followQueryString"`
+	FollowQueryString pulumi.BoolInput `pulumi:"followQueryString"`
 	// Specifies whether to follow 3XX redirect to another origin server to pull data from.
-	FollowRedirection pulumi.BoolPtrInput `pulumi:"followRedirection"`
+	FollowRedirection pulumi.BoolInput `pulumi:"followRedirection"`
 	// Allows only a domain name or IP address. You can optionally append a port number to the address.
 	Host pulumi.StringInput `pulumi:"host"`
 	// Triggers the origin-pull rule when the requested file name matches this prefix.
-	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
+	Prefix pulumi.StringInput `pulumi:"prefix"`
 	// Priority of origin-pull rules, do not set the same value for multiple rules.
 	Priority pulumi.IntInput `pulumi:"priority"`
 	// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
-	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	Protocol pulumi.StringInput `pulumi:"protocol"`
 	// If `true`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
-	SyncBackToSource pulumi.BoolPtrInput `pulumi:"syncBackToSource"`
+	SyncBackToSource pulumi.BoolInput `pulumi:"syncBackToSource"`
 }
 
 func (GetBucketsBucketListOriginPullRuleArgs) ElementType() reflect.Type {
@@ -8026,6 +9982,11 @@ func (o GetBucketsBucketListOriginPullRuleOutput) ToGetBucketsBucketListOriginPu
 	return o
 }
 
+// Back to source mode. Allow value: Proxy, Mirror, Redirect.
+func (o GetBucketsBucketListOriginPullRuleOutput) BackToSourceMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) string { return v.BackToSourceMode }).(pulumi.StringOutput)
+}
+
 // Specifies the custom headers that you can add for COS to access your origin server.
 func (o GetBucketsBucketListOriginPullRuleOutput) CustomHttpHeaders() pulumi.StringMapOutput {
 	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) map[string]string { return v.CustomHttpHeaders }).(pulumi.StringMapOutput)
@@ -8037,13 +9998,13 @@ func (o GetBucketsBucketListOriginPullRuleOutput) FollowHttpHeaders() pulumi.Str
 }
 
 // Specifies whether to pass through COS request query string when accessing the origin server.
-func (o GetBucketsBucketListOriginPullRuleOutput) FollowQueryString() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.FollowQueryString }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) FollowQueryString() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) bool { return v.FollowQueryString }).(pulumi.BoolOutput)
 }
 
 // Specifies whether to follow 3XX redirect to another origin server to pull data from.
-func (o GetBucketsBucketListOriginPullRuleOutput) FollowRedirection() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.FollowRedirection }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) FollowRedirection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) bool { return v.FollowRedirection }).(pulumi.BoolOutput)
 }
 
 // Allows only a domain name or IP address. You can optionally append a port number to the address.
@@ -8052,8 +10013,8 @@ func (o GetBucketsBucketListOriginPullRuleOutput) Host() pulumi.StringOutput {
 }
 
 // Triggers the origin-pull rule when the requested file name matches this prefix.
-func (o GetBucketsBucketListOriginPullRuleOutput) Prefix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *string { return v.Prefix }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Prefix() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
 // Priority of origin-pull rules, do not set the same value for multiple rules.
@@ -8062,13 +10023,13 @@ func (o GetBucketsBucketListOriginPullRuleOutput) Priority() pulumi.IntOutput {
 }
 
 // the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
-func (o GetBucketsBucketListOriginPullRuleOutput) Protocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
 // If `true`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
-func (o GetBucketsBucketListOriginPullRuleOutput) SyncBackToSource() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) *bool { return v.SyncBackToSource }).(pulumi.BoolPtrOutput)
+func (o GetBucketsBucketListOriginPullRuleOutput) SyncBackToSource() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBucketsBucketListOriginPullRule) bool { return v.SyncBackToSource }).(pulumi.BoolOutput)
 }
 
 type GetBucketsBucketListOriginPullRuleArrayOutput struct{ *pulumi.OutputState }
@@ -8228,6 +10189,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificatePtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrInput)(nil)).Elem(), BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListArrayInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterPtrInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterAndArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndPtrInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterAndArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndTagInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterAndTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterAndTagArrayInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterAndTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterTagInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListFilterTagArrayInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListFilterTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListTieringInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListTieringArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketIntelligentTieringArchivingRuleListTieringArrayInput)(nil)).Elem(), BucketIntelligentTieringArchivingRuleListTieringArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationInput)(nil)).Elem(), BucketInventoryDestinationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationPtrInput)(nil)).Elem(), BucketInventoryDestinationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketInventoryDestinationEncryptionInput)(nil)).Elem(), BucketInventoryDestinationEncryptionArgs{})
@@ -8252,12 +10225,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleNonCurrentTransitionArrayInput)(nil)).Elem(), BucketLifecycleRuleNonCurrentTransitionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleTransitionInput)(nil)).Elem(), BucketLifecycleRuleTransitionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketLifecycleRuleTransitionArrayInput)(nil)).Elem(), BucketLifecycleRuleTransitionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketObjectLockConfigurationInput)(nil)).Elem(), BucketObjectLockConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketObjectLockConfigurationPtrInput)(nil)).Elem(), BucketObjectLockConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketObjectLockConfigurationRuleInput)(nil)).Elem(), BucketObjectLockConfigurationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketObjectLockConfigurationRulePtrInput)(nil)).Elem(), BucketObjectLockConfigurationRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginDomainRuleInput)(nil)).Elem(), BucketOriginDomainRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginDomainRuleArrayInput)(nil)).Elem(), BucketOriginDomainRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginPullRuleInput)(nil)).Elem(), BucketOriginPullRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketOriginPullRuleArrayInput)(nil)).Elem(), BucketOriginPullRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleInput)(nil)).Elem(), BucketReplicaRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleArrayInput)(nil)).Elem(), BucketReplicaRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleDeleteMarkerReplicationInput)(nil)).Elem(), BucketReplicaRuleDeleteMarkerReplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleDeleteMarkerReplicationPtrInput)(nil)).Elem(), BucketReplicaRuleDeleteMarkerReplicationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterInput)(nil)).Elem(), BucketReplicaRuleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterPtrInput)(nil)).Elem(), BucketReplicaRuleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterAndInput)(nil)).Elem(), BucketReplicaRuleFilterAndArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterAndPtrInput)(nil)).Elem(), BucketReplicaRuleFilterAndArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterAndTagInput)(nil)).Elem(), BucketReplicaRuleFilterAndTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleFilterAndTagArrayInput)(nil)).Elem(), BucketReplicaRuleFilterAndTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaInput)(nil)).Elem(), BucketReplicaRuleSourceSelectionCriteriaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaPtrInput)(nil)).Elem(), BucketReplicaRuleSourceSelectionCriteriaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsInput)(nil)).Elem(), BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrInput)(nil)).Elem(), BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsiteInput)(nil)).Elem(), BucketWebsiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsitePtrInput)(nil)).Elem(), BucketWebsiteArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BucketWebsiteRoutingRulesInput)(nil)).Elem(), BucketWebsiteRoutingRulesArgs{})
@@ -8340,6 +10329,18 @@ func init() {
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificatePtrOutput{})
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertOutput{})
 	pulumi.RegisterOutputType(BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertPtrOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListArrayOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterPtrOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterAndOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterAndPtrOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterAndTagOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterAndTagArrayOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterTagOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListFilterTagArrayOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListTieringOutput{})
+	pulumi.RegisterOutputType(BucketIntelligentTieringArchivingRuleListTieringArrayOutput{})
 	pulumi.RegisterOutputType(BucketInventoryDestinationOutput{})
 	pulumi.RegisterOutputType(BucketInventoryDestinationPtrOutput{})
 	pulumi.RegisterOutputType(BucketInventoryDestinationEncryptionOutput{})
@@ -8364,12 +10365,28 @@ func init() {
 	pulumi.RegisterOutputType(BucketLifecycleRuleNonCurrentTransitionArrayOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleTransitionOutput{})
 	pulumi.RegisterOutputType(BucketLifecycleRuleTransitionArrayOutput{})
+	pulumi.RegisterOutputType(BucketObjectLockConfigurationOutput{})
+	pulumi.RegisterOutputType(BucketObjectLockConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(BucketObjectLockConfigurationRuleOutput{})
+	pulumi.RegisterOutputType(BucketObjectLockConfigurationRulePtrOutput{})
 	pulumi.RegisterOutputType(BucketOriginDomainRuleOutput{})
 	pulumi.RegisterOutputType(BucketOriginDomainRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketOriginPullRuleOutput{})
 	pulumi.RegisterOutputType(BucketOriginPullRuleArrayOutput{})
 	pulumi.RegisterOutputType(BucketReplicaRuleOutput{})
 	pulumi.RegisterOutputType(BucketReplicaRuleArrayOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleDeleteMarkerReplicationOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleDeleteMarkerReplicationPtrOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterPtrOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterAndOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterAndPtrOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterAndTagOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleFilterAndTagArrayOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleSourceSelectionCriteriaOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleSourceSelectionCriteriaPtrOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsOutput{})
+	pulumi.RegisterOutputType(BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput{})
 	pulumi.RegisterOutputType(BucketWebsiteOutput{})
 	pulumi.RegisterOutputType(BucketWebsitePtrOutput{})
 	pulumi.RegisterOutputType(BucketWebsiteRoutingRulesOutput{})

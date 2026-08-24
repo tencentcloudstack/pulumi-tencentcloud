@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -71,7 +71,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql time_window can be imported using the id, e.g.
+ * mysql timeWindow can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/timeWindow:TimeWindow time_window instanceId
@@ -164,19 +164,19 @@ export interface TimeWindowState {
     /**
      * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Data delay threshold. It takes effect only for source instance and disaster recovery instance. Default value: 10.
      */
-    maxDelayTime?: pulumi.Input<number>;
+    maxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Time period available for maintenance after modification in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. Start and end time range: [00:00, 24:00].
      */
-    timeRanges?: pulumi.Input<pulumi.Input<string>[]>;
+    timeRanges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
      */
-    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    weekdays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -190,7 +190,7 @@ export interface TimeWindowArgs {
     /**
      * Data delay threshold. It takes effect only for source instance and disaster recovery instance. Default value: 10.
      */
-    maxDelayTime?: pulumi.Input<number>;
+    maxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Time period available for maintenance after modification in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. Start and end time range: [00:00, 24:00].
      */
@@ -198,5 +198,5 @@ export interface TimeWindowArgs {
     /**
      * Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
      */
-    weekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    weekdays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

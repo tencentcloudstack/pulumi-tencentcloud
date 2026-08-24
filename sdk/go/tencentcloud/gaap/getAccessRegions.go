@@ -62,12 +62,8 @@ type GetAccessRegionsResult struct {
 }
 
 func GetAccessRegionsOutput(ctx *pulumi.Context, args GetAccessRegionsOutputArgs, opts ...pulumi.InvokeOption) GetAccessRegionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccessRegionsResultOutput, error) {
-			args := v.(GetAccessRegionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args, GetAccessRegionsResultOutput{}, options).(GetAccessRegionsResultOutput), nil
-		}).(GetAccessRegionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args, GetAccessRegionsResultOutput{}, options).(GetAccessRegionsResultOutput)
 }
 
 // A collection of arguments for invoking getAccessRegions.

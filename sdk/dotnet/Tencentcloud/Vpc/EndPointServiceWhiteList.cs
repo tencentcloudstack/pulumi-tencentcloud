@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc end_point_service_white_list can be imported using the id, e.g.
+    /// vpc EndPointServiceWhiteList can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id

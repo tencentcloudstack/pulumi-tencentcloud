@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     /// <summary>
-    /// Provides a resource to create a cvm launch template
+    /// Provides a resource to create a CVM launch template
     /// 
     /// ## Example Usage
     /// 
@@ -19,29 +19,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var myFavoriteImage = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     var example = Tencentcloud.Images.GetInstance.Invoke(new()
     ///     {
     ///         ImageTypes = new[]
     ///         {
     ///             "PUBLIC_IMAGE",
     ///         },
-    ///         ImageNameRegex = "Final",
+    ///         ImageNameRegex = "CentOS 8.2",
     ///     });
     /// 
-    ///     var demo = new Tencentcloud.Cvm.LaunchTemplate("demo", new()
+    ///     var exampleLaunchTemplate = new Tencentcloud.Cvm.LaunchTemplate("example", new()
     ///     {
-    ///         LaunchTemplateName = "test",
+    ///         LaunchTemplateName = "tf-example",
     ///         Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplatePlacementArgs
     ///         {
     ///             Zone = "ap-guangzhou-6",
     ///             ProjectId = 0,
     ///         },
-    ///         ImageId = myFavoriteImage.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         ImageId = example.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         LaunchTemplateVersionDescription = "CentOS 8.2",
+    ///         InstanceType = "S5.SMALL1",
+    ///         InstanceChargeType = "POSTPAID_BY_HOUR",
+    ///         SystemDisk = new Tencentcloud.Cvm.Inputs.LaunchTemplateSystemDiskArgs
+    ///         {
+    ///             DiskSize = 50,
+    ///             DiskType = "CLOUD_PREMIUM",
+    ///         },
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Cvm.Inputs.LaunchTemplateDataDiskArgs
+    ///             {
+    ///                 DiskSize = 200,
+    ///                 DiskType = "CLOUD_PREMIUM",
+    ///             },
+    ///         },
+    ///         VirtualPrivateCloud = new Tencentcloud.Cvm.Inputs.LaunchTemplateVirtualPrivateCloudArgs
+    ///         {
+    ///             SubnetId = "subnet-5l1ya4my",
+    ///             VpcId = "vpc-0m6078eb",
+    ///         },
+    ///         InternetAccessible = new Tencentcloud.Cvm.Inputs.LaunchTemplateInternetAccessibleArgs
+    ///         {
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             PublicIpAssigned = false,
+    ///         },
+    ///         InstanceCount = 1,
+    ///         InstanceName = "instanceName",
+    ///         HostName = "root",
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-4z20n68d",
+    ///         },
+    ///         EnhancedService = new Tencentcloud.Cvm.Inputs.LaunchTemplateEnhancedServiceArgs
+    ///         {
+    ///             AutomationService = new Tencentcloud.Cvm.Inputs.LaunchTemplateEnhancedServiceAutomationServiceArgs
+    ///             {
+    ///                 Enabled = true,
+    ///             },
+    ///             MonitorService = new Tencentcloud.Cvm.Inputs.LaunchTemplateEnhancedServiceMonitorServiceArgs
+    ///             {
+    ///                 Enabled = true,
+    ///             },
+    ///             SecurityService = new Tencentcloud.Cvm.Inputs.LaunchTemplateEnhancedServiceSecurityServiceArgs
+    ///             {
+    ///                 Enabled = true,
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });

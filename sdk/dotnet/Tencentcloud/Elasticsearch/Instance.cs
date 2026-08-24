@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -93,13 +92,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// });
     /// ```
     /// 
+    /// ### Create a basic version of elasticsearch instance with destroy protection enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    ///     {
+    ///         Product = "es",
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         Name = "tf_es_vpc",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         Name = "tf_es_subnet",
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example_es",
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         Version = "7.10.1",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Password = "Test12345",
+    ///         LicenseType = "basic",
+    ///         BasicSecurityType = 2,
+    ///         EnableDestroyProtection = "OPEN",
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Create a basic version of elasticsearch instance for multi-availability zone deployment
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -268,6 +328,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<string> ElasticsearchVip { get; private set; } = null!;
 
         /// <summary>
+        /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+        /// </summary>
+        [Output("enableDestroyProtection")]
+        public Output<string> EnableDestroyProtection { get; private set; } = null!;
+
+        /// <summary>
         /// Kibana Access Control Configuration.
         /// </summary>
         [Output("esAcl")]
@@ -356,6 +422,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Output("renewFlag")]
         public Output<string?> RenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        /// </summary>
+        [Output("sceneType")]
+        public Output<int> SceneType { get; private set; } = null!;
 
         /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
@@ -475,6 +547,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<int>? DeployMode { get; set; }
 
         /// <summary>
+        /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+        /// </summary>
+        [Input("enableDestroyProtection")]
+        public Input<string>? EnableDestroyProtection { get; set; }
+
+        /// <summary>
         /// Kibana Access Control Configuration.
         /// </summary>
         [Input("esAcl")]
@@ -567,6 +645,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
+
+        /// <summary>
+        /// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        /// </summary>
+        [Input("sceneType")]
+        public Input<int>? SceneType { get; set; }
 
         /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
@@ -679,6 +763,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Input<string>? ElasticsearchVip { get; set; }
 
         /// <summary>
+        /// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+        /// </summary>
+        [Input("enableDestroyProtection")]
+        public Input<string>? EnableDestroyProtection { get; set; }
+
+        /// <summary>
         /// Kibana Access Control Configuration.
         /// </summary>
         [Input("esAcl")]
@@ -789,6 +879,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("renewFlag")]
         public Input<string>? RenewFlag { get; set; }
+
+        /// <summary>
+        /// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        /// </summary>
+        [Input("sceneType")]
+        public Input<int>? SceneType { get; set; }
 
         /// <summary>
         /// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.

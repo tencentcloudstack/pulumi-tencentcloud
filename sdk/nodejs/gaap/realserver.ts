@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  * GAAP realserver can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/realserver:Realserver  tencentcloud_gaap_realserver.foo rs-4ftghy6
+ *   $ pulumi import tencentcloud:Gaap/realserver:Realserver foo rs-4ftghy6
  * ```
  */
 export class Realserver extends pulumi.CustomResource {
@@ -117,23 +117,23 @@ export interface RealserverState {
     /**
      * Domain of the GAAP realserver, conflict with `ip`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * IP of the GAAP realserver, conflict with `domain`.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the GAAP realserver, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the GAAP realserver, '0' means is default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags of the GAAP realserver.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -143,21 +143,21 @@ export interface RealserverArgs {
     /**
      * Domain of the GAAP realserver, conflict with `ip`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * IP of the GAAP realserver, conflict with `domain`.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the GAAP realserver, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the GAAP realserver, '0' means is default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags of the GAAP realserver.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

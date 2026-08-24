@@ -86,12 +86,8 @@ type GetListProcessLineageResult struct {
 }
 
 func GetListProcessLineageOutput(ctx *pulumi.Context, args GetListProcessLineageOutputArgs, opts ...pulumi.InvokeOption) GetListProcessLineageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListProcessLineageResultOutput, error) {
-			args := v.(GetListProcessLineageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListProcessLineage:getListProcessLineage", args, GetListProcessLineageResultOutput{}, options).(GetListProcessLineageResultOutput), nil
-		}).(GetListProcessLineageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListProcessLineage:getListProcessLineage", args, GetListProcessLineageResultOutput{}, options).(GetListProcessLineageResultOutput)
 }
 
 // A collection of arguments for invoking getListProcessLineage.

@@ -30,6 +30,8 @@ type GetInstanceInstanceList struct {
 	DedicatedClusterId string `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime string `pulumi:"expiredTime"`
+	// Instance GPU info.
+	GpuInfos []GetInstanceInstanceListGpuInfo `pulumi:"gpuInfos"`
 	// ID of the image.
 	ImageId string `pulumi:"imageId"`
 	// The charge type of the instance.
@@ -56,6 +58,8 @@ type GetInstanceInstanceList struct {
 	ProjectId int `pulumi:"projectId"`
 	// Public IP of the instance.
 	PublicIp string `pulumi:"publicIp"`
+	// The rack ID of the instance resource pool to which the instance belongs.
+	RackId string `pulumi:"rackId"`
 	// Security groups of the instance.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Status of the instance.
@@ -104,6 +108,8 @@ type GetInstanceInstanceListArgs struct {
 	DedicatedClusterId pulumi.StringInput `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// Instance GPU info.
+	GpuInfos GetInstanceInstanceListGpuInfoArrayInput `pulumi:"gpuInfos"`
 	// ID of the image.
 	ImageId pulumi.StringInput `pulumi:"imageId"`
 	// The charge type of the instance.
@@ -130,6 +136,8 @@ type GetInstanceInstanceListArgs struct {
 	ProjectId pulumi.IntInput `pulumi:"projectId"`
 	// Public IP of the instance.
 	PublicIp pulumi.StringInput `pulumi:"publicIp"`
+	// The rack ID of the instance resource pool to which the instance belongs.
+	RackId pulumi.StringInput `pulumi:"rackId"`
 	// Security groups of the instance.
 	SecurityGroups pulumi.StringArrayInput `pulumi:"securityGroups"`
 	// Status of the instance.
@@ -241,6 +249,11 @@ func (o GetInstanceInstanceListOutput) ExpiredTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
+// Instance GPU info.
+func (o GetInstanceInstanceListOutput) GpuInfos() GetInstanceInstanceListGpuInfoArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) []GetInstanceInstanceListGpuInfo { return v.GpuInfos }).(GetInstanceInstanceListGpuInfoArrayOutput)
+}
+
 // ID of the image.
 func (o GetInstanceInstanceListOutput) ImageId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.ImageId }).(pulumi.StringOutput)
@@ -304,6 +317,11 @@ func (o GetInstanceInstanceListOutput) ProjectId() pulumi.IntOutput {
 // Public IP of the instance.
 func (o GetInstanceInstanceListOutput) PublicIp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.PublicIp }).(pulumi.StringOutput)
+}
+
+// The rack ID of the instance resource pool to which the instance belongs.
+func (o GetInstanceInstanceListOutput) RackId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.RackId }).(pulumi.StringOutput)
 }
 
 // Security groups of the instance.
@@ -493,6 +511,121 @@ func (o GetInstanceInstanceListDataDiskArrayOutput) Index(i pulumi.IntInput) Get
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceInstanceListDataDisk {
 		return vs[0].([]GetInstanceInstanceListDataDisk)[vs[1].(int)]
 	}).(GetInstanceInstanceListDataDiskOutput)
+}
+
+type GetInstanceInstanceListGpuInfo struct {
+	// Number of instance GPUs. A value less than 1 indicates a VGPU type, and a value greater than 1 indicates a GPU passthrough type.
+	GpuCount float64 `pulumi:"gpuCount"`
+	// Instance GPU address.
+	GpuIds []string `pulumi:"gpuIds"`
+	// Instance GPU type.
+	GpuType string `pulumi:"gpuType"`
+}
+
+// GetInstanceInstanceListGpuInfoInput is an input type that accepts GetInstanceInstanceListGpuInfoArgs and GetInstanceInstanceListGpuInfoOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListGpuInfoInput` via:
+//
+//	GetInstanceInstanceListGpuInfoArgs{...}
+type GetInstanceInstanceListGpuInfoInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListGpuInfoOutput() GetInstanceInstanceListGpuInfoOutput
+	ToGetInstanceInstanceListGpuInfoOutputWithContext(context.Context) GetInstanceInstanceListGpuInfoOutput
+}
+
+type GetInstanceInstanceListGpuInfoArgs struct {
+	// Number of instance GPUs. A value less than 1 indicates a VGPU type, and a value greater than 1 indicates a GPU passthrough type.
+	GpuCount pulumi.Float64Input `pulumi:"gpuCount"`
+	// Instance GPU address.
+	GpuIds pulumi.StringArrayInput `pulumi:"gpuIds"`
+	// Instance GPU type.
+	GpuType pulumi.StringInput `pulumi:"gpuType"`
+}
+
+func (GetInstanceInstanceListGpuInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceListGpuInfo)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListGpuInfoArgs) ToGetInstanceInstanceListGpuInfoOutput() GetInstanceInstanceListGpuInfoOutput {
+	return i.ToGetInstanceInstanceListGpuInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListGpuInfoArgs) ToGetInstanceInstanceListGpuInfoOutputWithContext(ctx context.Context) GetInstanceInstanceListGpuInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListGpuInfoOutput)
+}
+
+// GetInstanceInstanceListGpuInfoArrayInput is an input type that accepts GetInstanceInstanceListGpuInfoArray and GetInstanceInstanceListGpuInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstanceInstanceListGpuInfoArrayInput` via:
+//
+//	GetInstanceInstanceListGpuInfoArray{ GetInstanceInstanceListGpuInfoArgs{...} }
+type GetInstanceInstanceListGpuInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstanceInstanceListGpuInfoArrayOutput() GetInstanceInstanceListGpuInfoArrayOutput
+	ToGetInstanceInstanceListGpuInfoArrayOutputWithContext(context.Context) GetInstanceInstanceListGpuInfoArrayOutput
+}
+
+type GetInstanceInstanceListGpuInfoArray []GetInstanceInstanceListGpuInfoInput
+
+func (GetInstanceInstanceListGpuInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceListGpuInfo)(nil)).Elem()
+}
+
+func (i GetInstanceInstanceListGpuInfoArray) ToGetInstanceInstanceListGpuInfoArrayOutput() GetInstanceInstanceListGpuInfoArrayOutput {
+	return i.ToGetInstanceInstanceListGpuInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstanceInstanceListGpuInfoArray) ToGetInstanceInstanceListGpuInfoArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListGpuInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstanceInstanceListGpuInfoArrayOutput)
+}
+
+type GetInstanceInstanceListGpuInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListGpuInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstanceInstanceListGpuInfo)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListGpuInfoOutput) ToGetInstanceInstanceListGpuInfoOutput() GetInstanceInstanceListGpuInfoOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListGpuInfoOutput) ToGetInstanceInstanceListGpuInfoOutputWithContext(ctx context.Context) GetInstanceInstanceListGpuInfoOutput {
+	return o
+}
+
+// Number of instance GPUs. A value less than 1 indicates a VGPU type, and a value greater than 1 indicates a GPU passthrough type.
+func (o GetInstanceInstanceListGpuInfoOutput) GpuCount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstanceInstanceListGpuInfo) float64 { return v.GpuCount }).(pulumi.Float64Output)
+}
+
+// Instance GPU address.
+func (o GetInstanceInstanceListGpuInfoOutput) GpuIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstanceInstanceListGpuInfo) []string { return v.GpuIds }).(pulumi.StringArrayOutput)
+}
+
+// Instance GPU type.
+func (o GetInstanceInstanceListGpuInfoOutput) GpuType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceListGpuInfo) string { return v.GpuType }).(pulumi.StringOutput)
+}
+
+type GetInstanceInstanceListGpuInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstanceInstanceListGpuInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstanceInstanceListGpuInfo)(nil)).Elem()
+}
+
+func (o GetInstanceInstanceListGpuInfoArrayOutput) ToGetInstanceInstanceListGpuInfoArrayOutput() GetInstanceInstanceListGpuInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListGpuInfoArrayOutput) ToGetInstanceInstanceListGpuInfoArrayOutputWithContext(ctx context.Context) GetInstanceInstanceListGpuInfoArrayOutput {
+	return o
+}
+
+func (o GetInstanceInstanceListGpuInfoArrayOutput) Index(i pulumi.IntInput) GetInstanceInstanceListGpuInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstanceInstanceListGpuInfo {
+		return vs[0].([]GetInstanceInstanceListGpuInfo)[vs[1].(int)]
+	}).(GetInstanceInstanceListGpuInfoOutput)
 }
 
 type GetSetInstanceList struct {
@@ -955,6 +1088,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListArrayInput)(nil)).Elem(), GetInstanceInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListDataDiskInput)(nil)).Elem(), GetInstanceInstanceListDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListDataDiskArrayInput)(nil)).Elem(), GetInstanceInstanceListDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListGpuInfoInput)(nil)).Elem(), GetInstanceInstanceListGpuInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceInstanceListGpuInfoArrayInput)(nil)).Elem(), GetInstanceInstanceListGpuInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSetInstanceListInput)(nil)).Elem(), GetSetInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSetInstanceListArrayInput)(nil)).Elem(), GetSetInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSetInstanceListDataDiskInput)(nil)).Elem(), GetSetInstanceListDataDiskArgs{})
@@ -963,6 +1098,8 @@ func init() {
 	pulumi.RegisterOutputType(GetInstanceInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceInstanceListDataDiskOutput{})
 	pulumi.RegisterOutputType(GetInstanceInstanceListDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListGpuInfoOutput{})
+	pulumi.RegisterOutputType(GetInstanceInstanceListGpuInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetSetInstanceListOutput{})
 	pulumi.RegisterOutputType(GetSetInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetSetInstanceListDataDiskOutput{})

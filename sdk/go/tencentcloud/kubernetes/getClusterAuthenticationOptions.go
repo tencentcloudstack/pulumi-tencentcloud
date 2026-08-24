@@ -71,12 +71,8 @@ type GetClusterAuthenticationOptionsResult struct {
 }
 
 func GetClusterAuthenticationOptionsOutput(ctx *pulumi.Context, args GetClusterAuthenticationOptionsOutputArgs, opts ...pulumi.InvokeOption) GetClusterAuthenticationOptionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterAuthenticationOptionsResultOutput, error) {
-			args := v.(GetClusterAuthenticationOptionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args, GetClusterAuthenticationOptionsResultOutput{}, options).(GetClusterAuthenticationOptionsResultOutput), nil
-		}).(GetClusterAuthenticationOptionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args, GetClusterAuthenticationOptionsResultOutput{}, options).(GetClusterAuthenticationOptionsResultOutput)
 }
 
 // A collection of arguments for invoking getClusterAuthenticationOptions.

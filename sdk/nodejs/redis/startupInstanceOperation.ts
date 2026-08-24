@@ -84,7 +84,7 @@ export interface StartupInstanceOperationState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

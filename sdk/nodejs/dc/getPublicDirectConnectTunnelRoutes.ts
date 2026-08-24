@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publicDirectConnectTunnelRoutes = tencentcloud.Dc.getPublicDirectConnectTunnelRoutes({
+ * const publicDirectConnectTunnelRoutes = tencentcloud.dc.getPublicDirectConnectTunnelRoutes({
  *     directConnectTunnelId: "dcx-4z49tnws",
  * });
  * ```
@@ -72,7 +72,7 @@ export interface GetPublicDirectConnectTunnelRoutesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publicDirectConnectTunnelRoutes = tencentcloud.Dc.getPublicDirectConnectTunnelRoutes({
+ * const publicDirectConnectTunnelRoutes = tencentcloud.dc.getPublicDirectConnectTunnelRoutes({
  *     directConnectTunnelId: "dcx-4z49tnws",
  * });
  * ```
@@ -97,9 +97,9 @@ export interface GetPublicDirectConnectTunnelRoutesOutputArgs {
     /**
      * filter condition: route-type: route type, value: BGP/STATIC route-subnet: route cidr, value such as: 192.68.1.0/24.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Dc.GetPublicDirectConnectTunnelRoutesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Dc.GetPublicDirectConnectTunnelRoutesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

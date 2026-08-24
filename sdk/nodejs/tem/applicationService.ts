@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tem application_service can be imported using the environmentId#applicationId#serviceName, e.g.
+ * tem applicationService can be imported using the environmentId#applicationId#serviceName, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1
@@ -119,15 +119,15 @@ export interface ApplicationServiceState {
     /**
      * application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * environment ID.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * service detail list.
      */
-    service?: pulumi.Input<inputs.Tem.ApplicationServiceService>;
+    service?: pulumi.Input<inputs.Tem.ApplicationServiceService | undefined>;
 }
 
 /**
@@ -145,5 +145,5 @@ export interface ApplicationServiceArgs {
     /**
      * service detail list.
      */
-    service?: pulumi.Input<inputs.Tem.ApplicationServiceService>;
+    service?: pulumi.Input<inputs.Tem.ApplicationServiceService | undefined>;
 }

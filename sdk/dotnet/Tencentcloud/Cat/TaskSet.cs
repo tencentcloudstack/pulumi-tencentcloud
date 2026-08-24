@@ -79,8 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
     /// 
     /// ## Import
     /// 
-    /// cat task_set can be imported using the id, e.g.
-    /// 
+    /// cat TaskSet can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
     /// ```

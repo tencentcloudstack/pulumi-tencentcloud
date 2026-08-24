@@ -41,20 +41,20 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  fooProxy.ID(),
+//				ProxyId:  fooProxy.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("www.qq.com"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_ = gaap.GetHttpDomainsOutput(ctx, gaap.GetHttpDomainsOutputArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     fooHttpDomain.Domain,
 //			}, nil)
 //			return nil
@@ -95,12 +95,8 @@ type GetHttpDomainsResult struct {
 }
 
 func GetHttpDomainsOutput(ctx *pulumi.Context, args GetHttpDomainsOutputArgs, opts ...pulumi.InvokeOption) GetHttpDomainsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetHttpDomainsResultOutput, error) {
-			args := v.(GetHttpDomainsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args, GetHttpDomainsResultOutput{}, options).(GetHttpDomainsResultOutput), nil
-		}).(GetHttpDomainsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args, GetHttpDomainsResultOutput{}, options).(GetHttpDomainsResultOutput)
 }
 
 // A collection of arguments for invoking getHttpDomains.

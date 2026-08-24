@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *         "/root#release",
  *     ],
  * });
- * const id = tencentcloud.ApiGateway.getCustomerDomainsOutput({
+ * const id = tencentcloud.apigateway.getCustomerDomainsOutput({
  *     serviceId: foo.serviceId,
  * });
  * ```
@@ -90,7 +90,7 @@ export interface GetCustomerDomainsResult {
  *         "/root#release",
  *     ],
  * });
- * const id = tencentcloud.ApiGateway.getCustomerDomainsOutput({
+ * const id = tencentcloud.apigateway.getCustomerDomainsOutput({
  *     serviceId: foo.serviceId,
  * });
  * ```
@@ -110,7 +110,7 @@ export interface GetCustomerDomainsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The service ID.
      */

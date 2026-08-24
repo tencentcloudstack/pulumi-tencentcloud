@@ -102,11 +102,11 @@ export interface TemplateGroupState {
     /**
      * Name of the protocol template group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Service template ID list.
      */
-    templateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    templateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -116,7 +116,7 @@ export interface TemplateGroupArgs {
     /**
      * Name of the protocol template group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Service template ID list.
      */

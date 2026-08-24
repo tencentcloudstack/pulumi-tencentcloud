@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_role_configuration_permission_policy_attachment can be imported using the id, e.g.
+    /// organization IdentityCenterRoleConfigurationPermissionPolicyAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Identity/centerRoleConfigurationPermissionPolicyAttachment:CenterRoleConfigurationPermissionPolicyAttachment identity_center_role_configuration_permission_policy_attachment ${zoneId}#${roleConfigurationId}#${rolePolicyIdString}

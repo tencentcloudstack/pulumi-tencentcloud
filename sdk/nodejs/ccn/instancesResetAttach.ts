@@ -110,15 +110,15 @@ export interface InstancesResetAttachState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * CCN Uin (root account).
      */
-    ccnUin?: pulumi.Input<string>;
+    ccnUin?: pulumi.Input<string | undefined>;
     /**
      * List Of Attachment Instances.
      */
-    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.InstancesResetAttachInstance>[]>;
+    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.InstancesResetAttachInstance>[] | undefined>;
 }
 
 /**

@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
 //
@@ -60,7 +62,7 @@ import (
 //				DomainName: task.DomainName,
 //				AppName:    task.AppName,
 //				StreamName: task.StreamName,
-//				TemplateId: temp.ID(),
+//				TemplateId: temp.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //			})
 //			if err != nil {
 //				return err
@@ -73,8 +75,7 @@ import (
 //
 // ## Import
 //
-// css live_transcode_rule_attachment can be imported using the id, e.g.
-//
+// css liveTranscodeRuleAttachment can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
 // ```

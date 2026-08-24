@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tasks = tencentcloud.Mps.getTasks({
+ * const tasks = tencentcloud.mps.getTasks({
  *     status: "FINISH",
  *     limit: 20,
  * });
@@ -79,7 +79,7 @@ export interface GetTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tasks = tencentcloud.Mps.getTasks({
+ * const tasks = tencentcloud.mps.getTasks({
  *     status: "FINISH",
  *     limit: 20,
  * });
@@ -102,15 +102,15 @@ export interface GetTasksOutputArgs {
     /**
      * Return the number of records, default value: 10, maximum value: 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Page turning flag, used when pulling in batches: when a single request cannot pull all the data, the interface will return a ScrollToken, and the next request will carry this Token, and it will be obtained from the next record.
      */
-    scrollToken?: pulumi.Input<string>;
+    scrollToken?: pulumi.Input<string | undefined>;
     /**
      * Filter condition: task status, optional values: WAITING, PROCESSING, FINISH.
      */

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
 {
     /// <summary>
-    /// Provides a resource to create a mps TranscodeTemplate
+    /// Provides a resource to create a MPS transcode template
     /// 
     /// ## Example Usage
     /// 
@@ -23,10 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var transcodeTemplate = new Tencentcloud.Mps.TranscodeTemplate("transcode_template", new()
+    ///     var example = new Tencentcloud.Mps.TranscodeTemplate("example", new()
     ///     {
     ///         Container = "mp4",
-    ///         Name = "tf_transcode_template",
+    ///         Name = "tf-example",
     ///         RemoveAudio = 0,
     ///         RemoveVideo = 0,
     ///         AudioTemplate = new Tencentcloud.Mps.Inputs.TranscodeTemplateAudioTemplateArgs
@@ -55,10 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps transcode_template can be imported using the id, e.g.
+    /// MPS transcode template can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+    /// $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate example 1638607
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/transcodeTemplate:TranscodeTemplate")]

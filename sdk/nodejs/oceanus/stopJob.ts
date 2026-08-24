@@ -96,11 +96,11 @@ export interface StopJobState {
     /**
      * The description information for batch job stop.
      */
-    stopJobDescriptions?: pulumi.Input<pulumi.Input<inputs.Oceanus.StopJobStopJobDescription>[]>;
+    stopJobDescriptions?: pulumi.Input<pulumi.Input<inputs.Oceanus.StopJobStopJobDescription>[] | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -114,5 +114,5 @@ export interface StopJobArgs {
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

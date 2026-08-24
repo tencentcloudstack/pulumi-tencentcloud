@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// ckafka consumer_group can be imported using the id, e.g.
+// ckafka consumerGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id

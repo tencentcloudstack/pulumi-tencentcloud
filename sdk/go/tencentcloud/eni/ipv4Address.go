@@ -31,17 +31,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -61,19 +61,19 @@ import (
 //			}
 //			exampleInstance, err := eni.NewInstance(ctx, "example", &eni.InstanceArgs{
 //				Name:        pulumi.String("tf-example"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Description: pulumi.String("eni desc."),
 //				Ipv4Count:   pulumi.Int(1),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = eni.NewIpv4Address(ctx, "example", &eni.Ipv4AddressArgs{
-//				NetworkInterfaceId:             exampleInstance.ID(),
+//				NetworkInterfaceId:             exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				QosLevel:                       pulumi.String("DEFAULT"),
 //				SecondaryPrivateIpAddressCount: pulumi.Int(3),
 //			})

@@ -65,12 +65,8 @@ type GetParseLiveStreamProcessNotificationResult struct {
 }
 
 func GetParseLiveStreamProcessNotificationOutput(ctx *pulumi.Context, args GetParseLiveStreamProcessNotificationOutputArgs, opts ...pulumi.InvokeOption) GetParseLiveStreamProcessNotificationResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParseLiveStreamProcessNotificationResultOutput, error) {
-			args := v.(GetParseLiveStreamProcessNotificationArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args, GetParseLiveStreamProcessNotificationResultOutput{}, options).(GetParseLiveStreamProcessNotificationResultOutput), nil
-		}).(GetParseLiveStreamProcessNotificationResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args, GetParseLiveStreamProcessNotificationResultOutput{}, options).(GetParseLiveStreamProcessNotificationResultOutput)
 }
 
 // A collection of arguments for invoking getParseLiveStreamProcessNotification.

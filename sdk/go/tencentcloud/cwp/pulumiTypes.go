@@ -13,6 +13,1095 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type GetMachinesFilter struct {
+	// Fuzzy search.
+	ExactMatch *bool `pulumi:"exactMatch"`
+	// Name of filter key.
+	Name string `pulumi:"name"`
+	// One or more filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetMachinesFilterInput is an input type that accepts GetMachinesFilterArgs and GetMachinesFilterOutput values.
+// You can construct a concrete instance of `GetMachinesFilterInput` via:
+//
+//	GetMachinesFilterArgs{...}
+type GetMachinesFilterInput interface {
+	pulumi.Input
+
+	ToGetMachinesFilterOutput() GetMachinesFilterOutput
+	ToGetMachinesFilterOutputWithContext(context.Context) GetMachinesFilterOutput
+}
+
+type GetMachinesFilterArgs struct {
+	// Fuzzy search.
+	ExactMatch pulumi.BoolPtrInput `pulumi:"exactMatch"`
+	// Name of filter key.
+	Name pulumi.StringInput `pulumi:"name"`
+	// One or more filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetMachinesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesFilter)(nil)).Elem()
+}
+
+func (i GetMachinesFilterArgs) ToGetMachinesFilterOutput() GetMachinesFilterOutput {
+	return i.ToGetMachinesFilterOutputWithContext(context.Background())
+}
+
+func (i GetMachinesFilterArgs) ToGetMachinesFilterOutputWithContext(ctx context.Context) GetMachinesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesFilterOutput)
+}
+
+// GetMachinesFilterArrayInput is an input type that accepts GetMachinesFilterArray and GetMachinesFilterArrayOutput values.
+// You can construct a concrete instance of `GetMachinesFilterArrayInput` via:
+//
+//	GetMachinesFilterArray{ GetMachinesFilterArgs{...} }
+type GetMachinesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesFilterArrayOutput() GetMachinesFilterArrayOutput
+	ToGetMachinesFilterArrayOutputWithContext(context.Context) GetMachinesFilterArrayOutput
+}
+
+type GetMachinesFilterArray []GetMachinesFilterInput
+
+func (GetMachinesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesFilter)(nil)).Elem()
+}
+
+func (i GetMachinesFilterArray) ToGetMachinesFilterArrayOutput() GetMachinesFilterArrayOutput {
+	return i.ToGetMachinesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesFilterArray) ToGetMachinesFilterArrayOutputWithContext(ctx context.Context) GetMachinesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesFilterArrayOutput)
+}
+
+type GetMachinesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesFilter)(nil)).Elem()
+}
+
+func (o GetMachinesFilterOutput) ToGetMachinesFilterOutput() GetMachinesFilterOutput {
+	return o
+}
+
+func (o GetMachinesFilterOutput) ToGetMachinesFilterOutputWithContext(ctx context.Context) GetMachinesFilterOutput {
+	return o
+}
+
+// Fuzzy search.
+func (o GetMachinesFilterOutput) ExactMatch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetMachinesFilter) *bool { return v.ExactMatch }).(pulumi.BoolPtrOutput)
+}
+
+// Name of filter key.
+func (o GetMachinesFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// One or more filter values.
+func (o GetMachinesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMachinesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetMachinesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesFilter)(nil)).Elem()
+}
+
+func (o GetMachinesFilterArrayOutput) ToGetMachinesFilterArrayOutput() GetMachinesFilterArrayOutput {
+	return o
+}
+
+func (o GetMachinesFilterArrayOutput) ToGetMachinesFilterArrayOutputWithContext(ctx context.Context) GetMachinesFilterArrayOutput {
+	return o
+}
+
+func (o GetMachinesFilterArrayOutput) Index(i pulumi.IntInput) GetMachinesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesFilter {
+		return vs[0].([]GetMachinesFilter)[vs[1].(int)]
+	}).(GetMachinesFilterOutput)
+}
+
+type GetMachinesMachine struct {
+	// ONLINE: Protected; OFFLINE: Offline; UNINSTALLED: Not installed.
+	AgentStatus string `pulumi:"agentStatus"`
+	// Host security agent version.
+	AgentVersion string `pulumi:"agentVersion"`
+	// Number of baseline risks.
+	BaselineNum int `pulumi:"baselineNum"`
+	// Cloud Tag Information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CloudTags []GetMachinesMachineCloudTag `pulumi:"cloudTags"`
+	// Number of network risks.
+	CyberAttackNum int `pulumi:"cyberAttackNum"`
+	// Whether there is an available asset scanning API: 0 - no; 1 - yes.
+	HasAssetScan int `pulumi:"hasAssetScan"`
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance status: TERMINATED_PRO_VERSION - terminated.
+	InstanceState string `pulumi:"instanceState"`
+	// RUNNING; STOPPED; EXPIRED (awaiting recycling).
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// Number of intrusion events.
+	InvasionNum int `pulumi:"invasionNum"`
+	// Host IP List
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IpList string `pulumi:"ipList"`
+	// Whether a host added within the last 15 days: 0: no; 1: yes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsAddedOnTheFifteen int `pulumi:"isAddedOnTheFifteen"`
+	// Whether the edition is Pro Edition
+	// <li>true: yes</li>
+	// <li>false: no</li>.
+	IsProVersion bool `pulumi:"isProVersion"`
+	// Kernel version.
+	KernelVersion string `pulumi:"kernelVersion"`
+	// Tamper-proof; authorization status: 1 - authorized; 0 - unauthorized.
+	LicenseStatus int `pulumi:"licenseStatus"`
+	// Additional information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MachineExtraInfos []GetMachinesMachineMachineExtraInfo `pulumi:"machineExtraInfos"`
+	// Host IP.
+	MachineIp string `pulumi:"machineIp"`
+	// Host name.
+	MachineName string `pulumi:"machineName"`
+	// Host System.
+	MachineOs string `pulumi:"machineOs"`
+	// Host status
+	// <li>OFFLINE: Offline</li>
+	// <li>ONLINE: Online</li>
+	// <li>SHUTDOWN: Shut down</li>
+	// <li>UNINSTALLED: Unprotected</li>.
+	MachineStatus string `pulumi:"machineStatus"`
+	// Type of the machine's zone
+	// CVM: Cloud Virtual Machine
+	// BM: BMECM: Edge Computing Machine
+	// LH: Lighthouse
+	// Other: Hybrid Cloud Zone.
+	MachineType string `pulumi:"machineType"`
+	// Public IP address of a host.
+	MachineWanIp string `pulumi:"machineWanIp"`
+	// Number of Trojans.
+	MalwareNum int `pulumi:"malwareNum"`
+	// Host status
+	// <li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
+	// <li>PREPAY: prepaid, indicating monthly subscription mode</li>.
+	PayMode string `pulumi:"payMode"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Inclusive Edition.
+	ProtectType string `pulumi:"protectType"`
+	// CVM or BM Machine Unique UUID.
+	Quuid string `pulumi:"quuid"`
+	// Region information.
+	RegionInfos []GetMachinesMachineRegionInfo `pulumi:"regionInfos"`
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remark string `pulumi:"remark"`
+	// Risk status
+	// <li>SAFE: Safe</li>
+	// <li>RISK: Risk</li>
+	// <li>UNKNOWN: Unknown</li>.
+	SecurityStatus string `pulumi:"securityStatus"`
+	// Tag information.
+	Tags []GetMachinesMachineTag `pulumi:"tags"`
+	// Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+	Uuid string `pulumi:"uuid"`
+	// Network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId string `pulumi:"vpcId"`
+	// Number of vulnerabilities.
+	VulNum int `pulumi:"vulNum"`
+}
+
+// GetMachinesMachineInput is an input type that accepts GetMachinesMachineArgs and GetMachinesMachineOutput values.
+// You can construct a concrete instance of `GetMachinesMachineInput` via:
+//
+//	GetMachinesMachineArgs{...}
+type GetMachinesMachineInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineOutput() GetMachinesMachineOutput
+	ToGetMachinesMachineOutputWithContext(context.Context) GetMachinesMachineOutput
+}
+
+type GetMachinesMachineArgs struct {
+	// ONLINE: Protected; OFFLINE: Offline; UNINSTALLED: Not installed.
+	AgentStatus pulumi.StringInput `pulumi:"agentStatus"`
+	// Host security agent version.
+	AgentVersion pulumi.StringInput `pulumi:"agentVersion"`
+	// Number of baseline risks.
+	BaselineNum pulumi.IntInput `pulumi:"baselineNum"`
+	// Cloud Tag Information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CloudTags GetMachinesMachineCloudTagArrayInput `pulumi:"cloudTags"`
+	// Number of network risks.
+	CyberAttackNum pulumi.IntInput `pulumi:"cyberAttackNum"`
+	// Whether there is an available asset scanning API: 0 - no; 1 - yes.
+	HasAssetScan pulumi.IntInput `pulumi:"hasAssetScan"`
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance status: TERMINATED_PRO_VERSION - terminated.
+	InstanceState pulumi.StringInput `pulumi:"instanceState"`
+	// RUNNING; STOPPED; EXPIRED (awaiting recycling).
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// Number of intrusion events.
+	InvasionNum pulumi.IntInput `pulumi:"invasionNum"`
+	// Host IP List
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IpList pulumi.StringInput `pulumi:"ipList"`
+	// Whether a host added within the last 15 days: 0: no; 1: yes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsAddedOnTheFifteen pulumi.IntInput `pulumi:"isAddedOnTheFifteen"`
+	// Whether the edition is Pro Edition
+	// <li>true: yes</li>
+	// <li>false: no</li>.
+	IsProVersion pulumi.BoolInput `pulumi:"isProVersion"`
+	// Kernel version.
+	KernelVersion pulumi.StringInput `pulumi:"kernelVersion"`
+	// Tamper-proof; authorization status: 1 - authorized; 0 - unauthorized.
+	LicenseStatus pulumi.IntInput `pulumi:"licenseStatus"`
+	// Additional information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MachineExtraInfos GetMachinesMachineMachineExtraInfoArrayInput `pulumi:"machineExtraInfos"`
+	// Host IP.
+	MachineIp pulumi.StringInput `pulumi:"machineIp"`
+	// Host name.
+	MachineName pulumi.StringInput `pulumi:"machineName"`
+	// Host System.
+	MachineOs pulumi.StringInput `pulumi:"machineOs"`
+	// Host status
+	// <li>OFFLINE: Offline</li>
+	// <li>ONLINE: Online</li>
+	// <li>SHUTDOWN: Shut down</li>
+	// <li>UNINSTALLED: Unprotected</li>.
+	MachineStatus pulumi.StringInput `pulumi:"machineStatus"`
+	// Type of the machine's zone
+	// CVM: Cloud Virtual Machine
+	// BM: BMECM: Edge Computing Machine
+	// LH: Lighthouse
+	// Other: Hybrid Cloud Zone.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Public IP address of a host.
+	MachineWanIp pulumi.StringInput `pulumi:"machineWanIp"`
+	// Number of Trojans.
+	MalwareNum pulumi.IntInput `pulumi:"malwareNum"`
+	// Host status
+	// <li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
+	// <li>PREPAY: prepaid, indicating monthly subscription mode</li>.
+	PayMode pulumi.StringInput `pulumi:"payMode"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Inclusive Edition.
+	ProtectType pulumi.StringInput `pulumi:"protectType"`
+	// CVM or BM Machine Unique UUID.
+	Quuid pulumi.StringInput `pulumi:"quuid"`
+	// Region information.
+	RegionInfos GetMachinesMachineRegionInfoArrayInput `pulumi:"regionInfos"`
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Risk status
+	// <li>SAFE: Safe</li>
+	// <li>RISK: Risk</li>
+	// <li>UNKNOWN: Unknown</li>.
+	SecurityStatus pulumi.StringInput `pulumi:"securityStatus"`
+	// Tag information.
+	Tags GetMachinesMachineTagArrayInput `pulumi:"tags"`
+	// Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+	Uuid pulumi.StringInput `pulumi:"uuid"`
+	// Network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Number of vulnerabilities.
+	VulNum pulumi.IntInput `pulumi:"vulNum"`
+}
+
+func (GetMachinesMachineArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachine)(nil)).Elem()
+}
+
+func (i GetMachinesMachineArgs) ToGetMachinesMachineOutput() GetMachinesMachineOutput {
+	return i.ToGetMachinesMachineOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineArgs) ToGetMachinesMachineOutputWithContext(ctx context.Context) GetMachinesMachineOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineOutput)
+}
+
+// GetMachinesMachineArrayInput is an input type that accepts GetMachinesMachineArray and GetMachinesMachineArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineArrayInput` via:
+//
+//	GetMachinesMachineArray{ GetMachinesMachineArgs{...} }
+type GetMachinesMachineArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput
+	ToGetMachinesMachineArrayOutputWithContext(context.Context) GetMachinesMachineArrayOutput
+}
+
+type GetMachinesMachineArray []GetMachinesMachineInput
+
+func (GetMachinesMachineArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachine)(nil)).Elem()
+}
+
+func (i GetMachinesMachineArray) ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput {
+	return i.ToGetMachinesMachineArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineArray) ToGetMachinesMachineArrayOutputWithContext(ctx context.Context) GetMachinesMachineArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineArrayOutput)
+}
+
+type GetMachinesMachineOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachine)(nil)).Elem()
+}
+
+func (o GetMachinesMachineOutput) ToGetMachinesMachineOutput() GetMachinesMachineOutput {
+	return o
+}
+
+func (o GetMachinesMachineOutput) ToGetMachinesMachineOutputWithContext(ctx context.Context) GetMachinesMachineOutput {
+	return o
+}
+
+// ONLINE: Protected; OFFLINE: Offline; UNINSTALLED: Not installed.
+func (o GetMachinesMachineOutput) AgentStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.AgentStatus }).(pulumi.StringOutput)
+}
+
+// Host security agent version.
+func (o GetMachinesMachineOutput) AgentVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.AgentVersion }).(pulumi.StringOutput)
+}
+
+// Number of baseline risks.
+func (o GetMachinesMachineOutput) BaselineNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.BaselineNum }).(pulumi.IntOutput)
+}
+
+// Cloud Tag Information
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) CloudTags() GetMachinesMachineCloudTagArrayOutput {
+	return o.ApplyT(func(v GetMachinesMachine) []GetMachinesMachineCloudTag { return v.CloudTags }).(GetMachinesMachineCloudTagArrayOutput)
+}
+
+// Number of network risks.
+func (o GetMachinesMachineOutput) CyberAttackNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.CyberAttackNum }).(pulumi.IntOutput)
+}
+
+// Whether there is an available asset scanning API: 0 - no; 1 - yes.
+func (o GetMachinesMachineOutput) HasAssetScan() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.HasAssetScan }).(pulumi.IntOutput)
+}
+
+// Instance ID
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance status: TERMINATED_PRO_VERSION - terminated.
+func (o GetMachinesMachineOutput) InstanceState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.InstanceState }).(pulumi.StringOutput)
+}
+
+// RUNNING; STOPPED; EXPIRED (awaiting recycling).
+func (o GetMachinesMachineOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+// Number of intrusion events.
+func (o GetMachinesMachineOutput) InvasionNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.InvasionNum }).(pulumi.IntOutput)
+}
+
+// Host IP List
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) IpList() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.IpList }).(pulumi.StringOutput)
+}
+
+// Whether a host added within the last 15 days: 0: no; 1: yes
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) IsAddedOnTheFifteen() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.IsAddedOnTheFifteen }).(pulumi.IntOutput)
+}
+
+// Whether the edition is Pro Edition
+// <li>true: yes</li>
+// <li>false: no</li>.
+func (o GetMachinesMachineOutput) IsProVersion() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetMachinesMachine) bool { return v.IsProVersion }).(pulumi.BoolOutput)
+}
+
+// Kernel version.
+func (o GetMachinesMachineOutput) KernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.KernelVersion }).(pulumi.StringOutput)
+}
+
+// Tamper-proof; authorization status: 1 - authorized; 0 - unauthorized.
+func (o GetMachinesMachineOutput) LicenseStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.LicenseStatus }).(pulumi.IntOutput)
+}
+
+// Additional information
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) MachineExtraInfos() GetMachinesMachineMachineExtraInfoArrayOutput {
+	return o.ApplyT(func(v GetMachinesMachine) []GetMachinesMachineMachineExtraInfo { return v.MachineExtraInfos }).(GetMachinesMachineMachineExtraInfoArrayOutput)
+}
+
+// Host IP.
+func (o GetMachinesMachineOutput) MachineIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineIp }).(pulumi.StringOutput)
+}
+
+// Host name.
+func (o GetMachinesMachineOutput) MachineName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineName }).(pulumi.StringOutput)
+}
+
+// Host System.
+func (o GetMachinesMachineOutput) MachineOs() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineOs }).(pulumi.StringOutput)
+}
+
+// Host status
+// <li>OFFLINE: Offline</li>
+// <li>ONLINE: Online</li>
+// <li>SHUTDOWN: Shut down</li>
+// <li>UNINSTALLED: Unprotected</li>.
+func (o GetMachinesMachineOutput) MachineStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineStatus }).(pulumi.StringOutput)
+}
+
+// Type of the machine's zone
+// CVM: Cloud Virtual Machine
+// BM: BMECM: Edge Computing Machine
+// LH: Lighthouse
+// Other: Hybrid Cloud Zone.
+func (o GetMachinesMachineOutput) MachineType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineType }).(pulumi.StringOutput)
+}
+
+// Public IP address of a host.
+func (o GetMachinesMachineOutput) MachineWanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.MachineWanIp }).(pulumi.StringOutput)
+}
+
+// Number of Trojans.
+func (o GetMachinesMachineOutput) MalwareNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.MalwareNum }).(pulumi.IntOutput)
+}
+
+// Host status
+// <li>POSTPAY: postpaid, indicating pay-as-you-go mode  </li>
+// <li>PREPAY: prepaid, indicating monthly subscription mode</li>.
+func (o GetMachinesMachineOutput) PayMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.PayMode }).(pulumi.StringOutput)
+}
+
+// Project ID.
+func (o GetMachinesMachineOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Protection version: BASIC_VERSION - Basic Edition; PRO_VERSION - Professional Edition; Flagship - Ultimate Edition; GENERAL_DISCOUNT - Inclusive Edition.
+func (o GetMachinesMachineOutput) ProtectType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.ProtectType }).(pulumi.StringOutput)
+}
+
+// CVM or BM Machine Unique UUID.
+func (o GetMachinesMachineOutput) Quuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.Quuid }).(pulumi.StringOutput)
+}
+
+// Region information.
+func (o GetMachinesMachineOutput) RegionInfos() GetMachinesMachineRegionInfoArrayOutput {
+	return o.ApplyT(func(v GetMachinesMachine) []GetMachinesMachineRegionInfo { return v.RegionInfos }).(GetMachinesMachineRegionInfoArrayOutput)
+}
+
+// Remarks
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Risk status
+// <li>SAFE: Safe</li>
+// <li>RISK: Risk</li>
+// <li>UNKNOWN: Unknown</li>.
+func (o GetMachinesMachineOutput) SecurityStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.SecurityStatus }).(pulumi.StringOutput)
+}
+
+// Tag information.
+func (o GetMachinesMachineOutput) Tags() GetMachinesMachineTagArrayOutput {
+	return o.ApplyT(func(v GetMachinesMachine) []GetMachinesMachineTag { return v.Tags }).(GetMachinesMachineTagArrayOutput)
+}
+
+// Yunjing client UUID. If the client is offline for a long time, an empty string is returned.
+func (o GetMachinesMachineOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.Uuid }).(pulumi.StringOutput)
+}
+
+// Network
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachine) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Number of vulnerabilities.
+func (o GetMachinesMachineOutput) VulNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachine) int { return v.VulNum }).(pulumi.IntOutput)
+}
+
+type GetMachinesMachineArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachine)(nil)).Elem()
+}
+
+func (o GetMachinesMachineArrayOutput) ToGetMachinesMachineArrayOutput() GetMachinesMachineArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineArrayOutput) ToGetMachinesMachineArrayOutputWithContext(ctx context.Context) GetMachinesMachineArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachine {
+		return vs[0].([]GetMachinesMachine)[vs[1].(int)]
+	}).(GetMachinesMachineOutput)
+}
+
+type GetMachinesMachineCloudTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetMachinesMachineCloudTagInput is an input type that accepts GetMachinesMachineCloudTagArgs and GetMachinesMachineCloudTagOutput values.
+// You can construct a concrete instance of `GetMachinesMachineCloudTagInput` via:
+//
+//	GetMachinesMachineCloudTagArgs{...}
+type GetMachinesMachineCloudTagInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineCloudTagOutput() GetMachinesMachineCloudTagOutput
+	ToGetMachinesMachineCloudTagOutputWithContext(context.Context) GetMachinesMachineCloudTagOutput
+}
+
+type GetMachinesMachineCloudTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetMachinesMachineCloudTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineCloudTag)(nil)).Elem()
+}
+
+func (i GetMachinesMachineCloudTagArgs) ToGetMachinesMachineCloudTagOutput() GetMachinesMachineCloudTagOutput {
+	return i.ToGetMachinesMachineCloudTagOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineCloudTagArgs) ToGetMachinesMachineCloudTagOutputWithContext(ctx context.Context) GetMachinesMachineCloudTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineCloudTagOutput)
+}
+
+// GetMachinesMachineCloudTagArrayInput is an input type that accepts GetMachinesMachineCloudTagArray and GetMachinesMachineCloudTagArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineCloudTagArrayInput` via:
+//
+//	GetMachinesMachineCloudTagArray{ GetMachinesMachineCloudTagArgs{...} }
+type GetMachinesMachineCloudTagArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineCloudTagArrayOutput() GetMachinesMachineCloudTagArrayOutput
+	ToGetMachinesMachineCloudTagArrayOutputWithContext(context.Context) GetMachinesMachineCloudTagArrayOutput
+}
+
+type GetMachinesMachineCloudTagArray []GetMachinesMachineCloudTagInput
+
+func (GetMachinesMachineCloudTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineCloudTag)(nil)).Elem()
+}
+
+func (i GetMachinesMachineCloudTagArray) ToGetMachinesMachineCloudTagArrayOutput() GetMachinesMachineCloudTagArrayOutput {
+	return i.ToGetMachinesMachineCloudTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineCloudTagArray) ToGetMachinesMachineCloudTagArrayOutputWithContext(ctx context.Context) GetMachinesMachineCloudTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineCloudTagArrayOutput)
+}
+
+type GetMachinesMachineCloudTagOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineCloudTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineCloudTag)(nil)).Elem()
+}
+
+func (o GetMachinesMachineCloudTagOutput) ToGetMachinesMachineCloudTagOutput() GetMachinesMachineCloudTagOutput {
+	return o
+}
+
+func (o GetMachinesMachineCloudTagOutput) ToGetMachinesMachineCloudTagOutputWithContext(ctx context.Context) GetMachinesMachineCloudTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetMachinesMachineCloudTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineCloudTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetMachinesMachineCloudTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineCloudTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetMachinesMachineCloudTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineCloudTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineCloudTag)(nil)).Elem()
+}
+
+func (o GetMachinesMachineCloudTagArrayOutput) ToGetMachinesMachineCloudTagArrayOutput() GetMachinesMachineCloudTagArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineCloudTagArrayOutput) ToGetMachinesMachineCloudTagArrayOutputWithContext(ctx context.Context) GetMachinesMachineCloudTagArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineCloudTagArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineCloudTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachineCloudTag {
+		return vs[0].([]GetMachinesMachineCloudTag)[vs[1].(int)]
+	}).(GetMachinesMachineCloudTagOutput)
+}
+
+type GetMachinesMachineMachineExtraInfo struct {
+	// Host name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostName string `pulumi:"hostName"`
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId string `pulumi:"instanceId"`
+	// Network Name, returns vpcId in the case of a VPC network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkName string `pulumi:"networkName"`
+	// Network Type. 1: VPC network; 2: Basic Network; 3: Non-Tencent Cloud Network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkType int `pulumi:"networkType"`
+	// Private IP address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateIp string `pulumi:"privateIp"`
+	// Public IP address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanIp string `pulumi:"wanIp"`
+}
+
+// GetMachinesMachineMachineExtraInfoInput is an input type that accepts GetMachinesMachineMachineExtraInfoArgs and GetMachinesMachineMachineExtraInfoOutput values.
+// You can construct a concrete instance of `GetMachinesMachineMachineExtraInfoInput` via:
+//
+//	GetMachinesMachineMachineExtraInfoArgs{...}
+type GetMachinesMachineMachineExtraInfoInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineMachineExtraInfoOutput() GetMachinesMachineMachineExtraInfoOutput
+	ToGetMachinesMachineMachineExtraInfoOutputWithContext(context.Context) GetMachinesMachineMachineExtraInfoOutput
+}
+
+type GetMachinesMachineMachineExtraInfoArgs struct {
+	// Host name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostName pulumi.StringInput `pulumi:"hostName"`
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Network Name, returns vpcId in the case of a VPC network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkName pulumi.StringInput `pulumi:"networkName"`
+	// Network Type. 1: VPC network; 2: Basic Network; 3: Non-Tencent Cloud Network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkType pulumi.IntInput `pulumi:"networkType"`
+	// Private IP address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateIp pulumi.StringInput `pulumi:"privateIp"`
+	// Public IP address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+}
+
+func (GetMachinesMachineMachineExtraInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineMachineExtraInfo)(nil)).Elem()
+}
+
+func (i GetMachinesMachineMachineExtraInfoArgs) ToGetMachinesMachineMachineExtraInfoOutput() GetMachinesMachineMachineExtraInfoOutput {
+	return i.ToGetMachinesMachineMachineExtraInfoOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineMachineExtraInfoArgs) ToGetMachinesMachineMachineExtraInfoOutputWithContext(ctx context.Context) GetMachinesMachineMachineExtraInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineMachineExtraInfoOutput)
+}
+
+// GetMachinesMachineMachineExtraInfoArrayInput is an input type that accepts GetMachinesMachineMachineExtraInfoArray and GetMachinesMachineMachineExtraInfoArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineMachineExtraInfoArrayInput` via:
+//
+//	GetMachinesMachineMachineExtraInfoArray{ GetMachinesMachineMachineExtraInfoArgs{...} }
+type GetMachinesMachineMachineExtraInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineMachineExtraInfoArrayOutput() GetMachinesMachineMachineExtraInfoArrayOutput
+	ToGetMachinesMachineMachineExtraInfoArrayOutputWithContext(context.Context) GetMachinesMachineMachineExtraInfoArrayOutput
+}
+
+type GetMachinesMachineMachineExtraInfoArray []GetMachinesMachineMachineExtraInfoInput
+
+func (GetMachinesMachineMachineExtraInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineMachineExtraInfo)(nil)).Elem()
+}
+
+func (i GetMachinesMachineMachineExtraInfoArray) ToGetMachinesMachineMachineExtraInfoArrayOutput() GetMachinesMachineMachineExtraInfoArrayOutput {
+	return i.ToGetMachinesMachineMachineExtraInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineMachineExtraInfoArray) ToGetMachinesMachineMachineExtraInfoArrayOutputWithContext(ctx context.Context) GetMachinesMachineMachineExtraInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineMachineExtraInfoArrayOutput)
+}
+
+type GetMachinesMachineMachineExtraInfoOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineMachineExtraInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineMachineExtraInfo)(nil)).Elem()
+}
+
+func (o GetMachinesMachineMachineExtraInfoOutput) ToGetMachinesMachineMachineExtraInfoOutput() GetMachinesMachineMachineExtraInfoOutput {
+	return o
+}
+
+func (o GetMachinesMachineMachineExtraInfoOutput) ToGetMachinesMachineMachineExtraInfoOutputWithContext(ctx context.Context) GetMachinesMachineMachineExtraInfoOutput {
+	return o
+}
+
+// Host name
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) HostName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) string { return v.HostName }).(pulumi.StringOutput)
+}
+
+// Instance ID
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Network Name, returns vpcId in the case of a VPC network
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) NetworkName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) string { return v.NetworkName }).(pulumi.StringOutput)
+}
+
+// Network Type. 1: VPC network; 2: Basic Network; 3: Non-Tencent Cloud Network
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) NetworkType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) int { return v.NetworkType }).(pulumi.IntOutput)
+}
+
+// Private IP address
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) PrivateIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) string { return v.PrivateIp }).(pulumi.StringOutput)
+}
+
+// Public IP address
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetMachinesMachineMachineExtraInfoOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineMachineExtraInfo) string { return v.WanIp }).(pulumi.StringOutput)
+}
+
+type GetMachinesMachineMachineExtraInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineMachineExtraInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineMachineExtraInfo)(nil)).Elem()
+}
+
+func (o GetMachinesMachineMachineExtraInfoArrayOutput) ToGetMachinesMachineMachineExtraInfoArrayOutput() GetMachinesMachineMachineExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineMachineExtraInfoArrayOutput) ToGetMachinesMachineMachineExtraInfoArrayOutputWithContext(ctx context.Context) GetMachinesMachineMachineExtraInfoArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineMachineExtraInfoArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineMachineExtraInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachineMachineExtraInfo {
+		return vs[0].([]GetMachinesMachineMachineExtraInfo)[vs[1].(int)]
+	}).(GetMachinesMachineMachineExtraInfoOutput)
+}
+
+type GetMachinesMachineRegionInfo struct {
+	// Region identifiers, such as ap-guangzhou, ap-shanghai, and ap-beijing.
+	Region string `pulumi:"region"`
+	// Region code, such as gz, sh, and bj.
+	RegionCode string `pulumi:"regionCode"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+	// Chinese name of a region, such as South China (Guangzhou), East China (Shanghai Finance), and North China (Beijing).
+	RegionName string `pulumi:"regionName"`
+	// English name of the region.
+	RegionNameEn string `pulumi:"regionNameEn"`
+}
+
+// GetMachinesMachineRegionInfoInput is an input type that accepts GetMachinesMachineRegionInfoArgs and GetMachinesMachineRegionInfoOutput values.
+// You can construct a concrete instance of `GetMachinesMachineRegionInfoInput` via:
+//
+//	GetMachinesMachineRegionInfoArgs{...}
+type GetMachinesMachineRegionInfoInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineRegionInfoOutput() GetMachinesMachineRegionInfoOutput
+	ToGetMachinesMachineRegionInfoOutputWithContext(context.Context) GetMachinesMachineRegionInfoOutput
+}
+
+type GetMachinesMachineRegionInfoArgs struct {
+	// Region identifiers, such as ap-guangzhou, ap-shanghai, and ap-beijing.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region code, such as gz, sh, and bj.
+	RegionCode pulumi.StringInput `pulumi:"regionCode"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Chinese name of a region, such as South China (Guangzhou), East China (Shanghai Finance), and North China (Beijing).
+	RegionName pulumi.StringInput `pulumi:"regionName"`
+	// English name of the region.
+	RegionNameEn pulumi.StringInput `pulumi:"regionNameEn"`
+}
+
+func (GetMachinesMachineRegionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineRegionInfo)(nil)).Elem()
+}
+
+func (i GetMachinesMachineRegionInfoArgs) ToGetMachinesMachineRegionInfoOutput() GetMachinesMachineRegionInfoOutput {
+	return i.ToGetMachinesMachineRegionInfoOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineRegionInfoArgs) ToGetMachinesMachineRegionInfoOutputWithContext(ctx context.Context) GetMachinesMachineRegionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineRegionInfoOutput)
+}
+
+// GetMachinesMachineRegionInfoArrayInput is an input type that accepts GetMachinesMachineRegionInfoArray and GetMachinesMachineRegionInfoArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineRegionInfoArrayInput` via:
+//
+//	GetMachinesMachineRegionInfoArray{ GetMachinesMachineRegionInfoArgs{...} }
+type GetMachinesMachineRegionInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineRegionInfoArrayOutput() GetMachinesMachineRegionInfoArrayOutput
+	ToGetMachinesMachineRegionInfoArrayOutputWithContext(context.Context) GetMachinesMachineRegionInfoArrayOutput
+}
+
+type GetMachinesMachineRegionInfoArray []GetMachinesMachineRegionInfoInput
+
+func (GetMachinesMachineRegionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineRegionInfo)(nil)).Elem()
+}
+
+func (i GetMachinesMachineRegionInfoArray) ToGetMachinesMachineRegionInfoArrayOutput() GetMachinesMachineRegionInfoArrayOutput {
+	return i.ToGetMachinesMachineRegionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineRegionInfoArray) ToGetMachinesMachineRegionInfoArrayOutputWithContext(ctx context.Context) GetMachinesMachineRegionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineRegionInfoArrayOutput)
+}
+
+type GetMachinesMachineRegionInfoOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineRegionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineRegionInfo)(nil)).Elem()
+}
+
+func (o GetMachinesMachineRegionInfoOutput) ToGetMachinesMachineRegionInfoOutput() GetMachinesMachineRegionInfoOutput {
+	return o
+}
+
+func (o GetMachinesMachineRegionInfoOutput) ToGetMachinesMachineRegionInfoOutputWithContext(ctx context.Context) GetMachinesMachineRegionInfoOutput {
+	return o
+}
+
+// Region identifiers, such as ap-guangzhou, ap-shanghai, and ap-beijing.
+func (o GetMachinesMachineRegionInfoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineRegionInfo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region code, such as gz, sh, and bj.
+func (o GetMachinesMachineRegionInfoOutput) RegionCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineRegionInfo) string { return v.RegionCode }).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetMachinesMachineRegionInfoOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachineRegionInfo) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// Chinese name of a region, such as South China (Guangzhou), East China (Shanghai Finance), and North China (Beijing).
+func (o GetMachinesMachineRegionInfoOutput) RegionName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineRegionInfo) string { return v.RegionName }).(pulumi.StringOutput)
+}
+
+// English name of the region.
+func (o GetMachinesMachineRegionInfoOutput) RegionNameEn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineRegionInfo) string { return v.RegionNameEn }).(pulumi.StringOutput)
+}
+
+type GetMachinesMachineRegionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineRegionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineRegionInfo)(nil)).Elem()
+}
+
+func (o GetMachinesMachineRegionInfoArrayOutput) ToGetMachinesMachineRegionInfoArrayOutput() GetMachinesMachineRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineRegionInfoArrayOutput) ToGetMachinesMachineRegionInfoArrayOutputWithContext(ctx context.Context) GetMachinesMachineRegionInfoArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineRegionInfoArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineRegionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachineRegionInfo {
+		return vs[0].([]GetMachinesMachineRegionInfo)[vs[1].(int)]
+	}).(GetMachinesMachineRegionInfoOutput)
+}
+
+type GetMachinesMachineTag struct {
+	// Tag name.
+	Name string `pulumi:"name"`
+	// Associated tag ID.
+	Rid int `pulumi:"rid"`
+	// Tag ID.
+	TagId int `pulumi:"tagId"`
+}
+
+// GetMachinesMachineTagInput is an input type that accepts GetMachinesMachineTagArgs and GetMachinesMachineTagOutput values.
+// You can construct a concrete instance of `GetMachinesMachineTagInput` via:
+//
+//	GetMachinesMachineTagArgs{...}
+type GetMachinesMachineTagInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineTagOutput() GetMachinesMachineTagOutput
+	ToGetMachinesMachineTagOutputWithContext(context.Context) GetMachinesMachineTagOutput
+}
+
+type GetMachinesMachineTagArgs struct {
+	// Tag name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Associated tag ID.
+	Rid pulumi.IntInput `pulumi:"rid"`
+	// Tag ID.
+	TagId pulumi.IntInput `pulumi:"tagId"`
+}
+
+func (GetMachinesMachineTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineTag)(nil)).Elem()
+}
+
+func (i GetMachinesMachineTagArgs) ToGetMachinesMachineTagOutput() GetMachinesMachineTagOutput {
+	return i.ToGetMachinesMachineTagOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineTagArgs) ToGetMachinesMachineTagOutputWithContext(ctx context.Context) GetMachinesMachineTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineTagOutput)
+}
+
+// GetMachinesMachineTagArrayInput is an input type that accepts GetMachinesMachineTagArray and GetMachinesMachineTagArrayOutput values.
+// You can construct a concrete instance of `GetMachinesMachineTagArrayInput` via:
+//
+//	GetMachinesMachineTagArray{ GetMachinesMachineTagArgs{...} }
+type GetMachinesMachineTagArrayInput interface {
+	pulumi.Input
+
+	ToGetMachinesMachineTagArrayOutput() GetMachinesMachineTagArrayOutput
+	ToGetMachinesMachineTagArrayOutputWithContext(context.Context) GetMachinesMachineTagArrayOutput
+}
+
+type GetMachinesMachineTagArray []GetMachinesMachineTagInput
+
+func (GetMachinesMachineTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineTag)(nil)).Elem()
+}
+
+func (i GetMachinesMachineTagArray) ToGetMachinesMachineTagArrayOutput() GetMachinesMachineTagArrayOutput {
+	return i.ToGetMachinesMachineTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachinesMachineTagArray) ToGetMachinesMachineTagArrayOutputWithContext(ctx context.Context) GetMachinesMachineTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachinesMachineTagArrayOutput)
+}
+
+type GetMachinesMachineTagOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachinesMachineTag)(nil)).Elem()
+}
+
+func (o GetMachinesMachineTagOutput) ToGetMachinesMachineTagOutput() GetMachinesMachineTagOutput {
+	return o
+}
+
+func (o GetMachinesMachineTagOutput) ToGetMachinesMachineTagOutputWithContext(ctx context.Context) GetMachinesMachineTagOutput {
+	return o
+}
+
+// Tag name.
+func (o GetMachinesMachineTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachinesMachineTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Associated tag ID.
+func (o GetMachinesMachineTagOutput) Rid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachineTag) int { return v.Rid }).(pulumi.IntOutput)
+}
+
+// Tag ID.
+func (o GetMachinesMachineTagOutput) TagId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachinesMachineTag) int { return v.TagId }).(pulumi.IntOutput)
+}
+
+type GetMachinesMachineTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachinesMachineTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachinesMachineTag)(nil)).Elem()
+}
+
+func (o GetMachinesMachineTagArrayOutput) ToGetMachinesMachineTagArrayOutput() GetMachinesMachineTagArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineTagArrayOutput) ToGetMachinesMachineTagArrayOutputWithContext(ctx context.Context) GetMachinesMachineTagArrayOutput {
+	return o
+}
+
+func (o GetMachinesMachineTagArrayOutput) Index(i pulumi.IntInput) GetMachinesMachineTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachineTag {
+		return vs[0].([]GetMachinesMachineTag)[vs[1].(int)]
+	}).(GetMachinesMachineTagOutput)
+}
+
 type GetMachinesSimpleFilter struct {
 	// exact match. true or false.
 	ExactMatch *bool `pulumi:"exactMatch"`
@@ -866,6 +1955,18 @@ func (o GetMachinesSimpleMachineTagArrayOutput) Index(i pulumi.IntInput) GetMach
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesFilterInput)(nil)).Elem(), GetMachinesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesFilterArrayInput)(nil)).Elem(), GetMachinesFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineInput)(nil)).Elem(), GetMachinesMachineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineArrayInput)(nil)).Elem(), GetMachinesMachineArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineCloudTagInput)(nil)).Elem(), GetMachinesMachineCloudTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineCloudTagArrayInput)(nil)).Elem(), GetMachinesMachineCloudTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineMachineExtraInfoInput)(nil)).Elem(), GetMachinesMachineMachineExtraInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineMachineExtraInfoArrayInput)(nil)).Elem(), GetMachinesMachineMachineExtraInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineRegionInfoInput)(nil)).Elem(), GetMachinesMachineRegionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineRegionInfoArrayInput)(nil)).Elem(), GetMachinesMachineRegionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineTagInput)(nil)).Elem(), GetMachinesMachineTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineTagArrayInput)(nil)).Elem(), GetMachinesMachineTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleFilterInput)(nil)).Elem(), GetMachinesSimpleFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleFilterArrayInput)(nil)).Elem(), GetMachinesSimpleFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleMachineInput)(nil)).Elem(), GetMachinesSimpleMachineArgs{})
@@ -878,6 +1979,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleMachineRegionInfoArrayInput)(nil)).Elem(), GetMachinesSimpleMachineRegionInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleMachineTagInput)(nil)).Elem(), GetMachinesSimpleMachineTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesSimpleMachineTagArrayInput)(nil)).Elem(), GetMachinesSimpleMachineTagArray{})
+	pulumi.RegisterOutputType(GetMachinesFilterOutput{})
+	pulumi.RegisterOutputType(GetMachinesFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineCloudTagOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineCloudTagArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineMachineExtraInfoOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineMachineExtraInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineRegionInfoOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineRegionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineTagOutput{})
+	pulumi.RegisterOutputType(GetMachinesMachineTagArrayOutput{})
 	pulumi.RegisterOutputType(GetMachinesSimpleFilterOutput{})
 	pulumi.RegisterOutputType(GetMachinesSimpleFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetMachinesSimpleMachineOutput{})

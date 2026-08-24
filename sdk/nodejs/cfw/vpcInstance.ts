@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cfw vpcInstance
+ * Provides a resource to create a CFW vpc instance
  *
  * ## Example Usage
  *
@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw vpc_instance can be imported using the id, e.g.
+ * CFW vpc instance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
@@ -106,6 +106,10 @@ export class VpcInstance extends pulumi.CustomResource {
      */
     declare public readonly ccnId: pulumi.Output<string | undefined>;
     /**
+     * Firewall group ID.
+     */
+    declare public /*out*/ readonly fwGroupId: pulumi.Output<string>;
+    /**
      * auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
      */
     declare public readonly fwVpcCidr: pulumi.Output<string | undefined>;
@@ -140,6 +144,7 @@ export class VpcInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as VpcInstanceState | undefined;
             resourceInputs["ccnId"] = state?.ccnId;
+            resourceInputs["fwGroupId"] = state?.fwGroupId;
             resourceInputs["fwVpcCidr"] = state?.fwVpcCidr;
             resourceInputs["mode"] = state?.mode;
             resourceInputs["name"] = state?.name;
@@ -162,6 +167,7 @@ export class VpcInstance extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["switchMode"] = args?.switchMode;
             resourceInputs["vpcFwInstances"] = args?.vpcFwInstances;
+            resourceInputs["fwGroupId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(VpcInstance.__pulumiType, name, resourceInputs, opts);
@@ -175,27 +181,31 @@ export interface VpcInstanceState {
     /**
      * Cloud networking id, suitable for cloud networking mode.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
+    /**
+     * Firewall group ID.
+     */
+    fwGroupId?: pulumi.Input<string | undefined>;
     /**
      * auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
      */
-    fwVpcCidr?: pulumi.Input<string>;
+    fwVpcCidr?: pulumi.Input<string | undefined>;
     /**
      * Mode 0: private network mode; 1: CCN cloud networking mode.
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * VPC firewall (group) name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Switch mode of firewall instance. 1: Single point intercommunication; 2: Multi-point communication; 4: Custom Routing.
      */
-    switchMode?: pulumi.Input<number>;
+    switchMode?: pulumi.Input<number | undefined>;
     /**
      * List of firewall instances under firewall (group).
      */
-    vpcFwInstances?: pulumi.Input<pulumi.Input<inputs.Cfw.VpcInstanceVpcFwInstance>[]>;
+    vpcFwInstances?: pulumi.Input<pulumi.Input<inputs.Cfw.VpcInstanceVpcFwInstance>[] | undefined>;
 }
 
 /**
@@ -205,11 +215,11 @@ export interface VpcInstanceArgs {
     /**
      * Cloud networking id, suitable for cloud networking mode.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
      */
-    fwVpcCidr?: pulumi.Input<string>;
+    fwVpcCidr?: pulumi.Input<string | undefined>;
     /**
      * Mode 0: private network mode; 1: CCN cloud networking mode.
      */
@@ -217,7 +227,7 @@ export interface VpcInstanceArgs {
     /**
      * VPC firewall (group) name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Switch mode of firewall instance. 1: Single point intercommunication; 2: Multi-point communication; 4: Custom Routing.
      */

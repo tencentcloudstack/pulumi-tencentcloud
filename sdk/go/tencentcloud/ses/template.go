@@ -72,7 +72,6 @@ import (
 // ## Import
 //
 // ses template can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Ses/template:Template example template_id
 // ```

@@ -131,27 +131,27 @@ export interface SqlFolderState {
     /**
      * Permission range: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Folder ID.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Folder name.
      */
-    folderName?: pulumi.Input<string>;
+    folderName?: pulumi.Input<string | undefined>;
     /**
      * The parent folder path is /aaa/bbb/ccc. The path header must have a slash. To query the root directory, pass /.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Node path.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface SqlFolderArgs {
     /**
      * Permission range: SHARED, PRIVATE.
      */
-    accessScope?: pulumi.Input<string>;
+    accessScope?: pulumi.Input<string | undefined>;
     /**
      * Folder name.
      */

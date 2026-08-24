@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs mount_point can be imported using the id, e.g.
+ * chdfs mountPoint can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
@@ -112,15 +112,15 @@ export interface MountPointState {
     /**
      * file system id you want to mount.
      */
-    fileSystemId?: pulumi.Input<string>;
+    fileSystemId?: pulumi.Input<string | undefined>;
     /**
      * mount point name.
      */
-    mountPointName?: pulumi.Input<string>;
+    mountPointName?: pulumi.Input<string | undefined>;
     /**
      * mount status 1:open, 2:close.
      */
-    mountPointStatus?: pulumi.Input<number>;
+    mountPointStatus?: pulumi.Input<number | undefined>;
 }
 
 /**

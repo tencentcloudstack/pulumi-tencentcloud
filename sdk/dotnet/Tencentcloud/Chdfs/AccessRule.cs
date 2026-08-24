@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Import
     /// 
-    /// chdfs access_rule can be imported using the id, e.g.
+    /// chdfs AccessRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Chdfs/accessRule:AccessRule access_rule access_group_id#access_rule_id

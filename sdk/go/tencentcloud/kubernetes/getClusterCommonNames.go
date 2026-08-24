@@ -108,12 +108,8 @@ type GetClusterCommonNamesResult struct {
 }
 
 func GetClusterCommonNamesOutput(ctx *pulumi.Context, args GetClusterCommonNamesOutputArgs, opts ...pulumi.InvokeOption) GetClusterCommonNamesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterCommonNamesResultOutput, error) {
-			args := v.(GetClusterCommonNamesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args, GetClusterCommonNamesResultOutput{}, options).(GetClusterCommonNamesResultOutput), nil
-		}).(GetClusterCommonNamesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args, GetClusterCommonNamesResultOutput{}, options).(GetClusterCommonNamesResultOutput)
 }
 
 // A collection of arguments for invoking getClusterCommonNames.

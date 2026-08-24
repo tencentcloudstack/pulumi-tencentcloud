@@ -131,6 +131,10 @@ export class DrInstance extends pulumi.CustomResource {
      */
     declare public readonly deviceType: pulumi.Output<string>;
     /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    declare public readonly diskType: pulumi.Output<string>;
+    /**
      * Zone information about first slave instance.
      */
     declare public readonly firstSlaveZone: pulumi.Output<string>;
@@ -233,6 +237,7 @@ export class DrInstance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["cpu"] = state?.cpu;
             resourceInputs["deviceType"] = state?.deviceType;
+            resourceInputs["diskType"] = state?.diskType;
             resourceInputs["firstSlaveZone"] = state?.firstSlaveZone;
             resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["instanceName"] = state?.instanceName;
@@ -275,6 +280,7 @@ export class DrInstance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["cpu"] = args?.cpu;
             resourceInputs["deviceType"] = args?.deviceType;
+            resourceInputs["diskType"] = args?.diskType;
             resourceInputs["firstSlaveZone"] = args?.firstSlaveZone;
             resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["instanceName"] = args?.instanceName;
@@ -308,107 +314,111 @@ export interface DrInstanceState {
     /**
      * Auto renew flag. NOTES: Only supported prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Indicates which availability zone will be used.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * CPU cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Zone information about first slave instance.
      */
-    firstSlaveZone?: pulumi.Input<string>;
+    firstSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * The name of a mysql instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance intranet IP.
      */
-    intranetIp?: pulumi.Input<string>;
+    intranetIp?: pulumi.Input<string | undefined>;
     /**
      * Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
      */
-    intranetPort?: pulumi.Input<number>;
+    intranetPort?: pulumi.Input<number | undefined>;
     /**
      * Indicates the master instance ID of recovery instances.
      */
-    masterInstanceId?: pulumi.Input<string>;
+    masterInstanceId?: pulumi.Input<string | undefined>;
     /**
      * The zone information of the primary instance is required when you purchase a disaster recovery instance.
      */
-    masterRegion?: pulumi.Input<string>;
+    masterRegion?: pulumi.Input<string | undefined>;
     /**
      * Memory size (in MB).
      */
-    memSize?: pulumi.Input<number>;
+    memSize?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
-    payType?: pulumi.Input<number>;
+    payType?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Period of instance. NOTES: Only supported prepaid instance.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Zone information about second slave instance.
      */
-    secondSlaveZone?: pulumi.Input<string>;
+    secondSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Security groups to use.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
      */
-    slaveDeployMode?: pulumi.Input<number>;
+    slaveDeployMode?: pulumi.Input<number | undefined>;
     /**
      * Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
      */
-    slaveSyncMode?: pulumi.Input<number>;
+    slaveSyncMode?: pulumi.Input<number | undefined>;
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Disk size (in GB).
      */
-    volumeSize?: pulumi.Input<number>;
+    volumeSize?: pulumi.Input<number | undefined>;
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -418,31 +428,35 @@ export interface DrInstanceArgs {
     /**
      * Auto renew flag. NOTES: Only supported prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Indicates which availability zone will be used.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * CPU cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Zone information about first slave instance.
      */
-    firstSlaveZone?: pulumi.Input<string>;
+    firstSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * The name of a mysql instance.
      */
@@ -450,7 +464,7 @@ export interface DrInstanceArgs {
     /**
      * Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
      */
-    intranetPort?: pulumi.Input<number>;
+    intranetPort?: pulumi.Input<number | undefined>;
     /**
      * Indicates the master instance ID of recovery instances.
      */
@@ -468,45 +482,45 @@ export interface DrInstanceArgs {
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
-    payType?: pulumi.Input<number>;
+    payType?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Period of instance. NOTES: Only supported prepaid instance.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Zone information about second slave instance.
      */
-    secondSlaveZone?: pulumi.Input<string>;
+    secondSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Security groups to use.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
      */
-    slaveDeployMode?: pulumi.Input<number>;
+    slaveDeployMode?: pulumi.Input<number | undefined>;
     /**
      * Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
      */
-    slaveSyncMode?: pulumi.Input<number>;
+    slaveSyncMode?: pulumi.Input<number | undefined>;
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Disk size (in GB).
      */
@@ -514,5 +528,5 @@ export interface DrInstanceArgs {
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

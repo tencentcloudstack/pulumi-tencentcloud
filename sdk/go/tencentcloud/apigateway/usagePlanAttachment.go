@@ -55,7 +55,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example"),
 //				ApiDesc:             pulumi.String("my hello api update"),
 //				AuthType:            pulumi.String("SECRET"),
@@ -95,11 +95,11 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewUsagePlanAttachment(ctx, "example", &apigateway.UsagePlanAttachmentArgs{
-//				UsagePlanId: example.ID(),
-//				ServiceId:   exampleService.ID(),
+//				UsagePlanId: example.ID().ToIDOutput().ToStringOutput(),
+//				ServiceId:   exampleService.ID().ToIDOutput().ToStringOutput(),
 //				Environment: pulumi.String("release"),
 //				BindType:    pulumi.String("API"),
-//				ApiId:       exampleApi.ID(),
+//				ApiId:       exampleApi.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -138,7 +138,7 @@ import (
 //				BindType:    pulumi.String("API"),
 //				ApiId:       pulumi.Any(exampleTencentcloudApiGatewayApi.Id),
 //				AccessKeyIds: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {

@@ -16,16 +16,16 @@ import * as utilities from "../utilities";
  * import * as std from "@pulumi/std";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstances = tencentcloud.Wedata.getTaskInstances({
+ * const wedataTaskInstances = tencentcloud.wedata.getTaskInstances({
  *     projectId: "1859317240494305280",
  * });
  * const instanceKeys = wedataTaskInstances.then(wedataTaskInstances => wedataTaskInstances.datas?.[0]?.items.map(__item => __item.instanceKey));
  * const wedataUpstreamTaskInstances = std.toset({
  *     input: instanceKeys,
- * }).then(invoke => .reduce((__obj, [__key, __value]) => ({ ...__obj, [__key]: tencentcloud.Wedata.getUpstreamTaskInstances({
+ * }).then(invoke => .reduce((__obj, [__key, __value]) => ({ ...__obj, [String(__key)]: tencentcloud.wedata.getUpstreamTaskInstances({
  *     projectId: "1859317240494305280",
  *     instanceKey: __value,
- * }) })));
+ * }) }), {}));
  * ```
  */
 export function getUpstreamTaskInstances(args: GetUpstreamTaskInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetUpstreamTaskInstancesResult> {
@@ -87,16 +87,16 @@ export interface GetUpstreamTaskInstancesResult {
  * import * as std from "@pulumi/std";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstances = tencentcloud.Wedata.getTaskInstances({
+ * const wedataTaskInstances = tencentcloud.wedata.getTaskInstances({
  *     projectId: "1859317240494305280",
  * });
  * const instanceKeys = wedataTaskInstances.then(wedataTaskInstances => wedataTaskInstances.datas?.[0]?.items.map(__item => __item.instanceKey));
  * const wedataUpstreamTaskInstances = std.toset({
  *     input: instanceKeys,
- * }).then(invoke => .reduce((__obj, [__key, __value]) => ({ ...__obj, [__key]: tencentcloud.Wedata.getUpstreamTaskInstances({
+ * }).then(invoke => .reduce((__obj, [__key, __value]) => ({ ...__obj, [String(__key)]: tencentcloud.wedata.getUpstreamTaskInstances({
  *     projectId: "1859317240494305280",
  *     instanceKey: __value,
- * }) })));
+ * }) }), {}));
  * ```
  */
 export function getUpstreamTaskInstancesOutput(args: GetUpstreamTaskInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUpstreamTaskInstancesResult> {
@@ -124,9 +124,9 @@ export interface GetUpstreamTaskInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Time zone, default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
 }

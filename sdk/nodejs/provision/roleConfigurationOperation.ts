@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  *     zoneId: "xxxxxx",
  *     roleConfigurationId: "xxxxxx",
  *     targetType: "MemberUin",
- *     targetUin: "xxxxxx",
+ *     targetUin: Number("xxxxxx"),
  * });
  * ```
  */
@@ -114,19 +114,19 @@ export interface RoleConfigurationOperationState {
     /**
      * Permission configuration ID.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Type of the synchronized target account of the Tencent Cloud Organization. ManagerUin: admin account; MemberUin: member account.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * UIN of the target account of the Tencent Cloud Organization.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

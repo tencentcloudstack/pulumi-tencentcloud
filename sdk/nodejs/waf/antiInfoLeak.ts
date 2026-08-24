@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf anti_info_leak can be imported using the id, e.g.
+ * waf antiInfoLeak can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com
@@ -141,27 +141,27 @@ export interface AntiInfoLeakState {
     /**
      * Rule Action, 0 (log), 1 (replace), 2 (only display the first four digits), 3 (only display the last four digits), 4 (deny).
      */
-    actionType?: pulumi.Input<number>;
+    actionType?: pulumi.Input<number | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Strategies detail.
      */
-    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.AntiInfoLeakStrategy>[]>;
+    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.AntiInfoLeakStrategy>[] | undefined>;
     /**
      * Uri.
      */
-    uri?: pulumi.Input<string>;
+    uri?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -179,11 +179,11 @@ export interface AntiInfoLeakArgs {
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Strategies detail.
      */

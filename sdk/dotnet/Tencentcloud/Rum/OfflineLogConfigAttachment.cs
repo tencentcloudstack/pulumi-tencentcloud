@@ -34,8 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Import
     /// 
-    /// rum offline_log_config_attachment can be imported using the id, e.g.
-    /// 
+    /// rum OfflineLogConfigAttachment can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
     /// ```

@@ -94,11 +94,11 @@ export interface ApplyDiskBackupState {
     /**
      * Disk backup ID.
      */
-    diskBackupId?: pulumi.Input<string>;
+    diskBackupId?: pulumi.Input<string | undefined>;
     /**
      * Disk ID.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
 }
 
 /**

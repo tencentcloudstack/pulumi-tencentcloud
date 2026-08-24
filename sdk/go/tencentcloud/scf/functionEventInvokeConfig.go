@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// scf function_event_invoke_config can be imported using the id, e.g.
+// scf functionEventInvokeConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace

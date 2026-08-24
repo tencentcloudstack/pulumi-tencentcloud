@@ -42,7 +42,7 @@ import (
 //
 // ## Import
 //
-// organization quit_organization_operation can be imported using the id, e.g.
+// organization quitOrganizationOperation can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id

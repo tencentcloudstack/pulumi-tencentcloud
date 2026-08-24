@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to create a redis param
 //
+// > **NOTE:** This resource is applicable to modifying the parameters of Tencent Cloud Distributed Cache instances across three engine types(`Redis Edition`, `Valkey Edition`, `Memcached Edition`). For details on the engines, please refer to [Storage Engine](https://www.tencentcloud.com/document/product/239/31957)
+//
 // ## Example Usage
 //
 // ```go
@@ -28,8 +30,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := redis.NewParam(ctx, "param", &redis.ParamArgs{
-//				InstanceId: pulumi.String("crs-c1nl9rpv"),
+//			_, err := redis.NewParam(ctx, "example", &redis.ParamArgs{
+//				InstanceId: pulumi.String("crs-cqdfdzvt"),
 //				InstanceParams: pulumi.StringMap{
 //					"cluster-node-timeout":          pulumi.String("15000"),
 //					"disable-command-list":          pulumi.String("\"\""),
@@ -42,7 +44,6 @@ import (
 //					"maxmemory-policy":              pulumi.String("noeviction"),
 //					"notify-keyspace-events":        pulumi.String("\"\""),
 //					"proxy-slowlog-log-slower-than": pulumi.String("500"),
-//					"replica-lazy-flush":            pulumi.String("yes"),
 //					"sentineauth":                   pulumi.String("no"),
 //					"set-max-intset-entries":        pulumi.String("512"),
 //					"slowlog-log-slower-than":       pulumi.String("10"),
@@ -65,7 +66,7 @@ import (
 // redis param can be imported using the instanceId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
+// $ pulumi import tencentcloud:Redis/param:Param example crs-cqdfdzvt
 // ```
 type Param struct {
 	pulumi.CustomResourceState

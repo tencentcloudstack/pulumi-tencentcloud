@@ -68,12 +68,8 @@ type GetInfoResult struct {
 }
 
 func GetInfoOutput(ctx *pulumi.Context, args GetInfoOutputArgs, opts ...pulumi.InvokeOption) GetInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInfoResultOutput, error) {
-			args := v.(GetInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:User/getInfo:getInfo", args, GetInfoResultOutput{}, options).(GetInfoResultOutput), nil
-		}).(GetInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:User/getInfo:getInfo", args, GetInfoResultOutput{}, options).(GetInfoResultOutput)
 }
 
 // A collection of arguments for invoking getInfo.

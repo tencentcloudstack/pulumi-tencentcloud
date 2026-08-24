@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeUserType({
+ * const example = tencentcloud.dlc.getDescribeUserType({
  *     userId: "100021240183",
  * });
  * ```
@@ -65,7 +65,7 @@ export interface GetDescribeUserTypeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeUserType({
+ * const example = tencentcloud.dlc.getDescribeUserType({
  *     userId: "100021240183",
  * });
  * ```
@@ -86,9 +86,9 @@ export interface GetDescribeUserTypeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * User ID (UIN). If it is not specified, it will be the sub-UIN of the caller by default.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }

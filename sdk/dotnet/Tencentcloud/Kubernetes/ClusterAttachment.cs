@@ -15,13 +15,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// &gt; **NOTE:** Use `Unschedulable` to set whether the join node participates in the schedule. The `IsSchedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
     /// 
+    /// &gt; **NOTE:** Starting from version `1.24`, Kubernetes has abandoned Docker, so after version `1.24`, the default value of the `DockerGraphPath` field is `/var/lib/containerd`. For details, please visit the link [Kubernetes blog](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/).
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 

@@ -27,8 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * rum taw_instance can be imported using the id, e.g.
- *
+ * rum tawInstance can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
  * ```
@@ -168,47 +167,47 @@ export interface TawInstanceState {
     /**
      * Region ID (at least greater than 0).
      */
-    areaId?: pulumi.Input<number>;
+    areaId?: pulumi.Input<number | undefined>;
     /**
      * Billing status (`1` = in use, `2` = expired, `3` = destroyed, `4` = assigning, `5` = failed).
      */
-    chargeStatus?: pulumi.Input<number>;
+    chargeStatus?: pulumi.Input<number | undefined>;
     /**
      * Billing type (1: Pay-as-you-go).
      */
-    chargeType?: pulumi.Input<number>;
+    chargeType?: pulumi.Input<number | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<number>;
+    clusterId?: pulumi.Input<number | undefined>;
     /**
      * Create time.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Data retention period (at least greater than 0).
      */
-    dataRetentionDays?: pulumi.Input<number>;
+    dataRetentionDays?: pulumi.Input<number | undefined>;
     /**
      * Instance description (up to 1,024 bytes).
      */
-    instanceDesc?: pulumi.Input<string>;
+    instanceDesc?: pulumi.Input<string | undefined>;
     /**
      * Instance name (up to 255 bytes).
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance status (`1` = creating, `2` = running, `3` = exception, `4` = restarting, `5` = stopping, `6` = stopped, `7` = deleted).
      */
-    instanceStatus?: pulumi.Input<number>;
+    instanceStatus?: pulumi.Input<number | undefined>;
     /**
      * Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -230,7 +229,7 @@ export interface TawInstanceArgs {
     /**
      * Instance description (up to 1,024 bytes).
      */
-    instanceDesc?: pulumi.Input<string>;
+    instanceDesc?: pulumi.Input<string | undefined>;
     /**
      * Instance name (up to 255 bytes).
      */
@@ -238,5 +237,5 @@ export interface TawInstanceArgs {
     /**
      * Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -317,89 +317,89 @@ export interface StorageState {
     /**
      * Indicates whether the CBS is mounted the CVM.
      */
-    attached?: pulumi.Input<boolean>;
+    attached?: pulumi.Input<boolean | undefined>;
     /**
      * The available zone that the CBS instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable performance burst when creating a cloud disk.
      */
-    burstPerformance?: pulumi.Input<boolean>;
+    burstPerformance?: pulumi.Input<boolean | undefined>;
     /**
      * The charge type of CBS instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `CDCPAID` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * The quota of backup points of cloud disk.
      */
-    diskBackupQuota?: pulumi.Input<number>;
+    diskBackupQuota?: pulumi.Input<number | undefined>;
     /**
      * Pass in this parameter to create an encrypted cloud disk.
      */
-    encrypt?: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
      */
-    encryptType?: pulumi.Input<string>;
+    encryptType?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
      * @deprecated It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidRenewFlag?: pulumi.Input<string>;
+    prepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the snapshot. If specified, created the CBS by this snapshot.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
     /**
      * Name of CBS. The maximum length can not exceed 60 bytes.
      */
-    storageName?: pulumi.Input<string>;
+    storageName?: pulumi.Input<string | undefined>;
     /**
      * Volume of CBS, and unit is GB.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
      */
-    storageStatus?: pulumi.Input<string>;
+    storageStatus?: pulumi.Input<string | undefined>;
     /**
      * Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this CBS.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
      */
-    throughputPerformance?: pulumi.Input<number>;
+    throughputPerformance?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -413,57 +413,57 @@ export interface StorageArgs {
     /**
      * Whether to enable performance burst when creating a cloud disk.
      */
-    burstPerformance?: pulumi.Input<boolean>;
+    burstPerformance?: pulumi.Input<boolean | undefined>;
     /**
      * The charge type of CBS instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `CDCPAID` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * The quota of backup points of cloud disk.
      */
-    diskBackupQuota?: pulumi.Input<number>;
+    diskBackupQuota?: pulumi.Input<number | undefined>;
     /**
      * Pass in this parameter to create an encrypted cloud disk.
      */
-    encrypt?: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Specifies the cloud disk encryption type. The values are `ENCRYPT_V1` and `ENCRYPT_V2`, which represent the first-generation and second-generation encryption technologies respectively. The two encryption technologies are incompatible with each other. It is recommended to use the second-generation encryption technology `ENCRYPT_V2` first. The first-generation encryption technology is only supported on some older models. This parameter is only valid when creating an encrypted cloud disk.
      */
-    encryptType?: pulumi.Input<string>;
+    encryptType?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete CBS instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
      *
      * @deprecated It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto Renewal flag. Value range: `NOTIFY_AND_AUTO_RENEW`: Notify expiry and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Neither notify expiry nor renew automatically. Default value range: `NOTIFY_AND_MANUAL_RENEW`: Notify expiry but do not renew automatically. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidRenewFlag?: pulumi.Input<string>;
+    prepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the snapshot. If specified, created the CBS by this snapshot.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
     /**
      * Name of CBS. The maximum length can not exceed 60 bytes.
      */
@@ -479,9 +479,9 @@ export interface StorageArgs {
     /**
      * The available tags within this CBS.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
      */
-    throughputPerformance?: pulumi.Input<number>;
+    throughputPerformance?: pulumi.Input<number | undefined>;
 }

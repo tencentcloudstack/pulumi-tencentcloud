@@ -79,12 +79,8 @@ type LookupTopicFlowRankingResult struct {
 }
 
 func LookupTopicFlowRankingOutput(ctx *pulumi.Context, args LookupTopicFlowRankingOutputArgs, opts ...pulumi.InvokeOption) LookupTopicFlowRankingResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupTopicFlowRankingResultOutput, error) {
-			args := v.(LookupTopicFlowRankingArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args, LookupTopicFlowRankingResultOutput{}, options).(LookupTopicFlowRankingResultOutput), nil
-		}).(LookupTopicFlowRankingResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicFlowRanking:getTopicFlowRanking", args, LookupTopicFlowRankingResultOutput{}, options).(LookupTopicFlowRankingResultOutput)
 }
 
 // A collection of arguments for invoking getTopicFlowRanking.

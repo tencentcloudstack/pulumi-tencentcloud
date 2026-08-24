@@ -2,10 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provide a resource to create a TDMQ topic.
+ * Provides a resource to create a TDMQ topic.
  *
  * ## Example Usage
  *
@@ -37,6 +39,10 @@ import * as utilities from "../utilities";
  *     partitions: 6,
  *     pulsarTopicType: 3,
  *     remark: "remark.",
+ *     tags: {
+ *         env: "test",
+ *         team: "backend",
+ *     },
  * });
  * ```
  */
@@ -93,6 +99,10 @@ export class Topic extends pulumi.CustomResource {
      */
     declare public readonly remark: pulumi.Output<string | undefined>;
     /**
+     * Tag description list.
+     */
+    declare public readonly tags: pulumi.Output<outputs.Tdmq.TopicTag[] | undefined>;
+    /**
      * The name of topic to be created.
      */
     declare public readonly topicName: pulumi.Output<string>;
@@ -122,6 +132,7 @@ export class Topic extends pulumi.CustomResource {
             resourceInputs["partitions"] = state?.partitions;
             resourceInputs["pulsarTopicType"] = state?.pulsarTopicType;
             resourceInputs["remark"] = state?.remark;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["topicName"] = state?.topicName;
             resourceInputs["topicType"] = state?.topicType;
         } else {
@@ -143,6 +154,7 @@ export class Topic extends pulumi.CustomResource {
             resourceInputs["partitions"] = args?.partitions;
             resourceInputs["pulsarTopicType"] = args?.pulsarTopicType;
             resourceInputs["remark"] = args?.remark;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["topicName"] = args?.topicName;
             resourceInputs["topicType"] = args?.topicType;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -159,37 +171,41 @@ export interface TopicState {
     /**
      * The Dedicated Cluster Id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Creation time of resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The name of tdmq namespace.
      */
-    environId?: pulumi.Input<string>;
+    environId?: pulumi.Input<string | undefined>;
     /**
      * The partitions of topic.
      */
-    partitions?: pulumi.Input<number>;
+    partitions?: pulumi.Input<number | undefined>;
     /**
      * Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
      */
-    pulsarTopicType?: pulumi.Input<number>;
+    pulsarTopicType?: pulumi.Input<number | undefined>;
     /**
      * Description of the namespace.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Tdmq.TopicTag>[] | undefined>;
     /**
      * The name of topic to be created.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
      * This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
      *
      * @deprecated This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
      */
-    topicType?: pulumi.Input<number>;
+    topicType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -211,11 +227,15 @@ export interface TopicArgs {
     /**
      * Pulsar Topic Type 0: Non-persistent non-partitioned 1: Non-persistent partitioned 2: Persistent non-partitioned 3: Persistent partitioned.
      */
-    pulsarTopicType?: pulumi.Input<number>;
+    pulsarTopicType?: pulumi.Input<number | undefined>;
     /**
      * Description of the namespace.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
+    /**
+     * Tag description list.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Tdmq.TopicTag>[] | undefined>;
     /**
      * The name of topic to be created.
      */
@@ -225,5 +245,5 @@ export interface TopicArgs {
      *
      * @deprecated This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue.
      */
-    topicType?: pulumi.Input<number>;
+    topicType?: pulumi.Input<number | undefined>;
 }

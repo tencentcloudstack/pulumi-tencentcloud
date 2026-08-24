@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos packet_filter_config can be imported using the id, e.g.
+ * antiddos packetFilterConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
@@ -92,11 +92,11 @@ export interface PacketFilterConfigState {
     /**
      * resource id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Feature filtering configuration.
      */
-    packetFilterConfig?: pulumi.Input<inputs.Antiddos.PacketFilterConfigPacketFilterConfig>;
+    packetFilterConfig?: pulumi.Input<inputs.Antiddos.PacketFilterConfigPacketFilterConfig | undefined>;
 }
 
 /**

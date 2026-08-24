@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const services = tencentcloud.Organization.getServices({});
+ * const services = tencentcloud.organization.getServices({});
  * ```
  *
  * ### Query organization services by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const services = tencentcloud.Organization.getServices({
+ * const services = tencentcloud.organization.getServices({
  *     searchKey: "KeyWord",
  * });
  * ```
@@ -80,7 +80,7 @@ export interface GetServicesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const services = tencentcloud.Organization.getServices({});
+ * const services = tencentcloud.organization.getServices({});
  * ```
  *
  * ### Query organization services by filter
@@ -89,7 +89,7 @@ export interface GetServicesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const services = tencentcloud.Organization.getServices({
+ * const services = tencentcloud.organization.getServices({
  *     searchKey: "KeyWord",
  * });
  * ```
@@ -110,9 +110,9 @@ export interface GetServicesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Keyword for search by name.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
 }

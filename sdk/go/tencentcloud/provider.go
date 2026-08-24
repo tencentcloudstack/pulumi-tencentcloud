@@ -89,9 +89,12 @@ func NewProvider(ctx *pulumi.Context,
 
 type providerArgs struct {
 	// List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `forbiddenAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
-	AllowedAccountIds         []string                           `pulumi:"allowedAccountIds"`
-	AssumeRole                *ProviderAssumeRole                `pulumi:"assumeRole"`
-	AssumeRoleWithSaml        *ProviderAssumeRoleWithSaml        `pulumi:"assumeRoleWithSaml"`
+	AllowedAccountIds []string `pulumi:"allowedAccountIds"`
+	// The `assumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+	AssumeRole *ProviderAssumeRole `pulumi:"assumeRole"`
+	// The `assumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+	AssumeRoleWithSaml *ProviderAssumeRoleWithSaml `pulumi:"assumeRoleWithSaml"`
+	// The `assumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRoleWithWebIdentity *ProviderAssumeRoleWithWebIdentity `pulumi:"assumeRoleWithWebIdentity"`
 	// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
 	CamRoleName *string `pulumi:"camRoleName"`
@@ -102,8 +105,9 @@ type providerArgs struct {
 	// Whether to enable pod oidc.
 	EnablePodOidc *bool `pulumi:"enablePodOidc"`
 	// List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `allowedAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
-	ForbiddenAccountIds []string                  `pulumi:"forbiddenAccountIds"`
-	MfaCertification    *ProviderMfaCertification `pulumi:"mfaCertification"`
+	ForbiddenAccountIds []string `pulumi:"forbiddenAccountIds"`
+	// The `mfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+	MfaCertification *ProviderMfaCertification `pulumi:"mfaCertification"`
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment variable. If not set, the default profile created with `tccli configure` will be used.
 	Profile *string `pulumi:"profile"`
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
@@ -123,9 +127,12 @@ type providerArgs struct {
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
 	// List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `forbiddenAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
-	AllowedAccountIds         pulumi.StringArrayInput
-	AssumeRole                ProviderAssumeRolePtrInput
-	AssumeRoleWithSaml        ProviderAssumeRoleWithSamlPtrInput
+	AllowedAccountIds pulumi.StringArrayInput
+	// The `assumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+	AssumeRole ProviderAssumeRolePtrInput
+	// The `assumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+	AssumeRoleWithSaml ProviderAssumeRoleWithSamlPtrInput
+	// The `assumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRoleWithWebIdentity ProviderAssumeRoleWithWebIdentityPtrInput
 	// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
 	CamRoleName pulumi.StringPtrInput
@@ -137,7 +144,8 @@ type ProviderArgs struct {
 	EnablePodOidc pulumi.BoolPtrInput
 	// List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `allowedAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
 	ForbiddenAccountIds pulumi.StringArrayInput
-	MfaCertification    ProviderMfaCertificationPtrInput
+	// The `mfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+	MfaCertification ProviderMfaCertificationPtrInput
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment variable. If not set, the default profile created with `tccli configure` will be used.
 	Profile pulumi.StringPtrInput
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.

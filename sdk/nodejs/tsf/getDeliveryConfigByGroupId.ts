@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deliveryConfigByGroupId = tencentcloud.Tsf.getDeliveryConfigByGroupId({
+ * const deliveryConfigByGroupId = tencentcloud.tsf.getDeliveryConfigByGroupId({
  *     groupId: "group-yrjkln9v",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetDeliveryConfigByGroupIdResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deliveryConfigByGroupId = tencentcloud.Tsf.getDeliveryConfigByGroupId({
+ * const deliveryConfigByGroupId = tencentcloud.tsf.getDeliveryConfigByGroupId({
  *     groupId: "group-yrjkln9v",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetDeliveryConfigByGroupIdOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

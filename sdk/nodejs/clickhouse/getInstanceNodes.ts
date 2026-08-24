@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceNodes = tencentcloud.Clickhouse.getInstanceNodes({
+ * const instanceNodes = tencentcloud.clickhouse.getInstanceNodes({
  *     instanceId: "cdwch-mvfjh373",
  *     nodeRole: "data",
  *     displayPolicy: "all",
@@ -87,7 +87,7 @@ export interface GetInstanceNodesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceNodes = tencentcloud.Clickhouse.getInstanceNodes({
+ * const instanceNodes = tencentcloud.clickhouse.getInstanceNodes({
  *     instanceId: "cdwch-mvfjh373",
  *     nodeRole: "data",
  *     displayPolicy: "all",
@@ -113,11 +113,11 @@ export interface GetInstanceNodesOutputArgs {
     /**
      * Display strategy, display all when All.
      */
-    displayPolicy?: pulumi.Input<string>;
+    displayPolicy?: pulumi.Input<string | undefined>;
     /**
      * When true, returns all nodes, that is, the Limit is infinitely large.
      */
-    forceAll?: pulumi.Input<boolean>;
+    forceAll?: pulumi.Input<boolean | undefined>;
     /**
      * InstanceId.
      */
@@ -125,9 +125,9 @@ export interface GetInstanceNodesOutputArgs {
     /**
      * Cluster role type, default is `data` data node.
      */
-    nodeRole?: pulumi.Input<string>;
+    nodeRole?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

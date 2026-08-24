@@ -112,7 +112,7 @@ import (
 //
 // ## Import
 //
-// postgresql backup_download_restriction_config can be imported using the id, e.g.
+// postgresql backupDownloadRestrictionConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id

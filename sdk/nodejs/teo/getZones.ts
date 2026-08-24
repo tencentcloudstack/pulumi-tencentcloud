@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of teo zoneAvailablePlans
+ * Use this data source to query detailed information of TEO zones.
  *
  * ## Example Usage
  *
@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const teoZones = tencentcloud.Teo.getZones({
+ * const teoZones = tencentcloud.teo.getZones({
  *     filters: [
  *         {
  *             name: "zone-id",
@@ -84,7 +84,7 @@ export interface GetZonesResult {
     readonly zones: outputs.Teo.GetZonesZone[];
 }
 /**
- * Use this data source to query detailed information of teo zoneAvailablePlans
+ * Use this data source to query detailed information of TEO zones.
  *
  * ## Example Usage
  *
@@ -92,7 +92,7 @@ export interface GetZonesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const teoZones = tencentcloud.Teo.getZones({
+ * const teoZones = tencentcloud.teo.getZones({
  *     filters: [
  *         {
  *             name: "zone-id",
@@ -128,17 +128,17 @@ export interface GetZonesOutputArgs {
     /**
      * Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include: `asc`: From the smallest to largest; `desc`: From the largest to smallest. Default value: `desc`.
      */
-    direction?: pulumi.Input<string>;
+    direction?: pulumi.Input<string | undefined>;
     /**
      * Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows: zone-name: filter by site name; zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k; status: filter by site status; tag-key: filter by tag key; tag-value: filter by tag value; alias-zone-name: filter by identical site identifier. when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Teo.GetZonesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Teo.GetZonesFilterArgs>[] | undefined>;
     /**
      * Sort the returned results according to this field. Values include: `type`: Connection mode; `area`: Acceleration region; `create-time`: Creation time; `zone-name`: Site name; `use-time`: Last used time; `active-status` Effective status. Default value: `create-time`.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

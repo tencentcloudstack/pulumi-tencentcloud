@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssm ssh_key_pair_secret can be imported using the id, e.g.
+ * ssm sshKeyPairSecret can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
@@ -93,6 +93,10 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
      */
     declare public readonly projectId: pulumi.Output<number>;
     /**
+     * The resource ID associated with the secret.
+     */
+    declare public /*out*/ readonly resourceId: pulumi.Output<string>;
+    /**
      * Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
      */
     declare public readonly secretName: pulumi.Output<string>;
@@ -100,6 +104,10 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
      * `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
      */
     declare public /*out*/ readonly secretType: pulumi.Output<number>;
+    /**
+     * The key pair ID is the unique identifier of the key pair in the cloud server.
+     */
+    declare public /*out*/ readonly sshKeyId: pulumi.Output<string>;
     /**
      * Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
      */
@@ -131,8 +139,10 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["kmsKeyId"] = state?.kmsKeyId;
             resourceInputs["projectId"] = state?.projectId;
+            resourceInputs["resourceId"] = state?.resourceId;
             resourceInputs["secretName"] = state?.secretName;
             resourceInputs["secretType"] = state?.secretType;
+            resourceInputs["sshKeyId"] = state?.sshKeyId;
             resourceInputs["sshKeyName"] = state?.sshKeyName;
             resourceInputs["status"] = state?.status;
             resourceInputs["tags"] = state?.tags;
@@ -153,7 +163,9 @@ export class SshKeyPairSecret extends pulumi.CustomResource {
             resourceInputs["status"] = args?.status;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["resourceId"] = undefined /*out*/;
             resourceInputs["secretType"] = undefined /*out*/;
+            resourceInputs["sshKeyId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SshKeyPairSecret.__pulumiType, name, resourceInputs, opts);
@@ -167,43 +179,51 @@ export interface SshKeyPairSecretState {
     /**
      * Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
      */
-    cleanSshKey?: pulumi.Input<boolean>;
+    cleanSshKey?: pulumi.Input<boolean | undefined>;
     /**
      * Credential creation time in UNIX timestamp format.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Description, such as what it is used for. It contains up to 2,048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the created SSH key belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
+    /**
+     * The resource ID associated with the secret.
+     */
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
      */
-    secretType?: pulumi.Input<number>;
+    secretType?: pulumi.Input<number | undefined>;
+    /**
+     * The key pair ID is the unique identifier of the key pair in the cloud server.
+     */
+    sshKeyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
      */
-    sshKeyName?: pulumi.Input<string>;
+    sshKeyName?: pulumi.Input<string | undefined>;
     /**
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -213,15 +233,15 @@ export interface SshKeyPairSecretArgs {
     /**
      * Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
      */
-    cleanSshKey?: pulumi.Input<boolean>;
+    cleanSshKey?: pulumi.Input<boolean | undefined>;
     /**
      * Description, such as what it is used for. It contains up to 2,048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specifies a KMS CMK to encrypt the secret.If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the created SSH key belongs.
      */
@@ -233,13 +253,13 @@ export interface SshKeyPairSecretArgs {
     /**
      * Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
      */
-    sshKeyName?: pulumi.Input<string>;
+    sshKeyName?: pulumi.Input<string | undefined>;
     /**
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

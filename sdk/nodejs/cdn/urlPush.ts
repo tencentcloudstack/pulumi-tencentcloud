@@ -138,35 +138,35 @@ export interface UrlPushState {
     /**
      * Specify push area. NOTE: only push same area cache contents.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Layer to push.
      */
-    layer?: pulumi.Input<string>;
+    layer?: pulumi.Input<string | undefined>;
     /**
      * Whether to recursive parse m3u8 files.
      */
-    parseM3u8?: pulumi.Input<boolean>;
+    parseM3u8?: pulumi.Input<boolean | undefined>;
     /**
      * logs of latest push task.
      */
-    pushHistories?: pulumi.Input<pulumi.Input<inputs.Cdn.UrlPushPushHistory>[]>;
+    pushHistories?: pulumi.Input<pulumi.Input<inputs.Cdn.UrlPushPushHistory>[] | undefined>;
     /**
      * Change to push again. NOTE: this argument only works while resource update, if set to `0` or null will not be triggered.
      */
-    redo?: pulumi.Input<number>;
+    redo?: pulumi.Input<number | undefined>;
     /**
      * Push task id.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * List of url to push. NOTE: urls need include protocol prefix `http://` or `https://`.
      */
-    urls?: pulumi.Input<pulumi.Input<string>[]>;
+    urls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specify `User-Agent` HTTP header, default: `TencentCdn`.
      */
-    userAgent?: pulumi.Input<string>;
+    userAgent?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -176,19 +176,19 @@ export interface UrlPushArgs {
     /**
      * Specify push area. NOTE: only push same area cache contents.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Layer to push.
      */
-    layer?: pulumi.Input<string>;
+    layer?: pulumi.Input<string | undefined>;
     /**
      * Whether to recursive parse m3u8 files.
      */
-    parseM3u8?: pulumi.Input<boolean>;
+    parseM3u8?: pulumi.Input<boolean | undefined>;
     /**
      * Change to push again. NOTE: this argument only works while resource update, if set to `0` or null will not be triggered.
      */
-    redo?: pulumi.Input<number>;
+    redo?: pulumi.Input<number | undefined>;
     /**
      * List of url to push. NOTE: urls need include protocol prefix `http://` or `https://`.
      */
@@ -196,5 +196,5 @@ export interface UrlPushArgs {
     /**
      * Specify `User-Agent` HTTP header, default: `TencentCdn`.
      */
-    userAgent?: pulumi.Input<string>;
+    userAgent?: pulumi.Input<string | undefined>;
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to get the available product configs of the postgresql instance.
+// Use this data source to get the available product configs of the PostgreSQL specifications.
 //
 // ## Example Usage
 //
@@ -28,7 +28,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := postgresql.GetSpecinfos(ctx, &postgresql.GetSpecinfosArgs{
-//				AvailabilityZone: "ap-shanghai-2",
+//				AvailabilityZone: "ap-guangzhou-7",
+//				StorageType:      pulumi.StringRef("CLOUD_HSSD"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -54,6 +55,8 @@ type GetSpecinfosArgs struct {
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType *string `pulumi:"storageType"`
 }
 
 // A collection of values returned by getSpecinfos.
@@ -64,15 +67,12 @@ type GetSpecinfosResult struct {
 	// A list of zones will be exported and its every element contains the following attributes:
 	Lists            []GetSpecinfosList `pulumi:"lists"`
 	ResultOutputFile *string            `pulumi:"resultOutputFile"`
+	StorageType      *string            `pulumi:"storageType"`
 }
 
 func GetSpecinfosOutput(ctx *pulumi.Context, args GetSpecinfosOutputArgs, opts ...pulumi.InvokeOption) GetSpecinfosResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSpecinfosResultOutput, error) {
-			args := v.(GetSpecinfosArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args, GetSpecinfosResultOutput{}, options).(GetSpecinfosResultOutput), nil
-		}).(GetSpecinfosResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args, GetSpecinfosResultOutput{}, options).(GetSpecinfosResultOutput)
 }
 
 // A collection of arguments for invoking getSpecinfos.
@@ -81,6 +81,8 @@ type GetSpecinfosOutputArgs struct {
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType pulumi.StringPtrInput `pulumi:"storageType"`
 }
 
 func (GetSpecinfosOutputArgs) ElementType() reflect.Type {
@@ -118,6 +120,10 @@ func (o GetSpecinfosResultOutput) Lists() GetSpecinfosListArrayOutput {
 
 func (o GetSpecinfosResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSpecinfosResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+func (o GetSpecinfosResultOutput) StorageType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetSpecinfosResult) *string { return v.StorageType }).(pulumi.StringPtrOutput)
 }
 
 func init() {

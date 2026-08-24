@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Kubernetes.getClusterLevels({});
+ * const foo = tencentcloud.kubernetes.getClusterLevels({});
  * export const level5 = foo.then(foo => foo.lists?.[0]?.alias);
  * ```
  */
@@ -66,7 +66,7 @@ export interface GetClusterLevelsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Kubernetes.getClusterLevels({});
+ * const foo = tencentcloud.kubernetes.getClusterLevels({});
  * export const level5 = foo.then(foo => foo.lists?.[0]?.alias);
  * ```
  */
@@ -86,9 +86,9 @@ export interface GetClusterLevelsOutputArgs {
     /**
      * Specify cluster Id, if set will only query current cluster's available levels.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

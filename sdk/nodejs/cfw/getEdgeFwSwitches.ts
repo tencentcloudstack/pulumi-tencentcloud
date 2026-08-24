@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
+ * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * ```
  */
 export function getEdgeFwSwitches(args?: GetEdgeFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetEdgeFwSwitchesResult> {
@@ -59,7 +59,7 @@ export interface GetEdgeFwSwitchesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
+ * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * ```
  */
 export function getEdgeFwSwitchesOutput(args?: GetEdgeFwSwitchesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEdgeFwSwitchesResult> {
@@ -77,5 +77,5 @@ export interface GetEdgeFwSwitchesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

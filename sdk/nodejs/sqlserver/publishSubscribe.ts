@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -221,23 +221,23 @@ export interface PublishSubscribeState {
     /**
      * Database Publish and Publish relationship list. The elements inside can be deleted and added individually, but modification is not allowed.
      */
-    databaseTuples?: pulumi.Input<pulumi.Input<inputs.Sqlserver.PublishSubscribeDatabaseTuple>[]>;
+    databaseTuples?: pulumi.Input<pulumi.Input<inputs.Sqlserver.PublishSubscribeDatabaseTuple>[] | undefined>;
     /**
      * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
      */
-    deleteSubscribeDb?: pulumi.Input<boolean>;
+    deleteSubscribeDb?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the SQL Server instance which publish.
      */
-    publishInstanceId?: pulumi.Input<string>;
+    publishInstanceId?: pulumi.Input<string | undefined>;
     /**
      * The name of the Publish and Subscribe. Default is `defaultName`.
      */
-    publishSubscribeName?: pulumi.Input<string>;
+    publishSubscribeName?: pulumi.Input<string | undefined>;
     /**
      * ID of the SQL Server instance which subscribe.
      */
-    subscribeInstanceId?: pulumi.Input<string>;
+    subscribeInstanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -251,7 +251,7 @@ export interface PublishSubscribeArgs {
     /**
      * Whether to delete the subscriber database when deleting the Publish and Subscribe. `true` for deletes the subscribe database, `false` for does not delete the subscribe database. default is `false`.
      */
-    deleteSubscribeDb?: pulumi.Input<boolean>;
+    deleteSubscribeDb?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the SQL Server instance which publish.
      */
@@ -259,7 +259,7 @@ export interface PublishSubscribeArgs {
     /**
      * The name of the Publish and Subscribe. Default is `defaultName`.
      */
-    publishSubscribeName?: pulumi.Input<string>;
+    publishSubscribeName?: pulumi.Input<string | undefined>;
     /**
      * ID of the SQL Server instance which subscribe.
      */

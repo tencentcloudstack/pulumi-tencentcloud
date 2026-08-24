@@ -40,8 +40,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tdmqRocketmq environment_role can be imported using the id, e.g.
- *
+ * tdmqRocketmq environmentRole can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rocketmqEnvironmentRole:RocketmqEnvironmentRole environment_role environmentRole_id
  * ```
@@ -139,19 +138,19 @@ export interface RocketmqEnvironmentRoleState {
     /**
      * Cluster ID (required).
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Environment (namespace) name.
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
      */
-    permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    permissions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Role Name.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }
 
 /**

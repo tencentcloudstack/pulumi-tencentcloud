@@ -67,12 +67,8 @@ type GetProxyAndStatisticsListenersResult struct {
 }
 
 func GetProxyAndStatisticsListenersOutput(ctx *pulumi.Context, args GetProxyAndStatisticsListenersOutputArgs, opts ...pulumi.InvokeOption) GetProxyAndStatisticsListenersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxyAndStatisticsListenersResultOutput, error) {
-			args := v.(GetProxyAndStatisticsListenersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getProxyAndStatisticsListeners:getProxyAndStatisticsListeners", args, GetProxyAndStatisticsListenersResultOutput{}, options).(GetProxyAndStatisticsListenersResultOutput), nil
-		}).(GetProxyAndStatisticsListenersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getProxyAndStatisticsListeners:getProxyAndStatisticsListeners", args, GetProxyAndStatisticsListenersResultOutput{}, options).(GetProxyAndStatisticsListenersResultOutput)
 }
 
 // A collection of arguments for invoking getProxyAndStatisticsListeners.

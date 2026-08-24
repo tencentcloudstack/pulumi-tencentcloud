@@ -259,19 +259,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> RuleId { get; private set; } = null!;
 
         /// <summary>
-        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `TargetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Output("scheduler")]
-        public Output<string?> Scheduler { get; private set; } = null!;
+        public Output<string> Scheduler { get; private set; } = null!;
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
         /// </summary>
         [Output("sessionExpireTime")]
         public Output<int?> SessionExpireTime { get; private set; } = null!;
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
         /// </summary>
         [Output("targetType")]
         public Output<string?> TargetType { get; private set; } = null!;
@@ -480,19 +480,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? Quic { get; set; }
 
         /// <summary>
-        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `TargetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }
@@ -668,19 +668,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? RuleId { get; set; }
 
         /// <summary>
-        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `TargetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }

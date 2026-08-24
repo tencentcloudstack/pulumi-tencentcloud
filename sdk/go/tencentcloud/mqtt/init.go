@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &JwksAuthenticator{}
 	case "tencentcloud:Mqtt/jwtAuthenticator:JwtAuthenticator":
 		r = &JwtAuthenticator{}
+	case "tencentcloud:Mqtt/messageEnrichmentRule:MessageEnrichmentRule":
+		r = &MessageEnrichmentRule{}
 	case "tencentcloud:Mqtt/topic:Topic":
 		r = &Topic{}
 	case "tencentcloud:Mqtt/user:User":
@@ -92,6 +94,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mqtt/jwtAuthenticator",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mqtt/messageEnrichmentRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

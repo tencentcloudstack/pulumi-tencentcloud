@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logBackups = tencentcloud.Postgresql.getLogBackups({
+ * const logBackups = tencentcloud.postgresql.getLogBackups({
  *     minFinishTime: "%s",
  *     maxFinishTime: "%s",
  *     filters: [{
@@ -98,7 +98,7 @@ export interface GetLogBackupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logBackups = tencentcloud.Postgresql.getLogBackups({
+ * const logBackups = tencentcloud.postgresql.getLogBackups({
  *     minFinishTime: "%s",
  *     maxFinishTime: "%s",
  *     filters: [{
@@ -130,25 +130,25 @@ export interface GetLogBackupsOutputArgs {
     /**
      * Filter instances using one or more criteria. Valid filter names:db-instance-id: Filter by instance ID (in string format).db-instance-name: Filter by instance name (in string format).db-instance-ip: Filter by instance VPC IP (in string format).
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetLogBackupsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetLogBackupsFilterArgs>[] | undefined>;
     /**
      * Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
      */
-    maxFinishTime?: pulumi.Input<string>;
+    maxFinishTime?: pulumi.Input<string | undefined>;
     /**
      * Minimum end time of a backup in the format of `2018-01-01 00:00:00`. It is 7 days ago by default.
      */
-    minFinishTime?: pulumi.Input<string>;
+    minFinishTime?: pulumi.Input<string | undefined>;
     /**
      * Sorting field. Valid values: `StartTime`, `FinishTime`, `Size`.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

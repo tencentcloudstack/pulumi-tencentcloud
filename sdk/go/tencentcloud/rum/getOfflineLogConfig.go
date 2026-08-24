@@ -69,12 +69,8 @@ type GetOfflineLogConfigResult struct {
 }
 
 func GetOfflineLogConfigOutput(ctx *pulumi.Context, args GetOfflineLogConfigOutputArgs, opts ...pulumi.InvokeOption) GetOfflineLogConfigResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOfflineLogConfigResultOutput, error) {
-			args := v.(GetOfflineLogConfigArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args, GetOfflineLogConfigResultOutput{}, options).(GetOfflineLogConfigResultOutput), nil
-		}).(GetOfflineLogConfigResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", args, GetOfflineLogConfigResultOutput{}, options).(GetOfflineLogConfigResultOutput)
 }
 
 // A collection of arguments for invoking getOfflineLogConfig.

@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb cluster_databases can be imported using the id, e.g.
+    /// cynosdb ClusterDatabases can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id

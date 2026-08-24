@@ -88,12 +88,8 @@ type GetParameterTemplatesResult struct {
 }
 
 func GetParameterTemplatesOutput(ctx *pulumi.Context, args GetParameterTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetParameterTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParameterTemplatesResultOutput, error) {
-			args := v.(GetParameterTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args, GetParameterTemplatesResultOutput{}, options).(GetParameterTemplatesResultOutput), nil
-		}).(GetParameterTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args, GetParameterTemplatesResultOutput{}, options).(GetParameterTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getParameterTemplates.

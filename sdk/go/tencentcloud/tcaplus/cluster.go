@@ -12,13 +12,13 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this resource to create TcaplusDB cluster.
+// Provides a resource to create a TcaplusDB cluster.
 //
-// > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
+// > **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai`, `ap-hongkong`, `na-siliconvalley`, `ap-singapore`, `ap-seoul`, `ap-tokyo`, `eu-frankfurt`, `and na-ashburn`.
 //
 // ## Example Usage
 //
-// ### Create a new tcaplus cluster instance
+// ### Create a tcaplus cluster instance with clusterType is 1
 //
 // ```go
 // package main
@@ -26,35 +26,76 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				IsDefault:        pulumi.BoolRef(true),
-//				AvailabilityZone: pulumi.StringRef(availabilityZone),
-//			}, nil)
+//			_, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("MIX"),
+//				ClusterName:           pulumi.String("tf_example"),
+//				VpcId:                 pulumi.String("vpc-jll1dzwr"),
+//				SubnetId:              pulumi.String("subnet-ef14ogeu"),
+//				Password:              pulumi.String("Password@2026"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//				ClusterType:           pulumi.Int(1),
+//				ResourceTags: tcaplus.ClusterResourceTagArray{
+//					&tcaplus.ClusterResourceTagArgs{
+//						TagKey:   pulumi.String("createBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			vpcId := vpc.InstanceLists[0].VpcId
-//			subnetId := vpc.InstanceLists[0].SubnetId
-//			_, err = tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
-//				IdlType:               pulumi.String("PROTO"),
-//				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-//				VpcId:                 pulumi.String(vpcId),
-//				SubnetId:              pulumi.String(subnetId),
-//				Password:              pulumi.String("your_pw_123111"),
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Create a tcaplus cluster instance with clusterType is 2
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("MIX"),
+//				ClusterName:           pulumi.String("tf_example"),
+//				VpcId:                 pulumi.String("vpc-qtzga3pm"),
+//				SubnetId:              pulumi.String("subnet-c063n9el"),
+//				Password:              pulumi.String("Password@2026"),
 //				OldPasswordExpireLast: pulumi.Int(3600),
+//				ClusterType:           pulumi.Int(2),
+//				ServerLists: tcaplus.ClusterServerListArray{
+//					&tcaplus.ClusterServerListArgs{
+//						MachineType: pulumi.String("T1"),
+//						MachineNum:  pulumi.Int(4),
+//					},
+//				},
+//				ProxyLists: tcaplus.ClusterProxyListArray{
+//					&tcaplus.ClusterProxyListArgs{
+//						MachineType: pulumi.String("T1"),
+//						MachineNum:  pulumi.Int(2),
+//					},
+//				},
+//				ResourceTags: tcaplus.ClusterResourceTagArray{
+//					&tcaplus.ClusterResourceTagArgs{
+//						TagKey:   pulumi.String("createBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -67,25 +108,29 @@ import (
 //
 // ## Import
 //
-// tcaplus cluster can be imported using the id, e.g.
+// TcaplusDB cluster can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
+// $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example 35402666774
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
 
-	// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessId pulumi.StringOutput `pulumi:"apiAccessId"`
-	// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessIp pulumi.StringOutput `pulumi:"apiAccessIp"`
-	// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessPort pulumi.IntOutput `pulumi:"apiAccessPort"`
-	// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+	// Cluster ID.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 	ClusterName pulumi.StringOutput `pulumi:"clusterName"`
+	// Cluster type: `1` shared, `2` dedicated.
+	ClusterType pulumi.IntOutput `pulumi:"clusterType"`
 	// Create time of the TcaplusDB cluster.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
-	// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+	// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 	IdlType pulumi.StringOutput `pulumi:"idlType"`
 	// Network type of the TcaplusDB cluster.
 	NetworkType pulumi.StringOutput `pulumi:"networkType"`
@@ -93,13 +138,19 @@ type Cluster struct {
 	OldPasswordExpireLast pulumi.IntPtrOutput `pulumi:"oldPasswordExpireLast"`
 	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime pulumi.StringOutput `pulumi:"oldPasswordExpireTime"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 	Password pulumi.StringOutput `pulumi:"password"`
 	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus pulumi.StringOutput `pulumi:"passwordStatus"`
-	// Subnet id of the TcaplusDB cluster.
+	// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ProxyLists ClusterProxyListArrayOutput `pulumi:"proxyLists"`
+	// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+	ResourceTags ClusterResourceTagArrayOutput `pulumi:"resourceTags"`
+	// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ServerLists ClusterServerListArrayOutput `pulumi:"serverLists"`
+	// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
-	// VPC id of the TcaplusDB cluster.
+	// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
 
@@ -155,17 +206,21 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
-	// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessId *string `pulumi:"apiAccessId"`
-	// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessIp *string `pulumi:"apiAccessIp"`
-	// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessPort *int `pulumi:"apiAccessPort"`
-	// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+	// Cluster ID.
+	ClusterId *string `pulumi:"clusterId"`
+	// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 	ClusterName *string `pulumi:"clusterName"`
+	// Cluster type: `1` shared, `2` dedicated.
+	ClusterType *int `pulumi:"clusterType"`
 	// Create time of the TcaplusDB cluster.
 	CreateTime *string `pulumi:"createTime"`
-	// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+	// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 	IdlType *string `pulumi:"idlType"`
 	// Network type of the TcaplusDB cluster.
 	NetworkType *string `pulumi:"networkType"`
@@ -173,28 +228,38 @@ type clusterState struct {
 	OldPasswordExpireLast *int `pulumi:"oldPasswordExpireLast"`
 	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime *string `pulumi:"oldPasswordExpireTime"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 	Password *string `pulumi:"password"`
 	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus *string `pulumi:"passwordStatus"`
-	// Subnet id of the TcaplusDB cluster.
+	// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ProxyLists []ClusterProxyList `pulumi:"proxyLists"`
+	// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+	ResourceTags []ClusterResourceTag `pulumi:"resourceTags"`
+	// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ServerLists []ClusterServerList `pulumi:"serverLists"`
+	// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 	SubnetId *string `pulumi:"subnetId"`
-	// VPC id of the TcaplusDB cluster.
+	// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 	VpcId *string `pulumi:"vpcId"`
 }
 
 type ClusterState struct {
-	// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessId pulumi.StringPtrInput
-	// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessIp pulumi.StringPtrInput
-	// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+	// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
 	ApiAccessPort pulumi.IntPtrInput
-	// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+	// Cluster ID.
+	ClusterId pulumi.StringPtrInput
+	// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 	ClusterName pulumi.StringPtrInput
+	// Cluster type: `1` shared, `2` dedicated.
+	ClusterType pulumi.IntPtrInput
 	// Create time of the TcaplusDB cluster.
 	CreateTime pulumi.StringPtrInput
-	// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+	// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 	IdlType pulumi.StringPtrInput
 	// Network type of the TcaplusDB cluster.
 	NetworkType pulumi.StringPtrInput
@@ -202,13 +267,19 @@ type ClusterState struct {
 	OldPasswordExpireLast pulumi.IntPtrInput
 	// Expiration time of the old password. If `passwordStatus` is `unmodifiable`, it means the old password has not yet expired.
 	OldPasswordExpireTime pulumi.StringPtrInput
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 	Password pulumi.StringPtrInput
 	// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
 	PasswordStatus pulumi.StringPtrInput
-	// Subnet id of the TcaplusDB cluster.
+	// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ProxyLists ClusterProxyListArrayInput
+	// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+	ResourceTags ClusterResourceTagArrayInput
+	// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ServerLists ClusterServerListArrayInput
+	// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 	SubnetId pulumi.StringPtrInput
-	// VPC id of the TcaplusDB cluster.
+	// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 	VpcId pulumi.StringPtrInput
 }
 
@@ -217,33 +288,49 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
-	// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+	// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 	ClusterName string `pulumi:"clusterName"`
-	// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+	// Cluster type: `1` shared, `2` dedicated.
+	ClusterType *int `pulumi:"clusterType"`
+	// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 	IdlType string `pulumi:"idlType"`
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast *int `pulumi:"oldPasswordExpireLast"`
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 	Password string `pulumi:"password"`
-	// Subnet id of the TcaplusDB cluster.
+	// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ProxyLists []ClusterProxyList `pulumi:"proxyLists"`
+	// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+	ResourceTags []ClusterResourceTag `pulumi:"resourceTags"`
+	// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ServerLists []ClusterServerList `pulumi:"serverLists"`
+	// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 	SubnetId string `pulumi:"subnetId"`
-	// VPC id of the TcaplusDB cluster.
+	// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 	VpcId string `pulumi:"vpcId"`
 }
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
-	// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+	// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 	ClusterName pulumi.StringInput
-	// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+	// Cluster type: `1` shared, `2` dedicated.
+	ClusterType pulumi.IntPtrInput
+	// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 	IdlType pulumi.StringInput
 	// Expiration time of old password after password update, unit: second.
 	OldPasswordExpireLast pulumi.IntPtrInput
-	// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+	// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 	Password pulumi.StringInput
-	// Subnet id of the TcaplusDB cluster.
+	// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ProxyLists ClusterProxyListArrayInput
+	// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+	ResourceTags ClusterResourceTagArrayInput
+	// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+	ServerLists ClusterServerListArrayInput
+	// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 	SubnetId pulumi.StringInput
-	// VPC id of the TcaplusDB cluster.
+	// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 	VpcId pulumi.StringInput
 }
 
@@ -334,24 +421,34 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
-// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
+// Access ID of the TcaplusDB cluster. For TcaplusDB SDK connect.
 func (o ClusterOutput) ApiAccessId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ApiAccessId }).(pulumi.StringOutput)
 }
 
-// Access IP of the TcaplusDB cluster.For TcaplusDB SDK connect.
+// Access IP of the TcaplusDB cluster. For TcaplusDB SDK connect.
 func (o ClusterOutput) ApiAccessIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ApiAccessIp }).(pulumi.StringOutput)
 }
 
-// Access port of the TcaplusDB cluster.For TcaplusDB SDK connect.
+// Access port of the TcaplusDB cluster. For TcaplusDB SDK connect.
 func (o ClusterOutput) ApiAccessPort() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.ApiAccessPort }).(pulumi.IntOutput)
 }
 
-// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
+// Cluster ID.
+func (o ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name, Chinese or English characters can be used, maximum length is 32 characters.
 func (o ClusterOutput) ClusterName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster type: `1` shared, `2` dedicated.
+func (o ClusterOutput) ClusterType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.ClusterType }).(pulumi.IntOutput)
 }
 
 // Create time of the TcaplusDB cluster.
@@ -359,7 +456,7 @@ func (o ClusterOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
-// IDL type of the TcaplusDB cluster. Valid values: `PROTO` and `TDR`.
+// Cluster data description language type, uniformly filled with `MIX`, enumeration value: `MIX`: supports both `PROTO` and `TDR` tables.
 func (o ClusterOutput) IdlType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.IdlType }).(pulumi.StringOutput)
 }
@@ -379,7 +476,7 @@ func (o ClusterOutput) OldPasswordExpireTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.OldPasswordExpireTime }).(pulumi.StringOutput)
 }
 
-// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
+// Cluster access password, must be `a-zA-Z0-9` characters, and must contain numbers, uppercase and lowercase letters.
 func (o ClusterOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
@@ -389,12 +486,27 @@ func (o ClusterOutput) PasswordStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.PasswordStatus }).(pulumi.StringOutput)
 }
 
-// Subnet id of the TcaplusDB cluster.
+// Dedicated cluster occupied proxy machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+func (o ClusterOutput) ProxyLists() ClusterProxyListArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterProxyListArrayOutput { return v.ProxyLists }).(ClusterProxyListArrayOutput)
+}
+
+// Cluster tag set. Note: this field cannot be modified after cluster creation via CreateCluster, but can be modified via ModifyClusterTags. Tags will be refreshed on Read via DescribeClusterTags.
+func (o ClusterOutput) ResourceTags() ClusterResourceTagArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterResourceTagArrayOutput { return v.ResourceTags }).(ClusterResourceTagArrayOutput)
+}
+
+// Dedicated cluster occupied svr machines. Only valid when `clusterType` is `2` (dedicated cluster). For creation, each element exposes `machineType` and `machineNum`.
+func (o ClusterOutput) ServerLists() ClusterServerListArrayOutput {
+	return o.ApplyT(func(v *Cluster) ClusterServerListArrayOutput { return v.ServerLists }).(ClusterServerListArrayOutput)
+}
+
+// The subnet instance ID bound to the cluster, such as: `subnet-pxir56ns`.
 func (o ClusterOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-// VPC id of the TcaplusDB cluster.
+// The private network instance ID bound to the cluster, such as: `vpc-f49l6u0z`.
 func (o ClusterOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }

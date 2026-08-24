@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl check_certificate_chain can be imported using the id, e.g.
+ * ssl checkCertificateChain can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
@@ -90,7 +90,7 @@ export interface CheckCertificateChainOperationState {
     /**
      * The certificate chain to check.
      */
-    certificateChain?: pulumi.Input<string>;
+    certificateChain?: pulumi.Input<string | undefined>;
 }
 
 /**

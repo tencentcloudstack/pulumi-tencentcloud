@@ -343,167 +343,167 @@ export interface ClusterState {
     /**
      * Abnormal number of deployment groups.
      */
-    abnormalGroupCount?: pulumi.Input<number>;
+    abnormalGroupCount?: pulumi.Input<number | undefined>;
     /**
      * CIDR assigned to cluster containers and service IP.
      */
-    clusterCidr?: pulumi.Input<string>;
+    clusterCidr?: pulumi.Input<string | undefined>;
     /**
      * cluster notes.
      */
-    clusterDesc?: pulumi.Input<string>;
+    clusterDesc?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Cluster remaining cpu limit.
      */
-    clusterLimitCpu?: pulumi.Input<string>;
+    clusterLimitCpu?: pulumi.Input<string | undefined>;
     /**
      * Cluster remaining memory limit.
      */
-    clusterLimitMem?: pulumi.Input<string>;
+    clusterLimitMem?: pulumi.Input<string | undefined>;
     /**
      * Cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * cluster remark name.
      */
-    clusterRemarkName?: pulumi.Input<string>;
+    clusterRemarkName?: pulumi.Input<string | undefined>;
     /**
      * cluster status.
      */
-    clusterStatus?: pulumi.Input<string>;
+    clusterStatus?: pulumi.Input<string | undefined>;
     /**
      * The total CPU of the cluster, unit: core.
      */
-    clusterTotalCpu?: pulumi.Input<number>;
+    clusterTotalCpu?: pulumi.Input<number | undefined>;
     /**
      * The total memory of the cluster, unit: G.
      */
-    clusterTotalMem?: pulumi.Input<number>;
+    clusterTotalMem?: pulumi.Input<number | undefined>;
     /**
      * Cluster type.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * CPU used by the cluster, unit: core.
      */
-    clusterUsedCpu?: pulumi.Input<number>;
+    clusterUsedCpu?: pulumi.Input<number | undefined>;
     /**
      * The memory used by the cluster, unit: G.
      */
-    clusterUsedMem?: pulumi.Input<number>;
+    clusterUsedMem?: pulumi.Input<number | undefined>;
     /**
      * cluster version.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Delete flag: `true`: can be deleted; `false`: can not be deleted.
      */
-    deleteFlag?: pulumi.Input<boolean>;
+    deleteFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Reasons why clusters cannot be deleted.
      */
-    deleteFlagReason?: pulumi.Input<string>;
+    deleteFlagReason?: pulumi.Input<string | undefined>;
     /**
      * Total number of deployment groups.
      */
-    groupCount?: pulumi.Input<number>;
+    groupCount?: pulumi.Input<number | undefined>;
     /**
      * Number of cluster machine instances.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * api address.
      */
-    kuberneteApiServer?: pulumi.Input<string>;
+    kuberneteApiServer?: pulumi.Input<string | undefined>;
     /**
      * native secret.
      */
-    kuberneteNativeSecret?: pulumi.Input<string>;
+    kuberneteNativeSecret?: pulumi.Input<string | undefined>;
     /**
      * `K`:kubeconfig, `S`:service account.
      */
-    kuberneteNativeType?: pulumi.Input<string>;
+    kuberneteNativeType?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.
      */
-    maxClusterServiceNum?: pulumi.Input<number>;
+    maxClusterServiceNum?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.
      */
-    maxNodePodNum?: pulumi.Input<number>;
+    maxNodePodNum?: pulumi.Input<number | undefined>;
     /**
      * The number of machine instances in the normal state of the cluster.
      */
-    normalInstanceCount?: pulumi.Input<number>;
+    normalInstanceCount?: pulumi.Input<number | undefined>;
     /**
      * Control information for buttons on the front end.
      */
-    operationInfos?: pulumi.Input<pulumi.Input<inputs.Tsf.ClusterOperationInfo>[]>;
+    operationInfos?: pulumi.Input<pulumi.Input<inputs.Tsf.ClusterOperationInfo>[] | undefined>;
     /**
      * The dataset ID to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of Deployment Groups in progress.
      */
-    runGroupCount?: pulumi.Input<number>;
+    runGroupCount?: pulumi.Input<number | undefined>;
     /**
      * Number of machine instances running in the cluster.
      */
-    runInstanceCount?: pulumi.Input<number>;
+    runInstanceCount?: pulumi.Input<number | undefined>;
     /**
      * Number of running service instances.
      */
-    runServiceInstanceCount?: pulumi.Input<number>;
+    runServiceInstanceCount?: pulumi.Input<number | undefined>;
     /**
      * Number of deployment groups in stop.
      */
-    stopGroupCount?: pulumi.Input<number>;
+    stopGroupCount?: pulumi.Input<number | undefined>;
     /**
      * Subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The TSF region to which the cluster belongs.
      */
-    tsfRegionId?: pulumi.Input<string>;
+    tsfRegionId?: pulumi.Input<string | undefined>;
     /**
      * Name of the TSF region to which the cluster belongs.
      */
-    tsfRegionName?: pulumi.Input<string>;
+    tsfRegionName?: pulumi.Input<string | undefined>;
     /**
      * The TSF availability zone to which the cluster belongs.
      */
-    tsfZoneId?: pulumi.Input<string>;
+    tsfZoneId?: pulumi.Input<string | undefined>;
     /**
      * The name of the TSF availability zone to which the cluster belongs.
      */
-    tsfZoneName?: pulumi.Input<string>;
+    tsfZoneName?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -513,11 +513,11 @@ export interface ClusterArgs {
     /**
      * CIDR assigned to cluster containers and service IP.
      */
-    clusterCidr?: pulumi.Input<string>;
+    clusterCidr?: pulumi.Input<string | undefined>;
     /**
      * cluster notes.
      */
-    clusterDesc?: pulumi.Input<string>;
+    clusterDesc?: pulumi.Input<string | undefined>;
     /**
      * Cluster name.
      */
@@ -525,7 +525,7 @@ export interface ClusterArgs {
     /**
      * cluster remark name.
      */
-    clusterRemarkName?: pulumi.Input<string>;
+    clusterRemarkName?: pulumi.Input<string | undefined>;
     /**
      * Cluster type.
      */
@@ -533,51 +533,51 @@ export interface ClusterArgs {
     /**
      * cluster version.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * api address.
      */
-    kuberneteApiServer?: pulumi.Input<string>;
+    kuberneteApiServer?: pulumi.Input<string | undefined>;
     /**
      * native secret.
      */
-    kuberneteNativeSecret?: pulumi.Input<string>;
+    kuberneteNativeSecret?: pulumi.Input<string | undefined>;
     /**
      * `K`:kubeconfig, `S`:service account.
      */
-    kuberneteNativeType?: pulumi.Input<string>;
+    kuberneteNativeType?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of services in the cluster. The value ranges from 32 to 32768. If it is not a power of 2, the nearest power of 2 will be taken up.
      */
-    maxClusterServiceNum?: pulumi.Input<number>;
+    maxClusterServiceNum?: pulumi.Input<number | undefined>;
     /**
      * The maximum number of Pods on each Node in the cluster. The value ranges from 4 to 256. When the value is not a power of 2, the nearest power of 2 will be taken up.
      */
-    maxNodePodNum?: pulumi.Input<number>;
+    maxNodePodNum?: pulumi.Input<number | undefined>;
     /**
      * The dataset ID to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The TSF region to which the cluster belongs.
      */
-    tsfRegionId?: pulumi.Input<string>;
+    tsfRegionId?: pulumi.Input<string | undefined>;
     /**
      * The TSF availability zone to which the cluster belongs.
      */
-    tsfZoneId?: pulumi.Input<string>;
+    tsfZoneId?: pulumi.Input<string | undefined>;
     /**
      * Vpc id.
      */

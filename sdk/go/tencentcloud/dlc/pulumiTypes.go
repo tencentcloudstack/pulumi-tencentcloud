@@ -540,6 +540,523 @@ func (o AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoPtrOutput) Table(
 	}).(pulumi.StringPtrOutput)
 }
 
+type AttachUserPolicyAttachmentPolicySet struct {
+	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used.
+	Catalog *string `pulumi:"catalog"`
+	// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+	Column *string `pulumi:"column"`
+	// The permission policy creation time, which is not required as an input parameter.
+	CreateTime *string `pulumi:"createTime"`
+	// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+	DataEngine *string `pulumi:"dataEngine"`
+	// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+	Database *string `pulumi:"database"`
+	// Engine type.
+	EngineGeneration *string `pulumi:"engineGeneration"`
+	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+	Function *string `pulumi:"function"`
+	// ID of the resource.
+	Id *int `pulumi:"id"`
+	// Whether the permission source is admin.
+	IsAdminPolicy *bool `pulumi:"isAdminPolicy"`
+	// The grant mode, Valid values: `COMMON` and `SENIOR`.
+	Mode *string `pulumi:"mode"`
+	// The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Model *string `pulumi:"model"`
+	// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`.
+	Operation *string `pulumi:"operation"`
+	// The operator, which is not required as an input parameter.
+	Operator *string `pulumi:"operator"`
+	// The deterministic string PolicyId corresponding to the user and workgroup.
+	PolicyId *string `pulumi:"policyId"`
+	// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+	PolicyType *string `pulumi:"policyType"`
+	// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+	ReAuth *bool `pulumi:"reAuth"`
+	// The permission source, Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+	Source *string `pulumi:"source"`
+	// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceName *string `pulumi:"sourceName"`
+	// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Table *string `pulumi:"table"`
+	// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+	View *string `pulumi:"view"`
+}
+
+// AttachUserPolicyAttachmentPolicySetInput is an input type that accepts AttachUserPolicyAttachmentPolicySetArgs and AttachUserPolicyAttachmentPolicySetOutput values.
+// You can construct a concrete instance of `AttachUserPolicyAttachmentPolicySetInput` via:
+//
+//	AttachUserPolicyAttachmentPolicySetArgs{...}
+type AttachUserPolicyAttachmentPolicySetInput interface {
+	pulumi.Input
+
+	ToAttachUserPolicyAttachmentPolicySetOutput() AttachUserPolicyAttachmentPolicySetOutput
+	ToAttachUserPolicyAttachmentPolicySetOutputWithContext(context.Context) AttachUserPolicyAttachmentPolicySetOutput
+}
+
+type AttachUserPolicyAttachmentPolicySetArgs struct {
+	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The permission policy creation time, which is not required as an input parameter.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
+	// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+	Database pulumi.StringPtrInput `pulumi:"database"`
+	// Engine type.
+	EngineGeneration pulumi.StringPtrInput `pulumi:"engineGeneration"`
+	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// ID of the resource.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Whether the permission source is admin.
+	IsAdminPolicy pulumi.BoolPtrInput `pulumi:"isAdminPolicy"`
+	// The grant mode, Valid values: `COMMON` and `SENIOR`.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Model pulumi.StringPtrInput `pulumi:"model"`
+	// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`.
+	Operation pulumi.StringPtrInput `pulumi:"operation"`
+	// The operator, which is not required as an input parameter.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// The deterministic string PolicyId corresponding to the user and workgroup.
+	PolicyId pulumi.StringPtrInput `pulumi:"policyId"`
+	// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
+	// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// The permission source, Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
+	// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+	// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+	View pulumi.StringPtrInput `pulumi:"view"`
+}
+
+func (AttachUserPolicyAttachmentPolicySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AttachUserPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (i AttachUserPolicyAttachmentPolicySetArgs) ToAttachUserPolicyAttachmentPolicySetOutput() AttachUserPolicyAttachmentPolicySetOutput {
+	return i.ToAttachUserPolicyAttachmentPolicySetOutputWithContext(context.Background())
+}
+
+func (i AttachUserPolicyAttachmentPolicySetArgs) ToAttachUserPolicyAttachmentPolicySetOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachUserPolicyAttachmentPolicySetOutput)
+}
+
+func (i AttachUserPolicyAttachmentPolicySetArgs) ToAttachUserPolicyAttachmentPolicySetPtrOutput() AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return i.ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (i AttachUserPolicyAttachmentPolicySetArgs) ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachUserPolicyAttachmentPolicySetOutput).ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(ctx)
+}
+
+// AttachUserPolicyAttachmentPolicySetPtrInput is an input type that accepts AttachUserPolicyAttachmentPolicySetArgs, AttachUserPolicyAttachmentPolicySetPtr and AttachUserPolicyAttachmentPolicySetPtrOutput values.
+// You can construct a concrete instance of `AttachUserPolicyAttachmentPolicySetPtrInput` via:
+//
+//	        AttachUserPolicyAttachmentPolicySetArgs{...}
+//
+//	or:
+//
+//	        nil
+type AttachUserPolicyAttachmentPolicySetPtrInput interface {
+	pulumi.Input
+
+	ToAttachUserPolicyAttachmentPolicySetPtrOutput() AttachUserPolicyAttachmentPolicySetPtrOutput
+	ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(context.Context) AttachUserPolicyAttachmentPolicySetPtrOutput
+}
+
+type attachUserPolicyAttachmentPolicySetPtrType AttachUserPolicyAttachmentPolicySetArgs
+
+func AttachUserPolicyAttachmentPolicySetPtr(v *AttachUserPolicyAttachmentPolicySetArgs) AttachUserPolicyAttachmentPolicySetPtrInput {
+	return (*attachUserPolicyAttachmentPolicySetPtrType)(v)
+}
+
+func (*attachUserPolicyAttachmentPolicySetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AttachUserPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (i *attachUserPolicyAttachmentPolicySetPtrType) ToAttachUserPolicyAttachmentPolicySetPtrOutput() AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return i.ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (i *attachUserPolicyAttachmentPolicySetPtrType) ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachUserPolicyAttachmentPolicySetPtrOutput)
+}
+
+type AttachUserPolicyAttachmentPolicySetOutput struct{ *pulumi.OutputState }
+
+func (AttachUserPolicyAttachmentPolicySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AttachUserPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (o AttachUserPolicyAttachmentPolicySetOutput) ToAttachUserPolicyAttachmentPolicySetOutput() AttachUserPolicyAttachmentPolicySetOutput {
+	return o
+}
+
+func (o AttachUserPolicyAttachmentPolicySetOutput) ToAttachUserPolicyAttachmentPolicySetOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetOutput {
+	return o
+}
+
+func (o AttachUserPolicyAttachmentPolicySetOutput) ToAttachUserPolicyAttachmentPolicySetPtrOutput() AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return o.ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (o AttachUserPolicyAttachmentPolicySetOutput) ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AttachUserPolicyAttachmentPolicySet) *AttachUserPolicyAttachmentPolicySet {
+		return &v
+	}).(AttachUserPolicyAttachmentPolicySetPtrOutput)
+}
+
+// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Column() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
+}
+
+// The permission policy creation time, which is not required as an input parameter.
+func (o AttachUserPolicyAttachmentPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Database }).(pulumi.StringPtrOutput)
+}
+
+// Engine type.
+func (o AttachUserPolicyAttachmentPolicySetOutput) EngineGeneration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.EngineGeneration }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Function() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
+}
+
+// ID of the resource.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// Whether the permission source is admin.
+func (o AttachUserPolicyAttachmentPolicySetOutput) IsAdminPolicy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *bool { return v.IsAdminPolicy }).(pulumi.BoolPtrOutput)
+}
+
+// The grant mode, Valid values: `COMMON` and `SENIOR`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Model }).(pulumi.StringPtrOutput)
+}
+
+// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Operation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Operation }).(pulumi.StringPtrOutput)
+}
+
+// The operator, which is not required as an input parameter.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
+}
+
+// The deterministic string PolicyId corresponding to the user and workgroup.
+func (o AttachUserPolicyAttachmentPolicySetOutput) PolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.PolicyId }).(pulumi.StringPtrOutput)
+}
+
+// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+func (o AttachUserPolicyAttachmentPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
+}
+
+// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+func (o AttachUserPolicyAttachmentPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
+}
+
+// The permission source, Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+func (o AttachUserPolicyAttachmentPolicySetOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) SourceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
+}
+
+// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachUserPolicyAttachmentPolicySetOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachUserPolicyAttachmentPolicySetOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+func (o AttachUserPolicyAttachmentPolicySetOutput) View() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachUserPolicyAttachmentPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
+}
+
+type AttachUserPolicyAttachmentPolicySetPtrOutput struct{ *pulumi.OutputState }
+
+func (AttachUserPolicyAttachmentPolicySetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AttachUserPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) ToAttachUserPolicyAttachmentPolicySetPtrOutput() AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return o
+}
+
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) ToAttachUserPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachUserPolicyAttachmentPolicySetPtrOutput {
+	return o
+}
+
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Elem() AttachUserPolicyAttachmentPolicySetOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) AttachUserPolicyAttachmentPolicySet {
+		if v != nil {
+			return *v
+		}
+		var ret AttachUserPolicyAttachmentPolicySet
+		return ret
+	}).(AttachUserPolicyAttachmentPolicySetOutput)
+}
+
+// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Column() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Column
+	}).(pulumi.StringPtrOutput)
+}
+
+// The permission policy creation time, which is not required as an input parameter.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CreateTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) DataEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataEngine
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Database
+	}).(pulumi.StringPtrOutput)
+}
+
+// Engine type.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) EngineGeneration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EngineGeneration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Function() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Function
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of the resource.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether the permission source is admin.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) IsAdminPolicy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsAdminPolicy
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The grant mode, Valid values: `COMMON` and `SENIOR`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mode
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target Model. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Model
+	}).(pulumi.StringPtrOutput)
+}
+
+// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Operation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Operation
+	}).(pulumi.StringPtrOutput)
+}
+
+// The operator, which is not required as an input parameter.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Operator
+	}).(pulumi.StringPtrOutput)
+}
+
+// The deterministic string PolicyId corresponding to the user and workgroup.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) PolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) ReAuth() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ReAuth
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The permission source, Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Source
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) SourceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SourceId
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+func (o AttachUserPolicyAttachmentPolicySetPtrOutput) View() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachUserPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.View
+	}).(pulumi.StringPtrOutput)
+}
+
 type AttachUserPolicyOperationPolicySet struct {
 	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
 	Catalog string `pulumi:"catalog"`
@@ -779,6 +1296,523 @@ func (o AttachUserPolicyOperationPolicySetArrayOutput) Index(i pulumi.IntInput) 
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AttachUserPolicyOperationPolicySet {
 		return vs[0].([]AttachUserPolicyOperationPolicySet)[vs[1].(int)]
 	}).(AttachUserPolicyOperationPolicySetOutput)
+}
+
+type AttachWorkGroupPolicyAttachmentPolicySet struct {
+	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
+	Catalog string `pulumi:"catalog"`
+	// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+	Column *string `pulumi:"column"`
+	// The permission policy creation time, which is not required as an input parameter.
+	CreateTime *string `pulumi:"createTime"`
+	// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+	DataEngine *string `pulumi:"dataEngine"`
+	// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+	Database string `pulumi:"database"`
+	// The engine generation/type.
+	EngineGeneration *string `pulumi:"engineGeneration"`
+	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+	Function *string `pulumi:"function"`
+	// ID of the resource.
+	Id *int `pulumi:"id"`
+	// Whether the permission source is admin, which is not required as an input parameter.
+	IsAdminPolicy *bool `pulumi:"isAdminPolicy"`
+	// The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
+	Mode *string `pulumi:"mode"`
+	// The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
+	Model *string `pulumi:"model"`
+	// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`. Note: For table permissions, if a data source other than `COSDataCatalog` is specified, only the `SELECT` permission can be granted here.
+	Operation string `pulumi:"operation"`
+	// The operator, which is not required as an input parameter.
+	Operator *string `pulumi:"operator"`
+	// The deterministic string PolicyId corresponding to user and workgroup, which is not required as an input parameter.
+	PolicyId *string `pulumi:"policyId"`
+	// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+	PolicyType *string `pulumi:"policyType"`
+	// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+	ReAuth *bool `pulumi:"reAuth"`
+	// The permission source, which is not required when input parameters are passed in. Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+	Source *string `pulumi:"source"`
+	// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceId *int `pulumi:"sourceId"`
+	// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceName *string `pulumi:"sourceName"`
+	// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Table string `pulumi:"table"`
+	// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+	View *string `pulumi:"view"`
+}
+
+// AttachWorkGroupPolicyAttachmentPolicySetInput is an input type that accepts AttachWorkGroupPolicyAttachmentPolicySetArgs and AttachWorkGroupPolicyAttachmentPolicySetOutput values.
+// You can construct a concrete instance of `AttachWorkGroupPolicyAttachmentPolicySetInput` via:
+//
+//	AttachWorkGroupPolicyAttachmentPolicySetArgs{...}
+type AttachWorkGroupPolicyAttachmentPolicySetInput interface {
+	pulumi.Input
+
+	ToAttachWorkGroupPolicyAttachmentPolicySetOutput() AttachWorkGroupPolicyAttachmentPolicySetOutput
+	ToAttachWorkGroupPolicyAttachmentPolicySetOutputWithContext(context.Context) AttachWorkGroupPolicyAttachmentPolicySetOutput
+}
+
+type AttachWorkGroupPolicyAttachmentPolicySetArgs struct {
+	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
+	Catalog pulumi.StringInput `pulumi:"catalog"`
+	// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+	Column pulumi.StringPtrInput `pulumi:"column"`
+	// The permission policy creation time, which is not required as an input parameter.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+	DataEngine pulumi.StringPtrInput `pulumi:"dataEngine"`
+	// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+	Database pulumi.StringInput `pulumi:"database"`
+	// The engine generation/type.
+	EngineGeneration pulumi.StringPtrInput `pulumi:"engineGeneration"`
+	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+	Function pulumi.StringPtrInput `pulumi:"function"`
+	// ID of the resource.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Whether the permission source is admin, which is not required as an input parameter.
+	IsAdminPolicy pulumi.BoolPtrInput `pulumi:"isAdminPolicy"`
+	// The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
+	Model pulumi.StringPtrInput `pulumi:"model"`
+	// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`. Note: For table permissions, if a data source other than `COSDataCatalog` is specified, only the `SELECT` permission can be granted here.
+	Operation pulumi.StringInput `pulumi:"operation"`
+	// The operator, which is not required as an input parameter.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// The deterministic string PolicyId corresponding to user and workgroup, which is not required as an input parameter.
+	PolicyId pulumi.StringPtrInput `pulumi:"policyId"`
+	// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+	PolicyType pulumi.StringPtrInput `pulumi:"policyType"`
+	// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+	ReAuth pulumi.BoolPtrInput `pulumi:"reAuth"`
+	// The permission source, which is not required when input parameters are passed in. Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceId pulumi.IntPtrInput `pulumi:"sourceId"`
+	// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	SourceName pulumi.StringPtrInput `pulumi:"sourceName"`
+	// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Table pulumi.StringInput `pulumi:"table"`
+	// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+	View pulumi.StringPtrInput `pulumi:"view"`
+}
+
+func (AttachWorkGroupPolicyAttachmentPolicySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AttachWorkGroupPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (i AttachWorkGroupPolicyAttachmentPolicySetArgs) ToAttachWorkGroupPolicyAttachmentPolicySetOutput() AttachWorkGroupPolicyAttachmentPolicySetOutput {
+	return i.ToAttachWorkGroupPolicyAttachmentPolicySetOutputWithContext(context.Background())
+}
+
+func (i AttachWorkGroupPolicyAttachmentPolicySetArgs) ToAttachWorkGroupPolicyAttachmentPolicySetOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachWorkGroupPolicyAttachmentPolicySetOutput)
+}
+
+func (i AttachWorkGroupPolicyAttachmentPolicySetArgs) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutput() AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return i.ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (i AttachWorkGroupPolicyAttachmentPolicySetArgs) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachWorkGroupPolicyAttachmentPolicySetOutput).ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(ctx)
+}
+
+// AttachWorkGroupPolicyAttachmentPolicySetPtrInput is an input type that accepts AttachWorkGroupPolicyAttachmentPolicySetArgs, AttachWorkGroupPolicyAttachmentPolicySetPtr and AttachWorkGroupPolicyAttachmentPolicySetPtrOutput values.
+// You can construct a concrete instance of `AttachWorkGroupPolicyAttachmentPolicySetPtrInput` via:
+//
+//	        AttachWorkGroupPolicyAttachmentPolicySetArgs{...}
+//
+//	or:
+//
+//	        nil
+type AttachWorkGroupPolicyAttachmentPolicySetPtrInput interface {
+	pulumi.Input
+
+	ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutput() AttachWorkGroupPolicyAttachmentPolicySetPtrOutput
+	ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(context.Context) AttachWorkGroupPolicyAttachmentPolicySetPtrOutput
+}
+
+type attachWorkGroupPolicyAttachmentPolicySetPtrType AttachWorkGroupPolicyAttachmentPolicySetArgs
+
+func AttachWorkGroupPolicyAttachmentPolicySetPtr(v *AttachWorkGroupPolicyAttachmentPolicySetArgs) AttachWorkGroupPolicyAttachmentPolicySetPtrInput {
+	return (*attachWorkGroupPolicyAttachmentPolicySetPtrType)(v)
+}
+
+func (*attachWorkGroupPolicyAttachmentPolicySetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AttachWorkGroupPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (i *attachWorkGroupPolicyAttachmentPolicySetPtrType) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutput() AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return i.ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (i *attachWorkGroupPolicyAttachmentPolicySetPtrType) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AttachWorkGroupPolicyAttachmentPolicySetPtrOutput)
+}
+
+type AttachWorkGroupPolicyAttachmentPolicySetOutput struct{ *pulumi.OutputState }
+
+func (AttachWorkGroupPolicyAttachmentPolicySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AttachWorkGroupPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) ToAttachWorkGroupPolicyAttachmentPolicySetOutput() AttachWorkGroupPolicyAttachmentPolicySetOutput {
+	return o
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) ToAttachWorkGroupPolicyAttachmentPolicySetOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetOutput {
+	return o
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutput() AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return o.ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(context.Background())
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AttachWorkGroupPolicyAttachmentPolicySet) *AttachWorkGroupPolicyAttachmentPolicySet {
+		return &v
+	}).(AttachWorkGroupPolicyAttachmentPolicySetPtrOutput)
+}
+
+// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Catalog() pulumi.StringOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) string { return v.Catalog }).(pulumi.StringOutput)
+}
+
+// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Column() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Column }).(pulumi.StringPtrOutput)
+}
+
+// The permission policy creation time, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) DataEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.DataEngine }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) string { return v.Database }).(pulumi.StringOutput)
+}
+
+// The engine generation/type.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) EngineGeneration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.EngineGeneration }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Function() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Function }).(pulumi.StringPtrOutput)
+}
+
+// ID of the resource.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// Whether the permission source is admin, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) IsAdminPolicy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *bool { return v.IsAdminPolicy }).(pulumi.BoolPtrOutput)
+}
+
+// The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Mode }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Model }).(pulumi.StringPtrOutput)
+}
+
+// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`. Note: For table permissions, if a data source other than `COSDataCatalog` is specified, only the `SELECT` permission can be granted here.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Operation() pulumi.StringOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) string { return v.Operation }).(pulumi.StringOutput)
+}
+
+// The operator, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Operator }).(pulumi.StringPtrOutput)
+}
+
+// The deterministic string PolicyId corresponding to user and workgroup, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) PolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.PolicyId }).(pulumi.StringPtrOutput)
+}
+
+// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.PolicyType }).(pulumi.StringPtrOutput)
+}
+
+// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) ReAuth() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *bool { return v.ReAuth }).(pulumi.BoolPtrOutput)
+}
+
+// The permission source, which is not required when input parameters are passed in. Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) SourceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *int { return v.SourceId }).(pulumi.IntPtrOutput)
+}
+
+// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.SourceName }).(pulumi.StringPtrOutput)
+}
+
+// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) Table() pulumi.StringOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) string { return v.Table }).(pulumi.StringOutput)
+}
+
+// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+func (o AttachWorkGroupPolicyAttachmentPolicySetOutput) View() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AttachWorkGroupPolicyAttachmentPolicySet) *string { return v.View }).(pulumi.StringPtrOutput)
+}
+
+type AttachWorkGroupPolicyAttachmentPolicySetPtrOutput struct{ *pulumi.OutputState }
+
+func (AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AttachWorkGroupPolicyAttachmentPolicySet)(nil)).Elem()
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutput() AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return o
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) ToAttachWorkGroupPolicyAttachmentPolicySetPtrOutputWithContext(ctx context.Context) AttachWorkGroupPolicyAttachmentPolicySetPtrOutput {
+	return o
+}
+
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Elem() AttachWorkGroupPolicyAttachmentPolicySetOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) AttachWorkGroupPolicyAttachmentPolicySet {
+		if v != nil {
+			return *v
+		}
+		var ret AttachWorkGroupPolicyAttachmentPolicySet
+		return ret
+	}).(AttachWorkGroupPolicyAttachmentPolicySetOutput)
+}
+
+// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Column() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Column
+	}).(pulumi.StringPtrOutput)
+}
+
+// The permission policy creation time, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CreateTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) DataEngine() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataEngine
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Database() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Database
+	}).(pulumi.StringPtrOutput)
+}
+
+// The engine generation/type.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) EngineGeneration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EngineGeneration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Function() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Function
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of the resource.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Id
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether the permission source is admin, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) IsAdminPolicy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsAdminPolicy
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mode
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target Model. `*` represents all models in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any model.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Model() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Model
+	}).(pulumi.StringPtrOutput)
+}
+
+// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`. Note: For table permissions, if a data source other than `COSDataCatalog` is specified, only the `SELECT` permission can be granted here.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Operation() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Operation
+	}).(pulumi.StringPtrOutput)
+}
+
+// The operator, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Operator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Operator
+	}).(pulumi.StringPtrOutput)
+}
+
+// The deterministic string PolicyId corresponding to user and workgroup, which is not required as an input parameter.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) PolicyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) PolicyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PolicyType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) ReAuth() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ReAuth
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The permission source, which is not required when input parameters are passed in. Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Source
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) SourceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SourceId
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) SourceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+func (o AttachWorkGroupPolicyAttachmentPolicySetPtrOutput) View() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AttachWorkGroupPolicyAttachmentPolicySet) *string {
+		if v == nil {
+			return nil
+		}
+		return v.View
+	}).(pulumi.StringPtrOutput)
 }
 
 type AttachWorkGroupPolicyOperationPolicySet struct {
@@ -1778,6 +2812,112 @@ func (o DataEngineSessionResourceTemplateRunningTimeParameterArrayOutput) Index(
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataEngineSessionResourceTemplateRunningTimeParameter {
 		return vs[0].([]DataEngineSessionResourceTemplateRunningTimeParameter)[vs[1].(int)]
 	}).(DataEngineSessionResourceTemplateRunningTimeParameterOutput)
+}
+
+type DataEngineTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue *string `pulumi:"tagValue"`
+}
+
+// DataEngineTagInput is an input type that accepts DataEngineTagArgs and DataEngineTagOutput values.
+// You can construct a concrete instance of `DataEngineTagInput` via:
+//
+//	DataEngineTagArgs{...}
+type DataEngineTagInput interface {
+	pulumi.Input
+
+	ToDataEngineTagOutput() DataEngineTagOutput
+	ToDataEngineTagOutputWithContext(context.Context) DataEngineTagOutput
+}
+
+type DataEngineTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringPtrInput `pulumi:"tagValue"`
+}
+
+func (DataEngineTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataEngineTag)(nil)).Elem()
+}
+
+func (i DataEngineTagArgs) ToDataEngineTagOutput() DataEngineTagOutput {
+	return i.ToDataEngineTagOutputWithContext(context.Background())
+}
+
+func (i DataEngineTagArgs) ToDataEngineTagOutputWithContext(ctx context.Context) DataEngineTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataEngineTagOutput)
+}
+
+// DataEngineTagArrayInput is an input type that accepts DataEngineTagArray and DataEngineTagArrayOutput values.
+// You can construct a concrete instance of `DataEngineTagArrayInput` via:
+//
+//	DataEngineTagArray{ DataEngineTagArgs{...} }
+type DataEngineTagArrayInput interface {
+	pulumi.Input
+
+	ToDataEngineTagArrayOutput() DataEngineTagArrayOutput
+	ToDataEngineTagArrayOutputWithContext(context.Context) DataEngineTagArrayOutput
+}
+
+type DataEngineTagArray []DataEngineTagInput
+
+func (DataEngineTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataEngineTag)(nil)).Elem()
+}
+
+func (i DataEngineTagArray) ToDataEngineTagArrayOutput() DataEngineTagArrayOutput {
+	return i.ToDataEngineTagArrayOutputWithContext(context.Background())
+}
+
+func (i DataEngineTagArray) ToDataEngineTagArrayOutputWithContext(ctx context.Context) DataEngineTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataEngineTagArrayOutput)
+}
+
+type DataEngineTagOutput struct{ *pulumi.OutputState }
+
+func (DataEngineTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataEngineTag)(nil)).Elem()
+}
+
+func (o DataEngineTagOutput) ToDataEngineTagOutput() DataEngineTagOutput {
+	return o
+}
+
+func (o DataEngineTagOutput) ToDataEngineTagOutputWithContext(ctx context.Context) DataEngineTagOutput {
+	return o
+}
+
+// Tag key.
+func (o DataEngineTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DataEngineTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o DataEngineTagOutput) TagValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataEngineTag) *string { return v.TagValue }).(pulumi.StringPtrOutput)
+}
+
+type DataEngineTagArrayOutput struct{ *pulumi.OutputState }
+
+func (DataEngineTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataEngineTag)(nil)).Elem()
+}
+
+func (o DataEngineTagArrayOutput) ToDataEngineTagArrayOutput() DataEngineTagArrayOutput {
+	return o
+}
+
+func (o DataEngineTagArrayOutput) ToDataEngineTagArrayOutputWithContext(ctx context.Context) DataEngineTagArrayOutput {
+	return o
+}
+
+func (o DataEngineTagArrayOutput) Index(i pulumi.IntInput) DataEngineTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataEngineTag {
+		return vs[0].([]DataEngineTag)[vs[1].(int)]
+	}).(DataEngineTagOutput)
 }
 
 type DataMaskStrategyStrategy struct {
@@ -10420,10 +11560,6 @@ type GetDescribeDataEngineDataEngine struct {
 	TagLists []GetDescribeDataEngineDataEngineTagList `pulumi:"tagLists"`
 	// Tolerable queuing time, default 0. scaling may be triggered when tasks are queued for longer than the tolerable time. if this parameter is 0, it means that capacity expansion may be triggered immediately once a task is queued.
 	TolerableQueueTime int `pulumi:"tolerableQueueTime"`
-	// (**Deprecated**) It has been deprecated. Use `uiUrl` instead. Jump address of ui.
-	//
-	// Deprecated: It has been deprecated. Use `uiUrl` instead.
-	UiURL string `pulumi:"uiURL"`
 	// Jump address of ui.
 	UiUrl string `pulumi:"uiUrl"`
 	// Update time.
@@ -10528,10 +11664,6 @@ type GetDescribeDataEngineDataEngineArgs struct {
 	TagLists GetDescribeDataEngineDataEngineTagListArrayInput `pulumi:"tagLists"`
 	// Tolerable queuing time, default 0. scaling may be triggered when tasks are queued for longer than the tolerable time. if this parameter is 0, it means that capacity expansion may be triggered immediately once a task is queued.
 	TolerableQueueTime pulumi.IntInput `pulumi:"tolerableQueueTime"`
-	// (**Deprecated**) It has been deprecated. Use `uiUrl` instead. Jump address of ui.
-	//
-	// Deprecated: It has been deprecated. Use `uiUrl` instead.
-	UiURL pulumi.StringInput `pulumi:"uiURL"`
 	// Jump address of ui.
 	UiUrl pulumi.StringInput `pulumi:"uiUrl"`
 	// Update time.
@@ -10799,13 +11931,6 @@ func (o GetDescribeDataEngineDataEngineOutput) TagLists() GetDescribeDataEngineD
 // Tolerable queuing time, default 0. scaling may be triggered when tasks are queued for longer than the tolerable time. if this parameter is 0, it means that capacity expansion may be triggered immediately once a task is queued.
 func (o GetDescribeDataEngineDataEngineOutput) TolerableQueueTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDescribeDataEngineDataEngine) int { return v.TolerableQueueTime }).(pulumi.IntOutput)
-}
-
-// (**Deprecated**) It has been deprecated. Use `uiUrl` instead. Jump address of ui.
-//
-// Deprecated: It has been deprecated. Use `uiUrl` instead.
-func (o GetDescribeDataEngineDataEngineOutput) UiURL() pulumi.StringOutput {
-	return o.ApplyT(func(v GetDescribeDataEngineDataEngine) string { return v.UiURL }).(pulumi.StringOutput)
 }
 
 // Jump address of ui.
@@ -17380,8 +18505,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachDataMaskPolicyDataMaskStrategyPolicySetPtrInput)(nil)).Elem(), AttachDataMaskPolicyDataMaskStrategyPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoInput)(nil)).Elem(), AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoPtrInput)(nil)).Elem(), AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AttachUserPolicyAttachmentPolicySetInput)(nil)).Elem(), AttachUserPolicyAttachmentPolicySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AttachUserPolicyAttachmentPolicySetPtrInput)(nil)).Elem(), AttachUserPolicyAttachmentPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachUserPolicyOperationPolicySetInput)(nil)).Elem(), AttachUserPolicyOperationPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachUserPolicyOperationPolicySetArrayInput)(nil)).Elem(), AttachUserPolicyOperationPolicySetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AttachWorkGroupPolicyAttachmentPolicySetInput)(nil)).Elem(), AttachWorkGroupPolicyAttachmentPolicySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AttachWorkGroupPolicyAttachmentPolicySetPtrInput)(nil)).Elem(), AttachWorkGroupPolicyAttachmentPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachWorkGroupPolicyOperationPolicySetInput)(nil)).Elem(), AttachWorkGroupPolicyOperationPolicySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AttachWorkGroupPolicyOperationPolicySetArrayInput)(nil)).Elem(), AttachWorkGroupPolicyOperationPolicySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BindWorkGroupsToUserAttachmentAddInfoInput)(nil)).Elem(), BindWorkGroupsToUserAttachmentAddInfoArgs{})
@@ -17394,6 +18523,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DataEngineSessionResourceTemplatePtrInput)(nil)).Elem(), DataEngineSessionResourceTemplateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataEngineSessionResourceTemplateRunningTimeParameterInput)(nil)).Elem(), DataEngineSessionResourceTemplateRunningTimeParameterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataEngineSessionResourceTemplateRunningTimeParameterArrayInput)(nil)).Elem(), DataEngineSessionResourceTemplateRunningTimeParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataEngineTagInput)(nil)).Elem(), DataEngineTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataEngineTagArrayInput)(nil)).Elem(), DataEngineTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataMaskStrategyStrategyInput)(nil)).Elem(), DataMaskStrategyStrategyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataMaskStrategyStrategyPtrInput)(nil)).Elem(), DataMaskStrategyStrategyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataMaskStrategyStrategyGroupInput)(nil)).Elem(), DataMaskStrategyStrategyGroupArgs{})
@@ -17576,8 +18707,12 @@ func init() {
 	pulumi.RegisterOutputType(AttachDataMaskPolicyDataMaskStrategyPolicySetPtrOutput{})
 	pulumi.RegisterOutputType(AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoOutput{})
 	pulumi.RegisterOutputType(AttachDataMaskPolicyDataMaskStrategyPolicySetPolicyInfoPtrOutput{})
+	pulumi.RegisterOutputType(AttachUserPolicyAttachmentPolicySetOutput{})
+	pulumi.RegisterOutputType(AttachUserPolicyAttachmentPolicySetPtrOutput{})
 	pulumi.RegisterOutputType(AttachUserPolicyOperationPolicySetOutput{})
 	pulumi.RegisterOutputType(AttachUserPolicyOperationPolicySetArrayOutput{})
+	pulumi.RegisterOutputType(AttachWorkGroupPolicyAttachmentPolicySetOutput{})
+	pulumi.RegisterOutputType(AttachWorkGroupPolicyAttachmentPolicySetPtrOutput{})
 	pulumi.RegisterOutputType(AttachWorkGroupPolicyOperationPolicySetOutput{})
 	pulumi.RegisterOutputType(AttachWorkGroupPolicyOperationPolicySetArrayOutput{})
 	pulumi.RegisterOutputType(BindWorkGroupsToUserAttachmentAddInfoOutput{})
@@ -17590,6 +18725,8 @@ func init() {
 	pulumi.RegisterOutputType(DataEngineSessionResourceTemplatePtrOutput{})
 	pulumi.RegisterOutputType(DataEngineSessionResourceTemplateRunningTimeParameterOutput{})
 	pulumi.RegisterOutputType(DataEngineSessionResourceTemplateRunningTimeParameterArrayOutput{})
+	pulumi.RegisterOutputType(DataEngineTagOutput{})
+	pulumi.RegisterOutputType(DataEngineTagArrayOutput{})
 	pulumi.RegisterOutputType(DataMaskStrategyStrategyOutput{})
 	pulumi.RegisterOutputType(DataMaskStrategyStrategyPtrOutput{})
 	pulumi.RegisterOutputType(DataMaskStrategyStrategyGroupOutput{})

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupJobs = tencentcloud.Clickhouse.getBackupJobs({
+ * const backupJobs = tencentcloud.clickhouse.getBackupJobs({
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
@@ -78,7 +78,7 @@ export interface GetBackupJobsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupJobs = tencentcloud.Clickhouse.getBackupJobs({
+ * const backupJobs = tencentcloud.clickhouse.getBackupJobs({
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
@@ -100,11 +100,11 @@ export interface GetBackupJobsOutputArgs {
     /**
      * Begin time.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * End time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
@@ -112,5 +112,5 @@ export interface GetBackupJobsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

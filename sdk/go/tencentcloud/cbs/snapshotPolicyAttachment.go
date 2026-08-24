@@ -61,8 +61,8 @@ import (
 //				return err
 //			}
 //			_, err = cbs.NewSnapshotPolicyAttachment(ctx, "example", &cbs.SnapshotPolicyAttachmentArgs{
-//				StorageId:        example.ID(),
-//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				StorageId:        example.ID().ToIDOutput().ToStringOutput(),
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -131,10 +131,10 @@ import (
 //			}
 //			_, err = cbs.NewSnapshotPolicyAttachment(ctx, "example", &cbs.SnapshotPolicyAttachmentArgs{
 //				StorageIds: pulumi.StringArray{
-//					example1.ID(),
-//					example2.ID(),
+//					example1.ID().ToIDOutput().ToStringOutput(),
+//					example2.ID().ToIDOutput().ToStringOutput(),
 //				},
-//				SnapshotPolicyId: example.ID(),
+//				SnapshotPolicyId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -149,12 +149,13 @@ import (
 //
 // CBS snapshot policy attachment can be imported using the id, e.g.
 //
-// If use storage_id
+// # If use storageId
 //
 // ```sh
 // $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-fesgc43m#asp-8abupspr
 // ```
-// If use storage_ids
+//
+// # If use storageIds
 //
 // ```sh
 // $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-ghylus9y,disk-0tm61hla#asp-ng87uf4t

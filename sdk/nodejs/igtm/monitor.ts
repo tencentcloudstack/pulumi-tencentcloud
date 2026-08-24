@@ -247,75 +247,75 @@ export interface MonitorState {
     /**
      * Check interval (seconds), optional values 15 60 120 300.
      */
-    checkInterval?: pulumi.Input<number>;
+    checkInterval?: pulumi.Input<number | undefined>;
     /**
      * Detection protocol, optional values `PING`, `TCP`, `HTTP`, `HTTPS`.
      */
-    checkProtocol?: pulumi.Input<string>;
+    checkProtocol?: pulumi.Input<string | undefined>;
     /**
      * Continuous period count, optional values 1-5.
      */
-    continuePeriod?: pulumi.Input<number>;
+    continuePeriod?: pulumi.Input<number | undefined>;
     /**
      * Detector group ID list separated by commas.
      */
-    detectorGroupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    detectorGroupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Monitoring node type, optional values AUTO INTERNAL OVERSEAS IPV6 ALL.
      */
-    detectorStyle?: pulumi.Input<string>;
+    detectorStyle?: pulumi.Input<string | undefined>;
     /**
      * Follow 3XX redirect, DISABLED for disabled, ENABLED for enabled, default disabled.
      */
-    enableRedirect?: pulumi.Input<string>;
+    enableRedirect?: pulumi.Input<string | undefined>;
     /**
      * Enable SNI, DISABLED for disabled, ENABLED for enabled, default disabled.
      */
-    enableSni?: pulumi.Input<string>;
+    enableSni?: pulumi.Input<string | undefined>;
     /**
      * Failure rate, values 20 30 40 50 60 70 80 100, default value 50.
      */
-    failRate?: pulumi.Input<number>;
+    failRate?: pulumi.Input<number | undefined>;
     /**
      * Retry count, optional values 0, 1, 2.
      */
-    failTimes?: pulumi.Input<number>;
+    failTimes?: pulumi.Input<number | undefined>;
     /**
      * Host setting, default is business domain name.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Monitor ID.
      */
-    monitorId?: pulumi.Input<number>;
+    monitorId?: pulumi.Input<number | undefined>;
     /**
      * Monitor name.
      */
-    monitorName?: pulumi.Input<string>;
+    monitorName?: pulumi.Input<string | undefined>;
     /**
      * Packet loss rate alarm threshold, required when CheckProtocol=ping, values 10 30 50 80 90 100.
      */
-    packetLossRate?: pulumi.Input<number>;
+    packetLossRate?: pulumi.Input<number | undefined>;
     /**
      * URL path, default is "/".
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * PING packet count, required when CheckProtocol=ping, optional values 20 50 100.
      */
-    pingNum?: pulumi.Input<number>;
+    pingNum?: pulumi.Input<number | undefined>;
     /**
      * Return error code threshold, optional values 400 and 500, default value 500.
      */
-    returnCodeThreshold?: pulumi.Input<number>;
+    returnCodeThreshold?: pulumi.Input<number | undefined>;
     /**
      * Check port, optional values between 1-65535.
      */
-    tcpPort?: pulumi.Input<number>;
+    tcpPort?: pulumi.Input<number | undefined>;
     /**
      * Timeout time, unit seconds, optional values 2 3 5 10.
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -333,7 +333,7 @@ export interface MonitorArgs {
     /**
      * Continuous period count, optional values 1-5.
      */
-    continuePeriod?: pulumi.Input<number>;
+    continuePeriod?: pulumi.Input<number | undefined>;
     /**
      * Detector group ID list separated by commas.
      */
@@ -345,11 +345,11 @@ export interface MonitorArgs {
     /**
      * Follow 3XX redirect, DISABLED for disabled, ENABLED for enabled, default disabled.
      */
-    enableRedirect?: pulumi.Input<string>;
+    enableRedirect?: pulumi.Input<string | undefined>;
     /**
      * Enable SNI, DISABLED for disabled, ENABLED for enabled, default disabled.
      */
-    enableSni?: pulumi.Input<string>;
+    enableSni?: pulumi.Input<string | undefined>;
     /**
      * Failure rate, values 20 30 40 50 60 70 80 100, default value 50.
      */
@@ -361,7 +361,7 @@ export interface MonitorArgs {
     /**
      * Host setting, default is business domain name.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Monitor name.
      */
@@ -369,23 +369,23 @@ export interface MonitorArgs {
     /**
      * Packet loss rate alarm threshold, required when CheckProtocol=ping, values 10 30 50 80 90 100.
      */
-    packetLossRate?: pulumi.Input<number>;
+    packetLossRate?: pulumi.Input<number | undefined>;
     /**
      * URL path, default is "/".
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * PING packet count, required when CheckProtocol=ping, optional values 20 50 100.
      */
-    pingNum?: pulumi.Input<number>;
+    pingNum?: pulumi.Input<number | undefined>;
     /**
      * Return error code threshold, optional values 400 and 500, default value 500.
      */
-    returnCodeThreshold?: pulumi.Input<number>;
+    returnCodeThreshold?: pulumi.Input<number | undefined>;
     /**
      * Check port, optional values between 1-65535.
      */
-    tcpPort?: pulumi.Input<number>;
+    tcpPort?: pulumi.Input<number | undefined>;
     /**
      * Timeout time, unit seconds, optional values 2 3 5 10.
      */

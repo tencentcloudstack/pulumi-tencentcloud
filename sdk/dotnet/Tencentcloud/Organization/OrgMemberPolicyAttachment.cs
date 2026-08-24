@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Import
     /// 
-    /// organization org_member_policy_attachment can be imported using the id, e.g.
+    /// organization OrgMemberPolicyAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id

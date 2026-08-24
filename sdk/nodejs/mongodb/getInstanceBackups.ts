@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceBackups = tencentcloud.Mongodb.getInstanceBackups({
+ * const instanceBackups = tencentcloud.mongodb.getInstanceBackups({
  *     instanceId: "cmgo-9d0p6umb",
  *     backupMethod: 0,
  * });
@@ -79,7 +79,7 @@ export interface GetInstanceBackupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceBackups = tencentcloud.Mongodb.getInstanceBackups({
+ * const instanceBackups = tencentcloud.mongodb.getInstanceBackups({
  *     instanceId: "cmgo-9d0p6umb",
  *     backupMethod: 0,
  * });
@@ -101,7 +101,7 @@ export interface GetInstanceBackupsOutputArgs {
     /**
      * Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
      */
-    backupMethod?: pulumi.Input<number>;
+    backupMethod?: pulumi.Input<number | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
@@ -109,5 +109,5 @@ export interface GetInstanceBackupsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

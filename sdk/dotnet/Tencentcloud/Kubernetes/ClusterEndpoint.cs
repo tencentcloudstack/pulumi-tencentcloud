@@ -111,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> ClusterInternetDomain { get; private set; } = null!;
 
         /// <summary>
-        /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+        /// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Output("clusterInternetSecurityGroup")]
         public Output<string?> ClusterInternetSecurityGroup { get; private set; } = null!;
@@ -129,6 +129,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> ClusterIntranetDomain { get; private set; } = null!;
 
         /// <summary>
+        /// Security group ID for intranet cluster endpoint.
+        /// </summary>
+        [Output("clusterIntranetSecurityGroup")]
+        public Output<string?> ClusterIntranetSecurityGroup { get; private set; } = null!;
+
+        /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `ClusterIntranet` is true. `ClusterIntranetSubnetId` can not modify once be set.
         /// </summary>
         [Output("clusterIntranetSubnetId")]
@@ -139,6 +145,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("domain")]
         public Output<string> Domain { get; private set; } = null!;
+
+        /// <summary>
+        /// Enable internal or external access using an existing CLB.
+        /// </summary>
+        [Output("existedLoadBalancerId")]
+        public Output<string?> ExistedLoadBalancerId { get; private set; } = null!;
 
         /// <summary>
         /// The LB parameter. Only used for public network access.
@@ -254,7 +266,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterInternetDomain { get; set; }
 
         /// <summary>
-        /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+        /// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Input("clusterInternetSecurityGroup")]
         public Input<string>? ClusterInternetSecurityGroup { get; set; }
@@ -272,10 +284,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterIntranetDomain { get; set; }
 
         /// <summary>
+        /// Security group ID for intranet cluster endpoint.
+        /// </summary>
+        [Input("clusterIntranetSecurityGroup")]
+        public Input<string>? ClusterIntranetSecurityGroup { get; set; }
+
+        /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `ClusterIntranet` is true. `ClusterIntranetSubnetId` can not modify once be set.
         /// </summary>
         [Input("clusterIntranetSubnetId")]
         public Input<string>? ClusterIntranetSubnetId { get; set; }
+
+        /// <summary>
+        /// Enable internal or external access using an existing CLB.
+        /// </summary>
+        [Input("existedLoadBalancerId")]
+        public Input<string>? ExistedLoadBalancerId { get; set; }
 
         /// <summary>
         /// The LB parameter. Only used for public network access.
@@ -341,7 +365,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterInternetDomain { get; set; }
 
         /// <summary>
-        /// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+        /// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
         /// </summary>
         [Input("clusterInternetSecurityGroup")]
         public Input<string>? ClusterInternetSecurityGroup { get; set; }
@@ -359,6 +383,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterIntranetDomain { get; set; }
 
         /// <summary>
+        /// Security group ID for intranet cluster endpoint.
+        /// </summary>
+        [Input("clusterIntranetSecurityGroup")]
+        public Input<string>? ClusterIntranetSecurityGroup { get; set; }
+
+        /// <summary>
         /// Subnet id who can access this independent cluster, this field must and can only set  when `ClusterIntranet` is true. `ClusterIntranetSubnetId` can not modify once be set.
         /// </summary>
         [Input("clusterIntranetSubnetId")]
@@ -369,6 +399,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
+
+        /// <summary>
+        /// Enable internal or external access using an existing CLB.
+        /// </summary>
+        [Input("existedLoadBalancerId")]
+        public Input<string>? ExistedLoadBalancerId { get; set; }
 
         /// <summary>
         /// The LB parameter. Only used for public network access.

@@ -35,12 +35,8 @@ type GetDeliverLogDownListResult struct {
 }
 
 func GetDeliverLogDownListOutput(ctx *pulumi.Context, args GetDeliverLogDownListOutputArgs, opts ...pulumi.InvokeOption) GetDeliverLogDownListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDeliverLogDownListResultOutput, error) {
-			args := v.(GetDeliverLogDownListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args, GetDeliverLogDownListResultOutput{}, options).(GetDeliverLogDownListResultOutput), nil
-		}).(GetDeliverLogDownListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getDeliverLogDownList:getDeliverLogDownList", args, GetDeliverLogDownListResultOutput{}, options).(GetDeliverLogDownListResultOutput)
 }
 
 // A collection of arguments for invoking getDeliverLogDownList.

@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Import
     /// 
-    /// lighthouse disk_attachment can be imported using the id, e.g.
+    /// lighthouse DiskAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id

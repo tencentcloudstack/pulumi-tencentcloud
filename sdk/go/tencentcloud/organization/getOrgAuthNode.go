@@ -66,12 +66,8 @@ type GetOrgAuthNodeResult struct {
 }
 
 func GetOrgAuthNodeOutput(ctx *pulumi.Context, args GetOrgAuthNodeOutputArgs, opts ...pulumi.InvokeOption) GetOrgAuthNodeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgAuthNodeResultOutput, error) {
-			args := v.(GetOrgAuthNodeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args, GetOrgAuthNodeResultOutput{}, options).(GetOrgAuthNodeResultOutput), nil
-		}).(GetOrgAuthNodeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args, GetOrgAuthNodeResultOutput{}, options).(GetOrgAuthNodeResultOutput)
 }
 
 // A collection of arguments for invoking getOrgAuthNode.

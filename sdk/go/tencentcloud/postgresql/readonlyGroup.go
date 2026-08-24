@@ -38,7 +38,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -46,10 +46,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -61,8 +61,8 @@ import (
 //				Name:             pulumi.String("example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				EngineVersion:    pulumi.String("10.4"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
@@ -91,13 +91,13 @@ import (
 //				return err
 //			}
 //			_, err = postgresql.NewReadonlyGroup(ctx, "example", &postgresql.ReadonlyGroupArgs{
-//				MasterDbInstanceId: example.ID(),
+//				MasterDbInstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				Name:               pulumi.String("tf_ro_group"),
 //				ProjectId:          pulumi.Int(0),
-//				VpcId:              vpc.ID(),
-//				SubnetId:           subnet.ID(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroupsIds: pulumi.StringArray{
-//					exampleGroup.ID(),
+//					exampleGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				ReplayLagEliminate:       pulumi.Int(1),
 //				ReplayLatencyEliminate:   pulumi.Int(1),

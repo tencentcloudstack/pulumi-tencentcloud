@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
     public static class GetInstances
     {
         /// <summary>
-        /// Use this data source to query detailed information of cdwdoris instances
+        /// Use this data source to query detailed information of CDWDoris instances
         /// 
         /// ## Example Usage
         /// 
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Cdwdoris/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of cdwdoris instances
+        /// Use this data source to query detailed information of CDWDoris instances
         /// 
         /// ## Example Usage
         /// 
@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Cdwdoris/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of cdwdoris instances
+        /// Use this data source to query detailed information of CDWDoris instances
         /// 
         /// ## Example Usage
         /// 
@@ -69,7 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {

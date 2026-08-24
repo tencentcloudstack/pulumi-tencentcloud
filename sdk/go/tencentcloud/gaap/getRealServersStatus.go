@@ -69,12 +69,8 @@ type GetRealServersStatusResult struct {
 }
 
 func GetRealServersStatusOutput(ctx *pulumi.Context, args GetRealServersStatusOutputArgs, opts ...pulumi.InvokeOption) GetRealServersStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRealServersStatusResultOutput, error) {
-			args := v.(GetRealServersStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args, GetRealServersStatusResultOutput{}, options).(GetRealServersStatusResultOutput), nil
-		}).(GetRealServersStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getRealServersStatus:getRealServersStatus", args, GetRealServersStatusResultOutput{}, options).(GetRealServersStatusResultOutput)
 }
 
 // A collection of arguments for invoking getRealServersStatus.

@@ -23,6 +23,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/css"
 //
@@ -61,7 +63,7 @@ import (
 //				DomainName: example.DomainName,
 //				AppName:    example.AppName,
 //				StreamName: example.StreamName,
-//				TemplateId: exampleWatermark.ID(),
+//				TemplateId: exampleWatermark.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //			})
 //			if err != nil {
 //				return err
@@ -74,7 +76,7 @@ import (
 //
 // ## Import
 //
-// css watermark_rule_attachment can be imported using the id, e.g.
+// css watermarkRuleAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tat invoker_config can be imported using the id, e.g.
+ * tat invokerConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
@@ -102,11 +102,11 @@ export interface InvokerConfigState {
     /**
      * ID of the invoker to be enabled.
      */
-    invokerId?: pulumi.Input<string>;
+    invokerId?: pulumi.Input<string | undefined>;
     /**
      * Invoker on and off state, Values: `on`, `off`.
      */
-    invokerStatus?: pulumi.Input<string>;
+    invokerStatus?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -141,35 +141,35 @@ export interface InstanceState {
     /**
      * Description of the NAT forward.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Network address of the EIP.
      */
-    elasticIp?: pulumi.Input<string>;
+    elasticIp?: pulumi.Input<string | undefined>;
     /**
      * Port of the EIP.
      */
-    elasticPort?: pulumi.Input<string>;
+    elasticPort?: pulumi.Input<string | undefined>;
     /**
      * ID of the NAT gateway.
      */
-    natId?: pulumi.Input<string>;
+    natId?: pulumi.Input<string | undefined>;
     /**
      * Network address of the backend service.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * Port of intranet.
      */
-    privatePort?: pulumi.Input<string>;
+    privatePort?: pulumi.Input<string | undefined>;
     /**
      * Type of the network protocol. Valid value: `TCP` and `UDP`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -179,7 +179,7 @@ export interface InstanceArgs {
     /**
      * Description of the NAT forward.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Network address of the EIP.
      */

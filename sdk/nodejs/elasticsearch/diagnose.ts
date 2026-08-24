@@ -113,19 +113,19 @@ export interface DiagnoseState {
     /**
      * Intelligent operation and maintenance staff regularly patrol the inspection time every day, the time format is HH:00:00, such as 15:00:00.
      */
-    cronTime?: pulumi.Input<string>;
+    cronTime?: pulumi.Input<string | undefined>;
     /**
      * Diagnostic items and meta-information of intelligent operation and maintenance.
      */
-    diagnoseJobMetas?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.DiagnoseDiagnoseJobMeta>[]>;
+    diagnoseJobMetas?: pulumi.Input<pulumi.Input<inputs.Elasticsearch.DiagnoseDiagnoseJobMeta>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of manual triggers per day for intelligent operation and maintenance staff.
      */
-    maxCount?: pulumi.Input<number>;
+    maxCount?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -135,7 +135,7 @@ export interface DiagnoseArgs {
     /**
      * Intelligent operation and maintenance staff regularly patrol the inspection time every day, the time format is HH:00:00, such as 15:00:00.
      */
-    cronTime?: pulumi.Input<string>;
+    cronTime?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */

@@ -12,87 +12,14 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a dcdb dbInstance
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dcdb"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dcdb.NewDbInstance(ctx, "db_instance", &dcdb.DbInstanceArgs{
-//				InstanceName: pulumi.String("test_dcdb_db_instance"),
-//				Zones: pulumi.StringArray{
-//					pulumi.String("ap-guangzhou-5"),
-//				},
-//				Period:         pulumi.Int(1),
-//				ShardMemory:    pulumi.Int(2),
-//				ShardStorage:   pulumi.Int(10),
-//				ShardNodeCount: pulumi.Int(2),
-//				ShardCount:     pulumi.Int(2),
-//				VpcId:          pulumi.Any(vpcId),
-//				SubnetId:       pulumi.Any(subnetId),
-//				DbVersionId:    pulumi.String("8.0"),
-//				ResourceTags: dcdb.DbInstanceResourceTagArray{
-//					&dcdb.DbInstanceResourceTagArgs{
-//						TagKey:   pulumi.String("aaa"),
-//						TagValue: pulumi.String("bbb"),
-//					},
-//				},
-//				InitParams: dcdb.DbInstanceInitParamArray{
-//					&dcdb.DbInstanceInitParamArgs{
-//						Param: pulumi.String("character_set_server"),
-//						Value: pulumi.String("utf8mb4"),
-//					},
-//					&dcdb.DbInstanceInitParamArgs{
-//						Param: pulumi.String("lower_case_table_names"),
-//						Value: pulumi.String("1"),
-//					},
-//					&dcdb.DbInstanceInitParamArgs{
-//						Param: pulumi.String("sync_mode"),
-//						Value: pulumi.String("2"),
-//					},
-//					&dcdb.DbInstanceInitParamArgs{
-//						Param: pulumi.String("innodb_page_size"),
-//						Value: pulumi.String("16384"),
-//					},
-//				},
-//				SecurityGroupIds: pulumi.StringArray{
-//					sgId,
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Import
-//
-// dcdb db_instance can be imported using the id, e.g.
-//
-// ```sh
-// $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
-// ```
 type DbInstance struct {
 	pulumi.CustomResourceState
 
-	// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+	// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// Whether to automatically use vouchers for payment, not used by default.
 	AutoVoucher pulumi.BoolPtrOutput `pulumi:"autoVoucher"`
-	// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+	// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 	DbVersionId pulumi.StringPtrOutput `pulumi:"dbVersionId"`
 	// DCN source instance ID.
 	DcnInstanceId pulumi.StringPtrOutput `pulumi:"dcnInstanceId"`
@@ -100,7 +27,7 @@ type DbInstance struct {
 	DcnRegion pulumi.StringPtrOutput `pulumi:"dcnRegion"`
 	// Whether to open the extranet access.
 	ExtranetAccess pulumi.BoolPtrOutput `pulumi:"extranetAccess"`
-	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+	// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 	InitParams DbInstanceInitParamArrayOutput `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
@@ -116,11 +43,11 @@ type DbInstance struct {
 	SecurityGroupIds pulumi.StringArrayOutput `pulumi:"securityGroupIds"`
 	// The number of instance fragments, the optional range is 2-8, and new fragments can be added to a maximum of 64 fragments by upgrading the instance.
 	ShardCount pulumi.IntOutput `pulumi:"shardCount"`
-	// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 	ShardMemory pulumi.IntOutput `pulumi:"shardMemory"`
-	// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardNodeCount pulumi.IntOutput `pulumi:"shardNodeCount"`
-	// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardStorage pulumi.IntOutput `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
@@ -134,7 +61,7 @@ type DbInstance struct {
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Intranet port.
 	Vport pulumi.IntOutput `pulumi:"vport"`
-	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+	// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 	Zones pulumi.StringArrayOutput `pulumi:"zones"`
 }
 
@@ -186,11 +113,11 @@ func GetDbInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DbInstance resources.
 type dbInstanceState struct {
-	// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+	// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to automatically use vouchers for payment, not used by default.
 	AutoVoucher *bool `pulumi:"autoVoucher"`
-	// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+	// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 	DbVersionId *string `pulumi:"dbVersionId"`
 	// DCN source instance ID.
 	DcnInstanceId *string `pulumi:"dcnInstanceId"`
@@ -198,7 +125,7 @@ type dbInstanceState struct {
 	DcnRegion *string `pulumi:"dcnRegion"`
 	// Whether to open the extranet access.
 	ExtranetAccess *bool `pulumi:"extranetAccess"`
-	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+	// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 	InitParams []DbInstanceInitParam `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
 	InstanceName *string `pulumi:"instanceName"`
@@ -214,11 +141,11 @@ type dbInstanceState struct {
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// The number of instance fragments, the optional range is 2-8, and new fragments can be added to a maximum of 64 fragments by upgrading the instance.
 	ShardCount *int `pulumi:"shardCount"`
-	// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 	ShardMemory *int `pulumi:"shardMemory"`
-	// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardNodeCount *int `pulumi:"shardNodeCount"`
-	// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardStorage *int `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId *string `pulumi:"subnetId"`
@@ -232,16 +159,16 @@ type dbInstanceState struct {
 	VpcId *string `pulumi:"vpcId"`
 	// Intranet port.
 	Vport *int `pulumi:"vport"`
-	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+	// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 	Zones []string `pulumi:"zones"`
 }
 
 type DbInstanceState struct {
-	// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+	// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to automatically use vouchers for payment, not used by default.
 	AutoVoucher pulumi.BoolPtrInput
-	// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+	// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 	DbVersionId pulumi.StringPtrInput
 	// DCN source instance ID.
 	DcnInstanceId pulumi.StringPtrInput
@@ -249,7 +176,7 @@ type DbInstanceState struct {
 	DcnRegion pulumi.StringPtrInput
 	// Whether to open the extranet access.
 	ExtranetAccess pulumi.BoolPtrInput
-	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+	// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 	InitParams DbInstanceInitParamArrayInput
 	// Instance name, you can set the name of the instance independently through this field.
 	InstanceName pulumi.StringPtrInput
@@ -265,11 +192,11 @@ type DbInstanceState struct {
 	SecurityGroupIds pulumi.StringArrayInput
 	// The number of instance fragments, the optional range is 2-8, and new fragments can be added to a maximum of 64 fragments by upgrading the instance.
 	ShardCount pulumi.IntPtrInput
-	// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 	ShardMemory pulumi.IntPtrInput
-	// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardNodeCount pulumi.IntPtrInput
-	// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardStorage pulumi.IntPtrInput
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrInput
@@ -283,7 +210,7 @@ type DbInstanceState struct {
 	VpcId pulumi.StringPtrInput
 	// Intranet port.
 	Vport pulumi.IntPtrInput
-	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+	// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 	Zones pulumi.StringArrayInput
 }
 
@@ -292,11 +219,11 @@ func (DbInstanceState) ElementType() reflect.Type {
 }
 
 type dbInstanceArgs struct {
-	// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+	// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to automatically use vouchers for payment, not used by default.
 	AutoVoucher *bool `pulumi:"autoVoucher"`
-	// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+	// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 	DbVersionId *string `pulumi:"dbVersionId"`
 	// DCN source instance ID.
 	DcnInstanceId *string `pulumi:"dcnInstanceId"`
@@ -304,7 +231,7 @@ type dbInstanceArgs struct {
 	DcnRegion *string `pulumi:"dcnRegion"`
 	// Whether to open the extranet access.
 	ExtranetAccess *bool `pulumi:"extranetAccess"`
-	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+	// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 	InitParams []DbInstanceInitParam `pulumi:"initParams"`
 	// Instance name, you can set the name of the instance independently through this field.
 	InstanceName *string `pulumi:"instanceName"`
@@ -320,11 +247,11 @@ type dbInstanceArgs struct {
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// The number of instance fragments, the optional range is 2-8, and new fragments can be added to a maximum of 64 fragments by upgrading the instance.
 	ShardCount int `pulumi:"shardCount"`
-	// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 	ShardMemory int `pulumi:"shardMemory"`
-	// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardNodeCount int `pulumi:"shardNodeCount"`
-	// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardStorage int `pulumi:"shardStorage"`
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId *string `pulumi:"subnetId"`
@@ -336,17 +263,17 @@ type dbInstanceArgs struct {
 	VoucherIds []string `pulumi:"voucherIds"`
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 	VpcId *string `pulumi:"vpcId"`
-	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+	// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 	Zones []string `pulumi:"zones"`
 }
 
 // The set of arguments for constructing a DbInstance resource.
 type DbInstanceArgs struct {
-	// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+	// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to automatically use vouchers for payment, not used by default.
 	AutoVoucher pulumi.BoolPtrInput
-	// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+	// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 	DbVersionId pulumi.StringPtrInput
 	// DCN source instance ID.
 	DcnInstanceId pulumi.StringPtrInput
@@ -354,7 +281,7 @@ type DbInstanceArgs struct {
 	DcnRegion pulumi.StringPtrInput
 	// Whether to open the extranet access.
 	ExtranetAccess pulumi.BoolPtrInput
-	// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+	// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 	InitParams DbInstanceInitParamArrayInput
 	// Instance name, you can set the name of the instance independently through this field.
 	InstanceName pulumi.StringPtrInput
@@ -370,11 +297,11 @@ type DbInstanceArgs struct {
 	SecurityGroupIds pulumi.StringArrayInput
 	// The number of instance fragments, the optional range is 2-8, and new fragments can be added to a maximum of 64 fragments by upgrading the instance.
 	ShardCount pulumi.IntInput
-	// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 	ShardMemory pulumi.IntInput
-	// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardNodeCount pulumi.IntInput
-	// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+	// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 	ShardStorage pulumi.IntInput
 	// Virtual private network subnet ID, required when VpcId is not empty.
 	SubnetId pulumi.StringPtrInput
@@ -386,7 +313,7 @@ type DbInstanceArgs struct {
 	VoucherIds pulumi.StringArrayInput
 	// Virtual private network ID, if not passed or passed empty, it means that it is created as a basic network.
 	VpcId pulumi.StringPtrInput
-	// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+	// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 	Zones pulumi.StringArrayInput
 }
 
@@ -477,7 +404,7 @@ func (o DbInstanceOutput) ToDbInstanceOutputWithContext(ctx context.Context) DbI
 	return o
 }
 
-// &amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;quot;&amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;quot;&amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;quot;.
+// Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).  1 means automatic renewal, 2 means no automatic renewal (user setting).  if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.
 func (o DbInstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
 }
@@ -487,7 +414,7 @@ func (o DbInstanceOutput) AutoVoucher() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.BoolPtrOutput { return v.AutoVoucher }).(pulumi.BoolPtrOutput)
 }
 
-// &amp;quot;Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.&amp;quot;&amp;quot;8.0.18 - MySQL 8.0.18;&amp;quot;&amp;quot;10.1.9 - Mariadb 10.1.9;&amp;quot;&amp;quot;5.7.17 - Percona 5.7.17&amp;quot;&amp;quot;If not filled, the default is 5.7.17, which means Percona 5.7.17.&amp;quot;.
+// Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17.  8.0.18 - MySQL 8.0.18;  10.1.9 - Mariadb 10.1.9;  5.7.17 - Percona 5.7.17  If not filled, the default is 5.7.17, which means Percona 5.7.17.
 func (o DbInstanceOutput) DbVersionId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringPtrOutput { return v.DbVersionId }).(pulumi.StringPtrOutput)
 }
@@ -507,7 +434,7 @@ func (o DbInstanceOutput) ExtranetAccess() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.BoolPtrOutput { return v.ExtranetAccess }).(pulumi.BoolPtrOutput)
 }
 
-// &amp;quot;parameter list. The optional values of this interface are:&amp;quot;&amp;quot;character_set_server (character set, must be passed),&amp;quot;&amp;quot;lower_case_table_names (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),&amp;quot;&amp;quot;innodb_page_size (innodb data page, default 16K),&amp;quot;&amp;quot;sync_mode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate)&amp;quot;.
+// parameter list. The optional values of this interface are:  characterSetServer (character set, must be passed),  lowerCaseTableNames (table name is case sensitive, must be passed, 0 - sensitive; 1 - insensitive),  innodbPageSize (innodb data page, default 16K),  syncMode ( Synchronous mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous degenerate. The default is strong synchronous degenerate) .
 func (o DbInstanceOutput) InitParams() DbInstanceInitParamArrayOutput {
 	return o.ApplyT(func(v *DbInstance) DbInstanceInitParamArrayOutput { return v.InitParams }).(DbInstanceInitParamArrayOutput)
 }
@@ -547,17 +474,17 @@ func (o DbInstanceOutput) ShardCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.ShardCount }).(pulumi.IntOutput)
 }
 
-// &amp;quot;Shard memory size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+// Shard memory size, unit: GB, can pass DescribeShardSpec Query the instance specification to obtain.
 func (o DbInstanceOutput) ShardMemory() pulumi.IntOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.ShardMemory }).(pulumi.IntOutput)
 }
 
-// &amp;quot;Number of single shard nodes, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+// Number of single shard nodes, can pass DescribeShardSpec  Query the instance specification to obtain.
 func (o DbInstanceOutput) ShardNodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.ShardNodeCount }).(pulumi.IntOutput)
 }
 
-// &amp;quot;Shard storage size, unit: GB, can pass DescribeShardSpec&amp;quot;&amp;quot;Query the instance specification to obtain.&amp;quot;.
+// Shard storage size, unit: GB, can pass DescribeShardSpec  Query the instance specification to obtain.
 func (o DbInstanceOutput) ShardStorage() pulumi.IntOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.ShardStorage }).(pulumi.IntOutput)
 }
@@ -592,7 +519,7 @@ func (o DbInstanceOutput) Vport() pulumi.IntOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.IntOutput { return v.Vport }).(pulumi.IntOutput)
 }
 
-// &amp;quot;The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.&amp;quot;&amp;quot;Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.&amp;quot;.
+// The availability zone distribution of shard nodes can be filled with up to two availability zones. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.Note that the current availability zone that can be sold needs to be pulled through the DescribeDCDBSaleInfo interface.
 func (o DbInstanceOutput) Zones() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *DbInstance) pulumi.StringArrayOutput { return v.Zones }).(pulumi.StringArrayOutput)
 }

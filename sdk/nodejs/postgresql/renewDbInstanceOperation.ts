@@ -107,19 +107,19 @@ export interface RenewDbInstanceOperationState {
     /**
      * Whether to automatically use vouchers. 1:yes, 0:no. Default value:0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Instance ID in the format of postgres-6fego161.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Renewal duration in months.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Voucher ID list (only one voucher can be specified currently).
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -129,7 +129,7 @@ export interface RenewDbInstanceOperationArgs {
     /**
      * Whether to automatically use vouchers. 1:yes, 0:no. Default value:0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Instance ID in the format of postgres-6fego161.
      */
@@ -141,5 +141,5 @@ export interface RenewDbInstanceOperationArgs {
     /**
      * Voucher ID list (only one voucher can be specified currently).
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

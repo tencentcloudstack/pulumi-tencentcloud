@@ -17,27 +17,105 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.cls.AlarmNotice("example", {
  *     name: "tf-example",
- *     type: "All",
- *     noticeReceivers: [{
- *         receiverType: "Uin",
- *         receiverIds: [100037718139],
- *         receiverChannels: [
- *             "Email",
- *             "Sms",
+ *     jumpDomain: "https://console.cloud.tencent.com",
+ *     deliverStatus: 2,
+ *     alarmShieldStatus: 2,
+ *     callbackPrioritize: true,
+ *     noticeRules: [{
+ *         escalate: true,
+ *         interval: 10,
+ *         rule: JSON.stringify({
+ *             Children: [
+ *                 {
+ *                     Children: [
+ *                         {
+ *                             Type: "Compare",
+ *                             Value: "In",
+ *                         },
+ *                         {
+ *                             Type: "Value",
+ *                             Value: JSON.stringify([1]),
+ *                         },
+ *                     ],
+ *                     Type: "Condition",
+ *                     Value: "NotifyType",
+ *                 },
+ *                 {
+ *                     Children: [
+ *                         {
+ *                             Type: "Compare",
+ *                             Value: "In",
+ *                         },
+ *                         {
+ *                             Type: "Value",
+ *                             Value: JSON.stringify([
+ *                                 0,
+ *                                 2,
+ *                             ]),
+ *                         },
+ *                     ],
+ *                     Type: "Condition",
+ *                     Value: "Level",
+ *                 },
+ *             ],
+ *             Type: "Operation",
+ *             Value: "AND",
+ *         }),
+ *         type: 1,
+ *         escalateNotices: [
+ *             {
+ *                 escalate: true,
+ *                 interval: 10,
+ *                 type: 1,
+ *                 noticeReceivers: [{
+ *                     endTime: "23:59:59",
+ *                     index: 1,
+ *                     noticeContentId: "Default-zh",
+ *                     receiverChannels: [
+ *                         "Phone",
+ *                         "Sms",
+ *                     ],
+ *                     receiverIds: [19284382],
+ *                     receiverType: "Uin",
+ *                     startTime: "00:00:00",
+ *                 }],
+ *             },
+ *             {
+ *                 escalate: false,
+ *                 interval: 10,
+ *                 type: 1,
+ *                 noticeReceivers: [{
+ *                     endTime: "23:59:59",
+ *                     index: 1,
+ *                     noticeContentId: "Default-en",
+ *                     receiverChannels: [
+ *                         "Email",
+ *                         "Phone",
+ *                         "Sms",
+ *                     ],
+ *                     receiverIds: [19284382],
+ *                     receiverType: "Uin",
+ *                     startTime: "00:00:00",
+ *                 }],
+ *             },
  *         ],
- *         noticeContentId: "noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7",
- *         startTime: "00:00:00",
- *         endTime: "23:59:59",
+ *         noticeReceivers: [{
+ *             endTime: "23:59:59",
+ *             index: 1,
+ *             noticeContentId: "Default-en",
+ *             receiverChannels: ["Sms"],
+ *             receiverIds: [19284382],
+ *             receiverType: "Uin",
+ *             startTime: "00:00:00",
+ *         }],
  *     }],
- *     webCallbacks: [{
- *         callbackType: "Http",
- *         url: "example.com",
- *         method: "POST",
- *         noticeContentId: "noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7",
- *         remindType: 1,
- *     }],
+ *     deliverConfig: {
+ *         region: "ap-guangzhou",
+ *         topicId: "898016cf-7e17-426f-9167-9b56fcfc603e",
+ *         scope: 0,
+ *     },
  *     tags: {
- *         createdBy: "terraform",
+ *         createdBy: "Terraform",
  *     },
  * });
  * ```
@@ -79,6 +157,26 @@ export class AlarmNotice extends pulumi.CustomResource {
     }
 
     /**
+     * Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+     */
+    declare public readonly alarmShieldStatus: pulumi.Output<number>;
+    /**
+     * Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+     */
+    declare public readonly callbackPrioritize: pulumi.Output<boolean | undefined>;
+    /**
+     * Deliver log configuration. Required when deliverStatus is 2.
+     */
+    declare public readonly deliverConfig: pulumi.Output<outputs.Cls.AlarmNoticeDeliverConfig | undefined>;
+    /**
+     * Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+     */
+    declare public readonly deliverStatus: pulumi.Output<number>;
+    /**
+     * Jump domain. Must start with http:// or https://, cannot end with /.
+     */
+    declare public readonly jumpDomain: pulumi.Output<string | undefined>;
+    /**
      * Alarm notice name.
      */
     declare public readonly name: pulumi.Output<string>;
@@ -86,6 +184,10 @@ export class AlarmNotice extends pulumi.CustomResource {
      * Notice receivers.
      */
     declare public readonly noticeReceivers: pulumi.Output<outputs.Cls.AlarmNoticeNoticeReceiver[] | undefined>;
+    /**
+     * Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+     */
+    declare public readonly noticeRules: pulumi.Output<outputs.Cls.AlarmNoticeNoticeRule[] | undefined>;
     /**
      * Tag description list.
      */
@@ -106,24 +208,33 @@ export class AlarmNotice extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: AlarmNoticeArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: AlarmNoticeArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: AlarmNoticeArgs | AlarmNoticeState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as AlarmNoticeState | undefined;
+            resourceInputs["alarmShieldStatus"] = state?.alarmShieldStatus;
+            resourceInputs["callbackPrioritize"] = state?.callbackPrioritize;
+            resourceInputs["deliverConfig"] = state?.deliverConfig;
+            resourceInputs["deliverStatus"] = state?.deliverStatus;
+            resourceInputs["jumpDomain"] = state?.jumpDomain;
             resourceInputs["name"] = state?.name;
             resourceInputs["noticeReceivers"] = state?.noticeReceivers;
+            resourceInputs["noticeRules"] = state?.noticeRules;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["type"] = state?.type;
             resourceInputs["webCallbacks"] = state?.webCallbacks;
         } else {
             const args = argsOrState as AlarmNoticeArgs | undefined;
-            if (args?.type === undefined && !opts.urn) {
-                throw new Error("Missing required property 'type'");
-            }
+            resourceInputs["alarmShieldStatus"] = args?.alarmShieldStatus;
+            resourceInputs["callbackPrioritize"] = args?.callbackPrioritize;
+            resourceInputs["deliverConfig"] = args?.deliverConfig;
+            resourceInputs["deliverStatus"] = args?.deliverStatus;
+            resourceInputs["jumpDomain"] = args?.jumpDomain;
             resourceInputs["name"] = args?.name;
             resourceInputs["noticeReceivers"] = args?.noticeReceivers;
+            resourceInputs["noticeRules"] = args?.noticeRules;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["type"] = args?.type;
             resourceInputs["webCallbacks"] = args?.webCallbacks;
@@ -138,25 +249,49 @@ export class AlarmNotice extends pulumi.CustomResource {
  */
 export interface AlarmNoticeState {
     /**
+     * Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+     */
+    alarmShieldStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+     */
+    callbackPrioritize?: pulumi.Input<boolean | undefined>;
+    /**
+     * Deliver log configuration. Required when deliverStatus is 2.
+     */
+    deliverConfig?: pulumi.Input<inputs.Cls.AlarmNoticeDeliverConfig | undefined>;
+    /**
+     * Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+     */
+    deliverStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Jump domain. Must start with http:// or https://, cannot end with /.
+     */
+    jumpDomain?: pulumi.Input<string | undefined>;
+    /**
      * Alarm notice name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Notice receivers.
      */
-    noticeReceivers?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeReceiver>[]>;
+    noticeReceivers?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeReceiver>[] | undefined>;
+    /**
+     * Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+     */
+    noticeRules?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeRule>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Notice type. Value: Trigger, Recovery, All.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Callback info.
      */
-    webCallbacks?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeWebCallback>[]>;
+    webCallbacks?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeWebCallback>[] | undefined>;
 }
 
 /**
@@ -164,23 +299,47 @@ export interface AlarmNoticeState {
  */
 export interface AlarmNoticeArgs {
     /**
+     * Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+     */
+    alarmShieldStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+     */
+    callbackPrioritize?: pulumi.Input<boolean | undefined>;
+    /**
+     * Deliver log configuration. Required when deliverStatus is 2.
+     */
+    deliverConfig?: pulumi.Input<inputs.Cls.AlarmNoticeDeliverConfig | undefined>;
+    /**
+     * Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, deliverConfig is required.
+     */
+    deliverStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Jump domain. Must start with http:// or https://, cannot end with /.
+     */
+    jumpDomain?: pulumi.Input<string | undefined>;
+    /**
      * Alarm notice name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Notice receivers.
      */
-    noticeReceivers?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeReceiver>[]>;
+    noticeReceivers?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeReceiver>[] | undefined>;
+    /**
+     * Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+     */
+    noticeRules?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeNoticeRule>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Notice type. Value: Trigger, Recovery, All.
      */
-    type: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Callback info.
      */
-    webCallbacks?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeWebCallback>[]>;
+    webCallbacks?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmNoticeWebCallback>[] | undefined>;
 }

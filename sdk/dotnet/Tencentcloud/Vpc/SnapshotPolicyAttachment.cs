@@ -83,7 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc snapshot_policy_attachment can be imported using the id, e.g.
+    /// vpc SnapshotPolicyAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id

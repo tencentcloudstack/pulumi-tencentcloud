@@ -42,7 +42,7 @@ import (
 //			}
 //			// create cdc dedicated cluster
 //			_, err = cdc.NewDedicatedCluster(ctx, "example", &cdc.DedicatedClusterArgs{
-//				SiteId:      example.ID(),
+//				SiteId:      example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("tf-example"),
 //				Zone:        pulumi.String("ap-guangzhou-6"),
 //				Description: pulumi.String("desc."),

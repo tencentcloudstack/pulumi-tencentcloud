@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const metricData = tencentcloud.Cat.getMetricData({
+ * const metricData = tencentcloud.cat.getMetricData({
  *     analyzeTaskType: "AnalyzeTaskType_Network",
  *     metricType: "gauge",
  *     field: "avg(\"ping_time\")",
@@ -100,7 +100,7 @@ export interface GetMetricDataResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const metricData = tencentcloud.Cat.getMetricData({
+ * const metricData = tencentcloud.cat.getMetricData({
  *     analyzeTaskType: "AnalyzeTaskType_Network",
  *     metricType: "gauge",
  *     field: "avg(\"ping_time\")",
@@ -139,7 +139,7 @@ export interface GetMetricDataOutputArgs {
     /**
      * Filter conditions can be passed as a single filter or multiple parameters concatenated together.
      */
-    filter?: pulumi.Input<string>;
+    filter?: pulumi.Input<string | undefined>;
     /**
      * Multiple condition filtering, supports combining multiple filtering conditions for query.
      */
@@ -147,7 +147,7 @@ export interface GetMetricDataOutputArgs {
     /**
      * Aggregation time, such as 1m, 1d, 30d, and so on.
      */
-    groupBy?: pulumi.Input<string>;
+    groupBy?: pulumi.Input<string | undefined>;
     /**
      * Metric type, metrics queries are passed with gauge by default.
      */
@@ -155,5 +155,5 @@ export interface GetMetricDataOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Billing mode, `0`: Pay-as-you-go
+        /// Billing mode, `0`: Pay-as-you-go.
         /// </summary>
         public readonly int PayMode;
         /// <summary>
@@ -51,15 +51,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string PlanId;
         /// <summary>
-        /// The plan status. Values: `Normal`: Normal; `Isolated`: Isolated; `Destroyed`: Terminated.
+        /// The site status. Values: `Active`: The name server is switched to EdgeOne. `Pending`: The name server is not switched. `Moved`: The name server is changed to other service providers. `Deactivated`: The site is blocked. `Initializing`: The site is not bound with any plan.
         /// </summary>
         public readonly string Status;
         /// <summary>
-        /// Pricing query parameter
+        /// Pricing query parameter.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetZonesZoneResourceSvResult> Svs;
         /// <summary>
-        /// Resource tag type. Valid values: vodeo: vodeo resource.
+        /// Site access method. Valid values: full: NS access; partial: CNAME access; noDomainAccess: access with no domain name.
         /// </summary>
         public readonly string Type;
         /// <summary>

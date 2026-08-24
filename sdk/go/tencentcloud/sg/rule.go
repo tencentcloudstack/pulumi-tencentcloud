@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// cfw sg_rule can be imported using the id, e.g.
+// cfw sgRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Sg/rule:Rule sg_rule rule_id

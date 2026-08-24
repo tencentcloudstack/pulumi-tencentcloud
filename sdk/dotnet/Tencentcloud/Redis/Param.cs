@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// <summary>
     /// Provides a resource to create a redis param
     /// 
+    /// &gt; **NOTE:** This resource is applicable to modifying the parameters of Tencent Cloud Distributed Cache instances across three engine types(`Redis Edition`, `Valkey Edition`, `Memcached Edition`). For details on the engines, please refer to [Storage Engine](https://www.tencentcloud.com/document/product/239/31957)
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -23,9 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var param = new Tencentcloud.Redis.Param("param", new()
+    ///     var example = new Tencentcloud.Redis.Param("example", new()
     ///     {
-    ///         InstanceId = "crs-c1nl9rpv",
+    ///         InstanceId = "crs-cqdfdzvt",
     ///         InstanceParams = 
     ///         {
     ///             { "cluster-node-timeout", "15000" },
@@ -39,7 +41,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///             { "maxmemory-policy", "noeviction" },
     ///             { "notify-keyspace-events", "\"\"" },
     ///             { "proxy-slowlog-log-slower-than", "500" },
-    ///             { "replica-lazy-flush", "yes" },
     ///             { "sentineauth", "no" },
     ///             { "set-max-intset-entries", "512" },
     ///             { "slowlog-log-slower-than", "10" },
@@ -57,7 +58,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// redis param can be imported using the instanceId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
+    /// $ pulumi import tencentcloud:Redis/param:Param example crs-cqdfdzvt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/param:Param")]

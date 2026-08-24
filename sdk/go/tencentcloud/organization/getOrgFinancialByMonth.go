@@ -24,20 +24,22 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := organization.GetOrgFinancialByMonth(ctx, &organization.GetOrgFinancialByMonthArgs{
-// EndMonth: pulumi.StringRef("2023-05"),
-// MemberUins: interface{}{
-// 100026517717,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := organization.GetOrgFinancialByMonth(ctx, &organization.GetOrgFinancialByMonthArgs{
+//				EndMonth: pulumi.StringRef("2023-05"),
+//				MemberUins: pulumi.IntArray{
+//					100026517717,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOrgFinancialByMonth(ctx *pulumi.Context, args *GetOrgFinancialByMonthArgs, opts ...pulumi.InvokeOption) (*GetOrgFinancialByMonthResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -74,12 +76,8 @@ type GetOrgFinancialByMonthResult struct {
 }
 
 func GetOrgFinancialByMonthOutput(ctx *pulumi.Context, args GetOrgFinancialByMonthOutputArgs, opts ...pulumi.InvokeOption) GetOrgFinancialByMonthResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgFinancialByMonthResultOutput, error) {
-			args := v.(GetOrgFinancialByMonthArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args, GetOrgFinancialByMonthResultOutput{}, options).(GetOrgFinancialByMonthResultOutput), nil
-		}).(GetOrgFinancialByMonthResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByMonth:getOrgFinancialByMonth", args, GetOrgFinancialByMonthResultOutput{}, options).(GetOrgFinancialByMonthResultOutput)
 }
 
 // A collection of arguments for invoking getOrgFinancialByMonth.

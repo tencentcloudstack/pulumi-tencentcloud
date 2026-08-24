@@ -62,7 +62,7 @@ import (
 //
 // ## Import
 //
-// emr serverless_hbase_instance can be imported using the id, e.g.
+// emr serverlessHbaseInstance can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Serverless/hbaseInstance:HbaseInstance serverless_hbase_instance serverless_hbase_instance_id

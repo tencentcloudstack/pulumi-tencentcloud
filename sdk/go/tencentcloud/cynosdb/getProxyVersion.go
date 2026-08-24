@@ -73,12 +73,8 @@ type GetProxyVersionResult struct {
 }
 
 func GetProxyVersionOutput(ctx *pulumi.Context, args GetProxyVersionOutputArgs, opts ...pulumi.InvokeOption) GetProxyVersionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxyVersionResultOutput, error) {
-			args := v.(GetProxyVersionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args, GetProxyVersionResultOutput{}, options).(GetProxyVersionResultOutput), nil
-		}).(GetProxyVersionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args, GetProxyVersionResultOutput{}, options).(GetProxyVersionResultOutput)
 }
 
 // A collection of arguments for invoking getProxyVersion.

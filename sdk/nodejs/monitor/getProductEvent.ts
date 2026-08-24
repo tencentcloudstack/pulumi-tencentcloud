@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmEventData = tencentcloud.Monitor.getProductEvent({
+ * const cvmEventData = tencentcloud.monitor.getProductEvent({
  *     startTime: 1588700283,
  *     isAlarmConfig: 0,
  *     productNames: ["cvm"],
@@ -156,7 +156,7 @@ export interface GetProductEventResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cvmEventData = tencentcloud.Monitor.getProductEvent({
+ * const cvmEventData = tencentcloud.monitor.getProductEvent({
  *     startTime: 1588700283,
  *     isAlarmConfig: 0,
  *     productNames: ["cvm"],
@@ -189,49 +189,49 @@ export interface GetProductEventOutputArgs {
     /**
      * Dimensional composition of instance objects.
      */
-    dimensions?: pulumi.Input<pulumi.Input<inputs.Monitor.GetProductEventDimensionArgs>[]>;
+    dimensions?: pulumi.Input<pulumi.Input<inputs.Monitor.GetProductEventDimensionArgs>[] | undefined>;
     /**
      * End timestamp for this query, eg:`1588232111`. Default start time is `now-3000`.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Event name filtering, such as `guestReboot` indicates that the machine restart.
      */
-    eventNames?: pulumi.Input<pulumi.Input<string>[]>;
+    eventNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Affect objects, such as `ins-19708ino`.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Alarm status configuration filter, 1means configured, 0(default) means not configured.
      */
-    isAlarmConfig?: pulumi.Input<number>;
+    isAlarmConfig?: pulumi.Input<number | undefined>;
     /**
      * Product type filtering, such as `cvm` for cloud server.
      */
-    productNames?: pulumi.Input<pulumi.Input<string>[]>;
+    productNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project ID filter.
      */
-    projectIds?: pulumi.Input<pulumi.Input<string>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Region filter, such as `gz`.
      */
-    regionLists?: pulumi.Input<pulumi.Input<string>[]>;
+    regionLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start timestamp for this query, eg:`1588230000`. Default start time is `now-3600`.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
     /**
      * Event status filter, value range `-`,`alarm`,`recover`, indicating recovered, unrecovered and stateless.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Event type filtering, with value range `abnormal`,`statusChange`, indicating state change and abnormal events.
      */
-    types?: pulumi.Input<pulumi.Input<string>[]>;
+    types?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

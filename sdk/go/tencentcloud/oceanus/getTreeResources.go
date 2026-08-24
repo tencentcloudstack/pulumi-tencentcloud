@@ -67,12 +67,8 @@ type GetTreeResourcesResult struct {
 }
 
 func GetTreeResourcesOutput(ctx *pulumi.Context, args GetTreeResourcesOutputArgs, opts ...pulumi.InvokeOption) GetTreeResourcesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTreeResourcesResultOutput, error) {
-			args := v.(GetTreeResourcesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getTreeResources:getTreeResources", args, GetTreeResourcesResultOutput{}, options).(GetTreeResourcesResultOutput), nil
-		}).(GetTreeResourcesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getTreeResources:getTreeResources", args, GetTreeResourcesResultOutput{}, options).(GetTreeResourcesResultOutput)
 }
 
 // A collection of arguments for invoking getTreeResources.

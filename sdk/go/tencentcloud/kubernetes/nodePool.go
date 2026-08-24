@@ -47,7 +47,7 @@ import (
 //			if param := cfg.Get("clusterCidr"); param != "" {
 //				clusterCidr = param
 //			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
@@ -60,7 +60,7 @@ import (
 //			}
 //			// this is the cluster with empty worker config
 //			example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
-//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				VpcId:                pulumi.String(vpc2.InstanceLists[0].VpcId),
 //				ClusterCidr:          pulumi.String(clusterCidr),
 //				ClusterMaxPodNum:     pulumi.Int(32),
 //				ClusterName:          pulumi.String("tf-tke-unit-test"),
@@ -75,12 +75,12 @@ import (
 //			// this is one example of managing node using node pool
 //			_, err = kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
 //				Name:      pulumi.String("tf-example"),
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:   pulumi.Int(6),
 //				MinSize:   pulumi.Int(1),
-//				VpcId:     pulumi.String(vpc.InstanceLists[0].VpcId),
+//				VpcId:     pulumi.String(vpc2.InstanceLists[0].VpcId),
 //				SubnetIds: pulumi.StringArray{
-//					pulumi.String(vpc.InstanceLists[0].SubnetId),
+//					pulumi.String(vpc2.InstanceLists[0].SubnetId),
 //				},
 //				RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
 //				DesiredCapacity:       pulumi.Int(4),

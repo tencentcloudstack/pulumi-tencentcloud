@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// organization org_member_auth_identity can be imported using the id, e.g.
+// organization orgMemberAuthIdentity can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id

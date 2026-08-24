@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_speech_recognition_template can be imported using the bucket#templateId, e.g.
+ * ci mediaSpeechRecognitionTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaSpeechRecognitionTemplate:MediaSpeechRecognitionTemplate media_speech_recognition_template terraform-ci-xxxxxx#t1d794430f2f1f4350b11e905ce2c6167e
@@ -122,15 +122,15 @@ export interface MediaSpeechRecognitionTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * audio configuration.
      */
-    speechRecognition?: pulumi.Input<inputs.Ci.MediaSpeechRecognitionTemplateSpeechRecognition>;
+    speechRecognition?: pulumi.Input<inputs.Ci.MediaSpeechRecognitionTemplateSpeechRecognition | undefined>;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface MediaSpeechRecognitionTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * audio configuration.
      */

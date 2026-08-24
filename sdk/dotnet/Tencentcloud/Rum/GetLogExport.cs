@@ -12,87 +12,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
 {
     public static class GetLogExport
     {
-        /// <summary>
-        /// Use this data source to query detailed information of rum LogExport
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var logExport = Tencentcloud.Rum.GetLogExport.Invoke(new()
-        ///     {
-        ///         Name = "log",
-        ///         StartTime = "1692594840000",
-        ///         Query = "id:123 AND type: \"log\"",
-        ///         EndTime = "1692609240000",
-        ///         ProjectId = 1,
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Task<GetLogExportResult> InvokeAsync(GetLogExportArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of rum LogExport
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var logExport = Tencentcloud.Rum.GetLogExport.Invoke(new()
-        ///     {
-        ///         Name = "log",
-        ///         StartTime = "1692594840000",
-        ///         Query = "id:123 AND type: \"log\"",
-        ///         EndTime = "1692609240000",
-        ///         ProjectId = 1,
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Output<GetLogExportResult> Invoke(GetLogExportInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query detailed information of rum LogExport
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var logExport = Tencentcloud.Rum.GetLogExport.Invoke(new()
-        ///     {
-        ///         Name = "log",
-        ///         StartTime = "1692594840000",
-        ///         Query = "id:123 AND type: \"log\"",
-        ///         EndTime = "1692609240000",
-        ///         ProjectId = 1,
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Output<GetLogExportResult> Invoke(GetLogExportInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogExportResult>("tencentcloud:Rum/getLogExport:getLogExport", args ?? new GetLogExportInvokeArgs(), options.WithDefaults());
     }
@@ -100,51 +25,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
 
     public sealed class GetLogExportArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// End timestamp, in milliseconds.
-        /// </summary>
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
 
         [Input("fields")]
         private List<string>? _fields;
-
-        /// <summary>
-        /// Log fields.
-        /// </summary>
         public List<string> Fields
         {
             get => _fields ?? (_fields = new List<string>());
             set => _fields = value;
         }
 
-        /// <summary>
-        /// Export flag name.
-        /// </summary>
         [Input("name", required: true)]
         public string Name { get; set; } = null!;
 
-        /// <summary>
-        /// Project ID.
-        /// </summary>
         [Input("projectId", required: true)]
         public int ProjectId { get; set; }
 
-        /// <summary>
-        /// Log Query syntax statement.
-        /// </summary>
         [Input("query", required: true)]
         public string Query { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Start timestamp, in milliseconds.
-        /// </summary>
         [Input("startTime", required: true)]
         public string StartTime { get; set; } = null!;
 
@@ -156,51 +59,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
 
     public sealed class GetLogExportInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// End timestamp, in milliseconds.
-        /// </summary>
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
 
         [Input("fields")]
         private InputList<string>? _fields;
-
-        /// <summary>
-        /// Log fields.
-        /// </summary>
         public InputList<string> Fields
         {
             get => _fields ?? (_fields = new InputList<string>());
             set => _fields = value;
         }
 
-        /// <summary>
-        /// Export flag name.
-        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
-        /// <summary>
-        /// Project ID.
-        /// </summary>
         [Input("projectId", required: true)]
         public Input<int> ProjectId { get; set; } = null!;
 
-        /// <summary>
-        /// Log Query syntax statement.
-        /// </summary>
         [Input("query", required: true)]
         public Input<string> Query { get; set; } = null!;
 
-        /// <summary>
-        /// Used to save results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Start timestamp, in milliseconds.
-        /// </summary>
         [Input("startTime", required: true)]
         public Input<string> StartTime { get; set; } = null!;
 
@@ -223,9 +104,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public readonly string Name;
         public readonly int ProjectId;
         public readonly string Query;
-        /// <summary>
-        /// Return result.
-        /// </summary>
         public readonly string Result;
         public readonly string? ResultOutputFile;
         public readonly string StartTime;

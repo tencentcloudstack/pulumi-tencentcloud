@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_video_montage_template can be imported using the bucket#templateId, e.g.
+ * ci mediaVideoMontageTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63
@@ -159,31 +159,31 @@ export interface MediaVideoMontageTemplateState {
     /**
      * audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
      */
-    audio?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudio>;
+    audio?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudio | undefined>;
     /**
      * mixing parameters.
      */
-    audioMixes?: pulumi.Input<pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudioMix>[]>;
+    audioMixes?: pulumi.Input<pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudioMix>[] | undefined>;
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    container?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateContainer>;
+    container?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateContainer | undefined>;
     /**
      * Collection duration 1: Default automatic analysis duration, 2: The unit is seconds, 3: Support float format, execution accuracy is accurate to milliseconds.
      */
-    duration?: pulumi.Input<string>;
+    duration?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateVideo | undefined>;
 }
 
 /**
@@ -193,11 +193,11 @@ export interface MediaVideoMontageTemplateArgs {
     /**
      * audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
      */
-    audio?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudio>;
+    audio?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudio | undefined>;
     /**
      * mixing parameters.
      */
-    audioMixes?: pulumi.Input<pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudioMix>[]>;
+    audioMixes?: pulumi.Input<pulumi.Input<inputs.Ci.MediaVideoMontageTemplateAudioMix>[] | undefined>;
     /**
      * bucket name.
      */
@@ -209,13 +209,13 @@ export interface MediaVideoMontageTemplateArgs {
     /**
      * Collection duration 1: Default automatic analysis duration, 2: The unit is seconds, 3: Support float format, execution accuracy is accurate to milliseconds.
      */
-    duration?: pulumi.Input<string>;
+    duration?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaVideoMontageTemplateVideo | undefined>;
 }

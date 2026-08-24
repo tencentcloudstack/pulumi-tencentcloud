@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backup = tencentcloud.Redis.getBackup({
+ * const backup = tencentcloud.redis.getBackup({
  *     instanceId: "crs-c1nl9rpv",
  *     beginTime: "2023-04-07 03:57:30",
  *     endTime: "2023-04-07 03:57:56",
@@ -107,7 +107,7 @@ export interface GetBackupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backup = tencentcloud.Redis.getBackup({
+ * const backup = tencentcloud.redis.getBackup({
  *     instanceId: "crs-c1nl9rpv",
  *     beginTime: "2023-04-07 03:57:30",
  *     endTime: "2023-04-07 03:57:56",
@@ -136,25 +136,25 @@ export interface GetBackupOutputArgs {
     /**
      * start time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * End time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name, which supports fuzzy search based on instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Status of the backup task:1: Backup is in the process.2: The backup is normal.3: Backup to RDB file processing.4: RDB conversion completed.-1: The backup has expired.-2: Backup deleted.
      */
-    statuses?: pulumi.Input<pulumi.Input<number>[]>;
+    statuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }

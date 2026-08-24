@@ -85,12 +85,8 @@ type GetGatewaySnatsResult struct {
 }
 
 func GetGatewaySnatsOutput(ctx *pulumi.Context, args GetGatewaySnatsOutputArgs, opts ...pulumi.InvokeOption) GetGatewaySnatsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewaySnatsResultOutput, error) {
-			args := v.(GetGatewaySnatsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args, GetGatewaySnatsResultOutput{}, options).(GetGatewaySnatsResultOutput), nil
-		}).(GetGatewaySnatsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args, GetGatewaySnatsResultOutput{}, options).(GetGatewaySnatsResultOutput)
 }
 
 // A collection of arguments for invoking getGatewaySnats.

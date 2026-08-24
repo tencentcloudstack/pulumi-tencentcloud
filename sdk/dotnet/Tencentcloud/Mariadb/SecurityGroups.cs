@@ -37,8 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Import
     /// 
-    /// mariadb security_groups can be imported using the id, e.g.
-    /// 
+    /// mariadb SecurityGroups can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
     /// ```

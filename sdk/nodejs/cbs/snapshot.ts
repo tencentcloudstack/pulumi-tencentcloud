@@ -150,41 +150,41 @@ export interface SnapshotState {
     /**
      * Creation time of snapshot.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * (**Deprecated**) It has been deprecated from version 1.82.14. Please use `diskUsage` instead. Types of CBS which this snapshot created from.
      *
      * @deprecated It has been deprecated from version 1.82.14. Please use `diskUsage` instead.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * The type of cloud disk associated with the snapshot: SYSTEM_DISK: system disk; DATA_DISK: data disk. If not filled in, the snapshot type will be consistent with the cloud disk type. This parameter is used in some scenarios where users need to create a data disk snapshot from the system disk for shared use.
      */
-    diskUsage?: pulumi.Input<string>;
+    diskUsage?: pulumi.Input<string | undefined>;
     /**
      * Snapshot creation progress percentage. If the snapshot has created successfully, the constant value is 100.
      */
-    percent?: pulumi.Input<number>;
+    percent?: pulumi.Input<number | undefined>;
     /**
      * Name of the snapshot.
      */
-    snapshotName?: pulumi.Input<string>;
+    snapshotName?: pulumi.Input<string | undefined>;
     /**
      * Status of the snapshot.
      */
-    snapshotStatus?: pulumi.Input<string>;
+    snapshotStatus?: pulumi.Input<string | undefined>;
     /**
      * ID of the the CBS which this snapshot created from.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
     /**
      * Volume of storage which this snapshot created from.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * The available tags within this CBS Snapshot.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -194,7 +194,7 @@ export interface SnapshotArgs {
     /**
      * The type of cloud disk associated with the snapshot: SYSTEM_DISK: system disk; DATA_DISK: data disk. If not filled in, the snapshot type will be consistent with the cloud disk type. This parameter is used in some scenarios where users need to create a data disk snapshot from the system disk for shared use.
      */
-    diskUsage?: pulumi.Input<string>;
+    diskUsage?: pulumi.Input<string | undefined>;
     /**
      * Name of the snapshot.
      */
@@ -206,5 +206,5 @@ export interface SnapshotArgs {
     /**
      * The available tags within this CBS Snapshot.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

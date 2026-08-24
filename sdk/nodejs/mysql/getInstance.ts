@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getInstance({
+ * const mysql = tencentcloud.mysql.getInstance({
  *     mysqlId: "cdb-fitq5t9h",
  * });
  * ```
@@ -173,7 +173,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getInstance({
+ * const mysql = tencentcloud.mysql.getInstance({
  *     mysqlId: "cdb-fitq5t9h",
  * });
  * ```
@@ -207,63 +207,63 @@ export interface GetInstanceOutputArgs {
     /**
      * Pay type of instance, valid values are `PREPAID` and `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Initialization mark. Available values: `0` - Uninitialized; `1` - Initialized.
      */
-    initFlag?: pulumi.Input<number>;
+    initFlag?: pulumi.Input<number | undefined>;
     /**
      * Name of mysql instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance type. Supported values include: `master` - master instance, `dr` - disaster recovery instance, and `ro` - read-only instance.
      */
-    instanceRole?: pulumi.Input<string>;
+    instanceRole?: pulumi.Input<string | undefined>;
     /**
      * Number of results returned for a single request. Default is `20`, and maximum is 2000.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Instance ID, such as `cdb-c1nl9rpv`. It is identical to the instance ID displayed in the database console page.
      */
-    mysqlId?: pulumi.Input<string>;
+    mysqlId?: pulumi.Input<string | undefined>;
     /**
      * Record offset. Default is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
-    payType?: pulumi.Input<number>;
+    payType?: pulumi.Input<number | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Security groups ID of instance.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
     /**
      * Instance status. Available values: `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to query disaster recovery instances.
      */
-    withDr?: pulumi.Input<number>;
+    withDr?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to query master instances.
      */
-    withMaster?: pulumi.Input<number>;
+    withMaster?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to query read-only instances.
      */
-    withRo?: pulumi.Input<number>;
+    withRo?: pulumi.Input<number | undefined>;
 }

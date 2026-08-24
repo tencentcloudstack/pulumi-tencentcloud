@@ -80,12 +80,8 @@ type GetTaskInstanceLogResult struct {
 }
 
 func GetTaskInstanceLogOutput(ctx *pulumi.Context, args GetTaskInstanceLogOutputArgs, opts ...pulumi.InvokeOption) GetTaskInstanceLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTaskInstanceLogResultOutput, error) {
-			args := v.(GetTaskInstanceLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getTaskInstanceLog:getTaskInstanceLog", args, GetTaskInstanceLogResultOutput{}, options).(GetTaskInstanceLogResultOutput), nil
-		}).(GetTaskInstanceLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getTaskInstanceLog:getTaskInstanceLog", args, GetTaskInstanceLogResultOutput{}, options).(GetTaskInstanceLogResultOutput)
 }
 
 // A collection of arguments for invoking getTaskInstanceLog.

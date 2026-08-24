@@ -68,7 +68,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor grafanaPlugin can be imported using the instance_id#plugin_id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
     /// ```

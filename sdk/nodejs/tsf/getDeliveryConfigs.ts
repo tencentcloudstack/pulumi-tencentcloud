@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deliveryConfigs = tencentcloud.Tsf.getDeliveryConfigs({
+ * const deliveryConfigs = tencentcloud.tsf.getDeliveryConfigs({
  *     searchWord: "test",
  * });
  * ```
@@ -67,7 +67,7 @@ export interface GetDeliveryConfigsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deliveryConfigs = tencentcloud.Tsf.getDeliveryConfigs({
+ * const deliveryConfigs = tencentcloud.tsf.getDeliveryConfigs({
  *     searchWord: "test",
  * });
  * ```
@@ -88,9 +88,9 @@ export interface GetDeliveryConfigsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search word.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sg
     /// 
     /// ## Import
     /// 
-    /// cfw sg_rule can be imported using the id, e.g.
+    /// cfw SgRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Sg/rule:Rule sg_rule rule_id

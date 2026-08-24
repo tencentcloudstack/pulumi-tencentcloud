@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// waf module_status can be imported using the id, e.g.
+// waf moduleStatus can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com

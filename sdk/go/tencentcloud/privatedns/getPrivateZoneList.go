@@ -166,12 +166,8 @@ type GetPrivateZoneListResult struct {
 }
 
 func GetPrivateZoneListOutput(ctx *pulumi.Context, args GetPrivateZoneListOutputArgs, opts ...pulumi.InvokeOption) GetPrivateZoneListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPrivateZoneListResultOutput, error) {
-			args := v.(GetPrivateZoneListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:PrivateDns/getPrivateZoneList:getPrivateZoneList", args, GetPrivateZoneListResultOutput{}, options).(GetPrivateZoneListResultOutput), nil
-		}).(GetPrivateZoneListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:PrivateDns/getPrivateZoneList:getPrivateZoneList", args, GetPrivateZoneListResultOutput{}, options).(GetPrivateZoneListResultOutput)
 }
 
 // A collection of arguments for invoking getPrivateZoneList.

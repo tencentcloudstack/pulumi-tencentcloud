@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asScalingGroups = tencentcloud.As.getScalingGroups({
+ * const asScalingGroups = tencentcloud.as.getScalingGroups({
  *     scalingGroupName: "myasgroup",
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
@@ -99,7 +99,7 @@ export interface GetScalingGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asScalingGroups = tencentcloud.As.getScalingGroups({
+ * const asScalingGroups = tencentcloud.as.getScalingGroups({
  *     scalingGroupName: "myasgroup",
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
@@ -125,21 +125,21 @@ export interface GetScalingGroupsOutputArgs {
     /**
      * Filter results by launch configuration ID.
      */
-    configurationId?: pulumi.Input<string>;
+    configurationId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * A specified scaling group ID used to query.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * A scaling group name used to query.
      */
-    scalingGroupName?: pulumi.Input<string>;
+    scalingGroupName?: pulumi.Input<string | undefined>;
     /**
      * Tags used to query.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

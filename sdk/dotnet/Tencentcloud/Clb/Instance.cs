@@ -44,14 +44,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         IsMulticast = false,
     ///     });
     /// 
-    ///     // create clb
-    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     // create INTERNAL clb
+    ///     var example1 = new Tencentcloud.Clb.Instance("example1", new()
     ///     {
     ///         NetworkType = "INTERNAL",
     ///         ClbName = "tf-example",
     ///         ProjectId = 0,
     ///         VpcId = vpc.Id,
     ///         SubnetId = subnet.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create INTERNAL clb by sla_type and internet_bandwidth_max_out
+    ///     var example2 = new Tencentcloud.Clb.Instance("example2", new()
+    ///     {
+    ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         SlaType = "clb.c2.medium",
+    ///         InternetBandwidthMaxOut = 100,
     ///         Tags = 
     ///         {
     ///             { "tagKey", "tagValue" },
@@ -192,6 +208,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         ClbName = "tf-example",
     ///         ProjectId = 0,
     ///         SlaType = "clb.c3.medium",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### changes.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         Name = "vpc",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         Name = "subnet",
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create clb and forcibly upgrade sla_type
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     {
+    ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         SlaType = "clb.c3.medium",
+    ///         Force = true,
     ///         VpcId = vpc.Id,
     ///         SubnetId = subnet.Id,
     ///         Tags = 
@@ -651,6 +715,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ### Create instance with associate endpoint
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-e51ilko8",
+    ///         AssociateEndpoint = "vpce-du9ssd3z",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// CLB instance can be imported using the id, e.g.
@@ -673,6 +763,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("addressIpv6")]
         public Output<string> AddressIpv6 { get; private set; } = null!;
+
+        /// <summary>
+        /// The associated terminal node ID; passing an empty string indicates unassociating the node.
+        /// </summary>
+        [Output("associateEndpoint")]
+        public Output<string?> AssociateEndpoint { get; private set; } = null!;
 
         /// <summary>
         /// Bandwidth package id. If set, the `InternetChargeType` must be `BANDWIDTH_PACKAGE`.
@@ -723,7 +819,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> EipAddressId { get; private set; } = null!;
 
         /// <summary>
-        /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+        /// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+        /// </summary>
+        [Output("exclusiveCluster")]
+        public Output<Outputs.InstanceExclusiveCluster> ExclusiveCluster { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to forcibly upgrade the CLB instance, default is `False`. This parameter only takes effect when `SlaType` changes.
+        /// </summary>
+        [Output("force")]
+        public Output<bool?> Force { get; private set; } = null!;
+
+        /// <summary>
+        /// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+        /// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+        /// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+        /// (Default to 10Mbps when CreateLoadBalancer is call.).
         /// </summary>
         [Output("internetBandwidthMaxOut")]
         public Output<int> InternetBandwidthMaxOut { get; private set; } = null!;
@@ -908,6 +1019,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? AddressIpVersion { get; set; }
 
         /// <summary>
+        /// The associated terminal node ID; passing an empty string indicates unassociating the node.
+        /// </summary>
+        [Input("associateEndpoint")]
+        public Input<string>? AssociateEndpoint { get; set; }
+
+        /// <summary>
         /// Bandwidth package id. If set, the `InternetChargeType` must be `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("bandwidthPackageId")]
@@ -944,7 +1061,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? EipAddressId { get; set; }
 
         /// <summary>
-        /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+        /// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+        /// </summary>
+        [Input("exclusiveCluster")]
+        public Input<Inputs.InstanceExclusiveClusterArgs>? ExclusiveCluster { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly upgrade the CLB instance, default is `False`. This parameter only takes effect when `SlaType` changes.
+        /// </summary>
+        [Input("force")]
+        public Input<bool>? Force { get; set; }
+
+        /// <summary>
+        /// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+        /// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+        /// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+        /// (Default to 10Mbps when CreateLoadBalancer is call.).
         /// </summary>
         [Input("internetBandwidthMaxOut")]
         public Input<int>? InternetBandwidthMaxOut { get; set; }
@@ -1108,6 +1240,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? AddressIpv6 { get; set; }
 
         /// <summary>
+        /// The associated terminal node ID; passing an empty string indicates unassociating the node.
+        /// </summary>
+        [Input("associateEndpoint")]
+        public Input<string>? AssociateEndpoint { get; set; }
+
+        /// <summary>
         /// Bandwidth package id. If set, the `InternetChargeType` must be `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("bandwidthPackageId")]
@@ -1162,7 +1300,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? EipAddressId { get; set; }
 
         /// <summary>
-        /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+        /// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+        /// </summary>
+        [Input("exclusiveCluster")]
+        public Input<Inputs.InstanceExclusiveClusterGetArgs>? ExclusiveCluster { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly upgrade the CLB instance, default is `False`. This parameter only takes effect when `SlaType` changes.
+        /// </summary>
+        [Input("force")]
+        public Input<bool>? Force { get; set; }
+
+        /// <summary>
+        /// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+        /// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+        /// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+        /// (Default to 10Mbps when CreateLoadBalancer is call.).
         /// </summary>
         [Input("internetBandwidthMaxOut")]
         public Input<int>? InternetBandwidthMaxOut { get; set; }

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getRegistrationCode({
+ * const example = tencentcloud.mqtt.getRegistrationCode({
  *     instanceId: "mqtt-zxjwkr98",
  * });
  * ```
@@ -64,7 +64,7 @@ export interface GetRegistrationCodeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getRegistrationCode({
+ * const example = tencentcloud.mqtt.getRegistrationCode({
  *     instanceId: "mqtt-zxjwkr98",
  * });
  * ```
@@ -88,5 +88,5 @@ export interface GetRegistrationCodeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

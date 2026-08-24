@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *     autoRenew: 0,
  *     instanceClass: "micro",
  * });
- * const syncJobs = tencentcloud.Dts.getSyncJobsOutput({
+ * const syncJobs = tencentcloud.dts.getSyncJobsOutput({
  *     jobId: job.id,
  *     jobName: "tf_dts_test",
  * });
@@ -159,7 +159,7 @@ export interface GetSyncJobsResult {
  *     autoRenew: 0,
  *     instanceClass: "micro",
  * });
- * const syncJobs = tencentcloud.Dts.getSyncJobsOutput({
+ * const syncJobs = tencentcloud.dts.getSyncJobsOutput({
  *     jobId: job.id,
  *     jobName: "tf_dts_test",
  * });
@@ -189,41 +189,41 @@ export interface GetSyncJobsOutputArgs {
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * job type.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * order field.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * order way, optional value is DESC or ASC.
      */
-    orderSeq?: pulumi.Input<string>;
+    orderSeq?: pulumi.Input<string | undefined>;
     /**
      * pay mode, optional value is PrePay or PostPay.
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * run mode, optional value is mmediate or Timed.
      */
-    runMode?: pulumi.Input<string>;
+    runMode?: pulumi.Input<string | undefined>;
     /**
      * status.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * tag filters.
      */
-    tagFilters?: pulumi.Input<pulumi.Input<inputs.Dts.GetSyncJobsTagFilterArgs>[]>;
+    tagFilters?: pulumi.Input<pulumi.Input<inputs.Dts.GetSyncJobsTagFilterArgs>[] | undefined>;
 }

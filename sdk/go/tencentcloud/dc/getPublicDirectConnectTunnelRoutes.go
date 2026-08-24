@@ -70,12 +70,8 @@ type GetPublicDirectConnectTunnelRoutesResult struct {
 }
 
 func GetPublicDirectConnectTunnelRoutesOutput(ctx *pulumi.Context, args GetPublicDirectConnectTunnelRoutesOutputArgs, opts ...pulumi.InvokeOption) GetPublicDirectConnectTunnelRoutesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPublicDirectConnectTunnelRoutesResultOutput, error) {
-			args := v.(GetPublicDirectConnectTunnelRoutesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args, GetPublicDirectConnectTunnelRoutesResultOutput{}, options).(GetPublicDirectConnectTunnelRoutesResultOutput), nil
-		}).(GetPublicDirectConnectTunnelRoutesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args, GetPublicDirectConnectTunnelRoutesResultOutput{}, options).(GetPublicDirectConnectTunnelRoutesResultOutput)
 }
 
 // A collection of arguments for invoking getPublicDirectConnectTunnelRoutes.

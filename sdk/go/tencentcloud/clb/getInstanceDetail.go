@@ -73,12 +73,8 @@ type GetInstanceDetailResult struct {
 }
 
 func GetInstanceDetailOutput(ctx *pulumi.Context, args GetInstanceDetailOutputArgs, opts ...pulumi.InvokeOption) GetInstanceDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceDetailResultOutput, error) {
-			args := v.(GetInstanceDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args, GetInstanceDetailResultOutput{}, options).(GetInstanceDetailResultOutput), nil
-		}).(GetInstanceDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getInstanceDetail:getInstanceDetail", args, GetInstanceDetailResultOutput{}, options).(GetInstanceDetailResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceDetail.

@@ -55,7 +55,7 @@ import (
 //				return err
 //			}
 //			_, err = wedata.NewProjectMember(ctx, "example", &wedata.ProjectMemberArgs{
-//				ProjectId: example.ID(),
+//				ProjectId: example.ID().ToIDOutput().ToStringOutput(),
 //				UserUin:   pulumi.String("100044238258"),
 //				RoleIds: pulumi.StringArray{
 //					pulumi.String("308335260274237440"),

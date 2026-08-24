@@ -38,7 +38,7 @@ import (
 //			}
 //			ccnMain, err := dc.NewGateway(ctx, "ccn_main", &dc.GatewayArgs{
 //				Name:              pulumi.String("ci-cdg-ccn-test"),
-//				NetworkInstanceId: main.ID(),
+//				NetworkInstanceId: main.ID().ToIDOutput().ToStringOutput(),
 //				NetworkType:       pulumi.String("CCN"),
 //				GatewayType:       pulumi.String("NORMAL"),
 //			})
@@ -50,7 +50,7 @@ import (
 //				Name: ccnMain.Name,
 //			}, nil)
 //			_ = dc.GetGatewayInstancesOutput(ctx, dc.GetGatewayInstancesOutputArgs{
-//				DcgId: ccnMain.ID(),
+//				DcgId: ccnMain.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -91,12 +91,8 @@ type GetGatewayInstancesResult struct {
 }
 
 func GetGatewayInstancesOutput(ctx *pulumi.Context, args GetGatewayInstancesOutputArgs, opts ...pulumi.InvokeOption) GetGatewayInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayInstancesResultOutput, error) {
-			args := v.(GetGatewayInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args, GetGatewayInstancesResultOutput{}, options).(GetGatewayInstancesResultOutput), nil
-		}).(GetGatewayInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getGatewayInstances:getGatewayInstances", args, GetGatewayInstancesResultOutput{}, options).(GetGatewayInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayInstances.

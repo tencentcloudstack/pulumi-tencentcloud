@@ -128,12 +128,8 @@ type GetAttackOverviewResult struct {
 }
 
 func GetAttackOverviewOutput(ctx *pulumi.Context, args GetAttackOverviewOutputArgs, opts ...pulumi.InvokeOption) GetAttackOverviewResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAttackOverviewResultOutput, error) {
-			args := v.(GetAttackOverviewArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getAttackOverview:getAttackOverview", args, GetAttackOverviewResultOutput{}, options).(GetAttackOverviewResultOutput), nil
-		}).(GetAttackOverviewResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getAttackOverview:getAttackOverview", args, GetAttackOverviewResultOutput{}, options).(GetAttackOverviewResultOutput)
 }
 
 // A collection of arguments for invoking getAttackOverview.

@@ -24,35 +24,37 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := monitor.GetAlarmBasicAlarms(ctx, &monitor.GetAlarmBasicAlarmsArgs{
-// Module: "monitor",
-// StartTime: pulumi.IntRef(1696990903),
-// EndTime: pulumi.IntRef(1697098903),
-// OccurTimeOrder: pulumi.StringRef("DESC"),
-// ProjectIds: interface{}{
-// 0,
-// },
-// ViewNames: []string{
-// "cvm_device",
-// },
-// AlarmStatuses: interface{}{
-// 1,
-// },
-// InstanceGroupIds: interface{}{
-// 5497073,
-// },
-// MetricNames: []string{
-// "cpu_usage",
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.GetAlarmBasicAlarms(ctx, &monitor.GetAlarmBasicAlarmsArgs{
+//				Module:         "monitor",
+//				StartTime:      pulumi.IntRef(1696990903),
+//				EndTime:        pulumi.IntRef(1697098903),
+//				OccurTimeOrder: pulumi.StringRef("DESC"),
+//				ProjectIds: []int{
+//					0,
+//				},
+//				ViewNames: []string{
+//					"cvm_device",
+//				},
+//				AlarmStatuses: []int{
+//					1,
+//				},
+//				InstanceGroupIds: []int{
+//					5497073,
+//				},
+//				MetricNames: []string{
+//					"cpu_usage",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAlarmBasicAlarms(ctx *pulumi.Context, args *GetAlarmBasicAlarmsArgs, opts ...pulumi.InvokeOption) (*GetAlarmBasicAlarmsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -113,12 +115,8 @@ type GetAlarmBasicAlarmsResult struct {
 }
 
 func GetAlarmBasicAlarmsOutput(ctx *pulumi.Context, args GetAlarmBasicAlarmsOutputArgs, opts ...pulumi.InvokeOption) GetAlarmBasicAlarmsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmBasicAlarmsResultOutput, error) {
-			args := v.(GetAlarmBasicAlarmsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args, GetAlarmBasicAlarmsResultOutput{}, options).(GetAlarmBasicAlarmsResultOutput), nil
-		}).(GetAlarmBasicAlarmsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmBasicAlarms:getAlarmBasicAlarms", args, GetAlarmBasicAlarmsResultOutput{}, options).(GetAlarmBasicAlarmsResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmBasicAlarms.

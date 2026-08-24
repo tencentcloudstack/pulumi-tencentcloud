@@ -20,6 +20,11 @@ export type ExportImages = import("./exportImages").ExportImages;
 export const ExportImages: typeof import("./exportImages").ExportImages = null as any;
 utilities.lazyLoad(exports, ["ExportImages"], () => require("./exportImages"));
 
+export { GetAccountQuotaArgs, GetAccountQuotaResult, GetAccountQuotaOutputArgs } from "./getAccountQuota";
+export const getAccountQuota: typeof import("./getAccountQuota").getAccountQuota = null as any;
+export const getAccountQuotaOutput: typeof import("./getAccountQuota").getAccountQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountQuota","getAccountQuotaOutput"], () => require("./getAccountQuota"));
+
 export { GetChcDeniedActionsArgs, GetChcDeniedActionsResult, GetChcDeniedActionsOutputArgs } from "./getChcDeniedActions";
 export const getChcDeniedActions: typeof import("./getChcDeniedActions").getChcDeniedActions = null as any;
 export const getChcDeniedActionsOutput: typeof import("./getChcDeniedActions").getChcDeniedActionsOutput = null as any;
@@ -59,6 +64,11 @@ export { GetInstancesModificationArgs, GetInstancesModificationResult, GetInstan
 export const getInstancesModification: typeof import("./getInstancesModification").getInstancesModification = null as any;
 export const getInstancesModificationOutput: typeof import("./getInstancesModification").getInstancesModificationOutput = null as any;
 utilities.lazyLoad(exports, ["getInstancesModification","getInstancesModificationOutput"], () => require("./getInstancesModification"));
+
+export { GetRepairTasksArgs, GetRepairTasksResult, GetRepairTasksOutputArgs } from "./getRepairTasks";
+export const getRepairTasks: typeof import("./getRepairTasks").getRepairTasks = null as any;
+export const getRepairTasksOutput: typeof import("./getRepairTasks").getRepairTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getRepairTasks","getRepairTasksOutput"], () => require("./getRepairTasks"));
 
 export { HpcClusterArgs, HpcClusterState } from "./hpcCluster";
 export type HpcCluster = import("./hpcCluster").HpcCluster;
@@ -115,6 +125,16 @@ export type RenewInstance = import("./renewInstance").RenewInstance;
 export const RenewInstance: typeof import("./renewInstance").RenewInstance = null as any;
 utilities.lazyLoad(exports, ["RenewInstance"], () => require("./renewInstance"));
 
+export { RepairTaskControlOperationArgs, RepairTaskControlOperationState } from "./repairTaskControlOperation";
+export type RepairTaskControlOperation = import("./repairTaskControlOperation").RepairTaskControlOperation;
+export const RepairTaskControlOperation: typeof import("./repairTaskControlOperation").RepairTaskControlOperation = null as any;
+utilities.lazyLoad(exports, ["RepairTaskControlOperation"], () => require("./repairTaskControlOperation"));
+
+export { ResourcePoolPackArgs, ResourcePoolPackState } from "./resourcePoolPack";
+export type ResourcePoolPack = import("./resourcePoolPack").ResourcePoolPack;
+export const ResourcePoolPack: typeof import("./resourcePoolPack").ResourcePoolPack = null as any;
+utilities.lazyLoad(exports, ["ResourcePoolPack"], () => require("./resourcePoolPack"));
+
 export { SecurityGroupAttachmentArgs, SecurityGroupAttachmentState } from "./securityGroupAttachment";
 export type SecurityGroupAttachment = import("./securityGroupAttachment").SecurityGroupAttachment;
 export const SecurityGroupAttachment: typeof import("./securityGroupAttachment").SecurityGroupAttachment = null as any;
@@ -158,6 +178,10 @@ const _module = {
                 return new RenewHost(name, <any>undefined, { urn })
             case "tencentcloud:Cvm/renewInstance:RenewInstance":
                 return new RenewInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Cvm/repairTaskControlOperation:RepairTaskControlOperation":
+                return new RepairTaskControlOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cvm/resourcePoolPack:ResourcePoolPack":
+                return new ResourcePoolPack(name, <any>undefined, { urn })
             case "tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment":
                 return new SecurityGroupAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cvm/syncImage:SyncImage":
@@ -181,5 +205,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/programFpgaImage", _m
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/rebootInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/renewHost", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/renewInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/repairTaskControlOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/resourcePoolPack", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/securityGroupAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cvm/syncImage", _module)

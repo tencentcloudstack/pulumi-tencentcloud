@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization organization_org_share_unit_resource can be imported using the id, e.g.
+ * organization organizationOrgShareUnitResource can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgShareUnitResource:OrgShareUnitResource organization_org_share_unit_resource ${unit_id}#${area}#${share_resource_type}#${product_resource_id}
@@ -152,39 +152,39 @@ export interface OrgShareUnitResourceState {
     /**
      * Shared unit area.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Product Resource ID.
      */
-    productResourceId?: pulumi.Input<string>;
+    productResourceId?: pulumi.Input<string | undefined>;
     /**
      * Shared resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Sharing administrator OwnerUin.
      */
-    shareManagerUin?: pulumi.Input<number>;
+    shareManagerUin?: pulumi.Input<number | undefined>;
     /**
      * Number of shared unit members.
      */
-    sharedMemberNum?: pulumi.Input<number>;
+    sharedMemberNum?: pulumi.Input<number | undefined>;
     /**
      * Number of shared unit members in use.
      */
-    sharedMemberUseNum?: pulumi.Input<number>;
+    sharedMemberUseNum?: pulumi.Input<number | undefined>;
     /**
      * Shared resource type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Shared unit ID.
      */
-    unitId?: pulumi.Input<string>;
+    unitId?: pulumi.Input<string | undefined>;
 }
 
 /**

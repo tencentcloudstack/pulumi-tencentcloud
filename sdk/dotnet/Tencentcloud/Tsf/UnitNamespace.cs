@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Import
     /// 
-    /// tsf unit_namespace can be imported using the id, e.g.
+    /// tsf UnitNamespace can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy

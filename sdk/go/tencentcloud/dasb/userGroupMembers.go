@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -45,9 +47,9 @@ import (
 //				return err
 //			}
 //			_, err = dasb.NewUserGroupMembers(ctx, "example", &dasb.UserGroupMembersArgs{
-//				UserGroupId: exampleUserGroup.ID(),
+//				UserGroupId: exampleUserGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				MemberIdSets: pulumi.IntArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //			})
 //			if err != nil {
@@ -61,7 +63,7 @@ import (
 //
 // ## Import
 //
-// dasb user_group_members can be imported using the id, e.g.
+// dasb userGroupMembers can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14

@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -184,6 +183,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     ///         Tags = 
     ///         {
     ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Ssm secret for mongodb
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Ssm.ProductSecret("example", new()
+    ///     {
+    ///         SecretName = "tf-mongodb-example",
+    ///         UserNamePrefix = "ssm",
+    ///         ProductName = "MongoDB",
+    ///         InstanceId = "cmgo-xxxxxx",
+    ///         Domains = new[]
+    ///         {
+    ///             "%",
+    ///         },
+    ///         PrivilegesLists = new[]
+    ///         {
+    ///             new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///             {
+    ///                 PrivilegeName = "GlobalPrivileges",
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "READ_ONLY",
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///             {
+    ///                 PrivilegeName = "DatabasePrivileges",
+    ///                 Database = "admin",
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "READ_WRITE",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Description = "MongoDB secret",
+    ///         Status = "Enabled",
+    ///         EnableRotation = true,
+    ///         RotationBeginTime = "2026-02-04 00:00:00",
+    ///         RotationFrequency = 30,
+    ///         Tags = 
+    ///         {
+    ///             { "env", "test" },
     ///         },
     ///     });
     /// 

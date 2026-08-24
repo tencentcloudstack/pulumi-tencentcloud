@@ -112,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Import
     /// 
-    /// apiGateway plugin_attachment can be imported using the id, e.g.
+    /// apiGateway PluginAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa

@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -83,6 +82,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ### Example with custom timezone:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleTimezone = new Tencentcloud.Sqlserver.BasicInstance("example_timezone", new()
+    ///     {
+    ///         Name = "tf-example-utc",
+    ///         AvailabilityZone = zones.Zones[4].Name,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         TimeZone = "UTC",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Example with disk encryption enabled:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleEncrypted = new Tencentcloud.Sqlserver.BasicInstance("example_encrypted", new()
+    ///     {
+    ///         Name = "tf-example-encrypted",
+    ///         AvailabilityZone = zones.Zones[4].Name,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_SSD",
+    ///         DiskEncryptFlag = 1,
+    ///         TimeZone = "China Standard Time",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// SQL Server basic instance can be imported using the id, e.g.
@@ -135,6 +189,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+        /// </summary>
+        [Output("diskEncryptFlag")]
+        public Output<int> DiskEncryptFlag { get; private set; } = null!;
 
         /// <summary>
         /// Internet address domain name.
@@ -231,6 +291,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("tgwWanVport")]
         public Output<int> TgwWanVport { get; private set; } = null!;
+
+        /// <summary>
+        /// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+        /// </summary>
+        [Output("timeZone")]
+        public Output<string> TimeZone { get; private set; } = null!;
 
         /// <summary>
         /// IP for private access.
@@ -340,6 +406,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<int> Cpu { get; set; } = null!;
 
         /// <summary>
+        /// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+        /// </summary>
+        [Input("diskEncryptFlag")]
+        public Input<int>? DiskEncryptFlag { get; set; }
+
+        /// <summary>
         /// Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         /// </summary>
         [Input("engineVersion")]
@@ -435,6 +507,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
             set => _tags = value;
         }
 
+        /// <summary>
+        /// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+        /// </summary>
+        [Input("timeZone")]
+        public Input<string>? TimeZone { get; set; }
+
         [Input("voucherIds")]
         private InputList<string>? _voucherIds;
 
@@ -502,6 +580,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
+        /// </summary>
+        [Input("diskEncryptFlag")]
+        public Input<int>? DiskEncryptFlag { get; set; }
 
         /// <summary>
         /// Internet address domain name.
@@ -616,6 +700,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("tgwWanVport")]
         public Input<int>? TgwWanVport { get; set; }
+
+        /// <summary>
+        /// System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+        /// </summary>
+        [Input("timeZone")]
+        public Input<string>? TimeZone { get; set; }
 
         /// <summary>
         /// IP for private access.

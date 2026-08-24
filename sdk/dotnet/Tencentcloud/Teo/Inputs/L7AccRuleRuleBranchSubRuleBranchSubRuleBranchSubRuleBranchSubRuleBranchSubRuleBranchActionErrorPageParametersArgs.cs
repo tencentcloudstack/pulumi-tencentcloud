@@ -13,11 +13,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersArgs : global::Pulumi.ResourceArgs
     {
+        [Input("errorPageParams")]
+        private InputList<Inputs.L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParamArgs>? _errorPageParams;
+
         /// <summary>
         /// Custom error page configuration list.
         /// </summary>
-        [Input("errorPageParams")]
-        public Input<Inputs.L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParamsArgs>? ErrorPageParams { get; set; }
+        public InputList<Inputs.L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParamArgs> ErrorPageParams
+        {
+            get => _errorPageParams ?? (_errorPageParams = new InputList<Inputs.L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParamArgs>());
+            set => _errorPageParams = value;
+        }
 
         public L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersArgs()
         {

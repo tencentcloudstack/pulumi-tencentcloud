@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class NativeNodePoolTag
     {
         /// <summary>
-        /// The resource type bound to the label.
+        /// The resource type bound to the label. `Cluster`: related to clusters; `Machine`: related to node pools.
         /// </summary>
         public readonly string? ResourceType;
         /// <summary>

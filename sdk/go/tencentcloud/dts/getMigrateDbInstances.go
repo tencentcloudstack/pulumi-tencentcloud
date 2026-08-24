@@ -107,12 +107,8 @@ type GetMigrateDbInstancesResult struct {
 }
 
 func GetMigrateDbInstancesOutput(ctx *pulumi.Context, args GetMigrateDbInstancesOutputArgs, opts ...pulumi.InvokeOption) GetMigrateDbInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMigrateDbInstancesResultOutput, error) {
-			args := v.(GetMigrateDbInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args, GetMigrateDbInstancesResultOutput{}, options).(GetMigrateDbInstancesResultOutput), nil
-		}).(GetMigrateDbInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args, GetMigrateDbInstancesResultOutput{}, options).(GetMigrateDbInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getMigrateDbInstances.

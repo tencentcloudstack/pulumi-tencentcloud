@@ -95,12 +95,8 @@ type LookupApiGroupResult struct {
 }
 
 func LookupApiGroupOutput(ctx *pulumi.Context, args LookupApiGroupOutputArgs, opts ...pulumi.InvokeOption) LookupApiGroupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupApiGroupResultOutput, error) {
-			args := v.(LookupApiGroupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getApiGroup:getApiGroup", args, LookupApiGroupResultOutput{}, options).(LookupApiGroupResultOutput), nil
-		}).(LookupApiGroupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getApiGroup:getApiGroup", args, LookupApiGroupResultOutput{}, options).(LookupApiGroupResultOutput)
 }
 
 // A collection of arguments for invoking getApiGroup.

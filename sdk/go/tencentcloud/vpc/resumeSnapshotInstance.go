@@ -101,7 +101,7 @@ import (
 //				return err
 //			}
 //			_, err = vpc.NewResumeSnapshotInstance(ctx, "example", &vpc.ResumeSnapshotInstanceArgs{
-//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID().ToIDOutput().ToStringOutput(),
 //				SnapshotFileId:   pulumi.String(example.SnapshotFileSets[0].SnapshotFileId),
 //				InstanceId:       pulumi.String("policy-1t6cob"),
 //			})

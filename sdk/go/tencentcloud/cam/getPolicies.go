@@ -15,6 +15,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Query all policies
+//
 // ```go
 // package main
 //
@@ -27,17 +29,35 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// query by policy_id
-//			_, err := cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-//				PolicyId: pulumi.StringRef(fooTencentcloudCamPolicy.Id),
-//			}, nil)
+//			_, err := cam.GetPolicies(ctx, &cam.GetPoliciesArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			// query by policy_id and name
-//			_, err = cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-//				PolicyId: pulumi.StringRef(fooTencentcloudCamPolicy.Id),
-//				Name:     pulumi.StringRef("tf-auto-test"),
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Query policies by filter
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				Name:       pulumi.StringRef("tf-example"),
+//				PolicyId:   pulumi.StringRef("236215899"),
+//				Type:       pulumi.IntRef(1),
+//				CreateMode: pulumi.IntRef(2),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -63,12 +83,16 @@ type GetPoliciesArgs struct {
 	CreateMode *int `pulumi:"createMode"`
 	// The description of the CAM policy.
 	Description *string `pulumi:"description"`
+	// Match by strategy name.
+	KeyWord *string `pulumi:"keyWord"`
 	// Name of the CAM policy to be queried.
 	Name *string `pulumi:"name"`
 	// ID of CAM policy to be queried.
 	PolicyId *string `pulumi:"policyId"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	// Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+	Scope *string `pulumi:"scope"`
 	// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
 	Type *int `pulumi:"type"`
 }
@@ -80,7 +104,8 @@ type GetPoliciesResult struct {
 	// Description of CAM policy.
 	Description *string `pulumi:"description"`
 	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id      string  `pulumi:"id"`
+	KeyWord *string `pulumi:"keyWord"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
 	// ID of the policy strategy.
@@ -88,17 +113,14 @@ type GetPoliciesResult struct {
 	// A list of CAM policies. Each element contains the following attributes:
 	PolicyLists      []GetPoliciesPolicyList `pulumi:"policyLists"`
 	ResultOutputFile *string                 `pulumi:"resultOutputFile"`
+	Scope            *string                 `pulumi:"scope"`
 	// Type of the policy strategy. `1` means customer strategy and `2` means preset strategy.
 	Type *int `pulumi:"type"`
 }
 
 func GetPoliciesOutput(ctx *pulumi.Context, args GetPoliciesOutputArgs, opts ...pulumi.InvokeOption) GetPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPoliciesResultOutput, error) {
-			args := v.(GetPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getPolicies:getPolicies", args, GetPoliciesResultOutput{}, options).(GetPoliciesResultOutput), nil
-		}).(GetPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getPolicies:getPolicies", args, GetPoliciesResultOutput{}, options).(GetPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getPolicies.
@@ -107,12 +129,16 @@ type GetPoliciesOutputArgs struct {
 	CreateMode pulumi.IntPtrInput `pulumi:"createMode"`
 	// The description of the CAM policy.
 	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Match by strategy name.
+	KeyWord pulumi.StringPtrInput `pulumi:"keyWord"`
 	// Name of the CAM policy to be queried.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// ID of CAM policy to be queried.
 	PolicyId pulumi.StringPtrInput `pulumi:"policyId"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
+	// Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+	Scope pulumi.StringPtrInput `pulumi:"scope"`
 	// Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
 	Type pulumi.IntPtrInput `pulumi:"type"`
 }
@@ -151,6 +177,10 @@ func (o GetPoliciesResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPoliciesResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+func (o GetPoliciesResultOutput) KeyWord() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetPoliciesResult) *string { return v.KeyWord }).(pulumi.StringPtrOutput)
+}
+
 // Name of CAM policy.
 func (o GetPoliciesResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetPoliciesResult) *string { return v.Name }).(pulumi.StringPtrOutput)
@@ -168,6 +198,10 @@ func (o GetPoliciesResultOutput) PolicyLists() GetPoliciesPolicyListArrayOutput 
 
 func (o GetPoliciesResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetPoliciesResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+func (o GetPoliciesResultOutput) Scope() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetPoliciesResult) *string { return v.Scope }).(pulumi.StringPtrOutput)
 }
 
 // Type of the policy strategy. `1` means customer strategy and `2` means preset strategy.

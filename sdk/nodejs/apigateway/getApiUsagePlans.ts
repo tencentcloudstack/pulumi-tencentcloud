@@ -71,7 +71,7 @@ import * as utilities from "../utilities";
  *     bindType: "API",
  *     apiId: exampleApi.id,
  * });
- * const example = tencentcloud.ApiGateway.getApiUsagePlansOutput({
+ * const example = tencentcloud.apigateway.getApiUsagePlansOutput({
  *     serviceId: exampleUsagePlanAttachment.serviceId,
  * });
  * ```
@@ -181,7 +181,7 @@ export interface GetApiUsagePlansResult {
  *     bindType: "API",
  *     apiId: exampleApi.id,
  * });
- * const example = tencentcloud.ApiGateway.getApiUsagePlansOutput({
+ * const example = tencentcloud.apigateway.getApiUsagePlansOutput({
  *     serviceId: exampleUsagePlanAttachment.serviceId,
  * });
  * ```
@@ -201,7 +201,7 @@ export interface GetApiUsagePlansOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service to be queried.
      */

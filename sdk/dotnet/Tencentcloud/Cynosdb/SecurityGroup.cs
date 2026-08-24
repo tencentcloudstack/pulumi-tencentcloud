@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb security_group can be imported using the id, e.g.
+    /// cynosdb SecurityGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}

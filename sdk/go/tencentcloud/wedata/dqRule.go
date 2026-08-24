@@ -66,7 +66,7 @@ import (
 //
 // ## Import
 //
-// wedata dq_rule can be imported using the id, e.g.
+// wedata dqRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894

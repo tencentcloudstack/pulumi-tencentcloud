@@ -51,8 +51,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ses email_address can be imported using the id, e.g.
- *
+ * ses emailAddress can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
  * ```
@@ -138,15 +137,15 @@ export interface ReceiverState {
     /**
      * Recipient email and template parameters in array format. The number of recipients is limited to within 20,000. If there is an object in the `data` list that inputs `templateData`, then other objects are also required.
      */
-    datas?: pulumi.Input<pulumi.Input<inputs.Ses.ReceiverData>[]>;
+    datas?: pulumi.Input<pulumi.Input<inputs.Ses.ReceiverData>[] | undefined>;
     /**
      * Recipient group description.
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Recipient group name.
      */
-    receiversName?: pulumi.Input<string>;
+    receiversName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -160,7 +159,7 @@ export interface ReceiverArgs {
     /**
      * Recipient group description.
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Recipient group name.
      */

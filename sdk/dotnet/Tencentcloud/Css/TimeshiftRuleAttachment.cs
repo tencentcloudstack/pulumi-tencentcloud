@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css timeshift_rule_attachment can be imported using the id, e.g.
+    /// css TimeshiftRuleAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName

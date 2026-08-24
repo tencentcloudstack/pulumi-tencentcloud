@@ -24,7 +24,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * CLS logset can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Cls/logset:Logset example 698902ff-8b5a-4c65-824b-d8956f366351
  * ```
@@ -119,23 +118,23 @@ export interface LogsetState {
     /**
      * Creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Logset name, which must be unique.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
     /**
      * If assumerUin is not empty, it indicates the service provider who creates the logset.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Number of log topics in logset.
      */
-    topicCount?: pulumi.Input<number>;
+    topicCount?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -149,5 +148,5 @@ export interface LogsetArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

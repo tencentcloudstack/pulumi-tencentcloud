@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -90,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Import
     /// 
-    /// mysql restart_db_instances_operation can be imported using the id, e.g.
+    /// mysql RestartDbInstancesOperation can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mysql/restartDbInstancesOperation:RestartDbInstancesOperation restart_db_instances_operation restart_db_instances_operation_id

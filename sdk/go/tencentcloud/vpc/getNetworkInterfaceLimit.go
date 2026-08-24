@@ -77,12 +77,8 @@ type GetNetworkInterfaceLimitResult struct {
 }
 
 func GetNetworkInterfaceLimitOutput(ctx *pulumi.Context, args GetNetworkInterfaceLimitOutputArgs, opts ...pulumi.InvokeOption) GetNetworkInterfaceLimitResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNetworkInterfaceLimitResultOutput, error) {
-			args := v.(GetNetworkInterfaceLimitArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args, GetNetworkInterfaceLimitResultOutput{}, options).(GetNetworkInterfaceLimitResultOutput), nil
-		}).(GetNetworkInterfaceLimitResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args, GetNetworkInterfaceLimitResultOutput{}, options).(GetNetworkInterfaceLimitResultOutput)
 }
 
 // A collection of arguments for invoking getNetworkInterfaceLimit.

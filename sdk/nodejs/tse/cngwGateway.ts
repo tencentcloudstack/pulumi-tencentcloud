@@ -217,67 +217,67 @@ export interface CngwGatewayState {
     /**
      * description information, up to 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * whether to enable CLS log. Default value: fasle.
      */
-    enableCls?: pulumi.Input<boolean>;
+    enableCls?: pulumi.Input<boolean | undefined>;
     /**
      * engine region of gateway.
      */
-    engineRegion?: pulumi.Input<string>;
+    engineRegion?: pulumi.Input<string | undefined>;
     /**
      * product version. Reference value: `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
      */
-    featureVersion?: pulumi.Input<string>;
+    featureVersion?: pulumi.Input<string | undefined>;
     /**
      * gateway vwersion. Reference value: `2.4.1`, `2.5.1`.
      */
-    gatewayVersion?: pulumi.Input<string>;
+    gatewayVersion?: pulumi.Input<string | undefined>;
     /**
      * ingress class name.
      */
-    ingressClassName?: pulumi.Input<string>;
+    ingressClassName?: pulumi.Input<string | undefined>;
     /**
      * Port information that the instance listens to.
      */
-    instancePorts?: pulumi.Input<pulumi.Input<inputs.Tse.CngwGatewayInstancePort>[]>;
+    instancePorts?: pulumi.Input<pulumi.Input<inputs.Tse.CngwGatewayInstancePort>[] | undefined>;
     /**
      * internet configration.
      */
-    internetConfig?: pulumi.Input<inputs.Tse.CngwGatewayInternetConfig>;
+    internetConfig?: pulumi.Input<inputs.Tse.CngwGatewayInternetConfig | undefined>;
     /**
      * public network outbound traffic bandwidth,[1,2048]Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * gateway name, supports up to 60 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * gateway node configration.
      */
-    nodeConfig?: pulumi.Input<inputs.Tse.CngwGatewayNodeConfig>;
+    nodeConfig?: pulumi.Input<inputs.Tse.CngwGatewayNodeConfig | undefined>;
     /**
      * Public IP address list.
      */
-    publicIpAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    publicIpAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trade type. Reference value: `0`: postpaid, `1`:Prepaid (Interface does not support the creation of prepaid instances yet).
      */
-    tradeType?: pulumi.Input<number>;
+    tradeType?: pulumi.Input<number | undefined>;
     /**
      * gateway type,currently only supports kong.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * vpc information.
      */
-    vpcConfig?: pulumi.Input<inputs.Tse.CngwGatewayVpcConfig>;
+    vpcConfig?: pulumi.Input<inputs.Tse.CngwGatewayVpcConfig | undefined>;
 }
 
 /**
@@ -287,19 +287,19 @@ export interface CngwGatewayArgs {
     /**
      * description information, up to 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * whether to enable CLS log. Default value: fasle.
      */
-    enableCls?: pulumi.Input<boolean>;
+    enableCls?: pulumi.Input<boolean | undefined>;
     /**
      * engine region of gateway.
      */
-    engineRegion?: pulumi.Input<string>;
+    engineRegion?: pulumi.Input<string | undefined>;
     /**
      * product version. Reference value: `TRIAL`, `STANDARD`(default value), `PROFESSIONAL`.
      */
-    featureVersion?: pulumi.Input<string>;
+    featureVersion?: pulumi.Input<string | undefined>;
     /**
      * gateway vwersion. Reference value: `2.4.1`, `2.5.1`.
      */
@@ -307,19 +307,19 @@ export interface CngwGatewayArgs {
     /**
      * ingress class name.
      */
-    ingressClassName?: pulumi.Input<string>;
+    ingressClassName?: pulumi.Input<string | undefined>;
     /**
      * internet configration.
      */
-    internetConfig?: pulumi.Input<inputs.Tse.CngwGatewayInternetConfig>;
+    internetConfig?: pulumi.Input<inputs.Tse.CngwGatewayInternetConfig | undefined>;
     /**
      * public network outbound traffic bandwidth,[1,2048]Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * gateway name, supports up to 60 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * gateway node configration.
      */
@@ -327,11 +327,11 @@ export interface CngwGatewayArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trade type. Reference value: `0`: postpaid, `1`:Prepaid (Interface does not support the creation of prepaid instances yet).
      */
-    tradeType?: pulumi.Input<number>;
+    tradeType?: pulumi.Input<number | undefined>;
     /**
      * gateway type,currently only supports kong.
      */

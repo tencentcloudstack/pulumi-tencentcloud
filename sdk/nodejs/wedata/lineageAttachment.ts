@@ -107,7 +107,7 @@ export interface LineageAttachmentState {
     /**
      * List of lineage relationships to be registered.
      */
-    relations?: pulumi.Input<inputs.Wedata.LineageAttachmentRelations>;
+    relations?: pulumi.Input<inputs.Wedata.LineageAttachmentRelations | undefined>;
 }
 
 /**

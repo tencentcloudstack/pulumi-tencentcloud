@@ -16,11 +16,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by role_id
- * const foo = tencentcloud.Cam.getRoles({
+ * const foo = tencentcloud.cam.getRoles({
  *     roleId: fooTencentcloudCamRole.id,
  * });
  * // query by name
- * const bar = tencentcloud.Cam.getRoles({
+ * const bar = tencentcloud.cam.getRoles({
  *     name: "cam-role-test",
  * });
  * ```
@@ -94,11 +94,11 @@ export interface GetRolesResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by role_id
- * const foo = tencentcloud.Cam.getRoles({
+ * const foo = tencentcloud.cam.getRoles({
  *     roleId: fooTencentcloudCamRole.id,
  * });
  * // query by name
- * const bar = tencentcloud.Cam.getRoles({
+ * const bar = tencentcloud.cam.getRoles({
  *     name: "cam-role-test",
  * });
  * ```
@@ -121,17 +121,17 @@ export interface GetRolesOutputArgs {
     /**
      * The description of the CAM role to be queried.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the CAM policy to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the CAM role to be queried.
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
 }

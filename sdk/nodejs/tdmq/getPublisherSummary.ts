@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publisherSummary = tencentcloud.Tdmq.getPublisherSummary({
+ * const publisherSummary = tencentcloud.tdmq.getPublisherSummary({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     namespace: "keep-ns",
  *     topic: "keep-topic",
@@ -90,7 +90,7 @@ export interface GetPublisherSummaryResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publisherSummary = tencentcloud.Tdmq.getPublisherSummary({
+ * const publisherSummary = tencentcloud.tdmq.getPublisherSummary({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     namespace: "keep-ns",
  *     topic: "keep-topic",
@@ -122,7 +122,7 @@ export interface GetPublisherSummaryOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * subject name.
      */

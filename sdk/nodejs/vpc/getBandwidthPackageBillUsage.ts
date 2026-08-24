@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bandwidthPackageBillUsage = tencentcloud.Vpc.getBandwidthPackageBillUsage({
+ * const bandwidthPackageBillUsage = tencentcloud.vpc.getBandwidthPackageBillUsage({
  *     bandwidthPackageId: "bwp-234rfgt5",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetBandwidthPackageBillUsageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bandwidthPackageBillUsage = tencentcloud.Vpc.getBandwidthPackageBillUsage({
+ * const bandwidthPackageBillUsage = tencentcloud.vpc.getBandwidthPackageBillUsage({
  *     bandwidthPackageId: "bwp-234rfgt5",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetBandwidthPackageBillUsageOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -62,12 +62,8 @@ type GetPadTemplatesResult struct {
 }
 
 func GetPadTemplatesOutput(ctx *pulumi.Context, args GetPadTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetPadTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPadTemplatesResultOutput, error) {
-			args := v.(GetPadTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getPadTemplates:getPadTemplates", args, GetPadTemplatesResultOutput{}, options).(GetPadTemplatesResultOutput), nil
-		}).(GetPadTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getPadTemplates:getPadTemplates", args, GetPadTemplatesResultOutput{}, options).(GetPadTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getPadTemplates.

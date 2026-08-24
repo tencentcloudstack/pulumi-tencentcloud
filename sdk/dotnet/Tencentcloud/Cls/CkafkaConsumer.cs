@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
 {
     /// <summary>
-    /// Provides a resource to create a cls CkafkaConsumer
+    /// Provides a resource to create a CLS ckafka consumer
     /// 
     /// ## Example Usage
     /// 
@@ -23,9 +23,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var ckafkaConsumer = new Tencentcloud.Cls.CkafkaConsumer("ckafka_consumer", new()
+    ///     var example = new Tencentcloud.Cls.CkafkaConsumer("example", new()
     ///     {
-    ///         Compression = 1,
+    ///         Compression = 0,
     ///         NeedContent = true,
     ///         TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
     ///         Ckafka = new Tencentcloud.Cls.Inputs.CkafkaConsumerCkafkaArgs
@@ -50,6 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///             },
     ///             TagJsonNotTiled = true,
     ///             TimestampAccuracy = 2,
+    ///             JsonType = 1,
     ///         },
     ///     });
     /// 
@@ -58,10 +59,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls ckafka_consumer can be imported using the id, e.g.
+    /// cls CkafkaConsumer can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+    /// $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer example 7e34a3a7-635e-4da8-9005-88106c1fde69
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer")]

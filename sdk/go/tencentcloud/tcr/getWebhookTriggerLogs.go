@@ -31,7 +31,7 @@ import (
 //				RegistryId: tcrId,
 //				Namespace:  tcrNamespace,
 //				TriggerId:  triggerId,
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"createdBy": "terraform",
 //				},
 //			}, nil)
@@ -82,12 +82,8 @@ type GetWebhookTriggerLogsResult struct {
 }
 
 func GetWebhookTriggerLogsOutput(ctx *pulumi.Context, args GetWebhookTriggerLogsOutputArgs, opts ...pulumi.InvokeOption) GetWebhookTriggerLogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWebhookTriggerLogsResultOutput, error) {
-			args := v.(GetWebhookTriggerLogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args, GetWebhookTriggerLogsResultOutput{}, options).(GetWebhookTriggerLogsResultOutput), nil
-		}).(GetWebhookTriggerLogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args, GetWebhookTriggerLogsResultOutput{}, options).(GetWebhookTriggerLogsResultOutput)
 }
 
 // A collection of arguments for invoking getWebhookTriggerLogs.

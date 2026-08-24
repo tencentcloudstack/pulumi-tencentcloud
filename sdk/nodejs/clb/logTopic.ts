@@ -115,19 +115,19 @@ export interface LogTopicState {
     /**
      * Log topic creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Log topic of CLB instance.
      */
-    logSetId?: pulumi.Input<string>;
+    logSetId?: pulumi.Input<string | undefined>;
     /**
      * The status of log topic. true: enable; false: disable. Default is true.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Log topic of CLB instance.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -141,7 +141,7 @@ export interface LogTopicArgs {
     /**
      * The status of log topic. true: enable; false: disable. Default is true.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Log topic of CLB instance.
      */

@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public Output<string?> WorkGroupDescription { get; private set; } = null!;
 
         /// <summary>
+        /// Working group ID.
+        /// </summary>
+        [Output("workGroupId")]
+        public Output<int> WorkGroupId { get; private set; } = null!;
+
+        /// <summary>
         /// Working group name.
         /// </summary>
         [Output("workGroupName")]
@@ -145,6 +151,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// </summary>
         [Input("workGroupDescription")]
         public Input<string>? WorkGroupDescription { get; set; }
+
+        /// <summary>
+        /// Working group ID.
+        /// </summary>
+        [Input("workGroupId")]
+        public Input<int>? WorkGroupId { get; set; }
 
         /// <summary>
         /// Working group name.

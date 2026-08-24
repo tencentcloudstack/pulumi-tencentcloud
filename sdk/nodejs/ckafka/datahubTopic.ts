@@ -14,7 +14,7 @@ import * as utilities from "../utilities";
  * import * as std from "@pulumi/std";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const user = tencentcloud.User.getInfo({});
+ * const user = tencentcloud.user.getInfo({});
  * const datahubTopic = new tencentcloud.ckafka.DatahubTopic("datahub_topic", {
  *     name: std.format({
  *         input: "%s-tf",
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ckafka datahub_topic can be imported using the id, e.g.
+ * ckafka datahubTopic can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
@@ -130,23 +130,23 @@ export interface DatahubTopicState {
     /**
      * Name, start with appid, which is a string of no more than 128 characters, must start with a letter, and the rest can contain letters, numbers, and dashes (-).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Subject note, which is a string of no more than 64 characters, must start with a letter, and the rest can contain letters, numbers and dashes (-).
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Number of Partitions, greater than 0.
      */
-    partitionNum?: pulumi.Input<number>;
+    partitionNum?: pulumi.Input<number | undefined>;
     /**
      * Message retention time, in ms, the current minimum value is 60000 ms.
      */
-    retentionMs?: pulumi.Input<number>;
+    retentionMs?: pulumi.Input<number | undefined>;
     /**
      * Tags of dataHub topic.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -156,11 +156,11 @@ export interface DatahubTopicArgs {
     /**
      * Name, start with appid, which is a string of no more than 128 characters, must start with a letter, and the rest can contain letters, numbers, and dashes (-).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Subject note, which is a string of no more than 64 characters, must start with a letter, and the rest can contain letters, numbers and dashes (-).
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Number of Partitions, greater than 0.
      */
@@ -172,5 +172,5 @@ export interface DatahubTopicArgs {
     /**
      * Tags of dataHub topic.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

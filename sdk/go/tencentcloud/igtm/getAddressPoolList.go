@@ -101,12 +101,8 @@ type GetAddressPoolListResult struct {
 }
 
 func GetAddressPoolListOutput(ctx *pulumi.Context, args GetAddressPoolListOutputArgs, opts ...pulumi.InvokeOption) GetAddressPoolListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAddressPoolListResultOutput, error) {
-			args := v.(GetAddressPoolListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getAddressPoolList:getAddressPoolList", args, GetAddressPoolListResultOutput{}, options).(GetAddressPoolListResultOutput), nil
-		}).(GetAddressPoolListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getAddressPoolList:getAddressPoolList", args, GetAddressPoolListResultOutput{}, options).(GetAddressPoolListResultOutput)
 }
 
 // A collection of arguments for invoking getAddressPoolList.

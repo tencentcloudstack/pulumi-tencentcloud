@@ -37,12 +37,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = exampleSecret.SecretName.ApplyT(func(secretName string) (ssm.GetSecretsResult, error) {
-//				return ssm.GetSecretsResult(interface{}(ssm.GetSecrets(ctx, &ssm.GetSecretsArgs{
-//					SecretName: pulumi.StringRef(pulumi.StringRef(secretName)),
-//					State:      pulumi.IntRef(pulumi.IntRef(int(1))),
-//				}, nil))), nil
-//			}).(ssm.GetSecretsResultOutput)
+//			_ = ssm.GetSecretsOutput(ctx, ssm.GetSecretsOutputArgs{
+//				SecretName: exampleSecret.SecretName,
+//				State:      pulumi.Int(1),
+//			}, nil)
 //			return nil
 //		})
 //	}
@@ -66,7 +64,7 @@ import (
 //			_, err := ssm.GetSecrets(ctx, &ssm.GetSecretsArgs{
 //				SecretName: pulumi.StringRef(exampleTencentcloudSsmSecret.SecretName),
 //				State:      pulumi.IntRef(1),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"createdBy": "terraform",
 //				},
 //			}, nil)
@@ -125,12 +123,8 @@ type GetSecretsResult struct {
 }
 
 func GetSecretsOutput(ctx *pulumi.Context, args GetSecretsOutputArgs, opts ...pulumi.InvokeOption) GetSecretsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecretsResultOutput, error) {
-			args := v.(GetSecretsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssm/getSecrets:getSecrets", args, GetSecretsResultOutput{}, options).(GetSecretsResultOutput), nil
-		}).(GetSecretsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssm/getSecrets:getSecrets", args, GetSecretsResultOutput{}, options).(GetSecretsResultOutput)
 }
 
 // A collection of arguments for invoking getSecrets.

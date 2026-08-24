@@ -5,6 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AuditLogFileArgs, AuditLogFileState } from "./auditLogFile";
+export type AuditLogFile = import("./auditLogFile").AuditLogFile;
+export const AuditLogFile: typeof import("./auditLogFile").AuditLogFile = null as any;
+utilities.lazyLoad(exports, ["AuditLogFile"], () => require("./auditLogFile"));
+
+export { AuditServiceArgs, AuditServiceState } from "./auditService";
+export type AuditService = import("./auditService").AuditService;
+export const AuditService: typeof import("./auditService").AuditService = null as any;
+utilities.lazyLoad(exports, ["AuditService"], () => require("./auditService"));
+
+export { GetDbInstanceNodePropertyArgs, GetDbInstanceNodePropertyResult, GetDbInstanceNodePropertyOutputArgs } from "./getDbInstanceNodeProperty";
+export const getDbInstanceNodeProperty: typeof import("./getDbInstanceNodeProperty").getDbInstanceNodeProperty = null as any;
+export const getDbInstanceNodePropertyOutput: typeof import("./getDbInstanceNodeProperty").getDbInstanceNodePropertyOutput = null as any;
+utilities.lazyLoad(exports, ["getDbInstanceNodeProperty","getDbInstanceNodePropertyOutput"], () => require("./getDbInstanceNodeProperty"));
+
 export { GetInstanceBackupsArgs, GetInstanceBackupsResult, GetInstanceBackupsOutputArgs } from "./getInstanceBackups";
 export const getInstanceBackups: typeof import("./getInstanceBackups").getInstanceBackups = null as any;
 export const getInstanceBackupsOutput: typeof import("./getInstanceBackups").getInstanceBackupsOutput = null as any;
@@ -75,6 +90,11 @@ export type InstanceParams = import("./instanceParams").InstanceParams;
 export const InstanceParams: typeof import("./instanceParams").InstanceParams = null as any;
 utilities.lazyLoad(exports, ["InstanceParams"], () => require("./instanceParams"));
 
+export { InstanceSrvConnectionArgs, InstanceSrvConnectionState } from "./instanceSrvConnection";
+export type InstanceSrvConnection = import("./instanceSrvConnection").InstanceSrvConnection;
+export const InstanceSrvConnection: typeof import("./instanceSrvConnection").InstanceSrvConnection = null as any;
+utilities.lazyLoad(exports, ["InstanceSrvConnection"], () => require("./instanceSrvConnection"));
+
 export { InstanceSslArgs, InstanceSslState } from "./instanceSsl";
 export type InstanceSsl = import("./instanceSsl").InstanceSsl;
 export const InstanceSsl: typeof import("./instanceSsl").InstanceSsl = null as any;
@@ -105,6 +125,10 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Mongodb/auditLogFile:AuditLogFile":
+                return new AuditLogFile(name, <any>undefined, { urn })
+            case "tencentcloud:Mongodb/auditService:AuditService":
+                return new AuditService(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instanceAccount:InstanceAccount":
@@ -117,6 +141,8 @@ const _module = {
                 return new InstanceBackupRule(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instanceParams:InstanceParams":
                 return new InstanceParams(name, <any>undefined, { urn })
+            case "tencentcloud:Mongodb/instanceSrvConnection:InstanceSrvConnection":
+                return new InstanceSrvConnection(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instanceSsl:InstanceSsl":
                 return new InstanceSsl(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceTransparentDataEncryption":
@@ -132,12 +158,15 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/auditLogFile", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/auditService", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceAccount", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackupDownloadTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackupRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceParams", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceSrvConnection", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceSsl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceTransparentDataEncryption", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/readonlyInstance", _module)

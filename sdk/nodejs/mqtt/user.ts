@@ -130,27 +130,27 @@ export interface UserState {
     /**
      * Creation time, millisecond timestamp.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Modify time, millisecond timestamp.
      */
-    modifiedTime?: pulumi.Input<number>;
+    modifiedTime?: pulumi.Input<number | undefined>;
     /**
      * Password, when this field is empty, the backend will generate it by default.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Note that the length should not exceed 128 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Username, cannot be empty, only supports uppercase and lowercase letter separators ("_", "-"), cannot exceed 32 characters.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -164,11 +164,11 @@ export interface UserArgs {
     /**
      * Password, when this field is empty, the backend will generate it by default.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Note that the length should not exceed 128 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Username, cannot be empty, only supports uppercase and lowercase letter separators ("_", "-"), cannot exceed 32 characters.
      */

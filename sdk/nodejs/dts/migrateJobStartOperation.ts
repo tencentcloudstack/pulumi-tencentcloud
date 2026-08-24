@@ -187,7 +187,7 @@ export interface MigrateJobStartOperationState {
     /**
      * Job Id from `tencentcloud.Dts.MigrateJob`.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
 }
 
 /**

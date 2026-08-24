@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getDescribeKeys({
+ * const example = tencentcloud.kms.getDescribeKeys({
  *     keyIds: [
  *         "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
  *         "bffae4ed-6465-11ee-90b2-5254000ef00e",
@@ -69,7 +69,7 @@ export interface GetDescribeKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getDescribeKeys({
+ * const example = tencentcloud.kms.getDescribeKeys({
  *     keyIds: [
  *         "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
  *         "bffae4ed-6465-11ee-90b2-5254000ef00e",
@@ -96,5 +96,5 @@ export interface GetDescribeKeysOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

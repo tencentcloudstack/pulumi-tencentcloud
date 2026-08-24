@@ -71,12 +71,8 @@ type GetDatahubGroupOffsetsResult struct {
 }
 
 func GetDatahubGroupOffsetsOutput(ctx *pulumi.Context, args GetDatahubGroupOffsetsOutputArgs, opts ...pulumi.InvokeOption) GetDatahubGroupOffsetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDatahubGroupOffsetsResultOutput, error) {
-			args := v.(GetDatahubGroupOffsetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args, GetDatahubGroupOffsetsResultOutput{}, options).(GetDatahubGroupOffsetsResultOutput), nil
-		}).(GetDatahubGroupOffsetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args, GetDatahubGroupOffsetsResultOutput{}, options).(GetDatahubGroupOffsetsResultOutput)
 }
 
 // A collection of arguments for invoking getDatahubGroupOffsets.

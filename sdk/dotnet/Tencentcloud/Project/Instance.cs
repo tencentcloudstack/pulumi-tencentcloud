@@ -11,6 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Project
 {
     /// <summary>
+    /// Provides a resource to create a project
+    /// 
+    /// &gt; **NOTE:** Project can not be destroyed. If run `terraform destroy`, project will be set invisible.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

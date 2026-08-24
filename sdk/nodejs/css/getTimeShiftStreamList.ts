@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeShiftStreamList = tencentcloud.Css.getTimeShiftStreamList({
+ * const timeShiftStreamList = tencentcloud.css.getTimeShiftStreamList({
  *     startTime: 1698768000,
  *     endTime: 1698820641,
  *     streamName: "live",
@@ -113,7 +113,7 @@ export interface GetTimeShiftStreamListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeShiftStreamList = tencentcloud.Css.getTimeShiftStreamList({
+ * const timeShiftStreamList = tencentcloud.css.getTimeShiftStreamList({
  *     startTime: 1698768000,
  *     endTime: 1698820641,
  *     streamName: "live",
@@ -141,11 +141,11 @@ export interface GetTimeShiftStreamListOutputArgs {
     /**
      * The push domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The group the push domain belongs to.
      */
-    domainGroup?: pulumi.Input<string>;
+    domainGroup?: pulumi.Input<string | undefined>;
     /**
      * The end time, which must be a Unix timestamp.
      */
@@ -153,7 +153,7 @@ export interface GetTimeShiftStreamListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The start time, which must be a Unix timestamp.
      */
@@ -161,5 +161,5 @@ export interface GetTimeShiftStreamListOutputArgs {
     /**
      * The stream name.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
 }

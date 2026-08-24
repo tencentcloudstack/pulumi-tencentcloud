@@ -83,12 +83,8 @@ type GetRedisTopBigKeysResult struct {
 }
 
 func GetRedisTopBigKeysOutput(ctx *pulumi.Context, args GetRedisTopBigKeysOutputArgs, opts ...pulumi.InvokeOption) GetRedisTopBigKeysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRedisTopBigKeysResultOutput, error) {
-			args := v.(GetRedisTopBigKeysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args, GetRedisTopBigKeysResultOutput{}, options).(GetRedisTopBigKeysResultOutput), nil
-		}).(GetRedisTopBigKeysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args, GetRedisTopBigKeysResultOutput{}, options).(GetRedisTopBigKeysResultOutput)
 }
 
 // A collection of arguments for invoking getRedisTopBigKeys.

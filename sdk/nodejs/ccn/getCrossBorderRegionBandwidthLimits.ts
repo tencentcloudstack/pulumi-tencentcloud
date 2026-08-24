@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccnRegionBandwidthLimits = tencentcloud.Ccn.getCrossBorderRegionBandwidthLimits({
+ * const ccnRegionBandwidthLimits = tencentcloud.ccn.getCrossBorderRegionBandwidthLimits({
  *     filters: [
  *         {
  *             name: "source-region",
@@ -80,7 +80,7 @@ export interface GetCrossBorderRegionBandwidthLimitsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccnRegionBandwidthLimits = tencentcloud.Ccn.getCrossBorderRegionBandwidthLimits({
+ * const ccnRegionBandwidthLimits = tencentcloud.ccn.getCrossBorderRegionBandwidthLimits({
  *     filters: [
  *         {
  *             name: "source-region",
@@ -110,9 +110,9 @@ export interface GetCrossBorderRegionBandwidthLimitsOutputArgs {
     /**
      * Filter condition. Currently, only one value is supported. The supported fields, 1)source-region, the value is like ap-guangzhou; 2)destination-region, the value is like ap-shanghai; 3)ccn-ids,cloud network ID array, the value is like ccn-12345678; 4)user-account-id,user account ID, the value is like 12345678.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ccn.GetCrossBorderRegionBandwidthLimitsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ccn.GetCrossBorderRegionBandwidthLimitsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

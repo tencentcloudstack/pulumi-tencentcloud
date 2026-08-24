@@ -68,12 +68,8 @@ type GetDescribeCompaniesResult struct {
 }
 
 func GetDescribeCompaniesOutput(ctx *pulumi.Context, args GetDescribeCompaniesOutputArgs, opts ...pulumi.InvokeOption) GetDescribeCompaniesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeCompaniesResultOutput, error) {
-			args := v.(GetDescribeCompaniesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args, GetDescribeCompaniesResultOutput{}, options).(GetDescribeCompaniesResultOutput), nil
-		}).(GetDescribeCompaniesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args, GetDescribeCompaniesResultOutput{}, options).(GetDescribeCompaniesResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeCompanies.

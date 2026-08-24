@@ -17,15 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all members
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var members = Tencentcloud.Organization.GetMembers.Invoke();
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query members by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke(new()
+        ///     {
+        ///         Lang = "en",
+        ///         SearchKey = "tf-example",
+        ///     });
         /// 
         /// });
         /// ```
@@ -38,15 +59,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all members
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var members = Tencentcloud.Organization.GetMembers.Invoke();
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query members by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke(new()
+        ///     {
+        ///         Lang = "en",
+        ///         SearchKey = "tf-example",
+        ///     });
         /// 
         /// });
         /// ```
@@ -59,15 +101,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all members
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var members = Tencentcloud.Organization.GetMembers.Invoke();
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query members by filter
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Organization.GetMembers.Invoke(new()
+        ///     {
+        ///         Lang = "en",
+        ///         SearchKey = "tf-example",
+        ///     });
         /// 
         /// });
         /// ```

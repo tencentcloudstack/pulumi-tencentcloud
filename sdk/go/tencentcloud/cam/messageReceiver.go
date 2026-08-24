@@ -12,6 +12,47 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a CAM message receiver
+//
+// > **NOTE:** For security reasons, the CAM will return the `email` and `phoneNumber` parameter values in encrypted form. Please use the `ignoreChanges` function in Terraform's `lifecycle` to include these two parameters.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cam.NewMessageReceiver(ctx, "example", &cam.MessageReceiverArgs{
+//				Name:        pulumi.String("tf-example"),
+//				Remark:      pulumi.String("remark."),
+//				CountryCode: pulumi.String("86"),
+//				PhoneNumber: pulumi.String("18123456789"),
+//				Email:       pulumi.String("demo@qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// CAM message receiver can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Cam/messageReceiver:MessageReceiver example tf-example
+// ```
 type MessageReceiver struct {
 	pulumi.CustomResourceState
 

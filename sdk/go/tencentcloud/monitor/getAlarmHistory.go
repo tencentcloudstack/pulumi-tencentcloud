@@ -24,37 +24,39 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := monitor.GetAlarmHistory(ctx, &monitor.GetAlarmHistoryArgs{
-// Module: "monitor",
-// Order: pulumi.StringRef("DESC"),
-// StartTime: pulumi.IntRef(1696608000),
-// EndTime: pulumi.IntRef(1697212799),
-// MonitorTypes: []string{
-// "MT_QCE",
-// },
-// ProjectIds: interface{}{
-// 0,
-// },
-// Namespaces: []monitor.GetAlarmHistoryNamespace{
-// {
-// MonitorType: "CpuUsage",
-// Namespace: "cvm_device",
-// },
-// },
-// PolicyName: pulumi.StringRef("terraform_test"),
-// Content: pulumi.StringRef("CPU利用率 > 3%"),
-// PolicyIds: []string{
-// "policy-iejtp4ue",
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.GetAlarmHistory(ctx, &monitor.GetAlarmHistoryArgs{
+//				Module:    "monitor",
+//				Order:     pulumi.StringRef("DESC"),
+//				StartTime: pulumi.IntRef(1696608000),
+//				EndTime:   pulumi.IntRef(1697212799),
+//				MonitorTypes: []string{
+//					"MT_QCE",
+//				},
+//				ProjectIds: []int{
+//					0,
+//				},
+//				Namespaces: []monitor.GetAlarmHistoryNamespace{
+//					{
+//						MonitorType: "CpuUsage",
+//						Namespace:   "cvm_device",
+//					},
+//				},
+//				PolicyName: pulumi.StringRef("terraform_test"),
+//				Content:    pulumi.StringRef("CPU利用率 > 3%"),
+//				PolicyIds: []string{
+//					"policy-iejtp4ue",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetAlarmHistory(ctx *pulumi.Context, args *GetAlarmHistoryArgs, opts ...pulumi.InvokeOption) (*GetAlarmHistoryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -139,12 +141,8 @@ type GetAlarmHistoryResult struct {
 }
 
 func GetAlarmHistoryOutput(ctx *pulumi.Context, args GetAlarmHistoryOutputArgs, opts ...pulumi.InvokeOption) GetAlarmHistoryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmHistoryResultOutput, error) {
-			args := v.(GetAlarmHistoryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args, GetAlarmHistoryResultOutput{}, options).(GetAlarmHistoryResultOutput), nil
-		}).(GetAlarmHistoryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args, GetAlarmHistoryResultOutput{}, options).(GetAlarmHistoryResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmHistory.

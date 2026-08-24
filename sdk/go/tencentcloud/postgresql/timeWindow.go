@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// postgres postgresql_time_window can be imported using the id, e.g.
+// postgres postgresqlTimeWindow can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Postgresql/timeWindow:TimeWindow postgresql_time_window instance_id

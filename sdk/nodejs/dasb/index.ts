@@ -25,11 +25,6 @@ export type BindDeviceAccountPrivateKey = import("./bindDeviceAccountPrivateKey"
 export const BindDeviceAccountPrivateKey: typeof import("./bindDeviceAccountPrivateKey").BindDeviceAccountPrivateKey = null as any;
 utilities.lazyLoad(exports, ["BindDeviceAccountPrivateKey"], () => require("./bindDeviceAccountPrivateKey"));
 
-export { BindDeviceResourceArgs, BindDeviceResourceState } from "./bindDeviceResource";
-export type BindDeviceResource = import("./bindDeviceResource").BindDeviceResource;
-export const BindDeviceResource: typeof import("./bindDeviceResource").BindDeviceResource = null as any;
-utilities.lazyLoad(exports, ["BindDeviceResource"], () => require("./bindDeviceResource"));
-
 export { CmdTemplateArgs, CmdTemplateState } from "./cmdTemplate";
 export type CmdTemplate = import("./cmdTemplate").CmdTemplate;
 export const CmdTemplate: typeof import("./cmdTemplate").CmdTemplate = null as any;
@@ -93,8 +88,6 @@ const _module = {
                 return new BindDeviceAccountPassword(name, <any>undefined, { urn })
             case "tencentcloud:Dasb/bindDeviceAccountPrivateKey:BindDeviceAccountPrivateKey":
                 return new BindDeviceAccountPrivateKey(name, <any>undefined, { urn })
-            case "tencentcloud:Dasb/bindDeviceResource:BindDeviceResource":
-                return new BindDeviceResource(name, <any>undefined, { urn })
             case "tencentcloud:Dasb/cmdTemplate:CmdTemplate":
                 return new CmdTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Dasb/device:Device":
@@ -124,7 +117,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/acl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/assetSyncJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/bindDeviceAccountPassword", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/bindDeviceAccountPrivateKey", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/bindDeviceResource", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/cmdTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/device", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dasb/deviceAccount", _module)

@@ -11,6 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
 {
     /// <summary>
+    /// Provides a resource to create a VPN gateway.
+    /// 
+    /// &gt; **NOTE:** The prepaid VPN gateway do not support renew operation or delete operation with terraform.
+    /// 
     /// ## Example Usage
     /// 
     /// ### VPC SSL VPN gateway

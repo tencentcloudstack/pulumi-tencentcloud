@@ -24,35 +24,37 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := redis.GetInstanceTaskList(ctx, &redis.GetInstanceTaskListArgs{
-// InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
-// InstanceName: pulumi.StringRef(""),
-// ProjectIds: interface{}{
-// "",
-// },
-// TaskTypes: []string{
-// "",
-// },
-// BeginTime: pulumi.StringRef("2021-12-30 00:00:00"),
-// EndTime: pulumi.StringRef("2021-12-30 00:00:00"),
-// TaskStatuses: interface{}{
-// "",
-// },
-// Results: interface{}{
-// "",
-// },
-// OperateUins: []string{
-// "",
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := redis.GetInstanceTaskList(ctx, &redis.GetInstanceTaskListArgs{
+//				InstanceId:   pulumi.StringRef("crs-c1nl9rpv"),
+//				InstanceName: pulumi.StringRef(""),
+//				ProjectIds: pulumi.IntArray{
+//					"",
+//				},
+//				TaskTypes: []string{
+//					"",
+//				},
+//				BeginTime: pulumi.StringRef("2021-12-30 00:00:00"),
+//				EndTime:   pulumi.StringRef("2021-12-30 00:00:00"),
+//				TaskStatuses: pulumi.IntArray{
+//					"",
+//				},
+//				Results: pulumi.IntArray{
+//					"",
+//				},
+//				OperateUins: []string{
+//					"",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetInstanceTaskList(ctx *pulumi.Context, args *GetInstanceTaskListArgs, opts ...pulumi.InvokeOption) (*GetInstanceTaskListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -111,12 +113,8 @@ type GetInstanceTaskListResult struct {
 }
 
 func GetInstanceTaskListOutput(ctx *pulumi.Context, args GetInstanceTaskListOutputArgs, opts ...pulumi.InvokeOption) GetInstanceTaskListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceTaskListResultOutput, error) {
-			args := v.(GetInstanceTaskListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args, GetInstanceTaskListResultOutput{}, options).(GetInstanceTaskListResultOutput), nil
-		}).(GetInstanceTaskListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getInstanceTaskList:getInstanceTaskList", args, GetInstanceTaskListResultOutput{}, options).(GetInstanceTaskListResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceTaskList.

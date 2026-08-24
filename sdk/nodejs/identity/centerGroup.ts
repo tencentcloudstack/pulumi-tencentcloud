@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tencentcloud_identity_center_group can be imported using the id, e.g.
+ * tencentcloud.Identity.CenterGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerGroup:CenterGroup identity_center_group ${zoneId}#${groupId}
@@ -139,35 +139,35 @@ export interface CenterGroupState {
     /**
      * Creation time of the user group.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * A description of the user group. Length: Maximum 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of the user group.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * The name of the user group. Format: Allow English letters, numbers and special characters-. Length: Maximum 128 characters.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Type of user group. `Manual`: manual creation, `Synchronized`: external import.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * Number of team members.
      */
-    memberCount?: pulumi.Input<number>;
+    memberCount?: pulumi.Input<number | undefined>;
     /**
      * Modification time for the user group.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -177,7 +177,7 @@ export interface CenterGroupArgs {
     /**
      * A description of the user group. Length: Maximum 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The name of the user group. Format: Allow English letters, numbers and special characters-. Length: Maximum 128 characters.
      */
@@ -185,7 +185,7 @@ export interface CenterGroupArgs {
     /**
      * Type of user group. `Manual`: manual creation, `Synchronized`: external import.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */

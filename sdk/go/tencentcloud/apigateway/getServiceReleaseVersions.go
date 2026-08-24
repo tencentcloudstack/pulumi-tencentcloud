@@ -67,12 +67,8 @@ type LookupServiceReleaseVersionsResult struct {
 }
 
 func LookupServiceReleaseVersionsOutput(ctx *pulumi.Context, args LookupServiceReleaseVersionsOutputArgs, opts ...pulumi.InvokeOption) LookupServiceReleaseVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupServiceReleaseVersionsResultOutput, error) {
-			args := v.(LookupServiceReleaseVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args, LookupServiceReleaseVersionsResultOutput{}, options).(LookupServiceReleaseVersionsResultOutput), nil
-		}).(LookupServiceReleaseVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args, LookupServiceReleaseVersionsResultOutput{}, options).(LookupServiceReleaseVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getServiceReleaseVersions.

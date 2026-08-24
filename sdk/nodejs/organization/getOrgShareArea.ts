@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgShareArea = tencentcloud.Organization.getOrgShareArea({
+ * const orgShareArea = tencentcloud.organization.getOrgShareArea({
  *     lang: "zh",
  * });
  * ```
@@ -68,7 +68,7 @@ export interface GetOrgShareAreaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgShareArea = tencentcloud.Organization.getOrgShareArea({
+ * const orgShareArea = tencentcloud.organization.getOrgShareArea({
  *     lang: "zh",
  * });
  * ```
@@ -90,9 +90,9 @@ export interface GetOrgShareAreaOutputArgs {
      * Language.default zh.
      * Valid values:
      */
-    lang?: pulumi.Input<string>;
+    lang?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

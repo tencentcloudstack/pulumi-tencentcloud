@@ -974,6 +974,612 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput) Index(i pul
 	}).(NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput)
 }
 
+type PrivateNatGatewayTranslationAclRuleTranslationAclRules struct {
+	// ACL rule ID.
+	AclRuleId *int `pulumi:"aclRuleId"`
+	// Whether to match.
+	Action *int `pulumi:"action"`
+	// ACL rule description.
+	Description *string `pulumi:"description"`
+	// Destination address.
+	DestinationCidr string `pulumi:"destinationCidr"`
+	// Destination port.
+	DestinationPort string `pulumi:"destinationPort"`
+	// ACL protocol type, optional values: `ALL`, `TCP`, `UDP`.
+	Protocol string `pulumi:"protocol"`
+	// Source address. Supports `ip` or `cidr` format `xxx.xxx.xxx.000/xx`.
+	SourceCidr *string `pulumi:"sourceCidr"`
+	// Source port.
+	SourcePort string `pulumi:"sourcePort"`
+}
+
+// PrivateNatGatewayTranslationAclRuleTranslationAclRulesInput is an input type that accepts PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs and PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationAclRuleTranslationAclRulesInput` via:
+//
+//	PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs{...}
+type PrivateNatGatewayTranslationAclRuleTranslationAclRulesInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput
+	ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutputWithContext(context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput
+}
+
+type PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs struct {
+	// ACL rule ID.
+	AclRuleId pulumi.IntPtrInput `pulumi:"aclRuleId"`
+	// Whether to match.
+	Action pulumi.IntPtrInput `pulumi:"action"`
+	// ACL rule description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Destination address.
+	DestinationCidr pulumi.StringInput `pulumi:"destinationCidr"`
+	// Destination port.
+	DestinationPort pulumi.StringInput `pulumi:"destinationPort"`
+	// ACL protocol type, optional values: `ALL`, `TCP`, `UDP`.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Source address. Supports `ip` or `cidr` format `xxx.xxx.xxx.000/xx`.
+	SourceCidr pulumi.StringPtrInput `pulumi:"sourceCidr"`
+	// Source port.
+	SourcePort pulumi.StringInput `pulumi:"sourcePort"`
+}
+
+func (PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationAclRuleTranslationAclRules)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput {
+	return i.ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput)
+}
+
+func (i PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return i.ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput).ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(ctx)
+}
+
+// PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrInput is an input type that accepts PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs, PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtr and PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrInput` via:
+//
+//	        PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs{...}
+//
+//	or:
+//
+//	        nil
+type PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput
+	ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput
+}
+
+type privateNatGatewayTranslationAclRuleTranslationAclRulesPtrType PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs
+
+func PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtr(v *PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrInput {
+	return (*privateNatGatewayTranslationAclRuleTranslationAclRulesPtrType)(v)
+}
+
+func (*privateNatGatewayTranslationAclRuleTranslationAclRulesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateNatGatewayTranslationAclRuleTranslationAclRules)(nil)).Elem()
+}
+
+func (i *privateNatGatewayTranslationAclRuleTranslationAclRulesPtrType) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return i.ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(context.Background())
+}
+
+func (i *privateNatGatewayTranslationAclRuleTranslationAclRulesPtrType) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput)
+}
+
+type PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationAclRuleTranslationAclRules)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return o.ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(context.Background())
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PrivateNatGatewayTranslationAclRuleTranslationAclRules) *PrivateNatGatewayTranslationAclRuleTranslationAclRules {
+		return &v
+	}).(PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput)
+}
+
+// ACL rule ID.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) AclRuleId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) *int { return v.AclRuleId }).(pulumi.IntPtrOutput)
+}
+
+// Whether to match.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) Action() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) *int { return v.Action }).(pulumi.IntPtrOutput)
+}
+
+// ACL rule description.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Destination address.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) DestinationCidr() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) string { return v.DestinationCidr }).(pulumi.StringOutput)
+}
+
+// Destination port.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) DestinationPort() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) string { return v.DestinationPort }).(pulumi.StringOutput)
+}
+
+// ACL protocol type, optional values: `ALL`, `TCP`, `UDP`.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Source address. Supports `ip` or `cidr` format `xxx.xxx.xxx.000/xx`.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) SourceCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string { return v.SourceCidr }).(pulumi.StringPtrOutput)
+}
+
+// Source port.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput) SourcePort() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationAclRuleTranslationAclRules) string { return v.SourcePort }).(pulumi.StringOutput)
+}
+
+type PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateNatGatewayTranslationAclRuleTranslationAclRules)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput() PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) ToPrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) Elem() PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) PrivateNatGatewayTranslationAclRuleTranslationAclRules {
+		if v != nil {
+			return *v
+		}
+		var ret PrivateNatGatewayTranslationAclRuleTranslationAclRules
+		return ret
+	}).(PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput)
+}
+
+// ACL rule ID.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) AclRuleId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AclRuleId
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to match.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) Action() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Action
+	}).(pulumi.IntPtrOutput)
+}
+
+// ACL rule description.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// Destination address.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) DestinationCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DestinationCidr
+	}).(pulumi.StringPtrOutput)
+}
+
+// Destination port.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) DestinationPort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DestinationPort
+	}).(pulumi.StringPtrOutput)
+}
+
+// ACL protocol type, optional values: `ALL`, `TCP`, `UDP`.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// Source address. Supports `ip` or `cidr` format `xxx.xxx.xxx.000/xx`.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) SourceCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SourceCidr
+	}).(pulumi.StringPtrOutput)
+}
+
+// Source port.
+func (o PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput) SourcePort() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateNatGatewayTranslationAclRuleTranslationAclRules) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SourcePort
+	}).(pulumi.StringPtrOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule struct {
+	// Translation rule description.
+	Description *string `pulumi:"description"`
+	// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+	OriginalIp string `pulumi:"originalIp"`
+	// Translated (mapped-after) IP for this rule. Can be modified in place.
+	TranslationIp string `pulumi:"translationIp"`
+}
+
+// PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleInput is an input type that accepts PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs and PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleInput` via:
+//
+//	PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs{...}
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput
+	ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs struct {
+	// Translation rule description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+	OriginalIp pulumi.StringInput `pulumi:"originalIp"`
+	// Translated (mapped-after) IP for this rule. Can be modified in place.
+	TranslationIp pulumi.StringInput `pulumi:"translationIp"`
+}
+
+func (PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput {
+	return i.ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput)
+}
+
+// PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayInput is an input type that accepts PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray and PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayInput` via:
+//
+//	PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray{ PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs{...} }
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput
+	ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray []PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleInput
+
+func (PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput {
+	return i.ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput {
+	return o
+}
+
+// Translation rule description.
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) OriginalIp() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule) string { return v.OriginalIp }).(pulumi.StringOutput)
+}
+
+// Translated (mapped-after) IP for this rule. Can be modified in place.
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput) TranslationIp() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule) string { return v.TranslationIp }).(pulumi.StringOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput) Index(i pulumi.IntInput) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule {
+		return vs[0].([]PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule)[vs[1].(int)]
+	}).(PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule struct {
+	// Translation rule description.
+	Description *string `pulumi:"description"`
+	// Translated IP pool for this rule (transport-layer rules use an IP pool). Acts as the rule identity within this bucket.
+	TranslationIp string `pulumi:"translationIp"`
+}
+
+// PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleInput is an input type that accepts PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs and PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleInput` via:
+//
+//	PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs{...}
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput
+	ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs struct {
+	// Translation rule description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Translated IP pool for this rule (transport-layer rules use an IP pool). Acts as the rule identity within this bucket.
+	TranslationIp pulumi.StringInput `pulumi:"translationIp"`
+}
+
+func (PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput {
+	return i.ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput)
+}
+
+// PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayInput is an input type that accepts PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray and PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayInput` via:
+//
+//	PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray{ PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs{...} }
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput
+	ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray []PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleInput
+
+func (PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput {
+	return i.ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput {
+	return o
+}
+
+// Translation rule description.
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Translated IP pool for this rule (transport-layer rules use an IP pool). Acts as the rule identity within this bucket.
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput) TranslationIp() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule) string { return v.TranslationIp }).(pulumi.StringOutput)
+}
+
+type PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput) Index(i pulumi.IntInput) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule {
+		return vs[0].([]PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule)[vs[1].(int)]
+	}).(PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput)
+}
+
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule struct {
+	// Translation rule description.
+	Description *string `pulumi:"description"`
+	// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+	OriginalIp string `pulumi:"originalIp"`
+	// Translated (mapped-after) IP for this rule. Can be modified in place.
+	TranslationIp string `pulumi:"translationIp"`
+}
+
+// PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleInput is an input type that accepts PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs and PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleInput` via:
+//
+//	PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs{...}
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput
+	ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput
+}
+
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs struct {
+	// Translation rule description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+	OriginalIp pulumi.StringInput `pulumi:"originalIp"`
+	// Translated (mapped-after) IP for this rule. Can be modified in place.
+	TranslationIp pulumi.StringInput `pulumi:"translationIp"`
+}
+
+func (PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput {
+	return i.ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput)
+}
+
+// PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayInput is an input type that accepts PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray and PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput values.
+// You can construct a concrete instance of `PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayInput` via:
+//
+//	PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray{ PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs{...} }
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayInput interface {
+	pulumi.Input
+
+	ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput
+	ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutputWithContext(context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput
+}
+
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray []PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleInput
+
+func (PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule)(nil)).Elem()
+}
+
+func (i PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput {
+	return i.ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput)
+}
+
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput {
+	return o
+}
+
+// Translation rule description.
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Original (mapped-before) IP for this rule. Acts as the rule identity within this bucket.
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) OriginalIp() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule) string { return v.OriginalIp }).(pulumi.StringOutput)
+}
+
+// Translated (mapped-after) IP for this rule. Can be modified in place.
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput) TranslationIp() pulumi.StringOutput {
+	return o.ApplyT(func(v PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule) string { return v.TranslationIp }).(pulumi.StringOutput)
+}
+
+type PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule)(nil)).Elem()
+}
+
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput() PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput) ToPrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutputWithContext(ctx context.Context) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput {
+	return o
+}
+
+func (o PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput) Index(i pulumi.IntInput) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule {
+		return vs[0].([]PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule)[vs[1].(int)]
+	}).(PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput)
+}
+
 type PrivateNatGatewayTranslationNatRuleTranslationNatRule struct {
 	// Translation rule description.
 	Description string `pulumi:"description"`
@@ -1105,6 +1711,371 @@ func (o PrivateNatGatewayTranslationNatRuleTranslationNatRuleArrayOutput) Index(
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) PrivateNatGatewayTranslationNatRuleTranslationNatRule {
 		return vs[0].([]PrivateNatGatewayTranslationNatRuleTranslationNatRule)[vs[1].(int)]
 	}).(PrivateNatGatewayTranslationNatRuleTranslationNatRuleOutput)
+}
+
+type ReplaceRoutesWithRoutePolicyConfigRoute struct {
+	// Match the route reception policy tag.
+	ForceMatchPolicy *bool `pulumi:"forceMatchPolicy"`
+	// Route unique policy ID.
+	RouteItemId *string `pulumi:"routeItemId"`
+}
+
+// ReplaceRoutesWithRoutePolicyConfigRouteInput is an input type that accepts ReplaceRoutesWithRoutePolicyConfigRouteArgs and ReplaceRoutesWithRoutePolicyConfigRouteOutput values.
+// You can construct a concrete instance of `ReplaceRoutesWithRoutePolicyConfigRouteInput` via:
+//
+//	ReplaceRoutesWithRoutePolicyConfigRouteArgs{...}
+type ReplaceRoutesWithRoutePolicyConfigRouteInput interface {
+	pulumi.Input
+
+	ToReplaceRoutesWithRoutePolicyConfigRouteOutput() ReplaceRoutesWithRoutePolicyConfigRouteOutput
+	ToReplaceRoutesWithRoutePolicyConfigRouteOutputWithContext(context.Context) ReplaceRoutesWithRoutePolicyConfigRouteOutput
+}
+
+type ReplaceRoutesWithRoutePolicyConfigRouteArgs struct {
+	// Match the route reception policy tag.
+	ForceMatchPolicy pulumi.BoolPtrInput `pulumi:"forceMatchPolicy"`
+	// Route unique policy ID.
+	RouteItemId pulumi.StringPtrInput `pulumi:"routeItemId"`
+}
+
+func (ReplaceRoutesWithRoutePolicyConfigRouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplaceRoutesWithRoutePolicyConfigRoute)(nil)).Elem()
+}
+
+func (i ReplaceRoutesWithRoutePolicyConfigRouteArgs) ToReplaceRoutesWithRoutePolicyConfigRouteOutput() ReplaceRoutesWithRoutePolicyConfigRouteOutput {
+	return i.ToReplaceRoutesWithRoutePolicyConfigRouteOutputWithContext(context.Background())
+}
+
+func (i ReplaceRoutesWithRoutePolicyConfigRouteArgs) ToReplaceRoutesWithRoutePolicyConfigRouteOutputWithContext(ctx context.Context) ReplaceRoutesWithRoutePolicyConfigRouteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplaceRoutesWithRoutePolicyConfigRouteOutput)
+}
+
+// ReplaceRoutesWithRoutePolicyConfigRouteArrayInput is an input type that accepts ReplaceRoutesWithRoutePolicyConfigRouteArray and ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput values.
+// You can construct a concrete instance of `ReplaceRoutesWithRoutePolicyConfigRouteArrayInput` via:
+//
+//	ReplaceRoutesWithRoutePolicyConfigRouteArray{ ReplaceRoutesWithRoutePolicyConfigRouteArgs{...} }
+type ReplaceRoutesWithRoutePolicyConfigRouteArrayInput interface {
+	pulumi.Input
+
+	ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutput() ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput
+	ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutputWithContext(context.Context) ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput
+}
+
+type ReplaceRoutesWithRoutePolicyConfigRouteArray []ReplaceRoutesWithRoutePolicyConfigRouteInput
+
+func (ReplaceRoutesWithRoutePolicyConfigRouteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReplaceRoutesWithRoutePolicyConfigRoute)(nil)).Elem()
+}
+
+func (i ReplaceRoutesWithRoutePolicyConfigRouteArray) ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutput() ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput {
+	return i.ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutputWithContext(context.Background())
+}
+
+func (i ReplaceRoutesWithRoutePolicyConfigRouteArray) ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutputWithContext(ctx context.Context) ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput)
+}
+
+type ReplaceRoutesWithRoutePolicyConfigRouteOutput struct{ *pulumi.OutputState }
+
+func (ReplaceRoutesWithRoutePolicyConfigRouteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ReplaceRoutesWithRoutePolicyConfigRoute)(nil)).Elem()
+}
+
+func (o ReplaceRoutesWithRoutePolicyConfigRouteOutput) ToReplaceRoutesWithRoutePolicyConfigRouteOutput() ReplaceRoutesWithRoutePolicyConfigRouteOutput {
+	return o
+}
+
+func (o ReplaceRoutesWithRoutePolicyConfigRouteOutput) ToReplaceRoutesWithRoutePolicyConfigRouteOutputWithContext(ctx context.Context) ReplaceRoutesWithRoutePolicyConfigRouteOutput {
+	return o
+}
+
+// Match the route reception policy tag.
+func (o ReplaceRoutesWithRoutePolicyConfigRouteOutput) ForceMatchPolicy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ReplaceRoutesWithRoutePolicyConfigRoute) *bool { return v.ForceMatchPolicy }).(pulumi.BoolPtrOutput)
+}
+
+// Route unique policy ID.
+func (o ReplaceRoutesWithRoutePolicyConfigRouteOutput) RouteItemId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ReplaceRoutesWithRoutePolicyConfigRoute) *string { return v.RouteItemId }).(pulumi.StringPtrOutput)
+}
+
+type ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput struct{ *pulumi.OutputState }
+
+func (ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ReplaceRoutesWithRoutePolicyConfigRoute)(nil)).Elem()
+}
+
+func (o ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput) ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutput() ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput {
+	return o
+}
+
+func (o ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput) ToReplaceRoutesWithRoutePolicyConfigRouteArrayOutputWithContext(ctx context.Context) ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput {
+	return o
+}
+
+func (o ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput) Index(i pulumi.IntInput) ReplaceRoutesWithRoutePolicyConfigRouteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReplaceRoutesWithRoutePolicyConfigRoute {
+		return vs[0].([]ReplaceRoutesWithRoutePolicyConfigRoute)[vs[1].(int)]
+	}).(ReplaceRoutesWithRoutePolicyConfigRouteOutput)
+}
+
+type RoutePolicyEntriesRoutePolicyEntrySet struct {
+	// Action.
+	// DROP: drop.
+	// DISABLE: receive and disable.
+	// ACCEPT: receive and enable.
+	// Note: This field may return null, indicating that no valid value was found.
+	Action *string `pulumi:"action"`
+	// Destination ip range.
+	// Note: This field may return null, indicating that no valid value was found.
+	CidrBlock *string `pulumi:"cidrBlock"`
+	// Creation time.
+	//
+	// Note: This field may return null, indicating that no valid value was found.
+	CreatedTime *string `pulumi:"createdTime"`
+	// Describes the routing strategy rule.
+	// Note: This field may return null, indicating that no valid value was found.
+	Description *string `pulumi:"description"`
+	// Gateway unique ID.
+	// Note: This field may return null, indicating that no valid value was found.
+	GatewayId *string `pulumi:"gatewayId"`
+	// Next hop type. types currently supported:.
+	// CVM: cloud virtual machine with public network gateway type.
+	// VPN: vpn gateway.
+	// DIRECTCONNECT: direct connect gateway.
+	// PEERCONNECTION: peering connection.
+	// HAVIP: high availability virtual ip.
+	// NAT: specifies the nat gateway.
+	// EIP: specifies the public ip address of the cloud virtual machine.
+	// LOCAL_GATEWAY: specifies the local gateway.
+	// PVGW: pvgw gateway.
+	// Note: This field may return null, indicating that no valid value was found.
+	GatewayType *string `pulumi:"gatewayType"`
+	// Priority. a smaller value indicates a higher priority.
+	// Note: This field may return null, indicating that no valid value was found.
+	Priority *int `pulumi:"priority"`
+	// Specifies the region.
+	// Note: This field may return null, indicating that no valid value was found.
+	Region *string `pulumi:"region"`
+	// Specifies the unique ID of the IPv4 routing strategy entry.
+	// Note: This field may return null, indicating that no valid value was found.
+	RoutePolicyEntryId *string `pulumi:"routePolicyEntryId"`
+	// Routing Type
+	//
+	// Specifies the USER-customized data type.
+	// NETD: specifies the route for network detection.
+	// CCN: CCN route.
+	// Note: This field may return null, indicating that no valid value was found.
+	RouteType *string `pulumi:"routeType"`
+}
+
+// RoutePolicyEntriesRoutePolicyEntrySetInput is an input type that accepts RoutePolicyEntriesRoutePolicyEntrySetArgs and RoutePolicyEntriesRoutePolicyEntrySetOutput values.
+// You can construct a concrete instance of `RoutePolicyEntriesRoutePolicyEntrySetInput` via:
+//
+//	RoutePolicyEntriesRoutePolicyEntrySetArgs{...}
+type RoutePolicyEntriesRoutePolicyEntrySetInput interface {
+	pulumi.Input
+
+	ToRoutePolicyEntriesRoutePolicyEntrySetOutput() RoutePolicyEntriesRoutePolicyEntrySetOutput
+	ToRoutePolicyEntriesRoutePolicyEntrySetOutputWithContext(context.Context) RoutePolicyEntriesRoutePolicyEntrySetOutput
+}
+
+type RoutePolicyEntriesRoutePolicyEntrySetArgs struct {
+	// Action.
+	// DROP: drop.
+	// DISABLE: receive and disable.
+	// ACCEPT: receive and enable.
+	// Note: This field may return null, indicating that no valid value was found.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Destination ip range.
+	// Note: This field may return null, indicating that no valid value was found.
+	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
+	// Creation time.
+	//
+	// Note: This field may return null, indicating that no valid value was found.
+	CreatedTime pulumi.StringPtrInput `pulumi:"createdTime"`
+	// Describes the routing strategy rule.
+	// Note: This field may return null, indicating that no valid value was found.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Gateway unique ID.
+	// Note: This field may return null, indicating that no valid value was found.
+	GatewayId pulumi.StringPtrInput `pulumi:"gatewayId"`
+	// Next hop type. types currently supported:.
+	// CVM: cloud virtual machine with public network gateway type.
+	// VPN: vpn gateway.
+	// DIRECTCONNECT: direct connect gateway.
+	// PEERCONNECTION: peering connection.
+	// HAVIP: high availability virtual ip.
+	// NAT: specifies the nat gateway.
+	// EIP: specifies the public ip address of the cloud virtual machine.
+	// LOCAL_GATEWAY: specifies the local gateway.
+	// PVGW: pvgw gateway.
+	// Note: This field may return null, indicating that no valid value was found.
+	GatewayType pulumi.StringPtrInput `pulumi:"gatewayType"`
+	// Priority. a smaller value indicates a higher priority.
+	// Note: This field may return null, indicating that no valid value was found.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Specifies the region.
+	// Note: This field may return null, indicating that no valid value was found.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+	// Specifies the unique ID of the IPv4 routing strategy entry.
+	// Note: This field may return null, indicating that no valid value was found.
+	RoutePolicyEntryId pulumi.StringPtrInput `pulumi:"routePolicyEntryId"`
+	// Routing Type
+	//
+	// Specifies the USER-customized data type.
+	// NETD: specifies the route for network detection.
+	// CCN: CCN route.
+	// Note: This field may return null, indicating that no valid value was found.
+	RouteType pulumi.StringPtrInput `pulumi:"routeType"`
+}
+
+func (RoutePolicyEntriesRoutePolicyEntrySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RoutePolicyEntriesRoutePolicyEntrySet)(nil)).Elem()
+}
+
+func (i RoutePolicyEntriesRoutePolicyEntrySetArgs) ToRoutePolicyEntriesRoutePolicyEntrySetOutput() RoutePolicyEntriesRoutePolicyEntrySetOutput {
+	return i.ToRoutePolicyEntriesRoutePolicyEntrySetOutputWithContext(context.Background())
+}
+
+func (i RoutePolicyEntriesRoutePolicyEntrySetArgs) ToRoutePolicyEntriesRoutePolicyEntrySetOutputWithContext(ctx context.Context) RoutePolicyEntriesRoutePolicyEntrySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RoutePolicyEntriesRoutePolicyEntrySetOutput)
+}
+
+// RoutePolicyEntriesRoutePolicyEntrySetArrayInput is an input type that accepts RoutePolicyEntriesRoutePolicyEntrySetArray and RoutePolicyEntriesRoutePolicyEntrySetArrayOutput values.
+// You can construct a concrete instance of `RoutePolicyEntriesRoutePolicyEntrySetArrayInput` via:
+//
+//	RoutePolicyEntriesRoutePolicyEntrySetArray{ RoutePolicyEntriesRoutePolicyEntrySetArgs{...} }
+type RoutePolicyEntriesRoutePolicyEntrySetArrayInput interface {
+	pulumi.Input
+
+	ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutput() RoutePolicyEntriesRoutePolicyEntrySetArrayOutput
+	ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutputWithContext(context.Context) RoutePolicyEntriesRoutePolicyEntrySetArrayOutput
+}
+
+type RoutePolicyEntriesRoutePolicyEntrySetArray []RoutePolicyEntriesRoutePolicyEntrySetInput
+
+func (RoutePolicyEntriesRoutePolicyEntrySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RoutePolicyEntriesRoutePolicyEntrySet)(nil)).Elem()
+}
+
+func (i RoutePolicyEntriesRoutePolicyEntrySetArray) ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutput() RoutePolicyEntriesRoutePolicyEntrySetArrayOutput {
+	return i.ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutputWithContext(context.Background())
+}
+
+func (i RoutePolicyEntriesRoutePolicyEntrySetArray) ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutputWithContext(ctx context.Context) RoutePolicyEntriesRoutePolicyEntrySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RoutePolicyEntriesRoutePolicyEntrySetArrayOutput)
+}
+
+type RoutePolicyEntriesRoutePolicyEntrySetOutput struct{ *pulumi.OutputState }
+
+func (RoutePolicyEntriesRoutePolicyEntrySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RoutePolicyEntriesRoutePolicyEntrySet)(nil)).Elem()
+}
+
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) ToRoutePolicyEntriesRoutePolicyEntrySetOutput() RoutePolicyEntriesRoutePolicyEntrySetOutput {
+	return o
+}
+
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) ToRoutePolicyEntriesRoutePolicyEntrySetOutputWithContext(ctx context.Context) RoutePolicyEntriesRoutePolicyEntrySetOutput {
+	return o
+}
+
+// Action.
+// DROP: drop.
+// DISABLE: receive and disable.
+// ACCEPT: receive and enable.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// Destination ip range.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) CidrBlock() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.CidrBlock }).(pulumi.StringPtrOutput)
+}
+
+// Creation time.
+//
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) CreatedTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.CreatedTime }).(pulumi.StringPtrOutput)
+}
+
+// Describes the routing strategy rule.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Gateway unique ID.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) GatewayId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.GatewayId }).(pulumi.StringPtrOutput)
+}
+
+// Next hop type. types currently supported:.
+// CVM: cloud virtual machine with public network gateway type.
+// VPN: vpn gateway.
+// DIRECTCONNECT: direct connect gateway.
+// PEERCONNECTION: peering connection.
+// HAVIP: high availability virtual ip.
+// NAT: specifies the nat gateway.
+// EIP: specifies the public ip address of the cloud virtual machine.
+// LOCAL_GATEWAY: specifies the local gateway.
+// PVGW: pvgw gateway.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) GatewayType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.GatewayType }).(pulumi.StringPtrOutput)
+}
+
+// Priority. a smaller value indicates a higher priority.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+// Specifies the region.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+// Specifies the unique ID of the IPv4 routing strategy entry.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) RoutePolicyEntryId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.RoutePolicyEntryId }).(pulumi.StringPtrOutput)
+}
+
+// Routing Type
+//
+// Specifies the USER-customized data type.
+// NETD: specifies the route for network detection.
+// CCN: CCN route.
+// Note: This field may return null, indicating that no valid value was found.
+func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) RouteType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.RouteType }).(pulumi.StringPtrOutput)
+}
+
+type RoutePolicyEntriesRoutePolicyEntrySetArrayOutput struct{ *pulumi.OutputState }
+
+func (RoutePolicyEntriesRoutePolicyEntrySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RoutePolicyEntriesRoutePolicyEntrySet)(nil)).Elem()
+}
+
+func (o RoutePolicyEntriesRoutePolicyEntrySetArrayOutput) ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutput() RoutePolicyEntriesRoutePolicyEntrySetArrayOutput {
+	return o
+}
+
+func (o RoutePolicyEntriesRoutePolicyEntrySetArrayOutput) ToRoutePolicyEntriesRoutePolicyEntrySetArrayOutputWithContext(ctx context.Context) RoutePolicyEntriesRoutePolicyEntrySetArrayOutput {
+	return o
+}
+
+func (o RoutePolicyEntriesRoutePolicyEntrySetArrayOutput) Index(i pulumi.IntInput) RoutePolicyEntriesRoutePolicyEntrySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RoutePolicyEntriesRoutePolicyEntrySet {
+		return vs[0].([]RoutePolicyEntriesRoutePolicyEntrySet)[vs[1].(int)]
+	}).(RoutePolicyEntriesRoutePolicyEntrySetOutput)
 }
 
 type SnapshotPolicyAttachmentInstance struct {
@@ -4949,6 +5920,8 @@ type GetRouteTablesInstanceListRouteEntryInfo struct {
 	NextType string `pulumi:"nextType"`
 	// ID of a route table entry.
 	RouteEntryId string `pulumi:"routeEntryId"`
+	// The unique policy ID for the route.
+	RouteItemId string `pulumi:"routeItemId"`
 }
 
 // GetRouteTablesInstanceListRouteEntryInfoInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArgs and GetRouteTablesInstanceListRouteEntryInfoOutput values.
@@ -4973,6 +5946,8 @@ type GetRouteTablesInstanceListRouteEntryInfoArgs struct {
 	NextType pulumi.StringInput `pulumi:"nextType"`
 	// ID of a route table entry.
 	RouteEntryId pulumi.StringInput `pulumi:"routeEntryId"`
+	// The unique policy ID for the route.
+	RouteItemId pulumi.StringInput `pulumi:"routeItemId"`
 }
 
 func (GetRouteTablesInstanceListRouteEntryInfoArgs) ElementType() reflect.Type {
@@ -5049,6 +6024,11 @@ func (o GetRouteTablesInstanceListRouteEntryInfoOutput) NextType() pulumi.String
 // ID of a route table entry.
 func (o GetRouteTablesInstanceListRouteEntryInfoOutput) RouteEntryId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRouteTablesInstanceListRouteEntryInfo) string { return v.RouteEntryId }).(pulumi.StringOutput)
+}
+
+// The unique policy ID for the route.
+func (o GetRouteTablesInstanceListRouteEntryInfoOutput) RouteItemId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRouteTablesInstanceListRouteEntryInfo) string { return v.RouteItemId }).(pulumi.StringOutput)
 }
 
 type GetRouteTablesInstanceListRouteEntryInfoArrayOutput struct{ *pulumi.OutputState }
@@ -6989,8 +7969,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetEgressArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngressInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetIngressArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationAclRuleTranslationAclRulesInput)(nil)).Elem(), PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrInput)(nil)).Elem(), PrivateNatGatewayTranslationAclRuleTranslationAclRulesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleTranslationNatRuleInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleTranslationNatRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateNatGatewayTranslationNatRuleTranslationNatRuleArrayInput)(nil)).Elem(), PrivateNatGatewayTranslationNatRuleTranslationNatRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceRoutesWithRoutePolicyConfigRouteInput)(nil)).Elem(), ReplaceRoutesWithRoutePolicyConfigRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ReplaceRoutesWithRoutePolicyConfigRouteArrayInput)(nil)).Elem(), ReplaceRoutesWithRoutePolicyConfigRouteArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RoutePolicyEntriesRoutePolicyEntrySetInput)(nil)).Elem(), RoutePolicyEntriesRoutePolicyEntrySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RoutePolicyEntriesRoutePolicyEntrySetArrayInput)(nil)).Elem(), RoutePolicyEntriesRoutePolicyEntrySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyAttachmentInstanceInput)(nil)).Elem(), SnapshotPolicyAttachmentInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyAttachmentInstanceArrayInput)(nil)).Elem(), SnapshotPolicyAttachmentInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SnapshotPolicyBackupPolicyInput)(nil)).Elem(), SnapshotPolicyBackupPolicyArgs{})
@@ -7087,8 +8079,20 @@ func init() {
 	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput{})
 	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput{})
 	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationAclRuleTranslationAclRulesOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationAclRuleTranslationAclRulesPtrOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArrayOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArrayOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleOutput{})
+	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArrayOutput{})
 	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleTranslationNatRuleOutput{})
 	pulumi.RegisterOutputType(PrivateNatGatewayTranslationNatRuleTranslationNatRuleArrayOutput{})
+	pulumi.RegisterOutputType(ReplaceRoutesWithRoutePolicyConfigRouteOutput{})
+	pulumi.RegisterOutputType(ReplaceRoutesWithRoutePolicyConfigRouteArrayOutput{})
+	pulumi.RegisterOutputType(RoutePolicyEntriesRoutePolicyEntrySetOutput{})
+	pulumi.RegisterOutputType(RoutePolicyEntriesRoutePolicyEntrySetArrayOutput{})
 	pulumi.RegisterOutputType(SnapshotPolicyAttachmentInstanceOutput{})
 	pulumi.RegisterOutputType(SnapshotPolicyAttachmentInstanceArrayOutput{})
 	pulumi.RegisterOutputType(SnapshotPolicyBackupPolicyOutput{})

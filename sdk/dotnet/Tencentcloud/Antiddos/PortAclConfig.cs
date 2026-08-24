@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Import
     /// 
-    /// antiddos port_acl_config can be imported using the id, e.g.
+    /// antiddos PortAclConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}

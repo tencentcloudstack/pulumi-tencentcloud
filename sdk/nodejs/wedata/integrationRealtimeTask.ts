@@ -68,7 +68,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata integration_realtime_task can be imported using the id, e.g.
+ * wedata integrationRealtimeTask can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d
@@ -188,31 +188,31 @@ export interface IntegrationRealtimeTaskState {
     /**
      * Description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Synchronization type: 1. Whole database synchronization, 2. Single table synchronization.
      */
-    syncType?: pulumi.Input<number>;
+    syncType?: pulumi.Input<number | undefined>;
     /**
      * Task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Task Information.
      */
-    taskInfo?: pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfo>;
+    taskInfo?: pulumi.Input<inputs.Wedata.IntegrationRealtimeTaskTaskInfo | undefined>;
     /**
      * Task display mode, 0: canvas mode, 1: form mode.
      */
-    taskMode?: pulumi.Input<string>;
+    taskMode?: pulumi.Input<string | undefined>;
     /**
      * Task name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -222,7 +222,7 @@ export interface IntegrationRealtimeTaskArgs {
     /**
      * Description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */

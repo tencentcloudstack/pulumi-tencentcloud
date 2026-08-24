@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mysql.getInstance({});
+ * const example = tencentcloud.mysql.getInstance({});
  * const exampleBackupOperation = new tencentcloud.redis.BackupOperation("example", {
  *     instanceId: example.then(example => example.instanceLists?.[0]?.mysqlId),
  *     remark: "manually back",
@@ -101,15 +101,15 @@ export interface BackupOperationState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Notes information for the backup.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Number of days to store.0 specifies the default retention time.
      */
-    storageDays?: pulumi.Input<number>;
+    storageDays?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -123,9 +123,9 @@ export interface BackupOperationArgs {
     /**
      * Notes information for the backup.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Number of days to store.0 specifies the default retention time.
      */
-    storageDays?: pulumi.Input<number>;
+    storageDays?: pulumi.Input<number | undefined>;
 }

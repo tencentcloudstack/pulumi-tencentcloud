@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getInstanceQpsLimit({
+ * const example = tencentcloud.waf.getInstanceQpsLimit({
  *     instanceId: "waf_2kxtlbky00b3b4qz",
  * });
  * ```
@@ -72,7 +72,7 @@ export interface GetInstanceQpsLimitResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getInstanceQpsLimit({
+ * const example = tencentcloud.waf.getInstanceQpsLimit({
  *     instanceId: "waf_2kxtlbky00b3b4qz",
  * });
  * ```
@@ -97,9 +97,9 @@ export interface GetInstanceQpsLimitOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Instance type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

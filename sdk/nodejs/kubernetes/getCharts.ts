@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getCharts({});
+ * const example = tencentcloud.kubernetes.getCharts({});
  * ```
  */
 export function getCharts(args?: GetChartsArgs, opts?: pulumi.InvokeOptions): Promise<GetChartsResult> {
@@ -81,7 +81,7 @@ export interface GetChartsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getCharts({});
+ * const example = tencentcloud.kubernetes.getCharts({});
  * ```
  */
 export function getChartsOutput(args?: GetChartsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetChartsResult> {
@@ -102,17 +102,17 @@ export interface GetChartsOutputArgs {
     /**
      * Operation system app supported. Available values: `arm32`, `arm64`, `amd64`.
      */
-    arch?: pulumi.Input<string>;
+    arch?: pulumi.Input<string | undefined>;
     /**
      * Cluster type. Available values: `tke`, `eks`.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Kind of app chart. Available values: `log`, `scheduler`, `network`, `storage`, `monitor`, `dns`, `image`, `other`, `invisible`.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

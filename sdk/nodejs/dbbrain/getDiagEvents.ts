@@ -7,20 +7,37 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of dbbrain diagEvents
+ * Use this data source to query detailed information of DBbrain diag events
  *
  * ## Example Usage
+ *
+ * ### Query events only by time
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagEvents = tencentcloud.Dbbrain.getDiagEvents({
- *     instanceIds: ["%s"],
- *     startTime: "%s",
- *     endTime: "%s",
+ * const example = tencentcloud.dbbrain.getDiagEvents({
+ *     startTime: "2025-01-01T00:00:00+08:00",
+ *     endTime: "2026-12-31T00:00:00+08:00",
+ * });
+ * ```
+ *
+ * ### Or add another filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.dbbrain.getDiagEvents({
+ *     startTime: "2026-01-01T00:00:00+08:00",
+ *     endTime: "2026-12-31T00:00:00+08:00",
+ *     instanceIds: ["crs-kpyy0txj"],
+ *     product: "redis",
  *     severities: [
  *         1,
+ *         2,
+ *         3,
  *         4,
  *         5,
  *     ],
@@ -32,6 +49,7 @@ export function getDiagEvents(args: GetDiagEventsArgs, opts?: pulumi.InvokeOptio
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", {
         "endTime": args.endTime,
         "instanceIds": args.instanceIds,
+        "product": args.product,
         "resultOutputFile": args.resultOutputFile,
         "severities": args.severities,
         "startTime": args.startTime,
@@ -43,23 +61,27 @@ export function getDiagEvents(args: GetDiagEventsArgs, opts?: pulumi.InvokeOptio
  */
 export interface GetDiagEventsArgs {
     /**
-     * end time.
+     * End time.
      */
     endTime: string;
     /**
-     * instance id list.
+     * Instance ID list.
      */
     instanceIds?: string[];
+    /**
+     * Service product type; supported values include: `mysql` - Cloud Database MySQL, `redis` - Cloud Database Redis, `mariadb` - MariaDB database. The default is `mysql`.
+     */
+    product?: string;
     /**
      * Used to save results.
      */
     resultOutputFile?: string;
     /**
-     * severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+     * Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
      */
     severities?: number[];
     /**
-     * start time.
+     * Start time.
      */
     startTime: string;
 }
@@ -69,7 +91,7 @@ export interface GetDiagEventsArgs {
  */
 export interface GetDiagEventsResult {
     /**
-     * end time.
+     * End time.
      */
     readonly endTime: string;
     /**
@@ -78,31 +100,49 @@ export interface GetDiagEventsResult {
     readonly id: string;
     readonly instanceIds?: string[];
     /**
-     * diag event list.
+     * Diag event list.
      */
     readonly lists: outputs.Dbbrain.GetDiagEventsList[];
+    readonly product?: string;
     readonly resultOutputFile?: string;
     readonly severities?: number[];
     /**
-     * start time.
+     * Start time.
      */
     readonly startTime: string;
 }
 /**
- * Use this data source to query detailed information of dbbrain diagEvents
+ * Use this data source to query detailed information of DBbrain diag events
  *
  * ## Example Usage
+ *
+ * ### Query events only by time
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagEvents = tencentcloud.Dbbrain.getDiagEvents({
- *     instanceIds: ["%s"],
- *     startTime: "%s",
- *     endTime: "%s",
+ * const example = tencentcloud.dbbrain.getDiagEvents({
+ *     startTime: "2025-01-01T00:00:00+08:00",
+ *     endTime: "2026-12-31T00:00:00+08:00",
+ * });
+ * ```
+ *
+ * ### Or add another filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.dbbrain.getDiagEvents({
+ *     startTime: "2026-01-01T00:00:00+08:00",
+ *     endTime: "2026-12-31T00:00:00+08:00",
+ *     instanceIds: ["crs-kpyy0txj"],
+ *     product: "redis",
  *     severities: [
  *         1,
+ *         2,
+ *         3,
  *         4,
  *         5,
  *     ],
@@ -114,6 +154,7 @@ export function getDiagEventsOutput(args: GetDiagEventsOutputArgs, opts?: pulumi
     return pulumi.runtime.invokeOutput("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", {
         "endTime": args.endTime,
         "instanceIds": args.instanceIds,
+        "product": args.product,
         "resultOutputFile": args.resultOutputFile,
         "severities": args.severities,
         "startTime": args.startTime,
@@ -125,23 +166,27 @@ export function getDiagEventsOutput(args: GetDiagEventsOutputArgs, opts?: pulumi
  */
 export interface GetDiagEventsOutputArgs {
     /**
-     * end time.
+     * End time.
      */
     endTime: pulumi.Input<string>;
     /**
-     * instance id list.
+     * Instance ID list.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Service product type; supported values include: `mysql` - Cloud Database MySQL, `redis` - Cloud Database Redis, `mariadb` - MariaDB database. The default is `mysql`.
+     */
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
-     * severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+     * Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
      */
-    severities?: pulumi.Input<pulumi.Input<number>[]>;
+    severities?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
-     * start time.
+     * Start time.
      */
     startTime: pulumi.Input<string>;
 }

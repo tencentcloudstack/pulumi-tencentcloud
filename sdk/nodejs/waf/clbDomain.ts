@@ -7,7 +7,12 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a waf clbDomain
+ * Provides a resource to create a Waf clb domain
+ *
+ * > **NOTE:** There are two modes for the `flowMade` field:
+ * ##### `Cleaning mode`: Business traffic is forwarded to the WAF cluster, which performs bypass detection and alerting, synchronizes requests for trusted status, and the gateway cluster intercepts or releases requests based on the status. (Recommended)
+ * ##### `Mirror mode`: Mirror traffic to WAF cluster, WAF performs bypass detection and alarm, and does not return request trusted status.
+ * The default value for creating resources in TF is mirror mode. If WAF needs to handle traffic, please set it to clean mode.
  *
  * ## Example Usage
  *
@@ -19,22 +24,23 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.waf.ClbDomain("example", {
  *     instanceId: "waf_2kxtlbky00b2v1fn",
- *     domain: "test.com",
+ *     domain: "demo.com",
  *     loadBalancerSets: [{
  *         loadBalancerId: "lb-5dnrkgry",
- *         loadBalancerName: "keep-listener-clb",
+ *         loadBalancerName: "example-clb",
  *         listenerId: "lbl-nonkgvc2",
- *         listenerName: "dsadasd",
+ *         listenerName: "example-listener",
  *         vip: "106.55.220.8",
  *         vport: 80,
  *         region: "gz",
  *         protocol: "HTTP",
  *         zone: "ap-guangzhou-6",
- *         numericalVpcId: 5232945,
+ *         numericalVpcId: -1,
  *         loadBalancerType: "OPEN",
  *     }],
  *     region: "gz",
  *     albType: "clb",
+ *     note: "notes.",
  * });
  * ```
  *
@@ -46,21 +52,21 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.waf.ClbDomain("example", {
  *     instanceId: "waf_2kxtlbky00b2v1fn",
- *     domain: "test.com",
+ *     domain: "demo.com",
  *     isCdn: 3,
  *     status: 1,
  *     engine: 21,
  *     loadBalancerSets: [{
  *         loadBalancerId: "lb-5dnrkgry",
- *         loadBalancerName: "keep-listener-clb",
+ *         loadBalancerName: "example-clb",
  *         listenerId: "lbl-nonkgvc2",
- *         listenerName: "dsadasd",
+ *         listenerName: "example-listener",
  *         vip: "106.55.220.8",
  *         vport: 80,
  *         region: "gz",
  *         protocol: "HTTP",
  *         zone: "ap-guangzhou-6",
- *         numericalVpcId: 5232945,
+ *         numericalVpcId: -1,
  *         loadBalancerType: "OPEN",
  *     }],
  *     region: "gz",
@@ -84,7 +90,7 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.waf.ClbDomain("example", {
  *     instanceId: "waf_2kxtlbky00b2v1fn",
- *     domain: "xxx.com",
+ *     domain: "demo.com",
  *     isCdn: 0,
  *     status: 1,
  *     engine: 12,
@@ -104,7 +110,7 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.waf.ClbDomain("example", {
  *     instanceId: "waf_2kxtlbky00b2v1fn",
- *     domain: "xxx.com",
+ *     domain: "demo.com",
  *     isCdn: 0,
  *     status: 1,
  *     engine: 12,
@@ -118,10 +124,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf clb_domain can be imported using the id, e.g.
+ * Waf clb domain can be imported using the instanceID#domain#domainId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+ * $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#demo.com#waf-0FSehoRU
  * ```
  */
 export class ClbDomain extends pulumi.CustomResource {
@@ -165,6 +171,10 @@ export class ClbDomain extends pulumi.CustomResource {
      */
     declare public readonly botStatus: pulumi.Output<number | undefined>;
     /**
+     * Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+     */
+    declare public readonly cloudType: pulumi.Output<string>;
+    /**
      * Whether to enable access logs, 1 enable, 0 disable.
      */
     declare public readonly clsStatus: pulumi.Output<number | undefined>;
@@ -201,6 +211,10 @@ export class ClbDomain extends pulumi.CustomResource {
      */
     declare public readonly loadBalancerSets: pulumi.Output<outputs.Waf.ClbDomainLoadBalancerSet[] | undefined>;
     /**
+     * Domain name notes.
+     */
+    declare public readonly note: pulumi.Output<string | undefined>;
+    /**
      * Regions of LB bound by domain.
      */
     declare public readonly region: pulumi.Output<string>;
@@ -225,6 +239,7 @@ export class ClbDomain extends pulumi.CustomResource {
             resourceInputs["albType"] = state?.albType;
             resourceInputs["apiSafeStatus"] = state?.apiSafeStatus;
             resourceInputs["botStatus"] = state?.botStatus;
+            resourceInputs["cloudType"] = state?.cloudType;
             resourceInputs["clsStatus"] = state?.clsStatus;
             resourceInputs["domain"] = state?.domain;
             resourceInputs["domainId"] = state?.domainId;
@@ -234,6 +249,7 @@ export class ClbDomain extends pulumi.CustomResource {
             resourceInputs["ipHeaders"] = state?.ipHeaders;
             resourceInputs["isCdn"] = state?.isCdn;
             resourceInputs["loadBalancerSets"] = state?.loadBalancerSets;
+            resourceInputs["note"] = state?.note;
             resourceInputs["region"] = state?.region;
             resourceInputs["status"] = state?.status;
         } else {
@@ -250,6 +266,7 @@ export class ClbDomain extends pulumi.CustomResource {
             resourceInputs["albType"] = args?.albType;
             resourceInputs["apiSafeStatus"] = args?.apiSafeStatus;
             resourceInputs["botStatus"] = args?.botStatus;
+            resourceInputs["cloudType"] = args?.cloudType;
             resourceInputs["clsStatus"] = args?.clsStatus;
             resourceInputs["domain"] = args?.domain;
             resourceInputs["engine"] = args?.engine;
@@ -258,6 +275,7 @@ export class ClbDomain extends pulumi.CustomResource {
             resourceInputs["ipHeaders"] = args?.ipHeaders;
             resourceInputs["isCdn"] = args?.isCdn;
             resourceInputs["loadBalancerSets"] = args?.loadBalancerSets;
+            resourceInputs["note"] = args?.note;
             resourceInputs["region"] = args?.region;
             resourceInputs["status"] = args?.status;
             resourceInputs["domainId"] = undefined /*out*/;
@@ -274,59 +292,67 @@ export interface ClbDomainState {
     /**
      * Load balancer type: clb, apisix or tsegw, default clb.
      */
-    albType?: pulumi.Input<string>;
+    albType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable api safe, 1 enable, 0 disable.
      */
-    apiSafeStatus?: pulumi.Input<number>;
+    apiSafeStatus?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable bot, 1 enable, 0 disable.
      */
-    botStatus?: pulumi.Input<number>;
+    botStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+     */
+    cloudType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable access logs, 1 enable, 0 disable.
      */
-    clsStatus?: pulumi.Input<number>;
+    clsStatus?: pulumi.Input<number | undefined>;
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Domain id.
      */
-    domainId?: pulumi.Input<string>;
+    domainId?: pulumi.Input<string | undefined>;
     /**
      * Protection Status: 10: Rule Observation&&AI Off Mode, 11: Rule Observation&&AI Observation Mode, 12: Rule Observation&&AI Interception Mode, 20: Rule Interception&&AI Off Mode, 21: Rule Interception&&AI Observation Mode, 22: Rule Interception&&AI Interception Mode, Default 20.
      */
-    engine?: pulumi.Input<number>;
+    engine?: pulumi.Input<number | undefined>;
     /**
      * WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
      */
-    flowMode?: pulumi.Input<number>;
+    flowMode?: pulumi.Input<number | undefined>;
     /**
      * Instance unique ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * When is_cdn=3, this parameter needs to be filled in to indicate a custom header.
      */
-    ipHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    ipHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether a proxy has been enabled before WAF, 0 no deployment, 1 deployment and use first IP in X-Forwarded-For as client IP, 2 deployment and use remoteAddr as client IP, 3 deployment and use values of custom headers as client IP.
      */
-    isCdn?: pulumi.Input<number>;
+    isCdn?: pulumi.Input<number | undefined>;
     /**
      * List of bound LB.
      */
-    loadBalancerSets?: pulumi.Input<pulumi.Input<inputs.Waf.ClbDomainLoadBalancerSet>[]>;
+    loadBalancerSets?: pulumi.Input<pulumi.Input<inputs.Waf.ClbDomainLoadBalancerSet>[] | undefined>;
+    /**
+     * Domain name notes.
+     */
+    note?: pulumi.Input<string | undefined>;
     /**
      * Regions of LB bound by domain.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Binding status between waf and LB, 0:not bind, 1:binding.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -336,19 +362,23 @@ export interface ClbDomainArgs {
     /**
      * Load balancer type: clb, apisix or tsegw, default clb.
      */
-    albType?: pulumi.Input<string>;
+    albType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable api safe, 1 enable, 0 disable.
      */
-    apiSafeStatus?: pulumi.Input<number>;
+    apiSafeStatus?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable bot, 1 enable, 0 disable.
      */
-    botStatus?: pulumi.Input<number>;
+    botStatus?: pulumi.Input<number | undefined>;
+    /**
+     * Cloud type. `public`: public cloud; `private`: private cloud; `hybrid`: hybrid cloud.
+     */
+    cloudType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable access logs, 1 enable, 0 disable.
      */
-    clsStatus?: pulumi.Input<number>;
+    clsStatus?: pulumi.Input<number | undefined>;
     /**
      * Domain name.
      */
@@ -356,11 +386,11 @@ export interface ClbDomainArgs {
     /**
      * Protection Status: 10: Rule Observation&&AI Off Mode, 11: Rule Observation&&AI Observation Mode, 12: Rule Observation&&AI Interception Mode, 20: Rule Interception&&AI Off Mode, 21: Rule Interception&&AI Observation Mode, 22: Rule Interception&&AI Interception Mode, Default 20.
      */
-    engine?: pulumi.Input<number>;
+    engine?: pulumi.Input<number | undefined>;
     /**
      * WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
      */
-    flowMode?: pulumi.Input<number>;
+    flowMode?: pulumi.Input<number | undefined>;
     /**
      * Instance unique ID.
      */
@@ -368,15 +398,19 @@ export interface ClbDomainArgs {
     /**
      * When is_cdn=3, this parameter needs to be filled in to indicate a custom header.
      */
-    ipHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    ipHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether a proxy has been enabled before WAF, 0 no deployment, 1 deployment and use first IP in X-Forwarded-For as client IP, 2 deployment and use remoteAddr as client IP, 3 deployment and use values of custom headers as client IP.
      */
-    isCdn?: pulumi.Input<number>;
+    isCdn?: pulumi.Input<number | undefined>;
     /**
      * List of bound LB.
      */
-    loadBalancerSets?: pulumi.Input<pulumi.Input<inputs.Waf.ClbDomainLoadBalancerSet>[]>;
+    loadBalancerSets?: pulumi.Input<pulumi.Input<inputs.Waf.ClbDomainLoadBalancerSet>[] | undefined>;
+    /**
+     * Domain name notes.
+     */
+    note?: pulumi.Input<string | undefined>;
     /**
      * Regions of LB bound by domain.
      */
@@ -384,5 +418,5 @@ export interface ClbDomainArgs {
     /**
      * Binding status between waf and LB, 0:not bind, 1:binding.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

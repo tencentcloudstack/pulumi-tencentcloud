@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a monitor Exporter Integration
+ * Provides a resource to create a Monitor Exporter Integration
  *
  * > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
  *
@@ -20,7 +20,7 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.monitor.TmpExporterIntegrationV2("example", {
  *     instanceId: "prom-gzg3f1em",
  *     kind: "qcloud-exporter",
- *     content: "{\"name\":\"test\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}",
+ *     content: "{\"name\":\"tf-example\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}",
  * });
  * ```
  *
@@ -116,6 +116,35 @@ import * as utilities from "../utilities";
  *     }),
  * });
  * ```
+ *
+ * ### With clusterId
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.monitor.TmpExporterIntegrationV2("example", {
+ *     instanceId: "prom-gzg3f1em",
+ *     kind: "external-node-exporter",
+ *     content: "{\"kind\":\"external-node-exporter\",\"name\":\"tf-example\",\"spec\":{\"instanceSpec\":{\"interval\":30,\"path\":\"/metrics\",\"servers\":[\"1.1.1.1:9100\"]}}}",
+ *     kubeType: 3,
+ *     clusterId: "cls-csxm4phu",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * Monitor Exporter Integration can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#qcloud-exporter
+ * ```
+ *
+ * with clusterId
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#3#cls-csxm4phu#external-node-exporter
+ * ```
  */
 export class TmpExporterIntegrationV2 extends pulumi.CustomResource {
     /**
@@ -150,9 +179,13 @@ export class TmpExporterIntegrationV2 extends pulumi.CustomResource {
      */
     declare public readonly clusterId: pulumi.Output<string | undefined>;
     /**
-     * Integration config.
+     * Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
      */
     declare public readonly content: pulumi.Output<string>;
+    /**
+     * Integration is disabled when the value is true. Default is false.
+     */
+    declare public readonly disable: pulumi.Output<boolean>;
     /**
      * Instance ID.
      */
@@ -181,6 +214,7 @@ export class TmpExporterIntegrationV2 extends pulumi.CustomResource {
             const state = argsOrState as TmpExporterIntegrationV2State | undefined;
             resourceInputs["clusterId"] = state?.clusterId;
             resourceInputs["content"] = state?.content;
+            resourceInputs["disable"] = state?.disable;
             resourceInputs["instanceId"] = state?.instanceId;
             resourceInputs["kind"] = state?.kind;
             resourceInputs["kubeType"] = state?.kubeType;
@@ -197,6 +231,7 @@ export class TmpExporterIntegrationV2 extends pulumi.CustomResource {
             }
             resourceInputs["clusterId"] = args?.clusterId;
             resourceInputs["content"] = args?.content;
+            resourceInputs["disable"] = args?.disable;
             resourceInputs["instanceId"] = args?.instanceId;
             resourceInputs["kind"] = args?.kind;
             resourceInputs["kubeType"] = args?.kubeType;
@@ -213,23 +248,27 @@ export interface TmpExporterIntegrationV2State {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
-     * Integration config.
+     * Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
+    /**
+     * Integration is disabled when the value is true. Default is false.
+     */
+    disable?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Type.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
     /**
      * Integration config. 1 - TKE; 2 - EKS; 3 - MEKS.
      */
-    kubeType?: pulumi.Input<number>;
+    kubeType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -239,11 +278,15 @@ export interface TmpExporterIntegrationV2Args {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
-     * Integration config.
+     * Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
      */
     content: pulumi.Input<string>;
+    /**
+     * Integration is disabled when the value is true. Default is false.
+     */
+    disable?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
@@ -255,5 +298,5 @@ export interface TmpExporterIntegrationV2Args {
     /**
      * Integration config. 1 - TKE; 2 - EKS; 3 - MEKS.
      */
-    kubeType?: pulumi.Input<number>;
+    kubeType?: pulumi.Input<number | undefined>;
 }

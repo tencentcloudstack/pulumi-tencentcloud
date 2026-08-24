@@ -73,12 +73,8 @@ type GetClusterDetailDatabasesResult struct {
 }
 
 func GetClusterDetailDatabasesOutput(ctx *pulumi.Context, args GetClusterDetailDatabasesOutputArgs, opts ...pulumi.InvokeOption) GetClusterDetailDatabasesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterDetailDatabasesResultOutput, error) {
-			args := v.(GetClusterDetailDatabasesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args, GetClusterDetailDatabasesResultOutput{}, options).(GetClusterDetailDatabasesResultOutput), nil
-		}).(GetClusterDetailDatabasesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args, GetClusterDetailDatabasesResultOutput{}, options).(GetClusterDetailDatabasesResultOutput)
 }
 
 // A collection of arguments for invoking getClusterDetailDatabases.

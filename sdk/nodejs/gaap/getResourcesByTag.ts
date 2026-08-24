@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcesByTag = tencentcloud.Gaap.getResourcesByTag({
+ * const resourcesByTag = tencentcloud.gaap.getResourcesByTag({
  *     tagKey: "tagKey",
  *     tagValue: "tagValue",
  * });
@@ -82,7 +82,7 @@ export interface GetResourcesByTagResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcesByTag = tencentcloud.Gaap.getResourcesByTag({
+ * const resourcesByTag = tencentcloud.gaap.getResourcesByTag({
  *     tagKey: "tagKey",
  *     tagValue: "tagValue",
  * });
@@ -105,11 +105,11 @@ export interface GetResourcesByTagOutputArgs {
     /**
      * Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag key.
      */

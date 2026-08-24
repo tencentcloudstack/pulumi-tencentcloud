@@ -77,12 +77,8 @@ type GetFunctionVersionsResult struct {
 }
 
 func GetFunctionVersionsOutput(ctx *pulumi.Context, args GetFunctionVersionsOutputArgs, opts ...pulumi.InvokeOption) GetFunctionVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFunctionVersionsResultOutput, error) {
-			args := v.(GetFunctionVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args, GetFunctionVersionsResultOutput{}, options).(GetFunctionVersionsResultOutput), nil
-		}).(GetFunctionVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args, GetFunctionVersionsResultOutput{}, options).(GetFunctionVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getFunctionVersions.

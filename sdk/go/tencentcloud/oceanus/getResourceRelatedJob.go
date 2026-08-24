@@ -79,12 +79,8 @@ type GetResourceRelatedJobResult struct {
 }
 
 func GetResourceRelatedJobOutput(ctx *pulumi.Context, args GetResourceRelatedJobOutputArgs, opts ...pulumi.InvokeOption) GetResourceRelatedJobResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourceRelatedJobResultOutput, error) {
-			args := v.(GetResourceRelatedJobArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args, GetResourceRelatedJobResultOutput{}, options).(GetResourceRelatedJobResultOutput), nil
-		}).(GetResourceRelatedJobResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", args, GetResourceRelatedJobResultOutput{}, options).(GetResourceRelatedJobResultOutput)
 }
 
 // A collection of arguments for invoking getResourceRelatedJob.

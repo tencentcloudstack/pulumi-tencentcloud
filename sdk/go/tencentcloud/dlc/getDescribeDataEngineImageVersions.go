@@ -76,12 +76,8 @@ type GetDescribeDataEngineImageVersionsResult struct {
 }
 
 func GetDescribeDataEngineImageVersionsOutput(ctx *pulumi.Context, args GetDescribeDataEngineImageVersionsOutputArgs, opts ...pulumi.InvokeOption) GetDescribeDataEngineImageVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeDataEngineImageVersionsResultOutput, error) {
-			args := v.(GetDescribeDataEngineImageVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args, GetDescribeDataEngineImageVersionsResultOutput{}, options).(GetDescribeDataEngineImageVersionsResultOutput), nil
-		}).(GetDescribeDataEngineImageVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEngineImageVersions:getDescribeDataEngineImageVersions", args, GetDescribeDataEngineImageVersionsResultOutput{}, options).(GetDescribeDataEngineImageVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeDataEngineImageVersions.

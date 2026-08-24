@@ -177,59 +177,59 @@ export interface ApiDocState {
     /**
      * Api Document count.
      */
-    apiCount?: pulumi.Input<number>;
+    apiCount?: pulumi.Input<number | undefined>;
     /**
      * Api Document ID.
      */
-    apiDocId?: pulumi.Input<string>;
+    apiDocId?: pulumi.Input<string | undefined>;
     /**
      * Api Document name.
      */
-    apiDocName?: pulumi.Input<string>;
+    apiDocName?: pulumi.Input<string | undefined>;
     /**
      * API Document Build Status.
      */
-    apiDocStatus?: pulumi.Input<string>;
+    apiDocStatus?: pulumi.Input<string | undefined>;
     /**
      * API Document Access URI.
      */
-    apiDocUri?: pulumi.Input<string>;
+    apiDocUri?: pulumi.Input<string | undefined>;
     /**
      * List of APIs for generating documents.
      */
-    apiIds?: pulumi.Input<pulumi.Input<string>[]>;
+    apiIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of names for generating documents.
      */
-    apiNames?: pulumi.Input<pulumi.Input<string>[]>;
+    apiNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Env name.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * Number of API document releases.
      */
-    releaseCount?: pulumi.Input<number>;
+    releaseCount?: pulumi.Input<number | undefined>;
     /**
      * Service name.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * API Document service name.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
     /**
      * API Document Sharing Password.
      */
-    sharePassword?: pulumi.Input<string>;
+    sharePassword?: pulumi.Input<string | undefined>;
     /**
      * API Document update time.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
     /**
      * API Document Viewing Times.
      */
-    viewCount?: pulumi.Input<number>;
+    viewCount?: pulumi.Input<number | undefined>;
 }
 
 /**

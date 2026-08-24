@@ -161,39 +161,39 @@ export interface InstanceState {
     /**
      * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
      */
-    dataDiskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    dataDiskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
      */
-    forcePoweroff?: pulumi.Input<boolean>;
+    forcePoweroff?: pulumi.Input<boolean | undefined>;
     /**
      * Image Description.
      */
-    imageDescription?: pulumi.Input<string>;
+    imageDescription?: pulumi.Input<string | undefined>;
     /**
      * Set image family. Example value: `business-daily-update`.
      */
-    imageFamily?: pulumi.Input<string>;
+    imageFamily?: pulumi.Input<string | undefined>;
     /**
      * Image name.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Cloud server instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
      */
-    snapshotIds?: pulumi.Input<pulumi.Input<string>[]>;
+    snapshotIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
-    sysprep?: pulumi.Input<boolean>;
+    sysprep?: pulumi.Input<boolean | undefined>;
     /**
      * Tags of the image.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -203,19 +203,19 @@ export interface InstanceArgs {
     /**
      * Cloud disk ID list, When creating a whole machine image based on an instance, specify the data disk ID contained in the image.
      */
-    dataDiskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    dataDiskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Set whether to force shutdown during mirroring. The default value is `false`, when set to true, it means that the mirror will be made after shutdown.
      */
-    forcePoweroff?: pulumi.Input<boolean>;
+    forcePoweroff?: pulumi.Input<boolean | undefined>;
     /**
      * Image Description.
      */
-    imageDescription?: pulumi.Input<string>;
+    imageDescription?: pulumi.Input<string | undefined>;
     /**
      * Set image family. Example value: `business-daily-update`.
      */
-    imageFamily?: pulumi.Input<string>;
+    imageFamily?: pulumi.Input<string | undefined>;
     /**
      * Image name.
      */
@@ -223,17 +223,17 @@ export interface InstanceArgs {
     /**
      * Cloud server instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Cloud disk snapshot ID list; creating a mirror based on a snapshot must include a system disk snapshot. It cannot be passed in simultaneously with InstanceId.
      */
-    snapshotIds?: pulumi.Input<pulumi.Input<string>[]>;
+    snapshotIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sysprep function under Windows. When creating a Windows image, you can select true or false to enable or disable the Syspre function.
      */
-    sysprep?: pulumi.Input<boolean>;
+    sysprep?: pulumi.Input<boolean | undefined>;
     /**
      * Tags of the image.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

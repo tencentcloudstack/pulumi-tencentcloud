@@ -55,6 +55,8 @@ type WorkGroup struct {
 	UserIds pulumi.StringArrayOutput `pulumi:"userIds"`
 	// Working group description.
 	WorkGroupDescription pulumi.StringPtrOutput `pulumi:"workGroupDescription"`
+	// Working group ID.
+	WorkGroupId pulumi.IntOutput `pulumi:"workGroupId"`
 	// Working group name.
 	WorkGroupName pulumi.StringOutput `pulumi:"workGroupName"`
 }
@@ -96,6 +98,8 @@ type workGroupState struct {
 	UserIds []string `pulumi:"userIds"`
 	// Working group description.
 	WorkGroupDescription *string `pulumi:"workGroupDescription"`
+	// Working group ID.
+	WorkGroupId *int `pulumi:"workGroupId"`
 	// Working group name.
 	WorkGroupName *string `pulumi:"workGroupName"`
 }
@@ -105,6 +109,8 @@ type WorkGroupState struct {
 	UserIds pulumi.StringArrayInput
 	// Working group description.
 	WorkGroupDescription pulumi.StringPtrInput
+	// Working group ID.
+	WorkGroupId pulumi.IntPtrInput
 	// Working group name.
 	WorkGroupName pulumi.StringPtrInput
 }
@@ -223,6 +229,11 @@ func (o WorkGroupOutput) UserIds() pulumi.StringArrayOutput {
 // Working group description.
 func (o WorkGroupOutput) WorkGroupDescription() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *WorkGroup) pulumi.StringPtrOutput { return v.WorkGroupDescription }).(pulumi.StringPtrOutput)
+}
+
+// Working group ID.
+func (o WorkGroupOutput) WorkGroupId() pulumi.IntOutput {
+	return o.ApplyT(func(v *WorkGroup) pulumi.IntOutput { return v.WorkGroupId }).(pulumi.IntOutput)
 }
 
 // Working group name.

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageQuota = tencentcloud.Cvm.getImageQuota({});
+ * const imageQuota = tencentcloud.cvm.getImageQuota({});
  * ```
  */
 export function getImageQuota(args?: GetImageQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetImageQuotaResult> {
@@ -57,7 +57,7 @@ export interface GetImageQuotaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageQuota = tencentcloud.Cvm.getImageQuota({});
+ * const imageQuota = tencentcloud.cvm.getImageQuota({});
  * ```
  */
 export function getImageQuotaOutput(args?: GetImageQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImageQuotaResult> {
@@ -75,5 +75,5 @@ export interface GetImageQuotaOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

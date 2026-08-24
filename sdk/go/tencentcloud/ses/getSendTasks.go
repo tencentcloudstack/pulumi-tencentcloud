@@ -77,12 +77,8 @@ type GetSendTasksResult struct {
 }
 
 func GetSendTasksOutput(ctx *pulumi.Context, args GetSendTasksOutputArgs, opts ...pulumi.InvokeOption) GetSendTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSendTasksResultOutput, error) {
-			args := v.(GetSendTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getSendTasks:getSendTasks", args, GetSendTasksResultOutput{}, options).(GetSendTasksResultOutput), nil
-		}).(GetSendTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getSendTasks:getSendTasks", args, GetSendTasksResultOutput{}, options).(GetSendTasksResultOutput)
 }
 
 // A collection of arguments for invoking getSendTasks.

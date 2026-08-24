@@ -69,12 +69,8 @@ type GetSecurityGroupReferencesResult struct {
 }
 
 func GetSecurityGroupReferencesOutput(ctx *pulumi.Context, args GetSecurityGroupReferencesOutputArgs, opts ...pulumi.InvokeOption) GetSecurityGroupReferencesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityGroupReferencesResultOutput, error) {
-			args := v.(GetSecurityGroupReferencesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args, GetSecurityGroupReferencesResultOutput{}, options).(GetSecurityGroupReferencesResultOutput), nil
-		}).(GetSecurityGroupReferencesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args, GetSecurityGroupReferencesResultOutput{}, options).(GetSecurityGroupReferencesResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityGroupReferences.

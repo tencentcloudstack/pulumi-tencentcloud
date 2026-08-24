@@ -94,11 +94,11 @@ export interface CompareTaskStopOperationState {
     /**
      * Compare task id.
      */
-    compareTaskId?: pulumi.Input<string>;
+    compareTaskId?: pulumi.Input<string | undefined>;
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
 }
 
 /**

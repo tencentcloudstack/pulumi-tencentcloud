@@ -86,7 +86,7 @@ export interface GetDatabaseTablesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Table name, obtained through the DescribeDatabaseObjects api.
      */

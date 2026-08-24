@@ -167,11 +167,11 @@ export interface LoadBalancerState {
     /**
      * ID of a scaling group.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * List of application load balancers. The maximum number of application-type load balancers bound to each scaling group is 100.
      */
-    forwardLoadBalancers?: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancer>[]>;
+    forwardLoadBalancers?: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancer>[] | undefined>;
 }
 
 /**
@@ -185,5 +185,5 @@ export interface LoadBalancerArgs {
     /**
      * List of application load balancers. The maximum number of application-type load balancers bound to each scaling group is 100.
      */
-    forwardLoadBalancers?: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancer>[]>;
+    forwardLoadBalancers?: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancer>[] | undefined>;
 }

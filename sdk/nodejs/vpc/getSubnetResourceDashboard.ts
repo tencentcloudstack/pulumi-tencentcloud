@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const subnetResourceDashboard = tencentcloud.Vpc.getSubnetResourceDashboard({
+ * const subnetResourceDashboard = tencentcloud.vpc.getSubnetResourceDashboard({
  *     subnetIds: ["subnet-i9tpf6hq"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetSubnetResourceDashboardResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const subnetResourceDashboard = tencentcloud.Vpc.getSubnetResourceDashboard({
+ * const subnetResourceDashboard = tencentcloud.vpc.getSubnetResourceDashboard({
  *     subnetIds: ["subnet-i9tpf6hq"],
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetSubnetResourceDashboardOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID, such as `subnet-f1xjkw1b`.
      */

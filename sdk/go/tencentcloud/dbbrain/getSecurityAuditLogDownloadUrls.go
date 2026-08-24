@@ -86,12 +86,8 @@ type GetSecurityAuditLogDownloadUrlsResult struct {
 }
 
 func GetSecurityAuditLogDownloadUrlsOutput(ctx *pulumi.Context, args GetSecurityAuditLogDownloadUrlsOutputArgs, opts ...pulumi.InvokeOption) GetSecurityAuditLogDownloadUrlsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityAuditLogDownloadUrlsResultOutput, error) {
-			args := v.(GetSecurityAuditLogDownloadUrlsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args, GetSecurityAuditLogDownloadUrlsResultOutput{}, options).(GetSecurityAuditLogDownloadUrlsResultOutput), nil
-		}).(GetSecurityAuditLogDownloadUrlsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args, GetSecurityAuditLogDownloadUrlsResultOutput{}, options).(GetSecurityAuditLogDownloadUrlsResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityAuditLogDownloadUrls.

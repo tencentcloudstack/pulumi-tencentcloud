@@ -40,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps sample_snapshot_template can be imported using the id, e.g.
+    /// mps SampleSnapshotTemplate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mps/sampleSnapshotTemplate:SampleSnapshotTemplate sample_snapshot_template sample_snapshot_template_id

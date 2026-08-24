@@ -185,27 +185,27 @@ export interface GrafanaNotificationChannelState {
     /**
      * plugin id.
      */
-    channelId?: pulumi.Input<string>;
+    channelId?: pulumi.Input<string | undefined>;
     /**
      * channel name.
      */
-    channelName?: pulumi.Input<string>;
+    channelName?: pulumi.Input<string | undefined>;
     /**
      * extra grafana organization id list, default to 1 representing Main Org.
      */
-    extraOrgIds?: pulumi.Input<pulumi.Input<string>[]>;
+    extraOrgIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * grafana instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Grafana organization which channel will be installed, default to 1 representing Main Org.
      */
-    orgId?: pulumi.Input<number>;
+    orgId?: pulumi.Input<number | undefined>;
     /**
      * cloud monitor notification template notice-id list.
      */
-    receivers?: pulumi.Input<pulumi.Input<string>[]>;
+    receivers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -215,11 +215,11 @@ export interface GrafanaNotificationChannelArgs {
     /**
      * channel name.
      */
-    channelName?: pulumi.Input<string>;
+    channelName?: pulumi.Input<string | undefined>;
     /**
      * extra grafana organization id list, default to 1 representing Main Org.
      */
-    extraOrgIds?: pulumi.Input<pulumi.Input<string>[]>;
+    extraOrgIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * grafana instance id.
      */
@@ -227,9 +227,9 @@ export interface GrafanaNotificationChannelArgs {
     /**
      * Grafana organization which channel will be installed, default to 1 representing Main Org.
      */
-    orgId?: pulumi.Input<number>;
+    orgId?: pulumi.Input<number | undefined>;
     /**
      * cloud monitor notification template notice-id list.
      */
-    receivers?: pulumi.Input<pulumi.Input<string>[]>;
+    receivers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

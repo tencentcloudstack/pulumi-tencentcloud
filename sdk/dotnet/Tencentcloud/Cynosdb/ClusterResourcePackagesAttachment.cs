@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
+    /// cynosdb ClusterResourcePackagesAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id

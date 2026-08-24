@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_identity can be imported using the id, e.g.
+ * organization orgIdentity can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgIdentity:OrgIdentity org_identity org_identity_id
@@ -115,15 +115,15 @@ export interface OrgIdentityState {
     /**
      * Identity description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Identity name.Supports English letters and numbers, the length cannot exceed 40 characters.
      */
-    identityAliasName?: pulumi.Input<string>;
+    identityAliasName?: pulumi.Input<string | undefined>;
     /**
      * Identity policy list.
      */
-    identityPolicies?: pulumi.Input<pulumi.Input<inputs.Organization.OrgIdentityIdentityPolicy>[]>;
+    identityPolicies?: pulumi.Input<pulumi.Input<inputs.Organization.OrgIdentityIdentityPolicy>[] | undefined>;
 }
 
 /**
@@ -133,7 +133,7 @@ export interface OrgIdentityArgs {
     /**
      * Identity description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Identity name.Supports English letters and numbers, the length cannot exceed 40 characters.
      */

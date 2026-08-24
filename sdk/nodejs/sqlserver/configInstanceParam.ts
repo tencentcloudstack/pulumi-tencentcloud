@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver config_instance_param can be imported using the id, e.g.
+ * sqlserver configInstanceParam can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/configInstanceParam:ConfigInstanceParam example config_instance_param
@@ -148,11 +148,11 @@ export interface ConfigInstanceParamState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * List of modified parameters. Each list element has two fields: Name and CurrentValue. Set Name to the parameter name and CurrentValue to the new value after modification. Note: if the instance needs to be restarted for the modified parameter to take effect, it will be restarted immediately or during the maintenance time. Before you modify a parameter, you can use the DescribeInstanceParams API to query whether the instance needs to be restarted.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceParamParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceParamParamList>[] | undefined>;
 }
 
 /**

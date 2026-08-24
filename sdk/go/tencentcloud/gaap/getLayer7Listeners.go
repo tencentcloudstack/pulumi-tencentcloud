@@ -41,15 +41,15 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  foo.ID(),
+//				ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_ = gaap.GetLayer7ListenersOutput(ctx, gaap.GetLayer7ListenersOutputArgs{
 //				Protocol:   pulumi.String("HTTP"),
-//				ProxyId:    foo.ID(),
-//				ListenerId: fooLayer7Listener.ID(),
+//				ProxyId:    foo.ID().ToIDOutput().ToStringOutput(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -103,12 +103,8 @@ type GetLayer7ListenersResult struct {
 }
 
 func GetLayer7ListenersOutput(ctx *pulumi.Context, args GetLayer7ListenersOutputArgs, opts ...pulumi.InvokeOption) GetLayer7ListenersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLayer7ListenersResultOutput, error) {
-			args := v.(GetLayer7ListenersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args, GetLayer7ListenersResultOutput{}, options).(GetLayer7ListenersResultOutput), nil
-		}).(GetLayer7ListenersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getLayer7Listeners:getLayer7Listeners", args, GetLayer7ListenersResultOutput{}, options).(GetLayer7ListenersResultOutput)
 }
 
 // A collection of arguments for invoking getLayer7Listeners.

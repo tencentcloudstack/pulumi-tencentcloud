@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const list = tencentcloud.Cdh.getInstances({
+ * const list = tencentcloud.cdh.getInstances({
  *     availabilityZone: "ap-guangzhou-3",
  *     hostId: "host-d6s7i5q4",
  *     hostName: "test",
@@ -110,7 +110,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const list = tencentcloud.Cdh.getInstances({
+ * const list = tencentcloud.cdh.getInstances({
  *     availabilityZone: "ap-guangzhou-3",
  *     hostId: "host-d6s7i5q4",
  *     hostName: "test",
@@ -139,25 +139,25 @@ export interface GetInstancesOutputArgs {
     /**
      * The available zone that the CDH instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * ID of the CDH instances to be queried.
      */
-    hostId?: pulumi.Input<string>;
+    hostId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CDH instances to be queried.
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * State of the CDH instances to be queried. Valid values: `PENDING`, `LAUNCH_FAILURE`, `RUNNING`, `EXPIRED`.
      */
-    hostState?: pulumi.Input<string>;
+    hostState?: pulumi.Input<string | undefined>;
     /**
      * The project CDH belongs to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

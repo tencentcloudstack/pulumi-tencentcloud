@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// ci hot_link can be imported using the bucket, e.g.
+// ci hotLink can be imported using the bucket, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx

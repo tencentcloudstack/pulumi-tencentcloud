@@ -21,7 +21,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Certificate ID, which originates from the SSL side. You can check the CertId from the [SSL Certificate List](https://console.cloud.tencent.com/ssl).
         /// </summary>
-        public readonly string CertId;
+        public readonly string? CertId;
         /// <summary>
         /// Time when the certificate is deployed.
         /// </summary>
@@ -35,6 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? SignAlgo;
         /// <summary>
+        /// Certificate status.
+        /// </summary>
+        public readonly string? Status;
+        /// <summary>
         /// Type of the certificate. Values: `Default`: Default certificate `Upload`: Specified certificate `Managed`: Tencent Cloud-managed certificate.
         /// </summary>
         public readonly string? Type;
@@ -43,13 +47,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         private CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfo(
             string? alias,
 
-            string certId,
+            string? certId,
 
             string? deployTime,
 
             string? expireTime,
 
             string? signAlgo,
+
+            string? status,
 
             string? type)
         {
@@ -58,6 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             DeployTime = deployTime;
             ExpireTime = expireTime;
             SignAlgo = signAlgo;
+            Status = status;
             Type = type;
         }
     }

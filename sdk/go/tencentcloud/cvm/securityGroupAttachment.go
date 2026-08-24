@@ -33,7 +33,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -41,9 +41,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -73,8 +73,8 @@ import (
 //				SystemDiskSize:   pulumi.Int(100),
 //				Hostname:         pulumi.String("example"),
 //				ProjectId:        pulumi.Int(0),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataDisks: instance.InstanceDataDiskArray{
 //					&instance.InstanceDataDiskArgs{
 //						DataDiskType: pulumi.String("CLOUD_HSSD"),
@@ -91,8 +91,8 @@ import (
 //			}
 //			// attachment security group
 //			_, err = cvm.NewSecurityGroupAttachment(ctx, "example", &cvm.SecurityGroupAttachmentArgs{
-//				InstanceId:      exampleInstance.ID(),
-//				SecurityGroupId: example.ID(),
+//				InstanceId:      exampleInstance.ID().ToIDOutput().ToStringOutput(),
+//				SecurityGroupId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -105,7 +105,7 @@ import (
 //
 // ## Import
 //
-// cvm security_group_attachment can be imported using the id, e.g.
+// cvm securityGroupAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment example ins-odl0lrcy#sg-5275dorp

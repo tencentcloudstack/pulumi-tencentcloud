@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const unitRules = tencentcloud.Tsf.getUnitRules({
+ * const unitRules = tencentcloud.tsf.getUnitRules({
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  *     status: "disabled",
  * });
@@ -79,7 +79,7 @@ export interface GetUnitRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const unitRules = tencentcloud.Tsf.getUnitRules({
+ * const unitRules = tencentcloud.tsf.getUnitRules({
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  *     status: "disabled",
  * });
@@ -105,9 +105,9 @@ export interface GetUnitRulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Enabled state, disabled: unpublished, enabled: published.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

@@ -17,11 +17,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// ### Use CertId
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -60,20 +61,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     ///                 CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
     ///                 {
     ///                     CertId = "JG65alUy",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Use cert and key
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cos.BucketDomainCertificateAttachment("example", new()
+    ///     {
+    ///         Bucket = exampleTencentcloudCosBucket.Id,
+    ///         DomainCertificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateArgs
+    ///         {
+    ///             Domain = customOriginDomain,
+    ///             Certificate = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs
+    ///             {
+    ///                 CertType = "CustomCert",
+    ///                 CustomCert = new Tencentcloud.Cos.Inputs.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs
+    ///                 {
     ///                     Cert = @"-----BEGIN CERTIFICATE-----
-    /// MIIGQjCCBSqgAwIBAgIQfTllN2vZr7vcoGF3ZTHwxjANBgkqhkiG9w0BAQsFADBA
-    /// ...
-    /// ...
-    /// ...
-    /// 9YSJrdvskqI3v/3SkVezzNiWQMuMTg==
+    /// MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+    /// ***
+    /// ***
+    /// ***
+    /// ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+    /// gJE=
     /// -----END CERTIFICATE-----
     /// ",
     ///                     PrivateKey = @"-----BEGIN RSA PRIVATE KEY-----
-    /// MIIEpQIBAAKCAQEAsmwAXXVh6N4fd281K0671jYBrSV2v/5+TCeewsNx6ys3kC8o
-    /// ...
-    /// ...
-    /// ...
-    /// MgbOv6byAafSQWU+5+KFfK3Nj7eezx6yfQQM0Kxl4ZPm1w3Fb6gIFBc=
+    /// MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+    /// ***
+    /// ***
+    /// ***
+    /// Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
     /// -----END RSA PRIVATE KEY-----
     /// ",
     ///                 },

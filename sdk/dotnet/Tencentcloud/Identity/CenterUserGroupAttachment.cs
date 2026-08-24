@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_user_group_attachment can be imported using the id, e.g.
+    /// organization IdentityCenterUserGroupAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Identity/centerUserGroupAttachment:CenterUserGroupAttachment identity_center_user_group_attachment ${zoneId}#${groupId}#${userId}

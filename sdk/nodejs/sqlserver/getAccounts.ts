@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getAccounts({
+ * const example = tencentcloud.sqlserver.getAccounts({
  *     instanceId: "mssql-3cdq7kx5",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getAccounts({
+ * const example = tencentcloud.sqlserver.getAccounts({
  *     instanceId: "mssql-3cdq7kx5",
  *     name: "myaccount",
  * });
@@ -94,7 +94,7 @@ export interface GetAccountsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getAccounts({
+ * const example = tencentcloud.sqlserver.getAccounts({
  *     instanceId: "mssql-3cdq7kx5",
  * });
  * ```
@@ -105,7 +105,7 @@ export interface GetAccountsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getAccounts({
+ * const example = tencentcloud.sqlserver.getAccounts({
  *     instanceId: "mssql-3cdq7kx5",
  *     name: "myaccount",
  * });
@@ -131,9 +131,9 @@ export interface GetAccountsOutputArgs {
     /**
      * Name of the SQL server account to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

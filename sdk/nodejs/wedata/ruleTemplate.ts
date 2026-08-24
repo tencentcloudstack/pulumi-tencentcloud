@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata rule_template can be imported using the id, e.g.
+ * wedata ruleTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
@@ -162,43 +162,43 @@ export interface RuleTemplateState {
     /**
      * Description of Template.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to associate other library tables.
      */
-    multiSourceFlag?: pulumi.Input<boolean>;
+    multiSourceFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Quality inspection dimensions. `1`: Accuracy, `2`: Uniqueness, `3`: Completeness, `4`: Consistency, `5`: Timeliness, `6`: Effectiveness.
      */
-    qualityDim?: pulumi.Input<number>;
+    qualityDim?: pulumi.Input<number | undefined>;
     /**
      * The engine type corresponding to the source. `2`: hive,`4`: spark, `16`: dlc.
      */
-    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Source data object type. `1`: Constant, `2`: Offline table level, `3`: Offline field level.
      */
-    sourceObjectType?: pulumi.Input<number>;
+    sourceObjectType?: pulumi.Input<number | undefined>;
     /**
      * SQL Expression.
      */
-    sqlExpression?: pulumi.Input<string>;
+    sqlExpression?: pulumi.Input<string | undefined>;
     /**
      * Template type. `1` means System template, `2` means Custom template.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * If add where.
      */
-    whereFlag?: pulumi.Input<boolean>;
+    whereFlag?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -208,15 +208,15 @@ export interface RuleTemplateArgs {
     /**
      * Description of Template.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to associate other library tables.
      */
-    multiSourceFlag?: pulumi.Input<boolean>;
+    multiSourceFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -224,25 +224,25 @@ export interface RuleTemplateArgs {
     /**
      * Quality inspection dimensions. `1`: Accuracy, `2`: Uniqueness, `3`: Completeness, `4`: Consistency, `5`: Timeliness, `6`: Effectiveness.
      */
-    qualityDim?: pulumi.Input<number>;
+    qualityDim?: pulumi.Input<number | undefined>;
     /**
      * The engine type corresponding to the source. `2`: hive,`4`: spark, `16`: dlc.
      */
-    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Source data object type. `1`: Constant, `2`: Offline table level, `3`: Offline field level.
      */
-    sourceObjectType?: pulumi.Input<number>;
+    sourceObjectType?: pulumi.Input<number | undefined>;
     /**
      * SQL Expression.
      */
-    sqlExpression?: pulumi.Input<string>;
+    sqlExpression?: pulumi.Input<string | undefined>;
     /**
      * Template type. `1` means System template, `2` means Custom template.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
     /**
      * If add where.
      */
-    whereFlag?: pulumi.Input<boolean>;
+    whereFlag?: pulumi.Input<boolean | undefined>;
 }

@@ -104,15 +104,15 @@ export interface StartBackupIncrementalMigrationState {
     /**
      * Backup import task ID, returned by the CreateBackupMigration interface.
      */
-    backupMigrationId?: pulumi.Input<string>;
+    backupMigrationId?: pulumi.Input<string | undefined>;
     /**
      * Incremental backup import task ID.
      */
-    incrementalMigrationId?: pulumi.Input<string>;
+    incrementalMigrationId?: pulumi.Input<string | undefined>;
     /**
      * ID of imported target instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

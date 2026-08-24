@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getSessionImageVersion({
+ * const example = tencentcloud.dlc.getSessionImageVersion({
  *     dataEngineId: "DataEngine-e482ijv6",
  *     frameworkType: "machine-learning",
  * });
@@ -73,7 +73,7 @@ export interface GetSessionImageVersionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getSessionImageVersion({
+ * const example = tencentcloud.dlc.getSessionImageVersion({
  *     dataEngineId: "DataEngine-e482ijv6",
  *     frameworkType: "machine-learning",
  * });
@@ -103,5 +103,5 @@ export interface GetSessionImageVersionOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

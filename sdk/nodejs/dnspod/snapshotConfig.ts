@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dnspod snapshot_config can be imported using the id, e.g.
+ * dnspod snapshotConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
@@ -102,11 +102,11 @@ export interface SnapshotConfigState {
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Backup interval: empty string - no backup, halfHour - every half hour, hourly - every hour, daily - every day, monthly - every month.
      */
-    period?: pulumi.Input<string>;
+    period?: pulumi.Input<string | undefined>;
 }
 
 /**

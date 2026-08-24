@@ -45,7 +45,7 @@ import (
 //				SecretName:  pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
 //				Description: pulumi.String("desc."),
-//				KmsKeyId:    example.ID(),
+//				KmsKeyId:    example.ID().ToIDOutput().ToStringOutput(),
 //				SshKeyName:  pulumi.String("tf_example_ssh"),
 //				Status:      pulumi.String("Enabled"),
 //				CleanSshKey: pulumi.Bool(true),
@@ -64,7 +64,7 @@ import (
 //
 // ## Import
 //
-// ssm ssh_key_pair_secret can be imported using the id, e.g.
+// ssm sshKeyPairSecret can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
@@ -82,10 +82,14 @@ type SshKeyPairSecret struct {
 	KmsKeyId pulumi.StringOutput `pulumi:"kmsKeyId"`
 	// ID of the project to which the created SSH key belongs.
 	ProjectId pulumi.IntOutput `pulumi:"projectId"`
+	// The resource ID associated with the secret.
+	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
 	// `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretType pulumi.IntOutput `pulumi:"secretType"`
+	// The key pair ID is the unique identifier of the key pair in the cloud server.
+	SshKeyId pulumi.StringOutput `pulumi:"sshKeyId"`
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
 	SshKeyName pulumi.StringOutput `pulumi:"sshKeyName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
@@ -140,10 +144,14 @@ type sshKeyPairSecretState struct {
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// ID of the project to which the created SSH key belongs.
 	ProjectId *int `pulumi:"projectId"`
+	// The resource ID associated with the secret.
+	ResourceId *string `pulumi:"resourceId"`
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
 	SecretName *string `pulumi:"secretName"`
 	// `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretType *int `pulumi:"secretType"`
+	// The key pair ID is the unique identifier of the key pair in the cloud server.
+	SshKeyId *string `pulumi:"sshKeyId"`
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
 	SshKeyName *string `pulumi:"sshKeyName"`
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
@@ -163,10 +171,14 @@ type SshKeyPairSecretState struct {
 	KmsKeyId pulumi.StringPtrInput
 	// ID of the project to which the created SSH key belongs.
 	ProjectId pulumi.IntPtrInput
+	// The resource ID associated with the secret.
+	ResourceId pulumi.StringPtrInput
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
 	SecretName pulumi.StringPtrInput
 	// `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretType pulumi.IntPtrInput
+	// The key pair ID is the unique identifier of the key pair in the cloud server.
+	SshKeyId pulumi.StringPtrInput
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
 	SshKeyName pulumi.StringPtrInput
 	// Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
@@ -330,6 +342,11 @@ func (o SshKeyPairSecretOutput) ProjectId() pulumi.IntOutput {
 	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
 }
 
+// The resource ID associated with the secret.
+func (o SshKeyPairSecretOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.ResourceId }).(pulumi.StringOutput)
+}
+
 // Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
 func (o SshKeyPairSecretOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
@@ -338,6 +355,11 @@ func (o SshKeyPairSecretOutput) SecretName() pulumi.StringOutput {
 // `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
 func (o SshKeyPairSecretOutput) SecretType() pulumi.IntOutput {
 	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.IntOutput { return v.SecretType }).(pulumi.IntOutput)
+}
+
+// The key pair ID is the unique identifier of the key pair in the cloud server.
+func (o SshKeyPairSecretOutput) SshKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SshKeyPairSecret) pulumi.StringOutput { return v.SshKeyId }).(pulumi.StringOutput)
 }
 
 // Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.

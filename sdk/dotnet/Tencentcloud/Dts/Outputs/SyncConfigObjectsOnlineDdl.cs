@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     public sealed class SyncConfigObjectsOnlineDdl
     {
         /// <summary>
-        /// status.
+        /// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
         /// </summary>
         public readonly string? Status;
 

@@ -59,15 +59,15 @@ export class InstanceBackupRule extends pulumi.CustomResource {
     }
 
     /**
-     * Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+     * Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
      */
     declare public readonly activeWeekdays: pulumi.Output<string | undefined>;
     /**
-     * Alert threshold. Range: 50-300.
+     * Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
      */
     declare public readonly alarmWaterLevel: pulumi.Output<number | undefined>;
     /**
-     * Automatic backup frequency, for internal display, default value is 24h.
+     * Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
      */
     declare public readonly backupFrequency: pulumi.Output<number | undefined>;
     /**
@@ -78,7 +78,7 @@ export class InstanceBackupRule extends pulumi.CustomResource {
      */
     declare public readonly backupMethod: pulumi.Output<number>;
     /**
-     * Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+     * Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
      */
     declare public readonly backupRetentionPeriod: pulumi.Output<number>;
     /**
@@ -94,15 +94,15 @@ export class InstanceBackupRule extends pulumi.CustomResource {
      */
     declare public readonly instanceId: pulumi.Output<string>;
     /**
-     * Which days to retain long-term, week 0-6, month 1-31, comma separated.
+     * Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
      */
     declare public readonly longTermActiveDays: pulumi.Output<string | undefined>;
     /**
-     * How many days to retain long-term backups.
+     * Long-term backup retention period. Value range [30, 1075].
      */
     declare public readonly longTermExpiredDays: pulumi.Output<number | undefined>;
     /**
-     * Long-term retention cycle, weekly, monthly, empty means not enabled.
+     * Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `weekly`. Monthly retention: Specify `monthly`.
      */
     declare public readonly longTermUnit: pulumi.Output<string | undefined>;
     /**
@@ -112,7 +112,7 @@ export class InstanceBackupRule extends pulumi.CustomResource {
      */
     declare public readonly notify: pulumi.Output<boolean | undefined>;
     /**
-     * How many days to retain incremental backups.
+     * Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
      */
     declare public readonly oplogExpiredDays: pulumi.Output<number | undefined>;
 
@@ -177,62 +177,62 @@ export class InstanceBackupRule extends pulumi.CustomResource {
  */
 export interface InstanceBackupRuleState {
     /**
-     * Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+     * Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
      */
-    activeWeekdays?: pulumi.Input<string>;
+    activeWeekdays?: pulumi.Input<string | undefined>;
     /**
-     * Alert threshold. Range: 50-300.
+     * Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
      */
-    alarmWaterLevel?: pulumi.Input<number>;
+    alarmWaterLevel?: pulumi.Input<number | undefined>;
     /**
-     * Automatic backup frequency, for internal display, default value is 24h.
+     * Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
      */
-    backupFrequency?: pulumi.Input<number>;
+    backupFrequency?: pulumi.Input<number | undefined>;
     /**
      * Set automatic backup method. Valid values:
      * - 0: Logical backup;
      * - 1: Physical backup;
      * - 3: Snapshot backup (supported only in cloud disk version).
      */
-    backupMethod?: pulumi.Input<number>;
+    backupMethod?: pulumi.Input<number | undefined>;
     /**
-     * Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+     * Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
      */
-    backupRetentionPeriod?: pulumi.Input<number>;
+    backupRetentionPeriod?: pulumi.Input<number | undefined>;
     /**
      * Set the start time for automatic backup. The value range is: [0,23]. For example, setting this parameter to 2 means that backup starts at 02:00.
      */
-    backupTime?: pulumi.Input<number>;
+    backupTime?: pulumi.Input<number | undefined>;
     /**
      * Backup version. Old version backup is 0, advanced backup is 1. Set this value to 1 when enabling advanced backup.
      */
-    backupVersion?: pulumi.Input<number>;
+    backupVersion?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
-     * Which days to retain long-term, week 0-6, month 1-31, comma separated.
+     * Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
      */
-    longTermActiveDays?: pulumi.Input<string>;
+    longTermActiveDays?: pulumi.Input<string | undefined>;
     /**
-     * How many days to retain long-term backups.
+     * Long-term backup retention period. Value range [30, 1075].
      */
-    longTermExpiredDays?: pulumi.Input<number>;
+    longTermExpiredDays?: pulumi.Input<number | undefined>;
     /**
-     * Long-term retention cycle, weekly, monthly, empty means not enabled.
+     * Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `weekly`. Monthly retention: Specify `monthly`.
      */
-    longTermUnit?: pulumi.Input<string>;
+    longTermUnit?: pulumi.Input<string | undefined>;
     /**
      * Set whether to send failure alerts when automatic backup errors occur.
      * - true: Send.
      * - false: Do not send.
      */
-    notify?: pulumi.Input<boolean>;
+    notify?: pulumi.Input<boolean | undefined>;
     /**
-     * How many days to retain incremental backups.
+     * Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
      */
-    oplogExpiredDays?: pulumi.Input<number>;
+    oplogExpiredDays?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -240,17 +240,17 @@ export interface InstanceBackupRuleState {
  */
 export interface InstanceBackupRuleArgs {
     /**
-     * Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+     * Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
      */
-    activeWeekdays?: pulumi.Input<string>;
+    activeWeekdays?: pulumi.Input<string | undefined>;
     /**
-     * Alert threshold. Range: 50-300.
+     * Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
      */
-    alarmWaterLevel?: pulumi.Input<number>;
+    alarmWaterLevel?: pulumi.Input<number | undefined>;
     /**
-     * Automatic backup frequency, for internal display, default value is 24h.
+     * Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
      */
-    backupFrequency?: pulumi.Input<number>;
+    backupFrequency?: pulumi.Input<number | undefined>;
     /**
      * Set automatic backup method. Valid values:
      * - 0: Logical backup;
@@ -259,9 +259,9 @@ export interface InstanceBackupRuleArgs {
      */
     backupMethod: pulumi.Input<number>;
     /**
-     * Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+     * Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
      */
-    backupRetentionPeriod?: pulumi.Input<number>;
+    backupRetentionPeriod?: pulumi.Input<number | undefined>;
     /**
      * Set the start time for automatic backup. The value range is: [0,23]. For example, setting this parameter to 2 means that backup starts at 02:00.
      */
@@ -269,31 +269,31 @@ export interface InstanceBackupRuleArgs {
     /**
      * Backup version. Old version backup is 0, advanced backup is 1. Set this value to 1 when enabling advanced backup.
      */
-    backupVersion?: pulumi.Input<number>;
+    backupVersion?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
     instanceId: pulumi.Input<string>;
     /**
-     * Which days to retain long-term, week 0-6, month 1-31, comma separated.
+     * Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
      */
-    longTermActiveDays?: pulumi.Input<string>;
+    longTermActiveDays?: pulumi.Input<string | undefined>;
     /**
-     * How many days to retain long-term backups.
+     * Long-term backup retention period. Value range [30, 1075].
      */
-    longTermExpiredDays?: pulumi.Input<number>;
+    longTermExpiredDays?: pulumi.Input<number | undefined>;
     /**
-     * Long-term retention cycle, weekly, monthly, empty means not enabled.
+     * Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `weekly`. Monthly retention: Specify `monthly`.
      */
-    longTermUnit?: pulumi.Input<string>;
+    longTermUnit?: pulumi.Input<string | undefined>;
     /**
      * Set whether to send failure alerts when automatic backup errors occur.
      * - true: Send.
      * - false: Do not send.
      */
-    notify?: pulumi.Input<boolean>;
+    notify?: pulumi.Input<boolean | undefined>;
     /**
-     * How many days to retain incremental backups.
+     * Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
      */
-    oplogExpiredDays?: pulumi.Input<number>;
+    oplogExpiredDays?: pulumi.Input<number | undefined>;
 }

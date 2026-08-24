@@ -134,23 +134,23 @@ export interface GrafanaIntegrationState {
     /**
      * generated json string of given integration json schema.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * integration desc.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * grafana instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * integration id.
      */
-    integrationId?: pulumi.Input<string>;
+    integrationId?: pulumi.Input<string | undefined>;
     /**
      * integration json schema kind.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -160,11 +160,11 @@ export interface GrafanaIntegrationArgs {
     /**
      * generated json string of given integration json schema.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * integration desc.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * grafana instance id.
      */
@@ -172,5 +172,5 @@ export interface GrafanaIntegrationArgs {
     /**
      * integration json schema kind.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
 }

@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf cc_auto_status can be imported using the id, e.g.
+    /// waf CcAutoStatus can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf

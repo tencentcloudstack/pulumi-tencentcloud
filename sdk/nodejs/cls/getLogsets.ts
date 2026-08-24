@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logsets = tencentcloud.Cls.getLogsets({});
+ * const logsets = tencentcloud.cls.getLogsets({});
  * ```
  */
 export function getLogsets(args?: GetLogsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogsetsResult> {
@@ -69,7 +69,7 @@ export interface GetLogsetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logsets = tencentcloud.Cls.getLogsets({});
+ * const logsets = tencentcloud.cls.getLogsets({});
  * ```
  */
 export function getLogsetsOutput(args?: GetLogsetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogsetsResult> {
@@ -88,9 +88,9 @@ export interface GetLogsetsOutputArgs {
     /**
      * Query by filter.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cls.GetLogsetsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cls.GetLogsetsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

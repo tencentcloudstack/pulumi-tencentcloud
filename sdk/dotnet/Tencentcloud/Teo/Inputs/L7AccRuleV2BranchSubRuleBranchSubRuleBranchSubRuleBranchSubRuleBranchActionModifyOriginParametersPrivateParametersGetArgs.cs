@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string> SecretAccessKey { get; set; } = null!;
 
         /// <summary>
-        /// Authentication version. values: v2: v2 version; v4: v4 version.
+        /// Authentication version. Values: v2: v2 version; v4: v4 version.
         /// </summary>
         [Input("signatureVersion", required: true)]
         public Input<string> SignatureVersion { get; set; } = null!;

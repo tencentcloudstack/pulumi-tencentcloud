@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cluster = tencentcloud.Cynosdb.getCluster({
+ * const cluster = tencentcloud.cynosdb.getCluster({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     database: "users",
  *     table: "tb_user_name",
@@ -90,7 +90,7 @@ export interface GetClusterResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cluster = tencentcloud.Cynosdb.getCluster({
+ * const cluster = tencentcloud.cynosdb.getCluster({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     database: "users",
  *     table: "tb_user_name",
@@ -120,17 +120,17 @@ export interface GetClusterOutputArgs {
     /**
      * Database name.
      */
-    database?: pulumi.Input<string>;
+    database?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Data Table Name.
      */
-    table?: pulumi.Input<string>;
+    table?: pulumi.Input<string | undefined>;
     /**
      * Data table type: view: only return view, base_ Table: only returns the basic table, all: returns the view and table.
      */
-    tableType?: pulumi.Input<string>;
+    tableType?: pulumi.Input<string | undefined>;
 }

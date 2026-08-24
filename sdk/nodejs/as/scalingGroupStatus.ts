@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -73,7 +73,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * as scaling_group_status can be imported using the id, e.g.
+ * as scalingGroupStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id
@@ -154,11 +154,11 @@ export interface ScalingGroupStatusState {
     /**
      * Scaling group ID.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * If enable auto scaling group.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
 }
 
 /**

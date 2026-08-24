@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -47,7 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -69,7 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Import
     /// 
-    /// cfw vpc_firewall_switch can be imported using the id, e.g.
+    /// cfw VpcFirewallSwitch can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84

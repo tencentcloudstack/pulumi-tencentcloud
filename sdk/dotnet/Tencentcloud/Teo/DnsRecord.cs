@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_dns_record can be imported using the id, e.g.
+    /// teo TeoDnsRecord can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord teo_dns_record {zoneId}#{recordId}
@@ -63,10 +63,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> CreatedOn { get; private set; } = null!;
 
         /// <summary>
-        /// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-        /// 
-        /// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-        /// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+        /// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+        /// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+        /// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
         /// </summary>
         [Output("location")]
         public Output<string> Location { get; private set; } = null!;
@@ -88,6 +87,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("priority")]
         public Output<int> Priority { get; private set; } = null!;
+
+        /// <summary>
+        /// DNS record id.
+        /// </summary>
+        [Output("recordId")]
+        public Output<string> RecordId { get; private set; } = null!;
 
         /// <summary>
         /// DNS record resolution status, the following values:
@@ -184,10 +189,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> Content { get; set; } = null!;
 
         /// <summary>
-        /// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-        /// 
-        /// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-        /// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+        /// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+        /// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+        /// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
         /// </summary>
         [Input("location")]
         public Input<string>? Location { get; set; }
@@ -266,10 +270,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? CreatedOn { get; set; }
 
         /// <summary>
-        /// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-        /// 
-        /// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-        /// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+        /// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+        /// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+        /// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
         /// </summary>
         [Input("location")]
         public Input<string>? Location { get; set; }
@@ -291,6 +294,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("priority")]
         public Input<int>? Priority { get; set; }
+
+        /// <summary>
+        /// DNS record id.
+        /// </summary>
+        [Input("recordId")]
+        public Input<string>? RecordId { get; set; }
 
         /// <summary>
         /// DNS record resolution status, the following values:

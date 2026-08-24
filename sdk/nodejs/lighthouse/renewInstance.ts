@@ -57,7 +57,7 @@ export class RenewInstance extends pulumi.CustomResource {
     /**
      * Whether to automatically deduct vouchers. Valid values:
      * - true: Automatically deduct vouchers.
-     * -false:Do not automatically deduct vouchers. Default value: false.
+     *   -false:Do not automatically deduct vouchers. Default value: false.
      */
     declare public readonly autoVoucher: pulumi.Output<boolean | undefined>;
     /**
@@ -115,21 +115,21 @@ export interface RenewInstanceState {
     /**
      * Whether to automatically deduct vouchers. Valid values:
      * - true: Automatically deduct vouchers.
-     * -false:Do not automatically deduct vouchers. Default value: false.
+     *   -false:Do not automatically deduct vouchers. Default value: false.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify attributes such as the purchase duration of the Subscription instance and whether to set automatic renewal.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Lighthouse.RenewInstanceInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Lighthouse.RenewInstanceInstanceChargePrepaid | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to renew the data disk. Valid values:true: Indicates that the renewal instance also renews the data disk attached to it.false: Indicates that the instance will be renewed and the data disk attached to it will not be renewed at the same time.Default value: true.
      */
-    renewDataDisk?: pulumi.Input<boolean>;
+    renewDataDisk?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -139,9 +139,9 @@ export interface RenewInstanceArgs {
     /**
      * Whether to automatically deduct vouchers. Valid values:
      * - true: Automatically deduct vouchers.
-     * -false:Do not automatically deduct vouchers. Default value: false.
+     *   -false:Do not automatically deduct vouchers. Default value: false.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify attributes such as the purchase duration of the Subscription instance and whether to set automatic renewal.
      */
@@ -153,5 +153,5 @@ export interface RenewInstanceArgs {
     /**
      * Whether to renew the data disk. Valid values:true: Indicates that the renewal instance also renews the data disk attached to it.false: Indicates that the instance will be renewed and the data disk attached to it will not be renewed at the same time.Default value: true.
      */
-    renewDataDisk?: pulumi.Input<boolean>;
+    renewDataDisk?: pulumi.Input<boolean | undefined>;
 }

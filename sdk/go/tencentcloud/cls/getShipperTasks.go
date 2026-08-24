@@ -78,12 +78,8 @@ type GetShipperTasksResult struct {
 }
 
 func GetShipperTasksOutput(ctx *pulumi.Context, args GetShipperTasksOutputArgs, opts ...pulumi.InvokeOption) GetShipperTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetShipperTasksResultOutput, error) {
-			args := v.(GetShipperTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cls/getShipperTasks:getShipperTasks", args, GetShipperTasksResultOutput{}, options).(GetShipperTasksResultOutput), nil
-		}).(GetShipperTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cls/getShipperTasks:getShipperTasks", args, GetShipperTasksResultOutput{}, options).(GetShipperTasksResultOutput)
 }
 
 // A collection of arguments for invoking getShipperTasks.

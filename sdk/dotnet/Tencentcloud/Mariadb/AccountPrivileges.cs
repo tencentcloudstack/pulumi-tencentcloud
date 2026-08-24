@@ -47,7 +47,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Import
     /// 
-    /// mariadb account_privileges can be imported using the id, e.g.
+    /// mariadb AccountPrivileges can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id

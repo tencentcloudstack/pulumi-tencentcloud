@@ -80,12 +80,8 @@ type GetAccountPrivilegesResult struct {
 }
 
 func GetAccountPrivilegesOutput(ctx *pulumi.Context, args GetAccountPrivilegesOutputArgs, opts ...pulumi.InvokeOption) GetAccountPrivilegesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountPrivilegesResultOutput, error) {
-			args := v.(GetAccountPrivilegesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getAccountPrivileges:getAccountPrivileges", args, GetAccountPrivilegesResultOutput{}, options).(GetAccountPrivilegesResultOutput), nil
-		}).(GetAccountPrivilegesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getAccountPrivileges:getAccountPrivileges", args, GetAccountPrivilegesResultOutput{}, options).(GetAccountPrivilegesResultOutput)
 }
 
 // A collection of arguments for invoking getAccountPrivileges.

@@ -80,12 +80,8 @@ type GetTopSpaceSchemasResult struct {
 }
 
 func GetTopSpaceSchemasOutput(ctx *pulumi.Context, args GetTopSpaceSchemasOutputArgs, opts ...pulumi.InvokeOption) GetTopSpaceSchemasResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTopSpaceSchemasResultOutput, error) {
-			args := v.(GetTopSpaceSchemasArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args, GetTopSpaceSchemasResultOutput{}, options).(GetTopSpaceSchemasResultOutput), nil
-		}).(GetTopSpaceSchemasResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args, GetTopSpaceSchemasResultOutput{}, options).(GetTopSpaceSchemasResultOutput)
 }
 
 // A collection of arguments for invoking getTopSpaceSchemas.

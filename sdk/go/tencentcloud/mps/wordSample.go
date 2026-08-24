@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// mps word_sample can be imported using the id, e.g.
+// mps wordSample can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword

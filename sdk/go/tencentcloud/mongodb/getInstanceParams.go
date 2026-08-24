@@ -73,12 +73,8 @@ type LookupInstanceParamsResult struct {
 }
 
 func LookupInstanceParamsOutput(ctx *pulumi.Context, args LookupInstanceParamsOutputArgs, opts ...pulumi.InvokeOption) LookupInstanceParamsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupInstanceParamsResultOutput, error) {
-			args := v.(LookupInstanceParamsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args, LookupInstanceParamsResultOutput{}, options).(LookupInstanceParamsResultOutput), nil
-		}).(LookupInstanceParamsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args, LookupInstanceParamsResultOutput{}, options).(LookupInstanceParamsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceParams.

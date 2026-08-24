@@ -48,7 +48,7 @@ export class RestartInstanceOperation extends pulumi.CustomResource {
      * Force restart. Valid values:
      * - true: Forced restart;
      * - false: No forced restart;
-     * default false.
+     *   default false.
      */
     declare public readonly forceRestart: pulumi.Output<boolean | undefined>;
     /**
@@ -98,17 +98,17 @@ export interface RestartInstanceOperationState {
      * Force restart. Valid values:
      * - true: Forced restart;
      * - false: No forced restart;
-     * default false.
+     *   default false.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Restart mode: 0 roll restart; 1 full restart.
      */
-    restartMode?: pulumi.Input<number>;
+    restartMode?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -119,9 +119,9 @@ export interface RestartInstanceOperationArgs {
      * Force restart. Valid values:
      * - true: Forced restart;
      * - false: No forced restart;
-     * default false.
+     *   default false.
      */
-    forceRestart?: pulumi.Input<boolean>;
+    forceRestart?: pulumi.Input<boolean | undefined>;
     /**
      * Instance id.
      */
@@ -129,5 +129,5 @@ export interface RestartInstanceOperationArgs {
     /**
      * Restart mode: 0 roll restart; 1 full restart.
      */
-    restartMode?: pulumi.Input<number>;
+    restartMode?: pulumi.Input<number | undefined>;
 }

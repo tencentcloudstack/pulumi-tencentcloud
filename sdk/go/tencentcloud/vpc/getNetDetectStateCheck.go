@@ -92,12 +92,8 @@ type GetNetDetectStateCheckResult struct {
 }
 
 func GetNetDetectStateCheckOutput(ctx *pulumi.Context, args GetNetDetectStateCheckOutputArgs, opts ...pulumi.InvokeOption) GetNetDetectStateCheckResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNetDetectStateCheckResultOutput, error) {
-			args := v.(GetNetDetectStateCheckArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args, GetNetDetectStateCheckResultOutput{}, options).(GetNetDetectStateCheckResultOutput), nil
-		}).(GetNetDetectStateCheckResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args, GetNetDetectStateCheckResultOutput{}, options).(GetNetDetectStateCheckResultOutput)
 }
 
 // A collection of arguments for invoking getNetDetectStateCheck.

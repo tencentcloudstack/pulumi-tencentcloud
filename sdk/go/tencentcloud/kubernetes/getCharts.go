@@ -73,12 +73,8 @@ type GetChartsResult struct {
 }
 
 func GetChartsOutput(ctx *pulumi.Context, args GetChartsOutputArgs, opts ...pulumi.InvokeOption) GetChartsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetChartsResultOutput, error) {
-			args := v.(GetChartsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getCharts:getCharts", args, GetChartsResultOutput{}, options).(GetChartsResultOutput), nil
-		}).(GetChartsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getCharts:getCharts", args, GetChartsResultOutput{}, options).(GetChartsResultOutput)
 }
 
 // A collection of arguments for invoking getCharts.

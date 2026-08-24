@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * clb instance_mix_ip_target_config can be imported using the id, e.g.
+ * clb instanceMixIpTargetConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
@@ -102,11 +102,11 @@ export interface InstanceMixIpTargetConfigState {
     /**
      * ID of CLB instances to be queried.
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * False: closed True:open.
      */
-    mixIpTarget?: pulumi.Input<boolean>;
+    mixIpTarget?: pulumi.Input<boolean | undefined>;
 }
 
 /**

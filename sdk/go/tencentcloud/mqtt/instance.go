@@ -39,7 +39,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -47,8 +47,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -64,10 +64,14 @@ import (
 //				SkuCode:      pulumi.String("pro_6k_1"),
 //				Remark:       pulumi.String("remarks."),
 //				VpcList: &mqtt.InstanceVpcListArgs{
-//					VpcId:    vpc.ID(),
-//					SubnetId: subnet.ID(),
+//					VpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
+//					SubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
-//				PayMode: pulumi.Int(0),
+//				PayMode:                        pulumi.Int(0),
+//				X509Mode:                       pulumi.String("BYOC"),
+//				DeviceCertificateProvisionType: pulumi.String("JITP"),
+//				MessageRate:                    pulumi.Int(100),
+//				UseDefaultServerCert:           pulumi.Bool(true),
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("Terraform"),
 //				},
@@ -104,7 +108,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -112,8 +116,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -129,8 +133,8 @@ import (
 //				SkuCode:      pulumi.String("pro_10k_2"),
 //				Remark:       pulumi.String("remarks."),
 //				VpcList: &mqtt.InstanceVpcListArgs{
-//					VpcId:    vpc.ID(),
-//					SubnetId: subnet.ID(),
+//					VpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
+//					SubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				PayMode:             pulumi.Int(1),
 //				TimeSpan:            pulumi.Int(1),
@@ -163,6 +167,8 @@ type Instance struct {
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
+	// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+	MessageRate pulumi.IntOutput `pulumi:"messageRate"`
 	// Instance name.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Payment mode (0: Postpaid; 1: Prepaid).
@@ -177,8 +183,12 @@ type Instance struct {
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Purchase duration (unit: months).
 	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
+	// Whether to use the default server certificate.
+	UseDefaultServerCert pulumi.BoolOutput `pulumi:"useDefaultServerCert"`
 	// VPC information bound to the instance.
 	VpcList InstanceVpcListPtrOutput `pulumi:"vpcList"`
+	// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+	X509Mode pulumi.StringOutput `pulumi:"x509Mode"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -227,6 +237,8 @@ type instanceState struct {
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
 	InstanceType *string `pulumi:"instanceType"`
+	// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+	MessageRate *int `pulumi:"messageRate"`
 	// Instance name.
 	Name *string `pulumi:"name"`
 	// Payment mode (0: Postpaid; 1: Prepaid).
@@ -241,8 +253,12 @@ type instanceState struct {
 	Tags map[string]string `pulumi:"tags"`
 	// Purchase duration (unit: months).
 	TimeSpan *int `pulumi:"timeSpan"`
+	// Whether to use the default server certificate.
+	UseDefaultServerCert *bool `pulumi:"useDefaultServerCert"`
 	// VPC information bound to the instance.
 	VpcList *InstanceVpcList `pulumi:"vpcList"`
+	// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+	X509Mode *string `pulumi:"x509Mode"`
 }
 
 type InstanceState struct {
@@ -256,6 +272,8 @@ type InstanceState struct {
 	ForceDelete pulumi.BoolPtrInput
 	// Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
 	InstanceType pulumi.StringPtrInput
+	// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+	MessageRate pulumi.IntPtrInput
 	// Instance name.
 	Name pulumi.StringPtrInput
 	// Payment mode (0: Postpaid; 1: Prepaid).
@@ -270,8 +288,12 @@ type InstanceState struct {
 	Tags pulumi.StringMapInput
 	// Purchase duration (unit: months).
 	TimeSpan pulumi.IntPtrInput
+	// Whether to use the default server certificate.
+	UseDefaultServerCert pulumi.BoolPtrInput
 	// VPC information bound to the instance.
 	VpcList InstanceVpcListPtrInput
+	// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+	X509Mode pulumi.StringPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -283,10 +305,14 @@ type instanceArgs struct {
 	AuthorizationPolicy *bool `pulumi:"authorizationPolicy"`
 	// Is the automatic registration certificate automatically activated. Default is false.
 	AutomaticActivation *bool `pulumi:"automaticActivation"`
+	// Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
+	DeviceCertificateProvisionType *string `pulumi:"deviceCertificateProvisionType"`
 	// Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
 	InstanceType string `pulumi:"instanceType"`
+	// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+	MessageRate *int `pulumi:"messageRate"`
 	// Instance name.
 	Name *string `pulumi:"name"`
 	// Payment mode (0: Postpaid; 1: Prepaid).
@@ -301,8 +327,12 @@ type instanceArgs struct {
 	Tags map[string]string `pulumi:"tags"`
 	// Purchase duration (unit: months).
 	TimeSpan *int `pulumi:"timeSpan"`
+	// Whether to use the default server certificate.
+	UseDefaultServerCert *bool `pulumi:"useDefaultServerCert"`
 	// VPC information bound to the instance.
 	VpcList *InstanceVpcList `pulumi:"vpcList"`
+	// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+	X509Mode *string `pulumi:"x509Mode"`
 }
 
 // The set of arguments for constructing a Instance resource.
@@ -311,10 +341,14 @@ type InstanceArgs struct {
 	AuthorizationPolicy pulumi.BoolPtrInput
 	// Is the automatic registration certificate automatically activated. Default is false.
 	AutomaticActivation pulumi.BoolPtrInput
+	// Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
+	DeviceCertificateProvisionType pulumi.StringPtrInput
 	// Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
 	ForceDelete pulumi.BoolPtrInput
 	// Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
 	InstanceType pulumi.StringInput
+	// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+	MessageRate pulumi.IntPtrInput
 	// Instance name.
 	Name pulumi.StringPtrInput
 	// Payment mode (0: Postpaid; 1: Prepaid).
@@ -329,8 +363,12 @@ type InstanceArgs struct {
 	Tags pulumi.StringMapInput
 	// Purchase duration (unit: months).
 	TimeSpan pulumi.IntPtrInput
+	// Whether to use the default server certificate.
+	UseDefaultServerCert pulumi.BoolPtrInput
 	// VPC information bound to the instance.
 	VpcList InstanceVpcListPtrInput
+	// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+	X509Mode pulumi.StringPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -445,6 +483,11 @@ func (o InstanceOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
 }
 
+// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+func (o InstanceOutput) MessageRate() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.MessageRate }).(pulumi.IntOutput)
+}
+
 // Instance name.
 func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -480,9 +523,19 @@ func (o InstanceOutput) TimeSpan() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.TimeSpan }).(pulumi.IntPtrOutput)
 }
 
+// Whether to use the default server certificate.
+func (o InstanceOutput) UseDefaultServerCert() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.UseDefaultServerCert }).(pulumi.BoolOutput)
+}
+
 // VPC information bound to the instance.
 func (o InstanceOutput) VpcList() InstanceVpcListPtrOutput {
 	return o.ApplyT(func(v *Instance) InstanceVpcListPtrOutput { return v.VpcList }).(InstanceVpcListPtrOutput)
+}
+
+// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+func (o InstanceOutput) X509Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.X509Mode }).(pulumi.StringOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

@@ -132,7 +132,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := eips.GetInstance(ctx, &eips.GetInstanceArgs{
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"test": "test",
 //				},
 //			}, nil)
@@ -186,12 +186,8 @@ type GetInstanceResult struct {
 }
 
 func GetInstanceOutput(ctx *pulumi.Context, args GetInstanceOutputArgs, opts ...pulumi.InvokeOption) GetInstanceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceResultOutput, error) {
-			args := v.(GetInstanceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eips/getInstance:getInstance", args, GetInstanceResultOutput{}, options).(GetInstanceResultOutput), nil
-		}).(GetInstanceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eips/getInstance:getInstance", args, GetInstanceResultOutput{}, options).(GetInstanceResultOutput)
 }
 
 // A collection of arguments for invoking getInstance.

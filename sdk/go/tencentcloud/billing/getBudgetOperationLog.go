@@ -68,12 +68,8 @@ type GetBudgetOperationLogResult struct {
 }
 
 func GetBudgetOperationLogOutput(ctx *pulumi.Context, args GetBudgetOperationLogOutputArgs, opts ...pulumi.InvokeOption) GetBudgetOperationLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBudgetOperationLogResultOutput, error) {
-			args := v.(GetBudgetOperationLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Billing/getBudgetOperationLog:getBudgetOperationLog", args, GetBudgetOperationLogResultOutput{}, options).(GetBudgetOperationLogResultOutput), nil
-		}).(GetBudgetOperationLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Billing/getBudgetOperationLog:getBudgetOperationLog", args, GetBudgetOperationLogResultOutput{}, options).(GetBudgetOperationLogResultOutput)
 }
 
 // A collection of arguments for invoking getBudgetOperationLog.

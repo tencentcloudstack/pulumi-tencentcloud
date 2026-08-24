@@ -42,7 +42,7 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  foo.ID(),
+//				ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -62,14 +62,14 @@ import (
 //				return err
 //			}
 //			fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("www.qq.com"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = gaap.NewHttpRule(ctx, "foo", &gaap.HttpRuleArgs{
-//				ListenerId:        fooLayer7Listener.ID(),
+//				ListenerId:        fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:            fooHttpDomain.Domain,
 //				Path:              pulumi.String("/"),
 //				RealserverType:    pulumi.String("IP"),
@@ -81,12 +81,12 @@ import (
 //				},
 //				Realservers: gaap.HttpRuleRealserverArray{
 //					&gaap.HttpRuleRealserverArgs{
-//						Id:   fooRealserver.ID(),
+//						Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   fooRealserver.Ip,
 //						Port: pulumi.Int(80),
 //					},
 //					&gaap.HttpRuleRealserverArgs{
-//						Id:   bar.ID(),
+//						Id:   bar.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   bar.Ip,
 //						Port: pulumi.Int(80),
 //					},
@@ -106,7 +106,9 @@ import (
 // GAAP http rule can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Gaap/httpRule:HttpRule  tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+//
+//	$ pulumi import tencentcloud:Gaap/httpRule:HttpRule foo rule-3bsuu01r
+//
 // ```
 type HttpRule struct {
 	pulumi.CustomResourceState

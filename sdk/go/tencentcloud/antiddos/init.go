@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Antiddos/bgpInstance:BgpInstance":
+		r = &BgpInstance{}
 	case "tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp":
 		r = &CcBlackWhiteIp{}
 	case "tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy":
@@ -54,6 +56,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Antiddos/bgpInstance",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Antiddos/ccBlackWhiteIp",

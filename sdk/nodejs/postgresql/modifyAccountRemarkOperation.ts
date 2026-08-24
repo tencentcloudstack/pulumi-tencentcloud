@@ -104,15 +104,15 @@ export interface ModifyAccountRemarkOperationState {
     /**
      * Instance ID in the format of postgres-4wdeb0zv.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * New remarks corresponding to user `UserName`.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Instance username.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**

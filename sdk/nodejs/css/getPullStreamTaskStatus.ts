@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pullStreamTaskStatus = tencentcloud.Css.getPullStreamTaskStatus({
+ * const pullStreamTaskStatus = tencentcloud.css.getPullStreamTaskStatus({
  *     taskId: "63229997",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetPullStreamTaskStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pullStreamTaskStatus = tencentcloud.Css.getPullStreamTaskStatus({
+ * const pullStreamTaskStatus = tencentcloud.css.getPullStreamTaskStatus({
  *     taskId: "63229997",
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetPullStreamTaskStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */

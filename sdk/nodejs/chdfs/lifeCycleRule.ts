@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs life_cycle_rule can be imported using the id, e.g.
+ * chdfs lifeCycleRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id
@@ -112,11 +112,11 @@ export interface LifeCycleRuleState {
     /**
      * file system id.
      */
-    fileSystemId?: pulumi.Input<string>;
+    fileSystemId?: pulumi.Input<string | undefined>;
     /**
      * life cycle rule.
      */
-    lifeCycleRule?: pulumi.Input<inputs.Chdfs.LifeCycleRuleLifeCycleRule>;
+    lifeCycleRule?: pulumi.Input<inputs.Chdfs.LifeCycleRuleLifeCycleRule | undefined>;
 }
 
 /**

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
+ * cfs autoSnapshotPolicyAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
@@ -102,11 +102,11 @@ export interface AutoSnapshotPolicyAttachmentState {
     /**
      * ID of the snapshot to be unbound.
      */
-    autoSnapshotPolicyId?: pulumi.Input<string>;
+    autoSnapshotPolicyId?: pulumi.Input<string | undefined>;
     /**
      * List of IDs of the file systems to be unbound, separated by comma.
      */
-    fileSystemIds?: pulumi.Input<string>;
+    fileSystemIds?: pulumi.Input<string | undefined>;
 }
 
 /**

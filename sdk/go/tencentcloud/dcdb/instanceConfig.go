@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// dcdb instance_config can be imported using the id, e.g.
+// dcdb instanceConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id

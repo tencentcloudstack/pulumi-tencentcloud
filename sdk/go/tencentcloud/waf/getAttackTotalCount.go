@@ -110,12 +110,8 @@ type GetAttackTotalCountResult struct {
 }
 
 func GetAttackTotalCountOutput(ctx *pulumi.Context, args GetAttackTotalCountOutputArgs, opts ...pulumi.InvokeOption) GetAttackTotalCountResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAttackTotalCountResultOutput, error) {
-			args := v.(GetAttackTotalCountArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args, GetAttackTotalCountResultOutput{}, options).(GetAttackTotalCountResultOutput), nil
-		}).(GetAttackTotalCountResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args, GetAttackTotalCountResultOutput{}, options).(GetAttackTotalCountResultOutput)
 }
 
 // A collection of arguments for invoking getAttackTotalCount.

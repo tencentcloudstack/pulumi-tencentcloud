@@ -132,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// 
     /// ## Import
     /// 
-    /// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
+    /// Resource tencentcloud.Security.GroupRuleSet can be imported by passing security grou id:
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx

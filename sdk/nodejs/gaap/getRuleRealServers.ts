@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleRealServers = tencentcloud.Gaap.getRuleRealServers({
+ * const ruleRealServers = tencentcloud.gaap.getRuleRealServers({
  *     ruleId: "rule-xxxxxx",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetRuleRealServersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleRealServers = tencentcloud.Gaap.getRuleRealServers({
+ * const ruleRealServers = tencentcloud.gaap.getRuleRealServers({
  *     ruleId: "rule-xxxxxx",
  * });
  * ```
@@ -90,7 +90,7 @@ export interface GetRuleRealServersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Rule Id.
      */

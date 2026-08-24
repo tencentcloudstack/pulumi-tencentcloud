@@ -43,6 +43,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
 
         private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?> _assumeRole = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole>("assumeRole"));
+        /// <summary>
+        /// The `AssumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole? AssumeRole
         {
             get => _assumeRole.Get();
@@ -50,6 +53,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
 
         private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?> _assumeRoleWithSaml = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml>("assumeRoleWithSaml"));
+        /// <summary>
+        /// The `AssumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml? AssumeRoleWithSaml
         {
             get => _assumeRoleWithSaml.Get();
@@ -57,6 +63,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
 
         private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?> _assumeRoleWithWebIdentity = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity>("assumeRoleWithWebIdentity"));
+        /// <summary>
+        /// The `AssumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity? AssumeRoleWithWebIdentity
         {
             get => _assumeRoleWithWebIdentity.Get();
@@ -114,6 +123,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
 
         private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.MfaCertification?> _mfaCertification = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.MfaCertification?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.MfaCertification>("mfaCertification"));
+        /// <summary>
+        /// The `MfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+        /// </summary>
         public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.MfaCertification? MfaCertification
         {
             get => _mfaCertification.Get();
@@ -260,9 +272,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             /// </summary>
                 public string? ProviderId { get; set; } = null!;
             /// <summary>
-            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `RoleArn` or `RoleArnFile` is required.
             /// </summary>
-                public string RoleArn { get; set; }
+                public string? RoleArn { get; set; } = null!;
+            /// <summary>
+            /// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `RoleArn` or `RoleArnFile` is required.
+            /// </summary>
+                public string? RoleArnFile { get; set; } = null!;
             /// <summary>
             /// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
             /// </summary>
@@ -272,9 +288,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             /// </summary>
                 public string SessionName { get; set; }
             /// <summary>
-            /// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+            /// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `WebIdentityToken` or `WebIdentityTokenFile` is required.
             /// </summary>
-                public string WebIdentityToken { get; set; }
+                public string? WebIdentityToken { get; set; } = null!;
+            /// <summary>
+            /// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `WebIdentityToken` or `WebIdentityTokenFile` is required.
+            /// </summary>
+                public string? WebIdentityTokenFile { get; set; } = null!;
             }
 
              public class MfaCertification

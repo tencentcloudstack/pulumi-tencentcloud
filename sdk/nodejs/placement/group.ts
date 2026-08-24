@@ -23,6 +23,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create partition placement group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const bar = new tencentcloud.placement.Group("bar", {
+ *     name: "test-partition",
+ *     type: "HOST",
+ *     strategy: "PARTITION",
+ *     partitionCount: 5,
+ * });
+ * ```
+ *
  * ## Import
  *
  * Placement group can be imported using the id, e.g.
@@ -80,6 +94,14 @@ export class Group extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+     */
+    declare public readonly partitionCount: pulumi.Output<number>;
+    /**
+     * Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+     */
+    declare public readonly strategy: pulumi.Output<string>;
+    /**
      * Tags of the placement group.
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
@@ -106,6 +128,8 @@ export class Group extends pulumi.CustomResource {
             resourceInputs["currentNum"] = state?.currentNum;
             resourceInputs["cvmQuotaTotal"] = state?.cvmQuotaTotal;
             resourceInputs["name"] = state?.name;
+            resourceInputs["partitionCount"] = state?.partitionCount;
+            resourceInputs["strategy"] = state?.strategy;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["type"] = state?.type;
         } else {
@@ -115,6 +139,8 @@ export class Group extends pulumi.CustomResource {
             }
             resourceInputs["affinity"] = args?.affinity;
             resourceInputs["name"] = args?.name;
+            resourceInputs["partitionCount"] = args?.partitionCount;
+            resourceInputs["strategy"] = args?.strategy;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["type"] = args?.type;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -133,31 +159,39 @@ export interface GroupState {
     /**
      * Affinity of the placement group.Valid values: 1~10, default is 1.
      */
-    affinity?: pulumi.Input<number>;
+    affinity?: pulumi.Input<number | undefined>;
     /**
      * Creation time of the placement group.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Number of hosts in the placement group.
      */
-    currentNum?: pulumi.Input<number>;
+    currentNum?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of hosts in the placement group.
      */
-    cvmQuotaTotal?: pulumi.Input<number>;
+    cvmQuotaTotal?: pulumi.Input<number | undefined>;
     /**
      * Name of the placement group, 1-60 characters in length.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+     */
+    partitionCount?: pulumi.Input<number | undefined>;
+    /**
+     * Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+     */
+    strategy?: pulumi.Input<string | undefined>;
     /**
      * Tags of the placement group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -167,15 +201,23 @@ export interface GroupArgs {
     /**
      * Affinity of the placement group.Valid values: 1~10, default is 1.
      */
-    affinity?: pulumi.Input<number>;
+    affinity?: pulumi.Input<number | undefined>;
     /**
      * Name of the placement group, 1-60 characters in length.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Partition count of the placement group. Valid values: 2~30. Only valid when `strategy` is set to `PARTITION`.
+     */
+    partitionCount?: pulumi.Input<number | undefined>;
+    /**
+     * Strategy of the placement group. Valid values: `SPREAD` and `PARTITION`. `SPREAD` is the default strategy. When strategy is `PARTITION`, `partitionCount` must be set. This field cannot be modified after creation.
+     */
+    strategy?: pulumi.Input<string | undefined>;
     /**
      * Tags of the placement group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the placement group. Valid values: `HOST`, `SW` and `RACK`.
      */

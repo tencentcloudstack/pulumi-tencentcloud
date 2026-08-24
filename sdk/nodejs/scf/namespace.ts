@@ -114,23 +114,23 @@ export interface NamespaceState {
     /**
      * SCF namespace creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the SCF namespace.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * SCF namespace last modified time.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * SCF namespace type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -140,7 +140,7 @@ export interface NamespaceArgs {
     /**
      * Description of the SCF namespace.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF namespace.
      */

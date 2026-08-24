@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
+ * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * const exampleEdgeFirewallSwitch = new tencentcloud.cfw.EdgeFirewallSwitch("example", {
  *     publicIp: example.then(example => example.datas?.[0]?.publicIp),
  *     switchMode: 1,
@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getEdgeFwSwitches({});
+ * const example = tencentcloud.cfw.getEdgeFwSwitches({});
  * const exampleEdgeFirewallSwitch = new tencentcloud.cfw.EdgeFirewallSwitch("example", {
  *     publicIp: example.then(example => example.datas?.[0]?.publicIp),
  *     subnetId: "subnet-id",
@@ -128,19 +128,19 @@ export interface EdgeFirewallSwitchState {
     /**
      * Switch, 0: off, 1: on.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Public Ip.
      */
-    publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string | undefined>;
     /**
      * The first EIP switch in the vpc is turned on, and you need to specify a subnet to create a private connection. If `switchMode` is 1 and `enable` is 1, this field is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * 0: bypass; 1: serial.
      */
-    switchMode?: pulumi.Input<number>;
+    switchMode?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -158,7 +158,7 @@ export interface EdgeFirewallSwitchArgs {
     /**
      * The first EIP switch in the vpc is turned on, and you need to specify a subnet to create a private connection. If `switchMode` is 1 and `enable` is 1, this field is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * 0: bypass; 1: serial.
      */

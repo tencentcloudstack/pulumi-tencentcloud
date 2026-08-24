@@ -85,12 +85,8 @@ type GetDescribeHostTkeInstanceListResult struct {
 }
 
 func GetDescribeHostTkeInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostTkeInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostTkeInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostTkeInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostTkeInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args, GetDescribeHostTkeInstanceListResultOutput{}, options).(GetDescribeHostTkeInstanceListResultOutput), nil
-		}).(GetDescribeHostTkeInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostTkeInstanceList:getDescribeHostTkeInstanceList", args, GetDescribeHostTkeInstanceListResultOutput{}, options).(GetDescribeHostTkeInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostTkeInstanceList.

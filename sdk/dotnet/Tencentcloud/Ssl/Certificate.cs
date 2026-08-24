@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -70,7 +69,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -304,7 +302,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// ssl certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ssl/certificate:Certificate  tencentcloud_ssl_certificate.cert GjTNRoK7
+    ///   $ pulumi import tencentcloud:Ssl/certificate:Certificate cert GjTNRoK7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/certificate:Certificate")]

@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cls ckafkaConsumer
+ * Provides a resource to create a CLS ckafka consumer
  *
  * ## Example Usage
  *
@@ -15,8 +15,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ckafkaConsumer = new tencentcloud.cls.CkafkaConsumer("ckafka_consumer", {
- *     compression: 1,
+ * const example = new tencentcloud.cls.CkafkaConsumer("example", {
+ *     compression: 0,
  *     needContent: true,
  *     topicId: "7e34a3a7-635e-4da8-9005-88106c1fde69",
  *     ckafka: {
@@ -38,16 +38,17 @@ import * as utilities from "../utilities";
  *         ],
  *         tagJsonNotTiled: true,
  *         timestampAccuracy: 2,
+ *         jsonType: 1,
  *     },
  * });
  * ```
  *
  * ## Import
  *
- * cls ckafka_consumer can be imported using the id, e.g.
+ * cls ckafkaConsumer can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+ * $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer example 7e34a3a7-635e-4da8-9005-88106c1fde69
  * ```
  */
 export class CkafkaConsumer extends pulumi.CustomResource {
@@ -140,23 +141,23 @@ export interface CkafkaConsumerState {
     /**
      * ckafka info.
      */
-    ckafka?: pulumi.Input<inputs.Cls.CkafkaConsumerCkafka>;
+    ckafka?: pulumi.Input<inputs.Cls.CkafkaConsumerCkafka | undefined>;
     /**
      * compression method. 0 for NONE, 2 for SNAPPY, 3 for LZ4.
      */
-    compression?: pulumi.Input<number>;
+    compression?: pulumi.Input<number | undefined>;
     /**
      * metadata information.
      */
-    content?: pulumi.Input<inputs.Cls.CkafkaConsumerContent>;
+    content?: pulumi.Input<inputs.Cls.CkafkaConsumerContent | undefined>;
     /**
      * whether to deliver the metadata information of the log.
      */
-    needContent?: pulumi.Input<boolean>;
+    needContent?: pulumi.Input<boolean | undefined>;
     /**
      * topic id.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -166,19 +167,19 @@ export interface CkafkaConsumerArgs {
     /**
      * ckafka info.
      */
-    ckafka?: pulumi.Input<inputs.Cls.CkafkaConsumerCkafka>;
+    ckafka?: pulumi.Input<inputs.Cls.CkafkaConsumerCkafka | undefined>;
     /**
      * compression method. 0 for NONE, 2 for SNAPPY, 3 for LZ4.
      */
-    compression?: pulumi.Input<number>;
+    compression?: pulumi.Input<number | undefined>;
     /**
      * metadata information.
      */
-    content?: pulumi.Input<inputs.Cls.CkafkaConsumerContent>;
+    content?: pulumi.Input<inputs.Cls.CkafkaConsumerContent | undefined>;
     /**
      * whether to deliver the metadata information of the log.
      */
-    needContent?: pulumi.Input<boolean>;
+    needContent?: pulumi.Input<boolean | undefined>;
     /**
      * topic id.
      */

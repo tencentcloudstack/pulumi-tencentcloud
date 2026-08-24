@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Import
     /// 
-    /// postgres postgresql_time_window can be imported using the id, e.g.
+    /// postgres PostgresqlTimeWindow can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Postgresql/timeWindow:TimeWindow postgresql_time_window instance_id

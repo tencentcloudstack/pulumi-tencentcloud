@@ -12,6 +12,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a dnspod customLine
+//
+// > **NOTE:** Terraform uses the combined id of doamin and name when importing. When the name changes, the combined id will also change.
+//
 // ## Example Usage
 //
 // ```go
@@ -42,7 +46,7 @@ import (
 //
 // ## Import
 //
-// dnspod custom_line can be imported using the id, e.g.
+// dnspod customLine can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name

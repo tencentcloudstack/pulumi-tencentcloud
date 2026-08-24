@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver renew_db_instance can be imported using the id, e.g.
+ * sqlserver renewDbInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/renewDbInstance:RenewDbInstance example mssql-i9ma6oy7#1
@@ -140,11 +140,11 @@ export interface RenewDbInstanceState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * How many months to renew, the value range is 1-48, the default is 1.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -158,5 +158,5 @@ export interface RenewDbInstanceArgs {
     /**
      * How many months to renew, the value range is 1-48, the default is 1.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }

@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public static class GetZones
     {
         /// <summary>
-        /// Use this data source to query detailed information of teo zoneAvailablePlans
+        /// Use this data source to query detailed information of TEO zones.
         /// 
         /// ## Example Usage
         /// 
@@ -21,7 +21,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -63,7 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetZonesResult>("tencentcloud:Teo/getZones:getZones", args ?? new GetZonesArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of teo zoneAvailablePlans
+        /// Use this data source to query detailed information of TEO zones.
         /// 
         /// ## Example Usage
         /// 
@@ -71,7 +71,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -113,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
             => global::Pulumi.Deployment.Instance.Invoke<GetZonesResult>("tencentcloud:Teo/getZones:getZones", args ?? new GetZonesInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of teo zoneAvailablePlans
+        /// Use this data source to query detailed information of TEO zones.
         /// 
         /// ## Example Usage
         /// 
@@ -121,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {

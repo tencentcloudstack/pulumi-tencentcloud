@@ -68,12 +68,8 @@ type GetTenantRolesResult struct {
 }
 
 func GetTenantRolesOutput(ctx *pulumi.Context, args GetTenantRolesOutputArgs, opts ...pulumi.InvokeOption) GetTenantRolesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTenantRolesResultOutput, error) {
-			args := v.(GetTenantRolesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getTenantRoles:getTenantRoles", args, GetTenantRolesResultOutput{}, options).(GetTenantRolesResultOutput), nil
-		}).(GetTenantRolesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getTenantRoles:getTenantRoles", args, GetTenantRolesResultOutput{}, options).(GetTenantRolesResultOutput)
 }
 
 // A collection of arguments for invoking getTenantRoles.

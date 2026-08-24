@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internetAddressStatistics = tencentcloud.Dc.getInternetAddressStatistics({});
+ * const internetAddressStatistics = tencentcloud.dc.getInternetAddressStatistics({});
  * ```
  */
 export function getInternetAddressStatistics(args?: GetInternetAddressStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetInternetAddressStatisticsResult> {
@@ -59,7 +59,7 @@ export interface GetInternetAddressStatisticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internetAddressStatistics = tencentcloud.Dc.getInternetAddressStatistics({});
+ * const internetAddressStatistics = tencentcloud.dc.getInternetAddressStatistics({});
  * ```
  */
 export function getInternetAddressStatisticsOutput(args?: GetInternetAddressStatisticsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInternetAddressStatisticsResult> {
@@ -77,5 +77,5 @@ export interface GetInternetAddressStatisticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

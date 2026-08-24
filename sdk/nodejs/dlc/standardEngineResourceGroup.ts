@@ -137,7 +137,7 @@ export class StandardEngineResourceGroup extends pulumi.CustomResource {
      */
     declare public readonly frameType: pulumi.Output<string | undefined>;
     /**
-     * Image Name. 
+     * Image Name.
      * Example value: image-xxx. If using a built-in image (ImageType is built-in), the ImageName for different frameworks is: machine-learning: pytorch-v2.5.1, scikit-learn-v1.6.0, tensorflow-v2.18.0, python: python-v3.10, spark-m: Standard-S 1.1.
      */
     declare public readonly imageName: pulumi.Output<string | undefined>;
@@ -294,112 +294,112 @@ export interface StandardEngineResourceGroupState {
     /**
      * Automatic start (task submission automatically pulls up the resource group) 0-automatic start, 1-not automatic start.
      */
-    autoLaunch?: pulumi.Input<number>;
+    autoLaunch?: pulumi.Input<number | undefined>;
     /**
      * Automatically suspend resource groups. 0 - Automatically suspend, 1 - Not automatically suspend.
      */
-    autoPause?: pulumi.Input<number>;
+    autoPause?: pulumi.Input<number | undefined>;
     /**
      * Automatic suspension time, in minutes, with a value range of 1-999 (after no tasks have reached AutoPauseTime, the resource group will automatically suspend).
      */
-    autoPauseTime?: pulumi.Input<number>;
+    autoPauseTime?: pulumi.Input<number | undefined>;
     /**
      * Standard engine name.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Driver CU specifications: Currently supported: small (default, 1 CU), medium (2 CU), large (4 CU), xlarge (8 CU). Memory CUs are CPUs with a ratio of 1:8, m.small (1 CU memory), m.medium (2 CU memory), m.large (4 CU memory), and m.xlarge (8 CU memory).
      */
-    driverCuSpec?: pulumi.Input<string>;
+    driverCuSpec?: pulumi.Input<string | undefined>;
     /**
      * Dynamic parameters of the resource group, effective in the next task.
      */
-    dynamicConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupDynamicConfigPair>[]>;
+    dynamicConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupDynamicConfigPair>[] | undefined>;
     /**
      * Standard engine resource group ID.
      */
-    engineResourceGroupId?: pulumi.Input<string>;
+    engineResourceGroupId?: pulumi.Input<string | undefined>;
     /**
      * Standard engine resource group name.
      */
-    engineResourceGroupName?: pulumi.Input<string>;
+    engineResourceGroupName?: pulumi.Input<string | undefined>;
     /**
      * Executor CU specifications: Currently supported: small (default, 1 CU), medium (2 CU), large (4 CU), xlarge (8 CU). Memory CUs are CPUs with a ratio of 1:8, m.small (1 CU memory), m.medium (2 CU memory), m.large (4 CU memory), and m.xlarge (8 CU memory).
      */
-    executorCuSpec?: pulumi.Input<string>;
+    executorCuSpec?: pulumi.Input<string | undefined>;
     /**
      * The framework type of the AI type resource group, machine-learning, python, spark-ml, if not filled in, the default is machine-learning.
      */
-    frameType?: pulumi.Input<string>;
+    frameType?: pulumi.Input<string | undefined>;
     /**
-     * Image Name. 
+     * Image Name.
      * Example value: image-xxx. If using a built-in image (ImageType is built-in), the ImageName for different frameworks is: machine-learning: pytorch-v2.5.1, scikit-learn-v1.6.0, tensorflow-v2.18.0, python: python-v3.10, spark-m: Standard-S 1.1.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Image type, build-in: built-in, custom: custom, if not filled in, the default is build-in.
      */
-    imageType?: pulumi.Input<string>;
+    imageType?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageVersion?: pulumi.Input<string>;
+    imageVersion?: pulumi.Input<string | undefined>;
     /**
      * The number of concurrent tasks is 5 by default.
      */
-    maxConcurrency?: pulumi.Input<number>;
+    maxConcurrency?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of executors.
      */
-    maxExecutorNums?: pulumi.Input<number>;
+    maxExecutorNums?: pulumi.Input<number | undefined>;
     /**
      * Minimum number of executors.
      */
-    minExecutorNums?: pulumi.Input<number>;
+    minExecutorNums?: pulumi.Input<number | undefined>;
     /**
      * Network configuration name.
      */
-    networkConfigNames?: pulumi.Input<pulumi.Input<string>[]>;
+    networkConfigNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Customized mirror domain name.
      */
-    publicDomain?: pulumi.Input<string>;
+    publicDomain?: pulumi.Input<string | undefined>;
     /**
      * The resource limit for a Python stand-alone node in a Python resource group must be smaller than the resource limit for the resource group. Small: 1cu Medium: 2cu Large: 4cu Xlarge: 8cu 4xlarge: 16cu 8xlarge: 32cu 16xlarge: 64cu. If the resource type is high memory, add m before the type.
      */
-    pythonCuSpec?: pulumi.Input<string>;
+    pythonCuSpec?: pulumi.Input<string | undefined>;
     /**
      * Custom image location.
      */
-    regionName?: pulumi.Input<string>;
+    regionName?: pulumi.Input<string | undefined>;
     /**
      * Custom image instance ID.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * Resource group scenario.
      */
-    resourceGroupScene?: pulumi.Input<string>;
+    resourceGroupScene?: pulumi.Input<string | undefined>;
     /**
      * The state of the resource group. true: launch standard engine resource group; false: pause standard engine resource group. Default is true.
      */
-    runningState?: pulumi.Input<boolean>;
+    runningState?: pulumi.Input<boolean | undefined>;
     /**
      * The AI resource group is valid, and the upper limit of available resources in the resource group must be less than the upper limit of engine resources.
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
     /**
      * Only the SQL resource group resource limit, only used for the express module.
      */
-    sparkSize?: pulumi.Input<number>;
+    sparkSize?: pulumi.Input<number | undefined>;
     /**
      * Only SQL resource group resource configuration mode, fast: fast mode, custom: custom mode.
      */
-    sparkSpecMode?: pulumi.Input<string>;
+    sparkSpecMode?: pulumi.Input<string | undefined>;
     /**
      * Static parameters of the resource group, which require restarting the resource group to take effect.
      */
-    staticConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupStaticConfigPair>[]>;
+    staticConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupStaticConfigPair>[] | undefined>;
 }
 
 /**
@@ -409,15 +409,15 @@ export interface StandardEngineResourceGroupArgs {
     /**
      * Automatic start (task submission automatically pulls up the resource group) 0-automatic start, 1-not automatic start.
      */
-    autoLaunch?: pulumi.Input<number>;
+    autoLaunch?: pulumi.Input<number | undefined>;
     /**
      * Automatically suspend resource groups. 0 - Automatically suspend, 1 - Not automatically suspend.
      */
-    autoPause?: pulumi.Input<number>;
+    autoPause?: pulumi.Input<number | undefined>;
     /**
      * Automatic suspension time, in minutes, with a value range of 1-999 (after no tasks have reached AutoPauseTime, the resource group will automatically suspend).
      */
-    autoPauseTime?: pulumi.Input<number>;
+    autoPauseTime?: pulumi.Input<number | undefined>;
     /**
      * Standard engine name.
      */
@@ -425,11 +425,11 @@ export interface StandardEngineResourceGroupArgs {
     /**
      * Driver CU specifications: Currently supported: small (default, 1 CU), medium (2 CU), large (4 CU), xlarge (8 CU). Memory CUs are CPUs with a ratio of 1:8, m.small (1 CU memory), m.medium (2 CU memory), m.large (4 CU memory), and m.xlarge (8 CU memory).
      */
-    driverCuSpec?: pulumi.Input<string>;
+    driverCuSpec?: pulumi.Input<string | undefined>;
     /**
      * Dynamic parameters of the resource group, effective in the next task.
      */
-    dynamicConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupDynamicConfigPair>[]>;
+    dynamicConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupDynamicConfigPair>[] | undefined>;
     /**
      * Standard engine resource group name.
      */
@@ -437,78 +437,78 @@ export interface StandardEngineResourceGroupArgs {
     /**
      * Executor CU specifications: Currently supported: small (default, 1 CU), medium (2 CU), large (4 CU), xlarge (8 CU). Memory CUs are CPUs with a ratio of 1:8, m.small (1 CU memory), m.medium (2 CU memory), m.large (4 CU memory), and m.xlarge (8 CU memory).
      */
-    executorCuSpec?: pulumi.Input<string>;
+    executorCuSpec?: pulumi.Input<string | undefined>;
     /**
      * The framework type of the AI type resource group, machine-learning, python, spark-ml, if not filled in, the default is machine-learning.
      */
-    frameType?: pulumi.Input<string>;
+    frameType?: pulumi.Input<string | undefined>;
     /**
-     * Image Name. 
+     * Image Name.
      * Example value: image-xxx. If using a built-in image (ImageType is built-in), the ImageName for different frameworks is: machine-learning: pytorch-v2.5.1, scikit-learn-v1.6.0, tensorflow-v2.18.0, python: python-v3.10, spark-m: Standard-S 1.1.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Image type, build-in: built-in, custom: custom, if not filled in, the default is build-in.
      */
-    imageType?: pulumi.Input<string>;
+    imageType?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageVersion?: pulumi.Input<string>;
+    imageVersion?: pulumi.Input<string | undefined>;
     /**
      * The number of concurrent tasks is 5 by default.
      */
-    maxConcurrency?: pulumi.Input<number>;
+    maxConcurrency?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of executors.
      */
-    maxExecutorNums?: pulumi.Input<number>;
+    maxExecutorNums?: pulumi.Input<number | undefined>;
     /**
      * Minimum number of executors.
      */
-    minExecutorNums?: pulumi.Input<number>;
+    minExecutorNums?: pulumi.Input<number | undefined>;
     /**
      * Network configuration name.
      */
-    networkConfigNames?: pulumi.Input<pulumi.Input<string>[]>;
+    networkConfigNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Customized mirror domain name.
      */
-    publicDomain?: pulumi.Input<string>;
+    publicDomain?: pulumi.Input<string | undefined>;
     /**
      * The resource limit for a Python stand-alone node in a Python resource group must be smaller than the resource limit for the resource group. Small: 1cu Medium: 2cu Large: 4cu Xlarge: 8cu 4xlarge: 16cu 8xlarge: 32cu 16xlarge: 64cu. If the resource type is high memory, add m before the type.
      */
-    pythonCuSpec?: pulumi.Input<string>;
+    pythonCuSpec?: pulumi.Input<string | undefined>;
     /**
      * Custom image location.
      */
-    regionName?: pulumi.Input<string>;
+    regionName?: pulumi.Input<string | undefined>;
     /**
      * Custom image instance ID.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * Resource group scenario.
      */
-    resourceGroupScene?: pulumi.Input<string>;
+    resourceGroupScene?: pulumi.Input<string | undefined>;
     /**
      * The state of the resource group. true: launch standard engine resource group; false: pause standard engine resource group. Default is true.
      */
-    runningState?: pulumi.Input<boolean>;
+    runningState?: pulumi.Input<boolean | undefined>;
     /**
      * The AI resource group is valid, and the upper limit of available resources in the resource group must be less than the upper limit of engine resources.
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
     /**
      * Only the SQL resource group resource limit, only used for the express module.
      */
-    sparkSize?: pulumi.Input<number>;
+    sparkSize?: pulumi.Input<number | undefined>;
     /**
      * Only SQL resource group resource configuration mode, fast: fast mode, custom: custom mode.
      */
-    sparkSpecMode?: pulumi.Input<string>;
+    sparkSpecMode?: pulumi.Input<string | undefined>;
     /**
      * Static parameters of the resource group, which require restarting the resource group to take effect.
      */
-    staticConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupStaticConfigPair>[]>;
+    staticConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.StandardEngineResourceGroupStaticConfigPair>[] | undefined>;
 }

@@ -54,7 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Import
     /// 
-    /// antiddos cc_precision_policy can be imported using the id, e.g.
+    /// antiddos CcPrecisionPolicy can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}

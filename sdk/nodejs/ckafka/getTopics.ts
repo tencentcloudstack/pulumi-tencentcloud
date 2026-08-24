@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ckafka.getTopics({
+ * const example = tencentcloud.ckafka.getTopics({
  *     instanceId: "ckafka-vv7wp5nx",
  *     topicName: "tf_example",
  * });
@@ -76,7 +76,7 @@ export interface GetTopicsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ckafka.getTopics({
+ * const example = tencentcloud.ckafka.getTopics({
  *     instanceId: "ckafka-vv7wp5nx",
  *     topicName: "tf_example",
  * });
@@ -102,9 +102,9 @@ export interface GetTopicsOutputArgs {
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Name of the CKafka topic. It must start with a letter, the rest can contain letters, numbers and dashes(-). The length range is from 1 to 64.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }

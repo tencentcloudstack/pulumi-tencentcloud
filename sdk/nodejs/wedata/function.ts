@@ -224,63 +224,63 @@ export interface FunctionState {
     /**
      * Class name of function entry.
      */
-    className?: pulumi.Input<string>;
+    className?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterIdentifier?: pulumi.Input<string>;
+    clusterIdentifier?: pulumi.Input<string | undefined>;
     /**
      * Comment.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Description of the function.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Example of the function.
      */
-    example?: pulumi.Input<string>;
+    example?: pulumi.Input<string | undefined>;
     /**
      * Function ID.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * Function Kind, Enum: ANALYSIS, ENCRYPTION, AGGREGATE, LOGIC, DATE_AND_TIME, MATH, CONVERSION, STRING, IP_AND_DOMAIN, WINDOW, OTHER.
      */
-    kind?: pulumi.Input<string>;
+    kind?: pulumi.Input<string | undefined>;
     /**
      * Function Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Description of the Parameter.
      */
-    paramDesc?: pulumi.Input<string>;
+    paramDesc?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Resource of the function, stored in WeData COS(.jar,...).
      */
-    resourceLists?: pulumi.Input<pulumi.Input<inputs.Wedata.FunctionResourceList>[]>;
+    resourceLists?: pulumi.Input<pulumi.Input<inputs.Wedata.FunctionResourceList>[] | undefined>;
     /**
      * Description of the Return value.
      */
-    returnDesc?: pulumi.Input<string>;
+    returnDesc?: pulumi.Input<string | undefined>;
     /**
      * Function Type, Enum: HIVE, SPARK, DLC.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Usage of the function.
      */
-    usage?: pulumi.Input<string>;
+    usage?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -318,7 +318,7 @@ export interface FunctionArgs {
     /**
      * Function Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Description of the Parameter.
      */

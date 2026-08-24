@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getSqlScriptRuns({
+ * const example = tencentcloud.wedata.getSqlScriptRuns({
  *     projectId: "1460947878944567296",
  *     scriptId: "971c1520-836f-41be-b13f-7a6c637317c8",
  * });
@@ -112,7 +112,7 @@ export interface GetSqlScriptRunsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getSqlScriptRuns({
+ * const example = tencentcloud.wedata.getSqlScriptRuns({
  *     projectId: "1460947878944567296",
  *     scriptId: "971c1520-836f-41be-b13f-7a6c637317c8",
  * });
@@ -139,15 +139,15 @@ export interface GetSqlScriptRunsOutputArgs {
     /**
      * End time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Execute user UIN.
      */
-    executeUserUin?: pulumi.Input<string>;
+    executeUserUin?: pulumi.Input<string | undefined>;
     /**
      * Job ID.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -155,7 +155,7 @@ export interface GetSqlScriptRunsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Script ID.
      */
@@ -163,9 +163,9 @@ export interface GetSqlScriptRunsOutputArgs {
     /**
      * Search keyword.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * Start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

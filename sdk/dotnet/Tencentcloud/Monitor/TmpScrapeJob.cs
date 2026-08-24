@@ -75,7 +75,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor tmpScrapeJob can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
     /// ```

@@ -17,19 +17,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all Ckafka instances
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Ckafka.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query Ckafka instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke(new()
         ///     {
         ///         InstanceIds = new[]
         ///         {
-        ///             "ckafka-vv7wpvae",
+        ///             "ckafka-7k5nbnem",
+        ///             "ckafka-8j4raxv8",
+        ///         },
+        ///         Statuses = new[]
+        ///         {
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Ckafka.Inputs.GetInstancesFilterInputArgs
+        ///             {
+        ///                 Name = "InstanceType",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "profession",
+        ///                 },
+        ///             },
         ///         },
         ///     });
         /// 
@@ -44,19 +79,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all Ckafka instances
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Ckafka.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query Ckafka instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke(new()
         ///     {
         ///         InstanceIds = new[]
         ///         {
-        ///             "ckafka-vv7wpvae",
+        ///             "ckafka-7k5nbnem",
+        ///             "ckafka-8j4raxv8",
+        ///         },
+        ///         Statuses = new[]
+        ///         {
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Ckafka.Inputs.GetInstancesFilterInputArgs
+        ///             {
+        ///                 Name = "InstanceType",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "profession",
+        ///                 },
+        ///             },
         ///         },
         ///     });
         /// 
@@ -71,19 +141,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all Ckafka instances
+        /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Ckafka.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query Ckafka instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Ckafka.GetInstances.Invoke(new()
         ///     {
         ///         InstanceIds = new[]
         ///         {
-        ///             "ckafka-vv7wpvae",
+        ///             "ckafka-7k5nbnem",
+        ///             "ckafka-8j4raxv8",
+        ///         },
+        ///         Statuses = new[]
+        ///         {
+        ///             0,
+        ///             1,
+        ///             2,
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.Ckafka.Inputs.GetInstancesFilterInputArgs
+        ///             {
+        ///                 Name = "InstanceType",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "profession",
+        ///                 },
+        ///             },
         ///         },
         ///     });
         /// 
@@ -122,13 +227,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
-        /// The number of pages, default is `10`.
+        /// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
         /// </summary>
         [Input("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// The page start offset, default is `0`.
+        /// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
         /// </summary>
         [Input("offset")]
         public int? Offset { get; set; }
@@ -196,13 +301,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
 
         /// <summary>
-        /// The number of pages, default is `10`.
+        /// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
         /// </summary>
         [Input("limit")]
         public Input<int>? Limit { get; set; }
 
         /// <summary>
-        /// The page start offset, default is `0`.
+        /// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
         /// </summary>
         [Input("offset")]
         public Input<int>? Offset { get; set; }

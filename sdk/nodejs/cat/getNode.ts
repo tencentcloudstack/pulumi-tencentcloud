@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const node = tencentcloud.Cat.getNode({
+ * const node = tencentcloud.cat.getNode({
  *     nodeType: 1,
  *     location: 2,
  *     isIpv6: false,
@@ -96,7 +96,7 @@ export interface GetNodeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const node = tencentcloud.Cat.getNode({
+ * const node = tencentcloud.cat.getNode({
  *     nodeType: 1,
  *     location: 2,
  *     isIpv6: false,
@@ -123,25 +123,25 @@ export interface GetNodeOutputArgs {
     /**
      * is IPv6.
      */
-    isIpv6?: pulumi.Input<boolean>;
+    isIpv6?: pulumi.Input<boolean | undefined>;
     /**
      * Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.
      */
-    location?: pulumi.Input<number>;
+    location?: pulumi.Input<number | undefined>;
     /**
      * Node name.
      */
-    nodeName?: pulumi.Input<string>;
+    nodeName?: pulumi.Input<string | undefined>;
     /**
      * Node type 1:IDC,2:LastMile,3:Mobile.
      */
-    nodeType?: pulumi.Input<number>;
+    nodeType?: pulumi.Input<number | undefined>;
     /**
      * Payment mode:1=Trial version,2=Paid version.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

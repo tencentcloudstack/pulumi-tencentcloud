@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceNodeInfo = tencentcloud.Dcdb.getInstanceNodeInfo({
+ * const instanceNodeInfo = tencentcloud.dcdb.getInstanceNodeInfo({
  *     instanceId: dcdbId,
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetInstanceNodeInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceNodeInfo = tencentcloud.Dcdb.getInstanceNodeInfo({
+ * const instanceNodeInfo = tencentcloud.dcdb.getInstanceNodeInfo({
  *     instanceId: dcdbId,
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetInstanceNodeInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

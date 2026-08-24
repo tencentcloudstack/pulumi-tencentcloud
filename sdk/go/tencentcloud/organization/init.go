@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ExternalSamlIdentityProvider{}
 	case "tencentcloud:Organization/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Organization/ipWhitelistConfig:IpWhitelistConfig":
+		r = &IpWhitelistConfig{}
 	case "tencentcloud:Organization/memberAuthPolicyAttachment:MemberAuthPolicyAttachment":
 		r = &MemberAuthPolicyAttachment{}
 	case "tencentcloud:Organization/orgIdentity:OrgIdentity":
@@ -49,6 +51,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OrgShareUnit{}
 	case "tencentcloud:Organization/orgShareUnitMemberV2:OrgShareUnitMemberV2":
 		r = &OrgShareUnitMemberV2{}
+	case "tencentcloud:Organization/orgShareUnitNode:OrgShareUnitNode":
+		r = &OrgShareUnitNode{}
 	case "tencentcloud:Organization/orgShareUnitResource:OrgShareUnitResource":
 		r = &OrgShareUnitResource{}
 	case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
@@ -78,6 +82,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/ipWhitelistConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -138,6 +147,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Organization/orgShareUnitMemberV2",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Organization/orgShareUnitNode",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

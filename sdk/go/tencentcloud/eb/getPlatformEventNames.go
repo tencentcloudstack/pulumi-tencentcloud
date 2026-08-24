@@ -67,12 +67,8 @@ type GetPlatformEventNamesResult struct {
 }
 
 func GetPlatformEventNamesOutput(ctx *pulumi.Context, args GetPlatformEventNamesOutputArgs, opts ...pulumi.InvokeOption) GetPlatformEventNamesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPlatformEventNamesResultOutput, error) {
-			args := v.(GetPlatformEventNamesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", args, GetPlatformEventNamesResultOutput{}, options).(GetPlatformEventNamesResultOutput), nil
-		}).(GetPlatformEventNamesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", args, GetPlatformEventNamesResultOutput{}, options).(GetPlatformEventNamesResultOutput)
 }
 
 // A collection of arguments for invoking getPlatformEventNames.

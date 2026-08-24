@@ -93,12 +93,8 @@ type GetUserTaskResult struct {
 }
 
 func GetUserTaskOutput(ctx *pulumi.Context, args GetUserTaskOutputArgs, opts ...pulumi.InvokeOption) GetUserTaskResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUserTaskResultOutput, error) {
-			args := v.(GetUserTaskArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getUserTask:getUserTask", args, GetUserTaskResultOutput{}, options).(GetUserTaskResultOutput), nil
-		}).(GetUserTaskResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getUserTask:getUserTask", args, GetUserTaskResultOutput{}, options).(GetUserTaskResultOutput)
 }
 
 // A collection of arguments for invoking getUserTask.

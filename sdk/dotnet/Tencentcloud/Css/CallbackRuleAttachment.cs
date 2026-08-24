@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css callback_rule can be imported using the id, e.g.
+    /// css CallbackRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName

@@ -246,87 +246,87 @@ export interface TaskState {
     /**
      * advanced settings.
      */
-    advanceSettings?: pulumi.Input<inputs.Tsf.TaskAdvanceSettings>;
+    advanceSettings?: pulumi.Input<inputs.Tsf.TaskAdvanceSettings | undefined>;
     /**
      * ID of the workflow to which it belongs.
      */
-    belongFlowIds?: pulumi.Input<pulumi.Input<string>[]>;
+    belongFlowIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * execution type, unicast/broadcast.
      */
-    executeType?: pulumi.Input<string>;
+    executeType?: pulumi.Input<string | undefined>;
     /**
      * deployment group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.
      */
-    retryCount?: pulumi.Input<number>;
+    retryCount?: pulumi.Input<number | undefined>;
     /**
      * retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.
      */
-    retryInterval?: pulumi.Input<number>;
+    retryInterval?: pulumi.Input<number | undefined>;
     /**
      * Fragmentation parameters.
      */
-    shardArguments?: pulumi.Input<pulumi.Input<inputs.Tsf.TaskShardArgument>[]>;
+    shardArguments?: pulumi.Input<pulumi.Input<inputs.Tsf.TaskShardArgument>[] | undefined>;
     /**
      * number of shards.
      */
-    shardCount?: pulumi.Input<number>;
+    shardCount?: pulumi.Input<number | undefined>;
     /**
      * the operator to judge the success of the task.
      */
-    successOperator?: pulumi.Input<string>;
+    successOperator?: pulumi.Input<string | undefined>;
     /**
      * The threshold for judging the success rate of the task, such as 100.
      */
-    successRatio?: pulumi.Input<string>;
+    successRatio?: pulumi.Input<string | undefined>;
     /**
      * task parameters, the length limit is 10000 characters.
      */
-    taskArgument?: pulumi.Input<string>;
+    taskArgument?: pulumi.Input<string | undefined>;
     /**
      * task content, length limit 65536 bytes.
      */
-    taskContent?: pulumi.Input<string>;
+    taskContent?: pulumi.Input<string | undefined>;
     /**
      * task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * task history ID.
      */
-    taskLogId?: pulumi.Input<string>;
+    taskLogId?: pulumi.Input<string | undefined>;
     /**
      * task name, task length 64 characters.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
     /**
      * trigger rule.
      */
-    taskRule?: pulumi.Input<inputs.Tsf.TaskTaskRule>;
+    taskRule?: pulumi.Input<inputs.Tsf.TaskTaskRule | undefined>;
     /**
      * Whether to enable the task, ENABLED/DISABLED.
      */
-    taskState?: pulumi.Input<string>;
+    taskState?: pulumi.Input<string | undefined>;
     /**
      * task type, java.
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
     /**
      * task timeout, time unit ms.
      */
-    timeOut?: pulumi.Input<number>;
+    timeOut?: pulumi.Input<number | undefined>;
     /**
      * trigger type.
      */
-    triggerType?: pulumi.Input<string>;
+    triggerType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -336,7 +336,7 @@ export interface TaskArgs {
     /**
      * advanced settings.
      */
-    advanceSettings?: pulumi.Input<inputs.Tsf.TaskAdvanceSettings>;
+    advanceSettings?: pulumi.Input<inputs.Tsf.TaskAdvanceSettings | undefined>;
     /**
      * execution type, unicast/broadcast.
      */
@@ -348,35 +348,35 @@ export interface TaskArgs {
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * number of retries, 0 &amp;lt;= RetryCount&amp;lt;= 10.
      */
-    retryCount?: pulumi.Input<number>;
+    retryCount?: pulumi.Input<number | undefined>;
     /**
      * retry interval, 0 &amp;lt;= RetryInterval &amp;lt;= 600000, time unit ms.
      */
-    retryInterval?: pulumi.Input<number>;
+    retryInterval?: pulumi.Input<number | undefined>;
     /**
      * Fragmentation parameters.
      */
-    shardArguments?: pulumi.Input<pulumi.Input<inputs.Tsf.TaskShardArgument>[]>;
+    shardArguments?: pulumi.Input<pulumi.Input<inputs.Tsf.TaskShardArgument>[] | undefined>;
     /**
      * number of shards.
      */
-    shardCount?: pulumi.Input<number>;
+    shardCount?: pulumi.Input<number | undefined>;
     /**
      * the operator to judge the success of the task.
      */
-    successOperator?: pulumi.Input<string>;
+    successOperator?: pulumi.Input<string | undefined>;
     /**
      * The threshold for judging the success rate of the task, such as 100.
      */
-    successRatio?: pulumi.Input<string>;
+    successRatio?: pulumi.Input<string | undefined>;
     /**
      * task parameters, the length limit is 10000 characters.
      */
-    taskArgument?: pulumi.Input<string>;
+    taskArgument?: pulumi.Input<string | undefined>;
     /**
      * task content, length limit 65536 bytes.
      */
@@ -388,7 +388,7 @@ export interface TaskArgs {
     /**
      * trigger rule.
      */
-    taskRule?: pulumi.Input<inputs.Tsf.TaskTaskRule>;
+    taskRule?: pulumi.Input<inputs.Tsf.TaskTaskRule | undefined>;
     /**
      * task type, java.
      */

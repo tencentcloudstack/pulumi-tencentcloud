@@ -34,7 +34,7 @@ import (
 //				ProjectId:        pulumi.IntRef(0),
 //				VpcId:            pulumi.StringRef("vpc-l040hycv"),
 //				SubnetId:         pulumi.StringRef("subnet-1to7t9au"),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"tagKey": "tagValue",
 //				},
 //			}, nil)
@@ -100,12 +100,8 @@ type GetSetResult struct {
 }
 
 func GetSetOutput(ctx *pulumi.Context, args GetSetOutputArgs, opts ...pulumi.InvokeOption) GetSetResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSetResultOutput, error) {
-			args := v.(GetSetArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Instances/getSet:getSet", args, GetSetResultOutput{}, options).(GetSetResultOutput), nil
-		}).(GetSetResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Instances/getSet:getSet", args, GetSetResultOutput{}, options).(GetSetResultOutput)
 }
 
 // A collection of arguments for invoking getSet.

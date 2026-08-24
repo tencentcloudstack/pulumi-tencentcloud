@@ -76,12 +76,8 @@ type GetTenantInstancesResult struct {
 }
 
 func GetTenantInstancesOutput(ctx *pulumi.Context, args GetTenantInstancesOutputArgs, opts ...pulumi.InvokeOption) GetTenantInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTenantInstancesResultOutput, error) {
-			args := v.(GetTenantInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args, GetTenantInstancesResultOutput{}, options).(GetTenantInstancesResultOutput), nil
-		}).(GetTenantInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args, GetTenantInstancesResultOutput{}, options).(GetTenantInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getTenantInstances.

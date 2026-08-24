@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgFinancialByMember = tencentcloud.Organization.getOrgFinancialByMember({
+ * const orgFinancialByMember = tencentcloud.organization.getOrgFinancialByMember({
  *     month: "2023-05",
  *     endMonth: "2023-10",
  *     memberUins: [
@@ -93,7 +93,7 @@ export interface GetOrgFinancialByMemberResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgFinancialByMember = tencentcloud.Organization.getOrgFinancialByMember({
+ * const orgFinancialByMember = tencentcloud.organization.getOrgFinancialByMember({
  *     month: "2023-05",
  *     endMonth: "2023-10",
  *     memberUins: [
@@ -121,11 +121,11 @@ export interface GetOrgFinancialByMemberOutputArgs {
     /**
      * Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.
      */
-    endMonth?: pulumi.Input<string>;
+    endMonth?: pulumi.Input<string | undefined>;
     /**
      * Member uin list. Up to 100.
      */
-    memberUins?: pulumi.Input<pulumi.Input<number>[]>;
+    memberUins?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Query for the start month. Format:yyyy-mm, for example:2021-01.
      */
@@ -133,9 +133,9 @@ export interface GetOrgFinancialByMemberOutputArgs {
     /**
      * Product code list. Up to 100.
      */
-    productCodes?: pulumi.Input<pulumi.Input<string>[]>;
+    productCodes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

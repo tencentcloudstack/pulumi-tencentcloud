@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogUserSqlAdvice({
+ * const test = tencentcloud.dbbrain.getSlowLogUserSqlAdvice({
  *     instanceId: "%s",
  *     sqlText: "%s",
  *     product: "mysql",
@@ -104,7 +104,7 @@ export interface GetSlowLogUserSqlAdviceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogUserSqlAdvice({
+ * const test = tencentcloud.dbbrain.getSlowLogUserSqlAdvice({
  *     instanceId: "%s",
  *     sqlText: "%s",
  *     product: "mysql",
@@ -133,15 +133,15 @@ export interface GetSlowLogUserSqlAdviceOutputArgs {
     /**
      * Service product type, supported values: `mysql` - cloud database MySQL; `cynosdb` - cloud database TDSQL-C for MySQL; `dbbrain-mysql` - self-built MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * library name.
      */
-    schema?: pulumi.Input<string>;
+    schema?: pulumi.Input<string | undefined>;
     /**
      * SQL statements.
      */

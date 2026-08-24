@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  * GAAP security rule can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule  tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+ *   $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule foo sr-xxxxxxxx
  * ```
  */
 export class SecurityRule extends pulumi.CustomResource {
@@ -142,27 +142,27 @@ export interface SecurityRuleState {
     /**
      * Policy of the rule. Valid value: `ACCEPT` and `DROP`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the request source.
      */
-    cidrIp?: pulumi.Input<string>;
+    cidrIp?: pulumi.Input<string | undefined>;
     /**
      * Name of the security policy rule. Maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the security policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Target port. Default value is `ALL`. Valid examples: `80`, `80,443` and `3306-20000`.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the security policy rule. Default value is `ALL`. Valid value: `TCP`, `UDP` and `ALL`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,7 +180,7 @@ export interface SecurityRuleArgs {
     /**
      * Name of the security policy rule. Maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the security policy.
      */
@@ -188,9 +188,9 @@ export interface SecurityRuleArgs {
     /**
      * Target port. Default value is `ALL`. Valid examples: `80`, `80,443` and `3306-20000`.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the security policy rule. Default value is `ALL`. Valid value: `TCP`, `UDP` and `ALL`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
 }

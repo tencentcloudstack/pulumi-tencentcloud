@@ -358,147 +358,147 @@ export interface DeployContainerGroupState {
     /**
      * The maximum number of CPU cores allocated to the agent container corresponds to the limit field in Kubernetes.
      */
-    agentCpuLimit?: pulumi.Input<string>;
+    agentCpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    agentCpuRequest?: pulumi.Input<string>;
+    agentCpuRequest?: pulumi.Input<string | undefined>;
     /**
      * The maximum amount of memory in MiB allocated to the agent container corresponds to the &amp;#39;limit&amp;#39; field in Kubernetes.
      */
-    agentMemLimit?: pulumi.Input<string>;
+    agentMemLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    agentMemRequest?: pulumi.Input<string>;
+    agentMemRequest?: pulumi.Input<string | undefined>;
     /**
      * javaagent info: SERVICE_AGENT/OT_AGENT.
      */
-    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupAgentProfileList>[]>;
+    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupAgentProfileList>[] | undefined>;
     /**
      * The maximum number of CPU cores for the business container, corresponding to the limit in K8S. If not specified, it defaults to twice the request.
      */
-    cpuLimit?: pulumi.Input<string>;
+    cpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the business container, corresponding to the request in K8S. The default value is 0.25.
      */
-    cpuRequest?: pulumi.Input<string>;
+    cpuRequest?: pulumi.Input<string | undefined>;
     /**
      * Whether to deploy the agent container. If this parameter is not specified, the agent container will not be deployed by default.
      */
-    deployAgent?: pulumi.Input<boolean>;
+    deployAgent?: pulumi.Input<boolean | undefined>;
     /**
      * Not start right away.
      */
-    doNotStart?: pulumi.Input<boolean>;
+    doNotStart?: pulumi.Input<boolean | undefined>;
     /**
      * The environment variables that the application runs in the deployment group. If this parameter is not specified, no additional environment variables are set by default.
      */
-    envs?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupEnv>[]>;
+    envs?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupEnv>[] | undefined>;
     /**
      * group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * The configuration information for health checks. If this parameter is not specified, the health check is not set by default.
      */
-    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettings>;
+    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettings | undefined>;
     /**
      * Whether to perform incremental deployment. The default value is false, which means full update.
      */
-    incrementalDeployment?: pulumi.Input<boolean>;
+    incrementalDeployment?: pulumi.Input<boolean | undefined>;
     /**
      * instance number.
      */
-    instanceNum?: pulumi.Input<number>;
+    instanceNum?: pulumi.Input<number | undefined>;
     /**
      * The maximum amount of CPU cores allocated to the istio proxy container corresponds to the &amp;#39;limit&amp;#39; field in Kubernetes.
      */
-    istioCpuLimit?: pulumi.Input<string>;
+    istioCpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the istio proxy container corresponds to the &amp;#39;request&amp;#39; field in Kubernetes.
      */
-    istioCpuRequest?: pulumi.Input<string>;
+    istioCpuRequest?: pulumi.Input<string | undefined>;
     /**
      * The maximum amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    istioMemLimit?: pulumi.Input<string>;
+    istioMemLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    istioMemRequest?: pulumi.Input<string>;
+    istioMemRequest?: pulumi.Input<string | undefined>;
     /**
      * jvm options.
      */
-    jvmOpts?: pulumi.Input<string>;
+    jvmOpts?: pulumi.Input<string | undefined>;
     /**
      * MaxSurge parameter in Kubernetes rolling update strategy.
      */
-    maxSurge?: pulumi.Input<string>;
+    maxSurge?: pulumi.Input<string | undefined>;
     /**
      * MaxUnavailable parameter in Kubernetes rolling update strategy.
      */
-    maxUnavailable?: pulumi.Input<string>;
+    maxUnavailable?: pulumi.Input<string | undefined>;
     /**
      * The maximum memory size in MiB for the business container, corresponding to the limit in K8S. If not specified, it defaults to twice the request.
      */
-    memLimit?: pulumi.Input<string>;
+    memLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the business container, corresponding to the request in K8S. The default value is 640 MiB.
      */
-    memRequest?: pulumi.Input<string>;
+    memRequest?: pulumi.Input<string | undefined>;
     /**
      * (Priority use) New image name, such as /tsf/nginx.
      */
-    repoName?: pulumi.Input<string>;
+    repoName?: pulumi.Input<string | undefined>;
     /**
      * repo type, tcr or leave it blank.
      */
-    repoType?: pulumi.Input<string>;
+    repoType?: pulumi.Input<string | undefined>;
     /**
      * old image name, eg: /tsf/server.
      */
-    reponame?: pulumi.Input<string>;
+    reponame?: pulumi.Input<string | undefined>;
     /**
      * Node scheduling strategy. If this parameter is not specified, the node scheduling strategy will not be used by default.
      */
-    schedulingStrategy?: pulumi.Input<inputs.Tsf.DeployContainerGroupSchedulingStrategy>;
+    schedulingStrategy?: pulumi.Input<inputs.Tsf.DeployContainerGroupSchedulingStrategy | undefined>;
     /**
      * image server.
      */
-    server?: pulumi.Input<string>;
+    server?: pulumi.Input<string | undefined>;
     /**
      * Network settings for container deployment groups.
      */
-    serviceSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupServiceSetting>;
+    serviceSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupServiceSetting | undefined>;
     /**
      * image version name, v1.
      */
-    tagName?: pulumi.Input<string>;
+    tagName?: pulumi.Input<string | undefined>;
     /**
      * update Interval, is required when rolling update.
      */
-    updateIvl?: pulumi.Input<number>;
+    updateIvl?: pulumi.Input<number | undefined>;
     /**
      * Update method: 0 for fast update, 1 for rolling update.
      */
-    updateType?: pulumi.Input<number>;
+    updateType?: pulumi.Input<number | undefined>;
     /**
      * Whether to clear the volume information. Default is false.
      */
-    volumeClean?: pulumi.Input<boolean>;
+    volumeClean?: pulumi.Input<boolean | undefined>;
     /**
      * Volume information, as a list.
      */
-    volumeInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeInfoList>[]>;
+    volumeInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeInfoList>[] | undefined>;
     /**
      * Volume mount point information, list type.
      */
-    volumeMountInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeMountInfoList>[]>;
+    volumeMountInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeMountInfoList>[] | undefined>;
     /**
      * warmup setting.
      */
-    warmupSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupWarmupSetting>;
+    warmupSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupWarmupSetting | undefined>;
 }
 
 /**
@@ -508,43 +508,43 @@ export interface DeployContainerGroupArgs {
     /**
      * The maximum number of CPU cores allocated to the agent container corresponds to the limit field in Kubernetes.
      */
-    agentCpuLimit?: pulumi.Input<string>;
+    agentCpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    agentCpuRequest?: pulumi.Input<string>;
+    agentCpuRequest?: pulumi.Input<string | undefined>;
     /**
      * The maximum amount of memory in MiB allocated to the agent container corresponds to the &amp;#39;limit&amp;#39; field in Kubernetes.
      */
-    agentMemLimit?: pulumi.Input<string>;
+    agentMemLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    agentMemRequest?: pulumi.Input<string>;
+    agentMemRequest?: pulumi.Input<string | undefined>;
     /**
      * javaagent info: SERVICE_AGENT/OT_AGENT.
      */
-    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupAgentProfileList>[]>;
+    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupAgentProfileList>[] | undefined>;
     /**
      * The maximum number of CPU cores for the business container, corresponding to the limit in K8S. If not specified, it defaults to twice the request.
      */
-    cpuLimit?: pulumi.Input<string>;
+    cpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the business container, corresponding to the request in K8S. The default value is 0.25.
      */
-    cpuRequest?: pulumi.Input<string>;
+    cpuRequest?: pulumi.Input<string | undefined>;
     /**
      * Whether to deploy the agent container. If this parameter is not specified, the agent container will not be deployed by default.
      */
-    deployAgent?: pulumi.Input<boolean>;
+    deployAgent?: pulumi.Input<boolean | undefined>;
     /**
      * Not start right away.
      */
-    doNotStart?: pulumi.Input<boolean>;
+    doNotStart?: pulumi.Input<boolean | undefined>;
     /**
      * The environment variables that the application runs in the deployment group. If this parameter is not specified, no additional environment variables are set by default.
      */
-    envs?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupEnv>[]>;
+    envs?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupEnv>[] | undefined>;
     /**
      * group Id.
      */
@@ -552,11 +552,11 @@ export interface DeployContainerGroupArgs {
     /**
      * The configuration information for health checks. If this parameter is not specified, the health check is not set by default.
      */
-    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettings>;
+    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployContainerGroupHealthCheckSettings | undefined>;
     /**
      * Whether to perform incremental deployment. The default value is false, which means full update.
      */
-    incrementalDeployment?: pulumi.Input<boolean>;
+    incrementalDeployment?: pulumi.Input<boolean | undefined>;
     /**
      * instance number.
      */
@@ -564,63 +564,63 @@ export interface DeployContainerGroupArgs {
     /**
      * The maximum amount of CPU cores allocated to the istio proxy container corresponds to the &amp;#39;limit&amp;#39; field in Kubernetes.
      */
-    istioCpuLimit?: pulumi.Input<string>;
+    istioCpuLimit?: pulumi.Input<string | undefined>;
     /**
      * The number of CPU cores allocated to the istio proxy container corresponds to the &amp;#39;request&amp;#39; field in Kubernetes.
      */
-    istioCpuRequest?: pulumi.Input<string>;
+    istioCpuRequest?: pulumi.Input<string | undefined>;
     /**
      * The maximum amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    istioMemLimit?: pulumi.Input<string>;
+    istioMemLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the agent container corresponds to the request field in Kubernetes.
      */
-    istioMemRequest?: pulumi.Input<string>;
+    istioMemRequest?: pulumi.Input<string | undefined>;
     /**
      * jvm options.
      */
-    jvmOpts?: pulumi.Input<string>;
+    jvmOpts?: pulumi.Input<string | undefined>;
     /**
      * MaxSurge parameter in Kubernetes rolling update strategy.
      */
-    maxSurge?: pulumi.Input<string>;
+    maxSurge?: pulumi.Input<string | undefined>;
     /**
      * MaxUnavailable parameter in Kubernetes rolling update strategy.
      */
-    maxUnavailable?: pulumi.Input<string>;
+    maxUnavailable?: pulumi.Input<string | undefined>;
     /**
      * The maximum memory size in MiB for the business container, corresponding to the limit in K8S. If not specified, it defaults to twice the request.
      */
-    memLimit?: pulumi.Input<string>;
+    memLimit?: pulumi.Input<string | undefined>;
     /**
      * The amount of memory in MiB allocated to the business container, corresponding to the request in K8S. The default value is 640 MiB.
      */
-    memRequest?: pulumi.Input<string>;
+    memRequest?: pulumi.Input<string | undefined>;
     /**
      * (Priority use) New image name, such as /tsf/nginx.
      */
-    repoName?: pulumi.Input<string>;
+    repoName?: pulumi.Input<string | undefined>;
     /**
      * repo type, tcr or leave it blank.
      */
-    repoType?: pulumi.Input<string>;
+    repoType?: pulumi.Input<string | undefined>;
     /**
      * old image name, eg: /tsf/server.
      */
-    reponame?: pulumi.Input<string>;
+    reponame?: pulumi.Input<string | undefined>;
     /**
      * Node scheduling strategy. If this parameter is not specified, the node scheduling strategy will not be used by default.
      */
-    schedulingStrategy?: pulumi.Input<inputs.Tsf.DeployContainerGroupSchedulingStrategy>;
+    schedulingStrategy?: pulumi.Input<inputs.Tsf.DeployContainerGroupSchedulingStrategy | undefined>;
     /**
      * image server.
      */
-    server?: pulumi.Input<string>;
+    server?: pulumi.Input<string | undefined>;
     /**
      * Network settings for container deployment groups.
      */
-    serviceSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupServiceSetting>;
+    serviceSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupServiceSetting | undefined>;
     /**
      * image version name, v1.
      */
@@ -628,25 +628,25 @@ export interface DeployContainerGroupArgs {
     /**
      * update Interval, is required when rolling update.
      */
-    updateIvl?: pulumi.Input<number>;
+    updateIvl?: pulumi.Input<number | undefined>;
     /**
      * Update method: 0 for fast update, 1 for rolling update.
      */
-    updateType?: pulumi.Input<number>;
+    updateType?: pulumi.Input<number | undefined>;
     /**
      * Whether to clear the volume information. Default is false.
      */
-    volumeClean?: pulumi.Input<boolean>;
+    volumeClean?: pulumi.Input<boolean | undefined>;
     /**
      * Volume information, as a list.
      */
-    volumeInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeInfoList>[]>;
+    volumeInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeInfoList>[] | undefined>;
     /**
      * Volume mount point information, list type.
      */
-    volumeMountInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeMountInfoList>[]>;
+    volumeMountInfoLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployContainerGroupVolumeMountInfoList>[] | undefined>;
     /**
      * warmup setting.
      */
-    warmupSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupWarmupSetting>;
+    warmupSetting?: pulumi.Input<inputs.Tsf.DeployContainerGroupWarmupSetting | undefined>;
 }

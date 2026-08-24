@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// cos bucket_version can be imported using the id, e.g.
+// cos bucketVersion can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id

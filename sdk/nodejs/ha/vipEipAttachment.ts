@@ -102,11 +102,11 @@ export interface VipEipAttachmentState {
     /**
      * Public address of the EIP.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * ID of the attached HA VIP.
      */
-    havipId?: pulumi.Input<string>;
+    havipId?: pulumi.Input<string | undefined>;
 }
 
 /**

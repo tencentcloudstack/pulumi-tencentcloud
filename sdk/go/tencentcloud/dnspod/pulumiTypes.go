@@ -615,6 +615,202 @@ func (o GetDomainAnalyticsInfoArrayOutput) Index(i pulumi.IntInput) GetDomainAna
 	}).(GetDomainAnalyticsInfoOutput)
 }
 
+type GetDomainInstancesInstanceList struct {
+	// Create time of the domain.
+	CreateTime string `pulumi:"createTime"`
+	// The Domain.
+	Domain string `pulumi:"domain"`
+	// ID of the domain.
+	DomainId int `pulumi:"domainId"`
+	// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+	Grade string `pulumi:"grade"`
+	// The Group Id of Domain.
+	GroupId int `pulumi:"groupId"`
+	// ID of the domain.
+	Id string `pulumi:"id"`
+	// Whether to Mark the Domain.
+	IsMark string `pulumi:"isMark"`
+	// Number of DNS records under this domain.
+	RecordCount int `pulumi:"recordCount"`
+	// The remark of Domain.
+	Remark string `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns string `pulumi:"slaveDns"`
+	// The status of Domain.
+	Status string `pulumi:"status"`
+	// Last modification time of the domain.
+	UpdatedOn string `pulumi:"updatedOn"`
+}
+
+// GetDomainInstancesInstanceListInput is an input type that accepts GetDomainInstancesInstanceListArgs and GetDomainInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetDomainInstancesInstanceListInput` via:
+//
+//	GetDomainInstancesInstanceListArgs{...}
+type GetDomainInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetDomainInstancesInstanceListOutput() GetDomainInstancesInstanceListOutput
+	ToGetDomainInstancesInstanceListOutputWithContext(context.Context) GetDomainInstancesInstanceListOutput
+}
+
+type GetDomainInstancesInstanceListArgs struct {
+	// Create time of the domain.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// The Domain.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// ID of the domain.
+	DomainId pulumi.IntInput `pulumi:"domainId"`
+	// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+	Grade pulumi.StringInput `pulumi:"grade"`
+	// The Group Id of Domain.
+	GroupId pulumi.IntInput `pulumi:"groupId"`
+	// ID of the domain.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Whether to Mark the Domain.
+	IsMark pulumi.StringInput `pulumi:"isMark"`
+	// Number of DNS records under this domain.
+	RecordCount pulumi.IntInput `pulumi:"recordCount"`
+	// The remark of Domain.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Is secondary DNS enabled.
+	SlaveDns pulumi.StringInput `pulumi:"slaveDns"`
+	// The status of Domain.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Last modification time of the domain.
+	UpdatedOn pulumi.StringInput `pulumi:"updatedOn"`
+}
+
+func (GetDomainInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetDomainInstancesInstanceListArgs) ToGetDomainInstancesInstanceListOutput() GetDomainInstancesInstanceListOutput {
+	return i.ToGetDomainInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetDomainInstancesInstanceListArgs) ToGetDomainInstancesInstanceListOutputWithContext(ctx context.Context) GetDomainInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainInstancesInstanceListOutput)
+}
+
+// GetDomainInstancesInstanceListArrayInput is an input type that accepts GetDomainInstancesInstanceListArray and GetDomainInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetDomainInstancesInstanceListArrayInput` via:
+//
+//	GetDomainInstancesInstanceListArray{ GetDomainInstancesInstanceListArgs{...} }
+type GetDomainInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetDomainInstancesInstanceListArrayOutput() GetDomainInstancesInstanceListArrayOutput
+	ToGetDomainInstancesInstanceListArrayOutputWithContext(context.Context) GetDomainInstancesInstanceListArrayOutput
+}
+
+type GetDomainInstancesInstanceListArray []GetDomainInstancesInstanceListInput
+
+func (GetDomainInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetDomainInstancesInstanceListArray) ToGetDomainInstancesInstanceListArrayOutput() GetDomainInstancesInstanceListArrayOutput {
+	return i.ToGetDomainInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetDomainInstancesInstanceListArray) ToGetDomainInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetDomainInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDomainInstancesInstanceListArrayOutput)
+}
+
+type GetDomainInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetDomainInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDomainInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetDomainInstancesInstanceListOutput) ToGetDomainInstancesInstanceListOutput() GetDomainInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetDomainInstancesInstanceListOutput) ToGetDomainInstancesInstanceListOutputWithContext(ctx context.Context) GetDomainInstancesInstanceListOutput {
+	return o
+}
+
+// Create time of the domain.
+func (o GetDomainInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// The Domain.
+func (o GetDomainInstancesInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// ID of the domain.
+func (o GetDomainInstancesInstanceListOutput) DomainId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) int { return v.DomainId }).(pulumi.IntOutput)
+}
+
+// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+func (o GetDomainInstancesInstanceListOutput) Grade() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.Grade }).(pulumi.StringOutput)
+}
+
+// The Group Id of Domain.
+func (o GetDomainInstancesInstanceListOutput) GroupId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) int { return v.GroupId }).(pulumi.IntOutput)
+}
+
+// ID of the domain.
+func (o GetDomainInstancesInstanceListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Whether to Mark the Domain.
+func (o GetDomainInstancesInstanceListOutput) IsMark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.IsMark }).(pulumi.StringOutput)
+}
+
+// Number of DNS records under this domain.
+func (o GetDomainInstancesInstanceListOutput) RecordCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) int { return v.RecordCount }).(pulumi.IntOutput)
+}
+
+// The remark of Domain.
+func (o GetDomainInstancesInstanceListOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Is secondary DNS enabled.
+func (o GetDomainInstancesInstanceListOutput) SlaveDns() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.SlaveDns }).(pulumi.StringOutput)
+}
+
+// The status of Domain.
+func (o GetDomainInstancesInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Last modification time of the domain.
+func (o GetDomainInstancesInstanceListOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDomainInstancesInstanceList) string { return v.UpdatedOn }).(pulumi.StringOutput)
+}
+
+type GetDomainInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDomainInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDomainInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetDomainInstancesInstanceListArrayOutput) ToGetDomainInstancesInstanceListArrayOutput() GetDomainInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDomainInstancesInstanceListArrayOutput) ToGetDomainInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetDomainInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetDomainInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetDomainInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDomainInstancesInstanceList {
+		return vs[0].([]GetDomainInstancesInstanceList)[vs[1].(int)]
+	}).(GetDomainInstancesInstanceListOutput)
+}
+
 type GetDomainListDomainList struct {
 	// Whether to enable CNAME acceleration, enabled: ENABLE, disabled: DISABLE.
 	CnameSpeedup string `pulumi:"cnameSpeedup"`
@@ -2867,6 +3063,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsDataArrayInput)(nil)).Elem(), GetDomainAnalyticsDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsInfoInput)(nil)).Elem(), GetDomainAnalyticsInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainAnalyticsInfoArrayInput)(nil)).Elem(), GetDomainAnalyticsInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainInstancesInstanceListInput)(nil)).Elem(), GetDomainInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainInstancesInstanceListArrayInput)(nil)).Elem(), GetDomainInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListInput)(nil)).Elem(), GetDomainListDomainListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListArrayInput)(nil)).Elem(), GetDomainListDomainListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDomainListDomainListTagListInput)(nil)).Elem(), GetDomainListDomainListTagListArgs{})
@@ -2907,6 +3105,8 @@ func init() {
 	pulumi.RegisterOutputType(GetDomainAnalyticsDataArrayOutput{})
 	pulumi.RegisterOutputType(GetDomainAnalyticsInfoOutput{})
 	pulumi.RegisterOutputType(GetDomainAnalyticsInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetDomainInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetDomainInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetDomainListDomainListOutput{})
 	pulumi.RegisterOutputType(GetDomainListDomainListArrayOutput{})
 	pulumi.RegisterOutputType(GetDomainListDomainListTagListOutput{})

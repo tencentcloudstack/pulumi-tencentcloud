@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -93,7 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Import
     /// 
-    /// sqlserver business_intelligence_file can be imported using the id, e.g.
+    /// sqlserver BusinessIntelligenceFile can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile example mssqlbi-fo2dwujt#test.xlsx

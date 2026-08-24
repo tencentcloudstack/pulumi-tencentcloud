@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_strategy_bind_group can be imported using the id, e.g.
+ * tse cngwStrategyBindGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwStrategyBindGroup:CngwStrategyBindGroup cngw_strategy_bind_group cngw_strategy_bind_group_id
@@ -128,23 +128,23 @@ export interface CngwStrategyBindGroupState {
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * `bind` or `unbind`.
      */
-    option?: pulumi.Input<string>;
+    option?: pulumi.Input<string | undefined>;
     /**
      * Binding status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * strategy ID.
      */
-    strategyId?: pulumi.Input<string>;
+    strategyId?: pulumi.Input<string | undefined>;
 }
 
 /**

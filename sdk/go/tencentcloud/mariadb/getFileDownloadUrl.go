@@ -71,12 +71,8 @@ type GetFileDownloadUrlResult struct {
 }
 
 func GetFileDownloadUrlOutput(ctx *pulumi.Context, args GetFileDownloadUrlOutputArgs, opts ...pulumi.InvokeOption) GetFileDownloadUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFileDownloadUrlResultOutput, error) {
-			args := v.(GetFileDownloadUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args, GetFileDownloadUrlResultOutput{}, options).(GetFileDownloadUrlResultOutput), nil
-		}).(GetFileDownloadUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args, GetFileDownloadUrlResultOutput{}, options).(GetFileDownloadUrlResultOutput)
 }
 
 // A collection of arguments for invoking getFileDownloadUrl.

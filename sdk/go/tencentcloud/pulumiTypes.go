@@ -499,14 +499,18 @@ func (o ProviderAssumeRoleWithSamlPtrOutput) SessionName() pulumi.StringPtrOutpu
 type ProviderAssumeRoleWithWebIdentity struct {
 	// Identity provider name. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID`, Default is OIDC.
 	ProviderId *string `pulumi:"providerId"`
-	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-	RoleArn string `pulumi:"roleArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+	RoleArn *string `pulumi:"roleArn"`
+	// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+	RoleArnFile *string `pulumi:"roleArnFile"`
 	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 	SessionDuration int `pulumi:"sessionDuration"`
 	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 	SessionName string `pulumi:"sessionName"`
-	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-	WebIdentityToken string `pulumi:"webIdentityToken"`
+	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityToken *string `pulumi:"webIdentityToken"`
+	// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityTokenFile *string `pulumi:"webIdentityTokenFile"`
 }
 
 // ProviderAssumeRoleWithWebIdentityInput is an input type that accepts ProviderAssumeRoleWithWebIdentityArgs and ProviderAssumeRoleWithWebIdentityOutput values.
@@ -523,14 +527,18 @@ type ProviderAssumeRoleWithWebIdentityInput interface {
 type ProviderAssumeRoleWithWebIdentityArgs struct {
 	// Identity provider name. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_PROVIDER_ID`, Default is OIDC.
 	ProviderId pulumi.StringPtrInput `pulumi:"providerId"`
-	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
+	// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+	RoleArnFile pulumi.StringPtrInput `pulumi:"roleArnFile"`
 	// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
 	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 	SessionName pulumi.StringInput `pulumi:"sessionName"`
-	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-	WebIdentityToken pulumi.StringInput `pulumi:"webIdentityToken"`
+	// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityToken pulumi.StringPtrInput `pulumi:"webIdentityToken"`
+	// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+	WebIdentityTokenFile pulumi.StringPtrInput `pulumi:"webIdentityTokenFile"`
 }
 
 func (ProviderAssumeRoleWithWebIdentityArgs) ElementType() reflect.Type {
@@ -615,9 +623,14 @@ func (o ProviderAssumeRoleWithWebIdentityOutput) ProviderId() pulumi.StringPtrOu
 	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) *string { return v.ProviderId }).(pulumi.StringPtrOutput)
 }
 
-// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
-func (o ProviderAssumeRoleWithWebIdentityOutput) RoleArn() pulumi.StringOutput {
-	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.RoleArn }).(pulumi.StringOutput)
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
+// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityOutput) RoleArnFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) *string { return v.RoleArnFile }).(pulumi.StringPtrOutput)
 }
 
 // The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
@@ -630,9 +643,14 @@ func (o ProviderAssumeRoleWithWebIdentityOutput) SessionName() pulumi.StringOutp
 	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.SessionName }).(pulumi.StringOutput)
 }
 
-// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
-func (o ProviderAssumeRoleWithWebIdentityOutput) WebIdentityToken() pulumi.StringOutput {
-	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) string { return v.WebIdentityToken }).(pulumi.StringOutput)
+// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityOutput) WebIdentityToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) *string { return v.WebIdentityToken }).(pulumi.StringPtrOutput)
+}
+
+// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityOutput) WebIdentityTokenFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ProviderAssumeRoleWithWebIdentity) *string { return v.WebIdentityTokenFile }).(pulumi.StringPtrOutput)
 }
 
 type ProviderAssumeRoleWithWebIdentityPtrOutput struct{ *pulumi.OutputState }
@@ -669,13 +687,23 @@ func (o ProviderAssumeRoleWithWebIdentityPtrOutput) ProviderId() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
-// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`. One of `roleArn` or `roleArnFile` is required.
 func (o ProviderAssumeRoleWithWebIdentityPtrOutput) RoleArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.RoleArn
+		return v.RoleArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// File containin the ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARNN_FILE`. One of `roleArn` or `roleArnFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) RoleArnFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RoleArnFile
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -699,13 +727,23 @@ func (o ProviderAssumeRoleWithWebIdentityPtrOutput) SessionName() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
-// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+// OIDC token issued by IdP. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
 func (o ProviderAssumeRoleWithWebIdentityPtrOutput) WebIdentityToken() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.WebIdentityToken
+		return v.WebIdentityToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_WEB_IDENTITY_TOKEN_FILE`. One of `webIdentityToken` or `webIdentityTokenFile` is required.
+func (o ProviderAssumeRoleWithWebIdentityPtrOutput) WebIdentityTokenFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderAssumeRoleWithWebIdentity) *string {
+		if v == nil {
+			return nil
+		}
+		return v.WebIdentityTokenFile
 	}).(pulumi.StringPtrOutput)
 }
 

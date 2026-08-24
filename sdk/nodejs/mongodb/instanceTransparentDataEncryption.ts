@@ -61,6 +61,9 @@ export class InstanceTransparentDataEncryption extends pulumi.CustomResource {
      * Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
      */
     declare public readonly instanceId: pulumi.Output<string>;
+    /**
+     * Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+     */
     declare public readonly keyId: pulumi.Output<string | undefined>;
     /**
      * List of bound keys.
@@ -121,22 +124,25 @@ export interface InstanceTransparentDataEncryptionState {
     /**
      * Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
      */
-    instanceId?: pulumi.Input<string>;
-    keyId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+     */
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * List of bound keys.
      */
-    keyInfoLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceTransparentDataEncryptionKeyInfoList>[]>;
+    keyInfoLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceTransparentDataEncryptionKeyInfoList>[] | undefined>;
     /**
      * The region where the Key Management Service (KMS) serves, such as ap-shanghai.
      */
-    kmsRegion?: pulumi.Input<string>;
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Represents whether transparent encryption is turned on. Valid values:
      * - close: Not opened;
      * - open: It has been opened.
      */
-    transparentDataEncryptionStatus?: pulumi.Input<string>;
+    transparentDataEncryptionStatus?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -147,7 +153,10 @@ export interface InstanceTransparentDataEncryptionArgs {
      * Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
      */
     instanceId: pulumi.Input<string>;
-    keyId?: pulumi.Input<string>;
+    /**
+     * Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+     */
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * The region where the Key Management Service (KMS) serves, such as ap-shanghai.
      */

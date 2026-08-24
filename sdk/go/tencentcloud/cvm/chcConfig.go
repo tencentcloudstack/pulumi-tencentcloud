@@ -59,7 +59,7 @@ import (
 //
 // ## Import
 //
-// cvm chc_config can be imported using the id, e.g.
+// cvm chcConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id

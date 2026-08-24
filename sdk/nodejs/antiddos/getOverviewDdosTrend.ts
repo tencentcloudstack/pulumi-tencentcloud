@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewDdosTrend = tencentcloud.Antiddos.getOverviewDdosTrend({
+ * const overviewDdosTrend = tencentcloud.antiddos.getOverviewDdosTrend({
  *     period: 300,
  *     startTime: "2023-11-20 14:16:23",
  *     endTime: "2023-11-21 14:16:23",
@@ -98,7 +98,7 @@ export interface GetOverviewDdosTrendResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewDdosTrend = tencentcloud.Antiddos.getOverviewDdosTrend({
+ * const overviewDdosTrend = tencentcloud.antiddos.getOverviewDdosTrend({
  *     period: 300,
  *     startTime: "2023-11-20 14:16:23",
  *     endTime: "2023-11-21 14:16:23",
@@ -127,7 +127,7 @@ export interface GetOverviewDdosTrendOutputArgs {
     /**
      * Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * EndTime.
      */
@@ -135,7 +135,7 @@ export interface GetOverviewDdosTrendOutputArgs {
     /**
      * instance IpList.
      */
-    ipLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicator, value [bps (attack traffic bandwidth, pps (attack packet rate)].
      */
@@ -147,7 +147,7 @@ export interface GetOverviewDdosTrendOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * StartTime.
      */

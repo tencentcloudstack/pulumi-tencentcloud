@@ -67,12 +67,8 @@ type GetBandwidthPackageBillUsageResult struct {
 }
 
 func GetBandwidthPackageBillUsageOutput(ctx *pulumi.Context, args GetBandwidthPackageBillUsageOutputArgs, opts ...pulumi.InvokeOption) GetBandwidthPackageBillUsageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBandwidthPackageBillUsageResultOutput, error) {
-			args := v.(GetBandwidthPackageBillUsageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args, GetBandwidthPackageBillUsageResultOutput{}, options).(GetBandwidthPackageBillUsageResultOutput), nil
-		}).(GetBandwidthPackageBillUsageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args, GetBandwidthPackageBillUsageResultOutput{}, options).(GetBandwidthPackageBillUsageResultOutput)
 }
 
 // A collection of arguments for invoking getBandwidthPackageBillUsage.

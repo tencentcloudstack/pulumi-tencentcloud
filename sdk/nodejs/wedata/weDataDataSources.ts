@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSources({
+ * const example = tencentcloud.wedata.WeDataDataSources({
  *     projectId: "2982667120655491072",
  *     name: "tf_example",
  *     displayName: "display_name",
@@ -165,7 +165,7 @@ export interface WeDataDataSourcesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSources({
+ * const example = tencentcloud.wedata.WeDataDataSources({
  *     projectId: "2982667120655491072",
  *     name: "tf_example",
  *     displayName: "display_name",
@@ -196,15 +196,15 @@ export interface WeDataDataSourcesOutputArgs {
     /**
      * Creator.
      */
-    creator?: pulumi.Input<string>;
+    creator?: pulumi.Input<string | undefined>;
     /**
      * Data source display name.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * Data source name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -212,7 +212,7 @@ export interface WeDataDataSourcesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Data source type: enumeration values.
      *
@@ -272,5 +272,5 @@ export interface WeDataDataSourcesOutputArgs {
      * - SSH
      * - BLOB.
      */
-    types?: pulumi.Input<pulumi.Input<string>[]>;
+    types?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

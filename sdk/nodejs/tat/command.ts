@@ -39,7 +39,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tat command can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tat/command:Command example cmd-6fydo27j
  * ```
@@ -203,67 +202,67 @@ export interface CommandState {
     /**
      * Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
      */
-    commandName?: pulumi.Input<string>;
+    commandName?: pulumi.Input<string | undefined>;
     /**
      * Command type. `SHELL`, `POWERSHELL` and `BAT` are supported. The default value is `SHELL`.
      */
-    commandType?: pulumi.Input<string>;
+    commandType?: pulumi.Input<string | undefined>;
     /**
      * Command content. The maximum length is 64 KB.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Command creator. `TAT` indicates a public command and `USER` indicates a personal command.
      */
-    createdBy?: pulumi.Input<string>;
+    createdBy?: pulumi.Input<string | undefined>;
     /**
      * Command creation time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {"varA": "222"}.`key` is the name of the custom parameter and value is the default value. Both `key` and `value` are strings.If no parameter value is provided in the `InvokeCommand` API, the default value is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    defaultParameters?: pulumi.Input<string>;
+    defaultParameters?: pulumi.Input<string | undefined>;
     /**
      * Command description. The maximum length is 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom parameter feature.This cannot be modified once created.Default value: `false`.
      */
-    enableParameter?: pulumi.Input<boolean>;
+    enableParameter?: pulumi.Input<boolean | undefined>;
     /**
      * Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.
      */
-    formattedDescription?: pulumi.Input<string>;
+    formattedDescription?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved. Check below for the rules of the directory name.1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.2. Use a slash (/) to create a subdirectory.3. Consecutive dots (.) and slashes (/) are not allowed. It can not start with a slash (/).
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Tags bound to the command. At most 10 tags are allowed.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Tat.CommandTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Tat.CommandTag>[] | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * Command update time.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the root user is used to execute commands on Linux and the System user is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for `SHELL` commands and C:/Program Files/qcloudtat_agent/workdir for `POWERSHELL` commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -277,7 +276,7 @@ export interface CommandArgs {
     /**
      * Command type. `SHELL`, `POWERSHELL` and `BAT` are supported. The default value is `SHELL`.
      */
-    commandType?: pulumi.Input<string>;
+    commandType?: pulumi.Input<string | undefined>;
     /**
      * Command content. The maximum length is 64 KB.
      */
@@ -285,37 +284,37 @@ export interface CommandArgs {
     /**
      * The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {"varA": "222"}.`key` is the name of the custom parameter and value is the default value. Both `key` and `value` are strings.If no parameter value is provided in the `InvokeCommand` API, the default value is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    defaultParameters?: pulumi.Input<string>;
+    defaultParameters?: pulumi.Input<string | undefined>;
     /**
      * Command description. The maximum length is 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom parameter feature.This cannot be modified once created.Default value: `false`.
      */
-    enableParameter?: pulumi.Input<boolean>;
+    enableParameter?: pulumi.Input<boolean | undefined>;
     /**
      * The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved. Check below for the rules of the directory name.1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.2. Use a slash (/) to create a subdirectory.3. Consecutive dots (.) and slashes (/) are not allowed. It can not start with a slash (/).
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Tags bound to the command. At most 10 tags are allowed.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Tat.CommandTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Tat.CommandTag>[] | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the root user is used to execute commands on Linux and the System user is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for `SHELL` commands and C:/Program Files/qcloudtat_agent/workdir for `POWERSHELL` commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }

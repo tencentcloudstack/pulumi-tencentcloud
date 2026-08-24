@@ -155,27 +155,27 @@ export interface AutoSnapshotPolicyState {
     /**
      * Snapshot retention period.
      */
-    aliveDays?: pulumi.Input<number>;
+    aliveDays?: pulumi.Input<number | undefined>;
     /**
      * The specific day (day 1 to day 31) of the month on which to create a snapshot.
      */
-    dayOfMonth?: pulumi.Input<string>;
+    dayOfMonth?: pulumi.Input<string | undefined>;
     /**
      * The day of the week on which to repeat the snapshot operation.
      */
-    dayOfWeek?: pulumi.Input<string>;
+    dayOfWeek?: pulumi.Input<string | undefined>;
     /**
      * The time point when to repeat the snapshot operation.
      */
-    hour?: pulumi.Input<string>;
+    hour?: pulumi.Input<string | undefined>;
     /**
      * The snapshot interval, in days.
      */
-    intervalDays?: pulumi.Input<number>;
+    intervalDays?: pulumi.Input<number | undefined>;
     /**
      * Policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -185,15 +185,15 @@ export interface AutoSnapshotPolicyArgs {
     /**
      * Snapshot retention period.
      */
-    aliveDays?: pulumi.Input<number>;
+    aliveDays?: pulumi.Input<number | undefined>;
     /**
      * The specific day (day 1 to day 31) of the month on which to create a snapshot.
      */
-    dayOfMonth?: pulumi.Input<string>;
+    dayOfMonth?: pulumi.Input<string | undefined>;
     /**
      * The day of the week on which to repeat the snapshot operation.
      */
-    dayOfWeek?: pulumi.Input<string>;
+    dayOfWeek?: pulumi.Input<string | undefined>;
     /**
      * The time point when to repeat the snapshot operation.
      */
@@ -201,9 +201,9 @@ export interface AutoSnapshotPolicyArgs {
     /**
      * The snapshot interval, in days.
      */
-    intervalDays?: pulumi.Input<number>;
+    intervalDays?: pulumi.Input<number | undefined>;
     /**
      * Policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
 }

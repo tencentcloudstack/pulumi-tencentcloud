@@ -67,12 +67,8 @@ type GetBackupTablesResult struct {
 }
 
 func GetBackupTablesOutput(ctx *pulumi.Context, args GetBackupTablesOutputArgs, opts ...pulumi.InvokeOption) GetBackupTablesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupTablesResultOutput, error) {
-			args := v.(GetBackupTablesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args, GetBackupTablesResultOutput{}, options).(GetBackupTablesResultOutput), nil
-		}).(GetBackupTablesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args, GetBackupTablesResultOutput{}, options).(GetBackupTablesResultOutput)
 }
 
 // A collection of arguments for invoking getBackupTables.

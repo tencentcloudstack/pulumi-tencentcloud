@@ -28,7 +28,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem logConfig can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
  * ```
@@ -177,47 +176,47 @@ export interface LogConfigState {
     /**
      * application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * regex pattern.
      */
-    beginningRegex?: pulumi.Input<string>;
+    beginningRegex?: pulumi.Input<string | undefined>;
     /**
      * environment ID.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * file name pattern if container_file.
      */
-    filePattern?: pulumi.Input<string>;
+    filePattern?: pulumi.Input<string | undefined>;
     /**
      * container_stdout or container_file.
      */
-    inputType?: pulumi.Input<string>;
+    inputType?: pulumi.Input<string | undefined>;
     /**
      * directory if container_file.
      */
-    logPath?: pulumi.Input<string>;
+    logPath?: pulumi.Input<string | undefined>;
     /**
      * minimalist_log or multiline_log.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * logset.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * appConfig name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * topic.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
     /**
      * application ID, which is combined by environment ID and application ID, like `en-o5edaepv#app-3j29aa2p`.
      */
-    workloadId?: pulumi.Input<string>;
+    workloadId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -231,7 +230,7 @@ export interface LogConfigArgs {
     /**
      * regex pattern.
      */
-    beginningRegex?: pulumi.Input<string>;
+    beginningRegex?: pulumi.Input<string | undefined>;
     /**
      * environment ID.
      */
@@ -239,7 +238,7 @@ export interface LogConfigArgs {
     /**
      * file name pattern if container_file.
      */
-    filePattern?: pulumi.Input<string>;
+    filePattern?: pulumi.Input<string | undefined>;
     /**
      * container_stdout or container_file.
      */
@@ -247,7 +246,7 @@ export interface LogConfigArgs {
     /**
      * directory if container_file.
      */
-    logPath?: pulumi.Input<string>;
+    logPath?: pulumi.Input<string | undefined>;
     /**
      * minimalist_log or multiline_log.
      */
@@ -259,7 +258,7 @@ export interface LogConfigArgs {
     /**
      * appConfig name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * topic.
      */

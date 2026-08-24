@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AllocationTag{}
 	case "tencentcloud:Billing/budget:Budget":
 		r = &Budget{}
+	case "tencentcloud:Billing/instance:Instance":
+		r = &Instance{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -46,6 +48,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Billing/budget",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Billing/instance",
 		&module{version},
 	)
 }

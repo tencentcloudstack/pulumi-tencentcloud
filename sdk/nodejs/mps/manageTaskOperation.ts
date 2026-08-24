@@ -94,11 +94,11 @@ export interface ManageTaskOperationState {
     /**
      * Operation type. Valid values:`Abort`: task termination. Notice: If the task type is live stream processing (LiveStreamProcessTask), tasks whose task status is `WAITING` or `PROCESSING` can be terminated.For other task types, only tasks whose task status is `WAITING` can be terminated.
      */
-    operationType?: pulumi.Input<string>;
+    operationType?: pulumi.Input<string | undefined>;
     /**
      * Video processing task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
 }
 
 /**

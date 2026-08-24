@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_role_configuration can be imported using the id, e.g.
+ * organization identityCenterRoleConfiguration can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerRoleConfiguration:CenterRoleConfiguration identity_center_role_configuration ${zoneId}#${roleConfigurationId}
@@ -139,35 +139,35 @@ export interface CenterRoleConfigurationState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Access configuration description, which contains up to 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page. The default is null, which indicates navigating to the home page of the Tencent Cloud console.
      */
-    relayState?: pulumi.Input<string>;
+    relayState?: pulumi.Input<string | undefined>;
     /**
      * Role configuration id.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Access configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
      */
-    roleConfigurationName?: pulumi.Input<string>;
+    roleConfigurationName?: pulumi.Input<string | undefined>;
     /**
      * Session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours). Default value: 3600 (1 hour).
      */
-    sessionDuration?: pulumi.Input<number>;
+    sessionDuration?: pulumi.Input<number | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -177,11 +177,11 @@ export interface CenterRoleConfigurationArgs {
     /**
      * Access configuration description, which contains up to 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page. The default is null, which indicates navigating to the home page of the Tencent Cloud console.
      */
-    relayState?: pulumi.Input<string>;
+    relayState?: pulumi.Input<string | undefined>;
     /**
      * Access configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
      */
@@ -189,7 +189,7 @@ export interface CenterRoleConfigurationArgs {
     /**
      * Session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours). Default value: 3600 (1 hour).
      */
-    sessionDuration?: pulumi.Input<number>;
+    sessionDuration?: pulumi.Input<number | undefined>;
     /**
      * Space ID.
      */

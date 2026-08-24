@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// organization organization_org_share_unit_resource can be imported using the id, e.g.
+// organization organizationOrgShareUnitResource can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Organization/orgShareUnitResource:OrgShareUnitResource organization_org_share_unit_resource ${unit_id}#${area}#${share_resource_type}#${product_resource_id}

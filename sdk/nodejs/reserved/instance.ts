@@ -130,29 +130,29 @@ export interface InstanceState {
     /**
      * Configuration ID of the reserved instance.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Expiry time of the RI.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Number of reserved instances to be purchased.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * Reserved Instance display name.
      * - If you do not specify an instance display name, 'Unnamed' is displayed by default.
      * - Up to 60 characters (including pattern strings) are supported.
      */
-    reservedInstanceName?: pulumi.Input<string>;
+    reservedInstanceName?: pulumi.Input<string | undefined>;
     /**
      * Start time of the RI.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * Status of the RI at the time of purchase.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -172,5 +172,5 @@ export interface InstanceArgs {
      * - If you do not specify an instance display name, 'Unnamed' is displayed by default.
      * - Up to 60 characters (including pattern strings) are supported.
      */
-    reservedInstanceName?: pulumi.Input<string>;
+    reservedInstanceName?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
+ * const proxyStatistics = tencentcloud.gaap.getProxyStatistics({
  *     proxyId: "link-m9t4yho9",
  *     startTime: "2024-05-20 00:00:00",
  *     endTime: "2024-05-20 23:59:59",
@@ -112,7 +112,7 @@ export interface GetProxyStatisticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyStatistics = tencentcloud.Gaap.getProxyStatistics({
+ * const proxyStatistics = tencentcloud.gaap.getProxyStatistics({
  *     proxyId: "link-m9t4yho9",
  *     startTime: "2024-05-20 00:00:00",
  *     endTime: "2024-05-20 23:59:59",
@@ -161,7 +161,7 @@ export interface GetProxyStatisticsOutputArgs {
     /**
      * Operator (valid when the proxy is a three network proxy), supports CMCC, CUCC, CTCC, and merges data from the three operators if null values are passed or not passed.
      */
-    isp?: pulumi.Input<string>;
+    isp?: pulumi.Input<string | undefined>;
     /**
      * Metric Names. Valid values: InBandwidth,OutBandwidth, Concurrent, InPackets, OutPackets, PacketLoss, Latency, HttpQPS, HttpsQPS, HttpQPSPercent, HttpsQPSPercent.
      */
@@ -173,7 +173,7 @@ export interface GetProxyStatisticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start Time(2019-03-25 12:00:00).
      */

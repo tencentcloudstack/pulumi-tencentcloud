@@ -35,7 +35,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// ## Import
     /// 
     /// tdmqRocketmq cluster can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
     /// ```

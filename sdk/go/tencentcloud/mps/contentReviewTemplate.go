@@ -141,7 +141,7 @@ import (
 //
 // ## Import
 //
-// mps content_review_template can be imported using the id, e.g.
+// mps contentReviewTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition

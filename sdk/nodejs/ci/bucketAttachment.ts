@@ -96,11 +96,11 @@ export interface BucketAttachmentState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Binding object storage state, `on`: bound, `off`: unbound, `unbinding`: unbinding.
      */
-    ciStatus?: pulumi.Input<string>;
+    ciStatus?: pulumi.Input<string | undefined>;
 }
 
 /**

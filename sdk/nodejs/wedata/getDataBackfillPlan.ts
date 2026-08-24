@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDataBackfillPlan = tencentcloud.Wedata.getDataBackfillPlan({
+ * const wedataDataBackfillPlan = tencentcloud.wedata.getDataBackfillPlan({
  *     projectId: "1859317240494305280",
  *     dataBackfillPlanId: "deb71ea1-f708-47ab-8eb6-491ce5b9c011",
  * });
@@ -79,7 +79,7 @@ export interface GetDataBackfillPlanResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataDataBackfillPlan = tencentcloud.Wedata.getDataBackfillPlan({
+ * const wedataDataBackfillPlan = tencentcloud.wedata.getDataBackfillPlan({
  *     projectId: "1859317240494305280",
  *     dataBackfillPlanId: "deb71ea1-f708-47ab-8eb6-491ce5b9c011",
  * });
@@ -110,9 +110,9 @@ export interface GetDataBackfillPlanOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Display time zone, default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
 }

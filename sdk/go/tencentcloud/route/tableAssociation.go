@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// vpc route_table can be imported using the id, e.g.
+// vpc routeTable can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id

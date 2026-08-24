@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getKeys({
+ * const example = tencentcloud.kms.getKeys({
  *     searchKeyAlias: "tf_example",
  *     keyState: 0,
  *     origin: "TENCENT_KMS",
@@ -125,7 +125,7 @@ export interface GetKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getKeys({
+ * const example = tencentcloud.kms.getKeys({
  *     searchKeyAlias: "tf_example",
  *     keyState: 0,
  *     origin: "TENCENT_KMS",
@@ -157,37 +157,37 @@ export interface GetKeysOutputArgs {
     /**
      * The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Filter by state of CMK. `0` - all CMKs are queried, `1` - only Enabled CMKs are queried, `2` - only Disabled CMKs are queried, `3` - only PendingDelete CMKs are queried, `4` - only PendingImport CMKs are queried, `5` - only Archived CMKs are queried.
      */
-    keyState?: pulumi.Input<number>;
+    keyState?: pulumi.Input<number | undefined>;
     /**
      * Filter by usage of CMK. Available values include `ALL`, `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, `ASYMMETRIC_SIGN_VERIFY_ECC`. Default value is `ENCRYPT_DECRYPT`.
      */
-    keyUsage?: pulumi.Input<string>;
+    keyUsage?: pulumi.Input<string | undefined>;
     /**
      * Order to sort the CMK create time. `0` - desc, `1` - asc. Default value is `0`.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Filter by origin of CMK. `TENCENT_KMS` - CMK created by KMS, `EXTERNAL` - CMK imported by user, `ALL` - all CMKs. Default value is `ALL`.
      */
-    origin?: pulumi.Input<string>;
+    origin?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by role of the CMK creator. `0` - created by user, `1` - created by cloud product. Default value is `0`.
      */
-    role?: pulumi.Input<number>;
+    role?: pulumi.Input<number | undefined>;
     /**
      * Words used to match the results, and the words can be: keyId and alias.
      */
-    searchKeyAlias?: pulumi.Input<string>;
+    searchKeyAlias?: pulumi.Input<string | undefined>;
     /**
      * Tags to filter CMK.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

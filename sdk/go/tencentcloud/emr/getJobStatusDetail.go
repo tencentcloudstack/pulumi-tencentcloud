@@ -87,12 +87,8 @@ type GetJobStatusDetailResult struct {
 }
 
 func GetJobStatusDetailOutput(ctx *pulumi.Context, args GetJobStatusDetailOutputArgs, opts ...pulumi.InvokeOption) GetJobStatusDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetJobStatusDetailResultOutput, error) {
-			args := v.(GetJobStatusDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Emr/getJobStatusDetail:getJobStatusDetail", args, GetJobStatusDetailResultOutput{}, options).(GetJobStatusDetailResultOutput), nil
-		}).(GetJobStatusDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Emr/getJobStatusDetail:getJobStatusDetail", args, GetJobStatusDetailResultOutput{}, options).(GetJobStatusDetailResultOutput)
 }
 
 // A collection of arguments for invoking getJobStatusDetail.

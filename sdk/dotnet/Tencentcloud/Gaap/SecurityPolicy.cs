@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP security policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy  tencentcloud_gaap_security_policy.foo pl-xxxx
+    ///   $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy foo pl-xxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/securityPolicy:SecurityPolicy")]

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Batch
 {
     /// <summary>
-    /// Provides a resource to create a controlcenter batch apply account baselines
+    /// Provides a resource to create a Controlcenter batch apply account baselines
     /// 
     /// ## Example Usage
     /// 

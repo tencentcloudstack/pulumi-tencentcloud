@@ -39,7 +39,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -47,8 +47,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -57,13 +57,29 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			// create clb
-//			_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+//			// create INTERNAL clb
+//			_, err = clb.NewInstance(ctx, "example1", &clb.InstanceArgs{
 //				NetworkType: pulumi.String("INTERNAL"),
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create INTERNAL clb by sla_type and internet_bandwidth_max_out
+//			_, err = clb.NewInstance(ctx, "example2", &clb.InstanceArgs{
+//				NetworkType:             pulumi.String("INTERNAL"),
+//				ClbName:                 pulumi.String("tf-example"),
+//				ProjectId:               pulumi.Int(0),
+//				VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
+//				SlaType:                 pulumi.String("clb.c2.medium"),
+//				InternetBandwidthMaxOut: pulumi.Int(100),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
 //				},
@@ -100,7 +116,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -108,8 +124,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -123,8 +139,8 @@ import (
 //				NetworkType:  pulumi.String("INTERNAL"),
 //				ClbName:      pulumi.String("tf-example"),
 //				ProjectId:    pulumi.Int(0),
-//				VpcId:        vpc.ID(),
-//				SubnetId:     subnet.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
 //				EipAddressId: pulumi.String("eip-lt0w6jhq"),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
@@ -162,7 +178,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -170,8 +186,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -187,8 +203,8 @@ import (
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
 //				ClusterId:   pulumi.String("cluster-lchwgxhs"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
 //				},
@@ -225,7 +241,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -233,8 +249,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -249,8 +265,71 @@ import (
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
 //				SlaType:     pulumi.String("clb.c3.medium"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### changes.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			// create vpc
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//				Name:      pulumi.String("vpc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create subnet
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				Name:             pulumi.String("subnet"),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create clb and forcibly upgrade sla_type
+//			_, err = clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+//				NetworkType: pulumi.String("INTERNAL"),
+//				ClbName:     pulumi.String("tf-example"),
+//				ProjectId:   pulumi.Int(0),
+//				SlaType:     pulumi.String("clb.c3.medium"),
+//				Force:       pulumi.Bool(true),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
 //				},
@@ -287,7 +366,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -311,9 +390,9 @@ import (
 //				NetworkType: pulumi.String("OPEN"),
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
-//				VpcId:       vpc.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
@@ -355,7 +434,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -379,12 +458,12 @@ import (
 //				NetworkType: pulumi.String("OPEN"),
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
-//				VpcId:       vpc.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				TargetRegionInfoRegion: pulumi.String(zone),
-//				TargetRegionInfoVpcId:  vpc.ID(),
+//				TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
 //				},
@@ -413,7 +492,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -441,8 +520,8 @@ import (
 //				ProjectId:          pulumi.Int(0),
 //				VipIsp:             pulumi.String("CMCC"),
 //				InternetChargeType: pulumi.String("BANDWIDTH_PACKAGE"),
-//				BandwidthPackageId: example.ID(),
-//				VpcId:              vpc.ID(),
+//				BandwidthPackageId: example.ID().ToIDOutput().ToStringOutput(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
 //				},
@@ -484,7 +563,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -493,7 +572,7 @@ import (
 //			}
 //			// create subnet
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -519,11 +598,11 @@ import (
 //				NetworkType:            pulumi.String("OPEN"),
 //				ClbName:                pulumi.String("tf-example"),
 //				ProjectId:              pulumi.Int(0),
-//				VpcId:                  vpc.ID(),
+//				VpcId:                  vpc2.ID().ToIDOutput().ToStringOutput(),
 //				TargetRegionInfoRegion: pulumi.String(zone),
-//				TargetRegionInfoVpcId:  vpc.ID(),
+//				TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				DynamicVip: pulumi.Bool(true),
 //				Tags: pulumi.StringMap{
@@ -563,7 +642,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -587,9 +666,9 @@ import (
 //				NetworkType: pulumi.String("OPEN"),
 //				ClbName:     pulumi.String("tf-example"),
 //				ProjectId:   pulumi.Int(0),
-//				VpcId:       vpc.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Vip: pulumi.String("111.230.4.204"),
 //				Tags: pulumi.StringMap{
@@ -634,7 +713,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -643,7 +722,7 @@ import (
 //			}
 //			// create subnet
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -670,11 +749,11 @@ import (
 //				ClbName:                  pulumi.String("tf-example"),
 //				ProjectId:                pulumi.Int(0),
 //				LoadBalancerPassToTarget: pulumi.Bool(true),
-//				VpcId:                    vpc.ID(),
+//				VpcId:                    vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
-//				TargetRegionInfoVpcId:  vpc.ID(),
+//				TargetRegionInfoVpcId:  vpc2.ID().ToIDOutput().ToStringOutput(),
 //				TargetRegionInfoRegion: pulumi.String(zone),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
@@ -742,7 +821,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -750,8 +829,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.Any(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -763,7 +842,7 @@ import (
 //			// create route table
 //			_, err = route.NewTable(ctx, "route", &route.TableArgs{
 //				Name:  pulumi.String("route_table"),
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -788,7 +867,7 @@ import (
 //			}
 //			// create topic
 //			topic, err := clb.NewLogTopic(ctx, "topic", &clb.LogTopicArgs{
-//				LogSetId:  log.ID(),
+//				LogSetId:  log.ID().ToIDOutput().ToStringOutput(),
 //				TopicName: pulumi.String("clb-topic"),
 //			})
 //			if err != nil {
@@ -800,15 +879,48 @@ import (
 //				ClbName:                  pulumi.String("tf-example"),
 //				ProjectId:                pulumi.Int(0),
 //				LoadBalancerPassToTarget: pulumi.Bool(true),
-//				VpcId:                    vpc.ID(),
-//				SubnetId:                 subnet.ID(),
+//				VpcId:                    vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                 subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
-//				LogSetId:   log.ID(),
-//				LogTopicId: topic.ID(),
+//				LogSetId:   log.ID().ToIDOutput().ToStringOutput(),
+//				LogTopicId: topic.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Create instance with associate endpoint
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
+//				NetworkType:       pulumi.String("OPEN"),
+//				ClbName:           pulumi.String("tf-example"),
+//				ProjectId:         pulumi.Int(0),
+//				VpcId:             pulumi.String("vpc-e51ilko8"),
+//				AssociateEndpoint: pulumi.String("vpce-du9ssd3z"),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -834,6 +946,8 @@ type Instance struct {
 	AddressIpVersion pulumi.StringOutput `pulumi:"addressIpVersion"`
 	// The IPv6 address of the load balancing instance.
 	AddressIpv6 pulumi.StringOutput `pulumi:"addressIpv6"`
+	// The associated terminal node ID; passing an empty string indicates unassociating the node.
+	AssociateEndpoint pulumi.StringPtrOutput `pulumi:"associateEndpoint"`
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrOutput `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -850,7 +964,14 @@ type Instance struct {
 	DynamicVip pulumi.BoolPtrOutput `pulumi:"dynamicVip"`
 	// The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
 	EipAddressId pulumi.StringOutput `pulumi:"eipAddressId"`
-	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+	ExclusiveCluster InstanceExclusiveClusterOutput `pulumi:"exclusiveCluster"`
+	// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+	Force pulumi.BoolPtrOutput `pulumi:"force"`
+	// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+	// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+	// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+	//   (Default to 10Mbps when CreateLoadBalancer is call.).
 	InternetBandwidthMaxOut pulumi.IntOutput `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
@@ -936,6 +1057,8 @@ type instanceState struct {
 	AddressIpVersion *string `pulumi:"addressIpVersion"`
 	// The IPv6 address of the load balancing instance.
 	AddressIpv6 *string `pulumi:"addressIpv6"`
+	// The associated terminal node ID; passing an empty string indicates unassociating the node.
+	AssociateEndpoint *string `pulumi:"associateEndpoint"`
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -952,7 +1075,14 @@ type instanceState struct {
 	DynamicVip *bool `pulumi:"dynamicVip"`
 	// The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
 	EipAddressId *string `pulumi:"eipAddressId"`
-	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+	ExclusiveCluster *InstanceExclusiveCluster `pulumi:"exclusiveCluster"`
+	// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+	Force *bool `pulumi:"force"`
+	// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+	// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+	// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+	//   (Default to 10Mbps when CreateLoadBalancer is call.).
 	InternetBandwidthMaxOut *int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
@@ -1003,6 +1133,8 @@ type InstanceState struct {
 	AddressIpVersion pulumi.StringPtrInput
 	// The IPv6 address of the load balancing instance.
 	AddressIpv6 pulumi.StringPtrInput
+	// The associated terminal node ID; passing an empty string indicates unassociating the node.
+	AssociateEndpoint pulumi.StringPtrInput
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -1019,7 +1151,14 @@ type InstanceState struct {
 	DynamicVip pulumi.BoolPtrInput
 	// The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
 	EipAddressId pulumi.StringPtrInput
-	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+	ExclusiveCluster InstanceExclusiveClusterPtrInput
+	// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+	Force pulumi.BoolPtrInput
+	// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+	// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+	// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+	//   (Default to 10Mbps when CreateLoadBalancer is call.).
 	InternetBandwidthMaxOut pulumi.IntPtrInput
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput
@@ -1072,6 +1211,8 @@ func (InstanceState) ElementType() reflect.Type {
 type instanceArgs struct {
 	// It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
 	AddressIpVersion *string `pulumi:"addressIpVersion"`
+	// The associated terminal node ID; passing an empty string indicates unassociating the node.
+	AssociateEndpoint *string `pulumi:"associateEndpoint"`
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -1084,7 +1225,14 @@ type instanceArgs struct {
 	DynamicVip *bool `pulumi:"dynamicVip"`
 	// The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
 	EipAddressId *string `pulumi:"eipAddressId"`
-	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+	ExclusiveCluster *InstanceExclusiveCluster `pulumi:"exclusiveCluster"`
+	// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+	Force *bool `pulumi:"force"`
+	// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+	// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+	// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+	//   (Default to 10Mbps when CreateLoadBalancer is call.).
 	InternetBandwidthMaxOut *int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
@@ -1132,6 +1280,8 @@ type instanceArgs struct {
 type InstanceArgs struct {
 	// It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
 	AddressIpVersion pulumi.StringPtrInput
+	// The associated terminal node ID; passing an empty string indicates unassociating the node.
+	AssociateEndpoint pulumi.StringPtrInput
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -1144,7 +1294,14 @@ type InstanceArgs struct {
 	DynamicVip pulumi.BoolPtrInput
 	// The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
 	EipAddressId pulumi.StringPtrInput
-	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+	ExclusiveCluster InstanceExclusiveClusterPtrInput
+	// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+	Force pulumi.BoolPtrInput
+	// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+	// - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+	// - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+	//   (Default to 10Mbps when CreateLoadBalancer is call.).
 	InternetBandwidthMaxOut pulumi.IntPtrInput
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput
@@ -1285,6 +1442,11 @@ func (o InstanceOutput) AddressIpv6() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AddressIpv6 }).(pulumi.StringOutput)
 }
 
+// The associated terminal node ID; passing an empty string indicates unassociating the node.
+func (o InstanceOutput) AssociateEndpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.AssociateEndpoint }).(pulumi.StringPtrOutput)
+}
+
 // Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 func (o InstanceOutput) BandwidthPackageId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.BandwidthPackageId }).(pulumi.StringPtrOutput)
@@ -1325,7 +1487,20 @@ func (o InstanceOutput) EipAddressId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EipAddressId }).(pulumi.StringOutput)
 }
 
-// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+func (o InstanceOutput) ExclusiveCluster() InstanceExclusiveClusterOutput {
+	return o.ApplyT(func(v *Instance) InstanceExclusiveClusterOutput { return v.ExclusiveCluster }).(InstanceExclusiveClusterOutput)
+}
+
+// Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+func (o InstanceOutput) Force() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.Force }).(pulumi.BoolPtrOutput)
+}
+
+// Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+//   - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+//   - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+//     (Default to 10Mbps when CreateLoadBalancer is call.).
 func (o InstanceOutput) InternetBandwidthMaxOut() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.InternetBandwidthMaxOut }).(pulumi.IntOutput)
 }

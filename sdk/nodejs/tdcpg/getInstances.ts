@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Tdcpg.getInstances({
+ * const instances = tencentcloud.tdcpg.getInstances({
  *     clusterId: "",
  *     instanceId: "",
  *     instanceName: "",
@@ -113,7 +113,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Tdcpg.getInstances({
+ * const instances = tencentcloud.tdcpg.getInstances({
  *     clusterId: "",
  *     instanceId: "",
  *     instanceName: "",
@@ -145,21 +145,21 @@ export interface GetInstancesOutputArgs {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * instance type.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * instance status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

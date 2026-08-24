@@ -65,6 +65,11 @@ export type JwtAuthenticator = import("./jwtAuthenticator").JwtAuthenticator;
 export const JwtAuthenticator: typeof import("./jwtAuthenticator").JwtAuthenticator = null as any;
 utilities.lazyLoad(exports, ["JwtAuthenticator"], () => require("./jwtAuthenticator"));
 
+export { MessageEnrichmentRuleArgs, MessageEnrichmentRuleState } from "./messageEnrichmentRule";
+export type MessageEnrichmentRule = import("./messageEnrichmentRule").MessageEnrichmentRule;
+export const MessageEnrichmentRule: typeof import("./messageEnrichmentRule").MessageEnrichmentRule = null as any;
+utilities.lazyLoad(exports, ["MessageEnrichmentRule"], () => require("./messageEnrichmentRule"));
+
 export { TopicArgs, TopicState } from "./topic";
 export type Topic = import("./topic").Topic;
 export const Topic: typeof import("./topic").Topic = null as any;
@@ -96,6 +101,8 @@ const _module = {
                 return new JwksAuthenticator(name, <any>undefined, { urn })
             case "tencentcloud:Mqtt/jwtAuthenticator:JwtAuthenticator":
                 return new JwtAuthenticator(name, <any>undefined, { urn })
+            case "tencentcloud:Mqtt/messageEnrichmentRule:MessageEnrichmentRule":
+                return new MessageEnrichmentRule(name, <any>undefined, { urn })
             case "tencentcloud:Mqtt/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             case "tencentcloud:Mqtt/user:User":
@@ -113,5 +120,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/instancePublicEndpoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/jwksAuthenticator", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/jwtAuthenticator", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/messageEnrichmentRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mqtt/user", _module)

@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * postgresql backup_download_restriction_config can be imported using the id, e.g.
+ * postgresql backupDownloadRestrictionConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
@@ -144,23 +144,23 @@ export interface BackupDownloadRestrictionConfigState {
     /**
      * ip limit Strategy: ALLOW, DENY.
      */
-    ipRestrictionEffect?: pulumi.Input<string>;
+    ipRestrictionEffect?: pulumi.Input<string | undefined>;
     /**
      * The list of ips that are allowed or denied to download backup files.
      */
-    ipSets?: pulumi.Input<pulumi.Input<string>[]>;
+    ipSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup file download restriction type: NONE:Unlimited, both internal and external networks can be downloaded. INTRANET:Only intranet downloads are allowed. CUSTOMIZE:Customize the vpc or ip that limits downloads.
      */
-    restrictionType?: pulumi.Input<string>;
+    restrictionType?: pulumi.Input<string | undefined>;
     /**
      * The list of vpcIds that allow or deny downloading of backup files.
      */
-    vpcIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    vpcIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * vpc limit Strategy: ALLOW, DENY.
      */
-    vpcRestrictionEffect?: pulumi.Input<string>;
+    vpcRestrictionEffect?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -170,11 +170,11 @@ export interface BackupDownloadRestrictionConfigArgs {
     /**
      * ip limit Strategy: ALLOW, DENY.
      */
-    ipRestrictionEffect?: pulumi.Input<string>;
+    ipRestrictionEffect?: pulumi.Input<string | undefined>;
     /**
      * The list of ips that are allowed or denied to download backup files.
      */
-    ipSets?: pulumi.Input<pulumi.Input<string>[]>;
+    ipSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup file download restriction type: NONE:Unlimited, both internal and external networks can be downloaded. INTRANET:Only intranet downloads are allowed. CUSTOMIZE:Customize the vpc or ip that limits downloads.
      */
@@ -182,9 +182,9 @@ export interface BackupDownloadRestrictionConfigArgs {
     /**
      * The list of vpcIds that allow or deny downloading of backup files.
      */
-    vpcIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    vpcIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * vpc limit Strategy: ALLOW, DENY.
      */
-    vpcRestrictionEffect?: pulumi.Input<string>;
+    vpcRestrictionEffect?: pulumi.Input<string | undefined>;
 }

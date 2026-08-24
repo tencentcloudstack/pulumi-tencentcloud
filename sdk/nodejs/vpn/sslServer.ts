@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -9,20 +11,72 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Basic Configuration
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.vpn.SslServer("example", {
- *     localAddresses: ["10.0.0.0/17"],
- *     remoteAddress: "11.0.0.0/16",
+ *     localAddresses: ["10.0.200.0/24"],
+ *     remoteAddress: "192.168.100.0/24",
  *     sslVpnServerName: "helloworld",
- *     vpnGatewayId: "vpngw-335lwf7d",
- *     sslVpnProtocol: "UDP",
- *     sslVpnPort: 1194,
- *     integrityAlgorithm: "MD5",
- *     encryptAlgorithm: "AES-128-CBC",
- *     compress: true,
+ *     vpnGatewayId: "vpngw-6lq9ayur",
+ * });
+ * ```
+ *
+ * ### With Tags and DNS Configuration
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.vpn.SslServer("example", {
+ *     localAddresses: ["10.0.200.0/24"],
+ *     remoteAddress: "192.168.100.0/24",
+ *     sslVpnServerName: "helloworld",
+ *     vpnGatewayId: "vpngw-6lq9ayur",
+ *     tags: {
+ *         Environment: "production",
+ *         Owner: "team-a",
+ *     },
+ *     dnsServers: {
+ *         primaryDns: "8.8.8.8",
+ *         secondaryDns: "8.8.4.4",
+ *     },
+ * });
+ * ```
+ *
+ * ### With SSO Authentication (Requires Whitelist)
+ *
+ * **Note:** SSO authentication feature requires whitelist approval from TencentCloud. Please contact TencentCloud support to apply for whitelist access before enabling this feature.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.vpn.SslServer("example", {
+ *     localAddresses: ["10.0.200.0/24"],
+ *     remoteAddress: "192.168.100.0/24",
+ *     sslVpnServerName: "helloworld",
+ *     vpnGatewayId: "vpngw-6lq9ayur",
+ *     ssoEnabled: true,
+ *     samlData: "<SAML configuration data>",
+ * });
+ * ```
+ *
+ * ### parameter only controls the feature switch. Detailed access policies must be configured through the TencentCloud console or other resources.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.vpn.SslServer("example", {
+ *     localAddresses: ["10.0.200.0/24"],
+ *     remoteAddress: "192.168.100.0/24",
+ *     sslVpnServerName: "helloworld",
+ *     vpnGatewayId: "vpngw-6lq9ayur",
+ *     accessPolicyEnabled: true,
  * });
  * ```
  *
@@ -63,17 +117,25 @@ export class SslServer extends pulumi.CustomResource {
     }
 
     /**
+     * Enable access policy control. Default: false.
+     */
+    declare public readonly accessPolicyEnabled: pulumi.Output<boolean>;
+    /**
      * Need compressed. Currently is not supports compress. Default value: False.
      */
     declare public readonly compress: pulumi.Output<boolean | undefined>;
     /**
+     * DNS server configuration.
+     */
+    declare public readonly dnsServers: pulumi.Output<outputs.Vpn.SslServerDnsServers>;
+    /**
      * The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
      */
-    declare public readonly encryptAlgorithm: pulumi.Output<string | undefined>;
+    declare public readonly encryptAlgorithm: pulumi.Output<string>;
     /**
      * The integrity algorithm. Valid values: SHA1. Default value: SHA1.
      */
-    declare public readonly integrityAlgorithm: pulumi.Output<string | undefined>;
+    declare public readonly integrityAlgorithm: pulumi.Output<string>;
     /**
      * List of local CIDR.
      */
@@ -83,17 +145,29 @@ export class SslServer extends pulumi.CustomResource {
      */
     declare public readonly remoteAddress: pulumi.Output<string>;
     /**
+     * SAML-DATA. Required when ssoEnabled is true.
+     */
+    declare public readonly samlData: pulumi.Output<string | undefined>;
+    /**
      * The port of ssl vpn. Currently only supports UDP. Default value: 1194.
      */
-    declare public readonly sslVpnPort: pulumi.Output<number | undefined>;
+    declare public readonly sslVpnPort: pulumi.Output<number>;
     /**
      * The protocol of ssl vpn. Default value: UDP.
      */
-    declare public readonly sslVpnProtocol: pulumi.Output<string | undefined>;
+    declare public readonly sslVpnProtocol: pulumi.Output<string>;
     /**
      * The name of ssl vpn server to be created.
      */
     declare public readonly sslVpnServerName: pulumi.Output<string>;
+    /**
+     * Enable SSO authentication. Default: false. This feature requires whitelist approval.
+     */
+    declare public readonly ssoEnabled: pulumi.Output<boolean>;
+    /**
+     * Tags for resource management.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * VPN gateway ID.
      */
@@ -112,14 +186,19 @@ export class SslServer extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as SslServerState | undefined;
+            resourceInputs["accessPolicyEnabled"] = state?.accessPolicyEnabled;
             resourceInputs["compress"] = state?.compress;
+            resourceInputs["dnsServers"] = state?.dnsServers;
             resourceInputs["encryptAlgorithm"] = state?.encryptAlgorithm;
             resourceInputs["integrityAlgorithm"] = state?.integrityAlgorithm;
             resourceInputs["localAddresses"] = state?.localAddresses;
             resourceInputs["remoteAddress"] = state?.remoteAddress;
+            resourceInputs["samlData"] = state?.samlData;
             resourceInputs["sslVpnPort"] = state?.sslVpnPort;
             resourceInputs["sslVpnProtocol"] = state?.sslVpnProtocol;
             resourceInputs["sslVpnServerName"] = state?.sslVpnServerName;
+            resourceInputs["ssoEnabled"] = state?.ssoEnabled;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["vpnGatewayId"] = state?.vpnGatewayId;
         } else {
             const args = argsOrState as SslServerArgs | undefined;
@@ -135,14 +214,19 @@ export class SslServer extends pulumi.CustomResource {
             if (args?.vpnGatewayId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'vpnGatewayId'");
             }
+            resourceInputs["accessPolicyEnabled"] = args?.accessPolicyEnabled;
             resourceInputs["compress"] = args?.compress;
+            resourceInputs["dnsServers"] = args?.dnsServers;
             resourceInputs["encryptAlgorithm"] = args?.encryptAlgorithm;
             resourceInputs["integrityAlgorithm"] = args?.integrityAlgorithm;
             resourceInputs["localAddresses"] = args?.localAddresses;
             resourceInputs["remoteAddress"] = args?.remoteAddress;
+            resourceInputs["samlData"] = args?.samlData;
             resourceInputs["sslVpnPort"] = args?.sslVpnPort;
             resourceInputs["sslVpnProtocol"] = args?.sslVpnProtocol;
             resourceInputs["sslVpnServerName"] = args?.sslVpnServerName;
+            resourceInputs["ssoEnabled"] = args?.ssoEnabled;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["vpnGatewayId"] = args?.vpnGatewayId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -155,41 +239,61 @@ export class SslServer extends pulumi.CustomResource {
  */
 export interface SslServerState {
     /**
+     * Enable access policy control. Default: false.
+     */
+    accessPolicyEnabled?: pulumi.Input<boolean | undefined>;
+    /**
      * Need compressed. Currently is not supports compress. Default value: False.
      */
-    compress?: pulumi.Input<boolean>;
+    compress?: pulumi.Input<boolean | undefined>;
+    /**
+     * DNS server configuration.
+     */
+    dnsServers?: pulumi.Input<inputs.Vpn.SslServerDnsServers | undefined>;
     /**
      * The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
      */
-    encryptAlgorithm?: pulumi.Input<string>;
+    encryptAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * The integrity algorithm. Valid values: SHA1. Default value: SHA1.
      */
-    integrityAlgorithm?: pulumi.Input<string>;
+    integrityAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * List of local CIDR.
      */
-    localAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    localAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Remote CIDR for client.
      */
-    remoteAddress?: pulumi.Input<string>;
+    remoteAddress?: pulumi.Input<string | undefined>;
+    /**
+     * SAML-DATA. Required when ssoEnabled is true.
+     */
+    samlData?: pulumi.Input<string | undefined>;
     /**
      * The port of ssl vpn. Currently only supports UDP. Default value: 1194.
      */
-    sslVpnPort?: pulumi.Input<number>;
+    sslVpnPort?: pulumi.Input<number | undefined>;
     /**
      * The protocol of ssl vpn. Default value: UDP.
      */
-    sslVpnProtocol?: pulumi.Input<string>;
+    sslVpnProtocol?: pulumi.Input<string | undefined>;
     /**
      * The name of ssl vpn server to be created.
      */
-    sslVpnServerName?: pulumi.Input<string>;
+    sslVpnServerName?: pulumi.Input<string | undefined>;
+    /**
+     * Enable SSO authentication. Default: false. This feature requires whitelist approval.
+     */
+    ssoEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Tags for resource management.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPN gateway ID.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -197,17 +301,25 @@ export interface SslServerState {
  */
 export interface SslServerArgs {
     /**
+     * Enable access policy control. Default: false.
+     */
+    accessPolicyEnabled?: pulumi.Input<boolean | undefined>;
+    /**
      * Need compressed. Currently is not supports compress. Default value: False.
      */
-    compress?: pulumi.Input<boolean>;
+    compress?: pulumi.Input<boolean | undefined>;
+    /**
+     * DNS server configuration.
+     */
+    dnsServers?: pulumi.Input<inputs.Vpn.SslServerDnsServers | undefined>;
     /**
      * The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
      */
-    encryptAlgorithm?: pulumi.Input<string>;
+    encryptAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * The integrity algorithm. Valid values: SHA1. Default value: SHA1.
      */
-    integrityAlgorithm?: pulumi.Input<string>;
+    integrityAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * List of local CIDR.
      */
@@ -217,17 +329,29 @@ export interface SslServerArgs {
      */
     remoteAddress: pulumi.Input<string>;
     /**
+     * SAML-DATA. Required when ssoEnabled is true.
+     */
+    samlData?: pulumi.Input<string | undefined>;
+    /**
      * The port of ssl vpn. Currently only supports UDP. Default value: 1194.
      */
-    sslVpnPort?: pulumi.Input<number>;
+    sslVpnPort?: pulumi.Input<number | undefined>;
     /**
      * The protocol of ssl vpn. Default value: UDP.
      */
-    sslVpnProtocol?: pulumi.Input<string>;
+    sslVpnProtocol?: pulumi.Input<string | undefined>;
     /**
      * The name of ssl vpn server to be created.
      */
     sslVpnServerName: pulumi.Input<string>;
+    /**
+     * Enable SSO authentication. Default: false. This feature requires whitelist approval.
+     */
+    ssoEnabled?: pulumi.Input<boolean | undefined>;
+    /**
+     * Tags for resource management.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPN gateway ID.
      */

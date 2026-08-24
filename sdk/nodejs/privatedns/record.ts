@@ -170,35 +170,35 @@ export interface RecordState {
     /**
      * MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
      */
-    mx?: pulumi.Input<number>;
+    mx?: pulumi.Input<number | undefined>;
     /**
      * Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
      */
-    recordType?: pulumi.Input<string>;
+    recordType?: pulumi.Input<string | undefined>;
     /**
      * Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
      */
-    recordValue?: pulumi.Input<string>;
+    recordValue?: pulumi.Input<string | undefined>;
     /**
      * Record status. Valid values: `enabled`, `disabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Subdomain, such as `www`, `m`, and `@`.
      */
-    subDomain?: pulumi.Input<string>;
+    subDomain?: pulumi.Input<string | undefined>;
     /**
      * Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
     /**
      * Record weight. Value range: 1~100.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
     /**
      * Private domain ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -208,7 +208,7 @@ export interface RecordArgs {
     /**
      * MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
      */
-    mx?: pulumi.Input<number>;
+    mx?: pulumi.Input<number | undefined>;
     /**
      * Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
      */
@@ -220,7 +220,7 @@ export interface RecordArgs {
     /**
      * Record status. Valid values: `enabled`, `disabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Subdomain, such as `www`, `m`, and `@`.
      */
@@ -228,11 +228,11 @@ export interface RecordArgs {
     /**
      * Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
     /**
      * Record weight. Value range: 1~100.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
     /**
      * Private domain ID.
      */

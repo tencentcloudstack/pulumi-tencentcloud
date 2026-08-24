@@ -95,12 +95,8 @@ type GetParamTemplatesResult struct {
 }
 
 func GetParamTemplatesOutput(ctx *pulumi.Context, args GetParamTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetParamTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParamTemplatesResultOutput, error) {
-			args := v.(GetParamTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args, GetParamTemplatesResultOutput{}, options).(GetParamTemplatesResultOutput), nil
-		}).(GetParamTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", args, GetParamTemplatesResultOutput{}, options).(GetParamTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getParamTemplates.

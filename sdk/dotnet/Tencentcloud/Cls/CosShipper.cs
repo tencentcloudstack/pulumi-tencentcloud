@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -67,6 +66,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         Partition = "/%Y/%m/%d/%H/",
     ///         Prefix = "ap-guangzhou-fffsasad-1649734752",
     ///         ShipperName = "ap-guangzhou-fffsasad-1649734752",
+    ///         TimeZone = "GMT+08:00",
     ///         Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
     ///         {
     ///             Format = "lzop",
@@ -82,6 +82,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///                     "__FILENAME__",
     ///                     "__SOURCE__",
     ///                     "__TIMESTAMP__",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Example with Parquet format:
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var parquetExample = new Tencentcloud.Cls.CosShipper("parquet_example", new()
+    ///     {
+    ///         Bucket = example.Id,
+    ///         TopicId = exampleTencentcloudClsTopic.Id,
+    ///         Interval = 300,
+    ///         MaxSize = 256,
+    ///         Partition = "/%Y/%m/%d/%H/",
+    ///         Prefix = "logs/parquet/",
+    ///         ShipperName = "parquet-shipper",
+    ///         Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
+    ///         {
+    ///             Format = "gzip",
+    ///         },
+    ///         Content = new Tencentcloud.Cls.Inputs.CosShipperContentArgs
+    ///         {
+    ///             Format = "parquet",
+    ///             Parquet = new Tencentcloud.Cls.Inputs.CosShipperContentParquetArgs
+    ///             {
+    ///                 ParquetKeyInfos = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.CosShipperContentParquetParquetKeyInfoArgs
+    ///                     {
+    ///                         KeyName = "level",
+    ///                         KeyType = "string",
+    ///                         KeyNonExistingField = "INFO",
+    ///                     },
+    ///                     new Tencentcloud.Cls.Inputs.CosShipperContentParquetParquetKeyInfoArgs
+    ///                     {
+    ///                         KeyName = "user_id",
+    ///                         KeyType = "int64",
+    ///                         KeyNonExistingField = "0",
+    ///                     },
     ///                 },
     ///             },
     ///         },
@@ -178,6 +228,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Output("storageType")]
         public Output<string?> StorageType { get; private set; } = null!;
+
+        /// <summary>
+        /// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+        /// </summary>
+        [Output("timeZone")]
+        public Output<string> TimeZone { get; private set; } = null!;
 
         /// <summary>
         /// ID of the log topic to which the shipping rule to be created belongs.
@@ -317,6 +373,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<string>? StorageType { get; set; }
 
         /// <summary>
+        /// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+        /// </summary>
+        [Input("timeZone")]
+        public Input<string>? TimeZone { get; set; }
+
+        /// <summary>
         /// ID of the log topic to which the shipping rule to be created belongs.
         /// </summary>
         [Input("topicId", required: true)]
@@ -413,6 +475,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
+
+        /// <summary>
+        /// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+        /// </summary>
+        [Input("timeZone")]
+        public Input<string>? TimeZone { get; set; }
 
         /// <summary>
         /// ID of the log topic to which the shipping rule to be created belongs.

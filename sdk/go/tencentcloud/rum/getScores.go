@@ -80,12 +80,8 @@ type GetScoresResult struct {
 }
 
 func GetScoresOutput(ctx *pulumi.Context, args GetScoresOutputArgs, opts ...pulumi.InvokeOption) GetScoresResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetScoresResultOutput, error) {
-			args := v.(GetScoresArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getScores:getScores", args, GetScoresResultOutput{}, options).(GetScoresResultOutput), nil
-		}).(GetScoresResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getScores:getScores", args, GetScoresResultOutput{}, options).(GetScoresResultOutput)
 }
 
 // A collection of arguments for invoking getScores.

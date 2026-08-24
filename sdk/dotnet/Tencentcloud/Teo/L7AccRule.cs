@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "1",
     ///                 },
-    ///                 RuleName = "网站加速",
+    ///                 RuleName = "Web Acceleration",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -140,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "2",
     ///                 },
-    ///                 RuleName = "音视频直播",
+    ///                 RuleName = "Live Video Streaming",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -229,7 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "3",
     ///                 },
-    ///                 RuleName = "大文件下载",
+    ///                 RuleName = "Large File Download",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -315,7 +315,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "4",
     ///                 },
-    ///                 RuleName = "音视频点播",
+    ///                 RuleName = "Video On Demand",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -401,7 +401,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "5",
     ///                 },
-    ///                 RuleName = "API 加速",
+    ///                 RuleName = "API Acceleration",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -438,7 +438,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 {
     ///                     "6",
     ///                 },
-    ///                 RuleName = "WordPress 建站",
+    ///                 RuleName = "WordPress Site",
     ///                 Branches = new[]
     ///                 {
     ///                     new Tencentcloud.Teo.Inputs.L7AccRuleRuleBranchArgs
@@ -564,14 +564,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// ## Import
     /// 
     /// TEO l7 acc rule can be imported using the zone_id, e.g.
-    /// 
-    /// `
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Teo/l7AccRule:L7AccRule example zone-36bjhygh1bxe
-    /// ```
-    /// 
-    /// `
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/l7AccRule:L7AccRule")]
     public partial class L7AccRule : global::Pulumi.CustomResource

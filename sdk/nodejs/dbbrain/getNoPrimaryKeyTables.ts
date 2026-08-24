@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const noPrimaryKeyTables = tencentcloud.Dbbrain.getNoPrimaryKeyTables({
+ * const noPrimaryKeyTables = tencentcloud.dbbrain.getNoPrimaryKeyTables({
  *     instanceId: "",
  *     date: "",
  *     product: "",
@@ -88,7 +88,7 @@ export interface GetNoPrimaryKeyTablesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const noPrimaryKeyTables = tencentcloud.Dbbrain.getNoPrimaryKeyTables({
+ * const noPrimaryKeyTables = tencentcloud.dbbrain.getNoPrimaryKeyTables({
  *     instanceId: "",
  *     date: "",
  *     product: "",
@@ -120,9 +120,9 @@ export interface GetNoPrimaryKeyTablesOutputArgs {
     /**
      * Service product type, supported values: `mysql` - ApsaraDB for MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

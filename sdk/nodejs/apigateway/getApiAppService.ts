@@ -58,7 +58,7 @@ import * as utilities from "../utilities";
  *         needConvert: true,
  *     }],
  * });
- * const example = tencentcloud.ApiGateway.getApiAppServiceOutput({
+ * const example = tencentcloud.apigateway.getApiAppServiceOutput({
  *     serviceId: exampleApi.serviceId,
  *     apiRegion: "ap-guangzhou",
  * });
@@ -230,7 +230,7 @@ export interface GetApiAppServiceResult {
  *         needConvert: true,
  *     }],
  * });
- * const example = tencentcloud.ApiGateway.getApiAppServiceOutput({
+ * const example = tencentcloud.apigateway.getApiAppServiceOutput({
  *     serviceId: exampleApi.serviceId,
  *     apiRegion: "ap-guangzhou",
  * });
@@ -256,7 +256,7 @@ export interface GetApiAppServiceOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service to be queried.
      */

@@ -79,7 +79,7 @@ export interface NormalAddressReturnState {
     /**
      * The IP address of the EIP, example: 101.35.139.183.
      */
-    addressIps?: pulumi.Input<pulumi.Input<string>[]>;
+    addressIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -89,5 +89,5 @@ export interface NormalAddressReturnArgs {
     /**
      * The IP address of the EIP, example: 101.35.139.183.
      */
-    addressIps?: pulumi.Input<pulumi.Input<string>[]>;
+    addressIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

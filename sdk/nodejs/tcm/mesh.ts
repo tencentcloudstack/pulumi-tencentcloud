@@ -87,7 +87,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tcm mesh can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
  * ```
@@ -197,27 +196,27 @@ export interface MeshState {
     /**
      * Mesh configuration.
      */
-    config?: pulumi.Input<inputs.Tcm.MeshConfig>;
+    config?: pulumi.Input<inputs.Tcm.MeshConfig | undefined>;
     /**
      * Mesh name.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * Mesh ID.
      */
-    meshId?: pulumi.Input<string>;
+    meshId?: pulumi.Input<string | undefined>;
     /**
      * Mesh version.
      */
-    meshVersion?: pulumi.Input<string>;
+    meshVersion?: pulumi.Input<string | undefined>;
     /**
      * A list of associated tags.
      */
-    tagLists?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshTagList>[]>;
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshTagList>[] | undefined>;
     /**
      * Mesh type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -235,7 +234,7 @@ export interface MeshArgs {
     /**
      * Mesh ID.
      */
-    meshId?: pulumi.Input<string>;
+    meshId?: pulumi.Input<string | undefined>;
     /**
      * Mesh version.
      */
@@ -243,7 +242,7 @@ export interface MeshArgs {
     /**
      * A list of associated tags.
      */
-    tagLists?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshTagList>[]>;
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Tcm.MeshTagList>[] | undefined>;
     /**
      * Mesh type.
      */

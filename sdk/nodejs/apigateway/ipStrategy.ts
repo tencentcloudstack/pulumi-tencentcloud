@@ -144,27 +144,27 @@ export interface IpStrategyState {
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The ID of the API gateway service.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * IP address data.
      */
-    strategyData?: pulumi.Input<string>;
+    strategyData?: pulumi.Input<string | undefined>;
     /**
      * IP policy ID.
      */
-    strategyId?: pulumi.Input<string>;
+    strategyId?: pulumi.Input<string | undefined>;
     /**
      * User defined strategy name.
      */
-    strategyName?: pulumi.Input<string>;
+    strategyName?: pulumi.Input<string | undefined>;
     /**
      * Blacklist or whitelist.
      */
-    strategyType?: pulumi.Input<string>;
+    strategyType?: pulumi.Input<string | undefined>;
 }
 
 /**

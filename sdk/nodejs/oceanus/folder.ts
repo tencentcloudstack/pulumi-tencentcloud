@@ -119,19 +119,19 @@ export interface FolderState {
     /**
      * New file name.
      */
-    folderName?: pulumi.Input<string>;
+    folderName?: pulumi.Input<string | undefined>;
     /**
      * Folder type, 0: job folder, 1: resource folder. Default is 0.
      */
-    folderType?: pulumi.Input<number>;
+    folderType?: pulumi.Input<number | undefined>;
     /**
      * Parent folder id.
      */
-    parentId?: pulumi.Input<string>;
+    parentId?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -145,7 +145,7 @@ export interface FolderArgs {
     /**
      * Folder type, 0: job folder, 1: resource folder. Default is 0.
      */
-    folderType?: pulumi.Input<number>;
+    folderType?: pulumi.Input<number | undefined>;
     /**
      * Parent folder id.
      */

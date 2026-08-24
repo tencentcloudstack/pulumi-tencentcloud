@@ -73,12 +73,8 @@ type GetSupportedPrivilegesResult struct {
 }
 
 func GetSupportedPrivilegesOutput(ctx *pulumi.Context, args GetSupportedPrivilegesOutputArgs, opts ...pulumi.InvokeOption) GetSupportedPrivilegesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSupportedPrivilegesResultOutput, error) {
-			args := v.(GetSupportedPrivilegesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args, GetSupportedPrivilegesResultOutput{}, options).(GetSupportedPrivilegesResultOutput), nil
-		}).(GetSupportedPrivilegesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args, GetSupportedPrivilegesResultOutput{}, options).(GetSupportedPrivilegesResultOutput)
 }
 
 // A collection of arguments for invoking getSupportedPrivileges.

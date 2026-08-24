@@ -33,6 +33,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BackupConfig{}
 	case "tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays":
 		r = &BinlogSaveDays{}
+	case "tencentcloud:Cynosdb/clsDelivery:ClsDelivery":
+		r = &ClsDelivery{}
 	case "tencentcloud:Cynosdb/cluster:Cluster":
 		r = &Cluster{}
 	case "tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases":
@@ -45,6 +47,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ClusterSlaveZone{}
 	case "tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt":
 		r = &ClusterTransparentEncrypt{}
+	case "tencentcloud:Cynosdb/clusterV2:ClusterV2":
+		r = &ClusterV2{}
 	case "tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs":
 		r = &ExportInstanceErrorLogs{}
 	case "tencentcloud:Cynosdb/exportInstanceSlowQueries:ExportInstanceSlowQueries":
@@ -53,6 +57,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InstanceParam{}
 	case "tencentcloud:Cynosdb/isolateInstance:IsolateInstance":
 		r = &IsolateInstance{}
+	case "tencentcloud:Cynosdb/libraDbInstance:LibraDbInstance":
+		r = &LibraDbInstance{}
 	case "tencentcloud:Cynosdb/paramTemplate:ParamTemplate":
 		r = &ParamTemplate{}
 	case "tencentcloud:Cynosdb/proxy:Proxy":
@@ -124,6 +130,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/clsDelivery",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/cluster",
 		&module{version},
 	)
@@ -154,6 +165,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cynosdb/clusterV2",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cynosdb/exportInstanceErrorLogs",
 		&module{version},
 	)
@@ -170,6 +186,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cynosdb/isolateInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cynosdb/libraDbInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

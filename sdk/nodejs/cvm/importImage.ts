@@ -144,47 +144,47 @@ export interface ImportImageState {
     /**
      * OS architecture of the image to be imported, `x8664` or `i386`.
      */
-    architecture?: pulumi.Input<string>;
+    architecture?: pulumi.Input<string | undefined>;
     /**
      * Boot mode.
      */
-    bootMode?: pulumi.Input<string>;
+    bootMode?: pulumi.Input<string | undefined>;
     /**
      * Dry run to check the parameters without performing the operation.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to force import the image.
      */
-    force?: pulumi.Input<boolean>;
+    force?: pulumi.Input<boolean | undefined>;
     /**
      * Image description.
      */
-    imageDescription?: pulumi.Input<string>;
+    imageDescription?: pulumi.Input<string | undefined>;
     /**
      * Image name.
      */
-    imageName?: pulumi.Input<string>;
+    imageName?: pulumi.Input<string | undefined>;
     /**
      * Address on COS where the image to be imported is stored.
      */
-    imageUrl?: pulumi.Input<string>;
+    imageUrl?: pulumi.Input<string | undefined>;
     /**
      * The license type used to activate the OS after importing an image. Valid values: TencentCloud: Tencent Cloud official license BYOL: Bring Your Own License.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * OS type of the image to be imported. You can call `DescribeImportImageOs` to obtain the list of supported operating systems.
      */
-    osType?: pulumi.Input<string>;
+    osType?: pulumi.Input<string | undefined>;
     /**
      * OS version of the image to be imported. You can call `DescribeImportImageOs` to obtain the list of supported operating systems.
      */
-    osVersion?: pulumi.Input<string>;
+    osVersion?: pulumi.Input<string | undefined>;
     /**
      * Tag description list. This parameter is used to bind a tag to a custom image.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecification>[] | undefined>;
 }
 
 /**
@@ -198,19 +198,19 @@ export interface ImportImageArgs {
     /**
      * Boot mode.
      */
-    bootMode?: pulumi.Input<string>;
+    bootMode?: pulumi.Input<string | undefined>;
     /**
      * Dry run to check the parameters without performing the operation.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to force import the image.
      */
-    force?: pulumi.Input<boolean>;
+    force?: pulumi.Input<boolean | undefined>;
     /**
      * Image description.
      */
-    imageDescription?: pulumi.Input<string>;
+    imageDescription?: pulumi.Input<string | undefined>;
     /**
      * Image name.
      */
@@ -222,7 +222,7 @@ export interface ImportImageArgs {
     /**
      * The license type used to activate the OS after importing an image. Valid values: TencentCloud: Tencent Cloud official license BYOL: Bring Your Own License.
      */
-    licenseType?: pulumi.Input<string>;
+    licenseType?: pulumi.Input<string | undefined>;
     /**
      * OS type of the image to be imported. You can call `DescribeImportImageOs` to obtain the list of supported operating systems.
      */
@@ -234,5 +234,5 @@ export interface ImportImageArgs {
     /**
      * Tag description list. This parameter is used to bind a tag to a custom image.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecification>[] | undefined>;
 }

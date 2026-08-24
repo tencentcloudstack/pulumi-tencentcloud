@@ -70,12 +70,8 @@ type GetTreeJobsResult struct {
 }
 
 func GetTreeJobsOutput(ctx *pulumi.Context, args GetTreeJobsOutputArgs, opts ...pulumi.InvokeOption) GetTreeJobsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTreeJobsResultOutput, error) {
-			args := v.(GetTreeJobsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args, GetTreeJobsResultOutput{}, options).(GetTreeJobsResultOutput), nil
-		}).(GetTreeJobsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getTreeJobs:getTreeJobs", args, GetTreeJobsResultOutput{}, options).(GetTreeJobsResultOutput)
 }
 
 // A collection of arguments for invoking getTreeJobs.

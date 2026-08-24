@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getBindApiAppsStatus({
+ * const example = tencentcloud.apigateway.getBindApiAppsStatus({
  *     serviceId: "service-nxz6yync",
  *     apiIds: [
  *         "api-0cvmf4x4",
@@ -89,7 +89,7 @@ export interface GetBindApiAppsStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getBindApiAppsStatus({
+ * const example = tencentcloud.apigateway.getBindApiAppsStatus({
  *     serviceId: "service-nxz6yync",
  *     apiIds: [
  *         "api-0cvmf4x4",
@@ -123,11 +123,11 @@ export interface GetBindApiAppsStatusOutputArgs {
     /**
      * Filter conditions. Supports ApiAppId, Environment, KeyWord (can match name or ID).
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.GetBindApiAppsStatusFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.GetBindApiAppsStatusFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Service ID.
      */

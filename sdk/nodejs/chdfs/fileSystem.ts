@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs file_system can be imported using the id, e.g.
+ * chdfs fileSystem can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
@@ -146,31 +146,31 @@ export interface FileSystemState {
     /**
      * file system capacity. min 1GB, max 1PB, CapacityQuota is N * 1073741824.
      */
-    capacityQuota?: pulumi.Input<number>;
+    capacityQuota?: pulumi.Input<number | undefined>;
     /**
      * desc of the file system.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * check the ranger address or not.
      */
-    enableRanger?: pulumi.Input<boolean>;
+    enableRanger?: pulumi.Input<boolean | undefined>;
     /**
      * file system name.
      */
-    fileSystemName?: pulumi.Input<string>;
+    fileSystemName?: pulumi.Input<string | undefined>;
     /**
      * check POSIX ACL or not.
      */
-    posixAcl?: pulumi.Input<boolean>;
+    posixAcl?: pulumi.Input<boolean | undefined>;
     /**
      * ranger address list, default empty.
      */
-    rangerServiceAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    rangerServiceAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * super users of the file system, default empty.
      */
-    superUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    superUsers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -184,11 +184,11 @@ export interface FileSystemArgs {
     /**
      * desc of the file system.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * check the ranger address or not.
      */
-    enableRanger?: pulumi.Input<boolean>;
+    enableRanger?: pulumi.Input<boolean | undefined>;
     /**
      * file system name.
      */
@@ -200,9 +200,9 @@ export interface FileSystemArgs {
     /**
      * ranger address list, default empty.
      */
-    rangerServiceAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    rangerServiceAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * super users of the file system, default empty.
      */
-    superUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    superUsers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

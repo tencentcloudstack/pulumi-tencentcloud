@@ -220,75 +220,75 @@ export interface DatasourceState {
     /**
      * BizParams.
      */
-    bizParams?: pulumi.Input<string>;
+    bizParams?: pulumi.Input<string | undefined>;
     /**
      * DataSource Category.
      */
-    category?: pulumi.Input<string>;
+    category?: pulumi.Input<string | undefined>;
     /**
      * ClusterId.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Collect.
      */
-    collect?: pulumi.Input<string>;
+    collect?: pulumi.Input<string | undefined>;
     /**
      * COSBucket.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * Cos region.
      */
-    cosRegion?: pulumi.Input<string>;
+    cosRegion?: pulumi.Input<string | undefined>;
     /**
      * Dbname.
      */
-    databaseName?: pulumi.Input<string>;
+    databaseName?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Display.
      */
-    display?: pulumi.Input<string>;
+    display?: pulumi.Input<string | undefined>;
     /**
      * Instance.
      */
-    instance?: pulumi.Input<string>;
+    instance?: pulumi.Input<string | undefined>;
     /**
      * DataSource Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Owner projectId.
      */
-    ownerProjectId?: pulumi.Input<string>;
+    ownerProjectId?: pulumi.Input<string | undefined>;
     /**
      * Owner Project Ident.
      */
-    ownerProjectIdent?: pulumi.Input<string>;
+    ownerProjectIdent?: pulumi.Input<string | undefined>;
     /**
      * Owner project name.
      */
-    ownerProjectName?: pulumi.Input<string>;
+    ownerProjectName?: pulumi.Input<string | undefined>;
     /**
      * Params.
      */
-    params?: pulumi.Input<string>;
+    params?: pulumi.Input<string | undefined>;
     /**
      * Params Out.
      */
-    paramsOut?: pulumi.Input<string>;
+    paramsOut?: pulumi.Input<string | undefined>;
     /**
      * Status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * DataSource Type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -298,7 +298,7 @@ export interface DatasourceArgs {
     /**
      * BizParams.
      */
-    bizParams?: pulumi.Input<string>;
+    bizParams?: pulumi.Input<string | undefined>;
     /**
      * DataSource Category.
      */
@@ -306,39 +306,39 @@ export interface DatasourceArgs {
     /**
      * ClusterId.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Collect.
      */
-    collect?: pulumi.Input<string>;
+    collect?: pulumi.Input<string | undefined>;
     /**
      * COSBucket.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * Cos region.
      */
-    cosRegion?: pulumi.Input<string>;
+    cosRegion?: pulumi.Input<string | undefined>;
     /**
      * Dbname.
      */
-    databaseName?: pulumi.Input<string>;
+    databaseName?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Display.
      */
-    display?: pulumi.Input<string>;
+    display?: pulumi.Input<string | undefined>;
     /**
      * Instance.
      */
-    instance?: pulumi.Input<string>;
+    instance?: pulumi.Input<string | undefined>;
     /**
      * DataSource Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Owner projectId.
      */
@@ -358,7 +358,7 @@ export interface DatasourceArgs {
     /**
      * Status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * DataSource Type.
      */

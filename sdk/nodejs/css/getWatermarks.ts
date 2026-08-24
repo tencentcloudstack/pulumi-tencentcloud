@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const watermarks = tencentcloud.Css.getWatermarks({});
+ * const watermarks = tencentcloud.css.getWatermarks({});
  * ```
  */
 export function getWatermarks(args?: GetWatermarksArgs, opts?: pulumi.InvokeOptions): Promise<GetWatermarksResult> {
@@ -59,7 +59,7 @@ export interface GetWatermarksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const watermarks = tencentcloud.Css.getWatermarks({});
+ * const watermarks = tencentcloud.css.getWatermarks({});
  * ```
  */
 export function getWatermarksOutput(args?: GetWatermarksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWatermarksResult> {
@@ -77,5 +77,5 @@ export interface GetWatermarksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

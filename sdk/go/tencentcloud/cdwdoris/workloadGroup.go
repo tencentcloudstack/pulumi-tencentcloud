@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cdwdoris workload group
+// Provides a resource to create a CDWDoris workload group
 //
 // > **NOTE:** To use this resource, The `workloadGroupStatus` field of `Cdwdoris.Instance` needs to be set to true.
 //
@@ -39,7 +39,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -47,10 +47,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -60,8 +60,8 @@ import (
 //			// create instance
 //			example, err := cdwdoris.NewInstance(ctx, "example", &cdwdoris.InstanceArgs{
 //				Zone:                pulumi.String(availabilityZone),
-//				UserVpcId:           vpc.ID(),
-//				UserSubnetId:        subnet.ID(),
+//				UserVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
+//				UserSubnetId:        subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProductVersion:      pulumi.String("2.1"),
 //				InstanceName:        pulumi.String("tf-example"),
 //				DorisUserPwd:        pulumi.String("Password@test"),
@@ -94,7 +94,7 @@ import (
 //			}
 //			// create workload group
 //			_, err = cdwdoris.NewWorkloadGroup(ctx, "example", &cdwdoris.WorkloadGroupArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				WorkloadGroup: &cdwdoris.WorkloadGroupWorkloadGroupArgs{
 //					WorkloadGroupName:      pulumi.String("example"),
 //					CpuShare:               pulumi.Int(1024),

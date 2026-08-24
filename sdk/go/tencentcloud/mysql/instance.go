@@ -44,17 +44,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-mysql"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-mysql"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -80,11 +80,11 @@ import (
 //				InstanceName:     pulumi.String("tf-example-mysql"),
 //				MemSize:          pulumi.Int(4000),
 //				VolumeSize:       pulumi.Int(200),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"name": pulumi.String("test"),
@@ -243,9 +243,11 @@ type Instance struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 	EngineType pulumi.StringOutput `pulumi:"engineType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
@@ -381,9 +383,11 @@ type instanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 	EngineType *string `pulumi:"engineType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
@@ -474,9 +478,11 @@ type InstanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 	EngineType pulumi.StringPtrInput
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
@@ -571,9 +577,11 @@ type instanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 	EngineType *string `pulumi:"engineType"`
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
@@ -651,9 +659,11 @@ type InstanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 	EngineType pulumi.StringPtrInput
-	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+	// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 	EngineVersion pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
@@ -834,12 +844,17 @@ func (o InstanceOutput) DeviceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
 }
 
+// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+func (o InstanceOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DiskType }).(pulumi.StringOutput)
+}
+
 // Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
 func (o InstanceOutput) EngineType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EngineType }).(pulumi.StringOutput)
 }
 
-// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
 func (o InstanceOutput) EngineVersion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.EngineVersion }).(pulumi.StringPtrOutput)
 }

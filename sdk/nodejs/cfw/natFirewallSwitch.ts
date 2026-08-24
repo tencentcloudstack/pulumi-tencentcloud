@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * const exampleNatFirewallSwitch = new tencentcloud.cfw.NatFirewallSwitch("example", {
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * const exampleNatFirewallSwitch = new tencentcloud.cfw.NatFirewallSwitch("example", {
@@ -133,15 +133,15 @@ export interface NatFirewallSwitchState {
     /**
      * Switch, 0: off, 1: on.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Firewall instance id.
      */
-    natInsId?: pulumi.Input<string>;
+    natInsId?: pulumi.Input<string | undefined>;
     /**
      * subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -82,7 +82,7 @@ export interface SyncCheckJobOperationState {
     /**
      * Sync job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
 }
 
 /**

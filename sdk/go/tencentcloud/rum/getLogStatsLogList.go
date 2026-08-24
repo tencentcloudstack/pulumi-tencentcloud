@@ -43,12 +43,8 @@ type GetLogStatsLogListResult struct {
 }
 
 func GetLogStatsLogListOutput(ctx *pulumi.Context, args GetLogStatsLogListOutputArgs, opts ...pulumi.InvokeOption) GetLogStatsLogListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogStatsLogListResultOutput, error) {
-			args := v.(GetLogStatsLogListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args, GetLogStatsLogListResultOutput{}, options).(GetLogStatsLogListResultOutput), nil
-		}).(GetLogStatsLogListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", args, GetLogStatsLogListResultOutput{}, options).(GetLogStatsLogListResultOutput)
 }
 
 // A collection of arguments for invoking getLogStatsLogList.

@@ -142,15 +142,22 @@ import * as utilities from "../utilities";
  *
  * CLB attachment can be imported using the id, e.g.
  *
- * If use rule_id
+ * If use ruleId
  *
  * ```sh
  * $ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
  * ```
+ *
  * If use domain & url
  *
  * ```sh
  * $ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/path#lbl-hh141sn9#lb-7a0t6zqb
+ * ```
+ *
+ * Of if use layer-4 forwarding rule
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Clb/attachment:Attachment example ""#lbl-hh141sn9#lb-7a0t6zqb
  * ```
  */
 export class Attachment extends pulumi.CustomResource {
@@ -261,31 +268,31 @@ export interface AttachmentState {
     /**
      * ID of the CLB.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Type of protocol within the listener.
      */
-    protocolType?: pulumi.Input<string>;
+    protocolType?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener rule. Only supports listeners of `HTTPS` and `HTTP` protocol.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Information of the backends to be attached.
      */
-    targets?: pulumi.Input<pulumi.Input<inputs.Clb.AttachmentTarget>[]>;
+    targets?: pulumi.Input<pulumi.Input<inputs.Clb.AttachmentTarget>[] | undefined>;
     /**
      * URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -299,7 +306,7 @@ export interface AttachmentArgs {
     /**
      * Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener.
      */
@@ -307,7 +314,7 @@ export interface AttachmentArgs {
     /**
      * ID of the CLB listener rule. Only supports listeners of `HTTPS` and `HTTP` protocol.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Information of the backends to be attached.
      */
@@ -315,5 +322,5 @@ export interface AttachmentArgs {
     /**
      * URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }

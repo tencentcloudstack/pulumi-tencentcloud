@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const classicElasticPublicIpv6s = tencentcloud.Classic.getElasticPublicIpv6s({
+ * const classicElasticPublicIpv6s = tencentcloud.classic.getElasticPublicIpv6s({
  *     ip6AddressIds: ["xxxxxx"],
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetElasticPublicIpv6sResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const classicElasticPublicIpv6s = tencentcloud.Classic.getElasticPublicIpv6s({
+ * const classicElasticPublicIpv6s = tencentcloud.classic.getElasticPublicIpv6s({
  *     ip6AddressIds: ["xxxxxx"],
  * });
  * ```
@@ -99,13 +99,13 @@ export interface GetElasticPublicIpv6sOutputArgs {
      * - address-ip: filter according to IPV6 IP address.
      * - network-interface-id: filter according to the unique ID of the Elastic Network Interface.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Classic.GetElasticPublicIpv6sFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Classic.GetElasticPublicIpv6sFilterArgs>[] | undefined>;
     /**
      * List of unique IDs that identify IPV6. The IPV6 unique ID is shaped like `eip-11112222`. Parameters do not support specifying both `Ip6AddressIds` and `Filters`.
      */
-    ip6AddressIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ip6AddressIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

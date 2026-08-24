@@ -208,35 +208,35 @@ export interface AttackWhiteRuleState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * 0: Whiten according to a specific rule ID, 1: Whiten according to the rule type.
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<number>;
+    ruleId?: pulumi.Input<number | undefined>;
     /**
      * Rule list.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Waf.AttackWhiteRuleRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Waf.AttackWhiteRuleRule>[] | undefined>;
     /**
      * Whitelist of rule IDs.
      */
-    signatureIds?: pulumi.Input<pulumi.Input<string>[]>;
+    signatureIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Rule status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * The whitened category rule ID.
      */
-    typeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    typeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -250,11 +250,11 @@ export interface AttackWhiteRuleArgs {
     /**
      * 0: Whiten according to a specific rule ID, 1: Whiten according to the rule type.
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule list.
      */
@@ -262,7 +262,7 @@ export interface AttackWhiteRuleArgs {
     /**
      * Whitelist of rule IDs.
      */
-    signatureIds?: pulumi.Input<pulumi.Input<string>[]>;
+    signatureIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Rule status.
      */
@@ -270,5 +270,5 @@ export interface AttackWhiteRuleArgs {
     /**
      * The whitened category rule ID.
      */
-    typeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    typeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

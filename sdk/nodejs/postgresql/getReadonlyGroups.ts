@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *     maxReplayLatency: 512,
  *     minDelayEliminateReserve: 1,
  * });
- * const readOnlyGroups = tencentcloud.Postgresql.getReadonlyGroupsOutput({
+ * const readOnlyGroups = tencentcloud.postgresql.getReadonlyGroupsOutput({
  *     filters: [{
  *         name: "db-master-instance-id",
  *         values: [group.masterDbInstanceId],
@@ -108,7 +108,7 @@ export interface GetReadonlyGroupsResult {
  *     maxReplayLatency: 512,
  *     minDelayEliminateReserve: 1,
  * });
- * const readOnlyGroups = tencentcloud.Postgresql.getReadonlyGroupsOutput({
+ * const readOnlyGroups = tencentcloud.postgresql.getReadonlyGroupsOutput({
  *     filters: [{
  *         name: "db-master-instance-id",
  *         values: [group.masterDbInstanceId],
@@ -136,17 +136,17 @@ export interface GetReadonlyGroupsOutputArgs {
     /**
      * Filter condition. The primary ID must be specified in the format of db-master-instance-id to filter results, or else null will be returned.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetReadonlyGroupsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetReadonlyGroupsFilterArgs>[] | undefined>;
     /**
      * Sorting criterion. Valid values:ROGroupId, CreateTime, Name.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting order. Valid values:desc, asc.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

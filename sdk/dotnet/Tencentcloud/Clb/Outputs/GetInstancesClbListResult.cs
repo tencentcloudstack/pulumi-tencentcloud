@@ -19,6 +19,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// </summary>
         public readonly string AddressIpVersion;
         /// <summary>
+        /// IPv6 address of the CLB instance.
+        /// </summary>
+        public readonly string AddressIpv6;
+        /// <summary>
+        /// Anycast CLB publishing region, returns empty string for non-anycast CLB.
+        /// </summary>
+        public readonly string AnycastZone;
+        /// <summary>
+        /// Endpoint ID associated with the CLB instance.
+        /// </summary>
+        public readonly string AssociateEndpoint;
+        /// <summary>
+        /// CLB attribute flags array.
+        /// </summary>
+        public readonly ImmutableArray<string> AttributeFlags;
+        /// <summary>
+        /// Available zone forwarding affinity information (JSON format).
+        /// </summary>
+        public readonly string AvailableZoneAffinityInfo;
+        /// <summary>
+        /// Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInstancesClbListBackupZoneSetResult> BackupZoneSets;
+        /// <summary>
+        /// Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.
+        /// </summary>
+        public readonly string ChargeType;
+        /// <summary>
         /// ID of the CLB to be queried.
         /// </summary>
         public readonly string ClbId;
@@ -35,9 +63,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// </summary>
         public readonly string ClusterId;
         /// <summary>
+        /// Cluster ID list.
+        /// </summary>
+        public readonly ImmutableArray<string> ClusterIds;
+        /// <summary>
+        /// Layer-7 exclusive tag.
+        /// </summary>
+        public readonly string ClusterTag;
+        /// <summary>
+        /// CLB dimension personalized configuration ID.
+        /// </summary>
+        public readonly string ConfigId;
+        /// <summary>
         /// Create time of the CLB.
         /// </summary>
         public readonly string CreateTime;
+        /// <summary>
+        /// CLB domain (only for public network Classic CLB), gradually deprecated.
+        /// </summary>
+        public readonly string Domain;
+        /// <summary>
+        /// Network egress.
+        /// </summary>
+        public readonly string Egress;
+        /// <summary>
+        /// Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.
+        /// </summary>
+        public readonly int Exclusive;
+        /// <summary>
+        /// Internal exclusive cluster information (JSON format).
+        /// </summary>
+        public readonly string ExclusiveCluster;
+        /// <summary>
+        /// Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.
+        /// </summary>
+        public readonly string ExpireTime;
+        /// <summary>
+        /// Reserved field, generally no need to pay attention (JSON format).
+        /// </summary>
+        public readonly string ExtraInfo;
+        /// <summary>
+        /// CLB type identifier, 1: CLB, 0: Classic CLB.
+        /// </summary>
+        public readonly int Forward;
+        /// <summary>
+        /// Log service (CLS) health check log set ID.
+        /// </summary>
+        public readonly string HealthLogSetId;
+        /// <summary>
+        /// Log service (CLS) health check log topic ID.
+        /// </summary>
+        public readonly string HealthLogTopicId;
         /// <summary>
         /// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         /// </summary>
@@ -47,17 +123,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// </summary>
         public readonly string InternetChargeType;
         /// <summary>
+        /// IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.
+        /// </summary>
+        public readonly string Ipv6Mode;
+        /// <summary>
+        /// Whether the VIP is blocked.
+        /// </summary>
+        public readonly bool IsBlock;
+        /// <summary>
+        /// Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.
+        /// </summary>
+        public readonly string IsBlockTime;
+        /// <summary>
+        /// Whether Anti-DDoS Pro can be bound.
+        /// </summary>
+        public readonly bool IsDdos;
+        /// <summary>
+        /// Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.
+        /// </summary>
+        public readonly string IsolatedTime;
+        /// <summary>
+        /// Whether isolated, 0: Not isolated, 1: Isolated.
+        /// </summary>
+        public readonly int Isolation;
+        /// <summary>
+        /// Domain of the CLB instance.
+        /// </summary>
+        public readonly string LoadBalancerDomain;
+        /// <summary>
+        /// Whether backend services allow traffic from CLB.
+        /// </summary>
+        public readonly bool LoadBalancerPassToTarget;
+        /// <summary>
+        /// Whether the IP type is local BGP.
+        /// </summary>
+        public readonly bool LocalBgp;
+        /// <summary>
         /// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
         /// </summary>
         public readonly bool LocalZone;
+        /// <summary>
+        /// Log service (CLS) log set ID.
+        /// </summary>
+        public readonly string LogSetId;
+        /// <summary>
+        /// Log service (CLS) log topic ID.
+        /// </summary>
+        public readonly string LogTopicId;
+        /// <summary>
+        /// IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.
+        /// </summary>
+        public readonly bool MixIpTarget;
         /// <summary>
         /// Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
         /// </summary>
         public readonly string NetworkType;
         /// <summary>
+        /// Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.
+        /// </summary>
+        public readonly string NfvInfo;
+        /// <summary>
         /// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly int NumericalVpcId;
+        /// <summary>
+        /// Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.
+        /// </summary>
+        public readonly int OpenBgp;
+        /// <summary>
+        /// Prepaid purchase period, unit: month.
+        /// </summary>
+        public readonly int PrepaidPeriod;
+        /// <summary>
+        /// Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.
+        /// </summary>
+        public readonly string PrepaidRenewFlag;
         /// <summary>
         /// Project ID of the CLB.
         /// </summary>
@@ -66,6 +206,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// ID set of the security groups.
         /// </summary>
         public readonly ImmutableArray<string> SecurityGroups;
+        /// <summary>
+        /// Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).
+        /// </summary>
+        public readonly string SlaType;
+        /// <summary>
+        /// Whether SNAT is enabled.
+        /// </summary>
+        public readonly bool Snat;
+        /// <summary>
+        /// SnatIp list after enabling SnatPro (JSON format).
+        /// </summary>
+        public readonly string SnatIps;
+        /// <summary>
+        /// Whether SnatPro is enabled.
+        /// </summary>
+        public readonly bool SnatPro;
         /// <summary>
         /// The status of CLB.
         /// </summary>
@@ -82,6 +238,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// The available tags within this CLB.
         /// </summary>
         public readonly ImmutableDictionary<string, string> Tags;
+        /// <summary>
+        /// Number of bound backend services.
+        /// </summary>
+        public readonly int TargetCount;
         /// <summary>
         /// Region information of backend service are attached the CLB.
         /// </summary>
@@ -114,10 +274,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
         /// </summary>
         public readonly string ZoneRegion;
+        /// <summary>
+        /// Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.
+        /// </summary>
+        public readonly ImmutableArray<string> Zones;
 
         [OutputConstructor]
         private GetInstancesClbListResult(
             string addressIpVersion,
+
+            string addressIpv6,
+
+            string anycastZone,
+
+            string associateEndpoint,
+
+            ImmutableArray<string> attributeFlags,
+
+            string availableZoneAffinityInfo,
+
+            ImmutableArray<Outputs.GetInstancesClbListBackupZoneSetResult> backupZoneSets,
+
+            string chargeType,
 
             string clbId,
 
@@ -127,21 +305,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
 
             string clusterId,
 
+            ImmutableArray<string> clusterIds,
+
+            string clusterTag,
+
+            string configId,
+
             string createTime,
+
+            string domain,
+
+            string egress,
+
+            int exclusive,
+
+            string exclusiveCluster,
+
+            string expireTime,
+
+            string extraInfo,
+
+            int forward,
+
+            string healthLogSetId,
+
+            string healthLogTopicId,
 
             int internetBandwidthMaxOut,
 
             string internetChargeType,
 
+            string ipv6Mode,
+
+            bool isBlock,
+
+            string isBlockTime,
+
+            bool isDdos,
+
+            string isolatedTime,
+
+            int isolation,
+
+            string loadBalancerDomain,
+
+            bool loadBalancerPassToTarget,
+
+            bool localBgp,
+
             bool localZone,
+
+            string logSetId,
+
+            string logTopicId,
+
+            bool mixIpTarget,
 
             string networkType,
 
+            string nfvInfo,
+
             int numericalVpcId,
+
+            int openBgp,
+
+            int prepaidPeriod,
+
+            string prepaidRenewFlag,
 
             int projectId,
 
             ImmutableArray<string> securityGroups,
+
+            string slaType,
+
+            bool snat,
+
+            string snatIps,
+
+            bool snatPro,
 
             int status,
 
@@ -150,6 +392,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
             string subnetId,
 
             ImmutableDictionary<string, string> tags,
+
+            int targetCount,
 
             string targetRegionInfoRegion,
 
@@ -165,25 +409,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
 
             string zoneName,
 
-            string zoneRegion)
+            string zoneRegion,
+
+            ImmutableArray<string> zones)
         {
             AddressIpVersion = addressIpVersion;
+            AddressIpv6 = addressIpv6;
+            AnycastZone = anycastZone;
+            AssociateEndpoint = associateEndpoint;
+            AttributeFlags = attributeFlags;
+            AvailableZoneAffinityInfo = availableZoneAffinityInfo;
+            BackupZoneSets = backupZoneSets;
+            ChargeType = chargeType;
             ClbId = clbId;
             ClbName = clbName;
             ClbVips = clbVips;
             ClusterId = clusterId;
+            ClusterIds = clusterIds;
+            ClusterTag = clusterTag;
+            ConfigId = configId;
             CreateTime = createTime;
+            Domain = domain;
+            Egress = egress;
+            Exclusive = exclusive;
+            ExclusiveCluster = exclusiveCluster;
+            ExpireTime = expireTime;
+            ExtraInfo = extraInfo;
+            Forward = forward;
+            HealthLogSetId = healthLogSetId;
+            HealthLogTopicId = healthLogTopicId;
             InternetBandwidthMaxOut = internetBandwidthMaxOut;
             InternetChargeType = internetChargeType;
+            Ipv6Mode = ipv6Mode;
+            IsBlock = isBlock;
+            IsBlockTime = isBlockTime;
+            IsDdos = isDdos;
+            IsolatedTime = isolatedTime;
+            Isolation = isolation;
+            LoadBalancerDomain = loadBalancerDomain;
+            LoadBalancerPassToTarget = loadBalancerPassToTarget;
+            LocalBgp = localBgp;
             LocalZone = localZone;
+            LogSetId = logSetId;
+            LogTopicId = logTopicId;
+            MixIpTarget = mixIpTarget;
             NetworkType = networkType;
+            NfvInfo = nfvInfo;
             NumericalVpcId = numericalVpcId;
+            OpenBgp = openBgp;
+            PrepaidPeriod = prepaidPeriod;
+            PrepaidRenewFlag = prepaidRenewFlag;
             ProjectId = projectId;
             SecurityGroups = securityGroups;
+            SlaType = slaType;
+            Snat = snat;
+            SnatIps = snatIps;
+            SnatPro = snatPro;
             Status = status;
             StatusTime = statusTime;
             SubnetId = subnetId;
             Tags = tags;
+            TargetCount = targetCount;
             TargetRegionInfoRegion = targetRegionInfoRegion;
             TargetRegionInfoVpcId = targetRegionInfoVpcId;
             VipIsp = vipIsp;
@@ -192,6 +478,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
             ZoneId = zoneId;
             ZoneName = zoneName;
             ZoneRegion = zoneRegion;
+            Zones = zones;
         }
     }
 }

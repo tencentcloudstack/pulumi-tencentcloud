@@ -50,7 +50,6 @@ import (
 // ## Import
 //
 // tem logConfig can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
 // ```

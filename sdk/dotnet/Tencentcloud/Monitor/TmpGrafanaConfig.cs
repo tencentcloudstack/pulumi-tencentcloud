@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Import
     /// 
-    /// monitor tmp_grafana_config can be imported using the id, e.g.
+    /// monitor TmpGrafanaConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id

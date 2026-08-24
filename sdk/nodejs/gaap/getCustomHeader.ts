@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const customHeader = tencentcloud.Gaap.getCustomHeader({
+ * const customHeader = tencentcloud.gaap.getCustomHeader({
  *     ruleId: "rule-hddrxgpd",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetCustomHeaderResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const customHeader = tencentcloud.Gaap.getCustomHeader({
+ * const customHeader = tencentcloud.gaap.getCustomHeader({
  *     ruleId: "rule-hddrxgpd",
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetCustomHeaderOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Rule IdNote: This field may return null, indicating that a valid value cannot be obtained.
      */

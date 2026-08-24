@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 {
     /// <summary>
-    /// Provides a resource to create a monitor Exporter Integration
+    /// Provides a resource to create a Monitor Exporter Integration
     /// 
     /// &gt; **NOTE:** If you only want to upgrade the exporter version with same config, you can set `Version` under `instanceSpec` with any value to trigger the change.
     /// 
@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     {
     ///         InstanceId = "prom-gzg3f1em",
     ///         Kind = "qcloud-exporter",
-    ///         Content = "{\"name\":\"test\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}",
+    ///         Content = "{\"name\":\"tf-example\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}",
     ///     });
     /// 
     /// });
@@ -91,7 +91,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -124,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     });
     /// 
     ///     // Integration Center: CVM Scrape Job
-    ///     var exampleMonitorTmpExporterIntegration = new Tencentcloud.Index.MonitorTmpExporterIntegration("example", new()
+    ///     var exampleMonitorTmpExporterIntegration = new Tencentcloud.MonitorTmpExporterIntegration("example", new()
     ///     {
     ///         InstanceId = example.Id,
     ///         Kind = "cvm-http-sd-exporter",
@@ -160,6 +159,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// });
     /// ```
+    /// 
+    /// ### With ClusterId
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Monitor.TmpExporterIntegrationV2("example", new()
+    ///     {
+    ///         InstanceId = "prom-gzg3f1em",
+    ///         Kind = "external-node-exporter",
+    ///         Content = "{\"kind\":\"external-node-exporter\",\"name\":\"tf-example\",\"spec\":{\"instanceSpec\":{\"interval\":30,\"path\":\"/metrics\",\"servers\":[\"1.1.1.1:9100\"]}}}",
+    ///         KubeType = 3,
+    ///         ClusterId = "cls-csxm4phu",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// Monitor Exporter Integration can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#qcloud-exporter
+    /// ```
+    /// 
+    /// with ClusterId
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#3#cls-csxm4phu#external-node-exporter
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2")]
     public partial class TmpExporterIntegrationV2 : global::Pulumi.CustomResource
@@ -171,10 +206,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Output<string?> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Integration config.
+        /// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&amp;pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
         /// </summary>
         [Output("content")]
         public Output<string> Content { get; private set; } = null!;
+
+        /// <summary>
+        /// Integration is disabled when the value is true. Default is false.
+        /// </summary>
+        [Output("disable")]
+        public Output<bool> Disable { get; private set; } = null!;
 
         /// <summary>
         /// Instance ID.
@@ -248,10 +289,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Integration config.
+        /// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&amp;pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
         /// </summary>
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
+
+        /// <summary>
+        /// Integration is disabled when the value is true. Default is false.
+        /// </summary>
+        [Input("disable")]
+        public Input<bool>? Disable { get; set; }
 
         /// <summary>
         /// Instance ID.
@@ -286,10 +333,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Integration config.
+        /// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&amp;pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
         /// </summary>
         [Input("content")]
         public Input<string>? Content { get; set; }
+
+        /// <summary>
+        /// Integration is disabled when the value is true. Default is false.
+        /// </summary>
+        [Input("disable")]
+        public Input<bool>? Disable { get; set; }
 
         /// <summary>
         /// Instance ID.

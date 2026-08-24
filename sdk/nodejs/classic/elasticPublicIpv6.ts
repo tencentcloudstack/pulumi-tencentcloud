@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc classic_elastic_public_ipv6 can be imported using the id, e.g.
+ * vpc classicElasticPublicIpv6 can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Classic/elasticPublicIpv6:ElasticPublicIpv6 classic_elastic_public_ipv6 classic_elastic_public_ipv6_id
@@ -120,23 +120,23 @@ export interface ElasticPublicIpv6State {
     /**
      * Bandwidth package id, move the account up, and you need to pass in the ipv6 address to apply for bandwidth package charging mode.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Network billing model. IPV6 currently supports `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. The default network charging mode is `TRAFFIC_POSTPAID_BY_HOUR`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth in Mbps. Default is 1Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * IPV6 addresses that require public network access.
      */
-    ip6Address?: pulumi.Input<string>;
+    ip6Address?: pulumi.Input<string | undefined>;
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -146,15 +146,15 @@ export interface ElasticPublicIpv6Args {
     /**
      * Bandwidth package id, move the account up, and you need to pass in the ipv6 address to apply for bandwidth package charging mode.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Network billing model. IPV6 currently supports `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. The default network charging mode is `TRAFFIC_POSTPAID_BY_HOUR`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth in Mbps. Default is 1Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * IPV6 addresses that require public network access.
      */
@@ -162,5 +162,5 @@ export interface ElasticPublicIpv6Args {
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

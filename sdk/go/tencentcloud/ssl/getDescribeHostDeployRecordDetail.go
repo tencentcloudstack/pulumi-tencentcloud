@@ -73,12 +73,8 @@ type GetDescribeHostDeployRecordDetailResult struct {
 }
 
 func GetDescribeHostDeployRecordDetailOutput(ctx *pulumi.Context, args GetDescribeHostDeployRecordDetailOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostDeployRecordDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostDeployRecordDetailResultOutput, error) {
-			args := v.(GetDescribeHostDeployRecordDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostDeployRecordDetail:getDescribeHostDeployRecordDetail", args, GetDescribeHostDeployRecordDetailResultOutput{}, options).(GetDescribeHostDeployRecordDetailResultOutput), nil
-		}).(GetDescribeHostDeployRecordDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostDeployRecordDetail:getDescribeHostDeployRecordDetail", args, GetDescribeHostDeployRecordDetailResultOutput{}, options).(GetDescribeHostDeployRecordDetailResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostDeployRecordDetail.

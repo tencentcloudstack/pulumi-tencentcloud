@@ -101,29 +101,29 @@ export interface GetPublicConfigSummaryOutputArgs {
     /**
      * Config Id List.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * config tag list.
      */
-    configTagLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configTagLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to disable dataset authentication.
      */
-    disableProgramAuthCheck?: pulumi.Input<boolean>;
+    disableProgramAuthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Sort by time: creation_time; Sort by name: config_name.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Pass 0 for ascending order and 1 for descending order.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query keyword for fuzzy search: configuration item name. If not passed in, the full set will be queried.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

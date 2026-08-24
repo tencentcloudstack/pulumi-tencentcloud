@@ -71,12 +71,8 @@ type GetGroupResult struct {
 }
 
 func GetGroupOutput(ctx *pulumi.Context, args GetGroupOutputArgs, opts ...pulumi.InvokeOption) GetGroupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGroupResultOutput, error) {
-			args := v.(GetGroupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getGroup:getGroup", args, GetGroupResultOutput{}, options).(GetGroupResultOutput), nil
-		}).(GetGroupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getGroup:getGroup", args, GetGroupResultOutput{}, options).(GetGroupResultOutput)
 }
 
 // A collection of arguments for invoking getGroup.

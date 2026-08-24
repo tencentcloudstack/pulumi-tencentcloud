@@ -53,32 +53,40 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// DTS sync job can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Dts/syncJob:SyncJob example sync-hpb214ua
+// ```
 type SyncJob struct {
 	pulumi.CustomResourceState
 
-	// auto renew.
+	// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 	AutoRenew pulumi.IntOutput `pulumi:"autoRenew"`
-	// destination database type.
+	// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 	DstDatabaseType pulumi.StringOutput `pulumi:"dstDatabaseType"`
-	// destination region.
+	// The region where the destination database resides, such as `ap-guangzhou`.
 	DstRegion pulumi.StringOutput `pulumi:"dstRegion"`
-	// existed job id.
+	// The existing sync job ID used to create a similar job.
 	ExistedJobId pulumi.StringOutput `pulumi:"existedJobId"`
-	// instance class.
+	// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 	InstanceClass pulumi.StringOutput `pulumi:"instanceClass"`
-	// job id.
+	// Sync job ID.
 	JobId pulumi.StringOutput `pulumi:"jobId"`
-	// job name.
+	// Sync job name.
 	JobName pulumi.StringOutput `pulumi:"jobName"`
-	// pay mode, optional value is PrePay or PostPay.
+	// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 	PayMode pulumi.StringOutput `pulumi:"payMode"`
-	// specification.
+	// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 	Specification pulumi.StringOutput `pulumi:"specification"`
-	// source database type.
+	// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 	SrcDatabaseType pulumi.StringOutput `pulumi:"srcDatabaseType"`
-	// source region.
+	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringOutput `pulumi:"srcRegion"`
-	// tags.
+	// Tag information.
 	Tags SyncJobTagArrayOutput `pulumi:"tags"`
 }
 
@@ -127,56 +135,56 @@ func GetSyncJob(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SyncJob resources.
 type syncJobState struct {
-	// auto renew.
+	// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 	AutoRenew *int `pulumi:"autoRenew"`
-	// destination database type.
+	// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 	DstDatabaseType *string `pulumi:"dstDatabaseType"`
-	// destination region.
+	// The region where the destination database resides, such as `ap-guangzhou`.
 	DstRegion *string `pulumi:"dstRegion"`
-	// existed job id.
+	// The existing sync job ID used to create a similar job.
 	ExistedJobId *string `pulumi:"existedJobId"`
-	// instance class.
+	// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 	InstanceClass *string `pulumi:"instanceClass"`
-	// job id.
+	// Sync job ID.
 	JobId *string `pulumi:"jobId"`
-	// job name.
+	// Sync job name.
 	JobName *string `pulumi:"jobName"`
-	// pay mode, optional value is PrePay or PostPay.
+	// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 	PayMode *string `pulumi:"payMode"`
-	// specification.
+	// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 	Specification *string `pulumi:"specification"`
-	// source database type.
+	// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 	SrcDatabaseType *string `pulumi:"srcDatabaseType"`
-	// source region.
+	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion *string `pulumi:"srcRegion"`
-	// tags.
+	// Tag information.
 	Tags []SyncJobTag `pulumi:"tags"`
 }
 
 type SyncJobState struct {
-	// auto renew.
+	// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 	AutoRenew pulumi.IntPtrInput
-	// destination database type.
+	// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 	DstDatabaseType pulumi.StringPtrInput
-	// destination region.
+	// The region where the destination database resides, such as `ap-guangzhou`.
 	DstRegion pulumi.StringPtrInput
-	// existed job id.
+	// The existing sync job ID used to create a similar job.
 	ExistedJobId pulumi.StringPtrInput
-	// instance class.
+	// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 	InstanceClass pulumi.StringPtrInput
-	// job id.
+	// Sync job ID.
 	JobId pulumi.StringPtrInput
-	// job name.
+	// Sync job name.
 	JobName pulumi.StringPtrInput
-	// pay mode, optional value is PrePay or PostPay.
+	// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 	PayMode pulumi.StringPtrInput
-	// specification.
+	// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 	Specification pulumi.StringPtrInput
-	// source database type.
+	// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 	SrcDatabaseType pulumi.StringPtrInput
-	// source region.
+	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringPtrInput
-	// tags.
+	// Tag information.
 	Tags SyncJobTagArrayInput
 }
 
@@ -185,53 +193,53 @@ func (SyncJobState) ElementType() reflect.Type {
 }
 
 type syncJobArgs struct {
-	// auto renew.
+	// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 	AutoRenew *int `pulumi:"autoRenew"`
-	// destination database type.
+	// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 	DstDatabaseType string `pulumi:"dstDatabaseType"`
-	// destination region.
+	// The region where the destination database resides, such as `ap-guangzhou`.
 	DstRegion string `pulumi:"dstRegion"`
-	// existed job id.
+	// The existing sync job ID used to create a similar job.
 	ExistedJobId *string `pulumi:"existedJobId"`
-	// instance class.
+	// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 	InstanceClass *string `pulumi:"instanceClass"`
-	// job name.
+	// Sync job name.
 	JobName *string `pulumi:"jobName"`
-	// pay mode, optional value is PrePay or PostPay.
+	// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 	PayMode string `pulumi:"payMode"`
-	// specification.
+	// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 	Specification *string `pulumi:"specification"`
-	// source database type.
+	// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 	SrcDatabaseType string `pulumi:"srcDatabaseType"`
-	// source region.
+	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion string `pulumi:"srcRegion"`
-	// tags.
+	// Tag information.
 	Tags []SyncJobTag `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a SyncJob resource.
 type SyncJobArgs struct {
-	// auto renew.
+	// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 	AutoRenew pulumi.IntPtrInput
-	// destination database type.
+	// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 	DstDatabaseType pulumi.StringInput
-	// destination region.
+	// The region where the destination database resides, such as `ap-guangzhou`.
 	DstRegion pulumi.StringInput
-	// existed job id.
+	// The existing sync job ID used to create a similar job.
 	ExistedJobId pulumi.StringPtrInput
-	// instance class.
+	// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 	InstanceClass pulumi.StringPtrInput
-	// job name.
+	// Sync job name.
 	JobName pulumi.StringPtrInput
-	// pay mode, optional value is PrePay or PostPay.
+	// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 	PayMode pulumi.StringInput
-	// specification.
+	// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 	Specification pulumi.StringPtrInput
-	// source database type.
+	// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 	SrcDatabaseType pulumi.StringInput
-	// source region.
+	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringInput
-	// tags.
+	// Tag information.
 	Tags SyncJobTagArrayInput
 }
 
@@ -322,62 +330,62 @@ func (o SyncJobOutput) ToSyncJobOutputWithContext(ctx context.Context) SyncJobOu
 	return o
 }
 
-// auto renew.
+// Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
 func (o SyncJobOutput) AutoRenew() pulumi.IntOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.IntOutput { return v.AutoRenew }).(pulumi.IntOutput)
 }
 
-// destination database type.
+// Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
 func (o SyncJobOutput) DstDatabaseType() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.DstDatabaseType }).(pulumi.StringOutput)
 }
 
-// destination region.
+// The region where the destination database resides, such as `ap-guangzhou`.
 func (o SyncJobOutput) DstRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.DstRegion }).(pulumi.StringOutput)
 }
 
-// existed job id.
+// The existing sync job ID used to create a similar job.
 func (o SyncJobOutput) ExistedJobId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.ExistedJobId }).(pulumi.StringOutput)
 }
 
-// instance class.
+// Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
 func (o SyncJobOutput) InstanceClass() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.InstanceClass }).(pulumi.StringOutput)
 }
 
-// job id.
+// Sync job ID.
 func (o SyncJobOutput) JobId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.JobId }).(pulumi.StringOutput)
 }
 
-// job name.
+// Sync job name.
 func (o SyncJobOutput) JobName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.JobName }).(pulumi.StringOutput)
 }
 
-// pay mode, optional value is PrePay or PostPay.
+// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
 func (o SyncJobOutput) PayMode() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.PayMode }).(pulumi.StringOutput)
 }
 
-// specification.
+// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
 func (o SyncJobOutput) Specification() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.Specification }).(pulumi.StringOutput)
 }
 
-// source database type.
+// Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
 func (o SyncJobOutput) SrcDatabaseType() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.SrcDatabaseType }).(pulumi.StringOutput)
 }
 
-// source region.
+// The region where the source database resides, such as `ap-guangzhou`.
 func (o SyncJobOutput) SrcRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.SrcRegion }).(pulumi.StringOutput)
 }
 
-// tags.
+// Tag information.
 func (o SyncJobOutput) Tags() SyncJobTagArrayOutput {
 	return o.ApplyT(func(v *SyncJob) SyncJobTagArrayOutput { return v.Tags }).(SyncJobTagArrayOutput)
 }

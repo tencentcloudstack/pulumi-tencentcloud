@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Import
     /// 
-    /// organization org_share_unit can be imported using the id, e.g.
+    /// organization OrgShareUnit can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Organization/orgShareUnit:OrgShareUnit org_share_unit area#unit_id

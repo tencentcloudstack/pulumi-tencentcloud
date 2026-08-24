@@ -45,12 +45,8 @@ type GetRabbitmqNodeListResult struct {
 }
 
 func GetRabbitmqNodeListOutput(ctx *pulumi.Context, args GetRabbitmqNodeListOutputArgs, opts ...pulumi.InvokeOption) GetRabbitmqNodeListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRabbitmqNodeListResultOutput, error) {
-			args := v.(GetRabbitmqNodeListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args, GetRabbitmqNodeListResultOutput{}, options).(GetRabbitmqNodeListResultOutput), nil
-		}).(GetRabbitmqNodeListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args, GetRabbitmqNodeListResultOutput{}, options).(GetRabbitmqNodeListResultOutput)
 }
 
 // A collection of arguments for invoking getRabbitmqNodeList.

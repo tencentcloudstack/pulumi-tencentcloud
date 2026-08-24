@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstanceLog = tencentcloud.Wedata.getTaskInstanceLog({
+ * const wedataTaskInstanceLog = tencentcloud.wedata.getTaskInstanceLog({
  *     projectId: "1859317240494305280",
  *     instanceKey: "20250324192240178_2025-10-13 11:50:00",
  * });
@@ -91,7 +91,7 @@ export interface GetTaskInstanceLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstanceLog = tencentcloud.Wedata.getTaskInstanceLog({
+ * const wedataTaskInstanceLog = tencentcloud.wedata.getTaskInstanceLog({
  *     projectId: "1859317240494305280",
  *     instanceKey: "20250324192240178_2025-10-13 11:50:00",
  * });
@@ -120,15 +120,15 @@ export interface GetTaskInstanceLogOutputArgs {
     /**
      * Instance lifecycle number, identifying a specific execution of the instance. For example: the first run of a periodic instance is 0, if manually rerun the second execution is 1; defaults to the latest execution.
      */
-    lifeRoundNum?: pulumi.Input<number>;
+    lifeRoundNum?: pulumi.Input<number | undefined>;
     /**
      * Log level, default All - Info - Debug - Warn - Error - All.
      */
-    logLevel?: pulumi.Input<string>;
+    logLevel?: pulumi.Input<string | undefined>;
     /**
      * Pagination cursor for log queries, no business meaning. First query uses null, subsequent queries use NextCursor from previous response.
      */
-    nextCursor?: pulumi.Input<string>;
+    nextCursor?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -136,5 +136,5 @@ export interface GetTaskInstanceLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

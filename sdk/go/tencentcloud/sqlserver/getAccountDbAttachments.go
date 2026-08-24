@@ -50,12 +50,8 @@ type GetAccountDbAttachmentsResult struct {
 }
 
 func GetAccountDbAttachmentsOutput(ctx *pulumi.Context, args GetAccountDbAttachmentsOutputArgs, opts ...pulumi.InvokeOption) GetAccountDbAttachmentsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountDbAttachmentsResultOutput, error) {
-			args := v.(GetAccountDbAttachmentsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args, GetAccountDbAttachmentsResultOutput{}, options).(GetAccountDbAttachmentsResultOutput), nil
-		}).(GetAccountDbAttachmentsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args, GetAccountDbAttachmentsResultOutput{}, options).(GetAccountDbAttachmentsResultOutput)
 }
 
 // A collection of arguments for invoking getAccountDbAttachments.

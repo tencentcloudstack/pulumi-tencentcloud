@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLog = tencentcloud.Mysql.getSlowLog({
+ * const slowLog = tencentcloud.mysql.getSlowLog({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetSlowLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLog = tencentcloud.Mysql.getSlowLog({
+ * const slowLog = tencentcloud.mysql.getSlowLog({
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetSlowLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

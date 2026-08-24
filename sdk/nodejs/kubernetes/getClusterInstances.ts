@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterInstances = tencentcloud.Kubernetes.getClusterInstances({
+ * const clusterInstances = tencentcloud.kubernetes.getClusterInstances({
  *     clusterId: "cls-ely08ic4",
  *     instanceIds: ["ins-kqmx8dm2"],
  *     instanceRole: "WORKER",
@@ -93,7 +93,7 @@ export interface GetClusterInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterInstances = tencentcloud.Kubernetes.getClusterInstances({
+ * const clusterInstances = tencentcloud.kubernetes.getClusterInstances({
  *     clusterId: "cls-ely08ic4",
  *     instanceIds: ["ins-kqmx8dm2"],
  *     instanceRole: "WORKER",
@@ -126,17 +126,17 @@ export interface GetClusterInstancesOutputArgs {
     /**
      * List of filter conditions. The optional values of Name are `nodepool-id` and `nodepool-instance-type`. Name is `nodepool-id`, which means filtering machines based on node pool id, and Value is the specific node pool id. Name is `nodepool-instance-type`, which indicates how the node is added to the node pool. Value is MANUALLY_ADDED (manually added to the node pool), AUTOSCALING_ADDED (joined by scaling group expansion method), ALL (manually join the node pool and join the node pool through scaling group expansion).
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Kubernetes.GetClusterInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Kubernetes.GetClusterInstancesFilterArgs>[] | undefined>;
     /**
      * List of node instance IDs to be obtained. If it is empty, it means pulling all node instances in the cluster.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node role, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, default is WORKER.
      */
-    instanceRole?: pulumi.Input<string>;
+    instanceRole?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

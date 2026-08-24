@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Import
     /// 
-    /// tsf enable_unit_rule can be imported using the id, e.g.
+    /// tsf EnableUnitRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id

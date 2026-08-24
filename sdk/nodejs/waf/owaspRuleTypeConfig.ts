@@ -153,43 +153,43 @@ export interface OwaspRuleTypeConfigState {
     /**
      * Indicates the total number of rules enabled under the rule type.
      */
-    activeRule?: pulumi.Input<number>;
+    activeRule?: pulumi.Input<number | undefined>;
     /**
      * Data type category.
      */
-    classification?: pulumi.Input<string>;
+    classification?: pulumi.Input<string | undefined>;
     /**
      * Rule type description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Protection mode of the rule type. valid values: 0 (observation), 1 (intercept).
      */
-    ruleTypeAction?: pulumi.Input<number>;
+    ruleTypeAction?: pulumi.Input<number | undefined>;
     /**
      * Protection level of the rule. valid values: 100 (loose), 200 (normal), 300 (strict), 400 (ultra-strict).
      */
-    ruleTypeLevel?: pulumi.Input<number>;
+    ruleTypeLevel?: pulumi.Input<number | undefined>;
     /**
      * Rule type name.
      */
-    ruleTypeName?: pulumi.Input<string>;
+    ruleTypeName?: pulumi.Input<string | undefined>;
     /**
      * The switch status of the rule type. valid values: 0 (disabled), 1 (enabled).
      */
-    ruleTypeStatus?: pulumi.Input<number>;
+    ruleTypeStatus?: pulumi.Input<number | undefined>;
     /**
      * Specifies all rules under the rule type. always.
      */
-    totalRule?: pulumi.Input<number>;
+    totalRule?: pulumi.Input<number | undefined>;
     /**
      * Rule type ID.
      */
-    typeId?: pulumi.Input<string>;
+    typeId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -203,15 +203,15 @@ export interface OwaspRuleTypeConfigArgs {
     /**
      * Protection mode of the rule type. valid values: 0 (observation), 1 (intercept).
      */
-    ruleTypeAction?: pulumi.Input<number>;
+    ruleTypeAction?: pulumi.Input<number | undefined>;
     /**
      * Protection level of the rule. valid values: 100 (loose), 200 (normal), 300 (strict), 400 (ultra-strict).
      */
-    ruleTypeLevel?: pulumi.Input<number>;
+    ruleTypeLevel?: pulumi.Input<number | undefined>;
     /**
      * The switch status of the rule type. valid values: 0 (disabled), 1 (enabled).
      */
-    ruleTypeStatus?: pulumi.Input<number>;
+    ruleTypeStatus?: pulumi.Input<number | undefined>;
     /**
      * Rule type ID.
      */

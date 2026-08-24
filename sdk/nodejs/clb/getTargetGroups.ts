@@ -41,7 +41,7 @@ import * as utilities from "../utilities";
  *     ruleId: ruleBasic.ruleId,
  *     targrtGroupId: test.id,
  * });
- * const targetGroupInfoId = tencentcloud.Clb.getTargetGroupsOutput({
+ * const targetGroupInfoId = tencentcloud.clb.getTargetGroupsOutput({
  *     targetGroupId: test.id,
  * });
  * ```
@@ -140,7 +140,7 @@ export interface GetTargetGroupsResult {
  *     ruleId: ruleBasic.ruleId,
  *     targrtGroupId: test.id,
  * });
- * const targetGroupInfoId = tencentcloud.Clb.getTargetGroupsOutput({
+ * const targetGroupInfoId = tencentcloud.clb.getTargetGroupsOutput({
  *     targetGroupId: test.id,
  * });
  * ```
@@ -163,17 +163,17 @@ export interface GetTargetGroupsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of Target group. Mutually exclusive with `vpcId` and `targetGroupName`. `targetGroupId` is preferred.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
     /**
      * Name of target group. Mutually exclusive with `targetGroupId`. `targetGroupId` is preferred.
      */
-    targetGroupName?: pulumi.Input<string>;
+    targetGroupName?: pulumi.Input<string | undefined>;
     /**
      * Target group VPC ID. Mutually exclusive with `targetGroupId`. `targetGroupId` is preferred.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

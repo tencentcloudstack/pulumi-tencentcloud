@@ -112,15 +112,15 @@ export interface AttachmentState {
     /**
      * [Six-segment description of resources](https://cloud.tencent.com/document/product/598/10606).
      */
-    resource?: pulumi.Input<string>;
+    resource?: pulumi.Input<string | undefined>;
     /**
      * tag key.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
     /**
      * tag value.
      */
-    tagValue?: pulumi.Input<string>;
+    tagValue?: pulumi.Input<string | undefined>;
 }
 
 /**

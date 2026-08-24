@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gaap proxy_group can be imported using the id, e.g.
+ * gaap proxyGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
@@ -126,23 +126,23 @@ export interface ProxyGroupState {
     /**
      * Channel group alias.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.
      */
-    ipAddressVersion?: pulumi.Input<string>;
+    ipAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the proxy group belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * real server region, refer to the interface DescribeDestRegions to return the RegionId in the parameter RegionDetail.
      */
-    realServerRegion?: pulumi.Input<string>;
+    realServerRegion?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,11 +156,11 @@ export interface ProxyGroupArgs {
     /**
      * IP version, can be taken as IPv4 or IPv6 with a default value of IPv4.
      */
-    ipAddressVersion?: pulumi.Input<string>;
+    ipAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * Package type of channel group. Available values: Thunder and Accelerator. Default is Thunder.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the proxy group belongs.
      */

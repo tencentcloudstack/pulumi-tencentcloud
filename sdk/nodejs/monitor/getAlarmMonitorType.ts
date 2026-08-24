@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMonitorType = tencentcloud.Monitor.getAlarmMonitorType({});
+ * const alarmMonitorType = tencentcloud.monitor.getAlarmMonitorType({});
  * ```
  */
 export function getAlarmMonitorType(args?: GetAlarmMonitorTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmMonitorTypeResult> {
@@ -63,7 +63,7 @@ export interface GetAlarmMonitorTypeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMonitorType = tencentcloud.Monitor.getAlarmMonitorType({});
+ * const alarmMonitorType = tencentcloud.monitor.getAlarmMonitorType({});
  * ```
  */
 export function getAlarmMonitorTypeOutput(args?: GetAlarmMonitorTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmMonitorTypeResult> {
@@ -81,5 +81,5 @@ export interface GetAlarmMonitorTypeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

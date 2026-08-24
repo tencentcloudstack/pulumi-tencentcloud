@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_manage_policy can be imported using the id, e.g.
+ * organization orgManagePolicy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgManagePolicy:OrgManagePolicy org_manage_policy policy_id#type
@@ -123,27 +123,27 @@ export interface OrgManagePolicyState {
     /**
      * Policy content. Refer to the CAM policy syntax.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Policy description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Policy name.
      * The length is 1~128 characters, which can include Chinese characters, English letters, numbers, and underscores.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Policy Id.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Policy type. Default value is SERVICE_CONTROL_POLICY.
      * Valid values:
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -157,17 +157,17 @@ export interface OrgManagePolicyArgs {
     /**
      * Policy description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Policy name.
      * The length is 1~128 characters, which can include Chinese characters, English letters, numbers, and underscores.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Policy type. Default value is SERVICE_CONTROL_POLICY.
      * Valid values:
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

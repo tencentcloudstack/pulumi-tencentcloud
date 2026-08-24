@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameters = tencentcloud.Dcdb.getParameters({
+ * const parameters = tencentcloud.dcdb.getParameters({
  *     instanceId: "your_instance_id",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetParametersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameters = tencentcloud.Dcdb.getParameters({
+ * const parameters = tencentcloud.dcdb.getParameters({
  *     instanceId: "your_instance_id",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetParametersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

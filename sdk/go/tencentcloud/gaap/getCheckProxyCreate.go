@@ -64,12 +64,8 @@ type GetCheckProxyCreateResult struct {
 }
 
 func GetCheckProxyCreateOutput(ctx *pulumi.Context, args GetCheckProxyCreateOutputArgs, opts ...pulumi.InvokeOption) GetCheckProxyCreateResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCheckProxyCreateResultOutput, error) {
-			args := v.(GetCheckProxyCreateArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args, GetCheckProxyCreateResultOutput{}, options).(GetCheckProxyCreateResultOutput), nil
-		}).(GetCheckProxyCreateResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args, GetCheckProxyCreateResultOutput{}, options).(GetCheckProxyCreateResultOutput)
 }
 
 // A collection of arguments for invoking getCheckProxyCreate.

@@ -104,7 +104,7 @@ export class Zone extends pulumi.CustomResource {
     /**
      * List of authorized accounts' VPCs to associate with the private domain.
      */
-    declare public readonly accountVpcSets: pulumi.Output<outputs.PrivateDns.ZoneAccountVpcSet[] | undefined>;
+    declare public readonly accountVpcSets: pulumi.Output<outputs.PrivateDns.ZoneAccountVpcSet[]>;
     /**
      * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
      */
@@ -183,37 +183,37 @@ export interface ZoneState {
     /**
      * List of authorized accounts' VPCs to associate with the private domain.
      */
-    accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[]>;
+    accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[] | undefined>;
     /**
      * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
      */
-    cnameSpeedupStatus?: pulumi.Input<string>;
+    cnameSpeedupStatus?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
      */
-    dnsForwardStatus?: pulumi.Input<string>;
+    dnsForwardStatus?: pulumi.Input<string | undefined>;
     /**
      * Domain name, which must be in the format of standard TLD.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
      *
      * @deprecated It has been deprecated from version 1.72.4. Use `tags` instead.
      */
-    tagSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneTagSet>[]>;
+    tagSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneTagSet>[] | undefined>;
     /**
      * Tags of the private dns zone.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Associates the private domain to a VPC when it is created.
      */
-    vpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneVpcSet>[]>;
+    vpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneVpcSet>[] | undefined>;
 }
 
 /**
@@ -223,15 +223,15 @@ export interface ZoneArgs {
     /**
      * List of authorized accounts' VPCs to associate with the private domain.
      */
-    accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[]>;
+    accountVpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneAccountVpcSet>[] | undefined>;
     /**
      * CNAME acceleration: ENABLED, DISABLED, Default value is ENABLED.
      */
-    cnameSpeedupStatus?: pulumi.Input<string>;
+    cnameSpeedupStatus?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED.
      */
-    dnsForwardStatus?: pulumi.Input<string>;
+    dnsForwardStatus?: pulumi.Input<string | undefined>;
     /**
      * Domain name, which must be in the format of standard TLD.
      */
@@ -239,19 +239,19 @@ export interface ZoneArgs {
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.72.4. Use `tags` instead. Tags the private domain when it is created.
      *
      * @deprecated It has been deprecated from version 1.72.4. Use `tags` instead.
      */
-    tagSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneTagSet>[]>;
+    tagSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneTagSet>[] | undefined>;
     /**
      * Tags of the private dns zone.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Associates the private domain to a VPC when it is created.
      */
-    vpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneVpcSet>[]>;
+    vpcSets?: pulumi.Input<pulumi.Input<inputs.PrivateDns.ZoneVpcSet>[] | undefined>;
 }

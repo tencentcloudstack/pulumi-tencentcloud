@@ -86,12 +86,8 @@ type LookupApplicationFileConfigResult struct {
 }
 
 func LookupApplicationFileConfigOutput(ctx *pulumi.Context, args LookupApplicationFileConfigOutputArgs, opts ...pulumi.InvokeOption) LookupApplicationFileConfigResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupApplicationFileConfigResultOutput, error) {
-			args := v.(LookupApplicationFileConfigArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args, LookupApplicationFileConfigResultOutput{}, options).(LookupApplicationFileConfigResultOutput), nil
-		}).(LookupApplicationFileConfigResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args, LookupApplicationFileConfigResultOutput{}, options).(LookupApplicationFileConfigResultOutput)
 }
 
 // A collection of arguments for invoking getApplicationFileConfig.

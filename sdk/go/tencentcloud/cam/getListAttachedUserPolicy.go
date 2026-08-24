@@ -43,12 +43,8 @@ type GetListAttachedUserPolicyResult struct {
 }
 
 func GetListAttachedUserPolicyOutput(ctx *pulumi.Context, args GetListAttachedUserPolicyOutputArgs, opts ...pulumi.InvokeOption) GetListAttachedUserPolicyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListAttachedUserPolicyResultOutput, error) {
-			args := v.(GetListAttachedUserPolicyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args, GetListAttachedUserPolicyResultOutput{}, options).(GetListAttachedUserPolicyResultOutput), nil
-		}).(GetListAttachedUserPolicyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args, GetListAttachedUserPolicyResultOutput{}, options).(GetListAttachedUserPolicyResultOutput)
 }
 
 // A collection of arguments for invoking getListAttachedUserPolicy.

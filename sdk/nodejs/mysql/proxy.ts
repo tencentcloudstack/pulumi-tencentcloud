@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -223,55 +223,55 @@ export interface ProxyState {
     /**
      * Connection Pool Threshold.
      */
-    connectionPoolLimit?: pulumi.Input<number>;
+    connectionPoolLimit?: pulumi.Input<number | undefined>;
     /**
      * Describe.
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Proxy address id.
      */
-    proxyAddressId?: pulumi.Input<string>;
+    proxyAddressId?: pulumi.Input<string | undefined>;
     /**
      * Proxy group id.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Node specification configuration.
      */
-    proxyNodeCustoms?: pulumi.Input<pulumi.Input<inputs.Mysql.ProxyProxyNodeCustom>[]>;
+    proxyNodeCustoms?: pulumi.Input<pulumi.Input<inputs.Mysql.ProxyProxyNodeCustom>[] | undefined>;
     /**
      * The current version of the database agent. No need to fill in when creating.
      */
-    proxyVersion?: pulumi.Input<string>;
+    proxyVersion?: pulumi.Input<string | undefined>;
     /**
      * Security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Subnet id.
      */
-    uniqSubnetId?: pulumi.Input<string>;
+    uniqSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Vpc id.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.
      */
-    upgradeTime?: pulumi.Input<string>;
+    upgradeTime?: pulumi.Input<string | undefined>;
     /**
      * IP address.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Port.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -281,11 +281,11 @@ export interface ProxyArgs {
     /**
      * Connection Pool Threshold.
      */
-    connectionPoolLimit?: pulumi.Input<number>;
+    connectionPoolLimit?: pulumi.Input<number | undefined>;
     /**
      * Describe.
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
@@ -297,11 +297,11 @@ export interface ProxyArgs {
     /**
      * The current version of the database agent. No need to fill in when creating.
      */
-    proxyVersion?: pulumi.Input<string>;
+    proxyVersion?: pulumi.Input<string | undefined>;
     /**
      * Security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Subnet id.
      */
@@ -313,13 +313,13 @@ export interface ProxyArgs {
     /**
      * Upgrade time: nowTime (upgrade completed) timeWindow (instance maintenance time), Required when modifying the agent version, No need to fill in when creating.
      */
-    upgradeTime?: pulumi.Input<string>;
+    upgradeTime?: pulumi.Input<string | undefined>;
     /**
      * IP address.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Port.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
 }

@@ -68,12 +68,8 @@ type GetDescribeDataEnginePythonSparkImagesResult struct {
 }
 
 func GetDescribeDataEnginePythonSparkImagesOutput(ctx *pulumi.Context, args GetDescribeDataEnginePythonSparkImagesOutputArgs, opts ...pulumi.InvokeOption) GetDescribeDataEnginePythonSparkImagesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeDataEnginePythonSparkImagesResultOutput, error) {
-			args := v.(GetDescribeDataEnginePythonSparkImagesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args, GetDescribeDataEnginePythonSparkImagesResultOutput{}, options).(GetDescribeDataEnginePythonSparkImagesResultOutput), nil
-		}).(GetDescribeDataEnginePythonSparkImagesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", args, GetDescribeDataEnginePythonSparkImagesResultOutput{}, options).(GetDescribeDataEnginePythonSparkImagesResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeDataEnginePythonSparkImages.

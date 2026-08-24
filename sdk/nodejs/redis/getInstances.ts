@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redislab = tencentcloud.Redis.getInstances({
+ * const redislab = tencentcloud.redis.getInstances({
  *     zone: "ap-hongkong-1",
  *     searchKey: "myredis",
  *     projectId: 0,
@@ -104,7 +104,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redislab = tencentcloud.Redis.getInstances({
+ * const redislab = tencentcloud.redis.getInstances({
  *     zone: "ap-hongkong-1",
  *     searchKey: "myredis",
  *     projectId: 0,
@@ -133,25 +133,25 @@ export interface GetInstancesOutputArgs {
     /**
      * The number limitation of results for a query.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * ID of the project to which redis instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Key words used to match the results, and the key words can be: instance ID, instance name and IP address.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Tags of redis instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of an available zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataWorkflows = tencentcloud.Wedata.getWorkflows({
+ * const wedataWorkflows = tencentcloud.wedata.getWorkflows({
  *     projectId: "2905622749543821312",
  *     keyword: "test_workflow",
  * });
@@ -115,7 +115,7 @@ export interface GetWorkflowsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataWorkflows = tencentcloud.Wedata.getWorkflows({
+ * const wedataWorkflows = tencentcloud.wedata.getWorkflows({
  *     projectId: "2905622749543821312",
  *     keyword: "test_workflow",
  * });
@@ -144,31 +144,31 @@ export interface GetWorkflowsOutputArgs {
     /**
      * bundleId item.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * Creation time range yyyy-MM-dd HH:MM:ss. two times must be filled in the array.
      */
-    createTimes?: pulumi.Input<pulumi.Input<string>[]>;
+    createTimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Creator ID.
      */
-    createUserUin?: pulumi.Input<string>;
+    createUserUin?: pulumi.Input<string | undefined>;
     /**
      * Search keywords.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Modification time interval yyyy-MM-dd HH:MM:ss. fill in two times in the array.
      */
-    modifyTimes?: pulumi.Input<pulumi.Input<string>[]>;
+    modifyTimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Owner ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Workflow folder.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -176,9 +176,9 @@ export interface GetWorkflowsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workflow type. valid values: cycle and manual.
      */
-    workflowType?: pulumi.Input<string>;
+    workflowType?: pulumi.Input<string | undefined>;
 }

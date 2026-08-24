@@ -61,11 +61,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         [Input("desiredPodNum")]
         public Input<int>? DesiredPodNum { get; set; }
 
+        [Input("disasterRecoverGroupIds")]
+        private InputList<string>? _disasterRecoverGroupIds;
+
         /// <summary>
         /// Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
         /// </summary>
-        [Input("disasterRecoverGroupIds")]
-        public Input<string>? DisasterRecoverGroupIds { get; set; }
+        public InputList<string> DisasterRecoverGroupIds
+        {
+            get => _disasterRecoverGroupIds ?? (_disasterRecoverGroupIds = new InputList<string>());
+            set => _disasterRecoverGroupIds = value;
+        }
 
         /// <summary>
         /// To specify whether to enable cloud monitor service. Default is TRUE.

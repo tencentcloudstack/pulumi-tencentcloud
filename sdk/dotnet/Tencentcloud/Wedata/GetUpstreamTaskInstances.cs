@@ -22,7 +22,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// using System.Linq;
         /// using Pulumi;
         /// using Std = Pulumi.Std;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -54,7 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// using System.Linq;
         /// using Pulumi;
         /// using Std = Pulumi.Std;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// using System.Linq;
         /// using Pulumi;
         /// using Std = Pulumi.Std;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {

@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *     remark: "test rocketmq role",
  *     clusterId: cluster.clusterId,
  * });
- * const role = tencentcloud.Tdmq.getRocketmqRoleOutput({
+ * const role = tencentcloud.tdmq.getRocketmqRoleOutput({
  *     roleName: roleRocketmqRole.roleName,
  *     clusterId: cluster.clusterId,
  * });
@@ -94,7 +94,7 @@ export interface GetRocketmqRoleResult {
  *     remark: "test rocketmq role",
  *     clusterId: cluster.clusterId,
  * });
- * const role = tencentcloud.Tdmq.getRocketmqRoleOutput({
+ * const role = tencentcloud.tdmq.getRocketmqRoleOutput({
  *     roleName: roleRocketmqRole.roleName,
  *     clusterId: cluster.clusterId,
  * });
@@ -120,9 +120,9 @@ export interface GetRocketmqRoleOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Fuzzy query by role name.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }

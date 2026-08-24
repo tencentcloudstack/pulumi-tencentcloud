@@ -141,43 +141,43 @@ export interface SampleSnapshotTemplateState {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:  stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.Default value: black.
      */
-    fillType?: pulumi.Input<string>;
+    fillType?: pulumi.Input<string | undefined>;
     /**
      * Image format. Valid values: jpg, png. Default value: jpg.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Name of a sampled screencapturing template. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resolution adaption. Valid values: open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side; close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.
      */
-    resolutionAdaptive?: pulumi.Input<string>;
+    resolutionAdaptive?: pulumi.Input<string | undefined>;
     /**
      * Sampling interval. If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage. If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.
      */
-    sampleInterval?: pulumi.Input<number>;
+    sampleInterval?: pulumi.Input<number | undefined>;
     /**
      * Sampled screencapturing type. Valid values: Percent: by percent. Time: by time interval.
      */
-    sampleType?: pulumi.Input<string>;
+    sampleType?: pulumi.Input<string | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -187,27 +187,27 @@ export interface SampleSnapshotTemplateArgs {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:  stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks. gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.Default value: black.
      */
-    fillType?: pulumi.Input<string>;
+    fillType?: pulumi.Input<string | undefined>;
     /**
      * Image format. Valid values: jpg, png. Default value: jpg.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Name of a sampled screencapturing template. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resolution adaption. Valid values: open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side; close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.
      */
-    resolutionAdaptive?: pulumi.Input<string>;
+    resolutionAdaptive?: pulumi.Input<string | undefined>;
     /**
      * Sampling interval. If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage. If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.
      */
@@ -223,5 +223,5 @@ export interface SampleSnapshotTemplateArgs {
     /**
      * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `Width` and `Height` are 0, the resolution will be the same as that of the source video; If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled; If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled; If both `Width` and `Height` are not 0, the custom resolution will be used.Default value: 0.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }

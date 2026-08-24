@@ -33,7 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Import
     /// 
-    /// ssl check_certificate_chain can be imported using the id, e.g.
+    /// ssl CheckCertificateChain can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id

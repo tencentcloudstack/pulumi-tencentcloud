@@ -47,14 +47,14 @@ import (
 //				return err
 //			}
 //			fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("www.qq.com"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			fooDomainErrorPage, err := gaap.NewDomainErrorPage(ctx, "foo", &gaap.DomainErrorPageArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     fooHttpDomain.Domain,
 //				ErrorCodes: pulumi.IntArray{
 //					pulumi.Int(406),
@@ -119,12 +119,8 @@ type GetDomainErrorPagesResult struct {
 }
 
 func GetDomainErrorPagesOutput(ctx *pulumi.Context, args GetDomainErrorPagesOutputArgs, opts ...pulumi.InvokeOption) GetDomainErrorPagesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainErrorPagesResultOutput, error) {
-			args := v.(GetDomainErrorPagesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args, GetDomainErrorPagesResultOutput{}, options).(GetDomainErrorPagesResultOutput), nil
-		}).(GetDomainErrorPagesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getDomainErrorPages:getDomainErrorPages", args, GetDomainErrorPagesResultOutput{}, options).(GetDomainErrorPagesResultOutput)
 }
 
 // A collection of arguments for invoking getDomainErrorPages.

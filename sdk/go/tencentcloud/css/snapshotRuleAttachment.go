@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// css snapshot_rule can be imported using the id, e.g.
+// css snapshotRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName

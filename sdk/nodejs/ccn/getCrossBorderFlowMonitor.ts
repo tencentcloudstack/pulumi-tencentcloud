@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossBorderFlowMonitor = tencentcloud.Ccn.getCrossBorderFlowMonitor({
+ * const crossBorderFlowMonitor = tencentcloud.ccn.getCrossBorderFlowMonitor({
  *     sourceRegion: "ap-guangzhou",
  *     destinationRegion: "ap-singapore",
  *     ccnId: "ccn-39lqkygf",
@@ -108,7 +108,7 @@ export interface GetCrossBorderFlowMonitorResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossBorderFlowMonitor = tencentcloud.Ccn.getCrossBorderFlowMonitor({
+ * const crossBorderFlowMonitor = tencentcloud.ccn.getCrossBorderFlowMonitor({
  *     sourceRegion: "ap-guangzhou",
  *     destinationRegion: "ap-singapore",
  *     ccnId: "ccn-39lqkygf",
@@ -160,7 +160,7 @@ export interface GetCrossBorderFlowMonitorOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * SourceRegion.
      */

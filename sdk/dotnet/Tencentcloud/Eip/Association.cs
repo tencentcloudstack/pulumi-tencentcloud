@@ -60,7 +60,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Output<string> EipId { get; private set; } = null!;
 
         /// <summary>
-        /// The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `NetworkInterfaceId` and `PrivateIp fields`.
+        /// The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+        /// Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+        /// Mutual exclusivity: This field conflicts with `NetworkInterfaceId` and `PrivateIp`. Only one association target can be specified per request.
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
@@ -131,7 +133,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<string> EipId { get; set; } = null!;
 
         /// <summary>
-        /// The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `NetworkInterfaceId` and `PrivateIp fields`.
+        /// The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+        /// Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+        /// Mutual exclusivity: This field conflicts with `NetworkInterfaceId` and `PrivateIp`. Only one association target can be specified per request.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
@@ -169,7 +173,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Input<string>? EipId { get; set; }
 
         /// <summary>
-        /// The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `NetworkInterfaceId` and `PrivateIp fields`.
+        /// The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+        /// Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+        /// Mutual exclusivity: This field conflicts with `NetworkInterfaceId` and `PrivateIp`. Only one association target can be specified per request.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }

@@ -30,7 +30,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := teo.NewFunction(ctx, "teo_function", &teo.FunctionArgs{
 //				Content: pulumi.String("addEventListener('fetch', e => {\n  const response = new Response('Hello World!!');\n  e.respondWith(response);\n});\n"),
-//				Name:    pulumi.String("aaa-zone-2qtuhspy7cr6-1310708577"),
+//				Name:    pulumi.String("aaa"),
 //				Remark:  pulumi.String("test"),
 //				ZoneId:  pulumi.String("zone-2qtuhspy7cr6"),
 //			})
@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// teo teo_function can be imported using the id, e.g.
+// teo teoFunction can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/function:Function teo_function zone_id#function_id

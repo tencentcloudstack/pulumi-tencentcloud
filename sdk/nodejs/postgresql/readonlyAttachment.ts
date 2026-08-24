@@ -94,11 +94,11 @@ export interface ReadonlyAttachmentState {
     /**
      * Read only instance ID.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Read only group ID.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

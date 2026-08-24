@@ -71,12 +71,8 @@ type GetCheckDataEngineImageCanBeRollbackResult struct {
 }
 
 func GetCheckDataEngineImageCanBeRollbackOutput(ctx *pulumi.Context, args GetCheckDataEngineImageCanBeRollbackOutputArgs, opts ...pulumi.InvokeOption) GetCheckDataEngineImageCanBeRollbackResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCheckDataEngineImageCanBeRollbackResultOutput, error) {
-			args := v.(GetCheckDataEngineImageCanBeRollbackArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args, GetCheckDataEngineImageCanBeRollbackResultOutput{}, options).(GetCheckDataEngineImageCanBeRollbackResultOutput), nil
-		}).(GetCheckDataEngineImageCanBeRollbackResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", args, GetCheckDataEngineImageCanBeRollbackResultOutput{}, options).(GetCheckDataEngineImageCanBeRollbackResultOutput)
 }
 
 // A collection of arguments for invoking getCheckDataEngineImageCanBeRollback.

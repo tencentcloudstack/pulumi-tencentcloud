@@ -72,7 +72,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// ## Import
     /// 
-    /// tcr image_signature_operation can be imported using the id, e.g.
+    /// tcr ImageSignatureOperation can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id

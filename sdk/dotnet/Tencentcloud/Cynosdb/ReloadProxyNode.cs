@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb reload_proxy_node can be imported using the id, e.g.
+    /// cynosdb ReloadProxyNode can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id

@@ -101,7 +101,7 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      */
     declare public readonly clusterInternetDomain: pulumi.Output<string | undefined>;
     /**
-     * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+     * Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
      */
     declare public readonly clusterInternetSecurityGroup: pulumi.Output<string | undefined>;
     /**
@@ -113,6 +113,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      */
     declare public readonly clusterIntranetDomain: pulumi.Output<string | undefined>;
     /**
+     * Security group ID for intranet cluster endpoint.
+     */
+    declare public readonly clusterIntranetSecurityGroup: pulumi.Output<string | undefined>;
+    /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
     declare public readonly clusterIntranetSubnetId: pulumi.Output<string | undefined>;
@@ -120,6 +124,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
      * Domain name for access.
      */
     declare public /*out*/ readonly domain: pulumi.Output<string>;
+    /**
+     * Enable internal or external access using an existing CLB.
+     */
+    declare public readonly existedLoadBalancerId: pulumi.Output<string | undefined>;
     /**
      * The LB parameter. Only used for public network access.
      */
@@ -173,8 +181,10 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["clusterInternetSecurityGroup"] = state?.clusterInternetSecurityGroup;
             resourceInputs["clusterIntranet"] = state?.clusterIntranet;
             resourceInputs["clusterIntranetDomain"] = state?.clusterIntranetDomain;
+            resourceInputs["clusterIntranetSecurityGroup"] = state?.clusterIntranetSecurityGroup;
             resourceInputs["clusterIntranetSubnetId"] = state?.clusterIntranetSubnetId;
             resourceInputs["domain"] = state?.domain;
+            resourceInputs["existedLoadBalancerId"] = state?.existedLoadBalancerId;
             resourceInputs["extensiveParameters"] = state?.extensiveParameters;
             resourceInputs["kubeConfig"] = state?.kubeConfig;
             resourceInputs["kubeConfigIntranet"] = state?.kubeConfigIntranet;
@@ -193,7 +203,9 @@ export class ClusterEndpoint extends pulumi.CustomResource {
             resourceInputs["clusterInternetSecurityGroup"] = args?.clusterInternetSecurityGroup;
             resourceInputs["clusterIntranet"] = args?.clusterIntranet;
             resourceInputs["clusterIntranetDomain"] = args?.clusterIntranetDomain;
+            resourceInputs["clusterIntranetSecurityGroup"] = args?.clusterIntranetSecurityGroup;
             resourceInputs["clusterIntranetSubnetId"] = args?.clusterIntranetSubnetId;
+            resourceInputs["existedLoadBalancerId"] = args?.existedLoadBalancerId;
             resourceInputs["extensiveParameters"] = args?.extensiveParameters;
             resourceInputs["managedClusterInternetSecurityPolicies"] = args?.managedClusterInternetSecurityPolicies;
             resourceInputs["certificationAuthority"] = undefined /*out*/;
@@ -220,77 +232,85 @@ export interface ClusterEndpointState {
     /**
      * The certificate used for access.
      */
-    certificationAuthority?: pulumi.Input<string>;
+    certificationAuthority?: pulumi.Input<string | undefined>;
     /**
      * Cluster deploy type of `MANAGED_CLUSTER` or `INDEPENDENT_CLUSTER`.
      */
-    clusterDeployType?: pulumi.Input<string>;
+    clusterDeployType?: pulumi.Input<string | undefined>;
     /**
      * External network address to access.
      */
-    clusterExternalEndpoint?: pulumi.Input<string>;
+    clusterExternalEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Specify cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Open internet access or not.
      */
-    clusterInternet?: pulumi.Input<boolean>;
+    clusterInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
-    clusterInternetDomain?: pulumi.Input<string>;
+    clusterInternetDomain?: pulumi.Input<string | undefined>;
     /**
-     * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+     * Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
      */
-    clusterInternetSecurityGroup?: pulumi.Input<string>;
+    clusterInternetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Open intranet access or not.
      */
-    clusterIntranet?: pulumi.Input<boolean>;
+    clusterIntranet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
-    clusterIntranetDomain?: pulumi.Input<string>;
+    clusterIntranetDomain?: pulumi.Input<string | undefined>;
+    /**
+     * Security group ID for intranet cluster endpoint.
+     */
+    clusterIntranetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
-    clusterIntranetSubnetId?: pulumi.Input<string>;
+    clusterIntranetSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Domain name for access.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
+    /**
+     * Enable internal or external access using an existing CLB.
+     */
+    existedLoadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * The LB parameter. Only used for public network access.
      */
-    extensiveParameters?: pulumi.Input<string>;
+    extensiveParameters?: pulumi.Input<string | undefined>;
     /**
      * The Intranet address used for access.
      */
-    kubeConfig?: pulumi.Input<string>;
+    kubeConfig?: pulumi.Input<string | undefined>;
     /**
      * Kubernetes config of private network.
      */
-    kubeConfigIntranet?: pulumi.Input<string>;
+    kubeConfigIntranet?: pulumi.Input<string | undefined>;
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
-    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Password of account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The Intranet address used for access.
      */
-    pgwEndpoint?: pulumi.Input<string>;
+    pgwEndpoint?: pulumi.Input<string | undefined>;
     /**
      * User name of account.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -304,35 +324,43 @@ export interface ClusterEndpointArgs {
     /**
      * Open internet access or not.
      */
-    clusterInternet?: pulumi.Input<boolean>;
+    clusterInternet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
-    clusterInternetDomain?: pulumi.Input<string>;
+    clusterInternetDomain?: pulumi.Input<string | undefined>;
     /**
-     * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+     * Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
      */
-    clusterInternetSecurityGroup?: pulumi.Input<string>;
+    clusterInternetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Open intranet access or not.
      */
-    clusterIntranet?: pulumi.Input<boolean>;
+    clusterIntranet?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
-    clusterIntranetDomain?: pulumi.Input<string>;
+    clusterIntranetDomain?: pulumi.Input<string | undefined>;
+    /**
+     * Security group ID for intranet cluster endpoint.
+     */
+    clusterIntranetSecurityGroup?: pulumi.Input<string | undefined>;
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
-    clusterIntranetSubnetId?: pulumi.Input<string>;
+    clusterIntranetSubnetId?: pulumi.Input<string | undefined>;
+    /**
+     * Enable internal or external access using an existing CLB.
+     */
+    existedLoadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * The LB parameter. Only used for public network access.
      */
-    extensiveParameters?: pulumi.Input<string>;
+    extensiveParameters?: pulumi.Input<string | undefined>;
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
      * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
-    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

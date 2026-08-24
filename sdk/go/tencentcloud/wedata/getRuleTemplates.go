@@ -24,24 +24,26 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := wedata.GetRuleTemplates(ctx, &wedata.GetRuleTemplatesArgs{
-// Type: pulumi.IntRef(2),
-// SourceObjectType: pulumi.IntRef(2),
-// ProjectId: pulumi.StringRef("1840731346428280832"),
-// SourceEngineTypes: interface{}{
-// 2,
-// 4,
-// 16,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := wedata.GetRuleTemplates(ctx, &wedata.GetRuleTemplatesArgs{
+//				Type:             pulumi.IntRef(2),
+//				SourceObjectType: pulumi.IntRef(2),
+//				ProjectId:        pulumi.StringRef("1840731346428280832"),
+//				SourceEngineTypes: []int{
+//					2,
+//					4,
+//					16,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetRuleTemplates(ctx *pulumi.Context, args *GetRuleTemplatesArgs, opts ...pulumi.InvokeOption) (*GetRuleTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -84,12 +86,8 @@ type GetRuleTemplatesResult struct {
 }
 
 func GetRuleTemplatesOutput(ctx *pulumi.Context, args GetRuleTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetRuleTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRuleTemplatesResultOutput, error) {
-			args := v.(GetRuleTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args, GetRuleTemplatesResultOutput{}, options).(GetRuleTemplatesResultOutput), nil
-		}).(GetRuleTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", args, GetRuleTemplatesResultOutput{}, options).(GetRuleTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getRuleTemplates.

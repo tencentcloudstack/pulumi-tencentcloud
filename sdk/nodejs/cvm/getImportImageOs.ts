@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const importImageOs = tencentcloud.Cvm.getImportImageOs({});
+ * const importImageOs = tencentcloud.cvm.getImportImageOs({});
  * ```
  */
 export function getImportImageOs(args?: GetImportImageOsArgs, opts?: pulumi.InvokeOptions): Promise<GetImportImageOsResult> {
@@ -63,7 +63,7 @@ export interface GetImportImageOsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const importImageOs = tencentcloud.Cvm.getImportImageOs({});
+ * const importImageOs = tencentcloud.cvm.getImportImageOs({});
  * ```
  */
 export function getImportImageOsOutput(args?: GetImportImageOsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImportImageOsResult> {
@@ -81,5 +81,5 @@ export interface GetImportImageOsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

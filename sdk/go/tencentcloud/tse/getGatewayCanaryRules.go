@@ -72,12 +72,8 @@ type LookupGatewayCanaryRulesResult struct {
 }
 
 func LookupGatewayCanaryRulesOutput(ctx *pulumi.Context, args LookupGatewayCanaryRulesOutputArgs, opts ...pulumi.InvokeOption) LookupGatewayCanaryRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGatewayCanaryRulesResultOutput, error) {
-			args := v.(LookupGatewayCanaryRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args, LookupGatewayCanaryRulesResultOutput{}, options).(LookupGatewayCanaryRulesResultOutput), nil
-		}).(LookupGatewayCanaryRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args, LookupGatewayCanaryRulesResultOutput{}, options).(LookupGatewayCanaryRulesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayCanaryRules.

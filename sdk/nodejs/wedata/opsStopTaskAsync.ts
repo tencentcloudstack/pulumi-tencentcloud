@@ -100,15 +100,15 @@ export interface OpsStopTaskAsyncState {
     /**
      * Whether to terminate the generated instance, the default is false; if true, it will wait for all forces to terminate.
      */
-    killInstance?: pulumi.Input<boolean>;
+    killInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Task id list.
      */
-    taskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    taskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -118,7 +118,7 @@ export interface OpsStopTaskAsyncArgs {
     /**
      * Whether to terminate the generated instance, the default is false; if true, it will wait for all forces to terminate.
      */
-    killInstance?: pulumi.Input<boolean>;
+    killInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Project id.
      */

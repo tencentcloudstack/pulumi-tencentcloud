@@ -15,31 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
     public sealed class GetInstancesInstancesListCoreSummaryAttachCbsSpecResult
     {
         /// <summary>
-        /// Total number of disks.
+        /// Disk size. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly int? DiskCount;
+        public readonly int DiskCount;
         /// <summary>
-        /// Description.
+        /// Disk description.
         /// </summary>
-        public readonly string? DiskDesc;
+        public readonly string DiskDesc;
         /// <summary>
         /// Disk capacity, in GB.
         /// </summary>
-        public readonly int? DiskSize;
+        public readonly int DiskSize;
         /// <summary>
-        /// Node disk type, such as CLOUD_SSD, CLOUD_PREMIUM.
+        /// Disk type.
         /// </summary>
-        public readonly string? DiskType;
+        public readonly string DiskType;
 
         [OutputConstructor]
         private GetInstancesInstancesListCoreSummaryAttachCbsSpecResult(
-            int? diskCount,
+            int diskCount,
 
-            string? diskDesc,
+            string diskDesc,
 
-            int? diskSize,
+            int diskSize,
 
-            string? diskType)
+            string diskType)
         {
             DiskCount = diskCount;
             DiskDesc = diskDesc;

@@ -121,7 +121,8 @@ type RoleByName struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	Document    pulumi.StringOutput    `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM role.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A list of tags used to associate different resources.
@@ -169,7 +170,8 @@ type roleByNameState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	Document    *string `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document *string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
 	// A list of tags used to associate different resources.
@@ -185,7 +187,8 @@ type RoleByNameState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringPtrInput
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringPtrInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
@@ -203,7 +206,8 @@ type roleByNameArgs struct {
 	ConsoleLogin *bool `pulumi:"consoleLogin"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	Document    string  `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
 	// A list of tags used to associate different resources.
@@ -216,7 +220,8 @@ type RoleByNameArgs struct {
 	ConsoleLogin pulumi.BoolPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringInput
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
 	// A list of tags used to associate different resources.
@@ -325,6 +330,7 @@ func (o RoleByNameOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RoleByName) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
 func (o RoleByNameOutput) Document() pulumi.StringOutput {
 	return o.ApplyT(func(v *RoleByName) pulumi.StringOutput { return v.Document }).(pulumi.StringOutput)
 }

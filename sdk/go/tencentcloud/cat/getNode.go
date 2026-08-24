@@ -82,12 +82,8 @@ type GetNodeResult struct {
 }
 
 func GetNodeOutput(ctx *pulumi.Context, args GetNodeOutputArgs, opts ...pulumi.InvokeOption) GetNodeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNodeResultOutput, error) {
-			args := v.(GetNodeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cat/getNode:getNode", args, GetNodeResultOutput{}, options).(GetNodeResultOutput), nil
-		}).(GetNodeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cat/getNode:getNode", args, GetNodeResultOutput{}, options).(GetNodeResultOutput)
 }
 
 // A collection of arguments for invoking getNode.

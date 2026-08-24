@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -65,7 +65,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql remote_backup_config can be imported using the id, e.g.
+ * mysql remoteBackupConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/remoteBackupConfig:RemoteBackupConfig remote_backup_config remote_backup_config_id
@@ -173,23 +173,23 @@ export interface RemoteBackupConfigState {
     /**
      * Remote backup retention time, in days.
      */
-    expireDays?: pulumi.Input<number>;
+    expireDays?: pulumi.Input<number | undefined>;
     /**
      * Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Remote data backup switch, off - disable remote backup, on - enable remote backup.
      */
-    remoteBackupSave?: pulumi.Input<string>;
+    remoteBackupSave?: pulumi.Input<string | undefined>;
     /**
      * Off-site log backup switch, off - off off-site backup, on-on off-site backup, only when the parameter RemoteBackupSave is on, the RemoteBinlogSave parameter can be set to on.
      */
-    remoteBinlogSave?: pulumi.Input<string>;
+    remoteBinlogSave?: pulumi.Input<string | undefined>;
     /**
      * User settings off-site backup region list.
      */
-    remoteRegions?: pulumi.Input<pulumi.Input<string>[]>;
+    remoteRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**

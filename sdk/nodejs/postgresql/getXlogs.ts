@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Postgresql.getXlogs({
+ * const foo = tencentcloud.postgresql.getXlogs({
  *     instanceId: "postgres-xxxxxxxx",
  *     startTime: "2022-01-01 00:00:00",
  *     endTime: "2022-01-07 01:02:03",
@@ -86,7 +86,7 @@ export interface GetXlogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Postgresql.getXlogs({
+ * const foo = tencentcloud.postgresql.getXlogs({
  *     instanceId: "postgres-xxxxxxxx",
  *     startTime: "2022-01-01 00:00:00",
  *     endTime: "2022-01-07 01:02:03",
@@ -110,7 +110,7 @@ export interface GetXlogsOutputArgs {
     /**
      * Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * PostgreSQL instance id.
      */
@@ -118,9 +118,9 @@ export interface GetXlogsOutputArgs {
     /**
      * Used for save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Xlog start time, format `yyyy-MM-dd hh:mm:ss`, start time cannot before 7 days ago.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql backup_download_restriction can be imported using the "BackupDownloadRestriction", as follows.
+ * mysql backupDownloadRestriction can be imported using the "BackupDownloadRestriction", as follows.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
@@ -125,23 +125,23 @@ export interface BackupDownloadRestrictionState {
     /**
      * In: The specified ip can be downloaded; NotIn: The specified ip cannot be downloaded. The default is In.
      */
-    ipComparisonSymbol?: pulumi.Input<string>;
+    ipComparisonSymbol?: pulumi.Input<string | undefined>;
     /**
      * ip settings to limit downloads.
      */
-    limitIps?: pulumi.Input<pulumi.Input<string>[]>;
+    limitIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * NoLimit No limit, both internal and external networks can be downloaded; LimitOnlyIntranet Only intranet can be downloaded; Customize user-defined vpc:ip can be downloaded. LimitVpc and LimitIp can be set only when the value is Customize.
      */
-    limitType?: pulumi.Input<string>;
+    limitType?: pulumi.Input<string | undefined>;
     /**
      * vpc settings to limit downloads.
      */
-    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Mysql.BackupDownloadRestrictionLimitVpc>[]>;
+    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Mysql.BackupDownloadRestrictionLimitVpc>[] | undefined>;
     /**
      * This parameter only supports In, which means that the vpc specified by LimitVpc can be downloaded. The default is In.
      */
-    vpcComparisonSymbol?: pulumi.Input<string>;
+    vpcComparisonSymbol?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -151,11 +151,11 @@ export interface BackupDownloadRestrictionArgs {
     /**
      * In: The specified ip can be downloaded; NotIn: The specified ip cannot be downloaded. The default is In.
      */
-    ipComparisonSymbol?: pulumi.Input<string>;
+    ipComparisonSymbol?: pulumi.Input<string | undefined>;
     /**
      * ip settings to limit downloads.
      */
-    limitIps?: pulumi.Input<pulumi.Input<string>[]>;
+    limitIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * NoLimit No limit, both internal and external networks can be downloaded; LimitOnlyIntranet Only intranet can be downloaded; Customize user-defined vpc:ip can be downloaded. LimitVpc and LimitIp can be set only when the value is Customize.
      */
@@ -163,9 +163,9 @@ export interface BackupDownloadRestrictionArgs {
     /**
      * vpc settings to limit downloads.
      */
-    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Mysql.BackupDownloadRestrictionLimitVpc>[]>;
+    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Mysql.BackupDownloadRestrictionLimitVpc>[] | undefined>;
     /**
      * This parameter only supports In, which means that the vpc specified by LimitVpc can be downloaded. The default is In.
      */
-    vpcComparisonSymbol?: pulumi.Input<string>;
+    vpcComparisonSymbol?: pulumi.Input<string | undefined>;
 }

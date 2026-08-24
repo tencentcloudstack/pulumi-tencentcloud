@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     /// <summary>
-    /// Provides a resource to create a cynosdb BackupConfig
+    /// Provides a resource to create a CynosDB backup config
     /// 
     /// ## Example Usage
     /// 
@@ -25,11 +25,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Cynosdb.BackupConfig("foo", new()
+    ///     var example = new Tencentcloud.Cynosdb.Cluster("example", new()
     ///     {
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         DbMode = "NORMAL",
+    ///         DbType = "MYSQL",
+    ///         DbVersion = "5.7",
+    ///         Port = 3306,
+    ///         ClusterName = "tf-example",
+    ///         Password = "cynosDB@123",
+    ///         InstanceMaintainDuration = 7200,
+    ///         InstanceMaintainStartTime = 10800,
+    ///         InstanceCpuCore = 2,
+    ///         InstanceMemorySize = 4,
+    ///         ForceDelete = true,
+    ///         InstanceMaintainWeekdays = new[]
+    ///         {
+    ///             "Fri",
+    ///             "Mon",
+    ///             "Sat",
+    ///             "Sun",
+    ///             "Thu",
+    ///             "Wed",
+    ///             "Tue",
+    ///         },
+    ///         ParamItems = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "character_set_server",
+    ///                 CurrentValue = "utf8mb4",
+    ///             },
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "lower_case_table_names",
+    ///                 CurrentValue = "1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleBackupConfig = new Tencentcloud.Cynosdb.BackupConfig("example", new()
+    ///     {
+    ///         ClusterId = example.Id,
     ///         BackupTimeBeg = 7200,
     ///         BackupTimeEnd = 21600,
-    ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         ReserveDuration = 604800,
     ///         LogicBackupConfig = new Tencentcloud.Cynosdb.Inputs.BackupConfigLogicBackupConfigArgs
     ///         {
@@ -41,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///                 "ap-shanghai",
     ///             },
     ///             LogicCrossRegionsEnable = "ON",
-    ///             LogicReserveDuration = 259200,
+    ///             LogicReserveDuration = 604800,
     ///         },
     ///     });
     /// 
@@ -58,11 +103,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Cynosdb.BackupConfig("foo", new()
+    ///     var example = new Tencentcloud.Cynosdb.BackupConfig("example", new()
     ///     {
+    ///         ClusterId = exampleTencentcloudCynosdbCluster.Id,
     ///         BackupTimeBeg = 7200,
     ///         BackupTimeEnd = 21600,
-    ///         ClusterId = "cynosdbmysql-bws8h88b",
     ///         ReserveDuration = 604800,
     ///         LogicBackupConfig = new Tencentcloud.Cynosdb.Inputs.BackupConfigLogicBackupConfigArgs
     ///         {
@@ -73,12 +118,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ### Enable secondary snapshot backup configuration
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cynosdb.BackupConfig("example", new()
+    ///     {
+    ///         ClusterId = exampleTencentcloudCynosdbCluster.Id,
+    ///         BackupTimeBeg = 7200,
+    ///         BackupTimeEnd = 21600,
+    ///         ReserveDuration = 604800,
+    ///         SnapshotSecondaryBackupConfig = new Tencentcloud.Cynosdb.Inputs.BackupConfigSnapshotSecondaryBackupConfigArgs
+    ///         {
+    ///             BackupTimeBeg = 7200,
+    ///             BackupTimeEnd = 21600,
+    ///             ReserveDuration = 604800,
+    ///             BackupTriggerStrategy = "periodically",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
-    /// cynosdb backup_config can be imported using the id, e.g.
+    /// CynosDB backup config can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig foo cynosdbmysql-bws8h88b
+    /// $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig example cynosdbmysql-bws8h88b
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/backupConfig:BackupConfig")]
@@ -118,13 +191,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
         /// </summary>
         [Output("logicBackupConfig")]
-        public Output<Outputs.BackupConfigLogicBackupConfig?> LogicBackupConfig { get; private set; } = null!;
+        public Output<Outputs.BackupConfigLogicBackupConfig> LogicBackupConfig { get; private set; } = null!;
 
         /// <summary>
         /// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
         /// </summary>
         [Output("reserveDuration")]
         public Output<int> ReserveDuration { get; private set; } = null!;
+
+        /// <summary>
+        /// Secondary snapshot backup configuration.
+        /// </summary>
+        [Output("snapshotSecondaryBackupConfig")]
+        public Output<Outputs.BackupConfigSnapshotSecondaryBackupConfig> SnapshotSecondaryBackupConfig { get; private set; } = null!;
 
 
         /// <summary>
@@ -203,6 +282,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         [Input("reserveDuration", required: true)]
         public Input<int> ReserveDuration { get; set; } = null!;
 
+        /// <summary>
+        /// Secondary snapshot backup configuration.
+        /// </summary>
+        [Input("snapshotSecondaryBackupConfig")]
+        public Input<Inputs.BackupConfigSnapshotSecondaryBackupConfigArgs>? SnapshotSecondaryBackupConfig { get; set; }
+
         public BackupConfigArgs()
         {
         }
@@ -258,6 +343,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("reserveDuration")]
         public Input<int>? ReserveDuration { get; set; }
+
+        /// <summary>
+        /// Secondary snapshot backup configuration.
+        /// </summary>
+        [Input("snapshotSecondaryBackupConfig")]
+        public Input<Inputs.BackupConfigSnapshotSecondaryBackupConfigGetArgs>? SnapshotSecondaryBackupConfig { get; set; }
 
         public BackupConfigState()
         {

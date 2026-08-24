@@ -115,15 +115,15 @@ export interface GatewayCcnRouteState {
     /**
      * As path list of the BGP.
      */
-    asPaths?: pulumi.Input<pulumi.Input<string>[]>;
+    asPaths?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A network address segment of IDC.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * ID of the DCG.
      */
-    dcgId?: pulumi.Input<string>;
+    dcgId?: pulumi.Input<string | undefined>;
 }
 
 /**

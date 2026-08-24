@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewSsl(ctx, "cynosdb_ssl", &cynosdb.SslArgs{
+//			_, err := cynosdb.NewSsl(ctx, "example", &cynosdb.SslArgs{
 //				ClusterId:  pulumi.String("cynosdbmysql-1e0nzayx"),
 //				InstanceId: pulumi.String("cynosdbmysql-ins-pfsv6q1e"),
 //				Status:     pulumi.String("ON"),
@@ -44,10 +44,10 @@ import (
 //
 // ## Import
 //
-// cynosdb ssl can be imported using the id, e.g.
+// cynosdb ssl can be imported using the clusterId#instanceId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cynosdb/ssl:Ssl cynosdb_ssl ${cluster_id}#${instance_id}
+// $ pulumi import tencentcloud:Cynosdb/ssl:Ssl example cynosdbmysql-1e0nzayx#cynosdbmysql-ins-pfsv6q1e
 // ```
 type Ssl struct {
 	pulumi.CustomResourceState

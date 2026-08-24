@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a mps adaptiveDynamicStreamingTemplate
+ * Provides a resource to create a MPS adaptive dynamic streaming template
  *
  * ## Example Usage
  *
@@ -15,12 +15,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const adaptiveDynamicStreamingTemplate = new tencentcloud.mps.AdaptiveDynamicStreamingTemplate("adaptive_dynamic_streaming_template", {
+ * const example = new tencentcloud.mps.AdaptiveDynamicStreamingTemplate("example", {
+ *     name: "tf-example",
  *     comment: "terrraform test",
  *     disableHigherVideoBitrate: 0,
  *     disableHigherVideoResolution: 1,
  *     format: "HLS",
- *     name: "terrraform-test",
+ *     pureAudio: 0,
+ *     segmentType: "ts-segment",
  *     streamInfos: [
  *         {
  *             removeAudio: 0,
@@ -70,10 +72,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps adaptive_dynamic_streaming_template can be imported using the id, e.g.
+ * MPS adaptive dynamic streaming template can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
+ * $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate example 1636009
  * ```
  */
 export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
@@ -125,6 +127,35 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+     * When the value is 1.
+     * 1. StreamInfos.N.RemoveVideo=1
+     * 2. StreamInfos.N.RemoveAudio=0
+     * 3. StreamInfos.N.Video.Codec=copy
+     *    When the value is 0.
+     * 4. StreamInfos.N.Video.Codec cannot be copy.
+     * 5. StreamInfos.N.Video.Fps cannot be null.
+     *    Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+     */
+    declare public readonly pureAudio: pulumi.Output<number>;
+    /**
+     * Segment type. Valid values:
+     * ts-segment: HLS+TS segment
+     * ts-byterange: HLS+TS byte range
+     * mp4-segment: HLS+MP4 segment
+     * mp4-byterange: HLS/DASH+MP4 byte range
+     * ts-packed-audio: HLS+TS+Packed Audio segment
+     * mp4-packed-audio: HLS+MP4+Packed Audio segment
+     * ts-ts-segment: HLS+TS+TS segment
+     * ts-ts-byterange: HLS+TS+TS byte range
+     * mp4-mp4-segment: HLS+MP4+MP4 segment
+     * mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+     * ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+     * mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+     * Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+     */
+    declare public readonly segmentType: pulumi.Output<string>;
+    /**
      * Convert adaptive code stream to output sub-stream parameter information, and output up to 10 sub-streams.Note: The frame rate of each sub-stream must be consistent; if not, the frame rate of the first sub-stream is used as the output frame rate.
      */
     declare public readonly streamInfos: pulumi.Output<outputs.Mps.AdaptiveDynamicStreamingTemplateStreamInfo[]>;
@@ -147,6 +178,8 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
             resourceInputs["disableHigherVideoResolution"] = state?.disableHigherVideoResolution;
             resourceInputs["format"] = state?.format;
             resourceInputs["name"] = state?.name;
+            resourceInputs["pureAudio"] = state?.pureAudio;
+            resourceInputs["segmentType"] = state?.segmentType;
             resourceInputs["streamInfos"] = state?.streamInfos;
         } else {
             const args = argsOrState as AdaptiveDynamicStreamingTemplateArgs | undefined;
@@ -161,6 +194,8 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
             resourceInputs["disableHigherVideoResolution"] = args?.disableHigherVideoResolution;
             resourceInputs["format"] = args?.format;
             resourceInputs["name"] = args?.name;
+            resourceInputs["pureAudio"] = args?.pureAudio;
+            resourceInputs["segmentType"] = args?.segmentType;
             resourceInputs["streamInfos"] = args?.streamInfos;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -175,27 +210,56 @@ export interface AdaptiveDynamicStreamingTemplateState {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Whether to prohibit video from low bit rate to high bit rate, value range:0: no.1: yes.Default value: 0.
      */
-    disableHigherVideoBitrate?: pulumi.Input<number>;
+    disableHigherVideoBitrate?: pulumi.Input<number | undefined>;
     /**
      * Whether to prohibit the conversion of video resolution to high resolution, value range:0: no.1: yes.Default value: 0.
      */
-    disableHigherVideoResolution?: pulumi.Input<number>;
+    disableHigherVideoResolution?: pulumi.Input<number | undefined>;
     /**
      * Adaptive transcoding format, value range:HLS, MPEG-DASH.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+     * When the value is 1.
+     * 1. StreamInfos.N.RemoveVideo=1
+     * 2. StreamInfos.N.RemoveAudio=0
+     * 3. StreamInfos.N.Video.Codec=copy
+     *    When the value is 0.
+     * 4. StreamInfos.N.Video.Codec cannot be copy.
+     * 5. StreamInfos.N.Video.Fps cannot be null.
+     *    Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+     */
+    pureAudio?: pulumi.Input<number | undefined>;
+    /**
+     * Segment type. Valid values:
+     * ts-segment: HLS+TS segment
+     * ts-byterange: HLS+TS byte range
+     * mp4-segment: HLS+MP4 segment
+     * mp4-byterange: HLS/DASH+MP4 byte range
+     * ts-packed-audio: HLS+TS+Packed Audio segment
+     * mp4-packed-audio: HLS+MP4+Packed Audio segment
+     * ts-ts-segment: HLS+TS+TS segment
+     * ts-ts-byterange: HLS+TS+TS byte range
+     * mp4-mp4-segment: HLS+MP4+MP4 segment
+     * mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+     * ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+     * mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+     * Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+     */
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * Convert adaptive code stream to output sub-stream parameter information, and output up to 10 sub-streams.Note: The frame rate of each sub-stream must be consistent; if not, the frame rate of the first sub-stream is used as the output frame rate.
      */
-    streamInfos?: pulumi.Input<pulumi.Input<inputs.Mps.AdaptiveDynamicStreamingTemplateStreamInfo>[]>;
+    streamInfos?: pulumi.Input<pulumi.Input<inputs.Mps.AdaptiveDynamicStreamingTemplateStreamInfo>[] | undefined>;
 }
 
 /**
@@ -205,15 +269,15 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
     /**
      * Template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Whether to prohibit video from low bit rate to high bit rate, value range:0: no.1: yes.Default value: 0.
      */
-    disableHigherVideoBitrate?: pulumi.Input<number>;
+    disableHigherVideoBitrate?: pulumi.Input<number | undefined>;
     /**
      * Whether to prohibit the conversion of video resolution to high resolution, value range:0: no.1: yes.Default value: 0.
      */
-    disableHigherVideoResolution?: pulumi.Input<number>;
+    disableHigherVideoResolution?: pulumi.Input<number | undefined>;
     /**
      * Adaptive transcoding format, value range:HLS, MPEG-DASH.
      */
@@ -221,7 +285,36 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
     /**
      * Template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Indicates whether it is audio-only. 0 means video template, 1 means audio-only template.
+     * When the value is 1.
+     * 1. StreamInfos.N.RemoveVideo=1
+     * 2. StreamInfos.N.RemoveAudio=0
+     * 3. StreamInfos.N.Video.Codec=copy
+     *    When the value is 0.
+     * 4. StreamInfos.N.Video.Codec cannot be copy.
+     * 5. StreamInfos.N.Video.Fps cannot be null.
+     *    Note: This value only distinguishes template types. The task uses the values of RemoveAudio and RemoveVideo.
+     */
+    pureAudio?: pulumi.Input<number | undefined>;
+    /**
+     * Segment type. Valid values:
+     * ts-segment: HLS+TS segment
+     * ts-byterange: HLS+TS byte range
+     * mp4-segment: HLS+MP4 segment
+     * mp4-byterange: HLS/DASH+MP4 byte range
+     * ts-packed-audio: HLS+TS+Packed Audio segment
+     * mp4-packed-audio: HLS+MP4+Packed Audio segment
+     * ts-ts-segment: HLS+TS+TS segment
+     * ts-ts-byterange: HLS+TS+TS byte range
+     * mp4-mp4-segment: HLS+MP4+MP4 segment
+     * mp4-mp4-byterange: HLS/DASH+MP4+MP4 byte range
+     * ts-packed-audio-byterange: HLS+TS+Packed Audio byte range
+     * mp4-packed-audio-byterange: HLS+MP4+Packed Audio byte range.
+     * Default value: ts-segment. Note: The segment format for adaptive bitrate streaming is determined by this field. For DASH format, SegmentType can only be mp4-byterange or mp4-mp4-byterange.
+     */
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * Convert adaptive code stream to output sub-stream parameter information, and output up to 10 sub-streams.Note: The frame rate of each sub-stream must be consistent; if not, the frame rate of the first sub-stream is used as the output frame rate.
      */

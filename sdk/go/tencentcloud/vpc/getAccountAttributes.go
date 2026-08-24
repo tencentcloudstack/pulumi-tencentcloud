@@ -62,12 +62,8 @@ type GetAccountAttributesResult struct {
 }
 
 func GetAccountAttributesOutput(ctx *pulumi.Context, args GetAccountAttributesOutputArgs, opts ...pulumi.InvokeOption) GetAccountAttributesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccountAttributesResultOutput, error) {
-			args := v.(GetAccountAttributesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args, GetAccountAttributesResultOutput{}, options).(GetAccountAttributesResultOutput), nil
-		}).(GetAccountAttributesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args, GetAccountAttributesResultOutput{}, options).(GetAccountAttributesResultOutput)
 }
 
 // A collection of arguments for invoking getAccountAttributes.

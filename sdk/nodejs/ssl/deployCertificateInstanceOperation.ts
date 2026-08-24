@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl deploy_certificate_instance can be imported using the id, e.g.
+ * ssl deployCertificateInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
@@ -118,19 +118,19 @@ export interface DeployCertificateInstanceOperationState {
     /**
      * ID of the certificate to be deployed.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Need to deploy instance list.
      */
-    instanceIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Deployed cloud resource type.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Deployment cloud resource status: Live: -1: The domain name is not associated with a certificate.1:  Domain name https is enabled.0:  Domain name https is closed.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -148,9 +148,9 @@ export interface DeployCertificateInstanceOperationArgs {
     /**
      * Deployed cloud resource type.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Deployment cloud resource status: Live: -1: The domain name is not associated with a certificate.1:  Domain name https is enabled.0:  Domain name https is closed.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

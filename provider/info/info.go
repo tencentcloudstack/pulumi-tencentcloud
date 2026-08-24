@@ -163,6 +163,19 @@ func GetResourceInfo(mainPkg string) map[string]*tfbridge.ResourceInfo {
 			info[item.Key] = &tfbridge.ResourceInfo{
 				Tok: tfbridge.MakeResource(mainPkg, item.Module, "WeDataDataSource"),
 			}
+		} else if item.Key == "tencentcloud_waf_object" {
+			// The generated class name "Object" is a reserved built-in in
+			// TypeScript and cannot be declared when module is NodeNext
+			// (error TS2725), breaking the entire nodejs SDK build. Rename
+			// the entity to WafObject and alias the original token so
+			// existing state stays valid.
+			oldTok := mainPkg + ":Waf/object:Object"
+			info[item.Key] = &tfbridge.ResourceInfo{
+				Tok: tfbridge.MakeResource(mainPkg, item.Module, "WafObject"),
+				Aliases: []tfbridge.AliasInfo{
+					{Type: &oldTok},
+				},
+			}
 		} else {
 			info[item.Key] = &tfbridge.ResourceInfo{
 				Tok: tfbridge.MakeResource(mainPkg, item.Module, item.Resource),

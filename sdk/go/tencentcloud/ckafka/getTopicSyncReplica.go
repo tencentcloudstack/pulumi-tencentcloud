@@ -74,12 +74,8 @@ type GetTopicSyncReplicaResult struct {
 }
 
 func GetTopicSyncReplicaOutput(ctx *pulumi.Context, args GetTopicSyncReplicaOutputArgs, opts ...pulumi.InvokeOption) GetTopicSyncReplicaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTopicSyncReplicaResultOutput, error) {
-			args := v.(GetTopicSyncReplicaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args, GetTopicSyncReplicaResultOutput{}, options).(GetTopicSyncReplicaResultOutput), nil
-		}).(GetTopicSyncReplicaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", args, GetTopicSyncReplicaResultOutput{}, options).(GetTopicSyncReplicaResultOutput)
 }
 
 // A collection of arguments for invoking getTopicSyncReplica.

@@ -14,10 +14,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
     public sealed class IndexRuleTagKeyValueValueArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Field alias.
+        /// </summary>
+        [Input("alias")]
+        public Input<string>? Alias { get; set; }
+
+        [Input("childNodes")]
+        private InputList<Inputs.IndexRuleTagKeyValueValueChildNodeArgs>? _childNodes;
+
+        /// <summary>
+        /// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+        /// </summary>
+        public InputList<Inputs.IndexRuleTagKeyValueValueChildNodeArgs> ChildNodes
+        {
+            get => _childNodes ?? (_childNodes = new InputList<Inputs.IndexRuleTagKeyValueValueChildNodeArgs>());
+            set => _childNodes = value;
+        }
+
+        /// <summary>
         /// Whether Chinese characters are contained.
         /// </summary>
         [Input("containZH")]
         public Input<bool>? ContainZH { get; set; }
+
+        /// <summary>
+        /// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+        /// </summary>
+        [Input("openIndexForChildOnly")]
+        public Input<bool>? OpenIndexForChildOnly { get; set; }
 
         /// <summary>
         /// Whether the analysis feature is enabled for the field.

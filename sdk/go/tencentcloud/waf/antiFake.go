@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// waf anti_fake can be imported using the id, e.g.
+// waf antiFake can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com

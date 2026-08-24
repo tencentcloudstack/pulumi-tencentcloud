@@ -71,7 +71,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor tmpAlertRule can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
  * ```
@@ -199,39 +198,39 @@ export interface TmpAlertRuleState {
     /**
      * Rule alarm duration.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleAnnotation>[] | undefined>;
     /**
      * Rule alarm duration.
      */
-    duration?: pulumi.Input<string>;
+    duration?: pulumi.Input<string | undefined>;
     /**
      * Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
      */
-    expr?: pulumi.Input<string>;
+    expr?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Rule alarm duration.
      */
-    labels?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleLabel>[]>;
+    labels?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleLabel>[] | undefined>;
     /**
      * Alarm notification template id list.
      */
-    receivers?: pulumi.Input<pulumi.Input<string>[]>;
+    receivers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Rule name.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Rule state code.
      */
-    ruleState?: pulumi.Input<number>;
+    ruleState?: pulumi.Input<number | undefined>;
     /**
      * Alarm Policy Template Classification.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -241,11 +240,11 @@ export interface TmpAlertRuleArgs {
     /**
      * Rule alarm duration.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleAnnotation>[] | undefined>;
     /**
      * Rule alarm duration.
      */
-    duration?: pulumi.Input<string>;
+    duration?: pulumi.Input<string | undefined>;
     /**
      * Rule expression, reference documentation: `https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/`.
      */
@@ -257,7 +256,7 @@ export interface TmpAlertRuleArgs {
     /**
      * Rule alarm duration.
      */
-    labels?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleLabel>[]>;
+    labels?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpAlertRuleLabel>[] | undefined>;
     /**
      * Alarm notification template id list.
      */
@@ -269,9 +268,9 @@ export interface TmpAlertRuleArgs {
     /**
      * Rule state code.
      */
-    ruleState?: pulumi.Input<number>;
+    ruleState?: pulumi.Input<number | undefined>;
     /**
      * Alarm Policy Template Classification.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

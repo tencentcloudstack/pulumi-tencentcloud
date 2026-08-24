@@ -39,7 +39,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// ## Import
     /// 
     /// css watermark can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/watermark:Watermark watermark watermark_id
     /// ```

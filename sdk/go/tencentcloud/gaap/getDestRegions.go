@@ -62,12 +62,8 @@ type GetDestRegionsResult struct {
 }
 
 func GetDestRegionsOutput(ctx *pulumi.Context, args GetDestRegionsOutputArgs, opts ...pulumi.InvokeOption) GetDestRegionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDestRegionsResultOutput, error) {
-			args := v.(GetDestRegionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getDestRegions:getDestRegions", args, GetDestRegionsResultOutput{}, options).(GetDestRegionsResultOutput), nil
-		}).(GetDestRegionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getDestRegions:getDestRegions", args, GetDestRegionsResultOutput{}, options).(GetDestRegionsResultOutput)
 }
 
 // A collection of arguments for invoking getDestRegions.

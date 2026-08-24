@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
+ * const example = tencentcloud.dlc.getCheckDataEngineImageCanBeRollback({
  *     dataEngineId: "DataEngine-cgkvbas6",
  * });
  * const exampleRollbackDataEngineImageOperation = new tencentcloud.dlc.RollbackDataEngineImageOperation("example", {
@@ -101,15 +101,15 @@ export interface RollbackDataEngineImageOperationState {
     /**
      * Engine ID.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * FromRecordId parameters returned by the API for checking the availability of rolling back.
      */
-    fromRecordId?: pulumi.Input<string>;
+    fromRecordId?: pulumi.Input<string | undefined>;
     /**
      * ToRecordId parameters returned by the API for checking the availability of rolling back.
      */
-    toRecordId?: pulumi.Input<string>;
+    toRecordId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -123,9 +123,9 @@ export interface RollbackDataEngineImageOperationArgs {
     /**
      * FromRecordId parameters returned by the API for checking the availability of rolling back.
      */
-    fromRecordId?: pulumi.Input<string>;
+    fromRecordId?: pulumi.Input<string | undefined>;
     /**
      * ToRecordId parameters returned by the API for checking the availability of rolling back.
      */
-    toRecordId?: pulumi.Input<string>;
+    toRecordId?: pulumi.Input<string | undefined>;
 }

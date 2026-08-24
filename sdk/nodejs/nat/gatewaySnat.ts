@@ -13,13 +13,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "nat",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     osName: "centos",
  * });
- * const instanceTypes = zones.then(zones => tencentcloud.Instance.getTypes({
+ * const instanceTypes = zones.then(zones => tencentcloud.instance.getTypes({
  *     filters: [
  *         {
  *             name: "zone",
@@ -106,15 +106,14 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+ * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId`, e.g.
  *
  * SUBNET SNat
- *
  * ```sh
  * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
  * ```
- * NETWORKINTERFACT SNat
  *
+ * NETWORKINTERFACT SNat
  * ```sh
  * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
  * ```
@@ -248,43 +247,43 @@ export interface GatewaySnatState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, required when `resourceType` is NETWORKINTERFACE.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
      */
-    instancePrivateIpAddr?: pulumi.Input<string>;
+    instancePrivateIpAddr?: pulumi.Input<string | undefined>;
     /**
      * NAT gateway ID.
      */
-    natGatewayId?: pulumi.Input<string>;
+    natGatewayId?: pulumi.Input<string | undefined>;
     /**
      * Elastic IP address pool.
      */
-    publicIpAddrs?: pulumi.Input<pulumi.Input<string>[]>;
+    publicIpAddrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * SNAT rule ID.
      */
-    snatId?: pulumi.Input<string>;
+    snatId?: pulumi.Input<string | undefined>;
     /**
      * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
      */
-    subnetCidrBlock?: pulumi.Input<string>;
+    subnetCidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID, required when `resourceType` is SUBNET.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -298,11 +297,11 @@ export interface GatewaySnatArgs {
     /**
      * Instance ID, required when `resourceType` is NETWORKINTERFACE.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
      */
-    instancePrivateIpAddr?: pulumi.Input<string>;
+    instancePrivateIpAddr?: pulumi.Input<string | undefined>;
     /**
      * NAT gateway ID.
      */
@@ -318,9 +317,9 @@ export interface GatewaySnatArgs {
     /**
      * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
      */
-    subnetCidrBlock?: pulumi.Input<string>;
+    subnetCidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID, required when `resourceType` is SUBNET.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }

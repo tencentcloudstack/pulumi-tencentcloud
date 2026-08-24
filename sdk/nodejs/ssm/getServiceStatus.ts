@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getServiceStatus({});
+ * const example = tencentcloud.ssm.getServiceStatus({});
  * ```
  */
 export function getServiceStatus(args?: GetServiceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceStatusResult> {
@@ -65,7 +65,7 @@ export interface GetServiceStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getServiceStatus({});
+ * const example = tencentcloud.ssm.getServiceStatus({});
  * ```
  */
 export function getServiceStatusOutput(args?: GetServiceStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServiceStatusResult> {
@@ -83,5 +83,5 @@ export interface GetServiceStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

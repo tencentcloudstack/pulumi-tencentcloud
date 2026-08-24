@@ -88,12 +88,8 @@ type GetSecurityAuditLogExportTasksResult struct {
 }
 
 func GetSecurityAuditLogExportTasksOutput(ctx *pulumi.Context, args GetSecurityAuditLogExportTasksOutputArgs, opts ...pulumi.InvokeOption) GetSecurityAuditLogExportTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityAuditLogExportTasksResultOutput, error) {
-			args := v.(GetSecurityAuditLogExportTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args, GetSecurityAuditLogExportTasksResultOutput{}, options).(GetSecurityAuditLogExportTasksResultOutput), nil
-		}).(GetSecurityAuditLogExportTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args, GetSecurityAuditLogExportTasksResultOutput{}, options).(GetSecurityAuditLogExportTasksResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityAuditLogExportTasks.

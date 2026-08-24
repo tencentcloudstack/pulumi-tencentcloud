@@ -102,6 +102,18 @@ export class DataTransform extends pulumi.CustomResource {
     }
 
     /**
+     * When `funcType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `false`. `false`: Create backup logset and topic and write logs to the backup topic; `true`: Discard log data.
+     */
+    declare public readonly backupGiveUpData: pulumi.Output<boolean | undefined>;
+    /**
+     * Associated data source information.
+     */
+    declare public readonly dataTransformSqlDataSources: pulumi.Output<outputs.Cls.DataTransformDataTransformSqlDataSource[] | undefined>;
+    /**
+     * Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+     */
+    declare public readonly dataTransformType: pulumi.Output<number | undefined>;
+    /**
      * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
     declare public readonly dstResources: pulumi.Output<outputs.Cls.DataTransformDstResource[] | undefined>;
@@ -110,17 +122,41 @@ export class DataTransform extends pulumi.CustomResource {
      */
     declare public readonly enableFlag: pulumi.Output<number | undefined>;
     /**
+     * Set environment variables.
+     */
+    declare public readonly envInfos: pulumi.Output<outputs.Cls.DataTransformEnvInfo[] | undefined>;
+    /**
      * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
     declare public readonly etlContent: pulumi.Output<string>;
+    /**
+     * Field name for failure logs.
+     */
+    declare public readonly failureLogKey: pulumi.Output<string>;
     /**
      * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
     declare public readonly funcType: pulumi.Output<number>;
     /**
+     * Whether to enable service log delivery. `1`: disable; `2`: enable.
+     */
+    declare public readonly hasServicesLog: pulumi.Output<number>;
+    /**
+     * Keep failure log status. `1`: do not keep (default); `2`: keep.
+     */
+    declare public readonly keepFailureLog: pulumi.Output<number>;
+    /**
      * Task name.
      */
     declare public readonly name: pulumi.Output<string>;
+    /**
+     * Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+     */
+    declare public readonly processFromTimestamp: pulumi.Output<number>;
+    /**
+     * Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+     */
+    declare public readonly processToTimestamp: pulumi.Output<number | undefined>;
     /**
      * Source topic ID.
      */
@@ -143,11 +179,20 @@ export class DataTransform extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DataTransformState | undefined;
+            resourceInputs["backupGiveUpData"] = state?.backupGiveUpData;
+            resourceInputs["dataTransformSqlDataSources"] = state?.dataTransformSqlDataSources;
+            resourceInputs["dataTransformType"] = state?.dataTransformType;
             resourceInputs["dstResources"] = state?.dstResources;
             resourceInputs["enableFlag"] = state?.enableFlag;
+            resourceInputs["envInfos"] = state?.envInfos;
             resourceInputs["etlContent"] = state?.etlContent;
+            resourceInputs["failureLogKey"] = state?.failureLogKey;
             resourceInputs["funcType"] = state?.funcType;
+            resourceInputs["hasServicesLog"] = state?.hasServicesLog;
+            resourceInputs["keepFailureLog"] = state?.keepFailureLog;
             resourceInputs["name"] = state?.name;
+            resourceInputs["processFromTimestamp"] = state?.processFromTimestamp;
+            resourceInputs["processToTimestamp"] = state?.processToTimestamp;
             resourceInputs["srcTopicId"] = state?.srcTopicId;
             resourceInputs["taskType"] = state?.taskType;
         } else {
@@ -164,11 +209,20 @@ export class DataTransform extends pulumi.CustomResource {
             if (args?.taskType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'taskType'");
             }
+            resourceInputs["backupGiveUpData"] = args?.backupGiveUpData;
+            resourceInputs["dataTransformSqlDataSources"] = args?.dataTransformSqlDataSources;
+            resourceInputs["dataTransformType"] = args?.dataTransformType;
             resourceInputs["dstResources"] = args?.dstResources;
             resourceInputs["enableFlag"] = args?.enableFlag;
+            resourceInputs["envInfos"] = args?.envInfos;
             resourceInputs["etlContent"] = args?.etlContent;
+            resourceInputs["failureLogKey"] = args?.failureLogKey;
             resourceInputs["funcType"] = args?.funcType;
+            resourceInputs["hasServicesLog"] = args?.hasServicesLog;
+            resourceInputs["keepFailureLog"] = args?.keepFailureLog;
             resourceInputs["name"] = args?.name;
+            resourceInputs["processFromTimestamp"] = args?.processFromTimestamp;
+            resourceInputs["processToTimestamp"] = args?.processToTimestamp;
             resourceInputs["srcTopicId"] = args?.srcTopicId;
             resourceInputs["taskType"] = args?.taskType;
         }
@@ -182,33 +236,69 @@ export class DataTransform extends pulumi.CustomResource {
  */
 export interface DataTransformState {
     /**
+     * When `funcType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `false`. `false`: Create backup logset and topic and write logs to the backup topic; `true`: Discard log data.
+     */
+    backupGiveUpData?: pulumi.Input<boolean | undefined>;
+    /**
+     * Associated data source information.
+     */
+    dataTransformSqlDataSources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDataTransformSqlDataSource>[] | undefined>;
+    /**
+     * Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+     */
+    dataTransformType?: pulumi.Input<number | undefined>;
+    /**
      * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
-    dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[]>;
+    dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[] | undefined>;
     /**
      * Task enable flag. `1`: enable, `2`: disable, Default is `1`.
      */
-    enableFlag?: pulumi.Input<number>;
+    enableFlag?: pulumi.Input<number | undefined>;
+    /**
+     * Set environment variables.
+     */
+    envInfos?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformEnvInfo>[] | undefined>;
     /**
      * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
-    etlContent?: pulumi.Input<string>;
+    etlContent?: pulumi.Input<string | undefined>;
+    /**
+     * Field name for failure logs.
+     */
+    failureLogKey?: pulumi.Input<string | undefined>;
     /**
      * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
-    funcType?: pulumi.Input<number>;
+    funcType?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable service log delivery. `1`: disable; `2`: enable.
+     */
+    hasServicesLog?: pulumi.Input<number | undefined>;
+    /**
+     * Keep failure log status. `1`: do not keep (default); `2`: keep.
+     */
+    keepFailureLog?: pulumi.Input<number | undefined>;
     /**
      * Task name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+     */
+    processFromTimestamp?: pulumi.Input<number | undefined>;
+    /**
+     * Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+     */
+    processToTimestamp?: pulumi.Input<number | undefined>;
     /**
      * Source topic ID.
      */
-    srcTopicId?: pulumi.Input<string>;
+    srcTopicId?: pulumi.Input<string | undefined>;
     /**
      * Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
      */
-    taskType?: pulumi.Input<number>;
+    taskType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -216,25 +306,61 @@ export interface DataTransformState {
  */
 export interface DataTransformArgs {
     /**
+     * When `funcType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `false`. `false`: Create backup logset and topic and write logs to the backup topic; `true`: Discard log data.
+     */
+    backupGiveUpData?: pulumi.Input<boolean | undefined>;
+    /**
+     * Associated data source information.
+     */
+    dataTransformSqlDataSources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDataTransformSqlDataSource>[] | undefined>;
+    /**
+     * Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+     */
+    dataTransformType?: pulumi.Input<number | undefined>;
+    /**
      * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
-    dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[]>;
+    dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[] | undefined>;
     /**
      * Task enable flag. `1`: enable, `2`: disable, Default is `1`.
      */
-    enableFlag?: pulumi.Input<number>;
+    enableFlag?: pulumi.Input<number | undefined>;
+    /**
+     * Set environment variables.
+     */
+    envInfos?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformEnvInfo>[] | undefined>;
     /**
      * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
     etlContent: pulumi.Input<string>;
     /**
+     * Field name for failure logs.
+     */
+    failureLogKey?: pulumi.Input<string | undefined>;
+    /**
      * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
     funcType: pulumi.Input<number>;
     /**
+     * Whether to enable service log delivery. `1`: disable; `2`: enable.
+     */
+    hasServicesLog?: pulumi.Input<number | undefined>;
+    /**
+     * Keep failure log status. `1`: do not keep (default); `2`: keep.
+     */
+    keepFailureLog?: pulumi.Input<number | undefined>;
+    /**
      * Task name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+     */
+    processFromTimestamp?: pulumi.Input<number | undefined>;
+    /**
+     * Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+     */
+    processToTimestamp?: pulumi.Input<number | undefined>;
     /**
      * Source topic ID.
      */

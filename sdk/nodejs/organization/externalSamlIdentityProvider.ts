@@ -153,47 +153,47 @@ export interface ExternalSamlIdentityProviderState {
     /**
      * Another certificate ID.
      */
-    anotherCertificateId?: pulumi.Input<string>;
+    anotherCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Another X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    anotherX509Certificate?: pulumi.Input<string>;
+    anotherX509Certificate?: pulumi.Input<string | undefined>;
     /**
      * Certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * IdP metadata document (Base64 encoded). Provided by an IdP that supports the SAML 2.0 protocol.
      */
-    encodedMetadataDocument?: pulumi.Input<string>;
+    encodedMetadataDocument?: pulumi.Input<string | undefined>;
     /**
      * IdP identifier.
      */
-    entityId?: pulumi.Input<string>;
+    entityId?: pulumi.Input<string | undefined>;
     /**
      * IdP login URL.
      */
-    loginUrl?: pulumi.Input<string>;
+    loginUrl?: pulumi.Input<string | undefined>;
     /**
      * SSO enabling status. Valid values: Enabled, Disabled (default).
      */
-    ssoStatus?: pulumi.Input<string>;
+    ssoStatus?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    x509Certificate?: pulumi.Input<string>;
+    x509Certificate?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -203,27 +203,27 @@ export interface ExternalSamlIdentityProviderArgs {
     /**
      * Another X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    anotherX509Certificate?: pulumi.Input<string>;
+    anotherX509Certificate?: pulumi.Input<string | undefined>;
     /**
      * IdP metadata document (Base64 encoded). Provided by an IdP that supports the SAML 2.0 protocol.
      */
-    encodedMetadataDocument?: pulumi.Input<string>;
+    encodedMetadataDocument?: pulumi.Input<string | undefined>;
     /**
      * IdP identifier.
      */
-    entityId?: pulumi.Input<string>;
+    entityId?: pulumi.Input<string | undefined>;
     /**
      * IdP login URL.
      */
-    loginUrl?: pulumi.Input<string>;
+    loginUrl?: pulumi.Input<string | undefined>;
     /**
      * SSO enabling status. Valid values: Enabled, Disabled (default).
      */
-    ssoStatus?: pulumi.Input<string>;
+    ssoStatus?: pulumi.Input<string | undefined>;
     /**
      * X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    x509Certificate?: pulumi.Input<string>;
+    x509Certificate?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -206,15 +206,19 @@ export class Instance extends pulumi.CustomResource {
      * - `BASIC_V2`: ONTKE single-node instance,
      * - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
      * - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
-     * If it is not specified, it defaults to a universal instance.
+     *   If it is not specified, it defaults to a universal instance.
      */
     declare public readonly deviceType: pulumi.Output<string>;
+    /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    declare public readonly diskType: pulumi.Output<string>;
     /**
      * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
      */
     declare public readonly engineType: pulumi.Output<string>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
     declare public readonly engineVersion: pulumi.Output<string | undefined>;
     /**
@@ -369,6 +373,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["clusterTopology"] = state?.clusterTopology;
             resourceInputs["cpu"] = state?.cpu;
             resourceInputs["deviceType"] = state?.deviceType;
+            resourceInputs["diskType"] = state?.diskType;
             resourceInputs["engineType"] = state?.engineType;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["fastUpgrade"] = state?.fastUpgrade;
@@ -420,6 +425,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["clusterTopology"] = args?.clusterTopology;
             resourceInputs["cpu"] = args?.cpu;
             resourceInputs["deviceType"] = args?.deviceType;
+            resourceInputs["diskType"] = args?.diskType;
             resourceInputs["engineType"] = args?.engineType;
             resourceInputs["engineVersion"] = args?.engineVersion;
             resourceInputs["fastUpgrade"] = args?.fastUpgrade;
@@ -469,23 +475,23 @@ export interface InstanceState {
     /**
      * Auto renew flag. NOTES: Only supported prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Indicates which availability zone will be used.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
      */
-    clusterTopology?: pulumi.Input<inputs.Mysql.InstanceClusterTopology>;
+    clusterTopology?: pulumi.Input<inputs.Mysql.InstanceClusterTopology | undefined>;
     /**
      * CPU cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Specify device type, available values:
      * - `UNIVERSAL` (default): universal instance,
@@ -493,149 +499,153 @@ export interface InstanceState {
      * - `BASIC_V2`: ONTKE single-node instance,
      * - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
      * - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
-     * If it is not specified, it defaults to a universal instance.
+     *   If it is not specified, it defaults to a universal instance.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
      */
-    fastUpgrade?: pulumi.Input<number>;
+    fastUpgrade?: pulumi.Input<number | undefined>;
     /**
      * Zone information about first slave instance.
      */
-    firstSlaveZone?: pulumi.Input<string>;
+    firstSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether GTID is enable. `0` - Not enabled; `1` - Enabled.
      */
-    gtid?: pulumi.Input<number>;
+    gtid?: pulumi.Input<number | undefined>;
     /**
      * The name of a mysql instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * host for public access.
      */
-    internetHost?: pulumi.Input<string>;
+    internetHost?: pulumi.Input<string | undefined>;
     /**
      * Access port for public access.
      */
-    internetPort?: pulumi.Input<number>;
+    internetPort?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
      */
-    internetService?: pulumi.Input<number>;
+    internetService?: pulumi.Input<number | undefined>;
     /**
      * instance intranet IP.
      */
-    intranetIp?: pulumi.Input<string>;
+    intranetIp?: pulumi.Input<string | undefined>;
     /**
      * Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
      */
-    intranetPort?: pulumi.Input<number>;
+    intranetPort?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether the instance is locked. Valid values: `0`, `1`. `0` - No; `1` - Yes.
      */
-    locked?: pulumi.Input<number>;
+    locked?: pulumi.Input<number | undefined>;
     /**
      * Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
      */
-    maxDeayTime?: pulumi.Input<number>;
+    maxDeayTime?: pulumi.Input<number | undefined>;
     /**
      * Memory size (in MB).
      */
-    memSize?: pulumi.Input<number>;
+    memSize?: pulumi.Input<number | undefined>;
     /**
      * Specify parameter template id.
      */
-    paramTemplateId?: pulumi.Input<number>;
+    paramTemplateId?: pulumi.Input<number | undefined>;
     /**
      * List of parameters to use.
      */
-    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
-    payType?: pulumi.Input<number>;
+    payType?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Period of instance. NOTES: Only supported prepaid instance.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
-    rootPassword?: pulumi.Input<string>;
+    rootPassword?: pulumi.Input<string | undefined>;
     /**
      * Zone information about second slave instance.
      */
-    secondSlaveZone?: pulumi.Input<string>;
+    secondSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Security groups to use.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones. Readonly instance settings are not supported.
      */
-    slaveDeployMode?: pulumi.Input<number>;
+    slaveDeployMode?: pulumi.Input<number | undefined>;
     /**
      * Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
      */
-    slaveSyncMode?: pulumi.Input<number>;
+    slaveSyncMode?: pulumi.Input<number | undefined>;
     /**
      * Instance status. Valid values: `0`, `1`, `4`, `5`. `0` - Creating; `1` - Running; `4` - Isolating; `5` - Isolated.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Indicates which kind of operations is being executed.
      */
-    taskStatus?: pulumi.Input<number>;
+    taskStatus?: pulumi.Input<number | undefined>;
     /**
      * Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
      */
-    upgradeSubversion?: pulumi.Input<number>;
+    upgradeSubversion?: pulumi.Input<number | undefined>;
     /**
      * Disk size (in GB).
      */
-    volumeSize?: pulumi.Input<number>;
+    volumeSize?: pulumi.Input<number | undefined>;
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -645,23 +655,23 @@ export interface InstanceArgs {
     /**
      * Auto renew flag. NOTES: Only supported prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Indicates which availability zone will be used.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
      */
-    clusterTopology?: pulumi.Input<inputs.Mysql.InstanceClusterTopology>;
+    clusterTopology?: pulumi.Input<inputs.Mysql.InstanceClusterTopology | undefined>;
     /**
      * CPU cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Specify device type, available values:
      * - `UNIVERSAL` (default): universal instance,
@@ -669,29 +679,33 @@ export interface InstanceArgs {
      * - `BASIC_V2`: ONTKE single-node instance,
      * - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
      * - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
-     * If it is not specified, it defaults to a universal instance.
+     *   If it is not specified, it defaults to a universal instance.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+     */
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
-     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+     * The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
      */
-    fastUpgrade?: pulumi.Input<number>;
+    fastUpgrade?: pulumi.Input<number | undefined>;
     /**
      * Zone information about first slave instance.
      */
-    firstSlaveZone?: pulumi.Input<string>;
+    firstSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * The name of a mysql instance.
      */
@@ -699,15 +713,15 @@ export interface InstanceArgs {
     /**
      * Indicates whether to enable the access to an instance from public network: 0 - No, 1 - Yes.
      */
-    internetService?: pulumi.Input<number>;
+    internetService?: pulumi.Input<number | undefined>;
     /**
      * Public access port. Valid value ranges: [1024~65535]. The default value is `3306`.
      */
-    intranetPort?: pulumi.Input<number>;
+    intranetPort?: pulumi.Input<number | undefined>;
     /**
      * Latency threshold. Value range 1~10. Only need to fill in when upgrading kernel subversion and engine version.
      */
-    maxDeayTime?: pulumi.Input<number>;
+    maxDeayTime?: pulumi.Input<number | undefined>;
     /**
      * Memory size (in MB).
      */
@@ -715,63 +729,63 @@ export interface InstanceArgs {
     /**
      * Specify parameter template id.
      */
-    paramTemplateId?: pulumi.Input<number>;
+    paramTemplateId?: pulumi.Input<number | undefined>;
     /**
      * List of parameters to use.
      */
-    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    parameters?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
-    payType?: pulumi.Input<number>;
+    payType?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
      *
      * @deprecated It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Period of instance. NOTES: Only supported prepaid instance.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
-    rootPassword?: pulumi.Input<string>;
+    rootPassword?: pulumi.Input<string | undefined>;
     /**
      * Zone information about second slave instance.
      */
-    secondSlaveZone?: pulumi.Input<string>;
+    secondSlaveZone?: pulumi.Input<string | undefined>;
     /**
      * Security groups to use.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones. Readonly instance settings are not supported.
      */
-    slaveDeployMode?: pulumi.Input<number>;
+    slaveDeployMode?: pulumi.Input<number | undefined>;
     /**
      * Data replication mode. 0 - Async replication; 1 - Semisync replication; 2 - Strongsync replication.
      */
-    slaveSyncMode?: pulumi.Input<number>;
+    slaveSyncMode?: pulumi.Input<number | undefined>;
     /**
      * Private network ID. If `vpcId` is set, this value is required.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Whether it is a kernel subversion upgrade, supported values: 1 - upgrade the kernel subversion; 0 - upgrade the database engine version. Only need to fill in when upgrading kernel subversion and engine version.
      */
-    upgradeSubversion?: pulumi.Input<number>;
+    upgradeSubversion?: pulumi.Input<number | undefined>;
     /**
      * Disk size (in GB).
      */
@@ -779,9 +793,9 @@ export interface InstanceArgs {
     /**
      * ID of VPC, which can be modified once every 24 hours and can't be removed.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Switch the method of accessing new instances, default is `0`. Supported values include: `0` - switch immediately, `1` - switch in time window.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }

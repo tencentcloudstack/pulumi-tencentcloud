@@ -70,7 +70,7 @@ import (
 //
 // ## Import
 //
-// ci media_video_montage_template can be imported using the bucket#templateId, e.g.
+// ci mediaVideoMontageTemplate can be imported using the bucket#templateId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaVideoMontageTemplate:MediaVideoMontageTemplate media_video_montage_template terraform-ci-xxxxxx#t193e5ecc1b8154e57a8376b4405ad9c63

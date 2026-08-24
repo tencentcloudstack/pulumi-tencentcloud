@@ -104,15 +104,15 @@ export interface ResourceFolderState {
     /**
      * Folder name.
      */
-    folderName?: pulumi.Input<string>;
+    folderName?: pulumi.Input<string | undefined>;
     /**
      * Absolute path of parent folder, value example/wedata/test, root directory, please use/.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**

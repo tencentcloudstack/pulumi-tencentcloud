@@ -114,15 +114,15 @@ export interface ResetAccountPasswordState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * New password.
      */
-    newPassword?: pulumi.Input<string>;
+    newPassword?: pulumi.Input<string | undefined>;
     /**
      * Username.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**

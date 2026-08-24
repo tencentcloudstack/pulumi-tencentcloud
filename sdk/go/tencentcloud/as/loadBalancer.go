@@ -44,7 +44,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -52,8 +52,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -77,12 +77,12 @@ import (
 //			}
 //			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(1),
 //				MinSize:          pulumi.Int(0),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -91,8 +91,8 @@ import (
 //			exampleInstance, err := clb.NewInstance(ctx, "example", &clb.InstanceArgs{
 //				NetworkType: pulumi.String("INTERNAL"),
 //				ClbName:     pulumi.String("tf-example"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("Terraform"),
 //				},
@@ -101,7 +101,7 @@ import (
 //				return err
 //			}
 //			exampleListener, err := clb.NewListener(ctx, "example", &clb.ListenerArgs{
-//				ClbId:        exampleInstance.ID(),
+//				ClbId:        exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				ListenerName: pulumi.String("tf-example"),
 //				Port:         pulumi.Int(80),
 //				Protocol:     pulumi.String("HTTP"),
@@ -111,7 +111,7 @@ import (
 //			}
 //			exampleListenerRule, err := clb.NewListenerRule(ctx, "example", &clb.ListenerRuleArgs{
 //				ListenerId: exampleListener.ListenerId,
-//				ClbId:      exampleInstance.ID(),
+//				ClbId:      exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("foo.net"),
 //				Url:        pulumi.String("/bar"),
 //			})
@@ -119,10 +119,10 @@ import (
 //				return err
 //			}
 //			_, err = as.NewLoadBalancer(ctx, "example", &as.LoadBalancerArgs{
-//				AutoScalingGroupId: exampleScalingGroup.ID(),
+//				AutoScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
 //				ForwardLoadBalancers: as.LoadBalancerForwardLoadBalancerArray{
 //					&as.LoadBalancerForwardLoadBalancerArgs{
-//						LoadBalancerId: exampleInstance.ID(),
+//						LoadBalancerId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //						ListenerId:     exampleListener.ListenerId,
 //						LocationId:     exampleListenerRule.RuleId,
 //						TargetAttributes: as.LoadBalancerForwardLoadBalancerTargetAttributeArray{

@@ -107,25 +107,25 @@ export interface EventConfigState {
     /**
      * Whether to receive video deletion completion event notification, default `OFF` is to ignore the event notification, `ON` is to receive event notification.
      */
-    deleteMediaCompleteEventSwitch?: pulumi.Input<string>;
+    deleteMediaCompleteEventSwitch?: pulumi.Input<string | undefined>;
     /**
      * How to receive event notifications. Valid values:
      * - Push: HTTP callback notification;
      * - PULL: Reliable notification based on message queuing.
      */
-    mode?: pulumi.Input<string>;
+    mode?: pulumi.Input<string | undefined>;
     /**
      * The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.
      */
-    notificationUrl?: pulumi.Input<string>;
+    notificationUrl?: pulumi.Input<string | undefined>;
     /**
      * Sub app id.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Whether to receive video upload completion event notification, default `OFF` means to ignore the event notification, `ON` means to receive event notification.
      */
-    uploadMediaCompleteEventSwitch?: pulumi.Input<string>;
+    uploadMediaCompleteEventSwitch?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -135,17 +135,17 @@ export interface EventConfigArgs {
     /**
      * Whether to receive video deletion completion event notification, default `OFF` is to ignore the event notification, `ON` is to receive event notification.
      */
-    deleteMediaCompleteEventSwitch?: pulumi.Input<string>;
+    deleteMediaCompleteEventSwitch?: pulumi.Input<string | undefined>;
     /**
      * How to receive event notifications. Valid values:
      * - Push: HTTP callback notification;
      * - PULL: Reliable notification based on message queuing.
      */
-    mode?: pulumi.Input<string>;
+    mode?: pulumi.Input<string | undefined>;
     /**
      * The address used to receive 3.0 format callbacks when receiving HTTP callback notifications. Note: If you take the NotificationUrl parameter and the value is an empty string, the 3.0 format callback address is cleared.
      */
-    notificationUrl?: pulumi.Input<string>;
+    notificationUrl?: pulumi.Input<string | undefined>;
     /**
      * Sub app id.
      */
@@ -153,5 +153,5 @@ export interface EventConfigArgs {
     /**
      * Whether to receive video upload completion event notification, default `OFF` means to ignore the event notification, `ON` means to receive event notification.
      */
-    uploadMediaCompleteEventSwitch?: pulumi.Input<string>;
+    uploadMediaCompleteEventSwitch?: pulumi.Input<string | undefined>;
 }

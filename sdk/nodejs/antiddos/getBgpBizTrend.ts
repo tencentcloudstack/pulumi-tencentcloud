@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bgpBizTrend = tencentcloud.Antiddos.getBgpBizTrend({
+ * const bgpBizTrend = tencentcloud.antiddos.getBgpBizTrend({
  *     business: "bgp-multip",
  *     startTime: "2023-11-22 09:25:00",
  *     endTime: "2023-11-22 10:25:00",
@@ -107,7 +107,7 @@ export interface GetBgpBizTrendResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bgpBizTrend = tencentcloud.Antiddos.getBgpBizTrend({
+ * const bgpBizTrend = tencentcloud.antiddos.getBgpBizTrend({
  *     business: "bgp-multip",
  *     startTime: "2023-11-22 09:25:00",
  *     endTime: "2023-11-22 10:25:00",
@@ -157,7 +157,7 @@ export interface GetBgpBizTrendOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Statistic start time.
      */

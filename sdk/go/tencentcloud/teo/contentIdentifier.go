@@ -67,6 +67,8 @@ type ContentIdentifier struct {
 	ModifiedOn pulumi.StringOutput `pulumi:"modifiedOn"`
 	// Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
 	PlanId pulumi.StringOutput `pulumi:"planId"`
+	// Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+	Status pulumi.StringOutput `pulumi:"status"`
 	// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
 	Tags ContentIdentifierTagArrayOutput `pulumi:"tags"`
 }
@@ -117,6 +119,8 @@ type contentIdentifierState struct {
 	ModifiedOn *string `pulumi:"modifiedOn"`
 	// Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
 	PlanId *string `pulumi:"planId"`
+	// Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+	Status *string `pulumi:"status"`
 	// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
 	Tags []ContentIdentifierTag `pulumi:"tags"`
 }
@@ -132,6 +136,8 @@ type ContentIdentifierState struct {
 	ModifiedOn pulumi.StringPtrInput
 	// Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
 	PlanId pulumi.StringPtrInput
+	// Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+	Status pulumi.StringPtrInput
 	// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
 	Tags ContentIdentifierTagArrayInput
 }
@@ -269,6 +275,11 @@ func (o ContentIdentifierOutput) ModifiedOn() pulumi.StringOutput {
 // Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
 func (o ContentIdentifierOutput) PlanId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ContentIdentifier) pulumi.StringOutput { return v.PlanId }).(pulumi.StringOutput)
+}
+
+// Content identifier status. Valid values: `active` (effective), `deleted` (deleted).
+func (o ContentIdentifierOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v *ContentIdentifier) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
 // Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).

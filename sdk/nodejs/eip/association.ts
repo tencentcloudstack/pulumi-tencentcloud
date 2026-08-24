@@ -68,7 +68,9 @@ export class Association extends pulumi.CustomResource {
      */
     declare public readonly eipId: pulumi.Output<string>;
     /**
-     * The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
+     * The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+     * Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+     * Mutual exclusivity: This field conflicts with `networkInterfaceId` and `privateIp`. Only one association target can be specified per request.
      */
     declare public readonly instanceId: pulumi.Output<string>;
     /**
@@ -121,23 +123,25 @@ export interface AssociationState {
     /**
      * ID of the dedicated cluster.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * The ID of EIP.
      */
-    eipId?: pulumi.Input<string>;
+    eipId?: pulumi.Input<string | undefined>;
     /**
-     * The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
+     * The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+     * Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+     * Mutual exclusivity: This field conflicts with `networkInterfaceId` and `privateIp`. Only one association target can be specified per request.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -149,15 +153,17 @@ export interface AssociationArgs {
      */
     eipId: pulumi.Input<string>;
     /**
-     * The CVM, SaaS WAF or CLB instance id going to bind with the EIP. This field is conflict with `networkInterfaceId` and `privateIp fields`.
+     * The ID of the target resource to associate with the Elastic IP (EIP). Supported targets include a CVM instance, SaaS WAF instance, CLB instance, or a VPC endpoint.
+     * Limitation (GWLB VPC endpoint): Only an EIP in the bound state can be associated with a GWLB-type VPC endpoint through this field, enabling more advanced networking scenarios.
+     * Mutual exclusivity: This field conflicts with `networkInterfaceId` and `privateIp`. Only one association target can be specified per request.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Indicates the network interface id like `eni-xxxxxx`. This field is conflict with `instanceId`.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * Indicates an IP belongs to the `networkInterfaceId`. This field is conflict with `instanceId`.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
 }

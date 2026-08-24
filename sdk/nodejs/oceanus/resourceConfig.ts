@@ -139,23 +139,23 @@ export interface ResourceConfigState {
     /**
      * Resource description.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Resource location.
      */
-    resourceLoc?: pulumi.Input<inputs.Oceanus.ResourceConfigResourceLoc>;
+    resourceLoc?: pulumi.Input<inputs.Oceanus.ResourceConfigResourceLoc | undefined>;
     /**
      * Resource Config Version.
      */
-    version?: pulumi.Input<number>;
+    version?: pulumi.Input<number | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -165,7 +165,7 @@ export interface ResourceConfigArgs {
     /**
      * Resource description.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource ID.
      */
@@ -177,5 +177,5 @@ export interface ResourceConfigArgs {
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

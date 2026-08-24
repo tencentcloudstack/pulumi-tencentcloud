@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// css domain_referer can be imported using the id, e.g.
+// css domainReferer can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName

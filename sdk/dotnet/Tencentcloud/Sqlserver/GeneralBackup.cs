@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -100,10 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Import
     /// 
-    /// sqlserver general_backups can be imported using the id, e.g.
+    /// sqlserver GeneralBackups can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Sqlserver/generalBackup:GeneralBackup example mssql-qelbzgwf#3512621#5293#2020-07-31 14:28:51#2020-07-31 15:10:27#autoed_instance_58037_20200728011545.bak.tar
+    /// terraform import tencentcloud_sqlserver_general_backups.example mssql-qelbzgwf#3512621#5293#2020-07-31 14:28:51#2020-07-31 15:10:27#autoed_instance_58037_20200728011545.bak.tar
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/generalBackup:GeneralBackup")]

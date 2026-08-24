@@ -40,6 +40,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// });
     /// ```
     /// 
+    /// ### CLS key-value index configuration example
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Apm.Instance("example", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         Description = "desc.",
+    ///         IsRelatedLog = 1,
+    ///         LogIndexType = 1,
+    ///         LogTraceIdKey = "traceId",
+    ///         LogSpanIdKey = "spanId",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// APM instance can be imported using the id, e.g.
@@ -52,10 +75,196 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// List of custom display tags.
+        /// </summary>
+        [Output("customShowTags")]
+        public Output<ImmutableArray<string>> CustomShowTags { get; private set; } = null!;
+
+        /// <summary>
+        /// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+        /// </summary>
+        [Output("dashboardTopicId")]
+        public Output<string?> DashboardTopicId { get; private set; } = null!;
+
+        /// <summary>
         /// Description Of Instance.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+        /// </summary>
+        [Output("errRateThreshold")]
+        public Output<int> ErrRateThreshold { get; private set; } = null!;
+
+        /// <summary>
+        /// Error sampling switch (0: off, 1: on).
+        /// </summary>
+        [Output("errorSample")]
+        public Output<int> ErrorSample { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+        /// </summary>
+        [Output("free")]
+        public Output<int> Free { get; private set; } = null!;
+
+        /// <summary>
+        /// APM instance ID.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+        /// </summary>
+        [Output("isDeleteAnyFileAnalysis")]
+        public Output<int> IsDeleteAnyFileAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isDeserializationAnalysis")]
+        public Output<int> IsDeserializationAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isDirectoryTraversalAnalysis")]
+        public Output<int> IsDirectoryTraversalAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isExpressionInjectionAnalysis")]
+        public Output<int> IsExpressionInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+        /// </summary>
+        [Output("isIncludeAnyFileAnalysis")]
+        public Output<int> IsIncludeAnyFileAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+        /// </summary>
+        [Output("isInstrumentationVulnerabilityScan")]
+        public Output<int> IsInstrumentationVulnerabilityScan { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isJndiInjectionAnalysis")]
+        public Output<int> IsJndiInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+        /// </summary>
+        [Output("isJniInjectionAnalysis")]
+        public Output<int> IsJniInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable detection of Java webshell.
+        /// </summary>
+        [Output("isMemoryHijackingAnalysis")]
+        public Output<int> IsMemoryHijackingAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isReadAnyFileAnalysis")]
+        public Output<int> IsReadAnyFileAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to associate the dashboard (0 = off, 1 = on).
+        /// </summary>
+        [Output("isRelatedDashboard")]
+        public Output<int> IsRelatedDashboard { get; private set; } = null!;
+
+        /// <summary>
+        /// Log feature switch (0: off; 1: on).
+        /// </summary>
+        [Output("isRelatedLog")]
+        public Output<int> IsRelatedLog { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable detection of the remote command attack.
+        /// </summary>
+        [Output("isRemoteCommandExecutionAnalysis")]
+        public Output<int> IsRemoteCommandExecutionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isScriptEngineInjectionAnalysis")]
+        public Output<int> IsScriptEngineInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// SQL injection detection switch (0: off, 1: on).
+        /// </summary>
+        [Output("isSqlInjectionAnalysis")]
+        public Output<int> IsSqlInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+        /// </summary>
+        [Output("isTemplateEngineInjectionAnalysis")]
+        public Output<int> IsTemplateEngineInjectionAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isUploadAnyFileAnalysis")]
+        public Output<int> IsUploadAnyFileAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Output("isWebshellBackdoorAnalysis")]
+        public Output<int> IsWebshellBackdoorAnalysis { get; private set; } = null!;
+
+        /// <summary>
+        /// CLS index type. (0 = full-text index; 1 = key-value index).
+        /// </summary>
+        [Output("logIndexType")]
+        public Output<int> LogIndexType { get; private set; } = null!;
+
+        /// <summary>
+        /// Log region, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Output("logRegion")]
+        public Output<string?> LogRegion { get; private set; } = null!;
+
+        /// <summary>
+        /// Logset, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Output("logSet")]
+        public Output<string?> LogSet { get; private set; } = null!;
+
+        /// <summary>
+        /// Log source, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Output("logSource")]
+        public Output<string?> LogSource { get; private set; } = null!;
+
+        /// <summary>
+        /// Index key of spanId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Output("logSpanIdKey")]
+        public Output<string?> LogSpanIdKey { get; private set; } = null!;
+
+        /// <summary>
+        /// CLS log topic id, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Output("logTopicId")]
+        public Output<string?> LogTopicId { get; private set; } = null!;
+
+        /// <summary>
+        /// Index key of traceId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Output("logTraceIdKey")]
+        public Output<string?> LogTraceIdKey { get; private set; } = null!;
 
         /// <summary>
         /// Name Of Instance.
@@ -64,10 +273,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// Billing switch.
+        /// </summary>
+        [Output("openBilling")]
+        public Output<bool> OpenBilling { get; private set; } = null!;
+
+        /// <summary>
         /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         /// </summary>
         [Output("payMode")]
-        public Output<int?> PayMode { get; private set; } = null!;
+        public Output<int> PayMode { get; private set; } = null!;
 
         /// <summary>
         /// External Network Reporting Address.
@@ -76,10 +291,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public Output<string> PublicCollectorUrl { get; private set; } = null!;
 
         /// <summary>
+        /// Response time warning line.
+        /// </summary>
+        [Output("responseDurationWarningThreshold")]
+        public Output<int> ResponseDurationWarningThreshold { get; private set; } = null!;
+
+        /// <summary>
+        /// Sampling rate (unit: %).
+        /// </summary>
+        [Output("sampleRate")]
+        public Output<int> SampleRate { get; private set; } = null!;
+
+        /// <summary>
+        /// Sampling slow call saving threshold (unit: ms).
+        /// </summary>
+        [Output("slowRequestSavedThreshold")]
+        public Output<int> SlowRequestSavedThreshold { get; private set; } = null!;
+
+        /// <summary>
         /// Quota Of Instance Reporting.
         /// </summary>
         [Output("spanDailyCounters")]
-        public Output<int?> SpanDailyCounters { get; private set; } = null!;
+        public Output<int> SpanDailyCounters { get; private set; } = null!;
 
         /// <summary>
         /// Tag description list.
@@ -98,6 +331,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         /// </summary>
         [Output("traceDuration")]
         public Output<int> TraceDuration { get; private set; } = null!;
+
+        /// <summary>
+        /// Convergence threshold for URL long segments.
+        /// </summary>
+        [Output("urlLongSegmentThreshold")]
+        public Output<int> UrlLongSegmentThreshold { get; private set; } = null!;
+
+        /// <summary>
+        /// Convergence threshold for URL numerical segments.
+        /// </summary>
+        [Output("urlNumberSegmentThreshold")]
+        public Output<int> UrlNumberSegmentThreshold { get; private set; } = null!;
 
 
         /// <summary>
@@ -146,11 +391,197 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
 
     public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("customShowTags")]
+        private InputList<string>? _customShowTags;
+
+        /// <summary>
+        /// List of custom display tags.
+        /// </summary>
+        public InputList<string> CustomShowTags
+        {
+            get => _customShowTags ?? (_customShowTags = new InputList<string>());
+            set => _customShowTags = value;
+        }
+
+        /// <summary>
+        /// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+        /// </summary>
+        [Input("dashboardTopicId")]
+        public Input<string>? DashboardTopicId { get; set; }
+
         /// <summary>
         /// Description Of Instance.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+        /// </summary>
+        [Input("errRateThreshold")]
+        public Input<int>? ErrRateThreshold { get; set; }
+
+        /// <summary>
+        /// Error sampling switch (0: off, 1: on).
+        /// </summary>
+        [Input("errorSample")]
+        public Input<int>? ErrorSample { get; set; }
+
+        /// <summary>
+        /// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+        /// </summary>
+        [Input("free")]
+        public Input<int>? Free { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+        /// </summary>
+        [Input("isDeleteAnyFileAnalysis")]
+        public Input<int>? IsDeleteAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isDeserializationAnalysis")]
+        public Input<int>? IsDeserializationAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isDirectoryTraversalAnalysis")]
+        public Input<int>? IsDirectoryTraversalAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isExpressionInjectionAnalysis")]
+        public Input<int>? IsExpressionInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+        /// </summary>
+        [Input("isIncludeAnyFileAnalysis")]
+        public Input<int>? IsIncludeAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+        /// </summary>
+        [Input("isInstrumentationVulnerabilityScan")]
+        public Input<int>? IsInstrumentationVulnerabilityScan { get; set; }
+
+        /// <summary>
+        /// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isJndiInjectionAnalysis")]
+        public Input<int>? IsJndiInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+        /// </summary>
+        [Input("isJniInjectionAnalysis")]
+        public Input<int>? IsJniInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable detection of Java webshell.
+        /// </summary>
+        [Input("isMemoryHijackingAnalysis")]
+        public Input<int>? IsMemoryHijackingAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isReadAnyFileAnalysis")]
+        public Input<int>? IsReadAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to associate the dashboard (0 = off, 1 = on).
+        /// </summary>
+        [Input("isRelatedDashboard")]
+        public Input<int>? IsRelatedDashboard { get; set; }
+
+        /// <summary>
+        /// Log feature switch (0: off; 1: on).
+        /// </summary>
+        [Input("isRelatedLog")]
+        public Input<int>? IsRelatedLog { get; set; }
+
+        /// <summary>
+        /// Whether to enable detection of the remote command attack.
+        /// </summary>
+        [Input("isRemoteCommandExecutionAnalysis")]
+        public Input<int>? IsRemoteCommandExecutionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isScriptEngineInjectionAnalysis")]
+        public Input<int>? IsScriptEngineInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// SQL injection detection switch (0: off, 1: on).
+        /// </summary>
+        [Input("isSqlInjectionAnalysis")]
+        public Input<int>? IsSqlInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+        /// </summary>
+        [Input("isTemplateEngineInjectionAnalysis")]
+        public Input<int>? IsTemplateEngineInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isUploadAnyFileAnalysis")]
+        public Input<int>? IsUploadAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isWebshellBackdoorAnalysis")]
+        public Input<int>? IsWebshellBackdoorAnalysis { get; set; }
+
+        /// <summary>
+        /// CLS index type. (0 = full-text index; 1 = key-value index).
+        /// </summary>
+        [Input("logIndexType")]
+        public Input<int>? LogIndexType { get; set; }
+
+        /// <summary>
+        /// Log region, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Input("logRegion")]
+        public Input<string>? LogRegion { get; set; }
+
+        /// <summary>
+        /// Logset, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Input("logSet")]
+        public Input<string>? LogSet { get; set; }
+
+        /// <summary>
+        /// Log source, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Input("logSource")]
+        public Input<string>? LogSource { get; set; }
+
+        /// <summary>
+        /// Index key of spanId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Input("logSpanIdKey")]
+        public Input<string>? LogSpanIdKey { get; set; }
+
+        /// <summary>
+        /// CLS log topic id, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Input("logTopicId")]
+        public Input<string>? LogTopicId { get; set; }
+
+        /// <summary>
+        /// Index key of traceId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Input("logTraceIdKey")]
+        public Input<string>? LogTraceIdKey { get; set; }
 
         /// <summary>
         /// Name Of Instance.
@@ -159,10 +590,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Billing switch.
+        /// </summary>
+        [Input("openBilling")]
+        public Input<bool>? OpenBilling { get; set; }
+
+        /// <summary>
         /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
         /// </summary>
         [Input("payMode")]
         public Input<int>? PayMode { get; set; }
+
+        /// <summary>
+        /// Response time warning line.
+        /// </summary>
+        [Input("responseDurationWarningThreshold")]
+        public Input<int>? ResponseDurationWarningThreshold { get; set; }
+
+        /// <summary>
+        /// Sampling rate (unit: %).
+        /// </summary>
+        [Input("sampleRate")]
+        public Input<int>? SampleRate { get; set; }
+
+        /// <summary>
+        /// Sampling slow call saving threshold (unit: ms).
+        /// </summary>
+        [Input("slowRequestSavedThreshold")]
+        public Input<int>? SlowRequestSavedThreshold { get; set; }
 
         /// <summary>
         /// Quota Of Instance Reporting.
@@ -188,6 +643,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         [Input("traceDuration")]
         public Input<int>? TraceDuration { get; set; }
 
+        /// <summary>
+        /// Convergence threshold for URL long segments.
+        /// </summary>
+        [Input("urlLongSegmentThreshold")]
+        public Input<int>? UrlLongSegmentThreshold { get; set; }
+
+        /// <summary>
+        /// Convergence threshold for URL numerical segments.
+        /// </summary>
+        [Input("urlNumberSegmentThreshold")]
+        public Input<int>? UrlNumberSegmentThreshold { get; set; }
+
         public InstanceArgs()
         {
         }
@@ -196,6 +663,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
 
     public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
+        [Input("customShowTags")]
+        private InputList<string>? _customShowTags;
+
+        /// <summary>
+        /// List of custom display tags.
+        /// </summary>
+        public InputList<string> CustomShowTags
+        {
+            get => _customShowTags ?? (_customShowTags = new InputList<string>());
+            set => _customShowTags = value;
+        }
+
+        /// <summary>
+        /// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+        /// </summary>
+        [Input("dashboardTopicId")]
+        public Input<string>? DashboardTopicId { get; set; }
+
         /// <summary>
         /// Description Of Instance.
         /// </summary>
@@ -203,10 +688,190 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+        /// </summary>
+        [Input("errRateThreshold")]
+        public Input<int>? ErrRateThreshold { get; set; }
+
+        /// <summary>
+        /// Error sampling switch (0: off, 1: on).
+        /// </summary>
+        [Input("errorSample")]
+        public Input<int>? ErrorSample { get; set; }
+
+        /// <summary>
+        /// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+        /// </summary>
+        [Input("free")]
+        public Input<int>? Free { get; set; }
+
+        /// <summary>
+        /// APM instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+        /// </summary>
+        [Input("isDeleteAnyFileAnalysis")]
+        public Input<int>? IsDeleteAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isDeserializationAnalysis")]
+        public Input<int>? IsDeserializationAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isDirectoryTraversalAnalysis")]
+        public Input<int>? IsDirectoryTraversalAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isExpressionInjectionAnalysis")]
+        public Input<int>? IsExpressionInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+        /// </summary>
+        [Input("isIncludeAnyFileAnalysis")]
+        public Input<int>? IsIncludeAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+        /// </summary>
+        [Input("isInstrumentationVulnerabilityScan")]
+        public Input<int>? IsInstrumentationVulnerabilityScan { get; set; }
+
+        /// <summary>
+        /// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isJndiInjectionAnalysis")]
+        public Input<int>? IsJndiInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+        /// </summary>
+        [Input("isJniInjectionAnalysis")]
+        public Input<int>? IsJniInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable detection of Java webshell.
+        /// </summary>
+        [Input("isMemoryHijackingAnalysis")]
+        public Input<int>? IsMemoryHijackingAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isReadAnyFileAnalysis")]
+        public Input<int>? IsReadAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to associate the dashboard (0 = off, 1 = on).
+        /// </summary>
+        [Input("isRelatedDashboard")]
+        public Input<int>? IsRelatedDashboard { get; set; }
+
+        /// <summary>
+        /// Log feature switch (0: off; 1: on).
+        /// </summary>
+        [Input("isRelatedLog")]
+        public Input<int>? IsRelatedLog { get; set; }
+
+        /// <summary>
+        /// Whether to enable detection of the remote command attack.
+        /// </summary>
+        [Input("isRemoteCommandExecutionAnalysis")]
+        public Input<int>? IsRemoteCommandExecutionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isScriptEngineInjectionAnalysis")]
+        public Input<int>? IsScriptEngineInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// SQL injection detection switch (0: off, 1: on).
+        /// </summary>
+        [Input("isSqlInjectionAnalysis")]
+        public Input<int>? IsSqlInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+        /// </summary>
+        [Input("isTemplateEngineInjectionAnalysis")]
+        public Input<int>? IsTemplateEngineInjectionAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isUploadAnyFileAnalysis")]
+        public Input<int>? IsUploadAnyFileAnalysis { get; set; }
+
+        /// <summary>
+        /// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+        /// </summary>
+        [Input("isWebshellBackdoorAnalysis")]
+        public Input<int>? IsWebshellBackdoorAnalysis { get; set; }
+
+        /// <summary>
+        /// CLS index type. (0 = full-text index; 1 = key-value index).
+        /// </summary>
+        [Input("logIndexType")]
+        public Input<int>? LogIndexType { get; set; }
+
+        /// <summary>
+        /// Log region, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Input("logRegion")]
+        public Input<string>? LogRegion { get; set; }
+
+        /// <summary>
+        /// Logset, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Input("logSet")]
+        public Input<string>? LogSet { get; set; }
+
+        /// <summary>
+        /// Log source, which takes effect only after the log feature is enabled.
+        /// </summary>
+        [Input("logSource")]
+        public Input<string>? LogSource { get; set; }
+
+        /// <summary>
+        /// Index key of spanId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Input("logSpanIdKey")]
+        public Input<string>? LogSpanIdKey { get; set; }
+
+        /// <summary>
+        /// CLS log topic id, which takes effect after the log feature is enabled.
+        /// </summary>
+        [Input("logTopicId")]
+        public Input<string>? LogTopicId { get; set; }
+
+        /// <summary>
+        /// Index key of traceId. It is valid when the CLS index type is key-value index.
+        /// </summary>
+        [Input("logTraceIdKey")]
+        public Input<string>? LogTraceIdKey { get; set; }
+
+        /// <summary>
         /// Name Of Instance.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Billing switch.
+        /// </summary>
+        [Input("openBilling")]
+        public Input<bool>? OpenBilling { get; set; }
 
         /// <summary>
         /// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
@@ -219,6 +884,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         /// </summary>
         [Input("publicCollectorUrl")]
         public Input<string>? PublicCollectorUrl { get; set; }
+
+        /// <summary>
+        /// Response time warning line.
+        /// </summary>
+        [Input("responseDurationWarningThreshold")]
+        public Input<int>? ResponseDurationWarningThreshold { get; set; }
+
+        /// <summary>
+        /// Sampling rate (unit: %).
+        /// </summary>
+        [Input("sampleRate")]
+        public Input<int>? SampleRate { get; set; }
+
+        /// <summary>
+        /// Sampling slow call saving threshold (unit: ms).
+        /// </summary>
+        [Input("slowRequestSavedThreshold")]
+        public Input<int>? SlowRequestSavedThreshold { get; set; }
 
         /// <summary>
         /// Quota Of Instance Reporting.
@@ -249,6 +932,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
         /// </summary>
         [Input("traceDuration")]
         public Input<int>? TraceDuration { get; set; }
+
+        /// <summary>
+        /// Convergence threshold for URL long segments.
+        /// </summary>
+        [Input("urlLongSegmentThreshold")]
+        public Input<int>? UrlLongSegmentThreshold { get; set; }
+
+        /// <summary>
+        /// Convergence threshold for URL numerical segments.
+        /// </summary>
+        [Input("urlNumberSegmentThreshold")]
+        public Input<int>? UrlNumberSegmentThreshold { get; set; }
 
         public InstanceState()
         {

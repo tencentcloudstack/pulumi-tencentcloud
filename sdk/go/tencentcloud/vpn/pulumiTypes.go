@@ -663,6 +663,162 @@ func (o CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput) Vend
 	}).(pulumi.StringPtrOutput)
 }
 
+type SslServerDnsServers struct {
+	// Primary DNS server address.
+	PrimaryDns *string `pulumi:"primaryDns"`
+	// Secondary DNS server address.
+	SecondaryDns *string `pulumi:"secondaryDns"`
+}
+
+// SslServerDnsServersInput is an input type that accepts SslServerDnsServersArgs and SslServerDnsServersOutput values.
+// You can construct a concrete instance of `SslServerDnsServersInput` via:
+//
+//	SslServerDnsServersArgs{...}
+type SslServerDnsServersInput interface {
+	pulumi.Input
+
+	ToSslServerDnsServersOutput() SslServerDnsServersOutput
+	ToSslServerDnsServersOutputWithContext(context.Context) SslServerDnsServersOutput
+}
+
+type SslServerDnsServersArgs struct {
+	// Primary DNS server address.
+	PrimaryDns pulumi.StringPtrInput `pulumi:"primaryDns"`
+	// Secondary DNS server address.
+	SecondaryDns pulumi.StringPtrInput `pulumi:"secondaryDns"`
+}
+
+func (SslServerDnsServersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SslServerDnsServers)(nil)).Elem()
+}
+
+func (i SslServerDnsServersArgs) ToSslServerDnsServersOutput() SslServerDnsServersOutput {
+	return i.ToSslServerDnsServersOutputWithContext(context.Background())
+}
+
+func (i SslServerDnsServersArgs) ToSslServerDnsServersOutputWithContext(ctx context.Context) SslServerDnsServersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SslServerDnsServersOutput)
+}
+
+func (i SslServerDnsServersArgs) ToSslServerDnsServersPtrOutput() SslServerDnsServersPtrOutput {
+	return i.ToSslServerDnsServersPtrOutputWithContext(context.Background())
+}
+
+func (i SslServerDnsServersArgs) ToSslServerDnsServersPtrOutputWithContext(ctx context.Context) SslServerDnsServersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SslServerDnsServersOutput).ToSslServerDnsServersPtrOutputWithContext(ctx)
+}
+
+// SslServerDnsServersPtrInput is an input type that accepts SslServerDnsServersArgs, SslServerDnsServersPtr and SslServerDnsServersPtrOutput values.
+// You can construct a concrete instance of `SslServerDnsServersPtrInput` via:
+//
+//	        SslServerDnsServersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SslServerDnsServersPtrInput interface {
+	pulumi.Input
+
+	ToSslServerDnsServersPtrOutput() SslServerDnsServersPtrOutput
+	ToSslServerDnsServersPtrOutputWithContext(context.Context) SslServerDnsServersPtrOutput
+}
+
+type sslServerDnsServersPtrType SslServerDnsServersArgs
+
+func SslServerDnsServersPtr(v *SslServerDnsServersArgs) SslServerDnsServersPtrInput {
+	return (*sslServerDnsServersPtrType)(v)
+}
+
+func (*sslServerDnsServersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SslServerDnsServers)(nil)).Elem()
+}
+
+func (i *sslServerDnsServersPtrType) ToSslServerDnsServersPtrOutput() SslServerDnsServersPtrOutput {
+	return i.ToSslServerDnsServersPtrOutputWithContext(context.Background())
+}
+
+func (i *sslServerDnsServersPtrType) ToSslServerDnsServersPtrOutputWithContext(ctx context.Context) SslServerDnsServersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SslServerDnsServersPtrOutput)
+}
+
+type SslServerDnsServersOutput struct{ *pulumi.OutputState }
+
+func (SslServerDnsServersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SslServerDnsServers)(nil)).Elem()
+}
+
+func (o SslServerDnsServersOutput) ToSslServerDnsServersOutput() SslServerDnsServersOutput {
+	return o
+}
+
+func (o SslServerDnsServersOutput) ToSslServerDnsServersOutputWithContext(ctx context.Context) SslServerDnsServersOutput {
+	return o
+}
+
+func (o SslServerDnsServersOutput) ToSslServerDnsServersPtrOutput() SslServerDnsServersPtrOutput {
+	return o.ToSslServerDnsServersPtrOutputWithContext(context.Background())
+}
+
+func (o SslServerDnsServersOutput) ToSslServerDnsServersPtrOutputWithContext(ctx context.Context) SslServerDnsServersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SslServerDnsServers) *SslServerDnsServers {
+		return &v
+	}).(SslServerDnsServersPtrOutput)
+}
+
+// Primary DNS server address.
+func (o SslServerDnsServersOutput) PrimaryDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SslServerDnsServers) *string { return v.PrimaryDns }).(pulumi.StringPtrOutput)
+}
+
+// Secondary DNS server address.
+func (o SslServerDnsServersOutput) SecondaryDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SslServerDnsServers) *string { return v.SecondaryDns }).(pulumi.StringPtrOutput)
+}
+
+type SslServerDnsServersPtrOutput struct{ *pulumi.OutputState }
+
+func (SslServerDnsServersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SslServerDnsServers)(nil)).Elem()
+}
+
+func (o SslServerDnsServersPtrOutput) ToSslServerDnsServersPtrOutput() SslServerDnsServersPtrOutput {
+	return o
+}
+
+func (o SslServerDnsServersPtrOutput) ToSslServerDnsServersPtrOutputWithContext(ctx context.Context) SslServerDnsServersPtrOutput {
+	return o
+}
+
+func (o SslServerDnsServersPtrOutput) Elem() SslServerDnsServersOutput {
+	return o.ApplyT(func(v *SslServerDnsServers) SslServerDnsServers {
+		if v != nil {
+			return *v
+		}
+		var ret SslServerDnsServers
+		return ret
+	}).(SslServerDnsServersOutput)
+}
+
+// Primary DNS server address.
+func (o SslServerDnsServersPtrOutput) PrimaryDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SslServerDnsServers) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PrimaryDns
+	}).(pulumi.StringPtrOutput)
+}
+
+// Secondary DNS server address.
+func (o SslServerDnsServersPtrOutput) SecondaryDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SslServerDnsServers) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecondaryDns
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetConnectionsConnectionList struct {
 	// Create time of the VPN connection.
 	CreateTime string `pulumi:"createTime"`
@@ -1805,6 +1961,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConnectionSecurityGroupPolicyArrayInput)(nil)).Elem(), ConnectionSecurityGroupPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendorInput)(nil)).Elem(), CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrInput)(nil)).Elem(), CustomerGatewayConfigurationDownloadCustomerGatewayVendorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SslServerDnsServersInput)(nil)).Elem(), SslServerDnsServersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SslServerDnsServersPtrInput)(nil)).Elem(), SslServerDnsServersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListInput)(nil)).Elem(), GetConnectionsConnectionListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListArrayInput)(nil)).Elem(), GetConnectionsConnectionListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionsConnectionListSecurityGroupPolicyInput)(nil)).Elem(), GetConnectionsConnectionListSecurityGroupPolicyArgs{})
@@ -1825,6 +1983,8 @@ func init() {
 	pulumi.RegisterOutputType(ConnectionSecurityGroupPolicyArrayOutput{})
 	pulumi.RegisterOutputType(CustomerGatewayConfigurationDownloadCustomerGatewayVendorOutput{})
 	pulumi.RegisterOutputType(CustomerGatewayConfigurationDownloadCustomerGatewayVendorPtrOutput{})
+	pulumi.RegisterOutputType(SslServerDnsServersOutput{})
+	pulumi.RegisterOutputType(SslServerDnsServersPtrOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListArrayOutput{})
 	pulumi.RegisterOutputType(GetConnectionsConnectionListSecurityGroupPolicyOutput{})

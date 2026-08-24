@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// organization identity_center_role_configuration can be imported using the id, e.g.
+// organization identityCenterRoleConfiguration can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Identity/centerRoleConfiguration:CenterRoleConfiguration identity_center_role_configuration ${zoneId}#${roleConfigurationId}

@@ -97,12 +97,8 @@ type GetDomainVerifierResult struct {
 }
 
 func GetDomainVerifierOutput(ctx *pulumi.Context, args GetDomainVerifierOutputArgs, opts ...pulumi.InvokeOption) GetDomainVerifierResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainVerifierResultOutput, error) {
-			args := v.(GetDomainVerifierArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args, GetDomainVerifierResultOutput{}, options).(GetDomainVerifierResultOutput), nil
-		}).(GetDomainVerifierResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args, GetDomainVerifierResultOutput{}, options).(GetDomainVerifierResultOutput)
 }
 
 // A collection of arguments for invoking getDomainVerifier.

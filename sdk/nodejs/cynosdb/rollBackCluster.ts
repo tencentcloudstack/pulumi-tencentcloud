@@ -149,35 +149,35 @@ export interface RollBackClusterState {
     /**
      * The ID of cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Expected rollback Time.
      */
-    expectTime?: pulumi.Input<string>;
+    expectTime?: pulumi.Input<string | undefined>;
     /**
      * Expected Threshold (Obsolete).
      */
-    expectTimeThresh?: pulumi.Input<number>;
+    expectTimeThresh?: pulumi.Input<number | undefined>;
     /**
      * Database list.
      */
-    rollbackDatabases?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackDatabase>[]>;
+    rollbackDatabases?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackDatabase>[] | undefined>;
     /**
      * Rollback ID.
      */
-    rollbackId?: pulumi.Input<number>;
+    rollbackId?: pulumi.Input<number | undefined>;
     /**
      * Rollback mode by time point, full: normal; Db: fast; Table: Extreme speed (default is normal).
      */
-    rollbackMode?: pulumi.Input<string>;
+    rollbackMode?: pulumi.Input<string | undefined>;
     /**
      * Backfile policy timeRollback - Backfile by point in time snapRollback - Backfile by backup file.
      */
-    rollbackStrategy?: pulumi.Input<string>;
+    rollbackStrategy?: pulumi.Input<string | undefined>;
     /**
      * Table list.
      */
-    rollbackTables?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackTable>[]>;
+    rollbackTables?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackTable>[] | undefined>;
 }
 
 /**
@@ -191,15 +191,15 @@ export interface RollBackClusterArgs {
     /**
      * Expected rollback Time.
      */
-    expectTime?: pulumi.Input<string>;
+    expectTime?: pulumi.Input<string | undefined>;
     /**
      * Expected Threshold (Obsolete).
      */
-    expectTimeThresh?: pulumi.Input<number>;
+    expectTimeThresh?: pulumi.Input<number | undefined>;
     /**
      * Database list.
      */
-    rollbackDatabases?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackDatabase>[]>;
+    rollbackDatabases?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackDatabase>[] | undefined>;
     /**
      * Rollback ID.
      */
@@ -207,7 +207,7 @@ export interface RollBackClusterArgs {
     /**
      * Rollback mode by time point, full: normal; Db: fast; Table: Extreme speed (default is normal).
      */
-    rollbackMode?: pulumi.Input<string>;
+    rollbackMode?: pulumi.Input<string | undefined>;
     /**
      * Backfile policy timeRollback - Backfile by point in time snapRollback - Backfile by backup file.
      */
@@ -215,5 +215,5 @@ export interface RollBackClusterArgs {
     /**
      * Table list.
      */
-    rollbackTables?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackTable>[]>;
+    rollbackTables?: pulumi.Input<pulumi.Input<inputs.Cynosdb.RollBackClusterRollbackTable>[] | undefined>;
 }

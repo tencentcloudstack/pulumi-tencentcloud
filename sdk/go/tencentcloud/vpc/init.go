@@ -69,10 +69,20 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PeerConnectRejectOperation{}
 	case "tencentcloud:Vpc/privateNatGateway:PrivateNatGateway":
 		r = &PrivateNatGateway{}
+	case "tencentcloud:Vpc/privateNatGatewayTranslationAclRule:PrivateNatGatewayTranslationAclRule":
+		r = &PrivateNatGatewayTranslationAclRule{}
 	case "tencentcloud:Vpc/privateNatGatewayTranslationNatRule:PrivateNatGatewayTranslationNatRule":
 		r = &PrivateNatGatewayTranslationNatRule{}
+	case "tencentcloud:Vpc/replaceRoutesWithRoutePolicyConfig:ReplaceRoutesWithRoutePolicyConfig":
+		r = &ReplaceRoutesWithRoutePolicyConfig{}
 	case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
 		r = &ResumeSnapshotInstance{}
+	case "tencentcloud:Vpc/routePolicy:RoutePolicy":
+		r = &RoutePolicy{}
+	case "tencentcloud:Vpc/routePolicyAssociation:RoutePolicyAssociation":
+		r = &RoutePolicyAssociation{}
+	case "tencentcloud:Vpc/routePolicyEntries:RoutePolicyEntries":
+		r = &RoutePolicyEntries{}
 	case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
 		r = &SnapshotPolicy{}
 	case "tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment":
@@ -216,12 +226,37 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpc/privateNatGatewayTranslationAclRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpc/privateNatGatewayTranslationNatRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Vpc/replaceRoutesWithRoutePolicyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Vpc/resumeSnapshotInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/routePolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/routePolicyAssociation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vpc/routePolicyEntries",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

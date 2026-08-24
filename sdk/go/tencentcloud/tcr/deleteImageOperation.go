@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf_example_ns"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -57,7 +57,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewDeleteImageOperation(ctx, "example", &tcr.DeleteImageOperationArgs{
-//				RegistryId:     example.ID(),
+//				RegistryId:     example.ID().ToIDOutput().ToStringOutput(),
 //				RepositoryName: pulumi.String("repo"),
 //				ImageVersion:   pulumi.String("v1"),
 //				NamespaceName:  exampleNamespace.Name,

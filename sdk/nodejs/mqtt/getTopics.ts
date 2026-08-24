@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getTopics({
+ * const example = tencentcloud.mqtt.getTopics({
  *     instanceId: "mqtt-g4qgr3gx",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetTopicsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getTopics({
+ * const example = tencentcloud.mqtt.getTopics({
  *     instanceId: "mqtt-g4qgr3gx",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetTopicsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

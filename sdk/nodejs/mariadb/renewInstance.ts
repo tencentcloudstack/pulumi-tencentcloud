@@ -94,11 +94,11 @@ export interface RenewInstanceState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Renewal duration, unit: month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }
 
 /**

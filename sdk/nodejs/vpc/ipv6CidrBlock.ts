@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc ipv6_cidr_block can be imported using the id, e.g.
+ * vpc ipv6CidrBlock can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock example vpc-826mi3hd
@@ -126,19 +126,19 @@ export interface Ipv6CidrBlockState {
     /**
      * Apply for the type of IPv6 Cidr, GUA (Global Unicast Address), ULA (Unique Local Address).
      */
-    addressType?: pulumi.Input<string>;
+    addressType?: pulumi.Input<string | undefined>;
     /**
      * Ipv6 cidr block.
      */
-    ipv6CidrBlock?: pulumi.Input<string>;
+    ipv6CidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Ipv6 cidr block set.
      */
-    ipv6CidrBlockSets?: pulumi.Input<pulumi.Input<inputs.Vpc.Ipv6CidrBlockIpv6CidrBlockSet>[]>;
+    ipv6CidrBlockSets?: pulumi.Input<pulumi.Input<inputs.Vpc.Ipv6CidrBlockIpv6CidrBlockSet>[] | undefined>;
     /**
      * `VPC` instance `ID`, in the form of `vpc-f49l6u0z`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -148,7 +148,7 @@ export interface Ipv6CidrBlockArgs {
     /**
      * Apply for the type of IPv6 Cidr, GUA (Global Unicast Address), ULA (Unique Local Address).
      */
-    addressType?: pulumi.Input<string>;
+    addressType?: pulumi.Input<string | undefined>;
     /**
      * `VPC` instance `ID`, in the form of `vpc-f49l6u0z`.
      */

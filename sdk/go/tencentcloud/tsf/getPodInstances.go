@@ -73,12 +73,8 @@ type LookupPodInstancesResult struct {
 }
 
 func LookupPodInstancesOutput(ctx *pulumi.Context, args LookupPodInstancesOutputArgs, opts ...pulumi.InvokeOption) LookupPodInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupPodInstancesResultOutput, error) {
-			args := v.(LookupPodInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getPodInstances:getPodInstances", args, LookupPodInstancesResultOutput{}, options).(LookupPodInstancesResultOutput), nil
-		}).(LookupPodInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getPodInstances:getPodInstances", args, LookupPodInstancesResultOutput{}, options).(LookupPodInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getPodInstances.

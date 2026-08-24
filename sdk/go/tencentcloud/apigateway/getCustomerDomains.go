@@ -79,12 +79,8 @@ type GetCustomerDomainsResult struct {
 }
 
 func GetCustomerDomainsOutput(ctx *pulumi.Context, args GetCustomerDomainsOutputArgs, opts ...pulumi.InvokeOption) GetCustomerDomainsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCustomerDomainsResultOutput, error) {
-			args := v.(GetCustomerDomainsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args, GetCustomerDomainsResultOutput{}, options).(GetCustomerDomainsResultOutput), nil
-		}).(GetCustomerDomainsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getCustomerDomains:getCustomerDomains", args, GetCustomerDomainsResultOutput{}, options).(GetCustomerDomainsResultOutput)
 }
 
 // A collection of arguments for invoking getCustomerDomains.

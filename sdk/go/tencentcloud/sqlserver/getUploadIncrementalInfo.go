@@ -89,12 +89,8 @@ type GetUploadIncrementalInfoResult struct {
 }
 
 func GetUploadIncrementalInfoOutput(ctx *pulumi.Context, args GetUploadIncrementalInfoOutputArgs, opts ...pulumi.InvokeOption) GetUploadIncrementalInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUploadIncrementalInfoResultOutput, error) {
-			args := v.(GetUploadIncrementalInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args, GetUploadIncrementalInfoResultOutput{}, options).(GetUploadIncrementalInfoResultOutput), nil
-		}).(GetUploadIncrementalInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args, GetUploadIncrementalInfoResultOutput{}, options).(GetUploadIncrementalInfoResultOutput)
 }
 
 // A collection of arguments for invoking getUploadIncrementalInfo.

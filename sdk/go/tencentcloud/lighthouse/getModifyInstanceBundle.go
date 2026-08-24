@@ -83,12 +83,8 @@ type GetModifyInstanceBundleResult struct {
 }
 
 func GetModifyInstanceBundleOutput(ctx *pulumi.Context, args GetModifyInstanceBundleOutputArgs, opts ...pulumi.InvokeOption) GetModifyInstanceBundleResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetModifyInstanceBundleResultOutput, error) {
-			args := v.(GetModifyInstanceBundleArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args, GetModifyInstanceBundleResultOutput{}, options).(GetModifyInstanceBundleResultOutput), nil
-		}).(GetModifyInstanceBundleResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getModifyInstanceBundle:getModifyInstanceBundle", args, GetModifyInstanceBundleResultOutput{}, options).(GetModifyInstanceBundleResultOutput)
 }
 
 // A collection of arguments for invoking getModifyInstanceBundle.

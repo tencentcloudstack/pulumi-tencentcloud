@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Import
     /// 
-    /// apigateway api_app can be imported using the id, e.g.
+    /// apigateway ApiApp can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex

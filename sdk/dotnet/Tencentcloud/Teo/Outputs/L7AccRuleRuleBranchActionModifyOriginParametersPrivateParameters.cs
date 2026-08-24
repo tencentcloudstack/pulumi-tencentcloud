@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string SecretAccessKey;
         /// <summary>
-        /// Authentication version. values: v2: v2 version; v4: v4 version.
+        /// Authentication version. Values: v2: v2 version; v4: v4 version.
         /// </summary>
         public readonly string SignatureVersion;
 

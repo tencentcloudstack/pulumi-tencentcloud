@@ -15,13 +15,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     public sealed class BucketReplicaRule
     {
         /// <summary>
+        /// Synchronized deletion marker.
+        /// </summary>
+        public readonly Outputs.BucketReplicaRuleDeleteMarkerReplication? DeleteMarkerReplication;
+        /// <summary>
         /// Destination bucket identifier, format: `qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;`. NOTE: destination bucket must enable versioning.
         /// </summary>
         public readonly string DestinationBucket;
         /// <summary>
-        /// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        /// This field must be included when `source_selection_criteria.sse_kms_encrypted_objects.status` is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.
+        /// </summary>
+        public readonly string? DestinationEncryptionKmsKeyId;
+        /// <summary>
+        /// Storage class of destination, available values: `Standard`, `Intelligent_Tiering`, `Standard_IA`. default is following current class of destination.
         /// </summary>
         public readonly string? DestinationStorageClass;
+        /// <summary>
+        /// Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.
+        /// </summary>
+        public readonly Outputs.BucketReplicaRuleFilter? Filter;
         /// <summary>
         /// Name of a specific rule.
         /// </summary>
@@ -31,26 +43,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// </summary>
         public readonly string? Prefix;
         /// <summary>
+        /// Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.
+        /// </summary>
+        public readonly int? Priority;
+        /// <summary>
+        /// This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.
+        /// </summary>
+        public readonly Outputs.BucketReplicaRuleSourceSelectionCriteria? SourceSelectionCriteria;
+        /// <summary>
         /// Status identifier, available values: `Enabled`, `Disabled`.
         /// </summary>
-        public readonly string Status;
+        public readonly string? Status;
 
         [OutputConstructor]
         private BucketReplicaRule(
+            Outputs.BucketReplicaRuleDeleteMarkerReplication? deleteMarkerReplication,
+
             string destinationBucket,
 
+            string? destinationEncryptionKmsKeyId,
+
             string? destinationStorageClass,
+
+            Outputs.BucketReplicaRuleFilter? filter,
 
             string? id,
 
             string? prefix,
 
-            string status)
+            int? priority,
+
+            Outputs.BucketReplicaRuleSourceSelectionCriteria? sourceSelectionCriteria,
+
+            string? status)
         {
+            DeleteMarkerReplication = deleteMarkerReplication;
             DestinationBucket = destinationBucket;
+            DestinationEncryptionKmsKeyId = destinationEncryptionKmsKeyId;
             DestinationStorageClass = destinationStorageClass;
+            Filter = filter;
             Id = id;
             Prefix = prefix;
+            Priority = priority;
+            SourceSelectionCriteria = sourceSelectionCriteria;
             Status = status;
         }
     }

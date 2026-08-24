@@ -72,12 +72,8 @@ type GetListDatabaseResult struct {
 }
 
 func GetListDatabaseOutput(ctx *pulumi.Context, args GetListDatabaseOutputArgs, opts ...pulumi.InvokeOption) GetListDatabaseResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListDatabaseResultOutput, error) {
-			args := v.(GetListDatabaseArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListDatabase:getListDatabase", args, GetListDatabaseResultOutput{}, options).(GetListDatabaseResultOutput), nil
-		}).(GetListDatabaseResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListDatabase:getListDatabase", args, GetListDatabaseResultOutput{}, options).(GetListDatabaseResultOutput)
 }
 
 // A collection of arguments for invoking getListDatabase.

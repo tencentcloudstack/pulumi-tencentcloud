@@ -91,11 +91,11 @@ export interface DeleteBackupDataState {
     /**
      * Back up job id.
      */
-    backUpJobId?: pulumi.Input<number>;
+    backUpJobId?: pulumi.Input<number | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -105,7 +105,7 @@ export interface DeleteBackupDataArgs {
     /**
      * Back up job id.
      */
-    backUpJobId?: pulumi.Input<number>;
+    backUpJobId?: pulumi.Input<number | undefined>;
     /**
      * Instance id.
      */

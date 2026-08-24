@@ -229,75 +229,75 @@ export interface DatasourceCloudState {
     /**
      * Charset.
      */
-    charset?: pulumi.Input<string>;
+    charset?: pulumi.Input<string | undefined>;
     /**
      * Cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource identification, this parameter can be ignored.
      */
-    dataOrigin?: pulumi.Input<string>;
+    dataOrigin?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginDatasourceId?: pulumi.Input<string>;
+    dataOriginDatasourceId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginProjectId?: pulumi.Input<string>;
+    dataOriginProjectId?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Password.
      */
-    dbPwd?: pulumi.Input<string>;
+    dbPwd?: pulumi.Input<string | undefined>;
     /**
      * `MYSQL`, `TDSQL-C_MYSQL`, `TDSQL_MYSQL`, `MSSQL`, `POSTGRESQL`, `MARIADB`.
      */
-    dbType?: pulumi.Input<string>;
+    dbType?: pulumi.Input<string | undefined>;
     /**
      * User name.
      */
-    dbUser?: pulumi.Input<string>;
+    dbUser?: pulumi.Input<string | undefined>;
     /**
      * Extended parameters.
      */
-    extraParam?: pulumi.Input<string>;
+    extraParam?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Region identifier.
      */
-    regionId?: pulumi.Input<string>;
+    regionId?: pulumi.Input<string | undefined>;
     /**
      * Service type, Own or Cloud.
      */
-    serviceType?: pulumi.Input<inputs.Bi.DatasourceCloudServiceType>;
+    serviceType?: pulumi.Input<inputs.Bi.DatasourceCloudServiceType | undefined>;
     /**
      * Datasource name in BI.
      */
-    sourceName?: pulumi.Input<string>;
+    sourceName?: pulumi.Input<string | undefined>;
     /**
      * Unified vpc identification.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Public cloud intranet ip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Vpc identification.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Public cloud intranet port.
      */
-    vport?: pulumi.Input<string>;
+    vport?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -311,19 +311,19 @@ export interface DatasourceCloudArgs {
     /**
      * Cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource identification, this parameter can be ignored.
      */
-    dataOrigin?: pulumi.Input<string>;
+    dataOrigin?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginDatasourceId?: pulumi.Input<string>;
+    dataOriginDatasourceId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginProjectId?: pulumi.Input<string>;
+    dataOriginProjectId?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
@@ -343,7 +343,7 @@ export interface DatasourceCloudArgs {
     /**
      * Extended parameters.
      */
-    extraParam?: pulumi.Input<string>;
+    extraParam?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
@@ -351,7 +351,7 @@ export interface DatasourceCloudArgs {
     /**
      * Region identifier.
      */
-    regionId?: pulumi.Input<string>;
+    regionId?: pulumi.Input<string | undefined>;
     /**
      * Service type, Own or Cloud.
      */
@@ -363,11 +363,11 @@ export interface DatasourceCloudArgs {
     /**
      * Unified vpc identification.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Public cloud intranet ip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Vpc identification.
      */
@@ -375,5 +375,5 @@ export interface DatasourceCloudArgs {
     /**
      * Public cloud intranet port.
      */
-    vport?: pulumi.Input<string>;
+    vport?: pulumi.Input<string | undefined>;
 }

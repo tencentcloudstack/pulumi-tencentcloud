@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc notify_routes can be imported using the id, e.g.
+ * vpc notifyRoutes can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/notifyRoutes:NotifyRoutes notify_routes route_table_id#route_item_id
@@ -116,15 +116,15 @@ export interface NotifyRoutesState {
     /**
      * If published to vbc.
      */
-    publishedToVbc?: pulumi.Input<boolean>;
+    publishedToVbc?: pulumi.Input<boolean | undefined>;
     /**
      * The unique ID of the routing policy.
      */
-    routeItemIds?: pulumi.Input<string>;
+    routeItemIds?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the routing table.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**

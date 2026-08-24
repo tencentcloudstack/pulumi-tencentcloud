@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetGroupList = tencentcloud.Clb.getTargetGroupList({
+ * const targetGroupList = tencentcloud.clb.getTargetGroupList({
  *     filters: [{
  *         name: "TargetGroupName",
  *         values: ["keep-tgg"],
@@ -76,7 +76,7 @@ export interface GetTargetGroupListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetGroupList = tencentcloud.Clb.getTargetGroupList({
+ * const targetGroupList = tencentcloud.clb.getTargetGroupList({
  *     filters: [{
  *         name: "TargetGroupName",
  *         values: ["keep-tgg"],
@@ -101,13 +101,13 @@ export interface GetTargetGroupListOutputArgs {
     /**
      * Filter array, which is exclusive of TargetGroupIds. Valid values: TargetGroupVpcId and TargetGroupName. Target group ID will be used first.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetTargetGroupListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetTargetGroupListFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Target group ID array.
      */
-    targetGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    targetGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

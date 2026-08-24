@@ -24,28 +24,30 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
-// MinFinishTime: pulumi.StringRef("%s"),
-// MaxFinishTime: pulumi.StringRef("%s"),
-// Filters: []postgresql.GetLogBackupsFilter{
-// {
-// Name: pulumi.StringRef("db-instance-id"),
-// Values: interface{}{
-// pgsqlId,
-// },
-// },
-// },
-// OrderBy: pulumi.StringRef("StartTime"),
-// OrderByType: pulumi.StringRef("desc"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := postgresql.GetLogBackups(ctx, &postgresql.GetLogBackupsArgs{
+//				MinFinishTime: pulumi.StringRef("%s"),
+//				MaxFinishTime: pulumi.StringRef("%s"),
+//				Filters: []postgresql.GetLogBackupsFilter{
+//					{
+//						Name: pulumi.StringRef("db-instance-id"),
+//						Values: pulumi.StringArray{
+//							pgsqlId,
+//						},
+//					},
+//				},
+//				OrderBy:     pulumi.StringRef("StartTime"),
+//				OrderByType: pulumi.StringRef("desc"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetLogBackups(ctx *pulumi.Context, args *GetLogBackupsArgs, opts ...pulumi.InvokeOption) (*GetLogBackupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -88,12 +90,8 @@ type GetLogBackupsResult struct {
 }
 
 func GetLogBackupsOutput(ctx *pulumi.Context, args GetLogBackupsOutputArgs, opts ...pulumi.InvokeOption) GetLogBackupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogBackupsResultOutput, error) {
-			args := v.(GetLogBackupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getLogBackups:getLogBackups", args, GetLogBackupsResultOutput{}, options).(GetLogBackupsResultOutput), nil
-		}).(GetLogBackupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getLogBackups:getLogBackups", args, GetLogBackupsResultOutput{}, options).(GetLogBackupsResultOutput)
 }
 
 // A collection of arguments for invoking getLogBackups.

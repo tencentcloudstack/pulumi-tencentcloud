@@ -15,6 +15,21 @@ export type BlockIgnore = import("./blockIgnore").BlockIgnore;
 export const BlockIgnore: typeof import("./blockIgnore").BlockIgnore = null as any;
 utilities.lazyLoad(exports, ["BlockIgnore"], () => require("./blockIgnore"));
 
+export { ClusterFwBypassConfigArgs, ClusterFwBypassConfigState } from "./clusterFwBypassConfig";
+export type ClusterFwBypassConfig = import("./clusterFwBypassConfig").ClusterFwBypassConfig;
+export const ClusterFwBypassConfig: typeof import("./clusterFwBypassConfig").ClusterFwBypassConfig = null as any;
+utilities.lazyLoad(exports, ["ClusterFwBypassConfig"], () => require("./clusterFwBypassConfig"));
+
+export { ClusterNatFwSwitchArgs, ClusterNatFwSwitchState } from "./clusterNatFwSwitch";
+export type ClusterNatFwSwitch = import("./clusterNatFwSwitch").ClusterNatFwSwitch;
+export const ClusterNatFwSwitch: typeof import("./clusterNatFwSwitch").ClusterNatFwSwitch = null as any;
+utilities.lazyLoad(exports, ["ClusterNatFwSwitch"], () => require("./clusterNatFwSwitch"));
+
+export { ClusterVpcFwSwitchArgs, ClusterVpcFwSwitchState } from "./clusterVpcFwSwitch";
+export type ClusterVpcFwSwitch = import("./clusterVpcFwSwitch").ClusterVpcFwSwitch;
+export const ClusterVpcFwSwitch: typeof import("./clusterVpcFwSwitch").ClusterVpcFwSwitch = null as any;
+utilities.lazyLoad(exports, ["ClusterVpcFwSwitch"], () => require("./clusterVpcFwSwitch"));
+
 export { EdgeFirewallSwitchArgs, EdgeFirewallSwitchState } from "./edgeFirewallSwitch";
 export type EdgeFirewallSwitch = import("./edgeFirewallSwitch").EdgeFirewallSwitch;
 export const EdgeFirewallSwitch: typeof import("./edgeFirewallSwitch").EdgeFirewallSwitch = null as any;
@@ -25,10 +40,35 @@ export type EdgePolicy = import("./edgePolicy").EdgePolicy;
 export const EdgePolicy: typeof import("./edgePolicy").EdgePolicy = null as any;
 utilities.lazyLoad(exports, ["EdgePolicy"], () => require("./edgePolicy"));
 
+export { EdgePolicyOrderConfigArgs, EdgePolicyOrderConfigState } from "./edgePolicyOrderConfig";
+export type EdgePolicyOrderConfig = import("./edgePolicyOrderConfig").EdgePolicyOrderConfig;
+export const EdgePolicyOrderConfig: typeof import("./edgePolicyOrderConfig").EdgePolicyOrderConfig = null as any;
+utilities.lazyLoad(exports, ["EdgePolicyOrderConfig"], () => require("./edgePolicyOrderConfig"));
+
+export { GetCcnAssociatedInstancesArgs, GetCcnAssociatedInstancesResult, GetCcnAssociatedInstancesOutputArgs } from "./getCcnAssociatedInstances";
+export const getCcnAssociatedInstances: typeof import("./getCcnAssociatedInstances").getCcnAssociatedInstances = null as any;
+export const getCcnAssociatedInstancesOutput: typeof import("./getCcnAssociatedInstances").getCcnAssociatedInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getCcnAssociatedInstances","getCcnAssociatedInstancesOutput"], () => require("./getCcnAssociatedInstances"));
+
+export { GetCcnInstanceRegionStatusArgs, GetCcnInstanceRegionStatusResult, GetCcnInstanceRegionStatusOutputArgs } from "./getCcnInstanceRegionStatus";
+export const getCcnInstanceRegionStatus: typeof import("./getCcnInstanceRegionStatus").getCcnInstanceRegionStatus = null as any;
+export const getCcnInstanceRegionStatusOutput: typeof import("./getCcnInstanceRegionStatus").getCcnInstanceRegionStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getCcnInstanceRegionStatus","getCcnInstanceRegionStatusOutput"], () => require("./getCcnInstanceRegionStatus"));
+
+export { GetCcnVpcFwSwitchArgs, GetCcnVpcFwSwitchResult, GetCcnVpcFwSwitchOutputArgs } from "./getCcnVpcFwSwitch";
+export const getCcnVpcFwSwitch: typeof import("./getCcnVpcFwSwitch").getCcnVpcFwSwitch = null as any;
+export const getCcnVpcFwSwitchOutput: typeof import("./getCcnVpcFwSwitch").getCcnVpcFwSwitchOutput = null as any;
+utilities.lazyLoad(exports, ["getCcnVpcFwSwitch","getCcnVpcFwSwitchOutput"], () => require("./getCcnVpcFwSwitch"));
+
 export { GetEdgeFwSwitchesArgs, GetEdgeFwSwitchesResult, GetEdgeFwSwitchesOutputArgs } from "./getEdgeFwSwitches";
 export const getEdgeFwSwitches: typeof import("./getEdgeFwSwitches").getEdgeFwSwitches = null as any;
 export const getEdgeFwSwitchesOutput: typeof import("./getEdgeFwSwitches").getEdgeFwSwitchesOutput = null as any;
 utilities.lazyLoad(exports, ["getEdgeFwSwitches","getEdgeFwSwitchesOutput"], () => require("./getEdgeFwSwitches"));
+
+export { GetNatFwClusterRegionStatusArgs, GetNatFwClusterRegionStatusResult, GetNatFwClusterRegionStatusOutputArgs } from "./getNatFwClusterRegionStatus";
+export const getNatFwClusterRegionStatus: typeof import("./getNatFwClusterRegionStatus").getNatFwClusterRegionStatus = null as any;
+export const getNatFwClusterRegionStatusOutput: typeof import("./getNatFwClusterRegionStatus").getNatFwClusterRegionStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getNatFwClusterRegionStatus","getNatFwClusterRegionStatusOutput"], () => require("./getNatFwClusterRegionStatus"));
 
 export { GetNatFwSwitchesArgs, GetNatFwSwitchesResult, GetNatFwSwitchesOutputArgs } from "./getNatFwSwitches";
 export const getNatFwSwitches: typeof import("./getNatFwSwitches").getNatFwSwitches = null as any;
@@ -39,6 +79,11 @@ export { GetVpcFwSwitchesArgs, GetVpcFwSwitchesResult, GetVpcFwSwitchesOutputArg
 export const getVpcFwSwitches: typeof import("./getVpcFwSwitches").getVpcFwSwitches = null as any;
 export const getVpcFwSwitchesOutput: typeof import("./getVpcFwSwitches").getVpcFwSwitchesOutput = null as any;
 utilities.lazyLoad(exports, ["getVpcFwSwitches","getVpcFwSwitchesOutput"], () => require("./getVpcFwSwitches"));
+
+export { IpsModeSwitchArgs, IpsModeSwitchState } from "./ipsModeSwitch";
+export type IpsModeSwitch = import("./ipsModeSwitch").IpsModeSwitch;
+export const IpsModeSwitch: typeof import("./ipsModeSwitch").IpsModeSwitch = null as any;
+utilities.lazyLoad(exports, ["IpsModeSwitch"], () => require("./ipsModeSwitch"));
 
 export { NatFirewallSwitchArgs, NatFirewallSwitchState } from "./natFirewallSwitch";
 export type NatFirewallSwitch = import("./natFirewallSwitch").NatFirewallSwitch;
@@ -54,6 +99,11 @@ export { NatPolicyArgs, NatPolicyState } from "./natPolicy";
 export type NatPolicy = import("./natPolicy").NatPolicy;
 export const NatPolicy: typeof import("./natPolicy").NatPolicy = null as any;
 utilities.lazyLoad(exports, ["NatPolicy"], () => require("./natPolicy"));
+
+export { NatPolicyOrderConfigArgs, NatPolicyOrderConfigState } from "./natPolicyOrderConfig";
+export type NatPolicyOrderConfig = import("./natPolicyOrderConfig").NatPolicyOrderConfig;
+export const NatPolicyOrderConfig: typeof import("./natPolicyOrderConfig").NatPolicyOrderConfig = null as any;
+utilities.lazyLoad(exports, ["NatPolicyOrderConfig"], () => require("./natPolicyOrderConfig"));
 
 export { SyncAssetArgs, SyncAssetState } from "./syncAsset";
 export type SyncAsset = import("./syncAsset").SyncAsset;
@@ -80,6 +130,11 @@ export type VpcPolicy = import("./vpcPolicy").VpcPolicy;
 export const VpcPolicy: typeof import("./vpcPolicy").VpcPolicy = null as any;
 utilities.lazyLoad(exports, ["VpcPolicy"], () => require("./vpcPolicy"));
 
+export { VpcPolicyOrderConfigArgs, VpcPolicyOrderConfigState } from "./vpcPolicyOrderConfig";
+export type VpcPolicyOrderConfig = import("./vpcPolicyOrderConfig").VpcPolicyOrderConfig;
+export const VpcPolicyOrderConfig: typeof import("./vpcPolicyOrderConfig").VpcPolicyOrderConfig = null as any;
+utilities.lazyLoad(exports, ["VpcPolicyOrderConfig"], () => require("./vpcPolicyOrderConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -89,16 +144,28 @@ const _module = {
                 return new AddressTemplate(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/blockIgnore:BlockIgnore":
                 return new BlockIgnore(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/clusterFwBypassConfig:ClusterFwBypassConfig":
+                return new ClusterFwBypassConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/clusterNatFwSwitch:ClusterNatFwSwitch":
+                return new ClusterNatFwSwitch(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/clusterVpcFwSwitch:ClusterVpcFwSwitch":
+                return new ClusterVpcFwSwitch(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/edgeFirewallSwitch:EdgeFirewallSwitch":
                 return new EdgeFirewallSwitch(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/edgePolicy:EdgePolicy":
                 return new EdgePolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/edgePolicyOrderConfig:EdgePolicyOrderConfig":
+                return new EdgePolicyOrderConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/ipsModeSwitch:IpsModeSwitch":
+                return new IpsModeSwitch(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/natFirewallSwitch:NatFirewallSwitch":
                 return new NatFirewallSwitch(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/natInstance:NatInstance":
                 return new NatInstance(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/natPolicy:NatPolicy":
                 return new NatPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/natPolicyOrderConfig:NatPolicyOrderConfig":
+                return new NatPolicyOrderConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/syncAsset:SyncAsset":
                 return new SyncAsset(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/syncRoute:SyncRoute":
@@ -109,6 +176,8 @@ const _module = {
                 return new VpcInstance(name, <any>undefined, { urn })
             case "tencentcloud:Cfw/vpcPolicy:VpcPolicy":
                 return new VpcPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Cfw/vpcPolicyOrderConfig:VpcPolicyOrderConfig":
+                return new VpcPolicyOrderConfig(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -116,13 +185,20 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/addressTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/blockIgnore", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/clusterFwBypassConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/clusterNatFwSwitch", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/clusterVpcFwSwitch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/edgeFirewallSwitch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/edgePolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/edgePolicyOrderConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/ipsModeSwitch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/natFirewallSwitch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/natInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/natPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/natPolicyOrderConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/syncAsset", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/syncRoute", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/vpcFirewallSwitch", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/vpcInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/vpcPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cfw/vpcPolicyOrderConfig", _module)

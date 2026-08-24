@@ -67,6 +67,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.L7AccSettingZoneConfigMaxAge? MaxAge;
         /// <summary>
+        /// Network error logging configuration.
+        /// </summary>
+        public readonly Outputs.L7AccSettingZoneConfigNetworkErrorLogging? NetworkErrorLogging;
+        /// <summary>
         /// OCSP stapling configuration.
         /// </summary>
         public readonly Outputs.L7AccSettingZoneConfigOcspStapling? OcspStapling;
@@ -131,6 +135,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             Outputs.L7AccSettingZoneConfigMaxAge? maxAge,
 
+            Outputs.L7AccSettingZoneConfigNetworkErrorLogging? networkErrorLogging,
+
             Outputs.L7AccSettingZoneConfigOcspStapling? ocspStapling,
 
             Outputs.L7AccSettingZoneConfigOfflineCache? offlineCache,
@@ -162,6 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Http2 = http2;
             Ipv6 = ipv6;
             MaxAge = maxAge;
+            NetworkErrorLogging = networkErrorLogging;
             OcspStapling = ocspStapling;
             OfflineCache = offlineCache;
             PostMaxSize = postMaxSize;

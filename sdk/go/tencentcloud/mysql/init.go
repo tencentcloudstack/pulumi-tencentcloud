@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AuditLogFile{}
 	case "tencentcloud:Mysql/auditService:AuditService":
 		r = &AuditService{}
+	case "tencentcloud:Mysql/backup:Backup":
+		r = &Backup{}
 	case "tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction":
 		r = &BackupDownloadRestriction{}
 	case "tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus":
@@ -61,6 +63,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Privilege{}
 	case "tencentcloud:Mysql/proxy:Proxy":
 		r = &Proxy{}
+	case "tencentcloud:Mysql/proxyAddressConfig:ProxyAddressConfig":
+		r = &ProxyAddressConfig{}
 	case "tencentcloud:Mysql/readonlyInstance:ReadonlyInstance":
 		r = &ReadonlyInstance{}
 	case "tencentcloud:Mysql/reloadBalanceProxyNode:ReloadBalanceProxyNode":
@@ -127,6 +131,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/auditService",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/backup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -212,6 +221,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/proxy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/proxyAddressConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

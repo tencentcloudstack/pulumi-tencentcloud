@@ -45,8 +45,8 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewApiKeyAttachment(ctx, "attach", &apigateway.ApiKeyAttachmentArgs{
-//				ApiKeyId:    key.ID(),
-//				UsagePlanId: plan.ID(),
+//				ApiKeyId:    key.ID().ToIDOutput().ToStringOutput(),
+//				UsagePlanId: plan.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -62,7 +62,7 @@ import (
 // API gateway attach access key can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach [your api_key_id]#usagePlan-gyeafpab
+// $ terraform import tencentcloud_api_gateway_api_key_attachment.attach [your api_key_id]#usagePlan-gyeafpab
 // ```
 type ApiKeyAttachment struct {
 	pulumi.CustomResourceState

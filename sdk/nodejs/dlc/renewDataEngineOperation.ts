@@ -115,23 +115,23 @@ export interface RenewDataEngineOperationState {
     /**
      * CU queue name.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Payment type. It is 1 by default and is prepaid.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Auto-renewal flag: 0 means the initial status, and there is no automatic renewal by default. If the user has the privilege to retain services with prepayment, there will be an automatic renewal. 1 means that there is an automatic renewal. 2 means that there is surely no automatic renewal. If it is not specified, the parameter is 0 by default.
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Renewal period in months, which is at least one month.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Unit. It is m by default, and only m can be filled in.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -145,11 +145,11 @@ export interface RenewDataEngineOperationArgs {
     /**
      * Payment type. It is 1 by default and is prepaid.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Auto-renewal flag: 0 means the initial status, and there is no automatic renewal by default. If the user has the privilege to retain services with prepayment, there will be an automatic renewal. 1 means that there is an automatic renewal. 2 means that there is surely no automatic renewal. If it is not specified, the parameter is 0 by default.
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Renewal period in months, which is at least one month.
      */
@@ -157,5 +157,5 @@ export interface RenewDataEngineOperationArgs {
     /**
      * Unit. It is m by default, and only m can be filled in.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
 }

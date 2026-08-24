@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     /// <summary>
-    /// Provides a resource to create a vpc private nat gateway
+    /// Provides a resource to create a VPC private nat gateway
     /// 
     /// ## Example Usage
     /// 
@@ -23,10 +23,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var privateNatGateway = new Tencentcloud.Vpc.PrivateNatGateway("private_nat_gateway", new()
+    ///     var example = new Tencentcloud.Vpc.PrivateNatGateway("example", new()
     ///     {
-    ///         NatGatewayName = "xxx",
-    ///         VpcId = "xxx",
+    ///         NatGatewayName = "tf-example",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -34,10 +38,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc private_nat_gateway can be imported using the id, e.g.
+    /// VPC private nat gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway private_nat_gateway private_nat_gateway_id
+    /// $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway example intranat-ljdy849x
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/privateNatGateway:PrivateNatGateway")]
@@ -56,10 +60,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<bool> CrossDomain { get; private set; } = null!;
 
         /// <summary>
+        /// Private network NAT gateway instance ID.
+        /// </summary>
+        [Output("natGatewayId")]
+        public Output<string> NatGatewayId { get; private set; } = null!;
+
+        /// <summary>
         /// Private network gateway name.
         /// </summary>
         [Output("natGatewayName")]
         public Output<string> NatGatewayName { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag description of the instance.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
@@ -138,6 +154,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("natGatewayName", required: true)]
         public Input<string> NatGatewayName { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag description of the instance.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
         /// </summary>
@@ -171,10 +199,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<bool>? CrossDomain { get; set; }
 
         /// <summary>
+        /// Private network NAT gateway instance ID.
+        /// </summary>
+        [Input("natGatewayId")]
+        public Input<string>? NatGatewayId { get; set; }
+
+        /// <summary>
         /// Private network gateway name.
         /// </summary>
         [Input("natGatewayName")]
         public Input<string>? NatGatewayName { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag description of the instance.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.

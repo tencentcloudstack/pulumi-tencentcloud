@@ -62,12 +62,8 @@ type GetApiDocsResult struct {
 }
 
 func GetApiDocsOutput(ctx *pulumi.Context, args GetApiDocsOutputArgs, opts ...pulumi.InvokeOption) GetApiDocsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetApiDocsResultOutput, error) {
-			args := v.(GetApiDocsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args, GetApiDocsResultOutput{}, options).(GetApiDocsResultOutput), nil
-		}).(GetApiDocsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiDocs:getApiDocs", args, GetApiDocsResultOutput{}, options).(GetApiDocsResultOutput)
 }
 
 // A collection of arguments for invoking getApiDocs.

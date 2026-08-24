@@ -84,7 +84,7 @@ export interface BlackListDeleteState {
     /**
      * Email addresses to be unblocklisted.
      */
-    emailAddress?: pulumi.Input<string>;
+    emailAddress?: pulumi.Input<string | undefined>;
 }
 
 /**

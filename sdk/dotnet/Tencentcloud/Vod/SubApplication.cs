@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// 
     /// ## Example Usage
     /// 
+    /// ### ### Basic Usage
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -23,9 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Vod.SubApplication("foo", new()
+    ///     var example = new Tencentcloud.Vod.SubApplication("example", new()
     ///     {
-    ///         Name = "foo",
+    ///         Name = "tf-example",
     ///         Status = "On",
     ///         Description = "this is sub application",
     ///     });
@@ -33,12 +35,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// });
     /// ```
     /// 
+    /// ### ### Tags Update Example
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Vod.SubApplication("example", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         Status = "On",
+    ///         Description = "Sub application with updatable tags",
+    ///         Tags = 
+    ///         {
+    ///             { "team", "media" },
+    ///             { "environment", "production" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
-    /// VOD super player config can be imported using the name+, e.g.
+    /// VOD sub application can be imported using the name and id separated by `name#sub_app_id`, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+    /// $ pulumi import tencentcloud:Vod/subApplication:SubApplication example tf-example#1500066377
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/subApplication:SubApplication")]
@@ -67,6 +94,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Sub application ID.
+        /// </summary>
+        [Output("subAppId")]
+        public Output<string> SubAppId { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag key-value pairs for resource management. Maximum 10 tags.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -133,6 +172,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         [Input("status", required: true)]
         public Input<string> Status { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for resource management. Maximum 10 tags.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         public SubApplicationArgs()
         {
         }
@@ -164,6 +215,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        /// <summary>
+        /// Sub application ID.
+        /// </summary>
+        [Input("subAppId")]
+        public Input<string>? SubAppId { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for resource management. Maximum 10 tags.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         public SubApplicationState()
         {

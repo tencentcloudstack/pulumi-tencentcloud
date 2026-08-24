@@ -49,13 +49,13 @@ import (
 //				Name:           pulumi.String("ci-test-gaap-4-listener"),
 //				Port:           pulumi.Int(80),
 //				RealserverType: pulumi.String("IP"),
-//				ProxyId:        fooProxy.ID(),
+//				ProxyId:        fooProxy.ID().ToIDOutput().ToStringOutput(),
 //				HealthCheck:    pulumi.Bool(true),
 //				Interval:       pulumi.Int(5),
 //				ConnectTimeout: pulumi.Int(2),
 //				RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
 //					&gaap.Layer4ListenerRealserverBindSetArgs{
-//						Id:   fooRealserver.ID(),
+//						Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   fooRealserver.Ip,
 //						Port: pulumi.Int(80),
 //					},
@@ -66,8 +66,8 @@ import (
 //			}
 //			_ = gaap.GetLayer4ListenersOutput(ctx, gaap.GetLayer4ListenersOutputArgs{
 //				Protocol:   pulumi.String("TCP"),
-//				ProxyId:    fooProxy.ID(),
-//				ListenerId: fooLayer4Listener.ID(),
+//				ProxyId:    fooProxy.ID().ToIDOutput().ToStringOutput(),
+//				ListenerId: fooLayer4Listener.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -118,12 +118,8 @@ type GetLayer4ListenersResult struct {
 }
 
 func GetLayer4ListenersOutput(ctx *pulumi.Context, args GetLayer4ListenersOutputArgs, opts ...pulumi.InvokeOption) GetLayer4ListenersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLayer4ListenersResultOutput, error) {
-			args := v.(GetLayer4ListenersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args, GetLayer4ListenersResultOutput{}, options).(GetLayer4ListenersResultOutput), nil
-		}).(GetLayer4ListenersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", args, GetLayer4ListenersResultOutput{}, options).(GetLayer4ListenersResultOutput)
 }
 
 // A collection of arguments for invoking getLayer4Listeners.

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_scim_credential_status can be imported using the id, e.g.
+ * organization identityCenterScimCredentialStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerScimCredentialStatus:CenterScimCredentialStatus identity_center_scim_credential_status ${zone_id}#${credential_id}
@@ -112,15 +112,15 @@ export interface CenterScimCredentialStatusState {
     /**
      * SCIM key ID. scimcred-prefix and followed by 12 random digits/lowercase letters.
      */
-    credentialId?: pulumi.Input<string>;
+    credentialId?: pulumi.Input<string | undefined>;
     /**
      * SCIM key status. Enabled-enabled. Disabled-disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Space ID. z-prefix starts with 12 random digits/lowercase letters.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

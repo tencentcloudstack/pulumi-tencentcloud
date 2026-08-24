@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getMonitors({});
+ * const example = tencentcloud.igtm.getMonitors({});
  * ```
  *
  * ### Query igtm monitors by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getMonitors({
+ * const example = tencentcloud.igtm.getMonitors({
  *     filters: [{
  *         name: "MonitorId",
  *         values: ["12383"],
@@ -90,7 +90,7 @@ export interface GetMonitorsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getMonitors({});
+ * const example = tencentcloud.igtm.getMonitors({});
  * ```
  *
  * ### Query igtm monitors by filter
@@ -99,7 +99,7 @@ export interface GetMonitorsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getMonitors({
+ * const example = tencentcloud.igtm.getMonitors({
  *     filters: [{
  *         name: "MonitorId",
  *         values: ["12383"],
@@ -125,13 +125,13 @@ export interface GetMonitorsOutputArgs {
     /**
      * Query filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetMonitorsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetMonitorsFilterArgs>[] | undefined>;
     /**
      * Whether to query detection count, 0 for no, 1 for yes.
      */
-    isDetectNum?: pulumi.Input<number>;
+    isDetectNum?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

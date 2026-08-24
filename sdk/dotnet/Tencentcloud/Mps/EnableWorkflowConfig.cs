@@ -156,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps enable_workflow_config can be imported using the id, e.g.
+    /// mps EnableWorkflowConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id

@@ -128,31 +128,31 @@ export interface ExportImagesState {
     /**
      * COS bucket name.
      */
-    bucketName?: pulumi.Input<string>;
+    bucketName?: pulumi.Input<string | undefined>;
     /**
      * Check whether the image can be exported.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Format of the exported image file. Valid values: RAW, QCOW2, VHD and VMDK. Default value: RAW.
      */
-    exportFormat?: pulumi.Input<string>;
+    exportFormat?: pulumi.Input<string | undefined>;
     /**
      * Prefix of exported file.
      */
-    fileNamePrefix?: pulumi.Input<string>;
+    fileNamePrefix?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Whether to export only the system disk.
      */
-    onlyExportRootDisk?: pulumi.Input<boolean>;
+    onlyExportRootDisk?: pulumi.Input<boolean | undefined>;
     /**
      * Role name (Default: CVM_QcsRole). Before exporting the images, make sure the role exists, and it has write permission to COS.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -166,11 +166,11 @@ export interface ExportImagesArgs {
     /**
      * Check whether the image can be exported.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Format of the exported image file. Valid values: RAW, QCOW2, VHD and VMDK. Default value: RAW.
      */
-    exportFormat?: pulumi.Input<string>;
+    exportFormat?: pulumi.Input<string | undefined>;
     /**
      * Prefix of exported file.
      */
@@ -182,9 +182,9 @@ export interface ExportImagesArgs {
     /**
      * Whether to export only the system disk.
      */
-    onlyExportRootDisk?: pulumi.Input<boolean>;
+    onlyExportRootDisk?: pulumi.Input<boolean | undefined>;
     /**
      * Role name (Default: CVM_QcsRole). Before exporting the images, make sure the role exists, and it has write permission to COS.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }

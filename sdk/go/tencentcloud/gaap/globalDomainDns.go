@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// gaap global_domain_dns can be imported using the id, e.g.
+// gaap globalDomainDns can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gaap/globalDomainDns:GlobalDomainDns global_domain_dns ${domainId}#${dnsRecordId}

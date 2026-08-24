@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     accessRegion: "SouthChina",
  *     realserverRegion: "NorthChina",
  * });
- * const foo = tencentcloud.Gaap.getProxiesOutput({
+ * const foo = tencentcloud.gaap.getProxiesOutput({
  *     ids: [fooProxy.id],
  * });
  * ```
@@ -117,7 +117,7 @@ export interface GetProxiesResult {
  *     accessRegion: "SouthChina",
  *     realserverRegion: "NorthChina",
  * });
- * const foo = tencentcloud.Gaap.getProxiesOutput({
+ * const foo = tencentcloud.gaap.getProxiesOutput({
  *     ids: [fooProxy.id],
  * });
  * ```
@@ -142,25 +142,25 @@ export interface GetProxiesOutputArgs {
     /**
      * Access region of the GAAP proxy to be queried. Conflict with `ids`.
      */
-    accessRegion?: pulumi.Input<string>;
+    accessRegion?: pulumi.Input<string | undefined>;
     /**
      * ID of the GAAP proxy to be queried. Conflict with `projectId`, `accessRegion` and `realserverRegion`.
      */
-    ids?: pulumi.Input<pulumi.Input<string>[]>;
+    ids?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project ID of the GAAP proxy to be queried. Conflict with `ids`.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Region of the GAAP realserver to be queried. Conflict with `ids`.
      */
-    realserverRegion?: pulumi.Input<string>;
+    realserverRegion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

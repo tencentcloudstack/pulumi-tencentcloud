@@ -244,47 +244,47 @@ export interface AttachmentV2State {
     /**
      * Time of attaching.
      */
-    attachedTime?: pulumi.Input<string>;
+    attachedTime?: pulumi.Input<string | undefined>;
     /**
      * ID of the CCN.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
-    ccnUin?: pulumi.Input<string>;
+    ccnUin?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the instance that is attached.
      */
-    cidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    cidrBlocks?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Remark of attachment.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of instance is attached.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The region that the instance locates at.
      */
-    instanceRegion?: pulumi.Input<string>;
+    instanceRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Route id list.
      */
-    routeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    routeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Ccn instance route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
     /**
      * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -298,11 +298,11 @@ export interface AttachmentV2Args {
     /**
      * Uin of the ccn attached. If not set, which means the uin of this account. This parameter is used with case when attaching ccn of other account to the instance of this account. For now only support instance type `VPC`.
      */
-    ccnUin?: pulumi.Input<string>;
+    ccnUin?: pulumi.Input<string | undefined>;
     /**
      * Remark of attachment.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of instance is attached.
      */
@@ -318,5 +318,5 @@ export interface AttachmentV2Args {
     /**
      * Ccn instance route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }

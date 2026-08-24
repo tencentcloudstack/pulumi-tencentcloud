@@ -50,6 +50,11 @@ export const getOrgShareUnitMembers: typeof import("./getOrgShareUnitMembers").g
 export const getOrgShareUnitMembersOutput: typeof import("./getOrgShareUnitMembers").getOrgShareUnitMembersOutput = null as any;
 utilities.lazyLoad(exports, ["getOrgShareUnitMembers","getOrgShareUnitMembersOutput"], () => require("./getOrgShareUnitMembers"));
 
+export { GetOrgShareUnitNodesArgs, GetOrgShareUnitNodesResult, GetOrgShareUnitNodesOutputArgs } from "./getOrgShareUnitNodes";
+export const getOrgShareUnitNodes: typeof import("./getOrgShareUnitNodes").getOrgShareUnitNodes = null as any;
+export const getOrgShareUnitNodesOutput: typeof import("./getOrgShareUnitNodes").getOrgShareUnitNodesOutput = null as any;
+utilities.lazyLoad(exports, ["getOrgShareUnitNodes","getOrgShareUnitNodesOutput"], () => require("./getOrgShareUnitNodes"));
+
 export { GetOrgShareUnitResourcesArgs, GetOrgShareUnitResourcesResult, GetOrgShareUnitResourcesOutputArgs } from "./getOrgShareUnitResources";
 export const getOrgShareUnitResources: typeof import("./getOrgShareUnitResources").getOrgShareUnitResources = null as any;
 export const getOrgShareUnitResourcesOutput: typeof import("./getOrgShareUnitResources").getOrgShareUnitResourcesOutput = null as any;
@@ -59,6 +64,11 @@ export { GetOrgShareUnitsArgs, GetOrgShareUnitsResult, GetOrgShareUnitsOutputArg
 export const getOrgShareUnits: typeof import("./getOrgShareUnits").getOrgShareUnits = null as any;
 export const getOrgShareUnitsOutput: typeof import("./getOrgShareUnits").getOrgShareUnitsOutput = null as any;
 utilities.lazyLoad(exports, ["getOrgShareUnits","getOrgShareUnitsOutput"], () => require("./getOrgShareUnits"));
+
+export { GetPermissionPoliciesInRoleConfigurationArgs, GetPermissionPoliciesInRoleConfigurationResult, GetPermissionPoliciesInRoleConfigurationOutputArgs } from "./getPermissionPoliciesInRoleConfiguration";
+export const getPermissionPoliciesInRoleConfiguration: typeof import("./getPermissionPoliciesInRoleConfiguration").getPermissionPoliciesInRoleConfiguration = null as any;
+export const getPermissionPoliciesInRoleConfigurationOutput: typeof import("./getPermissionPoliciesInRoleConfiguration").getPermissionPoliciesInRoleConfigurationOutput = null as any;
+utilities.lazyLoad(exports, ["getPermissionPoliciesInRoleConfiguration","getPermissionPoliciesInRoleConfigurationOutput"], () => require("./getPermissionPoliciesInRoleConfiguration"));
 
 export { GetResourceToShareMemberArgs, GetResourceToShareMemberResult, GetResourceToShareMemberOutputArgs } from "./getResourceToShareMember";
 export const getResourceToShareMember: typeof import("./getResourceToShareMember").getResourceToShareMember = null as any;
@@ -74,6 +84,11 @@ export { InstanceArgs, InstanceState } from "./instance";
 export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
 utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { IpWhitelistConfigArgs, IpWhitelistConfigState } from "./ipWhitelistConfig";
+export type IpWhitelistConfig = import("./ipWhitelistConfig").IpWhitelistConfig;
+export const IpWhitelistConfig: typeof import("./ipWhitelistConfig").IpWhitelistConfig = null as any;
+utilities.lazyLoad(exports, ["IpWhitelistConfig"], () => require("./ipWhitelistConfig"));
 
 export { MemberAuthPolicyAttachmentArgs, MemberAuthPolicyAttachmentState } from "./memberAuthPolicyAttachment";
 export type MemberAuthPolicyAttachment = import("./memberAuthPolicyAttachment").MemberAuthPolicyAttachment;
@@ -135,6 +150,11 @@ export type OrgShareUnitMemberV2 = import("./orgShareUnitMemberV2").OrgShareUnit
 export const OrgShareUnitMemberV2: typeof import("./orgShareUnitMemberV2").OrgShareUnitMemberV2 = null as any;
 utilities.lazyLoad(exports, ["OrgShareUnitMemberV2"], () => require("./orgShareUnitMemberV2"));
 
+export { OrgShareUnitNodeArgs, OrgShareUnitNodeState } from "./orgShareUnitNode";
+export type OrgShareUnitNode = import("./orgShareUnitNode").OrgShareUnitNode;
+export const OrgShareUnitNode: typeof import("./orgShareUnitNode").OrgShareUnitNode = null as any;
+utilities.lazyLoad(exports, ["OrgShareUnitNode"], () => require("./orgShareUnitNode"));
+
 export { OrgShareUnitResourceArgs, OrgShareUnitResourceState } from "./orgShareUnitResource";
 export type OrgShareUnitResource = import("./orgShareUnitResource").OrgShareUnitResource;
 export const OrgShareUnitResource: typeof import("./orgShareUnitResource").OrgShareUnitResource = null as any;
@@ -164,6 +184,8 @@ const _module = {
                 return new ExternalSamlIdentityProvider(name, <any>undefined, { urn })
             case "tencentcloud:Organization/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/ipWhitelistConfig:IpWhitelistConfig":
+                return new IpWhitelistConfig(name, <any>undefined, { urn })
             case "tencentcloud:Organization/memberAuthPolicyAttachment:MemberAuthPolicyAttachment":
                 return new MemberAuthPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgIdentity:OrgIdentity":
@@ -188,6 +210,8 @@ const _module = {
                 return new OrgShareUnit(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgShareUnitMemberV2:OrgShareUnitMemberV2":
                 return new OrgShareUnitMemberV2(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/orgShareUnitNode:OrgShareUnitNode":
+                return new OrgShareUnitNode(name, <any>undefined, { urn })
             case "tencentcloud:Organization/orgShareUnitResource:OrgShareUnitResource":
                 return new OrgShareUnitResource(name, <any>undefined, { urn })
             case "tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment":
@@ -203,6 +227,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/externalSamlIdentityProvider", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/ipWhitelistConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/memberAuthPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgIdentity", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgManagePolicy", _module)
@@ -215,6 +240,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgMemberPol
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgNode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnit", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnitMemberV2", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnitNode", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnitResource", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/policySubAccountAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/quitOrganizationOperation", _module)

@@ -69,12 +69,8 @@ type GetTargetHealthResult struct {
 }
 
 func GetTargetHealthOutput(ctx *pulumi.Context, args GetTargetHealthOutputArgs, opts ...pulumi.InvokeOption) GetTargetHealthResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTargetHealthResultOutput, error) {
-			args := v.(GetTargetHealthArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getTargetHealth:getTargetHealth", args, GetTargetHealthResultOutput{}, options).(GetTargetHealthResultOutput), nil
-		}).(GetTargetHealthResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getTargetHealth:getTargetHealth", args, GetTargetHealthResultOutput{}, options).(GetTargetHealthResultOutput)
 }
 
 // A collection of arguments for invoking getTargetHealth.

@@ -67,7 +67,7 @@ import (
 //
 // ## Import
 //
-// clickhouse account_permission can be imported using the id, e.g.
+// clickhouse accountPermission can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}

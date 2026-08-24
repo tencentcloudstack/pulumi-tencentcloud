@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const netDetectStateCheck = tencentcloud.Vpc.getNetDetectStateCheck({
+ * const netDetectStateCheck = tencentcloud.vpc.getNetDetectStateCheck({
  *     netDetectId: "netd-12345678",
  *     detectDestinationIps: [
  *         "10.0.0.3",
@@ -111,7 +111,7 @@ export interface GetNetDetectStateCheckResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const netDetectStateCheck = tencentcloud.Vpc.getNetDetectStateCheck({
+ * const netDetectStateCheck = tencentcloud.vpc.getNetDetectStateCheck({
  *     netDetectId: "netd-12345678",
  *     detectDestinationIps: [
  *         "10.0.0.3",
@@ -147,11 +147,11 @@ export interface GetNetDetectStateCheckOutputArgs {
     /**
      * ID of a network inspector instance, e.g. netd-12345678. Enter at least one of this parameter, VpcId, SubnetId, and NetDetectName. Use NetDetectId if it is present.
      */
-    netDetectId?: pulumi.Input<string>;
+    netDetectId?: pulumi.Input<string | undefined>;
     /**
      * The name of a network inspector, up to 60 bytes in length. It is used together with VpcId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
      */
-    netDetectName?: pulumi.Input<string>;
+    netDetectName?: pulumi.Input<string | undefined>;
     /**
      * The next-hop destination gateway. The value is related to NextHopType.If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
      */
@@ -163,13 +163,13 @@ export interface GetNetDetectStateCheckOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of a subnet instance, e.g. `subnet-12345678`, which is used together with VpcId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of a `VPC` instance, e.g. `vpc-12345678`, which is used together with SubnetId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

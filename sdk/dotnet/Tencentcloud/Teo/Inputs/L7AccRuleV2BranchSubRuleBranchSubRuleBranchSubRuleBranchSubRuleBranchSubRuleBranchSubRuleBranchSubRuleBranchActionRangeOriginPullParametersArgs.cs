@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionRangeOriginPullParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable range gets. values are: on: enable; Off: disable.
+        /// Whether to enable range gets. values are: on: enable; off: disable.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

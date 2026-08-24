@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logstashInstanceOperations = tencentcloud.Elasticsearch.getLogstashInstanceOperations({
+ * const logstashInstanceOperations = tencentcloud.elasticsearch.getLogstashInstanceOperations({
  *     instanceId: "ls-xxxxxx",
  *     startTime: "2018-01-01 00:00:00",
  *     endTime: "2023-10-31 10:12:45",
@@ -83,7 +83,7 @@ export interface GetLogstashInstanceOperationsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logstashInstanceOperations = tencentcloud.Elasticsearch.getLogstashInstanceOperations({
+ * const logstashInstanceOperations = tencentcloud.elasticsearch.getLogstashInstanceOperations({
  *     instanceId: "ls-xxxxxx",
  *     startTime: "2018-01-01 00:00:00",
  *     endTime: "2023-10-31 10:12:45",
@@ -115,7 +115,7 @@ export interface GetLogstashInstanceOperationsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, e.g. 2019-03-07 16:30:39.
      */

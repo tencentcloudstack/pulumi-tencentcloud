@@ -64,7 +64,7 @@ export class InstanceParams extends pulumi.CustomResource {
      * Operation types, including:
      * - IMMEDIATELY: Adjust immediately;
      * - DELAY: Delay adjustment;
-     * Optional field. If this parameter is not configured, it defaults to immediate adjustment.
+     *   Optional field. If this parameter is not configured, it defaults to immediate adjustment.
      */
     declare public readonly modifyType: pulumi.Output<string | undefined>;
 
@@ -108,18 +108,18 @@ export interface InstanceParamsState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Specify the parameter name and value to be modified.
      */
-    instanceParams?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceParamsInstanceParam>[]>;
+    instanceParams?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceParamsInstanceParam>[] | undefined>;
     /**
      * Operation types, including:
      * - IMMEDIATELY: Adjust immediately;
      * - DELAY: Delay adjustment;
-     * Optional field. If this parameter is not configured, it defaults to immediate adjustment.
+     *   Optional field. If this parameter is not configured, it defaults to immediate adjustment.
      */
-    modifyType?: pulumi.Input<string>;
+    modifyType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface InstanceParamsArgs {
      * Operation types, including:
      * - IMMEDIATELY: Adjust immediately;
      * - DELAY: Delay adjustment;
-     * Optional field. If this parameter is not configured, it defaults to immediate adjustment.
+     *   Optional field. If this parameter is not configured, it defaults to immediate adjustment.
      */
-    modifyType?: pulumi.Input<string>;
+    modifyType?: pulumi.Input<string | undefined>;
 }

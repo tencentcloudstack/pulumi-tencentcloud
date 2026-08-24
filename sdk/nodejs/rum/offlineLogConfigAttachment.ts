@@ -21,8 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * rum offline_log_config_attachment can be imported using the id, e.g.
- *
+ * rum offlineLogConfigAttachment can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
  * ```
@@ -108,15 +107,15 @@ export interface OfflineLogConfigAttachmentState {
     /**
      * Interface call information.
      */
-    msg?: pulumi.Input<string>;
+    msg?: pulumi.Input<string | undefined>;
     /**
      * Unique project key for reporting.
      */
-    projectKey?: pulumi.Input<string>;
+    projectKey?: pulumi.Input<string | undefined>;
     /**
      * Unique identifier of the user to be listened on(aid or uin).
      */
-    uniqueId?: pulumi.Input<string>;
+    uniqueId?: pulumi.Input<string | undefined>;
 }
 
 /**

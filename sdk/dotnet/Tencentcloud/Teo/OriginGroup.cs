@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo OriginGroup
+    /// Provides a resource to create a TEO OriginGroup
     /// 
     /// &gt; **NOTE:** Please note that `tencentcloud.Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
     /// 
@@ -57,15 +57,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo origin_group can be imported using the zone_id#originGroup_id, e.g.
-    /// 
-    /// `
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
-    /// ```
-    /// 
-    /// `
+    /// teo OriginGroup can be imported using the zone_id#originGroup_id, e.g.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/originGroup:OriginGroup")]
     public partial class OriginGroup : global::Pulumi.CustomResource

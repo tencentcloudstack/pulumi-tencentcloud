@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// chdfs life_cycle_rule can be imported using the id, e.g.
+// chdfs lifeCycleRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Chdfs/lifeCycleRule:LifeCycleRule life_cycle_rule file_system_id#life_cycle_rule_id

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf application_release_config can be imported using the configId#groupId#configReleaseId, e.g.
+ * tsf applicationReleaseConfig can be imported using the configId#groupId#configReleaseId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea
@@ -169,55 +169,55 @@ export interface ApplicationReleaseConfigState {
     /**
      * Application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Configuration ID.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * configuration item name.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * configuration item release ID.
      */
-    configReleaseId?: pulumi.Input<string>;
+    configReleaseId?: pulumi.Input<string | undefined>;
     /**
      * configuration item version.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * deployment group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * deployment group name.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Namespace ID.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * release description.
      */
-    releaseDesc?: pulumi.Input<string>;
+    releaseDesc?: pulumi.Input<string | undefined>;
     /**
      * release time.
      */
-    releaseTime?: pulumi.Input<string>;
+    releaseTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -235,5 +235,5 @@ export interface ApplicationReleaseConfigArgs {
     /**
      * release description.
      */
-    releaseDesc?: pulumi.Input<string>;
+    releaseDesc?: pulumi.Input<string | undefined>;
 }

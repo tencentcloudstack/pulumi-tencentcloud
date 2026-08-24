@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tat invocationInvokeAttachment
+ * Provides a resource to create a tat invocation invoke attachment
  *
  * ## Example Usage
  *
@@ -13,14 +13,29 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invocationInvokeAttachment = new tencentcloud.tat.InvocationInvokeAttachment("invocation_invoke_attachment", {
- *     instanceId: "ins-881b1c8w",
- *     workingDirectory: "/root",
- *     timeout: 100,
+ * const example = new tencentcloud.tat.InvocationInvokeAttachment("example", {
+ *     instanceId: "ins-hoek7x44",
+ *     workingDirectory: "/root/",
+ *     timeout: 60,
  *     username: "root",
- *     outputCosBucketUrl: "https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
- *     outputCosKeyPrefix: "log",
- *     commandId: "cmd-rxbs7f5z",
+ *     commandId: "cmd-l7otm4cn",
+ * });
+ * ```
+ *
+ * ### or
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tat.InvocationInvokeAttachment("example", {
+ *     instanceId: "ins-hoek7x44",
+ *     workingDirectory: "/root/",
+ *     timeout: 60,
+ *     username: "root",
+ *     commandId: "cmd-l7otm4cn",
+ *     outputCosBucketUrl: "https://your-bucket.cos.ap-guangzhou.myqcloud.com",
+ *     outputCosKeyPrefix: "tat/invoke",
  * });
  * ```
  *
@@ -29,7 +44,7 @@ import * as utilities from "../utilities";
  * tat invocation can be imported using the invocation_id#instance_id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+ * $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment example inv-64mrb10i1j#ins-hoek7x44
  * ```
  */
 export class InvocationInvokeAttachment extends pulumi.CustomResource {
@@ -68,6 +83,10 @@ export class InvocationInvokeAttachment extends pulumi.CustomResource {
      * ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
      */
     declare public readonly instanceId: pulumi.Output<string>;
+    /**
+     * Invocation ID.
+     */
+    declare public /*out*/ readonly invocationId: pulumi.Output<string>;
     /**
      * The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
      */
@@ -108,6 +127,7 @@ export class InvocationInvokeAttachment extends pulumi.CustomResource {
             const state = argsOrState as InvocationInvokeAttachmentState | undefined;
             resourceInputs["commandId"] = state?.commandId;
             resourceInputs["instanceId"] = state?.instanceId;
+            resourceInputs["invocationId"] = state?.invocationId;
             resourceInputs["outputCosBucketUrl"] = state?.outputCosBucketUrl;
             resourceInputs["outputCosKeyPrefix"] = state?.outputCosKeyPrefix;
             resourceInputs["parameters"] = state?.parameters;
@@ -130,6 +150,7 @@ export class InvocationInvokeAttachment extends pulumi.CustomResource {
             resourceInputs["timeout"] = args?.timeout;
             resourceInputs["username"] = args?.username;
             resourceInputs["workingDirectory"] = args?.workingDirectory;
+            resourceInputs["invocationId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(InvocationInvokeAttachment.__pulumiType, name, resourceInputs, opts);
@@ -143,35 +164,39 @@ export interface InvocationInvokeAttachmentState {
     /**
      * Command ID.
      */
-    commandId?: pulumi.Input<string>;
+    commandId?: pulumi.Input<string | undefined>;
     /**
      * ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
+    /**
+     * Invocation ID.
+     */
+    invocationId?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of Command. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If no parameter value is provided, the DefaultParameters is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user root is used to execute commands on Linux and the user System is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for SHELL commands and C:Program Filesqcloudtat_agentworkdir for POWERSHELL commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -189,25 +214,25 @@ export interface InvocationInvokeAttachmentArgs {
     /**
      * The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of Command. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If no parameter value is provided, the DefaultParameters is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user root is used to execute commands on Linux and the user System is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for SHELL commands and C:Program Filesqcloudtat_agentworkdir for POWERSHELL commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }

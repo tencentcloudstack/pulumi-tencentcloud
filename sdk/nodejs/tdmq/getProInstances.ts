@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proInstancesFilter = tencentcloud.Tdmq.getProInstances({
+ * const proInstancesFilter = tencentcloud.tdmq.getProInstances({
  *     filters: [{
  *         name: "InstanceName",
  *         values: ["keep"],
@@ -70,7 +70,7 @@ export interface GetProInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proInstancesFilter = tencentcloud.Tdmq.getProInstances({
+ * const proInstancesFilter = tencentcloud.tdmq.getProInstances({
  *     filters: [{
  *         name: "InstanceName",
  *         values: ["keep"],
@@ -94,9 +94,9 @@ export interface GetProInstancesOutputArgs {
     /**
      * query condition filter.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetProInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetProInstancesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

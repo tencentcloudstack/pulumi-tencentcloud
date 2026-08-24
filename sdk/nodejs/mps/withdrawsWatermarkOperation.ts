@@ -117,15 +117,15 @@ export interface WithdrawsWatermarkOperationState {
     /**
      * Input information of file for metadata getting.
      */
-    inputInfo?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationInputInfo>;
+    inputInfo?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationInputInfo | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationTaskNotifyConfig | undefined>;
 }
 
 /**
@@ -139,9 +139,9 @@ export interface WithdrawsWatermarkOperationArgs {
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.WithdrawsWatermarkOperationTaskNotifyConfig | undefined>;
 }

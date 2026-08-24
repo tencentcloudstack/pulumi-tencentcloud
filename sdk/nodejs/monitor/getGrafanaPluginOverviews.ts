@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaPluginOverviews = tencentcloud.Monitor.getGrafanaPluginOverviews({});
+ * const grafanaPluginOverviews = tencentcloud.monitor.getGrafanaPluginOverviews({});
  * ```
  */
 export function getGrafanaPluginOverviews(args?: GetGrafanaPluginOverviewsArgs, opts?: pulumi.InvokeOptions): Promise<GetGrafanaPluginOverviewsResult> {
@@ -59,7 +59,7 @@ export interface GetGrafanaPluginOverviewsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const grafanaPluginOverviews = tencentcloud.Monitor.getGrafanaPluginOverviews({});
+ * const grafanaPluginOverviews = tencentcloud.monitor.getGrafanaPluginOverviews({});
  * ```
  */
 export function getGrafanaPluginOverviewsOutput(args?: GetGrafanaPluginOverviewsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGrafanaPluginOverviewsResult> {
@@ -77,5 +77,5 @@ export interface GetGrafanaPluginOverviewsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

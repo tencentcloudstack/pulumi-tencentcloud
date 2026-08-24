@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// antiddos default_alarm_threshold can be imported using the id, e.g.
+// antiddos defaultAlarmThreshold can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}

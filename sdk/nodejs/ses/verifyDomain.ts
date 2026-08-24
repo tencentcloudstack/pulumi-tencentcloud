@@ -84,7 +84,7 @@ export interface VerifyDomainState {
     /**
      * Domain name requested for verification.
      */
-    emailIdentity?: pulumi.Input<string>;
+    emailIdentity?: pulumi.Input<string | undefined>;
 }
 
 /**

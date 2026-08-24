@@ -36,8 +36,8 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			tmpJSON0, err := json.Marshal(map[string]interface{}{
 //				"Lang": "cn",
-//				"Areas": []map[string]interface{}{
-//					map[string]interface{}{
+//				"Areas": []map[string]string{
+//					{
 //						"Country": "国外",
 //					},
 //				},

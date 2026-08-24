@@ -82,12 +82,8 @@ type GetReportCountResult struct {
 }
 
 func GetReportCountOutput(ctx *pulumi.Context, args GetReportCountOutputArgs, opts ...pulumi.InvokeOption) GetReportCountResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetReportCountResultOutput, error) {
-			args := v.(GetReportCountArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getReportCount:getReportCount", args, GetReportCountResultOutput{}, options).(GetReportCountResultOutput), nil
-		}).(GetReportCountResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getReportCount:getReportCount", args, GetReportCountResultOutput{}, options).(GetReportCountResultOutput)
 }
 
 // A collection of arguments for invoking getReportCount.

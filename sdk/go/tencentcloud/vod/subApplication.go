@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### ### Basic Usage
+//
 // ```go
 // package main
 //
@@ -28,8 +30,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := vod.NewSubApplication(ctx, "foo", &vod.SubApplicationArgs{
-//				Name:        pulumi.String("foo"),
+//			_, err := vod.NewSubApplication(ctx, "example", &vod.SubApplicationArgs{
+//				Name:        pulumi.String("tf-example"),
 //				Status:      pulumi.String("On"),
 //				Description: pulumi.String("this is sub application"),
 //			})
@@ -42,12 +44,44 @@ import (
 //
 // ```
 //
+// ### ### Tags Update Example
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vod"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vod.NewSubApplication(ctx, "example", &vod.SubApplicationArgs{
+//				Name:        pulumi.String("tf-example"),
+//				Status:      pulumi.String("On"),
+//				Description: pulumi.String("Sub application with updatable tags"),
+//				Tags: pulumi.StringMap{
+//					"team":        pulumi.String("media"),
+//					"environment": pulumi.String("production"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
-// VOD super player config can be imported using the name+, e.g.
+// VOD sub application can be imported using the name and id separated by `name#sub_app_id`, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+// $ pulumi import tencentcloud:Vod/subApplication:SubApplication example tf-example#1500066377
 // ```
 type SubApplication struct {
 	pulumi.CustomResourceState
@@ -60,6 +94,10 @@ type SubApplication struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Sub appliaction status.
 	Status pulumi.StringOutput `pulumi:"status"`
+	// Sub application ID.
+	SubAppId pulumi.StringOutput `pulumi:"subAppId"`
+	// Tag key-value pairs for resource management. Maximum 10 tags.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 }
 
 // NewSubApplication registers a new resource with the given unique name, arguments, and options.
@@ -103,6 +141,10 @@ type subApplicationState struct {
 	Name *string `pulumi:"name"`
 	// Sub appliaction status.
 	Status *string `pulumi:"status"`
+	// Sub application ID.
+	SubAppId *string `pulumi:"subAppId"`
+	// Tag key-value pairs for resource management. Maximum 10 tags.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 type SubApplicationState struct {
@@ -114,6 +156,10 @@ type SubApplicationState struct {
 	Name pulumi.StringPtrInput
 	// Sub appliaction status.
 	Status pulumi.StringPtrInput
+	// Sub application ID.
+	SubAppId pulumi.StringPtrInput
+	// Tag key-value pairs for resource management. Maximum 10 tags.
+	Tags pulumi.StringMapInput
 }
 
 func (SubApplicationState) ElementType() reflect.Type {
@@ -127,6 +173,8 @@ type subApplicationArgs struct {
 	Name *string `pulumi:"name"`
 	// Sub appliaction status.
 	Status string `pulumi:"status"`
+	// Tag key-value pairs for resource management. Maximum 10 tags.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a SubApplication resource.
@@ -137,6 +185,8 @@ type SubApplicationArgs struct {
 	Name pulumi.StringPtrInput
 	// Sub appliaction status.
 	Status pulumi.StringInput
+	// Tag key-value pairs for resource management. Maximum 10 tags.
+	Tags pulumi.StringMapInput
 }
 
 func (SubApplicationArgs) ElementType() reflect.Type {
@@ -244,6 +294,16 @@ func (o SubApplicationOutput) Name() pulumi.StringOutput {
 // Sub appliaction status.
 func (o SubApplicationOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *SubApplication) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
+}
+
+// Sub application ID.
+func (o SubApplicationOutput) SubAppId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SubApplication) pulumi.StringOutput { return v.SubAppId }).(pulumi.StringOutput)
+}
+
+// Tag key-value pairs for resource management. Maximum 10 tags.
+func (o SubApplicationOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SubApplication) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 type SubApplicationArrayOutput struct{ *pulumi.OutputState }

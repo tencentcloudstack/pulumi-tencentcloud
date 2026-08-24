@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of ssl describeHostWafInstanceList
+ * Use this data source to query detailed information of SSL describe host waf instance list
  *
  * ## Example Usage
  *
@@ -15,8 +15,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostWafInstanceList = tencentcloud.Ssl.getDescribeHostWafInstanceList({
- *     certificateId: "8u8DII0l",
+ * const example = tencentcloud.ssl.getDescribeHostWafInstanceList({
+ *     certificateId: "GGQ0tJxn",
  *     resourceType: "waf",
  * });
  * ```
@@ -83,7 +83,7 @@ export interface GetDescribeHostWafInstanceListResult {
     readonly resultOutputFile?: string;
 }
 /**
- * Use this data source to query detailed information of ssl describeHostWafInstanceList
+ * Use this data source to query detailed information of SSL describe host waf instance list
  *
  * ## Example Usage
  *
@@ -91,8 +91,8 @@ export interface GetDescribeHostWafInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostWafInstanceList = tencentcloud.Ssl.getDescribeHostWafInstanceList({
- *     certificateId: "8u8DII0l",
+ * const example = tencentcloud.ssl.getDescribeHostWafInstanceList({
+ *     certificateId: "GGQ0tJxn",
  *     resourceType: "waf",
  * });
  * ```
@@ -120,15 +120,15 @@ export interface GetDescribeHostWafInstanceListOutputArgs {
     /**
      * List of filtering parameters; Filterkey: domainmatch.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostWafInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostWafInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Deployed certificate ID.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Deploy resource type.
      */
@@ -136,5 +136,5 @@ export interface GetDescribeHostWafInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

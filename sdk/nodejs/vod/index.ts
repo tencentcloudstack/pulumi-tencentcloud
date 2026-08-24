@@ -10,6 +10,16 @@ export type AdaptiveDynamicStreamingTemplate = import("./adaptiveDynamicStreamin
 export const AdaptiveDynamicStreamingTemplate: typeof import("./adaptiveDynamicStreamingTemplate").AdaptiveDynamicStreamingTemplate = null as any;
 utilities.lazyLoad(exports, ["AdaptiveDynamicStreamingTemplate"], () => require("./adaptiveDynamicStreamingTemplate"));
 
+export { AigcApiTokenArgs, AigcApiTokenState } from "./aigcApiToken";
+export type AigcApiToken = import("./aigcApiToken").AigcApiToken;
+export const AigcApiToken: typeof import("./aigcApiToken").AigcApiToken = null as any;
+utilities.lazyLoad(exports, ["AigcApiToken"], () => require("./aigcApiToken"));
+
+export { AigcQuotaArgs, AigcQuotaState } from "./aigcQuota";
+export type AigcQuota = import("./aigcQuota").AigcQuota;
+export const AigcQuota: typeof import("./aigcQuota").AigcQuota = null as any;
+utilities.lazyLoad(exports, ["AigcQuota"], () => require("./aigcQuota"));
+
 export { EventConfigArgs, EventConfigState } from "./eventConfig";
 export type EventConfig = import("./eventConfig").EventConfig;
 export const EventConfig: typeof import("./eventConfig").EventConfig = null as any;
@@ -34,6 +44,11 @@ export { GetSnapshotByTimeOffsetTemplatesArgs, GetSnapshotByTimeOffsetTemplatesR
 export const getSnapshotByTimeOffsetTemplates: typeof import("./getSnapshotByTimeOffsetTemplates").getSnapshotByTimeOffsetTemplates = null as any;
 export const getSnapshotByTimeOffsetTemplatesOutput: typeof import("./getSnapshotByTimeOffsetTemplates").getSnapshotByTimeOffsetTemplatesOutput = null as any;
 utilities.lazyLoad(exports, ["getSnapshotByTimeOffsetTemplates","getSnapshotByTimeOffsetTemplatesOutput"], () => require("./getSnapshotByTimeOffsetTemplates"));
+
+export { GetSubApplicationsArgs, GetSubApplicationsResult, GetSubApplicationsOutputArgs } from "./getSubApplications";
+export const getSubApplications: typeof import("./getSubApplications").getSubApplications = null as any;
+export const getSubApplicationsOutput: typeof import("./getSubApplications").getSubApplicationsOutput = null as any;
+utilities.lazyLoad(exports, ["getSubApplications","getSubApplicationsOutput"], () => require("./getSubApplications"));
 
 export { GetSuperPlayerConfigsArgs, GetSuperPlayerConfigsResult, GetSuperPlayerConfigsOutputArgs } from "./getSuperPlayerConfigs";
 export const getSuperPlayerConfigs: typeof import("./getSuperPlayerConfigs").getSuperPlayerConfigs = null as any;
@@ -87,6 +102,10 @@ const _module = {
         switch (type) {
             case "tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate":
                 return new AdaptiveDynamicStreamingTemplate(name, <any>undefined, { urn })
+            case "tencentcloud:Vod/aigcApiToken:AigcApiToken":
+                return new AigcApiToken(name, <any>undefined, { urn })
+            case "tencentcloud:Vod/aigcQuota:AigcQuota":
+                return new AigcQuota(name, <any>undefined, { urn })
             case "tencentcloud:Vod/eventConfig:EventConfig":
                 return new EventConfig(name, <any>undefined, { urn })
             case "tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate":
@@ -111,6 +130,8 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Vod/adaptiveDynamicStreamingTemplate", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vod/aigcApiToken", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vod/aigcQuota", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vod/eventConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vod/imageSpriteTemplate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vod/procedureTemplate", _module)

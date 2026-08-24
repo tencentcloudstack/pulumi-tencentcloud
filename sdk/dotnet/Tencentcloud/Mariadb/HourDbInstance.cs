@@ -11,9 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
 {
     /// <summary>
-    /// Provides a resource to create a mariadb HourDbInstance
+    /// Provides a resource to create a MariaDB hour db instance
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Create with default init params
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -23,16 +25,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var basic = new Tencentcloud.Mariadb.HourDbInstance("basic", new()
+    ///     var example = new Tencentcloud.Mariadb.HourDbInstance("example", new()
     ///     {
-    ///         DbVersionId = "10.0",
-    ///         InstanceName = "db-test-del",
-    ///         Memory = 2,
+    ///         InstanceName = "tf-example",
+    ///         Memory = 4,
     ///         NodeCount = 2,
-    ///         Storage = 10,
-    ///         SubnetId = "subnet-jdi5xn22",
-    ///         VpcId = "vpc-k1t8ickr",
-    ///         Vip = "10.0.0.197",
+    ///         Storage = 100,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-d4umunpy",
+    ///         Vip = "10.0.0.8",
     ///         Zones = new[]
     ///         {
     ///             "ap-guangzhou-6",
@@ -40,7 +41,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "createdBy", "terraform" },
+    ///             { "createdBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create with custom init params
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mariadb.HourDbInstance("example", new()
+    ///     {
+    ///         DbVersionId = "5.7",
+    ///         InstanceName = "tf-example",
+    ///         Memory = 2,
+    ///         NodeCount = 2,
+    ///         Storage = 100,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-d4umunpy",
+    ///         Vip = "10.0.0.8",
+    ///         Zones = new[]
+    ///         {
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-7",
+    ///         },
+    ///         InitParams = new[]
+    ///         {
+    ///             new Tencentcloud.Mariadb.Inputs.HourDbInstanceInitParamArgs
+    ///             {
+    ///                 Param = "character_set_server",
+    ///                 Value = "utf8",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.HourDbInstanceInitParamArgs
+    ///             {
+    ///                 Param = "lower_case_table_names",
+    ///                 Value = "1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "Terraform" },
     ///         },
     ///     });
     /// 
@@ -49,10 +97,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Import
     /// 
-    /// mariadb hour_db_instance can be imported using the id, e.g.
-    /// 
+    /// MariaDB hour db instance can be imported using the id, e.g.
     /// ```sh
-    /// $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+    /// $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance example tdsql-kjqih9nn
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/hourDbInstance:HourDbInstance")]
@@ -63,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// </summary>
         [Output("dbVersionId")]
         public Output<string> DbVersionId { get; private set; } = null!;
+
+        /// <summary>
+        /// parameter list. This interface's optional values include: `CharacterSetServer` (character set, required), `LowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `InnodbPageSize` (innodb data page, default 16K), `SyncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+        /// </summary>
+        [Output("initParams")]
+        public Output<ImmutableArray<Outputs.HourDbInstanceInitParam>> InitParams { get; private set; } = null!;
 
         /// <summary>
         /// name of this instance.
@@ -177,6 +230,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         [Input("dbVersionId")]
         public Input<string>? DbVersionId { get; set; }
 
+        [Input("initParams")]
+        private InputList<Inputs.HourDbInstanceInitParamArgs>? _initParams;
+
+        /// <summary>
+        /// parameter list. This interface's optional values include: `CharacterSetServer` (character set, required), `LowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `InnodbPageSize` (innodb data page, default 16K), `SyncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+        /// </summary>
+        public InputList<Inputs.HourDbInstanceInitParamArgs> InitParams
+        {
+            get => _initParams ?? (_initParams = new InputList<Inputs.HourDbInstanceInitParamArgs>());
+            set => _initParams = value;
+        }
+
         /// <summary>
         /// name of this instance.
         /// </summary>
@@ -262,6 +327,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// </summary>
         [Input("dbVersionId")]
         public Input<string>? DbVersionId { get; set; }
+
+        [Input("initParams")]
+        private InputList<Inputs.HourDbInstanceInitParamGetArgs>? _initParams;
+
+        /// <summary>
+        /// parameter list. This interface's optional values include: `CharacterSetServer` (character set, required), `LowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `InnodbPageSize` (innodb data page, default 16K), `SyncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+        /// </summary>
+        public InputList<Inputs.HourDbInstanceInitParamGetArgs> InitParams
+        {
+            get => _initParams ?? (_initParams = new InputList<Inputs.HourDbInstanceInitParamGetArgs>());
+            set => _initParams = value;
+        }
 
         /// <summary>
         /// name of this instance.

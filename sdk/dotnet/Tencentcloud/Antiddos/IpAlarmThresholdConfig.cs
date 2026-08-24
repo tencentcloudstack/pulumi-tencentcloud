@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Import
     /// 
-    /// antiddos ip_alarm_threshold_config can be imported using the id, e.g.
+    /// antiddos IpAlarmThresholdConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}

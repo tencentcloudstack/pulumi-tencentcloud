@@ -108,12 +108,8 @@ type GetResourcePackageListResult struct {
 }
 
 func GetResourcePackageListOutput(ctx *pulumi.Context, args GetResourcePackageListOutputArgs, opts ...pulumi.InvokeOption) GetResourcePackageListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourcePackageListResultOutput, error) {
-			args := v.(GetResourcePackageListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args, GetResourcePackageListResultOutput{}, options).(GetResourcePackageListResultOutput), nil
-		}).(GetResourcePackageListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args, GetResourcePackageListResultOutput{}, options).(GetResourcePackageListResultOutput)
 }
 
 // A collection of arguments for invoking getResourcePackageList.

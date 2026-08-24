@@ -75,12 +75,8 @@ type GetRollbackRangeTimeResult struct {
 }
 
 func GetRollbackRangeTimeOutput(ctx *pulumi.Context, args GetRollbackRangeTimeOutputArgs, opts ...pulumi.InvokeOption) GetRollbackRangeTimeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRollbackRangeTimeResultOutput, error) {
-			args := v.(GetRollbackRangeTimeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args, GetRollbackRangeTimeResultOutput{}, options).(GetRollbackRangeTimeResultOutput), nil
-		}).(GetRollbackRangeTimeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args, GetRollbackRangeTimeResultOutput{}, options).(GetRollbackRangeTimeResultOutput)
 }
 
 // A collection of arguments for invoking getRollbackRangeTime.

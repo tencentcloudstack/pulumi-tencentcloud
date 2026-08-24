@@ -181,51 +181,51 @@ export interface CenterUserState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * User's description. Length: Maximum 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The display name of the user. Length: Maximum 256 characters.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * The user's email address. Must be unique within the catalog. Length: Maximum 128 characters.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * The user's last name. Length: Maximum 64 characters.
      */
-    firstName?: pulumi.Input<string>;
+    firstName?: pulumi.Input<string | undefined>;
     /**
      * The user's name. Length: Maximum 64 characters.
      */
-    lastName?: pulumi.Input<string>;
+    lastName?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * User id.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * User name. It must be unique in space. Modifications are not supported. Format: Contains numbers, English letters and special symbols(`+`, `=`, `,`, `.`, `@`, `-`, `_`). Length: Maximum 64 characters.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
     /**
      * The status of the user. Value: Enabled (default): Enabled. Disabled: Disabled.
      */
-    userStatus?: pulumi.Input<string>;
+    userStatus?: pulumi.Input<string | undefined>;
     /**
      * User type.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -235,23 +235,23 @@ export interface CenterUserArgs {
     /**
      * User's description. Length: Maximum 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The display name of the user. Length: Maximum 256 characters.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * The user's email address. Must be unique within the catalog. Length: Maximum 128 characters.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * The user's last name. Length: Maximum 64 characters.
      */
-    firstName?: pulumi.Input<string>;
+    firstName?: pulumi.Input<string | undefined>;
     /**
      * The user's name. Length: Maximum 64 characters.
      */
-    lastName?: pulumi.Input<string>;
+    lastName?: pulumi.Input<string | undefined>;
     /**
      * User name. It must be unique in space. Modifications are not supported. Format: Contains numbers, English letters and special symbols(`+`, `=`, `,`, `.`, `@`, `-`, `_`). Length: Maximum 64 characters.
      */
@@ -259,7 +259,7 @@ export interface CenterUserArgs {
     /**
      * The status of the user. Value: Enabled (default): Enabled. Disabled: Disabled.
      */
-    userStatus?: pulumi.Input<string>;
+    userStatus?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */

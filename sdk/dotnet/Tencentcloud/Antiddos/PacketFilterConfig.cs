@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Import
     /// 
-    /// antiddos packet_filter_config can be imported using the id, e.g.
+    /// antiddos PacketFilterConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id

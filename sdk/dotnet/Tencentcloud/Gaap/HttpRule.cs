@@ -96,7 +96,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP http rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/httpRule:HttpRule  tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+    ///   $ pulumi import tencentcloud:Gaap/httpRule:HttpRule foo rule-3bsuu01r
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/httpRule:HttpRule")]

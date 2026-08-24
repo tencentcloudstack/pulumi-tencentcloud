@@ -91,11 +91,11 @@ export interface RenewInstanceState {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Renewal duration, the default is 1, and the unit is month.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -109,5 +109,5 @@ export interface RenewInstanceArgs {
     /**
      * Renewal duration, the default is 1, and the unit is month.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }

@@ -139,35 +139,35 @@ export interface UsagePlanState {
     /**
      * Attach API keys list.
      */
-    attachApiKeys?: pulumi.Input<pulumi.Input<string>[]>;
+    attachApiKeys?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Attach service and API list.
      */
-    attachLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UsagePlanAttachList>[]>;
+    attachLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UsagePlanAttachList>[] | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is -1, which indicates no limit.
      */
-    maxRequestNum?: pulumi.Input<number>;
+    maxRequestNum?: pulumi.Input<number | undefined>;
     /**
      * Limit of requests per second. Valid values: -1, [1,2000]. The default value is -1, which indicates no limit.
      */
-    maxRequestNumPreSec?: pulumi.Input<number>;
+    maxRequestNumPreSec?: pulumi.Input<number | undefined>;
     /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Custom usage plan description.
      */
-    usagePlanDesc?: pulumi.Input<string>;
+    usagePlanDesc?: pulumi.Input<string | undefined>;
     /**
      * Custom usage plan name.
      */
-    usagePlanName?: pulumi.Input<string>;
+    usagePlanName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -177,15 +177,15 @@ export interface UsagePlanArgs {
     /**
      * Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is -1, which indicates no limit.
      */
-    maxRequestNum?: pulumi.Input<number>;
+    maxRequestNum?: pulumi.Input<number | undefined>;
     /**
      * Limit of requests per second. Valid values: -1, [1,2000]. The default value is -1, which indicates no limit.
      */
-    maxRequestNumPreSec?: pulumi.Input<number>;
+    maxRequestNumPreSec?: pulumi.Input<number | undefined>;
     /**
      * Custom usage plan description.
      */
-    usagePlanDesc?: pulumi.Input<string>;
+    usagePlanDesc?: pulumi.Input<string | undefined>;
     /**
      * Custom usage plan name.
      */

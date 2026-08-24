@@ -107,7 +107,7 @@ import (
 //						Command: pulumi.String("echo \"hello\""),
 //					},
 //				},
-//				FirewallTemplateId: firewallTemplate.ID(),
+//				FirewallTemplateId: firewallTemplate.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

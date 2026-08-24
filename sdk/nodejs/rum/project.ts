@@ -38,7 +38,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * rum project can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Rum/project:Project example 139422
  * ```
@@ -202,63 +201,63 @@ export interface ProjectState {
     /**
      * Create Time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Creator ID.
      */
-    creator?: pulumi.Input<string>;
+    creator?: pulumi.Input<string | undefined>;
     /**
      * Description of the created project (optional and up to 1,000 characters).
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable aggregation.
      */
-    enableUrlGroup?: pulumi.Input<number>;
+    enableUrlGroup?: pulumi.Input<number | undefined>;
     /**
      * Business system ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance key.
      */
-    instanceKey?: pulumi.Input<string>;
+    instanceKey?: pulumi.Input<string | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Starred status. `1`: yes; `0`: no.
      */
-    isStar?: pulumi.Input<number>;
+    isStar?: pulumi.Input<number | undefined>;
     /**
      * Unique project key (12 characters).
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Name of the created project (required and up to 200 characters).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project status (`1`: Creating; `2`: Running; `3`: Abnormal; `4`: Restarting; `5`: Stopping; `6`: Stopped; `7`: Terminating; `8`: Terminated).
      */
-    projectStatus?: pulumi.Input<number>;
+    projectStatus?: pulumi.Input<number | undefined>;
     /**
      * Project sampling rate (greater than or equal to 0).
      */
-    rate?: pulumi.Input<string>;
+    rate?: pulumi.Input<string | undefined>;
     /**
      * Repository address of the project (optional and up to 256 characters).
      */
-    repo?: pulumi.Input<string>;
+    repo?: pulumi.Input<string | undefined>;
     /**
      * Project type (valid values: `web`, `mp`, `android`, `ios`, `node`, `hippy`, `weex`, `viola`, `rn`).
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Webpage address of the project (optional and up to 256 characters).
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -268,7 +267,7 @@ export interface ProjectArgs {
     /**
      * Description of the created project (optional and up to 1,000 characters).
      */
-    desc?: pulumi.Input<string>;
+    desc?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable aggregation.
      */
@@ -280,7 +279,7 @@ export interface ProjectArgs {
     /**
      * Name of the created project (required and up to 200 characters).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project sampling rate (greater than or equal to 0).
      */
@@ -288,7 +287,7 @@ export interface ProjectArgs {
     /**
      * Repository address of the project (optional and up to 256 characters).
      */
-    repo?: pulumi.Input<string>;
+    repo?: pulumi.Input<string | undefined>;
     /**
      * Project type (valid values: `web`, `mp`, `android`, `ios`, `node`, `hippy`, `weex`, `viola`, `rn`).
      */
@@ -296,5 +295,5 @@ export interface ProjectArgs {
     /**
      * Webpage address of the project (optional and up to 256 characters).
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }

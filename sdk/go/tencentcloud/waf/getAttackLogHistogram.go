@@ -114,12 +114,8 @@ type GetAttackLogHistogramResult struct {
 }
 
 func GetAttackLogHistogramOutput(ctx *pulumi.Context, args GetAttackLogHistogramOutputArgs, opts ...pulumi.InvokeOption) GetAttackLogHistogramResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAttackLogHistogramResultOutput, error) {
-			args := v.(GetAttackLogHistogramArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args, GetAttackLogHistogramResultOutput{}, options).(GetAttackLogHistogramResultOutput), nil
-		}).(GetAttackLogHistogramResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args, GetAttackLogHistogramResultOutput{}, options).(GetAttackLogHistogramResultOutput)
 }
 
 // A collection of arguments for invoking getAttackLogHistogram.

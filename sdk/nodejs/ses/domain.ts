@@ -21,7 +21,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * ses domain can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
  * ```
@@ -98,11 +97,11 @@ export interface DomainState {
     /**
      * DNS configuration details.
      */
-    attributes?: pulumi.Input<pulumi.Input<inputs.Ses.DomainAttribute>[]>;
+    attributes?: pulumi.Input<pulumi.Input<inputs.Ses.DomainAttribute>[] | undefined>;
     /**
      * Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
      */
-    emailIdentity?: pulumi.Input<string>;
+    emailIdentity?: pulumi.Input<string | undefined>;
 }
 
 /**

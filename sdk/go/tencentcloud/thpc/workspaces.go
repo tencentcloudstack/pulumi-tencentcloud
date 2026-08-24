@@ -41,7 +41,7 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			images, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//			images2, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
@@ -51,7 +51,7 @@ import (
 //				return err
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -59,10 +59,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -86,9 +86,9 @@ import (
 //				SpaceChargeType: pulumi.String("PREPAID"),
 //				SpaceType:       pulumi.String("96A.96XLARGE2304"),
 //				HpcClusterId:    pulumi.String("hpc-l9anqcbl"),
-//				ImageId:         pulumi.String(images.Images[0].ImageId),
+//				ImageId:         pulumi.String(images2.Images[0].ImageId),
 //				SecurityGroupIds: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Placement: &thpc.WorkspacesPlacementArgs{
 //					Zone:      pulumi.String(availabilityZone),
@@ -110,8 +110,8 @@ import (
 //					},
 //				},
 //				VirtualPrivateCloud: &thpc.WorkspacesVirtualPrivateCloudArgs{
-//					VpcId:            vpc.ID(),
-//					SubnetId:         subnet.ID(),
+//					VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//					SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //					AsVpcGateway:     pulumi.Bool(false),
 //					Ipv6AddressCount: pulumi.Int(0),
 //				},
@@ -168,7 +168,7 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			images, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//			images2, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
@@ -178,7 +178,7 @@ import (
 //				return err
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -186,10 +186,10 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("172.16.0.0/24"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -213,9 +213,9 @@ import (
 //				SpaceChargeType: pulumi.String("UNDERWRITE"),
 //				SpaceType:       pulumi.String("96A.96XLARGE2304"),
 //				HpcClusterId:    pulumi.String("hpc-l9anqcbl"),
-//				ImageId:         pulumi.String(images.Images[0].ImageId),
+//				ImageId:         pulumi.String(images2.Images[0].ImageId),
 //				SecurityGroupIds: pulumi.StringArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Placement: &thpc.WorkspacesPlacementArgs{
 //					Zone:      pulumi.String(availabilityZone),
@@ -237,8 +237,8 @@ import (
 //					},
 //				},
 //				VirtualPrivateCloud: &thpc.WorkspacesVirtualPrivateCloudArgs{
-//					VpcId:            vpc.ID(),
-//					SubnetId:         subnet.ID(),
+//					VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//					SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //					AsVpcGateway:     pulumi.Bool(false),
 //					Ipv6AddressCount: pulumi.Int(0),
 //					PrivateIpAddresses: pulumi.StringArray{
@@ -296,6 +296,8 @@ type Workspaces struct {
 	DisasterRecoverGroupId pulumi.StringPtrOutput `pulumi:"disasterRecoverGroupId"`
 	// Enhanced Services.
 	EnhancedService WorkspacesEnhancedServicePtrOutput `pulumi:"enhancedService"`
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolOutput `pulumi:"forceStop"`
 	// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
 	HostName pulumi.StringPtrOutput `pulumi:"hostName"`
 	// Hyper Computing Cluster ID.
@@ -370,6 +372,8 @@ type workspacesState struct {
 	DisasterRecoverGroupId *string `pulumi:"disasterRecoverGroupId"`
 	// Enhanced Services.
 	EnhancedService *WorkspacesEnhancedService `pulumi:"enhancedService"`
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop *bool `pulumi:"forceStop"`
 	// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
 	HostName *string `pulumi:"hostName"`
 	// Hyper Computing Cluster ID.
@@ -415,6 +419,8 @@ type WorkspacesState struct {
 	DisasterRecoverGroupId pulumi.StringPtrInput
 	// Enhanced Services.
 	EnhancedService WorkspacesEnhancedServicePtrInput
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolPtrInput
 	// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
 	HostName pulumi.StringPtrInput
 	// Hyper Computing Cluster ID.
@@ -464,6 +470,8 @@ type workspacesArgs struct {
 	DisasterRecoverGroupId *string `pulumi:"disasterRecoverGroupId"`
 	// Enhanced Services.
 	EnhancedService *WorkspacesEnhancedService `pulumi:"enhancedService"`
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop *bool `pulumi:"forceStop"`
 	// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
 	HostName *string `pulumi:"hostName"`
 	// Hyper Computing Cluster ID.
@@ -508,6 +516,8 @@ type WorkspacesArgs struct {
 	DisasterRecoverGroupId pulumi.StringPtrInput
 	// Enhanced Services.
 	EnhancedService WorkspacesEnhancedServicePtrInput
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolPtrInput
 	// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
 	HostName pulumi.StringPtrInput
 	// Hyper Computing Cluster ID.
@@ -650,6 +660,11 @@ func (o WorkspacesOutput) DisasterRecoverGroupId() pulumi.StringPtrOutput {
 // Enhanced Services.
 func (o WorkspacesOutput) EnhancedService() WorkspacesEnhancedServicePtrOutput {
 	return o.ApplyT(func(v *Workspaces) WorkspacesEnhancedServicePtrOutput { return v.EnhancedService }).(WorkspacesEnhancedServicePtrOutput)
+}
+
+// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+func (o WorkspacesOutput) ForceStop() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Workspaces) pulumi.BoolOutput { return v.ForceStop }).(pulumi.BoolOutput)
 }
 
 // The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountTargets = tencentcloud.Cfs.getMountTargets({
+ * const mountTargets = tencentcloud.cfs.getMountTargets({
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetMountTargetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountTargets = tencentcloud.Cfs.getMountTargets({
+ * const mountTargets = tencentcloud.cfs.getMountTargets({
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetMountTargetsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

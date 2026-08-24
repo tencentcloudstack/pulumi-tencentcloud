@@ -30,7 +30,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dnspod.NewRecord(ctx, "demo", &dnspod.RecordArgs{
+//			demo, err := dnspod.NewRecord(ctx, "demo", &dnspod.RecordArgs{
 //				Domain:     pulumi.String("mikatong.com"),
 //				RecordType: pulumi.String("A"),
 //				RecordLine: pulumi.String("默认"),
@@ -40,6 +40,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("updatedOn", demo.UpdatedOn)
 //			return nil
 //		})
 //	}
@@ -62,6 +63,8 @@ type Record struct {
 	MonitorStatus pulumi.StringOutput `pulumi:"monitorStatus"`
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx pulumi.IntPtrOutput `pulumi:"mx"`
+	// ID of the record.
+	RecordId pulumi.StringOutput `pulumi:"recordId"`
 	// The record line.
 	RecordLine pulumi.StringOutput `pulumi:"recordLine"`
 	// The record type.
@@ -74,6 +77,8 @@ type Record struct {
 	SubDomain pulumi.StringPtrOutput `pulumi:"subDomain"`
 	// TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
 	Ttl pulumi.IntPtrOutput `pulumi:"ttl"`
+	// Last update time of the record.
+	UpdatedOn pulumi.StringOutput `pulumi:"updatedOn"`
 	// The record value.
 	Value pulumi.StringOutput `pulumi:"value"`
 	// Weight information. An integer from 1 to 100. Only enterprise VIP domain names are available, does not pass this parameter, means that the weight information is not set.
@@ -128,6 +133,8 @@ type recordState struct {
 	MonitorStatus *string `pulumi:"monitorStatus"`
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx *int `pulumi:"mx"`
+	// ID of the record.
+	RecordId *string `pulumi:"recordId"`
 	// The record line.
 	RecordLine *string `pulumi:"recordLine"`
 	// The record type.
@@ -140,6 +147,8 @@ type recordState struct {
 	SubDomain *string `pulumi:"subDomain"`
 	// TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
 	Ttl *int `pulumi:"ttl"`
+	// Last update time of the record.
+	UpdatedOn *string `pulumi:"updatedOn"`
 	// The record value.
 	Value *string `pulumi:"value"`
 	// Weight information. An integer from 1 to 100. Only enterprise VIP domain names are available, does not pass this parameter, means that the weight information is not set.
@@ -153,6 +162,8 @@ type RecordState struct {
 	MonitorStatus pulumi.StringPtrInput
 	// MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
 	Mx pulumi.IntPtrInput
+	// ID of the record.
+	RecordId pulumi.StringPtrInput
 	// The record line.
 	RecordLine pulumi.StringPtrInput
 	// The record type.
@@ -165,6 +176,8 @@ type RecordState struct {
 	SubDomain pulumi.StringPtrInput
 	// TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
 	Ttl pulumi.IntPtrInput
+	// Last update time of the record.
+	UpdatedOn pulumi.StringPtrInput
 	// The record value.
 	Value pulumi.StringPtrInput
 	// Weight information. An integer from 1 to 100. Only enterprise VIP domain names are available, does not pass this parameter, means that the weight information is not set.
@@ -324,6 +337,11 @@ func (o RecordOutput) Mx() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Record) pulumi.IntPtrOutput { return v.Mx }).(pulumi.IntPtrOutput)
 }
 
+// ID of the record.
+func (o RecordOutput) RecordId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordId }).(pulumi.StringOutput)
+}
+
 // The record line.
 func (o RecordOutput) RecordLine() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordLine }).(pulumi.StringOutput)
@@ -352,6 +370,11 @@ func (o RecordOutput) SubDomain() pulumi.StringPtrOutput {
 // TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
 func (o RecordOutput) Ttl() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Record) pulumi.IntPtrOutput { return v.Ttl }).(pulumi.IntPtrOutput)
+}
+
+// Last update time of the record.
+func (o RecordOutput) UpdatedOn() pulumi.StringOutput {
+	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.UpdatedOn }).(pulumi.StringOutput)
 }
 
 // The record value.

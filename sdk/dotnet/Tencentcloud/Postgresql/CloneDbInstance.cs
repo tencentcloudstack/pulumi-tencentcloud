@@ -27,21 +27,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// {
     ///     var example = new Tencentcloud.Postgresql.CloneDbInstance("example", new()
     ///     {
-    ///         DbInstanceId = "postgres-evsqpyap",
-    ///         Name = "tf-example-clone",
+    ///         DbInstanceId = "postgres-ckwcgdf1",
+    ///         Name = "tf-example",
     ///         SpecCode = "pg.it.medium4",
-    ///         Storage = 200,
+    ///         Storage = 100,
     ///         Period = 1,
     ///         AutoRenewFlag = 0,
-    ///         VpcId = "vpc-a6zec4mf",
-    ///         SubnetId = "subnet-b8hintyy",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         InstanceChargeType = "POSTPAID_BY_HOUR",
     ///         SecurityGroupIds = new[]
     ///         {
-    ///             "sg-8stavs03",
+    ///             "sg-rs32zv1r",
+    ///             "sg-37tigqat",
     ///         },
     ///         ProjectId = 0,
-    ///         RecoveryTargetTime = "2024-10-12 18:17:00",
+    ///         RecoveryTargetTime = "2026-07-10 01:00:06",
+    ///         DeletionProtection = true,
     ///         DbNodeSets = new[]
     ///         {
     ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceDbNodeSetArgs
@@ -52,16 +54,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceDbNodeSetArgs
     ///             {
     ///                 Role = "Standby",
-    ///                 Zone = "ap-guangzhou-6",
+    ///                 Zone = "ap-guangzhou-7",
     ///             },
     ///         },
-    ///         TagLists = new[]
+    ///         Tags = 
     ///         {
-    ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceTagListArgs
-    ///             {
-    ///                 TagKey = "createBy",
-    ///                 TagValue = "Terraform",
-    ///             },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -74,7 +72,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -113,6 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         },
     ///         ProjectId = 0,
     ///         BackupSetId = baseBackups.Apply(getBaseBackupsResult =&gt; getBaseBackupsResult.BaseBackupSets[0]?.Id),
+    ///         DeletionProtection = true,
     ///         DbNodeSets = new[]
     ///         {
     ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceDbNodeSetArgs
@@ -126,13 +124,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///                 Zone = "ap-guangzhou-6",
     ///             },
     ///         },
-    ///         TagLists = new[]
+    ///         Tags = 
     ///         {
-    ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceTagListArgs
-    ///             {
-    ///                 TagKey = "createBy",
-    ///                 TagValue = "Terraform",
-    ///             },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -166,6 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         },
     ///         ProjectId = 0,
     ///         RecoveryTargetTime = "2024-10-12 18:17:00",
+    ///         DeletionProtection = true,
     ///         DbNodeSets = new[]
     ///         {
     ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceDbNodeSetArgs
@@ -181,13 +176,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///                 DedicatedClusterId = "cluster-262n63e8",
     ///             },
     ///         },
-    ///         TagLists = new[]
+    ///         Tags = 
     ///         {
-    ///             new Tencentcloud.Postgresql.Inputs.CloneDbInstanceTagListArgs
-    ///             {
-    ///                 TagKey = "createBy",
-    ///                 TagValue = "Terraform",
-    ///             },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -210,6 +201,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> AutoRenewFlag { get; private set; } = null!;
 
         /// <summary>
+        /// Availability zone.
+        /// </summary>
+        [Output("availabilityZone")]
+        public Output<string> AvailabilityZone { get; private set; } = null!;
+
+        /// <summary>
         /// Basic backup set ID.
         /// </summary>
         [Output("backupSetId")]
@@ -229,6 +226,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<ImmutableArray<Outputs.CloneDbInstanceDbNodeSet>> DbNodeSets { get; private set; } = null!;
 
         /// <summary>
+        /// Whether deletion protection is enabled for the instance: `True` deletion protection enabled; `False` deletion protection disabled.
+        /// </summary>
+        [Output("deletionProtection")]
+        public Output<bool?> DeletionProtection { get; private set; } = null!;
+
+        /// <summary>
         /// Instance billing type, which currently supports:
         /// 
         /// - PREPAID: Prepaid, i.e., monthly subscription
@@ -246,6 +249,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// ID of the cloned instance.
+        /// </summary>
+        [Output("newDbInstanceId")]
+        public Output<string> NewDbInstanceId { get; private set; } = null!;
+
+        /// <summary>
         /// Purchase duration, in months.
         /// - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
         /// - Pay-as-you-go: Only supports `1`.
@@ -254,10 +263,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<int> Period { get; private set; } = null!;
 
         /// <summary>
+        /// IP for private access.
+        /// </summary>
+        [Output("privateAccessIp")]
+        public Output<string> PrivateAccessIp { get; private set; } = null!;
+
+        /// <summary>
+        /// Port for private access.
+        /// </summary>
+        [Output("privateAccessPort")]
+        public Output<int> PrivateAccessPort { get; private set; } = null!;
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Output("projectId")]
         public Output<int?> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// Host for public access.
+        /// </summary>
+        [Output("publicAccessHost")]
+        public Output<string> PublicAccessHost { get; private set; } = null!;
+
+        /// <summary>
+        /// Port for public access.
+        /// </summary>
+        [Output("publicAccessPort")]
+        public Output<int> PublicAccessPort { get; private set; } = null!;
 
         /// <summary>
         /// Restoration point in time.
@@ -300,10 +333,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string?> SyncMode { get; private set; } = null!;
 
         /// <summary>
-        /// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+        /// It has been deprecated from version 1.83.10. Use `Tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
         /// </summary>
         [Output("tagLists")]
         public Output<ImmutableArray<Outputs.CloneDbInstanceTagList>> TagLists { get; private set; } = null!;
+
+        /// <summary>
+        /// The available tags within this postgresql.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
@@ -396,6 +435,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
 
         /// <summary>
+        /// Whether deletion protection is enabled for the instance: `True` deletion protection enabled; `False` deletion protection disabled.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
         /// Instance billing type, which currently supports:
         /// 
         /// - PREPAID: Prepaid, i.e., monthly subscription
@@ -476,12 +521,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         private InputList<Inputs.CloneDbInstanceTagListArgs>? _tagLists;
 
         /// <summary>
-        /// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+        /// It has been deprecated from version 1.83.10. Use `Tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.83.10. Use `Tags` instead.")]
         public InputList<Inputs.CloneDbInstanceTagListArgs> TagLists
         {
             get => _tagLists ?? (_tagLists = new InputList<Inputs.CloneDbInstanceTagListArgs>());
             set => _tagLists = value;
+        }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// The available tags within this postgresql.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
         }
 
         /// <summary>
@@ -511,6 +569,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? AutoRenewFlag { get; set; }
 
         /// <summary>
+        /// Availability zone.
+        /// </summary>
+        [Input("availabilityZone")]
+        public Input<string>? AvailabilityZone { get; set; }
+
+        /// <summary>
         /// Basic backup set ID.
         /// </summary>
         [Input("backupSetId")]
@@ -536,6 +600,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
 
         /// <summary>
+        /// Whether deletion protection is enabled for the instance: `True` deletion protection enabled; `False` deletion protection disabled.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
         /// Instance billing type, which currently supports:
         /// 
         /// - PREPAID: Prepaid, i.e., monthly subscription
@@ -553,6 +623,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// ID of the cloned instance.
+        /// </summary>
+        [Input("newDbInstanceId")]
+        public Input<string>? NewDbInstanceId { get; set; }
+
+        /// <summary>
         /// Purchase duration, in months.
         /// - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
         /// - Pay-as-you-go: Only supports `1`.
@@ -561,10 +637,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<int>? Period { get; set; }
 
         /// <summary>
+        /// IP for private access.
+        /// </summary>
+        [Input("privateAccessIp")]
+        public Input<string>? PrivateAccessIp { get; set; }
+
+        /// <summary>
+        /// Port for private access.
+        /// </summary>
+        [Input("privateAccessPort")]
+        public Input<int>? PrivateAccessPort { get; set; }
+
+        /// <summary>
         /// Project ID.
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        /// <summary>
+        /// Host for public access.
+        /// </summary>
+        [Input("publicAccessHost")]
+        public Input<string>? PublicAccessHost { get; set; }
+
+        /// <summary>
+        /// Port for public access.
+        /// </summary>
+        [Input("publicAccessPort")]
+        public Input<int>? PublicAccessPort { get; set; }
 
         /// <summary>
         /// Restoration point in time.
@@ -616,12 +716,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         private InputList<Inputs.CloneDbInstanceTagListGetArgs>? _tagLists;
 
         /// <summary>
-        /// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+        /// It has been deprecated from version 1.83.10. Use `Tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.83.10. Use `Tags` instead.")]
         public InputList<Inputs.CloneDbInstanceTagListGetArgs> TagLists
         {
             get => _tagLists ?? (_tagLists = new InputList<Inputs.CloneDbInstanceTagListGetArgs>());
             set => _tagLists = value;
+        }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// The available tags within this postgresql.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
         }
 
         /// <summary>

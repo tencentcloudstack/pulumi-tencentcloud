@@ -42,7 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Import
     /// 
-    /// dasb device_account can be imported using the id, e.g.
+    /// dasb DeviceAccount can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11

@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of dnspod domainList
+ * Use this data source to query detailed information of DnsPod domain list
  *
  * ## Example Usage
  *
@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainList = tencentcloud.Dnspod.getDomainList({
+ * const domainList = tencentcloud.dnspod.getDomainList({
  *     type: "ALL",
  *     groupIds: [1],
  *     keyword: "",
@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *     packages: [""],
  *     remark: "",
  *     updatedAtBegin: "2021-05-01 03:00:00",
- *     updatedAtEnd: "2024-05-10 20:00:00",
+ *     updatedAtEnd: "2025-05-10 20:00:00",
  *     recordCountBegin: 0,
  *     recordCountEnd: 100,
  *     projectId: -1,
@@ -161,7 +161,7 @@ export interface GetDomainListResult {
     readonly updatedAtEnd?: string;
 }
 /**
- * Use this data source to query detailed information of dnspod domainList
+ * Use this data source to query detailed information of DnsPod domain list
  *
  * ## Example Usage
  *
@@ -169,7 +169,7 @@ export interface GetDomainListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainList = tencentcloud.Dnspod.getDomainList({
+ * const domainList = tencentcloud.dnspod.getDomainList({
  *     type: "ALL",
  *     groupIds: [1],
  *     keyword: "",
@@ -179,7 +179,7 @@ export interface GetDomainListResult {
  *     packages: [""],
  *     remark: "",
  *     updatedAtBegin: "2021-05-01 03:00:00",
- *     updatedAtEnd: "2024-05-10 20:00:00",
+ *     updatedAtEnd: "2025-05-10 20:00:00",
  *     recordCountBegin: 0,
  *     recordCountEnd: 100,
  *     projectId: -1,
@@ -218,51 +218,51 @@ export interface GetDomainListOutputArgs {
     /**
      * Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
      */
-    groupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    groupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Get domain names based on keywords.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Get domain names based on the package, which can be obtained through the Grade field in DescribeDomain or DescribeDomainList interface.
      */
-    packages?: pulumi.Input<pulumi.Input<string>[]>;
+    packages?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * The start point of the domain name&amp;#39;s record count query range.
      */
-    recordCountBegin?: pulumi.Input<number>;
+    recordCountBegin?: pulumi.Input<number | undefined>;
     /**
      * The end point of the domain name&amp;#39;s record count query range.
      */
-    recordCountEnd?: pulumi.Input<number>;
+    recordCountEnd?: pulumi.Input<number | undefined>;
     /**
      * Get domain names based on remark information.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field. Available values are NAME, STATUS, RECORDS, GRADE, UPDATED_ON. NAME: Domain name STATUS: Domain status RECORDS: Number of records GRADE: Package level UPDATED_ON: Update time.
      */
-    sortField?: pulumi.Input<string>;
+    sortField?: pulumi.Input<string | undefined>;
     /**
      * Sorting type, ascending: ASC, descending: DESC.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * Get domain names based on domain status. Available values are ENABLE, LOCK, PAUSE, SPAM. ENABLE: Normal LOCK: Locked PAUSE: Paused SPAM: Banned.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Dnspod.GetDomainListTagArgs>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Dnspod.GetDomainListTagArgs>[] | undefined>;
     /**
      * Get domain names based on domain group type. Available values are ALL, MINE, SHARE, RECENT. ALL: All MINE: My domain names SHARE: Domain names shared with me RECENT: Recently operated domain names.
      */
@@ -270,9 +270,9 @@ export interface GetDomainListOutputArgs {
     /**
      * The start time of the domain name&amp;#39;s update time to be obtained, such as &amp;#39;2021-05-01 03:00:00&amp;#39;.
      */
-    updatedAtBegin?: pulumi.Input<string>;
+    updatedAtBegin?: pulumi.Input<string | undefined>;
     /**
      * The end time of the domain name&amp;#39;s update time to be obtained, such as &amp;#39;2021-05-10 20:00:00&amp;#39;.
      */
-    updatedAtEnd?: pulumi.Input<string>;
+    updatedAtEnd?: pulumi.Input<string | undefined>;
 }

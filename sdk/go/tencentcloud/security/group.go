@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create security group.
+// Provides a resource to create Security group.
 //
 // ## Example Usage
 //
@@ -30,7 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := security.NewGroup(ctx, "example", &security.GroupArgs{
-//				Name:        pulumi.String("tf-example-sg"),
+//				Name:        pulumi.String("tf-example"),
 //				Description: pulumi.String("sg test"),
 //			})
 //			if err != nil {
@@ -57,11 +57,11 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := security.NewGroup(ctx, "example", &security.GroupArgs{
-//				Name:        pulumi.String("tf-example-sg"),
+//				Name:        pulumi.String("tf-example"),
 //				Description: pulumi.String("sg test"),
 //				ProjectId:   pulumi.Int(0),
 //				Tags: pulumi.StringMap{
-//					"example": pulumi.String("test"),
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -78,7 +78,7 @@ import (
 // Security group can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Security/group:Group  tencentcloud_security_group.sglab sg-ey3wmiz1
+// $ pulumi import tencentcloud:Security/group:Group example sg-ey3wmiz1
 // ```
 type Group struct {
 	pulumi.CustomResourceState

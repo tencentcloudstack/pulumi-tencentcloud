@@ -81,6 +81,10 @@ export class NatPolicy extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly internalUuid: pulumi.Output<number>;
     /**
+     * Execution order.
+     */
+    declare public /*out*/ readonly orderIndex: pulumi.Output<number>;
+    /**
      * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
      */
     declare public readonly paramTemplateId: pulumi.Output<string>;
@@ -138,6 +142,7 @@ export class NatPolicy extends pulumi.CustomResource {
             resourceInputs["direction"] = state?.direction;
             resourceInputs["enable"] = state?.enable;
             resourceInputs["internalUuid"] = state?.internalUuid;
+            resourceInputs["orderIndex"] = state?.orderIndex;
             resourceInputs["paramTemplateId"] = state?.paramTemplateId;
             resourceInputs["port"] = state?.port;
             resourceInputs["protocol"] = state?.protocol;
@@ -187,6 +192,7 @@ export class NatPolicy extends pulumi.CustomResource {
             resourceInputs["targetContent"] = args?.targetContent;
             resourceInputs["targetType"] = args?.targetType;
             resourceInputs["internalUuid"] = undefined /*out*/;
+            resourceInputs["orderIndex"] = undefined /*out*/;
             resourceInputs["uuid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -201,59 +207,63 @@ export interface NatPolicyState {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Rule direction: 1, inbound; 0, outbound.
      */
-    direction?: pulumi.Input<number>;
+    direction?: pulumi.Input<number | undefined>;
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Internal ID.
      */
-    internalUuid?: pulumi.Input<number>;
+    internalUuid?: pulumi.Input<number | undefined>;
+    /**
+     * Execution order.
+     */
+    orderIndex?: pulumi.Input<number | undefined>;
     /**
      * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    paramTemplateId?: pulumi.Input<string>;
+    paramTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol. If Direction=1, optional values: TCP, UDP, ANY; If Direction=0, optional values: TCP, UDP, ICMP, ANY, HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, and DNS.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * How the traffic set in the access control policy passes through the cloud firewall. Values: accept: allow; drop: reject; log: observe.
      */
-    ruleAction?: pulumi.Input<string>;
+    ruleAction?: pulumi.Input<string | undefined>;
     /**
      * Scope of effective rules. ALL: Global effectiveness; ap-guangzhou: Effective territory; cfwnat-xxx: Effectiveness based on instance dimension.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access source example: net:IP/CIDR(192.168.0.2).
      */
-    sourceContent?: pulumi.Input<string>;
+    sourceContent?: pulumi.Input<string | undefined>;
     /**
      * Access source type: for inbound rules, the type can be net, location, vendor, template; for outbound rules, it can be net, instance, tag, template, group.
      */
-    sourceType?: pulumi.Input<string>;
+    sourceType?: pulumi.Input<string | undefined>;
     /**
      * Example of access purpose: net: IP/CIDR(192.168.0.2) domain: domain name rules, such as *.qq.com.
      */
-    targetContent?: pulumi.Input<string>;
+    targetContent?: pulumi.Input<string | undefined>;
     /**
      * Access purpose type: For inbound rules, the type can be net, instance, tag, template, group; for outbound rules, it can be net, location, vendor, template.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * The unique id corresponding to the rule, no need to fill in when creating the rule.
      */
-    uuid?: pulumi.Input<number>;
+    uuid?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -263,7 +273,7 @@ export interface NatPolicyArgs {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Rule direction: 1, inbound; 0, outbound.
      */
@@ -271,11 +281,11 @@ export interface NatPolicyArgs {
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    paramTemplateId?: pulumi.Input<string>;
+    paramTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
      */
@@ -291,7 +301,7 @@ export interface NatPolicyArgs {
     /**
      * Scope of effective rules. ALL: Global effectiveness; ap-guangzhou: Effective territory; cfwnat-xxx: Effectiveness based on instance dimension.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access source example: net:IP/CIDR(192.168.0.2).
      */

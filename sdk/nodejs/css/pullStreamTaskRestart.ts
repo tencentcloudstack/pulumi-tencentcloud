@@ -94,11 +94,11 @@ export interface PullStreamTaskRestartState {
     /**
      * Task operator.
      */
-    operator?: pulumi.Input<string>;
+    operator?: pulumi.Input<string | undefined>;
     /**
      * Task Id.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
 }
 
 /**

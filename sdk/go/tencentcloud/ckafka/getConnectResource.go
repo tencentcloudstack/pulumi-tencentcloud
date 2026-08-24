@@ -78,12 +78,8 @@ type LookupConnectResourceResult struct {
 }
 
 func LookupConnectResourceOutput(ctx *pulumi.Context, args LookupConnectResourceOutputArgs, opts ...pulumi.InvokeOption) LookupConnectResourceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupConnectResourceResultOutput, error) {
-			args := v.(LookupConnectResourceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getConnectResource:getConnectResource", args, LookupConnectResourceResultOutput{}, options).(LookupConnectResourceResultOutput), nil
-		}).(LookupConnectResourceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getConnectResource:getConnectResource", args, LookupConnectResourceResultOutput{}, options).(LookupConnectResourceResultOutput)
 }
 
 // A collection of arguments for invoking getConnectResource.

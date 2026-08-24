@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// cdwpg cdwpg_userhba can be imported using the id, e.g.
+// cdwpg cdwpgUserhba can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cdwpg/userhba:Userhba cdwpg_userhba cdwpg_userhba_id

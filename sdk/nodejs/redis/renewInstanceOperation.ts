@@ -90,15 +90,15 @@ export interface RenewInstanceOperationState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Identifies whether the billing model is modified:The current instance billing mode is pay-as-you-go, which is prepaid and renewed.The billing mode of the current instance is subscription and you can not set this parameter.
      */
-    modifyPayMode?: pulumi.Input<string>;
+    modifyPayMode?: pulumi.Input<string | undefined>;
     /**
      * Purchase duration, in months.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -112,7 +112,7 @@ export interface RenewInstanceOperationArgs {
     /**
      * Identifies whether the billing model is modified:The current instance billing mode is pay-as-you-go, which is prepaid and renewed.The billing mode of the current instance is subscription and you can not set this parameter.
      */
-    modifyPayMode?: pulumi.Input<string>;
+    modifyPayMode?: pulumi.Input<string | undefined>;
     /**
      * Purchase duration, in months.
      */

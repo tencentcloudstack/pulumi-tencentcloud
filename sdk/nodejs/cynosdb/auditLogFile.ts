@@ -157,50 +157,50 @@ export interface AuditLogFileState {
     /**
      * Audit log file creation time. The format is 2019-03-20 17:09:13.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The download address of the audit logs.
      */
-    downloadUrl?: pulumi.Input<string>;
+    downloadUrl?: pulumi.Input<string | undefined>;
     /**
      * End time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Error message.
      */
-    errMsg?: pulumi.Input<string>;
+    errMsg?: pulumi.Input<string | undefined>;
     /**
      * Audit log file name.
      */
-    fileName?: pulumi.Input<string>;
+    fileName?: pulumi.Input<string | undefined>;
     /**
      * File size, The unit is KB.
      */
-    fileSize?: pulumi.Input<number>;
+    fileSize?: pulumi.Input<number | undefined>;
     /**
      * Filter condition. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Cynosdb.AuditLogFileFilter>;
+    filter?: pulumi.Input<inputs.Cynosdb.AuditLogFileFilter | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Sort by. Supported values are: `ASC` - ascending, `DESC` - descending.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort field. supported values are:
      * `timestamp` - timestamp
      * `affectRows` - affected rows
      * `execTime` - execution time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -214,7 +214,7 @@ export interface AuditLogFileArgs {
     /**
      * Filter condition. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Cynosdb.AuditLogFileFilter>;
+    filter?: pulumi.Input<inputs.Cynosdb.AuditLogFileFilter | undefined>;
     /**
      * The ID of instance.
      */
@@ -222,14 +222,14 @@ export interface AuditLogFileArgs {
     /**
      * Sort by. Supported values are: `ASC` - ascending, `DESC` - descending.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort field. supported values are:
      * `timestamp` - timestamp
      * `affectRows` - affected rows
      * `execTime` - execution time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Start time.
      */

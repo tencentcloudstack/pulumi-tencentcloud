@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     resourceId: "bgpip-000004xe",
  *     resourceIp: "119.28.217.162",
  *     rule: {
- *         keepEnable: false,
+ *         keepEnable: Number(false),
  *         keeptime: 0,
  *         sourceLists: [
  *             {
@@ -135,19 +135,19 @@ export interface L7RuleV2State {
     /**
      * ID of the resource that the layer 7 rule works for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Ip of the resource that the layer 7 rule works for.
      */
-    resourceIp?: pulumi.Input<string>;
+    resourceIp?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * A list of layer 7 rules. Each element contains the following attributes:
      */
-    rule?: pulumi.Input<inputs.Dayu.L7RuleV2Rule>;
+    rule?: pulumi.Input<inputs.Dayu.L7RuleV2Rule | undefined>;
 }
 
 /**

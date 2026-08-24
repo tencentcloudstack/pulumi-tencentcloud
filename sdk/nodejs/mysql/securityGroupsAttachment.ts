@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql security_groups_attachment can be imported using the id, e.g.
+ * mysql securityGroupsAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment security_groups_attachment securityGroupId#instanceId
@@ -143,11 +143,11 @@ export interface SecurityGroupsAttachmentState {
     /**
      * The id of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The ID of security group.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

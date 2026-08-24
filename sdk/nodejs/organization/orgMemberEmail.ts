@@ -158,43 +158,43 @@ export interface OrgMemberEmailState {
     /**
      * Application timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    applyTime?: pulumi.Input<string>;
+    applyTime?: pulumi.Input<string | undefined>;
     /**
      * Binding IDNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    bindId?: pulumi.Input<number>;
+    bindId?: pulumi.Input<number | undefined>;
     /**
      * Binding status is not binding: unbound, to be activated: value, successful binding: success, binding failure: failedNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    bindStatus?: pulumi.Input<string>;
+    bindStatus?: pulumi.Input<string | undefined>;
     /**
      * Binding timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    bindTime?: pulumi.Input<string>;
+    bindTime?: pulumi.Input<string | undefined>;
     /**
      * International region.
      */
-    countryCode?: pulumi.Input<string>;
+    countryCode?: pulumi.Input<string | undefined>;
     /**
      * FailedNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Email address.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Member Uin.
      */
-    memberUin?: pulumi.Input<number>;
+    memberUin?: pulumi.Input<number | undefined>;
     /**
      * Phone number.
      */
-    phone?: pulumi.Input<string>;
+    phone?: pulumi.Input<string | undefined>;
     /**
      * Safe mobile phone binding state is not bound: 0, has been binded: 1Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    phoneBind?: pulumi.Input<number>;
+    phoneBind?: pulumi.Input<number | undefined>;
 }
 
 /**

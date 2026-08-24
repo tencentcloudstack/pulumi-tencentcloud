@@ -75,7 +75,7 @@ import (
 //
 // ## Import
 //
-// cynosdb account_privileges can be imported using the id, e.g.
+// cynosdb accountPrivileges can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id

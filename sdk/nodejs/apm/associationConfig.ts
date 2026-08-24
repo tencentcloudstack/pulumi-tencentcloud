@@ -125,23 +125,23 @@ export interface AssociationConfigState {
     /**
      * Business system ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Associated product instance ID.
      */
-    peerId?: pulumi.Input<string>;
+    peerId?: pulumi.Input<string | undefined>;
     /**
      * Associated product name. currently only supports Prometheus.
      */
-    productName?: pulumi.Input<string>;
+    productName?: pulumi.Input<string | undefined>;
     /**
      * Status of the association relationship: // association status: 1 (enabled), 2 (disabled).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Specifies the CKafka message topic.
      */
-    topic?: pulumi.Input<string>;
+    topic?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -155,7 +155,7 @@ export interface AssociationConfigArgs {
     /**
      * Associated product instance ID.
      */
-    peerId?: pulumi.Input<string>;
+    peerId?: pulumi.Input<string | undefined>;
     /**
      * Associated product name. currently only supports Prometheus.
      */
@@ -167,5 +167,5 @@ export interface AssociationConfigArgs {
     /**
      * Specifies the CKafka message topic.
      */
-    topic?: pulumi.Input<string>;
+    topic?: pulumi.Input<string | undefined>;
 }

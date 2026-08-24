@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = tencentcloud.Rum.getProject({
+ * const project = tencentcloud.rum.getProject({
  *     instanceId: "rum-pasZKEI3RLgakj",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetProjectResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = tencentcloud.Rum.getProject({
+ * const project = tencentcloud.rum.getProject({
  *     instanceId: "rum-pasZKEI3RLgakj",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetProjectOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

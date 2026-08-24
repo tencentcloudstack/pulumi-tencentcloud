@@ -211,51 +211,51 @@ export interface DdosPolicyState {
     /**
      * Black IP list.
      */
-    blackIps?: pulumi.Input<pulumi.Input<string>[]>;
+    blackIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Create time of the DDoS policy.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Option list of abnormal check of the DDos policy, should set at least one policy.
      */
-    dropOptions?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyDropOption>[]>;
+    dropOptions?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyDropOption>[] | undefined>;
     /**
      * Name of the DDoS policy. Length should between 1 and 32.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Message filter options list.
      */
-    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPacketFilter>[]>;
+    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPacketFilter>[] | undefined>;
     /**
      * Id of policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Port limits of abnormal check of the DDos policy.
      */
-    portFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPortFilter>[]>;
+    portFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPortFilter>[] | undefined>;
     /**
      * Type of the resource that the DDoS policy works for. Valid values: `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Id of policy case that the DDoS policy works for.
      */
-    sceneId?: pulumi.Input<string>;
+    sceneId?: pulumi.Input<string | undefined>;
     /**
      * Watermark policy options, and only support one watermark policy at most.
      */
-    watermarkFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkFilter>[]>;
+    watermarkFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkFilter>[] | undefined>;
     /**
      * Watermark content.
      */
-    watermarkKeys?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkKey>[]>;
+    watermarkKeys?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkKey>[] | undefined>;
     /**
      * White IP list.
      */
-    whiteIps?: pulumi.Input<pulumi.Input<string>[]>;
+    whiteIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -265,7 +265,7 @@ export interface DdosPolicyArgs {
     /**
      * Black IP list.
      */
-    blackIps?: pulumi.Input<pulumi.Input<string>[]>;
+    blackIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Option list of abnormal check of the DDos policy, should set at least one policy.
      */
@@ -273,15 +273,15 @@ export interface DdosPolicyArgs {
     /**
      * Name of the DDoS policy. Length should between 1 and 32.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Message filter options list.
      */
-    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPacketFilter>[]>;
+    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPacketFilter>[] | undefined>;
     /**
      * Port limits of abnormal check of the DDos policy.
      */
-    portFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPortFilter>[]>;
+    portFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyPortFilter>[] | undefined>;
     /**
      * Type of the resource that the DDoS policy works for. Valid values: `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
@@ -289,9 +289,9 @@ export interface DdosPolicyArgs {
     /**
      * Watermark policy options, and only support one watermark policy at most.
      */
-    watermarkFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkFilter>[]>;
+    watermarkFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyWatermarkFilter>[] | undefined>;
     /**
      * White IP list.
      */
-    whiteIps?: pulumi.Input<pulumi.Input<string>[]>;
+    whiteIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

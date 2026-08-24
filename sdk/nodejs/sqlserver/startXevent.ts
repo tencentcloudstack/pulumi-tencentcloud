@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -140,11 +140,11 @@ export interface StartXeventState {
     /**
      * Whether to start or stop an extended event.
      */
-    eventConfigs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.StartXeventEventConfig>[]>;
+    eventConfigs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.StartXeventEventConfig>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

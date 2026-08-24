@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({});
+ * const example = tencentcloud.instances.getInstance({});
  * ```
  *
  * ### Query cvm instances by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({
+ * const example = tencentcloud.instances.getInstance({
  *     instanceId: "ins-a81rnm8c",
  *     instanceName: "tf_example",
  *     availabilityZone: "ap-guangzhou-6",
@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({
+ * const example = tencentcloud.instances.getInstance({
  *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
@@ -171,7 +171,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({});
+ * const example = tencentcloud.instances.getInstance({});
  * ```
  *
  * ### Query cvm instances by filters
@@ -180,7 +180,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({
+ * const example = tencentcloud.instances.getInstance({
  *     instanceId: "ins-a81rnm8c",
  *     instanceName: "tf_example",
  *     availabilityZone: "ap-guangzhou-6",
@@ -199,7 +199,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instances.getInstance({
+ * const example = tencentcloud.instances.getInstance({
  *     instanceSetIds: ["ins-a81rnm8c"],
  * });
  * ```
@@ -228,41 +228,41 @@ export interface GetInstanceOutputArgs {
     /**
      * The available zone that the CVM instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * ID of the instances to be queried.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the instances to be queried.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance set ids, max length is 100, conflict with other field.
      */
-    instanceSetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceSetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The project CVM belongs to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of a vpc subnetwork.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc to be queried.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

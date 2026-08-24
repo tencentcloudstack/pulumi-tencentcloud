@@ -83,13 +83,13 @@ import (
 //			ckafkaId := kafkaInstance.ID()
 //			uin := foo.OwnerUin
 //			_, err = eb.NewEventConnector(ctx, "event_connector", &eb.EventConnectorArgs{
-//				EventBusId:     fooEventBus.ID(),
+//				EventBusId:     fooEventBus.ID().ToIDOutput().ToStringOutput(),
 //				ConnectionName: pulumi.String("tf-event-connector"),
 //				Description:    pulumi.String("event connector desc1"),
 //				Enable:         pulumi.Bool(true),
 //				Type:           pulumi.String("ckafka"),
 //				ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
-//					ResourceDescription: ckafkaId.ApplyT(func(ckafkaId string) (string, error) {
+//					ResourceDescription: ckafkaId.ApplyT(func(ckafkaId pulumi.ID) (string, error) {
 //						return fmt.Sprintf("qcs::ckafka:ap-guangzhou:uin/%v:ckafkaId/uin/%v/%v", uin, uin, ckafkaId), nil
 //					}).(pulumi.StringOutput),
 //					CkafkaParams: &eb.EventConnectorConnectionDescriptionCkafkaParamsArgs{
@@ -157,13 +157,13 @@ import (
 //			uin := foo.OwnerUin
 //			serviceId := service.ID()
 //			_, err = eb.NewEventConnector(ctx, "event_connector", &eb.EventConnectorArgs{
-//				EventBusId:     fooEventBus.ID(),
+//				EventBusId:     fooEventBus.ID().ToIDOutput().ToStringOutput(),
 //				ConnectionName: pulumi.String("tf-event-connector"),
 //				Description:    pulumi.String("event connector desc1"),
 //				Enable:         pulumi.Bool(false),
 //				Type:           pulumi.String("apigw"),
 //				ConnectionDescription: &eb.EventConnectorConnectionDescriptionArgs{
-//					ResourceDescription: serviceId.ApplyT(func(serviceId string) (string, error) {
+//					ResourceDescription: serviceId.ApplyT(func(serviceId pulumi.ID) (string, error) {
 //						return fmt.Sprintf("qcs::apigw:ap-guangzhou:uin/%v:serviceid/%v", uin, serviceId), nil
 //					}).(pulumi.StringOutput),
 //					ApiGwParams: &eb.EventConnectorConnectionDescriptionApiGwParamsArgs{
@@ -183,7 +183,7 @@ import (
 //
 // ## Import
 //
-// eb event_connector can be imported using the id, e.g.
+// eb eventConnector can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId

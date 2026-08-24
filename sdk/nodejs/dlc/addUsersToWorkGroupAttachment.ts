@@ -98,7 +98,7 @@ export interface AddUsersToWorkGroupAttachmentState {
     /**
      * Information about working groups and users to be operated.
      */
-    addInfo?: pulumi.Input<inputs.Dlc.AddUsersToWorkGroupAttachmentAddInfo>;
+    addInfo?: pulumi.Input<inputs.Dlc.AddUsersToWorkGroupAttachmentAddInfo | undefined>;
 }
 
 /**

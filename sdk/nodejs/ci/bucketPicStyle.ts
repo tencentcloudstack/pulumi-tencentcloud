@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci bucket_pic_style can be imported using the bucket#styleName, e.g.
+ * ci bucketPicStyle can be imported using the bucket#styleName, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
@@ -112,15 +112,15 @@ export interface BucketPicStyleState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * style details, example: mageMogr2/grayscale/1.
      */
-    styleBody?: pulumi.Input<string>;
+    styleBody?: pulumi.Input<string | undefined>;
     /**
      * style name, style names are case-sensitive, and a combination of uppercase and lowercase letters, numbers, and `$ + _ ( )` is supported.
      */
-    styleName?: pulumi.Input<string>;
+    styleName?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// ### Basic Configuration
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -27,6 +29,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     ///     {
     ///         SslVpnServerId = "vpns-aog5xcjj",
     ///         SslVpnClientName = "hello",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### With Tags
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var client = new Tencentcloud.Vpn.SslClient("client", new()
+    ///     {
+    ///         SslVpnServerId = "vpns-aog5xcjj",
+    ///         SslVpnClientName = "my-ssl-client",
+    ///         Tags = 
+    ///         {
+    ///             { "Environment", "production" },
+    ///             { "Owner", "team-a" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -54,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Output("sslVpnServerId")]
         public Output<string> SslVpnServerId { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags of the VPN SSL client.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -114,6 +146,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         [Input("sslVpnServerId", required: true)]
         public Input<string> SslVpnServerId { get; set; } = null!;
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags of the VPN SSL client.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         public SslClientArgs()
         {
         }
@@ -133,6 +177,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Input("sslVpnServerId")]
         public Input<string>? SslVpnServerId { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags of the VPN SSL client.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         public SslClientState()
         {

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossBorderCompliance = tencentcloud.Ccn.getCrossBorderCompliance({
+ * const crossBorderCompliance = tencentcloud.ccn.getCrossBorderCompliance({
  *     serviceProvider: "UNICOM",
  *     complianceId: 10002,
  *     email: "test@tencent.com",
@@ -156,7 +156,7 @@ export interface GetCrossBorderComplianceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossBorderCompliance = tencentcloud.Ccn.getCrossBorderCompliance({
+ * const crossBorderCompliance = tencentcloud.ccn.getCrossBorderCompliance({
  *     serviceProvider: "UNICOM",
  *     complianceId: 10002,
  *     email: "test@tencent.com",
@@ -197,69 +197,69 @@ export interface GetCrossBorderComplianceOutputArgs {
     /**
      * (Fuzzy query) business license address.
      */
-    businessAddress?: pulumi.Input<string>;
+    businessAddress?: pulumi.Input<string | undefined>;
     /**
      * (Fuzzy query) Company name.
      */
-    company?: pulumi.Input<string>;
+    company?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) compliance approval form: 'ID'.
      */
-    complianceId?: pulumi.Input<number>;
+    complianceId?: pulumi.Input<number | undefined>;
     /**
      * (Exact match) email.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * (Fuzzy query) Issuing authority.
      */
-    issuingAuthority?: pulumi.Input<string>;
+    issuingAuthority?: pulumi.Input<string | undefined>;
     /**
      * (Fuzzy query) legal representative.
      */
-    legalPerson?: pulumi.Input<string>;
+    legalPerson?: pulumi.Input<string | undefined>;
     /**
      * (Fuzzy query) Person in charge.
      */
-    manager?: pulumi.Input<string>;
+    manager?: pulumi.Input<string | undefined>;
     /**
      * (Fuzzy query) ID card address of the person in charge.
      */
-    managerAddress?: pulumi.Input<string>;
+    managerAddress?: pulumi.Input<string | undefined>;
     /**
      * (Exact query) ID number of the person in charge.
      */
-    managerId?: pulumi.Input<string>;
+    managerId?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) contact number of the person in charge.
      */
-    managerTelephone?: pulumi.Input<string>;
+    managerTelephone?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) post code.
      */
-    postCode?: pulumi.Input<number>;
+    postCode?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) service end date, such as: '2020-07-28'.
      */
-    serviceEndDate?: pulumi.Input<string>;
+    serviceEndDate?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) service provider, optional value: 'UNICOM'.
      */
-    serviceProvider?: pulumi.Input<string>;
+    serviceProvider?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) service start date, such as: '2020-07-28'.
      */
-    serviceStartDate?: pulumi.Input<string>;
+    serviceStartDate?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) status. Pending: PENDING, Passed: APPROVED, Denied: DENY.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * (Exact match) Uniform Social Credit Code.
      */
-    uniformSocialCreditCode?: pulumi.Input<string>;
+    uniformSocialCreditCode?: pulumi.Input<string | undefined>;
 }

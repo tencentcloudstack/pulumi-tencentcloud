@@ -52,13 +52,9 @@ import * as utilities from "../utilities";
  *
  * ```sh
  * $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1##tf-example
- * ```
  *
- * ```sh
  * $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1#4611686018441060141#
- * ```
  *
- * ```sh
  * $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1#4611686018441060141#tf-example
  * ```
  */
@@ -140,15 +136,15 @@ export interface RolePermissionBoundaryAttachmentState {
     /**
      * Role ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Role ID (at least one should be filled in with the role name).
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
     /**
      * Role name (at least one should be filled in with the role ID).
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -162,9 +158,9 @@ export interface RolePermissionBoundaryAttachmentArgs {
     /**
      * Role ID (at least one should be filled in with the role name).
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
     /**
      * Role name (at least one should be filled in with the role ID).
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }

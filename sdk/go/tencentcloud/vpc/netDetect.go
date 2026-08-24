@@ -18,7 +18,7 @@ import (
 //
 // ## Import
 //
-// vpc net_detect can be imported using the id, e.g.
+// vpc netDetect can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id

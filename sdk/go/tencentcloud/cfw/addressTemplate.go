@@ -76,7 +76,7 @@ import (
 //
 // ## Import
 //
-// cfw address_template can be imported using the id, e.g.
+// cfw addressTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900

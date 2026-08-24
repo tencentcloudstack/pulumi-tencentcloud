@@ -15,15 +15,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionCacheKeyParametersCookie
     {
         /// <summary>
-        /// Origin-Pull request parameter cookie mode. this parameter is required when switch is on. valid values are: full: retain all; ignore: ignore all; includeCustom: retain partial parameters; excludeCustom: ignore partial parameters.
+        /// Origin-pull request parameter cookie mode. Required when switch is on. Values: full: retain all; ignore: ignore all; includeCustom: retain partial parameters; excludeCustom: ignore partial parameters.
         /// </summary>
         public readonly string? Action;
         /// <summary>
-        /// Whether to enable the origin-pull request parameter cookie. valid values: on: enable; off: disable.
+        /// Whether to enable the origin-pull request parameter cookie. Values: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
         /// <summary>
-        /// Specifies parameter values. this parameter takes effect only when the query string mode action is includecustom or excludecustom, and is used to specify the parameters to be reserved or ignored. up to 10 parameters are supported.
+        /// Specifies parameter values. Up to 10 parameters are supported.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

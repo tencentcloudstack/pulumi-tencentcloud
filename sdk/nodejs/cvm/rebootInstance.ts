@@ -101,15 +101,15 @@ export interface RebootInstanceState {
      *
      * @deprecated It has been deprecated from version 1.81.21. Please use `stopType` instead.
      */
-    forceReboot?: pulumi.Input<boolean>;
+    forceReboot?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
      */
-    stopType?: pulumi.Input<string>;
+    stopType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -121,7 +121,7 @@ export interface RebootInstanceArgs {
      *
      * @deprecated It has been deprecated from version 1.81.21. Please use `stopType` instead.
      */
-    forceReboot?: pulumi.Input<boolean>;
+    forceReboot?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
@@ -129,5 +129,5 @@ export interface RebootInstanceArgs {
     /**
      * Shutdown type. Valid values: `SOFT`: soft shutdown; `HARD`: hard shutdown; `SOFT_FIRST`: perform a soft shutdown first, and perform a hard shutdown if the soft shutdown fails. Default value: SOFT.
      */
-    stopType?: pulumi.Input<string>;
+    stopType?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const privateIpAddresses = tencentcloud.Vpc.getPrivateIpAddresses({
+ * const privateIpAddresses = tencentcloud.vpc.getPrivateIpAddresses({
  *     vpcId: "vpc-l0dw94uh",
  *     privateIpAddresses: ["10.0.0.1"],
  * });
@@ -73,7 +73,7 @@ export interface GetPrivateIpAddressesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const privateIpAddresses = tencentcloud.Vpc.getPrivateIpAddresses({
+ * const privateIpAddresses = tencentcloud.vpc.getPrivateIpAddresses({
  *     vpcId: "vpc-l0dw94uh",
  *     privateIpAddresses: ["10.0.0.1"],
  * });
@@ -99,7 +99,7 @@ export interface GetPrivateIpAddressesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
      */

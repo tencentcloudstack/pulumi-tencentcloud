@@ -47,7 +47,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -55,10 +55,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -70,8 +70,8 @@ import (
 //				Name:             pulumi.String("example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMajorVersion:   pulumi.String("10"),
 //				EngineVersion:    pulumi.String("10.23"),
 //				RootUser:         pulumi.String("root123"),
@@ -117,7 +117,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -125,10 +125,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -140,8 +140,8 @@ import (
 //				Name:             pulumi.String("example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMajorVersion:   pulumi.String("10"),
 //				EngineVersion:    pulumi.String("10.23"),
 //				RootUser:         pulumi.String("root123"),
@@ -192,7 +192,7 @@ import (
 //				standbyAvailabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -200,10 +200,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -215,8 +215,8 @@ import (
 //				Name:             pulumi.String("example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMajorVersion:   pulumi.String("10"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
@@ -270,7 +270,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -278,10 +278,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -293,8 +293,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMajorVersion:   pulumi.String("10"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
@@ -458,12 +458,14 @@ type Instance struct {
 	pulumi.CustomResourceState
 
 	// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
-	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
+	AutoRenewFlag pulumi.IntOutput `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
-	// Specify DB backup plan.
+	// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+	//
+	// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 	BackupPlan InstanceBackupPlanOutput `pulumi:"backupPlan"`
 	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
@@ -484,7 +486,7 @@ type Instance struct {
 	// Specify instance node info for disaster migration.
 	DbNodeSets InstanceDbNodeSetArrayOutput `pulumi:"dbNodeSets"`
 	// Whether to enable instance deletion protection. Default: false.
-	DeleteProtection pulumi.BoolPtrOutput `pulumi:"deleteProtection"`
+	DeleteProtection pulumi.BoolOutput `pulumi:"deleteProtection"`
 	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.
@@ -525,6 +527,8 @@ type Instance struct {
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage pulumi.IntOutput `pulumi:"storage"`
+	// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+	StorageType pulumi.StringOutput `pulumi:"storageType"`
 	// ID of subnet.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// The available tags within this postgresql.
@@ -600,7 +604,9 @@ type instanceState struct {
 	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// Specify DB backup plan.
+	// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+	//
+	// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
 	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
@@ -662,6 +668,8 @@ type instanceState struct {
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage *int `pulumi:"storage"`
+	// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+	StorageType *string `pulumi:"storageType"`
 	// ID of subnet.
 	SubnetId *string `pulumi:"subnetId"`
 	// The available tags within this postgresql.
@@ -683,7 +691,9 @@ type InstanceState struct {
 	AutoVoucher pulumi.IntPtrInput
 	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringPtrInput
-	// Specify DB backup plan.
+	// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+	//
+	// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
 	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrInput
@@ -745,6 +755,8 @@ type InstanceState struct {
 	SecurityGroups pulumi.StringArrayInput
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage pulumi.IntPtrInput
+	// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+	StorageType pulumi.StringPtrInput
 	// ID of subnet.
 	SubnetId pulumi.StringPtrInput
 	// The available tags within this postgresql.
@@ -770,7 +782,9 @@ type instanceArgs struct {
 	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// Specify DB backup plan.
+	// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+	//
+	// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 	BackupPlan *InstanceBackupPlan `pulumi:"backupPlan"`
 	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType *string `pulumi:"chargeType"`
@@ -822,6 +836,8 @@ type instanceArgs struct {
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage int `pulumi:"storage"`
+	// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+	StorageType *string `pulumi:"storageType"`
 	// ID of subnet.
 	SubnetId string `pulumi:"subnetId"`
 	// The available tags within this postgresql.
@@ -842,7 +858,9 @@ type InstanceArgs struct {
 	AutoVoucher pulumi.IntPtrInput
 	// Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
 	AvailabilityZone pulumi.StringInput
-	// Specify DB backup plan.
+	// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+	//
+	// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 	BackupPlan InstanceBackupPlanPtrInput
 	// Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
 	ChargeType pulumi.StringPtrInput
@@ -894,6 +912,8 @@ type InstanceArgs struct {
 	SecurityGroups pulumi.StringArrayInput
 	// Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 	Storage pulumi.IntInput
+	// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+	StorageType pulumi.StringPtrInput
 	// ID of subnet.
 	SubnetId pulumi.StringInput
 	// The available tags within this postgresql.
@@ -994,8 +1014,8 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 }
 
 // Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
-func (o InstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.AutoRenewFlag }).(pulumi.IntOutput)
 }
 
 // Whether to use voucher, `1` for enabled.
@@ -1008,7 +1028,9 @@ func (o InstanceOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// Specify DB backup plan.
+// This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+//
+// Deprecated: This field is deprecated from version 1.83.9. Use resource `Postgresql.BackupPlan` to manage PG instance backup plan.
 func (o InstanceOutput) BackupPlan() InstanceBackupPlanOutput {
 	return o.ApplyT(func(v *Instance) InstanceBackupPlanOutput { return v.BackupPlan }).(InstanceBackupPlanOutput)
 }
@@ -1056,8 +1078,8 @@ func (o InstanceOutput) DbNodeSets() InstanceDbNodeSetArrayOutput {
 }
 
 // Whether to enable instance deletion protection. Default: false.
-func (o InstanceOutput) DeleteProtection() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.DeleteProtection }).(pulumi.BoolPtrOutput)
+func (o InstanceOutput) DeleteProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.DeleteProtection }).(pulumi.BoolOutput)
 }
 
 // Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
@@ -1158,6 +1180,11 @@ func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 // Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `Postgresql.getSpecinfos` provides.
 func (o InstanceOutput) Storage() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+func (o InstanceOutput) StorageType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }
 
 // ID of subnet.

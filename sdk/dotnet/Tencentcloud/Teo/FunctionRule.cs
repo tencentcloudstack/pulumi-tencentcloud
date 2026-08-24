@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo TeoFunctionRule
+    /// Provides a resource to create a TEO function rule
     /// 
     /// ## Example Usage
     /// 
@@ -23,11 +23,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var teoFunctionRule = new Tencentcloud.Teo.FunctionRule("teo_function_rule", new()
+    ///     var example = new Tencentcloud.Teo.FunctionRule("example", new()
     ///     {
-    ///         FunctionId = "ef-txx7fnua",
-    ///         Remark = "aaa",
-    ///         ZoneId = "zone-2qtuhspy7cr6",
+    ///         FunctionId = "ef-m01xn26e",
+    ///         Remark = "remark.",
+    ///         TriggerType = "direct",
+    ///         ZoneId = "zone-3fkff38fyw8s",
     ///         FunctionRuleConditions = new[]
     ///         {
     ///             new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionArgs
@@ -37,51 +38,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                     new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionRuleConditionArgs
     ///                     {
     ///                         IgnoreCase = false,
-    ///                         Name = null,
     ///                         Operator = "equal",
     ///                         Target = "host",
     ///                         Values = new[]
     ///                         {
-    ///                             "aaa.makn.cn",
+    ///                             "test.makn.cn",
     ///                         },
     ///                     },
     ///                     new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionRuleConditionArgs
     ///                     {
     ///                         IgnoreCase = false,
-    ///                         Name = null,
     ///                         Operator = "equal",
-    ///                         Target = "extension",
+    ///                         Target = "url",
     ///                         Values = new[]
     ///                         {
-    ///                             ".txt",
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///             new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionArgs
-    ///             {
-    ///                 RuleConditions = new[]
-    ///                 {
-    ///                     new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionRuleConditionArgs
-    ///                     {
-    ///                         IgnoreCase = false,
-    ///                         Name = null,
-    ///                         Operator = "notequal",
-    ///                         Target = "host",
-    ///                         Values = new[]
-    ///                         {
-    ///                             "aaa.makn.cn",
-    ///                         },
-    ///                     },
-    ///                     new Tencentcloud.Teo.Inputs.FunctionRuleFunctionRuleConditionRuleConditionArgs
-    ///                     {
-    ///                         IgnoreCase = false,
-    ///                         Name = null,
-    ///                         Operator = "equal",
-    ///                         Target = "extension",
-    ///                         Values = new[]
-    ///                         {
-    ///                             ".png",
+    ///                             "/path",
     ///                         },
     ///                     },
     ///                 },
@@ -94,10 +65,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_function_rule can be imported using the id, e.g.
+    /// teo TeoFunctionRule can be imported using the zoneId#functionId#ruleId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Teo/functionRule:FunctionRule teo_function_rule zone_id#function_id#rule_id
+    /// $ pulumi import tencentcloud:Teo/functionRule:FunctionRule example zone-3fkff38fyw8s#ef-m01xn26e#rule-yuvufj6h
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/functionRule:FunctionRule")]
@@ -138,6 +109,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("ruleId")]
         public Output<string> RuleId { get; private set; } = null!;
+
+        /// <summary>
+        /// Function selection configuration type. Valid values: `Direct`, `Weight`, `Region`. Defaults to `Direct` when not specified.
+        /// </summary>
+        [Output("triggerType")]
+        public Output<string> TriggerType { get; private set; } = null!;
 
         /// <summary>
         /// ID of the site.
@@ -217,6 +194,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? Remark { get; set; }
 
         /// <summary>
+        /// Function selection configuration type. Valid values: `Direct`, `Weight`, `Region`. Defaults to `Direct` when not specified.
+        /// </summary>
+        [Input("triggerType")]
+        public Input<string>? TriggerType { get; set; }
+
+        /// <summary>
         /// ID of the site.
         /// </summary>
         [Input("zoneId", required: true)]
@@ -271,6 +254,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("ruleId")]
         public Input<string>? RuleId { get; set; }
+
+        /// <summary>
+        /// Function selection configuration type. Valid values: `Direct`, `Weight`, `Region`. Defaults to `Direct` when not specified.
+        /// </summary>
+        [Input("triggerType")]
+        public Input<string>? TriggerType { get; set; }
 
         /// <summary>
         /// ID of the site.

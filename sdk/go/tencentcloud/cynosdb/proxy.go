@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cynosdb proxy
+// Provides a resource to create a CynosDB proxy
 //
 // ## Example Usage
 //
@@ -87,6 +87,8 @@ type Proxy struct {
 	UniqueSubnetId pulumi.StringOutput `pulumi:"uniqueSubnetId"`
 	// Private network ID, which is consistent with the cluster private network ID by default.
 	UniqueVpcId pulumi.StringOutput `pulumi:"uniqueVpcId"`
+	// Internal IP address.
+	Vip pulumi.StringOutput `pulumi:"vip"`
 }
 
 // NewProxy registers a new resource with the given unique name, arguments, and options.
@@ -156,6 +158,8 @@ type proxyState struct {
 	UniqueSubnetId *string `pulumi:"uniqueSubnetId"`
 	// Private network ID, which is consistent with the cluster private network ID by default.
 	UniqueVpcId *string `pulumi:"uniqueVpcId"`
+	// Internal IP address.
+	Vip *string `pulumi:"vip"`
 }
 
 type ProxyState struct {
@@ -187,6 +191,8 @@ type ProxyState struct {
 	UniqueSubnetId pulumi.StringPtrInput
 	// Private network ID, which is consistent with the cluster private network ID by default.
 	UniqueVpcId pulumi.StringPtrInput
+	// Internal IP address.
+	Vip pulumi.StringPtrInput
 }
 
 func (ProxyState) ElementType() reflect.Type {
@@ -403,6 +409,11 @@ func (o ProxyOutput) UniqueSubnetId() pulumi.StringOutput {
 // Private network ID, which is consistent with the cluster private network ID by default.
 func (o ProxyOutput) UniqueVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Proxy) pulumi.StringOutput { return v.UniqueVpcId }).(pulumi.StringOutput)
+}
+
+// Internal IP address.
+func (o ProxyOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v *Proxy) pulumi.StringOutput { return v.Vip }).(pulumi.StringOutput)
 }
 
 type ProxyArrayOutput struct{ *pulumi.OutputState }

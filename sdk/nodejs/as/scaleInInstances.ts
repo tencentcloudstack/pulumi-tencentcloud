@@ -13,10 +13,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -60,7 +60,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * as scale_in_instances can be imported using the id, e.g.
+ * as scaleInInstances can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:As/scaleInInstances:ScaleInInstances scale_in_instances scale_in_instances_id
@@ -141,11 +141,11 @@ export interface ScaleInInstancesState {
     /**
      * Scaling group ID.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * Number of instances to be reduced.
      */
-    scaleInNumber?: pulumi.Input<number>;
+    scaleInNumber?: pulumi.Input<number | undefined>;
 }
 
 /**

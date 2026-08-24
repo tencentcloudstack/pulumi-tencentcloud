@@ -62,7 +62,7 @@ import (
 //
 // ## Import
 //
-// wedata rule_template can be imported using the id, e.g.
+// wedata ruleTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id

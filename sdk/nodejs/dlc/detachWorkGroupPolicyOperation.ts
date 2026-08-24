@@ -78,11 +78,11 @@ export interface DetachWorkGroupPolicyOperationState {
     /**
      * Collection of policies to be bound.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachWorkGroupPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachWorkGroupPolicyOperationPolicySet>[] | undefined>;
     /**
      * Work group ID.
      */
-    workGroupId?: pulumi.Input<number>;
+    workGroupId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface DetachWorkGroupPolicyOperationArgs {
     /**
      * Collection of policies to be bound.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachWorkGroupPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachWorkGroupPolicyOperationPolicySet>[] | undefined>;
     /**
      * Work group ID.
      */

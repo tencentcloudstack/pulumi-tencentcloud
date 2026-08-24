@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+// Provides a resource to create a CAM-ROLE-SSO(Only support OIDC).
 //
 // ## Example Usage
 //
@@ -28,14 +28,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cam.NewRoleSso(ctx, "foo", &cam.RoleSsoArgs{
-//				Name:        pulumi.String("tf_cam_role_sso"),
+//			_, err := cam.NewRoleSso(ctx, "example", &cam.RoleSsoArgs{
+//				Name:        pulumi.String("tf_example"),
 //				IdentityUrl: pulumi.String("https://login.microsoftonline.com/.../v2.0"),
-//				IdentityKey: pulumi.String("..."),
+//				IdentityKey: pulumi.String("baz****"),
 //				ClientIds: pulumi.StringArray{
-//					pulumi.String("..."),
+//					pulumi.String("61adcf00620c31e3ddbc9546"),
 //				},
-//				Description: pulumi.String("this is a description"),
+//				Description:   pulumi.String("this is a description"),
+//				AutoRotateKey: pulumi.Int(1),
 //			})
 //			if err != nil {
 //				return err
@@ -48,19 +49,21 @@ import (
 //
 // ## Import
 //
-// CAM-ROLE-SSO can be imported using the `name`, e.g.
+// CAM-ROLE-SSO(Only support OIDC) can be imported using the `name`, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+// $ pulumi import tencentcloud:Cam/roleSso:RoleSso example tf_example
 // ```
 type RoleSso struct {
 	pulumi.CustomResourceState
 
+	// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+	AutoRotateKey pulumi.IntOutput `pulumi:"autoRotateKey"`
 	// Client ids.
 	ClientIds pulumi.StringArrayOutput `pulumi:"clientIds"`
 	// The description of resource.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// Sign the public key.
+	// Sign the public key. Base64 encryption is required.
 	IdentityKey pulumi.StringOutput `pulumi:"identityKey"`
 	// Identity provider URL.
 	IdentityUrl pulumi.StringOutput `pulumi:"identityUrl"`
@@ -107,11 +110,13 @@ func GetRoleSso(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RoleSso resources.
 type roleSsoState struct {
+	// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+	AutoRotateKey *int `pulumi:"autoRotateKey"`
 	// Client ids.
 	ClientIds []string `pulumi:"clientIds"`
 	// The description of resource.
 	Description *string `pulumi:"description"`
-	// Sign the public key.
+	// Sign the public key. Base64 encryption is required.
 	IdentityKey *string `pulumi:"identityKey"`
 	// Identity provider URL.
 	IdentityUrl *string `pulumi:"identityUrl"`
@@ -120,11 +125,13 @@ type roleSsoState struct {
 }
 
 type RoleSsoState struct {
+	// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+	AutoRotateKey pulumi.IntPtrInput
 	// Client ids.
 	ClientIds pulumi.StringArrayInput
 	// The description of resource.
 	Description pulumi.StringPtrInput
-	// Sign the public key.
+	// Sign the public key. Base64 encryption is required.
 	IdentityKey pulumi.StringPtrInput
 	// Identity provider URL.
 	IdentityUrl pulumi.StringPtrInput
@@ -137,11 +144,13 @@ func (RoleSsoState) ElementType() reflect.Type {
 }
 
 type roleSsoArgs struct {
+	// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+	AutoRotateKey *int `pulumi:"autoRotateKey"`
 	// Client ids.
 	ClientIds []string `pulumi:"clientIds"`
 	// The description of resource.
 	Description *string `pulumi:"description"`
-	// Sign the public key.
+	// Sign the public key. Base64 encryption is required.
 	IdentityKey string `pulumi:"identityKey"`
 	// Identity provider URL.
 	IdentityUrl string `pulumi:"identityUrl"`
@@ -151,11 +160,13 @@ type roleSsoArgs struct {
 
 // The set of arguments for constructing a RoleSso resource.
 type RoleSsoArgs struct {
+	// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+	AutoRotateKey pulumi.IntPtrInput
 	// Client ids.
 	ClientIds pulumi.StringArrayInput
 	// The description of resource.
 	Description pulumi.StringPtrInput
-	// Sign the public key.
+	// Sign the public key. Base64 encryption is required.
 	IdentityKey pulumi.StringInput
 	// Identity provider URL.
 	IdentityUrl pulumi.StringInput
@@ -250,6 +261,11 @@ func (o RoleSsoOutput) ToRoleSsoOutputWithContext(ctx context.Context) RoleSsoOu
 	return o
 }
 
+// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+func (o RoleSsoOutput) AutoRotateKey() pulumi.IntOutput {
+	return o.ApplyT(func(v *RoleSso) pulumi.IntOutput { return v.AutoRotateKey }).(pulumi.IntOutput)
+}
+
 // Client ids.
 func (o RoleSsoOutput) ClientIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *RoleSso) pulumi.StringArrayOutput { return v.ClientIds }).(pulumi.StringArrayOutput)
@@ -260,7 +276,7 @@ func (o RoleSsoOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RoleSso) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// Sign the public key.
+// Sign the public key. Base64 encryption is required.
 func (o RoleSsoOutput) IdentityKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *RoleSso) pulumi.StringOutput { return v.IdentityKey }).(pulumi.StringOutput)
 }

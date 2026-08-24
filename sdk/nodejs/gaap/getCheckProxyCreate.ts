@@ -127,19 +127,19 @@ export interface GetCheckProxyCreateOutputArgs {
     /**
      * If creating a proxy under a proxy group, you need to fill in the ID of the proxy group.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.
      */
-    ipAddressVersion?: pulumi.Input<string>;
+    ipAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * Network type, can take values &amp;#39;normal&amp;#39;, &amp;#39;cn2&amp;#39;, default value normal.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Channel package type. Thunder represents the standard proxy group, Accelerator represents the game accelerator proxy, and CrossBorder represents the cross-border proxy.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * The origin area of the proxy. The value can be obtained through the interface DescribeDestRegions.
      */
@@ -147,5 +147,5 @@ export interface GetCheckProxyCreateOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

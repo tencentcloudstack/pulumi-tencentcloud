@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcePackageList = tencentcloud.Cynosdb.getResourcePackageList({
+ * const resourcePackageList = tencentcloud.cynosdb.getResourcePackageList({
  *     packageIds: ["package-hy4d2ppl"],
  *     packageNames: ["keep-package-disk"],
  *     packageTypes: ["DISK"],
@@ -124,7 +124,7 @@ export interface GetResourcePackageListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resourcePackageList = tencentcloud.Cynosdb.getResourcePackageList({
+ * const resourcePackageList = tencentcloud.cynosdb.getResourcePackageList({
  *     packageIds: ["package-hy4d2ppl"],
  *     packageNames: ["keep-package-disk"],
  *     packageTypes: ["DISK"],
@@ -157,33 +157,33 @@ export interface GetResourcePackageListOutputArgs {
     /**
      * Sorting conditions supported: startTime - effective time, expireTime - expiration time, packageUsedSpec - usage capacity, and packageTotalSpec - total storage capacity. Arrange in array order;.
      */
-    orderBies?: pulumi.Input<pulumi.Input<string>[]>;
+    orderBies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sort by, DESC Descending, ASC Ascending.
      */
-    orderDirection?: pulumi.Input<string>;
+    orderDirection?: pulumi.Input<string | undefined>;
     /**
      * Resource Package Unique ID.
      */
-    packageIds?: pulumi.Input<pulumi.Input<string>[]>;
+    packageIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Resource Package Name.
      */
-    packageNames?: pulumi.Input<pulumi.Input<string>[]>;
+    packageNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
      */
-    packageRegions?: pulumi.Input<pulumi.Input<string>[]>;
+    packageRegions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Resource package type CCU - Compute resource package, DISK - Storage resource package.
      */
-    packageTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    packageTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Resource package status creating - creating; Using - In use; Expired - has expired; Normal_ Finish - used up; Apply_ Refund - Applying for a refund; Refund - The fee has been refunded.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMetric = tencentcloud.Monitor.getAlarmMetric({
+ * const alarmMetric = tencentcloud.monitor.getAlarmMetric({
  *     module: "monitor",
  *     monitorType: "Monitoring",
  *     namespace: "cvm_device",
@@ -83,7 +83,7 @@ export interface GetAlarmMetricResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmMetric = tencentcloud.Monitor.getAlarmMetric({
+ * const alarmMetric = tencentcloud.monitor.getAlarmMetric({
  *     module: "monitor",
  *     monitorType: "Monitoring",
  *     namespace: "cvm_device",
@@ -119,5 +119,5 @@ export interface GetAlarmMetricOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

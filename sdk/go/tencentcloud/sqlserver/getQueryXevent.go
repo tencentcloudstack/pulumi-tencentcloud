@@ -82,12 +82,8 @@ type GetQueryXeventResult struct {
 }
 
 func GetQueryXeventOutput(ctx *pulumi.Context, args GetQueryXeventOutputArgs, opts ...pulumi.InvokeOption) GetQueryXeventResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetQueryXeventResultOutput, error) {
-			args := v.(GetQueryXeventArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args, GetQueryXeventResultOutput{}, options).(GetQueryXeventResultOutput), nil
-		}).(GetQueryXeventResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args, GetQueryXeventResultOutput{}, options).(GetQueryXeventResultOutput)
 }
 
 // A collection of arguments for invoking getQueryXevent.

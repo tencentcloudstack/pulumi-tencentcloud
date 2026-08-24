@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchActionOfflineCacheParameters
     {
         /// <summary>
-        /// Whether to enable offline caching. values: on: enable; Off: disable.
+        /// Whether to enable offline caching. values: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
 

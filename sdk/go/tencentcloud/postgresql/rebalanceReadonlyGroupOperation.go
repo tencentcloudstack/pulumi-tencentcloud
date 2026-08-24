@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			_, err = postgresql.NewRebalanceReadonlyGroupOperation(ctx, "rebalance_readonly_group_operation", &postgresql.RebalanceReadonlyGroupOperationArgs{
-//				ReadOnlyGroupId: groupRebalance.ID(),
+//				ReadOnlyGroupId: groupRebalance.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

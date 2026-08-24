@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -114,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Import
     /// 
-    /// as scaling_group_status can be imported using the id, e.g.
+    /// as ScalingGroupStatus can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:As/scalingGroupStatus:ScalingGroupStatus scaling_group_status scaling_group_id

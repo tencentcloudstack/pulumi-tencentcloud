@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getDomains({});
+ * const example = tencentcloud.waf.getDomains({});
  * ```
  *
  * ### Find domains by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getDomains({
+ * const example = tencentcloud.waf.getDomains({
  *     instanceId: "waf_2kxtlbky01b3wceb",
  *     domain: "tf.example.com",
  * });
@@ -93,7 +93,7 @@ export interface GetDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getDomains({});
+ * const example = tencentcloud.waf.getDomains({});
  * ```
  *
  * ### Find domains by filter
@@ -102,7 +102,7 @@ export interface GetDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getDomains({
+ * const example = tencentcloud.waf.getDomains({
  *     instanceId: "waf_2kxtlbky01b3wceb",
  *     domain: "tf.example.com",
  * });
@@ -125,13 +125,13 @@ export interface GetDomainsOutputArgs {
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Unique ID of Instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

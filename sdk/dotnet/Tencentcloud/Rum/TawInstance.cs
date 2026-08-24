@@ -41,8 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Import
     /// 
-    /// rum taw_instance can be imported using the id, e.g.
-    /// 
+    /// rum TawInstance can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
     /// ```

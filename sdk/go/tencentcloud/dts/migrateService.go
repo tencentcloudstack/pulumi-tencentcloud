@@ -54,7 +54,6 @@ import (
 // ## Import
 //
 // DTS migrate service can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Dts/migrateService:MigrateService example dts-iy98oxba
 // ```

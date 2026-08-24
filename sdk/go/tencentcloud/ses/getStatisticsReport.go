@@ -81,12 +81,8 @@ type GetStatisticsReportResult struct {
 }
 
 func GetStatisticsReportOutput(ctx *pulumi.Context, args GetStatisticsReportOutputArgs, opts ...pulumi.InvokeOption) GetStatisticsReportResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStatisticsReportResultOutput, error) {
-			args := v.(GetStatisticsReportArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args, GetStatisticsReportResultOutput{}, options).(GetStatisticsReportResultOutput), nil
-		}).(GetStatisticsReportResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args, GetStatisticsReportResultOutput{}, options).(GetStatisticsReportResultOutput)
 }
 
 // A collection of arguments for invoking getStatisticsReport.

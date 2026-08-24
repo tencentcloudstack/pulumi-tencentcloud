@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstanceList({});
+ * const example = tencentcloud.igtm.getInstanceList({});
  * ```
  *
  * ### Query igtm instance list by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstanceList({
+ * const example = tencentcloud.igtm.getInstanceList({
  *     filters: [{
  *         name: "InstanceId",
  *         values: ["gtm-uukztqtoaru"],
@@ -88,7 +88,7 @@ export interface GetInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstanceList({});
+ * const example = tencentcloud.igtm.getInstanceList({});
  * ```
  *
  * ### Query igtm instance list by filters
@@ -97,7 +97,7 @@ export interface GetInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstanceList({
+ * const example = tencentcloud.igtm.getInstanceList({
  *     filters: [{
  *         name: "InstanceId",
  *         values: ["gtm-uukztqtoaru"],
@@ -122,9 +122,9 @@ export interface GetInstanceListOutputArgs {
     /**
      * Filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetInstanceListFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

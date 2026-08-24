@@ -50,5 +50,5 @@ export function getBackupDownloadUrlOutput(args: GetBackupDownloadUrlOutputArgs,
 export interface GetBackupDownloadUrlOutputArgs {
     backupId: pulumi.Input<number>;
     clusterId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

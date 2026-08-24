@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  *     region: "ap-guangzhou",
  * });
@@ -143,11 +143,11 @@ export interface SslState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The SSL configuration status of the instance: `enabled`,`disabled`.
      */
-    sslConfig?: pulumi.Input<string>;
+    sslConfig?: pulumi.Input<string | undefined>;
 }
 
 /**

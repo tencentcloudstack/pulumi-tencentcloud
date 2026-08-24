@@ -146,31 +146,31 @@ export interface ExportState {
     /**
      * log export format.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * export start time.
      */
-    from?: pulumi.Input<number>;
+    from?: pulumi.Input<number | undefined>;
     /**
      * export amount of log.
      */
-    logCount?: pulumi.Input<number>;
+    logCount?: pulumi.Input<number | undefined>;
     /**
      * log export time sorting. desc or asc.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * export query rules.
      */
-    query?: pulumi.Input<string>;
+    query?: pulumi.Input<string | undefined>;
     /**
      * export end time.
      */
-    to?: pulumi.Input<number>;
+    to?: pulumi.Input<number | undefined>;
     /**
      * topic id.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,7 +180,7 @@ export interface ExportArgs {
     /**
      * log export format.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * export start time.
      */
@@ -192,7 +192,7 @@ export interface ExportArgs {
     /**
      * log export time sorting. desc or asc.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * export query rules.
      */

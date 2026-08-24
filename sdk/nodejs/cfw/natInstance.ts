@@ -105,6 +105,10 @@ export class NatInstance extends pulumi.CustomResource {
      */
     declare public readonly natGwLists: pulumi.Output<string[] | undefined>;
     /**
+     * Nat instance ID.
+     */
+    declare public /*out*/ readonly natInstanceId: pulumi.Output<string>;
+    /**
      * New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
      */
     declare public readonly newModeItems: pulumi.Output<outputs.Cfw.NatInstanceNewModeItems | undefined>;
@@ -134,6 +138,7 @@ export class NatInstance extends pulumi.CustomResource {
             resourceInputs["mode"] = state?.mode;
             resourceInputs["name"] = state?.name;
             resourceInputs["natGwLists"] = state?.natGwLists;
+            resourceInputs["natInstanceId"] = state?.natInstanceId;
             resourceInputs["newModeItems"] = state?.newModeItems;
             resourceInputs["width"] = state?.width;
             resourceInputs["zoneSets"] = state?.zoneSets;
@@ -155,6 +160,7 @@ export class NatInstance extends pulumi.CustomResource {
             resourceInputs["newModeItems"] = args?.newModeItems;
             resourceInputs["width"] = args?.width;
             resourceInputs["zoneSets"] = args?.zoneSets;
+            resourceInputs["natInstanceId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(NatInstance.__pulumiType, name, resourceInputs, opts);
@@ -168,31 +174,35 @@ export interface NatInstanceState {
     /**
      * Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if empty, the default is not to use off-site disaster recovery.
      */
-    crossAZone?: pulumi.Input<number>;
+    crossAZone?: pulumi.Input<number | undefined>;
     /**
      * Mode 1: access mode; 0: new mode.
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * Firewall instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
      */
-    natGwLists?: pulumi.Input<pulumi.Input<string>[]>;
+    natGwLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Nat instance ID.
+     */
+    natInstanceId?: pulumi.Input<string | undefined>;
     /**
      * New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
      */
-    newModeItems?: pulumi.Input<inputs.Cfw.NatInstanceNewModeItems>;
+    newModeItems?: pulumi.Input<inputs.Cfw.NatInstanceNewModeItems | undefined>;
     /**
      * Bandwidth.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
     /**
      * Zone list.
      */
-    zoneSets?: pulumi.Input<pulumi.Input<string>[]>;
+    zoneSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -202,7 +212,7 @@ export interface NatInstanceArgs {
     /**
      * Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if empty, the default is not to use off-site disaster recovery.
      */
-    crossAZone?: pulumi.Input<number>;
+    crossAZone?: pulumi.Input<number | undefined>;
     /**
      * Mode 1: access mode; 0: new mode.
      */
@@ -210,15 +220,15 @@ export interface NatInstanceArgs {
     /**
      * Firewall instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
      */
-    natGwLists?: pulumi.Input<pulumi.Input<string>[]>;
+    natGwLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
      */
-    newModeItems?: pulumi.Input<inputs.Cfw.NatInstanceNewModeItems>;
+    newModeItems?: pulumi.Input<inputs.Cfw.NatInstanceNewModeItems | undefined>;
     /**
      * Bandwidth.
      */

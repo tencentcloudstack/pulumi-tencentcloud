@@ -170,47 +170,47 @@ export interface LaneRuleState {
     /**
      * creation time.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * open state, true/false, default: false.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * lane ID.
      */
-    laneId?: pulumi.Input<string>;
+    laneId?: pulumi.Input<string | undefined>;
     /**
      * Priority.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Lane rule notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Rule id.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * lane rule name.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * list of swimlane rule labels.
      */
-    ruleTagLists?: pulumi.Input<pulumi.Input<inputs.Tsf.LaneRuleRuleTagList>[]>;
+    ruleTagLists?: pulumi.Input<pulumi.Input<inputs.Tsf.LaneRuleRuleTagList>[] | undefined>;
     /**
      * lane rule label relationship.
      */
-    ruleTagRelationship?: pulumi.Input<string>;
+    ruleTagRelationship?: pulumi.Input<string | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -228,7 +228,7 @@ export interface LaneRuleArgs {
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Lane rule notes.
      */

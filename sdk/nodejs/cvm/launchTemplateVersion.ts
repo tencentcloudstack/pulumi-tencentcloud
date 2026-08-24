@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cvm launch_template_version can be imported using the id, e.g.
+ * cvm launchTemplateVersion can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
@@ -267,115 +267,115 @@ export interface LaunchTemplateVersionState {
     /**
      * Scheduled tasks. You can use this parameter to specify scheduled tasks for the instance. Only scheduled termination is supported.
      */
-    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionActionTimer>;
+    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionActionTimer | undefined>;
     /**
      * The role name of CAM.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionDataDisk>[] | undefined>;
     /**
      * Whether the termination protection is enabled. `TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.`FALSE`: Do not enable the instance protection. Default value: `FALSE`.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * Placement group ID. You can only specify one.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether the request is a dry run only.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default.
      */
-    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionEnhancedService>;
+    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionEnhancedService | undefined>;
     /**
      * Hostname of a CVM.
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Describes the billing method of an instance.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceChargePrepaid | undefined>;
     /**
      * The charge type of instance.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances to be purchased.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * Options related to bidding requests.
      */
-    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceMarketOptions>;
+    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceMarketOptions | undefined>;
     /**
      * Instance name to be displayed.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance. If this parameter is not specified, the system will dynamically specify the default model according to the resource sales in the current region.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Describes the accessibility of an instance in the public network, including its network billing method, maximum bandwidth, etc.
      */
-    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInternetAccessible>;
+    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInternetAccessible | undefined>;
     /**
      * Instance launch template ID. This parameter is used as a basis for creating new template versions.
      */
-    launchTemplateId?: pulumi.Input<string>;
+    launchTemplateId?: pulumi.Input<string | undefined>;
     /**
      * This parameter, when specified, is used to create instance launch templates. If this parameter is not specified, the default version will be used.
      */
-    launchTemplateVersion?: pulumi.Input<number>;
+    launchTemplateVersion?: pulumi.Input<number | undefined>;
     /**
      * Description of instance launch template versions. This parameter can contain 2-256 characters.
      */
-    launchTemplateVersionDescription?: pulumi.Input<string>;
+    launchTemplateVersionDescription?: pulumi.Input<string | undefined>;
     /**
      * Describes login settings of an instance.
      */
-    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionLoginSettings>;
+    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionLoginSettings | undefined>;
     /**
      * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH (for dedicated CVMs).
      */
-    placement?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionPlacement>;
+    placement?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionPlacement | undefined>;
     /**
      * Security groups to which the instance belongs. If this parameter is not specified, the instance will be associated with default security groups.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * System disk configuration information of the instance. If this parameter is not specified, it is assigned according to the system default.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionSystemDisk | undefined>;
     /**
      * Description of tags associated with resource instances during instance creation.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionTagSpecification>[] | undefined>;
     /**
      * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * Describes information on VPC, including subnets, IP addresses, etc.
      */
-    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionVirtualPrivateCloud>;
+    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionVirtualPrivateCloud | undefined>;
 }
 
 /**
@@ -385,75 +385,75 @@ export interface LaunchTemplateVersionArgs {
     /**
      * Scheduled tasks. You can use this parameter to specify scheduled tasks for the instance. Only scheduled termination is supported.
      */
-    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionActionTimer>;
+    actionTimer?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionActionTimer | undefined>;
     /**
      * The role name of CAM.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionDataDisk>[] | undefined>;
     /**
      * Whether the termination protection is enabled. `TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.`FALSE`: Do not enable the instance protection. Default value: `FALSE`.
      */
-    disableApiTermination?: pulumi.Input<boolean>;
+    disableApiTermination?: pulumi.Input<boolean | undefined>;
     /**
      * Placement group ID. You can only specify one.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether the request is a dry run only.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default.
      */
-    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionEnhancedService>;
+    enhancedService?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionEnhancedService | undefined>;
     /**
      * Hostname of a CVM.
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
      */
-    hpcClusterId?: pulumi.Input<string>;
+    hpcClusterId?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Describes the billing method of an instance.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceChargePrepaid | undefined>;
     /**
      * The charge type of instance.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances to be purchased.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * Options related to bidding requests.
      */
-    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceMarketOptions>;
+    instanceMarketOptions?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInstanceMarketOptions | undefined>;
     /**
      * Instance name to be displayed.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance. If this parameter is not specified, the system will dynamically specify the default model according to the resource sales in the current region.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Describes the accessibility of an instance in the public network, including its network billing method, maximum bandwidth, etc.
      */
-    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInternetAccessible>;
+    internetAccessible?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionInternetAccessible | undefined>;
     /**
      * Instance launch template ID. This parameter is used as a basis for creating new template versions.
      */
@@ -461,15 +461,15 @@ export interface LaunchTemplateVersionArgs {
     /**
      * This parameter, when specified, is used to create instance launch templates. If this parameter is not specified, the default version will be used.
      */
-    launchTemplateVersion?: pulumi.Input<number>;
+    launchTemplateVersion?: pulumi.Input<number | undefined>;
     /**
      * Description of instance launch template versions. This parameter can contain 2-256 characters.
      */
-    launchTemplateVersionDescription?: pulumi.Input<string>;
+    launchTemplateVersionDescription?: pulumi.Input<string | undefined>;
     /**
      * Describes login settings of an instance.
      */
-    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionLoginSettings>;
+    loginSettings?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionLoginSettings | undefined>;
     /**
      * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH (for dedicated CVMs).
      */
@@ -477,21 +477,21 @@ export interface LaunchTemplateVersionArgs {
     /**
      * Security groups to which the instance belongs. If this parameter is not specified, the instance will be associated with default security groups.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * System disk configuration information of the instance. If this parameter is not specified, it is assigned according to the system default.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionSystemDisk | undefined>;
     /**
      * Description of tags associated with resource instances during instance creation.
      */
-    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionTagSpecification>[]>;
+    tagSpecifications?: pulumi.Input<pulumi.Input<inputs.Cvm.LaunchTemplateVersionTagSpecification>[] | undefined>;
     /**
      * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * Describes information on VPC, including subnets, IP addresses, etc.
      */
-    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionVirtualPrivateCloud>;
+    virtualPrivateCloud?: pulumi.Input<inputs.Cvm.LaunchTemplateVersionVirtualPrivateCloud | undefined>;
 }

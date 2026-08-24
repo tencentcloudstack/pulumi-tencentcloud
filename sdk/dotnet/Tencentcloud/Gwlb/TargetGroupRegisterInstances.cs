@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gwlb
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -118,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gwlb
     /// 
     /// ## Import
     /// 
-    /// gwlb gwlb_target_group_register_instances can be imported using the id, e.g.
+    /// gwlb GwlbTargetGroupRegisterInstances can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Gwlb/targetGroupRegisterInstances:TargetGroupRegisterInstances gwlb_target_group_register_instances gwlb_target_group_register_instances_id

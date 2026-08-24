@@ -20,6 +20,11 @@ export const getBudgetOperationLog: typeof import("./getBudgetOperationLog").get
 export const getBudgetOperationLogOutput: typeof import("./getBudgetOperationLog").getBudgetOperationLogOutput = null as any;
 utilities.lazyLoad(exports, ["getBudgetOperationLog","getBudgetOperationLogOutput"], () => require("./getBudgetOperationLog"));
 
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -29,6 +34,8 @@ const _module = {
                 return new AllocationTag(name, <any>undefined, { urn })
             case "tencentcloud:Billing/budget:Budget":
                 return new Budget(name, <any>undefined, { urn })
+            case "tencentcloud:Billing/instance:Instance":
+                return new Instance(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -36,3 +43,4 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Billing/allocationTag", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Billing/budget", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Billing/instance", _module)

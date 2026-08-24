@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getNamespaces({
+ * const name = tencentcloud.tcr.getNamespaces({
  *     instanceId: "cls-satg5125",
  *     namespaceName: "test",
  * });
@@ -73,7 +73,7 @@ export interface GetNamespacesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getNamespaces({
+ * const name = tencentcloud.tcr.getNamespaces({
  *     instanceId: "cls-satg5125",
  *     namespaceName: "test",
  * });
@@ -99,9 +99,9 @@ export interface GetNamespacesOutputArgs {
     /**
      * ID of the TCR namespace to query.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

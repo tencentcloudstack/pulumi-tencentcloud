@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos ddos_speed_limit_config can be imported using the id, e.g.
+ * antiddos ddosSpeedLimitConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s
@@ -118,11 +118,11 @@ export interface DdosSpeedLimitConfigState {
     /**
      * Accessing speed limit configuration, the configuration ID cannot be empty when filling in parameters.
      */
-    ddosSpeedLimitConfig?: pulumi.Input<inputs.Antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfig>;
+    ddosSpeedLimitConfig?: pulumi.Input<inputs.Antiddos.DdosSpeedLimitConfigDdosSpeedLimitConfig | undefined>;
     /**
      * InstanceId.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

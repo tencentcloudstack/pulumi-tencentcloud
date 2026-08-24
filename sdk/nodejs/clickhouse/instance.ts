@@ -20,7 +20,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
- * const spec = tencentcloud.Clickhouse.getSpec({
+ * const spec = tencentcloud.clickhouse.getSpec({
  *     zone: availabilityZone,
  *     payMode: "POSTPAID_BY_HOUR",
  *     isElastic: false,
@@ -83,7 +83,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
- * const spec = tencentcloud.Clickhouse.getSpec({
+ * const spec = tencentcloud.clickhouse.getSpec({
  *     zone: availabilityZone,
  *     payMode: "POSTPAID_BY_HOUR",
  *     isElastic: false,
@@ -350,83 +350,83 @@ export interface InstanceState {
     /**
      * access address info.
      */
-    accessInfo?: pulumi.Input<string>;
+    accessInfo?: pulumi.Input<string | undefined>;
     /**
      * Billing type: `PREPAID` prepaid, `POSTPAID_BY_HOUR` postpaid.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * The password for the default account to log in to the instance. 8-16 characters, including at least three of the following: uppercase letters, lowercase letters, numbers, and special characters `!@#%^*`. The first character cannot be a special character.
      */
-    ckDefaultUserPwd?: pulumi.Input<string>;
+    ckDefaultUserPwd?: pulumi.Input<string | undefined>;
     /**
      * CLS log set id.
      */
-    clsLogSetId?: pulumi.Input<string>;
+    clsLogSetId?: pulumi.Input<string | undefined>;
     /**
      * ZK node.
      */
-    commonSpec?: pulumi.Input<inputs.Clickhouse.InstanceCommonSpec>;
+    commonSpec?: pulumi.Input<inputs.Clickhouse.InstanceCommonSpec | undefined>;
     /**
      * COS bucket name.
      */
-    cosBucketName?: pulumi.Input<string>;
+    cosBucketName?: pulumi.Input<string | undefined>;
     /**
      * Data spec.
      */
-    dataSpec?: pulumi.Input<inputs.Clickhouse.InstanceDataSpec>;
+    dataSpec?: pulumi.Input<inputs.Clickhouse.InstanceDataSpec | undefined>;
     /**
      * Expire time.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * Whether it is highly available.
      */
-    haFlag?: pulumi.Input<boolean>;
+    haFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Whether ZK is highly available.
      */
-    haZk?: pulumi.Input<boolean>;
+    haZk?: pulumi.Input<boolean | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Whether it is mounted on a bare disk.
      */
-    mountDiskType?: pulumi.Input<number>;
+    mountDiskType?: pulumi.Input<number | undefined>;
     /**
      * Product version.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * PREPAID needs to be passed. Whether to renew automatically. 1 means auto renewal is enabled.
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Secondary zone info.
      */
-    secondaryZoneInfos?: pulumi.Input<pulumi.Input<inputs.Clickhouse.InstanceSecondaryZoneInfo>[]>;
+    secondaryZoneInfos?: pulumi.Input<pulumi.Input<inputs.Clickhouse.InstanceSecondaryZoneInfo>[] | undefined>;
     /**
      * Subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Prepaid needs to be delivered, billing time length, how many months.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Private network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Availability zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -440,19 +440,19 @@ export interface InstanceArgs {
     /**
      * The password for the default account to log in to the instance. 8-16 characters, including at least three of the following: uppercase letters, lowercase letters, numbers, and special characters `!@#%^*`. The first character cannot be a special character.
      */
-    ckDefaultUserPwd?: pulumi.Input<string>;
+    ckDefaultUserPwd?: pulumi.Input<string | undefined>;
     /**
      * CLS log set id.
      */
-    clsLogSetId?: pulumi.Input<string>;
+    clsLogSetId?: pulumi.Input<string | undefined>;
     /**
      * ZK node.
      */
-    commonSpec?: pulumi.Input<inputs.Clickhouse.InstanceCommonSpec>;
+    commonSpec?: pulumi.Input<inputs.Clickhouse.InstanceCommonSpec | undefined>;
     /**
      * COS bucket name.
      */
-    cosBucketName?: pulumi.Input<string>;
+    cosBucketName?: pulumi.Input<string | undefined>;
     /**
      * Data spec.
      */
@@ -464,7 +464,7 @@ export interface InstanceArgs {
     /**
      * Whether ZK is highly available.
      */
-    haZk?: pulumi.Input<boolean>;
+    haZk?: pulumi.Input<boolean | undefined>;
     /**
      * Instance name.
      */
@@ -472,7 +472,7 @@ export interface InstanceArgs {
     /**
      * Whether it is mounted on a bare disk.
      */
-    mountDiskType?: pulumi.Input<number>;
+    mountDiskType?: pulumi.Input<number | undefined>;
     /**
      * Product version.
      */
@@ -480,11 +480,11 @@ export interface InstanceArgs {
     /**
      * PREPAID needs to be passed. Whether to renew automatically. 1 means auto renewal is enabled.
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Secondary zone info.
      */
-    secondaryZoneInfos?: pulumi.Input<pulumi.Input<inputs.Clickhouse.InstanceSecondaryZoneInfo>[]>;
+    secondaryZoneInfos?: pulumi.Input<pulumi.Input<inputs.Clickhouse.InstanceSecondaryZoneInfo>[] | undefined>;
     /**
      * Subnet.
      */
@@ -492,11 +492,11 @@ export interface InstanceArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Prepaid needs to be delivered, billing time length, how many months.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Private network.
      */

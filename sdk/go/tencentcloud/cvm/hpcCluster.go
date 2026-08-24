@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// cvm hpc_cluster can be imported using the id, e.g.
+// cvm hpcCluster can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id

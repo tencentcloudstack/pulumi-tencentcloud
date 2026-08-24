@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Import
     /// 
-    /// ci media_transcode_pro_template can be imported using the bucket#templateId, e.g.
+    /// ci MediaTranscodeProTemplate can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2

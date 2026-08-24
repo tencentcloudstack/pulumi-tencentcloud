@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameterTemplates = tencentcloud.Postgresql.getParameterTemplates({
+ * const parameterTemplates = tencentcloud.postgresql.getParameterTemplates({
  *     filters: [
  *         {
  *             name: "TemplateName",
@@ -90,7 +90,7 @@ export interface GetParameterTemplatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameterTemplates = tencentcloud.Postgresql.getParameterTemplates({
+ * const parameterTemplates = tencentcloud.postgresql.getParameterTemplates({
  *     filters: [
  *         {
  *             name: "TemplateName",
@@ -124,17 +124,17 @@ export interface GetParameterTemplatesOutputArgs {
     /**
      * Filter conditions. Valid values:TemplateName, TemplateId, DBMajorVersion, DBEngine.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetParameterTemplatesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetParameterTemplatesFilterArgs>[] | undefined>;
     /**
      * Sorting metric. Valid values:CreateTime, TemplateName, DBMajorVersion.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting order. Valid values:asc (ascending order),desc (descending order).
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

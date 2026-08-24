@@ -19,10 +19,10 @@ import * as utilities from "../utilities";
  *     name: "guagua_vpc_instance_test",
  *     cidrBlock: "10.0.0.0/16",
  * });
- * const idInstances = tencentcloud.Vpc.getInstancesOutput({
+ * const idInstances = tencentcloud.vpc.getInstancesOutput({
  *     vpcId: foo.id,
  * });
- * const nameInstances = tencentcloud.Vpc.getInstancesOutput({
+ * const nameInstances = tencentcloud.vpc.getInstancesOutput({
  *     name: foo.name,
  * });
  * ```
@@ -123,10 +123,10 @@ export interface GetInstancesResult {
  *     name: "guagua_vpc_instance_test",
  *     cidrBlock: "10.0.0.0/16",
  * });
- * const idInstances = tencentcloud.Vpc.getInstancesOutput({
+ * const idInstances = tencentcloud.vpc.getInstancesOutput({
  *     vpcId: foo.id,
  * });
- * const nameInstances = tencentcloud.Vpc.getInstancesOutput({
+ * const nameInstances = tencentcloud.vpc.getInstancesOutput({
  *     name: foo.name,
  * });
  * ```
@@ -152,29 +152,29 @@ export interface GetInstancesOutputArgs {
     /**
      * Filter VPC with this CIDR.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Filter default or no default VPC.
      */
-    isDefault?: pulumi.Input<boolean>;
+    isDefault?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the VPC to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter if VPC has this tag.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPC to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC to be queried.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

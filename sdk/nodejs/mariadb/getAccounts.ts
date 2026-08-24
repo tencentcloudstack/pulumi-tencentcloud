@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accounts = tencentcloud.Mariadb.getAccounts({
+ * const accounts = tencentcloud.mariadb.getAccounts({
  *     instanceId: "tdsql-4pzs5b67",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetAccountsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accounts = tencentcloud.Mariadb.getAccounts({
+ * const accounts = tencentcloud.mariadb.getAccounts({
  *     instanceId: "tdsql-4pzs5b67",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetAccountsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

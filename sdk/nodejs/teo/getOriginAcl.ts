@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Teo.getOriginAcl({
+ * const example = tencentcloud.teo.getOriginAcl({
  *     zoneId: "zone-3fkff38fyw8s",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetOriginAclResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Teo.getOriginAcl({
+ * const example = tencentcloud.teo.getOriginAcl({
  *     zoneId: "zone-3fkff38fyw8s",
  * });
  * ```
@@ -90,7 +90,7 @@ export interface GetOriginAclOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Specifies the site ID.
      */

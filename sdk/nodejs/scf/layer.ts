@@ -162,43 +162,43 @@ export interface LayerState {
     /**
      * The code type of layer.
      */
-    codeSha256?: pulumi.Input<string>;
+    codeSha256?: pulumi.Input<string | undefined>;
     /**
      * The compatible runtimes of layer.
      */
-    compatibleRuntimes?: pulumi.Input<pulumi.Input<string>[]>;
+    compatibleRuntimes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The source code of layer.
      */
-    content?: pulumi.Input<inputs.Scf.LayerContent>;
+    content?: pulumi.Input<inputs.Scf.LayerContent | undefined>;
     /**
      * The create time of layer.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The description of layer.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The name of layer.
      */
-    layerName?: pulumi.Input<string>;
+    layerName?: pulumi.Input<string | undefined>;
     /**
      * The version of layer.
      */
-    layerVersion?: pulumi.Input<number>;
+    layerVersion?: pulumi.Input<number | undefined>;
     /**
      * The license info of layer.
      */
-    licenseInfo?: pulumi.Input<string>;
+    licenseInfo?: pulumi.Input<string | undefined>;
     /**
      * The download location url of layer.
      */
-    location?: pulumi.Input<string>;
+    location?: pulumi.Input<string | undefined>;
     /**
      * The current status of layer.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -216,7 +216,7 @@ export interface LayerArgs {
     /**
      * The description of layer.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The name of layer.
      */
@@ -224,5 +224,5 @@ export interface LayerArgs {
     /**
      * The license info of layer.
      */
-    licenseInfo?: pulumi.Input<string>;
+    licenseInfo?: pulumi.Input<string | undefined>;
 }

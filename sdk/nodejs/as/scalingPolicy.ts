@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -74,10 +74,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -119,6 +119,14 @@ import * as utilities from "../utilities";
  *     predefinedMetricType: "ASG_AVG_CPU_UTILIZATION",
  *     targetValue: 80,
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * AS scaling policy can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:As/scalingPolicy:ScalingPolicy example asp-519acdug
  * ```
  */
 export class ScalingPolicy extends pulumi.CustomResource {
@@ -286,71 +294,71 @@ export interface ScalingPolicyState {
     /**
      * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
      */
-    adjustmentType?: pulumi.Input<string>;
+    adjustmentType?: pulumi.Input<string | undefined>;
     /**
      * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
      */
-    adjustmentValue?: pulumi.Input<number>;
+    adjustmentValue?: pulumi.Input<number | undefined>;
     /**
      * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
      */
-    comparisonOperator?: pulumi.Input<string>;
+    comparisonOperator?: pulumi.Input<string | undefined>;
     /**
      * Retry times. Valid value ranges: (1~10).
      */
-    continuousTime?: pulumi.Input<number>;
+    continuousTime?: pulumi.Input<number | undefined>;
     /**
      * Cooldwon time in second. Default is `300`.
      */
-    cooldown?: pulumi.Input<number>;
+    cooldown?: pulumi.Input<number | undefined>;
     /**
      * Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.
      */
-    disableScaleIn?: pulumi.Input<boolean>;
+    disableScaleIn?: pulumi.Input<boolean | undefined>;
     /**
      * Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.
      */
-    estimatedInstanceWarmup?: pulumi.Input<number>;
+    estimatedInstanceWarmup?: pulumi.Input<number | undefined>;
     /**
      * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
      */
-    metricName?: pulumi.Input<string>;
+    metricName?: pulumi.Input<string | undefined>;
     /**
      * An ID group of users to be notified when an alarm is triggered.
      */
-    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Time period in second. Valid values: `60` and `300`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Name of a policy used to define a reaction when an alarm is triggered.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.
      */
-    predefinedMetricType?: pulumi.Input<string>;
+    predefinedMetricType?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * Statistic types. Valid values: `AVERAGE`, `MAXIMUM` and `MINIMUM`. Default is `AVERAGE`.
      */
-    statistic?: pulumi.Input<string>;
+    statistic?: pulumi.Input<string | undefined>;
     /**
      * Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: >0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: >0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: >0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: >0, Unit: Mbps.
      */
-    targetValue?: pulumi.Input<number>;
+    targetValue?: pulumi.Input<number | undefined>;
     /**
      * Alarm threshold.
      */
-    threshold?: pulumi.Input<number>;
+    threshold?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -360,43 +368,43 @@ export interface ScalingPolicyArgs {
     /**
      * Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values: `CHANGE_IN_CAPACITY`, `EXACT_CAPACITY` and `PERCENT_CHANGE_IN_CAPACITY`.
      */
-    adjustmentType?: pulumi.Input<string>;
+    adjustmentType?: pulumi.Input<string | undefined>;
     /**
      * Define the number of instances by which to scale.For `CHANGE_IN_CAPACITY` type or PERCENT_CHANGE_IN_CAPACITY, a positive increment adds to the current capacity and a negative value removes from the current capacity. For `EXACT_CAPACITY` type, it defines an absolute number of the existing Auto Scaling group size.
      */
-    adjustmentValue?: pulumi.Input<number>;
+    adjustmentValue?: pulumi.Input<number | undefined>;
     /**
      * Comparison operator. Valid values: `GREATER_THAN`, `GREATER_THAN_OR_EQUAL_TO`, `LESS_THAN`, `LESS_THAN_OR_EQUAL_TO`, `EQUAL_TO` and `NOT_EQUAL_TO`.
      */
-    comparisonOperator?: pulumi.Input<string>;
+    comparisonOperator?: pulumi.Input<string | undefined>;
     /**
      * Retry times. Valid value ranges: (1~10).
      */
-    continuousTime?: pulumi.Input<number>;
+    continuousTime?: pulumi.Input<number | undefined>;
     /**
      * Cooldwon time in second. Default is `300`.
      */
-    cooldown?: pulumi.Input<number>;
+    cooldown?: pulumi.Input<number | undefined>;
     /**
      * Whether to disable scaling down applies only to the target tracking strategy; the default value is false. Value range: true: The target tracking strategy only triggers scaling up; false: The target tracking strategy triggers both scaling up and scaling down.
      */
-    disableScaleIn?: pulumi.Input<boolean>;
+    disableScaleIn?: pulumi.Input<boolean | undefined>;
     /**
      * Instance warm-up time, in seconds, applicable only to target tracking strategies. Value range is 0-3600, with a default warm-up time of 300 seconds.
      */
-    estimatedInstanceWarmup?: pulumi.Input<number>;
+    estimatedInstanceWarmup?: pulumi.Input<number | undefined>;
     /**
      * Name of an indicator. Valid values: `CPU_UTILIZATION`, `MEM_UTILIZATION`, `LAN_TRAFFIC_OUT`, `LAN_TRAFFIC_IN`, `WAN_TRAFFIC_OUT` and `WAN_TRAFFIC_IN`.
      */
-    metricName?: pulumi.Input<string>;
+    metricName?: pulumi.Input<string | undefined>;
     /**
      * An ID group of users to be notified when an alarm is triggered.
      */
-    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Time period in second. Valid values: `60` and `300`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Name of a policy used to define a reaction when an alarm is triggered.
      */
@@ -404,11 +412,11 @@ export interface ScalingPolicyArgs {
     /**
      * Alarm triggering policy type, the default type is SIMPLE. Value range: SIMPLE: Simple policy; TARGET_TRACKING: Target tracking policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Predefined monitoring items, applicable only to target tracking policies, and required in target tracking policy scenarios. Value range: ASG_AVG_CPU_UTILIZATION: Average CPU utilization; ASG_AVG_LAN_TRAFFIC_OUT: Average intranet outbound bandwidth; ASG_AVG_LAN_TRAFFIC_IN: Average intranet inbound bandwidth; ASG_AVG_WAN_TRAFFIC_OUT: Average internet outbound bandwidth; ASG_AVG_WAN_TRAFFIC_IN: Average internet inbound bandwidth.
      */
-    predefinedMetricType?: pulumi.Input<string>;
+    predefinedMetricType?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */
@@ -416,13 +424,13 @@ export interface ScalingPolicyArgs {
     /**
      * Statistic types. Valid values: `AVERAGE`, `MAXIMUM` and `MINIMUM`. Default is `AVERAGE`.
      */
-    statistic?: pulumi.Input<string>;
+    statistic?: pulumi.Input<string | undefined>;
     /**
      * Target value, applicable only to target tracking strategies, and required in target tracking strategy scenarios. ASG_AVG_CPU_UTILIZATION: [1, 100), Unit: %; ASG_AVG_LAN_TRAFFIC_OUT: >0, Unit: Mbps; ASG_AVG_LAN_TRAFFIC_IN: >0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_OUT: >0, Unit: Mbps; ASG_AVG_WAN_TRAFFIC_IN: >0, Unit: Mbps.
      */
-    targetValue?: pulumi.Input<number>;
+    targetValue?: pulumi.Input<number | undefined>;
     /**
      * Alarm threshold.
      */
-    threshold?: pulumi.Input<number>;
+    threshold?: pulumi.Input<number | undefined>;
 }

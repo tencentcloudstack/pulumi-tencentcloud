@@ -83,12 +83,8 @@ type GetRequestStatusResult struct {
 }
 
 func GetRequestStatusOutput(ctx *pulumi.Context, args GetRequestStatusOutputArgs, opts ...pulumi.InvokeOption) GetRequestStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRequestStatusResultOutput, error) {
-			args := v.(GetRequestStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getRequestStatus:getRequestStatus", args, GetRequestStatusResultOutput{}, options).(GetRequestStatusResultOutput), nil
-		}).(GetRequestStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getRequestStatus:getRequestStatus", args, GetRequestStatusResultOutput{}, options).(GetRequestStatusResultOutput)
 }
 
 // A collection of arguments for invoking getRequestStatus.

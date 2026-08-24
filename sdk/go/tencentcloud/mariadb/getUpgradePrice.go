@@ -86,12 +86,8 @@ type GetUpgradePriceResult struct {
 }
 
 func GetUpgradePriceOutput(ctx *pulumi.Context, args GetUpgradePriceOutputArgs, opts ...pulumi.InvokeOption) GetUpgradePriceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUpgradePriceResultOutput, error) {
-			args := v.(GetUpgradePriceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args, GetUpgradePriceResultOutput{}, options).(GetUpgradePriceResultOutput), nil
-		}).(GetUpgradePriceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args, GetUpgradePriceResultOutput{}, options).(GetUpgradePriceResultOutput)
 }
 
 // A collection of arguments for invoking getUpgradePrice.

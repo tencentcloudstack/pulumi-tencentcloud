@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *     cosObjectName: "code.zip",
  *     cosBucketRegion: "ap-guangzhou",
  * });
- * const foo = tencentcloud.Scf.getLogsOutput({
+ * const foo = tencentcloud.scf.getLogsOutput({
  *     functionName: fooFunction.name,
  * });
  * ```
@@ -145,7 +145,7 @@ export interface GetLogsResult {
  *     cosObjectName: "code.zip",
  *     cosBucketRegion: "ap-guangzhou",
  * });
- * const foo = tencentcloud.Scf.getLogsOutput({
+ * const foo = tencentcloud.scf.getLogsOutput({
  *     functionName: fooFunction.name,
  * });
  * ```
@@ -174,7 +174,7 @@ export interface GetLogsOutputArgs {
     /**
      * The end time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `startTime`.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF function to be queried.
      */
@@ -182,37 +182,37 @@ export interface GetLogsOutputArgs {
     /**
      * Corresponding requestId when executing function.
      */
-    invokeRequestId?: pulumi.Input<string>;
+    invokeRequestId?: pulumi.Input<string | undefined>;
     /**
      * Number of logs, the default is `10000`, offset+limit cannot be greater than 10000.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Namespace of the SCF function to be queried.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Log offset, default is `0`, offset+limit cannot be greater than 10000.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Order to sort the log, optional values `desc` and `asc`, default `desc`.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort the logs according to the following fields: `functionName`, `duration`, `memUsage`, `startTime`, default `startTime`.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Use to filter log, optional value: `not0` only returns the error log. `is0` only returns the correct log. `TimeLimitExceeded` returns the log of the function call timeout. `ResourceLimitExceeded` returns the function call generation resource overrun log. `UserCodeException` returns logs of the user code error that occurred in the function call. Not passing the parameter means returning all logs.
      */
-    retCode?: pulumi.Input<string>;
+    retCode?: pulumi.Input<string | undefined>;
     /**
      * The start time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `endTime`.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

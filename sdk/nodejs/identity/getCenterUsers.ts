@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterUsers = tencentcloud.Identity.getCenterUsers({
+ * const identityCenterUsers = tencentcloud.identity.getCenterUsers({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -102,7 +102,7 @@ export interface GetCenterUsersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterUsers = tencentcloud.Identity.getCenterUsers({
+ * const identityCenterUsers = tencentcloud.identity.getCenterUsers({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -128,31 +128,31 @@ export interface GetCenterUsersOutputArgs {
     /**
      * Filter criterion, which currently only supports username, email address, userId, and description.
      */
-    filter?: pulumi.Input<string>;
+    filter?: pulumi.Input<string | undefined>;
     /**
      * Filtered user group. IsSelected=1 will be returned for the sub-user associated with this user group.
      */
-    filterGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    filterGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field, which currently only supports CreateTime. The default is the CreateTime field.
      */
-    sortField?: pulumi.Input<string>;
+    sortField?: pulumi.Input<string | undefined>;
     /**
      * Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * User status: Enabled, Disabled.
      */
-    userStatus?: pulumi.Input<string>;
+    userStatus?: pulumi.Input<string | undefined>;
     /**
      * User type. Manual: manually created; Synchronized: externally imported.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

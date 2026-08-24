@@ -28,7 +28,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///         NetworkType = "BGP",
     ///         ChargeType = "TOP5_POSTPAID_BY_MONTH",
     ///         BandwidthPackageName = "tf-example",
-    ///         Tags = 
+    ///         Tag = 
     ///         {
     ///             { "createdBy", "Terraform" },
     ///         },
@@ -54,7 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///         BandwidthPackageName = "tf-example",
     ///         TimeSpan = 3,
     ///         InternetMaxBandwidth = 100,
-    ///         Tags = 
+    ///         Tag = 
     ///         {
     ///             { "createdBy", "Terraform" },
     ///         },
@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     ///         BandwidthPackageName = "tf-example",
     ///         InternetMaxBandwidth = 400,
     ///         Egress = "center_egress2",
-    ///         Tags = 
+    ///         Tag = 
     ///         {
     ///             { "createdBy", "Terraform" },
     ///         },
@@ -91,8 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc bandwidth_package can be imported using the id, e.g.
-    /// 
+    /// vpc BandwidthPackage can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage example bwp-hq8h7qpy
     /// ```
@@ -132,6 +131,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 
         /// <summary>
         /// Tag description list.
+        /// </summary>
+        [Output("tag")]
+        public Output<ImmutableDictionary<string, string>> Tag { get; private set; } = null!;
+
+        /// <summary>
+        /// Use `Tag` instead. Tag description list.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
@@ -219,12 +224,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
 
-        [Input("tags")]
-        private InputMap<string>? _tags;
+        [Input("tag")]
+        private InputMap<string>? _tag;
 
         /// <summary>
         /// Tag description list.
         /// </summary>
+        public InputMap<string> Tag
+        {
+            get => _tag ?? (_tag = new InputMap<string>());
+            set => _tag = value;
+        }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Use `Tag` instead. Tag description list.
+        /// </summary>
+        [Obsolete(@"Use `Tag` instead.")]
         public InputMap<string> Tags
         {
             get => _tags ?? (_tags = new InputMap<string>());
@@ -275,12 +293,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
 
-        [Input("tags")]
-        private InputMap<string>? _tags;
+        [Input("tag")]
+        private InputMap<string>? _tag;
 
         /// <summary>
         /// Tag description list.
         /// </summary>
+        public InputMap<string> Tag
+        {
+            get => _tag ?? (_tag = new InputMap<string>());
+            set => _tag = value;
+        }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Use `Tag` instead. Tag description list.
+        /// </summary>
+        [Obsolete(@"Use `Tag` instead.")]
         public InputMap<string> Tags
         {
             get => _tags ?? (_tags = new InputMap<string>());

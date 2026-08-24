@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.waf.getPeakPoints({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  * });
@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.waf.getPeakPoints({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  *     domain: "domain.com",
@@ -117,7 +117,7 @@ export interface GetPeakPointsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.waf.getPeakPoints({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  * });
@@ -129,7 +129,7 @@ export interface GetPeakPointsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.waf.getPeakPoints({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  *     domain: "domain.com",
@@ -159,11 +159,11 @@ export interface GetPeakPointsOutputArgs {
     /**
      * The domain name to be queried. If all domain name data is queried, this parameter is not filled in.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Only support sparta-waf and clb-waf. If not passed, there will be no filtering.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Begin time.
      */
@@ -171,15 +171,15 @@ export interface GetPeakPointsOutputArgs {
     /**
      * WAF instance ID, if not passed, there will be no filtering.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Twelve values are available: `access`-Peak qps trend chart; `botAccess`- bot peak qps trend chart; `down`-Downstream peak bandwidth trend chart; `up`-Upstream peak bandwidth trend chart; `attack`-Trend chart of total number of web attacks; `cc`-Trend chart of total number of CC attacks; `bw`- Black IP Attack Total Trend Chart; `tamper`- Anti Tamper Attack Total Trend Chart; `leak`- Trend chart of total number of anti leakage attacks; `acl`- Trend chart of total number of access control attacks; `httpStatus`- Trend chart of status code frequency; `wxAccess`- WeChat Mini Program Peak QPS Trend Chart.
      */
-    metricName?: pulumi.Input<string>;
+    metricName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * End time.
      */

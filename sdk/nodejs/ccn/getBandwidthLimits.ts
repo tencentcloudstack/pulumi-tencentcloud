@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
- * const limit = tencentcloud.Ccn.getBandwidthLimitsOutput({
+ * const limit = tencentcloud.ccn.getBandwidthLimitsOutput({
  *     ccnId: main.id,
  * });
  * const limit1 = new tencentcloud.ccn.BandwidthLimit("limit1", {
@@ -85,7 +85,7 @@ export interface GetBandwidthLimitsResult {
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
- * const limit = tencentcloud.Ccn.getBandwidthLimitsOutput({
+ * const limit = tencentcloud.ccn.getBandwidthLimitsOutput({
  *     ccnId: main.id,
  * });
  * const limit1 = new tencentcloud.ccn.BandwidthLimit("limit1", {
@@ -114,5 +114,5 @@ export interface GetBandwidthLimitsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

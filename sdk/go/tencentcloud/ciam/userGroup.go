@@ -38,7 +38,7 @@ import (
 //			}
 //			_, err = ciam.NewUserGroup(ctx, "user_group", &ciam.UserGroupArgs{
 //				DisplayName: pulumi.String("tf_user_group"),
-//				UserStoreId: userStore.ID(),
+//				UserStoreId: userStore.ID().ToIDOutput().ToStringOutput(),
 //				Description: pulumi.String("for terrafrom test"),
 //			})
 //			if err != nil {
@@ -52,7 +52,7 @@ import (
 //
 // ## Import
 //
-// ciam user_group can be imported using the id, e.g.
+// ciam userGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId

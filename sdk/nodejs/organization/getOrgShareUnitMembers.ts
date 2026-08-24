@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnitMembers = tencentcloud.Organization.getOrgShareUnitMembers({
+ * const organizationOrgShareUnitMembers = tencentcloud.organization.getOrgShareUnitMembers({
  *     unitId: "xxxxxx",
  *     area: "ap-guangzhou",
  *     searchKey: "xxxxxx",
@@ -80,7 +80,7 @@ export interface GetOrgShareUnitMembersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnitMembers = tencentcloud.Organization.getOrgShareUnitMembers({
+ * const organizationOrgShareUnitMembers = tencentcloud.organization.getOrgShareUnitMembers({
  *     unitId: "xxxxxx",
  *     area: "ap-guangzhou",
  *     searchKey: "xxxxxx",
@@ -108,11 +108,11 @@ export interface GetOrgShareUnitMembersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search for keywords. Support member Uin searches.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Shared unit ID.
      */

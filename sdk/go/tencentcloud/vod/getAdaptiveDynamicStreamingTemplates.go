@@ -73,7 +73,7 @@ import (
 //			}
 //			_ = vod.GetAdaptiveDynamicStreamingTemplatesOutput(ctx, vod.GetAdaptiveDynamicStreamingTemplatesOutputArgs{
 //				Type:       pulumi.String("Custom"),
-//				Definition: fooAdaptiveDynamicStreamingTemplate.ID(),
+//				Definition: fooAdaptiveDynamicStreamingTemplate.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -117,12 +117,8 @@ type GetAdaptiveDynamicStreamingTemplatesResult struct {
 }
 
 func GetAdaptiveDynamicStreamingTemplatesOutput(ctx *pulumi.Context, args GetAdaptiveDynamicStreamingTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetAdaptiveDynamicStreamingTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAdaptiveDynamicStreamingTemplatesResultOutput, error) {
-			args := v.(GetAdaptiveDynamicStreamingTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args, GetAdaptiveDynamicStreamingTemplatesResultOutput{}, options).(GetAdaptiveDynamicStreamingTemplatesResultOutput), nil
-		}).(GetAdaptiveDynamicStreamingTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args, GetAdaptiveDynamicStreamingTemplatesResultOutput{}, options).(GetAdaptiveDynamicStreamingTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getAdaptiveDynamicStreamingTemplates.

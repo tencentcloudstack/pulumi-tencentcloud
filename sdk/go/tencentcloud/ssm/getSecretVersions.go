@@ -87,12 +87,8 @@ type GetSecretVersionsResult struct {
 }
 
 func GetSecretVersionsOutput(ctx *pulumi.Context, args GetSecretVersionsOutputArgs, opts ...pulumi.InvokeOption) GetSecretVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecretVersionsResultOutput, error) {
-			args := v.(GetSecretVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args, GetSecretVersionsResultOutput{}, options).(GetSecretVersionsResultOutput), nil
-		}).(GetSecretVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args, GetSecretVersionsResultOutput{}, options).(GetSecretVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getSecretVersions.

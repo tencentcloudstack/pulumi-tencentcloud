@@ -39,6 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// Tencent Cloud nickname. Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        public readonly string NickName;
+        /// <summary>
         /// Node IDNote: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly int NodeId;
@@ -97,6 +101,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Outputs
 
             string name,
 
+            string nickName,
+
             int nodeId,
 
             string nodeName,
@@ -125,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Outputs
             MemberType = memberType;
             MemberUin = memberUin;
             Name = name;
+            NickName = nickName;
             NodeId = nodeId;
             NodeName = nodeName;
             OrgIdentities = orgIdentities;

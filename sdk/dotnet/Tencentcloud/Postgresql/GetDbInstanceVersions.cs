@@ -13,19 +13,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public static class GetDbInstanceVersions
     {
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceVersions
+        /// Use this data source to query detailed information of PostgreSQL db instance versions
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all versions
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceVersions = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query versions by storage type
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke(new()
+        ///     {
+        ///         StorageType = "CLOUD_HSSD",
+        ///     });
         /// 
         /// });
         /// ```
@@ -34,19 +54,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceVersions
+        /// Use this data source to query detailed information of PostgreSQL db instance versions
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all versions
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceVersions = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query versions by storage type
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke(new()
+        ///     {
+        ///         StorageType = "CLOUD_HSSD",
+        ///     });
         /// 
         /// });
         /// ```
@@ -55,19 +95,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceVersionsResult>("tencentcloud:Postgresql/getDbInstanceVersions:getDbInstanceVersions", args ?? new GetDbInstanceVersionsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceVersions
+        /// Use this data source to query detailed information of PostgreSQL db instance versions
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all versions
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceVersions = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Query versions by storage type
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceVersions.Invoke(new()
+        ///     {
+        ///         StorageType = "CLOUD_HSSD",
+        ///     });
         /// 
         /// });
         /// ```
@@ -85,6 +145,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
+        /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public string? StorageType { get; set; }
+
         public GetDbInstanceVersionsArgs()
         {
         }
@@ -98,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
+
+        /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public Input<string>? StorageType { get; set; }
 
         public GetDbInstanceVersionsInvokeArgs()
         {
@@ -114,6 +186,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
+        public readonly string? StorageType;
         /// <summary>
         /// List of database versions.
         /// </summary>
@@ -125,10 +198,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 
             string? resultOutputFile,
 
+            string? storageType,
+
             ImmutableArray<Outputs.GetDbInstanceVersionsVersionSetResult> versionSets)
         {
             Id = id;
             ResultOutputFile = resultOutputFile;
+            StorageType = storageType;
             VersionSets = versionSets;
         }
     }

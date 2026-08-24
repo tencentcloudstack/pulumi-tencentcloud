@@ -108,23 +108,23 @@ export interface L4RuleV2State {
     /**
      * Business of the resource that the layer 4 rule works for. Valid values: `bgpip` and `net`.
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * Resource id.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * A list of layer 4 rules. Each element contains the following attributes:
      */
-    rules?: pulumi.Input<inputs.Dayu.L4RuleV2Rules>;
+    rules?: pulumi.Input<inputs.Dayu.L4RuleV2Rules | undefined>;
     /**
      * The virtual port of the layer 4 rule.
      */
-    virtualPort?: pulumi.Input<number>;
+    virtualPort?: pulumi.Input<number | undefined>;
     /**
      * Resource vpn.
      */
-    vpn?: pulumi.Input<string>;
+    vpn?: pulumi.Input<string | undefined>;
 }
 
 /**

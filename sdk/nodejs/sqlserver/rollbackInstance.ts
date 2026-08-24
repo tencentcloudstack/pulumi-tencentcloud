@@ -27,10 +27,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver rollback_instance can be imported using the id, e.g.
+ * sqlserver rollbackInstance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
+ * terraform import tencentcloud_sqlserver_rollback_instance.rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
  * ```
  */
 export class RollbackInstance extends pulumi.CustomResource {
@@ -123,19 +123,19 @@ export interface RollbackInstanceState {
     /**
      * TDE encryption, `enable` encrypted, `disable` unencrypted.
      */
-    encryptions?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RollbackInstanceEncryption>[]>;
+    encryptions?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RollbackInstanceEncryption>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Rename the databases listed in ReNameRestoreDatabase.
      */
-    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RollbackInstanceRenameRestore>[]>;
+    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RollbackInstanceRenameRestore>[] | undefined>;
     /**
      * Target time point for rollback.
      */
-    time?: pulumi.Input<string>;
+    time?: pulumi.Input<string | undefined>;
 }
 
 /**

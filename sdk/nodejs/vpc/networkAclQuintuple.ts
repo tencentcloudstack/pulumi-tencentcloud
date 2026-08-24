@@ -81,11 +81,11 @@ export interface NetworkAclQuintupleState {
     /**
      * Network ACL instance ID. For example:acl-12345678.
      */
-    networkAclId?: pulumi.Input<string>;
+    networkAclId?: pulumi.Input<string | undefined>;
     /**
      * Network quintuple ACL rule set.
      */
-    networkAclQuintupleSet?: pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSet>;
+    networkAclQuintupleSet?: pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSet | undefined>;
 }
 
 /**

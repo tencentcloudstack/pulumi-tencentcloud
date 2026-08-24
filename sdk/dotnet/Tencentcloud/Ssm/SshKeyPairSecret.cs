@@ -55,7 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// 
     /// ## Import
     /// 
-    /// ssm ssh_key_pair_secret can be imported using the id, e.g.
+    /// ssm SshKeyPairSecret can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
@@ -95,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Output<int> ProjectId { get; private set; } = null!;
 
         /// <summary>
+        /// The resource ID associated with the secret.
+        /// </summary>
+        [Output("resourceId")]
+        public Output<string> ResourceId { get; private set; } = null!;
+
+        /// <summary>
         /// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
         /// </summary>
         [Output("secretName")]
@@ -105,6 +111,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Output("secretType")]
         public Output<int> SecretType { get; private set; } = null!;
+
+        /// <summary>
+        /// The key pair ID is the unique identifier of the key pair in the cloud server.
+        /// </summary>
+        [Output("sshKeyId")]
+        public Output<string> SshKeyId { get; private set; } = null!;
 
         /// <summary>
         /// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
@@ -264,6 +276,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
+        /// The resource ID associated with the secret.
+        /// </summary>
+        [Input("resourceId")]
+        public Input<string>? ResourceId { get; set; }
+
+        /// <summary>
         /// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
         /// </summary>
         [Input("secretName")]
@@ -274,6 +292,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// </summary>
         [Input("secretType")]
         public Input<int>? SecretType { get; set; }
+
+        /// <summary>
+        /// The key pair ID is the unique identifier of the key pair in the cloud server.
+        /// </summary>
+        [Input("sshKeyId")]
+        public Input<string>? SshKeyId { get; set; }
 
         /// <summary>
         /// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.

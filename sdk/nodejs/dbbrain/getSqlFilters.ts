@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *     maxConcurrency: 10,
  *     duration: 3600,
  * });
- * const sqlFilters = tencentcloud.Dbbrain.getSqlFiltersOutput({
+ * const sqlFilters = tencentcloud.dbbrain.getSqlFiltersOutput({
  *     instanceId: "mysql_ins_id",
  *     filterIds: [sqlFilter.filterId],
  * });
@@ -101,7 +101,7 @@ export interface GetSqlFiltersResult {
  *     maxConcurrency: 10,
  *     duration: 3600,
  * });
- * const sqlFilters = tencentcloud.Dbbrain.getSqlFiltersOutput({
+ * const sqlFilters = tencentcloud.dbbrain.getSqlFiltersOutput({
  *     instanceId: "mysql_ins_id",
  *     filterIds: [sqlFilter.filterId],
  * });
@@ -124,7 +124,7 @@ export interface GetSqlFiltersOutputArgs {
     /**
      * filter id list.
      */
-    filterIds?: pulumi.Input<pulumi.Input<number>[]>;
+    filterIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * instance id.
      */
@@ -132,9 +132,9 @@ export interface GetSqlFiltersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * status list.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

@@ -94,11 +94,11 @@ export interface ModifyDataEngineDescriptionOperationState {
     /**
      * Engine description and its maximum length is 250 characters.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Engine description and its maximum length is 250 characters.
      */
-    message?: pulumi.Input<string>;
+    message?: pulumi.Input<string | undefined>;
 }
 
 /**

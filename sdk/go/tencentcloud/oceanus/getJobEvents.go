@@ -88,12 +88,8 @@ type GetJobEventsResult struct {
 }
 
 func GetJobEventsOutput(ctx *pulumi.Context, args GetJobEventsOutputArgs, opts ...pulumi.InvokeOption) GetJobEventsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetJobEventsResultOutput, error) {
-			args := v.(GetJobEventsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getJobEvents:getJobEvents", args, GetJobEventsResultOutput{}, options).(GetJobEventsResultOutput), nil
-		}).(GetJobEventsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getJobEvents:getJobEvents", args, GetJobEventsResultOutput{}, options).(GetJobEventsResultOutput)
 }
 
 // A collection of arguments for invoking getJobEvents.

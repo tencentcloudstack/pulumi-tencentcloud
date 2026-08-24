@@ -83,12 +83,8 @@ type GetCheckSavepointResult struct {
 }
 
 func GetCheckSavepointOutput(ctx *pulumi.Context, args GetCheckSavepointOutputArgs, opts ...pulumi.InvokeOption) GetCheckSavepointResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCheckSavepointResultOutput, error) {
-			args := v.(GetCheckSavepointArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args, GetCheckSavepointResultOutput{}, options).(GetCheckSavepointResultOutput), nil
-		}).(GetCheckSavepointResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args, GetCheckSavepointResultOutput{}, options).(GetCheckSavepointResultOutput)
 }
 
 // A collection of arguments for invoking getCheckSavepoint.

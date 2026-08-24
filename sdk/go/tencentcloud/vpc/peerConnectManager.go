@@ -34,7 +34,7 @@ import (
 //				return err
 //			}
 //			ownerUin := info.OwnerUin
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("tf-example-pcx"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -49,9 +49,9 @@ import (
 //				return err
 //			}
 //			_, err = vpc.NewPeerConnectManager(ctx, "peer_connect_manager", &vpc.PeerConnectManagerArgs{
-//				SourceVpcId:           vpc.ID(),
+//				SourceVpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //				PeeringConnectionName: pulumi.String("example-iac"),
-//				DestinationVpcId:      desVpc.ID(),
+//				DestinationVpcId:      desVpc.ID().ToIDOutput().ToStringOutput(),
 //				DestinationUin:        pulumi.String(ownerUin),
 //				DestinationRegion:     pulumi.String("ap-guangzhou"),
 //			})
@@ -66,7 +66,7 @@ import (
 //
 // ## Import
 //
-// vpc peer_connect_manager can be imported using the id, e.g.
+// vpc peerConnectManager can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id

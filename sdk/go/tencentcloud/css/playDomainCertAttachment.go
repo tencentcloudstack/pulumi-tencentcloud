@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// css play_domain_cert_attachment can be imported using the id, e.g.
+// css playDomainCertAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId

@@ -49,7 +49,7 @@ import (
 //
 // ## Import
 //
-// tsf api_group can be imported using the id, e.g.
+// tsf apiGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id

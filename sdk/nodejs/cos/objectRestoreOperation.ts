@@ -69,7 +69,7 @@ export class ObjectRestoreOperation extends pulumi.CustomResource {
      * - Expedited: quick retrieval mode, and the recovery task can be completed in 1-5 minutes.
      * - Standard: standard retrieval mode. Recovery task is completed within 3-5 hours.
      * - Bulk: batch retrieval mode, and the recovery task is completed within 5-12 hours.
-     * For deep recovery archive storage type data, there are two recovery models, which are:
+     *   For deep recovery archive storage type data, there are two recovery models, which are:
      * - Standard: standard retrieval mode, recovery time is 12-24 hours.
      * - Bulk: batch retrieval mode, recovery time is 24-48 hours.
      */
@@ -123,26 +123,26 @@ export interface ObjectRestoreOperationState {
     /**
      * Bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Specifies the valid duration of the restored temporary copy in days.
      */
-    days?: pulumi.Input<number>;
+    days?: pulumi.Input<number | undefined>;
     /**
      * Object key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * when restoring, Tier can be specified as the supported recovery model.
      * There are three recovery models for recovering archived storage type data, which are:
      * - Expedited: quick retrieval mode, and the recovery task can be completed in 1-5 minutes.
      * - Standard: standard retrieval mode. Recovery task is completed within 3-5 hours.
      * - Bulk: batch retrieval mode, and the recovery task is completed within 5-12 hours.
-     * For deep recovery archive storage type data, there are two recovery models, which are:
+     *   For deep recovery archive storage type data, there are two recovery models, which are:
      * - Standard: standard retrieval mode, recovery time is 12-24 hours.
      * - Bulk: batch retrieval mode, recovery time is 24-48 hours.
      */
-    tier?: pulumi.Input<string>;
+    tier?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -167,7 +167,7 @@ export interface ObjectRestoreOperationArgs {
      * - Expedited: quick retrieval mode, and the recovery task can be completed in 1-5 minutes.
      * - Standard: standard retrieval mode. Recovery task is completed within 3-5 hours.
      * - Bulk: batch retrieval mode, and the recovery task is completed within 5-12 hours.
-     * For deep recovery archive storage type data, there are two recovery models, which are:
+     *   For deep recovery archive storage type data, there are two recovery models, which are:
      * - Standard: standard retrieval mode, recovery time is 12-24 hours.
      * - Bulk: batch retrieval mode, recovery time is 24-48 hours.
      */

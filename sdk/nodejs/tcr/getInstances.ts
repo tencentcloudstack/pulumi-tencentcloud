@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getInstances({
+ * const name = tencentcloud.tcr.getInstances({
  *     name: "test",
  * });
  * ```
@@ -76,7 +76,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcr.getInstances({
+ * const name = tencentcloud.tcr.getInstances({
  *     name: "test",
  * });
  * ```
@@ -98,13 +98,13 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the TCR instance to query.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the TCR instance to query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

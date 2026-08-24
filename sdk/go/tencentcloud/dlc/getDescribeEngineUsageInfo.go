@@ -69,12 +69,8 @@ type GetDescribeEngineUsageInfoResult struct {
 }
 
 func GetDescribeEngineUsageInfoOutput(ctx *pulumi.Context, args GetDescribeEngineUsageInfoOutputArgs, opts ...pulumi.InvokeOption) GetDescribeEngineUsageInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeEngineUsageInfoResultOutput, error) {
-			args := v.(GetDescribeEngineUsageInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeEngineUsageInfo:getDescribeEngineUsageInfo", args, GetDescribeEngineUsageInfoResultOutput{}, options).(GetDescribeEngineUsageInfoResultOutput), nil
-		}).(GetDescribeEngineUsageInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeEngineUsageInfo:getDescribeEngineUsageInfo", args, GetDescribeEngineUsageInfoResultOutput{}, options).(GetDescribeEngineUsageInfoResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeEngineUsageInfo.

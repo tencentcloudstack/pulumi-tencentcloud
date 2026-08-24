@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const limits = tencentcloud.As.getLimits({});
+ * const limits = tencentcloud.as.getLimits({});
  * ```
  */
 export function getLimits(args?: GetLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetLimitsResult> {
@@ -69,7 +69,7 @@ export interface GetLimitsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const limits = tencentcloud.As.getLimits({});
+ * const limits = tencentcloud.as.getLimits({});
  * ```
  */
 export function getLimitsOutput(args?: GetLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLimitsResult> {
@@ -87,5 +87,5 @@ export interface GetLimitsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

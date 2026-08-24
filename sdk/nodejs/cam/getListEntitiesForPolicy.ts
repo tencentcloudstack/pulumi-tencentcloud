@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listEntitiesForPolicy = tencentcloud.Cam.getListEntitiesForPolicy({
+ * const listEntitiesForPolicy = tencentcloud.cam.getListEntitiesForPolicy({
  *     policyId: 1,
  *     entityFilter: "All",
  * });
@@ -79,7 +79,7 @@ export interface GetListEntitiesForPolicyResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listEntitiesForPolicy = tencentcloud.Cam.getListEntitiesForPolicy({
+ * const listEntitiesForPolicy = tencentcloud.cam.getListEntitiesForPolicy({
  *     policyId: 1,
  *     entityFilter: "All",
  * });
@@ -102,7 +102,7 @@ export interface GetListEntitiesForPolicyOutputArgs {
     /**
      * Can take values of &amp;amp;#39;All&amp;amp;#39;, &amp;amp;#39;User&amp;amp;#39;, &amp;amp;#39;Group&amp;amp;#39;, and &amp;amp;#39;Role&amp;amp;#39;. &amp;amp;#39;All&amp;amp;#39; represents obtaining all entity types, &amp;amp;#39;User&amp;amp;#39; represents only obtaining sub accounts, &amp;amp;#39;Group&amp;amp;#39; represents only obtaining user groups, and &amp;amp;#39;Role&amp;amp;#39; represents only obtaining roles. The default value is&amp;amp;#39; All &amp;amp;#39;.
      */
-    entityFilter?: pulumi.Input<string>;
+    entityFilter?: pulumi.Input<string | undefined>;
     /**
      * Policy Id.
      */
@@ -110,9 +110,9 @@ export interface GetListEntitiesForPolicyOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Per page size, default value is 20.
      */
-    rp?: pulumi.Input<number>;
+    rp?: pulumi.Input<number | undefined>;
 }

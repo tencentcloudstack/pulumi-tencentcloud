@@ -74,12 +74,8 @@ type GetCrossTargetsResult struct {
 }
 
 func GetCrossTargetsOutput(ctx *pulumi.Context, args GetCrossTargetsOutputArgs, opts ...pulumi.InvokeOption) GetCrossTargetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCrossTargetsResultOutput, error) {
-			args := v.(GetCrossTargetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getCrossTargets:getCrossTargets", args, GetCrossTargetsResultOutput{}, options).(GetCrossTargetsResultOutput), nil
-		}).(GetCrossTargetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getCrossTargets:getCrossTargets", args, GetCrossTargetsResultOutput{}, options).(GetCrossTargetsResultOutput)
 }
 
 // A collection of arguments for invoking getCrossTargets.

@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { CloudNativeApiGatewayIpRestrictionArgs, CloudNativeApiGatewayIpRestrictionState } from "./cloudNativeApiGatewayIpRestriction";
+export type CloudNativeApiGatewayIpRestriction = import("./cloudNativeApiGatewayIpRestriction").CloudNativeApiGatewayIpRestriction;
+export const CloudNativeApiGatewayIpRestriction: typeof import("./cloudNativeApiGatewayIpRestriction").CloudNativeApiGatewayIpRestriction = null as any;
+utilities.lazyLoad(exports, ["CloudNativeApiGatewayIpRestriction"], () => require("./cloudNativeApiGatewayIpRestriction"));
+
 export { CngwCanaryRuleArgs, CngwCanaryRuleState } from "./cngwCanaryRule";
 export type CngwCanaryRule = import("./cngwCanaryRule").CngwCanaryRule;
 export const CngwCanaryRule: typeof import("./cngwCanaryRule").CngwCanaryRule = null as any;
@@ -145,6 +150,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Tse/cloudNativeApiGatewayIpRestriction:CloudNativeApiGatewayIpRestriction":
+                return new CloudNativeApiGatewayIpRestriction(name, <any>undefined, { urn })
             case "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule":
                 return new CngwCanaryRule(name, <any>undefined, { urn })
             case "tencentcloud:Tse/cngwCertificate:CngwCertificate":
@@ -180,6 +187,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cloudNativeApiGatewayIpRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwCanaryRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwCertificate", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tse/cngwGateway", _module)

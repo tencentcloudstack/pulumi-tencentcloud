@@ -50,8 +50,7 @@ import (
 //
 // ## Import
 //
-// pts cron_job can be imported using the projectId#cronJobId, e.g.
-//
+// pts cronJob can be imported using the projectId#cronJobId, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
 // ```

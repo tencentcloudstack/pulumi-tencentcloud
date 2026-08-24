@@ -82,12 +82,8 @@ type GetDataEngineNetworkResult struct {
 }
 
 func GetDataEngineNetworkOutput(ctx *pulumi.Context, args GetDataEngineNetworkOutputArgs, opts ...pulumi.InvokeOption) GetDataEngineNetworkResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataEngineNetworkResultOutput, error) {
-			args := v.(GetDataEngineNetworkArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDataEngineNetwork:getDataEngineNetwork", args, GetDataEngineNetworkResultOutput{}, options).(GetDataEngineNetworkResultOutput), nil
-		}).(GetDataEngineNetworkResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDataEngineNetwork:getDataEngineNetwork", args, GetDataEngineNetworkResultOutput{}, options).(GetDataEngineNetworkResultOutput)
 }
 
 // A collection of arguments for invoking getDataEngineNetwork.

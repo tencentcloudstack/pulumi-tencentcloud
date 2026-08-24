@@ -14,6 +14,10 @@ import (
 
 // Provide a resource to create a Mongodb sharding instance.
 //
+// > **NOTE:** The `addNodeList` and `removeNodeList` arguments are used to submit node change actions. When updating the resource, only newly added items in these lists will be sent to the API. If an existing item is removed from the Terraform configuration, Terraform only updates the local state and does not submit a repeated add or remove request. To add or remove another read-only node, append a new block instead of modifying an existing one. After the change is completed, obsolete action records can be removed from the configuration, and this cleanup does not trigger a new node operation when the remaining list is a subset of the previous list. In general, it is recommended to keep these action records in the configuration and avoid cleanup unless necessary.
+//
+// > **NOTE:** The `cpu` parameter takes effect only when the configuration is changed. Changing the `cpu` triggers the `ModifyDBInstanceSpec` API to adjust the CPU specification of the running MongoDB instance in-place. The supported CPU specifications can be obtained through the `DescribeSpecInfo` API.
+//
 // ## Example Usage
 //
 // ```go
@@ -28,22 +32,115 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mongodb.NewShardingInstance(ctx, "mongodb", &mongodb.ShardingInstanceArgs{
-//				InstanceName:  pulumi.String("mongodb"),
+//			_, err := mongodb.NewShardingInstance(ctx, "example", &mongodb.ShardingInstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
 //				ShardQuantity: pulumi.Int(2),
 //				NodesPerShard: pulumi.Int(3),
 //				Memory:        pulumi.Int(4),
 //				Volume:        pulumi.Int(100),
-//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
 //				MachineType:   pulumi.String("HIO10G"),
-//				AvailableZone: pulumi.String("ap-guangzhou-3"),
-//				VpcId:         pulumi.String("vpc-mz3efvbw"),
-//				SubnetId:      pulumi.String("subnet-lk0svi3p"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
 //				ProjectId:     pulumi.Int(0),
-//				Password:      pulumi.String("password1234"),
+//				Password:      pulumi.String("Password@123"),
 //				MongosCpu:     pulumi.Int(1),
 //				MongosMemory:  pulumi.Int(2),
 //				MongosNodeNum: pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Add a read-only node
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mongodb.NewShardingInstance(ctx, "example", &mongodb.ShardingInstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
+//				ShardQuantity: pulumi.Int(2),
+//				NodesPerShard: pulumi.Int(3),
+//				Memory:        pulumi.Int(4),
+//				Volume:        pulumi.Int(100),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
+//				ProjectId:     pulumi.Int(0),
+//				Password:      pulumi.String("Password@123"),
+//				MongosCpu:     pulumi.Int(1),
+//				MongosMemory:  pulumi.Int(2),
+//				MongosNodeNum: pulumi.Int(3),
+//				AddNodeLists: mongodb.ShardingInstanceAddNodeListArray{
+//					&mongodb.ShardingInstanceAddNodeListArgs{
+//						Role: pulumi.String("READONLY"),
+//						Zone: pulumi.String("ap-guangzhou-6"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Remove a read-only node
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mongodb.NewShardingInstance(ctx, "example", &mongodb.ShardingInstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
+//				ShardQuantity: pulumi.Int(2),
+//				NodesPerShard: pulumi.Int(3),
+//				Memory:        pulumi.Int(4),
+//				Volume:        pulumi.Int(100),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
+//				ProjectId:     pulumi.Int(0),
+//				Password:      pulumi.String("Password@123"),
+//				MongosCpu:     pulumi.Int(1),
+//				MongosMemory:  pulumi.Int(2),
+//				MongosNodeNum: pulumi.Int(3),
+//				RemoveNodeLists: mongodb.ShardingInstanceRemoveNodeListArray{
+//					&mongodb.ShardingInstanceRemoveNodeListArgs{
+//						Role:     pulumi.String("READONLY"),
+//						NodeName: pulumi.String("cmgo-xxxx_0-node-readonly0"),
+//						Zone:     pulumi.String("ap-guangzhou-6"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -59,11 +156,13 @@ import (
 // Mongodb sharding instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance example cmgo-41s6jwy4
 // ```
 type ShardingInstance struct {
 	pulumi.CustomResourceState
 
+	// Add node list. Node type and availability zone information.
+	AddNodeLists ShardingInstanceAddNodeListArrayOutput `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -76,6 +175,8 @@ type ShardingInstance struct {
 	AvailableZone pulumi.StringOutput `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -85,6 +186,7 @@ type ShardingInstance struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringOutput `pulumi:"hiddenZone"`
@@ -105,7 +207,7 @@ type ShardingInstance struct {
 	MongosMemory pulumi.IntOutput `pulumi:"mongosMemory"`
 	// Number of mongos.
 	MongosNodeNum pulumi.IntOutput `pulumi:"mongosNodeNum"`
-	// Number of nodes per shard, at least 3(one master and two slaves).
+	// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 	NodesPerShard pulumi.IntOutput `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
@@ -113,6 +215,8 @@ type ShardingInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
+	// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+	RemoveNodeLists ShardingInstanceRemoveNodeListArrayOutput `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Number of sharding.
@@ -194,6 +298,8 @@ func GetShardingInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ShardingInstance resources.
 type shardingInstanceState struct {
+	// Add node list. Node type and availability zone information.
+	AddNodeLists []ShardingInstanceAddNodeList `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -206,6 +312,8 @@ type shardingInstanceState struct {
 	AvailableZone *string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime *string `pulumi:"createTime"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -215,6 +323,7 @@ type shardingInstanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone *string `pulumi:"hiddenZone"`
@@ -235,7 +344,7 @@ type shardingInstanceState struct {
 	MongosMemory *int `pulumi:"mongosMemory"`
 	// Number of mongos.
 	MongosNodeNum *int `pulumi:"mongosNodeNum"`
-	// Number of nodes per shard, at least 3(one master and two slaves).
+	// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 	NodesPerShard *int `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
 	Password *string `pulumi:"password"`
@@ -243,6 +352,8 @@ type shardingInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
+	// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+	RemoveNodeLists []ShardingInstanceRemoveNodeList `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
@@ -264,6 +375,8 @@ type shardingInstanceState struct {
 }
 
 type ShardingInstanceState struct {
+	// Add node list. Node type and availability zone information.
+	AddNodeLists ShardingInstanceAddNodeListArrayInput
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -276,6 +389,8 @@ type ShardingInstanceState struct {
 	AvailableZone pulumi.StringPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringPtrInput
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -285,6 +400,7 @@ type ShardingInstanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringPtrInput
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringPtrInput
@@ -305,7 +421,7 @@ type ShardingInstanceState struct {
 	MongosMemory pulumi.IntPtrInput
 	// Number of mongos.
 	MongosNodeNum pulumi.IntPtrInput
-	// Number of nodes per shard, at least 3(one master and two slaves).
+	// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 	NodesPerShard pulumi.IntPtrInput
 	// Password of this Mongodb account.
 	Password pulumi.StringPtrInput
@@ -313,6 +429,8 @@ type ShardingInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
+	// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+	RemoveNodeLists ShardingInstanceRemoveNodeListArrayInput
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
@@ -338,6 +456,8 @@ func (ShardingInstanceState) ElementType() reflect.Type {
 }
 
 type shardingInstanceArgs struct {
+	// Add node list. Node type and availability zone information.
+	AddNodeLists []ShardingInstanceAddNodeList `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -350,6 +470,8 @@ type shardingInstanceArgs struct {
 	AvailableZone string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
 	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -357,6 +479,7 @@ type shardingInstanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion string `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone *string `pulumi:"hiddenZone"`
@@ -377,7 +500,7 @@ type shardingInstanceArgs struct {
 	MongosMemory *int `pulumi:"mongosMemory"`
 	// Number of mongos.
 	MongosNodeNum *int `pulumi:"mongosNodeNum"`
-	// Number of nodes per shard, at least 3(one master and two slaves).
+	// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 	NodesPerShard int `pulumi:"nodesPerShard"`
 	// Password of this Mongodb account.
 	Password *string `pulumi:"password"`
@@ -385,6 +508,8 @@ type shardingInstanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
+	// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+	RemoveNodeLists []ShardingInstanceRemoveNodeList `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Number of sharding.
@@ -401,6 +526,8 @@ type shardingInstanceArgs struct {
 
 // The set of arguments for constructing a ShardingInstance resource.
 type ShardingInstanceArgs struct {
+	// Add node list. Node type and availability zone information.
+	AddNodeLists ShardingInstanceAddNodeListArrayInput
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -413,6 +540,8 @@ type ShardingInstanceArgs struct {
 	AvailableZone pulumi.StringInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
 	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -420,6 +549,7 @@ type ShardingInstanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringInput
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringPtrInput
@@ -440,7 +570,7 @@ type ShardingInstanceArgs struct {
 	MongosMemory pulumi.IntPtrInput
 	// Number of mongos.
 	MongosNodeNum pulumi.IntPtrInput
-	// Number of nodes per shard, at least 3(one master and two slaves).
+	// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 	NodesPerShard pulumi.IntInput
 	// Password of this Mongodb account.
 	Password pulumi.StringPtrInput
@@ -448,6 +578,8 @@ type ShardingInstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
+	// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+	RemoveNodeLists ShardingInstanceRemoveNodeListArrayInput
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// Number of sharding.
@@ -549,6 +681,11 @@ func (o ShardingInstanceOutput) ToShardingInstanceOutputWithContext(ctx context.
 	return o
 }
 
+// Add node list. Node type and availability zone information.
+func (o ShardingInstanceOutput) AddNodeLists() ShardingInstanceAddNodeListArrayOutput {
+	return o.ApplyT(func(v *ShardingInstance) ShardingInstanceAddNodeListArrayOutput { return v.AddNodeLists }).(ShardingInstanceAddNodeListArrayOutput)
+}
+
 // Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 func (o ShardingInstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntPtrOutput { return v.AutoRenewFlag }).(pulumi.IntPtrOutput)
@@ -573,6 +710,11 @@ func (o ShardingInstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
 
+// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+func (o ShardingInstanceOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
+}
+
 // Creation time of the Mongodb instance.
 func (o ShardingInstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
@@ -585,6 +727,7 @@ func (o ShardingInstanceOutput) CreateTime() pulumi.StringOutput {
 // - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 // - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 // - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 func (o ShardingInstanceOutput) EngineVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.StringOutput { return v.EngineVersion }).(pulumi.StringOutput)
 }
@@ -632,7 +775,7 @@ func (o ShardingInstanceOutput) MongosNodeNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.MongosNodeNum }).(pulumi.IntOutput)
 }
 
-// Number of nodes per shard, at least 3(one master and two slaves).
+// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
 func (o ShardingInstanceOutput) NodesPerShard() pulumi.IntOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntOutput { return v.NodesPerShard }).(pulumi.IntOutput)
 }
@@ -650,6 +793,11 @@ func (o ShardingInstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 // ID of the project which the instance belongs.
 func (o ShardingInstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ShardingInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+func (o ShardingInstanceOutput) RemoveNodeLists() ShardingInstanceRemoveNodeListArrayOutput {
+	return o.ApplyT(func(v *ShardingInstance) ShardingInstanceRemoveNodeListArrayOutput { return v.RemoveNodeLists }).(ShardingInstanceRemoveNodeListArrayOutput)
 }
 
 // ID of the security group.

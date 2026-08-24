@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicFlowRanking = tencentcloud.Ckafka.getTopicFlowRanking({
+ * const topicFlowRanking = tencentcloud.ckafka.getTopicFlowRanking({
  *     instanceId: "ckafka-xxxxxx",
  *     rankingType: "PRO",
  *     beginDate: "2023-05-29T00:00:00+08:00",
@@ -87,7 +87,7 @@ export interface GetTopicFlowRankingResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicFlowRanking = tencentcloud.Ckafka.getTopicFlowRanking({
+ * const topicFlowRanking = tencentcloud.ckafka.getTopicFlowRanking({
  *     instanceId: "ckafka-xxxxxx",
  *     rankingType: "PRO",
  *     beginDate: "2023-05-29T00:00:00+08:00",
@@ -113,11 +113,11 @@ export interface GetTopicFlowRankingOutputArgs {
     /**
      * BeginDate.
      */
-    beginDate?: pulumi.Input<string>;
+    beginDate?: pulumi.Input<string | undefined>;
     /**
      * EndDate.
      */
-    endDate?: pulumi.Input<string>;
+    endDate?: pulumi.Input<string | undefined>;
     /**
      * InstanceId.
      */
@@ -129,5 +129,5 @@ export interface GetTopicFlowRankingOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

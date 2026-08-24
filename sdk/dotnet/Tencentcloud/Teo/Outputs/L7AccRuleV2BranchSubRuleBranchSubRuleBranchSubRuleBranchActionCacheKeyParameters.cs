@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchActionCacheKeyParametersHeader? Header;
         /// <summary>
-        /// Switch for ignoring case. values: enable; off: disable.note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
+        /// Switch for ignoring case. values: on: enable; off: disable. note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
         /// </summary>
         public readonly string? IgnoreCase;
         /// <summary>

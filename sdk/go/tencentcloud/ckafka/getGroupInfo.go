@@ -73,12 +73,8 @@ type LookupGroupInfoResult struct {
 }
 
 func LookupGroupInfoOutput(ctx *pulumi.Context, args LookupGroupInfoOutputArgs, opts ...pulumi.InvokeOption) LookupGroupInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGroupInfoResultOutput, error) {
-			args := v.(LookupGroupInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args, LookupGroupInfoResultOutput{}, options).(LookupGroupInfoResultOutput), nil
-		}).(LookupGroupInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args, LookupGroupInfoResultOutput{}, options).(LookupGroupInfoResultOutput)
 }
 
 // A collection of arguments for invoking getGroupInfo.

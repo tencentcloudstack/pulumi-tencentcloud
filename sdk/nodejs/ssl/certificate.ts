@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  *     type: "CA",
  *     cert: ca,
  * });
- * const caGetCertificates = tencentcloud.Ssl.getCertificatesOutput({
+ * const caGetCertificates = tencentcloud.ssl.getCertificatesOutput({
  *     name: caCertificate.name,
  * });
  * ```
@@ -268,7 +268,7 @@ import * as utilities from "../utilities";
  *     cert: cert,
  *     key: key,
  * });
- * const svr = tencentcloud.Ssl.getCertificatesOutput({
+ * const svr = tencentcloud.ssl.getCertificatesOutput({
  *     name: svrCertificate.name,
  * });
  * ```
@@ -278,7 +278,7 @@ import * as utilities from "../utilities";
  * ssl certificate can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ssl/certificate:Certificate  tencentcloud_ssl_certificate.cert GjTNRoK7
+ *   $ pulumi import tencentcloud:Ssl/certificate:Certificate cert GjTNRoK7
  * ```
  */
 export class Certificate extends pulumi.CustomResource {
@@ -424,55 +424,55 @@ export interface CertificateState {
     /**
      * Beginning time of the SSL certificate.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * Content of the SSL certificate. Not allowed newline at the start and end.
      */
-    cert?: pulumi.Input<string>;
+    cert?: pulumi.Input<string | undefined>;
     /**
      * Creation time of the SSL certificate.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Primary domain of the SSL certificate.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Ending time of the SSL certificate.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Key of the SSL certificate and required when certificate type is `SVR`. Not allowed newline at the start and end.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Name of the SSL certificate.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Certificate authority.
      */
-    productZhName?: pulumi.Input<string>;
+    productZhName?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the SSL certificate. Default is `0`.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Status of the SSL certificate.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * ALL domains included in the SSL certificate. Including the primary domain name.
      */
-    subjectNames?: pulumi.Input<pulumi.Input<string>[]>;
+    subjectNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Tags of the SSL certificate.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the SSL certificate. Valid values: `CA` and `SVR`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -486,19 +486,19 @@ export interface CertificateArgs {
     /**
      * Key of the SSL certificate and required when certificate type is `SVR`. Not allowed newline at the start and end.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Name of the SSL certificate.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the SSL certificate. Default is `0`.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags of the SSL certificate.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the SSL certificate. Valid values: `CA` and `SVR`.
      */

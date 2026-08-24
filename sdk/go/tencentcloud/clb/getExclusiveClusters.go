@@ -74,12 +74,8 @@ type GetExclusiveClustersResult struct {
 }
 
 func GetExclusiveClustersOutput(ctx *pulumi.Context, args GetExclusiveClustersOutputArgs, opts ...pulumi.InvokeOption) GetExclusiveClustersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetExclusiveClustersResultOutput, error) {
-			args := v.(GetExclusiveClustersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args, GetExclusiveClustersResultOutput{}, options).(GetExclusiveClustersResultOutput), nil
-		}).(GetExclusiveClustersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getExclusiveClusters:getExclusiveClusters", args, GetExclusiveClustersResultOutput{}, options).(GetExclusiveClustersResultOutput)
 }
 
 // A collection of arguments for invoking getExclusiveClusters.

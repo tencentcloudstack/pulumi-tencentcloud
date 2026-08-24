@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const natDcRoute = tencentcloud.Nat.getDcRoute({
+ * const natDcRoute = tencentcloud.nat.getDcRoute({
  *     natGatewayId: "nat-gnxkey2e",
  *     vpcId: "vpc-pyyv5k3v",
  * });
@@ -73,7 +73,7 @@ export interface GetDcRouteResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const natDcRoute = tencentcloud.Nat.getDcRoute({
+ * const natDcRoute = tencentcloud.nat.getDcRoute({
  *     natGatewayId: "nat-gnxkey2e",
  *     vpcId: "vpc-pyyv5k3v",
  * });
@@ -99,7 +99,7 @@ export interface GetDcRouteOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Unique identifier of Vpc.
      */

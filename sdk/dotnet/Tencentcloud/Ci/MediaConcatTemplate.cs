@@ -90,7 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Import
     /// 
-    /// ci media_concat_template can be imported using the bucket#templateId, e.g.
+    /// ci MediaConcatTemplate can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostCosInstanceList = tencentcloud.Ssl.getDescribeHostCosInstanceList({
+ * const describeHostCosInstanceList = tencentcloud.ssl.getDescribeHostCosInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "cos",
  * });
@@ -97,7 +97,7 @@ export interface GetDescribeHostCosInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostCosInstanceList = tencentcloud.Ssl.getDescribeHostCosInstanceList({
+ * const describeHostCosInstanceList = tencentcloud.ssl.getDescribeHostCosInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "cos",
  * });
@@ -125,11 +125,11 @@ export interface GetDescribeHostCosInstanceListOutputArgs {
     /**
      * List of filter parameters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostCosInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostCosInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Deploy resource type cos.
      */
@@ -137,5 +137,5 @@ export interface GetDescribeHostCosInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

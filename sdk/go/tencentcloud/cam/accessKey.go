@@ -121,7 +121,8 @@ type AccessKey struct {
 	pulumi.CustomResourceState
 
 	// Access_key is the access key identification, required when updating.
-	AccessKey                pulumi.StringOutput `pulumi:"accessKey"`
+	AccessKey pulumi.StringOutput `pulumi:"accessKey"`
+	// Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
 	EncryptedSecretAccessKey pulumi.StringOutput `pulumi:"encryptedSecretAccessKey"`
 	// Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
 	KeyFingerprint pulumi.StringOutput `pulumi:"keyFingerprint"`
@@ -170,7 +171,8 @@ func GetAccessKey(ctx *pulumi.Context,
 // Input properties used for looking up and filtering AccessKey resources.
 type accessKeyState struct {
 	// Access_key is the access key identification, required when updating.
-	AccessKey                *string `pulumi:"accessKey"`
+	AccessKey *string `pulumi:"accessKey"`
+	// Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
 	EncryptedSecretAccessKey *string `pulumi:"encryptedSecretAccessKey"`
 	// Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
 	KeyFingerprint *string `pulumi:"keyFingerprint"`
@@ -186,7 +188,8 @@ type accessKeyState struct {
 
 type AccessKeyState struct {
 	// Access_key is the access key identification, required when updating.
-	AccessKey                pulumi.StringPtrInput
+	AccessKey pulumi.StringPtrInput
+	// Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
 	EncryptedSecretAccessKey pulumi.StringPtrInput
 	// Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
 	KeyFingerprint pulumi.StringPtrInput
@@ -319,6 +322,7 @@ func (o AccessKeyOutput) AccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *AccessKey) pulumi.StringOutput { return v.AccessKey }).(pulumi.StringOutput)
 }
 
+// Encrypted secret, base64 encoded, if pgpKey was specified. This attribute is not available for imported resources. The encrypted secret may be decrypted using the command line, for example: terraform output -raw encryptedSecret | base64 --decode | keybase pgp decrypt.
 func (o AccessKeyOutput) EncryptedSecretAccessKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *AccessKey) pulumi.StringOutput { return v.EncryptedSecretAccessKey }).(pulumi.StringOutput)
 }

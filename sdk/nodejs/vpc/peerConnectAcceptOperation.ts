@@ -82,7 +82,7 @@ export interface PeerConnectAcceptOperationState {
     /**
      * Peer connection unique ID.
      */
-    peeringConnectionId?: pulumi.Input<string>;
+    peeringConnectionId?: pulumi.Input<string | undefined>;
 }
 
 /**

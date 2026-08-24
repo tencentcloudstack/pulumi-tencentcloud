@@ -127,27 +127,27 @@ export interface SamlProviderState {
     /**
      * The create time of the CAM SAML provider.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The description of the CAM SAML provider.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The meta data document of the CAM SAML provider.
      */
-    metaData?: pulumi.Input<string>;
+    metaData?: pulumi.Input<string | undefined>;
     /**
      * Name of CAM SAML provider.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The ARN of the CAM SAML provider.
      */
-    providerArn?: pulumi.Input<string>;
+    providerArn?: pulumi.Input<string | undefined>;
     /**
      * The last update time of the CAM SAML provider.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -165,5 +165,5 @@ export interface SamlProviderArgs {
     /**
      * Name of CAM SAML provider.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

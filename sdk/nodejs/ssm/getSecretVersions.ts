@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *     versionId: "v1",
  *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
  * });
- * const example = tencentcloud.Ssm.getSecretVersionsOutput({
+ * const example = tencentcloud.ssm.getSecretVersionsOutput({
  *     secretName: v1.secretName,
  *     versionId: v1.versionId,
  * });
@@ -100,7 +100,7 @@ export interface GetSecretVersionsResult {
  *     versionId: "v1",
  *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
  * });
- * const example = tencentcloud.Ssm.getSecretVersionsOutput({
+ * const example = tencentcloud.ssm.getSecretVersionsOutput({
  *     secretName: v1.secretName,
  *     versionId: v1.versionId,
  * });
@@ -122,7 +122,7 @@ export interface GetSecretVersionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Secret name used to filter result.
      */
@@ -130,5 +130,5 @@ export interface GetSecretVersionsOutputArgs {
     /**
      * VersionId used to filter result.
      */
-    versionId?: pulumi.Input<string>;
+    versionId?: pulumi.Input<string | undefined>;
 }

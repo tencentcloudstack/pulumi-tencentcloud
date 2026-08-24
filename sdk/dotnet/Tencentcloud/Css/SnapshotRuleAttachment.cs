@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css snapshot_rule can be imported using the id, e.g.
+    /// css SnapshotRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName

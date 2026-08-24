@@ -212,47 +212,47 @@ export interface ExternalKeyState {
     /**
      * Name of CMK. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Description of CMK. The maximum is 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isArchived?: pulumi.Input<boolean>;
+    isArchived?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
      */
-    keyMaterialBase64?: pulumi.Input<string>;
+    keyMaterialBase64?: pulumi.Input<string | undefined>;
     /**
      * State of CMK.
      */
-    keyState?: pulumi.Input<string>;
+    keyState?: pulumi.Input<string | undefined>;
     /**
      * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
-    pendingDeleteWindowInDays?: pulumi.Input<number>;
+    pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Tags of CMK.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
      */
-    validTo?: pulumi.Input<number>;
+    validTo?: pulumi.Input<number | undefined>;
     /**
      * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
      */
-    wrappingAlgorithm?: pulumi.Input<string>;
+    wrappingAlgorithm?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -266,37 +266,37 @@ export interface ExternalKeyArgs {
     /**
      * Description of CMK. The maximum is 1024 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The HSM cluster ID corresponding to KMS Advanced Edition (only valid for KMS Exclusive/Managed Edition service instances).
      */
-    hsmClusterId?: pulumi.Input<string>;
+    hsmClusterId?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to archive key. Default value is `false`. This field is conflict with `isEnabled`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isArchived?: pulumi.Input<boolean>;
+    isArchived?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to enable key. Default value is `false`. This field is conflict with `isArchived`, valid when keyState is `Enabled`, `Disabled`, `Archived`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * The base64-encoded key material encrypted with the public_key. For regions using the national secret version, the length of the imported key material is required to be 128 bits, and for regions using the FIPS version, the length of the imported key material is required to be 256 bits.
      */
-    keyMaterialBase64?: pulumi.Input<string>;
+    keyMaterialBase64?: pulumi.Input<string | undefined>;
     /**
      * Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
      */
-    pendingDeleteWindowInDays?: pulumi.Input<number>;
+    pendingDeleteWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Tags of CMK.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * This value means the effective timestamp of the key material, 0 means it does not expire. Need to be greater than the current timestamp, the maximum support is 2147443200.
      */
-    validTo?: pulumi.Input<number>;
+    validTo?: pulumi.Input<number | undefined>;
     /**
      * The algorithm for encrypting key material. Available values include `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1` and `RSAES_OAEP_SHA_256`. Default value is `RSAES_PKCS1_V1_5`.
      */
-    wrappingAlgorithm?: pulumi.Input<string>;
+    wrappingAlgorithm?: pulumi.Input<string | undefined>;
 }

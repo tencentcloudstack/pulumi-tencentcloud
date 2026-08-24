@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsTaskCode = tencentcloud.Wedata.getOpsTaskCode({
+ * const wedataOpsTaskCode = tencentcloud.wedata.getOpsTaskCode({
  *     projectId: "1859317240494305280",
  *     taskId: "20230901114849281",
  * });
@@ -73,7 +73,7 @@ export interface GetOpsTaskCodeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsTaskCode = tencentcloud.Wedata.getOpsTaskCode({
+ * const wedataOpsTaskCode = tencentcloud.wedata.getOpsTaskCode({
  *     projectId: "1859317240494305280",
  *     taskId: "20230901114849281",
  * });
@@ -99,7 +99,7 @@ export interface GetOpsTaskCodeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */

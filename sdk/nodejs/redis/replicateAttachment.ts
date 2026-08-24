@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  *     region: "ap-guangzhou",
  * });
@@ -166,15 +166,15 @@ export interface ReplicateAttachmentState {
     /**
      * The ID of group.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * All instance ids of the replication group.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of master instance.
      */
-    masterInstanceId?: pulumi.Input<string>;
+    masterInstanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

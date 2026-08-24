@@ -56,12 +56,8 @@ type LookupPublicConfigSummaryResult struct {
 }
 
 func LookupPublicConfigSummaryOutput(ctx *pulumi.Context, args LookupPublicConfigSummaryOutputArgs, opts ...pulumi.InvokeOption) LookupPublicConfigSummaryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupPublicConfigSummaryResultOutput, error) {
-			args := v.(LookupPublicConfigSummaryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args, LookupPublicConfigSummaryResultOutput{}, options).(LookupPublicConfigSummaryResultOutput), nil
-		}).(LookupPublicConfigSummaryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args, LookupPublicConfigSummaryResultOutput{}, options).(LookupPublicConfigSummaryResultOutput)
 }
 
 // A collection of arguments for invoking getPublicConfigSummary.

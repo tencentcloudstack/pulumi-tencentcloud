@@ -45,7 +45,6 @@ import (
 // ## Import
 //
 // rum whitelist can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
 // ```

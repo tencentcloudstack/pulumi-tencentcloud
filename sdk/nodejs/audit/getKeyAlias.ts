@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const all = tencentcloud.Audit.getKeyAlias({
+ * const all = tencentcloud.audit.getKeyAlias({
  *     region: "ap-hongkong",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetKeyAliasResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const all = tencentcloud.Audit.getKeyAlias({
+ * const all = tencentcloud.audit.getKeyAlias({
  *     region: "ap-hongkong",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetKeyAliasOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

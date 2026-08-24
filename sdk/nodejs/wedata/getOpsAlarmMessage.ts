@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmMessage = tencentcloud.Wedata.getOpsAlarmMessage({
+ * const wedataOpsAlarmMessage = tencentcloud.wedata.getOpsAlarmMessage({
  *     projectId: "1859317240494305280",
  *     alarmMessageId: "263840",
  * });
@@ -79,7 +79,7 @@ export interface GetOpsAlarmMessageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmMessage = tencentcloud.Wedata.getOpsAlarmMessage({
+ * const wedataOpsAlarmMessage = tencentcloud.wedata.getOpsAlarmMessage({
  *     projectId: "1859317240494305280",
  *     alarmMessageId: "263840",
  * });
@@ -110,9 +110,9 @@ export interface GetOpsAlarmMessageOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Specifies the time zone of the return date. default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
 }

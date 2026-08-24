@@ -134,19 +134,19 @@ export interface DeleteImageOperationState {
     /**
      * image version name.
      */
-    imageVersion?: pulumi.Input<string>;
+    imageVersion?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * repository name.
      */
-    repositoryName?: pulumi.Input<string>;
+    repositoryName?: pulumi.Input<string | undefined>;
 }
 
 /**

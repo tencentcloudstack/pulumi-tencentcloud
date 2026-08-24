@@ -79,12 +79,8 @@ type GetOidcConfigResult struct {
 }
 
 func GetOidcConfigOutput(ctx *pulumi.Context, args GetOidcConfigOutputArgs, opts ...pulumi.InvokeOption) GetOidcConfigResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOidcConfigResultOutput, error) {
-			args := v.(GetOidcConfigArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getOidcConfig:getOidcConfig", args, GetOidcConfigResultOutput{}, options).(GetOidcConfigResultOutput), nil
-		}).(GetOidcConfigResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getOidcConfig:getOidcConfig", args, GetOidcConfigResultOutput{}, options).(GetOidcConfigResultOutput)
 }
 
 // A collection of arguments for invoking getOidcConfig.

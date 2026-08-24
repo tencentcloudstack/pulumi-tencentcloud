@@ -109,12 +109,8 @@ type GetNatFwSwitchesResult struct {
 }
 
 func GetNatFwSwitchesOutput(ctx *pulumi.Context, args GetNatFwSwitchesOutputArgs, opts ...pulumi.InvokeOption) GetNatFwSwitchesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNatFwSwitchesResultOutput, error) {
-			args := v.(GetNatFwSwitchesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args, GetNatFwSwitchesResultOutput{}, options).(GetNatFwSwitchesResultOutput), nil
-		}).(GetNatFwSwitchesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args, GetNatFwSwitchesResultOutput{}, options).(GetNatFwSwitchesResultOutput)
 }
 
 // A collection of arguments for invoking getNatFwSwitches.

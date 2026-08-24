@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjectRoles({
+ * const example = tencentcloud.wedata.getProjectRoles({
  *     projectId: "2982667120655491072",
  *     roleDisplayName: "tf_example",
  * });
@@ -76,7 +76,7 @@ export interface GetProjectRolesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjectRoles({
+ * const example = tencentcloud.wedata.getProjectRoles({
  *     projectId: "2982667120655491072",
  *     roleDisplayName: "tf_example",
  * });
@@ -102,9 +102,9 @@ export interface GetProjectRolesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Role Chinese display name fuzzy search, can only pass one value.
      */
-    roleDisplayName?: pulumi.Input<string>;
+    roleDisplayName?: pulumi.Input<string | undefined>;
 }

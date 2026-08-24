@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a postgres backupPlanConfig
+// Provides a resource to create a postgres backup plan config
 //
 // ## Example Usage
 //
@@ -28,16 +28,22 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := postgresql.NewBackupPlanConfig(ctx, "backup_plan_config", &postgresql.BackupPlanConfigArgs{
-//				DbInstanceId:              pulumi.Any(pgsqlId),
-//				MinBackupStartTime:        pulumi.String("01:00:00"),
-//				MaxBackupStartTime:        pulumi.String("02:00:00"),
-//				BaseBackupRetentionPeriod: pulumi.Int(7),
+//			_, err := postgresql.NewBackupPlanConfig(ctx, "example", &postgresql.BackupPlanConfigArgs{
+//				DbInstanceId:       pulumi.String("postgres-ckwcgdf1"),
+//				MinBackupStartTime: pulumi.String("01:00:00"),
+//				MaxBackupStartTime: pulumi.String("03:00:00"),
 //				BackupPeriods: pulumi.StringArray{
 //					pulumi.String("monday"),
+//					pulumi.String("tuesday"),
 //					pulumi.String("wednesday"),
+//					pulumi.String("thursday"),
 //					pulumi.String("friday"),
+//					pulumi.String("saturday"),
+//					pulumi.String("sunday"),
 //				},
+//				BaseBackupRetentionPeriod: pulumi.Int(7),
+//				LogBackupRetentionPeriod:  pulumi.Int(7),
+//				BackupMethod:              pulumi.String("physical"),
 //			})
 //			if err != nil {
 //				return err
@@ -50,24 +56,28 @@ import (
 //
 // ## Import
 //
-// postgres backup_plan_config can be imported using the id, e.g.
+// postgres backup plan config can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig example postgres-ckwcgdf1
 // ```
 type BackupPlanConfig struct {
 	pulumi.CustomResourceState
 
+	// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+	BackupMethod pulumi.StringOutput `pulumi:"backupMethod"`
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 	BackupPeriods pulumi.StringArrayOutput `pulumi:"backupPeriods"`
 	// Backup retention period in days. Value range:7-1830.
-	BaseBackupRetentionPeriod pulumi.IntPtrOutput `pulumi:"baseBackupRetentionPeriod"`
+	BaseBackupRetentionPeriod pulumi.IntOutput `pulumi:"baseBackupRetentionPeriod"`
 	// instance id.
 	DbInstanceId pulumi.StringOutput `pulumi:"dbInstanceId"`
+	// Log backup retention period in days. Value range: 7-1830.
+	LogBackupRetentionPeriod pulumi.IntOutput `pulumi:"logBackupRetentionPeriod"`
 	// The latest time to start a backup.
-	MaxBackupStartTime pulumi.StringPtrOutput `pulumi:"maxBackupStartTime"`
+	MaxBackupStartTime pulumi.StringOutput `pulumi:"maxBackupStartTime"`
 	// The earliest time to start a backup.
-	MinBackupStartTime pulumi.StringPtrOutput `pulumi:"minBackupStartTime"`
+	MinBackupStartTime pulumi.StringOutput `pulumi:"minBackupStartTime"`
 }
 
 // NewBackupPlanConfig registers a new resource with the given unique name, arguments, and options.
@@ -103,12 +113,16 @@ func GetBackupPlanConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BackupPlanConfig resources.
 type backupPlanConfigState struct {
+	// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+	BackupMethod *string `pulumi:"backupMethod"`
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 	BackupPeriods []string `pulumi:"backupPeriods"`
 	// Backup retention period in days. Value range:7-1830.
 	BaseBackupRetentionPeriod *int `pulumi:"baseBackupRetentionPeriod"`
 	// instance id.
 	DbInstanceId *string `pulumi:"dbInstanceId"`
+	// Log backup retention period in days. Value range: 7-1830.
+	LogBackupRetentionPeriod *int `pulumi:"logBackupRetentionPeriod"`
 	// The latest time to start a backup.
 	MaxBackupStartTime *string `pulumi:"maxBackupStartTime"`
 	// The earliest time to start a backup.
@@ -116,12 +130,16 @@ type backupPlanConfigState struct {
 }
 
 type BackupPlanConfigState struct {
+	// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+	BackupMethod pulumi.StringPtrInput
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 	BackupPeriods pulumi.StringArrayInput
 	// Backup retention period in days. Value range:7-1830.
 	BaseBackupRetentionPeriod pulumi.IntPtrInput
 	// instance id.
 	DbInstanceId pulumi.StringPtrInput
+	// Log backup retention period in days. Value range: 7-1830.
+	LogBackupRetentionPeriod pulumi.IntPtrInput
 	// The latest time to start a backup.
 	MaxBackupStartTime pulumi.StringPtrInput
 	// The earliest time to start a backup.
@@ -133,12 +151,16 @@ func (BackupPlanConfigState) ElementType() reflect.Type {
 }
 
 type backupPlanConfigArgs struct {
+	// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+	BackupMethod *string `pulumi:"backupMethod"`
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 	BackupPeriods []string `pulumi:"backupPeriods"`
 	// Backup retention period in days. Value range:7-1830.
 	BaseBackupRetentionPeriod *int `pulumi:"baseBackupRetentionPeriod"`
 	// instance id.
 	DbInstanceId string `pulumi:"dbInstanceId"`
+	// Log backup retention period in days. Value range: 7-1830.
+	LogBackupRetentionPeriod *int `pulumi:"logBackupRetentionPeriod"`
 	// The latest time to start a backup.
 	MaxBackupStartTime *string `pulumi:"maxBackupStartTime"`
 	// The earliest time to start a backup.
@@ -147,12 +169,16 @@ type backupPlanConfigArgs struct {
 
 // The set of arguments for constructing a BackupPlanConfig resource.
 type BackupPlanConfigArgs struct {
+	// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+	BackupMethod pulumi.StringPtrInput
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 	BackupPeriods pulumi.StringArrayInput
 	// Backup retention period in days. Value range:7-1830.
 	BaseBackupRetentionPeriod pulumi.IntPtrInput
 	// instance id.
 	DbInstanceId pulumi.StringInput
+	// Log backup retention period in days. Value range: 7-1830.
+	LogBackupRetentionPeriod pulumi.IntPtrInput
 	// The latest time to start a backup.
 	MaxBackupStartTime pulumi.StringPtrInput
 	// The earliest time to start a backup.
@@ -246,14 +272,19 @@ func (o BackupPlanConfigOutput) ToBackupPlanConfigOutputWithContext(ctx context.
 	return o
 }
 
+// Backup method. Valid values: `physical` (physical backup), `logical` (logical backup), `snapshot` (snapshot backup).
+func (o BackupPlanConfigOutput) BackupMethod() pulumi.StringOutput {
+	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringOutput { return v.BackupMethod }).(pulumi.StringOutput)
+}
+
 // Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
 func (o BackupPlanConfigOutput) BackupPeriods() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringArrayOutput { return v.BackupPeriods }).(pulumi.StringArrayOutput)
 }
 
 // Backup retention period in days. Value range:7-1830.
-func (o BackupPlanConfigOutput) BaseBackupRetentionPeriod() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *BackupPlanConfig) pulumi.IntPtrOutput { return v.BaseBackupRetentionPeriod }).(pulumi.IntPtrOutput)
+func (o BackupPlanConfigOutput) BaseBackupRetentionPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v *BackupPlanConfig) pulumi.IntOutput { return v.BaseBackupRetentionPeriod }).(pulumi.IntOutput)
 }
 
 // instance id.
@@ -261,14 +292,19 @@ func (o BackupPlanConfigOutput) DbInstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringOutput { return v.DbInstanceId }).(pulumi.StringOutput)
 }
 
+// Log backup retention period in days. Value range: 7-1830.
+func (o BackupPlanConfigOutput) LogBackupRetentionPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v *BackupPlanConfig) pulumi.IntOutput { return v.LogBackupRetentionPeriod }).(pulumi.IntOutput)
+}
+
 // The latest time to start a backup.
-func (o BackupPlanConfigOutput) MaxBackupStartTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringPtrOutput { return v.MaxBackupStartTime }).(pulumi.StringPtrOutput)
+func (o BackupPlanConfigOutput) MaxBackupStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringOutput { return v.MaxBackupStartTime }).(pulumi.StringOutput)
 }
 
 // The earliest time to start a backup.
-func (o BackupPlanConfigOutput) MinBackupStartTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringPtrOutput { return v.MinBackupStartTime }).(pulumi.StringPtrOutput)
+func (o BackupPlanConfigOutput) MinBackupStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *BackupPlanConfig) pulumi.StringOutput { return v.MinBackupStartTime }).(pulumi.StringOutput)
 }
 
 type BackupPlanConfigArrayOutput struct{ *pulumi.OutputState }

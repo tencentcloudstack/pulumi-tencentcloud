@@ -67,12 +67,8 @@ type GetZookeeperReplicasResult struct {
 }
 
 func GetZookeeperReplicasOutput(ctx *pulumi.Context, args GetZookeeperReplicasOutputArgs, opts ...pulumi.InvokeOption) GetZookeeperReplicasResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZookeeperReplicasResultOutput, error) {
-			args := v.(GetZookeeperReplicasArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args, GetZookeeperReplicasResultOutput{}, options).(GetZookeeperReplicasResultOutput), nil
-		}).(GetZookeeperReplicasResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args, GetZookeeperReplicasResultOutput{}, options).(GetZookeeperReplicasResultOutput)
 }
 
 // A collection of arguments for invoking getZookeeperReplicas.

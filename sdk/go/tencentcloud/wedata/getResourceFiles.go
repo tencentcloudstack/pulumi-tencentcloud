@@ -89,12 +89,8 @@ type GetResourceFilesResult struct {
 }
 
 func GetResourceFilesOutput(ctx *pulumi.Context, args GetResourceFilesOutputArgs, opts ...pulumi.InvokeOption) GetResourceFilesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourceFilesResultOutput, error) {
-			args := v.(GetResourceFilesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getResourceFiles:getResourceFiles", args, GetResourceFilesResultOutput{}, options).(GetResourceFilesResultOutput), nil
-		}).(GetResourceFilesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getResourceFiles:getResourceFiles", args, GetResourceFilesResultOutput{}, options).(GetResourceFilesResultOutput)
 }
 
 // A collection of arguments for invoking getResourceFiles.

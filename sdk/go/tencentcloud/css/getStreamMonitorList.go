@@ -62,12 +62,8 @@ type GetStreamMonitorListResult struct {
 }
 
 func GetStreamMonitorListOutput(ctx *pulumi.Context, args GetStreamMonitorListOutputArgs, opts ...pulumi.InvokeOption) GetStreamMonitorListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStreamMonitorListResultOutput, error) {
-			args := v.(GetStreamMonitorListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args, GetStreamMonitorListResultOutput{}, options).(GetStreamMonitorListResultOutput), nil
-		}).(GetStreamMonitorListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getStreamMonitorList:getStreamMonitorList", args, GetStreamMonitorListResultOutput{}, options).(GetStreamMonitorListResultOutput)
 }
 
 // A collection of arguments for invoking getStreamMonitorList.

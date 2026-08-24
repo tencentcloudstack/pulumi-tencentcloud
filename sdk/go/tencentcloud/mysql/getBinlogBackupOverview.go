@@ -81,12 +81,8 @@ type GetBinlogBackupOverviewResult struct {
 }
 
 func GetBinlogBackupOverviewOutput(ctx *pulumi.Context, args GetBinlogBackupOverviewOutputArgs, opts ...pulumi.InvokeOption) GetBinlogBackupOverviewResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBinlogBackupOverviewResultOutput, error) {
-			args := v.(GetBinlogBackupOverviewArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args, GetBinlogBackupOverviewResultOutput{}, options).(GetBinlogBackupOverviewResultOutput), nil
-		}).(GetBinlogBackupOverviewResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args, GetBinlogBackupOverviewResultOutput{}, options).(GetBinlogBackupOverviewResultOutput)
 }
 
 // A collection of arguments for invoking getBinlogBackupOverview.

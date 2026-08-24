@@ -224,75 +224,75 @@ export interface L7RuleState {
     /**
      * Domain that the layer 7 rule works for. Valid string length ranges from 0 to 80.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
      */
-    healthCheckCode?: pulumi.Input<number>;
+    healthCheckCode?: pulumi.Input<number | undefined>;
     /**
      * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
      */
-    healthCheckHealthNum?: pulumi.Input<number>;
+    healthCheckHealthNum?: pulumi.Input<number | undefined>;
     /**
      * Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
      */
-    healthCheckInterval?: pulumi.Input<number>;
+    healthCheckInterval?: pulumi.Input<number | undefined>;
     /**
      * Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
      */
-    healthCheckMethod?: pulumi.Input<string>;
+    healthCheckMethod?: pulumi.Input<string | undefined>;
     /**
      * Path of health check. The default is `/`.
      */
-    healthCheckPath?: pulumi.Input<string>;
+    healthCheckPath?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether health check is enabled. The default is `false`.
      */
-    healthCheckSwitch?: pulumi.Input<boolean>;
+    healthCheckSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
      */
-    healthCheckUnhealthNum?: pulumi.Input<number>;
+    healthCheckUnhealthNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the rule.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the rule. Valid values: `http`, `https`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the layer 7 rule works for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the layer 7 rule works for, valid value is `bgpip`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the layer 7 rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Source list of the rule, it can be a set of ip sources or a set of domain sources. The number of items ranges from 1 to 16.
      */
-    sourceLists?: pulumi.Input<pulumi.Input<string>[]>;
+    sourceLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Source type, `1` for source of host, `2` for source of IP.
      */
-    sourceType?: pulumi.Input<number>;
+    sourceType?: pulumi.Input<number | undefined>;
     /**
      * SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
      */
-    sslId?: pulumi.Input<string>;
+    sslId?: pulumi.Input<string | undefined>;
     /**
      * Status of the rule. `0` for create/modify success, `2` for create/modify fail, `3` for delete success, `5` for delete failed, `6` for waiting to be created/modified, `7` for waiting to be deleted and 8 for waiting to get SSL ID.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Indicate the rule will take effect or not.
      */
-    switch?: pulumi.Input<boolean>;
+    switch?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -306,35 +306,35 @@ export interface L7RuleArgs {
     /**
      * HTTP Status Code. The default is `26`. Valid value ranges: [1~31]. `1` means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. `16` means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values.
      */
-    healthCheckCode?: pulumi.Input<number>;
+    healthCheckCode?: pulumi.Input<number | undefined>;
     /**
      * Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10].
      */
-    healthCheckHealthNum?: pulumi.Input<number>;
+    healthCheckHealthNum?: pulumi.Input<number | undefined>;
     /**
      * Interval time of health check. Valid value ranges: [10~60]sec. The default is 15 sec.
      */
-    healthCheckInterval?: pulumi.Input<number>;
+    healthCheckInterval?: pulumi.Input<number | undefined>;
     /**
      * Methods of health check. The default is 'HEAD', the available value are 'HEAD' and 'GET'.
      */
-    healthCheckMethod?: pulumi.Input<string>;
+    healthCheckMethod?: pulumi.Input<string | undefined>;
     /**
      * Path of health check. The default is `/`.
      */
-    healthCheckPath?: pulumi.Input<string>;
+    healthCheckPath?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether health check is enabled. The default is `false`.
      */
-    healthCheckSwitch?: pulumi.Input<boolean>;
+    healthCheckSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Unhealthy threshold of health check, and the default is `3`. If the unhealthy result is returned 3 consecutive times, indicates that the forwarding is abnormal. The value range is [2-10].
      */
-    healthCheckUnhealthNum?: pulumi.Input<number>;
+    healthCheckUnhealthNum?: pulumi.Input<number | undefined>;
     /**
      * Name of the rule.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the rule. Valid values: `http`, `https`.
      */
@@ -358,7 +358,7 @@ export interface L7RuleArgs {
     /**
      * SSL ID, when the `protocol` is `https`, the field should be set with valid SSL id.
      */
-    sslId?: pulumi.Input<string>;
+    sslId?: pulumi.Input<string | undefined>;
     /**
      * Indicate the rule will take effect or not.
      */

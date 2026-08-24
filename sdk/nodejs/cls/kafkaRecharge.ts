@@ -51,7 +51,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls kafka_recharge can be imported using the id, e.g.
+ * cls kafkaRecharge can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id
@@ -192,47 +192,47 @@ export interface KafkaRechargeState {
     /**
      * user consumer group name.
      */
-    consumerGroupName?: pulumi.Input<string>;
+    consumerGroupName?: pulumi.Input<string | undefined>;
     /**
      * ServerAddr is encryption addr.
      */
-    isEncryptionAddr?: pulumi.Input<boolean>;
+    isEncryptionAddr?: pulumi.Input<boolean | undefined>;
     /**
      * CKafka Instance id.
      */
-    kafkaInstance?: pulumi.Input<string>;
+    kafkaInstance?: pulumi.Input<string | undefined>;
     /**
      * kafka recharge type, 0 for CKafka, 1 fro user define Kafka.
      */
-    kafkaType?: pulumi.Input<number>;
+    kafkaType?: pulumi.Input<number | undefined>;
     /**
      * log recharge rule.
      */
-    logRechargeRule?: pulumi.Input<inputs.Cls.KafkaRechargeLogRechargeRule>;
+    logRechargeRule?: pulumi.Input<inputs.Cls.KafkaRechargeLogRechargeRule | undefined>;
     /**
      * kafka recharge name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The translation is: -2: Earliest (default) -1: Latest.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * encryption protocol.
      */
-    protocol?: pulumi.Input<inputs.Cls.KafkaRechargeProtocol>;
+    protocol?: pulumi.Input<inputs.Cls.KafkaRechargeProtocol | undefined>;
     /**
      * Server addr.
      */
-    serverAddr?: pulumi.Input<string>;
+    serverAddr?: pulumi.Input<string | undefined>;
     /**
      * recharge for cls TopicId.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
     /**
      * user need recharge kafka topic list.
      */
-    userKafkaTopics?: pulumi.Input<string>;
+    userKafkaTopics?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -242,15 +242,15 @@ export interface KafkaRechargeArgs {
     /**
      * user consumer group name.
      */
-    consumerGroupName?: pulumi.Input<string>;
+    consumerGroupName?: pulumi.Input<string | undefined>;
     /**
      * ServerAddr is encryption addr.
      */
-    isEncryptionAddr?: pulumi.Input<boolean>;
+    isEncryptionAddr?: pulumi.Input<boolean | undefined>;
     /**
      * CKafka Instance id.
      */
-    kafkaInstance?: pulumi.Input<string>;
+    kafkaInstance?: pulumi.Input<string | undefined>;
     /**
      * kafka recharge type, 0 for CKafka, 1 fro user define Kafka.
      */
@@ -258,11 +258,11 @@ export interface KafkaRechargeArgs {
     /**
      * log recharge rule.
      */
-    logRechargeRule?: pulumi.Input<inputs.Cls.KafkaRechargeLogRechargeRule>;
+    logRechargeRule?: pulumi.Input<inputs.Cls.KafkaRechargeLogRechargeRule | undefined>;
     /**
      * kafka recharge name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The translation is: -2: Earliest (default) -1: Latest.
      */
@@ -270,11 +270,11 @@ export interface KafkaRechargeArgs {
     /**
      * encryption protocol.
      */
-    protocol?: pulumi.Input<inputs.Cls.KafkaRechargeProtocol>;
+    protocol?: pulumi.Input<inputs.Cls.KafkaRechargeProtocol | undefined>;
     /**
      * Server addr.
      */
-    serverAddr?: pulumi.Input<string>;
+    serverAddr?: pulumi.Input<string | undefined>;
     /**
      * recharge for cls TopicId.
      */

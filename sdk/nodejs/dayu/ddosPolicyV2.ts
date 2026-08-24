@@ -237,55 +237,55 @@ export interface DdosPolicyV2State {
     /**
      * Port ACL policy for DDoS protection.
      */
-    acls?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2Acl>[]>;
+    acls?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2Acl>[] | undefined>;
     /**
      * DDoS-protected IP blacklist and whitelist.
      */
-    blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
+    blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[] | undefined>;
     /**
      * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * AI protection switch, take the value [`on`, `off`].
      */
-    ddosAi?: pulumi.Input<string>;
+    ddosAi?: pulumi.Input<string | undefined>;
     /**
      * DDoS connection suppression options.
      */
-    ddosConnectLimit?: pulumi.Input<inputs.Dayu.DdosPolicyV2DdosConnectLimit>;
+    ddosConnectLimit?: pulumi.Input<inputs.Dayu.DdosPolicyV2DdosConnectLimit | undefined>;
     /**
      * DDoS-protected area block configuration.
      */
-    ddosGeoIpBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosGeoIpBlockConfig>[]>;
+    ddosGeoIpBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosGeoIpBlockConfig>[] | undefined>;
     /**
      * Protection class, value [`low`, `middle`, `high`].
      */
-    ddosLevel?: pulumi.Input<string>;
+    ddosLevel?: pulumi.Input<string | undefined>;
     /**
      * Access speed limit configuration for DDoS protection.
      */
-    ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[]>;
+    ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[] | undefined>;
     /**
      * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
      */
-    ddosThreshold?: pulumi.Input<number>;
+    ddosThreshold?: pulumi.Input<number | undefined>;
     /**
      * Feature filtering rules for DDoS protection.
      */
-    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2PacketFilter>[]>;
+    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2PacketFilter>[] | undefined>;
     /**
      * Protocol block configuration for DDoS protection.
      */
-    protocolBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2ProtocolBlockConfig>[]>;
+    protocolBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2ProtocolBlockConfig>[] | undefined>;
     /**
      * The ID of the resource instance.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Water print config.
      */
-    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[]>;
+    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[] | undefined>;
 }
 
 /**
@@ -295,47 +295,47 @@ export interface DdosPolicyV2Args {
     /**
      * Port ACL policy for DDoS protection.
      */
-    acls?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2Acl>[]>;
+    acls?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2Acl>[] | undefined>;
     /**
      * DDoS-protected IP blacklist and whitelist.
      */
-    blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[]>;
+    blackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2BlackWhiteIp>[] | undefined>;
     /**
      * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * AI protection switch, take the value [`on`, `off`].
      */
-    ddosAi?: pulumi.Input<string>;
+    ddosAi?: pulumi.Input<string | undefined>;
     /**
      * DDoS connection suppression options.
      */
-    ddosConnectLimit?: pulumi.Input<inputs.Dayu.DdosPolicyV2DdosConnectLimit>;
+    ddosConnectLimit?: pulumi.Input<inputs.Dayu.DdosPolicyV2DdosConnectLimit | undefined>;
     /**
      * DDoS-protected area block configuration.
      */
-    ddosGeoIpBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosGeoIpBlockConfig>[]>;
+    ddosGeoIpBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosGeoIpBlockConfig>[] | undefined>;
     /**
      * Protection class, value [`low`, `middle`, `high`].
      */
-    ddosLevel?: pulumi.Input<string>;
+    ddosLevel?: pulumi.Input<string | undefined>;
     /**
      * Access speed limit configuration for DDoS protection.
      */
-    ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[]>;
+    ddosSpeedLimitConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2DdosSpeedLimitConfig>[] | undefined>;
     /**
      * DDoS cleaning threshold, value[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000]; When the value is set to 0, it means that the default value is adopted.
      */
-    ddosThreshold?: pulumi.Input<number>;
+    ddosThreshold?: pulumi.Input<number | undefined>;
     /**
      * Feature filtering rules for DDoS protection.
      */
-    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2PacketFilter>[]>;
+    packetFilters?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2PacketFilter>[] | undefined>;
     /**
      * Protocol block configuration for DDoS protection.
      */
-    protocolBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2ProtocolBlockConfig>[]>;
+    protocolBlockConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2ProtocolBlockConfig>[] | undefined>;
     /**
      * The ID of the resource instance.
      */
@@ -343,5 +343,5 @@ export interface DdosPolicyV2Args {
     /**
      * Water print config.
      */
-    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[]>;
+    waterPrintConfigs?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosPolicyV2WaterPrintConfig>[] | undefined>;
 }

@@ -90,12 +90,8 @@ type GetPublicIpv6sResult struct {
 }
 
 func GetPublicIpv6sOutput(ctx *pulumi.Context, args GetPublicIpv6sOutputArgs, opts ...pulumi.InvokeOption) GetPublicIpv6sResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPublicIpv6sResultOutput, error) {
-			args := v.(GetPublicIpv6sArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elastic/getPublicIpv6s:getPublicIpv6s", args, GetPublicIpv6sResultOutput{}, options).(GetPublicIpv6sResultOutput), nil
-		}).(GetPublicIpv6sResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elastic/getPublicIpv6s:getPublicIpv6s", args, GetPublicIpv6sResultOutput{}, options).(GetPublicIpv6sResultOutput)
 }
 
 // A collection of arguments for invoking getPublicIpv6s.

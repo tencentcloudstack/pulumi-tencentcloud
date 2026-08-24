@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a teo teoL4Proxy
+ * Provides a resource to create a TEO L4 proxy instance
  *
  * ## Example Usage
  *
@@ -27,10 +27,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_l4_proxy can be imported using the id, e.g.
+ * TEO L4 proxy can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Teo/l4Proxy:L4Proxy teo_l4_proxy teo_l4_proxy_id
+ * $ pulumi import tencentcloud:Teo/l4Proxy:L4Proxy teo_l4_proxy zone_id#proxy_id
  * ```
  */
 export class L4Proxy extends pulumi.CustomResource {
@@ -70,13 +70,19 @@ export class L4Proxy extends pulumi.CustomResource {
      */
     declare public readonly area: pulumi.Output<string | undefined>;
     /**
-     * Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     * It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     *
+     * @deprecated It has been deprecated from version 1.82.90. Please do not use this field anymore.
      */
-    declare public readonly ddosProtectionConfig: pulumi.Output<outputs.Teo.L4ProxyDdosProtectionConfig | undefined>;
+    declare public readonly ddosProtectionConfig: pulumi.Output<outputs.Teo.L4ProxyDdosProtectionConfig>;
     /**
      * Specifies whether to enable IPv6 access. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
     declare public readonly ipv6: pulumi.Output<string | undefined>;
+    /**
+     * L4 proxy instance ID.
+     */
+    declare public /*out*/ readonly proxyId: pulumi.Output<string>;
     /**
      * Layer 4 proxy instance name. You can enter 1-50 characters. Valid characters are a-z, 0-9, and hyphens (-). However, hyphens (-) cannot be used individually or consecutively and should not be placed at the beginning or end of the name. Modifications are not allowed after creation.
      */
@@ -107,6 +113,7 @@ export class L4Proxy extends pulumi.CustomResource {
             resourceInputs["area"] = state?.area;
             resourceInputs["ddosProtectionConfig"] = state?.ddosProtectionConfig;
             resourceInputs["ipv6"] = state?.ipv6;
+            resourceInputs["proxyId"] = state?.proxyId;
             resourceInputs["proxyName"] = state?.proxyName;
             resourceInputs["staticIp"] = state?.staticIp;
             resourceInputs["zoneId"] = state?.zoneId;
@@ -125,6 +132,7 @@ export class L4Proxy extends pulumi.CustomResource {
             resourceInputs["proxyName"] = args?.proxyName;
             resourceInputs["staticIp"] = args?.staticIp;
             resourceInputs["zoneId"] = args?.zoneId;
+            resourceInputs["proxyId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(L4Proxy.__pulumiType, name, resourceInputs, opts);
@@ -138,31 +146,37 @@ export interface L4ProxyState {
     /**
      * Specifies whether to enable network optimization in the Chinese mainland. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    accelerateMainland?: pulumi.Input<string>;
+    accelerateMainland?: pulumi.Input<string | undefined>;
     /**
      * Acceleration zone of the Layer 4 proxy instance. `mainland`: Availability zone in the Chinese mainland; `overseas`: Global availability zone (excluding the Chinese mainland); `global`: Global availability zone.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
-     * Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     * It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     *
+     * @deprecated It has been deprecated from version 1.82.90. Please do not use this field anymore.
      */
-    ddosProtectionConfig?: pulumi.Input<inputs.Teo.L4ProxyDdosProtectionConfig>;
+    ddosProtectionConfig?: pulumi.Input<inputs.Teo.L4ProxyDdosProtectionConfig | undefined>;
     /**
      * Specifies whether to enable IPv6 access. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    ipv6?: pulumi.Input<string>;
+    ipv6?: pulumi.Input<string | undefined>;
+    /**
+     * L4 proxy instance ID.
+     */
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Layer 4 proxy instance name. You can enter 1-50 characters. Valid characters are a-z, 0-9, and hyphens (-). However, hyphens (-) cannot be used individually or consecutively and should not be placed at the beginning or end of the name. Modifications are not allowed after creation.
      */
-    proxyName?: pulumi.Input<string>;
+    proxyName?: pulumi.Input<string | undefined>;
     /**
      * Specifies whether to enable the fixed IP address. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    staticIp?: pulumi.Input<string>;
+    staticIp?: pulumi.Input<string | undefined>;
     /**
      * Site ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -172,19 +186,21 @@ export interface L4ProxyArgs {
     /**
      * Specifies whether to enable network optimization in the Chinese mainland. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    accelerateMainland?: pulumi.Input<string>;
+    accelerateMainland?: pulumi.Input<string | undefined>;
     /**
      * Acceleration zone of the Layer 4 proxy instance. `mainland`: Availability zone in the Chinese mainland; `overseas`: Global availability zone (excluding the Chinese mainland); `global`: Global availability zone.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
-     * Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     * It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+     *
+     * @deprecated It has been deprecated from version 1.82.90. Please do not use this field anymore.
      */
-    ddosProtectionConfig?: pulumi.Input<inputs.Teo.L4ProxyDdosProtectionConfig>;
+    ddosProtectionConfig?: pulumi.Input<inputs.Teo.L4ProxyDdosProtectionConfig | undefined>;
     /**
      * Specifies whether to enable IPv6 access. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    ipv6?: pulumi.Input<string>;
+    ipv6?: pulumi.Input<string | undefined>;
     /**
      * Layer 4 proxy instance name. You can enter 1-50 characters. Valid characters are a-z, 0-9, and hyphens (-). However, hyphens (-) cannot be used individually or consecutively and should not be placed at the beginning or end of the name. Modifications are not allowed after creation.
      */
@@ -192,7 +208,7 @@ export interface L4ProxyArgs {
     /**
      * Specifies whether to enable the fixed IP address. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `on`: Enable; `off`: Disable.
      */
-    staticIp?: pulumi.Input<string>;
+    staticIp?: pulumi.Input<string | undefined>;
     /**
      * Site ID.
      */

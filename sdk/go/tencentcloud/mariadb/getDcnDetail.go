@@ -68,12 +68,8 @@ type GetDcnDetailResult struct {
 }
 
 func GetDcnDetailOutput(ctx *pulumi.Context, args GetDcnDetailOutputArgs, opts ...pulumi.InvokeOption) GetDcnDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDcnDetailResultOutput, error) {
-			args := v.(GetDcnDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args, GetDcnDetailResultOutput{}, options).(GetDcnDetailResultOutput), nil
-		}).(GetDcnDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args, GetDcnDetailResultOutput{}, options).(GetDcnDetailResultOutput)
 }
 
 // A collection of arguments for invoking getDcnDetail.

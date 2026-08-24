@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// <summary>
     /// Provide a resource to create a SCF function.
     /// 
+    /// &gt; **NOTE:** The use of `Trigger` is no longer recommended; `tencentcloud.Scf.Trigger` is recommended instead.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -23,13 +25,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
+    ///     var example = new Tencentcloud.Scf.Function("example", new()
     ///     {
     ///         Name = "ci-test-function",
     ///         Handler = "main.do_it",
     ///         Runtime = "Python3.6",
     ///         CosBucketName = "scf-code-1234567890",
-    ///         CosObjectName = "code.zip",
+    ///         CosObjectName = "/path/to/code.zip",
     ///         CosBucketRegion = "ap-guangzhou",
     ///     });
     /// 
@@ -46,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
+    ///     var example = new Tencentcloud.Scf.Function("example", new()
     ///     {
     ///         Name = "ci-test-function",
     ///         Handler = "first.do_it_first",
@@ -79,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
+    ///     var example = new Tencentcloud.Scf.Function("example", new()
     ///     {
     ///         Name = "ci-test-function",
     ///         Handler = "main.do_it",
@@ -112,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
+    ///     var example = new Tencentcloud.Scf.Function("example", new()
     ///     {
     ///         Name = "ci-test-function",
     ///         Handler = "first.do_it_first",
@@ -158,10 +160,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// SCF function can be imported, e.g.
     /// 
-    /// -&gt; __NOTE:__ function id is `&lt;function namespace&gt;+&lt;function name&gt;`
+    /// &gt; **NOTE:** function id is `&lt;function namespace&gt;+&lt;function name&gt;`
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Scf/function:Function test default+test
+    /// $ pulumi import tencentcloud:Scf/function:Function example default+test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/function:Function")]
@@ -310,6 +312,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Output("installDependency")]
         public Output<bool> InstallDependency { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance concurrency configuration for the function.
+        /// </summary>
+        [Output("instanceConcurrencyConfig")]
+        public Output<Outputs.FunctionInstanceConcurrencyConfig?> InstanceConcurrencyConfig { get; private set; } = null!;
 
         /// <summary>
         /// Intranet access configuration.
@@ -579,6 +587,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
             get => _imageConfigs ?? (_imageConfigs = new InputList<Inputs.FunctionImageConfigArgs>());
             set => _imageConfigs = value;
         }
+
+        /// <summary>
+        /// Instance concurrency configuration for the function.
+        /// </summary>
+        [Input("instanceConcurrencyConfig")]
+        public Input<Inputs.FunctionInstanceConcurrencyConfigArgs>? InstanceConcurrencyConfig { get; set; }
 
         /// <summary>
         /// Intranet access configuration.
@@ -857,6 +871,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Input("installDependency")]
         public Input<bool>? InstallDependency { get; set; }
+
+        /// <summary>
+        /// Instance concurrency configuration for the function.
+        /// </summary>
+        [Input("instanceConcurrencyConfig")]
+        public Input<Inputs.FunctionInstanceConcurrencyConfigGetArgs>? InstanceConcurrencyConfig { get; set; }
 
         /// <summary>
         /// Intranet access configuration.

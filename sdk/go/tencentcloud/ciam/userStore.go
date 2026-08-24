@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// ciam user_store can be imported using the id, e.g.
+// ciam userStore can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId

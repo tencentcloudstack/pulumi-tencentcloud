@@ -88,7 +88,7 @@ import (
 //
 // ## Import
 //
-// wedata integration_realtime_task can be imported using the id, e.g.
+// wedata integrationRealtimeTask can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d

@@ -95,12 +95,8 @@ type GetAlarmNoticesResult struct {
 }
 
 func GetAlarmNoticesOutput(ctx *pulumi.Context, args GetAlarmNoticesOutputArgs, opts ...pulumi.InvokeOption) GetAlarmNoticesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmNoticesResultOutput, error) {
-			args := v.(GetAlarmNoticesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args, GetAlarmNoticesResultOutput{}, options).(GetAlarmNoticesResultOutput), nil
-		}).(GetAlarmNoticesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmNotices:getAlarmNotices", args, GetAlarmNoticesResultOutput{}, options).(GetAlarmNoticesResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmNotices.

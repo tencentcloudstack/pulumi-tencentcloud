@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const output = new tencentcloud.cos.Bucket("output", {bucket: `tf-bucket-mps-output-${appId}`});
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
@@ -160,35 +160,35 @@ export interface EditMediaOperationState {
     /**
      * Information of input video file.
      */
-    fileInfos?: pulumi.Input<pulumi.Input<inputs.Mps.EditMediaOperationFileInfo>[]>;
+    fileInfos?: pulumi.Input<pulumi.Input<inputs.Mps.EditMediaOperationFileInfo>[] | undefined>;
     /**
      * Configuration for output files of video editing.
      */
-    outputConfig?: pulumi.Input<inputs.Mps.EditMediaOperationOutputConfig>;
+    outputConfig?: pulumi.Input<inputs.Mps.EditMediaOperationOutputConfig | undefined>;
     /**
      * The path to save the media processing output file.
      */
-    outputObjectPath?: pulumi.Input<string>;
+    outputObjectPath?: pulumi.Input<string | undefined>;
     /**
      * The storage location of the media processing output file.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.EditMediaOperationOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.EditMediaOperationOutputStorage | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.EditMediaOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.EditMediaOperationTaskNotifyConfig | undefined>;
     /**
      * Task priority. The higher the value, the higher the priority. Value range: [-10,10]. If this parameter is left empty, 0 will be used.
      */
-    tasksPriority?: pulumi.Input<number>;
+    tasksPriority?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -202,7 +202,7 @@ export interface EditMediaOperationArgs {
     /**
      * Configuration for output files of video editing.
      */
-    outputConfig?: pulumi.Input<inputs.Mps.EditMediaOperationOutputConfig>;
+    outputConfig?: pulumi.Input<inputs.Mps.EditMediaOperationOutputConfig | undefined>;
     /**
      * The path to save the media processing output file.
      */
@@ -214,17 +214,17 @@ export interface EditMediaOperationArgs {
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.EditMediaOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.EditMediaOperationTaskNotifyConfig | undefined>;
     /**
      * Task priority. The higher the value, the higher the priority. Value range: [-10,10]. If this parameter is left empty, 0 will be used.
      */
-    tasksPriority?: pulumi.Input<number>;
+    tasksPriority?: pulumi.Input<number | undefined>;
 }

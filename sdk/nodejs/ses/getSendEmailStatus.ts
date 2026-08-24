@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendEmailStatus = tencentcloud.Ses.getSendEmailStatus({
+ * const sendEmailStatus = tencentcloud.ses.getSendEmailStatus({
  *     requestDate: "2020-09-22",
  *     messageId: "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
  *     toEmailAddress: "example@cloud.com",
@@ -86,7 +86,7 @@ export interface GetSendEmailStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendEmailStatus = tencentcloud.Ses.getSendEmailStatus({
+ * const sendEmailStatus = tencentcloud.ses.getSendEmailStatus({
  *     requestDate: "2020-09-22",
  *     messageId: "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
  *     toEmailAddress: "example@cloud.com",
@@ -110,7 +110,7 @@ export interface GetSendEmailStatusOutputArgs {
     /**
      * The MessageId field returned by the SendMail API.
      */
-    messageId?: pulumi.Input<string>;
+    messageId?: pulumi.Input<string | undefined>;
     /**
      * Date sent. This parameter is required. You can only query the sending status for a single date at a time.
      */
@@ -118,9 +118,9 @@ export interface GetSendEmailStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Recipient email address.
      */
-    toEmailAddress?: pulumi.Input<string>;
+    toEmailAddress?: pulumi.Input<string | undefined>;
 }

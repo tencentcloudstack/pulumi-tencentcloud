@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a postgresql parameterTemplate
+ * Provides a resource to create a PostgreSQL parameter template
  *
  * ## Example Usage
  *
@@ -15,33 +15,59 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameterTemplate = new tencentcloud.postgresql.ParameterTemplate("parameter_template", {
- *     templateName: "your_temp_name",
- *     dbMajorVersion: "13",
+ * const example = new tencentcloud.postgresql.ParameterTemplate("example", {
+ *     templateName: "tf-example",
+ *     dbMajorVersion: "18",
  *     dbEngine: "postgresql",
- *     templateDescription: "For_tf_test",
+ *     templateDescription: "remark.",
  *     modifyParamEntrySets: [
  *         {
  *             name: "timezone",
- *             expectedValue: "UTC",
+ *             expectedValue: "PRC",
  *         },
  *         {
  *             name: "lock_timeout",
- *             expectedValue: "123",
+ *             expectedValue: "60",
+ *         },
+ *         {
+ *             name: "event_triggers",
+ *             expectedValue: "on",
  *         },
  *     ],
- *     deleteParamSets: ["lc_time"],
+ * });
+ * ```
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.postgresql.ParameterTemplate("example", {
+ *     templateName: "tf-example",
+ *     dbMajorVersion: "18",
+ *     dbEngine: "postgresql",
+ *     templateDescription: "remark.",
+ *     modifyParamEntrySets: [
+ *         {
+ *             name: "timezone",
+ *             expectedValue: "PRC",
+ *         },
+ *         {
+ *             name: "event_triggers",
+ *             expectedValue: "on",
+ *         },
+ *     ],
+ *     deleteParamSets: ["lock_timeout"],
  * });
  * ```
  *
  * ## Import
  *
- * postgresql parameter_template can be imported using the id, e.g.
+ * PostgreSQL parameter template can be imported using the id, e.g.
  *
- * Notice: `modify_param_entry_set` and `delete_param_set` do not support import.
+ * Notice: `deleteParamSet` do not support import.
  *
  * ```sh
- * $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+ * $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate example 81ec47ed-0e4e-5af2-a648-2072fe63f225
  * ```
  */
 export class ParameterTemplate extends pulumi.CustomResource {
@@ -87,7 +113,7 @@ export class ParameterTemplate extends pulumi.CustomResource {
     /**
      * The set of parameters that need to be modified or added. Note: the same parameter cannot appear in the set of modifying and adding and deleting at the same time.
      */
-    declare public readonly modifyParamEntrySets: pulumi.Output<outputs.Postgresql.ParameterTemplateModifyParamEntrySet[] | undefined>;
+    declare public readonly modifyParamEntrySets: pulumi.Output<outputs.Postgresql.ParameterTemplateModifyParamEntrySet[]>;
     /**
      * Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()+=:@).
      */
@@ -146,27 +172,27 @@ export interface ParameterTemplateState {
     /**
      * Database engine, such as postgresql, mssql_compatible.
      */
-    dbEngine?: pulumi.Input<string>;
+    dbEngine?: pulumi.Input<string | undefined>;
     /**
      * The major database version number, such as 11, 12, 13.
      */
-    dbMajorVersion?: pulumi.Input<string>;
+    dbMajorVersion?: pulumi.Input<string | undefined>;
     /**
      * The set of parameters that need to be deleted.
      */
-    deleteParamSets?: pulumi.Input<pulumi.Input<string>[]>;
+    deleteParamSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The set of parameters that need to be modified or added. Note: the same parameter cannot appear in the set of modifying and adding and deleting at the same time.
      */
-    modifyParamEntrySets?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParameterTemplateModifyParamEntrySet>[]>;
+    modifyParamEntrySets?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParameterTemplateModifyParamEntrySet>[] | undefined>;
     /**
      * Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()+=:@).
      */
-    templateDescription?: pulumi.Input<string>;
+    templateDescription?: pulumi.Input<string | undefined>;
     /**
      * Template name, which can contain 1-60 letters, digits, and symbols (-_./()+=:@).
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -184,15 +210,15 @@ export interface ParameterTemplateArgs {
     /**
      * The set of parameters that need to be deleted.
      */
-    deleteParamSets?: pulumi.Input<pulumi.Input<string>[]>;
+    deleteParamSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The set of parameters that need to be modified or added. Note: the same parameter cannot appear in the set of modifying and adding and deleting at the same time.
      */
-    modifyParamEntrySets?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParameterTemplateModifyParamEntrySet>[]>;
+    modifyParamEntrySets?: pulumi.Input<pulumi.Input<inputs.Postgresql.ParameterTemplateModifyParamEntrySet>[] | undefined>;
     /**
      * Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()+=:@).
      */
-    templateDescription?: pulumi.Input<string>;
+    templateDescription?: pulumi.Input<string | undefined>;
     /**
      * Template name, which can contain 1-60 letters, digits, and symbols (-_./()+=:@).
      */

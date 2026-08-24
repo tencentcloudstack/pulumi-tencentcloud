@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public static class GetRouteTables
     {
         /// <summary>
-        /// Use this data source to query vpc route tables information.
+        /// Use this data source to query VPC route tables information.
         /// 
         /// ## Example Usage
         /// 
@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -72,7 +71,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query vpc route tables information.
+        /// Use this data source to query VPC route tables information.
         /// 
         /// ## Example Usage
         /// 
@@ -80,7 +79,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
@@ -131,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
             => global::Pulumi.Deployment.Instance.Invoke<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query vpc route tables information.
+        /// Use this data source to query VPC route tables information.
         /// 
         /// ## Example Usage
         /// 
@@ -139,7 +137,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 

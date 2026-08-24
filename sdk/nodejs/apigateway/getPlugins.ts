@@ -78,7 +78,7 @@ import * as utilities from "../utilities";
  *     }),
  *     description: "desc.",
  * });
- * const example = tencentcloud.ApiGateway.getPluginsOutput({
+ * const example = tencentcloud.apigateway.getPluginsOutput({
  *     serviceId: exampleServiceRelease.serviceId,
  *     pluginId: examplePlugin.id,
  *     environmentName: "release",
@@ -206,7 +206,7 @@ export interface GetPluginsResult {
  *     }),
  *     description: "desc.",
  * });
- * const example = tencentcloud.ApiGateway.getPluginsOutput({
+ * const example = tencentcloud.apigateway.getPluginsOutput({
  *     serviceId: exampleServiceRelease.serviceId,
  *     pluginId: examplePlugin.id,
  *     environmentName: "release",
@@ -238,7 +238,7 @@ export interface GetPluginsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The service ID to query.
      */

@@ -82,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> PlanId { get; private set; } = null!;
 
         /// <summary>
+        /// Content identifier status. Valid values: `Active` (effective), `Deleted` (deleted).
+        /// </summary>
+        [Output("status")]
+        public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
         /// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
         /// </summary>
         [Output("tags")]
@@ -195,6 +201,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("planId")]
         public Input<string>? PlanId { get; set; }
+
+        /// <summary>
+        /// Content identifier status. Valid values: `Active` (effective), `Deleted` (deleted).
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         [Input("tags")]
         private InputList<Inputs.ContentIdentifierTagGetArgs>? _tags;

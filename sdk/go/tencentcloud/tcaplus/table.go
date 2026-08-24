@@ -39,15 +39,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			vpcId := vpc.InstanceLists[0].VpcId
-//			subnetId := vpc.InstanceLists[0].SubnetId
+//			vpcId := vpc2.InstanceLists[0].VpcId
+//			subnetId := vpc2.InstanceLists[0].SubnetId
 //			example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
 //				IdlType:               pulumi.String("PROTO"),
 //				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
@@ -60,15 +60,15 @@ import (
 //				return err
 //			}
 //			exampleTablegroup, err := tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
-//				ClusterId:      example.ID(),
+//				ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 //				TablegroupName: pulumi.String("tf_example_group_name"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			exampleIdl, err := tcaplus.NewIdl(ctx, "example", &tcaplus.IdlArgs{
-//				ClusterId:    example.ID(),
-//				TablegroupId: exampleTablegroup.ID(),
+//				ClusterId:    example.ID().ToIDOutput().ToStringOutput(),
+//				TablegroupId: exampleTablegroup.ID().ToIDOutput().ToStringOutput(),
 //				FileName:     pulumi.String("tf_example_tcaplus_idl"),
 //				FileType:     pulumi.String("PROTO"),
 //				FileExtType:  pulumi.String("proto"),
@@ -105,12 +105,12 @@ import (
 //				return err
 //			}
 //			_, err = tcaplus.NewTable(ctx, "example", &tcaplus.TableArgs{
-//				ClusterId:       example.ID(),
-//				TablegroupId:    exampleTablegroup.ID(),
+//				ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
+//				TablegroupId:    exampleTablegroup.ID().ToIDOutput().ToStringOutput(),
 //				TableName:       pulumi.String("example_table"),
 //				TableType:       pulumi.String("GENERIC"),
 //				Description:     pulumi.String("test"),
-//				IdlId:           exampleIdl.ID(),
+//				IdlId:           exampleIdl.ID().ToIDOutput().ToStringOutput(),
 //				TableIdlType:    pulumi.String("PROTO"),
 //				ReservedReadCu:  pulumi.Int(1000),
 //				ReservedWriteCu: pulumi.Int(20),

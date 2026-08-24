@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emailIdentities = tencentcloud.Ses.getEmailIdentities({});
+ * const emailIdentities = tencentcloud.ses.getEmailIdentities({});
  * ```
  */
 export function getEmailIdentities(args?: GetEmailIdentitiesArgs, opts?: pulumi.InvokeOptions): Promise<GetEmailIdentitiesResult> {
@@ -67,7 +67,7 @@ export interface GetEmailIdentitiesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emailIdentities = tencentcloud.Ses.getEmailIdentities({});
+ * const emailIdentities = tencentcloud.ses.getEmailIdentities({});
  * ```
  */
 export function getEmailIdentitiesOutput(args?: GetEmailIdentitiesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEmailIdentitiesResult> {
@@ -85,5 +85,5 @@ export interface GetEmailIdentitiesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTraffic = tencentcloud.Clb.getInstanceTraffic({
+ * const instanceTraffic = tencentcloud.clb.getInstanceTraffic({
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
@@ -67,7 +67,7 @@ export interface GetInstanceTrafficResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTraffic = tencentcloud.Clb.getInstanceTraffic({
+ * const instanceTraffic = tencentcloud.clb.getInstanceTraffic({
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
@@ -88,9 +88,9 @@ export interface GetInstanceTrafficOutputArgs {
     /**
      * CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
      */
-    loadBalancerRegion?: pulumi.Input<string>;
+    loadBalancerRegion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

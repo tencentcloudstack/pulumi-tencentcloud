@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_tts_template can be imported using the bucket#templateId, e.g.
+ * ci mediaTtsTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
@@ -134,31 +134,31 @@ export interface MediaTtsTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Audio format, default wav (synchronous)/pcm (asynchronous, wav, mp3, pcm.
      */
-    codec?: pulumi.Input<string>;
+    codec?: pulumi.Input<string | undefined>;
     /**
      * Processing mode, default value Asyc, Asyc (asynchronous composition), Sync (synchronous composition), When Asyc is selected, the codec only supports pcm.
      */
-    mode?: pulumi.Input<string>;
+    mode?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Speech rate, the default value is 100, [50,200].
      */
-    speed?: pulumi.Input<string>;
+    speed?: pulumi.Input<string | undefined>;
     /**
      * Timbre, the default value is ruxue.
      */
-    voiceType?: pulumi.Input<string>;
+    voiceType?: pulumi.Input<string | undefined>;
     /**
      * Volume, default value 0, [-10,10].
      */
-    volume?: pulumi.Input<string>;
+    volume?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -172,25 +172,25 @@ export interface MediaTtsTemplateArgs {
     /**
      * Audio format, default wav (synchronous)/pcm (asynchronous, wav, mp3, pcm.
      */
-    codec?: pulumi.Input<string>;
+    codec?: pulumi.Input<string | undefined>;
     /**
      * Processing mode, default value Asyc, Asyc (asynchronous composition), Sync (synchronous composition), When Asyc is selected, the codec only supports pcm.
      */
-    mode?: pulumi.Input<string>;
+    mode?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Speech rate, the default value is 100, [50,200].
      */
-    speed?: pulumi.Input<string>;
+    speed?: pulumi.Input<string | undefined>;
     /**
      * Timbre, the default value is ruxue.
      */
-    voiceType?: pulumi.Input<string>;
+    voiceType?: pulumi.Input<string | undefined>;
     /**
      * Volume, default value 0, [-10,10].
      */
-    volume?: pulumi.Input<string>;
+    volume?: pulumi.Input<string | undefined>;
 }

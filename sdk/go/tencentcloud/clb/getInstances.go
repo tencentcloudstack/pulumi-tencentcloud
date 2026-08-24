@@ -20,6 +20,7 @@ import (
 //
 // import (
 //
+//	"github.com/pulumi/pulumi-std/sdk/go/std"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/clb"
 //
@@ -27,16 +28,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := clb.GetInstances(ctx, &clb.GetInstancesArgs{
+//			example, err := clb.GetInstances(ctx, &clb.GetInstancesArgs{
 //				ClbId:            pulumi.StringRef("lb-k2zjp9lv"),
 //				NetworkType:      pulumi.StringRef("OPEN"),
-//				ClbName:          pulumi.StringRef("myclb"),
+//				ClbName:          pulumi.StringRef("tf-example"),
 //				ProjectId:        pulumi.IntRef(0),
-//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//				ResultOutputFile: pulumi.StringRef("myOutputPath"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("exclusiveClusterInfo", pulumi.Any(std.Jsondecode(ctx, &std.JsondecodeArgs{
+//				Input: example.ClbLists[0].ExclusiveCluster,
+//			}, nil).Result))
 //			return nil
 //		})
 //	}
@@ -87,12 +91,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.

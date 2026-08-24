@@ -17,10 +17,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Custom error page configuration list.
         /// </summary>
-        public readonly Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParams? ErrorPageParams;
+        public readonly ImmutableArray<Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParam> ErrorPageParams;
 
         [OutputConstructor]
-        private L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParameters(Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParams? errorPageParams)
+        private L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParameters(ImmutableArray<Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionErrorPageParametersErrorPageParam> errorPageParams)
         {
             ErrorPageParams = errorPageParams;
         }

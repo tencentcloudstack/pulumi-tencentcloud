@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shipperTasks = tencentcloud.Cls.getShipperTasks({
+ * const shipperTasks = tencentcloud.cls.getShipperTasks({
  *     shipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
  *     startTime: 160749910700,
  *     endTime: 160749910800,
@@ -89,7 +89,7 @@ export interface GetShipperTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shipperTasks = tencentcloud.Cls.getShipperTasks({
+ * const shipperTasks = tencentcloud.cls.getShipperTasks({
  *     shipperId: "dbde3c9b-ea16-4032-bc2a-d8fa65567a8e",
  *     startTime: 160749910700,
  *     endTime: 160749910800,
@@ -117,7 +117,7 @@ export interface GetShipperTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * shipper id.
      */

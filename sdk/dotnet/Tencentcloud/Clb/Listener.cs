@@ -25,12 +25,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var hTTPListener = new Tencentcloud.Clb.Listener("HTTP_listener", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = "lb-0lh5au7v",
-    ///         ListenerName = "test_listener",
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
     ///         Port = 80,
     ///         Protocol = "HTTP",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### HTTP Listener with specific data compress mode
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
+    ///     {
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
+    ///         Port = 80,
+    ///         Protocol = "HTTP",
+    ///         DataCompressMode = "transparent",
     ///     });
     /// 
     /// });
@@ -46,10 +68,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var tCPListener = new Tencentcloud.Clb.Listener("TCP_listener", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = "lb-0lh5au7v",
-    ///         ListenerName = "test_listener",
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
     ///         Port = 80,
     ///         Protocol = "TCP",
     ///         HealthCheckSwitch = true,
@@ -61,6 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         Scheduler = "WRR",
     ///         HealthCheckPort = 200,
     ///         HealthCheckType = "HTTP",
+    ///         HealthCheckHttpPath = "/",
     ///         HealthCheckHttpCode = 2,
     ///         HealthCheckHttpVersion = "HTTP/1.0",
     ///         HealthCheckHttpMethod = "GET",
@@ -81,10 +104,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listener_tcp", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = clbBasic.Id,
-    ///         ListenerName = "listener_tcp",
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
     ///         Port = 44,
     ///         Protocol = "TCP",
     ///         HealthCheckSwitch = true,
@@ -113,10 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listener_tcp", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = clbBasic.Id,
-    ///         ListenerName = "listener_tcp",
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
     ///         Port = 44,
     ///         Protocol = "TCP",
     ///         HealthCheckSwitch = true,
@@ -149,10 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var listenerTcp = new Tencentcloud.Clb.Listener("listener_tcp", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = clbBasic.Id,
-    ///         ListenerName = "listener_tcp",
+    ///         ClbId = "lb-qck8thny",
+    ///         ListenerName = "tf-example",
     ///         Port = 44,
     ///         Protocol = "TCP",
     ///         HealthCheckSwitch = true,
@@ -182,10 +205,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var hTTPSListener = new Tencentcloud.Clb.Listener("HTTPS_listener", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
     ///         ClbId = "lb-0lh5au7v",
-    ///         ListenerName = "test_listener",
+    ///         ListenerName = "tf-example",
     ///         Port = 80,
     ///         Protocol = "HTTPS",
     ///         CertificateSslMode = "MUTUAL",
@@ -207,10 +230,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var hTTPSListener = new Tencentcloud.Clb.Listener("HTTPS_listener", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
     ///         ClbId = "lb-l6cp6jt4",
-    ///         ListenerName = "test_listener",
+    ///         ListenerName = "tf-example",
     ///         Port = 80,
     ///         Protocol = "HTTPS",
     ///         SniSwitch = true,
@@ -238,10 +261,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var tCPSSLListener = new Tencentcloud.Clb.Listener("TCPSSL_listener", new()
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
     ///     {
     ///         ClbId = "lb-0lh5au7v",
-    ///         ListenerName = "test_listener",
+    ///         ListenerName = "tf-example",
     ///         Port = 80,
     ///         Protocol = "TCP_SSL",
     ///         CertificateSslMode = "MUTUAL",
@@ -259,6 +282,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ### TCP_SSL Listener with MaxConn, MaxCps, ProxyProtocol
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Listener("example", new()
+    ///     {
+    ///         ClbId = "lb-0lh5au7v",
+    ///         ListenerName = "tf-example",
+    ///         Port = 443,
+    ///         Protocol = "TCP_SSL",
+    ///         CertificateSslMode = "UNIDIRECTIONAL",
+    ///         CertificateId = "VjANRdz8",
+    ///         Scheduler = "WRR",
+    ///         MaxConn = 1000,
+    ///         MaxCps = 100,
+    ///         ProxyProtocol = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Port Range Listener
     /// 
     /// ```csharp
@@ -269,19 +319,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var clbBasic = new Tencentcloud.Clb.Instance("clb_basic", new()
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
     ///     {
-    ///         NetworkType = "OPEN",
     ///         ClbName = "tf-listener-test",
+    ///         NetworkType = "OPEN",
     ///     });
     /// 
-    ///     var listenerBasic = new Tencentcloud.Clb.Listener("listener_basic", new()
+    ///     var exampleListener = new Tencentcloud.Clb.Listener("example", new()
     ///     {
-    ///         ClbId = clbBasic.Id,
+    ///         ClbId = example.Id,
+    ///         ListenerName = "tf-example",
     ///         Port = 1,
     ///         EndPort = 6,
     ///         Protocol = "TCP",
-    ///         ListenerName = "listener_basic",
     ///         SessionExpireTime = 30,
     ///         Scheduler = "WRR",
     ///         TargetType = "NODE",
@@ -292,10 +342,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Import
     /// 
-    /// CLB listener can be imported using the id (version &gt;= 1.47.0), e.g.
+    /// CLB listener can be imported using the clbId#listenerId (version &gt;= 1.47.0), e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+    /// $ pulumi import tencentcloud:Clb/listener:Listener example lb-7a0t6zqb#lbl-hh141sn9
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/listener:Listener")]
@@ -320,13 +370,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string?> CertificateSslMode { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the CLB.
+        /// ID of the CLB instance.
         /// </summary>
         [Output("clbId")]
         public Output<string> ClbId { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+        /// Data compression mode. Valid values: `Transparent`, `Compatibility`.
+        /// </summary>
+        [Output("dataCompressMode")]
+        public Output<string> DataCompressMode { get; private set; } = null!;
+
+        /// <summary>
+        /// Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by `TCP`/`UDP` listeners.
         /// </summary>
         [Output("deregisterTargetRst")]
         public Output<bool> DeregisterTargetRst { get; private set; } = null!;
@@ -338,73 +394,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<int> EndPort { get; private set; } = null!;
 
         /// <summary>
-        /// Enable H2C switch for intranet HTTP listener.
+        /// Whether to enable H2C for intranet `HTTP` listeners. `True`: enable, `False`: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type `GRPC` or `GRPCS`; `GRPC` or `GRPCS` must be explicitly specified in the forwarding type when creating rules.
         /// </summary>
         [Output("h2cSwitch")]
         public Output<bool> H2cSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Health check protocol. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the input format of the health check. Valid values: `HEX`, `TEXT`. When `HEX`, the characters of `SendContext`/`RecvContext` can only be selected from `0123456789ABCDEF` and the length must be even. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Output("healthCheckContextType")]
         public Output<string> HealthCheckContextType { get; private set; } = null!;
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.
         /// </summary>
         [Output("healthCheckHealthNum")]
         public Output<int> HealthCheckHealthNum { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
+        /// Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. `1`=1xx healthy, `2`=2xx, `4`=3xx, `8`=4xx, `16`=5xx. To treat multiple return codes as healthy, add the corresponding values together.
         /// </summary>
         [Output("healthCheckHttpCode")]
         public Output<int?> HealthCheckHttpCode { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP health check domain of TCP listener.
+        /// Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).
         /// </summary>
         [Output("healthCheckHttpDomain")]
         public Output<string?> HealthCheckHttpDomain { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP health check method of TCP listener. Valid values: `HEAD`, `GET`.
+        /// Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default `HEAD`. Valid values: `HEAD`, `GET`.
         /// </summary>
         [Output("healthCheckHttpMethod")]
         public Output<string> HealthCheckHttpMethod { get; private set; } = null!;
 
         /// <summary>
-        /// HTTP health check path of TCP listener.
+        /// Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).
         /// </summary>
         [Output("healthCheckHttpPath")]
         public Output<string?> HealthCheckHttpPath { get; private set; } = null!;
 
         /// <summary>
-        /// The HTTP version of the backend service. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+        /// HTTP version of the backend service. Required when `HealthCheckType` is `HTTP`. Valid values: `HTTP/1.0`, `HTTP/1.1`. Only applicable to `TCP` listeners.
         /// </summary>
         [Output("healthCheckHttpVersion")]
         public Output<string?> HealthCheckHttpVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.
         /// </summary>
         [Output("healthCheckIntervalTime")]
         public Output<int> HealthCheckIntervalTime { get; private set; } = null!;
 
         /// <summary>
-        /// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
+        /// Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass `-1` to restore the default. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Output("healthCheckPort")]
         public Output<int?> HealthCheckPort { get; private set; } = null!;
 
         /// <summary>
-        /// It represents the result returned by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Output("healthCheckRecvContext")]
         public Output<string?> HealthCheckRecvContext { get; private set; } = null!;
 
         /// <summary>
-        /// It represents the content of the request sent by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Output("healthCheckSendContext")]
         public Output<string?> HealthCheckSendContext { get; private set; } = null!;
@@ -416,37 +472,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<bool> HealthCheckSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+        /// Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.
         /// </summary>
         [Output("healthCheckTimeOut")]
         public Output<int> HealthCheckTimeOut { get; private set; } = null!;
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
+        /// Health check protocol. Valid values: `TCP`, `HTTP`, `HTTPS`, `GRPC`, `PING`, `CUSTOM`. UDP listeners support `PING`/`CUSTOM`; TCP listeners support `TCP`/`HTTP`/`CUSTOM`; TCP_SSL/QUIC listeners support `TCP`/`HTTP`; HTTP rules support `HTTP`/`GRPC`; HTTPS rules support `HTTP`/`HTTPS`/`GRPC`. Defaults: `HTTP` for HTTP listeners, `TCP` for TCP/TCP_SSL/QUIC listeners, `PING` for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.
         /// </summary>
         [Output("healthCheckType")]
         public Output<string> HealthCheckType { get; private set; } = null!;
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.
         /// </summary>
         [Output("healthCheckUnhealthNum")]
         public Output<int> HealthCheckUnhealthNum { get; private set; } = null!;
 
         /// <summary>
-        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// Health check source IP type. `0`: use the CLB VIP as the source IP, `1`: use a 100.64 IP range as the source IP.
         /// </summary>
         [Output("healthSourceIpType")]
         public Output<int> HealthSourceIpType { get; private set; } = null!;
 
         /// <summary>
-        /// Connection idle timeout period (in seconds). It's only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds). Please submit a work order for processing.
+        /// Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.
         /// </summary>
         [Output("idleConnectTimeout")]
         public Output<int> IdleConnectTimeout { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// Whether to enable persistent connection (long connection). Only applicable to `HTTP`/`HTTPS` listeners. Valid values: `0` (disable, default), `1` (enable). This feature is currently in beta.
         /// </summary>
         [Output("keepaliveEnable")]
         public Output<int> KeepaliveEnable { get; private set; } = null!;
@@ -458,19 +514,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> ListenerId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
+        /// Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).
         /// </summary>
         [Output("listenerName")]
         public Output<string> ListenerName { get; private set; } = null!;
 
         /// <summary>
-        /// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. Certificate and MultiCertInfo cannot be specified at the same time.
+        /// Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Output("maxConn")]
+        public Output<int> MaxConn { get; private set; } = null!;
+
+        /// <summary>
+        /// Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Output("maxCps")]
+        public Output<int> MaxCps { get; private set; } = null!;
+
+        /// <summary>
+        /// Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to `TCP_SSL` listeners and `HTTPS` listeners with SNI disabled. When creating a `TCP_SSL` listener or an `HTTPS` listener with SNI disabled, at least one of `Certificate`/`MultiCertInfo` must be specified, but they cannot be specified at the same time.
         /// </summary>
         [Output("multiCertInfo")]
         public Output<Outputs.ListenerMultiCertInfo?> MultiCertInfo { get; private set; } = null!;
 
         /// <summary>
-        /// Port of the CLB listener.
+        /// Port of the CLB listener. Port range: [1 - 65535].
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
@@ -482,37 +550,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> Protocol { get; private set; } = null!;
 
         /// <summary>
-        /// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.
+        /// </summary>
+        [Output("proxyProtocol")]
+        public Output<bool> ProxyProtocol { get; private set; } = null!;
+
+        /// <summary>
+        /// The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Output("rescheduleExpandTarget")]
+        public Output<bool> RescheduleExpandTarget { get; private set; } = null!;
+
+        /// <summary>
+        /// Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Output("rescheduleInterval")]
+        public Output<int> RescheduleInterval { get; private set; } = null!;
+
+        /// <summary>
+        /// Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Output("rescheduleStartTime")]
+        public Output<int> RescheduleStartTime { get; private set; } = null!;
+
+        /// <summary>
+        /// The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Output("rescheduleTargetZeroWeight")]
+        public Output<bool> RescheduleTargetZeroWeight { get; private set; } = null!;
+
+        /// <summary>
+        /// Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Output("rescheduleUnhealthy")]
+        public Output<bool> RescheduleUnhealthy { get; private set; } = null!;
+
+        /// <summary>
+        /// Scheduling method. Valid values: `WRR` (weighted round-robin), `LEAST_CONN` (least connections). Default is `WRR`. Only applicable to `TCP`/`UDP`/`TCP_SSL`/`QUIC` listeners.
         /// </summary>
         [Output("scheduler")]
         public Output<string?> Scheduler { get; private set; } = null!;
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Output("sessionExpireTime")]
         public Output<int?> SessionExpireTime { get; private set; } = null!;
 
         /// <summary>
-        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// Session persistence type. `NORMAL` (default): default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule. If `QUIC_CID` is selected, `Protocol` must be `UDP`, `Scheduler` must be `WRR`, and only IPv4 is supported.
         /// </summary>
         [Output("sessionType")]
         public Output<string> SessionType { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to enable SNAT.
+        /// Whether to enable SNAT (source IP replacement). `True`: enable, `False`: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.
         /// </summary>
         [Output("snatEnable")]
         public Output<bool> SnatEnable { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
+        /// Indicates whether SNI is enabled. Only applicable to `HTTPS` listeners. `0`: disabled, `1`: enabled.
         /// </summary>
         [Output("sniSwitch")]
         public Output<bool?> SniSwitch { get; private set; } = null!;
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means binding ordinary nodes, `TARGETGROUP` means binding a target group. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule.
         /// </summary>
         [Output("targetType")]
         public Output<string> TargetType { get; private set; } = null!;
@@ -583,13 +687,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? CertificateSslMode { get; set; }
 
         /// <summary>
-        /// ID of the CLB.
+        /// ID of the CLB instance.
         /// </summary>
         [Input("clbId", required: true)]
         public Input<string> ClbId { get; set; } = null!;
 
         /// <summary>
-        /// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+        /// Data compression mode. Valid values: `Transparent`, `Compatibility`.
+        /// </summary>
+        [Input("dataCompressMode")]
+        public Input<string>? DataCompressMode { get; set; }
+
+        /// <summary>
+        /// Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by `TCP`/`UDP` listeners.
         /// </summary>
         [Input("deregisterTargetRst")]
         public Input<bool>? DeregisterTargetRst { get; set; }
@@ -601,73 +711,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? EndPort { get; set; }
 
         /// <summary>
-        /// Enable H2C switch for intranet HTTP listener.
+        /// Whether to enable H2C for intranet `HTTP` listeners. `True`: enable, `False`: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type `GRPC` or `GRPCS`; `GRPC` or `GRPCS` must be explicitly specified in the forwarding type when creating rules.
         /// </summary>
         [Input("h2cSwitch")]
         public Input<bool>? H2cSwitch { get; set; }
 
         /// <summary>
-        /// Health check protocol. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the input format of the health check. Valid values: `HEX`, `TEXT`. When `HEX`, the characters of `SendContext`/`RecvContext` can only be selected from `0123456789ABCDEF` and the length must be even. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckContextType")]
         public Input<string>? HealthCheckContextType { get; set; }
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
 
         /// <summary>
-        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
+        /// Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. `1`=1xx healthy, `2`=2xx, `4`=3xx, `8`=4xx, `16`=5xx. To treat multiple return codes as healthy, add the corresponding values together.
         /// </summary>
         [Input("healthCheckHttpCode")]
         public Input<int>? HealthCheckHttpCode { get; set; }
 
         /// <summary>
-        /// HTTP health check domain of TCP listener.
+        /// Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).
         /// </summary>
         [Input("healthCheckHttpDomain")]
         public Input<string>? HealthCheckHttpDomain { get; set; }
 
         /// <summary>
-        /// HTTP health check method of TCP listener. Valid values: `HEAD`, `GET`.
+        /// Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default `HEAD`. Valid values: `HEAD`, `GET`.
         /// </summary>
         [Input("healthCheckHttpMethod")]
         public Input<string>? HealthCheckHttpMethod { get; set; }
 
         /// <summary>
-        /// HTTP health check path of TCP listener.
+        /// Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).
         /// </summary>
         [Input("healthCheckHttpPath")]
         public Input<string>? HealthCheckHttpPath { get; set; }
 
         /// <summary>
-        /// The HTTP version of the backend service. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+        /// HTTP version of the backend service. Required when `HealthCheckType` is `HTTP`. Valid values: `HTTP/1.0`, `HTTP/1.1`. Only applicable to `TCP` listeners.
         /// </summary>
         [Input("healthCheckHttpVersion")]
         public Input<string>? HealthCheckHttpVersion { get; set; }
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.
         /// </summary>
         [Input("healthCheckIntervalTime")]
         public Input<int>? HealthCheckIntervalTime { get; set; }
 
         /// <summary>
-        /// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
+        /// Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass `-1` to restore the default. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckPort")]
         public Input<int>? HealthCheckPort { get; set; }
 
         /// <summary>
-        /// It represents the result returned by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckRecvContext")]
         public Input<string>? HealthCheckRecvContext { get; set; }
 
         /// <summary>
-        /// It represents the content of the request sent by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckSendContext")]
         public Input<string>? HealthCheckSendContext { get; set; }
@@ -679,55 +789,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? HealthCheckSwitch { get; set; }
 
         /// <summary>
-        /// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+        /// Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.
         /// </summary>
         [Input("healthCheckTimeOut")]
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
+        /// Health check protocol. Valid values: `TCP`, `HTTP`, `HTTPS`, `GRPC`, `PING`, `CUSTOM`. UDP listeners support `PING`/`CUSTOM`; TCP listeners support `TCP`/`HTTP`/`CUSTOM`; TCP_SSL/QUIC listeners support `TCP`/`HTTP`; HTTP rules support `HTTP`/`GRPC`; HTTPS rules support `HTTP`/`HTTPS`/`GRPC`. Defaults: `HTTP` for HTTP listeners, `TCP` for TCP/TCP_SSL/QUIC listeners, `PING` for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
 
         /// <summary>
-        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// Health check source IP type. `0`: use the CLB VIP as the source IP, `1`: use a 100.64 IP range as the source IP.
         /// </summary>
         [Input("healthSourceIpType")]
         public Input<int>? HealthSourceIpType { get; set; }
 
         /// <summary>
-        /// Connection idle timeout period (in seconds). It's only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds). Please submit a work order for processing.
+        /// Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.
         /// </summary>
         [Input("idleConnectTimeout")]
         public Input<int>? IdleConnectTimeout { get; set; }
 
         /// <summary>
-        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// Whether to enable persistent connection (long connection). Only applicable to `HTTP`/`HTTPS` listeners. Valid values: `0` (disable, default), `1` (enable). This feature is currently in beta.
         /// </summary>
         [Input("keepaliveEnable")]
         public Input<int>? KeepaliveEnable { get; set; }
 
         /// <summary>
-        /// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
+        /// Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).
         /// </summary>
         [Input("listenerName", required: true)]
         public Input<string> ListenerName { get; set; } = null!;
 
         /// <summary>
-        /// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. Certificate and MultiCertInfo cannot be specified at the same time.
+        /// Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Input("maxConn")]
+        public Input<int>? MaxConn { get; set; }
+
+        /// <summary>
+        /// Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Input("maxCps")]
+        public Input<int>? MaxCps { get; set; }
+
+        /// <summary>
+        /// Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to `TCP_SSL` listeners and `HTTPS` listeners with SNI disabled. When creating a `TCP_SSL` listener or an `HTTPS` listener with SNI disabled, at least one of `Certificate`/`MultiCertInfo` must be specified, but they cannot be specified at the same time.
         /// </summary>
         [Input("multiCertInfo")]
         public Input<Inputs.ListenerMultiCertInfoArgs>? MultiCertInfo { get; set; }
 
         /// <summary>
-        /// Port of the CLB listener.
+        /// Port of the CLB listener. Port range: [1 - 65535].
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -739,37 +861,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> Protocol { get; set; } = null!;
 
         /// <summary>
-        /// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.
+        /// </summary>
+        [Input("proxyProtocol")]
+        public Input<bool>? ProxyProtocol { get; set; }
+
+        /// <summary>
+        /// The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleExpandTarget")]
+        public Input<bool>? RescheduleExpandTarget { get; set; }
+
+        /// <summary>
+        /// Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleInterval")]
+        public Input<int>? RescheduleInterval { get; set; }
+
+        /// <summary>
+        /// Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleStartTime")]
+        public Input<int>? RescheduleStartTime { get; set; }
+
+        /// <summary>
+        /// The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleTargetZeroWeight")]
+        public Input<bool>? RescheduleTargetZeroWeight { get; set; }
+
+        /// <summary>
+        /// Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleUnhealthy")]
+        public Input<bool>? RescheduleUnhealthy { get; set; }
+
+        /// <summary>
+        /// Scheduling method. Valid values: `WRR` (weighted round-robin), `LEAST_CONN` (least connections). Default is `WRR`. Only applicable to `TCP`/`UDP`/`TCP_SSL`/`QUIC` listeners.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
 
         /// <summary>
-        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// Session persistence type. `NORMAL` (default): default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule. If `QUIC_CID` is selected, `Protocol` must be `UDP`, `Scheduler` must be `WRR`, and only IPv4 is supported.
         /// </summary>
         [Input("sessionType")]
         public Input<string>? SessionType { get; set; }
 
         /// <summary>
-        /// Whether to enable SNAT.
+        /// Whether to enable SNAT (source IP replacement). `True`: enable, `False`: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.
         /// </summary>
         [Input("snatEnable")]
         public Input<bool>? SnatEnable { get; set; }
 
         /// <summary>
-        /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
+        /// Indicates whether SNI is enabled. Only applicable to `HTTPS` listeners. `0`: disabled, `1`: enabled.
         /// </summary>
         [Input("sniSwitch")]
         public Input<bool>? SniSwitch { get; set; }
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means binding ordinary nodes, `TARGETGROUP` means binding a target group. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }
@@ -801,13 +959,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? CertificateSslMode { get; set; }
 
         /// <summary>
-        /// ID of the CLB.
+        /// ID of the CLB instance.
         /// </summary>
         [Input("clbId")]
         public Input<string>? ClbId { get; set; }
 
         /// <summary>
-        /// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
+        /// Data compression mode. Valid values: `Transparent`, `Compatibility`.
+        /// </summary>
+        [Input("dataCompressMode")]
+        public Input<string>? DataCompressMode { get; set; }
+
+        /// <summary>
+        /// Reschedule function: the switch for unbinding backend services. When enabled, rescheduling is triggered when a backend service is unbound. Only supported by `TCP`/`UDP` listeners.
         /// </summary>
         [Input("deregisterTargetRst")]
         public Input<bool>? DeregisterTargetRst { get; set; }
@@ -819,73 +983,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<int>? EndPort { get; set; }
 
         /// <summary>
-        /// Enable H2C switch for intranet HTTP listener.
+        /// Whether to enable H2C for intranet `HTTP` listeners. `True`: enable, `False`: disable (default). When enabled, the listener only supports creating L7 rules with backend forwarding type `GRPC` or `GRPCS`; `GRPC` or `GRPCS` must be explicitly specified in the forwarding type when creating rules.
         /// </summary>
         [Input("h2cSwitch")]
         public Input<bool>? H2cSwitch { get; set; }
 
         /// <summary>
-        /// Health check protocol. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required, which represents the input format of the health check. Valid values: `HEX`, `TEXT`.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the input format of the health check. Valid values: `HEX`, `TEXT`. When `HEX`, the characters of `SendContext`/`RecvContext` can only be selected from `0123456789ABCDEF` and the length must be even. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckContextType")]
         public Input<string>? HealthCheckContextType { get; set; }
 
         /// <summary>
-        /// Health threshold of health check, and the default is `3`. If a success result is returned for the health check for 3 consecutive times, the backend CVM is identified as healthy. The value range is 2-10. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Health threshold. Default 3, meaning the backend is considered healthy after 3 consecutive successful probes. Value range: 2-10.
         /// </summary>
         [Input("healthCheckHealthNum")]
         public Input<int>? HealthCheckHealthNum { get; set; }
 
         /// <summary>
-        /// HTTP health check code of TCP listener, Valid value ranges: [1~31]. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `1`, `2`, `4`, `8`, `16`. `1` means http_1xx, `2` means http_2xx, `4` means http_3xx, `8` means http_4xx, `16` means http_5xx.If you want multiple return codes to indicate health, need to add the corresponding values.
+        /// Health check status code (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Value range: 1-31, default 31. `1`=1xx healthy, `2`=2xx, `4`=3xx, `8`=4xx, `16`=5xx. To treat multiple return codes as healthy, add the corresponding values together.
         /// </summary>
         [Input("healthCheckHttpCode")]
         public Input<int>? HealthCheckHttpCode { get; set; }
 
         /// <summary>
-        /// HTTP health check domain of TCP listener.
+        /// Health check domain, carried in the HTTP Host header (only applicable to HTTP/HTTPS listeners and the HTTP health check method of TCP listeners; for TCP listeners using HTTP health check, this field is required).
         /// </summary>
         [Input("healthCheckHttpDomain")]
         public Input<string>? HealthCheckHttpDomain { get; set; }
 
         /// <summary>
-        /// HTTP health check method of TCP listener. Valid values: `HEAD`, `GET`.
+        /// Health check method (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners). Default `HEAD`. Valid values: `HEAD`, `GET`.
         /// </summary>
         [Input("healthCheckHttpMethod")]
         public Input<string>? HealthCheckHttpMethod { get; set; }
 
         /// <summary>
-        /// HTTP health check path of TCP listener.
+        /// Health check path (only applicable to HTTP/HTTPS forwarding rules and the HTTP health check method of TCP listeners).
         /// </summary>
         [Input("healthCheckHttpPath")]
         public Input<string>? HealthCheckHttpPath { get; set; }
 
         /// <summary>
-        /// The HTTP version of the backend service. When the value of `HealthCheckType` of the health check protocol is `HTTP`, this field is required. Valid values: `HTTP/1.0`, `HTTP/1.1`.
+        /// HTTP version of the backend service. Required when `HealthCheckType` is `HTTP`. Valid values: `HTTP/1.0`, `HTTP/1.1`. Only applicable to `TCP` listeners.
         /// </summary>
         [Input("healthCheckHttpVersion")]
         public Input<string>? HealthCheckHttpVersion { get; set; }
 
         /// <summary>
-        /// Interval time of health check. Valid value ranges: [2~300] sec. and the default is 5 sec. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Health check probe interval in seconds. Default 5. Value range: 2-300 for IPv4 CLB instances and 5-300 for IPv6 CLB instances. Note: some older IPv4 CLB instances have a range of 5-300.
         /// </summary>
         [Input("healthCheckIntervalTime")]
         public Input<int>? HealthCheckIntervalTime { get; set; }
 
         /// <summary>
-        /// The health check port is the port of the backend service by default. Unless you want to specify a specific port, it is recommended to leave it blank. Only applicable to TCP/UDP listener.
+        /// Health check port. Defaults to the backend service port; leave blank unless a specific port is required. Pass `-1` to restore the default. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckPort")]
         public Input<int>? HealthCheckPort { get; set; }
 
         /// <summary>
-        /// It represents the result returned by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only ASCII visible characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the result returned by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckRecvContext")]
         public Input<string>? HealthCheckRecvContext { get; set; }
 
         /// <summary>
-        /// It represents the content of the request sent by the health check. When the value of `HealthCheckType` of the health check protocol is `CUSTOM`, this field is required. Only visible ASCII characters are allowed and the maximum length is 500. When `HealthCheckContextType` value is `HEX`, the characters of SendContext and RecvContext can only be selected in `0123456789ABCDEF` and the length must be even digits.
+        /// Custom probe parameter. Required when `HealthCheckType` is `CUSTOM`, representing the request content sent by the health check. Only ASCII visible characters are allowed, max length 500. Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("healthCheckSendContext")]
         public Input<string>? HealthCheckSendContext { get; set; }
@@ -897,37 +1061,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? HealthCheckSwitch { get; set; }
 
         /// <summary>
-        /// Response timeout of health check. Valid value ranges: [2~60] sec. Default is 2 sec. Response timeout needs to be less than check interval. NOTES: Only supports listeners of `TCP`,`UDP`,`TCP_SSL` protocol.
+        /// Response timeout of health check in seconds. Value range: 2-60, default 2. The response timeout must be less than the check interval.
         /// </summary>
         [Input("healthCheckTimeOut")]
         public Input<int>? HealthCheckTimeOut { get; set; }
 
         /// <summary>
-        /// Protocol used for health check. Valid values: `CUSTOM`, `TCP`, `HTTP`,`HTTPS`, `PING`, `GRPC`.
+        /// Health check protocol. Valid values: `TCP`, `HTTP`, `HTTPS`, `GRPC`, `PING`, `CUSTOM`. UDP listeners support `PING`/`CUSTOM`; TCP listeners support `TCP`/`HTTP`/`CUSTOM`; TCP_SSL/QUIC listeners support `TCP`/`HTTP`; HTTP rules support `HTTP`/`GRPC`; HTTPS rules support `HTTP`/`HTTPS`/`GRPC`. Defaults: `HTTP` for HTTP listeners, `TCP` for TCP/TCP_SSL/QUIC listeners, `PING` for UDP listeners; for HTTPS listeners the default matches the backend forwarding protocol.
         /// </summary>
         [Input("healthCheckType")]
         public Input<string>? HealthCheckType { get; set; }
 
         /// <summary>
-        /// Unhealthy threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, the CVM is identified as unhealthy. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Unhealthy threshold. Default 3, meaning the backend is considered unhealthy after 3 consecutive failed probes. Value range: 2-10.
         /// </summary>
         [Input("healthCheckUnhealthNum")]
         public Input<int>? HealthCheckUnhealthNum { get; set; }
 
         /// <summary>
-        /// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+        /// Health check source IP type. `0`: use the CLB VIP as the source IP, `1`: use a 100.64 IP range as the source IP.
         /// </summary>
         [Input("healthSourceIpType")]
         public Input<int>? HealthSourceIpType { get; set; }
 
         /// <summary>
-        /// Connection idle timeout period (in seconds). It's only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds). Please submit a work order for processing.
+        /// Idle connection timeout. This parameter is only available for TCP/UDP listeners, in seconds. Default: 900s for TCP listeners, 300s for UDP listeners. Value range: 10-900 for shared and dedicated instances; 10-1980 for LCU-supported CLB instances. To set a value beyond the range, please submit a ticket for application.
         /// </summary>
         [Input("idleConnectTimeout")]
         public Input<int>? IdleConnectTimeout { get; set; }
 
         /// <summary>
-        /// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners. Valid values: 0 (disable; default value) and 1 (enable).
+        /// Whether to enable persistent connection (long connection). Only applicable to `HTTP`/`HTTPS` listeners. Valid values: `0` (disable, default), `1` (enable). This feature is currently in beta.
         /// </summary>
         [Input("keepaliveEnable")]
         public Input<int>? KeepaliveEnable { get; set; }
@@ -939,19 +1103,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? ListenerId { get; set; }
 
         /// <summary>
-        /// Name of the CLB listener, and available values can only be Chinese characters, English letters, numbers, underscore and hyphen '-'.
+        /// Name of the CLB listener, 1-80 characters. Supports letters, Chinese and other common international language characters, digits, hyphen '-' and underscore '_' (Unicode supplementary characters such as emoji are not allowed).
         /// </summary>
         [Input("listenerName")]
         public Input<string>? ListenerName { get; set; }
 
         /// <summary>
-        /// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. Certificate and MultiCertInfo cannot be specified at the same time.
+        /// Listener-level maximum concurrent connections. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Input("maxConn")]
+        public Input<int>? MaxConn { get; set; }
+
+        /// <summary>
+        /// Listener-level maximum new connections per second. Currently only supported for performance capacity-type CLB instances with TCP/UDP/TCP_SSL/QUIC listeners. Pass -1 to indicate no limit at the listener level. Basic network instances do not support this parameter.
+        /// </summary>
+        [Input("maxCps")]
+        public Input<int>? MaxCps { get; set; }
+
+        /// <summary>
+        /// Certificate information, supporting multiple server certificates with different algorithm types at the same time. Only applicable to `TCP_SSL` listeners and `HTTPS` listeners with SNI disabled. When creating a `TCP_SSL` listener or an `HTTPS` listener with SNI disabled, at least one of `Certificate`/`MultiCertInfo` must be specified, but they cannot be specified at the same time.
         /// </summary>
         [Input("multiCertInfo")]
         public Input<Inputs.ListenerMultiCertInfoGetArgs>? MultiCertInfo { get; set; }
 
         /// <summary>
-        /// Port of the CLB listener.
+        /// Port of the CLB listener. Port range: [1 - 65535].
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
@@ -963,37 +1139,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? Protocol { get; set; }
 
         /// <summary>
-        /// Scheduling method of the CLB listener, and available values are 'WRR' and 'LEAST_CONN'. The default is 'WRR'. NOTES: The listener of `HTTP` and `HTTPS` protocol additionally supports the `IP Hash` method. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Enable proxy protocol for TCP_SSL and QUIC listeners. Note: this field is not returned by the DescribeListeners API, so it will not be refreshed in state after creation.
+        /// </summary>
+        [Input("proxyProtocol")]
+        public Input<bool>? ProxyProtocol { get; set; }
+
+        /// <summary>
+        /// The rescheduling function, a switch for scaling backend services, triggers rescheduling when backend servers are added or removed. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleExpandTarget")]
+        public Input<bool>? RescheduleExpandTarget { get; set; }
+
+        /// <summary>
+        /// Rescheduled trigger duration, ranging from 0 to 3600 seconds. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleInterval")]
+        public Input<int>? RescheduleInterval { get; set; }
+
+        /// <summary>
+        /// Reschedule the trigger start time, with a value ranging from 0 to 3600 seconds. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleStartTime")]
+        public Input<int>? RescheduleStartTime { get; set; }
+
+        /// <summary>
+        /// The rescheduling function, with a weight of 0 as a switch, triggers rescheduling when the weight of the backend server is set to 0. Only supported by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleTargetZeroWeight")]
+        public Input<bool>? RescheduleTargetZeroWeight { get; set; }
+
+        /// <summary>
+        /// Rescheduling function, health check exception switch. Enabling this switch triggers rescheduling when a backend server fails a health check. Supported only by TCP/UDP listeners.
+        /// </summary>
+        [Input("rescheduleUnhealthy")]
+        public Input<bool>? RescheduleUnhealthy { get; set; }
+
+        /// <summary>
+        /// Scheduling method. Valid values: `WRR` (weighted round-robin), `LEAST_CONN` (least connections). Default is `WRR`. Only applicable to `TCP`/`UDP`/`TCP_SSL`/`QUIC` listeners.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
 
         /// <summary>
-        /// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `tencentcloud.Clb.ListenerRule`.
+        /// Session persistence time in seconds. Value range: 30-3600, default 0 (disabled). Only applicable to `TCP`/`UDP` listeners.
         /// </summary>
         [Input("sessionExpireTime")]
         public Input<int>? SessionExpireTime { get; set; }
 
         /// <summary>
-        /// Session persistence type. Valid values: `NORMAL`: the default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners. If this field is not specified, the default session persistence type will be used.
+        /// Session persistence type. `NORMAL` (default): default session persistence type; `QUIC_CID`: session persistence by QUIC connection ID. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule. If `QUIC_CID` is selected, `Protocol` must be `UDP`, `Scheduler` must be `WRR`, and only IPv4 is supported.
         /// </summary>
         [Input("sessionType")]
         public Input<string>? SessionType { get; set; }
 
         /// <summary>
-        /// Whether to enable SNAT.
+        /// Whether to enable SNAT (source IP replacement). `True`: enable, `False`: disable (default). Note: when SNAT is enabled, the client source IP is replaced and the pass-through client source IP option is disabled, and vice versa.
         /// </summary>
         [Input("snatEnable")]
         public Input<bool>? SnatEnable { get; set; }
 
         /// <summary>
-        /// Indicates whether SNI is enabled, and only supported with protocol `HTTPS`. If enabled, you can set a certificate for each rule in `tencentcloud.Clb.ListenerRule`, otherwise all rules have a certificate.
+        /// Indicates whether SNI is enabled. Only applicable to `HTTPS` listeners. `0`: disabled, `1`: enabled.
         /// </summary>
         [Input("sniSwitch")]
         public Input<bool>? SniSwitch { get; set; }
 
         /// <summary>
-        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group. NOTES: TCP/UDP/TCP_SSL listener must configuration, HTTP/HTTPS listener needs to be configured in tencentcloud_clb_listener_rule.
+        /// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means binding ordinary nodes, `TARGETGROUP` means binding a target group. Only applicable to `TCP`/`UDP` listeners; L7 listeners should be configured in the forwarding rule.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }

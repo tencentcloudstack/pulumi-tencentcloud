@@ -90,11 +90,11 @@ export interface AttachmentState {
     /**
      * ID of the ENI.
      */
-    eniId?: pulumi.Input<string>;
+    eniId?: pulumi.Input<string | undefined>;
     /**
      * ID of the instance which bind the ENI.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

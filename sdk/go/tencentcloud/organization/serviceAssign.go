@@ -85,7 +85,6 @@ import (
 // ## Import
 //
 // organization service assign can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Organization/serviceAssign:ServiceAssign example 15
 // ```

@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// tse waf_domains can be imported using the id, e.g.
+// tse wafDomains can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tse/wafDomains:WafDomains waf_domains waf_domains_id

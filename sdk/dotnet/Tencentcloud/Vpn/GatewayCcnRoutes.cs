@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Import
     /// 
-    /// vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
+    /// vpc VpnGatewayCcnRoutes can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id

@@ -38,6 +38,7 @@ import (
 //				EndOffset:     pulumi.String("-1"),
 //				Edition:       pulumi.String("sparta-waf"),
 //				SessionName:   pulumi.String("terraformDemo"),
+//				Key:           pulumi.String("sessionId"),
 //			})
 //			if err != nil {
 //				return err
@@ -50,7 +51,7 @@ import (
 //
 // ## Import
 //
-// waf cc_session can be imported using the id, e.g.
+// waf ccSession can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
@@ -68,6 +69,8 @@ type CcSession struct {
 	EndMat pulumi.StringOutput `pulumi:"endMat"`
 	// End offset position, when Category is location.
 	EndOffset pulumi.StringOutput `pulumi:"endOffset"`
+	// Precise-match session key, configured when Category is precise matching.
+	Key pulumi.StringOutput `pulumi:"key"`
 	// Session identifier.
 	KeyOrStartMat pulumi.StringOutput `pulumi:"keyOrStartMat"`
 	// Session ID.
@@ -147,6 +150,8 @@ type ccSessionState struct {
 	EndMat *string `pulumi:"endMat"`
 	// End offset position, when Category is location.
 	EndOffset *string `pulumi:"endOffset"`
+	// Precise-match session key, configured when Category is precise matching.
+	Key *string `pulumi:"key"`
 	// Session identifier.
 	KeyOrStartMat *string `pulumi:"keyOrStartMat"`
 	// Session ID.
@@ -170,6 +175,8 @@ type CcSessionState struct {
 	EndMat pulumi.StringPtrInput
 	// End offset position, when Category is location.
 	EndOffset pulumi.StringPtrInput
+	// Precise-match session key, configured when Category is precise matching.
+	Key pulumi.StringPtrInput
 	// Session identifier.
 	KeyOrStartMat pulumi.StringPtrInput
 	// Session ID.
@@ -197,6 +204,8 @@ type ccSessionArgs struct {
 	EndMat string `pulumi:"endMat"`
 	// End offset position, when Category is location.
 	EndOffset string `pulumi:"endOffset"`
+	// Precise-match session key, configured when Category is precise matching.
+	Key *string `pulumi:"key"`
 	// Session identifier.
 	KeyOrStartMat string `pulumi:"keyOrStartMat"`
 	// Session Name.
@@ -219,6 +228,8 @@ type CcSessionArgs struct {
 	EndMat pulumi.StringInput
 	// End offset position, when Category is location.
 	EndOffset pulumi.StringInput
+	// Precise-match session key, configured when Category is precise matching.
+	Key pulumi.StringPtrInput
 	// Session identifier.
 	KeyOrStartMat pulumi.StringInput
 	// Session Name.
@@ -339,6 +350,11 @@ func (o CcSessionOutput) EndMat() pulumi.StringOutput {
 // End offset position, when Category is location.
 func (o CcSessionOutput) EndOffset() pulumi.StringOutput {
 	return o.ApplyT(func(v *CcSession) pulumi.StringOutput { return v.EndOffset }).(pulumi.StringOutput)
+}
+
+// Precise-match session key, configured when Category is precise matching.
+func (o CcSessionOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v *CcSession) pulumi.StringOutput { return v.Key }).(pulumi.StringOutput)
 }
 
 // Session identifier.

@@ -82,12 +82,8 @@ type GetCenterGroupsResult struct {
 }
 
 func GetCenterGroupsOutput(ctx *pulumi.Context, args GetCenterGroupsOutputArgs, opts ...pulumi.InvokeOption) GetCenterGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCenterGroupsResultOutput, error) {
-			args := v.(GetCenterGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Identity/getCenterGroups:getCenterGroups", args, GetCenterGroupsResultOutput{}, options).(GetCenterGroupsResultOutput), nil
-		}).(GetCenterGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Identity/getCenterGroups:getCenterGroups", args, GetCenterGroupsResultOutput{}, options).(GetCenterGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getCenterGroups.

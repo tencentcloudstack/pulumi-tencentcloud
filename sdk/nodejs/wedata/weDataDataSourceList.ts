@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSourceList({});
+ * const example = tencentcloud.wedata.WeDataDataSourceList({});
  * ```
  *
  * ### Query By filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSourceList({
+ * const example = tencentcloud.wedata.WeDataDataSourceList({
  *     orderFields: [{
  *         name: "create_time",
  *         direction: "DESC",
@@ -93,7 +93,7 @@ export interface WeDataDataSourceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSourceList({});
+ * const example = tencentcloud.wedata.WeDataDataSourceList({});
  * ```
  *
  * ### Query By filter
@@ -102,7 +102,7 @@ export interface WeDataDataSourceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.WeDataDataSourceList({
+ * const example = tencentcloud.wedata.WeDataDataSourceList({
  *     orderFields: [{
  *         name: "create_time",
  *         direction: "DESC",
@@ -131,13 +131,13 @@ export interface WeDataDataSourceListOutputArgs {
     /**
      * Filters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Wedata.WeDataDataSourceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Wedata.WeDataDataSourceListFilterArgs>[] | undefined>;
     /**
      * OrderFields.
      */
-    orderFields?: pulumi.Input<pulumi.Input<inputs.Wedata.WeDataDataSourceListOrderFieldArgs>[]>;
+    orderFields?: pulumi.Input<pulumi.Input<inputs.Wedata.WeDataDataSourceListOrderFieldArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

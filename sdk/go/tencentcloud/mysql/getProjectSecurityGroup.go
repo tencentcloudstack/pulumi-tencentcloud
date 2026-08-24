@@ -68,12 +68,8 @@ type GetProjectSecurityGroupResult struct {
 }
 
 func GetProjectSecurityGroupOutput(ctx *pulumi.Context, args GetProjectSecurityGroupOutputArgs, opts ...pulumi.InvokeOption) GetProjectSecurityGroupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProjectSecurityGroupResultOutput, error) {
-			args := v.(GetProjectSecurityGroupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args, GetProjectSecurityGroupResultOutput{}, options).(GetProjectSecurityGroupResultOutput), nil
-		}).(GetProjectSecurityGroupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getProjectSecurityGroup:getProjectSecurityGroup", args, GetProjectSecurityGroupResultOutput{}, options).(GetProjectSecurityGroupResultOutput)
 }
 
 // A collection of arguments for invoking getProjectSecurityGroup.

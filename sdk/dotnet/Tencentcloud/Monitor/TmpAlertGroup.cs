@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 {
     /// <summary>
-    /// Provides a resource to create a monitor TmpAlertGroup
+    /// Provides a resource to create a monitor tmp alert group
     /// 
     /// ## Example Usage
     /// 
@@ -87,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Import
     /// 
-    /// monitor tmp_alert_group can be imported using the id, e.g.
+    /// monitor tmp alert group can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw

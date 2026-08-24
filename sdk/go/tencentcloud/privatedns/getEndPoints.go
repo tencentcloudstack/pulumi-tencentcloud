@@ -119,12 +119,8 @@ type GetEndPointsResult struct {
 }
 
 func GetEndPointsOutput(ctx *pulumi.Context, args GetEndPointsOutputArgs, opts ...pulumi.InvokeOption) GetEndPointsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEndPointsResultOutput, error) {
-			args := v.(GetEndPointsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:PrivateDns/getEndPoints:getEndPoints", args, GetEndPointsResultOutput{}, options).(GetEndPointsResultOutput), nil
-		}).(GetEndPointsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:PrivateDns/getEndPoints:getEndPoints", args, GetEndPointsResultOutput{}, options).(GetEndPointsResultOutput)
 }
 
 // A collection of arguments for invoking getEndPoints.

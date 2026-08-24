@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -120,7 +120,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver config_backup_strategy can be imported using the id, e.g.
+ * sqlserver configBackupStrategy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl
@@ -258,51 +258,51 @@ export interface ConfigBackupStrategyState {
     /**
      * The days of the week on which backup will be performed when `BackupType` is weekly. If data backup retention period is less than 7 days, the values will be 1-7, indicating that backup will be performed everyday by default; if data backup retention period is greater than or equal to 7 days, the values will be at least any two days, indicating that backup will be performed at least twice in a week by default.
      */
-    backupCycles?: pulumi.Input<pulumi.Input<number>[]>;
+    backupCycles?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Backup interval in days when the BackupType is daily. The current value can only be 1.
      */
-    backupDay?: pulumi.Input<number>;
+    backupDay?: pulumi.Input<number | undefined>;
     /**
      * Backup mode. Valid values: masterPkg (archive the backup files of the primary node), masterNoPkg (do not archive the backup files of the primary node), slavePkg (archive the backup files of the replica node), slaveNoPkg (do not archive the backup files of the replica node). Backup files of the replica node are supported only when Always On disaster recovery is enabled.
      */
-    backupModel?: pulumi.Input<string>;
+    backupModel?: pulumi.Input<string | undefined>;
     /**
      * Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
      */
-    backupSaveDays?: pulumi.Input<number>;
+    backupSaveDays?: pulumi.Input<number | undefined>;
     /**
      * Backup time. Value range: an integer from 0 to 23.
      */
-    backupTime?: pulumi.Input<number>;
+    backupTime?: pulumi.Input<number | undefined>;
     /**
      * Backup type. Valid values: weekly (when length(BackupDay) <=7 && length(BackupDay) >=2), daily (when length(BackupDay)=1). Default value: daily.
      */
-    backupType?: pulumi.Input<string>;
+    backupType?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The number of retained archive backups. Default value: 1.
      */
-    regularBackupCounts?: pulumi.Input<number>;
+    regularBackupCounts?: pulumi.Input<number | undefined>;
     /**
      * Archive backup status. Valid values: enable (enabled); disable (disabled). Default value: disable.
      */
-    regularBackupEnable?: pulumi.Input<string>;
+    regularBackupEnable?: pulumi.Input<string | undefined>;
     /**
      * Archive backup retention days. Value range: 90-3650 days. Default value: 365 days.
      */
-    regularBackupSaveDays?: pulumi.Input<number>;
+    regularBackupSaveDays?: pulumi.Input<number | undefined>;
     /**
      * Archive backup start date in YYYY-MM-DD format, which is the current time by default.
      */
-    regularBackupStartTime?: pulumi.Input<string>;
+    regularBackupStartTime?: pulumi.Input<string | undefined>;
     /**
      * Archive backup policy. Valid values: years (yearly); quarters (quarterly); months(monthly); Default value: `months`.
      */
-    regularBackupStrategy?: pulumi.Input<string>;
+    regularBackupStrategy?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -312,27 +312,27 @@ export interface ConfigBackupStrategyArgs {
     /**
      * The days of the week on which backup will be performed when `BackupType` is weekly. If data backup retention period is less than 7 days, the values will be 1-7, indicating that backup will be performed everyday by default; if data backup retention period is greater than or equal to 7 days, the values will be at least any two days, indicating that backup will be performed at least twice in a week by default.
      */
-    backupCycles?: pulumi.Input<pulumi.Input<number>[]>;
+    backupCycles?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Backup interval in days when the BackupType is daily. The current value can only be 1.
      */
-    backupDay?: pulumi.Input<number>;
+    backupDay?: pulumi.Input<number | undefined>;
     /**
      * Backup mode. Valid values: masterPkg (archive the backup files of the primary node), masterNoPkg (do not archive the backup files of the primary node), slavePkg (archive the backup files of the replica node), slaveNoPkg (do not archive the backup files of the replica node). Backup files of the replica node are supported only when Always On disaster recovery is enabled.
      */
-    backupModel?: pulumi.Input<string>;
+    backupModel?: pulumi.Input<string | undefined>;
     /**
      * Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
      */
-    backupSaveDays?: pulumi.Input<number>;
+    backupSaveDays?: pulumi.Input<number | undefined>;
     /**
      * Backup time. Value range: an integer from 0 to 23.
      */
-    backupTime?: pulumi.Input<number>;
+    backupTime?: pulumi.Input<number | undefined>;
     /**
      * Backup type. Valid values: weekly (when length(BackupDay) <=7 && length(BackupDay) >=2), daily (when length(BackupDay)=1). Default value: daily.
      */
-    backupType?: pulumi.Input<string>;
+    backupType?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -340,21 +340,21 @@ export interface ConfigBackupStrategyArgs {
     /**
      * The number of retained archive backups. Default value: 1.
      */
-    regularBackupCounts?: pulumi.Input<number>;
+    regularBackupCounts?: pulumi.Input<number | undefined>;
     /**
      * Archive backup status. Valid values: enable (enabled); disable (disabled). Default value: disable.
      */
-    regularBackupEnable?: pulumi.Input<string>;
+    regularBackupEnable?: pulumi.Input<string | undefined>;
     /**
      * Archive backup retention days. Value range: 90-3650 days. Default value: 365 days.
      */
-    regularBackupSaveDays?: pulumi.Input<number>;
+    regularBackupSaveDays?: pulumi.Input<number | undefined>;
     /**
      * Archive backup start date in YYYY-MM-DD format, which is the current time by default.
      */
-    regularBackupStartTime?: pulumi.Input<string>;
+    regularBackupStartTime?: pulumi.Input<string | undefined>;
     /**
      * Archive backup policy. Valid values: years (yearly); quarters (quarterly); months(monthly); Default value: `months`.
      */
-    regularBackupStrategy?: pulumi.Input<string>;
+    regularBackupStrategy?: pulumi.Input<string | undefined>;
 }

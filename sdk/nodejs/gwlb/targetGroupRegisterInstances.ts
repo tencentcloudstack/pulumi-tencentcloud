@@ -52,7 +52,7 @@ import * as utilities from "../utilities";
  *         unHealthNum: 3,
  *     },
  * });
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -82,7 +82,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gwlb gwlb_target_group_register_instances can be imported using the id, e.g.
+ * gwlb gwlbTargetGroupRegisterInstances can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gwlb/targetGroupRegisterInstances:TargetGroupRegisterInstances gwlb_target_group_register_instances gwlb_target_group_register_instances_id
@@ -163,11 +163,11 @@ export interface TargetGroupRegisterInstancesState {
     /**
      * Target group ID.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
     /**
      * Server instance array.
      */
-    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Gwlb.TargetGroupRegisterInstancesTargetGroupInstance>[]>;
+    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Gwlb.TargetGroupRegisterInstancesTargetGroupInstance>[] | undefined>;
 }
 
 /**

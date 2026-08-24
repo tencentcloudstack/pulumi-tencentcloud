@@ -105,11 +105,11 @@ export interface UpdateRowFilterOperationState {
     /**
      * The new filter policy.
      */
-    policy?: pulumi.Input<inputs.Dlc.UpdateRowFilterOperationPolicy>;
+    policy?: pulumi.Input<inputs.Dlc.UpdateRowFilterOperationPolicy | undefined>;
     /**
      * The ID of the row filter policy, which can be obtained using the `DescribeUserInfo` or `DescribeWorkGroupInfo` API.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
 }
 
 /**

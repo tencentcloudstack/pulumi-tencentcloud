@@ -102,15 +102,15 @@ export interface AccessGroupState {
     /**
      * Create time of the access group.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the access group, and max length is 255.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the access group, and max length is 64.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -120,9 +120,9 @@ export interface AccessGroupArgs {
     /**
      * Description of the access group, and max length is 255.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the access group, and max length is 64.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  * const namespace = config.get("namespace") || "default";
  * const _function = config.get("function") || "keep-1676351130";
  * const functionVersion = config.get("functionVersion") || "$LATEST";
- * const foo = tencentcloud.Cam.getUsers({});
+ * const foo = tencentcloud.cam.getUsers({});
  * const fooEventBus = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus",
  *     description: "event bus desc",
@@ -85,7 +85,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * eb event_target can be imported using the id, e.g.
+ * eb eventTarget can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
@@ -202,31 +202,31 @@ export interface EventTargetState {
     /**
      * Maximum number of events for batch delivery.
      */
-    batchEventCount?: pulumi.Input<number>;
+    batchEventCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum waiting time for batch delivery.
      */
-    batchTimeout?: pulumi.Input<number>;
+    batchTimeout?: pulumi.Input<number | undefined>;
     /**
      * Enable batch delivery.
      */
-    enableBatchDelivery?: pulumi.Input<boolean>;
+    enableBatchDelivery?: pulumi.Input<boolean | undefined>;
     /**
      * event bus id.
      */
-    eventBusId?: pulumi.Input<string>;
+    eventBusId?: pulumi.Input<string | undefined>;
     /**
      * event rule id.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * target description.
      */
-    targetDescription?: pulumi.Input<inputs.Eb.EventTargetTargetDescription>;
+    targetDescription?: pulumi.Input<inputs.Eb.EventTargetTargetDescription | undefined>;
     /**
      * target type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -236,15 +236,15 @@ export interface EventTargetArgs {
     /**
      * Maximum number of events for batch delivery.
      */
-    batchEventCount?: pulumi.Input<number>;
+    batchEventCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum waiting time for batch delivery.
      */
-    batchTimeout?: pulumi.Input<number>;
+    batchTimeout?: pulumi.Input<number | undefined>;
     /**
      * Enable batch delivery.
      */
-    enableBatchDelivery?: pulumi.Input<boolean>;
+    enableBatchDelivery?: pulumi.Input<boolean | undefined>;
     /**
      * event bus id.
      */

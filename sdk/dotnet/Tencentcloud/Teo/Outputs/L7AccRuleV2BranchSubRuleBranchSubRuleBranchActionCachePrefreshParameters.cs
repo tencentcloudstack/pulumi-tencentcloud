@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly int? CacheTimePercent;
         /// <summary>
-        /// Whether to enable cache prefresh. values: enable; off: disable.
+        /// Whether to enable cache prefresh. values: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
 

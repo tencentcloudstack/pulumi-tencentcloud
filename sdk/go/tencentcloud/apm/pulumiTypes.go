@@ -412,6 +412,704 @@ func (o SampleConfigTagArrayOutput) Index(i pulumi.IntInput) SampleConfigTagOutp
 	}).(SampleConfigTagOutput)
 }
 
+type GetInstancesInstanceList struct {
+	// Storage usage in MB.
+	AmountOfUsedStorage float64 `pulumi:"amountOfUsedStorage"`
+	// App ID.
+	AppId int `pulumi:"appId"`
+	// Whether billing is enabled. 0: not enabled, 1: enabled.
+	BillingInstance int `pulumi:"billingInstance"`
+	// Client application count.
+	ClientCount int `pulumi:"clientCount"`
+	// Daily reported span count.
+	CountOfReportSpanPerDay int `pulumi:"countOfReportSpanPerDay"`
+	// Creator UIN.
+	CreateUin string `pulumi:"createUin"`
+	// Custom display tag list.
+	CustomShowTags []string `pulumi:"customShowTags"`
+	// Associated dashboard ID.
+	DashboardTopicId string `pulumi:"dashboardTopicId"`
+	// Whether it is the default TSF instance. 0: no, 1: yes.
+	DefaultTsf int `pulumi:"defaultTsf"`
+	// Instance description.
+	Description string `pulumi:"description"`
+	// Error rate threshold.
+	ErrRateThreshold int `pulumi:"errRateThreshold"`
+	// Error sampling switch.
+	ErrorSample int `pulumi:"errorSample"`
+	// Whether it is free edition.
+	Free int `pulumi:"free"`
+	// Filter by instance ID (fuzzy match).
+	InstanceId string `pulumi:"instanceId"`
+	// Whether delete any file detection is enabled. 0: off, 1: on.
+	IsDeleteAnyFileAnalysis int `pulumi:"isDeleteAnyFileAnalysis"`
+	// Whether deserialization detection is enabled. 0: off, 1: on.
+	IsDeserializationAnalysis int `pulumi:"isDeserializationAnalysis"`
+	// Whether directory traversal detection is enabled. 0: off, 1: on.
+	IsDirectoryTraversalAnalysis int `pulumi:"isDirectoryTraversalAnalysis"`
+	// Whether expression injection detection is enabled. 0: off, 1: on.
+	IsExpressionInjectionAnalysis int `pulumi:"isExpressionInjectionAnalysis"`
+	// Whether include any file detection is enabled. 0: off, 1: on.
+	IsIncludeAnyFileAnalysis int `pulumi:"isIncludeAnyFileAnalysis"`
+	// Whether instrumentation vulnerability scan is enabled. 0: off, 1: on.
+	IsInstrumentationVulnerabilityScan int `pulumi:"isInstrumentationVulnerabilityScan"`
+	// Whether JNDI injection detection is enabled. 0: off, 1: on.
+	IsJndiInjectionAnalysis int `pulumi:"isJndiInjectionAnalysis"`
+	// Whether JNI injection detection is enabled. 0: off, 1: on.
+	IsJniInjectionAnalysis int `pulumi:"isJniInjectionAnalysis"`
+	// Whether memory hijacking detection is enabled. 0: off, 1: on.
+	IsMemoryHijackingAnalysis int `pulumi:"isMemoryHijackingAnalysis"`
+	// Whether read any file detection is enabled. 0: off, 1: on.
+	IsReadAnyFileAnalysis int `pulumi:"isReadAnyFileAnalysis"`
+	// Whether dashboard is associated. 0: off, 1: on.
+	IsRelatedDashboard int `pulumi:"isRelatedDashboard"`
+	// Log feature switch. 0: off, 1: on.
+	IsRelatedLog int `pulumi:"isRelatedLog"`
+	// Whether remote command execution detection is enabled. 0: off, 1: on.
+	IsRemoteCommandExecutionAnalysis int `pulumi:"isRemoteCommandExecutionAnalysis"`
+	// Whether script engine injection detection is enabled. 0: off, 1: on.
+	IsScriptEngineInjectionAnalysis int `pulumi:"isScriptEngineInjectionAnalysis"`
+	// Whether SQL injection analysis is enabled. 0: off, 1: on.
+	IsSqlInjectionAnalysis int `pulumi:"isSqlInjectionAnalysis"`
+	// Whether template engine injection detection is enabled. 0: off, 1: on.
+	IsTemplateEngineInjectionAnalysis int `pulumi:"isTemplateEngineInjectionAnalysis"`
+	// Whether upload any file detection is enabled. 0: off, 1: on.
+	IsUploadAnyFileAnalysis int `pulumi:"isUploadAnyFileAnalysis"`
+	// Whether webshell backdoor detection is enabled. 0: off, 1: on.
+	IsWebshellBackdoorAnalysis int `pulumi:"isWebshellBackdoorAnalysis"`
+	// CLS index type. 0: full-text index, 1: key-value index.
+	LogIndexType int `pulumi:"logIndexType"`
+	// CLS log region.
+	LogRegion string `pulumi:"logRegion"`
+	// CLS log set.
+	LogSet string `pulumi:"logSet"`
+	// Log source.
+	LogSource string `pulumi:"logSource"`
+	// Log topic ID.
+	LogTopicId string `pulumi:"logTopicId"`
+	// TraceId index key, effective when CLS index type is key-value.
+	LogTraceIdKey string `pulumi:"logTraceIdKey"`
+	// Metric data retention duration in days.
+	MetricDuration int `pulumi:"metricDuration"`
+	// Instance name.
+	Name string `pulumi:"name"`
+	// Billing mode.
+	PayMode int `pulumi:"payMode"`
+	// Whether pay mode is effective.
+	PayModeEffective bool `pulumi:"payModeEffective"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Response duration warning threshold in ms.
+	ResponseDurationWarningThreshold int `pulumi:"responseDurationWarningThreshold"`
+	// Sampling rate.
+	SampleRate int `pulumi:"sampleRate"`
+	// Service count.
+	ServiceCount int `pulumi:"serviceCount"`
+	// Slow request saved threshold in ms.
+	SlowRequestSavedThreshold int `pulumi:"slowRequestSavedThreshold"`
+	// Daily span count quota.
+	SpanDailyCounters int `pulumi:"spanDailyCounters"`
+	// Instance status.
+	Status int `pulumi:"status"`
+	// Throttling reason. 1: official version quota, 2: trial version quota, 4: trial expired, 8: account overdue.
+	StopReason int `pulumi:"stopReason"`
+	// Filter by tags.
+	Tags []GetInstancesInstanceListTag `pulumi:"tags"`
+	// Instance authentication token.
+	Token string `pulumi:"token"`
+	// Active application count in recent 2 days.
+	TotalCount int `pulumi:"totalCount"`
+	// Trace data retention duration.
+	TraceDuration int `pulumi:"traceDuration"`
+	// URL long segment convergence threshold.
+	UrlLongSegmentThreshold int `pulumi:"urlLongSegmentThreshold"`
+	// URL number segment convergence threshold.
+	UrlNumberSegmentThreshold int `pulumi:"urlNumberSegmentThreshold"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//	GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// Storage usage in MB.
+	AmountOfUsedStorage pulumi.Float64Input `pulumi:"amountOfUsedStorage"`
+	// App ID.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Whether billing is enabled. 0: not enabled, 1: enabled.
+	BillingInstance pulumi.IntInput `pulumi:"billingInstance"`
+	// Client application count.
+	ClientCount pulumi.IntInput `pulumi:"clientCount"`
+	// Daily reported span count.
+	CountOfReportSpanPerDay pulumi.IntInput `pulumi:"countOfReportSpanPerDay"`
+	// Creator UIN.
+	CreateUin pulumi.StringInput `pulumi:"createUin"`
+	// Custom display tag list.
+	CustomShowTags pulumi.StringArrayInput `pulumi:"customShowTags"`
+	// Associated dashboard ID.
+	DashboardTopicId pulumi.StringInput `pulumi:"dashboardTopicId"`
+	// Whether it is the default TSF instance. 0: no, 1: yes.
+	DefaultTsf pulumi.IntInput `pulumi:"defaultTsf"`
+	// Instance description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Error rate threshold.
+	ErrRateThreshold pulumi.IntInput `pulumi:"errRateThreshold"`
+	// Error sampling switch.
+	ErrorSample pulumi.IntInput `pulumi:"errorSample"`
+	// Whether it is free edition.
+	Free pulumi.IntInput `pulumi:"free"`
+	// Filter by instance ID (fuzzy match).
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Whether delete any file detection is enabled. 0: off, 1: on.
+	IsDeleteAnyFileAnalysis pulumi.IntInput `pulumi:"isDeleteAnyFileAnalysis"`
+	// Whether deserialization detection is enabled. 0: off, 1: on.
+	IsDeserializationAnalysis pulumi.IntInput `pulumi:"isDeserializationAnalysis"`
+	// Whether directory traversal detection is enabled. 0: off, 1: on.
+	IsDirectoryTraversalAnalysis pulumi.IntInput `pulumi:"isDirectoryTraversalAnalysis"`
+	// Whether expression injection detection is enabled. 0: off, 1: on.
+	IsExpressionInjectionAnalysis pulumi.IntInput `pulumi:"isExpressionInjectionAnalysis"`
+	// Whether include any file detection is enabled. 0: off, 1: on.
+	IsIncludeAnyFileAnalysis pulumi.IntInput `pulumi:"isIncludeAnyFileAnalysis"`
+	// Whether instrumentation vulnerability scan is enabled. 0: off, 1: on.
+	IsInstrumentationVulnerabilityScan pulumi.IntInput `pulumi:"isInstrumentationVulnerabilityScan"`
+	// Whether JNDI injection detection is enabled. 0: off, 1: on.
+	IsJndiInjectionAnalysis pulumi.IntInput `pulumi:"isJndiInjectionAnalysis"`
+	// Whether JNI injection detection is enabled. 0: off, 1: on.
+	IsJniInjectionAnalysis pulumi.IntInput `pulumi:"isJniInjectionAnalysis"`
+	// Whether memory hijacking detection is enabled. 0: off, 1: on.
+	IsMemoryHijackingAnalysis pulumi.IntInput `pulumi:"isMemoryHijackingAnalysis"`
+	// Whether read any file detection is enabled. 0: off, 1: on.
+	IsReadAnyFileAnalysis pulumi.IntInput `pulumi:"isReadAnyFileAnalysis"`
+	// Whether dashboard is associated. 0: off, 1: on.
+	IsRelatedDashboard pulumi.IntInput `pulumi:"isRelatedDashboard"`
+	// Log feature switch. 0: off, 1: on.
+	IsRelatedLog pulumi.IntInput `pulumi:"isRelatedLog"`
+	// Whether remote command execution detection is enabled. 0: off, 1: on.
+	IsRemoteCommandExecutionAnalysis pulumi.IntInput `pulumi:"isRemoteCommandExecutionAnalysis"`
+	// Whether script engine injection detection is enabled. 0: off, 1: on.
+	IsScriptEngineInjectionAnalysis pulumi.IntInput `pulumi:"isScriptEngineInjectionAnalysis"`
+	// Whether SQL injection analysis is enabled. 0: off, 1: on.
+	IsSqlInjectionAnalysis pulumi.IntInput `pulumi:"isSqlInjectionAnalysis"`
+	// Whether template engine injection detection is enabled. 0: off, 1: on.
+	IsTemplateEngineInjectionAnalysis pulumi.IntInput `pulumi:"isTemplateEngineInjectionAnalysis"`
+	// Whether upload any file detection is enabled. 0: off, 1: on.
+	IsUploadAnyFileAnalysis pulumi.IntInput `pulumi:"isUploadAnyFileAnalysis"`
+	// Whether webshell backdoor detection is enabled. 0: off, 1: on.
+	IsWebshellBackdoorAnalysis pulumi.IntInput `pulumi:"isWebshellBackdoorAnalysis"`
+	// CLS index type. 0: full-text index, 1: key-value index.
+	LogIndexType pulumi.IntInput `pulumi:"logIndexType"`
+	// CLS log region.
+	LogRegion pulumi.StringInput `pulumi:"logRegion"`
+	// CLS log set.
+	LogSet pulumi.StringInput `pulumi:"logSet"`
+	// Log source.
+	LogSource pulumi.StringInput `pulumi:"logSource"`
+	// Log topic ID.
+	LogTopicId pulumi.StringInput `pulumi:"logTopicId"`
+	// TraceId index key, effective when CLS index type is key-value.
+	LogTraceIdKey pulumi.StringInput `pulumi:"logTraceIdKey"`
+	// Metric data retention duration in days.
+	MetricDuration pulumi.IntInput `pulumi:"metricDuration"`
+	// Instance name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Billing mode.
+	PayMode pulumi.IntInput `pulumi:"payMode"`
+	// Whether pay mode is effective.
+	PayModeEffective pulumi.BoolInput `pulumi:"payModeEffective"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Response duration warning threshold in ms.
+	ResponseDurationWarningThreshold pulumi.IntInput `pulumi:"responseDurationWarningThreshold"`
+	// Sampling rate.
+	SampleRate pulumi.IntInput `pulumi:"sampleRate"`
+	// Service count.
+	ServiceCount pulumi.IntInput `pulumi:"serviceCount"`
+	// Slow request saved threshold in ms.
+	SlowRequestSavedThreshold pulumi.IntInput `pulumi:"slowRequestSavedThreshold"`
+	// Daily span count quota.
+	SpanDailyCounters pulumi.IntInput `pulumi:"spanDailyCounters"`
+	// Instance status.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Throttling reason. 1: official version quota, 2: trial version quota, 4: trial expired, 8: account overdue.
+	StopReason pulumi.IntInput `pulumi:"stopReason"`
+	// Filter by tags.
+	Tags GetInstancesInstanceListTagArrayInput `pulumi:"tags"`
+	// Instance authentication token.
+	Token pulumi.StringInput `pulumi:"token"`
+	// Active application count in recent 2 days.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+	// Trace data retention duration.
+	TraceDuration pulumi.IntInput `pulumi:"traceDuration"`
+	// URL long segment convergence threshold.
+	UrlLongSegmentThreshold pulumi.IntInput `pulumi:"urlLongSegmentThreshold"`
+	// URL number segment convergence threshold.
+	UrlNumberSegmentThreshold pulumi.IntInput `pulumi:"urlNumberSegmentThreshold"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// Storage usage in MB.
+func (o GetInstancesInstanceListOutput) AmountOfUsedStorage() pulumi.Float64Output {
+	return o.ApplyT(func(v GetInstancesInstanceList) float64 { return v.AmountOfUsedStorage }).(pulumi.Float64Output)
+}
+
+// App ID.
+func (o GetInstancesInstanceListOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Whether billing is enabled. 0: not enabled, 1: enabled.
+func (o GetInstancesInstanceListOutput) BillingInstance() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.BillingInstance }).(pulumi.IntOutput)
+}
+
+// Client application count.
+func (o GetInstancesInstanceListOutput) ClientCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ClientCount }).(pulumi.IntOutput)
+}
+
+// Daily reported span count.
+func (o GetInstancesInstanceListOutput) CountOfReportSpanPerDay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.CountOfReportSpanPerDay }).(pulumi.IntOutput)
+}
+
+// Creator UIN.
+func (o GetInstancesInstanceListOutput) CreateUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateUin }).(pulumi.StringOutput)
+}
+
+// Custom display tag list.
+func (o GetInstancesInstanceListOutput) CustomShowTags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []string { return v.CustomShowTags }).(pulumi.StringArrayOutput)
+}
+
+// Associated dashboard ID.
+func (o GetInstancesInstanceListOutput) DashboardTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DashboardTopicId }).(pulumi.StringOutput)
+}
+
+// Whether it is the default TSF instance. 0: no, 1: yes.
+func (o GetInstancesInstanceListOutput) DefaultTsf() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.DefaultTsf }).(pulumi.IntOutput)
+}
+
+// Instance description.
+func (o GetInstancesInstanceListOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Error rate threshold.
+func (o GetInstancesInstanceListOutput) ErrRateThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ErrRateThreshold }).(pulumi.IntOutput)
+}
+
+// Error sampling switch.
+func (o GetInstancesInstanceListOutput) ErrorSample() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ErrorSample }).(pulumi.IntOutput)
+}
+
+// Whether it is free edition.
+func (o GetInstancesInstanceListOutput) Free() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Free }).(pulumi.IntOutput)
+}
+
+// Filter by instance ID (fuzzy match).
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Whether delete any file detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsDeleteAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsDeleteAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether deserialization detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsDeserializationAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsDeserializationAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether directory traversal detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsDirectoryTraversalAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsDirectoryTraversalAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether expression injection detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsExpressionInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsExpressionInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether include any file detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsIncludeAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsIncludeAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether instrumentation vulnerability scan is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsInstrumentationVulnerabilityScan() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsInstrumentationVulnerabilityScan }).(pulumi.IntOutput)
+}
+
+// Whether JNDI injection detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsJndiInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsJndiInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether JNI injection detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsJniInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsJniInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether memory hijacking detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsMemoryHijackingAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsMemoryHijackingAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether read any file detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsReadAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsReadAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether dashboard is associated. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsRelatedDashboard() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsRelatedDashboard }).(pulumi.IntOutput)
+}
+
+// Log feature switch. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsRelatedLog() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsRelatedLog }).(pulumi.IntOutput)
+}
+
+// Whether remote command execution detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsRemoteCommandExecutionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsRemoteCommandExecutionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether script engine injection detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsScriptEngineInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsScriptEngineInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether SQL injection analysis is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsSqlInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsSqlInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether template engine injection detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsTemplateEngineInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsTemplateEngineInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether upload any file detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsUploadAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsUploadAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether webshell backdoor detection is enabled. 0: off, 1: on.
+func (o GetInstancesInstanceListOutput) IsWebshellBackdoorAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.IsWebshellBackdoorAnalysis }).(pulumi.IntOutput)
+}
+
+// CLS index type. 0: full-text index, 1: key-value index.
+func (o GetInstancesInstanceListOutput) LogIndexType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.LogIndexType }).(pulumi.IntOutput)
+}
+
+// CLS log region.
+func (o GetInstancesInstanceListOutput) LogRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LogRegion }).(pulumi.StringOutput)
+}
+
+// CLS log set.
+func (o GetInstancesInstanceListOutput) LogSet() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LogSet }).(pulumi.StringOutput)
+}
+
+// Log source.
+func (o GetInstancesInstanceListOutput) LogSource() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LogSource }).(pulumi.StringOutput)
+}
+
+// Log topic ID.
+func (o GetInstancesInstanceListOutput) LogTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LogTopicId }).(pulumi.StringOutput)
+}
+
+// TraceId index key, effective when CLS index type is key-value.
+func (o GetInstancesInstanceListOutput) LogTraceIdKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.LogTraceIdKey }).(pulumi.StringOutput)
+}
+
+// Metric data retention duration in days.
+func (o GetInstancesInstanceListOutput) MetricDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.MetricDuration }).(pulumi.IntOutput)
+}
+
+// Instance name.
+func (o GetInstancesInstanceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Billing mode.
+func (o GetInstancesInstanceListOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.PayMode }).(pulumi.IntOutput)
+}
+
+// Whether pay mode is effective.
+func (o GetInstancesInstanceListOutput) PayModeEffective() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.PayModeEffective }).(pulumi.BoolOutput)
+}
+
+// Region.
+func (o GetInstancesInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Response duration warning threshold in ms.
+func (o GetInstancesInstanceListOutput) ResponseDurationWarningThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ResponseDurationWarningThreshold }).(pulumi.IntOutput)
+}
+
+// Sampling rate.
+func (o GetInstancesInstanceListOutput) SampleRate() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.SampleRate }).(pulumi.IntOutput)
+}
+
+// Service count.
+func (o GetInstancesInstanceListOutput) ServiceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.ServiceCount }).(pulumi.IntOutput)
+}
+
+// Slow request saved threshold in ms.
+func (o GetInstancesInstanceListOutput) SlowRequestSavedThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.SlowRequestSavedThreshold }).(pulumi.IntOutput)
+}
+
+// Daily span count quota.
+func (o GetInstancesInstanceListOutput) SpanDailyCounters() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.SpanDailyCounters }).(pulumi.IntOutput)
+}
+
+// Instance status.
+func (o GetInstancesInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+// Throttling reason. 1: official version quota, 2: trial version quota, 4: trial expired, 8: account overdue.
+func (o GetInstancesInstanceListOutput) StopReason() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.StopReason }).(pulumi.IntOutput)
+}
+
+// Filter by tags.
+func (o GetInstancesInstanceListOutput) Tags() GetInstancesInstanceListTagArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListTag { return v.Tags }).(GetInstancesInstanceListTagArrayOutput)
+}
+
+// Instance authentication token.
+func (o GetInstancesInstanceListOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Token }).(pulumi.StringOutput)
+}
+
+// Active application count in recent 2 days.
+func (o GetInstancesInstanceListOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+// Trace data retention duration.
+func (o GetInstancesInstanceListOutput) TraceDuration() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.TraceDuration }).(pulumi.IntOutput)
+}
+
+// URL long segment convergence threshold.
+func (o GetInstancesInstanceListOutput) UrlLongSegmentThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.UrlLongSegmentThreshold }).(pulumi.IntOutput)
+}
+
+// URL number segment convergence threshold.
+func (o GetInstancesInstanceListOutput) UrlNumberSegmentThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.UrlNumberSegmentThreshold }).(pulumi.IntOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
+type GetInstancesInstanceListTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
+//
+//	GetInstancesInstanceListTagArgs{...}
+type GetInstancesInstanceListTagInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput
+	ToGetInstancesInstanceListTagOutputWithContext(context.Context) GetInstancesInstanceListTagOutput
+}
+
+type GetInstancesInstanceListTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetInstancesInstanceListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return i.ToGetInstancesInstanceListTagOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagOutput)
+}
+
+// GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
+//
+//	GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+type GetInstancesInstanceListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput
+	ToGetInstancesInstanceListTagArrayOutputWithContext(context.Context) GetInstancesInstanceListTagArrayOutput
+}
+
+type GetInstancesInstanceListTagArray []GetInstancesInstanceListTagInput
+
+func (GetInstancesInstanceListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return i.ToGetInstancesInstanceListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagArrayOutput)
+}
+
+type GetInstancesInstanceListTagOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetInstancesInstanceListTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetInstancesInstanceListTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListTag {
+		return vs[0].([]GetInstancesInstanceListTag)[vs[1].(int)]
+	}).(GetInstancesInstanceListTagOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationConfigAgentOperationConfigViewInput)(nil)).Elem(), ApplicationConfigAgentOperationConfigViewArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationConfigAgentOperationConfigViewPtrInput)(nil)).Elem(), ApplicationConfigAgentOperationConfigViewArgs{})
@@ -419,10 +1117,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationConfigInstrumentListArrayInput)(nil)).Elem(), ApplicationConfigInstrumentListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SampleConfigTagInput)(nil)).Elem(), SampleConfigTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SampleConfigTagArrayInput)(nil)).Elem(), SampleConfigTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagInput)(nil)).Elem(), GetInstancesInstanceListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagArrayInput)(nil)).Elem(), GetInstancesInstanceListTagArray{})
 	pulumi.RegisterOutputType(ApplicationConfigAgentOperationConfigViewOutput{})
 	pulumi.RegisterOutputType(ApplicationConfigAgentOperationConfigViewPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationConfigInstrumentListOutput{})
 	pulumi.RegisterOutputType(ApplicationConfigInstrumentListArrayOutput{})
 	pulumi.RegisterOutputType(SampleConfigTagOutput{})
 	pulumi.RegisterOutputType(SampleConfigTagArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagArrayOutput{})
 }

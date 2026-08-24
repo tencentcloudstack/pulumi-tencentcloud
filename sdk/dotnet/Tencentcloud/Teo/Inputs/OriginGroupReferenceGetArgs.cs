@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class OriginGroupReferenceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The alias zone name of the referenced instance.
+        /// </summary>
+        [Input("aliasZoneName")]
+        public Input<string>? AliasZoneName { get; set; }
+
+        /// <summary>
         /// The instance ID of the reference type.
         /// </summary>
         [Input("instanceId")]
@@ -34,6 +40,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("instanceType")]
         public Input<string>? InstanceType { get; set; }
+
+        /// <summary>
+        /// Site ID.
+        /// </summary>
+        [Input("zoneId")]
+        public Input<string>? ZoneId { get; set; }
+
+        /// <summary>
+        /// The zone name of the referenced instance.
+        /// </summary>
+        [Input("zoneName")]
+        public Input<string>? ZoneName { get; set; }
 
         public OriginGroupReferenceGetArgs()
         {

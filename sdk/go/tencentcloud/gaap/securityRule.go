@@ -39,14 +39,14 @@ import (
 //				return err
 //			}
 //			fooSecurityPolicy, err := gaap.NewSecurityPolicy(ctx, "foo", &gaap.SecurityPolicyArgs{
-//				ProxyId: foo.ID(),
+//				ProxyId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Action:  pulumi.String("ACCEPT"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = gaap.NewSecurityRule(ctx, "foo", &gaap.SecurityRuleArgs{
-//				PolicyId: fooSecurityPolicy.ID(),
+//				PolicyId: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
 //				CidrIp:   pulumi.String("1.1.1.1"),
 //				Action:   pulumi.String("ACCEPT"),
 //				Protocol: pulumi.String("TCP"),
@@ -65,7 +65,9 @@ import (
 // GAAP security rule can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule  tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+//
+//	$ pulumi import tencentcloud:Gaap/securityRule:SecurityRule foo sr-xxxxxxxx
+//
 // ```
 type SecurityRule struct {
 	pulumi.CustomResourceState

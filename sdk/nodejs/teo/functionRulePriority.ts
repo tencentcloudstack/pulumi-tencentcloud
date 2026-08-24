@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_function_rule_priority can be imported using the id, e.g.
+ * teo teoFunctionRulePriority can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/functionRulePriority:FunctionRulePriority teo_function_rule_priority zone_id#function_id
@@ -115,15 +115,15 @@ export interface FunctionRulePriorityState {
     /**
      * ID of the Function.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * he list of rule IDs. It is required to include all rule IDs after adjusting their priorities. The execution order of multiple rules follows a top-down sequence. If not specified, the original priority order will be maintained.
      */
-    ruleIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

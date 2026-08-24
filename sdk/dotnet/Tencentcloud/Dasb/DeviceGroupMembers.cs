@@ -50,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Import
     /// 
-    /// dasb device_group_members can be imported using the id, e.g.
+    /// dasb DeviceGroupMembers can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 53#102

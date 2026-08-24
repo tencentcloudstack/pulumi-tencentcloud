@@ -90,12 +90,8 @@ type GetTimeShiftStreamListResult struct {
 }
 
 func GetTimeShiftStreamListOutput(ctx *pulumi.Context, args GetTimeShiftStreamListOutputArgs, opts ...pulumi.InvokeOption) GetTimeShiftStreamListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTimeShiftStreamListResultOutput, error) {
-			args := v.(GetTimeShiftStreamListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args, GetTimeShiftStreamListResultOutput{}, options).(GetTimeShiftStreamListResultOutput), nil
-		}).(GetTimeShiftStreamListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args, GetTimeShiftStreamListResultOutput{}, options).(GetTimeShiftStreamListResultOutput)
 }
 
 // A collection of arguments for invoking getTimeShiftStreamList.

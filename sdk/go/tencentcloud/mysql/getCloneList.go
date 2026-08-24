@@ -67,12 +67,8 @@ type GetCloneListResult struct {
 }
 
 func GetCloneListOutput(ctx *pulumi.Context, args GetCloneListOutputArgs, opts ...pulumi.InvokeOption) GetCloneListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCloneListResultOutput, error) {
-			args := v.(GetCloneListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getCloneList:getCloneList", args, GetCloneListResultOutput{}, options).(GetCloneListResultOutput), nil
-		}).(GetCloneListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getCloneList:getCloneList", args, GetCloneListResultOutput{}, options).(GetCloneListResultOutput)
 }
 
 // A collection of arguments for invoking getCloneList.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shards = tencentcloud.Dcdb.getShards({
+ * const shards = tencentcloud.dcdb.getShards({
  *     instanceId: "your_instance_id",
  *     shardInstanceIds: ["shard1_id"],
  * });
@@ -76,7 +76,7 @@ export interface GetShardsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shards = tencentcloud.Dcdb.getShards({
+ * const shards = tencentcloud.dcdb.getShards({
  *     instanceId: "your_instance_id",
  *     shardInstanceIds: ["shard1_id"],
  * });
@@ -102,9 +102,9 @@ export interface GetShardsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * shard instance ids.
      */
-    shardInstanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    shardInstanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

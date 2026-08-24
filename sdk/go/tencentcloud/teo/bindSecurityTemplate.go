@@ -12,10 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo bindSecurityTemplate
+// Provides a resource to create a TEO bind security template
 //
 // > **NOTE:** If the domain name you input has been bound to a policy template (including site-level protection policies), the default value is to replace the template currently bound to the domain name.
-// **NOTE:** The current resource can only bind/unbind the template and domain name belonging to the same site.
+//
+// > **NOTE:** The current resource can only bind/unbind the template and domain name belonging to the same site.
 //
 // ## Example Usage
 //
@@ -31,11 +32,11 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := teo.NewBindSecurityTemplate(ctx, "teo_bind_security_template", &teo.BindSecurityTemplateArgs{
+//			_, err := teo.NewBindSecurityTemplate(ctx, "example", &teo.BindSecurityTemplateArgs{
+//				ZoneId:     pulumi.String("zone-3skoch6ingbw"),
+//				TemplateId: pulumi.String("temp-3s1pzyam2nxp"),
+//				Entity:     pulumi.String("tf.example.com"),
 //				Operate:    pulumi.String("unbind-use-default"),
-//				TemplateId: pulumi.String("temp-7dr7dm78"),
-//				ZoneId:     pulumi.String("zone-39quuimqg8r6"),
-//				Entity:     pulumi.String("aaa.makn.cn"),
 //			})
 //			if err != nil {
 //				return err
@@ -48,29 +49,34 @@ import (
 //
 // ## Import
 //
-// teo application_proxy_rule can be imported using the zoneId#templateId#entity, e.g.
+// TEO bind security template can be imported using the zoneId#templateId#entity, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate teo_bind_security_template zone-39quuimqg8r6#temp-7dr7dm78#aaa.makn.cn
+// $ pulumi import tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate teo_bind_security_template zone-3skoch6ingbw#temp-3s1pzyam2nxp#tf.example.com
 // ```
 type BindSecurityTemplate struct {
 	pulumi.CustomResourceState
 
-	// List of domain names to bind to/unbind from a policy template.
+	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity pulumi.StringOutput `pulumi:"entity"`
-	// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+	// Bind or unbind operation option. Valid values:
+	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+	// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 	Operate pulumi.StringOutput `pulumi:"operate"`
-	// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+	// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+	// <li>`true`: replace the template currently bound to the domain name.</li>
+	// <li>`false`: do not replace the template currently bound to the domain name.</li>
+	// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 	OverWrite pulumi.BoolOutput `pulumi:"overWrite"`
 	// Instance configuration delivery status, the possible values are: `online`: the configuration has taken effect; `fail`: the configuration failed; `process`: the configuration is being delivered.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-	//
-	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+	// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+	// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 	TemplateId pulumi.StringOutput `pulumi:"templateId"`
-	// Site ID of the policy template to be bound to or unbound from.
+	// The site ID to which the policy template to be bound or unbound belongs.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 }
 
@@ -113,40 +119,50 @@ func GetBindSecurityTemplate(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering BindSecurityTemplate resources.
 type bindSecurityTemplateState struct {
-	// List of domain names to bind to/unbind from a policy template.
+	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity *string `pulumi:"entity"`
-	// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+	// Bind or unbind operation option. Valid values:
+	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+	// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 	Operate *string `pulumi:"operate"`
-	// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+	// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+	// <li>`true`: replace the template currently bound to the domain name.</li>
+	// <li>`false`: do not replace the template currently bound to the domain name.</li>
+	// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 	OverWrite *bool `pulumi:"overWrite"`
 	// Instance configuration delivery status, the possible values are: `online`: the configuration has taken effect; `fail`: the configuration failed; `process`: the configuration is being delivered.
 	Status *string `pulumi:"status"`
 	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-	//
-	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+	// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+	// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 	TemplateId *string `pulumi:"templateId"`
-	// Site ID of the policy template to be bound to or unbound from.
+	// The site ID to which the policy template to be bound or unbound belongs.
 	ZoneId *string `pulumi:"zoneId"`
 }
 
 type BindSecurityTemplateState struct {
-	// List of domain names to bind to/unbind from a policy template.
+	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity pulumi.StringPtrInput
-	// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+	// Bind or unbind operation option. Valid values:
+	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+	// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 	Operate pulumi.StringPtrInput
-	// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+	// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+	// <li>`true`: replace the template currently bound to the domain name.</li>
+	// <li>`false`: do not replace the template currently bound to the domain name.</li>
+	// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 	OverWrite pulumi.BoolPtrInput
 	// Instance configuration delivery status, the possible values are: `online`: the configuration has taken effect; `fail`: the configuration failed; `process`: the configuration is being delivered.
 	Status pulumi.StringPtrInput
 	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-	//
-	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+	// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+	// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 	TemplateId pulumi.StringPtrInput
-	// Site ID of the policy template to be bound to or unbound from.
+	// The site ID to which the policy template to be bound or unbound belongs.
 	ZoneId pulumi.StringPtrInput
 }
 
@@ -155,37 +171,47 @@ func (BindSecurityTemplateState) ElementType() reflect.Type {
 }
 
 type bindSecurityTemplateArgs struct {
-	// List of domain names to bind to/unbind from a policy template.
+	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity string `pulumi:"entity"`
-	// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+	// Bind or unbind operation option. Valid values:
+	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+	// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 	Operate *string `pulumi:"operate"`
-	// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+	// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+	// <li>`true`: replace the template currently bound to the domain name.</li>
+	// <li>`false`: do not replace the template currently bound to the domain name.</li>
+	// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 	OverWrite *bool `pulumi:"overWrite"`
 	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-	//
-	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+	// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+	// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 	TemplateId string `pulumi:"templateId"`
-	// Site ID of the policy template to be bound to or unbound from.
+	// The site ID to which the policy template to be bound or unbound belongs.
 	ZoneId string `pulumi:"zoneId"`
 }
 
 // The set of arguments for constructing a BindSecurityTemplate resource.
 type BindSecurityTemplateArgs struct {
-	// List of domain names to bind to/unbind from a policy template.
+	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity pulumi.StringInput
-	// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+	// Bind or unbind operation option. Valid values:
+	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+	// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 	Operate pulumi.StringPtrInput
-	// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+	// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+	// <li>`true`: replace the template currently bound to the domain name.</li>
+	// <li>`false`: do not replace the template currently bound to the domain name.</li>
+	// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 	OverWrite pulumi.BoolPtrInput
 	// Specifies the ID of the policy template or the site global policy to be bound or unbound.
-	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-	// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-	//
-	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+	// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+	// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+	// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 	TemplateId pulumi.StringInput
-	// Site ID of the policy template to be bound to or unbound from.
+	// The site ID to which the policy template to be bound or unbound belongs.
 	ZoneId pulumi.StringInput
 }
 
@@ -276,17 +302,23 @@ func (o BindSecurityTemplateOutput) ToBindSecurityTemplateOutputWithContext(ctx 
 	return o
 }
 
-// List of domain names to bind to/unbind from a policy template.
+// The domain name to be bound to the policy template (or unbound from the policy template).
 func (o BindSecurityTemplateOutput) Entity() pulumi.StringOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.Entity }).(pulumi.StringOutput)
 }
 
-// Unbind operation option. valid values: `unbind-keep-policy`: unbind a domain name from the policy template while retaining the current policy. `unbind-use-default`: unbind a domain name from the policy template and use the default blank policy. default value: `unbind-keep-policy`.
+// Bind or unbind operation option. Valid values:
+// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
+// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
+// Default value: `unbind-keep-policy`. Note: The unbind operation currently only supports unbinding a single domain name. That is, when the value of `operate` is `unbind-keep-policy` or `unbind-use-default`, only one domain name can be unbound.
 func (o BindSecurityTemplateOutput) Operate() pulumi.StringOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.Operate }).(pulumi.StringOutput)
 }
 
-// If the passed-in domain is already bound to a policy template (including site-level protection policies), setting this parameter indicates whether to replace that template. The default value is true. Supported values are: `true`: Replace the currently bound template for the domain. `false`: Do not replace the currently bound template for the domain. Note: When set to false, if the passed-in domain is already bound to a policy template, the API will return an error; site-level protection policies are also a type of policy template.
+// If the passed-in domain name is already bound to a policy template (including site-level protection policies), this parameter indicates whether to replace the template. Default value is `true`. Supported values:
+// <li>`true`: replace the template currently bound to the domain name.</li>
+// <li>`false`: do not replace the template currently bound to the domain name.</li>
+// Note: When set to `false`, if the passed-in domain name is already bound to a policy template, the API will return an error; the site-level protection policy is also a type of policy template.
 func (o BindSecurityTemplateOutput) OverWrite() pulumi.BoolOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.BoolOutput { return v.OverWrite }).(pulumi.BoolOutput)
 }
@@ -297,15 +329,14 @@ func (o BindSecurityTemplateOutput) Status() pulumi.StringOutput {
 }
 
 // Specifies the ID of the policy template or the site global policy to be bound or unbound.
-// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>.
-// <li>To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.</li>.
-//
-// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
+// <li>To bind to a policy template, or unbind from it, specify the policy template ID.</li>
+// <li>To bind to the site global policy, or unbind from it, use the `@ZoneLevel@domain` parameter value.</li>
+// Note: After unbinding, the domain name will use an independent policy and the rule quota will be calculated separately. Please make sure the plan rule quota is sufficient before unbinding.
 func (o BindSecurityTemplateOutput) TemplateId() pulumi.StringOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.TemplateId }).(pulumi.StringOutput)
 }
 
-// Site ID of the policy template to be bound to or unbound from.
+// The site ID to which the policy template to be bound or unbound belongs.
 func (o BindSecurityTemplateOutput) ZoneId() pulumi.StringOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.ZoneId }).(pulumi.StringOutput)
 }

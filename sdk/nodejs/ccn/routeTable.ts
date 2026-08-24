@@ -149,23 +149,23 @@ export interface RouteTableState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of CCN Route table.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * True: default routing table False: non default routing table.
      */
-    isDefaultTable?: pulumi.Input<boolean>;
+    isDefaultTable?: pulumi.Input<boolean | undefined>;
     /**
      * CCN Route table name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -183,5 +183,5 @@ export interface RouteTableArgs {
     /**
      * CCN Route table name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

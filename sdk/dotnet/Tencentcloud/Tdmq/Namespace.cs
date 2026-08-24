@@ -44,6 +44,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     ///             SizeInMb = 10,
     ///         },
     ///         Remark = "remark.",
+    ///         Tags = new[]
+    ///         {
+    ///             new Tencentcloud.Tdmq.Inputs.NamespaceTagArgs
+    ///             {
+    ///                 TagKey = "createdBy",
+    ///                 TagValue = "terraform",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -89,6 +97,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Output("retentionPolicy")]
         public Output<Outputs.NamespaceRetentionPolicy> RetentionPolicy { get; private set; } = null!;
+
+        /// <summary>
+        /// The tags of the tencentcloud_tdmq_namespace.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<Outputs.NamespaceTag>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -167,6 +181,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("retentionPolicy")]
         public Input<Inputs.NamespaceRetentionPolicyArgs>? RetentionPolicy { get; set; }
 
+        [Input("tags")]
+        private InputList<Inputs.NamespaceTagArgs>? _tags;
+
+        /// <summary>
+        /// The tags of the tencentcloud_tdmq_namespace.
+        /// </summary>
+        public InputList<Inputs.NamespaceTagArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.NamespaceTagArgs>());
+            set => _tags = value;
+        }
+
         public NamespaceArgs()
         {
         }
@@ -204,6 +230,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("retentionPolicy")]
         public Input<Inputs.NamespaceRetentionPolicyGetArgs>? RetentionPolicy { get; set; }
+
+        [Input("tags")]
+        private InputList<Inputs.NamespaceTagGetArgs>? _tags;
+
+        /// <summary>
+        /// The tags of the tencentcloud_tdmq_namespace.
+        /// </summary>
+        public InputList<Inputs.NamespaceTagGetArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.NamespaceTagGetArgs>());
+            set => _tags = value;
+        }
 
         public NamespaceState()
         {

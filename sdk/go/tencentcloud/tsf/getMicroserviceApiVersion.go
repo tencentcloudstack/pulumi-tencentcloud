@@ -75,12 +75,8 @@ type LookupMicroserviceApiVersionResult struct {
 }
 
 func LookupMicroserviceApiVersionOutput(ctx *pulumi.Context, args LookupMicroserviceApiVersionOutputArgs, opts ...pulumi.InvokeOption) LookupMicroserviceApiVersionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupMicroserviceApiVersionResultOutput, error) {
-			args := v.(LookupMicroserviceApiVersionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args, LookupMicroserviceApiVersionResultOutput{}, options).(LookupMicroserviceApiVersionResultOutput), nil
-		}).(LookupMicroserviceApiVersionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getMicroserviceApiVersion:getMicroserviceApiVersion", args, LookupMicroserviceApiVersionResultOutput{}, options).(LookupMicroserviceApiVersionResultOutput)
 }
 
 // A collection of arguments for invoking getMicroserviceApiVersion.

@@ -73,12 +73,8 @@ type GetBindingObjectsResult struct {
 }
 
 func GetBindingObjectsOutput(ctx *pulumi.Context, args GetBindingObjectsOutputArgs, opts ...pulumi.InvokeOption) GetBindingObjectsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBindingObjectsResultOutput, error) {
-			args := v.(GetBindingObjectsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args, GetBindingObjectsResultOutput{}, options).(GetBindingObjectsResultOutput), nil
-		}).(GetBindingObjectsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args, GetBindingObjectsResultOutput{}, options).(GetBindingObjectsResultOutput)
 }
 
 // A collection of arguments for invoking getBindingObjects.

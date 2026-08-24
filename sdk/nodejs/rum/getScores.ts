@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scores = tencentcloud.Rum.getScores({
+ * const scores = tencentcloud.rum.getScores({
  *     endTime: "2023082215",
  *     startTime: "2023082214",
  *     projectId: 1,
@@ -90,7 +90,7 @@ export interface GetScoresResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scores = tencentcloud.Rum.getScores({
+ * const scores = tencentcloud.rum.getScores({
  *     endTime: "2023082215",
  *     startTime: "2023082214",
  *     projectId: 1,
@@ -120,15 +120,15 @@ export interface GetScoresOutputArgs {
     /**
      * Get data from demo. This parameter is deprecated.
      */
-    isDemo?: pulumi.Input<number>;
+    isDemo?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time.
      */

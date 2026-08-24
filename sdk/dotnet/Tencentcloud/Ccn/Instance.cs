@@ -34,6 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     ///         Qos = "AG",
     ///         ChargeType = "PREPAID",
     ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///         InstanceMeteringType = "BANDWIDTH",
     ///         RouteEcmpFlag = true,
     ///         RouteOverlapFlag = true,
     ///         Tags = 
@@ -137,6 +138,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Output<int> InstanceCount { get; private set; } = null!;
 
         /// <summary>
+        /// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+        /// </summary>
+        [Output("instanceMeteringType")]
+        public Output<string> InstanceMeteringType { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
         /// </summary>
         [Output("name")]
@@ -238,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+        /// </summary>
+        [Input("instanceMeteringType")]
+        public Input<string>? InstanceMeteringType { get; set; }
+
+        /// <summary>
         /// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
         /// </summary>
         [Input("name")]
@@ -310,6 +323,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// </summary>
         [Input("instanceCount")]
         public Input<int>? InstanceCount { get; set; }
+
+        /// <summary>
+        /// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+        /// </summary>
+        [Input("instanceMeteringType")]
+        public Input<string>? InstanceMeteringType { get; set; }
 
         /// <summary>
         /// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.

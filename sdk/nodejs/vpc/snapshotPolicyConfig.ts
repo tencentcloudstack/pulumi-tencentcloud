@@ -47,7 +47,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc snapshot_policy_config can be imported using the id, e.g.
+ * vpc snapshotPolicyConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/snapshotPolicyConfig:SnapshotPolicyConfig snapshot_policy_config snapshot_policy_id
@@ -128,11 +128,11 @@ export interface SnapshotPolicyConfigState {
     /**
      * If enable snapshot policy.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Snapshot policy Id.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterGroups = tencentcloud.Identity.getCenterGroups({
+ * const identityCenterGroups = tencentcloud.identity.getCenterGroups({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetCenterGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterGroups = tencentcloud.Identity.getCenterGroups({
+ * const identityCenterGroups = tencentcloud.identity.getCenterGroups({
  *     zoneId: "z-xxxxxx",
  * });
  * ```
@@ -121,27 +121,27 @@ export interface GetCenterGroupsOutputArgs {
     /**
      * Filter criterion. Format: <Attribute> <Operator> <Value>, case-insensitive. Currently, <Attribute> supports only GroupName, and <Operator> supports only eq (Equals) and sw (Start With). For example, Filter = "GroupName sw test" indicates querying all user groups with names starting with test; Filter = "GroupName eq testgroup" indicates querying the user group with the name testgroup.
      */
-    filter?: pulumi.Input<string>;
+    filter?: pulumi.Input<string | undefined>;
     /**
      * Filtered user. IsSelected=1 will be returned for the user group associated with this user.
      */
-    filterUsers?: pulumi.Input<pulumi.Input<string>[]>;
+    filterUsers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User group type. Manual: manually created; Synchronized: externally imported.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field, which currently only supports CreateTime. The default is the CreateTime field.
      */
-    sortField?: pulumi.Input<string>;
+    sortField?: pulumi.Input<string | undefined>;
     /**
      * Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

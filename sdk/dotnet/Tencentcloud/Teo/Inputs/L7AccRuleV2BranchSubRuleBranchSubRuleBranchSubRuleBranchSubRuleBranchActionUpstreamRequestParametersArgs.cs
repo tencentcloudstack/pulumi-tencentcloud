@@ -14,13 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cookie configuration. optional. if not provided, it will not be configured.
+        /// Cookie configuration. Optional. If not provided, it will not be configured.
         /// </summary>
         [Input("cookie")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParametersCookieArgs>? Cookie { get; set; }
 
         /// <summary>
-        /// Query string configuration. optional. if not provided, it will not be configured.
+        /// Query string configuration. Optional. If not provided, it will not be configured.
         /// </summary>
         [Input("queryString")]
         public Input<Inputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParametersQueryStringArgs>? QueryString { get; set; }

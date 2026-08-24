@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -139,15 +139,15 @@ export interface BackupConfigState {
      *
      * @deprecated It has been deprecated from version 1.58.2. It makes no difference to online config at all
      */
-    backupPeriods?: pulumi.Input<pulumi.Input<string>[]>;
+    backupPeriods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specifys what time the backup action should take place. And the time interval should be one hour.
      */
-    backupTime?: pulumi.Input<string>;
+    backupTime?: pulumi.Input<string | undefined>;
     /**
      * ID of a redis instance to which the policy will be applied.
      */
-    redisId?: pulumi.Input<string>;
+    redisId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -159,7 +159,7 @@ export interface BackupConfigArgs {
      *
      * @deprecated It has been deprecated from version 1.58.2. It makes no difference to online config at all
      */
-    backupPeriods?: pulumi.Input<pulumi.Input<string>[]>;
+    backupPeriods?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specifys what time the backup action should take place. And the time interval should be one hour.
      */

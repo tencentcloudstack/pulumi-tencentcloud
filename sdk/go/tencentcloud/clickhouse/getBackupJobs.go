@@ -73,12 +73,8 @@ type GetBackupJobsResult struct {
 }
 
 func GetBackupJobsOutput(ctx *pulumi.Context, args GetBackupJobsOutputArgs, opts ...pulumi.InvokeOption) GetBackupJobsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupJobsResultOutput, error) {
-			args := v.(GetBackupJobsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args, GetBackupJobsResultOutput{}, options).(GetBackupJobsResultOutput), nil
-		}).(GetBackupJobsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clickhouse/getBackupJobs:getBackupJobs", args, GetBackupJobsResultOutput{}, options).(GetBackupJobsResultOutput)
 }
 
 // A collection of arguments for invoking getBackupJobs.

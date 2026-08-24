@@ -100,12 +100,8 @@ type GetSuperPlayerConfigsResult struct {
 }
 
 func GetSuperPlayerConfigsOutput(ctx *pulumi.Context, args GetSuperPlayerConfigsOutputArgs, opts ...pulumi.InvokeOption) GetSuperPlayerConfigsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSuperPlayerConfigsResultOutput, error) {
-			args := v.(GetSuperPlayerConfigsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args, GetSuperPlayerConfigsResultOutput{}, options).(GetSuperPlayerConfigsResultOutput), nil
-		}).(GetSuperPlayerConfigsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vod/getSuperPlayerConfigs:getSuperPlayerConfigs", args, GetSuperPlayerConfigsResultOutput{}, options).(GetSuperPlayerConfigsResultOutput)
 }
 
 // A collection of arguments for invoking getSuperPlayerConfigs.

@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Tse/cloudNativeApiGatewayIpRestriction:CloudNativeApiGatewayIpRestriction":
+		r = &CloudNativeApiGatewayIpRestriction{}
 	case "tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule":
 		r = &CngwCanaryRule{}
 	case "tencentcloud:Tse/cngwCertificate:CngwCertificate":
@@ -64,6 +66,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Tse/cloudNativeApiGatewayIpRestriction",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Tse/cngwCanaryRule",

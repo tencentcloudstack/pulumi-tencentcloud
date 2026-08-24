@@ -136,12 +136,8 @@ type GetStaticProjectResult struct {
 }
 
 func GetStaticProjectOutput(ctx *pulumi.Context, args GetStaticProjectOutputArgs, opts ...pulumi.InvokeOption) GetStaticProjectResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStaticProjectResultOutput, error) {
-			args := v.(GetStaticProjectArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getStaticProject:getStaticProject", args, GetStaticProjectResultOutput{}, options).(GetStaticProjectResultOutput), nil
-		}).(GetStaticProjectResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getStaticProject:getStaticProject", args, GetStaticProjectResultOutput{}, options).(GetStaticProjectResultOutput)
 }
 
 // A collection of arguments for invoking getStaticProject.

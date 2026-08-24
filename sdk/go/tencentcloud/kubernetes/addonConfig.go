@@ -15,6 +15,88 @@ import (
 // Provide a resource to configure addon that kubernetes comes with.
 //
 // ## Example Usage
+//
+// ### Update cluster-autoscaler addon
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"autoDiscovery": map[string][]map[string]string{
+//					"labels": []map[string]string{
+//						{
+//							"node.tke.cloud.tencent.com/autoscaling-enabled": "true",
+//						},
+//					},
+//				},
+//				"extraArgs": map[string]interface{}{
+//					"expander":                         "random",
+//					"ignore-daemonsets-utilization":    false,
+//					"ignore-taint_1":                   "tke.cloud.tencent.com/direct-eni-unavailable",
+//					"ignore-taint_2":                   "tke.cloud.tencent.com/eni-ip-unavailable",
+//					"ignore-taint_3":                   "tke.cloud.tencent.com/uninitialized",
+//					"ignore-taint_4":                   "tke.cloud.tencent.com/no-aia-ip",
+//					"scale-down-unready-time":          "20m0s",
+//					"scale-down-utilization-threshold": 0.005,
+//					"skip-nodes-with-local-storage":    true,
+//					"scale-down-delay-after-add":       "10mm",
+//					"scale-down-enabled":               true,
+//					"scale-down-unneeded-time":         "10mm",
+//					"skip-nodes-with-system-pods":      true,
+//					"max-empty-bulk-delete":            11,
+//					"max-nodes-total":                  5,
+//					"max-total-unready-percentage":     33,
+//					"ok-total-unready-count":           3,
+//				},
+//				"image": map[string]string{
+//					"repository": "ccr.ccs.tencentyun.com/tkeimages/cluster-autoscaler",
+//				},
+//				"resources": map[string]map[string]string{
+//					"limits": map[string]string{
+//						"cpu":    "2",
+//						"memory": "4Gi",
+//					},
+//					"requests": map[string]string{
+//						"cpu":    "200m",
+//						"memory": "256Mi",
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = kubernetes.NewAddonConfig(ctx, "example", &kubernetes.AddonConfigArgs{
+//				ClusterId: pulumi.String("cls-5yezvaxo"),
+//				AddonName: pulumi.String("cluster-autoscaler"),
+//				RawValues: pulumi.String(json0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// kubernetes cluster addon config can be imported using the clusterId#addonName, e.g.
+// ```sh
+// $ pulumi import tencentcloud:Kubernetes/addonConfig:AddonConfig example cls-5yezvaxo#cluster-autoscaler
+// ```
 type AddonConfig struct {
 	pulumi.CustomResourceState
 

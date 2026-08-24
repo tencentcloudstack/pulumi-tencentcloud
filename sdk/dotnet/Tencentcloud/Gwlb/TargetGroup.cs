@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gwlb
     /// 
     /// ## Import
     /// 
-    /// gwlb gwlb_target_group can be imported using the id, e.g.
+    /// gwlb GwlbTargetGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Gwlb/targetGroup:TargetGroup gwlb_target_group gwlb_target_group_id
@@ -76,7 +76,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gwlb
         /// Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
         /// </summary>
         [Output("port")]
-        public Output<int?> Port { get; private set; } = null!;
+        public Output<int> Port { get; private set; } = null!;
 
         /// <summary>
         /// GWLB target group protocol.

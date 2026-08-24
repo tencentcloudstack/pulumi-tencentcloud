@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_manage_policy_target can be imported using the id, e.g.
+ * organization orgManagePolicyTarget can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgManagePolicyTarget:OrgManagePolicyTarget org_manage_policy_target policy_type#policy_id#target_type#target_id
@@ -125,25 +125,25 @@ export interface OrgManagePolicyTargetState {
     /**
      * Policy Id.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Policy type. Default value is SERVICE_CONTROL_POLICY.
      * Valid values:
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Binding target ID of the policy. Member Uin or Department ID.
      */
-    targetId?: pulumi.Input<number>;
+    targetId?: pulumi.Input<number | undefined>;
     /**
      * Target type.
      * Valid values:
      * - `NODE`: Department.
      * - `MEMBER`: Check Member.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -160,7 +160,7 @@ export interface OrgManagePolicyTargetArgs {
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Binding target ID of the policy. Member Uin or Department ID.
      */

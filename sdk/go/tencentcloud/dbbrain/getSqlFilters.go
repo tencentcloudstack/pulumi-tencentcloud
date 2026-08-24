@@ -87,12 +87,8 @@ type GetSqlFiltersResult struct {
 }
 
 func GetSqlFiltersOutput(ctx *pulumi.Context, args GetSqlFiltersOutputArgs, opts ...pulumi.InvokeOption) GetSqlFiltersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSqlFiltersResultOutput, error) {
-			args := v.(GetSqlFiltersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args, GetSqlFiltersResultOutput{}, options).(GetSqlFiltersResultOutput), nil
-		}).(GetSqlFiltersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args, GetSqlFiltersResultOutput{}, options).(GetSqlFiltersResultOutput)
 }
 
 // A collection of arguments for invoking getSqlFilters.

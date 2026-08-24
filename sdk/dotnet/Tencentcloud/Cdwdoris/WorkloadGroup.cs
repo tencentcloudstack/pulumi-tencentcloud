@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris
 {
     /// <summary>
-    /// Provides a resource to create a cdwdoris workload group
+    /// Provides a resource to create a CDWDoris workload group
     /// 
     /// &gt; **NOTE:** To use this resource, The `WorkloadGroupStatus` field of `tencentcloud.Cdwdoris.Instance` needs to be set to true.
     /// 

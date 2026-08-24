@@ -74,12 +74,8 @@ type GetClassicLinkInstancesResult struct {
 }
 
 func GetClassicLinkInstancesOutput(ctx *pulumi.Context, args GetClassicLinkInstancesOutputArgs, opts ...pulumi.InvokeOption) GetClassicLinkInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClassicLinkInstancesResultOutput, error) {
-			args := v.(GetClassicLinkInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args, GetClassicLinkInstancesResultOutput{}, options).(GetClassicLinkInstancesResultOutput), nil
-		}).(GetClassicLinkInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args, GetClassicLinkInstancesResultOutput{}, options).(GetClassicLinkInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getClassicLinkInstances.

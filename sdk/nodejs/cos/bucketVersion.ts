@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cos bucket_version can be imported using the id, e.g.
+ * cos bucketVersion can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
@@ -102,11 +102,11 @@ export interface BucketVersionState {
     /**
      * Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable versioning. Valid values: `Suspended`, `Enabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**

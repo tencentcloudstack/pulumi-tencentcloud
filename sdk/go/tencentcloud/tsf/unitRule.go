@@ -61,7 +61,7 @@ import (
 //
 // ## Import
 //
-// tsf unit_rule can be imported using the id, e.g.
+// tsf unitRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca

@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  *     clusterName: "tf_example",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqClusterOutput({
+ * const example = tencentcloud.tdmq.getRocketmqClusterOutput({
  *     nameKeyword: exampleRocketmqCluster.clusterName,
  * });
  * ```
@@ -87,7 +87,7 @@ export interface GetRocketmqClusterResult {
  *     clusterName: "tf_example",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqClusterOutput({
+ * const example = tencentcloud.tdmq.getRocketmqClusterOutput({
  *     nameKeyword: exampleRocketmqCluster.clusterName,
  * });
  * ```
@@ -110,17 +110,17 @@ export interface GetRocketmqClusterOutputArgs {
     /**
      * Filter by cluster ID.
      */
-    clusterIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Search by cluster ID.
      */
-    idKeyword?: pulumi.Input<string>;
+    idKeyword?: pulumi.Input<string | undefined>;
     /**
      * Search by cluster name.
      */
-    nameKeyword?: pulumi.Input<string>;
+    nameKeyword?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

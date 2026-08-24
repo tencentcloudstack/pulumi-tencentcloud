@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Use this resource to create tcr repository.
+    /// Use this resource to create TCR repository.
     /// 
     /// ## Example Usage
     /// 
@@ -27,35 +27,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     var example = new Tencentcloud.Tcr.Instance("example", new()
     ///     {
-    ///         Name = "tf-example-tcr",
-    ///         InstanceType = "premium",
+    ///         Name = "tf-example",
+    ///         InstanceType = "standard",
     ///         DeleteBucket = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "Terraform" },
+    ///         },
     ///     });
     /// 
     ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("example", new()
     ///     {
     ///         InstanceId = example.Id,
-    ///         Name = "tf_example_ns",
-    ///         IsPublic = true,
-    ///         IsAutoScan = true,
-    ///         IsPreventVul = true,
+    ///         Name = "tf_example",
     ///         Severity = "medium",
-    ///         CveWhitelistItems = new[]
-    ///         {
-    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///             {
-    ///                 CveId = "cve-xxxxx",
-    ///             },
-    ///         },
     ///     });
     /// 
     ///     var exampleRepository = new Tencentcloud.Tcr.Repository("example", new()
     ///     {
     ///         InstanceId = example.Id,
     ///         NamespaceName = exampleNamespace.Name,
-    ///         Name = "test",
-    ///         BriefDesc = "111",
-    ///         Description = "111111111111111111111111111111111111",
+    ///         Name = "tf-example",
+    ///         BriefDesc = "desc.",
+    ///         Description = "description.",
+    ///         ForceDelete = true,
     ///     });
     /// 
     /// });
@@ -63,10 +58,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// ## Import
     /// 
-    /// tcr repository can be imported using the id, e.g.
+    /// TCR repository can be imported using the instanceId#nameSpaceName#name, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+    /// $ pulumi import tencentcloud:Tcr/repository:Repository example tcr-s1jud21h#tf_example#tf-example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/repository:Repository")]
@@ -89,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+        /// </summary>
+        [Output("forceDelete")]
+        public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
         /// ID of the TCR instance.
@@ -186,6 +187,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<string>? Description { get; set; }
 
         /// <summary>
+        /// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+        /// </summary>
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
+
+        /// <summary>
         /// ID of the TCR instance.
         /// </summary>
         [Input("instanceId", required: true)]
@@ -228,6 +235,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+        /// </summary>
+        [Input("forceDelete")]
+        public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
         /// ID of the TCR instance.

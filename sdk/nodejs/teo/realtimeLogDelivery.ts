@@ -58,7 +58,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_realtime_log_delivery can be imported using the id, e.g.
+ * teo teoRealtimeLogDelivery can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery teo_realtime_log_delivery zoneId#taskId
@@ -149,7 +149,7 @@ export class RealtimeLogDelivery extends pulumi.CustomResource {
      */
     declare public readonly taskName: pulumi.Output<string>;
     /**
-     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
      */
     declare public readonly taskType: pulumi.Output<string>;
     /**
@@ -241,67 +241,67 @@ export interface RealtimeLogDeliveryState {
     /**
      * Data delivery area, possible values are: `mainland`: within mainland China; `overseas`: worldwide (excluding mainland China).
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * CLS configuration information. This parameter is required when TaskType is cls.
      */
-    cls?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCls>;
+    cls?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCls | undefined>;
     /**
      * Customize the configuration information of the HTTP service. This parameter is required when TaskType is set to custom_endpoint.
      */
-    customEndpoint?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomEndpoint>;
+    customEndpoint?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomEndpoint | undefined>;
     /**
      * The list of custom fields delivered supports extracting specified field values from HTTP request headers, response headers, and cookies. Custom field names cannot be repeated and cannot exceed 200 fields.
      */
-    customFields?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomField>[]>;
+    customFields?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomField>[] | undefined>;
     /**
      * The filter condition for log delivery. If it is not filled, all logs will be delivered.
      */
-    deliveryConditions?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryDeliveryCondition>[]>;
+    deliveryConditions?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryDeliveryCondition>[] | undefined>;
     /**
      * The status of the real-time log delivery task. The values are: `enabled`: enabled; `disabled`: disabled. Leave it blank to keep the original configuration. Not required when creating.
      */
-    deliveryStatus?: pulumi.Input<string>;
+    deliveryStatus?: pulumi.Input<string | undefined>;
     /**
      * List of entities (seven-layer domain names or four-layer proxy instances) corresponding to real-time log delivery tasks. Example values are as follows: Seven-layer domain name: `domain.example.com`; four-layer proxy instance: sid-2s69eb5wcms7. For values, refer to: `https://cloud.tencent.com/document/api/1552/80690`, `https://cloud.tencent.com/document/api/1552/86336`.
      */
-    entityLists?: pulumi.Input<pulumi.Input<string>[]>;
+    entityLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of preset fields for delivery.
      */
-    fields?: pulumi.Input<pulumi.Input<string>[]>;
+    fields?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The output format of log delivery. If it is not filled, it means the default format. The default format logic is as follows: when TaskType is `customEndpoint`, the default format is an array of multiple JSON objects, each JSON object is a log; when TaskType is `s3`, the default format is JSON Lines; in particular, when TaskType is `cls`, the value of LogFormat.FormatType can only be json, and other parameters in LogFormat will be ignored. It is recommended not to pass LogFormat.
      */
-    logFormat?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryLogFormat>;
+    logFormat?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryLogFormat | undefined>;
     /**
      * Data delivery type, the values are: `domain`: site acceleration log; `application`: four-layer proxy log; `web-rateLiming`: rate limit and CC attack protection log; `web-attack`: managed rule log; `web-rule`: custom rule log; `web-bot`: Bot management log.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Configuration information of AWS S3 compatible storage bucket. This parameter is required when TaskType is s3.
      */
-    s3?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryS3>;
+    s3?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryS3 | undefined>;
     /**
      * The sampling ratio is in thousandths, with a value range of 1-1000. For example, filling in 605 means the sampling ratio is 60.5%. Leaving it blank means the sampling ratio is 100%.
      */
-    sample?: pulumi.Input<number>;
+    sample?: pulumi.Input<number | undefined>;
     /**
      * Real-time log delivery task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
     /**
-     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -315,23 +315,23 @@ export interface RealtimeLogDeliveryArgs {
     /**
      * CLS configuration information. This parameter is required when TaskType is cls.
      */
-    cls?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCls>;
+    cls?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCls | undefined>;
     /**
      * Customize the configuration information of the HTTP service. This parameter is required when TaskType is set to custom_endpoint.
      */
-    customEndpoint?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomEndpoint>;
+    customEndpoint?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomEndpoint | undefined>;
     /**
      * The list of custom fields delivered supports extracting specified field values from HTTP request headers, response headers, and cookies. Custom field names cannot be repeated and cannot exceed 200 fields.
      */
-    customFields?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomField>[]>;
+    customFields?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryCustomField>[] | undefined>;
     /**
      * The filter condition for log delivery. If it is not filled, all logs will be delivered.
      */
-    deliveryConditions?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryDeliveryCondition>[]>;
+    deliveryConditions?: pulumi.Input<pulumi.Input<inputs.Teo.RealtimeLogDeliveryDeliveryCondition>[] | undefined>;
     /**
      * The status of the real-time log delivery task. The values are: `enabled`: enabled; `disabled`: disabled. Leave it blank to keep the original configuration. Not required when creating.
      */
-    deliveryStatus?: pulumi.Input<string>;
+    deliveryStatus?: pulumi.Input<string | undefined>;
     /**
      * List of entities (seven-layer domain names or four-layer proxy instances) corresponding to real-time log delivery tasks. Example values are as follows: Seven-layer domain name: `domain.example.com`; four-layer proxy instance: sid-2s69eb5wcms7. For values, refer to: `https://cloud.tencent.com/document/api/1552/80690`, `https://cloud.tencent.com/document/api/1552/86336`.
      */
@@ -343,7 +343,7 @@ export interface RealtimeLogDeliveryArgs {
     /**
      * The output format of log delivery. If it is not filled, it means the default format. The default format logic is as follows: when TaskType is `customEndpoint`, the default format is an array of multiple JSON objects, each JSON object is a log; when TaskType is `s3`, the default format is JSON Lines; in particular, when TaskType is `cls`, the value of LogFormat.FormatType can only be json, and other parameters in LogFormat will be ignored. It is recommended not to pass LogFormat.
      */
-    logFormat?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryLogFormat>;
+    logFormat?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryLogFormat | undefined>;
     /**
      * Data delivery type, the values are: `domain`: site acceleration log; `application`: four-layer proxy log; `web-rateLiming`: rate limit and CC attack protection log; `web-attack`: managed rule log; `web-rule`: custom rule log; `web-bot`: Bot management log.
      */
@@ -351,7 +351,7 @@ export interface RealtimeLogDeliveryArgs {
     /**
      * Configuration information of AWS S3 compatible storage bucket. This parameter is required when TaskType is s3.
      */
-    s3?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryS3>;
+    s3?: pulumi.Input<inputs.Teo.RealtimeLogDeliveryS3 | undefined>;
     /**
      * The sampling ratio is in thousandths, with a value range of 1-1000. For example, filling in 605 means the sampling ratio is 60.5%. Leaving it blank means the sampling ratio is 100%.
      */
@@ -361,7 +361,7 @@ export interface RealtimeLogDeliveryArgs {
      */
     taskName: pulumi.Input<string>;
     /**
-     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+     * The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
      */
     taskType: pulumi.Input<string>;
     /**

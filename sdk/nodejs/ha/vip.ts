@@ -152,43 +152,43 @@ export interface VipState {
     /**
      * EIP that is associated.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.
      */
-    checkAssociate?: pulumi.Input<boolean>;
+    checkAssociate?: pulumi.Input<boolean | undefined>;
     /**
      * Create time of the HA VIP.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Instance ID that is associated.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the HA VIP. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Network interface ID that is associated.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * State of the HA VIP. Valid value: `AVAILABLE`, `UNBIND`.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -198,11 +198,11 @@ export interface VipArgs {
     /**
      * Whether to enable verification of the submachine or network card range during HAVIP drift. Not enabled by default.
      */
-    checkAssociate?: pulumi.Input<boolean>;
+    checkAssociate?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the HA VIP. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID.
      */
@@ -210,7 +210,7 @@ export interface VipArgs {
     /**
      * Virtual IP address, it must not be occupied and in this VPC network segment. If not set, it will be assigned after resource created automatically.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */

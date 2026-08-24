@@ -13,31 +13,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public static class GetInstances
     {
         /// <summary>
-        /// Use this data source to query postgresql instances
+        /// Use this data source to query PostgreSQL instances
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all postgresql instances
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var name = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         Name = "test",
-        ///     });
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke();
         /// 
-        ///     var project = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         ProjectId = 0,
-        ///     });
+        /// });
+        /// ```
         /// 
-        ///     var id = Tencentcloud.Postgresql.GetInstances.Invoke(new()
+        /// ### Query postgresql instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke(new()
         ///     {
-        ///         Id = "postgres-h9t4fde1",
+        ///         Id = "postgres-gngyhl9d",
+        ///         Name = "tf-example",
+        ///         ProjectId = "1235143",
         ///     });
         /// 
         /// });
@@ -47,31 +56,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Postgresql/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query postgresql instances
+        /// Use this data source to query PostgreSQL instances
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all postgresql instances
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var name = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         Name = "test",
-        ///     });
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke();
         /// 
-        ///     var project = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         ProjectId = 0,
-        ///     });
+        /// });
+        /// ```
         /// 
-        ///     var id = Tencentcloud.Postgresql.GetInstances.Invoke(new()
+        /// ### Query postgresql instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke(new()
         ///     {
-        ///         Id = "postgres-h9t4fde1",
+        ///         Id = "postgres-gngyhl9d",
+        ///         Name = "tf-example",
+        ///         ProjectId = "1235143",
         ///     });
         /// 
         /// });
@@ -81,31 +99,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Postgresql/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query postgresql instances
+        /// Use this data source to query PostgreSQL instances
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query all postgresql instances
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var name = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         Name = "test",
-        ///     });
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke();
         /// 
-        ///     var project = Tencentcloud.Postgresql.GetInstances.Invoke(new()
-        ///     {
-        ///         ProjectId = 0,
-        ///     });
+        /// });
+        /// ```
         /// 
-        ///     var id = Tencentcloud.Postgresql.GetInstances.Invoke(new()
+        /// ### Query postgresql instances by filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Postgresql.GetInstances.Invoke(new()
         ///     {
-        ///         Id = "postgres-h9t4fde1",
+        ///         Id = "postgres-gngyhl9d",
+        ///         Name = "tf-example",
+        ///         ProjectId = "1235143",
         ///     });
         /// 
         /// });
@@ -134,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Project ID of the postgresql instance to be query.
         /// </summary>
         [Input("projectId")]
-        public int? ProjectId { get; set; }
+        public string? ProjectId { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -166,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Project ID of the postgresql instance to be query.
         /// </summary>
         [Input("projectId")]
-        public Input<int>? ProjectId { get; set; }
+        public Input<string>? ProjectId { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -185,11 +212,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public sealed class GetInstancesResult
     {
         /// <summary>
+        /// Instance details set.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInstancesDbInstanceSetResult> DbInstanceSets;
+        /// <summary>
         /// ID of the postgresql instance.
         /// </summary>
         public readonly string? Id;
         /// <summary>
-        /// A list of postgresql instances. Each element contains the following attributes.
+        /// (**Deprecated**) It has been deprecated from version 1.82.64. Please use `DbInstanceSet` instead. A list of postgresql instances. Each element contains the following attributes.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInstancesInstanceListResult> InstanceLists;
         /// <summary>
@@ -199,21 +230,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Project id, default value is 0.
         /// </summary>
-        public readonly int? ProjectId;
+        public readonly string? ProjectId;
         public readonly string? ResultOutputFile;
 
         [OutputConstructor]
         private GetInstancesResult(
+            ImmutableArray<Outputs.GetInstancesDbInstanceSetResult> dbInstanceSets,
+
             string? id,
 
             ImmutableArray<Outputs.GetInstancesInstanceListResult> instanceLists,
 
             string? name,
 
-            int? projectId,
+            string? projectId,
 
             string? resultOutputFile)
         {
+            DbInstanceSets = dbInstanceSets;
             Id = id;
             InstanceLists = instanceLists;
             Name = name;

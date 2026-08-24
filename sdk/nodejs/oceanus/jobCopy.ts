@@ -135,35 +135,35 @@ export interface JobCopyState {
     /**
      * Copy Job ID.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * The type of the source job.
      */
-    jobType?: pulumi.Input<number>;
+    jobType?: pulumi.Input<number | undefined>;
     /**
      * The serial ID of the job to be copied.
      */
-    sourceId?: pulumi.Input<string>;
+    sourceId?: pulumi.Input<string | undefined>;
     /**
      * The name of the job to be copied.
      */
-    sourceName?: pulumi.Input<string>;
+    sourceName?: pulumi.Input<string | undefined>;
     /**
      * The cluster serial ID of the target cluster.
      */
-    targetClusterId?: pulumi.Input<string>;
+    targetClusterId?: pulumi.Input<string | undefined>;
     /**
      * The directory ID of the new job.
      */
-    targetFolderId?: pulumi.Input<string>;
+    targetFolderId?: pulumi.Input<string | undefined>;
     /**
      * The name of the new job.
      */
-    targetName?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -173,7 +173,7 @@ export interface JobCopyArgs {
     /**
      * The type of the source job.
      */
-    jobType?: pulumi.Input<number>;
+    jobType?: pulumi.Input<number | undefined>;
     /**
      * The serial ID of the job to be copied.
      */
@@ -181,7 +181,7 @@ export interface JobCopyArgs {
     /**
      * The name of the job to be copied.
      */
-    sourceName?: pulumi.Input<string>;
+    sourceName?: pulumi.Input<string | undefined>;
     /**
      * The cluster serial ID of the target cluster.
      */
@@ -189,13 +189,13 @@ export interface JobCopyArgs {
     /**
      * The directory ID of the new job.
      */
-    targetFolderId?: pulumi.Input<string>;
+    targetFolderId?: pulumi.Input<string | undefined>;
     /**
      * The name of the new job.
      */
-    targetName?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

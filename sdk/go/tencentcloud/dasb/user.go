@@ -69,7 +69,7 @@ type User struct {
 	Phone pulumi.StringPtrOutput `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringOutput `pulumi:"realName"`
-	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 	UserName pulumi.StringOutput `pulumi:"userName"`
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
 	ValidateFrom pulumi.StringOutput `pulumi:"validateFrom"`
@@ -127,7 +127,7 @@ type userState struct {
 	Phone *string `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName *string `pulumi:"realName"`
-	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 	UserName *string `pulumi:"userName"`
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
 	ValidateFrom *string `pulumi:"validateFrom"`
@@ -150,7 +150,7 @@ type UserState struct {
 	Phone pulumi.StringPtrInput
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringPtrInput
-	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 	UserName pulumi.StringPtrInput
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
 	ValidateFrom pulumi.StringPtrInput
@@ -177,7 +177,7 @@ type userArgs struct {
 	Phone *string `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName string `pulumi:"realName"`
-	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 	UserName string `pulumi:"userName"`
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
 	ValidateFrom *string `pulumi:"validateFrom"`
@@ -201,7 +201,7 @@ type UserArgs struct {
 	Phone pulumi.StringPtrInput
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringInput
-	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+	// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 	UserName pulumi.StringInput
 	// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
 	ValidateFrom pulumi.StringPtrInput
@@ -328,7 +328,7 @@ func (o UserOutput) RealName() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.RealName }).(pulumi.StringOutput)
 }
 
-// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
 func (o UserOutput) UserName() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.UserName }).(pulumi.StringOutput)
 }

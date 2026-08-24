@@ -138,39 +138,39 @@ export interface TaskRerunInstanceAsyncState {
     /**
      * Whether to check upstream tasks: ALL, MAKE_SCOPE (selected), NONE (do not check anything), default is NONE.
      */
-    checkParentType?: pulumi.Input<string>;
+    checkParentType?: pulumi.Input<string | undefined>;
     /**
      * Instance id list, which can be obtained from ListInstances.
      */
-    instanceKeyLists?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceKeyLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project Id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Customize the instance running concurrency. If not configured, the original self-dependency of the task will be used.
      */
-    redefineParallelNum?: pulumi.Input<number>;
+    redefineParallelNum?: pulumi.Input<number | undefined>;
     /**
      * Re-run instance custom parameters.
      */
-    redefineParamList?: pulumi.Input<inputs.Wedata.TaskRerunInstanceAsyncRedefineParamList>;
+    redefineParamList?: pulumi.Input<inputs.Wedata.TaskRerunInstanceAsyncRedefineParamList | undefined>;
     /**
      * Customized workflow self-dependence: yes to enable, no to disable. If not configured, the original workflow self-dependence will be used.
      */
-    redefineSelfWorkflowDependency?: pulumi.Input<string>;
+    redefineSelfWorkflowDependency?: pulumi.Input<string | undefined>;
     /**
      * Rerun type, 1: self; 3: children; 2: self and children, default 1.
      */
-    rerunType?: pulumi.Input<string>;
+    rerunType?: pulumi.Input<string | undefined>;
     /**
      * Whether to ignore event monitoring when rerunning.
      */
-    skipEventListening?: pulumi.Input<boolean>;
+    skipEventListening?: pulumi.Input<boolean | undefined>;
     /**
      * Downstream instance scope WORKFLOW: workflow PROJECT: project ALL: all cross-workflow dependent projects, default WORKFLOW.
      */
-    sonRangeType?: pulumi.Input<string>;
+    sonRangeType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,7 +180,7 @@ export interface TaskRerunInstanceAsyncArgs {
     /**
      * Whether to check upstream tasks: ALL, MAKE_SCOPE (selected), NONE (do not check anything), default is NONE.
      */
-    checkParentType?: pulumi.Input<string>;
+    checkParentType?: pulumi.Input<string | undefined>;
     /**
      * Instance id list, which can be obtained from ListInstances.
      */
@@ -192,25 +192,25 @@ export interface TaskRerunInstanceAsyncArgs {
     /**
      * Customize the instance running concurrency. If not configured, the original self-dependency of the task will be used.
      */
-    redefineParallelNum?: pulumi.Input<number>;
+    redefineParallelNum?: pulumi.Input<number | undefined>;
     /**
      * Re-run instance custom parameters.
      */
-    redefineParamList?: pulumi.Input<inputs.Wedata.TaskRerunInstanceAsyncRedefineParamList>;
+    redefineParamList?: pulumi.Input<inputs.Wedata.TaskRerunInstanceAsyncRedefineParamList | undefined>;
     /**
      * Customized workflow self-dependence: yes to enable, no to disable. If not configured, the original workflow self-dependence will be used.
      */
-    redefineSelfWorkflowDependency?: pulumi.Input<string>;
+    redefineSelfWorkflowDependency?: pulumi.Input<string | undefined>;
     /**
      * Rerun type, 1: self; 3: children; 2: self and children, default 1.
      */
-    rerunType?: pulumi.Input<string>;
+    rerunType?: pulumi.Input<string | undefined>;
     /**
      * Whether to ignore event monitoring when rerunning.
      */
-    skipEventListening?: pulumi.Input<boolean>;
+    skipEventListening?: pulumi.Input<boolean | undefined>;
     /**
      * Downstream instance scope WORKFLOW: workflow PROJECT: project ALL: all cross-workflow dependent projects, default WORKFLOW.
      */
-    sonRangeType?: pulumi.Input<string>;
+    sonRangeType?: pulumi.Input<string | undefined>;
 }

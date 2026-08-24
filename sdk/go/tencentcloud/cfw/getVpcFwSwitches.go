@@ -67,12 +67,8 @@ type GetVpcFwSwitchesResult struct {
 }
 
 func GetVpcFwSwitchesOutput(ctx *pulumi.Context, args GetVpcFwSwitchesOutputArgs, opts ...pulumi.InvokeOption) GetVpcFwSwitchesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetVpcFwSwitchesResultOutput, error) {
-			args := v.(GetVpcFwSwitchesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args, GetVpcFwSwitchesResultOutput{}, options).(GetVpcFwSwitchesResultOutput), nil
-		}).(GetVpcFwSwitchesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cfw/getVpcFwSwitches:getVpcFwSwitches", args, GetVpcFwSwitchesResultOutput{}, options).(GetVpcFwSwitchesResultOutput)
 }
 
 // A collection of arguments for invoking getVpcFwSwitches.

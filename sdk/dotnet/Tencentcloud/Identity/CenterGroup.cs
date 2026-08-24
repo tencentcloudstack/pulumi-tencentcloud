@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// tencentcloud_identity_center_group can be imported using the id, e.g.
+    /// tencentcloud.Identity.CenterGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Identity/centerGroup:CenterGroup identity_center_group ${zoneId}#${groupId}

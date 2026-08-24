@@ -124,12 +124,8 @@ type GetPortsResult struct {
 }
 
 func GetPortsOutput(ctx *pulumi.Context, args GetPortsOutputArgs, opts ...pulumi.InvokeOption) GetPortsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPortsResultOutput, error) {
-			args := v.(GetPortsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getPorts:getPorts", args, GetPortsResultOutput{}, options).(GetPortsResultOutput), nil
-		}).(GetPortsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getPorts:getPorts", args, GetPortsResultOutput{}, options).(GetPortsResultOutput)
 }
 
 // A collection of arguments for invoking getPorts.

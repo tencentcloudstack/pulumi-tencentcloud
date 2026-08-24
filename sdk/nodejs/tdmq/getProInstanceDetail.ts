@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proInstanceDetail = tencentcloud.Tdmq.getProInstanceDetail({
+ * const proInstanceDetail = tencentcloud.tdmq.getProInstanceDetail({
  *     clusterId: "pulsar-9n95ax58b9vn",
  * });
  * ```
@@ -77,7 +77,7 @@ export interface GetProInstanceDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proInstanceDetail = tencentcloud.Tdmq.getProInstanceDetail({
+ * const proInstanceDetail = tencentcloud.tdmq.getProInstanceDetail({
  *     clusterId: "pulsar-9n95ax58b9vn",
  * });
  * ```
@@ -101,5 +101,5 @@ export interface GetProInstanceDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cvm hpc_cluster can be imported using the id, e.g.
+ * cvm hpcCluster can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
@@ -106,15 +106,15 @@ export interface HpcClusterState {
     /**
      * Name of Hpc Cluster.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Remark of Hpc Cluster.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Available zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,11 +124,11 @@ export interface HpcClusterArgs {
     /**
      * Name of Hpc Cluster.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Remark of Hpc Cluster.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Available zone.
      */

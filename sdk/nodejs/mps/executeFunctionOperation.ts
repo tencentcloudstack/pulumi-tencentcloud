@@ -94,11 +94,11 @@ export interface ExecuteFunctionOperationState {
     /**
      * API parameter. Parameter format will depend on the actual function definition.
      */
-    functionArg?: pulumi.Input<string>;
+    functionArg?: pulumi.Input<string | undefined>;
     /**
      * Name of called backend API.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
 }
 
 /**

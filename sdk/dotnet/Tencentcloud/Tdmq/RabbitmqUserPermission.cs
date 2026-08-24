@@ -79,7 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Import
     /// 
-    /// tdmq rabbitmq_user_permission can be imported using the id, e.g.
+    /// tdmq RabbitmqUserPermission can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/rabbitmqUserPermission:RabbitmqUserPermission example amqp-xxxxxxxx#user#vhost

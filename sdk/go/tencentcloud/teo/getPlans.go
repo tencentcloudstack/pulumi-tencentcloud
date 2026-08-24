@@ -136,12 +136,8 @@ type GetPlansResult struct {
 }
 
 func GetPlansOutput(ctx *pulumi.Context, args GetPlansOutputArgs, opts ...pulumi.InvokeOption) GetPlansResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPlansResultOutput, error) {
-			args := v.(GetPlansArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Teo/getPlans:getPlans", args, GetPlansResultOutput{}, options).(GetPlansResultOutput), nil
-		}).(GetPlansResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Teo/getPlans:getPlans", args, GetPlansResultOutput{}, options).(GetPlansResultOutput)
 }
 
 // A collection of arguments for invoking getPlans.

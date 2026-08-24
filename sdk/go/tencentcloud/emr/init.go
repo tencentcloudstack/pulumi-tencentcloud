@@ -23,8 +23,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Emr/autoScaleStrategy:AutoScaleStrategy":
 		r = &AutoScaleStrategy{}
+	case "tencentcloud:Emr/bootScript:BootScript":
+		r = &BootScript{}
 	case "tencentcloud:Emr/cluster:Cluster":
 		r = &Cluster{}
+	case "tencentcloud:Emr/clusterV2:ClusterV2":
+		r = &ClusterV2{}
 	case "tencentcloud:Emr/deployYarnOperation:DeployYarnOperation":
 		r = &DeployYarnOperation{}
 	case "tencentcloud:Emr/userManager:UserManager":
@@ -51,7 +55,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Emr/bootScript",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Emr/cluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Emr/clusterV2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

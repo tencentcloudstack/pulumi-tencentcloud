@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Redis.getClusters({});
+ * const clusters = tencentcloud.redis.getClusters({});
  * ```
  *
  * ### Also Support the following query conditions
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Redis.getClusters({
+ * const clusters = tencentcloud.redis.getClusters({
  *     dedicatedClusterId: "cluster-0astoh6a",
  *     redisClusterIds: ["crs-cdc-9nyfki8h"],
  *     clusterName: "crs-cdc-9nyfki8h",
@@ -138,7 +138,7 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Redis.getClusters({});
+ * const clusters = tencentcloud.redis.getClusters({});
  * ```
  *
  * ### Also Support the following query conditions
@@ -147,7 +147,7 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Redis.getClusters({
+ * const clusters = tencentcloud.redis.getClusters({
  *     dedicatedClusterId: "cluster-0astoh6a",
  *     redisClusterIds: ["crs-cdc-9nyfki8h"],
  *     clusterName: "crs-cdc-9nyfki8h",
@@ -189,29 +189,29 @@ export interface GetClustersOutputArgs {
     /**
      * Renewal mode: 0- default state (manual renewal); 1- Automatic renewal; 2- Clearly stating that automatic renewal is not allowed.
      */
-    autoRenewFlags?: pulumi.Input<pulumi.Input<number>[]>;
+    autoRenewFlags?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Dedicated cluster Id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * Project Ids.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Redis Cluster Ids.
      */
-    redisClusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    redisClusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Cluster status: 1- In process, 2- Running, 3- Isolated.
      */
-    statuses?: pulumi.Input<pulumi.Input<number>[]>;
+    statuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }

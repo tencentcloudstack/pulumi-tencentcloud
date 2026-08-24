@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Outputs
         /// </summary>
         public readonly ImmutableArray<string> DbLists;
         /// <summary>
-        /// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        /// End time of the backup.
         /// </summary>
         public readonly string EndTime;
         /// <summary>
@@ -47,7 +47,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Outputs
         /// </summary>
         public readonly int Size;
         /// <summary>
-        /// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
+        /// Start time of the backup.
         /// </summary>
         public readonly string StartTime;
         /// <summary>

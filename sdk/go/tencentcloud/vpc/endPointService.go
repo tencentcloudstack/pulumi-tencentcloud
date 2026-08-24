@@ -68,7 +68,7 @@ type EndPointService struct {
 	ServiceInstanceId pulumi.StringOutput `pulumi:"serviceInstanceId"`
 	// APPID.
 	ServiceOwner pulumi.StringOutput `pulumi:"serviceOwner"`
-	// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+	// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 	ServiceType pulumi.StringOutput `pulumi:"serviceType"`
 	// VIP of backend service.
 	ServiceVip pulumi.StringOutput `pulumi:"serviceVip"`
@@ -132,7 +132,7 @@ type endPointServiceState struct {
 	ServiceInstanceId *string `pulumi:"serviceInstanceId"`
 	// APPID.
 	ServiceOwner *string `pulumi:"serviceOwner"`
-	// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+	// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 	ServiceType *string `pulumi:"serviceType"`
 	// VIP of backend service.
 	ServiceVip *string `pulumi:"serviceVip"`
@@ -155,7 +155,7 @@ type EndPointServiceState struct {
 	ServiceInstanceId pulumi.StringPtrInput
 	// APPID.
 	ServiceOwner pulumi.StringPtrInput
-	// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+	// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 	ServiceType pulumi.StringPtrInput
 	// VIP of backend service.
 	ServiceVip pulumi.StringPtrInput
@@ -174,7 +174,7 @@ type endPointServiceArgs struct {
 	EndPointServiceName string `pulumi:"endPointServiceName"`
 	// Id of service instance, like lb-xxx.
 	ServiceInstanceId string `pulumi:"serviceInstanceId"`
-	// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+	// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 	ServiceType *string `pulumi:"serviceType"`
 	// ID of vpc instance.
 	VpcId string `pulumi:"vpcId"`
@@ -188,7 +188,7 @@ type EndPointServiceArgs struct {
 	EndPointServiceName pulumi.StringInput
 	// Id of service instance, like lb-xxx.
 	ServiceInstanceId pulumi.StringInput
-	// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+	// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 	ServiceType pulumi.StringPtrInput
 	// ID of vpc instance.
 	VpcId pulumi.StringInput
@@ -316,7 +316,7 @@ func (o EndPointServiceOutput) ServiceOwner() pulumi.StringOutput {
 	return o.ApplyT(func(v *EndPointService) pulumi.StringOutput { return v.ServiceOwner }).(pulumi.StringOutput)
 }
 
-// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
 func (o EndPointServiceOutput) ServiceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *EndPointService) pulumi.StringOutput { return v.ServiceType }).(pulumi.StringOutput)
 }

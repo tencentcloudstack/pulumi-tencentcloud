@@ -339,7 +339,9 @@ import (
 // ssl certificate can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Ssl/certificate:Certificate  tencentcloud_ssl_certificate.cert GjTNRoK7
+//
+//	$ pulumi import tencentcloud:Ssl/certificate:Certificate cert GjTNRoK7
+//
 // ```
 type Certificate struct {
 	pulumi.CustomResourceState

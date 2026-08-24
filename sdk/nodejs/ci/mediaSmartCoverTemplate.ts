@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_smart_cover_template can be imported using the bucket#templateId, e.g.
+ * ci mediaSmartCoverTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7
@@ -117,15 +117,15 @@ export interface MediaSmartCoverTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Smart Cover Parameters.
      */
-    smartCover?: pulumi.Input<inputs.Ci.MediaSmartCoverTemplateSmartCover>;
+    smartCover?: pulumi.Input<inputs.Ci.MediaSmartCoverTemplateSmartCover | undefined>;
 }
 
 /**
@@ -139,7 +139,7 @@ export interface MediaSmartCoverTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Smart Cover Parameters.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getSystemResource({
+ * const example = tencentcloud.oceanus.getSystemResource({
  *     resourceIds: ["resource-abd503yt"],
  *     filters: [{
  *         name: "Name",
@@ -91,7 +91,7 @@ export interface GetSystemResourceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getSystemResource({
+ * const example = tencentcloud.oceanus.getSystemResource({
  *     resourceIds: ["resource-abd503yt"],
  *     filters: [{
  *         name: "Name",
@@ -121,21 +121,21 @@ export interface GetSystemResourceOutputArgs {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Query the resource configuration list. If not specified, return all job configuration lists under ResourceIds.N.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetSystemResourceFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetSystemResourceFilterArgs>[] | undefined>;
     /**
      * Query built-in connectors for the corresponding Flink version.
      */
-    flinkVersion?: pulumi.Input<string>;
+    flinkVersion?: pulumi.Input<string | undefined>;
     /**
      * Array of resource IDs to be queried.
      */
-    resourceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

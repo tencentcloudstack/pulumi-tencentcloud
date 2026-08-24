@@ -21,10 +21,19 @@ List of allowed TencentCloud account IDs to prevent you from mistakenly using th
 """
 
 assumeRole: Optional[str]
+"""
+The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+"""
 
 assumeRoleWithSaml: Optional[str]
+"""
+The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+"""
 
 assumeRoleWithWebIdentity: Optional[str]
+"""
+The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+"""
 
 camRoleName: Optional[str]
 """
@@ -52,6 +61,9 @@ List of forbidden TencentCloud account IDs to prevent you from mistakenly using 
 """
 
 mfaCertification: Optional[str]
+"""
+The `mfa_certification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+"""
 
 profile: Optional[str]
 """

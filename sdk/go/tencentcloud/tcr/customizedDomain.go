@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewCustomizedDomain(ctx, "example", &tcr.CustomizedDomainArgs{
-//				RegistryId:    example.ID(),
+//				RegistryId:    example.ID().ToIDOutput().ToStringOutput(),
 //				DomainName:    pulumi.String("www.demo.com"),
 //				CertificateId: pulumi.String("your_cert_id"),
 //				Tags: pulumi.StringMap{

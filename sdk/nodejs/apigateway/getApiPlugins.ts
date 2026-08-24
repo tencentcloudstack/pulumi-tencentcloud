@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getApiPlugins({
+ * const example = tencentcloud.apigateway.getApiPlugins({
  *     apiId: "api-0cvmf4x4",
  *     serviceId: "service-nxz6yync",
  *     environmentName: "test",
@@ -80,7 +80,7 @@ export interface GetApiPluginsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getApiPlugins({
+ * const example = tencentcloud.apigateway.getApiPlugins({
  *     apiId: "api-0cvmf4x4",
  *     serviceId: "service-nxz6yync",
  *     environmentName: "test",
@@ -108,11 +108,11 @@ export interface GetApiPluginsOutputArgs {
     /**
      * Environment information.
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The service ID to be queried.
      */

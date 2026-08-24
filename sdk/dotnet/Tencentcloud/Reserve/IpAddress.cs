@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserve
     /// 
     /// ## Import
     /// 
-    /// vpc reserve_ip_addresses can be imported using the id, e.g.
+    /// vpc ReserveIpAddresses can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}

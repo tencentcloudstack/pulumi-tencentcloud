@@ -76,12 +76,8 @@ type GetLogstashInstanceOperationsResult struct {
 }
 
 func GetLogstashInstanceOperationsOutput(ctx *pulumi.Context, args GetLogstashInstanceOperationsOutputArgs, opts ...pulumi.InvokeOption) GetLogstashInstanceOperationsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogstashInstanceOperationsResultOutput, error) {
-			args := v.(GetLogstashInstanceOperationsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args, GetLogstashInstanceOperationsResultOutput{}, options).(GetLogstashInstanceOperationsResultOutput), nil
-		}).(GetLogstashInstanceOperationsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getLogstashInstanceOperations:getLogstashInstanceOperations", args, GetLogstashInstanceOperationsResultOutput{}, options).(GetLogstashInstanceOperationsResultOutput)
 }
 
 // A collection of arguments for invoking getLogstashInstanceOperations.

@@ -25,6 +25,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         [Input("diskType", required: true)]
         public Input<string> DiskType { get; set; } = null!;
 
+        /// <summary>
+        /// Encrypt System Drive. Allow value: `ENCRYPT`.
+        /// </summary>
+        [Input("encrypt")]
+        public Input<string>? Encrypt { get; set; }
+
+        /// <summary>
+        /// Kms key ID.
+        /// </summary>
+        [Input("kmsKeyId")]
+        public Input<string>? KmsKeyId { get; set; }
+
         public NativeNodePoolNativeSystemDiskGetArgs()
         {
         }

@@ -98,7 +98,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     declare public readonly instanceMemorySize: pulumi.Output<number | undefined>;
     /**
-     * Name of instance.
+     * Instance name.
      */
     declare public readonly instanceName: pulumi.Output<string>;
     /**
@@ -176,51 +176,51 @@ export interface ReadonlyInstanceState {
     /**
      * Cluster ID which the readonly instance belongs to.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceCpuCore?: pulumi.Input<number>;
+    instanceCpuCore?: pulumi.Input<number | undefined>;
     /**
      * Duration time for maintenance, unit in second. `3600` by default.
      */
-    instanceMaintainDuration?: pulumi.Input<number>;
+    instanceMaintainDuration?: pulumi.Input<number | undefined>;
     /**
      * Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
      */
-    instanceMaintainStartTime?: pulumi.Input<number>;
+    instanceMaintainStartTime?: pulumi.Input<number | undefined>;
     /**
      * Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
      */
-    instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceMemorySize?: pulumi.Input<number>;
+    instanceMemorySize?: pulumi.Input<number | undefined>;
     /**
-     * Name of instance.
+     * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Status of the instance.
      */
-    instanceStatus?: pulumi.Input<string>;
+    instanceStatus?: pulumi.Input<string | undefined>;
     /**
      * Storage size of the instance, unit in GB.
      */
-    instanceStorageSize?: pulumi.Input<number>;
+    instanceStorageSize?: pulumi.Input<number | undefined>;
     /**
      * ID of the subnet within this VPC.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -234,37 +234,37 @@ export interface ReadonlyInstanceArgs {
     /**
      * Indicate whether to delete readonly instance directly or not. Default is false. If set true, instance will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceCpuCore?: pulumi.Input<number>;
+    instanceCpuCore?: pulumi.Input<number | undefined>;
     /**
      * Duration time for maintenance, unit in second. `3600` by default.
      */
-    instanceMaintainDuration?: pulumi.Input<number>;
+    instanceMaintainDuration?: pulumi.Input<number | undefined>;
     /**
      * Offset time from 00:00, unit in second. For example, 03:00am should be `10800`. `10800` by default.
      */
-    instanceMaintainStartTime?: pulumi.Input<number>;
+    instanceMaintainStartTime?: pulumi.Input<number | undefined>;
     /**
      * Weekdays for maintenance. `["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]` by default.
      */
-    instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceMaintainWeekdays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
      */
-    instanceMemorySize?: pulumi.Input<number>;
+    instanceMemorySize?: pulumi.Input<number | undefined>;
     /**
-     * Name of instance.
+     * Instance name.
      */
     instanceName: pulumi.Input<string>;
     /**
      * ID of the subnet within this VPC.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

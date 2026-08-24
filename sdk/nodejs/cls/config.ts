@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cls config
+ * Provides a resource to create a CLS config
  *
  * ## Example Usage
  *
@@ -15,11 +15,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new tencentcloud.cls.Config("config", {
- *     name: "config_hello",
- *     output: "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
- *     path: "/var/log/kubernetes",
+ * const example = new tencentcloud.cls.Config("example", {
+ *     name: "tf-example",
+ *     output: "734f50d1-d621-425c-8768-6f9a5f0412ee",
+ *     path: "/data/log/**&#47;error.log",
  *     logType: "json_log",
+ *     inputType: "file",
  *     extractRule: {
  *         filterKeyRegexes: [
  *             {
@@ -30,10 +31,21 @@ import * as utilities from "../utilities";
  *                 key: "key2",
  *                 regex: "value2",
  *             },
+ *             {
+ *                 key: "ErrorCode",
+ *                 regex: "500",
+ *             },
  *         ],
+ *         isGbk: 0,
+ *         jsonStandard: 1,
  *         unMatchUpLoadSwitch: true,
- *         unMatchLogKey: "config",
- *         backtracking: -1,
+ *         unMatchLogKey: "LogParseFailure",
+ *         backtracking: 0,
+ *         metadataType: 2,
+ *         metaTags: [{
+ *             key: "myKey",
+ *             value: "myValue",
+ *         }],
  *     },
  *     excludePaths: [
  *         {
@@ -50,10 +62,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls config can be imported using the id, e.g.
+ * CLS config can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cls/config:Config config config_id
+ * $ pulumi import tencentcloud:Cls/config:Config example 49611ec9-c5f2-4cc9-9e06-15dd7fa43982
  * ```
  */
 export class Config extends pulumi.CustomResource {
@@ -93,6 +105,10 @@ export class Config extends pulumi.CustomResource {
      */
     declare public readonly extractRule: pulumi.Output<outputs.Cls.ConfigExtractRule>;
     /**
+     * Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+     */
+    declare public readonly inputType: pulumi.Output<string>;
+    /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
     declare public readonly logType: pulumi.Output<string | undefined>;
@@ -128,6 +144,7 @@ export class Config extends pulumi.CustomResource {
             const state = argsOrState as ConfigState | undefined;
             resourceInputs["excludePaths"] = state?.excludePaths;
             resourceInputs["extractRule"] = state?.extractRule;
+            resourceInputs["inputType"] = state?.inputType;
             resourceInputs["logType"] = state?.logType;
             resourceInputs["name"] = state?.name;
             resourceInputs["output"] = state?.output;
@@ -140,6 +157,7 @@ export class Config extends pulumi.CustomResource {
             }
             resourceInputs["excludePaths"] = args?.excludePaths;
             resourceInputs["extractRule"] = args?.extractRule;
+            resourceInputs["inputType"] = args?.inputType;
             resourceInputs["logType"] = args?.logType;
             resourceInputs["name"] = args?.name;
             resourceInputs["output"] = args?.output;
@@ -158,31 +176,35 @@ export interface ConfigState {
     /**
      * Collection path blocklist.
      */
-    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExcludePath>[]>;
+    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExcludePath>[] | undefined>;
     /**
      * Extraction rule. If ExtractRule is set, LogType must be set.
      */
-    extractRule?: pulumi.Input<inputs.Cls.ConfigExtractRule>;
+    extractRule?: pulumi.Input<inputs.Cls.ConfigExtractRule | undefined>;
+    /**
+     * Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+     */
+    inputType?: pulumi.Input<string | undefined>;
     /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Collection configuration name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID (TopicId) of collection configuration.
      */
-    output?: pulumi.Input<string>;
+    output?: pulumi.Input<string | undefined>;
     /**
      * Log collection path containing the filename. Required for document collection.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Custom collection rule, which is a serialized JSON string. Required when LogType is user_define_log.
      */
-    userDefineRule?: pulumi.Input<string>;
+    userDefineRule?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -192,29 +214,33 @@ export interface ConfigArgs {
     /**
      * Collection path blocklist.
      */
-    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExcludePath>[]>;
+    excludePaths?: pulumi.Input<pulumi.Input<inputs.Cls.ConfigExcludePath>[] | undefined>;
     /**
      * Extraction rule. If ExtractRule is set, LogType must be set.
      */
     extractRule: pulumi.Input<inputs.Cls.ConfigExtractRule>;
     /**
+     * Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+     */
+    inputType?: pulumi.Input<string | undefined>;
+    /**
      * Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Collection configuration name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID (TopicId) of collection configuration.
      */
-    output?: pulumi.Input<string>;
+    output?: pulumi.Input<string | undefined>;
     /**
      * Log collection path containing the filename. Required for document collection.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Custom collection rule, which is a serialized JSON string. Required when LogType is user_define_log.
      */
-    userDefineRule?: pulumi.Input<string>;
+    userDefineRule?: pulumi.Input<string | undefined>;
 }

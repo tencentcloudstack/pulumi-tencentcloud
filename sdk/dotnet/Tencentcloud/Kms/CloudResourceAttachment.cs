@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// 
     /// ## Import
     /// 
-    /// kms cloud_resource_attachment can be imported using the id, e.g.
+    /// kms CloudResourceAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Kms/cloudResourceAttachment:CloudResourceAttachment example 72688f39-1fe8-11ee-9f1a-525400cf25a4#mysql#cdb-fitq5t9h

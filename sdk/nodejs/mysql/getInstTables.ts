@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instTables = tencentcloud.Mysql.getInstTables({
+ * const instTables = tencentcloud.mysql.getInstTables({
  *     instanceId: "cdb-fitq5t9h",
  *     database: "tf_ci_test",
  * });
@@ -77,7 +77,7 @@ export interface GetInstTablesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instTables = tencentcloud.Mysql.getInstTables({
+ * const instTables = tencentcloud.mysql.getInstTables({
  *     instanceId: "cdb-fitq5t9h",
  *     database: "tf_ci_test",
  * });
@@ -108,9 +108,9 @@ export interface GetInstTablesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Match the regular expression of the database table name, the rules are the same as MySQL official website.
      */
-    tableRegexp?: pulumi.Input<string>;
+    tableRegexp?: pulumi.Input<string | undefined>;
 }

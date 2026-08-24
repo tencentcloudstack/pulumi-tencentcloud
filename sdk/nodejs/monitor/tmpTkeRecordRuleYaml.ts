@@ -18,13 +18,13 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
  * const sgId = sg.id;
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -246,27 +246,27 @@ export interface TmpTkeRecordRuleYamlState {
     /**
      * An ID identify the cluster, like cls-xxxxxx.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Contents of record rules in yaml format.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Instance Id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used for the argument, if the configuration comes to the template, the template id.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
     /**
      * Last modified time of record rule.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**

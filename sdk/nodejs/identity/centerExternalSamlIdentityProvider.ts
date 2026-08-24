@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a organization identityCenterExternalSamlIdentityProvider
+ * Provides a resource to create a Organization identity center external saml identity provider
  *
  * ## Example Usage
  *
@@ -13,18 +13,41 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterExternalSamlIdentityProvider = new tencentcloud.identity.CenterExternalSamlIdentityProvider("identity_center_external_saml_identity_provider", {
- *     zoneId: "z-xxxxxx",
+ * const example = new tencentcloud.identity.CenterExternalSamlIdentityProvider("example", {
+ *     zoneId: "z-1os7c9znogct",
  *     ssoStatus: "Enabled",
+ *     encodedMetadataDocument: "PD94bWwgdmVyc2lvbj0iM......VzY3JpcHRvcj4=",
+ * });
+ * ```
+ *
+ * ### Or
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.identity.CenterExternalSamlIdentityProvider("example", {
+ *     zoneId: "z-1os7c9znogct",
+ *     entityId: "https://sts.windows.net/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/",
+ *     loginUrl: "https://login.microsoftonline.com/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/saml2",
+ *     ssoStatus: "Enabled",
+ *     x509Certificate: `-----BEGIN CERTIFICATE-----
+ * MIIC8DCCAdigAwIBAgIQVbznAx6JSrhKG7gfJdx+jDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+ * ......
+ * ......
+ * ......
+ * 8hRskP2V6CH9PS0Zz2Zq
+ * -----END CERTIFICATE-----
+ * `,
  * });
  * ```
  *
  * ## Import
  *
- * organization identity_center_external_saml_identity_provider can be imported using the id, e.g.
+ * Organization identity center external saml identity provider can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider identity_center_external_saml_identity_provider ${zoneId}
+ * $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider example z-1os7c9znogct
  * ```
  */
 export class CenterExternalSamlIdentityProvider extends pulumi.CustomResource {
@@ -147,43 +170,43 @@ export interface CenterExternalSamlIdentityProviderState {
     /**
      * Acs url.
      */
-    acsUrl?: pulumi.Input<string>;
+    acsUrl?: pulumi.Input<string | undefined>;
     /**
      * Certificate ids.
      */
-    certificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    certificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * IdP metadata document (Base64 encoded). Provided by an IdP that supports the SAML 2.0 protocol.
      */
-    encodedMetadataDocument?: pulumi.Input<string>;
+    encodedMetadataDocument?: pulumi.Input<string | undefined>;
     /**
      * IdP identifier.
      */
-    entityId?: pulumi.Input<string>;
+    entityId?: pulumi.Input<string | undefined>;
     /**
      * IdP login URL.
      */
-    loginUrl?: pulumi.Input<string>;
+    loginUrl?: pulumi.Input<string | undefined>;
     /**
      * SSO enabling status. Valid values: Enabled, Disabled (default).
      */
-    ssoStatus?: pulumi.Input<string>;
+    ssoStatus?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    x509Certificate?: pulumi.Input<string>;
+    x509Certificate?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -193,23 +216,23 @@ export interface CenterExternalSamlIdentityProviderArgs {
     /**
      * IdP metadata document (Base64 encoded). Provided by an IdP that supports the SAML 2.0 protocol.
      */
-    encodedMetadataDocument?: pulumi.Input<string>;
+    encodedMetadataDocument?: pulumi.Input<string | undefined>;
     /**
      * IdP identifier.
      */
-    entityId?: pulumi.Input<string>;
+    entityId?: pulumi.Input<string | undefined>;
     /**
      * IdP login URL.
      */
-    loginUrl?: pulumi.Input<string>;
+    loginUrl?: pulumi.Input<string | undefined>;
     /**
      * SSO enabling status. Valid values: Enabled, Disabled (default).
      */
-    ssoStatus?: pulumi.Input<string>;
+    ssoStatus?: pulumi.Input<string | undefined>;
     /**
      * X509 certificate in PEM format. If this parameter is specified, all existing certificates will be replaced.
      */
-    x509Certificate?: pulumi.Input<string>;
+    x509Certificate?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */

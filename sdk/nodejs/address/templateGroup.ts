@@ -102,11 +102,11 @@ export interface TemplateGroupState {
     /**
      * Name of the address template group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Template ID list.
      */
-    templateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    templateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -116,7 +116,7 @@ export interface TemplateGroupArgs {
     /**
      * Name of the address template group.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Template ID list.
      */

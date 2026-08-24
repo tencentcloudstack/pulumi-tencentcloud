@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// elasticsearch security_group can be imported using the id, e.g.
+// elasticsearch securityGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id

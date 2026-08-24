@@ -66,12 +66,8 @@ type GetClusterLevelsResult struct {
 }
 
 func GetClusterLevelsOutput(ctx *pulumi.Context, args GetClusterLevelsOutputArgs, opts ...pulumi.InvokeOption) GetClusterLevelsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterLevelsResultOutput, error) {
-			args := v.(GetClusterLevelsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args, GetClusterLevelsResultOutput{}, options).(GetClusterLevelsResultOutput), nil
-		}).(GetClusterLevelsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args, GetClusterLevelsResultOutput{}, options).(GetClusterLevelsResultOutput)
 }
 
 // A collection of arguments for invoking getClusterLevels.

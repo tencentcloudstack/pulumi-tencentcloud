@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjects({});
+ * const example = tencentcloud.wedata.getProjects({});
  * ```
  *
  * ### Query projects by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjects({
+ * const example = tencentcloud.wedata.getProjects({
  *     projectIds: [
  *         "2982667120655491072",
  *         "2853989879663501312",
@@ -113,7 +113,7 @@ export interface GetProjectsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjects({});
+ * const example = tencentcloud.wedata.getProjects({});
  * ```
  *
  * ### Query projects by filter
@@ -122,7 +122,7 @@ export interface GetProjectsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getProjects({
+ * const example = tencentcloud.wedata.getProjects({
  *     projectIds: [
  *         "2982667120655491072",
  *         "2853989879663501312",
@@ -152,21 +152,21 @@ export interface GetProjectsOutputArgs {
     /**
      * List of project IDs.
      */
-    projectIds?: pulumi.Input<pulumi.Input<string>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project model, optional values: SIMPLE, STANDARD.
      */
-    projectModel?: pulumi.Input<string>;
+    projectModel?: pulumi.Input<string | undefined>;
     /**
      * Project name or unique identifier name, supports fuzzy search.
      */
-    projectName?: pulumi.Input<string>;
+    projectName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Project status, optional values: 0 (disabled), 1 (normal).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

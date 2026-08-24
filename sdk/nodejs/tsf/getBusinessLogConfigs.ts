@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const businessLogConfigs = tencentcloud.Tsf.getBusinessLogConfigs({
+ * const businessLogConfigs = tencentcloud.tsf.getBusinessLogConfigs({
  *     searchWord: "terraform",
  *     disableProgramAuthCheck: true,
  *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
@@ -81,7 +81,7 @@ export interface GetBusinessLogConfigsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const businessLogConfigs = tencentcloud.Tsf.getBusinessLogConfigs({
+ * const businessLogConfigs = tencentcloud.tsf.getBusinessLogConfigs({
  *     searchWord: "terraform",
  *     disableProgramAuthCheck: true,
  *     configIdLists: ["apm-busi-log-cfg-qv3x3rdv"],
@@ -106,17 +106,17 @@ export interface GetBusinessLogConfigsOutputArgs {
     /**
      * Config Id list.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Disable Program auth check or not.
      */
-    disableProgramAuthCheck?: pulumi.Input<boolean>;
+    disableProgramAuthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * wild search word.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

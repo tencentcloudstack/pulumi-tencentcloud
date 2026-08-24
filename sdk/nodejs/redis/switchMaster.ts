@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  *     region: "ap-guangzhou",
  * });
@@ -60,7 +60,7 @@ import * as utilities from "../utilities";
  *     subnetId: subnet.id,
  *     securityGroups: [securityGroup.id],
  * });
- * const example = tencentcloud.Redis.getInstanceZoneInfoOutput({
+ * const example = tencentcloud.redis.getInstanceZoneInfoOutput({
  *     instanceId: exampleInstance.id,
  * });
  * const exampleSwitchMaster = new tencentcloud.redis.SwitchMaster("example", {
@@ -141,11 +141,11 @@ export interface SwitchMasterState {
     /**
      * Replication group ID, required for multi-AZ instances.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -155,7 +155,7 @@ export interface SwitchMasterArgs {
     /**
      * Replication group ID, required for multi-AZ instances.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * The ID of instance.
      */

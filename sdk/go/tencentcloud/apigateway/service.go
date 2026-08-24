@@ -33,7 +33,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("example-vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -49,7 +49,7 @@ import (
 //					pulumi.String("OUTER"),
 //				},
 //				IpVersion: pulumi.String("IPv4"),
-//				UniqVpcId: vpc.ID(),
+//				UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
 //				},

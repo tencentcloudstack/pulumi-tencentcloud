@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -41,6 +40,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     ///             "ap-guangzhou",
     ///             "ap-shanghai",
     ///         },
+    ///         Encrypt = true,
+    ///         KmsKeyId = "f063c18b-654b-11ef-9d9f-525400d3a886",
     ///     });
     /// 
     /// });
@@ -62,6 +63,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public Output<bool?> DryRun { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to synchronize as an encrypted custom image. Default value is `False`. Synchronization to an encrypted custom image is only supported within the same region.
+        /// </summary>
+        [Output("encrypt")]
+        public Output<bool?> Encrypt { get; private set; } = null!;
+
+        /// <summary>
         /// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
         /// </summary>
         [Output("imageId")]
@@ -78,6 +85,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// </summary>
         [Output("imageSetRequired")]
         public Output<bool?> ImageSetRequired { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of the image created in the destination region.
+        /// </summary>
+        [Output("imageSets")]
+        public Output<ImmutableArray<Outputs.SyncImageImageSet>> ImageSets { get; private set; } = null!;
+
+        /// <summary>
+        /// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+        /// </summary>
+        [Output("kmsKeyId")]
+        public Output<string?> KmsKeyId { get; private set; } = null!;
 
 
         /// <summary>
@@ -145,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public Input<bool>? DryRun { get; set; }
 
         /// <summary>
+        /// Whether to synchronize as an encrypted custom image. Default value is `False`. Synchronization to an encrypted custom image is only supported within the same region.
+        /// </summary>
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
+
+        /// <summary>
         /// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
         /// </summary>
         [Input("imageId", required: true)]
@@ -161,6 +186,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// </summary>
         [Input("imageSetRequired")]
         public Input<bool>? ImageSetRequired { get; set; }
+
+        /// <summary>
+        /// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+        /// </summary>
+        [Input("kmsKeyId")]
+        public Input<string>? KmsKeyId { get; set; }
 
         public SyncImageArgs()
         {
@@ -189,6 +220,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public Input<bool>? DryRun { get; set; }
 
         /// <summary>
+        /// Whether to synchronize as an encrypted custom image. Default value is `False`. Synchronization to an encrypted custom image is only supported within the same region.
+        /// </summary>
+        [Input("encrypt")]
+        public Input<bool>? Encrypt { get; set; }
+
+        /// <summary>
         /// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
         /// </summary>
         [Input("imageId")]
@@ -205,6 +242,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// </summary>
         [Input("imageSetRequired")]
         public Input<bool>? ImageSetRequired { get; set; }
+
+        [Input("imageSets")]
+        private InputList<Inputs.SyncImageImageSetGetArgs>? _imageSets;
+
+        /// <summary>
+        /// ID of the image created in the destination region.
+        /// </summary>
+        public InputList<Inputs.SyncImageImageSetGetArgs> ImageSets
+        {
+            get => _imageSets ?? (_imageSets = new InputList<Inputs.SyncImageImageSetGetArgs>());
+            set => _imageSets = value;
+        }
+
+        /// <summary>
+        /// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+        /// </summary>
+        [Input("kmsKeyId")]
+        public Input<string>? KmsKeyId { get; set; }
 
         public SyncImageState()
         {

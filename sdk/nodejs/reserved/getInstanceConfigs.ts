@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = tencentcloud.Reserved.getInstanceConfigs({
+ * const config = tencentcloud.reserved.getInstanceConfigs({
  *     availabilityZone: "na-siliconvalley-1",
  * });
  * ```
@@ -103,7 +103,7 @@ export interface GetInstanceConfigsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = tencentcloud.Reserved.getInstanceConfigs({
+ * const config = tencentcloud.reserved.getInstanceConfigs({
  *     availabilityZone: "na-siliconvalley-1",
  * });
  * ```
@@ -128,25 +128,25 @@ export interface GetInstanceConfigsOutputArgs {
     /**
      * The available zone that the reserved instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Validity period of the reserved instance. Valid values are `31536000`(1 year) and `94608000`(3 years).
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * The type of reserved instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Filter by Payment Type. Such as All Upfront.
      */
-    offeringType?: pulumi.Input<string>;
+    offeringType?: pulumi.Input<string | undefined>;
     /**
      * Filter by the Platform Description (that is, operating system) for Reserved Instance billing. Shaped like: linux.
      */
-    productDescription?: pulumi.Input<string>;
+    productDescription?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

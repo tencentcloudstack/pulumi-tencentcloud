@@ -39,15 +39,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_es_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
 //				Name:             pulumi.String("tf_es_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -59,8 +59,8 @@ import (
 //				InstanceName:      pulumi.String("tf_example_es"),
 //				AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
 //				Version:           pulumi.String("7.10.1"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Password:          pulumi.String("Test12345"),
 //				LicenseType:       pulumi.String("basic"),
 //				BasicSecurityType: pulumi.Int(2),
@@ -99,6 +99,78 @@ import (
 //
 // ```
 //
+// ### Create a basic version of elasticsearch instance with destroy protection enabled
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/elasticsearch"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			availabilityZone, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "es",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//				Name:      pulumi.String("tf_es_vpc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+//				Name:             pulumi.String("tf_es_subnet"),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = elasticsearch.NewInstance(ctx, "example", &elasticsearch.InstanceArgs{
+//				InstanceName:            pulumi.String("tf_example_es"),
+//				AvailabilityZone:        pulumi.String(availabilityZone.Zones[0].Name),
+//				Version:                 pulumi.String("7.10.1"),
+//				VpcId:                   vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:                subnet2.ID().ToIDOutput().ToStringOutput(),
+//				Password:                pulumi.String("Test12345"),
+//				LicenseType:             pulumi.String("basic"),
+//				BasicSecurityType:       pulumi.Int(2),
+//				EnableDestroyProtection: pulumi.String("OPEN"),
+//				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+//					&elasticsearch.InstanceWebNodeTypeInfoArgs{
+//						NodeNum:  pulumi.Int(1),
+//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
+//					},
+//				},
+//				NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+//					&elasticsearch.InstanceNodeInfoListArgs{
+//						NodeNum:  pulumi.Int(2),
+//						NodeType: pulumi.String("ES.S1.MEDIUM8"),
+//						Encrypt:  pulumi.Bool(false),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ### Create a basic version of elasticsearch instance for multi-availability zone deployment
 //
 // ```go
@@ -122,15 +194,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_es_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
 //				Name:             pulumi.String("tf_es_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -139,7 +211,7 @@ import (
 //				return err
 //			}
 //			subnetMultiZone, err := subnet.NewInstance(ctx, "subnet_multi_zone", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
 //				Name:             pulumi.String("tf_es_subnet"),
 //				CidrBlock:        pulumi.String("10.0.2.0/24"),
@@ -151,7 +223,7 @@ import (
 //				InstanceName:      pulumi.String("tf_example_es"),
 //				AvailabilityZone:  pulumi.String("-"),
 //				Version:           pulumi.String("7.10.1"),
-//				VpcId:             vpc.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetId:          pulumi.String("-"),
 //				Password:          pulumi.String("Test12345"),
 //				LicenseType:       pulumi.String("basic"),
@@ -160,11 +232,11 @@ import (
 //				MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
 //					&elasticsearch.InstanceMultiZoneInfoArgs{
 //						AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-//						SubnetId:         subnet.ID(),
+//						SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //					},
 //					&elasticsearch.InstanceMultiZoneInfoArgs{
 //						AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
-//						SubnetId:         subnetMultiZone.ID(),
+//						SubnetId:         subnetMultiZone.ID().ToIDOutput().ToStringOutput(),
 //					},
 //				},
 //				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
@@ -235,6 +307,8 @@ type Instance struct {
 	ElasticsearchPort pulumi.IntOutput `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringOutput `pulumi:"elasticsearchVip"`
+	// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+	EnableDestroyProtection pulumi.StringOutput `pulumi:"enableDestroyProtection"`
 	// Kibana Access Control Configuration.
 	EsAcl InstanceEsAclOutput `pulumi:"esAcl"`
 	// Public network access control list.
@@ -265,6 +339,8 @@ type Instance struct {
 	PublicAccess pulumi.StringOutput `pulumi:"publicAccess"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrOutput `pulumi:"renewFlag"`
+	// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+	SceneType pulumi.IntOutput `pulumi:"sceneType"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
 	SubnetId pulumi.StringPtrOutput `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -343,6 +419,8 @@ type instanceState struct {
 	ElasticsearchPort *int `pulumi:"elasticsearchPort"`
 	// Elasticsearch VIP.
 	ElasticsearchVip *string `pulumi:"elasticsearchVip"`
+	// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+	EnableDestroyProtection *string `pulumi:"enableDestroyProtection"`
 	// Kibana Access Control Configuration.
 	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Public network access control list.
@@ -373,6 +451,8 @@ type instanceState struct {
 	PublicAccess *string `pulumi:"publicAccess"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
+	// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+	SceneType *int `pulumi:"sceneType"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
 	SubnetId *string `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -406,6 +486,8 @@ type InstanceState struct {
 	ElasticsearchPort pulumi.IntPtrInput
 	// Elasticsearch VIP.
 	ElasticsearchVip pulumi.StringPtrInput
+	// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+	EnableDestroyProtection pulumi.StringPtrInput
 	// Kibana Access Control Configuration.
 	EsAcl InstanceEsAclPtrInput
 	// Public network access control list.
@@ -436,6 +518,8 @@ type InstanceState struct {
 	PublicAccess pulumi.StringPtrInput
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
+	// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+	SceneType pulumi.IntPtrInput
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
 	SubnetId pulumi.StringPtrInput
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -465,6 +549,8 @@ type instanceArgs struct {
 	CosBackup *InstanceCosBackup `pulumi:"cosBackup"`
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode *int `pulumi:"deployMode"`
+	// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+	EnableDestroyProtection *string `pulumi:"enableDestroyProtection"`
 	// Kibana Access Control Configuration.
 	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Public network access control list.
@@ -489,6 +575,8 @@ type instanceArgs struct {
 	PublicAccess *string `pulumi:"publicAccess"`
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag *string `pulumi:"renewFlag"`
+	// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+	SceneType *int `pulumi:"sceneType"`
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
 	SubnetId *string `pulumi:"subnetId"`
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -515,6 +603,8 @@ type InstanceArgs struct {
 	CosBackup InstanceCosBackupPtrInput
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrInput
+	// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+	EnableDestroyProtection pulumi.StringPtrInput
 	// Kibana Access Control Configuration.
 	EsAcl InstanceEsAclPtrInput
 	// Public network access control list.
@@ -539,6 +629,8 @@ type InstanceArgs struct {
 	PublicAccess pulumi.StringPtrInput
 	// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 	RenewFlag pulumi.StringPtrInput
+	// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+	SceneType pulumi.IntPtrInput
 	// The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
 	SubnetId pulumi.StringPtrInput
 	// A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
@@ -688,6 +780,11 @@ func (o InstanceOutput) ElasticsearchVip() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ElasticsearchVip }).(pulumi.StringOutput)
 }
 
+// Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
+func (o InstanceOutput) EnableDestroyProtection() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EnableDestroyProtection }).(pulumi.StringOutput)
+}
+
 // Kibana Access Control Configuration.
 func (o InstanceOutput) EsAcl() InstanceEsAclOutput {
 	return o.ApplyT(func(v *Instance) InstanceEsAclOutput { return v.EsAcl }).(InstanceEsAclOutput)
@@ -761,6 +858,11 @@ func (o InstanceOutput) PublicAccess() pulumi.StringOutput {
 // When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when chargeType is set to `PREPAID`.
 func (o InstanceOutput) RenewFlag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+// Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+func (o InstanceOutput) SceneType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.SceneType }).(pulumi.IntOutput)
 }
 
 // The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.

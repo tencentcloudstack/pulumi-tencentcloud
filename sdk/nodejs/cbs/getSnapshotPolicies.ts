@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policies = tencentcloud.Cbs.getSnapshotPolicies({
+ * const policies = tencentcloud.cbs.getSnapshotPolicies({
  *     snapshotPolicyId: "snap-f3io7adt",
  *     snapshotPolicyName: "test",
  * });
@@ -80,7 +80,7 @@ export interface GetSnapshotPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policies = tencentcloud.Cbs.getSnapshotPolicies({
+ * const policies = tencentcloud.cbs.getSnapshotPolicies({
  *     snapshotPolicyId: "snap-f3io7adt",
  *     snapshotPolicyName: "test",
  * });
@@ -103,13 +103,13 @@ export interface GetSnapshotPoliciesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the snapshot policy to be queried.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the snapshot policy to be queried.
      */
-    snapshotPolicyName?: pulumi.Input<string>;
+    snapshotPolicyName?: pulumi.Input<string | undefined>;
 }

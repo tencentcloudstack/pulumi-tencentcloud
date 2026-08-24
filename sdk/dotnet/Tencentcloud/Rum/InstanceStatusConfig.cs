@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Import
     /// 
-    /// rum instance_status_config can be imported using the id, e.g.
+    /// rum InstanceStatusConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id

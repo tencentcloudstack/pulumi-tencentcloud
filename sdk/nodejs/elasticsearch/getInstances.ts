@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Elasticsearch.getInstances({
+ * const example = tencentcloud.elasticsearch.getInstances({
  *     instanceId: "es-bxffils7",
  *     instanceName: "tf-example",
  *     tags: {
@@ -96,7 +96,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Elasticsearch.getInstances({
+ * const example = tencentcloud.elasticsearch.getInstances({
  *     instanceId: "es-bxffils7",
  *     instanceName: "tf-example",
  *     tags: {
@@ -123,17 +123,17 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the instance to be queried.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the instance to be queried.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag of the instance to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

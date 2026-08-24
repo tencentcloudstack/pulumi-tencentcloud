@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchActionRangeOriginPullParameters
     {
         /// <summary>
-        /// Whether to enable range gets. values are: on: enable; Off: disable.
+        /// Whether to enable range gets. values are: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
 

@@ -22,7 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -120,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Import
     /// 
-    /// eb event_target can be imported using the id, e.g.
+    /// eb EventTarget can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id

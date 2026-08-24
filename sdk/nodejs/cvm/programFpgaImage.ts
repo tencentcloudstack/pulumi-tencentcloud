@@ -91,19 +91,19 @@ export interface ProgramFpgaImageState {
     /**
      * The DBDF number of the FPGA card on the instance, if left blank, the FPGA image will be burned to all FPGA cards owned by the instance by default.
      */
-    dbdFs?: pulumi.Input<pulumi.Input<string>[]>;
+    dbdFs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Trial run, will not perform the actual burning action, the default is False.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * COS URL address of the FPGA image file.
      */
-    fpgaUrl?: pulumi.Input<string>;
+    fpgaUrl?: pulumi.Input<string | undefined>;
     /**
      * The ID information of the instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -113,11 +113,11 @@ export interface ProgramFpgaImageArgs {
     /**
      * The DBDF number of the FPGA card on the instance, if left blank, the FPGA image will be burned to all FPGA cards owned by the instance by default.
      */
-    dbdFs?: pulumi.Input<pulumi.Input<string>[]>;
+    dbdFs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Trial run, will not perform the actual burning action, the default is False.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * COS URL address of the FPGA image file.
      */

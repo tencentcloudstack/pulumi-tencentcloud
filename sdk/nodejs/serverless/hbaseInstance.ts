@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * emr serverless_hbase_instance can be imported using the id, e.g.
+ * emr serverlessHbaseInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Serverless/hbaseInstance:HbaseInstance serverless_hbase_instance serverless_hbase_instance_id
@@ -176,43 +176,43 @@ export interface HbaseInstanceState {
     /**
      * AutoRenewFlag, Value range: 0: indicates NOTIFY_AND_MANUAL_RENEW; 1: indicates NOTIFY_AND_AUTO_RENEW; 2: indicates DISABLE_NOTIFY_AND_MANUAL_RENEW.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Instance single-node disk capacity, in GB. The single-node disk capacity must be greater than or equal to 100 and less than or equal to 250 times the number of CPU cores. The capacity adjustment step is 100.
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
      * Instance disk type, Value range: CLOUD_HSSD: indicate performance cloud storage(ESSD). CLOUD_BSSD: indicate standard cloud storage(SSD).
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Instance name. Length limit is 6-36 characters. Only Chinese characters, letters, numbers, -, and _ are allowed.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance node type, can be filled in as 4C16G, 8C32G, 16C64G, 32C128G, case insensitive.
      */
-    nodeType?: pulumi.Input<string>;
+    nodeType?: pulumi.Input<string | undefined>;
     /**
      * Instance pay mode. Value range: 0: indicates post-pay mode, that is, pay-as-you-go. 1: indicates pre-pay mode, that is, monthly subscription.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * List of tags to bind to the instance.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceTag>[] | undefined>;
     /**
      * Time span.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Time unit, fill in m which means month.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * Detailed configuration of the instance availability zone, currently supports multiple availability zones, the number of availability zones can only be 1 or 3, including zone name, VPC information, and number of nodes. The total number of nodes across all zones must be greater than or equal to 3 and less than or equal to 50.
      */
-    zoneSettings?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceZoneSetting>[]>;
+    zoneSettings?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceZoneSetting>[] | undefined>;
 }
 
 /**
@@ -222,7 +222,7 @@ export interface HbaseInstanceArgs {
     /**
      * AutoRenewFlag, Value range: 0: indicates NOTIFY_AND_MANUAL_RENEW; 1: indicates NOTIFY_AND_AUTO_RENEW; 2: indicates DISABLE_NOTIFY_AND_MANUAL_RENEW.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Instance single-node disk capacity, in GB. The single-node disk capacity must be greater than or equal to 100 and less than or equal to 250 times the number of CPU cores. The capacity adjustment step is 100.
      */
@@ -238,7 +238,7 @@ export interface HbaseInstanceArgs {
     /**
      * Instance node type, can be filled in as 4C16G, 8C32G, 16C64G, 32C128G, case insensitive.
      */
-    nodeType?: pulumi.Input<string>;
+    nodeType?: pulumi.Input<string | undefined>;
     /**
      * Instance pay mode. Value range: 0: indicates post-pay mode, that is, pay-as-you-go. 1: indicates pre-pay mode, that is, monthly subscription.
      */
@@ -246,15 +246,15 @@ export interface HbaseInstanceArgs {
     /**
      * List of tags to bind to the instance.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Serverless.HbaseInstanceTag>[] | undefined>;
     /**
      * Time span.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Time unit, fill in m which means month.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * Detailed configuration of the instance availability zone, currently supports multiple availability zones, the number of availability zones can only be 1 or 3, including zone name, VPC information, and number of nodes. The total number of nodes across all zones must be greater than or equal to 3 and less than or equal to 50.
      */

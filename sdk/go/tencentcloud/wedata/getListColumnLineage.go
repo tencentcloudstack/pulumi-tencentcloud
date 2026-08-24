@@ -81,12 +81,8 @@ type GetListColumnLineageResult struct {
 }
 
 func GetListColumnLineageOutput(ctx *pulumi.Context, args GetListColumnLineageOutputArgs, opts ...pulumi.InvokeOption) GetListColumnLineageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListColumnLineageResultOutput, error) {
-			args := v.(GetListColumnLineageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListColumnLineage:getListColumnLineage", args, GetListColumnLineageResultOutput{}, options).(GetListColumnLineageResultOutput), nil
-		}).(GetListColumnLineageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListColumnLineage:getListColumnLineage", args, GetListColumnLineageResultOutput{}, options).(GetListColumnLineageResultOutput)
 }
 
 // A collection of arguments for invoking getListColumnLineage.

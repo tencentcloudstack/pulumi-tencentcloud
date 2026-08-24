@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * clickhouse xml_config can be imported using the id, e.g.
+ * clickhouse xmlConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml
@@ -108,11 +108,11 @@ export interface XmlConfigState {
     /**
      * Cluster ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Configuration file modification information.
      */
-    modifyConfContext?: pulumi.Input<inputs.Clickhouse.XmlConfigModifyConfContext>;
+    modifyConfContext?: pulumi.Input<inputs.Clickhouse.XmlConfigModifyConfContext | undefined>;
 }
 
 /**

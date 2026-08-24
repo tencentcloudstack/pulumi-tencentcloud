@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps person_sample can be imported using the id, e.g.
+ * mps personSample can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
@@ -116,19 +116,19 @@ export interface PersonSampleState {
     /**
      * Material description, length limit: 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Material image [Base64](https://tools.ietf.org/html/rfc4648) encoded string only supports jpeg and png image formats. Array length limit: 5 images.Note: The picture must be a single portrait with clearer facial features, with a pixel size of not less than 200*200.
      */
-    faceContents?: pulumi.Input<pulumi.Input<string>[]>;
+    faceContents?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Material name, length limit: 20 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Material application scene, optional value:1. Recognition.Face: used for content recognition 2. Review.Face: used for inappropriate content identification 3. All: contains all of the above, equivalent to 1+2.
      */
-    usages?: pulumi.Input<pulumi.Input<string>[]>;
+    usages?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -138,15 +138,15 @@ export interface PersonSampleArgs {
     /**
      * Material description, length limit: 1024 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Material image [Base64](https://tools.ietf.org/html/rfc4648) encoded string only supports jpeg and png image formats. Array length limit: 5 images.Note: The picture must be a single portrait with clearer facial features, with a pixel size of not less than 200*200.
      */
-    faceContents?: pulumi.Input<pulumi.Input<string>[]>;
+    faceContents?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Material name, length limit: 20 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Material application scene, optional value:1. Recognition.Face: used for content recognition 2. Review.Face: used for inappropriate content identification 3. All: contains all of the above, equivalent to 1+2.
      */

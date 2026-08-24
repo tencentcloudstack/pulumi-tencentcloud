@@ -69,12 +69,8 @@ type GetInvokerRecordsResult struct {
 }
 
 func GetInvokerRecordsOutput(ctx *pulumi.Context, args GetInvokerRecordsOutputArgs, opts ...pulumi.InvokeOption) GetInvokerRecordsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInvokerRecordsResultOutput, error) {
-			args := v.(GetInvokerRecordsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args, GetInvokerRecordsResultOutput{}, options).(GetInvokerRecordsResultOutput), nil
-		}).(GetInvokerRecordsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tat/getInvokerRecords:getInvokerRecords", args, GetInvokerRecordsResultOutput{}, options).(GetInvokerRecordsResultOutput)
 }
 
 // A collection of arguments for invoking getInvokerRecords.

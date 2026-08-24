@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const limits = tencentcloud.Vpc.getLimits({
+ * const limits = tencentcloud.vpc.getLimits({
  *     limitTypes: [
  *         "appid-max-vpcs",
  *         "vpc-max-subnets",
@@ -69,7 +69,7 @@ export interface GetLimitsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const limits = tencentcloud.Vpc.getLimits({
+ * const limits = tencentcloud.vpc.getLimits({
  *     limitTypes: [
  *         "appid-max-vpcs",
  *         "vpc-max-subnets",
@@ -96,5 +96,5 @@ export interface GetLimitsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getEndPoints({});
+ * const example = tencentcloud.privatedns.getEndPoints({});
  * ```
  *
  * ### Query all private dns end points by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getEndPoints({
+ * const example = tencentcloud.privatedns.getEndPoints({
  *     filters: [
  *         {
  *             name: "EndPointName",
@@ -98,7 +98,7 @@ export interface GetEndPointsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getEndPoints({});
+ * const example = tencentcloud.privatedns.getEndPoints({});
  * ```
  *
  * ### Query all private dns end points by filters
@@ -107,7 +107,7 @@ export interface GetEndPointsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getEndPoints({
+ * const example = tencentcloud.privatedns.getEndPoints({
  *     filters: [
  *         {
  *             name: "EndPointName",
@@ -145,9 +145,9 @@ export interface GetEndPointsOutputArgs {
     /**
      * Filter parameters. Valid values: EndPointName, EndPointId, EndPointServiceId, and EndPointVip.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetEndPointsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetEndPointsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

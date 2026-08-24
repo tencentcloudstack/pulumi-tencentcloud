@@ -67,12 +67,8 @@ type GetFromFamilyResult struct {
 }
 
 func GetFromFamilyOutput(ctx *pulumi.Context, args GetFromFamilyOutputArgs, opts ...pulumi.InvokeOption) GetFromFamilyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFromFamilyResultOutput, error) {
-			args := v.(GetFromFamilyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Image/getFromFamily:getFromFamily", args, GetFromFamilyResultOutput{}, options).(GetFromFamilyResultOutput), nil
-		}).(GetFromFamilyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Image/getFromFamily:getFromFamily", args, GetFromFamilyResultOutput{}, options).(GetFromFamilyResultOutput)
 }
 
 // A collection of arguments for invoking getFromFamily.

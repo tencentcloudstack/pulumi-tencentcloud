@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// <summary>
     /// Provides a resource to create a scf TriggerConfig
     /// 
+    /// &gt; **NOTE:** Use of the current resource is no longer recommended; `tencentcloud.Scf.Trigger` is recommended instead.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -41,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Import
     /// 
-    /// scf trigger_config can be imported using the id, e.g.
+    /// scf TriggerConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName

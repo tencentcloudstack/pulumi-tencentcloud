@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterParamLogs = tencentcloud.Cynosdb.getClusterParamLogs({
+ * const clusterParamLogs = tencentcloud.cynosdb.getClusterParamLogs({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     instanceIds: ["cynosdbmysql-ins-afqx1hy0"],
  *     orderBy: "CreateTime",
@@ -90,7 +90,7 @@ export interface GetClusterParamLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterParamLogs = tencentcloud.Cynosdb.getClusterParamLogs({
+ * const clusterParamLogs = tencentcloud.cynosdb.getClusterParamLogs({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     instanceIds: ["cynosdbmysql-ins-afqx1hy0"],
  *     orderBy: "CreateTime",
@@ -120,17 +120,17 @@ export interface GetClusterParamLogsOutputArgs {
     /**
      * Instance ID list, used to record specific instances of operations.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sort field, defining which field to sort based on when returning results.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Define specific sorting rules, limited to one of desc, asc, DESC, or ASC.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

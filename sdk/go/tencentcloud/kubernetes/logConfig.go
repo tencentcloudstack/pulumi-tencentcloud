@@ -12,7 +12,9 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tke kubernetesLogConfig
+// Provides a resource to create a TKE kubernetes log config
+//
+// > **NOTE:** The value of Field `logConfigName` must be identical to Value `metadata.name` in Field `logConfig`.
 //
 // ## Example Usage
 //
@@ -88,25 +90,25 @@ import (
 //			tmpJSON0, err := json.Marshal(map[string]interface{}{
 //				"apiVersion": "cls.cloud.tencent.com/v1",
 //				"kind":       "LogConfig",
-//				"metadata": map[string]interface{}{
+//				"metadata": map[string]string{
 //					"name": "tf-test-cls",
 //				},
-//				"spec": map[string]interface{}{
+//				"spec": map[string]map[string]interface{}{
 //					"clsDetail": map[string]interface{}{
-//						"extractRule": map[string]interface{}{
+//						"extractRule": map[string]string{
 //							"backtracking":  "0",
 //							"isGBK":         "false",
 //							"jsonStandard":  "false",
 //							"unMatchUpload": "false",
 //						},
-//						"indexs": []map[string]interface{}{
-//							map[string]interface{}{
+//						"indexs": []map[string]string{
+//							{
 //								"indexName": "namespace",
 //							},
-//							map[string]interface{}{
+//							{
 //								"indexName": "pod_name",
 //							},
-//							map[string]interface{}{
+//							{
 //								"indexName": "container_name",
 //							},
 //						},
@@ -129,8 +131,8 @@ import (
 //								"cluster_id",
 //							},
 //							"nsLabelSelector": "",
-//							"workloads": []map[string]interface{}{
-//								map[string]interface{}{
+//							"workloads": []map[string]string{
+//								{
 //									"kind":      "deployment",
 //									"name":      "testlog1",
 //									"namespace": "default",
@@ -147,8 +149,8 @@ import (
 //			json0 := string(tmpJSON0)
 //			_, err = kubernetes.NewLogConfig(ctx, "kubernetes_log_config_cls", &kubernetes.LogConfigArgs{
 //				LogConfigName: pulumi.String("tf-test-cls"),
-//				ClusterId:     example.ID(),
-//				LogsetId:      logset.ID(),
+//				ClusterId:     example.ID().ToIDOutput().ToStringOutput(),
+//				LogsetId:      logset.ID().ToIDOutput().ToStringOutput(),
 //				LogConfig:     pulumi.String(json0),
 //			})
 //			if err != nil {
@@ -202,7 +204,7 @@ import (
 //				return err
 //			}
 //			exampleTopic, err := ckafka.NewTopic(ctx, "example", &ckafka.TopicArgs{
-//				InstanceId:                  example.ID(),
+//				InstanceId:                  example.ID().ToIDOutput().ToStringOutput(),
 //				TopicName:                   pulumi.String("tmp"),
 //				Note:                        pulumi.String("topic note"),
 //				ReplicaNum:                  pulumi.Int(2),
@@ -225,10 +227,10 @@ import (
 //					tmpJSON0, err := json.Marshal(map[string]interface{}{
 //						"apiVersion": "cls.cloud.tencent.com/v1",
 //						"kind":       "LogConfig",
-//						"metadata": map[string]interface{}{
+//						"metadata": map[string]string{
 //							"name": "tf-test-ckafka",
 //						},
-//						"spec": map[string]interface{}{
+//						"spec": map[string]map[string]interface{}{
 //							"inputDetail": map[string]interface{}{
 //								"containerStdout": map[string]interface{}{
 //									"allContainers":   true,
@@ -245,8 +247,8 @@ import (
 //								"logType":     "minimalist_log",
 //								"messageKey": map[string]interface{}{
 //									"value": "",
-//									"valueFrom": map[string]interface{}{
-//										"fieldRef": map[string]interface{}{
+//									"valueFrom": map[string]map[string]string{
+//										"fieldRef": map[string]string{
 //											"fieldPath": "",
 //										},
 //									},
@@ -280,9 +282,9 @@ type LogConfig struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The current cluster type supports tke and eks, default is tke.
 	ClusterType pulumi.StringPtrOutput `pulumi:"clusterType"`
-	// JSON expression of log collection configuration.
+	// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 	LogConfig pulumi.StringOutput `pulumi:"logConfig"`
-	// Log config name.
+	// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 	LogConfigName pulumi.StringOutput `pulumi:"logConfigName"`
 	// CLS log set ID.
 	LogsetId pulumi.StringPtrOutput `pulumi:"logsetId"`
@@ -331,9 +333,9 @@ type logConfigState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// The current cluster type supports tke and eks, default is tke.
 	ClusterType *string `pulumi:"clusterType"`
-	// JSON expression of log collection configuration.
+	// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 	LogConfig *string `pulumi:"logConfig"`
-	// Log config name.
+	// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 	LogConfigName *string `pulumi:"logConfigName"`
 	// CLS log set ID.
 	LogsetId *string `pulumi:"logsetId"`
@@ -344,9 +346,9 @@ type LogConfigState struct {
 	ClusterId pulumi.StringPtrInput
 	// The current cluster type supports tke and eks, default is tke.
 	ClusterType pulumi.StringPtrInput
-	// JSON expression of log collection configuration.
+	// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 	LogConfig pulumi.StringPtrInput
-	// Log config name.
+	// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 	LogConfigName pulumi.StringPtrInput
 	// CLS log set ID.
 	LogsetId pulumi.StringPtrInput
@@ -361,9 +363,9 @@ type logConfigArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// The current cluster type supports tke and eks, default is tke.
 	ClusterType *string `pulumi:"clusterType"`
-	// JSON expression of log collection configuration.
+	// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 	LogConfig string `pulumi:"logConfig"`
-	// Log config name.
+	// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 	LogConfigName string `pulumi:"logConfigName"`
 	// CLS log set ID.
 	LogsetId *string `pulumi:"logsetId"`
@@ -375,9 +377,9 @@ type LogConfigArgs struct {
 	ClusterId pulumi.StringInput
 	// The current cluster type supports tke and eks, default is tke.
 	ClusterType pulumi.StringPtrInput
-	// JSON expression of log collection configuration.
+	// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 	LogConfig pulumi.StringInput
-	// Log config name.
+	// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 	LogConfigName pulumi.StringInput
 	// CLS log set ID.
 	LogsetId pulumi.StringPtrInput
@@ -480,12 +482,12 @@ func (o LogConfigOutput) ClusterType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LogConfig) pulumi.StringPtrOutput { return v.ClusterType }).(pulumi.StringPtrOutput)
 }
 
-// JSON expression of log collection configuration.
+// JSON expression of log collection configuration. For more details, please refer to the guide: https://www.tencentcloud.com/zh/document/product/457/64846.
 func (o LogConfigOutput) LogConfig() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogConfig) pulumi.StringOutput { return v.LogConfig }).(pulumi.StringOutput)
 }
 
-// Log config name.
+// Log config name. Must be identical to Value `metadata.name` in Field `logConfig`.
 func (o LogConfigOutput) LogConfigName() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogConfig) pulumi.StringOutput { return v.LogConfigName }).(pulumi.StringOutput)
 }

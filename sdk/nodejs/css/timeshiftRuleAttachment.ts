@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css timeshift_rule_attachment can be imported using the id, e.g.
+ * css timeshiftRuleAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
@@ -122,19 +122,19 @@ export interface TimeshiftRuleAttachmentState {
     /**
      * The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * The push domain.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * The stream name.Note: If you pass in a non-empty string, the rule will only be applied to the specified stream.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * The template ID.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
 }
 
 /**

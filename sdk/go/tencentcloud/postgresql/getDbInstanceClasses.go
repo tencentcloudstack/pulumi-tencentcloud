@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of postgresql dbInstanceClasses
+// Use this data source to query detailed information of PostgreSQL db instance classes
 //
 // ## Example Usage
 //
@@ -31,6 +31,7 @@ import (
 //				Zone:           "ap-guangzhou-7",
 //				DbEngine:       "postgresql",
 //				DbMajorVersion: "13",
+//				StorageType:    pulumi.StringRef("CLOUD_HSSD"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -58,6 +59,8 @@ type GetDbInstanceClassesArgs struct {
 	DbMajorVersion string `pulumi:"dbMajorVersion"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType *string `pulumi:"storageType"`
 	// AZ ID, which can be obtained through the `DescribeZones` API.
 	Zone string `pulumi:"zone"`
 }
@@ -71,16 +74,13 @@ type GetDbInstanceClassesResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id               string  `pulumi:"id"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	StorageType      *string `pulumi:"storageType"`
 	Zone             string  `pulumi:"zone"`
 }
 
 func GetDbInstanceClassesOutput(ctx *pulumi.Context, args GetDbInstanceClassesOutputArgs, opts ...pulumi.InvokeOption) GetDbInstanceClassesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbInstanceClassesResultOutput, error) {
-			args := v.(GetDbInstanceClassesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args, GetDbInstanceClassesResultOutput{}, options).(GetDbInstanceClassesResultOutput), nil
-		}).(GetDbInstanceClassesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args, GetDbInstanceClassesResultOutput{}, options).(GetDbInstanceClassesResultOutput)
 }
 
 // A collection of arguments for invoking getDbInstanceClasses.
@@ -91,6 +91,8 @@ type GetDbInstanceClassesOutputArgs struct {
 	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
+	// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType pulumi.StringPtrInput `pulumi:"storageType"`
 	// AZ ID, which can be obtained through the `DescribeZones` API.
 	Zone pulumi.StringInput `pulumi:"zone"`
 }
@@ -134,6 +136,10 @@ func (o GetDbInstanceClassesResultOutput) Id() pulumi.StringOutput {
 
 func (o GetDbInstanceClassesResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetDbInstanceClassesResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+}
+
+func (o GetDbInstanceClassesResultOutput) StorageType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDbInstanceClassesResult) *string { return v.StorageType }).(pulumi.StringPtrOutput)
 }
 
 func (o GetDbInstanceClassesResultOutput) Zone() pulumi.StringOutput {

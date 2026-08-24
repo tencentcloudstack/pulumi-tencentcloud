@@ -25,9 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Cdn.Domain("foo", new()
+    ///     var example = new Tencentcloud.Cdn.Domain("example", new()
     ///     {
-    ///         CdnDomain = "xxxx.com",
+    ///         CdnDomain = "example.com",
     ///         ServiceType = "web",
     ///         Area = "mainland",
     ///         FullUrlCache = false,
@@ -73,9 +73,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Cdn.Domain("foo", new()
+    ///     var example = new Tencentcloud.Cdn.Domain("example", new()
     ///     {
-    ///         CdnDomain = "xxxx.com",
+    ///         CdnDomain = "example.com",
     ///         ServiceType = "web",
     ///         Area = "mainland",
     ///         CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
@@ -159,9 +159,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     ///     });
     /// 
     ///     // Create cdn domain
-    ///     var cdn = new Tencentcloud.Cdn.Domain("cdn", new()
+    ///     var example = new Tencentcloud.Cdn.Domain("example", new()
     ///     {
-    ///         CdnDomain = "abc.com",
+    ///         CdnDomain = "example.com",
     ///         ServiceType = "web",
     ///         Area = "mainland",
     ///         CacheKey = new Tencentcloud.Cdn.Inputs.DomainCacheKeyArgs
@@ -192,46 +192,155 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
     /// });
     /// ```
     /// 
+    /// ### Example Usage of CDN domain with advanced fields
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cdn.Domain("example", new()
+    ///     {
+    ///         CdnDomain = "example.com",
+    ///         ServiceType = "web",
+    ///         Area = "mainland",
+    ///         Origin = new Tencentcloud.Cdn.Inputs.DomainOriginArgs
+    ///         {
+    ///             OriginType = "ip",
+    ///             OriginLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///             OriginPullProtocol = "follow",
+    ///         },
+    ///         HttpsConfig = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigArgs
+    ///         {
+    ///             HttpsSwitch = "off",
+    ///             Http2Switch = "off",
+    ///             OcspStaplingSwitch = "off",
+    ///             SpdySwitch = "off",
+    ///             VerifyClient = "off",
+    ///             Hsts = new Tencentcloud.Cdn.Inputs.DomainHttpsConfigHstsArgs
+    ///             {
+    ///                 Switch = "on",
+    ///                 MaxAge = 31536000,
+    ///                 IncludeSubDomains = "on",
+    ///             },
+    ///         },
+    ///         UserAgentFilter = new Tencentcloud.Cdn.Inputs.DomainUserAgentFilterArgs
+    ///         {
+    ///             Switch = "on",
+    ///             FilterRules = new[]
+    ///             {
+    ///                 new Tencentcloud.Cdn.Inputs.DomainUserAgentFilterFilterRuleArgs
+    ///                 {
+    ///                     RuleType = "all",
+    ///                     RulePaths = new[]
+    ///                     {
+    ///                         "*",
+    ///                     },
+    ///                     UserAgents = new[]
+    ///                     {
+    ///                         "Mozilla/5.0",
+    ///                     },
+    ///                     FilterType = "blacklist",
+    ///                 },
+    ///             },
+    ///         },
+    ///         UrlRedirect = new Tencentcloud.Cdn.Inputs.DomainUrlRedirectArgs
+    ///         {
+    ///             Switch = "on",
+    ///             PathRules = new[]
+    ///             {
+    ///                 new Tencentcloud.Cdn.Inputs.DomainUrlRedirectPathRuleArgs
+    ///                 {
+    ///                     RedirectStatusCode = 302,
+    ///                     Pattern = "/old/*",
+    ///                     RedirectUrl = "/new/$1",
+    ///                 },
+    ///             },
+    ///         },
+    ///         OriginCombine = new Tencentcloud.Cdn.Inputs.DomainOriginCombineArgs
+    ///         {
+    ///             Switch = "on",
+    ///         },
+    ///         RangeOriginPull = new Tencentcloud.Cdn.Inputs.DomainRangeOriginPullArgs
+    ///         {
+    ///             Switch = "on",
+    ///             RangeRules = new[]
+    ///             {
+    ///                 new Tencentcloud.Cdn.Inputs.DomainRangeOriginPullRangeRuleArgs
+    ///                 {
+    ///                     Switch = "on",
+    ///                     RuleType = "file",
+    ///                     RulePaths = new[]
+    ///                     {
+    ///                         "jpg",
+    ///                         "png",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// CDN domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+    /// $ pulumi import tencentcloud:Cdn/domain:Domain example example.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdn/domain:Domain")]
     public partial class Domain : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Access port configuration. List of ports that can be accessed.
+        /// </summary>
+        [Output("accessPorts")]
+        public Output<ImmutableArray<int>> AccessPorts { get; private set; } = null!;
+
+        /// <summary>
         /// Domain name acceleration region. `Mainland`: acceleration inside mainland China, `Overseas`: acceleration outside mainland China, `Global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
         /// </summary>
         [Output("area")]
-        public Output<string?> Area { get; private set; } = null!;
+        public Output<string> Area { get; private set; } = null!;
 
         /// <summary>
         /// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
         /// </summary>
         [Output("authentication")]
-        public Output<Outputs.DomainAuthentication?> Authentication { get; private set; } = null!;
+        public Output<Outputs.DomainAuthentication> Authentication { get; private set; } = null!;
+
+        /// <summary>
+        /// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Output("autoGuard")]
+        public Output<Outputs.DomainAutoGuard> AutoGuard { get; private set; } = null!;
 
         /// <summary>
         /// Access authentication for S3 origin.
         /// </summary>
         [Output("awsPrivateAccess")]
-        public Output<Outputs.DomainAwsPrivateAccess?> AwsPrivateAccess { get; private set; } = null!;
+        public Output<Outputs.DomainAwsPrivateAccess> AwsPrivateAccess { get; private set; } = null!;
 
         /// <summary>
         /// Bandwidth cap configuration.
         /// </summary>
         [Output("bandWidthAlert")]
-        public Output<Outputs.DomainBandWidthAlert?> BandWidthAlert { get; private set; } = null!;
+        public Output<Outputs.DomainBandWidthAlert> BandWidthAlert { get; private set; } = null!;
 
         /// <summary>
         /// Cache key configuration (Ignore Query String configuration). NOTE: All of `FullUrlCache` default value is `On`.
         /// </summary>
         [Output("cacheKey")]
-        public Output<Outputs.DomainCacheKey?> CacheKey { get; private set; } = null!;
+        public Output<Outputs.DomainCacheKey> CacheKey { get; private set; } = null!;
 
         /// <summary>
         /// CNAME address of domain name.
@@ -243,7 +352,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Smart compression configurations.
         /// </summary>
         [Output("compression")]
-        public Output<Outputs.DomainCompression?> Compression { get; private set; } = null!;
+        public Output<Outputs.DomainCompression> Compression { get; private set; } = null!;
 
         /// <summary>
         /// Creation time of domain name.
@@ -261,7 +370,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Downstream capping configuration.
         /// </summary>
         [Output("downstreamCapping")]
-        public Output<Outputs.DomainDownstreamCapping?> DownstreamCapping { get; private set; } = null!;
+        public Output<Outputs.DomainDownstreamCapping> DownstreamCapping { get; private set; } = null!;
 
         /// <summary>
         /// Used for store `DryRun` request json.
@@ -279,13 +388,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Error page configurations.
         /// </summary>
         [Output("errorPage")]
-        public Output<Outputs.DomainErrorPage?> ErrorPage { get; private set; } = null!;
+        public Output<Outputs.DomainErrorPage> ErrorPage { get; private set; } = null!;
 
         /// <summary>
         /// Used for validate only by store arguments to request json string as expected, WARNING: if set to `True`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
         /// </summary>
         [Output("explicitUsingDryRun")]
-        public Output<bool?> ExplicitUsingDryRun { get; private set; } = null!;
+        public Output<bool> ExplicitUsingDryRun { get; private set; } = null!;
 
         /// <summary>
         /// 301/302 redirect following switch, available values: `On`, `Off` (default).
@@ -300,6 +409,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<bool?> FullUrlCache { get; private set; } = null!;
 
         /// <summary>
+        /// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Output("geoBlocker")]
+        public Output<Outputs.DomainGeoBlocker> GeoBlocker { get; private set; } = null!;
+
+        /// <summary>
+        /// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+        /// </summary>
+        [Output("httpsBilling")]
+        public Output<Outputs.DomainHttpsBilling> HttpsBilling { get; private set; } = null!;
+
+        /// <summary>
         /// HTTPS acceleration configuration. It's a list and consist of at most one item.
         /// </summary>
         [Output("httpsConfig")]
@@ -309,19 +430,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Access authentication for OBS origin.
         /// </summary>
         [Output("hwPrivateAccess")]
-        public Output<Outputs.DomainHwPrivateAccess?> HwPrivateAccess { get; private set; } = null!;
+        public Output<Outputs.DomainHwPrivateAccess> HwPrivateAccess { get; private set; } = null!;
 
         /// <summary>
         /// Specify Ip filter configurations.
         /// </summary>
         [Output("ipFilter")]
-        public Output<Outputs.DomainIpFilter?> IpFilter { get; private set; } = null!;
+        public Output<Outputs.DomainIpFilter> IpFilter { get; private set; } = null!;
 
         /// <summary>
         /// Specify Ip frequency limit configurations.
         /// </summary>
         [Output("ipFreqLimit")]
-        public Output<Outputs.DomainIpFreqLimit?> IpFreqLimit { get; private set; } = null!;
+        public Output<Outputs.DomainIpFreqLimit> IpFreqLimit { get; private set; } = null!;
 
         /// <summary>
         /// ipv6 access configuration switch. Only available when area set to `Mainland`. Valid values are `On` and `Off`. Default value is `Off`.
@@ -333,13 +454,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Browser cache configuration. (This feature is in beta and not generally available yet).
         /// </summary>
         [Output("maxAge")]
-        public Output<Outputs.DomainMaxAge?> MaxAge { get; private set; } = null!;
+        public Output<Outputs.DomainMaxAge> MaxAge { get; private set; } = null!;
 
         /// <summary>
         /// Offline cache switch, available values: `On`, `Off` (default).
         /// </summary>
         [Output("offlineCacheSwitch")]
-        public Output<string?> OfflineCacheSwitch { get; private set; } = null!;
+        public Output<string> OfflineCacheSwitch { get; private set; } = null!;
 
         /// <summary>
         /// Origin server configuration. It's a list and consist of at most one item.
@@ -348,28 +469,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<Outputs.DomainOrigin> Origin { get; private set; } = null!;
 
         /// <summary>
+        /// Origin combine configuration.
+        /// </summary>
+        [Output("originCombine")]
+        public Output<Outputs.DomainOriginCombine> OriginCombine { get; private set; } = null!;
+
+        /// <summary>
         /// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
         /// </summary>
         [Output("originPullOptimization")]
-        public Output<Outputs.DomainOriginPullOptimization?> OriginPullOptimization { get; private set; } = null!;
+        public Output<Outputs.DomainOriginPullOptimization> OriginPullOptimization { get; private set; } = null!;
 
         /// <summary>
         /// Cross-border linkage optimization configuration.
         /// </summary>
         [Output("originPullTimeout")]
-        public Output<Outputs.DomainOriginPullTimeout?> OriginPullTimeout { get; private set; } = null!;
+        public Output<Outputs.DomainOriginPullTimeout> OriginPullTimeout { get; private set; } = null!;
 
         /// <summary>
         /// Access authentication for OSS origin.
         /// </summary>
         [Output("ossPrivateAccess")]
-        public Output<Outputs.DomainOssPrivateAccess?> OssPrivateAccess { get; private set; } = null!;
+        public Output<Outputs.DomainOssPrivateAccess> OssPrivateAccess { get; private set; } = null!;
 
         /// <summary>
         /// Object storage back-to-source authentication of other vendors.
         /// </summary>
         [Output("othersPrivateAccess")]
-        public Output<Outputs.DomainOthersPrivateAccess?> OthersPrivateAccess { get; private set; } = null!;
+        public Output<Outputs.DomainOthersPrivateAccess> OthersPrivateAccess { get; private set; } = null!;
 
         /// <summary>
         /// Maximum post size configuration.
@@ -387,13 +514,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Access authentication for OBS origin.
         /// </summary>
         [Output("qnPrivateAccess")]
-        public Output<Outputs.DomainQnPrivateAccess?> QnPrivateAccess { get; private set; } = null!;
+        public Output<Outputs.DomainQnPrivateAccess> QnPrivateAccess { get; private set; } = null!;
 
         /// <summary>
         /// QUIC switch, available values: `On`, `Off` (default).
         /// </summary>
         [Output("quicSwitch")]
-        public Output<string?> QuicSwitch { get; private set; } = null!;
+        public Output<string> QuicSwitch { get; private set; } = null!;
+
+        /// <summary>
+        /// Range origin pull configuration with path-based rules.
+        /// </summary>
+        [Output("rangeOriginPull")]
+        public Output<Outputs.DomainRangeOriginPull> RangeOriginPull { get; private set; } = null!;
 
         /// <summary>
         /// Sharding back to source configuration switch. Valid values are `On` and `Off`. Default value is `On`.
@@ -405,7 +538,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Referer configuration.
         /// </summary>
         [Output("referer")]
-        public Output<Outputs.DomainReferer?> Referer { get; private set; } = null!;
+        public Output<Outputs.DomainReferer> Referer { get; private set; } = null!;
 
         /// <summary>
         /// Request header configuration. It's a list and consist of at most one item.
@@ -417,13 +550,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Response header configurations.
         /// </summary>
         [Output("responseHeader")]
-        public Output<Outputs.DomainResponseHeader?> ResponseHeader { get; private set; } = null!;
+        public Output<Outputs.DomainResponseHeader> ResponseHeader { get; private set; } = null!;
 
         /// <summary>
         /// Response header cache switch, available values: `On`, `Off` (default).
         /// </summary>
         [Output("responseHeaderCacheSwitch")]
-        public Output<string?> ResponseHeaderCacheSwitch { get; private set; } = null!;
+        public Output<string> ResponseHeaderCacheSwitch { get; private set; } = null!;
 
         /// <summary>
         /// Advanced path cache configuration.
@@ -435,7 +568,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// SEO switch, available values: `On`, `Off` (default).
         /// </summary>
         [Output("seoSwitch")]
-        public Output<string?> SeoSwitch { get; private set; } = null!;
+        public Output<string> SeoSwitch { get; private set; } = null!;
 
         /// <summary>
         /// Acceleration domain name service type. `Web`: static acceleration, `Download`: download acceleration, `Media`: streaming media VOD acceleration, `Hybrid`: hybrid acceleration, `Dynamic`: dynamic acceleration.
@@ -447,13 +580,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
         /// </summary>
         [Output("specificConfigMainland")]
-        public Output<string?> SpecificConfigMainland { get; private set; } = null!;
+        public Output<string> SpecificConfigMainland { get; private set; } = null!;
 
         /// <summary>
         /// Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
         /// </summary>
         [Output("specificConfigOverseas")]
-        public Output<string?> SpecificConfigOverseas { get; private set; } = null!;
+        public Output<string> SpecificConfigOverseas { get; private set; } = null!;
 
         /// <summary>
         /// Acceleration service status.
@@ -465,7 +598,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// Status code cache configurations.
         /// </summary>
         [Output("statusCodeCache")]
-        public Output<Outputs.DomainStatusCodeCache?> StatusCodeCache { get; private set; } = null!;
+        public Output<Outputs.DomainStatusCodeCache> StatusCodeCache { get; private set; } = null!;
 
         /// <summary>
         /// Tags of cdn domain.
@@ -474,10 +607,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
+        /// URL redirect configuration.
+        /// </summary>
+        [Output("urlRedirect")]
+        public Output<Outputs.DomainUrlRedirect> UrlRedirect { get; private set; } = null!;
+
+        /// <summary>
+        /// UserAgent blacklist/whitelist configuration.
+        /// </summary>
+        [Output("userAgentFilter")]
+        public Output<Outputs.DomainUserAgentFilter> UserAgentFilter { get; private set; } = null!;
+
+        /// <summary>
         /// Video seek switch, available values: `On`, `Off` (default).
         /// </summary>
         [Output("videoSeekSwitch")]
-        public Output<string?> VideoSeekSwitch { get; private set; } = null!;
+        public Output<string> VideoSeekSwitch { get; private set; } = null!;
 
 
         /// <summary>
@@ -526,6 +671,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
 
     public sealed class DomainArgs : global::Pulumi.ResourceArgs
     {
+        [Input("accessPorts")]
+        private InputList<int>? _accessPorts;
+
+        /// <summary>
+        /// Access port configuration. List of ports that can be accessed.
+        /// </summary>
+        public InputList<int> AccessPorts
+        {
+            get => _accessPorts ?? (_accessPorts = new InputList<int>());
+            set => _accessPorts = value;
+        }
+
         /// <summary>
         /// Domain name acceleration region. `Mainland`: acceleration inside mainland China, `Overseas`: acceleration outside mainland China, `Global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
         /// </summary>
@@ -537,6 +694,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("authentication")]
         public Input<Inputs.DomainAuthenticationArgs>? Authentication { get; set; }
+
+        /// <summary>
+        /// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Input("autoGuard")]
+        public Input<Inputs.DomainAutoGuardArgs>? AutoGuard { get; set; }
 
         /// <summary>
         /// Access authentication for S3 origin.
@@ -599,6 +762,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<bool>? FullUrlCache { get; set; }
 
         /// <summary>
+        /// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Input("geoBlocker")]
+        public Input<Inputs.DomainGeoBlockerArgs>? GeoBlocker { get; set; }
+
+        /// <summary>
+        /// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+        /// </summary>
+        [Input("httpsBilling")]
+        public Input<Inputs.DomainHttpsBillingArgs>? HttpsBilling { get; set; }
+
+        /// <summary>
         /// HTTPS acceleration configuration. It's a list and consist of at most one item.
         /// </summary>
         [Input("httpsConfig")]
@@ -645,6 +820,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("origin", required: true)]
         public Input<Inputs.DomainOriginArgs> Origin { get; set; } = null!;
+
+        /// <summary>
+        /// Origin combine configuration.
+        /// </summary>
+        [Input("originCombine")]
+        public Input<Inputs.DomainOriginCombineArgs>? OriginCombine { get; set; }
 
         /// <summary>
         /// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
@@ -699,6 +880,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("quicSwitch")]
         public Input<string>? QuicSwitch { get; set; }
+
+        /// <summary>
+        /// Range origin pull configuration with path-based rules.
+        /// </summary>
+        [Input("rangeOriginPull")]
+        public Input<Inputs.DomainRangeOriginPullArgs>? RangeOriginPull { get; set; }
 
         /// <summary>
         /// Sharding back to source configuration switch. Valid values are `On` and `Off`. Default value is `On`.
@@ -785,6 +972,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         }
 
         /// <summary>
+        /// URL redirect configuration.
+        /// </summary>
+        [Input("urlRedirect")]
+        public Input<Inputs.DomainUrlRedirectArgs>? UrlRedirect { get; set; }
+
+        /// <summary>
+        /// UserAgent blacklist/whitelist configuration.
+        /// </summary>
+        [Input("userAgentFilter")]
+        public Input<Inputs.DomainUserAgentFilterArgs>? UserAgentFilter { get; set; }
+
+        /// <summary>
         /// Video seek switch, available values: `On`, `Off` (default).
         /// </summary>
         [Input("videoSeekSwitch")]
@@ -798,6 +997,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
 
     public sealed class DomainState : global::Pulumi.ResourceArgs
     {
+        [Input("accessPorts")]
+        private InputList<int>? _accessPorts;
+
+        /// <summary>
+        /// Access port configuration. List of ports that can be accessed.
+        /// </summary>
+        public InputList<int> AccessPorts
+        {
+            get => _accessPorts ?? (_accessPorts = new InputList<int>());
+            set => _accessPorts = value;
+        }
+
         /// <summary>
         /// Domain name acceleration region. `Mainland`: acceleration inside mainland China, `Overseas`: acceleration outside mainland China, `Global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
         /// </summary>
@@ -809,6 +1020,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("authentication")]
         public Input<Inputs.DomainAuthenticationGetArgs>? Authentication { get; set; }
+
+        /// <summary>
+        /// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Input("autoGuard")]
+        public Input<Inputs.DomainAutoGuardGetArgs>? AutoGuard { get; set; }
 
         /// <summary>
         /// Access authentication for S3 origin.
@@ -895,6 +1112,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Input<bool>? FullUrlCache { get; set; }
 
         /// <summary>
+        /// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+        /// </summary>
+        [Input("geoBlocker")]
+        public Input<Inputs.DomainGeoBlockerGetArgs>? GeoBlocker { get; set; }
+
+        /// <summary>
+        /// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+        /// </summary>
+        [Input("httpsBilling")]
+        public Input<Inputs.DomainHttpsBillingGetArgs>? HttpsBilling { get; set; }
+
+        /// <summary>
         /// HTTPS acceleration configuration. It's a list and consist of at most one item.
         /// </summary>
         [Input("httpsConfig")]
@@ -941,6 +1170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("origin")]
         public Input<Inputs.DomainOriginGetArgs>? Origin { get; set; }
+
+        /// <summary>
+        /// Origin combine configuration.
+        /// </summary>
+        [Input("originCombine")]
+        public Input<Inputs.DomainOriginCombineGetArgs>? OriginCombine { get; set; }
 
         /// <summary>
         /// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
@@ -995,6 +1230,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("quicSwitch")]
         public Input<string>? QuicSwitch { get; set; }
+
+        /// <summary>
+        /// Range origin pull configuration with path-based rules.
+        /// </summary>
+        [Input("rangeOriginPull")]
+        public Input<Inputs.DomainRangeOriginPullGetArgs>? RangeOriginPull { get; set; }
 
         /// <summary>
         /// Sharding back to source configuration switch. Valid values are `On` and `Off`. Default value is `On`.
@@ -1085,6 +1326,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
             get => _tags ?? (_tags = new InputMap<string>());
             set => _tags = value;
         }
+
+        /// <summary>
+        /// URL redirect configuration.
+        /// </summary>
+        [Input("urlRedirect")]
+        public Input<Inputs.DomainUrlRedirectGetArgs>? UrlRedirect { get; set; }
+
+        /// <summary>
+        /// UserAgent blacklist/whitelist configuration.
+        /// </summary>
+        [Input("userAgentFilter")]
+        public Input<Inputs.DomainUserAgentFilterGetArgs>? UserAgentFilter { get; set; }
 
         /// <summary>
         /// Video seek switch, available values: `On`, `Off` (default).

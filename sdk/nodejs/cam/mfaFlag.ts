@@ -15,9 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const example = new tencentcloud.cam.MfaFlag("example", {
- *     opUin: info.then(info => info.uin),
+ *     opUin: output(info.then(info => info.uin)).apply(x =>Number(x)),
  *     loginFlag: {
  *         phone: 0,
  *         stoken: 1,
@@ -117,15 +117,15 @@ export interface MfaFlagState {
     /**
      * Action flag setting.
      */
-    actionFlag?: pulumi.Input<inputs.Cam.MfaFlagActionFlag>;
+    actionFlag?: pulumi.Input<inputs.Cam.MfaFlagActionFlag | undefined>;
     /**
      * Login flag setting.
      */
-    loginFlag?: pulumi.Input<inputs.Cam.MfaFlagLoginFlag>;
+    loginFlag?: pulumi.Input<inputs.Cam.MfaFlagLoginFlag | undefined>;
     /**
      * Operate uin.
      */
-    opUin?: pulumi.Input<number>;
+    opUin?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -135,11 +135,11 @@ export interface MfaFlagArgs {
     /**
      * Action flag setting.
      */
-    actionFlag?: pulumi.Input<inputs.Cam.MfaFlagActionFlag>;
+    actionFlag?: pulumi.Input<inputs.Cam.MfaFlagActionFlag | undefined>;
     /**
      * Login flag setting.
      */
-    loginFlag?: pulumi.Input<inputs.Cam.MfaFlagLoginFlag>;
+    loginFlag?: pulumi.Input<inputs.Cam.MfaFlagLoginFlag | undefined>;
     /**
      * Operate uin.
      */

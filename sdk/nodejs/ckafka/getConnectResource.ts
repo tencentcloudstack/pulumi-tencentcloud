@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const connectResource = tencentcloud.Ckafka.getConnectResource({});
+ * const connectResource = tencentcloud.ckafka.getConnectResource({});
  * ```
  */
 export function getConnectResource(args?: GetConnectResourceArgs, opts?: pulumi.InvokeOptions): Promise<GetConnectResourceResult> {
@@ -92,7 +92,7 @@ export interface GetConnectResourceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const connectResource = tencentcloud.Ckafka.getConnectResource({});
+ * const connectResource = tencentcloud.ckafka.getConnectResource({});
  * ```
  */
 export function getConnectResourceOutput(args?: GetConnectResourceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConnectResourceResult> {
@@ -115,25 +115,25 @@ export interface GetConnectResourceOutputArgs {
     /**
      * Return the number, the default is 20, the maximum is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Page offset, default is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Keyword query of the connection source, query the connection in the connection management list in the local region according to the region (only support the connection source containing the region input).
      */
-    resourceRegion?: pulumi.Input<string>;
+    resourceRegion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Keyword for search.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * connection source type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
     public sealed class SyncConfigObjectsOnlineDdlArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// status.
+        /// It has been deprecated from version 1.83.20. Status: ON - Enabled, OFF - Disabled.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

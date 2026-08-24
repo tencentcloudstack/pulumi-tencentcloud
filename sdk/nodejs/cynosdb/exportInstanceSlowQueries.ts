@@ -132,35 +132,35 @@ export interface ExportInstanceSlowQueriesState {
     /**
      * Database name.
      */
-    database?: pulumi.Input<string>;
+    database?: pulumi.Input<string | undefined>;
     /**
      * Latest transaction start time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Slow query export content.
      */
-    fileContent?: pulumi.Input<string>;
+    fileContent?: pulumi.Input<string | undefined>;
     /**
      * File type, optional values: csv, original.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Client host.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Earliest transaction start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * user name.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -170,19 +170,19 @@ export interface ExportInstanceSlowQueriesArgs {
     /**
      * Database name.
      */
-    database?: pulumi.Input<string>;
+    database?: pulumi.Input<string | undefined>;
     /**
      * Latest transaction start time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * File type, optional values: csv, original.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Client host.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -190,9 +190,9 @@ export interface ExportInstanceSlowQueriesArgs {
     /**
      * Earliest transaction start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * user name.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

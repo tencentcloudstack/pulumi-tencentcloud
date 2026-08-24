@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiDetail = tencentcloud.Tsf.getApiDetail({
+ * const apiDetail = tencentcloud.tsf.getApiDetail({
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "/printRequest",
  *     method: "GET",
@@ -94,7 +94,7 @@ export interface GetApiDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiDetail = tencentcloud.Tsf.getApiDetail({
+ * const apiDetail = tencentcloud.tsf.getApiDetail({
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "/printRequest",
  *     method: "GET",
@@ -142,5 +142,5 @@ export interface GetApiDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

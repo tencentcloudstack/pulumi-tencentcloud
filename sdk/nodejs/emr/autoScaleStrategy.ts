@@ -53,7 +53,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * emr emr_auto_scale_strategy can be imported using the id, e.g.
+ * emr emrAutoScaleStrategy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Emr/autoScaleStrategy:AutoScaleStrategy emr_auto_scale_strategy emr_auto_scale_strategy_id
@@ -146,19 +146,19 @@ export interface AutoScaleStrategyState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Expansion rules based on load.
      */
-    loadAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyLoadAutoScaleStrategy>[]>;
+    loadAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyLoadAutoScaleStrategy>[] | undefined>;
     /**
      * 1 means expansion and contraction according to load rules, 2 means expansion and contraction according to time rules. Must be filled in and match the following rule policy.
      */
-    strategyType?: pulumi.Input<number>;
+    strategyType?: pulumi.Input<number | undefined>;
     /**
      * Rules for scaling up and down over time.
      */
-    timeAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyTimeAutoScaleStrategy>[]>;
+    timeAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyTimeAutoScaleStrategy>[] | undefined>;
 }
 
 /**
@@ -172,7 +172,7 @@ export interface AutoScaleStrategyArgs {
     /**
      * Expansion rules based on load.
      */
-    loadAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyLoadAutoScaleStrategy>[]>;
+    loadAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyLoadAutoScaleStrategy>[] | undefined>;
     /**
      * 1 means expansion and contraction according to load rules, 2 means expansion and contraction according to time rules. Must be filled in and match the following rule policy.
      */
@@ -180,5 +180,5 @@ export interface AutoScaleStrategyArgs {
     /**
      * Rules for scaling up and down over time.
      */
-    timeAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyTimeAutoScaleStrategy>[]>;
+    timeAutoScaleStrategies?: pulumi.Input<pulumi.Input<inputs.Emr.AutoScaleStrategyTimeAutoScaleStrategy>[] | undefined>;
 }

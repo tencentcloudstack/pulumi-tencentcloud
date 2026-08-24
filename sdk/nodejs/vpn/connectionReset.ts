@@ -94,11 +94,11 @@ export interface ConnectionResetState {
     /**
      * VPN CONNECTION INSTANCE ID.
      */
-    vpnConnectionId?: pulumi.Input<string>;
+    vpnConnectionId?: pulumi.Input<string | undefined>;
     /**
      * VPN GATEWAY INSTANCE ID.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
 }
 
 /**

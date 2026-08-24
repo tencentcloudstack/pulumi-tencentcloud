@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         /// </summary>
         public readonly string ListenerName;
         /// <summary>
+        /// Load-balanced domain name.
+        /// </summary>
+        public readonly string? LoadBalancerDomain;
+        /// <summary>
         /// LoadBalancer unique ID.
         /// </summary>
         public readonly string LoadBalancerId;
@@ -34,6 +38,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         /// Network type for load balancer.
         /// </summary>
         public readonly string? LoadBalancerType;
+        /// <summary>
+        /// The ID of the member to whom the listener belongs.
+        /// </summary>
+        public readonly int? MemberAppId;
+        /// <summary>
+        /// Uin of the listener member.
+        /// </summary>
+        public readonly string? MemberUin;
         /// <summary>
         /// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
         /// </summary>
@@ -49,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         /// <summary>
         /// LoadBalancer IP.
         /// </summary>
-        public readonly string Vip;
+        public readonly string? Vip;
         /// <summary>
         /// LoadBalancer port.
         /// </summary>
@@ -65,11 +77,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
 
             string listenerName,
 
+            string? loadBalancerDomain,
+
             string loadBalancerId,
 
             string loadBalancerName,
 
             string? loadBalancerType,
+
+            int? memberAppId,
+
+            string? memberUin,
 
             int? numericalVpcId,
 
@@ -77,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
 
             string region,
 
-            string vip,
+            string? vip,
 
             int vport,
 
@@ -85,9 +103,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         {
             ListenerId = listenerId;
             ListenerName = listenerName;
+            LoadBalancerDomain = loadBalancerDomain;
             LoadBalancerId = loadBalancerId;
             LoadBalancerName = loadBalancerName;
             LoadBalancerType = loadBalancerType;
+            MemberAppId = memberAppId;
+            MemberUin = memberUin;
             NumericalVpcId = numericalVpcId;
             Protocol = protocol;
             Region = region;

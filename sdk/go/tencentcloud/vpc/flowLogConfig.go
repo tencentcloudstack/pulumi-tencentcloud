@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// vpc flow_log_config can be imported using the id, e.g.
+// vpc flowLogConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id

@@ -47,5 +47,5 @@ export function getInstanceNodeInfoOutput(args: GetInstanceNodeInfoOutputArgs, o
  */
 export interface GetInstanceNodeInfoOutputArgs {
     instanceId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

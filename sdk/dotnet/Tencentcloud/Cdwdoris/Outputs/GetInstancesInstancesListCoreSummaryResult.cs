@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
         /// <summary>
         /// Information of mounted cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetInstancesInstancesListCoreSummaryAttachCbsSpecResult AttachCbsSpec;
+        public readonly ImmutableArray<Outputs.GetInstancesInstancesListCoreSummaryAttachCbsSpecResult> AttachCbsSpecs;
         /// <summary>
         /// Number of CPU cores, in counts.
         /// </summary>
@@ -73,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
 
         [OutputConstructor]
         private GetInstancesInstancesListCoreSummaryResult(
-            Outputs.GetInstancesInstancesListCoreSummaryAttachCbsSpecResult attachCbsSpec,
+            ImmutableArray<Outputs.GetInstancesInstancesListCoreSummaryAttachCbsSpecResult> attachCbsSpecs,
 
             int core,
 
@@ -101,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
 
             string subProductType)
         {
-            AttachCbsSpec = attachCbsSpec;
+            AttachCbsSpecs = attachCbsSpecs;
             Core = core;
             Disk = disk;
             DiskCount = diskCount;

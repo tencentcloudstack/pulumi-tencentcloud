@@ -69,12 +69,8 @@ type LookupOriginAclResult struct {
 }
 
 func LookupOriginAclOutput(ctx *pulumi.Context, args LookupOriginAclOutputArgs, opts ...pulumi.InvokeOption) LookupOriginAclResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupOriginAclResultOutput, error) {
-			args := v.(LookupOriginAclArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Teo/getOriginAcl:getOriginAcl", args, LookupOriginAclResultOutput{}, options).(LookupOriginAclResultOutput), nil
-		}).(LookupOriginAclResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Teo/getOriginAcl:getOriginAcl", args, LookupOriginAclResultOutput{}, options).(LookupOriginAclResultOutput)
 }
 
 // A collection of arguments for invoking getOriginAcl.

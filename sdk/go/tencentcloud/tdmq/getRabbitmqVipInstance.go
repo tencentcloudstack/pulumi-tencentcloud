@@ -37,12 +37,8 @@ type LookupRabbitmqVipInstanceResult struct {
 }
 
 func LookupRabbitmqVipInstanceOutput(ctx *pulumi.Context, args LookupRabbitmqVipInstanceOutputArgs, opts ...pulumi.InvokeOption) LookupRabbitmqVipInstanceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRabbitmqVipInstanceResultOutput, error) {
-			args := v.(LookupRabbitmqVipInstanceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args, LookupRabbitmqVipInstanceResultOutput{}, options).(LookupRabbitmqVipInstanceResultOutput), nil
-		}).(LookupRabbitmqVipInstanceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args, LookupRabbitmqVipInstanceResultOutput{}, options).(LookupRabbitmqVipInstanceResultOutput)
 }
 
 // A collection of arguments for invoking getRabbitmqVipInstance.

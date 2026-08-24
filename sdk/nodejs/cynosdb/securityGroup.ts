@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb security_group can be imported using the id, e.g.
+ * cynosdb securityGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
@@ -61,7 +61,7 @@ export class SecurityGroup extends pulumi.CustomResource {
      */
     declare public readonly clusterId: pulumi.Output<string>;
     /**
-     * Instance group type. Available values: 
+     * Instance group type. Available values:
      * -`HA` - HA group;
      * -`RO` - Read-only group;
      * -`ALL` - HA and RO group.
@@ -115,18 +115,18 @@ export interface SecurityGroupState {
     /**
      * Cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
-     * Instance group type. Available values: 
+     * Instance group type. Available values:
      * -`HA` - HA group;
      * -`RO` - Read-only group;
      * -`ALL` - HA and RO group.
      */
-    instanceGroupType?: pulumi.Input<string>;
+    instanceGroupType?: pulumi.Input<string | undefined>;
     /**
      * A list of security group IDs to be modified, an array of one or more security group IDs.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface SecurityGroupArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Instance group type. Available values: 
+     * Instance group type. Available values:
      * -`HA` - HA group;
      * -`RO` - Read-only group;
      * -`ALL` - HA and RO group.

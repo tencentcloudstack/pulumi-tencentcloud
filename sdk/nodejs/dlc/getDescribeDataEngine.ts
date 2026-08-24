@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEngine({
+ * const example = tencentcloud.dlc.getDescribeDataEngine({
  *     dataEngineName: "tf-example",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetDescribeDataEngineResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEngine({
+ * const example = tencentcloud.dlc.getDescribeDataEngine({
  *     dataEngineName: "tf-example",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetDescribeDataEngineOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

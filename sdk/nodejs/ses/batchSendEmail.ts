@@ -172,47 +172,47 @@ export interface BatchSendEmailState {
     /**
      * Whether to add an ad tag. 0: Add no tag; 1: Add before the subject; 2: Add after the subject.
      */
-    adLocation?: pulumi.Input<number>;
+    adLocation?: pulumi.Input<number | undefined>;
     /**
      * Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
      */
-    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.BatchSendEmailAttachment>[]>;
+    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.BatchSendEmailAttachment>[] | undefined>;
     /**
      * Parameter required for a recurring sending task.
      */
-    cycleParam?: pulumi.Input<inputs.Ses.BatchSendEmailCycleParam>;
+    cycleParam?: pulumi.Input<inputs.Ses.BatchSendEmailCycleParam | undefined>;
     /**
      * Sender address. Enter a sender address such as noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:sender &amp;amp;lt;email address&amp;amp;gt;. For example:Tencent Cloud team &amp;amp;lt;noreply@mail.qcloud.com&amp;amp;gt;.
      */
-    fromEmailAddress?: pulumi.Input<string>;
+    fromEmailAddress?: pulumi.Input<string | undefined>;
     /**
      * Recipient group ID.
      */
-    receiverId?: pulumi.Input<number>;
+    receiverId?: pulumi.Input<number | undefined>;
     /**
      * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
      */
-    replyToAddresses?: pulumi.Input<string>;
+    replyToAddresses?: pulumi.Input<string | undefined>;
     /**
      * Email subject.
      */
-    subject?: pulumi.Input<string>;
+    subject?: pulumi.Input<string | undefined>;
     /**
      * Task type. 1: immediate; 2: scheduled; 3: recurring.
      */
-    taskType?: pulumi.Input<number>;
+    taskType?: pulumi.Input<number | undefined>;
     /**
      * Template when emails are sent using a template.
      */
-    template?: pulumi.Input<inputs.Ses.BatchSendEmailTemplate>;
+    template?: pulumi.Input<inputs.Ses.BatchSendEmailTemplate | undefined>;
     /**
      * Parameter required for a scheduled sending task.
      */
-    timedParam?: pulumi.Input<inputs.Ses.BatchSendEmailTimedParam>;
+    timedParam?: pulumi.Input<inputs.Ses.BatchSendEmailTimedParam | undefined>;
     /**
      * Unsubscribe link option.  0: Do not add unsubscribe link; 1: English 2: Simplified Chinese;  3: Traditional Chinese; 4: Spanish; 5: French;  6: German; 7: Japanese; 8: Korean;  9: Arabic; 10: Thai.
      */
-    unsubscribe?: pulumi.Input<string>;
+    unsubscribe?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -222,15 +222,15 @@ export interface BatchSendEmailArgs {
     /**
      * Whether to add an ad tag. 0: Add no tag; 1: Add before the subject; 2: Add after the subject.
      */
-    adLocation?: pulumi.Input<number>;
+    adLocation?: pulumi.Input<number | undefined>;
     /**
      * Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
      */
-    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.BatchSendEmailAttachment>[]>;
+    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.BatchSendEmailAttachment>[] | undefined>;
     /**
      * Parameter required for a recurring sending task.
      */
-    cycleParam?: pulumi.Input<inputs.Ses.BatchSendEmailCycleParam>;
+    cycleParam?: pulumi.Input<inputs.Ses.BatchSendEmailCycleParam | undefined>;
     /**
      * Sender address. Enter a sender address such as noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:sender &amp;amp;lt;email address&amp;amp;gt;. For example:Tencent Cloud team &amp;amp;lt;noreply@mail.qcloud.com&amp;amp;gt;.
      */
@@ -242,7 +242,7 @@ export interface BatchSendEmailArgs {
     /**
      * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
      */
-    replyToAddresses?: pulumi.Input<string>;
+    replyToAddresses?: pulumi.Input<string | undefined>;
     /**
      * Email subject.
      */
@@ -254,13 +254,13 @@ export interface BatchSendEmailArgs {
     /**
      * Template when emails are sent using a template.
      */
-    template?: pulumi.Input<inputs.Ses.BatchSendEmailTemplate>;
+    template?: pulumi.Input<inputs.Ses.BatchSendEmailTemplate | undefined>;
     /**
      * Parameter required for a scheduled sending task.
      */
-    timedParam?: pulumi.Input<inputs.Ses.BatchSendEmailTimedParam>;
+    timedParam?: pulumi.Input<inputs.Ses.BatchSendEmailTimedParam | undefined>;
     /**
      * Unsubscribe link option.  0: Do not add unsubscribe link; 1: English 2: Simplified Chinese;  3: Traditional Chinese; 4: Spanish; 5: French;  6: German; 7: Japanese; 8: Korean;  9: Arabic; 10: Thai.
      */
-    unsubscribe?: pulumi.Input<string>;
+    unsubscribe?: pulumi.Input<string | undefined>;
 }

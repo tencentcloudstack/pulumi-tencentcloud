@@ -218,79 +218,79 @@ export interface DeployVmGroupState {
     /**
      * javaagent info: SERVICE_AGENT/OT_AGENT.
      */
-    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployVmGroupAgentProfileList>[]>;
+    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployVmGroupAgentProfileList>[] | undefined>;
     /**
      * The ratio of instances participating in each batch during rolling release.
      */
-    deployBatches?: pulumi.Input<pulumi.Input<number>[]>;
+    deployBatches?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether to enable beta batch.
      */
-    deployBetaEnable?: pulumi.Input<boolean>;
+    deployBetaEnable?: pulumi.Input<boolean | undefined>;
     /**
      * group description.
      */
-    deployDesc?: pulumi.Input<string>;
+    deployDesc?: pulumi.Input<string | undefined>;
     /**
      * The execution method of rolling release.
      */
-    deployExeMode?: pulumi.Input<string>;
+    deployExeMode?: pulumi.Input<string | undefined>;
     /**
      * The time interval for each batch during rolling release.
      */
-    deployWaitTime?: pulumi.Input<number>;
+    deployWaitTime?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable health check.
      */
-    enableHealthCheck?: pulumi.Input<boolean>;
+    enableHealthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to allow forced start.
      */
-    forceStart?: pulumi.Input<boolean>;
+    forceStart?: pulumi.Input<boolean | undefined>;
     /**
      * group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * When enabling health check, configure the health check settings.
      */
-    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettings>;
+    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettings | undefined>;
     /**
      * Whether to perform incremental deployment. The default value is false, which means full update.
      */
-    incrementalDeployment?: pulumi.Input<boolean>;
+    incrementalDeployment?: pulumi.Input<boolean | undefined>;
     /**
      * JDK name: konaJDK or openJDK.
      */
-    jdkName?: pulumi.Input<string>;
+    jdkName?: pulumi.Input<string | undefined>;
     /**
      * JDK version: 8 or 11(openJDK only support 8).
      */
-    jdkVersion?: pulumi.Input<string>;
+    jdkVersion?: pulumi.Input<string | undefined>;
     /**
      * program package ID.
      */
-    pkgId?: pulumi.Input<string>;
+    pkgId?: pulumi.Input<string | undefined>;
     /**
      * The base64-encoded startup script.
      */
-    startScript?: pulumi.Input<string>;
+    startScript?: pulumi.Input<string | undefined>;
     /**
      * start args of group.
      */
-    startupParameters?: pulumi.Input<string>;
+    startupParameters?: pulumi.Input<string | undefined>;
     /**
      * The base64-encoded stop script.
      */
-    stopScript?: pulumi.Input<string>;
+    stopScript?: pulumi.Input<string | undefined>;
     /**
      * Update method: 0 for fast update, 1 for rolling update.
      */
-    updateType?: pulumi.Input<number>;
+    updateType?: pulumi.Input<number | undefined>;
     /**
      * warmup setting.
      */
-    warmupSetting?: pulumi.Input<inputs.Tsf.DeployVmGroupWarmupSetting>;
+    warmupSetting?: pulumi.Input<inputs.Tsf.DeployVmGroupWarmupSetting | undefined>;
 }
 
 /**
@@ -300,35 +300,35 @@ export interface DeployVmGroupArgs {
     /**
      * javaagent info: SERVICE_AGENT/OT_AGENT.
      */
-    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployVmGroupAgentProfileList>[]>;
+    agentProfileLists?: pulumi.Input<pulumi.Input<inputs.Tsf.DeployVmGroupAgentProfileList>[] | undefined>;
     /**
      * The ratio of instances participating in each batch during rolling release.
      */
-    deployBatches?: pulumi.Input<pulumi.Input<number>[]>;
+    deployBatches?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether to enable beta batch.
      */
-    deployBetaEnable?: pulumi.Input<boolean>;
+    deployBetaEnable?: pulumi.Input<boolean | undefined>;
     /**
      * group description.
      */
-    deployDesc?: pulumi.Input<string>;
+    deployDesc?: pulumi.Input<string | undefined>;
     /**
      * The execution method of rolling release.
      */
-    deployExeMode?: pulumi.Input<string>;
+    deployExeMode?: pulumi.Input<string | undefined>;
     /**
      * The time interval for each batch during rolling release.
      */
-    deployWaitTime?: pulumi.Input<number>;
+    deployWaitTime?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable health check.
      */
-    enableHealthCheck?: pulumi.Input<boolean>;
+    enableHealthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to allow forced start.
      */
-    forceStart?: pulumi.Input<boolean>;
+    forceStart?: pulumi.Input<boolean | undefined>;
     /**
      * group id.
      */
@@ -336,19 +336,19 @@ export interface DeployVmGroupArgs {
     /**
      * When enabling health check, configure the health check settings.
      */
-    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettings>;
+    healthCheckSettings?: pulumi.Input<inputs.Tsf.DeployVmGroupHealthCheckSettings | undefined>;
     /**
      * Whether to perform incremental deployment. The default value is false, which means full update.
      */
-    incrementalDeployment?: pulumi.Input<boolean>;
+    incrementalDeployment?: pulumi.Input<boolean | undefined>;
     /**
      * JDK name: konaJDK or openJDK.
      */
-    jdkName?: pulumi.Input<string>;
+    jdkName?: pulumi.Input<string | undefined>;
     /**
      * JDK version: 8 or 11(openJDK only support 8).
      */
-    jdkVersion?: pulumi.Input<string>;
+    jdkVersion?: pulumi.Input<string | undefined>;
     /**
      * program package ID.
      */
@@ -356,21 +356,21 @@ export interface DeployVmGroupArgs {
     /**
      * The base64-encoded startup script.
      */
-    startScript?: pulumi.Input<string>;
+    startScript?: pulumi.Input<string | undefined>;
     /**
      * start args of group.
      */
-    startupParameters?: pulumi.Input<string>;
+    startupParameters?: pulumi.Input<string | undefined>;
     /**
      * The base64-encoded stop script.
      */
-    stopScript?: pulumi.Input<string>;
+    stopScript?: pulumi.Input<string | undefined>;
     /**
      * Update method: 0 for fast update, 1 for rolling update.
      */
-    updateType?: pulumi.Input<number>;
+    updateType?: pulumi.Input<number | undefined>;
     /**
      * warmup setting.
      */
-    warmupSetting?: pulumi.Input<inputs.Tsf.DeployVmGroupWarmupSetting>;
+    warmupSetting?: pulumi.Input<inputs.Tsf.DeployVmGroupWarmupSetting | undefined>;
 }

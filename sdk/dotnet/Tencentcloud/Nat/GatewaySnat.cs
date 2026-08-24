@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -162,15 +161,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// ## Import
     /// 
-    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+    /// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', ResourceId range `SubnetId`, `InstanceId`, e.g.
     /// 
     /// SUBNET SNat
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
     /// ```
-    /// NETWORKINTERFACT SNat
     /// 
+    /// NETWORKINTERFACT SNat
     /// ```sh
     /// $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
     /// ```

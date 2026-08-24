@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc elastic_public_ipv6_attachment can be imported using the id, e.g.
+ * vpc elasticPublicIpv6Attachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Elastic/publicIpv6Attachment:PublicIpv6Attachment elastic_public_ipv6_attachment elastic_public_ipv6_attachment_id
@@ -112,19 +112,19 @@ export interface PublicIpv6AttachmentState {
     /**
      * Elastic IPv6 unique ID, EIPv6 unique ID is like eipv6-11112222.
      */
-    ipv6AddressId?: pulumi.Input<string>;
+    ipv6AddressId?: pulumi.Input<string | undefined>;
     /**
      * Whether to keep the Elastic Network Interface bound when unbinding.
      */
-    keepBindWithEni?: pulumi.Input<boolean>;
+    keepBindWithEni?: pulumi.Input<boolean | undefined>;
     /**
      * Elastic Network Interface ID to bind. Elastic Network Interface ID is like eni-11112222. NetworkInterfaceId and InstanceId cannot be specified simultaneously. The Elastic Network Interface ID can be queried by logging in to the console, or obtained through the networkInterfaceId in the return value of the DescribeNetworkInterfaces interface.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * The intranet IPv6 to bind. If NetworkInterfaceId is specified, PrivateIPv6Address must also be specified, which means that the EIP is bound to the specified private network IP of the specified Elastic Network Interface. Also ensure that the specified PrivateIPv6Address is an intranet IPv6 on the specified NetworkInterfaceId. The intranet IPv6 of the specified Elastic Network Interface can be queried by logging in to the console, or obtained through the Ipv6AddressSet.Address in the return value of the DescribeNetworkInterfaces interface.
      */
-    privateIpv6Address?: pulumi.Input<string>;
+    privateIpv6Address?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -138,13 +138,13 @@ export interface PublicIpv6AttachmentArgs {
     /**
      * Whether to keep the Elastic Network Interface bound when unbinding.
      */
-    keepBindWithEni?: pulumi.Input<boolean>;
+    keepBindWithEni?: pulumi.Input<boolean | undefined>;
     /**
      * Elastic Network Interface ID to bind. Elastic Network Interface ID is like eni-11112222. NetworkInterfaceId and InstanceId cannot be specified simultaneously. The Elastic Network Interface ID can be queried by logging in to the console, or obtained through the networkInterfaceId in the return value of the DescribeNetworkInterfaces interface.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * The intranet IPv6 to bind. If NetworkInterfaceId is specified, PrivateIPv6Address must also be specified, which means that the EIP is bound to the specified private network IP of the specified Elastic Network Interface. Also ensure that the specified PrivateIPv6Address is an intranet IPv6 on the specified NetworkInterfaceId. The intranet IPv6 of the specified Elastic Network Interface can be queried by logging in to the console, or obtained through the Ipv6AddressSet.Address in the return value of the DescribeNetworkInterfaces interface.
      */
-    privateIpv6Address?: pulumi.Input<string>;
+    privateIpv6Address?: pulumi.Input<string | undefined>;
 }

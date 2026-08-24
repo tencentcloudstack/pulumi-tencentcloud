@@ -122,7 +122,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps content_review_template can be imported using the id, e.g.
+ * mps contentReviewTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
@@ -227,31 +227,31 @@ export interface ContentReviewTemplateState {
     /**
      * Content review template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Content review template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Political control parameters.
      */
-    politicalConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigure>;
+    politicalConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigure | undefined>;
     /**
      * Control parameters for porn image.
      */
-    pornConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigure>;
+    pornConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigure | undefined>;
     /**
      * Prohibited control parameters. Prohibited content includes:abuse, drug-related violations.Note: this parameter is not yet supported.
      */
-    prohibitedConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigure>;
+    prohibitedConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigure | undefined>;
     /**
      * Control parameters for unsafe information.
      */
-    terrorismConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigure>;
+    terrorismConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigure | undefined>;
     /**
      * User-Defined Content Moderation Control Parameters.
      */
-    userDefineConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigure>;
+    userDefineConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigure | undefined>;
 }
 
 /**
@@ -261,29 +261,29 @@ export interface ContentReviewTemplateArgs {
     /**
      * Content review template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Content review template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Political control parameters.
      */
-    politicalConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigure>;
+    politicalConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePoliticalConfigure | undefined>;
     /**
      * Control parameters for porn image.
      */
-    pornConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigure>;
+    pornConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplatePornConfigure | undefined>;
     /**
      * Prohibited control parameters. Prohibited content includes:abuse, drug-related violations.Note: this parameter is not yet supported.
      */
-    prohibitedConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigure>;
+    prohibitedConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateProhibitedConfigure | undefined>;
     /**
      * Control parameters for unsafe information.
      */
-    terrorismConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigure>;
+    terrorismConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateTerrorismConfigure | undefined>;
     /**
      * User-Defined Content Moderation Control Parameters.
      */
-    userDefineConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigure>;
+    userDefineConfigure?: pulumi.Input<inputs.Mps.ContentReviewTemplateUserDefineConfigure | undefined>;
 }

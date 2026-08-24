@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetHealth = tencentcloud.Clb.getTargetHealth({
+ * const targetHealth = tencentcloud.clb.getTargetHealth({
  *     loadBalancerIds: ["lb-5dnrkgry"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetTargetHealthResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const targetHealth = tencentcloud.Clb.getTargetHealth({
+ * const targetHealth = tencentcloud.clb.getTargetHealth({
  *     loadBalancerIds: ["lb-5dnrkgry"],
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetTargetHealthOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

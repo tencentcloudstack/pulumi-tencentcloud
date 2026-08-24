@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Audit.getCosRegions({});
+ * const foo = tencentcloud.audit.getCosRegions({});
  * ```
  */
 export function getCosRegions(args?: GetCosRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetCosRegionsResult> {
@@ -59,7 +59,7 @@ export interface GetCosRegionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Audit.getCosRegions({});
+ * const foo = tencentcloud.audit.getCosRegions({});
  * ```
  */
 export function getCosRegionsOutput(args?: GetCosRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCosRegionsResult> {
@@ -77,5 +77,5 @@ export interface GetCosRegionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

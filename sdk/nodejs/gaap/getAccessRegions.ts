@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRegions = tencentcloud.Gaap.getAccessRegions({});
+ * const accessRegions = tencentcloud.gaap.getAccessRegions({});
  * ```
  */
 export function getAccessRegions(args?: GetAccessRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessRegionsResult> {
@@ -59,7 +59,7 @@ export interface GetAccessRegionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRegions = tencentcloud.Gaap.getAccessRegions({});
+ * const accessRegions = tencentcloud.gaap.getAccessRegions({});
  * ```
  */
 export function getAccessRegionsOutput(args?: GetAccessRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessRegionsResult> {
@@ -77,5 +77,5 @@ export interface GetAccessRegionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -68,12 +68,8 @@ type LookupBackupStreamResult struct {
 }
 
 func LookupBackupStreamOutput(ctx *pulumi.Context, args LookupBackupStreamOutputArgs, opts ...pulumi.InvokeOption) LookupBackupStreamResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupBackupStreamResultOutput, error) {
-			args := v.(LookupBackupStreamArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getBackupStream:getBackupStream", args, LookupBackupStreamResultOutput{}, options).(LookupBackupStreamResultOutput), nil
-		}).(LookupBackupStreamResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getBackupStream:getBackupStream", args, LookupBackupStreamResultOutput{}, options).(LookupBackupStreamResultOutput)
 }
 
 // A collection of arguments for invoking getBackupStream.

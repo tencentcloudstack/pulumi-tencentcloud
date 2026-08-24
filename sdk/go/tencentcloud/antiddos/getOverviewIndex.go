@@ -89,12 +89,8 @@ type GetOverviewIndexResult struct {
 }
 
 func GetOverviewIndexOutput(ctx *pulumi.Context, args GetOverviewIndexOutputArgs, opts ...pulumi.InvokeOption) GetOverviewIndexResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOverviewIndexResultOutput, error) {
-			args := v.(GetOverviewIndexArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args, GetOverviewIndexResultOutput{}, options).(GetOverviewIndexResultOutput), nil
-		}).(GetOverviewIndexResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", args, GetOverviewIndexResultOutput{}, options).(GetOverviewIndexResultOutput)
 }
 
 // A collection of arguments for invoking getOverviewIndex.

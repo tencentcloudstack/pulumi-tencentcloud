@@ -19,9 +19,9 @@ import * as utilities from "../utilities";
  *     ip: "1.1.1.1",
  *     name: "ci-test-gaap-realserver",
  * });
- * const foo = fooRealserver.ip.apply(ip => tencentcloud.Gaap.getRealserversOutput({
- *     ip: ip,
- * }));
+ * const foo = tencentcloud.gaap.getRealserversOutput({
+ *     ip: fooRealserver.ip,
+ * });
  * ```
  */
 export function getRealservers(args?: GetRealserversArgs, opts?: pulumi.InvokeOptions): Promise<GetRealserversResult> {
@@ -114,9 +114,9 @@ export interface GetRealserversResult {
  *     ip: "1.1.1.1",
  *     name: "ci-test-gaap-realserver",
  * });
- * const foo = fooRealserver.ip.apply(ip => tencentcloud.Gaap.getRealserversOutput({
- *     ip: ip,
- * }));
+ * const foo = tencentcloud.gaap.getRealserversOutput({
+ *     ip: fooRealserver.ip,
+ * });
  * ```
  */
 export function getRealserversOutput(args?: GetRealserversOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRealserversResult> {
@@ -139,25 +139,25 @@ export interface GetRealserversOutputArgs {
     /**
      * Domain of the GAAP realserver to be queried, conflict with `ip`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * IP of the GAAP realserver to be queried, conflict with `domain`.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the GAAP realserver to be queried, the maximum length is 30.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the GAAP realserver to be queried, default value is `-1`, no set means all projects.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the GAAP proxy to be queried. Support up to 5, display the information as long as it matches one.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

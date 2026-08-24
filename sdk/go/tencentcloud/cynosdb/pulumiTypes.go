@@ -831,6 +831,635 @@ func (o BackupConfigLogicBackupConfigPtrOutput) LogicReserveDuration() pulumi.In
 	}).(pulumi.IntPtrOutput)
 }
 
+type BackupConfigSnapshotSecondaryBackupConfig struct {
+	// Auto copy vault configuration list.
+	AutoCopyVaults []BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault `pulumi:"autoCopyVaults"`
+	// Whether to use system auto time.
+	BackupCustomAutoTime *bool `pulumi:"backupCustomAutoTime"`
+	// Backup interval time.
+	BackupIntervalTime *int `pulumi:"backupIntervalTime"`
+	// Backup start time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+	BackupTimeBeg *int `pulumi:"backupTimeBeg"`
+	// Backup end time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+	BackupTimeEnd *int `pulumi:"backupTimeEnd"`
+	// Backup trigger strategy. Values: `periodically` (periodic auto backup), `frequent` (high-frequency backup).
+	BackupTriggerStrategy *string `pulumi:"backupTriggerStrategy"`
+	// Backup week days array (length 7, Sunday to Saturday). Values: full, increment, none.
+	BackupWeekDays []string `pulumi:"backupWeekDays"`
+	// Cross-region backup target regions.
+	CrossRegions []string `pulumi:"crossRegions"`
+	// Whether cross-region backup is enabled. Values: `yes`, `no`.
+	CrossRegionsEnable *string `pulumi:"crossRegionsEnable"`
+	// Backup retention period in seconds. 7 days = 604800. Max: 158112000.
+	ReserveDuration *int `pulumi:"reserveDuration"`
+}
+
+// BackupConfigSnapshotSecondaryBackupConfigInput is an input type that accepts BackupConfigSnapshotSecondaryBackupConfigArgs and BackupConfigSnapshotSecondaryBackupConfigOutput values.
+// You can construct a concrete instance of `BackupConfigSnapshotSecondaryBackupConfigInput` via:
+//
+//	BackupConfigSnapshotSecondaryBackupConfigArgs{...}
+type BackupConfigSnapshotSecondaryBackupConfigInput interface {
+	pulumi.Input
+
+	ToBackupConfigSnapshotSecondaryBackupConfigOutput() BackupConfigSnapshotSecondaryBackupConfigOutput
+	ToBackupConfigSnapshotSecondaryBackupConfigOutputWithContext(context.Context) BackupConfigSnapshotSecondaryBackupConfigOutput
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigArgs struct {
+	// Auto copy vault configuration list.
+	AutoCopyVaults BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayInput `pulumi:"autoCopyVaults"`
+	// Whether to use system auto time.
+	BackupCustomAutoTime pulumi.BoolPtrInput `pulumi:"backupCustomAutoTime"`
+	// Backup interval time.
+	BackupIntervalTime pulumi.IntPtrInput `pulumi:"backupIntervalTime"`
+	// Backup start time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+	BackupTimeBeg pulumi.IntPtrInput `pulumi:"backupTimeBeg"`
+	// Backup end time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+	BackupTimeEnd pulumi.IntPtrInput `pulumi:"backupTimeEnd"`
+	// Backup trigger strategy. Values: `periodically` (periodic auto backup), `frequent` (high-frequency backup).
+	BackupTriggerStrategy pulumi.StringPtrInput `pulumi:"backupTriggerStrategy"`
+	// Backup week days array (length 7, Sunday to Saturday). Values: full, increment, none.
+	BackupWeekDays pulumi.StringArrayInput `pulumi:"backupWeekDays"`
+	// Cross-region backup target regions.
+	CrossRegions pulumi.StringArrayInput `pulumi:"crossRegions"`
+	// Whether cross-region backup is enabled. Values: `yes`, `no`.
+	CrossRegionsEnable pulumi.StringPtrInput `pulumi:"crossRegionsEnable"`
+	// Backup retention period in seconds. 7 days = 604800. Max: 158112000.
+	ReserveDuration pulumi.IntPtrInput `pulumi:"reserveDuration"`
+}
+
+func (BackupConfigSnapshotSecondaryBackupConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfig)(nil)).Elem()
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigArgs) ToBackupConfigSnapshotSecondaryBackupConfigOutput() BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return i.ToBackupConfigSnapshotSecondaryBackupConfigOutputWithContext(context.Background())
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigArgs) ToBackupConfigSnapshotSecondaryBackupConfigOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupConfigSnapshotSecondaryBackupConfigOutput)
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigArgs) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutput() BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return i.ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigArgs) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupConfigSnapshotSecondaryBackupConfigOutput).ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(ctx)
+}
+
+// BackupConfigSnapshotSecondaryBackupConfigPtrInput is an input type that accepts BackupConfigSnapshotSecondaryBackupConfigArgs, BackupConfigSnapshotSecondaryBackupConfigPtr and BackupConfigSnapshotSecondaryBackupConfigPtrOutput values.
+// You can construct a concrete instance of `BackupConfigSnapshotSecondaryBackupConfigPtrInput` via:
+//
+//	        BackupConfigSnapshotSecondaryBackupConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type BackupConfigSnapshotSecondaryBackupConfigPtrInput interface {
+	pulumi.Input
+
+	ToBackupConfigSnapshotSecondaryBackupConfigPtrOutput() BackupConfigSnapshotSecondaryBackupConfigPtrOutput
+	ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(context.Context) BackupConfigSnapshotSecondaryBackupConfigPtrOutput
+}
+
+type backupConfigSnapshotSecondaryBackupConfigPtrType BackupConfigSnapshotSecondaryBackupConfigArgs
+
+func BackupConfigSnapshotSecondaryBackupConfigPtr(v *BackupConfigSnapshotSecondaryBackupConfigArgs) BackupConfigSnapshotSecondaryBackupConfigPtrInput {
+	return (*backupConfigSnapshotSecondaryBackupConfigPtrType)(v)
+}
+
+func (*backupConfigSnapshotSecondaryBackupConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BackupConfigSnapshotSecondaryBackupConfig)(nil)).Elem()
+}
+
+func (i *backupConfigSnapshotSecondaryBackupConfigPtrType) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutput() BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return i.ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *backupConfigSnapshotSecondaryBackupConfigPtrType) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupConfigSnapshotSecondaryBackupConfigPtrOutput)
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigOutput struct{ *pulumi.OutputState }
+
+func (BackupConfigSnapshotSecondaryBackupConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfig)(nil)).Elem()
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) ToBackupConfigSnapshotSecondaryBackupConfigOutput() BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) ToBackupConfigSnapshotSecondaryBackupConfigOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutput() BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return o.ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BackupConfigSnapshotSecondaryBackupConfig) *BackupConfigSnapshotSecondaryBackupConfig {
+		return &v
+	}).(BackupConfigSnapshotSecondaryBackupConfigPtrOutput)
+}
+
+// Auto copy vault configuration list.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) AutoCopyVaults() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) []BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault {
+		return v.AutoCopyVaults
+	}).(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput)
+}
+
+// Whether to use system auto time.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupCustomAutoTime() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *bool { return v.BackupCustomAutoTime }).(pulumi.BoolPtrOutput)
+}
+
+// Backup interval time.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupIntervalTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *int { return v.BackupIntervalTime }).(pulumi.IntPtrOutput)
+}
+
+// Backup start time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupTimeBeg() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *int { return v.BackupTimeBeg }).(pulumi.IntPtrOutput)
+}
+
+// Backup end time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupTimeEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *int { return v.BackupTimeEnd }).(pulumi.IntPtrOutput)
+}
+
+// Backup trigger strategy. Values: `periodically` (periodic auto backup), `frequent` (high-frequency backup).
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupTriggerStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *string { return v.BackupTriggerStrategy }).(pulumi.StringPtrOutput)
+}
+
+// Backup week days array (length 7, Sunday to Saturday). Values: full, increment, none.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) BackupWeekDays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) []string { return v.BackupWeekDays }).(pulumi.StringArrayOutput)
+}
+
+// Cross-region backup target regions.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) CrossRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) []string { return v.CrossRegions }).(pulumi.StringArrayOutput)
+}
+
+// Whether cross-region backup is enabled. Values: `yes`, `no`.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) CrossRegionsEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *string { return v.CrossRegionsEnable }).(pulumi.StringPtrOutput)
+}
+
+// Backup retention period in seconds. 7 days = 604800. Max: 158112000.
+func (o BackupConfigSnapshotSecondaryBackupConfigOutput) ReserveDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfig) *int { return v.ReserveDuration }).(pulumi.IntPtrOutput)
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (BackupConfigSnapshotSecondaryBackupConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BackupConfigSnapshotSecondaryBackupConfig)(nil)).Elem()
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutput() BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) ToBackupConfigSnapshotSecondaryBackupConfigPtrOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigPtrOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) Elem() BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) BackupConfigSnapshotSecondaryBackupConfig {
+		if v != nil {
+			return *v
+		}
+		var ret BackupConfigSnapshotSecondaryBackupConfig
+		return ret
+	}).(BackupConfigSnapshotSecondaryBackupConfigOutput)
+}
+
+// Auto copy vault configuration list.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) AutoCopyVaults() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) []BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault {
+		if v == nil {
+			return nil
+		}
+		return v.AutoCopyVaults
+	}).(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput)
+}
+
+// Whether to use system auto time.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupCustomAutoTime() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.BackupCustomAutoTime
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Backup interval time.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupIntervalTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BackupIntervalTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Backup start time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupTimeBeg() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BackupTimeBeg
+	}).(pulumi.IntPtrOutput)
+}
+
+// Backup end time. Range: [0-24*3600]. E.g. 0:00, 1:00, 2:00 are 0, 3600, 7200.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupTimeEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BackupTimeEnd
+	}).(pulumi.IntPtrOutput)
+}
+
+// Backup trigger strategy. Values: `periodically` (periodic auto backup), `frequent` (high-frequency backup).
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupTriggerStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BackupTriggerStrategy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Backup week days array (length 7, Sunday to Saturday). Values: full, increment, none.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) BackupWeekDays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.BackupWeekDays
+	}).(pulumi.StringArrayOutput)
+}
+
+// Cross-region backup target regions.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) CrossRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) []string {
+		if v == nil {
+			return nil
+		}
+		return v.CrossRegions
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whether cross-region backup is enabled. Values: `yes`, `no`.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) CrossRegionsEnable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CrossRegionsEnable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Backup retention period in seconds. 7 days = 604800. Max: 158112000.
+func (o BackupConfigSnapshotSecondaryBackupConfigPtrOutput) ReserveDuration() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BackupConfigSnapshotSecondaryBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ReserveDuration
+	}).(pulumi.IntPtrOutput)
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault struct {
+	// Vault ID.
+	VaultId *string `pulumi:"vaultId"`
+	// Vault region.
+	VaultRegion *string `pulumi:"vaultRegion"`
+}
+
+// BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultInput is an input type that accepts BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs and BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput values.
+// You can construct a concrete instance of `BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultInput` via:
+//
+//	BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs{...}
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultInput interface {
+	pulumi.Input
+
+	ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput
+	ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutputWithContext(context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs struct {
+	// Vault ID.
+	VaultId pulumi.StringPtrInput `pulumi:"vaultId"`
+	// Vault region.
+	VaultRegion pulumi.StringPtrInput `pulumi:"vaultRegion"`
+}
+
+func (BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault)(nil)).Elem()
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput {
+	return i.ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutputWithContext(context.Background())
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput)
+}
+
+// BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayInput is an input type that accepts BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray and BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput values.
+// You can construct a concrete instance of `BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayInput` via:
+//
+//	BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray{ BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs{...} }
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayInput interface {
+	pulumi.Input
+
+	ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput
+	ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutputWithContext(context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray []BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultInput
+
+func (BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault)(nil)).Elem()
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return i.ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutputWithContext(context.Background())
+}
+
+func (i BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput)
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput struct{ *pulumi.OutputState }
+
+func (BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault)(nil)).Elem()
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput {
+	return o
+}
+
+// Vault ID.
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput) VaultId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault) *string { return v.VaultId }).(pulumi.StringPtrOutput)
+}
+
+// Vault region.
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput) VaultRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault) *string { return v.VaultRegion }).(pulumi.StringPtrOutput)
+}
+
+type BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput struct{ *pulumi.OutputState }
+
+func (BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault)(nil)).Elem()
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput() BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput) ToBackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutputWithContext(ctx context.Context) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput {
+	return o
+}
+
+func (o BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput) Index(i pulumi.IntInput) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault {
+		return vs[0].([]BackupConfigSnapshotSecondaryBackupConfigAutoCopyVault)[vs[1].(int)]
+	}).(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput)
+}
+
+type ClsDeliveryClsInfoList struct {
+	// Log set ID.
+	GroupId *string `pulumi:"groupId"`
+	// Log set name.
+	GroupName *string `pulumi:"groupName"`
+	// Log delivery area.
+	Region string `pulumi:"region"`
+	// Log topic ID.
+	TopicId *string `pulumi:"topicId"`
+	// Log topic name.
+	TopicName *string `pulumi:"topicName"`
+}
+
+// ClsDeliveryClsInfoListInput is an input type that accepts ClsDeliveryClsInfoListArgs and ClsDeliveryClsInfoListOutput values.
+// You can construct a concrete instance of `ClsDeliveryClsInfoListInput` via:
+//
+//	ClsDeliveryClsInfoListArgs{...}
+type ClsDeliveryClsInfoListInput interface {
+	pulumi.Input
+
+	ToClsDeliveryClsInfoListOutput() ClsDeliveryClsInfoListOutput
+	ToClsDeliveryClsInfoListOutputWithContext(context.Context) ClsDeliveryClsInfoListOutput
+}
+
+type ClsDeliveryClsInfoListArgs struct {
+	// Log set ID.
+	GroupId pulumi.StringPtrInput `pulumi:"groupId"`
+	// Log set name.
+	GroupName pulumi.StringPtrInput `pulumi:"groupName"`
+	// Log delivery area.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Log topic ID.
+	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
+	// Log topic name.
+	TopicName pulumi.StringPtrInput `pulumi:"topicName"`
+}
+
+func (ClsDeliveryClsInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClsDeliveryClsInfoList)(nil)).Elem()
+}
+
+func (i ClsDeliveryClsInfoListArgs) ToClsDeliveryClsInfoListOutput() ClsDeliveryClsInfoListOutput {
+	return i.ToClsDeliveryClsInfoListOutputWithContext(context.Background())
+}
+
+func (i ClsDeliveryClsInfoListArgs) ToClsDeliveryClsInfoListOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClsDeliveryClsInfoListOutput)
+}
+
+func (i ClsDeliveryClsInfoListArgs) ToClsDeliveryClsInfoListPtrOutput() ClsDeliveryClsInfoListPtrOutput {
+	return i.ToClsDeliveryClsInfoListPtrOutputWithContext(context.Background())
+}
+
+func (i ClsDeliveryClsInfoListArgs) ToClsDeliveryClsInfoListPtrOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClsDeliveryClsInfoListOutput).ToClsDeliveryClsInfoListPtrOutputWithContext(ctx)
+}
+
+// ClsDeliveryClsInfoListPtrInput is an input type that accepts ClsDeliveryClsInfoListArgs, ClsDeliveryClsInfoListPtr and ClsDeliveryClsInfoListPtrOutput values.
+// You can construct a concrete instance of `ClsDeliveryClsInfoListPtrInput` via:
+//
+//	        ClsDeliveryClsInfoListArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClsDeliveryClsInfoListPtrInput interface {
+	pulumi.Input
+
+	ToClsDeliveryClsInfoListPtrOutput() ClsDeliveryClsInfoListPtrOutput
+	ToClsDeliveryClsInfoListPtrOutputWithContext(context.Context) ClsDeliveryClsInfoListPtrOutput
+}
+
+type clsDeliveryClsInfoListPtrType ClsDeliveryClsInfoListArgs
+
+func ClsDeliveryClsInfoListPtr(v *ClsDeliveryClsInfoListArgs) ClsDeliveryClsInfoListPtrInput {
+	return (*clsDeliveryClsInfoListPtrType)(v)
+}
+
+func (*clsDeliveryClsInfoListPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClsDeliveryClsInfoList)(nil)).Elem()
+}
+
+func (i *clsDeliveryClsInfoListPtrType) ToClsDeliveryClsInfoListPtrOutput() ClsDeliveryClsInfoListPtrOutput {
+	return i.ToClsDeliveryClsInfoListPtrOutputWithContext(context.Background())
+}
+
+func (i *clsDeliveryClsInfoListPtrType) ToClsDeliveryClsInfoListPtrOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClsDeliveryClsInfoListPtrOutput)
+}
+
+type ClsDeliveryClsInfoListOutput struct{ *pulumi.OutputState }
+
+func (ClsDeliveryClsInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClsDeliveryClsInfoList)(nil)).Elem()
+}
+
+func (o ClsDeliveryClsInfoListOutput) ToClsDeliveryClsInfoListOutput() ClsDeliveryClsInfoListOutput {
+	return o
+}
+
+func (o ClsDeliveryClsInfoListOutput) ToClsDeliveryClsInfoListOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListOutput {
+	return o
+}
+
+func (o ClsDeliveryClsInfoListOutput) ToClsDeliveryClsInfoListPtrOutput() ClsDeliveryClsInfoListPtrOutput {
+	return o.ToClsDeliveryClsInfoListPtrOutputWithContext(context.Background())
+}
+
+func (o ClsDeliveryClsInfoListOutput) ToClsDeliveryClsInfoListPtrOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClsDeliveryClsInfoList) *ClsDeliveryClsInfoList {
+		return &v
+	}).(ClsDeliveryClsInfoListPtrOutput)
+}
+
+// Log set ID.
+func (o ClsDeliveryClsInfoListOutput) GroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClsDeliveryClsInfoList) *string { return v.GroupId }).(pulumi.StringPtrOutput)
+}
+
+// Log set name.
+func (o ClsDeliveryClsInfoListOutput) GroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClsDeliveryClsInfoList) *string { return v.GroupName }).(pulumi.StringPtrOutput)
+}
+
+// Log delivery area.
+func (o ClsDeliveryClsInfoListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ClsDeliveryClsInfoList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Log topic ID.
+func (o ClsDeliveryClsInfoListOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClsDeliveryClsInfoList) *string { return v.TopicId }).(pulumi.StringPtrOutput)
+}
+
+// Log topic name.
+func (o ClsDeliveryClsInfoListOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClsDeliveryClsInfoList) *string { return v.TopicName }).(pulumi.StringPtrOutput)
+}
+
+type ClsDeliveryClsInfoListPtrOutput struct{ *pulumi.OutputState }
+
+func (ClsDeliveryClsInfoListPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClsDeliveryClsInfoList)(nil)).Elem()
+}
+
+func (o ClsDeliveryClsInfoListPtrOutput) ToClsDeliveryClsInfoListPtrOutput() ClsDeliveryClsInfoListPtrOutput {
+	return o
+}
+
+func (o ClsDeliveryClsInfoListPtrOutput) ToClsDeliveryClsInfoListPtrOutputWithContext(ctx context.Context) ClsDeliveryClsInfoListPtrOutput {
+	return o
+}
+
+func (o ClsDeliveryClsInfoListPtrOutput) Elem() ClsDeliveryClsInfoListOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) ClsDeliveryClsInfoList {
+		if v != nil {
+			return *v
+		}
+		var ret ClsDeliveryClsInfoList
+		return ret
+	}).(ClsDeliveryClsInfoListOutput)
+}
+
+// Log set ID.
+func (o ClsDeliveryClsInfoListPtrOutput) GroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.GroupId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Log set name.
+func (o ClsDeliveryClsInfoListPtrOutput) GroupName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.GroupName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Log delivery area.
+func (o ClsDeliveryClsInfoListPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Log topic ID.
+func (o ClsDeliveryClsInfoListPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Log topic name.
+func (o ClsDeliveryClsInfoListPtrOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClsDeliveryClsInfoList) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopicName
+	}).(pulumi.StringPtrOutput)
+}
+
 type ClusterDatabasesUserHostPrivilege struct {
 	// .
 	DbHost string `pulumi:"dbHost"`
@@ -1339,7 +1968,7 @@ func (o ClusterRoGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterRoGroupAd
 type ClusterRoGroupInstance struct {
 	// ID of instance.
 	InstanceId *string `pulumi:"instanceId"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName *string `pulumi:"instanceName"`
 }
 
@@ -1357,7 +1986,7 @@ type ClusterRoGroupInstanceInput interface {
 type ClusterRoGroupInstanceArgs struct {
 	// ID of instance.
 	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 }
 
@@ -1417,7 +2046,7 @@ func (o ClusterRoGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Name of instance.
+// Name of instance. Only supported when modifying.
 func (o ClusterRoGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRoGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
@@ -1551,7 +2180,7 @@ func (o ClusterRwGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterRwGroupAd
 type ClusterRwGroupInstance struct {
 	// ID of instance.
 	InstanceId *string `pulumi:"instanceId"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName *string `pulumi:"instanceName"`
 }
 
@@ -1569,7 +2198,7 @@ type ClusterRwGroupInstanceInput interface {
 type ClusterRwGroupInstanceArgs struct {
 	// ID of instance.
 	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
-	// Name of instance.
+	// Name of instance. Only supported when modifying.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
 }
 
@@ -1629,7 +2258,7 @@ func (o ClusterRwGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
-// Name of instance.
+// Name of instance. Only supported when modifying.
 func (o ClusterRwGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRwGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
 }
@@ -1652,6 +2281,1045 @@ func (o ClusterRwGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterRwGro
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterRwGroupInstance {
 		return vs[0].([]ClusterRwGroupInstance)[vs[1].(int)]
 	}).(ClusterRwGroupInstanceOutput)
+}
+
+type ClusterV2InstanceInitInfo struct {
+	// CPU of instance.
+	Cpu int `pulumi:"cpu"`
+	// Instance machine type. Values: `common`, `exclusive`.
+	DeviceType *string `pulumi:"deviceType"`
+	// Instance count. Range: [1, 15].
+	InstanceCount int `pulumi:"instanceCount"`
+	// Instance type. Value: `rw`, `ro`.
+	InstanceType string `pulumi:"instanceType"`
+	// Maximum number of Serverless instances. Range [1,15].
+	MaxRoCount *int `pulumi:"maxRoCount"`
+	// Maximum Serverless Instance Specifications.
+	MaxRoCpu *float64 `pulumi:"maxRoCpu"`
+	// Memory of instance.
+	Memory int `pulumi:"memory"`
+	// Minimum number of Serverless instances. Range [1,15].
+	MinRoCount *int `pulumi:"minRoCount"`
+	// Minimum Serverless Instance Specifications.
+	MinRoCpu *float64 `pulumi:"minRoCpu"`
+}
+
+// ClusterV2InstanceInitInfoInput is an input type that accepts ClusterV2InstanceInitInfoArgs and ClusterV2InstanceInitInfoOutput values.
+// You can construct a concrete instance of `ClusterV2InstanceInitInfoInput` via:
+//
+//	ClusterV2InstanceInitInfoArgs{...}
+type ClusterV2InstanceInitInfoInput interface {
+	pulumi.Input
+
+	ToClusterV2InstanceInitInfoOutput() ClusterV2InstanceInitInfoOutput
+	ToClusterV2InstanceInitInfoOutputWithContext(context.Context) ClusterV2InstanceInitInfoOutput
+}
+
+type ClusterV2InstanceInitInfoArgs struct {
+	// CPU of instance.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Instance machine type. Values: `common`, `exclusive`.
+	DeviceType pulumi.StringPtrInput `pulumi:"deviceType"`
+	// Instance count. Range: [1, 15].
+	InstanceCount pulumi.IntInput `pulumi:"instanceCount"`
+	// Instance type. Value: `rw`, `ro`.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// Maximum number of Serverless instances. Range [1,15].
+	MaxRoCount pulumi.IntPtrInput `pulumi:"maxRoCount"`
+	// Maximum Serverless Instance Specifications.
+	MaxRoCpu pulumi.Float64PtrInput `pulumi:"maxRoCpu"`
+	// Memory of instance.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Minimum number of Serverless instances. Range [1,15].
+	MinRoCount pulumi.IntPtrInput `pulumi:"minRoCount"`
+	// Minimum Serverless Instance Specifications.
+	MinRoCpu pulumi.Float64PtrInput `pulumi:"minRoCpu"`
+}
+
+func (ClusterV2InstanceInitInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2InstanceInitInfo)(nil)).Elem()
+}
+
+func (i ClusterV2InstanceInitInfoArgs) ToClusterV2InstanceInitInfoOutput() ClusterV2InstanceInitInfoOutput {
+	return i.ToClusterV2InstanceInitInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterV2InstanceInitInfoArgs) ToClusterV2InstanceInitInfoOutputWithContext(ctx context.Context) ClusterV2InstanceInitInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2InstanceInitInfoOutput)
+}
+
+// ClusterV2InstanceInitInfoArrayInput is an input type that accepts ClusterV2InstanceInitInfoArray and ClusterV2InstanceInitInfoArrayOutput values.
+// You can construct a concrete instance of `ClusterV2InstanceInitInfoArrayInput` via:
+//
+//	ClusterV2InstanceInitInfoArray{ ClusterV2InstanceInitInfoArgs{...} }
+type ClusterV2InstanceInitInfoArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2InstanceInitInfoArrayOutput() ClusterV2InstanceInitInfoArrayOutput
+	ToClusterV2InstanceInitInfoArrayOutputWithContext(context.Context) ClusterV2InstanceInitInfoArrayOutput
+}
+
+type ClusterV2InstanceInitInfoArray []ClusterV2InstanceInitInfoInput
+
+func (ClusterV2InstanceInitInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2InstanceInitInfo)(nil)).Elem()
+}
+
+func (i ClusterV2InstanceInitInfoArray) ToClusterV2InstanceInitInfoArrayOutput() ClusterV2InstanceInitInfoArrayOutput {
+	return i.ToClusterV2InstanceInitInfoArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2InstanceInitInfoArray) ToClusterV2InstanceInitInfoArrayOutputWithContext(ctx context.Context) ClusterV2InstanceInitInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2InstanceInitInfoArrayOutput)
+}
+
+type ClusterV2InstanceInitInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2InstanceInitInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2InstanceInitInfo)(nil)).Elem()
+}
+
+func (o ClusterV2InstanceInitInfoOutput) ToClusterV2InstanceInitInfoOutput() ClusterV2InstanceInitInfoOutput {
+	return o
+}
+
+func (o ClusterV2InstanceInitInfoOutput) ToClusterV2InstanceInitInfoOutputWithContext(ctx context.Context) ClusterV2InstanceInitInfoOutput {
+	return o
+}
+
+// CPU of instance.
+func (o ClusterV2InstanceInitInfoOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Instance machine type. Values: `common`, `exclusive`.
+func (o ClusterV2InstanceInitInfoOutput) DeviceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) *string { return v.DeviceType }).(pulumi.StringPtrOutput)
+}
+
+// Instance count. Range: [1, 15].
+func (o ClusterV2InstanceInitInfoOutput) InstanceCount() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) int { return v.InstanceCount }).(pulumi.IntOutput)
+}
+
+// Instance type. Value: `rw`, `ro`.
+func (o ClusterV2InstanceInitInfoOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+// Maximum number of Serverless instances. Range [1,15].
+func (o ClusterV2InstanceInitInfoOutput) MaxRoCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) *int { return v.MaxRoCount }).(pulumi.IntPtrOutput)
+}
+
+// Maximum Serverless Instance Specifications.
+func (o ClusterV2InstanceInitInfoOutput) MaxRoCpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) *float64 { return v.MaxRoCpu }).(pulumi.Float64PtrOutput)
+}
+
+// Memory of instance.
+func (o ClusterV2InstanceInitInfoOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Minimum number of Serverless instances. Range [1,15].
+func (o ClusterV2InstanceInitInfoOutput) MinRoCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) *int { return v.MinRoCount }).(pulumi.IntPtrOutput)
+}
+
+// Minimum Serverless Instance Specifications.
+func (o ClusterV2InstanceInitInfoOutput) MinRoCpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ClusterV2InstanceInitInfo) *float64 { return v.MinRoCpu }).(pulumi.Float64PtrOutput)
+}
+
+type ClusterV2InstanceInitInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2InstanceInitInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2InstanceInitInfo)(nil)).Elem()
+}
+
+func (o ClusterV2InstanceInitInfoArrayOutput) ToClusterV2InstanceInitInfoArrayOutput() ClusterV2InstanceInitInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2InstanceInitInfoArrayOutput) ToClusterV2InstanceInitInfoArrayOutputWithContext(ctx context.Context) ClusterV2InstanceInitInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2InstanceInitInfoArrayOutput) Index(i pulumi.IntInput) ClusterV2InstanceInitInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2InstanceInitInfo {
+		return vs[0].([]ClusterV2InstanceInitInfo)[vs[1].(int)]
+	}).(ClusterV2InstanceInitInfoOutput)
+}
+
+type ClusterV2ParamItem struct {
+	// Param expected value to set.
+	CurrentValue string `pulumi:"currentValue"`
+	// Name of param, e.g. `characterSetServer`.
+	Name string `pulumi:"name"`
+	// Param old value, indicates the value which already set, this value is required when modifying current_value.
+	OldValue *string `pulumi:"oldValue"`
+}
+
+// ClusterV2ParamItemInput is an input type that accepts ClusterV2ParamItemArgs and ClusterV2ParamItemOutput values.
+// You can construct a concrete instance of `ClusterV2ParamItemInput` via:
+//
+//	ClusterV2ParamItemArgs{...}
+type ClusterV2ParamItemInput interface {
+	pulumi.Input
+
+	ToClusterV2ParamItemOutput() ClusterV2ParamItemOutput
+	ToClusterV2ParamItemOutputWithContext(context.Context) ClusterV2ParamItemOutput
+}
+
+type ClusterV2ParamItemArgs struct {
+	// Param expected value to set.
+	CurrentValue pulumi.StringInput `pulumi:"currentValue"`
+	// Name of param, e.g. `characterSetServer`.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Param old value, indicates the value which already set, this value is required when modifying current_value.
+	OldValue pulumi.StringPtrInput `pulumi:"oldValue"`
+}
+
+func (ClusterV2ParamItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ParamItem)(nil)).Elem()
+}
+
+func (i ClusterV2ParamItemArgs) ToClusterV2ParamItemOutput() ClusterV2ParamItemOutput {
+	return i.ToClusterV2ParamItemOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ParamItemArgs) ToClusterV2ParamItemOutputWithContext(ctx context.Context) ClusterV2ParamItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ParamItemOutput)
+}
+
+// ClusterV2ParamItemArrayInput is an input type that accepts ClusterV2ParamItemArray and ClusterV2ParamItemArrayOutput values.
+// You can construct a concrete instance of `ClusterV2ParamItemArrayInput` via:
+//
+//	ClusterV2ParamItemArray{ ClusterV2ParamItemArgs{...} }
+type ClusterV2ParamItemArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2ParamItemArrayOutput() ClusterV2ParamItemArrayOutput
+	ToClusterV2ParamItemArrayOutputWithContext(context.Context) ClusterV2ParamItemArrayOutput
+}
+
+type ClusterV2ParamItemArray []ClusterV2ParamItemInput
+
+func (ClusterV2ParamItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ParamItem)(nil)).Elem()
+}
+
+func (i ClusterV2ParamItemArray) ToClusterV2ParamItemArrayOutput() ClusterV2ParamItemArrayOutput {
+	return i.ToClusterV2ParamItemArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2ParamItemArray) ToClusterV2ParamItemArrayOutputWithContext(ctx context.Context) ClusterV2ParamItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2ParamItemArrayOutput)
+}
+
+type ClusterV2ParamItemOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ParamItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2ParamItem)(nil)).Elem()
+}
+
+func (o ClusterV2ParamItemOutput) ToClusterV2ParamItemOutput() ClusterV2ParamItemOutput {
+	return o
+}
+
+func (o ClusterV2ParamItemOutput) ToClusterV2ParamItemOutputWithContext(ctx context.Context) ClusterV2ParamItemOutput {
+	return o
+}
+
+// Param expected value to set.
+func (o ClusterV2ParamItemOutput) CurrentValue() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ParamItem) string { return v.CurrentValue }).(pulumi.StringOutput)
+}
+
+// Name of param, e.g. `characterSetServer`.
+func (o ClusterV2ParamItemOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterV2ParamItem) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Param old value, indicates the value which already set, this value is required when modifying current_value.
+func (o ClusterV2ParamItemOutput) OldValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2ParamItem) *string { return v.OldValue }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2ParamItemArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2ParamItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2ParamItem)(nil)).Elem()
+}
+
+func (o ClusterV2ParamItemArrayOutput) ToClusterV2ParamItemArrayOutput() ClusterV2ParamItemArrayOutput {
+	return o
+}
+
+func (o ClusterV2ParamItemArrayOutput) ToClusterV2ParamItemArrayOutputWithContext(ctx context.Context) ClusterV2ParamItemArrayOutput {
+	return o
+}
+
+func (o ClusterV2ParamItemArrayOutput) Index(i pulumi.IntInput) ClusterV2ParamItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2ParamItem {
+		return vs[0].([]ClusterV2ParamItem)[vs[1].(int)]
+	}).(ClusterV2ParamItemOutput)
+}
+
+type ClusterV2RoGroupAddr struct {
+	// IP address for single-readonly connection.
+	Ip *string `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port *int `pulumi:"port"`
+}
+
+// ClusterV2RoGroupAddrInput is an input type that accepts ClusterV2RoGroupAddrArgs and ClusterV2RoGroupAddrOutput values.
+// You can construct a concrete instance of `ClusterV2RoGroupAddrInput` via:
+//
+//	ClusterV2RoGroupAddrArgs{...}
+type ClusterV2RoGroupAddrInput interface {
+	pulumi.Input
+
+	ToClusterV2RoGroupAddrOutput() ClusterV2RoGroupAddrOutput
+	ToClusterV2RoGroupAddrOutputWithContext(context.Context) ClusterV2RoGroupAddrOutput
+}
+
+type ClusterV2RoGroupAddrArgs struct {
+	// IP address for single-readonly connection.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+}
+
+func (ClusterV2RoGroupAddrArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RoGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2RoGroupAddrArgs) ToClusterV2RoGroupAddrOutput() ClusterV2RoGroupAddrOutput {
+	return i.ToClusterV2RoGroupAddrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RoGroupAddrArgs) ToClusterV2RoGroupAddrOutputWithContext(ctx context.Context) ClusterV2RoGroupAddrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RoGroupAddrOutput)
+}
+
+// ClusterV2RoGroupAddrArrayInput is an input type that accepts ClusterV2RoGroupAddrArray and ClusterV2RoGroupAddrArrayOutput values.
+// You can construct a concrete instance of `ClusterV2RoGroupAddrArrayInput` via:
+//
+//	ClusterV2RoGroupAddrArray{ ClusterV2RoGroupAddrArgs{...} }
+type ClusterV2RoGroupAddrArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2RoGroupAddrArrayOutput() ClusterV2RoGroupAddrArrayOutput
+	ToClusterV2RoGroupAddrArrayOutputWithContext(context.Context) ClusterV2RoGroupAddrArrayOutput
+}
+
+type ClusterV2RoGroupAddrArray []ClusterV2RoGroupAddrInput
+
+func (ClusterV2RoGroupAddrArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RoGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2RoGroupAddrArray) ToClusterV2RoGroupAddrArrayOutput() ClusterV2RoGroupAddrArrayOutput {
+	return i.ToClusterV2RoGroupAddrArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RoGroupAddrArray) ToClusterV2RoGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2RoGroupAddrArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RoGroupAddrArrayOutput)
+}
+
+type ClusterV2RoGroupAddrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RoGroupAddrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RoGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2RoGroupAddrOutput) ToClusterV2RoGroupAddrOutput() ClusterV2RoGroupAddrOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupAddrOutput) ToClusterV2RoGroupAddrOutputWithContext(ctx context.Context) ClusterV2RoGroupAddrOutput {
+	return o
+}
+
+// IP address for single-readonly connection.
+func (o ClusterV2RoGroupAddrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RoGroupAddr) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Port of CynosDB cluster.
+func (o ClusterV2RoGroupAddrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2RoGroupAddr) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+type ClusterV2RoGroupAddrArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RoGroupAddrArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RoGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2RoGroupAddrArrayOutput) ToClusterV2RoGroupAddrArrayOutput() ClusterV2RoGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupAddrArrayOutput) ToClusterV2RoGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2RoGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterV2RoGroupAddrOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2RoGroupAddr {
+		return vs[0].([]ClusterV2RoGroupAddr)[vs[1].(int)]
+	}).(ClusterV2RoGroupAddrOutput)
+}
+
+type ClusterV2RoGroupInstance struct {
+	// ID of instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName *string `pulumi:"instanceName"`
+}
+
+// ClusterV2RoGroupInstanceInput is an input type that accepts ClusterV2RoGroupInstanceArgs and ClusterV2RoGroupInstanceOutput values.
+// You can construct a concrete instance of `ClusterV2RoGroupInstanceInput` via:
+//
+//	ClusterV2RoGroupInstanceArgs{...}
+type ClusterV2RoGroupInstanceInput interface {
+	pulumi.Input
+
+	ToClusterV2RoGroupInstanceOutput() ClusterV2RoGroupInstanceOutput
+	ToClusterV2RoGroupInstanceOutputWithContext(context.Context) ClusterV2RoGroupInstanceOutput
+}
+
+type ClusterV2RoGroupInstanceArgs struct {
+	// ID of instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+}
+
+func (ClusterV2RoGroupInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RoGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2RoGroupInstanceArgs) ToClusterV2RoGroupInstanceOutput() ClusterV2RoGroupInstanceOutput {
+	return i.ToClusterV2RoGroupInstanceOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RoGroupInstanceArgs) ToClusterV2RoGroupInstanceOutputWithContext(ctx context.Context) ClusterV2RoGroupInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RoGroupInstanceOutput)
+}
+
+// ClusterV2RoGroupInstanceArrayInput is an input type that accepts ClusterV2RoGroupInstanceArray and ClusterV2RoGroupInstanceArrayOutput values.
+// You can construct a concrete instance of `ClusterV2RoGroupInstanceArrayInput` via:
+//
+//	ClusterV2RoGroupInstanceArray{ ClusterV2RoGroupInstanceArgs{...} }
+type ClusterV2RoGroupInstanceArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2RoGroupInstanceArrayOutput() ClusterV2RoGroupInstanceArrayOutput
+	ToClusterV2RoGroupInstanceArrayOutputWithContext(context.Context) ClusterV2RoGroupInstanceArrayOutput
+}
+
+type ClusterV2RoGroupInstanceArray []ClusterV2RoGroupInstanceInput
+
+func (ClusterV2RoGroupInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RoGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2RoGroupInstanceArray) ToClusterV2RoGroupInstanceArrayOutput() ClusterV2RoGroupInstanceArrayOutput {
+	return i.ToClusterV2RoGroupInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RoGroupInstanceArray) ToClusterV2RoGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2RoGroupInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RoGroupInstanceArrayOutput)
+}
+
+type ClusterV2RoGroupInstanceOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RoGroupInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RoGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2RoGroupInstanceOutput) ToClusterV2RoGroupInstanceOutput() ClusterV2RoGroupInstanceOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupInstanceOutput) ToClusterV2RoGroupInstanceOutputWithContext(ctx context.Context) ClusterV2RoGroupInstanceOutput {
+	return o
+}
+
+// ID of instance.
+func (o ClusterV2RoGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RoGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Name of instance. Only supported when modifying.
+func (o ClusterV2RoGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RoGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2RoGroupInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RoGroupInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RoGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2RoGroupInstanceArrayOutput) ToClusterV2RoGroupInstanceArrayOutput() ClusterV2RoGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupInstanceArrayOutput) ToClusterV2RoGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2RoGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2RoGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterV2RoGroupInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2RoGroupInstance {
+		return vs[0].([]ClusterV2RoGroupInstance)[vs[1].(int)]
+	}).(ClusterV2RoGroupInstanceOutput)
+}
+
+type ClusterV2RwGroupAddr struct {
+	// IP address for single-readonly connection.
+	Ip *string `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port *int `pulumi:"port"`
+}
+
+// ClusterV2RwGroupAddrInput is an input type that accepts ClusterV2RwGroupAddrArgs and ClusterV2RwGroupAddrOutput values.
+// You can construct a concrete instance of `ClusterV2RwGroupAddrInput` via:
+//
+//	ClusterV2RwGroupAddrArgs{...}
+type ClusterV2RwGroupAddrInput interface {
+	pulumi.Input
+
+	ToClusterV2RwGroupAddrOutput() ClusterV2RwGroupAddrOutput
+	ToClusterV2RwGroupAddrOutputWithContext(context.Context) ClusterV2RwGroupAddrOutput
+}
+
+type ClusterV2RwGroupAddrArgs struct {
+	// IP address for single-readonly connection.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+}
+
+func (ClusterV2RwGroupAddrArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RwGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2RwGroupAddrArgs) ToClusterV2RwGroupAddrOutput() ClusterV2RwGroupAddrOutput {
+	return i.ToClusterV2RwGroupAddrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RwGroupAddrArgs) ToClusterV2RwGroupAddrOutputWithContext(ctx context.Context) ClusterV2RwGroupAddrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RwGroupAddrOutput)
+}
+
+// ClusterV2RwGroupAddrArrayInput is an input type that accepts ClusterV2RwGroupAddrArray and ClusterV2RwGroupAddrArrayOutput values.
+// You can construct a concrete instance of `ClusterV2RwGroupAddrArrayInput` via:
+//
+//	ClusterV2RwGroupAddrArray{ ClusterV2RwGroupAddrArgs{...} }
+type ClusterV2RwGroupAddrArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2RwGroupAddrArrayOutput() ClusterV2RwGroupAddrArrayOutput
+	ToClusterV2RwGroupAddrArrayOutputWithContext(context.Context) ClusterV2RwGroupAddrArrayOutput
+}
+
+type ClusterV2RwGroupAddrArray []ClusterV2RwGroupAddrInput
+
+func (ClusterV2RwGroupAddrArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RwGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2RwGroupAddrArray) ToClusterV2RwGroupAddrArrayOutput() ClusterV2RwGroupAddrArrayOutput {
+	return i.ToClusterV2RwGroupAddrArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RwGroupAddrArray) ToClusterV2RwGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2RwGroupAddrArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RwGroupAddrArrayOutput)
+}
+
+type ClusterV2RwGroupAddrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RwGroupAddrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RwGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2RwGroupAddrOutput) ToClusterV2RwGroupAddrOutput() ClusterV2RwGroupAddrOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupAddrOutput) ToClusterV2RwGroupAddrOutputWithContext(ctx context.Context) ClusterV2RwGroupAddrOutput {
+	return o
+}
+
+// IP address for single-readonly connection.
+func (o ClusterV2RwGroupAddrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RwGroupAddr) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Port of CynosDB cluster.
+func (o ClusterV2RwGroupAddrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2RwGroupAddr) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+type ClusterV2RwGroupAddrArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RwGroupAddrArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RwGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2RwGroupAddrArrayOutput) ToClusterV2RwGroupAddrArrayOutput() ClusterV2RwGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupAddrArrayOutput) ToClusterV2RwGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2RwGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterV2RwGroupAddrOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2RwGroupAddr {
+		return vs[0].([]ClusterV2RwGroupAddr)[vs[1].(int)]
+	}).(ClusterV2RwGroupAddrOutput)
+}
+
+type ClusterV2RwGroupInstance struct {
+	// ID of instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName *string `pulumi:"instanceName"`
+}
+
+// ClusterV2RwGroupInstanceInput is an input type that accepts ClusterV2RwGroupInstanceArgs and ClusterV2RwGroupInstanceOutput values.
+// You can construct a concrete instance of `ClusterV2RwGroupInstanceInput` via:
+//
+//	ClusterV2RwGroupInstanceArgs{...}
+type ClusterV2RwGroupInstanceInput interface {
+	pulumi.Input
+
+	ToClusterV2RwGroupInstanceOutput() ClusterV2RwGroupInstanceOutput
+	ToClusterV2RwGroupInstanceOutputWithContext(context.Context) ClusterV2RwGroupInstanceOutput
+}
+
+type ClusterV2RwGroupInstanceArgs struct {
+	// ID of instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+}
+
+func (ClusterV2RwGroupInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RwGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2RwGroupInstanceArgs) ToClusterV2RwGroupInstanceOutput() ClusterV2RwGroupInstanceOutput {
+	return i.ToClusterV2RwGroupInstanceOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RwGroupInstanceArgs) ToClusterV2RwGroupInstanceOutputWithContext(ctx context.Context) ClusterV2RwGroupInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RwGroupInstanceOutput)
+}
+
+// ClusterV2RwGroupInstanceArrayInput is an input type that accepts ClusterV2RwGroupInstanceArray and ClusterV2RwGroupInstanceArrayOutput values.
+// You can construct a concrete instance of `ClusterV2RwGroupInstanceArrayInput` via:
+//
+//	ClusterV2RwGroupInstanceArray{ ClusterV2RwGroupInstanceArgs{...} }
+type ClusterV2RwGroupInstanceArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2RwGroupInstanceArrayOutput() ClusterV2RwGroupInstanceArrayOutput
+	ToClusterV2RwGroupInstanceArrayOutputWithContext(context.Context) ClusterV2RwGroupInstanceArrayOutput
+}
+
+type ClusterV2RwGroupInstanceArray []ClusterV2RwGroupInstanceInput
+
+func (ClusterV2RwGroupInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RwGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2RwGroupInstanceArray) ToClusterV2RwGroupInstanceArrayOutput() ClusterV2RwGroupInstanceArrayOutput {
+	return i.ToClusterV2RwGroupInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2RwGroupInstanceArray) ToClusterV2RwGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2RwGroupInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2RwGroupInstanceArrayOutput)
+}
+
+type ClusterV2RwGroupInstanceOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RwGroupInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2RwGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2RwGroupInstanceOutput) ToClusterV2RwGroupInstanceOutput() ClusterV2RwGroupInstanceOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupInstanceOutput) ToClusterV2RwGroupInstanceOutputWithContext(ctx context.Context) ClusterV2RwGroupInstanceOutput {
+	return o
+}
+
+// ID of instance.
+func (o ClusterV2RwGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RwGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Name of instance. Only supported when modifying.
+func (o ClusterV2RwGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2RwGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2RwGroupInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2RwGroupInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2RwGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2RwGroupInstanceArrayOutput) ToClusterV2RwGroupInstanceArrayOutput() ClusterV2RwGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupInstanceArrayOutput) ToClusterV2RwGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2RwGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2RwGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterV2RwGroupInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2RwGroupInstance {
+		return vs[0].([]ClusterV2RwGroupInstance)[vs[1].(int)]
+	}).(ClusterV2RwGroupInstanceOutput)
+}
+
+type ClusterV2SingleRoGroupInfo struct {
+	// Single-readonly addresses. Each element contains the following attributes:
+	SingleRoGroupAddrs []ClusterV2SingleRoGroupInfoSingleRoGroupAddr `pulumi:"singleRoGroupAddrs"`
+	// ID list of single-read-only instance group.
+	SingleRoGroupId *string `pulumi:"singleRoGroupId"`
+	// List of instances in the single-read-only instance group.
+	SingleRoGroupInstances []ClusterV2SingleRoGroupInfoSingleRoGroupInstance `pulumi:"singleRoGroupInstances"`
+}
+
+// ClusterV2SingleRoGroupInfoInput is an input type that accepts ClusterV2SingleRoGroupInfoArgs and ClusterV2SingleRoGroupInfoOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoInput` via:
+//
+//	ClusterV2SingleRoGroupInfoArgs{...}
+type ClusterV2SingleRoGroupInfoInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoOutput() ClusterV2SingleRoGroupInfoOutput
+	ToClusterV2SingleRoGroupInfoOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoOutput
+}
+
+type ClusterV2SingleRoGroupInfoArgs struct {
+	// Single-readonly addresses. Each element contains the following attributes:
+	SingleRoGroupAddrs ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayInput `pulumi:"singleRoGroupAddrs"`
+	// ID list of single-read-only instance group.
+	SingleRoGroupId pulumi.StringPtrInput `pulumi:"singleRoGroupId"`
+	// List of instances in the single-read-only instance group.
+	SingleRoGroupInstances ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayInput `pulumi:"singleRoGroupInstances"`
+}
+
+func (ClusterV2SingleRoGroupInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfo)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoArgs) ToClusterV2SingleRoGroupInfoOutput() ClusterV2SingleRoGroupInfoOutput {
+	return i.ToClusterV2SingleRoGroupInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoArgs) ToClusterV2SingleRoGroupInfoOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoOutput)
+}
+
+// ClusterV2SingleRoGroupInfoArrayInput is an input type that accepts ClusterV2SingleRoGroupInfoArray and ClusterV2SingleRoGroupInfoArrayOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoArrayInput` via:
+//
+//	ClusterV2SingleRoGroupInfoArray{ ClusterV2SingleRoGroupInfoArgs{...} }
+type ClusterV2SingleRoGroupInfoArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoArrayOutput() ClusterV2SingleRoGroupInfoArrayOutput
+	ToClusterV2SingleRoGroupInfoArrayOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoArrayOutput
+}
+
+type ClusterV2SingleRoGroupInfoArray []ClusterV2SingleRoGroupInfoInput
+
+func (ClusterV2SingleRoGroupInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfo)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoArray) ToClusterV2SingleRoGroupInfoArrayOutput() ClusterV2SingleRoGroupInfoArrayOutput {
+	return i.ToClusterV2SingleRoGroupInfoArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoArray) ToClusterV2SingleRoGroupInfoArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoArrayOutput)
+}
+
+type ClusterV2SingleRoGroupInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfo)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoOutput) ToClusterV2SingleRoGroupInfoOutput() ClusterV2SingleRoGroupInfoOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoOutput) ToClusterV2SingleRoGroupInfoOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoOutput {
+	return o
+}
+
+// Single-readonly addresses. Each element contains the following attributes:
+func (o ClusterV2SingleRoGroupInfoOutput) SingleRoGroupAddrs() ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfo) []ClusterV2SingleRoGroupInfoSingleRoGroupAddr {
+		return v.SingleRoGroupAddrs
+	}).(ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput)
+}
+
+// ID list of single-read-only instance group.
+func (o ClusterV2SingleRoGroupInfoOutput) SingleRoGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfo) *string { return v.SingleRoGroupId }).(pulumi.StringPtrOutput)
+}
+
+// List of instances in the single-read-only instance group.
+func (o ClusterV2SingleRoGroupInfoOutput) SingleRoGroupInstances() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfo) []ClusterV2SingleRoGroupInfoSingleRoGroupInstance {
+		return v.SingleRoGroupInstances
+	}).(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput)
+}
+
+type ClusterV2SingleRoGroupInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfo)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoArrayOutput) ToClusterV2SingleRoGroupInfoArrayOutput() ClusterV2SingleRoGroupInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoArrayOutput) ToClusterV2SingleRoGroupInfoArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoArrayOutput) Index(i pulumi.IntInput) ClusterV2SingleRoGroupInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2SingleRoGroupInfo {
+		return vs[0].([]ClusterV2SingleRoGroupInfo)[vs[1].(int)]
+	}).(ClusterV2SingleRoGroupInfoOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddr struct {
+	// IP address for single-readonly connection.
+	Ip *string `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port *int `pulumi:"port"`
+}
+
+// ClusterV2SingleRoGroupInfoSingleRoGroupAddrInput is an input type that accepts ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs and ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoSingleRoGroupAddrInput` via:
+//
+//	ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs{...}
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput
+	ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs struct {
+	// IP address for single-readonly connection.
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
+	// Port of CynosDB cluster.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+}
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput {
+	return i.ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput)
+}
+
+// ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayInput is an input type that accepts ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray and ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayInput` via:
+//
+//	ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray{ ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs{...} }
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput
+	ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray []ClusterV2SingleRoGroupInfoSingleRoGroupAddrInput
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfoSingleRoGroupAddr)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput {
+	return i.ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput {
+	return o
+}
+
+// IP address for single-readonly connection.
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfoSingleRoGroupAddr) *string { return v.Ip }).(pulumi.StringPtrOutput)
+}
+
+// Port of CynosDB cluster.
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfoSingleRoGroupAddr) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfoSingleRoGroupAddr)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput) Index(i pulumi.IntInput) ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2SingleRoGroupInfoSingleRoGroupAddr {
+		return vs[0].([]ClusterV2SingleRoGroupInfoSingleRoGroupAddr)[vs[1].(int)]
+	}).(ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstance struct {
+	// ID of instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName *string `pulumi:"instanceName"`
+}
+
+// ClusterV2SingleRoGroupInfoSingleRoGroupInstanceInput is an input type that accepts ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs and ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoSingleRoGroupInstanceInput` via:
+//
+//	ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs{...}
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput
+	ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs struct {
+	// ID of instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Name of instance. Only supported when modifying.
+	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+}
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput {
+	return i.ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput)
+}
+
+// ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayInput is an input type that accepts ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray and ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput values.
+// You can construct a concrete instance of `ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayInput` via:
+//
+//	ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray{ ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs{...} }
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput
+	ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutputWithContext(context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray []ClusterV2SingleRoGroupInfoSingleRoGroupInstanceInput
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfoSingleRoGroupInstance)(nil)).Elem()
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput {
+	return i.ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput {
+	return o
+}
+
+// ID of instance.
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput) InstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfoSingleRoGroupInstance) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
+}
+
+// Name of instance. Only supported when modifying.
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput) InstanceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2SingleRoGroupInfoSingleRoGroupInstance) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2SingleRoGroupInfoSingleRoGroupInstance)(nil)).Elem()
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput() ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput) ToClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutputWithContext(ctx context.Context) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput {
+	return o
+}
+
+func (o ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput) Index(i pulumi.IntInput) ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2SingleRoGroupInfoSingleRoGroupInstance {
+		return vs[0].([]ClusterV2SingleRoGroupInfoSingleRoGroupInstance)[vs[1].(int)]
+	}).(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput)
 }
 
 type ExportInstanceErrorLogsErrorLogItemExport struct {
@@ -1873,6 +3541,515 @@ func (o InstanceParamInstanceParamListArrayOutput) Index(i pulumi.IntInput) Inst
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceParamInstanceParamList {
 		return vs[0].([]InstanceParamInstanceParamList)[vs[1].(int)]
 	}).(InstanceParamInstanceParamListOutput)
+}
+
+type LibraDbInstanceObjects struct {
+	// Database table information.
+	DatabaseTables *LibraDbInstanceObjectsDatabaseTables `pulumi:"databaseTables"`
+}
+
+// LibraDbInstanceObjectsInput is an input type that accepts LibraDbInstanceObjectsArgs and LibraDbInstanceObjectsOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsInput` via:
+//
+//	LibraDbInstanceObjectsArgs{...}
+type LibraDbInstanceObjectsInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsOutput() LibraDbInstanceObjectsOutput
+	ToLibraDbInstanceObjectsOutputWithContext(context.Context) LibraDbInstanceObjectsOutput
+}
+
+type LibraDbInstanceObjectsArgs struct {
+	// Database table information.
+	DatabaseTables LibraDbInstanceObjectsDatabaseTablesPtrInput `pulumi:"databaseTables"`
+}
+
+func (LibraDbInstanceObjectsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjects)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsArgs) ToLibraDbInstanceObjectsOutput() LibraDbInstanceObjectsOutput {
+	return i.ToLibraDbInstanceObjectsOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsArgs) ToLibraDbInstanceObjectsOutputWithContext(ctx context.Context) LibraDbInstanceObjectsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsOutput)
+}
+
+func (i LibraDbInstanceObjectsArgs) ToLibraDbInstanceObjectsPtrOutput() LibraDbInstanceObjectsPtrOutput {
+	return i.ToLibraDbInstanceObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsArgs) ToLibraDbInstanceObjectsPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsOutput).ToLibraDbInstanceObjectsPtrOutputWithContext(ctx)
+}
+
+// LibraDbInstanceObjectsPtrInput is an input type that accepts LibraDbInstanceObjectsArgs, LibraDbInstanceObjectsPtr and LibraDbInstanceObjectsPtrOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsPtrInput` via:
+//
+//	        LibraDbInstanceObjectsArgs{...}
+//
+//	or:
+//
+//	        nil
+type LibraDbInstanceObjectsPtrInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsPtrOutput() LibraDbInstanceObjectsPtrOutput
+	ToLibraDbInstanceObjectsPtrOutputWithContext(context.Context) LibraDbInstanceObjectsPtrOutput
+}
+
+type libraDbInstanceObjectsPtrType LibraDbInstanceObjectsArgs
+
+func LibraDbInstanceObjectsPtr(v *LibraDbInstanceObjectsArgs) LibraDbInstanceObjectsPtrInput {
+	return (*libraDbInstanceObjectsPtrType)(v)
+}
+
+func (*libraDbInstanceObjectsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LibraDbInstanceObjects)(nil)).Elem()
+}
+
+func (i *libraDbInstanceObjectsPtrType) ToLibraDbInstanceObjectsPtrOutput() LibraDbInstanceObjectsPtrOutput {
+	return i.ToLibraDbInstanceObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i *libraDbInstanceObjectsPtrType) ToLibraDbInstanceObjectsPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsPtrOutput)
+}
+
+type LibraDbInstanceObjectsOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjects)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsOutput) ToLibraDbInstanceObjectsOutput() LibraDbInstanceObjectsOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsOutput) ToLibraDbInstanceObjectsOutputWithContext(ctx context.Context) LibraDbInstanceObjectsOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsOutput) ToLibraDbInstanceObjectsPtrOutput() LibraDbInstanceObjectsPtrOutput {
+	return o.ToLibraDbInstanceObjectsPtrOutputWithContext(context.Background())
+}
+
+func (o LibraDbInstanceObjectsOutput) ToLibraDbInstanceObjectsPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LibraDbInstanceObjects) *LibraDbInstanceObjects {
+		return &v
+	}).(LibraDbInstanceObjectsPtrOutput)
+}
+
+// Database table information.
+func (o LibraDbInstanceObjectsOutput) DatabaseTables() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjects) *LibraDbInstanceObjectsDatabaseTables { return v.DatabaseTables }).(LibraDbInstanceObjectsDatabaseTablesPtrOutput)
+}
+
+type LibraDbInstanceObjectsPtrOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LibraDbInstanceObjects)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsPtrOutput) ToLibraDbInstanceObjectsPtrOutput() LibraDbInstanceObjectsPtrOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsPtrOutput) ToLibraDbInstanceObjectsPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsPtrOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsPtrOutput) Elem() LibraDbInstanceObjectsOutput {
+	return o.ApplyT(func(v *LibraDbInstanceObjects) LibraDbInstanceObjects {
+		if v != nil {
+			return *v
+		}
+		var ret LibraDbInstanceObjects
+		return ret
+	}).(LibraDbInstanceObjectsOutput)
+}
+
+// Database table information.
+func (o LibraDbInstanceObjectsPtrOutput) DatabaseTables() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o.ApplyT(func(v *LibraDbInstanceObjects) *LibraDbInstanceObjectsDatabaseTables {
+		if v == nil {
+			return nil
+		}
+		return v.DatabaseTables
+	}).(LibraDbInstanceObjectsDatabaseTablesPtrOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTables struct {
+	// Database information list.
+	Databases []LibraDbInstanceObjectsDatabaseTablesDatabase `pulumi:"databases"`
+	// Database migration mode.
+	MigrateDbMode *string `pulumi:"migrateDbMode"`
+}
+
+// LibraDbInstanceObjectsDatabaseTablesInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesArgs and LibraDbInstanceObjectsDatabaseTablesOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesInput` via:
+//
+//	LibraDbInstanceObjectsDatabaseTablesArgs{...}
+type LibraDbInstanceObjectsDatabaseTablesInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesOutput() LibraDbInstanceObjectsDatabaseTablesOutput
+	ToLibraDbInstanceObjectsDatabaseTablesOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesOutput
+}
+
+type LibraDbInstanceObjectsDatabaseTablesArgs struct {
+	// Database information list.
+	Databases LibraDbInstanceObjectsDatabaseTablesDatabaseArrayInput `pulumi:"databases"`
+	// Database migration mode.
+	MigrateDbMode pulumi.StringPtrInput `pulumi:"migrateDbMode"`
+}
+
+func (LibraDbInstanceObjectsDatabaseTablesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTables)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesArgs) ToLibraDbInstanceObjectsDatabaseTablesOutput() LibraDbInstanceObjectsDatabaseTablesOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesArgs) ToLibraDbInstanceObjectsDatabaseTablesOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesOutput)
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesArgs) ToLibraDbInstanceObjectsDatabaseTablesPtrOutput() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesArgs) ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesOutput).ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(ctx)
+}
+
+// LibraDbInstanceObjectsDatabaseTablesPtrInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesArgs, LibraDbInstanceObjectsDatabaseTablesPtr and LibraDbInstanceObjectsDatabaseTablesPtrOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesPtrInput` via:
+//
+//	        LibraDbInstanceObjectsDatabaseTablesArgs{...}
+//
+//	or:
+//
+//	        nil
+type LibraDbInstanceObjectsDatabaseTablesPtrInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesPtrOutput() LibraDbInstanceObjectsDatabaseTablesPtrOutput
+	ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesPtrOutput
+}
+
+type libraDbInstanceObjectsDatabaseTablesPtrType LibraDbInstanceObjectsDatabaseTablesArgs
+
+func LibraDbInstanceObjectsDatabaseTablesPtr(v *LibraDbInstanceObjectsDatabaseTablesArgs) LibraDbInstanceObjectsDatabaseTablesPtrInput {
+	return (*libraDbInstanceObjectsDatabaseTablesPtrType)(v)
+}
+
+func (*libraDbInstanceObjectsDatabaseTablesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LibraDbInstanceObjectsDatabaseTables)(nil)).Elem()
+}
+
+func (i *libraDbInstanceObjectsDatabaseTablesPtrType) ToLibraDbInstanceObjectsDatabaseTablesPtrOutput() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(context.Background())
+}
+
+func (i *libraDbInstanceObjectsDatabaseTablesPtrType) ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesPtrOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTables)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) ToLibraDbInstanceObjectsDatabaseTablesOutput() LibraDbInstanceObjectsDatabaseTablesOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) ToLibraDbInstanceObjectsDatabaseTablesOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) ToLibraDbInstanceObjectsDatabaseTablesPtrOutput() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o.ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(context.Background())
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LibraDbInstanceObjectsDatabaseTables) *LibraDbInstanceObjectsDatabaseTables {
+		return &v
+	}).(LibraDbInstanceObjectsDatabaseTablesPtrOutput)
+}
+
+// Database information list.
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) Databases() LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTables) []LibraDbInstanceObjectsDatabaseTablesDatabase {
+		return v.Databases
+	}).(LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput)
+}
+
+// Database migration mode.
+func (o LibraDbInstanceObjectsDatabaseTablesOutput) MigrateDbMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTables) *string { return v.MigrateDbMode }).(pulumi.StringPtrOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesPtrOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LibraDbInstanceObjectsDatabaseTables)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesPtrOutput) ToLibraDbInstanceObjectsDatabaseTablesPtrOutput() LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesPtrOutput) ToLibraDbInstanceObjectsDatabaseTablesPtrOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesPtrOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesPtrOutput) Elem() LibraDbInstanceObjectsDatabaseTablesOutput {
+	return o.ApplyT(func(v *LibraDbInstanceObjectsDatabaseTables) LibraDbInstanceObjectsDatabaseTables {
+		if v != nil {
+			return *v
+		}
+		var ret LibraDbInstanceObjectsDatabaseTables
+		return ret
+	}).(LibraDbInstanceObjectsDatabaseTablesOutput)
+}
+
+// Database information list.
+func (o LibraDbInstanceObjectsDatabaseTablesPtrOutput) Databases() LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return o.ApplyT(func(v *LibraDbInstanceObjectsDatabaseTables) []LibraDbInstanceObjectsDatabaseTablesDatabase {
+		if v == nil {
+			return nil
+		}
+		return v.Databases
+	}).(LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput)
+}
+
+// Database migration mode.
+func (o LibraDbInstanceObjectsDatabaseTablesPtrOutput) MigrateDbMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LibraDbInstanceObjectsDatabaseTables) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MigrateDbMode
+	}).(pulumi.StringPtrOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabase struct {
+	// Database name.
+	DbName *string `pulumi:"dbName"`
+	// Table migration mode.
+	MigrateTableMode *string `pulumi:"migrateTableMode"`
+	// Table information list.
+	Tables []LibraDbInstanceObjectsDatabaseTablesDatabaseTable `pulumi:"tables"`
+}
+
+// LibraDbInstanceObjectsDatabaseTablesDatabaseInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesDatabaseArgs and LibraDbInstanceObjectsDatabaseTablesDatabaseOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesDatabaseInput` via:
+//
+//	LibraDbInstanceObjectsDatabaseTablesDatabaseArgs{...}
+type LibraDbInstanceObjectsDatabaseTablesDatabaseInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseOutput
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseOutput
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseArgs struct {
+	// Database name.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Table migration mode.
+	MigrateTableMode pulumi.StringPtrInput `pulumi:"migrateTableMode"`
+	// Table information list.
+	Tables LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayInput `pulumi:"tables"`
+}
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabase)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseArgs) ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseArgs) ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesDatabaseOutput)
+}
+
+// LibraDbInstanceObjectsDatabaseTablesDatabaseArrayInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesDatabaseArray and LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesDatabaseArrayInput` via:
+//
+//	LibraDbInstanceObjectsDatabaseTablesDatabaseArray{ LibraDbInstanceObjectsDatabaseTablesDatabaseArgs{...} }
+type LibraDbInstanceObjectsDatabaseTablesDatabaseArrayInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseArray []LibraDbInstanceObjectsDatabaseTablesDatabaseInput
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LibraDbInstanceObjectsDatabaseTablesDatabase)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseArray) ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseArray) ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabase)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseOutput {
+	return o
+}
+
+// Database name.
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTablesDatabase) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Table migration mode.
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) MigrateTableMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTablesDatabase) *string { return v.MigrateTableMode }).(pulumi.StringPtrOutput)
+}
+
+// Table information list.
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseOutput) Tables() LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTablesDatabase) []LibraDbInstanceObjectsDatabaseTablesDatabaseTable {
+		return v.Tables
+	}).(LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LibraDbInstanceObjectsDatabaseTablesDatabase)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput) Index(i pulumi.IntInput) LibraDbInstanceObjectsDatabaseTablesDatabaseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LibraDbInstanceObjectsDatabaseTablesDatabase {
+		return vs[0].([]LibraDbInstanceObjectsDatabaseTablesDatabase)[vs[1].(int)]
+	}).(LibraDbInstanceObjectsDatabaseTablesDatabaseOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTable struct {
+	// Table name.
+	TableName *string `pulumi:"tableName"`
+}
+
+// LibraDbInstanceObjectsDatabaseTablesDatabaseTableInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs and LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesDatabaseTableInput` via:
+//
+//	LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs{...}
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs struct {
+	// Table name.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseTable)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput)
+}
+
+// LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayInput is an input type that accepts LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray and LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput values.
+// You can construct a concrete instance of `LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayInput` via:
+//
+//	LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray{ LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs{...} }
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayInput interface {
+	pulumi.Input
+
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput
+	ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutputWithContext(context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray []LibraDbInstanceObjectsDatabaseTablesDatabaseTableInput
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LibraDbInstanceObjectsDatabaseTablesDatabaseTable)(nil)).Elem()
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput {
+	return i.ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutputWithContext(context.Background())
+}
+
+func (i LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseTable)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput {
+	return o
+}
+
+// Table name.
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LibraDbInstanceObjectsDatabaseTablesDatabaseTable) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+type LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput struct{ *pulumi.OutputState }
+
+func (LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LibraDbInstanceObjectsDatabaseTablesDatabaseTable)(nil)).Elem()
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput() LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput) ToLibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutputWithContext(ctx context.Context) LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput {
+	return o
+}
+
+func (o LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput) Index(i pulumi.IntInput) LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LibraDbInstanceObjectsDatabaseTablesDatabaseTable {
+		return vs[0].([]LibraDbInstanceObjectsDatabaseTablesDatabaseTable)[vs[1].(int)]
+	}).(LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput)
 }
 
 type ParamTemplateParamList struct {
@@ -8538,6 +10715,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterPtrInput)(nil)).Elem(), AuditLogFileFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigLogicBackupConfigInput)(nil)).Elem(), BackupConfigLogicBackupConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigLogicBackupConfigPtrInput)(nil)).Elem(), BackupConfigLogicBackupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigInput)(nil)).Elem(), BackupConfigSnapshotSecondaryBackupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigPtrInput)(nil)).Elem(), BackupConfigSnapshotSecondaryBackupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultInput)(nil)).Elem(), BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayInput)(nil)).Elem(), BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClsDeliveryClsInfoListInput)(nil)).Elem(), ClsDeliveryClsInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClsDeliveryClsInfoListPtrInput)(nil)).Elem(), ClsDeliveryClsInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDatabasesUserHostPrivilegeInput)(nil)).Elem(), ClusterDatabasesUserHostPrivilegeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDatabasesUserHostPrivilegeArrayInput)(nil)).Elem(), ClusterDatabasesUserHostPrivilegeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterInstanceInitInfoInput)(nil)).Elem(), ClusterInstanceInitInfoArgs{})
@@ -8552,10 +10735,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupAddrArrayInput)(nil)).Elem(), ClusterRwGroupAddrArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceInput)(nil)).Elem(), ClusterRwGroupInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRwGroupInstanceArrayInput)(nil)).Elem(), ClusterRwGroupInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2InstanceInitInfoInput)(nil)).Elem(), ClusterV2InstanceInitInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2InstanceInitInfoArrayInput)(nil)).Elem(), ClusterV2InstanceInitInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ParamItemInput)(nil)).Elem(), ClusterV2ParamItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2ParamItemArrayInput)(nil)).Elem(), ClusterV2ParamItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RoGroupAddrInput)(nil)).Elem(), ClusterV2RoGroupAddrArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RoGroupAddrArrayInput)(nil)).Elem(), ClusterV2RoGroupAddrArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RoGroupInstanceInput)(nil)).Elem(), ClusterV2RoGroupInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RoGroupInstanceArrayInput)(nil)).Elem(), ClusterV2RoGroupInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RwGroupAddrInput)(nil)).Elem(), ClusterV2RwGroupAddrArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RwGroupAddrArrayInput)(nil)).Elem(), ClusterV2RwGroupAddrArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RwGroupInstanceInput)(nil)).Elem(), ClusterV2RwGroupInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2RwGroupInstanceArrayInput)(nil)).Elem(), ClusterV2RwGroupInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoArrayInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupAddrInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoSingleRoGroupAddrArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoSingleRoGroupAddrArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupInstanceInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayInput)(nil)).Elem(), ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ExportInstanceErrorLogsErrorLogItemExportInput)(nil)).Elem(), ExportInstanceErrorLogsErrorLogItemExportArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ExportInstanceErrorLogsErrorLogItemExportArrayInput)(nil)).Elem(), ExportInstanceErrorLogsErrorLogItemExportArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceParamInstanceParamListInput)(nil)).Elem(), InstanceParamInstanceParamListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceParamInstanceParamListArrayInput)(nil)).Elem(), InstanceParamInstanceParamListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsInput)(nil)).Elem(), LibraDbInstanceObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsPtrInput)(nil)).Elem(), LibraDbInstanceObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesPtrInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesDatabaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseArrayInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesDatabaseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseTableInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesDatabaseTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayInput)(nil)).Elem(), LibraDbInstanceObjectsDatabaseTablesDatabaseTableArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParamTemplateParamListInput)(nil)).Elem(), ParamTemplateParamListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParamTemplateParamListArrayInput)(nil)).Elem(), ParamTemplateParamListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProxyEndPointInstanceWeightInput)(nil)).Elem(), ProxyEndPointInstanceWeightArgs{})
@@ -8649,6 +10858,12 @@ func init() {
 	pulumi.RegisterOutputType(AuditLogFileFilterPtrOutput{})
 	pulumi.RegisterOutputType(BackupConfigLogicBackupConfigOutput{})
 	pulumi.RegisterOutputType(BackupConfigLogicBackupConfigPtrOutput{})
+	pulumi.RegisterOutputType(BackupConfigSnapshotSecondaryBackupConfigOutput{})
+	pulumi.RegisterOutputType(BackupConfigSnapshotSecondaryBackupConfigPtrOutput{})
+	pulumi.RegisterOutputType(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultOutput{})
+	pulumi.RegisterOutputType(BackupConfigSnapshotSecondaryBackupConfigAutoCopyVaultArrayOutput{})
+	pulumi.RegisterOutputType(ClsDeliveryClsInfoListOutput{})
+	pulumi.RegisterOutputType(ClsDeliveryClsInfoListPtrOutput{})
 	pulumi.RegisterOutputType(ClusterDatabasesUserHostPrivilegeOutput{})
 	pulumi.RegisterOutputType(ClusterDatabasesUserHostPrivilegeArrayOutput{})
 	pulumi.RegisterOutputType(ClusterInstanceInitInfoOutput{})
@@ -8663,10 +10878,36 @@ func init() {
 	pulumi.RegisterOutputType(ClusterRwGroupAddrArrayOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceOutput{})
 	pulumi.RegisterOutputType(ClusterRwGroupInstanceArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2InstanceInitInfoOutput{})
+	pulumi.RegisterOutputType(ClusterV2InstanceInitInfoArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2ParamItemOutput{})
+	pulumi.RegisterOutputType(ClusterV2ParamItemArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2RoGroupAddrOutput{})
+	pulumi.RegisterOutputType(ClusterV2RoGroupAddrArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2RoGroupInstanceOutput{})
+	pulumi.RegisterOutputType(ClusterV2RoGroupInstanceArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2RwGroupAddrOutput{})
+	pulumi.RegisterOutputType(ClusterV2RwGroupAddrArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2RwGroupInstanceOutput{})
+	pulumi.RegisterOutputType(ClusterV2RwGroupInstanceArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoSingleRoGroupAddrOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoSingleRoGroupAddrArrayOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceOutput{})
+	pulumi.RegisterOutputType(ClusterV2SingleRoGroupInfoSingleRoGroupInstanceArrayOutput{})
 	pulumi.RegisterOutputType(ExportInstanceErrorLogsErrorLogItemExportOutput{})
 	pulumi.RegisterOutputType(ExportInstanceErrorLogsErrorLogItemExportArrayOutput{})
 	pulumi.RegisterOutputType(InstanceParamInstanceParamListOutput{})
 	pulumi.RegisterOutputType(InstanceParamInstanceParamListArrayOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsPtrOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesPtrOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesDatabaseOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesDatabaseArrayOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesDatabaseTableOutput{})
+	pulumi.RegisterOutputType(LibraDbInstanceObjectsDatabaseTablesDatabaseTableArrayOutput{})
 	pulumi.RegisterOutputType(ParamTemplateParamListOutput{})
 	pulumi.RegisterOutputType(ParamTemplateParamListArrayOutput{})
 	pulumi.RegisterOutputType(ProxyEndPointInstanceWeightOutput{})

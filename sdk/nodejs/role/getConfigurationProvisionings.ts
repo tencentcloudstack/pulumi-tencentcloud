@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const roleConfigurationProvisionings = tencentcloud.Role.getConfigurationProvisionings({
+ * const roleConfigurationProvisionings = tencentcloud.role.getConfigurationProvisionings({
  *     zoneId: "xxxxxx",
  *     roleConfigurationId: "xxxxxx",
  * });
@@ -97,7 +97,7 @@ export interface GetConfigurationProvisioningsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const roleConfigurationProvisionings = tencentcloud.Role.getConfigurationProvisionings({
+ * const roleConfigurationProvisionings = tencentcloud.role.getConfigurationProvisionings({
  *     zoneId: "xxxxxx",
  *     roleConfigurationId: "xxxxxx",
  * });
@@ -123,27 +123,27 @@ export interface GetConfigurationProvisioningsOutputArgs {
     /**
      * Deployed: Deployment succeeded; DeployedRequired: Redeployment required; DeployFailed: Deployment failed.
      */
-    deploymentStatus?: pulumi.Input<string>;
+    deploymentStatus?: pulumi.Input<string | undefined>;
     /**
      * Search by configuration name is supported.
      */
-    filter?: pulumi.Input<string>;
+    filter?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Permission configuration ID.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Type of the synchronized target account of the Tencent Cloud Organization. ManagerUin: admin account; MemberUin: member account.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * UIN of the synchronized target account of the Tencent Cloud Organization.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
     /**
      * Space ID.
      */

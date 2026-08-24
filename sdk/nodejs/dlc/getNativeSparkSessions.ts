@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getNativeSparkSessions({
+ * const example = tencentcloud.dlc.getNativeSparkSessions({
  *     dataEngineId: "DataEngine-5plqp7q7",
  *     resourceGroupId: "rg-j3zolzg77b",
  * });
@@ -74,7 +74,7 @@ export interface GetNativeSparkSessionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getNativeSparkSessions({
+ * const example = tencentcloud.dlc.getNativeSparkSessions({
  *     dataEngineId: "DataEngine-5plqp7q7",
  *     resourceGroupId: "rg-j3zolzg77b",
  * });
@@ -97,13 +97,13 @@ export interface GetNativeSparkSessionsOutputArgs {
     /**
      * Data engine id.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * Resource group id.
      */
-    resourceGroupId?: pulumi.Input<string>;
+    resourceGroupId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

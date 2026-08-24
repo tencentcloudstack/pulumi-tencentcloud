@@ -52,7 +52,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Import
     /// 
-    /// ci media_watermark_template can be imported using the id, e.g.
+    /// ci MediaWatermarkTemplate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id

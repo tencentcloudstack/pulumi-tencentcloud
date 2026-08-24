@@ -25,7 +25,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -251,13 +250,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<string> DeviceType { get; private set; } = null!;
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Output("diskType")]
+        public Output<string> DiskType { get; private set; } = null!;
+
+        /// <summary>
         /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         /// </summary>
         [Output("engineType")]
         public Output<string> EngineType { get; private set; } = null!;
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Output("engineVersion")]
         public Output<string?> EngineVersion { get; private set; } = null!;
@@ -548,13 +553,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
+
+        /// <summary>
         /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         /// </summary>
         [Input("engineType")]
         public Input<string>? EngineType { get; set; }
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -788,13 +799,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
+
+        /// <summary>
         /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         /// </summary>
         [Input("engineType")]
         public Input<string>? EngineType { get; set; }
 
         /// <summary>
-        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
+        /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }

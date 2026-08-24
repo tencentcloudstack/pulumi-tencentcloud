@@ -22,10 +22,10 @@ import * as utilities from "../utilities";
  *         createdBy: "terraform",
  *     },
  * });
- * const example = exampleSecret.secretName.apply(secretName => tencentcloud.Ssm.getSecretsOutput({
- *     secretName: secretName,
+ * const example = tencentcloud.ssm.getSecretsOutput({
+ *     secretName: exampleSecret.secretName,
  *     state: 1,
- * }));
+ * });
  * ```
  *
  * ### OR you can filter by tags
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSecrets({
+ * const example = tencentcloud.ssm.getSecrets({
  *     secretName: exampleTencentcloudSsmSecret.secretName,
  *     state: 1,
  *     tags: {
@@ -136,10 +136,10 @@ export interface GetSecretsResult {
  *         createdBy: "terraform",
  *     },
  * });
- * const example = exampleSecret.secretName.apply(secretName => tencentcloud.Ssm.getSecretsOutput({
- *     secretName: secretName,
+ * const example = tencentcloud.ssm.getSecretsOutput({
+ *     secretName: exampleSecret.secretName,
  *     state: 1,
- * }));
+ * });
  * ```
  *
  * ### OR you can filter by tags
@@ -148,7 +148,7 @@ export interface GetSecretsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSecrets({
+ * const example = tencentcloud.ssm.getSecrets({
  *     secretName: exampleTencentcloudSsmSecret.secretName,
  *     state: 1,
  *     tags: {
@@ -178,29 +178,29 @@ export interface GetSecretsOutputArgs {
     /**
      * The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
      */
-    productName?: pulumi.Input<string>;
+    productName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Secret name used to filter result.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * 0- represents user-defined credentials, defaults to 0. 1- represents the user's cloud product credentials. 2- represents SSH key pair credentials. 3- represents cloud API key pair credentials.
      */
-    secretType?: pulumi.Input<number>;
+    secretType?: pulumi.Input<number | undefined>;
     /**
      * Filter by state of secret. `0` - all secrets are queried, `1` - only Enabled secrets are queried, `2` - only Disabled secrets are queried, `3` - only PendingDelete secrets are queried.
      */
-    state?: pulumi.Input<number>;
+    state?: pulumi.Input<number | undefined>;
     /**
      * Tags to filter secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

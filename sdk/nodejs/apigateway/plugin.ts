@@ -122,19 +122,19 @@ export interface PluginState {
     /**
      * Description of plugin.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Statement to define plugin.
      */
-    pluginData?: pulumi.Input<string>;
+    pluginData?: pulumi.Input<string | undefined>;
     /**
      * Name of the user define plugin. It must start with a letter and end with letter or number, the rest can contain letters, numbers and dashes(-). The length range is from 2 to 50.
      */
-    pluginName?: pulumi.Input<string>;
+    pluginName?: pulumi.Input<string | undefined>;
     /**
      * Type of plugin. Now support IPControl, TrafficControl, Cors, CustomReq, CustomAuth, Routing, TrafficControlByParameter, CircuitBreaker, ProxyCache.
      */
-    pluginType?: pulumi.Input<string>;
+    pluginType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface PluginArgs {
     /**
      * Description of plugin.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Statement to define plugin.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossTargets = tencentcloud.Clb.getCrossTargets({
+ * const crossTargets = tencentcloud.clb.getCrossTargets({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-4owdpnwr"],
@@ -70,7 +70,7 @@ export interface GetCrossTargetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const crossTargets = tencentcloud.Clb.getCrossTargets({
+ * const crossTargets = tencentcloud.clb.getCrossTargets({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-4owdpnwr"],
@@ -94,9 +94,9 @@ export interface GetCrossTargetsOutputArgs {
     /**
      * Filter conditions to query CVMs and ENIs: vpc-id - String - Required: No - (Filter condition) Filter by VPC ID, such as vpc-12345678. ip - String - Required: No - (Filter condition) Filter by real server IP, such as 192.168.0.1. listener-id - String - Required: No - (Filter condition) Filter by listener ID, such as lbl-12345678. location-id - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as loc-12345678.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetCrossTargetsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetCrossTargetsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

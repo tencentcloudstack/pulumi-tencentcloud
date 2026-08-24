@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -69,10 +69,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver general_backups can be imported using the id, e.g.
+ * sqlserver generalBackups can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Sqlserver/generalBackup:GeneralBackup example mssql-qelbzgwf#3512621#5293#2020-07-31 14:28:51#2020-07-31 15:10:27#autoed_instance_58037_20200728011545.bak.tar
+ * terraform import tencentcloud_sqlserver_general_backups.example mssql-qelbzgwf#3512621#5293#2020-07-31 14:28:51#2020-07-31 15:10:27#autoed_instance_58037_20200728011545.bak.tar
  * ```
  */
 export class GeneralBackup extends pulumi.CustomResource {
@@ -165,23 +165,23 @@ export interface GeneralBackupState {
     /**
      * Backup name. If this parameter is left empty, a backup name in the format of [Instance ID]_[Backup start timestamp] will be automatically generated.
      */
-    backupName?: pulumi.Input<string>;
+    backupName?: pulumi.Input<string | undefined>;
     /**
      * List of names of databases to be backed up (required only for multi-database backup).
      */
-    dbNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dbNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * flow id.
      */
-    flowId?: pulumi.Input<string>;
+    flowId?: pulumi.Input<string | undefined>;
     /**
      * Instance ID in the format of mssql-i1z41iwd.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Backup policy (0: instance backup, 1: multi-database backup).
      */
-    strategy?: pulumi.Input<number>;
+    strategy?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -191,11 +191,11 @@ export interface GeneralBackupArgs {
     /**
      * Backup name. If this parameter is left empty, a backup name in the format of [Instance ID]_[Backup start timestamp] will be automatically generated.
      */
-    backupName?: pulumi.Input<string>;
+    backupName?: pulumi.Input<string | undefined>;
     /**
      * List of names of databases to be backed up (required only for multi-database backup).
      */
-    dbNames?: pulumi.Input<pulumi.Input<string>[]>;
+    dbNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance ID in the format of mssql-i1z41iwd.
      */
@@ -203,5 +203,5 @@ export interface GeneralBackupArgs {
     /**
      * Backup policy (0: instance backup, 1: multi-database backup).
      */
-    strategy?: pulumi.Input<number>;
+    strategy?: pulumi.Input<number | undefined>;
 }

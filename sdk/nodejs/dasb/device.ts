@@ -132,27 +132,27 @@ export interface DeviceState {
     /**
      * The department ID to which the device belongs.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * IP address.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Asset multi-node: fields ip and port.
      */
-    ipPortSets?: pulumi.Input<pulumi.Input<string>[]>;
+    ipPortSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Hostname, can be empty.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Operating system name, only Linux, Windows or MySQL.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
     /**
      * Management port.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -162,7 +162,7 @@ export interface DeviceArgs {
     /**
      * The department ID to which the device belongs.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * IP address.
      */
@@ -170,11 +170,11 @@ export interface DeviceArgs {
     /**
      * Asset multi-node: fields ip and port.
      */
-    ipPortSets?: pulumi.Input<pulumi.Input<string>[]>;
+    ipPortSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Hostname, can be empty.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Operating system name, only Linux, Windows or MySQL.
      */

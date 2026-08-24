@@ -102,11 +102,11 @@ export interface ShareDcxConfigState {
     /**
      * the direct connect owner accept or reject the apply of direct connect tunnel.
      */
-    directConnectTunnelId?: pulumi.Input<string>;
+    directConnectTunnelId?: pulumi.Input<string | undefined>;
     /**
      * if accept or reject direct connect tunnel.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
 }
 
 /**

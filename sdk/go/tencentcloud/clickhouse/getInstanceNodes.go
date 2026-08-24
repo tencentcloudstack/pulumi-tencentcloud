@@ -79,12 +79,8 @@ type GetInstanceNodesResult struct {
 }
 
 func GetInstanceNodesOutput(ctx *pulumi.Context, args GetInstanceNodesOutputArgs, opts ...pulumi.InvokeOption) GetInstanceNodesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceNodesResultOutput, error) {
-			args := v.(GetInstanceNodesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args, GetInstanceNodesResultOutput{}, options).(GetInstanceNodesResultOutput), nil
-		}).(GetInstanceNodesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", args, GetInstanceNodesResultOutput{}, options).(GetInstanceNodesResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceNodes.

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyVersion = tencentcloud.Cynosdb.getProxyVersion({
+ * const proxyVersion = tencentcloud.cynosdb.getProxyVersion({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
  * });
@@ -75,7 +75,7 @@ export interface GetProxyVersionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyVersion = tencentcloud.Cynosdb.getProxyVersion({
+ * const proxyVersion = tencentcloud.cynosdb.getProxyVersion({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
  * });
@@ -101,9 +101,9 @@ export interface GetProxyVersionOutputArgs {
     /**
      * Database Agent Group ID.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

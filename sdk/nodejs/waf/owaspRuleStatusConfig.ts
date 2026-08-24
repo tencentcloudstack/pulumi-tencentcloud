@@ -154,43 +154,43 @@ export interface OwaspRuleStatusConfigState {
     /**
      * CVE ID.
      */
-    cveId?: pulumi.Input<string>;
+    cveId?: pulumi.Input<string | undefined>;
     /**
      * Rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Protection level of the rule. valid values: 100 (loose), 200 (normal), 300 (strict), 400 (ultra-strict).
      */
-    level?: pulumi.Input<number>;
+    level?: pulumi.Input<number | undefined>;
     /**
      * Whether the user is locked.
      */
-    locked?: pulumi.Input<number>;
+    locked?: pulumi.Input<number | undefined>;
     /**
      * Reason for modification. valid values: 0: none (compatibility record is empty). 1: avoid false positives due to business characteristics. 2: reporting of rule-based false positives. 3: gray release of core business rules. 4: others.
      */
-    reason?: pulumi.Input<number>;
+    reason?: pulumi.Input<number | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Rule switch. valid values: 0 (disabled), 1 (enabled), 2 (observation only).
      */
-    ruleStatus?: pulumi.Input<number>;
+    ruleStatus?: pulumi.Input<number | undefined>;
     /**
      * If reverse requires the input of data type.
      */
-    typeId?: pulumi.Input<number>;
+    typeId?: pulumi.Input<number | undefined>;
     /**
      * Threat level. valid values: 0 (unknown), 100 (low risk), 200 (medium risk), 300 (high risk), 400 (critical).
      */
-    vulLevel?: pulumi.Input<number>;
+    vulLevel?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -204,7 +204,7 @@ export interface OwaspRuleStatusConfigArgs {
     /**
      * Reason for modification. valid values: 0: none (compatibility record is empty). 1: avoid false positives due to business characteristics. 2: reporting of rule-based false positives. 3: gray release of core business rules. 4: others.
      */
-    reason?: pulumi.Input<number>;
+    reason?: pulumi.Input<number | undefined>;
     /**
      * Rule ID.
      */
@@ -216,5 +216,5 @@ export interface OwaspRuleStatusConfigArgs {
     /**
      * If reverse requires the input of data type.
      */
-    typeId?: pulumi.Input<number>;
+    typeId?: pulumi.Input<number | undefined>;
 }

@@ -71,12 +71,8 @@ type GetDomainLogListResult struct {
 }
 
 func GetDomainLogListOutput(ctx *pulumi.Context, args GetDomainLogListOutputArgs, opts ...pulumi.InvokeOption) GetDomainLogListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainLogListResultOutput, error) {
-			args := v.(GetDomainLogListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args, GetDomainLogListResultOutput{}, options).(GetDomainLogListResultOutput), nil
-		}).(GetDomainLogListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args, GetDomainLogListResultOutput{}, options).(GetDomainLogListResultOutput)
 }
 
 // A collection of arguments for invoking getDomainLogList.

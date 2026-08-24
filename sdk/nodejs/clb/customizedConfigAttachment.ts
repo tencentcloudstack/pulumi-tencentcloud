@@ -156,11 +156,11 @@ export interface CustomizedConfigAttachmentState {
     /**
      * Associated server or location.
      */
-    bindLists?: pulumi.Input<pulumi.Input<inputs.Clb.CustomizedConfigAttachmentBindList>[]>;
+    bindLists?: pulumi.Input<pulumi.Input<inputs.Clb.CustomizedConfigAttachmentBindList>[] | undefined>;
     /**
      * ID of Customized Config.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
 }
 
 /**

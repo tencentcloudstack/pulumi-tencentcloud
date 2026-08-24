@@ -84,15 +84,15 @@ export interface ModifyInstanceDiskTypeState {
     /**
      * For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeDataDisk>[] | undefined>;
     /**
      * Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeSystemDisk | undefined>;
 }
 
 /**
@@ -102,7 +102,7 @@ export interface ModifyInstanceDiskTypeArgs {
     /**
      * For instance data disk configuration information, you only need to specify the media type of the target cloud disk to be converted, and specify the value of DiskType. Currently, only one data disk conversion is supported. The CdcId parameter is only supported for instances of the CDHPAID type.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeDataDisk>[] | undefined>;
     /**
      * Instance ID. To obtain the instance IDs, you can call DescribeInstances and look for InstanceId in the response.
      */
@@ -110,5 +110,5 @@ export interface ModifyInstanceDiskTypeArgs {
     /**
      * For instance system disk configuration information, you only need to specify the nature type of the target cloud disk to be converted, and specify the value of DiskType. Only CDHPAID type instances are supported to specify Cd.
      */
-    systemDisk?: pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeSystemDisk>;
+    systemDisk?: pulumi.Input<inputs.Cvm.ModifyInstanceDiskTypeSystemDisk | undefined>;
 }

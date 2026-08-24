@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
 {
     /// <summary>
-    /// Provides a resource to create a cfw VpcInstance
+    /// Provides a resource to create a CFW vpc instance
     /// 
     /// ## Example Usage
     /// 
@@ -100,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Import
     /// 
-    /// cfw vpc_instance can be imported using the id, e.g.
+    /// CFW vpc instance can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
@@ -114,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Output("ccnId")]
         public Output<string?> CcnId { get; private set; } = null!;
+
+        /// <summary>
+        /// Firewall group ID.
+        /// </summary>
+        [Output("fwGroupId")]
+        public Output<string> FwGroupId { get; private set; } = null!;
 
         /// <summary>
         /// auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
@@ -247,6 +253,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Input("ccnId")]
         public Input<string>? CcnId { get; set; }
+
+        /// <summary>
+        /// Firewall group ID.
+        /// </summary>
+        [Input("fwGroupId")]
+        public Input<string>? FwGroupId { get; set; }
 
         /// <summary>
         /// auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.

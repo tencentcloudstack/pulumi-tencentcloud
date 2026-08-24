@@ -125,23 +125,23 @@ export interface RunSqlScriptOperationState {
     /**
      * Job ID of the SQL script operation.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * Advanced running parameter.
      */
-    params?: pulumi.Input<string>;
+    params?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Script content. executed by default if not transmitted.
      */
-    scriptContent?: pulumi.Input<string>;
+    scriptContent?: pulumi.Input<string | undefined>;
     /**
      * Script id.
      */
-    scriptId?: pulumi.Input<string>;
+    scriptId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -151,7 +151,7 @@ export interface RunSqlScriptOperationArgs {
     /**
      * Advanced running parameter.
      */
-    params?: pulumi.Input<string>;
+    params?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -159,7 +159,7 @@ export interface RunSqlScriptOperationArgs {
     /**
      * Script content. executed by default if not transmitted.
      */
-    scriptContent?: pulumi.Input<string>;
+    scriptContent?: pulumi.Input<string | undefined>;
     /**
      * Script id.
      */

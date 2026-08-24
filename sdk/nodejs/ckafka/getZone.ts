@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ckafkaZone = tencentcloud.Ckafka.getZone({});
+ * const ckafkaZone = tencentcloud.ckafka.getZone({});
  * ```
  */
 export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> {
@@ -65,7 +65,7 @@ export interface GetZoneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ckafkaZone = tencentcloud.Ckafka.getZone({});
+ * const ckafkaZone = tencentcloud.ckafka.getZone({});
  * ```
  */
 export function getZoneOutput(args?: GetZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneResult> {
@@ -84,9 +84,9 @@ export interface GetZoneOutputArgs {
     /**
      * cdc professional cluster business parameters.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

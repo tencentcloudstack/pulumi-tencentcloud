@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  *     enable: 1,
  * });
@@ -108,7 +108,7 @@ export interface GetNatFwSwitchesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  * });
  * ```
@@ -119,7 +119,7 @@ export interface GetNatFwSwitchesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getNatFwSwitches({
+ * const example = tencentcloud.cfw.getNatFwSwitches({
  *     natInsId: "cfwnat-18d2ba18",
  *     enable: 1,
  * });
@@ -143,19 +143,19 @@ export interface GetNatFwSwitchesOutputArgs {
     /**
      * Switch enable status, 1 open; 0 close.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Filter the NAT firewall instance to which the NAT firewall subnet switch belongs.
      */
-    natInsId?: pulumi.Input<string>;
+    natInsId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.82.37. Please use `enable` instead. Switch status, 1 open; 0 close.
      *
      * @deprecated It has been deprecated from version 1.82.37. Please use `enable` instead.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

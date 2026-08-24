@@ -147,39 +147,39 @@ export interface ApplicationState {
     /**
      * application name.
      */
-    applicationName?: pulumi.Input<string>;
+    applicationName?: pulumi.Input<string | undefined>;
     /**
      * program language, like JAVA.
      */
-    codingLanguage?: pulumi.Input<string>;
+    codingLanguage?: pulumi.Input<string | undefined>;
     /**
      * application description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * tcr instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * repository name.
      */
-    repoName?: pulumi.Input<string>;
+    repoName?: pulumi.Input<string | undefined>;
     /**
      * registry address.
      */
-    repoServer?: pulumi.Input<string>;
+    repoServer?: pulumi.Input<string | undefined>;
     /**
      * repo type, 0: tcr personal, 1: tcr enterprise, 2: public repository, 3: tcr hosted by tem, 4: demo image.
      */
-    repoType?: pulumi.Input<number>;
+    repoType?: pulumi.Input<number | undefined>;
     /**
      * application tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * create image repo or not.
      */
-    useDefaultImageService?: pulumi.Input<number>;
+    useDefaultImageService?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -201,25 +201,25 @@ export interface ApplicationArgs {
     /**
      * tcr instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * repository name.
      */
-    repoName?: pulumi.Input<string>;
+    repoName?: pulumi.Input<string | undefined>;
     /**
      * registry address.
      */
-    repoServer?: pulumi.Input<string>;
+    repoServer?: pulumi.Input<string | undefined>;
     /**
      * repo type, 0: tcr personal, 1: tcr enterprise, 2: public repository, 3: tcr hosted by tem, 4: demo image.
      */
-    repoType?: pulumi.Input<number>;
+    repoType?: pulumi.Input<number | undefined>;
     /**
      * application tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * create image repo or not.
      */
-    useDefaultImageService?: pulumi.Input<number>;
+    useDefaultImageService?: pulumi.Input<number | undefined>;
 }

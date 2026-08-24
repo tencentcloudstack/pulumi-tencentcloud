@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * GAAP security policy can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy  tencentcloud_gaap_security_policy.foo pl-xxxx
+ *   $ pulumi import tencentcloud:Gaap/securityPolicy:SecurityPolicy foo pl-xxxx
  * ```
  */
 export class SecurityPolicy extends pulumi.CustomResource {
@@ -115,15 +115,15 @@ export interface SecurityPolicyState {
     /**
      * Default policy. Valid value: `ACCEPT` and `DROP`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether policy is enable, default value is `true`.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the GAAP proxy.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -137,7 +137,7 @@ export interface SecurityPolicyArgs {
     /**
      * Indicates whether policy is enable, default value is `true`.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the GAAP proxy.
      */

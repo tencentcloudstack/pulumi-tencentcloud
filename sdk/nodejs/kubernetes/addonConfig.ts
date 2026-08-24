@@ -8,6 +8,64 @@ import * as utilities from "../utilities";
  * Provide a resource to configure addon that kubernetes comes with.
  *
  * ## Example Usage
+ *
+ * ### Update cluster-autoscaler addon
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.kubernetes.AddonConfig("example", {
+ *     clusterId: "cls-5yezvaxo",
+ *     addonName: "cluster-autoscaler",
+ *     rawValues: JSON.stringify({
+ *         autoDiscovery: {
+ *             labels: [{
+ *                 "node.tke.cloud.tencent.com/autoscaling-enabled": "true",
+ *             }],
+ *         },
+ *         extraArgs: {
+ *             expander: "random",
+ *             "ignore-daemonsets-utilization": false,
+ *             "ignore-taint_1": "tke.cloud.tencent.com/direct-eni-unavailable",
+ *             "ignore-taint_2": "tke.cloud.tencent.com/eni-ip-unavailable",
+ *             "ignore-taint_3": "tke.cloud.tencent.com/uninitialized",
+ *             "ignore-taint_4": "tke.cloud.tencent.com/no-aia-ip",
+ *             "scale-down-unready-time": "20m0s",
+ *             "scale-down-utilization-threshold": 0.005,
+ *             "skip-nodes-with-local-storage": true,
+ *             "scale-down-delay-after-add": "10mm",
+ *             "scale-down-enabled": true,
+ *             "scale-down-unneeded-time": "10mm",
+ *             "skip-nodes-with-system-pods": true,
+ *             "max-empty-bulk-delete": 11,
+ *             "max-nodes-total": 5,
+ *             "max-total-unready-percentage": 33,
+ *             "ok-total-unready-count": 3,
+ *         },
+ *         image: {
+ *             repository: "ccr.ccs.tencentyun.com/tkeimages/cluster-autoscaler",
+ *         },
+ *         resources: {
+ *             limits: {
+ *                 cpu: "2",
+ *                 memory: "4Gi",
+ *             },
+ *             requests: {
+ *                 cpu: "200m",
+ *                 memory: "256Mi",
+ *             },
+ *         },
+ *     }),
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * kubernetes cluster addon config can be imported using the clusterId#addonName, e.g.
+ * ```sh
+ * $ pulumi import tencentcloud:Kubernetes/addonConfig:AddonConfig example cls-5yezvaxo#cluster-autoscaler
+ * ```
  */
 export class AddonConfig extends pulumi.CustomResource {
     /**
@@ -108,27 +166,27 @@ export interface AddonConfigState {
     /**
      * Name of addon.
      */
-    addonName?: pulumi.Input<string>;
+    addonName?: pulumi.Input<string | undefined>;
     /**
      * Version of addon.
      */
-    addonVersion?: pulumi.Input<string>;
+    addonVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Status of addon.
      */
-    phase?: pulumi.Input<string>;
+    phase?: pulumi.Input<string | undefined>;
     /**
      * Params of addon, base64 encoded json format.
      */
-    rawValues?: pulumi.Input<string>;
+    rawValues?: pulumi.Input<string | undefined>;
     /**
      * Reason of addon failed.
      */
-    reason?: pulumi.Input<string>;
+    reason?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -142,7 +200,7 @@ export interface AddonConfigArgs {
     /**
      * Version of addon.
      */
-    addonVersion?: pulumi.Input<string>;
+    addonVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of cluster.
      */
@@ -150,5 +208,5 @@ export interface AddonConfigArgs {
     /**
      * Params of addon, base64 encoded json format.
      */
-    rawValues?: pulumi.Input<string>;
+    rawValues?: pulumi.Input<string | undefined>;
 }

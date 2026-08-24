@@ -176,35 +176,35 @@ export interface CngwGroupState {
     /**
      * description information of group.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway IDonly postpaid gateway supported.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * gateway group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * internet configration.
      */
-    internetConfig?: pulumi.Input<inputs.Tse.CngwGroupInternetConfig>;
+    internetConfig?: pulumi.Input<inputs.Tse.CngwGroupInternetConfig | undefined>;
     /**
      * public network outbound traffic bandwidth,[1,2048]Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * gateway group name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * group node configration.
      */
-    nodeConfig?: pulumi.Input<inputs.Tse.CngwGroupNodeConfig>;
+    nodeConfig?: pulumi.Input<inputs.Tse.CngwGroupNodeConfig | undefined>;
     /**
      * subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value:- subnet-ahde9me9.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -214,7 +214,7 @@ export interface CngwGroupArgs {
     /**
      * description information of group.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway IDonly postpaid gateway supported.
      */
@@ -222,15 +222,15 @@ export interface CngwGroupArgs {
     /**
      * internet configration.
      */
-    internetConfig?: pulumi.Input<inputs.Tse.CngwGroupInternetConfig>;
+    internetConfig?: pulumi.Input<inputs.Tse.CngwGroupInternetConfig | undefined>;
     /**
      * public network outbound traffic bandwidth,[1,2048]Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * gateway group name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * group node configration.
      */

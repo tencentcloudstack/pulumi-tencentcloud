@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// ssl deploy_certificate_instance can be imported using the id, e.g.
+// ssl deployCertificateInstance can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id

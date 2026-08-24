@@ -21,14 +21,14 @@ import * as utilities from "../utilities";
  * });
  * const exampleDeviceGroup = new tencentcloud.dasb.DeviceGroup("example", {name: "tf_example"});
  * const exampleDeviceGroupMembers = new tencentcloud.dasb.DeviceGroupMembers("example", {
- *     deviceGroupId: exampleDeviceGroup.id,
- *     memberIdSets: [example.id],
+ *     deviceGroupId: exampleDeviceGroup.id.apply(x =>Number(x)),
+ *     memberIdSets: [example.id.apply(x =>Number(x))],
  * });
  * ```
  *
  * ## Import
  *
- * dasb device_group_members can be imported using the id, e.g.
+ * dasb deviceGroupMembers can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 53#102
@@ -109,11 +109,11 @@ export interface DeviceGroupMembersState {
     /**
      * Device Group ID.
      */
-    deviceGroupId?: pulumi.Input<number>;
+    deviceGroupId?: pulumi.Input<number | undefined>;
     /**
      * A collection of device IDs that need to be added to the device group.
      */
-    memberIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    memberIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**

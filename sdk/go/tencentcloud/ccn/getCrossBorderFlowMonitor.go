@@ -91,12 +91,8 @@ type GetCrossBorderFlowMonitorResult struct {
 }
 
 func GetCrossBorderFlowMonitorOutput(ctx *pulumi.Context, args GetCrossBorderFlowMonitorOutputArgs, opts ...pulumi.InvokeOption) GetCrossBorderFlowMonitorResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCrossBorderFlowMonitorResultOutput, error) {
-			args := v.(GetCrossBorderFlowMonitorArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args, GetCrossBorderFlowMonitorResultOutput{}, options).(GetCrossBorderFlowMonitorResultOutput), nil
-		}).(GetCrossBorderFlowMonitorResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", args, GetCrossBorderFlowMonitorResultOutput{}, options).(GetCrossBorderFlowMonitorResultOutput)
 }
 
 // A collection of arguments for invoking getCrossBorderFlowMonitor.

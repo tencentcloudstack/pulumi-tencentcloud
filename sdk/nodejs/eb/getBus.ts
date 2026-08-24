@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const _this = tencentcloud.Eb.getBus({
+ * const _this = tencentcloud.eb.getBus({
  *     orderBy: "created_at",
  *     order: "DESC",
  *     filters: [
@@ -93,7 +93,7 @@ export interface GetBusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const _this = tencentcloud.Eb.getBus({
+ * const _this = tencentcloud.eb.getBus({
  *     orderBy: "created_at",
  *     order: "DESC",
  *     filters: [
@@ -130,17 +130,17 @@ export interface GetBusOutputArgs {
     /**
      * Filter conditions. The upper limit of Filters per request is 10, and the upper limit of Filter.Values 5.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetBusFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetBusFilterArgs>[] | undefined>;
     /**
      * Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * According to which field to sort the returned results, the following fields are supported: `createdAt` (creation time), `updatedAt` (modification time).
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

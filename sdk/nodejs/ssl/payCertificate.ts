@@ -58,10 +58,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * payment SSL instance can be imported, e.g.
+ * payment SSL instance can be imported certificateId#productId#domainNum#timeSpan, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+ * $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate example iPQNn61x#33#1#1
  * ```
  */
 export class PayCertificate extends pulumi.CustomResource {
@@ -111,7 +111,7 @@ export class PayCertificate extends pulumi.CustomResource {
     /**
      * DV certification information.
      */
-    declare public readonly dvAuths: pulumi.Output<outputs.Ssl.PayCertificateDvAuth[]>;
+    declare public /*out*/ readonly dvAuths: pulumi.Output<outputs.Ssl.PayCertificateDvAuth[]>;
     /**
      * Certificate information.
      */
@@ -175,12 +175,12 @@ export class PayCertificate extends pulumi.CustomResource {
             resourceInputs["alias"] = args?.alias;
             resourceInputs["confirmLetter"] = args?.confirmLetter;
             resourceInputs["domainNum"] = args?.domainNum;
-            resourceInputs["dvAuths"] = args?.dvAuths;
             resourceInputs["information"] = args?.information;
             resourceInputs["productId"] = args?.productId;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["timeSpan"] = args?.timeSpan;
             resourceInputs["certificateId"] = undefined /*out*/;
+            resourceInputs["dvAuths"] = undefined /*out*/;
             resourceInputs["orderId"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -196,47 +196,47 @@ export interface PayCertificateState {
     /**
      * Remark name.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Returned certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.
      */
-    confirmLetter?: pulumi.Input<string>;
+    confirmLetter?: pulumi.Input<string | undefined>;
     /**
      * Number of domain names included in the certificate.
      */
-    domainNum?: pulumi.Input<number>;
+    domainNum?: pulumi.Input<number | undefined>;
     /**
      * DV certification information.
      */
-    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.PayCertificateDvAuth>[]>;
+    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.PayCertificateDvAuth>[] | undefined>;
     /**
      * Certificate information.
      */
-    information?: pulumi.Input<inputs.Ssl.PayCertificateInformation>;
+    information?: pulumi.Input<inputs.Ssl.PayCertificateInformation | undefined>;
     /**
      * Order ID returned.
      */
-    orderId?: pulumi.Input<string>;
+    orderId?: pulumi.Input<string | undefined>;
     /**
      * Certificate commodity ID. Valid value ranges: (3~42). `3` means SecureSite enhanced Enterprise Edition (EV Pro), `4` means SecureSite enhanced (EV), `5` means SecureSite Enterprise Professional Edition (OV Pro), `6` means SecureSite Enterprise (OV), `7` means SecureSite Enterprise Type (OV) wildcard, `8` means Geotrust enhanced (EV), `9` means Geotrust enterprise (OV), `10` means Geotrust enterprise (OV) wildcard, `11` means TrustAsia domain type multi-domain SSL certificate, `12` means TrustAsia domain type ( DV) wildcard, `13` means TrustAsia enterprise wildcard (OV) SSL certificate (D3), `14` means TrustAsia enterprise (OV) SSL certificate (D3), `15` means TrustAsia enterprise multi-domain (OV) SSL certificate (D3), `16` means TrustAsia Enhanced (EV) SSL Certificate (D3), `17` means TrustAsia Enhanced Multiple Domain (EV) SSL Certificate (D3), `18` means GlobalSign Enterprise (OV) SSL Certificate, `19` means GlobalSign Enterprise Wildcard (OV) SSL Certificate, `20` means GlobalSign Enhanced (EV) SSL Certificate, `21` means TrustAsia Enterprise Wildcard Multiple Domain (OV) SSL Certificate (D3), `22` means GlobalSign Enterprise Multiple Domain (OV) SSL Certificate, `23` means GlobalSign Enterprise Multiple Wildcard Domain name (OV) SSL certificate, `24` means GlobalSign enhanced multi-domain (EV) SSL certificate, `25` means Wotrus domain type certificate, `26` means Wotrus domain type multi-domain certificate, `27` means Wotrus domain type wildcard certificate, `28` means Wotrus enterprise type certificate, `29` means Wotrus enterprise multi-domain certificate, `30` means Wotrus enterprise wildcard certificate, `31` means Wotrus enhanced certificate, `32` means Wotrus enhanced multi-domain certificate, `33` means WoTrus National Secret Domain name Certificate, `34` means WoTrus National Secret Domain name Certificate (multiple domain names), `35` WoTrus National Secret Domain name Certificate (wildcard), `37` means WoTrus State Secret Enterprise Certificate, `38` means WoTrus State Secret Enterprise Certificate (multiple domain names), `39` means WoTrus State Secret Enterprise Certificate (wildcard), `40` means WoTrus National secret enhanced certificate, `41` means WoTrus National Secret enhanced Certificate (multiple domain names), `42` means TrustAsia- Domain name Certificate (wildcard multiple domain names), `43` means DNSPod Enterprise (OV) SSL Certificate, `44` means DNSPod- Enterprise (OV) wildcard SSL certificate, `45` means DNSPod Enterprise (OV) Multi-domain name SSL Certificate, `46` means DNSPod enhanced (EV) SSL certificate, `47` means DNSPod enhanced (EV) multi-domain name SSL certificate, `48` means DNSPod Domain name Type (DV) SSL Certificate, `49` means DNSPod Domain name Type (DV) wildcard SSL certificate, `50` means DNSPod domain name type (DV) multi-domain name SSL certificate, `51` means DNSPod (State Secret) Enterprise (OV) SSL certificate, `52` DNSPod (National Secret) Enterprise (OV) wildcard SSL certificate, `53` means DNSPod (National Secret) Enterprise (OV) multi-domain SSL certificate, `54` means DNSPod (National Secret) Domain Name (DV) SSL certificate, `55` means DNSPod (National Secret) Domain Name Type (DV) wildcard SSL certificate, `56` means DNSPod (National Secret) Domain Name Type (DV) multi-domain SSL certificate.
      */
-    productId?: pulumi.Input<number>;
+    productId?: pulumi.Input<number | undefined>;
     /**
      * The ID of project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * SSL certificate status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Certificate period, currently only supports 1 year certificate purchase.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -246,19 +246,15 @@ export interface PayCertificateArgs {
     /**
      * Remark name.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * The base64-encoded certificate confirmation file should be in jpg, jpeg, png, pdf, and the size should be between 1kb and 1.4M. Note: it only works when productId is set to 8, 9 or 10.
      */
-    confirmLetter?: pulumi.Input<string>;
+    confirmLetter?: pulumi.Input<string | undefined>;
     /**
      * Number of domain names included in the certificate.
      */
     domainNum: pulumi.Input<number>;
-    /**
-     * DV certification information.
-     */
-    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.PayCertificateDvAuth>[]>;
     /**
      * Certificate information.
      */
@@ -270,9 +266,9 @@ export interface PayCertificateArgs {
     /**
      * The ID of project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Certificate period, currently only supports 1 year certificate purchase.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }

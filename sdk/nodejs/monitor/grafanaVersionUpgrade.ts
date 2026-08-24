@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_version_upgrade can be imported using the id, e.g.
+ * monitor grafanaVersionUpgrade can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id
@@ -102,11 +102,11 @@ export interface GrafanaVersionUpgradeState {
     /**
      * Version alias.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

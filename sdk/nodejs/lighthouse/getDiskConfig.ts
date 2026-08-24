@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diskConfig = tencentcloud.Lighthouse.getDiskConfig({
+ * const diskConfig = tencentcloud.lighthouse.getDiskConfig({
  *     filters: [{
  *         name: "zone",
  *         values: ["ap-guangzhou-3"],
@@ -70,7 +70,7 @@ export interface GetDiskConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diskConfig = tencentcloud.Lighthouse.getDiskConfig({
+ * const diskConfig = tencentcloud.lighthouse.getDiskConfig({
  *     filters: [{
  *         name: "zone",
  *         values: ["ap-guangzhou-3"],
@@ -94,9 +94,9 @@ export interface GetDiskConfigOutputArgs {
     /**
      * Filter list.zoneFilter by availability zone.Type: StringRequired: no.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetDiskConfigFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetDiskConfigFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

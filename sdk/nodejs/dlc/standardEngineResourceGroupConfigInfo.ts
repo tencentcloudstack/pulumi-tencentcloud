@@ -128,15 +128,15 @@ export interface StandardEngineResourceGroupConfigInfoState {
     /**
      * Dynamic config context.
      */
-    dynamicConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoDynamicConfContext>;
+    dynamicConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoDynamicConfContext | undefined>;
     /**
      * Standard engine resource group name.
      */
-    engineResourceGroupName?: pulumi.Input<string>;
+    engineResourceGroupName?: pulumi.Input<string | undefined>;
     /**
      * Static config context.
      */
-    staticConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoStaticConfContext>;
+    staticConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoStaticConfContext | undefined>;
 }
 
 /**
@@ -146,7 +146,7 @@ export interface StandardEngineResourceGroupConfigInfoArgs {
     /**
      * Dynamic config context.
      */
-    dynamicConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoDynamicConfContext>;
+    dynamicConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoDynamicConfContext | undefined>;
     /**
      * Standard engine resource group name.
      */
@@ -154,5 +154,5 @@ export interface StandardEngineResourceGroupConfigInfoArgs {
     /**
      * Static config context.
      */
-    staticConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoStaticConfContext>;
+    staticConfContext?: pulumi.Input<inputs.Dlc.StandardEngineResourceGroupConfigInfoStaticConfContext | undefined>;
 }

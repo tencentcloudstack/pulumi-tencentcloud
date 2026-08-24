@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewToken(ctx, "example", &tcr.TokenArgs{
-//				InstanceId:  example.ID(),
+//				InstanceId:  example.ID().ToIDOutput().ToStringOutput(),
 //				Description: pulumi.String("example for the tcr token"),
 //			})
 //			if err != nil {

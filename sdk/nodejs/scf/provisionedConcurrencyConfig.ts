@@ -153,39 +153,39 @@ export interface ProvisionedConcurrencyConfigState {
     /**
      * Name of the function for which to set the provisioned concurrency.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of instances.
      */
-    maxCapacity?: pulumi.Input<number>;
+    maxCapacity?: pulumi.Input<number | undefined>;
     /**
      * The minimum number of instances. It can not be smaller than 1.
      */
-    minCapacity?: pulumi.Input<number>;
+    minCapacity?: pulumi.Input<number | undefined>;
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Specifies the provisioned concurrency type. Default: Static provisioned concurrency. ConcurrencyUtilizationTracking: Scales the concurrency automatically according to the concurrency utilization. If ConcurrencyUtilizationTracking is passed in, TrackingTarget, MinCapacity and MaxCapacity are required, and VersionProvisionedConcurrencyNum must be 0.
      */
-    provisionedType?: pulumi.Input<string>;
+    provisionedType?: pulumi.Input<string | undefined>;
     /**
      * Function version number. Note: the $LATEST version does not support provisioned concurrency.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * The target concurrency utilization. Range: (0,1) (two decimal places).
      */
-    trackingTarget?: pulumi.Input<number>;
+    trackingTarget?: pulumi.Input<number | undefined>;
     /**
      * Scheduled provisioned concurrency scaling action.
      */
-    triggerActions?: pulumi.Input<pulumi.Input<inputs.Scf.ProvisionedConcurrencyConfigTriggerAction>[]>;
+    triggerActions?: pulumi.Input<pulumi.Input<inputs.Scf.ProvisionedConcurrencyConfigTriggerAction>[] | undefined>;
     /**
      * Provisioned concurrency amount. Note: there is an upper limit for the sum of provisioned concurrency amounts of all versions, which currently is the function&amp;#39;s maximum concurrency quota minus 100.
      */
-    versionProvisionedConcurrencyNum?: pulumi.Input<number>;
+    versionProvisionedConcurrencyNum?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -199,19 +199,19 @@ export interface ProvisionedConcurrencyConfigArgs {
     /**
      * The maximum number of instances.
      */
-    maxCapacity?: pulumi.Input<number>;
+    maxCapacity?: pulumi.Input<number | undefined>;
     /**
      * The minimum number of instances. It can not be smaller than 1.
      */
-    minCapacity?: pulumi.Input<number>;
+    minCapacity?: pulumi.Input<number | undefined>;
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Specifies the provisioned concurrency type. Default: Static provisioned concurrency. ConcurrencyUtilizationTracking: Scales the concurrency automatically according to the concurrency utilization. If ConcurrencyUtilizationTracking is passed in, TrackingTarget, MinCapacity and MaxCapacity are required, and VersionProvisionedConcurrencyNum must be 0.
      */
-    provisionedType?: pulumi.Input<string>;
+    provisionedType?: pulumi.Input<string | undefined>;
     /**
      * Function version number. Note: the $LATEST version does not support provisioned concurrency.
      */
@@ -219,11 +219,11 @@ export interface ProvisionedConcurrencyConfigArgs {
     /**
      * The target concurrency utilization. Range: (0,1) (two decimal places).
      */
-    trackingTarget?: pulumi.Input<number>;
+    trackingTarget?: pulumi.Input<number | undefined>;
     /**
      * Scheduled provisioned concurrency scaling action.
      */
-    triggerActions?: pulumi.Input<pulumi.Input<inputs.Scf.ProvisionedConcurrencyConfigTriggerAction>[]>;
+    triggerActions?: pulumi.Input<pulumi.Input<inputs.Scf.ProvisionedConcurrencyConfigTriggerAction>[] | undefined>;
     /**
      * Provisioned concurrency amount. Note: there is an upper limit for the sum of provisioned concurrency amounts of all versions, which currently is the function&amp;#39;s maximum concurrency quota minus 100.
      */

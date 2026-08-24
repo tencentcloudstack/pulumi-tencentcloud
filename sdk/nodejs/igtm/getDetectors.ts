@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectors({});
+ * const example = tencentcloud.igtm.getDetectors({});
  * ```
  */
 export function getDetectors(args?: GetDetectorsArgs, opts?: pulumi.InvokeOptions): Promise<GetDetectorsResult> {
@@ -59,7 +59,7 @@ export interface GetDetectorsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectors({});
+ * const example = tencentcloud.igtm.getDetectors({});
  * ```
  */
 export function getDetectorsOutput(args?: GetDetectorsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDetectorsResult> {
@@ -77,5 +77,5 @@ export interface GetDetectorsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

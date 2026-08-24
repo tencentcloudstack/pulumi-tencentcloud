@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// <summary>
     /// Provides a resource to create a TEO l7 acc rule v2
     /// 
+    /// &gt; **NOTE:** Compared to tencentcloud_teo_l7_acc_rule, tencentcloud.Teo.L7AccRuleV2 is simpler to use but is limited to managing a single rule and lacks the ability to maintain rule ordering. It is best suited for scenarios where you need to manage multiple rules independently and priority/sequencing is not a concern.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -30,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///         {
     ///             "description",
     ///         },
-    ///         RuleName = "网站加速",
+    ///         RuleName = "Web Acceleration",
     ///         Status = "enable",
     ///         Branches = new[]
     ///         {
@@ -89,6 +91,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                                 {
     ///                                     Action = "del",
     ///                                     Name = "Eo-Client-Device",
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "ContentCompression",
+    ///                         ContentCompressionParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionContentCompressionParametersArgs
+    ///                         {
+    ///                             Switch = "on",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "Vary",
+    ///                         VaryParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionVaryParametersArgs
+    ///                         {
+    ///                             Switch = "on",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "OriginAuthentication",
+    ///                         OriginAuthenticationParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionOriginAuthenticationParametersArgs
+    ///                         {
+    ///                             RequestProperties = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionOriginAuthenticationParametersRequestPropertyArgs
+    ///                                 {
+    ///                                     Type = "Header",
+    ///                                     Name = "Authorization",
+    ///                                     Value = "Bearer token123",
     ///                                 },
     ///                             },
     ///                         },
@@ -158,17 +192,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ### Using AdvancedOriginRouting, Shield, and SiteFailover actions
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleFailover = new Tencentcloud.Teo.L7AccRuleV2("example_failover", new()
+    ///     {
+    ///         ZoneId = "zone-3fkff38fyw8s",
+    ///         Descriptions = new[]
+    ///         {
+    ///             "description",
+    ///         },
+    ///         RuleName = "Web Acceleration Failover",
+    ///         Status = "enable",
+    ///         Branches = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchArgs
+    ///             {
+    ///                 Condition = "${http.request.host} in ['www.example.com']",
+    ///                 Actions = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "AdvancedOriginRouting",
+    ///                         AdvancedOriginRoutingParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionAdvancedOriginRoutingParametersArgs
+    ///                         {
+    ///                             Direction = "MainlandChinaAndGlobalAdaptive",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "Shield",
+    ///                         ShieldParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionShieldParametersArgs
+    ///                         {
+    ///                             ShieldSpaceId = "shield-space-abc123",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionArgs
+    ///                     {
+    ///                         Name = "SiteFailover",
+    ///                         SiteFailoverParameters = new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionSiteFailoverParametersArgs
+    ///                         {
+    ///                             SiteFailoverStatusCodes = new[]
+    ///                             {
+    ///                                 500,
+    ///                             },
+    ///                             SiteFailoverParams = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Teo.Inputs.L7AccRuleV2BranchActionSiteFailoverParametersSiteFailoverParamArgs
+    ///                                 {
+    ///                                     Mode = "FailoverToHost",
+    ///                                     Origin = "backup.example.com",
+    ///                                     OriginProtocol = "https",
+    ///                                     HttpsOriginPort = 443,
+    ///                                     StatusCode = 302,
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// TEO l7 acc rule v2 can be imported using the {zone_id}#{rule_id}, e.g.
-    /// 
-    /// `
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Teo/l7AccRuleV2:L7AccRuleV2 example zone-3fkff38fyw8s#rule-3ft1xeuhlj1b
-    /// ```
-    /// 
-    /// `
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/l7AccRuleV2:L7AccRuleV2")]
     public partial class L7AccRuleV2 : global::Pulumi.CustomResource

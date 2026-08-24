@@ -46,7 +46,7 @@ import (
 //				return err
 //			}
 //			job, err := dts.NewMigrateJob(ctx, "job", &dts.MigrateJobArgs{
-//				ServiceId: service.ID(),
+//				ServiceId: service.ID().ToIDOutput().ToStringOutput(),
 //				RunMode:   pulumi.String("immediate"),
 //				MigrateOption: &dts.MigrateJobMigrateOptionArgs{
 //					DatabaseTable: &dts.MigrateJobMigrateOptionDatabaseTableArgs{
@@ -99,14 +99,14 @@ import (
 //				return err
 //			}
 //			start, err := dts.NewMigrateJobStartOperation(ctx, "start", &dts.MigrateJobStartOperationArgs{
-//				JobId: job.ID(),
+//				JobId: job.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			// pause the migration job
 //			_, err = dts.NewMigrateJobConfig(ctx, "config", &dts.MigrateJobConfigArgs{
-//				JobId:  start.ID(),
+//				JobId:  start.ID().ToIDOutput().ToStringOutput(),
 //				Action: pulumi.String("pause"),
 //			})
 //			if err != nil {

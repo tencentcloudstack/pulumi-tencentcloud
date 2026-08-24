@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_super_resolution_template can be imported using the bucket#templateId, e.g.
+ * ci mediaSuperResolutionTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
@@ -123,23 +123,23 @@ export interface MediaSuperResolutionTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Auto scaling switch, off by default.
      */
-    enableScaleUp?: pulumi.Input<string>;
+    enableScaleUp?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resolution Options sdtohd: Standard Definition to Ultra Definition, hdto4k: HD to 4K.
      */
-    resolution?: pulumi.Input<string>;
+    resolution?: pulumi.Input<string | undefined>;
     /**
      * version, default value Base, Base: basic version, Enhance: enhanced version.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -153,11 +153,11 @@ export interface MediaSuperResolutionTemplateArgs {
     /**
      * Auto scaling switch, off by default.
      */
-    enableScaleUp?: pulumi.Input<string>;
+    enableScaleUp?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resolution Options sdtohd: Standard Definition to Ultra Definition, hdto4k: HD to 4K.
      */
@@ -165,5 +165,5 @@ export interface MediaSuperResolutionTemplateArgs {
     /**
      * version, default value Base, Base: basic version, Enhance: enhanced version.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }

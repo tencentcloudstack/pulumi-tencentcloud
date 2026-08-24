@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bandwidthPackageQuota = tencentcloud.Vpc.getBandwidthPackageQuota({});
+ * const bandwidthPackageQuota = tencentcloud.vpc.getBandwidthPackageQuota({});
  * ```
  */
 export function getBandwidthPackageQuota(args?: GetBandwidthPackageQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetBandwidthPackageQuotaResult> {
@@ -59,7 +59,7 @@ export interface GetBandwidthPackageQuotaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bandwidthPackageQuota = tencentcloud.Vpc.getBandwidthPackageQuota({});
+ * const bandwidthPackageQuota = tencentcloud.vpc.getBandwidthPackageQuota({});
  * ```
  */
 export function getBandwidthPackageQuotaOutput(args?: GetBandwidthPackageQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBandwidthPackageQuotaResult> {
@@ -77,5 +77,5 @@ export interface GetBandwidthPackageQuotaOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

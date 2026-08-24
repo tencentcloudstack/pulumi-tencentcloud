@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRegionsByDestRegion = tencentcloud.Gaap.getAccessRegionsByDestRegion({
+ * const accessRegionsByDestRegion = tencentcloud.gaap.getAccessRegionsByDestRegion({
  *     destRegion: "SouthChina",
  * });
  * ```
@@ -78,7 +78,7 @@ export interface GetAccessRegionsByDestRegionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRegionsByDestRegion = tencentcloud.Gaap.getAccessRegionsByDestRegion({
+ * const accessRegionsByDestRegion = tencentcloud.gaap.getAccessRegionsByDestRegion({
  *     destRegion: "SouthChina",
  * });
  * ```
@@ -104,13 +104,13 @@ export interface GetAccessRegionsByDestRegionOutputArgs {
     /**
      * IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.
      */
-    ipAddressVersion?: pulumi.Input<string>;
+    ipAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * Channel package type, where Thunder represents a standard proxy group, Accelerator represents a game accelerator proxy, and CrossBorder represents a cross-border proxy.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

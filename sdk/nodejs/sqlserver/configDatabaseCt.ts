@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -70,7 +70,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver tencentcloud_sqlserver_config_database_ct can be imported using the id, e.g.
+ * sqlserver tencentcloud.Sqlserver.ConfigDatabaseCt can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/configDatabaseCt:ConfigDatabaseCt example mssql-i9ma6oy7#tf_example_db
@@ -166,19 +166,19 @@ export interface ConfigDatabaseCtState {
     /**
      * Retention period (in days) of change tracking information when CT is enabled. Value range: 3-30. Default value: 3.
      */
-    changeRetentionDay?: pulumi.Input<number>;
+    changeRetentionDay?: pulumi.Input<number | undefined>;
     /**
      * database name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Enable or disable CT. Valid values: enable, disable.
      */
-    modifyType?: pulumi.Input<string>;
+    modifyType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -188,7 +188,7 @@ export interface ConfigDatabaseCtArgs {
     /**
      * Retention period (in days) of change tracking information when CT is enabled. Value range: 3-30. Default value: 3.
      */
-    changeRetentionDay?: pulumi.Input<number>;
+    changeRetentionDay?: pulumi.Input<number | undefined>;
     /**
      * database name.
      */

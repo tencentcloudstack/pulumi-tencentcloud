@@ -40,7 +40,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -48,8 +48,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -75,8 +75,8 @@ import (
 //				NetworkType: pulumi.String("INTERNAL"),
 //				ClbName:     pulumi.String("clb-example"),
 //				ProjectId:   pulumi.Int(0),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("Terraform"),
 //				},
@@ -86,8 +86,8 @@ import (
 //			}
 //			// attachment
 //			_, err = clb.NewSecurityGroupAttachment(ctx, "example", &clb.SecurityGroupAttachmentArgs{
-//				SecurityGroup:   example.ID(),
-//				LoadBalancerIds: exampleInstance.ID(),
+//				SecurityGroup:   example.ID().ToIDOutput().ToStringOutput(),
+//				LoadBalancerIds: exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

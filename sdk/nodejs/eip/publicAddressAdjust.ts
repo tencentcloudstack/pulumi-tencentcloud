@@ -128,11 +128,11 @@ export interface PublicAddressAdjustState {
     /**
      * A unique ID that identifies an EIP instance. The unique ID of EIP is in the form:`eip-erft45fu`.
      */
-    addressId?: pulumi.Input<string>;
+    addressId?: pulumi.Input<string | undefined>;
     /**
      * A unique ID that identifies the CVM instance. The unique ID of CVM is in the form:`ins-osckfnm7`.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -142,9 +142,9 @@ export interface PublicAddressAdjustArgs {
     /**
      * A unique ID that identifies an EIP instance. The unique ID of EIP is in the form:`eip-erft45fu`.
      */
-    addressId?: pulumi.Input<string>;
+    addressId?: pulumi.Input<string | undefined>;
     /**
      * A unique ID that identifies the CVM instance. The unique ID of CVM is in the form:`ins-osckfnm7`.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }

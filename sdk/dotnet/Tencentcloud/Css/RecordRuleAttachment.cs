@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css record_rule can be imported using the id, e.g.
+    /// css RecordRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName

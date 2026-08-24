@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb instance_config can be imported using the id, e.g.
+ * dcdb instanceConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
@@ -102,11 +102,11 @@ export interface InstanceConfigState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * RS nearest access mode, 0-no policy, 1-nearest access.
      */
-    rsAccessStrategy?: pulumi.Input<number>;
+    rsAccessStrategy?: pulumi.Input<number | undefined>;
 }
 
 /**

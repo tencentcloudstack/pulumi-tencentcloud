@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cvm launch template
+// Provides a resource to create a CVM launch template
 //
 // ## Example Usage
 //
@@ -29,22 +29,60 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			myFavoriteImage, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//			example, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
-//				ImageNameRegex: pulumi.StringRef("Final"),
+//				ImageNameRegex: pulumi.StringRef("CentOS 8.2"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			_, err = cvm.NewLaunchTemplate(ctx, "demo", &cvm.LaunchTemplateArgs{
-//				LaunchTemplateName: pulumi.String("test"),
+//			_, err = cvm.NewLaunchTemplate(ctx, "example", &cvm.LaunchTemplateArgs{
+//				LaunchTemplateName: pulumi.String("tf-example"),
 //				Placement: &cvm.LaunchTemplatePlacementArgs{
 //					Zone:      pulumi.String("ap-guangzhou-6"),
 //					ProjectId: pulumi.Int(0),
 //				},
-//				ImageId: pulumi.String(myFavoriteImage.Images[0].ImageId),
+//				ImageId:                          pulumi.String(example.Images[0].ImageId),
+//				LaunchTemplateVersionDescription: pulumi.String("CentOS 8.2"),
+//				InstanceType:                     pulumi.String("S5.SMALL1"),
+//				InstanceChargeType:               pulumi.String("POSTPAID_BY_HOUR"),
+//				SystemDisk: &cvm.LaunchTemplateSystemDiskArgs{
+//					DiskSize: pulumi.Int(50),
+//					DiskType: pulumi.String("CLOUD_PREMIUM"),
+//				},
+//				DataDisks: cvm.LaunchTemplateDataDiskArray{
+//					&cvm.LaunchTemplateDataDiskArgs{
+//						DiskSize: pulumi.Int(200),
+//						DiskType: pulumi.String("CLOUD_PREMIUM"),
+//					},
+//				},
+//				VirtualPrivateCloud: &cvm.LaunchTemplateVirtualPrivateCloudArgs{
+//					SubnetId: pulumi.String("subnet-5l1ya4my"),
+//					VpcId:    pulumi.String("vpc-0m6078eb"),
+//				},
+//				InternetAccessible: &cvm.LaunchTemplateInternetAccessibleArgs{
+//					InternetChargeType: pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					PublicIpAssigned:   pulumi.Bool(false),
+//				},
+//				InstanceCount: pulumi.Int(1),
+//				InstanceName:  pulumi.String("instanceName"),
+//				HostName:      pulumi.String("root"),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-4z20n68d"),
+//				},
+//				EnhancedService: &cvm.LaunchTemplateEnhancedServiceArgs{
+//					AutomationService: &cvm.LaunchTemplateEnhancedServiceAutomationServiceArgs{
+//						Enabled: pulumi.Bool(true),
+//					},
+//					MonitorService: &cvm.LaunchTemplateEnhancedServiceMonitorServiceArgs{
+//						Enabled: pulumi.Bool(true),
+//					},
+//					SecurityService: &cvm.LaunchTemplateEnhancedServiceSecurityServiceArgs{
+//						Enabled: pulumi.Bool(true),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err

@@ -13,6 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// <summary>
     /// Provide a resource to create a Mongodb sharding instance.
     /// 
+    /// &gt; **NOTE:** The `AddNodeList` and `RemoveNodeList` arguments are used to submit node change actions. When updating the resource, only newly added items in these lists will be sent to the API. If an existing item is removed from the Terraform configuration, Terraform only updates the local state and does not submit a repeated add or remove request. To add or remove another read-only node, append a new block instead of modifying an existing one. After the change is completed, obsolete action records can be removed from the configuration, and this cleanup does not trigger a new node operation when the remaining list is a subset of the previous list. In general, it is recommended to keep these action records in the configuration and avoid cleanup unless necessary.
+    /// 
+    /// &gt; **NOTE:** The `Cpu` parameter takes effect only when the configuration is changed. Changing the `Cpu` triggers the `ModifyDBInstanceSpec` API to adjust the CPU specification of the running MongoDB instance in-place. The supported CPU specifications can be obtained through the `DescribeSpecInfo` API.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -23,23 +27,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var mongodb = new Tencentcloud.Mongodb.ShardingInstance("mongodb", new()
+    ///     var example = new Tencentcloud.Mongodb.ShardingInstance("example", new()
     ///     {
-    ///         InstanceName = "mongodb",
+    ///         InstanceName = "tf-example",
     ///         ShardQuantity = 2,
     ///         NodesPerShard = 3,
     ///         Memory = 4,
     ///         Volume = 100,
-    ///         EngineVersion = "MONGO_36_WT",
+    ///         EngineVersion = "MONGO_40_WT",
     ///         MachineType = "HIO10G",
-    ///         AvailableZone = "ap-guangzhou-3",
-    ///         VpcId = "vpc-mz3efvbw",
-    ///         SubnetId = "subnet-lk0svi3p",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
     ///         ProjectId = 0,
-    ///         Password = "password1234",
+    ///         Password = "Password@123",
     ///         MongosCpu = 1,
     ///         MongosMemory = 2,
     ///         MongosNodeNum = 3,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Add a read-only node
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mongodb.ShardingInstance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         ShardQuantity = 2,
+    ///         NodesPerShard = 3,
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_40_WT",
+    ///         MachineType = "HIO10G",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         ProjectId = 0,
+    ///         Password = "Password@123",
+    ///         MongosCpu = 1,
+    ///         MongosMemory = 2,
+    ///         MongosNodeNum = 3,
+    ///         AddNodeLists = new[]
+    ///         {
+    ///             new Tencentcloud.Mongodb.Inputs.ShardingInstanceAddNodeListArgs
+    ///             {
+    ///                 Role = "READONLY",
+    ///                 Zone = "ap-guangzhou-6",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Remove a read-only node
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mongodb.ShardingInstance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         ShardQuantity = 2,
+    ///         NodesPerShard = 3,
+    ///         Memory = 4,
+    ///         Volume = 100,
+    ///         EngineVersion = "MONGO_40_WT",
+    ///         MachineType = "HIO10G",
+    ///         AvailableZone = "ap-guangzhou-6",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         ProjectId = 0,
+    ///         Password = "Password@123",
+    ///         MongosCpu = 1,
+    ///         MongosMemory = 2,
+    ///         MongosNodeNum = 3,
+    ///         RemoveNodeLists = new[]
+    ///         {
+    ///             new Tencentcloud.Mongodb.Inputs.ShardingInstanceRemoveNodeListArgs
+    ///             {
+    ///                 Role = "READONLY",
+    ///                 NodeName = "cmgo-xxxx_0-node-readonly0",
+    ///                 Zone = "ap-guangzhou-6",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -50,12 +135,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// Mongodb sharding instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+    /// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance example cmgo-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/shardingInstance:ShardingInstance")]
     public partial class ShardingInstance : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Add node list. Node type and availability zone information.
+        /// </summary>
+        [Output("addNodeLists")]
+        public Output<ImmutableArray<Outputs.ShardingInstanceAddNodeList>> AddNodeLists { get; private set; } = null!;
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -85,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string?> ChargeType { get; private set; } = null!;
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Output("createTime")]
@@ -98,6 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Output("engineVersion")]
         public Output<string> EngineVersion { get; private set; } = null!;
@@ -154,7 +252,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<int> MongosNodeNum { get; private set; } = null!;
 
         /// <summary>
-        /// Number of nodes per shard, at least 3(one master and two slaves).
+        /// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
         /// </summary>
         [Output("nodesPerShard")]
         public Output<int> NodesPerShard { get; private set; } = null!;
@@ -176,6 +274,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Output("projectId")]
         public Output<int?> ProjectId { get; private set; } = null!;
+
+        /// <summary>
+        /// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+        /// </summary>
+        [Output("removeNodeLists")]
+        public Output<ImmutableArray<Outputs.ShardingInstanceRemoveNodeList>> RemoveNodeLists { get; private set; } = null!;
 
         /// <summary>
         /// ID of the security group.
@@ -282,6 +386,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
 
     public sealed class ShardingInstanceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("addNodeLists")]
+        private InputList<Inputs.ShardingInstanceAddNodeListArgs>? _addNodeLists;
+
+        /// <summary>
+        /// Add node list. Node type and availability zone information.
+        /// </summary>
+        public InputList<Inputs.ShardingInstanceAddNodeListArgs> AddNodeLists
+        {
+            get => _addNodeLists ?? (_addNodeLists = new InputList<Inputs.ShardingInstanceAddNodeListArgs>());
+            set => _addNodeLists = value;
+        }
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -317,6 +433,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
         /// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
         /// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -324,6 +446,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion", required: true)]
         public Input<string> EngineVersion { get; set; } = null!;
@@ -380,7 +503,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<int>? MongosNodeNum { get; set; }
 
         /// <summary>
-        /// Number of nodes per shard, at least 3(one master and two slaves).
+        /// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
         /// </summary>
         [Input("nodesPerShard", required: true)]
         public Input<int> NodesPerShard { get; set; } = null!;
@@ -412,6 +535,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("removeNodeLists")]
+        private InputList<Inputs.ShardingInstanceRemoveNodeListArgs>? _removeNodeLists;
+
+        /// <summary>
+        /// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+        /// </summary>
+        public InputList<Inputs.ShardingInstanceRemoveNodeListArgs> RemoveNodeLists
+        {
+            get => _removeNodeLists ?? (_removeNodeLists = new InputList<Inputs.ShardingInstanceRemoveNodeListArgs>());
+            set => _removeNodeLists = value;
+        }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;
@@ -469,6 +604,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
 
     public sealed class ShardingInstanceState : global::Pulumi.ResourceArgs
     {
+        [Input("addNodeLists")]
+        private InputList<Inputs.ShardingInstanceAddNodeListGetArgs>? _addNodeLists;
+
+        /// <summary>
+        /// Add node list. Node type and availability zone information.
+        /// </summary>
+        public InputList<Inputs.ShardingInstanceAddNodeListGetArgs> AddNodeLists
+        {
+            get => _addNodeLists ?? (_addNodeLists = new InputList<Inputs.ShardingInstanceAddNodeListGetArgs>());
+            set => _addNodeLists = value;
+        }
+
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         /// </summary>
@@ -504,6 +651,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? ChargeType { get; set; }
 
         /// <summary>
+        /// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
+
+        /// <summary>
         /// Creation time of the Mongodb instance.
         /// </summary>
         [Input("createTime")]
@@ -517,6 +670,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
         /// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
         /// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+        /// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -573,7 +727,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<int>? MongosNodeNum { get; set; }
 
         /// <summary>
-        /// Number of nodes per shard, at least 3(one master and two slaves).
+        /// Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
         /// </summary>
         [Input("nodesPerShard")]
         public Input<int>? NodesPerShard { get; set; }
@@ -605,6 +759,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
+
+        [Input("removeNodeLists")]
+        private InputList<Inputs.ShardingInstanceRemoveNodeListGetArgs>? _removeNodeLists;
+
+        /// <summary>
+        /// Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+        /// </summary>
+        public InputList<Inputs.ShardingInstanceRemoveNodeListGetArgs> RemoveNodeLists
+        {
+            get => _removeNodeLists ?? (_removeNodeLists = new InputList<Inputs.ShardingInstanceRemoveNodeListGetArgs>());
+            set => _removeNodeLists = value;
+        }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;

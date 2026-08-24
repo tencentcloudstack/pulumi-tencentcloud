@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cynosdb.getZoneConfig({});
+ * const foo = tencentcloud.cynosdb.getZoneConfig({});
  * ```
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
@@ -59,7 +59,7 @@ export interface GetZoneConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cynosdb.getZoneConfig({});
+ * const foo = tencentcloud.cynosdb.getZoneConfig({});
  * ```
  */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneConfigResult> {
@@ -77,5 +77,5 @@ export interface GetZoneConfigOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -10,6 +10,11 @@ export type Account = import("./account").Account;
 export const Account: typeof import("./account").Account = null as any;
 utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
+export { AuditLogArgs, AuditLogState } from "./auditLog";
+export type AuditLog = import("./auditLog").AuditLog;
+export const AuditLog: typeof import("./auditLog").AuditLog = null as any;
+utilities.lazyLoad(exports, ["AuditLog"], () => require("./auditLog"));
+
 export { BackupConfigArgs, BackupConfigState } from "./backupConfig";
 export type BackupConfig = import("./backupConfig").BackupConfig;
 export const BackupConfig: typeof import("./backupConfig").BackupConfig = null as any;
@@ -172,6 +177,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Redis/account:Account":
                 return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/auditLog:AuditLog":
+                return new AuditLog(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupConfig:BackupConfig":
                 return new BackupConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
@@ -220,6 +227,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/auditLog", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupDownloadRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupOperation", _module)

@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf-example"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -53,7 +53,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewServiceAccount(ctx, "example", &tcr.ServiceAccountArgs{
-//				RegistryId: example.ID(),
+//				RegistryId: example.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf-example"),
 //				Permissions: tcr.ServiceAccountPermissionArray{
 //					&tcr.ServiceAccountPermissionArgs{

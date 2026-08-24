@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Import
     /// 
-    /// ssl replace_certificate can be imported using the id, e.g.
+    /// ssl ReplaceCertificate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id

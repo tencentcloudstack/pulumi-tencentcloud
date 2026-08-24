@@ -39,12 +39,8 @@ type GetBackupDownloadUrlResult struct {
 }
 
 func GetBackupDownloadUrlOutput(ctx *pulumi.Context, args GetBackupDownloadUrlOutputArgs, opts ...pulumi.InvokeOption) GetBackupDownloadUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupDownloadUrlResultOutput, error) {
-			args := v.(GetBackupDownloadUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args, GetBackupDownloadUrlResultOutput{}, options).(GetBackupDownloadUrlResultOutput), nil
-		}).(GetBackupDownloadUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args, GetBackupDownloadUrlResultOutput{}, options).(GetBackupDownloadUrlResultOutput)
 }
 
 // A collection of arguments for invoking getBackupDownloadUrl.

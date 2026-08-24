@@ -46,7 +46,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * ses template can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Ses/template:Template example template_id
  * ```
@@ -126,11 +125,11 @@ export interface TemplateState {
     /**
      * Sms Template Content.
      */
-    templateContent?: pulumi.Input<inputs.Ses.TemplateTemplateContent>;
+    templateContent?: pulumi.Input<inputs.Ses.TemplateTemplateContent | undefined>;
     /**
      * smsTemplateName, which must be required.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**

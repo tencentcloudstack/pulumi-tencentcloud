@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Import
     /// 
-    /// wedata wedata_workflow can be imported using the id, e.g.
+    /// wedata WedataWorkflow can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Wedata/workflow:Workflow wedata_workflow wedata_workflow_id

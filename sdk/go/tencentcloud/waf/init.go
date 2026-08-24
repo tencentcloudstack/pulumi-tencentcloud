@@ -25,10 +25,26 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AntiFake{}
 	case "tencentcloud:Waf/antiInfoLeak:AntiInfoLeak":
 		r = &AntiInfoLeak{}
+	case "tencentcloud:Waf/apiSecSensitiveCustomApiExcludeRule:ApiSecSensitiveCustomApiExcludeRule":
+		r = &ApiSecSensitiveCustomApiExcludeRule{}
+	case "tencentcloud:Waf/apiSecSensitiveCustomApiExtractRule:ApiSecSensitiveCustomApiExtractRule":
+		r = &ApiSecSensitiveCustomApiExtractRule{}
+	case "tencentcloud:Waf/apiSecSensitiveCustomEventRule:ApiSecSensitiveCustomEventRule":
+		r = &ApiSecSensitiveCustomEventRule{}
+	case "tencentcloud:Waf/apiSecSensitiveCustomRule:ApiSecSensitiveCustomRule":
+		r = &ApiSecSensitiveCustomRule{}
+	case "tencentcloud:Waf/apiSecSensitivePrivilegeRule:ApiSecSensitivePrivilegeRule":
+		r = &ApiSecSensitivePrivilegeRule{}
+	case "tencentcloud:Waf/apiSecSensitiveSceneRule:ApiSecSensitiveSceneRule":
+		r = &ApiSecSensitiveSceneRule{}
+	case "tencentcloud:Waf/apiSecSensitiveWhiteRule:ApiSecSensitiveWhiteRule":
+		r = &ApiSecSensitiveWhiteRule{}
 	case "tencentcloud:Waf/attackWhiteRule:AttackWhiteRule":
 		r = &AttackWhiteRule{}
 	case "tencentcloud:Waf/autoDenyRules:AutoDenyRules":
 		r = &AutoDenyRules{}
+	case "tencentcloud:Waf/botIdRule:BotIdRule":
+		r = &BotIdRule{}
 	case "tencentcloud:Waf/botSceneStatusConfig:BotSceneStatusConfig":
 		r = &BotSceneStatusConfig{}
 	case "tencentcloud:Waf/botSceneUcbRule:BotSceneUcbRule":
@@ -71,10 +87,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OwaspWhiteRule{}
 	case "tencentcloud:Waf/protectionMode:ProtectionMode":
 		r = &ProtectionMode{}
+	case "tencentcloud:Waf/rateLimit:RateLimit":
+		r = &RateLimit{}
 	case "tencentcloud:Waf/saasDomain:SaasDomain":
 		r = &SaasDomain{}
 	case "tencentcloud:Waf/saasInstance:SaasInstance":
 		r = &SaasInstance{}
+	case "tencentcloud:Waf/wafObject:WafObject":
+		r = &WafObject{}
 	case "tencentcloud:Waf/webShell:WebShell":
 		r = &WebShell{}
 	default:
@@ -102,12 +122,52 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Waf/apiSecSensitiveCustomApiExcludeRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitiveCustomApiExtractRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitiveCustomEventRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitiveCustomRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitivePrivilegeRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitiveSceneRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/apiSecSensitiveWhiteRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Waf/attackWhiteRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Waf/autoDenyRules",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/botIdRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -217,12 +277,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Waf/rateLimit",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Waf/saasDomain",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Waf/saasInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Waf/wafObject",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

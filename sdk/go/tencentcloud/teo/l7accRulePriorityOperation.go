@@ -33,7 +33,7 @@ import (
 //				Descriptions: pulumi.StringArray{
 //					pulumi.String("1"),
 //				},
-//				RuleName: pulumi.String("网站加速1"),
+//				RuleName: pulumi.String("Web Acceleration 1"),
 //				Status:   pulumi.String("enable"),
 //				Branches: teo.L7AccRuleV2BranchArray{
 //					&teo.L7AccRuleV2BranchArgs{
@@ -113,7 +113,7 @@ import (
 //				Descriptions: pulumi.StringArray{
 //					pulumi.String("2"),
 //				},
-//				RuleName: pulumi.String("网站加速2"),
+//				RuleName: pulumi.String("Web Acceleration 2"),
 //				Status:   pulumi.String("enable"),
 //				Branches: teo.L7AccRuleV2BranchArray{
 //					&teo.L7AccRuleV2BranchArgs{

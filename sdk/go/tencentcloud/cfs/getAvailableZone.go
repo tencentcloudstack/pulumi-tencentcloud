@@ -62,12 +62,8 @@ type GetAvailableZoneResult struct {
 }
 
 func GetAvailableZoneOutput(ctx *pulumi.Context, args GetAvailableZoneOutputArgs, opts ...pulumi.InvokeOption) GetAvailableZoneResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAvailableZoneResultOutput, error) {
-			args := v.(GetAvailableZoneArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args, GetAvailableZoneResultOutput{}, options).(GetAvailableZoneResultOutput), nil
-		}).(GetAvailableZoneResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args, GetAvailableZoneResultOutput{}, options).(GetAvailableZoneResultOutput)
 }
 
 // A collection of arguments for invoking getAvailableZone.

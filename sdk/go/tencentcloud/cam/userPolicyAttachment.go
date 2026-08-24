@@ -82,7 +82,7 @@ import (
 //			}
 //			_, err = cam.NewUserPolicyAttachment(ctx, "user_policy_attachment_basic", &cam.UserPolicyAttachmentArgs{
 //				UserName: pulumi.String(users.UserLists[0].UserId),
-//				PolicyId: policyBasic.ID(),
+//				PolicyId: policyBasic.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

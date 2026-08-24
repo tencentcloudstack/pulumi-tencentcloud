@@ -43,6 +43,10 @@ import * as utilities from "../utilities";
  *         subnetId: subnet.id,
  *     },
  *     payMode: 0,
+ *     x509Mode: "BYOC",
+ *     deviceCertificateProvisionType: "JITP",
+ *     messageRate: 100,
+ *     useDefaultServerCert: true,
  *     tags: {
  *         createBy: "Terraform",
  *     },
@@ -131,7 +135,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
      */
-    declare public /*out*/ readonly deviceCertificateProvisionType: pulumi.Output<string>;
+    declare public readonly deviceCertificateProvisionType: pulumi.Output<string>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */
@@ -140,6 +144,10 @@ export class Instance extends pulumi.CustomResource {
      * Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
      */
     declare public readonly instanceType: pulumi.Output<string>;
+    /**
+     * Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+     */
+    declare public readonly messageRate: pulumi.Output<number>;
     /**
      * Instance name.
      */
@@ -169,9 +177,17 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly timeSpan: pulumi.Output<number | undefined>;
     /**
+     * Whether to use the default server certificate.
+     */
+    declare public readonly useDefaultServerCert: pulumi.Output<boolean>;
+    /**
      * VPC information bound to the instance.
      */
     declare public readonly vpcList: pulumi.Output<outputs.Mqtt.InstanceVpcList | undefined>;
+    /**
+     * X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+     */
+    declare public readonly x509Mode: pulumi.Output<string>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -191,6 +207,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["deviceCertificateProvisionType"] = state?.deviceCertificateProvisionType;
             resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["instanceType"] = state?.instanceType;
+            resourceInputs["messageRate"] = state?.messageRate;
             resourceInputs["name"] = state?.name;
             resourceInputs["payMode"] = state?.payMode;
             resourceInputs["remark"] = state?.remark;
@@ -198,7 +215,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["skuCode"] = state?.skuCode;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["timeSpan"] = state?.timeSpan;
+            resourceInputs["useDefaultServerCert"] = state?.useDefaultServerCert;
             resourceInputs["vpcList"] = state?.vpcList;
+            resourceInputs["x509Mode"] = state?.x509Mode;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
             if (args?.instanceType === undefined && !opts.urn) {
@@ -209,8 +228,10 @@ export class Instance extends pulumi.CustomResource {
             }
             resourceInputs["authorizationPolicy"] = args?.authorizationPolicy;
             resourceInputs["automaticActivation"] = args?.automaticActivation;
+            resourceInputs["deviceCertificateProvisionType"] = args?.deviceCertificateProvisionType;
             resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["instanceType"] = args?.instanceType;
+            resourceInputs["messageRate"] = args?.messageRate;
             resourceInputs["name"] = args?.name;
             resourceInputs["payMode"] = args?.payMode;
             resourceInputs["remark"] = args?.remark;
@@ -218,8 +239,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["skuCode"] = args?.skuCode;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["timeSpan"] = args?.timeSpan;
+            resourceInputs["useDefaultServerCert"] = args?.useDefaultServerCert;
             resourceInputs["vpcList"] = args?.vpcList;
-            resourceInputs["deviceCertificateProvisionType"] = undefined /*out*/;
+            resourceInputs["x509Mode"] = args?.x509Mode;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -233,55 +255,67 @@ export interface InstanceState {
     /**
      * Authorization policy switch. Default is false.
      */
-    authorizationPolicy?: pulumi.Input<boolean>;
+    authorizationPolicy?: pulumi.Input<boolean | undefined>;
     /**
      * Is the automatic registration certificate automatically activated. Default is false.
      */
-    automaticActivation?: pulumi.Input<boolean>;
+    automaticActivation?: pulumi.Input<boolean | undefined>;
     /**
      * Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
      */
-    deviceCertificateProvisionType?: pulumi.Input<string>;
+    deviceCertificateProvisionType?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
+    /**
+     * Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+     */
+    messageRate?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Payment mode (0: Postpaid; 1: Prepaid).
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable auto-renewal (0: Disabled; 1: Enabled).
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Product SKU, available SKUs can be queried via the DescribeProductSKUList API.
      */
-    skuCode?: pulumi.Input<string>;
+    skuCode?: pulumi.Input<string | undefined>;
     /**
      * Tags of the MQTT instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Purchase duration (unit: months).
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to use the default server certificate.
+     */
+    useDefaultServerCert?: pulumi.Input<boolean | undefined>;
     /**
      * VPC information bound to the instance.
      */
-    vpcList?: pulumi.Input<inputs.Mqtt.InstanceVpcList>;
+    vpcList?: pulumi.Input<inputs.Mqtt.InstanceVpcList | undefined>;
+    /**
+     * X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+     */
+    x509Mode?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -291,35 +325,43 @@ export interface InstanceArgs {
     /**
      * Authorization policy switch. Default is false.
      */
-    authorizationPolicy?: pulumi.Input<boolean>;
+    authorizationPolicy?: pulumi.Input<boolean | undefined>;
     /**
      * Is the automatic registration certificate automatically activated. Default is false.
      */
-    automaticActivation?: pulumi.Input<boolean>;
+    automaticActivation?: pulumi.Input<boolean | undefined>;
+    /**
+     * Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
+     */
+    deviceCertificateProvisionType?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Instance type. PRO for Professional Edition; PLATINUM for Platinum Edition.
      */
     instanceType: pulumi.Input<string>;
     /**
+     * Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+     */
+    messageRate?: pulumi.Input<number | undefined>;
+    /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Payment mode (0: Postpaid; 1: Prepaid).
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable auto-renewal (0: Disabled; 1: Enabled).
      */
-    renewFlag?: pulumi.Input<number>;
+    renewFlag?: pulumi.Input<number | undefined>;
     /**
      * Product SKU, available SKUs can be queried via the DescribeProductSKUList API.
      */
@@ -327,13 +369,21 @@ export interface InstanceArgs {
     /**
      * Tags of the MQTT instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Purchase duration (unit: months).
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to use the default server certificate.
+     */
+    useDefaultServerCert?: pulumi.Input<boolean | undefined>;
     /**
      * VPC information bound to the instance.
      */
-    vpcList?: pulumi.Input<inputs.Mqtt.InstanceVpcList>;
+    vpcList?: pulumi.Input<inputs.Mqtt.InstanceVpcList | undefined>;
+    /**
+     * X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+     */
+    x509Mode?: pulumi.Input<string | undefined>;
 }

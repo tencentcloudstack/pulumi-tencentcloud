@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cfw vpcInstance
+// Provides a resource to create a CFW vpc instance
 //
 // ## Example Usage
 //
@@ -108,7 +108,7 @@ import (
 //
 // ## Import
 //
-// cfw vpc_instance can be imported using the id, e.g.
+// CFW vpc instance can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
@@ -118,6 +118,8 @@ type VpcInstance struct {
 
 	// Cloud networking id, suitable for cloud networking mode.
 	CcnId pulumi.StringPtrOutput `pulumi:"ccnId"`
+	// Firewall group ID.
+	FwGroupId pulumi.StringOutput `pulumi:"fwGroupId"`
 	// auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
 	FwVpcCidr pulumi.StringPtrOutput `pulumi:"fwVpcCidr"`
 	// Mode 0: private network mode; 1: CCN cloud networking mode.
@@ -171,6 +173,8 @@ func GetVpcInstance(ctx *pulumi.Context,
 type vpcInstanceState struct {
 	// Cloud networking id, suitable for cloud networking mode.
 	CcnId *string `pulumi:"ccnId"`
+	// Firewall group ID.
+	FwGroupId *string `pulumi:"fwGroupId"`
 	// auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
 	FwVpcCidr *string `pulumi:"fwVpcCidr"`
 	// Mode 0: private network mode; 1: CCN cloud networking mode.
@@ -186,6 +190,8 @@ type vpcInstanceState struct {
 type VpcInstanceState struct {
 	// Cloud networking id, suitable for cloud networking mode.
 	CcnId pulumi.StringPtrInput
+	// Firewall group ID.
+	FwGroupId pulumi.StringPtrInput
 	// auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.
 	FwVpcCidr pulumi.StringPtrInput
 	// Mode 0: private network mode; 1: CCN cloud networking mode.
@@ -323,6 +329,11 @@ func (o VpcInstanceOutput) ToVpcInstanceOutputWithContext(ctx context.Context) V
 // Cloud networking id, suitable for cloud networking mode.
 func (o VpcInstanceOutput) CcnId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *VpcInstance) pulumi.StringPtrOutput { return v.CcnId }).(pulumi.StringPtrOutput)
+}
+
+// Firewall group ID.
+func (o VpcInstanceOutput) FwGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v *VpcInstance) pulumi.StringOutput { return v.FwGroupId }).(pulumi.StringOutput)
 }
 
 // auto Automatically select the firewall network segment; 10.10.10.0/24 The firewall network segment entered by the user.

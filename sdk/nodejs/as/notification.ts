@@ -13,10 +13,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -152,15 +152,15 @@ export interface NotificationState {
     /**
      * A list of Notification Types that trigger notifications. Acceptable values are `SCALE_OUT_FAILED`, `SCALE_IN_SUCCESSFUL`, `SCALE_IN_FAILED`, `REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL` and `REPLACE_UNHEALTHY_INSTANCE_FAILED`.
      */
-    notificationTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    notificationTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A group of user IDs to be notified.
      */
-    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    notificationUserGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of a scaling group.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cwp licenseOrder
+// Provides a resource to create a CWP license order
 //
 // ## Example Usage
 //
@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// cwp license_order can be imported using the id, e.g.
+// CWP license order can be imported using the resourceId#regionId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
@@ -60,13 +60,13 @@ type LicenseOrder struct {
 	Alias pulumi.StringOutput `pulumi:"alias"`
 	// license id.
 	LicenseId pulumi.IntOutput `pulumi:"licenseId"`
-	// License quantity, Quantity to be purchased.Default is 1.
+	// Authorization quantity: the number of units that need to be purchased, The default is 1.
 	LicenseNum pulumi.IntPtrOutput `pulumi:"licenseNum"`
-	// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 	LicenseType pulumi.IntPtrOutput `pulumi:"licenseType"`
 	// Project ID. Default is 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
-	// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+	// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 	RegionId pulumi.IntPtrOutput `pulumi:"regionId"`
 	// resource id.
 	ResourceId pulumi.StringOutput `pulumi:"resourceId"`
@@ -108,13 +108,13 @@ type licenseOrderState struct {
 	Alias *string `pulumi:"alias"`
 	// license id.
 	LicenseId *int `pulumi:"licenseId"`
-	// License quantity, Quantity to be purchased.Default is 1.
+	// Authorization quantity: the number of units that need to be purchased, The default is 1.
 	LicenseNum *int `pulumi:"licenseNum"`
-	// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 	LicenseType *int `pulumi:"licenseType"`
 	// Project ID. Default is 0.
 	ProjectId *int `pulumi:"projectId"`
-	// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+	// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 	RegionId *int `pulumi:"regionId"`
 	// resource id.
 	ResourceId *string `pulumi:"resourceId"`
@@ -127,13 +127,13 @@ type LicenseOrderState struct {
 	Alias pulumi.StringPtrInput
 	// license id.
 	LicenseId pulumi.IntPtrInput
-	// License quantity, Quantity to be purchased.Default is 1.
+	// Authorization quantity: the number of units that need to be purchased, The default is 1.
 	LicenseNum pulumi.IntPtrInput
-	// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 	LicenseType pulumi.IntPtrInput
 	// Project ID. Default is 0.
 	ProjectId pulumi.IntPtrInput
-	// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+	// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 	RegionId pulumi.IntPtrInput
 	// resource id.
 	ResourceId pulumi.StringPtrInput
@@ -148,13 +148,13 @@ func (LicenseOrderState) ElementType() reflect.Type {
 type licenseOrderArgs struct {
 	// Resource alias.
 	Alias *string `pulumi:"alias"`
-	// License quantity, Quantity to be purchased.Default is 1.
+	// Authorization quantity: the number of units that need to be purchased, The default is 1.
 	LicenseNum *int `pulumi:"licenseNum"`
-	// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 	LicenseType *int `pulumi:"licenseType"`
 	// Project ID. Default is 0.
 	ProjectId *int `pulumi:"projectId"`
-	// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+	// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 	RegionId *int `pulumi:"regionId"`
 	// Tags of the license order.
 	Tags map[string]string `pulumi:"tags"`
@@ -164,13 +164,13 @@ type licenseOrderArgs struct {
 type LicenseOrderArgs struct {
 	// Resource alias.
 	Alias pulumi.StringPtrInput
-	// License quantity, Quantity to be purchased.Default is 1.
+	// Authorization quantity: the number of units that need to be purchased, The default is 1.
 	LicenseNum pulumi.IntPtrInput
-	// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+	// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 	LicenseType pulumi.IntPtrInput
 	// Project ID. Default is 0.
 	ProjectId pulumi.IntPtrInput
-	// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+	// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 	RegionId pulumi.IntPtrInput
 	// Tags of the license order.
 	Tags pulumi.StringMapInput
@@ -273,12 +273,12 @@ func (o LicenseOrderOutput) LicenseId() pulumi.IntOutput {
 	return o.ApplyT(func(v *LicenseOrder) pulumi.IntOutput { return v.LicenseId }).(pulumi.IntOutput)
 }
 
-// License quantity, Quantity to be purchased.Default is 1.
+// Authorization quantity: the number of units that need to be purchased, The default is 1.
 func (o LicenseOrderOutput) LicenseNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LicenseOrder) pulumi.IntPtrOutput { return v.LicenseNum }).(pulumi.IntPtrOutput)
 }
 
-// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
 func (o LicenseOrderOutput) LicenseType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LicenseOrder) pulumi.IntPtrOutput { return v.LicenseType }).(pulumi.IntPtrOutput)
 }
@@ -288,7 +288,7 @@ func (o LicenseOrderOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LicenseOrder) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
 }
 
-// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
 func (o LicenseOrderOutput) RegionId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *LicenseOrder) pulumi.IntPtrOutput { return v.RegionId }).(pulumi.IntPtrOutput)
 }

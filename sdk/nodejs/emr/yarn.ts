@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * emr emr_yarn can be imported using the id, e.g.
+ * emr emrYarn can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Emr/yarn:Yarn emr_yarn emr_instance_id
@@ -135,31 +135,31 @@ export interface YarnState {
     /**
      * Resource dispatchers currently in effect.
      */
-    activeScheduler?: pulumi.Input<string>;
+    activeScheduler?: pulumi.Input<string | undefined>;
     /**
      * Information about capacity scheduler.
      */
-    capacityGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnCapacityGlobalConfig>[]>;
+    capacityGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnCapacityGlobalConfig>[] | undefined>;
     /**
      * Whether to synchronize when closing.
      */
-    disableResourceScheduleSync?: pulumi.Input<boolean>;
+    disableResourceScheduleSync?: pulumi.Input<boolean | undefined>;
     /**
      * Whether the resource scheduling function is enabled.
      */
-    enableResourceSchedule?: pulumi.Input<boolean>;
+    enableResourceSchedule?: pulumi.Input<boolean | undefined>;
     /**
      * Information about fair scheduler.
      */
-    fairGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnFairGlobalConfig>[]>;
+    fairGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnFairGlobalConfig>[] | undefined>;
     /**
      * EMR Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The latest resource scheduler.
      */
-    scheduler?: pulumi.Input<string>;
+    scheduler?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -169,19 +169,19 @@ export interface YarnArgs {
     /**
      * Information about capacity scheduler.
      */
-    capacityGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnCapacityGlobalConfig>[]>;
+    capacityGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnCapacityGlobalConfig>[] | undefined>;
     /**
      * Whether to synchronize when closing.
      */
-    disableResourceScheduleSync?: pulumi.Input<boolean>;
+    disableResourceScheduleSync?: pulumi.Input<boolean | undefined>;
     /**
      * Whether the resource scheduling function is enabled.
      */
-    enableResourceSchedule?: pulumi.Input<boolean>;
+    enableResourceSchedule?: pulumi.Input<boolean | undefined>;
     /**
      * Information about fair scheduler.
      */
-    fairGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnFairGlobalConfig>[]>;
+    fairGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Emr.YarnFairGlobalConfig>[] | undefined>;
     /**
      * EMR Instance ID.
      */
@@ -189,5 +189,5 @@ export interface YarnArgs {
     /**
      * The latest resource scheduler.
      */
-    scheduler?: pulumi.Input<string>;
+    scheduler?: pulumi.Input<string | undefined>;
 }

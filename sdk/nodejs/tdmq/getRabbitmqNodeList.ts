@@ -62,10 +62,10 @@ export function getRabbitmqNodeListOutput(args: GetRabbitmqNodeListOutputArgs, o
  * A collection of arguments for invoking getRabbitmqNodeList.
  */
 export interface GetRabbitmqNodeListOutputArgs {
-    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetRabbitmqNodeListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetRabbitmqNodeListFilterArgs>[] | undefined>;
     instanceId: pulumi.Input<string>;
-    nodeName?: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
-    sortElement?: pulumi.Input<string>;
-    sortOrder?: pulumi.Input<string>;
+    nodeName?: pulumi.Input<string | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    sortElement?: pulumi.Input<string | undefined>;
+    sortOrder?: pulumi.Input<string | undefined>;
 }

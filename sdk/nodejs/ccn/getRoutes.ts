@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routes = tencentcloud.Ccn.getRoutes({
+ * const routes = tencentcloud.ccn.getRoutes({
  *     ccnId: "ccn-gr7nynbd",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routes = tencentcloud.Ccn.getRoutes({
+ * const routes = tencentcloud.ccn.getRoutes({
  *     ccnId: "ccn-gr7nynbd",
  *     filters: [{
  *         name: "route-table-id",
@@ -91,7 +91,7 @@ export interface GetRoutesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routes = tencentcloud.Ccn.getRoutes({
+ * const routes = tencentcloud.ccn.getRoutes({
  *     ccnId: "ccn-gr7nynbd",
  * });
  * ```
@@ -102,7 +102,7 @@ export interface GetRoutesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const routes = tencentcloud.Ccn.getRoutes({
+ * const routes = tencentcloud.ccn.getRoutes({
  *     ccnId: "ccn-gr7nynbd",
  *     filters: [{
  *         name: "route-table-id",
@@ -131,9 +131,9 @@ export interface GetRoutesOutputArgs {
     /**
      * Filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ccn.GetRoutesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ccn.GetRoutesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

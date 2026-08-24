@@ -130,12 +130,8 @@ type GetForwardRulesResult struct {
 }
 
 func GetForwardRulesOutput(ctx *pulumi.Context, args GetForwardRulesOutputArgs, opts ...pulumi.InvokeOption) GetForwardRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetForwardRulesResultOutput, error) {
-			args := v.(GetForwardRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:PrivateDns/getForwardRules:getForwardRules", args, GetForwardRulesResultOutput{}, options).(GetForwardRulesResultOutput), nil
-		}).(GetForwardRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:PrivateDns/getForwardRules:getForwardRules", args, GetForwardRulesResultOutput{}, options).(GetForwardRulesResultOutput)
 }
 
 // A collection of arguments for invoking getForwardRules.

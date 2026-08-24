@@ -11,7 +11,12 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
 {
     /// <summary>
-    /// Provides a resource to create a waf ClbDomain
+    /// Provides a resource to create a Waf clb domain
+    /// 
+    /// &gt; **NOTE:** There are two modes for the `FlowMade` field:
+    /// ##### `Cleaning mode`: Business traffic is forwarded to the WAF cluster, which performs bypass detection and alerting, synchronizes requests for trusted status, and the gateway cluster intercepts or releases requests based on the status. (Recommended)
+    /// ##### `Mirror mode`: Mirror traffic to WAF cluster, WAF performs bypass detection and alarm, and does not return request trusted status.
+    /// The default value for creating resources in TF is mirror mode. If WAF needs to handle traffic, please set it to clean mode.
     /// 
     /// ## Example Usage
     /// 
@@ -28,26 +33,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
     ///         InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///         Domain = "test.com",
+    ///         Domain = "demo.com",
     ///         LoadBalancerSets = new[]
     ///         {
     ///             new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
     ///             {
     ///                 LoadBalancerId = "lb-5dnrkgry",
-    ///                 LoadBalancerName = "keep-listener-clb",
+    ///                 LoadBalancerName = "example-clb",
     ///                 ListenerId = "lbl-nonkgvc2",
-    ///                 ListenerName = "dsadasd",
+    ///                 ListenerName = "example-listener",
     ///                 Vip = "106.55.220.8",
     ///                 Vport = 80,
     ///                 Region = "gz",
     ///                 Protocol = "HTTP",
     ///                 Zone = "ap-guangzhou-6",
-    ///                 NumericalVpcId = 5232945,
+    ///                 NumericalVpcId = -1,
     ///                 LoadBalancerType = "OPEN",
     ///             },
     ///         },
     ///         Region = "gz",
     ///         AlbType = "clb",
+    ///         Note = "notes.",
     ///     });
     /// 
     /// });
@@ -66,7 +72,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
     ///         InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///         Domain = "test.com",
+    ///         Domain = "demo.com",
     ///         IsCdn = 3,
     ///         Status = 1,
     ///         Engine = 21,
@@ -75,15 +81,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///             new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
     ///             {
     ///                 LoadBalancerId = "lb-5dnrkgry",
-    ///                 LoadBalancerName = "keep-listener-clb",
+    ///                 LoadBalancerName = "example-clb",
     ///                 ListenerId = "lbl-nonkgvc2",
-    ///                 ListenerName = "dsadasd",
+    ///                 ListenerName = "example-listener",
     ///                 Vip = "106.55.220.8",
     ///                 Vport = 80,
     ///                 Region = "gz",
     ///                 Protocol = "HTTP",
     ///                 Zone = "ap-guangzhou-6",
-    ///                 NumericalVpcId = 5232945,
+    ///                 NumericalVpcId = -1,
     ///                 LoadBalancerType = "OPEN",
     ///             },
     ///         },
@@ -116,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
     ///         InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///         Domain = "xxx.com",
+    ///         Domain = "demo.com",
     ///         IsCdn = 0,
     ///         Status = 1,
     ///         Engine = 12,
@@ -143,7 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
     ///         InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///         Domain = "xxx.com",
+    ///         Domain = "demo.com",
     ///         IsCdn = 0,
     ///         Status = 1,
     ///         Engine = 12,
@@ -159,10 +165,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf clb_domain can be imported using the id, e.g.
+    /// Waf clb domain can be imported using the instanceID#domain#domainId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+    /// $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#demo.com#waf-0FSehoRU
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/clbDomain:ClbDomain")]
@@ -185,6 +191,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// </summary>
         [Output("botStatus")]
         public Output<int?> BotStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Cloud type. `Public`: public cloud; `Private`: private cloud; `Hybrid`: hybrid cloud.
+        /// </summary>
+        [Output("cloudType")]
+        public Output<string> CloudType { get; private set; } = null!;
 
         /// <summary>
         /// Whether to enable access logs, 1 enable, 0 disable.
@@ -239,6 +251,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// </summary>
         [Output("loadBalancerSets")]
         public Output<ImmutableArray<Outputs.ClbDomainLoadBalancerSet>> LoadBalancerSets { get; private set; } = null!;
+
+        /// <summary>
+        /// Domain name notes.
+        /// </summary>
+        [Output("note")]
+        public Output<string?> Note { get; private set; } = null!;
 
         /// <summary>
         /// Regions of LB bound by domain.
@@ -318,6 +336,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public Input<int>? BotStatus { get; set; }
 
         /// <summary>
+        /// Cloud type. `Public`: public cloud; `Private`: private cloud; `Hybrid`: hybrid cloud.
+        /// </summary>
+        [Input("cloudType")]
+        public Input<string>? CloudType { get; set; }
+
+        /// <summary>
         /// Whether to enable access logs, 1 enable, 0 disable.
         /// </summary>
         [Input("clsStatus")]
@@ -378,6 +402,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
 
         /// <summary>
+        /// Domain name notes.
+        /// </summary>
+        [Input("note")]
+        public Input<string>? Note { get; set; }
+
+        /// <summary>
         /// Regions of LB bound by domain.
         /// </summary>
         [Input("region", required: true)]
@@ -414,6 +444,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// </summary>
         [Input("botStatus")]
         public Input<int>? BotStatus { get; set; }
+
+        /// <summary>
+        /// Cloud type. `Public`: public cloud; `Private`: private cloud; `Hybrid`: hybrid cloud.
+        /// </summary>
+        [Input("cloudType")]
+        public Input<string>? CloudType { get; set; }
 
         /// <summary>
         /// Whether to enable access logs, 1 enable, 0 disable.
@@ -480,6 +516,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
             get => _loadBalancerSets ?? (_loadBalancerSets = new InputList<Inputs.ClbDomainLoadBalancerSetGetArgs>());
             set => _loadBalancerSets = value;
         }
+
+        /// <summary>
+        /// Domain name notes.
+        /// </summary>
+        [Input("note")]
+        public Input<string>? Note { get; set; }
 
         /// <summary>
         /// Regions of LB bound by domain.

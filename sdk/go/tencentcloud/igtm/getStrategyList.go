@@ -80,12 +80,8 @@ type GetStrategyListResult struct {
 }
 
 func GetStrategyListOutput(ctx *pulumi.Context, args GetStrategyListOutputArgs, opts ...pulumi.InvokeOption) GetStrategyListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStrategyListResultOutput, error) {
-			args := v.(GetStrategyListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getStrategyList:getStrategyList", args, GetStrategyListResultOutput{}, options).(GetStrategyListResultOutput), nil
-		}).(GetStrategyListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getStrategyList:getStrategyList", args, GetStrategyListResultOutput{}, options).(GetStrategyListResultOutput)
 }
 
 // A collection of arguments for invoking getStrategyList.

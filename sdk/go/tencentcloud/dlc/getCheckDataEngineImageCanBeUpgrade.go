@@ -69,12 +69,8 @@ type GetCheckDataEngineImageCanBeUpgradeResult struct {
 }
 
 func GetCheckDataEngineImageCanBeUpgradeOutput(ctx *pulumi.Context, args GetCheckDataEngineImageCanBeUpgradeOutputArgs, opts ...pulumi.InvokeOption) GetCheckDataEngineImageCanBeUpgradeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCheckDataEngineImageCanBeUpgradeResultOutput, error) {
-			args := v.(GetCheckDataEngineImageCanBeUpgradeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args, GetCheckDataEngineImageCanBeUpgradeResultOutput{}, options).(GetCheckDataEngineImageCanBeUpgradeResultOutput), nil
-		}).(GetCheckDataEngineImageCanBeUpgradeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args, GetCheckDataEngineImageCanBeUpgradeResultOutput{}, options).(GetCheckDataEngineImageCanBeUpgradeResultOutput)
 }
 
 // A collection of arguments for invoking getCheckDataEngineImageCanBeUpgrade.

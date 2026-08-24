@@ -49,8 +49,7 @@ import (
 //
 // ## Import
 //
-// mariadb dedicatedcluster_db_instance can be imported using the id, e.g.
-//
+// mariadb dedicatedclusterDbInstance can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/dedicatedclusterDbInstance:DedicatedclusterDbInstance dedicatedcluster_db_instance tdsql-050g3fmv
 // ```

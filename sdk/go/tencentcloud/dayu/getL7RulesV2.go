@@ -93,12 +93,8 @@ type GetL7RulesV2Result struct {
 }
 
 func GetL7RulesV2Output(ctx *pulumi.Context, args GetL7RulesV2OutputArgs, opts ...pulumi.InvokeOption) GetL7RulesV2ResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetL7RulesV2ResultOutput, error) {
-			args := v.(GetL7RulesV2Args)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args, GetL7RulesV2ResultOutput{}, options).(GetL7RulesV2ResultOutput), nil
-		}).(GetL7RulesV2ResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args, GetL7RulesV2ResultOutput{}, options).(GetL7RulesV2ResultOutput)
 }
 
 // A collection of arguments for invoking getL7RulesV2.

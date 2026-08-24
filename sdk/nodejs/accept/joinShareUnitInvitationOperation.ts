@@ -82,7 +82,7 @@ export interface JoinShareUnitInvitationOperationState {
     /**
      * Shared unit ID.
      */
-    unitId?: pulumi.Input<string>;
+    unitId?: pulumi.Input<string | undefined>;
 }
 
 /**

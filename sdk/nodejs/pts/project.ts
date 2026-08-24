@@ -28,7 +28,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * pts project can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Pts/project:Project project project-1ep27k1m
  * ```
@@ -144,39 +143,39 @@ export interface ProjectState {
     /**
      * App ID.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Creation time.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Pts object description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ptsObjectName, which must be required.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Sub-user ID.
      */
-    subAccountUin?: pulumi.Input<string>;
+    subAccountUin?: pulumi.Input<string | undefined>;
     /**
      * Tags List.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Pts.ProjectTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Pts.ProjectTag>[] | undefined>;
     /**
      * User ID.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -186,13 +185,13 @@ export interface ProjectArgs {
     /**
      * Pts object description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ptsObjectName, which must be required.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags List.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Pts.ProjectTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Pts.ProjectTag>[] | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostLiveInstanceList = tencentcloud.Ssl.getDescribeHostLiveInstanceList({
+ * const describeHostLiveInstanceList = tencentcloud.ssl.getDescribeHostLiveInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "live",
  * });
@@ -91,7 +91,7 @@ export interface GetDescribeHostLiveInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostLiveInstanceList = tencentcloud.Ssl.getDescribeHostLiveInstanceList({
+ * const describeHostLiveInstanceList = tencentcloud.ssl.getDescribeHostLiveInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "live",
  * });
@@ -120,15 +120,15 @@ export interface GetDescribeHostLiveInstanceListOutputArgs {
     /**
      * List of filtering parameters; Filterkey: domainmatch.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostLiveInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostLiveInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Deployed certificate ID.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Deploy resource type.
      */
@@ -136,5 +136,5 @@ export interface GetDescribeHostLiveInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

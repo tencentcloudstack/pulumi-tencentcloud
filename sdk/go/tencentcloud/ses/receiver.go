@@ -86,8 +86,7 @@ import (
 //
 // ## Import
 //
-// ses email_address can be imported using the id, e.g.
-//
+// ses emailAddress can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
 // ```

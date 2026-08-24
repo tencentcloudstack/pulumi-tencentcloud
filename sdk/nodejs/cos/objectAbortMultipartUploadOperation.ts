@@ -104,15 +104,15 @@ export interface ObjectAbortMultipartUploadOperationState {
     /**
      * Bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Object key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Multipart uploaded id.
      */
-    uploadId?: pulumi.Input<string>;
+    uploadId?: pulumi.Input<string | undefined>;
 }
 
 /**

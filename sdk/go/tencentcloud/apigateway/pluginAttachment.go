@@ -30,7 +30,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]string{
 //				"type":   "white_list",
 //				"blocks": "1.1.1.1",
 //			})
@@ -61,7 +61,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example_api"),
 //				ApiDesc:             pulumi.String("desc."),
 //				AuthType:            pulumi.String("APP"),
@@ -109,9 +109,9 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewPluginAttachment(ctx, "example", &apigateway.PluginAttachmentArgs{
-//				PluginId:        example.ID(),
+//				PluginId:        example.ID().ToIDOutput().ToStringOutput(),
 //				ServiceId:       exampleServiceRelease.ServiceId,
-//				ApiId:           exampleApi.ID(),
+//				ApiId:           exampleApi.ID().ToIDOutput().ToStringOutput(),
 //				EnvironmentName: pulumi.String("release"),
 //			})
 //			if err != nil {
@@ -125,7 +125,7 @@ import (
 //
 // ## Import
 //
-// apiGateway plugin_attachment can be imported using the id, e.g.
+// apiGateway pluginAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:ApiGateway/pluginAttachment:PluginAttachment example plugin-hnqntalp#service-q3f533ja#release#api-62ud9woa

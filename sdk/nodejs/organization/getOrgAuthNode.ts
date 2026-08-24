@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgAuthNode = tencentcloud.Organization.getOrgAuthNode({});
+ * const orgAuthNode = tencentcloud.organization.getOrgAuthNode({});
  * ```
  */
 export function getOrgAuthNode(args?: GetOrgAuthNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgAuthNodeResult> {
@@ -68,7 +68,7 @@ export interface GetOrgAuthNodeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgAuthNode = tencentcloud.Organization.getOrgAuthNode({});
+ * const orgAuthNode = tencentcloud.organization.getOrgAuthNode({});
  * ```
  */
 export function getOrgAuthNodeOutput(args?: GetOrgAuthNodeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgAuthNodeResult> {
@@ -87,9 +87,9 @@ export interface GetOrgAuthNodeOutputArgs {
     /**
      * Verified company name.
      */
-    authName?: pulumi.Input<string>;
+    authName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

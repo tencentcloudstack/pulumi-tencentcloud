@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo certificate
+    /// Provides a resource to create a TEO certificate config
     /// 
     /// ## Example Usage
     /// 
@@ -60,9 +60,129 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ### Configure SSL certificate with edge mutual TLS
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new()
+    ///     {
+    ///         Host = "test.tencentcloud-terraform-provider.cn",
+    ///         Mode = "sslcert",
+    ///         ZoneId = "zone-2o1t24kgy362",
+    ///         ServerCertInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.CertificateConfigServerCertInfoArgs
+    ///             {
+    ///                 CertId = "8xiUJIJd",
+    ///             },
+    ///         },
+    ///         ClientCertInfo = new Tencentcloud.Teo.Inputs.CertificateConfigClientCertInfoArgs
+    ///         {
+    ///             Switch = "on",
+    ///             CertInfos = new[]
+    ///             {
+    ///                 new Tencentcloud.Teo.Inputs.CertificateConfigClientCertInfoCertInfoArgs
+    ///                 {
+    ///                     CertId = "cert-client-001",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Configure SSL certificate with upstream mutual TLS
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new()
+    ///     {
+    ///         Host = "test.tencentcloud-terraform-provider.cn",
+    ///         Mode = "sslcert",
+    ///         ZoneId = "zone-2o1t24kgy362",
+    ///         ServerCertInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.CertificateConfigServerCertInfoArgs
+    ///             {
+    ///                 CertId = "8xiUJIJd",
+    ///             },
+    ///         },
+    ///         UpstreamCertInfo = new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoArgs
+    ///         {
+    ///             UpstreamMutualTls = new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoUpstreamMutualTlsArgs
+    ///             {
+    ///                 Switch = "on",
+    ///                 CertInfos = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgs
+    ///                     {
+    ///                         CertId = "cert-upstream-001",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Configure SSL certificate with upstream certificate verification
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var certificate = new Tencentcloud.Teo.CertificateConfig("certificate", new()
+    ///     {
+    ///         Host = "test.tencentcloud-terraform-provider.cn",
+    ///         Mode = "sslcert",
+    ///         ZoneId = "zone-2o1t24kgy362",
+    ///         ServerCertInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.CertificateConfigServerCertInfoArgs
+    ///             {
+    ///                 CertId = "8xiUJIJd",
+    ///             },
+    ///         },
+    ///         UpstreamCertInfo = new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoArgs
+    ///         {
+    ///             UpstreamCertificateVerify = new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoUpstreamCertificateVerifyArgs
+    ///             {
+    ///                 VerificationMode = "custom_ca",
+    ///                 CustomCaCerts = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.CertificateConfigUpstreamCertInfoUpstreamCertificateVerifyCustomCaCertArgs
+    ///                     {
+    ///                         CertId = "cert-ca-001",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
-    /// teo certificate can be imported using the id, e.g.
+    /// TEO certificate config can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host
@@ -72,13 +192,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public partial class CertificateConfig : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+        /// </summary>
+        [Output("clientCertInfo")]
+        public Output<Outputs.CertificateConfigClientCertInfo> ClientCertInfo { get; private set; } = null!;
+
+        /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
         /// </summary>
         [Output("host")]
         public Output<string> Host { get; private set; } = null!;
 
         /// <summary>
-        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
+        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `EofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
         /// </summary>
         [Output("mode")]
         public Output<string> Mode { get; private set; } = null!;
@@ -149,13 +275,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class CertificateConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+        /// </summary>
+        [Input("clientCertInfo")]
+        public Input<Inputs.CertificateConfigClientCertInfoArgs>? ClientCertInfo { get; set; }
+
+        /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
         /// </summary>
         [Input("host", required: true)]
         public Input<string> Host { get; set; } = null!;
 
         /// <summary>
-        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
+        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `EofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
         /// </summary>
         [Input("mode")]
         public Input<string>? Mode { get; set; }
@@ -193,13 +325,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     public sealed class CertificateConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+        /// </summary>
+        [Input("clientCertInfo")]
+        public Input<Inputs.CertificateConfigClientCertInfoGetArgs>? ClientCertInfo { get; set; }
+
+        /// <summary>
         /// Acceleration domain name that needs to modify the certificate configuration.
         /// </summary>
         [Input("host")]
         public Input<string>? Host { get; set; }
 
         /// <summary>
-        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
+        /// Mode of configuring the certificate, the values are: `Disable`: Do not configure the certificate; `Eofreecert`: Configure EdgeOne free certificate; `EofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `Sslcert`: Configure SSL certificate. If not filled in, the default value is `Disable`.
         /// </summary>
         [Input("mode")]
         public Input<string>? Mode { get; set; }

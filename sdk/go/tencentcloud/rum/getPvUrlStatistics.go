@@ -133,12 +133,8 @@ type GetPvUrlStatisticsResult struct {
 }
 
 func GetPvUrlStatisticsOutput(ctx *pulumi.Context, args GetPvUrlStatisticsOutputArgs, opts ...pulumi.InvokeOption) GetPvUrlStatisticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPvUrlStatisticsResultOutput, error) {
-			args := v.(GetPvUrlStatisticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args, GetPvUrlStatisticsResultOutput{}, options).(GetPvUrlStatisticsResultOutput), nil
-		}).(GetPvUrlStatisticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args, GetPvUrlStatisticsResultOutput{}, options).(GetPvUrlStatisticsResultOutput)
 }
 
 // A collection of arguments for invoking getPvUrlStatistics.

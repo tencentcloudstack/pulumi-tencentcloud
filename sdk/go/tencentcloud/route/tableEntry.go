@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create an entry of a routing table.
+// Provides a resource to create a Route table entry.
 //
 // > **NOTE:** When setting the route item switch, do not use it together with resource `Route.TableEntryConfig`.
 //
@@ -39,7 +39,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -48,7 +48,7 @@ import (
 //			}
 //			// create route table
 //			example, err := route.NewTable(ctx, "example", &route.TableArgs{
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:  pulumi.String("tf-example"),
 //			})
 //			if err != nil {
@@ -56,18 +56,18 @@ import (
 //			}
 //			// create subnet
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.12.0/24"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
-//				RouteTableId:     example.ID(),
+//				RouteTableId:     example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			// create route table entry
 //			exampleTableEntry, err := route.NewTableEntry(ctx, "example", &route.TableEntryArgs{
-//				RouteTableId:         example.ID(),
+//				RouteTableId:         example.ID().ToIDOutput().ToStringOutput(),
 //				DestinationCidrBlock: pulumi.String("10.12.12.0/24"),
 //				NextType:             pulumi.String("EIP"),
 //				NextHub:              pulumi.String("0"),
@@ -85,7 +85,7 @@ import (
 //
 // ## Import
 //
-// Route table entry can be imported using the id, e.g.
+// Route table entry can be imported using the routeEntryId.routeTableId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
@@ -101,8 +101,10 @@ type TableEntry struct {
 	Disabled pulumi.BoolOutput `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringOutput `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 	NextType pulumi.StringOutput `pulumi:"nextType"`
+	// ID of route entry.
+	RouteEntryId pulumi.IntOutput `pulumi:"routeEntryId"`
 	// ID of route table entry.
 	RouteItemId pulumi.StringOutput `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
@@ -159,8 +161,10 @@ type tableEntryState struct {
 	Disabled *bool `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub *string `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 	NextType *string `pulumi:"nextType"`
+	// ID of route entry.
+	RouteEntryId *int `pulumi:"routeEntryId"`
 	// ID of route table entry.
 	RouteItemId *string `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
@@ -176,8 +180,10 @@ type TableEntryState struct {
 	Disabled pulumi.BoolPtrInput
 	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringPtrInput
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 	NextType pulumi.StringPtrInput
+	// ID of route entry.
+	RouteEntryId pulumi.IntPtrInput
 	// ID of route table entry.
 	RouteItemId pulumi.StringPtrInput
 	// ID of routing table to which this entry belongs.
@@ -197,7 +203,7 @@ type tableEntryArgs struct {
 	Disabled *bool `pulumi:"disabled"`
 	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub string `pulumi:"nextHub"`
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 	NextType string `pulumi:"nextType"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId string `pulumi:"routeTableId"`
@@ -213,7 +219,7 @@ type TableEntryArgs struct {
 	Disabled pulumi.BoolPtrInput
 	// ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
 	NextHub pulumi.StringInput
-	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 	NextType pulumi.StringInput
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringInput
@@ -326,9 +332,14 @@ func (o TableEntryOutput) NextHub() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextHub }).(pulumi.StringOutput)
 }
 
-// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
 func (o TableEntryOutput) NextType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextType }).(pulumi.StringOutput)
+}
+
+// ID of route entry.
+func (o TableEntryOutput) RouteEntryId() pulumi.IntOutput {
+	return o.ApplyT(func(v *TableEntry) pulumi.IntOutput { return v.RouteEntryId }).(pulumi.IntOutput)
 }
 
 // ID of route table entry.

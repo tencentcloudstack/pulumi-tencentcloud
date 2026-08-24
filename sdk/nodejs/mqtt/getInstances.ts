@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstances({});
+ * const example = tencentcloud.mqtt.getInstances({});
  * ```
  *
  * ### Query mqtt instances by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstances({
+ * const example = tencentcloud.mqtt.getInstances({
  *     filters: [
  *         {
  *             name: "InstanceId",
@@ -99,7 +99,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstances({});
+ * const example = tencentcloud.mqtt.getInstances({});
  * ```
  *
  * ### Query mqtt instances by filters
@@ -108,7 +108,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstances({
+ * const example = tencentcloud.mqtt.getInstances({
  *     filters: [
  *         {
  *             name: "InstanceId",
@@ -143,13 +143,13 @@ export interface GetInstancesOutputArgs {
     /**
      * Query criteria list, supporting the following fields: InstanceName: cluster name, fuzzy search, InstanceId: cluster ID, precise search, InstanceStatus: cluster status search (RUNNING - Running, CREATING - Creating, MODIFYING - Changing, DELETING - Deleting).
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Mqtt.GetInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Mqtt.GetInstancesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag filters.
      */
-    tagFilters?: pulumi.Input<pulumi.Input<inputs.Mqtt.GetInstancesTagFilterArgs>[]>;
+    tagFilters?: pulumi.Input<pulumi.Input<inputs.Mqtt.GetInstancesTagFilterArgs>[] | undefined>;
 }

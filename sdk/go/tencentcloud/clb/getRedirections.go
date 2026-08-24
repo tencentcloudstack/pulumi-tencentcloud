@@ -89,12 +89,8 @@ type GetRedirectionsResult struct {
 }
 
 func GetRedirectionsOutput(ctx *pulumi.Context, args GetRedirectionsOutputArgs, opts ...pulumi.InvokeOption) GetRedirectionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRedirectionsResultOutput, error) {
-			args := v.(GetRedirectionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getRedirections:getRedirections", args, GetRedirectionsResultOutput{}, options).(GetRedirectionsResultOutput), nil
-		}).(GetRedirectionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getRedirections:getRedirections", args, GetRedirectionsResultOutput{}, options).(GetRedirectionsResultOutput)
 }
 
 // A collection of arguments for invoking getRedirections.

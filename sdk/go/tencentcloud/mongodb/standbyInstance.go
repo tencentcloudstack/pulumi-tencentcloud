@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			mongodb, err := mongodb.NewInstance(ctx, "mongodb", &mongodb.InstanceArgs{
+//			mongodb2, err := mongodb.NewInstance(ctx, "mongodb", &mongodb.InstanceArgs{
 //				InstanceName:  pulumi.String("tf-mongodb-test"),
 //				Memory:        pulumi.Int(4),
 //				Volume:        pulumi.Int(100),
@@ -50,7 +50,7 @@ import (
 //				Volume:               pulumi.Int(100),
 //				AvailableZone:        pulumi.String("ap-shanghai-2"),
 //				ProjectId:            pulumi.Int(0),
-//				FatherInstanceId:     mongodb.ID(),
+//				FatherInstanceId:     mongodb2.ID().ToIDOutput().ToStringOutput(),
 //				FatherInstanceRegion: pulumi.String("ap-guangzhou"),
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),

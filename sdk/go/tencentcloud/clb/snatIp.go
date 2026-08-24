@@ -15,7 +15,8 @@ import (
 // Provide a resource to create a SnatIp of CLB instance.
 //
 // > **NOTE:** Target CLB instance must enable `snatPro` before creating snat ips.
-// **NOTE:** Dynamic allocate IP doesn't support for now.
+//
+// > **NOTE:** Dynamic allocate IP doesn't support for now.
 //
 // ## Example Usage
 //
@@ -31,23 +32,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			snatTest, err := clb.NewInstance(ctx, "snat_test", &clb.InstanceArgs{
-//				NetworkType: pulumi.String("OPEN"),
-//				ClbName:     pulumi.String("tf-clb-snat-test"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = clb.NewSnatIp(ctx, "foo", &clb.SnatIpArgs{
-//				ClbId: snatTest.ID(),
+//			_, err := clb.NewSnatIp(ctx, "example", &clb.SnatIpArgs{
+//				ClbId: pulumi.String("lb-jnx618r2"),
 //				Ips: clb.SnatIpIpArray{
 //					&clb.SnatIpIpArgs{
-//						SubnetId: pulumi.String("subnet-12345678"),
-//						Ip:       pulumi.String("172.16.0.1"),
+//						SubnetId: pulumi.String("subnet-hhi88a58"),
+//						Ip:       pulumi.String("10.0.30.10"),
 //					},
 //					&clb.SnatIpIpArgs{
-//						SubnetId: pulumi.String("subnet-12345678"),
-//						Ip:       pulumi.String("172.16.0.2"),
+//						SubnetId: pulumi.String("subnet-d4umunpy"),
 //					},
 //				},
 //			})
@@ -62,10 +55,10 @@ import (
 //
 // ## Import
 //
-// ClbSnatIp instance can be imported by clb instance id, e.g.
+// Clb instance snat ip can be imported by clb instance id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+// $ pulumi import tencentcloud:Clb/snatIp:SnatIp example lb-jnx618r2
 // ```
 type SnatIp struct {
 	pulumi.CustomResourceState

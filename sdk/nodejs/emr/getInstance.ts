@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myEmr = tencentcloud.Emr.getInstance({
+ * const myEmr = tencentcloud.emr.getInstance({
  *     displayStrategy: "clusterList",
  *     instanceIds: ["emr-rnzqrleq"],
  * });
@@ -86,7 +86,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myEmr = tencentcloud.Emr.getInstance({
+ * const myEmr = tencentcloud.emr.getInstance({
  *     displayStrategy: "clusterList",
  *     instanceIds: ["emr-rnzqrleq"],
  * });
@@ -113,13 +113,13 @@ export interface GetInstanceOutputArgs {
     /**
      * fetch all instances with same prefix(e.g.:emr-xxxxxx).
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Fetch all instances which owner same project. Default 0 meaning use default project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cdc.getDedicatedClusters({});
+ * const example = tencentcloud.cdc.getDedicatedClusters({});
  * ```
  */
 export function getDedicatedClusters(args?: GetDedicatedClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetDedicatedClustersResult> {
@@ -93,7 +93,7 @@ export interface GetDedicatedClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cdc.getDedicatedClusters({});
+ * const example = tencentcloud.cdc.getDedicatedClusters({});
  * ```
  */
 export function getDedicatedClustersOutput(args?: GetDedicatedClustersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDedicatedClustersResult> {
@@ -116,25 +116,25 @@ export interface GetDedicatedClustersOutputArgs {
     /**
      * Query by one or more instance IDs. Example of instance ID: cluster-xxxxxxxx.
      */
-    dedicatedClusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    dedicatedClusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by CDC life cycle.
      */
-    lifecycleStatuses?: pulumi.Input<pulumi.Input<string>[]>;
+    lifecycleStatuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Name of fuzzy matching CDC.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by site id.
      */
-    siteIds?: pulumi.Input<pulumi.Input<string>[]>;
+    siteIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by AZ name.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

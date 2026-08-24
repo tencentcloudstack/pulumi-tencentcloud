@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordLineList = tencentcloud.Dnspod.getRecordLineList({
+ * const recordLineList = tencentcloud.dnspod.getRecordLineList({
  *     domain: "iac-tf.cloud",
  *     domainGrade: "DP_FREE",
  *     domainId: 123,
@@ -84,7 +84,7 @@ export interface GetRecordLineListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recordLineList = tencentcloud.Dnspod.getRecordLineList({
+ * const recordLineList = tencentcloud.dnspod.getRecordLineList({
  *     domain: "iac-tf.cloud",
  *     domainGrade: "DP_FREE",
  *     domainId: 123,
@@ -116,9 +116,9 @@ export interface GetRecordLineListOutputArgs {
     /**
      * Domain ID. The parameter DomainId has a higher priority than the parameter Domain. If the parameter DomainId is passed, the parameter Domain will be ignored. You can find all Domains and DomainIds through the DescribeDomainList interface.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }
