@@ -13,6 +13,17 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          # By default actions/checkout@v4 checks out the ephemeral
+          # `refs/pull/<PR>/merge` commit (a merge of the PR head into the
+          # base branch), NOT the actual PR branch head. That merge commit
+          # is recomputed whenever the base branch moves, and git's textual
+          # 3-way merge of *generated* files (schema.json, sdk/**) produces
+          # content that was never actually regenerated - causing the
+          # "workspace checking" step to intermittently report unrelated,
+          # non-reproducible diffs. Pin to the real PR head SHA instead so
+          # generation is deterministic and matches what was pushed.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
