@@ -12,12 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v5
         with:
+          # bridge v3.137+ requires go >= 1.25.11 (provider/go.mod declares it)
           go-version: ${{ matrix.goversion }}
       - name: Install pulumictl
         uses: jaxxstorm/action-install-gh-release@v1.5.0
@@ -27,17 +28,18 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2.0.0
         with:
-          pulumi-version: 3.210.0
+          # recent CLI required by tfgen's gen-sdk subprocess
+          pulumi-version: 3.259.0
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.nodeversion}}
       - name: Setup DotNet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{matrix.dotnetversion}}
       - name: Setup Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
         with:
           python-version: ${{matrix.pythonversion}}
       - name: Build SDK
@@ -57,13 +59,13 @@ jobs:
         dotnetversion:
           - 6.0.418
         goversion:
-          - 1.24.11
+          - 1.25.11
         language:
           - nodejs
           - python
           - dotnet
           - go
         nodeversion:
-          - 22.3.0
+          - 22.23.2
         pythonversion:
           - "3.13"
