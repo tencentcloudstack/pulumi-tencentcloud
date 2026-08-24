@@ -126,6 +126,14 @@ clean::
 install_plugins::
 	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
 	pulumi plugin install resource random 4.3.1
+	# Pin the std plugin version used by tfgen/codegen to translate doc examples
+	# (e.g. "@pulumi/std" -> Go import path). Without pinning, a fresh CI runner
+	# would auto-install whatever is "latest" at build time, which can differ
+	# from what a developer has cached locally and produce non-deterministic
+	# generated SDK code (e.g. github.com/pulumi/pulumi-std/sdk/go/std vs
+	# github.com/pulumi/pulumi-std/sdk/v2/go/std), breaking the "worktree clean"
+	# check in CI.
+	pulumi plugin install resource std 2.3.2
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget
