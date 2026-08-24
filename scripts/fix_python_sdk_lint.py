@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 """Post-process the pulumi-language-python generated SDK to satisfy lint rules
 that the upstream Pulumi codegen (pulumi/pulumi pkg/codegen/python) does not
-respect out of the box: F401, C408, E722, TRY002, RUF059, PLW0406.
+respect out of the box: F401, C408, E722, TRY002, RUF059, PLW0406, BLE001,
+UP009, I001, UP035, RUF022.
+
+Note: UP045/UP007/UP006/PYI016 (Optional[X] -> X | None, Union[X, Y] -> X | Y,
+List/Dict -> list/dict, etc.) are intentionally left untouched here. `sdk/python`
+declares `python_requires='>=3.9'` and the generated files do not carry
+`from __future__ import annotations`, so eagerly-evaluated `X | None` syntax
+would raise `TypeError` on Python 3.9. Revisit only after confirming the
+Pulumi Python SDK runtime's annotation handling is compatible with 3.9.
 
 This script is idempotent and is meant to be run automatically right after
 `pulumi-tfgen-tencentcloud python ...` regenerates `sdk/python/`, so the fixes
@@ -29,7 +37,13 @@ BARE_EXCEPT_RE = re.compile(r"except:\n")
 RAISE_PROVIDER_RE = re.compile(r'raise Exception\(f"unknown provider type \{typ\}"\)')
 RAISE_RESOURCE_RE = re.compile(r'raise Exception\(f"unknown resource type \{typ\}"\)')
 
-UNPACK_RE = re.compile(r'root_package, \*rest = __name__\.split\("\."\)')
+UNPACK_RE = re.compile(r"root_package, \*rest = __name__\.split\('\.'\)")
+
+# BLE001: narrow the blind `except Exception:` guards that pulumi-language-python
+# emits around `int(...)`/`float(...)` conversions in `_utilities.py` down to the
+# concrete exception types those calls can actually raise.
+GET_ENV_INT_RE = re.compile(r"(return int\(str\)\n\s+)except Exception:\n")
+GET_ENV_FLOAT_RE = re.compile(r"(return float\(str\)\n\s+)except Exception:\n")
 
 EXCEPTION_CLASSES = '''class UnknownProviderTypeError(Exception):
     """Raised when constructing a provider of a type unknown to this package."""
@@ -93,6 +107,8 @@ def fix_utilities_py(path: Path) -> bool:
 
     text = BARE_EXCEPT_RE.sub("except Exception:\n", text)
     text = UNPACK_RE.sub('root_package = __name__.split(".")[0]', text)
+    text = GET_ENV_INT_RE.sub(r"\1except (TypeError, ValueError):\n", text)
+    text = GET_ENV_FLOAT_RE.sub(r"\1except (TypeError, ValueError):\n", text)
     text = RAISE_PROVIDER_RE.sub(
         'raise UnknownProviderTypeError(f"unknown provider type {typ}")', text
     )
@@ -122,10 +138,13 @@ def run_ruff_autofix(pkg_dir: Path) -> None:
                 check=True,
             )
             ruff = shutil.which("ruff") or "ruff"
-        except Exception as exc:  # pragma: no cover - best effort only
+        except (
+            subprocess.CalledProcessError,
+            OSError,
+        ) as exc:  # pragma: no cover - best effort only
             print(
                 f"[fix_python_sdk_lint] WARNING: ruff unavailable and could not "
-                f"be installed ({exc}); skipping F401/C408 autofix.",
+                f"be installed ({exc}); skipping ruff-based autofix.",
                 file=sys.stderr,
             )
             return
@@ -143,6 +162,23 @@ def run_ruff_autofix(pkg_dir: Path) -> None:
             "--unsafe-fixes",
             "--select",
             "F401,C408",
+            "--no-cache",
+            str(pkg_dir),
+        ],
+        check=False,
+    )
+
+    # UP009/I001/UP035/RUF022 all have plain (non-"unsafe") autofixes in ruff and
+    # carry no runtime-behavior risk on Python >=3.9, unlike UP045/UP007/UP006/
+    # PYI016 which rewrite Optional[X]/Union[X, Y] into `X | None`/`X | Y` (see
+    # module docstring). Run them in a separate, deliberately scoped pass.
+    subprocess.run(
+        [
+            ruff,
+            "check",
+            "--fix",
+            "--select",
+            "UP009,I001,UP035,RUF022",
             "--no-cache",
             str(pkg_dir),
         ],
@@ -176,7 +212,7 @@ def main() -> int:
 
     print(
         f"[fix_python_sdk_lint] regex-based fixes applied to {changed} file(s); "
-        f"ruff --fix applied for F401/C408 across {pkg_dir}"
+        f"ruff --fix applied for F401/C408/UP009/I001/UP035/RUF022 across {pkg_dir}"
     )
     return 0
 
