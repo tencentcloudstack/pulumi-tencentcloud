@@ -3,17 +3,14 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import builtins as _builtins
-import warnings
 import sys
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Optional, Sequence
 if sys.version_info >= (3, 11):
-    from typing import NotRequired, TypedDict, TypeAlias
+    pass
 else:
-    from typing_extensions import NotRequired, TypedDict, TypeAlias
-from .. import _utilities
-from . import outputs
+    pass
 
 __all__ = [
     'DbconfigNodeConfigParam',

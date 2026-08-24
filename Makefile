@@ -82,6 +82,7 @@ build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
 build_python:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
+	python3 scripts/fix_python_sdk_lint.py sdk/python/tencentcloud_iac_pulumi
 	cd sdk/python/ && \
 	cp ../../README.md . && \
 	python3 -m venv .venv && \
