@@ -134,6 +134,19 @@ install_plugins::
 	# github.com/pulumi/pulumi-std/sdk/v2/go/std), breaking the "worktree clean"
 	# check in CI.
 	pulumi plugin install resource std 2.3.2
+	# Pin the terraform *converter* plugin (invoked internally by
+	# `pulumi convert --from terraform --language pcl`, which tfgen shells
+	# out to for translating upstream Terraform doc examples - including
+	# HCL `lifecycle { ignore_changes = [...] }` blocks - into per-language
+	# SDK example snippets, e.g. Go's `pulumi.IgnoreChanges(...)`). This
+	# plugin is resolved independently of the Pulumi CLI core version and,
+	# left unpinned, a fresh CI runner (no local plugin cache) will fetch
+	# whatever is "latest" at build time. Different converter versions can
+	# translate the same `lifecycle` block differently (e.g. dropping vs.
+	# emitting the ignore_changes/IgnoreChanges option), producing
+	# non-reproducible schema.json/SDK diffs and breaking the "worktree
+	# clean" check in CI even though the source docs never changed.
+	pulumi plugin install converter terraform 1.2.4
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget
